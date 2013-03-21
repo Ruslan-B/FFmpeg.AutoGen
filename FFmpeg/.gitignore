@@ -1,5 +1,4 @@
 # Binary files
-
 *.dll
 *.o
 *.so
@@ -9,3 +8,6 @@
 
 # C header files
 *.h
+
+# Include bin folder
+!bin/
