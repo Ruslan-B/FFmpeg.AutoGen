@@ -1,13 +1,20 @@
 FFmpeg.AutoGen
 ==============
 
-Auto Generated FFmpeg wrapper for C#/.NET also should work on mono.
-Generation done for FFmpeg 1.2 "Magic" that was released on 2013-03-15.
+Auto Generated FFmpeg wrapper for C#/.NET and Mono.
+Wrapper generated for FFmpeg 1.2 "Magic" that was released on 2013-03-15.
 
 Usage
 =====
 
 Example of usage video decoding with frame extraction included in FFmpeg.AutoGen.Example project.
+
+
+Download
+========
+
+Compiled wrapper including FFmpeg win32 libraries:
+http://sourceforge.net/projects/ffmpeg-autogen/files/
 
 
 Build
