@@ -35,11 +35,11 @@ Prerequisites:
     - ctypesgen 0.r125
  - gcc (MinGW for Windows)
 
-Like for build put prebuild shared libraries to "./FFmpeg/bin".
-Then put updated header files to "./FFmpeg/include".  They could be extracted from Dev build from: http://ffmpeg.zeranoe.com/builds/
-Execute:
-python generate.py
-File "./FFmpeg.AutoGen/Native.cs" will regenerated. 
+Steps:
+- Like for build put prebuild shared libraries to "./FFmpeg/bin".
+- Then put updated header files to "./FFmpeg/include".  They could be extracted from Dev build from: http://ffmpeg.zeranoe.com/builds/
+- Execute: python generate.py
+- File "./FFmpeg.AutoGen/Native.cs" will regenerated.
 
 License
 =======
