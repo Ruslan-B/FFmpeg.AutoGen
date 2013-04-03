@@ -41,9 +41,9 @@ namespace FFmpeg.AutoGen
 		
 		public const int LIBAVUTIL_VERSION_MAJOR = 0x34; // 52
 		
-		public const int LIBAVUTIL_VERSION_MINOR = 0x13; // 19
+		public const int LIBAVUTIL_VERSION_MINOR = 0x18; // 24
 		
-		public const int LIBAVUTIL_VERSION_MICRO = 0x65; // 101
+		public const int LIBAVUTIL_VERSION_MICRO = 0x64; // 100
 		
 		public const int LIBAVUTIL_BUILD = 0x0; // LIBAVUTIL_VERSION_INT
 		
@@ -419,7 +419,7 @@ namespace FFmpeg.AutoGen
 		
 		public const int LIBAVCODEC_VERSION_MAJOR = 0x37; // 55
 		
-		public const int LIBAVCODEC_VERSION_MINOR = 0x1; // 1
+		public const int LIBAVCODEC_VERSION_MINOR = 0x2; // 2
 		
 		public const int LIBAVCODEC_VERSION_MICRO = 0x64; // 100
 		
@@ -1021,7 +1021,7 @@ namespace FFmpeg.AutoGen
 		
 		public const int LIBAVFORMAT_VERSION_MAJOR = 0x37; // 55
 		
-		public const int LIBAVFORMAT_VERSION_MINOR = 0x0; // 0
+		public const int LIBAVFORMAT_VERSION_MINOR = 0x1; // 1
 		
 		public const int LIBAVFORMAT_VERSION_MICRO = 0x64; // 100
 		
@@ -1181,9 +1181,9 @@ namespace FFmpeg.AutoGen
 		
 		public const int LIBAVFILTER_VERSION_MAJOR = 0x3; // 3
 		
-		public const int LIBAVFILTER_VERSION_MINOR = 0x2f; // 47
+		public const int LIBAVFILTER_VERSION_MINOR = 0x30; // 48
 		
-		public const int LIBAVFILTER_VERSION_MICRO = 0x68; // 104
+		public const int LIBAVFILTER_VERSION_MICRO = 0x69; // 105
 		
 		public const int LIBAVFILTER_BUILD = 0x0; // LIBAVFILTER_VERSION_INT
 		
@@ -1878,6 +1878,7 @@ namespace FFmpeg.AutoGen
 			AV_CODEC_ID_MVC1 = 0x4d564331, // ((('1' | ('C' << 8)) | ('V' << 16)) | ('M' << 24))
 			AV_CODEC_ID_MVC2,
 			AV_CODEC_ID_SNOW = 0x534e4f57, // ((('W' | ('O' << 8)) | ('N' << 16)) | ('S' << 24))
+			AV_CODEC_ID_WEBP = 0x57454250, // ((('P' | ('B' << 8)) | ('E' << 16)) | ('W' << 24))
 			AV_CODEC_ID_FIRST_AUDIO = 0x10000, // 65536
 			AV_CODEC_ID_PCM_S16LE = 0x10000, // 65536
 			AV_CODEC_ID_PCM_S16BE,
@@ -3264,6 +3265,7 @@ namespace FFmpeg.AutoGen
 			public int skip_initial_bytes;
 			public int correct_ts_overflow;
 			public int seek2any;
+			public int flush_packets;
 			public AVPacketList* packet_buffer;
 			public AVPacketList* packet_buffer_end;
 			public long data_offset;
@@ -3601,6 +3603,7 @@ namespace FFmpeg.AutoGen
 			public IntPtr process_command; // Func<AVFilterContext*, String, String, String, int, int, int>
 			public IntPtr init_opaque; // Func<AVFilterContext*, String, void*, int>
 			public AVClass* priv_class;
+			public byte** shorthand;
 		}
 		
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -3848,6 +3851,9 @@ namespace FFmpeg.AutoGen
 		[DllImport("avutil-52", EntryPoint="av_samples_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_samples_alloc(byte** audio_data, int* linesize, int nb_channels, int nb_samples, AVSampleFormat sample_fmt, int align);
 		
+		[DllImport("avutil-52", EntryPoint="av_samples_alloc_array_and_samples", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_samples_alloc_array_and_samples(byte*** audio_data, int* linesize, int nb_channels, int nb_samples, AVSampleFormat sample_fmt, int align);
+		
 		[DllImport("avutil-52", EntryPoint="av_samples_copy", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_samples_copy(byte** dst, byte** src, int dst_offset, int src_offset, int nb_samples, int nb_channels, AVSampleFormat sample_fmt);
 		
@@ -3874,6 +3880,12 @@ namespace FFmpeg.AutoGen
 		
 		[DllImport("avutil-52", EntryPoint="av_buffer_is_writable", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_buffer_is_writable(AVBufferRef* buf);
+		
+		[DllImport("avutil-52", EntryPoint="av_buffer_get_opaque", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void* av_buffer_get_opaque(AVBufferRef* buf);
+		
+		[DllImport("avutil-52", EntryPoint="av_buffer_get_ref_count", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffer_get_ref_count(AVBufferRef* buf);
 		
 		[DllImport("avutil-52", EntryPoint="av_buffer_make_writable", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_buffer_make_writable(AVBufferRef** buf);
@@ -4753,6 +4765,9 @@ namespace FFmpeg.AutoGen
 		
 		[DllImport("avformat-55", EntryPoint="av_guess_sample_aspect_ratio", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern AVRational av_guess_sample_aspect_ratio(AVFormatContext* format, AVStream* stream, AVFrame* frame);
+		
+		[DllImport("avformat-55", EntryPoint="av_guess_frame_rate", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVRational av_guess_frame_rate(AVFormatContext* ctx, AVStream* stream, AVFrame* frame);
 		
 		[DllImport("avformat-55", EntryPoint="avformat_match_stream_specifier", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int avformat_match_stream_specifier(AVFormatContext* s, AVStream* st, String spec);
