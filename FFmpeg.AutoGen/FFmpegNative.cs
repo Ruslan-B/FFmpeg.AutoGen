@@ -3,9 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
-	using AVClassCategory=Native.anon_5;
+	using AVClassCategory=FFmpegNative.anon_5;
 	
-	public static unsafe partial class Native
+	public static unsafe class FFmpegNative
 	{
 		public const int FF_LAMBDA_SHIFT = 0x7; // 7
 		
@@ -2908,7 +2908,15 @@ namespace FFmpeg.AutoGen
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 		public struct AVFrame
 		{
-			public fixed int data[8]; // <Ctype "POINTER(c_uint8) * 8">
+			// fixed byte* data[8] - <Ctype "POINTER(c_uint8) * 8">
+			public byte* data_0;
+			public byte* data_1;
+			public byte* data_2;
+			public byte* data_3;
+			public byte* data_4;
+			public byte* data_5;
+			public byte* data_6;
+			public byte* data_7;
 			public fixed int linesize[8]; // <Ctype "c_int * 8">
 			public byte** extended_data;
 			public int width;
@@ -2917,7 +2925,15 @@ namespace FFmpeg.AutoGen
 			public int format;
 			public int key_frame;
 			public AVPictureType pict_type;
-			public fixed int @base[8]; // <Ctype "POINTER(c_uint8) * 8">
+			// fixed byte* @base[8] - <Ctype "POINTER(c_uint8) * 8">
+			public byte* @base_0;
+			public byte* @base_1;
+			public byte* @base_2;
+			public byte* @base_3;
+			public byte* @base_4;
+			public byte* @base_5;
+			public byte* @base_6;
+			public byte* @base_7;
 			public AVRational sample_aspect_ratio;
 			public long pts;
 			public long pkt_pts;
@@ -2930,10 +2946,14 @@ namespace FFmpeg.AutoGen
 			public int qstride;
 			public int qscale_type;
 			public byte* mbskip_table;
-			public fixed int motion_val[2]; // <Ctype "POINTER(c_int16 * 2) * 2">
+			// fixed short** motion_val[2] - <Ctype "POINTER(c_int16 * 2) * 2">
+			public short** motion_val_0;
+			public short** motion_val_1;
 			public uint* mb_type;
 			public short* dct_coeff;
-			public fixed int ref_index[2]; // <Ctype "POINTER(c_int8) * 2">
+			// fixed sbyte* ref_index[2] - <Ctype "POINTER(c_int8) * 2">
+			public sbyte* ref_index_0;
+			public sbyte* ref_index_1;
 			public void* opaque;
 			public fixed ulong error[8]; // <Ctype "c_uint64 * 8">
 			public int type;
@@ -2950,7 +2970,15 @@ namespace FFmpeg.AutoGen
 			public byte motion_subsample_log2;
 			public int sample_rate;
 			public ulong channel_layout;
-			public fixed int buf[8]; // <Ctype "POINTER(AVBufferRef) * 8">
+			// fixed AVBufferRef* buf[8] - <Ctype "POINTER(AVBufferRef) * 8">
+			public AVBufferRef* buf_0;
+			public AVBufferRef* buf_1;
+			public AVBufferRef* buf_2;
+			public AVBufferRef* buf_3;
+			public AVBufferRef* buf_4;
+			public AVBufferRef* buf_5;
+			public AVBufferRef* buf_6;
+			public AVBufferRef* buf_7;
 			public AVBufferRef** extended_buf;
 			public int nb_extended_buf;
 			public AVFrameSideData** side_data;
@@ -3087,7 +3115,15 @@ namespace FFmpeg.AutoGen
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 		public struct AVPicture
 		{
-			public fixed int data[8]; // <Ctype "POINTER(c_uint8) * 8">
+			// fixed byte* data[8] - <Ctype "POINTER(c_uint8) * 8">
+			public byte* data_0;
+			public byte* data_1;
+			public byte* data_2;
+			public byte* data_3;
+			public byte* data_4;
+			public byte* data_5;
+			public byte* data_6;
+			public byte* data_7;
 			public fixed int linesize[8]; // <Ctype "c_int * 8">
 		}
 		
@@ -3537,7 +3573,15 @@ namespace FFmpeg.AutoGen
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 		public struct AVFilterBuffer
 		{
-			public fixed int data[8]; // <Ctype "POINTER(c_uint8) * 8">
+			// fixed byte* data[8] - <Ctype "POINTER(c_uint8) * 8">
+			public byte* data_0;
+			public byte* data_1;
+			public byte* data_2;
+			public byte* data_3;
+			public byte* data_4;
+			public byte* data_5;
+			public byte* data_6;
+			public byte* data_7;
 			public byte** extended_data;
 			public fixed int linesize[8]; // <Ctype "c_int * 8">
 			public void* priv;
@@ -3576,7 +3620,15 @@ namespace FFmpeg.AutoGen
 		public struct AVFilterBufferRef
 		{
 			public AVFilterBuffer* buf;
-			public fixed int data[8]; // <Ctype "POINTER(c_uint8) * 8">
+			// fixed byte* data[8] - <Ctype "POINTER(c_uint8) * 8">
+			public byte* data_0;
+			public byte* data_1;
+			public byte* data_2;
+			public byte* data_3;
+			public byte* data_4;
+			public byte* data_5;
+			public byte* data_6;
+			public byte* data_7;
 			public byte** extended_data;
 			public fixed int linesize[8]; // <Ctype "c_int * 8">
 			public AVFilterBufferRefVideoProps* video;

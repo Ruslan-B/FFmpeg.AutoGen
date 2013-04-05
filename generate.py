@@ -28,12 +28,7 @@ class CSharpGenerator:
                         'intmax_t': 'long', 'uintmax_t': 'ulong',
                         'size_t': 'uint', 'SIZE_T': 'uint',
                         'va_list': 'void*',
-                        'FILE': 'void',
-                        'BYTE': 'byte',
-                        'WORD': 'ushort',
-                        'LONG': 'int', 'DWORD': 'uint', 'ULONG': 'uint', 'UINT': 'uint',
-                        'LONGLONG': 'long', 'ULONGLONG': 'ulong', 'LARGE_INTEGER': 'long',
-                        'BOOLEAN': 'bool'}
+                        'FILE': 'void'}
 
     def __init__(self, descriptions, options):
         self.descriptions = descriptions
@@ -72,8 +67,6 @@ class CSharpGenerator:
     def get_type_name(self, ctype):
         if isinstance(ctype, ctypedescs.CtypesPointer):
             dst_type = ctype.destination
-            #if isinstance(dst, ctypedescs.CtypesSimple) and dst.name == 'void':
-            #    return 'IntPtr'
             return '%s*' % self.get_type_name(dst_type)
         if isinstance(ctype, ctypedescs.CtypesSimple) or isinstance(ctype, ctypedescs.CtypesTypedef):
             if ctype.name in self.type_conversions:
@@ -83,7 +76,6 @@ class CSharpGenerator:
         if isinstance(ctype, ctypedescs.CtypesSpecial):
             return ctype.name
         if isinstance(ctype, ctypedescs.CtypesEnum):
-            #[return : MarshalAs(UnmanagedType.LPStruct)]
             return ctype.tag
         if isinstance(ctype, ctypedescs.CtypesStruct):
             return ctype.tag
@@ -193,24 +185,29 @@ class CSharpGenerator:
                     if ctype.count:
                         size = self.evaluate_expression(ctype.count)
                         base_type = ctype.base
-                        if isinstance(base_type, ctypedescs.CtypesPointer):
-                            ctype_name = 'int'
+                        if isinstance(base_type, ctypedescs.CtypesPointer) or isinstance(base_type, ctypedescs.CtypesStruct):
+                            # unfold fixed pointer array or structure array to set of indexed fields
+                            ctype_name = self.get_type_name(base_type)
+                            self.out('// fixed %s %s[%d] - %s' % (ctype_name, name, size, ctype))
+                            for i in range(size):
+                                self.out('public %s %s_%d;' % (ctype_name, name, i))
+                            continue
                         else:
                             while isinstance(base_type, ctypedescs.CtypesArray) and base_type.count:
                                 size *= self.evaluate_expression(ctype.base.count)
                                 base_type = base_type.base
                             ctype_name = self.get_type_name(base_type)
 
-                            if isinstance(base_type, ctypedescs.CtypesTypedef):
-                                if base_type.name in self.typedefs_map:
-                                    typedef = self.typedefs_map[base_type.name]
-                                    base_type = typedef.ctype
+                            #if isinstance(base_type, ctypedescs.CtypesTypedef):
+                            #    if base_type.name in self.typedefs_map:
+                            #        typedef = self.typedefs_map[base_type.name]
+                            #        base_type = typedef.ctype
 
-                        if isinstance(base_type, ctypedescs.CtypesStruct):
-                            self.out('[MarshalAs(UnmanagedType.ByValArray, SizeConst = %d)]' % size)
-                            self.out('public %s[] %s; // %s' % (ctype_name, name, ctype))
-                        else:
-                            self.out('public fixed %s %s[%d]; // %s' % (ctype_name, name, size, ctype))
+                        #if isinstance(base_type, ctypedescs.CtypesStruct):
+                        #    self.out('[MarshalAs(UnmanagedType.ByValArray, SizeConst = %d)]' % size)
+                        #    self.out('public %s[] %s; // %s' % (ctype_name, name, ctype))
+                        #else:
+                        self.out('public fixed %s %s[%d]; // %s' % (ctype_name, name, size, ctype))
 
                         continue
                     else:
@@ -279,7 +276,7 @@ class CSharpGenerator:
                     self.out('using %s=%s.%s;' % (typedef.name, self.options.class_name, type_name))
 
         self.out()
-        self.out('public static unsafe partial class %s' % self.options.class_name)
+        self.out('public static unsafe class %s' % self.options.class_name)
         self.begin_block()
 
         for macros in descriptions.macros:
@@ -349,7 +346,7 @@ class Options:
     inserted_files = []
     #printer
     namespace = 'FFmpeg.AutoGen'
-    class_name = 'Native'
+    class_name = 'FFmpegNative'
     output_only_from_paths = './FFmpeg/include'
 
 
@@ -363,7 +360,7 @@ ctypesgencore.processor.process(descriptions, options)
 # Step 3: Generate output
 
 csharp_generator = CSharpGenerator(descriptions, options)
-csharp_filename = './FFmpeg.AutoGen/Native.cs'
+csharp_filename = './FFmpeg.AutoGen/FFmpegNative.cs'
 csharp_generator.write_to_file(csharp_filename)
 
 #ctypesgencore.printer.WrapperPrinter(options.output, options, descriptions)
