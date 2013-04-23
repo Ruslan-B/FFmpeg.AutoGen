@@ -1,29 +1,24 @@
-FFmpeg.AutoGen
-==============
+##FFmpeg.AutoGen
 
 Auto Generated FFmpeg wrapper for C#/.NET and Mono.  
-Wrapper generated for FFmpeg 1.2 "Magic" - Build Version: git-599866f (2013-04-01)
+Wrapper generated for FFmpeg - Build Version: git-ee94362 (2013-04-18)
 
-Usage
-=====
+##Usage
 
 Example of usage video decoding with frame extraction included in FFmpeg.AutoGen.Example project.
 
-Download
-========
+##Download
 
 Compiled wrapper including prebuilt [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/) win32 libraries:  
 http://sourceforge.net/projects/ffmpeg-autogen/files/
 
-Build
-=====
+##Build
 
 - Put prebuild shared libraries to "./FFmpeg/bin" folder.  
 You can get them for Windows for example from [here](http://ffmpeg.zeranoe.com/builds/).  
 - Compile solution.
 
-Generate
-========
+##Generate
 
 Prerequisites:
  - Python 2.7
@@ -39,8 +34,7 @@ They could be extracted from ffmpeg source code or from [dev build](http://ffmpe
 - Execute: python generate.py
 - File "./FFmpeg.AutoGen/Native.cs" will regenerated.
 
-License
-=======
+##License
 
 GNU Lesser General Public License (LGPL) version 3 or later.  
 http://www.gnu.org/licenses/lgpl.html

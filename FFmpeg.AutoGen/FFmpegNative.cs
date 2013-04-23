@@ -41,7 +41,7 @@ namespace FFmpeg.AutoGen
 		
 		public const int LIBAVUTIL_VERSION_MAJOR = 0x34; // 52
 		
-		public const int LIBAVUTIL_VERSION_MINOR = 0x18; // 24
+		public const int LIBAVUTIL_VERSION_MINOR = 0x1a; // 26
 		
 		public const int LIBAVUTIL_VERSION_MICRO = 0x64; // 100
 		
@@ -1021,7 +1021,7 @@ namespace FFmpeg.AutoGen
 		
 		public const int LIBAVFORMAT_VERSION_MAJOR = 0x37; // 55
 		
-		public const int LIBAVFORMAT_VERSION_MINOR = 0x1; // 1
+		public const int LIBAVFORMAT_VERSION_MINOR = 0x2; // 2
 		
 		public const int LIBAVFORMAT_VERSION_MICRO = 0x64; // 100
 		
@@ -1181,9 +1181,9 @@ namespace FFmpeg.AutoGen
 		
 		public const int LIBAVFILTER_VERSION_MAJOR = 0x3; // 3
 		
-		public const int LIBAVFILTER_VERSION_MINOR = 0x30; // 48
+		public const int LIBAVFILTER_VERSION_MINOR = 0x38; // 56
 		
-		public const int LIBAVFILTER_VERSION_MICRO = 0x69; // 105
+		public const int LIBAVFILTER_VERSION_MICRO = 0x67; // 103
 		
 		public const int LIBAVFILTER_BUILD = 0x0; // LIBAVFILTER_VERSION_INT
 		
@@ -1196,6 +1196,16 @@ namespace FFmpeg.AutoGen
 		public const int FF_API_BUFFERSRC_BUFFER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 4)
 		
 		public const int FF_API_AVFILTERBUFFER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 4)
+		
+		public const int FF_API_OLD_FILTER_OPTS = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 4)
+		
+		public const int FF_API_ACONVERT_FILTER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 4)
+		
+		public const int FF_API_AVFILTER_OPEN = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 4)
+		
+		public const int FF_API_AVFILTER_INIT_FILTER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 4)
+		
+		public const int FF_API_OLD_FILTER_REGISTER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 4)
 		
 		public const int AV_PERM_READ = 0x1; // 1
 		
@@ -1213,13 +1223,17 @@ namespace FFmpeg.AutoGen
 		
 		public const int AVFILTER_ALIGN = 0x10; // 16
 		
+		public const int AVFILTER_FLAG_DYNAMIC_INPUTS = 0x1; // (1 << 0)
+		
+		public const int AVFILTER_FLAG_DYNAMIC_OUTPUTS = 0x2; // (1 << 1)
+		
 		public const int AVFILTER_CMD_FLAG_ONE = 0x1; // 1
 		
 		public const int AVFILTER_CMD_FLAG_FAST = 0x2; // 2
 		
 		public const int LIBPOSTPROC_VERSION_MAJOR = 0x34; // 52
 		
-		public const int LIBPOSTPROC_VERSION_MINOR = 0x2; // 2
+		public const int LIBPOSTPROC_VERSION_MINOR = 0x3; // 3
 		
 		public const int LIBPOSTPROC_VERSION_MICRO = 0x64; // 100
 		
@@ -1509,6 +1523,8 @@ namespace FFmpeg.AutoGen
 			AV_PIX_FMT_YUVA444P16BE,
 			AV_PIX_FMT_YUVA444P16LE,
 			AV_PIX_FMT_VDPAU,
+			AV_PIX_FMT_XYZ12LE,
+			AV_PIX_FMT_XYZ12BE,
 			AV_PIX_FMT_RGBA64BE = 0x123, // 291
 			AV_PIX_FMT_RGBA64LE,
 			AV_PIX_FMT_BGRA64BE,
@@ -2565,6 +2581,12 @@ namespace FFmpeg.AutoGen
 			AVLINK_INIT,
 		}
 		
+		public enum anon_9
+		{
+			AVFILTER_AUTO_CONVERT_ALL,
+			AVFILTER_AUTO_CONVERT_NONE = -0x1, // (-1)
+		}
+		
 		public enum SwrDitherType
 		{
 			SWR_DITHER_NONE,
@@ -3251,6 +3273,7 @@ namespace FFmpeg.AutoGen
 			public int direct;
 			public long bytes_read;
 			public int seek_count;
+			public int writeout_count;
 		}
 		
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -3310,6 +3333,7 @@ namespace FFmpeg.AutoGen
 			public AVPacketList* parse_queue;
 			public AVPacketList* parse_queue_end;
 			public int raw_packet_buffer_remaining_size;
+			public int io_repositioned;
 		}
 		
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -3505,6 +3529,7 @@ namespace FFmpeg.AutoGen
 			public int output_count;
 			public int nb_outputs;
 			public void* priv;
+			public AVFilterGraph* graph;
 			public AVFilterCommand* command_queue;
 		}
 		
@@ -3543,6 +3568,8 @@ namespace FFmpeg.AutoGen
 			public AVFilterBufferRef* cur_buf_copy;
 			public int closed;
 			public int channels;
+			public int frame_requested;
+			public int flags;
 		}
 		
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -3648,14 +3675,31 @@ namespace FFmpeg.AutoGen
 			public byte* description;
 			public AVFilterPad* inputs;
 			public AVFilterPad* outputs;
-			public IntPtr init; // Func<AVFilterContext*, String, int>
+			public AVClass* priv_class;
+			public int flags;
+			public IntPtr init; // Func<AVFilterContext*, int>
+			public IntPtr init_dict; // Func<AVFilterContext*, AVDictionary**, int>
 			public IntPtr uninit; // Action<AVFilterContext*>
 			public IntPtr query_formats; // Func<AVFilterContext*, int>
 			public int priv_size;
+			public AVFilter* next;
 			public IntPtr process_command; // Func<AVFilterContext*, String, String, String, int, int, int>
-			public IntPtr init_opaque; // Func<AVFilterContext*, String, void*, int>
-			public AVClass* priv_class;
-			public byte** shorthand;
+			public IntPtr init_opaque; // Func<AVFilterContext*, void*, int>
+		}
+		
+		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+		public struct AVFilterGraph
+		{
+			public AVClass* av_class;
+			public int filter_count_unused;
+			public AVFilterContext** filters;
+			public byte* scale_sws_opts;
+			public byte* resample_lavr_opts;
+			public int nb_filters;
+			public byte* aresample_swr_opts;
+			public AVFilterLink** sink_links;
+			public int sink_links_count;
+			public int disable_auto_convert;
 		}
 		
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -3674,8 +3718,12 @@ namespace FFmpeg.AutoGen
 		}
 		
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-		public struct AVFilterGraph
+		public struct AVFilterInOut
 		{
+			public byte* name;
+			public AVFilterContext* filter_ctx;
+			public int pad_idx;
+			public AVFilterInOut* next;
 		}
 		
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -3866,6 +3914,9 @@ namespace FFmpeg.AutoGen
 		
 		[DllImport("avutil-52", EntryPoint="av_log_set_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void av_log_set_flags(int arg);
+		
+		[DllImport("avutil-52", EntryPoint="av_int_list_length_for_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_int_list_length_for_size(int elsize, void* list, ulong term);
 		
 		[DllImport("avutil-52", EntryPoint="av_get_sample_fmt_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern String av_get_sample_fmt_name(AVSampleFormat sample_fmt);
@@ -4848,9 +4899,6 @@ namespace FFmpeg.AutoGen
 		[DllImport("avfilter-3", EntryPoint="avfilter_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern String avfilter_license();
 		
-		[DllImport("avfilter-3", EntryPoint="avfilter_get_class", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern AVClass* avfilter_get_class();
-		
 		[DllImport("avfilter-3", EntryPoint="avfilter_copy_buffer_ref_props", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void avfilter_copy_buffer_ref_props(AVFilterBufferRef* dst, AVFilterBufferRef* src);
 		
@@ -4865,6 +4913,9 @@ namespace FFmpeg.AutoGen
 		
 		[DllImport("avfilter-3", EntryPoint="avfilter_ref_get_channels", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int avfilter_ref_get_channels(AVFilterBufferRef* @ref);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_pad_count", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avfilter_pad_count(AVFilterPad* pads);
 		
 		[DllImport("avfilter-3", EntryPoint="avfilter_pad_get_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern String avfilter_pad_get_name(AVFilterPad* pads, int pad_idx);
@@ -4911,6 +4962,9 @@ namespace FFmpeg.AutoGen
 		[DllImport("avfilter-3", EntryPoint="avfilter_get_by_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern AVFilter* avfilter_get_by_name(String name);
 		
+		[DllImport("avfilter-3", EntryPoint="avfilter_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVFilter* avfilter_next(AVFilter* prev);
+		
 		[DllImport("avfilter-3", EntryPoint="av_filter_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern AVFilter** av_filter_next(AVFilter** filter);
 		
@@ -4919,6 +4973,12 @@ namespace FFmpeg.AutoGen
 		
 		[DllImport("avfilter-3", EntryPoint="avfilter_init_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int avfilter_init_filter(AVFilterContext* filter, String args, void* opaque);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_init_str", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avfilter_init_str(AVFilterContext* ctx, String args);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_init_dict", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avfilter_init_dict(AVFilterContext* ctx, AVDictionary** options);
 		
 		[DllImport("avfilter-3", EntryPoint="avfilter_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void avfilter_free(AVFilterContext* filter);
@@ -4931,6 +4991,57 @@ namespace FFmpeg.AutoGen
 		
 		[DllImport("avfilter-3", EntryPoint="avfilter_copy_buf_props", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int avfilter_copy_buf_props(AVFrame* dst, AVFilterBufferRef* src);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_get_class", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVClass* avfilter_get_class();
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVFilterGraph* avfilter_graph_alloc();
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_alloc_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVFilterContext* avfilter_graph_alloc_filter(AVFilterGraph* graph, AVFilter* filter, String name);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_get_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVFilterContext* avfilter_graph_get_filter(AVFilterGraph* graph, String name);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_add_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avfilter_graph_add_filter(AVFilterGraph* graphctx, AVFilterContext* filter);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_create_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avfilter_graph_create_filter(AVFilterContext** filt_ctx, AVFilter* filt, String name, String args, void* opaque, AVFilterGraph* graph_ctx);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_set_auto_convert", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void avfilter_graph_set_auto_convert(AVFilterGraph* graph, int flags);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_config", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avfilter_graph_config(AVFilterGraph* graphctx, void* log_ctx);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void avfilter_graph_free(AVFilterGraph** graph);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_inout_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVFilterInOut* avfilter_inout_alloc();
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_inout_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void avfilter_inout_free(AVFilterInOut** inout);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_parse", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avfilter_graph_parse(AVFilterGraph* graph, String filters, AVFilterInOut** inputs, AVFilterInOut** outputs, void* log_ctx);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_parse2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avfilter_graph_parse2(AVFilterGraph* graph, String filters, AVFilterInOut** inputs, AVFilterInOut** outputs);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_send_command", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avfilter_graph_send_command(AVFilterGraph* graph, String target, String cmd, String arg, String res, int res_len, int flags);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_queue_command", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avfilter_graph_queue_command(AVFilterGraph* graph, String target, String cmd, String arg, int flags, double ts);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_dump", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern String avfilter_graph_dump(AVFilterGraph* graph, String options);
+		
+		[DllImport("avfilter-3", EntryPoint="avfilter_graph_request_oldest", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avfilter_graph_request_oldest(AVFilterGraph* graph);
 		
 		[DllImport("postproc-52", EntryPoint="postproc_version", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int postproc_version();
