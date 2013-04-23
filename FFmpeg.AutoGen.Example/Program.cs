@@ -8,7 +8,7 @@ namespace FFmpeg.AutoGen.Example
     {
         private static unsafe void Main(string[] args)
         {
-            string url = @"http://samples.FFmpegNative.org/MPEG1/zelda%20first%20commercial.mpeg";
+            string url = @"http://www.fileformat.info/format/mpeg/sample/031699cb978244b8a3adf1e81cb2ac7c/download";
 
             FFmpegNative.av_register_all();
             FFmpegNative.avcodec_register_all();
