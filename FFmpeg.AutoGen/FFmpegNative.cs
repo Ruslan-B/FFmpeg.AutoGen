@@ -41,9 +41,9 @@ namespace FFmpeg.AutoGen
 		
 		public const int LIBAVUTIL_VERSION_MAJOR = 0x34; // 52
 		
-		public const int LIBAVUTIL_VERSION_MINOR = 0x1a; // 26
+		public const int LIBAVUTIL_VERSION_MINOR = 0x1b; // 27
 		
-		public const int LIBAVUTIL_VERSION_MICRO = 0x64; // 100
+		public const int LIBAVUTIL_VERSION_MICRO = 0x65; // 101
 		
 		public const int LIBAVUTIL_BUILD = 0x0; // LIBAVUTIL_VERSION_INT
 		
@@ -114,6 +114,8 @@ namespace FFmpeg.AutoGen
 		public const int av_sat_dadd32 = 0x0; // av_sat_dadd32_c
 		
 		public const int av_clipf = 0x0; // av_clipf_c
+		
+		public const int av_clipd = 0x0; // av_clipd_c
 		
 		public const int av_popcount = 0x0; // av_popcount_c
 		
@@ -419,7 +421,7 @@ namespace FFmpeg.AutoGen
 		
 		public const int LIBAVCODEC_VERSION_MAJOR = 0x37; // 55
 		
-		public const int LIBAVCODEC_VERSION_MINOR = 0x2; // 2
+		public const int LIBAVCODEC_VERSION_MINOR = 0x6; // 6
 		
 		public const int LIBAVCODEC_VERSION_MICRO = 0x64; // 100
 		
@@ -465,6 +467,8 @@ namespace FFmpeg.AutoGen
 		
 		public const int AV_CODEC_PROP_BITMAP_SUB = 0x10000; // (1 << 16)
 		
+		public const int AV_CODEC_PROP_TEXT_SUB = 0x20000; // (1 << 17)
+		
 		public const int FF_INPUT_BUFFER_PADDING_SIZE = 0x10; // 16
 		
 		public const int FF_MIN_BUFFER_SIZE = 0x4000; // 16384
@@ -472,6 +476,8 @@ namespace FFmpeg.AutoGen
 		public const int AVCOL_SPC_YCGCO = 0x8; // AVCOL_SPC_YCOCG
 		
 		public const int FF_MAX_B_FRAMES = 0x10; // 16
+		
+		public const int CODEC_FLAG_UNALIGNED = 0x1; // 1
 		
 		public const int CODEC_FLAG_QSCALE = 0x2; // 2
 		
@@ -979,6 +985,16 @@ namespace FFmpeg.AutoGen
 		
 		public const int FF_PROFILE_MPEG4_ADVANCED_SIMPLE = 0xf; // 15
 		
+		public const int FF_PROFILE_JPEG2000_CSTREAM_RESTRICTION_0 = 0x0; // 0
+		
+		public const int FF_PROFILE_JPEG2000_CSTREAM_RESTRICTION_1 = 0x1; // 1
+		
+		public const int FF_PROFILE_JPEG2000_CSTREAM_NO_RESTRICTION = 0x2; // 2
+		
+		public const int FF_PROFILE_JPEG2000_DCINEMA_2K = 0x3; // 3
+		
+		public const int FF_PROFILE_JPEG2000_DCINEMA_4K = 0x4; // 4
+		
 		public const int FF_LEVEL_UNKNOWN = -0x63; // (-99)
 		
 		public const int FF_SUB_CHARENC_MODE_DO_NOTHING = -0x1; // (-1)
@@ -1021,7 +1037,7 @@ namespace FFmpeg.AutoGen
 		
 		public const int LIBAVFORMAT_VERSION_MAJOR = 0x37; // 55
 		
-		public const int LIBAVFORMAT_VERSION_MINOR = 0x2; // 2
+		public const int LIBAVFORMAT_VERSION_MINOR = 0x3; // 3
 		
 		public const int LIBAVFORMAT_VERSION_MICRO = 0x64; // 100
 		
@@ -1042,6 +1058,8 @@ namespace FFmpeg.AutoGen
 		public const int FF_API_CLOSE_INPUT_FILE = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 56)
 		
 		public const int FF_API_READ_PACKET = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 56)
+		
+		public const int FF_API_ASS_SSA = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 56)
 		
 		public const int FF_API_R_FRAME_RATE = 0x1; // 1
 		
@@ -1098,6 +1116,8 @@ namespace FFmpeg.AutoGen
 		public const int AVFMT_ALLOW_FLUSH = 0x10000; // 65536
 		
 		public const int AVFMT_TS_NONSTRICT = 0x20000; // 131072
+		
+		public const int AVFMT_TS_NEGATIVE = 0x40000; // 262144
 		
 		public const int AVFMT_SEEK_TO_PTS = 0x4000000; // 67108864
 		
@@ -1181,9 +1201,9 @@ namespace FFmpeg.AutoGen
 		
 		public const int LIBAVFILTER_VERSION_MAJOR = 0x3; // 3
 		
-		public const int LIBAVFILTER_VERSION_MINOR = 0x38; // 56
+		public const int LIBAVFILTER_VERSION_MINOR = 0x3d; // 61
 		
-		public const int LIBAVFILTER_VERSION_MICRO = 0x67; // 103
+		public const int LIBAVFILTER_VERSION_MICRO = 0x64; // 100
 		
 		public const int LIBAVFILTER_BUILD = 0x0; // LIBAVFILTER_VERSION_INT
 		
@@ -1226,6 +1246,8 @@ namespace FFmpeg.AutoGen
 		public const int AVFILTER_FLAG_DYNAMIC_INPUTS = 0x1; // (1 << 0)
 		
 		public const int AVFILTER_FLAG_DYNAMIC_OUTPUTS = 0x2; // (1 << 1)
+		
+		public const int AVFILTER_FLAG_SUPPORT_TIMELINE = 0x10000; // (1 << 16)
 		
 		public const int AVFILTER_CMD_FLAG_ONE = 0x1; // 1
 		
@@ -2062,6 +2084,7 @@ namespace FFmpeg.AutoGen
 			AV_CODEC_ID_MPL2 = 0x4d504c32, // ((('2' | ('L' << 8)) | ('P' << 16)) | ('M' << 24))
 			AV_CODEC_ID_VPLAYER = 0x56506c72, // ((('r' | ('l' << 8)) | ('P' << 16)) | ('V' << 24))
 			AV_CODEC_ID_PJS = 0x50684a53, // ((('S' | ('J' << 8)) | ('h' << 16)) | ('P' << 24))
+			AV_CODEC_ID_ASS = 0x41535320, // (((' ' | ('S' << 8)) | ('S' << 16)) | ('A' << 24))
 			AV_CODEC_ID_FIRST_UNKNOWN = 0x18000, // 98304
 			AV_CODEC_ID_TTF = 0x18000, // 98304
 			AV_CODEC_ID_BINTEXT = 0x42545854, // ((('T' | ('X' << 8)) | ('T' << 16)) | ('B' << 24))
@@ -3333,6 +3356,8 @@ namespace FFmpeg.AutoGen
 			public AVPacketList* parse_queue;
 			public AVPacketList* parse_queue_end;
 			public int raw_packet_buffer_remaining_size;
+			public long offset;
+			public AVRational offset_timebase;
 			public int io_repositioned;
 		}
 		
@@ -3531,6 +3556,9 @@ namespace FFmpeg.AutoGen
 			public void* priv;
 			public AVFilterGraph* graph;
 			public AVFilterCommand* command_queue;
+			public byte* enable_str;
+			public void* enable;
+			public double* var_values;
 		}
 		
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -3570,6 +3598,7 @@ namespace FFmpeg.AutoGen
 			public int channels;
 			public int frame_requested;
 			public int flags;
+			public long frame_count;
 		}
 		
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -3590,6 +3619,7 @@ namespace FFmpeg.AutoGen
 			public IntPtr config_props; // Func<AVFilterLink*, int>
 			public int needs_fifo;
 			public int needs_writable;
+			public IntPtr passthrough_filter_frame; // Func<AVFilterLink*, AVFrame*, int>
 		}
 		
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]

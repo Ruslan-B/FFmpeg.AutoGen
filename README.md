@@ -1,7 +1,7 @@
 ##FFmpeg.AutoGen
 
 Auto Generated FFmpeg wrapper for C#/.NET and Mono.  
-Wrapper generated for FFmpeg - Build Version: git-ee94362 (2013-04-18)
+Wrapper generated for FFmpeg - Build Version: git-0fb64da (2013-04-28)
 
 ##Usage
 
@@ -9,7 +9,7 @@ Example of usage video decoding with frame extraction included in FFmpeg.AutoGen
 
 ##Download
 
-Compiled wrapper including prebuilt [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/) win32 libraries:  
+Compiled wrapper including prebuilt [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/) (Windows 64-bit) libraries:  
 http://sourceforge.net/projects/ffmpeg-autogen/files/
 
 ##Build
