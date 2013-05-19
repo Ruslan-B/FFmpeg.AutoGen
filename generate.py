@@ -16,25 +16,9 @@ class DescriptionsEvaluationContext(ctypesgencore.expressions.EvaluationContext)
         return 0
 
 
-class CSharpGenerator:
-    name_conversions = {'base', 'internal', 'in', 'out', 'ref'}
-
-    type_conversions = {'int8_t': 'sbyte', 'uint8_t': 'byte',
-                        'int16_t': 'short', 'uint16_t': 'ushort',
-                        'int32_t': 'int', 'uint32_t': 'uint',
-                        'int64_t': 'long', 'uint64_t': 'ulong',
-                        'float32_t': 'float',
-                        'char': 'byte',
-                        'intmax_t': 'long', 'uintmax_t': 'ulong',
-                        'size_t': 'uint', 'SIZE_T': 'uint',
-                        'va_list': 'void*',
-                        'FILE': 'void'}
-
-    def __init__(self, descriptions, options):
-        self.descriptions = descriptions
-        self.options = options
-        self.typedefs_map = dict((td.name, td) for td in descriptions.typedefs)
-        self.evaluation_context = DescriptionsEvaluationContext(self.descriptions)
+class FileWriter:
+    def __init__(self, filename):
+        self.filename = filename
         self.indentation_level = 0
 
     def out(self, line=''):
@@ -48,21 +32,31 @@ class CSharpGenerator:
         self.indentation_level -= 1
         self.out('}')
 
-    def type_was_included(self, ctype):
-        source_path, line_number = ctype.src
-        if source_path in ['<built-in>', '<command-line>']:
-            return False
-        source_path = os.path.abspath(source_path).lower()
-        for output_only_from_path in options.output_only_from_paths:
-            output_only_from_path = os.path.abspath(output_only_from_path).lower()
-            if source_path.startswith(output_only_from_path):
-                return True
-        return False
+    def __enter__(self):
+        self.f = file(self.filename, 'w')
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.f.__exit__(exc_type, exc_val, exc_tb)
+
+
+class GeneratorBase:
+    name_conversions = {'base', 'internal', 'in', 'out', 'ref'}
 
     def escape_id_if_needed(self, name):
         if name in self.name_conversions:
             return '@' + name
         return name
+
+    type_conversions = {'int8_t': 'sbyte', 'uint8_t': 'byte',
+                        'int16_t': 'short', 'uint16_t': 'ushort',
+                        'int32_t': 'int', 'uint32_t': 'uint',
+                        'int64_t': 'long', 'uint64_t': 'ulong',
+                        'float32_t': 'float',
+                        'char': 'byte',
+                        'intmax_t': 'long', 'uintmax_t': 'ulong',
+                        'size_t': 'uint', 'SIZE_T': 'uint',
+                        'va_list': 'void*',
+                        'FILE': 'void'}
 
     def get_type_name(self, ctype):
         if isinstance(ctype, ctypedescs.CtypesPointer):
@@ -91,47 +85,113 @@ class CSharpGenerator:
         else:
             return ctype.name
 
+    def write_to(self, writer):
+        pass
+
+
+class LibraryGenerator(GeneratorBase):
+    def __init__(self, name):
+        self.id = self.escape_id_if_needed("%s_LIBRARY" % name.upper())
+        self.name = name
+
+    def write_to(self, writer):
+        writer.out('public const string %s = "%s";' % (self.id, self.name))
+
+
+class ConstGenerator(GeneratorBase):
+    def __init__(self, name, value, comment=None):
+        self.id = self.escape_id_if_needed(name)
+        self.value = value
+        self.comment = comment
+        pass
+
+    def write_to(self, writer):
+        value = self.value
+        if isinstance(value, int):
+            if value < 0x80000000L:
+                const_type = 'int'
+            else:
+                const_type = 'uint'
+            value = hex(value)
+        elif isinstance(value, long):
+            if value < 0x8000000000000000L:
+                const_type = 'long'
+            else:
+                const_type = 'ulong'
+            value = hex(value)
+        elif isinstance(value, float):
+            const_type = 'float'
+            value = "%ff" % value
+        elif isinstance(value, basestring):
+            const_type = 'string'
+            value = '"' + value + '"'
+        else:
+            const_type = '<unknown>'
+
+        if self.comment:
+            writer.out('public const %s %s = %s; // %s' % (const_type, self.id, value, self.comment))
+        else:
+            writer.out('public const %s %s = %s;' % (const_type, self.id, value))
+
+
+class MethodGenerator(GeneratorBase):
+    def __init__(self, description, library):
+        self.id = self.escape_id_if_needed(description.name)
+        self.description = description
+        self.library = library
+
+    def write_to(self, writer):
+
+        writer.out(
+            '[DllImport(%s, EntryPoint="%s", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]'
+            % (self.library.id, self.description.name))
+
+        params = []
+        i = 0
+        for arg_type in self.description.argtypes:
+            arg_name = self.description.argnames[i]
+            arg_name = self.escape_id_if_needed(arg_name)
+
+            if isinstance(arg_type, ctypedescs.CtypesFunction):
+                p_type_name = "IntPtr"
+            else:
+                p_type_name = self.get_type_name(arg_type)
+
+            params.append('%s %s' % (p_type_name, arg_name))
+            i += 1
+
+        r_type_name = self.get_type_name(self.description.restype)
+
+        params_out = ', '.join(x for x in params)
+        writer.out('public static extern %s %s(%s);' % (r_type_name, self.id, params_out))
+
+
+class WrapperGenerator(GeneratorBase):
+    def __init__(self, descriptions, options):
+        self.descriptions = descriptions
+        self.options = options
+        self.typedefs_map = dict((td.name, td) for td in descriptions.typedefs)
+        self.evaluation_context = DescriptionsEvaluationContext(self.descriptions)
+        self.indentation_level = 0
+
+    def type_was_included(self, ctype):
+        source_path, line_number = ctype.src
+        source_path = os.path.abspath(source_path).lower()
+        for output_only_from_path in options.output_only_from_paths:
+            output_only_from_path = os.path.abspath(output_only_from_path).lower()
+            if source_path.startswith(output_only_from_path):
+                return True
+        return False
+
     def evaluate_expression(self, expression):
         if isinstance(expression, ctypesgencore.expressions.TypeCastExpressionNode):
             if isinstance(expression.base, ctypesgencore.expressions.CallExpressionNode):
                 expression = expression.base.arguments[0]
         return expression.evaluate(self.evaluation_context)
 
-    def write_macros(self, macros_name, macros):
-        try:
-            value = self.evaluate_expression(macros.expr)
-        except (TypeError, ZeroDivisionError, AttributeError, ValueError):
-            print "Warning: Could not evaluate macro:", macros_name
-            return
-
-        if isinstance(value, int):
-            if value < 0x80000000L:
-                macros_type = 'int'
-            else:
-                macros_type = 'uint'
-            value = hex(value)
-        elif isinstance(value, long):
-            if value < 0x8000000000000000L:
-                macros_type = 'long'
-            else:
-                macros_type = 'ulong'
-            value = hex(value)
-        elif isinstance(value, float):
-            macros_type = 'float'
-            value = "%ff" % value
-        elif isinstance(value, basestring):
-            macros_type = 'string'
-            value = '"' + value + '"'
-        else:
-            macros_type = '<unknown>'
-
-        raw = macros.expr.py_string(False)
-        self.out('public const %s %s = %s; // %s' % (macros_type, macros_name, value, raw))
-        self.out()
-
-    def write_enum(self, enum_name, enum_type):
-        self.out('public enum %s' % self.escape_id_if_needed(enum_name))
-        self.begin_block()
+    def write_enum(self, enum_name, enum_type, writer):
+        writer.out('public enum %s' % self.escape_id_if_needed(enum_name))
+        writer.begin_block()
 
         last_value = -1
         for item in enum_type.enumerators:
@@ -139,18 +199,18 @@ class CSharpGenerator:
             name = self.escape_id_if_needed(name)
             value = self.evaluate_expression(expression)
             if value == (last_value + 1):
-                self.out('%s,' % name)
+                writer.out('%s,' % name)
             else:
-                self.out('%s = %s, // %s' % (name, hex(value), expression.py_string(False)))
+                writer.out('%s = %s, // %s' % (name, hex(value), expression.py_string(False)))
             last_value = value
 
-        self.end_block()
-        self.out()
+        writer.end_block()
+        writer.out()
 
-    def write_struct(self, struct_name, struct):
-        self.out('[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]')
-        self.out('public struct %s' % struct_name)
-        self.begin_block()
+    def write_struct(self, struct_name, struct, writer):
+        writer.out('[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]')
+        writer.out('public unsafe struct %s' % struct_name)
+        writer.begin_block()
 
         bit_field = None
         bit_field_count = 0
@@ -160,7 +220,7 @@ class CSharpGenerator:
                 name, ctype = member
                 name = self.escape_id_if_needed(name)
                 if isinstance(ctype, ctypedescs.CtypesFunction):
-                    self.out('public IntPtr %s; // %s' % (name, self.get_type_name(ctype)))
+                    writer.out('public IntPtr %s; // %s' % (name, self.get_type_name(ctype)))
                     continue
                 if isinstance(ctype, ctypedescs.CtypesBitfield):
                     size = self.evaluate_expression(ctype.bitfield)
@@ -168,7 +228,7 @@ class CSharpGenerator:
 
                     if not bit_field:
                         bit_field = '_bitfield0x%0.2X;' % bit_field_count
-                        self.out('public uint %s' % bit_field)
+                        writer.out('public uint %s' % bit_field)
                         bit_field_count += 1
 
                     bit_field_shift += size
@@ -178,19 +238,20 @@ class CSharpGenerator:
                         bit_field = None
                         bit_field_shift = 0
 
-                    self.out('//bit field %s %s:%d' % (name, ctype_name, size))
+                    writer.out('//bit field %s %s:%d' % (name, ctype_name, size))
                     continue
                     # review
                 if isinstance(ctype, ctypedescs.CtypesArray):
                     if ctype.count:
                         size = self.evaluate_expression(ctype.count)
                         base_type = ctype.base
-                        if isinstance(base_type, ctypedescs.CtypesPointer) or isinstance(base_type, ctypedescs.CtypesStruct):
+                        if isinstance(base_type, ctypedescs.CtypesPointer) or isinstance(base_type,
+                                                                                         ctypedescs.CtypesStruct):
                             # unfold fixed pointer array or structure array to set of indexed fields
                             ctype_name = self.get_type_name(base_type)
-                            self.out('// fixed %s %s[%d] - %s' % (ctype_name, name, size, ctype))
+                            writer.out('// fixed %s %s[%d] - %s' % (ctype_name, name, size, ctype))
                             for i in range(size):
-                                self.out('public %s %s_%d;' % (ctype_name, name, i))
+                                writer.out('public %s %s_%d;' % (ctype_name, name, i))
                             continue
                         else:
                             while isinstance(base_type, ctypedescs.CtypesArray) and base_type.count:
@@ -207,7 +268,7 @@ class CSharpGenerator:
                         #    self.out('[MarshalAs(UnmanagedType.ByValArray, SizeConst = %d)]' % size)
                         #    self.out('public %s[] %s; // %s' % (ctype_name, name, ctype))
                         #else:
-                        self.out('public fixed %s %s[%d]; // %s' % (ctype_name, name, size, ctype))
+                        writer.out('public fixed %s %s[%d]; // %s' % (ctype_name, name, size, ctype))
 
                         continue
                     else:
@@ -218,35 +279,10 @@ class CSharpGenerator:
                 if ctype_name == 'String':
                     ctype_name = 'byte*'
 
-                self.out('public %s %s;' % (ctype_name, name))
+                writer.out('public %s %s;' % (ctype_name, name))
 
-        self.end_block()
-        self.out()
-
-    def write_method(self, function_name, function):
-        self.out(
-            '[DllImport("%s", EntryPoint="%s", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]'
-            % (function.source_library, function_name))
-
-        params = []
-        i = 0
-        for arg_type in function.argtypes:
-            arg_name = function.argnames[i]
-            arg_name = self.escape_id_if_needed(arg_name)
-
-            if isinstance(arg_type, ctypedescs.CtypesFunction):
-                p_type_name = "IntPtr"
-            else:
-                p_type_name = self.get_type_name(arg_type)
-
-            params.append('%s %s' % (p_type_name, arg_name))
-            i += 1
-
-        r_type_name = self.get_type_name(function.restype)
-
-        params_out = ', '.join(x for x in params)
-        self.out('public static extern %s %s(%s);' % (r_type_name, function.name, params_out))
-        self.out()
+        writer.end_block()
+        writer.out()
 
     def get_typedef(self, ctype):
         for typedef in self.descriptions.typedefs:
@@ -254,15 +290,14 @@ class CSharpGenerator:
                 return typedef
         return None
 
-    def write_to_file(self, filename):
-        self.f = file(filename, 'w')
+    def write_to(self, writer):
+        writer.out('using System;')
+        writer.out('using System.Runtime.InteropServices;')
+        writer.out()
+        writer.out('namespace %s' % self.options.namespace)
+        writer.begin_block()
 
-        self.out('using System;')
-        self.out('using System.Runtime.InteropServices;')
-        self.out()
-        self.out('namespace %s' % self.options.namespace)
-        self.begin_block()
-
+        # aliases
         for typedef in self.descriptions.typedefs:
             if self.type_was_included(typedef):
                 if isinstance(typedef.ctype, ctypedescs.CtypesEnum) or \
@@ -273,41 +308,74 @@ class CSharpGenerator:
                     continue
 
                 if typedef.name != type_name:
-                    self.out('using %s=%s.%s;' % (typedef.name, self.options.class_name, type_name))
+                    writer.out('using %s=%s;' % (typedef.name, type_name))
 
-        self.out()
-        self.out('public static unsafe class %s' % self.options.class_name)
-        self.begin_block()
+        writer.out()
 
+        # form functions and libraries list
+        methods = []
+        libraries_map = {}
+        for description in self.descriptions.functions:
+            if description.source_library is not None and self.type_was_included(description):
+                library_name = description.source_library
+
+                if library_name in libraries_map:
+                    library = libraries_map[library_name]
+                else:
+                    library = LibraryGenerator(library_name)
+                    libraries_map[library.name] = library
+
+                method = MethodGenerator(description, library)
+                methods.append(method)
+
+        libraries = libraries_map.values()
+
+        constants = []
         for macros in descriptions.macros:
             if macros.expr and self.type_was_included(macros):
-                macros_name = self.escape_id_if_needed(macros.name)
-                self.write_macros(macros_name, macros)
+                try:
+                    value = self.evaluate_expression(macros.expr)
+                    comment = macros.expr.py_string(False)
+                    if str(value) == comment:
+                        comment = None
+                    constant = ConstGenerator(macros.name, value, comment)
+                    constants.append(constant)
+                except (TypeError, ZeroDivisionError, AttributeError, ValueError):
+                    print "Warning: Could not evaluate macro:", macros.name
 
         for enum in self.descriptions.enums:
             if self.type_was_included(enum):
                 enum_name = self.escape_id_if_needed(enum.tag)
-                self.write_enum(enum_name, enum.ctype)
+                self.write_enum(enum_name, enum.ctype, writer)
 
         for struct in self.descriptions.structs:
             if self.type_was_included(struct):
                 struct_name = self.escape_id_if_needed(struct.tag)
-                self.write_struct(struct_name, struct)
+                self.write_struct(struct_name, struct, writer)
 
         # generate empty structures for void typedefs
         for typedef in self.descriptions.typedefs:
             if self.type_was_included(typedef):
                 if isinstance(typedef.ctype, ctypedescs.CtypesSimple) and typedef.ctype.name == 'void':
                     struct_name = self.escape_id_if_needed(typedef.name)
-                    self.write_struct(struct_name, ctypedescs.CtypesStruct(struct_name, None, None))
+                    self.write_struct(struct_name, ctypedescs.CtypesStruct(struct_name, None, None), writer)
 
-        for function in self.descriptions.functions:
-            if function.source_library is not None and self.type_was_included(function):
-                function_name = self.escape_id_if_needed(function.name)
-                self.write_method(function_name, function)
+        writer.out('public static unsafe class %s' % self.options.class_name)
+        writer.begin_block()
 
-        self.end_block()
-        self.end_block()
+        for library in libraries:
+            library.write_to(writer)
+        writer.out()
+
+        for constant in constants:
+            constant.write_to(writer)
+        writer.out()
+
+        for method in methods:
+            method.write_to(writer)
+
+        writer.end_block()
+        writer.end_block()
 
 
 work_path = os.path.dirname(os.path.realpath(__file__))
@@ -332,9 +400,9 @@ class Options:
     exclude_symbols = []
     include_symbols = []
     include_macros = True
-    compile_libdirs = ['./FFmpeg/bin']
-    libraries = ['avutil-52', 'avcodec-55', 'avformat-55', 'swresample-0',
-                 'swscale-2', 'postproc-52', 'avfilter-3', 'avdevice-55']
+    compile_libdirs = ['./FFmpeg/']
+    libraries = ['avutil', 'avcodec', 'avformat', 'swresample',
+                 'swscale', 'postproc', 'avfilter', 'avdevice']
     show_all_errors = True
     show_long_errors = True
     show_macro_warnings = True
@@ -346,8 +414,8 @@ class Options:
     inserted_files = []
     #printer
     namespace = 'FFmpeg.AutoGen'
-    class_name = 'FFmpegNative'
-    output_only_from_paths = './FFmpeg/include'
+    class_name = 'FFmpegInvoke'
+    output_only_from_paths = ['./FFmpeg/include']
 
 
 options = Options()
@@ -359,8 +427,11 @@ ctypesgencore.processor.process(descriptions, options)
 
 # Step 3: Generate output
 
-csharp_generator = CSharpGenerator(descriptions, options)
-csharp_filename = './FFmpeg.AutoGen/FFmpegNative.cs'
-csharp_generator.write_to_file(csharp_filename)
+output_filename = './FFmpeg.AutoGen/FFmpegInvoke.cs'
+
+writer = FileWriter(output_filename)
+with writer:
+    generator = WrapperGenerator(descriptions, options)
+    generator.write_to(writer)
 
 #ctypesgencore.printer.WrapperPrinter(options.output, options, descriptions)
