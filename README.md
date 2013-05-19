@@ -1,38 +1,51 @@
 ##FFmpeg.AutoGen
 
 Auto Generated FFmpeg wrapper for C#/.NET and Mono.  
-Wrapper generated for FFmpeg - Build Version: git-0fb64da (2013-04-28)
+Wrapper generated for FFmpeg 1.2.  
 
 ##Usage
 
 Example of usage video decoding with frame extraction included in FFmpeg.AutoGen.Example project.
 
+- on Windows:  
+Put FFmpeg binaries next to application.
+They can be downloaded from [Zeranoe FFmpeg builds](http://ffmpeg.zeranoe.com/builds/) for 
+[32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-1.2-win32-shared.7z) or
+[64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-1.2-win64-shared.7z).
+Please note that version number should be stripped out from the file name i.e. ```avcodec-54.dll``` should be renamed or symlinked to ```avcodec.dll```. 
+
+- on OS X:  
+Install FFmpeg via [MacPorts](http://www.macports.org):
+```bash
+sudo port install ffmpeg +universal
+```
+Before run application it is necessary set enviroment variable variable ```LD_LIBRARY_PATH``` to ```/opt/local/lib``` (default MacPorts libraries location)
+
+- on Linux:  
+*todo*
+
 ##Download
 
-Compiled wrapper including prebuilt [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/) (Windows 64-bit) libraries:  
+Compiled wrapper:
 http://sourceforge.net/projects/ffmpeg-autogen/files/
 
-##Build
+##Generation
 
-- Put prebuild shared libraries to "./FFmpeg/bin" folder.  
-You can get them for Windows for example from [here](http://ffmpeg.zeranoe.com/builds/).  
-- Compile solution.
-
-##Generate
+Wrapper generator uses customized version of ctypesgencore package based on ctypesgen 0.r125.
 
 Prerequisites:
  - Python 2.7
    with packages:
     - ctypes 1.0.2
-    - ctypesgen 0.r125
- - gcc (MinGW for Windows)
+
+ - gcc
+   OS dependent:
+    - on OS X - XCode Command Line Tools
+    - on Windows - [MinGW](http://www.mingw.org)
 
 Steps:
-- Like for build put prebuild shared libraries to "./FFmpeg/bin".
-- Then put updated header files to "./FFmpeg/include".  
-They could be extracted from ffmpeg source code or from [dev build](http://ffmpeg.zeranoe.com/builds/). 
 - Execute: python generate.py
-- File "./FFmpeg.AutoGen/Native.cs" will regenerated.
+- File "./FFmpeg.AutoGen/FFmpegInvoke.cs" will regenerated.
 
 ##License
 
