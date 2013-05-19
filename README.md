@@ -11,7 +11,7 @@ Example of usage video decoding with frame extraction included in FFmpeg.AutoGen
 Put FFmpeg binaries next to application.
 They can be downloaded from [Zeranoe FFmpeg builds](http://ffmpeg.zeranoe.com/builds/) for 
 [32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-1.2-win32-shared.7z) or
-[64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-1.2-win64-shared.7z).
+[64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-1.2-win64-shared.7z).  
 Please note that version number should be stripped out from the file name i.e. ```avcodec-54.dll``` should be renamed or symlinked to ```avcodec.dll```. 
 
 - on OS X:  
@@ -19,7 +19,7 @@ Install FFmpeg via [MacPorts](http://www.macports.org):
 ```bash
 sudo port install ffmpeg +universal
 ```
-Before run application it is necessary set enviroment variable variable ```LD_LIBRARY_PATH``` to ```/opt/local/lib``` (default MacPorts libraries location)
+Before run application it is necessary set enviroment variable variable ```LD_LIBRARY_PATH``` to ```/opt/local/lib``` (this is default MacPorts libraries location).
 
 - on Linux:  
 *todo*
@@ -31,19 +31,17 @@ http://sourceforge.net/projects/ffmpeg-autogen/files/
 
 ##Generation
 
-Wrapper generator uses customized version of ctypesgencore package based on ctypesgen 0.r125.
+The wrapper generator uses customized version of ctypesgencore package based on [ctypesgen](http://code.google.com/p/ctypesgen/) 0.r125.
 
 Prerequisites:
- - Python 2.7
-   with packages:
+ - Python 2.7 with packages:
     - ctypes 1.0.2
 
- - gcc
-   OS dependent:
+ - gcc - OS dependent:
     - on OS X - XCode Command Line Tools
     - on Windows - [MinGW](http://www.mingw.org)
 
-Steps:
+Steps to generate:
 - Execute: python generate.py
 - File "./FFmpeg.AutoGen/FFmpegInvoke.cs" will regenerated.
 
