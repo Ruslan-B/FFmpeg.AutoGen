@@ -2328,7 +2328,7 @@ namespace FFmpeg.AutoGen
 	{
 	}
 	
-	public static unsafe class FFmpegInvoke
+	public static unsafe partial class FFmpegInvoke
 	{
 		public const string AVCODEC_LIBRARY = "avcodec";
 		public const string AVFILTER_LIBRARY = "avfilter";
