@@ -5,21 +5,25 @@ Wrapper generated for FFmpeg 1.2.
 
 ##Usage
 
-Example of usage video decoding with frame extraction included in FFmpeg.AutoGen.Example project.
+Example of usage video decoding with frame extraction included in FFmpeg.AutoGen.Example project.  
+
+Before run an application set environment variable variable ```LD_LIBRARY_PATH``` to folder with FFmpeg library binaries.
+As an option they also can be in application folder.    
 
 - on Windows:  
-Put FFmpeg binaries next to application.
-They can be downloaded from [Zeranoe FFmpeg builds](http://ffmpeg.zeranoe.com/builds/) for 
+Precompiled shared libraries can be downloaded from [Zeranoe FFmpeg builds](http://ffmpeg.zeranoe.com/builds/).
+Here is direct links to FFmpeg 1.2 release for   
 [32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-1.2-win32-shared.7z) or
-[64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-1.2-win64-shared.7z).  
-Please note that version number should be stripped out from the file name i.e. ```avcodec-54.dll``` should be renamed or symlinked to ```avcodec.dll```. 
+[64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-1.2-win64-shared.7z) platform.  
+Please note that version number should be removed from the file name, for example: ```avcodec-54.dll``` should be ```avcodec.dll```.
+The common way to achive this is a symlink creation via ```linkd```. 
 
 - on OS X:  
 Install FFmpeg via [MacPorts](http://www.macports.org):
 ```bash
 sudo port install ffmpeg +universal
 ```
-Before run application it is necessary set enviroment variable variable ```LD_LIBRARY_PATH``` to ```/opt/local/lib``` (this is default MacPorts libraries location).
+By default ```LD_LIBRARY_PATH``` should point to ```/opt/local/lib``` it is default MacPorts libraries location.
 
 - on Linux:  
 *todo*
@@ -34,6 +38,7 @@ http://sourceforge.net/projects/ffmpeg-autogen/files/
 The wrapper generator uses customized version of ctypesgencore package based on [ctypesgen](http://code.google.com/p/ctypesgen/) 0.r125.
 
 Prerequisites:
+ - FFmpeg library binaries (see **[Usage](#usage)**)
  - Python 2.7 with packages:
     - ctypes 1.0.2
 
@@ -43,7 +48,7 @@ Prerequisites:
 
 Steps to generate:
 - Execute: python generate.py
-- File "./FFmpeg.AutoGen/FFmpegInvoke.cs" will regenerated.
+- File "./FFmpeg.AutoGen/FFmpegInvoke.cs" will be regenerated.
 
 ##License
 

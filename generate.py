@@ -360,7 +360,7 @@ class WrapperGenerator(GeneratorBase):
                     struct_name = self.escape_id_if_needed(typedef.name)
                     self.write_struct(struct_name, ctypedescs.CtypesStruct(struct_name, None, None), writer)
 
-        writer.out('public static unsafe class %s' % self.options.class_name)
+        writer.out('public static unsafe partial class %s' % self.options.class_name)
         writer.begin_block()
 
         for library in libraries:
@@ -400,7 +400,7 @@ class Options:
     exclude_symbols = []
     include_symbols = []
     include_macros = True
-    compile_libdirs = ['./FFmpeg/']
+    compile_libdirs = ['./']
     libraries = ['avutil', 'avcodec', 'avformat', 'swresample',
                  'swscale', 'postproc', 'avfilter', 'avdevice']
     show_all_errors = True
