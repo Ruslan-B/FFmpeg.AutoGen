@@ -110,6 +110,9 @@ UpgradeLog*.XML
 # Monodevelop
 *.userprefs
 
+# OS X
+.DS_Store
+
 # Python
 
 *.py[cod]
