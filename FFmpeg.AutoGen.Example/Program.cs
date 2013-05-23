@@ -8,7 +8,10 @@ namespace FFmpeg.AutoGen.Example
 	{
 		private static unsafe void Main(string[] args)
 		{
-			string url = @"http://www.fileformat.info/format/mpeg/sample/031699cb978244b8a3adf1e81cb2ac7c/download";
+            // register LD_LIBRARY_PATH on window 
+		    InteropHelper.RegisterLibrariesSearchPath(Environment.GetEnvironmentVariable(InteropHelper.LD_LIBRARY_PATH));
+
+            string url = @"http://www.fileformat.info/format/mpeg/sample/031699cb978244b8a3adf1e81cb2ac7c/download";
 
 			FFmpegInvoke.av_register_all();
 			FFmpegInvoke.avcodec_register_all();

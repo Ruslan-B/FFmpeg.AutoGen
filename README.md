@@ -5,10 +5,7 @@ Wrapper generated for FFmpeg 1.2.
 
 ##Usage
 
-Example of usage video decoding with frame extraction included in FFmpeg.AutoGen.Example project.  
-
-Before run an application set environment variable variable ```LD_LIBRARY_PATH``` to folder with FFmpeg library binaries.
-As an option they also can be in application folder.    
+Example of usage video decoding and conversion with raw frame extraction included in FFmpeg.AutoGen.Example project.  
 
 - on Windows:  
 Precompiled shared libraries can be downloaded from [Zeranoe FFmpeg builds](http://ffmpeg.zeranoe.com/builds/).
@@ -23,7 +20,8 @@ Install FFmpeg via [MacPorts](http://www.macports.org):
 ```bash
 sudo port install ffmpeg +universal
 ```
-By default ```LD_LIBRARY_PATH``` should point to ```/opt/local/lib``` it is default MacPorts libraries location.
+The default MacPorts libraries location is ```/opt/local/lib```.
+Before run an application ensure that environment variable ```LD_LIBRARY_PATH``` inclides path with FFmpeg library binaries.
 
 - on Linux:  
 *todo*
