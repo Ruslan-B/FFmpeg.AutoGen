@@ -21,7 +21,7 @@ Install FFmpeg via [MacPorts](http://www.macports.org):
 sudo port install ffmpeg +universal
 ```
 The default MacPorts libraries location is ```/opt/local/lib```.
-Before run an application ensure that environment variable ```LD_LIBRARY_PATH``` inclides path with FFmpeg library binaries.
+Before run an application ensure that environment variable ```LD_LIBRARY_PATH``` inclides this path.
 
 - on Linux:  
 *todo*
