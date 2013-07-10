@@ -8,8 +8,7 @@ namespace FFmpeg.AutoGen.Example
 	{
 		private static unsafe void Main(string[] args)
 		{
-            bool is64BitProcess = IntPtr.Size == 8;
-            Console.WriteLine("Runnung in {0}-bit mode.", is64BitProcess ? "64" : "32");
+            Console.WriteLine("Runnung in {0}-bit mode.", Environment.Is64BitProcess ? "64" : "32");
 
             // register LD_LIBRARY_PATH on window 
 		    InteropHelper.RegisterLibrariesSearchPath(Environment.GetEnvironmentVariable(InteropHelper.LD_LIBRARY_PATH));
