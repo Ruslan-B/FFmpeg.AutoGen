@@ -5,9 +5,12 @@ Wrapper generated for FFmpeg 1.2.
 
 ##Usage
 
-Example of usage video decoding and conversion with raw frame extraction included in FFmpeg.AutoGen.Example project.  
+The example of the library usage: video decoding, conversion and frame extraction to jpeg is included in ```FFmpeg.AutoGen.Example``` project.  
 
 - on Windows:  
+In order to use this libary you need to put FFmpeg precompiled shared libraries into your application working directory (usally next to you application binaries).  
+As an option you can reuse ```InteropHelper``` from the example project to specify fixed location of the FFmpeg libraries as well use get this path from the environment variable.
+
 Precompiled shared libraries can be downloaded from [Zeranoe FFmpeg builds](http://ffmpeg.zeranoe.com/builds/).
 Here is direct links to FFmpeg 1.2 release for   
 [32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-1.2-win32-shared.7z) or
@@ -20,8 +23,8 @@ Install FFmpeg via [MacPorts](http://www.macports.org):
 ```bash
 sudo port install ffmpeg +universal
 ```
-The default MacPorts libraries location is ```/opt/local/lib```.
-Before run an application ensure that environment variable ```LD_LIBRARY_PATH``` inclides this path.
+Before run the application please ensure that the environment variable ```LD_LIBRARY_PATH``` is inclides path to FFmpeg libraries.  
+By default MacPorts put libraries to ```/opt/local/lib```.
 
 - on Linux:  
 *todo*
