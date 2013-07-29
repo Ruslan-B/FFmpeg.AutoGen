@@ -14,8 +14,13 @@ Precompiled shared libraries can be downloaded from [Zeranoe FFmpeg builds](http
 Here is direct links to FFmpeg 1.2 release for 
 [32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-1.2-win32-shared.7z) or
 [64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-1.2-win64-shared.7z) platform.  
-Please note that _version number should be removed_ from the file name, for example: ```avcodec-54.dll``` should be ```avcodec.dll```. 
-This can be solved via symlink creation using ```mklink``` command. The sample command line script is [here](FFmpeg/tools/create-symlinks.cmd).
+Please note that **version number should be removed** from the file name, for example: ```avcodec-54.dll``` should be named as ```avcodec.dll```. 
+This can be easily solved via symlink creation using ```mklink``` command.
+```bash
+mklink avcodec.dll avcodec-54.dll
+...
+```
+The full command line script is [here](FFmpeg/tools/create-symlinks.cmd).
 
 - on OS X:  
 Install FFmpeg via [MacPorts](http://www.macports.org):
@@ -48,7 +53,7 @@ Prerequisites:
 
 Steps to generate:
 - Execute: python generate.py
-- File "./FFmpeg.AutoGen/FFmpegInvoke.cs" will be regenerated.
+- File ```./FFmpeg.AutoGen/FFmpegInvoke.cs``` will be regenerated.
 
 ##License
 
