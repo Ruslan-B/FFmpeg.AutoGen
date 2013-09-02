@@ -8,11 +8,11 @@ Wrapper generated for FFmpeg 1.2.
 The example of the library usage: video decoding, conversion and frame extraction to jpeg is included in ```FFmpeg.AutoGen.Example``` project.  
 
 - on Windows:  
-You should use aproach from the example project to specify fixed location of the FFmpeg libraries viz ```InteropHelper``` as well to get a location from the environment variable.  
-Precompiled shared libraries bundled in repository but can be downloaded from [Zeranoe FFmpeg builds](http://ffmpeg.zeranoe.com/builds/).  
-Here is direct links to FFmpeg 1.2 release for 
-[32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-1.2-win32-shared.7z) or
-[64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-1.2-win64-shared.7z) platform.  
+The libraries are bundled with repository. The original libraries source is [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/)
+v1.2 been used for 
+[32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-1.2-win32-shared.7z) and 
+[64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-1.2-win64-shared.7z) platforms.  
+The example project shows how specify path to native libraries.  
 
 - on OS X:  
 Install FFmpeg via [MacPorts](http://www.macports.org):
@@ -20,7 +20,7 @@ Install FFmpeg via [MacPorts](http://www.macports.org):
 sudo port install ffmpeg +universal
 ```
 Before run the application please ensure that the environment variable ```LD_LIBRARY_PATH``` is inclides path to FFmpeg libraries.  
-By default MacPorts keeps compiled libraries at ```/opt/local/lib```.
+By default MacPorts keeps compiled libraries at ```/opt/local/lib```.  
 
 - on Linux:  
 *todo*
