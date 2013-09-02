@@ -401,8 +401,8 @@ class Options:
     include_symbols = []
     include_macros = True
     compile_libdirs = ['./']
-    libraries = ['avutil', 'avcodec', 'avformat', 'swresample',
-                 'swscale', 'postproc', 'avfilter', 'avdevice']
+    libraries = ['avutil-52', 'avcodec-54', 'avformat-54', 'swresample-0',
+                 'swscale-2', 'postproc-52', 'avfilter-3', 'avdevice-54']
     show_all_errors = True
     show_long_errors = True
     show_macro_warnings = True
