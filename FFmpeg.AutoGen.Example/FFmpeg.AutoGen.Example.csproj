@@ -26,7 +26,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <EnvironmentVariables>
       <EnvironmentVariables>
-        <Variable name="LD_LIBRARY_PATH" value="/opt/local/lib" />
+        <Variable name="MONO_LOG_LEVEL" value="debug" />
       </EnvironmentVariables>
     </EnvironmentVariables>
   </PropertyGroup>
