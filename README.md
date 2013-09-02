@@ -8,19 +8,11 @@ Wrapper generated for FFmpeg 1.2.
 The example of the library usage: video decoding, conversion and frame extraction to jpeg is included in ```FFmpeg.AutoGen.Example``` project.  
 
 - on Windows:  
-In order to use this libary you need to put FFmpeg precompiled shared libraries into your application working directory (usually next to you application binaries).  
-As an option you can reuse ```InteropHelper``` from the example project to specify fixed location of the FFmpeg libraries as well to get a location from the environment variable.  
-Precompiled shared libraries can be downloaded from [Zeranoe FFmpeg builds](http://ffmpeg.zeranoe.com/builds/).  
+You should use aproach from the example project to specify fixed location of the FFmpeg libraries viz ```InteropHelper``` as well to get a location from the environment variable.  
+Precompiled shared libraries bundled in repository but can be downloaded from [Zeranoe FFmpeg builds](http://ffmpeg.zeranoe.com/builds/).  
 Here is direct links to FFmpeg 1.2 release for 
 [32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-1.2-win32-shared.7z) or
 [64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-1.2-win64-shared.7z) platform.  
-Please note that **version number should be removed** from the file name, for example: ```avcodec-54.dll``` should be named as ```avcodec.dll```. 
-This can be easily solved via symlink creation using ```mklink``` command.
-```bash
-mklink avcodec.dll avcodec-54.dll
-...
-```
-The full command line script is [here](FFmpeg/tools/create-symlinks.cmd).
 
 - on OS X:  
 Install FFmpeg via [MacPorts](http://www.macports.org):

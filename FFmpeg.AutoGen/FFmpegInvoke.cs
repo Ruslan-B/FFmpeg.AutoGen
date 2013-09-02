@@ -2330,14 +2330,14 @@ namespace FFmpeg.AutoGen
 	
 	public static unsafe partial class FFmpegInvoke
 	{
-		public const string AVCODEC_LIBRARY = "avcodec";
-		public const string AVFILTER_LIBRARY = "avfilter";
-		public const string SWRESAMPLE_LIBRARY = "swresample";
-		public const string AVUTIL_LIBRARY = "avutil";
-		public const string AVFORMAT_LIBRARY = "avformat";
-		public const string SWSCALE_LIBRARY = "swscale";
-		public const string POSTPROC_LIBRARY = "postproc";
-		public const string AVDEVICE_LIBRARY = "avdevice";
+		public const string AVCODEC_LIBRARY = "avcodec-54";
+		public const string AVFILTER_LIBRARY = "avfilter-3";
+		public const string SWRESAMPLE_LIBRARY = "swresample-0";
+		public const string AVUTIL_LIBRARY = "avutil-52";
+		public const string AVFORMAT_LIBRARY = "avformat-54";
+		public const string SWSCALE_LIBRARY = "swscale-2";
+		public const string POSTPROC_LIBRARY = "postproc-52";
+		public const string AVDEVICE_LIBRARY = "avdevice-54";
 		
 		public const int FF_LAMBDA_SHIFT = 0x7;
 		public const int FF_LAMBDA_SCALE = 0x1; // (1 << FF_LAMBDA_SHIFT)

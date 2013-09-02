@@ -10,8 +10,23 @@ namespace FFmpeg.AutoGen.Example
 		{
             Console.WriteLine("Runnung in {0}-bit mode.", Environment.Is64BitProcess ? "64" : "32");
 
-            // register LD_LIBRARY_PATH on window 
-		    InteropHelper.RegisterLibrariesSearchPath(Environment.GetEnvironmentVariable(InteropHelper.LD_LIBRARY_PATH));
+            // register path to ffmpeg
+            switch (Environment.OSVersion.Platform)
+            {
+                case PlatformID.Win32NT:
+                case PlatformID.Win32S:
+                case PlatformID.Win32Windows:
+                    string ffmpegPath = string.Format(@"../../../FFmpeg/bin/windows/{0}", Environment.Is64BitProcess ? "x64" : "x86");
+                    InteropHelper.RegisterLibrariesSearchPath(ffmpegPath);
+                    break;
+                case PlatformID.Unix:
+                case PlatformID.MacOSX:
+                    string libraryPath = Environment.GetEnvironmentVariable(InteropHelper.LD_LIBRARY_PATH);
+                    InteropHelper.RegisterLibrariesSearchPath(libraryPath);
+                    break;
+            }
+            
+            // decode 100 frame from url
 
             string url = @"http://hubblesource.stsci.edu/sources/video/clips/details/images/centaur_1.mpg";
 
