@@ -20,7 +20,7 @@ namespace FFmpeg.AutoGen.Example
                 case PlatformID.Unix:
                 case PlatformID.MacOSX:
                     string currentValue = Environment.GetEnvironmentVariable(LD_LIBRARY_PATH);
-                    if (currentValue.Contains(path) == false)
+                    if (string.IsNullOrWhiteSpace(currentValue) == false && currentValue.Contains(path) == false)
                     {
                         string newValue = currentValue + Path.PathSeparator + path;
                         Environment.SetEnvironmentVariable(LD_LIBRARY_PATH, newValue);

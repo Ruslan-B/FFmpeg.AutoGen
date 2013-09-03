@@ -45,7 +45,8 @@
     <Compile Include="FFmpegInvoke.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FFmpeg.AutoGen.config">
+    <None Include="FFmpeg.AutoGen.dll.config">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,6 +1,9 @@
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
-#[Bb]in/
-#[Oo]bj/
+[Bb]in/
+[Oo]bj/
+
+#include FFmpeg binaries
+!FFmpeg/[Bb]in/**/*
 
 # mstest test results
 TestResults
@@ -116,6 +119,3 @@ UpgradeLog*.XML
 
 # PyCharm
 .idea/
-
-#include FFmpeg binaries
-!FFmpeg/[Bb]in/**/*
