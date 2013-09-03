@@ -13,7 +13,7 @@ namespace FFmpeg.AutoGen.Example
             // register path to ffmpeg
             switch (Environment.OSVersion.Platform)
             {
-                case PlatformID.Win32NT:
+                case PlatformID.Win32NT:    
                 case PlatformID.Win32S:
                 case PlatformID.Win32Windows:
                     string ffmpegPath = string.Format(@"../../../FFmpeg/bin/windows/{0}", Environment.Is64BitProcess ? "x64" : "x86");
