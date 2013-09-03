@@ -8,8 +8,7 @@ Wrapper generated for FFmpeg 1.2.
 The example of the library usage: video decoding, conversion and frame extraction to jpeg is included in ```FFmpeg.AutoGen.Example``` project.  
 
 - on Windows:  
-The libraries are bundled with repository. The original libraries source is [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/)
-v1.2 been used for 
+The native FFmpeg binaries are bundled with repository. The binaries source is [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/), v1.2 been used for 
 [32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-1.2-win32-shared.7z) and 
 [64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-1.2-win64-shared.7z) platforms.  
 The example project shows how specify path to native libraries.  
@@ -19,11 +18,11 @@ Install FFmpeg via [MacPorts](http://www.macports.org):
 ```bash
 sudo port install ffmpeg +universal
 ```
-Before run the application please ensure that the environment variable ```LD_LIBRARY_PATH``` is inclides path to FFmpeg libraries.  
-By default MacPorts keeps compiled libraries at ```/opt/local/lib```.  
+Please ensure that ```FFmpeg.AutoGen.dll``` coupled with ```FFmpeg.AutoGen.config```. 
+By default MacPorts keeps compiled libraries at ```/opt/local/lib```.
 
 - on Linux:  
-*todo*
+You need to update ```FFmpeg.AutoGen.config``` with full path to FFmpeg libraries.
 
 ##Download
 
