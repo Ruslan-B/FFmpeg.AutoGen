@@ -3,7 +3,7 @@
 [Oo]bj/
 
 #include FFmpeg binaries
-!FFmpeg/[Bb]in/**/*
+!FFmpeg/[Bb]in/
 
 # mstest test results
 TestResults
