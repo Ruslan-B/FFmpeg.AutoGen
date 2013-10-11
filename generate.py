@@ -1,3 +1,4 @@
+import re
 import os
 import ctypesgencore
 import ctypesgencore.ctypedescs as ctypedescs
@@ -91,8 +92,12 @@ class GeneratorBase:
 
 class LibraryGenerator(GeneratorBase):
     def __init__(self, name):
-        self.id = self.escape_id_if_needed("%s_LIBRARY" % name.upper())
-        self.name = name
+        p = re.compile(r'(?:lib)?(\w+)[.-](\d+)')
+        m = p.match(name)
+        libname = m.group(1)
+        version = m.group(2)
+        self.id = self.escape_id_if_needed("%s_LIBRARY" % libname.upper())
+        self.name = '%s-%s' % (libname, version)
 
     def write_to(self, writer):
         writer.out('public const string %s = "%s";' % (self.id, self.name))
@@ -400,9 +405,9 @@ class Options:
     exclude_symbols = []
     include_symbols = []
     include_macros = True
-    compile_libdirs = ['./']
-    libraries = ['avutil-52', 'avcodec-54', 'avformat-54', 'swresample-0',
-                 'swscale-2', 'postproc-52', 'avfilter-3', 'avdevice-54']
+    compile_libdirs = ['/opt/local/lib']
+    libraries = ['libavutil.52', 'libavcodec.55', 'libavformat.55', 'libswresample.0',
+                 'libswscale.2', 'libpostproc.52', 'libavfilter.3', 'libavdevice.55']
     show_all_errors = True
     show_long_errors = True
     show_macro_warnings = True
