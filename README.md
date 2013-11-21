@@ -5,7 +5,8 @@ Wrapper generated for FFmpeg 2.0.1
 
 ##Usage
 
-The example of the library usage: video decoding, conversion and frame extraction to jpeg is included in ```FFmpeg.AutoGen.Example``` project.  
+The basic example of the library usage: video decoding, conversion and frame extraction to jpeg is included in ```FFmpeg.AutoGen.Example``` project.  
+For the more sophisticated operations I can recommend to read [An ffmpeg and SDL Tutorial](http://dranger.com/ffmpeg/) for C.
 
 - on Windows:  
 The native FFmpeg binaries are bundled with repository. The binaries source is [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/), v2.0.1 been used for 
