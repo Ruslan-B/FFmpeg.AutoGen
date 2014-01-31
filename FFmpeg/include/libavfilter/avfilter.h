@@ -35,6 +35,7 @@
 
 #include <stddef.h>
 
+#include "libavutil/attributes.h"
 #include "libavutil/avutil.h"
 #include "libavutil/dict.h"
 #include "libavutil/frame.h"
@@ -633,14 +634,14 @@ struct AVFilterContext {
     AVFilterPad   *input_pads;      ///< array of input pads
     AVFilterLink **inputs;          ///< array of pointers to input links
 #if FF_API_FOO_COUNT
-    unsigned input_count;           ///< @deprecated use nb_inputs
+    attribute_deprecated unsigned input_count; ///< @deprecated use nb_inputs
 #endif
     unsigned    nb_inputs;          ///< number of input pads
 
     AVFilterPad   *output_pads;     ///< array of output pads
     AVFilterLink **outputs;         ///< array of pointers to output links
 #if FF_API_FOO_COUNT
-    unsigned output_count;          ///< @deprecated use nb_outputs
+    attribute_deprecated unsigned output_count; ///< @deprecated use nb_outputs
 #endif
     unsigned    nb_outputs;         ///< number of output pads
 
@@ -1125,6 +1126,35 @@ const AVClass *avfilter_get_class(void);
 
 typedef struct AVFilterGraphInternal AVFilterGraphInternal;
 
+/**
+ * A function pointer passed to the @ref AVFilterGraph.execute callback to be
+ * executed multiple times, possibly in parallel.
+ *
+ * @param ctx the filter context the job belongs to
+ * @param arg an opaque parameter passed through from @ref
+ *            AVFilterGraph.execute
+ * @param jobnr the index of the job being executed
+ * @param nb_jobs the total number of jobs
+ *
+ * @return 0 on success, a negative AVERROR on error
+ */
+typedef int (avfilter_action_func)(AVFilterContext *ctx, void *arg, int jobnr, int nb_jobs);
+
+/**
+ * A function executing multiple jobs, possibly in parallel.
+ *
+ * @param ctx the filter context to which the jobs belong
+ * @param func the function to be called multiple times
+ * @param arg the argument to be passed to func
+ * @param ret a nb_jobs-sized array to be filled with return values from each
+ *            invocation of func
+ * @param nb_jobs the number of jobs to execute
+ *
+ * @return 0 on success, a negative AVERROR on error
+ */
+typedef int (avfilter_execute_func)(AVFilterContext *ctx, avfilter_action_func *func,
+                                    void *arg, int *ret, int nb_jobs);
+
 typedef struct AVFilterGraph {
     const AVClass *av_class;
 #if FF_API_FOO_COUNT
@@ -1167,6 +1197,27 @@ typedef struct AVFilterGraph {
      * Opaque object for libavfilter internal use.
      */
     AVFilterGraphInternal *internal;
+
+    /**
+     * Opaque user data. May be set by the caller to an arbitrary value, e.g. to
+     * be used from callbacks like @ref AVFilterGraph.execute.
+     * Libavfilter will not touch this field in any way.
+     */
+    void *opaque;
+
+    /**
+     * This callback may be set by the caller immediately after allocating the
+     * graph and before adding any filters to it, to provide a custom
+     * multithreading implementation.
+     *
+     * If set, filters with slice threading capability will call this callback
+     * to execute multiple jobs in parallel.
+     *
+     * If this field is left unset, libavfilter will use its internal
+     * implementation, which may or may not be multithreaded depending on the
+     * platform and build options.
+     */
+    avfilter_execute_func *execute;
 
     char *aresample_swr_opts; ///< swr options to use for the auto-inserted aresample filters, Access ONLY through AVOptions
 
@@ -1241,7 +1292,7 @@ int avfilter_graph_add_filter(AVFilterGraph *graphctx, AVFilterContext *filter);
  * @return a negative AVERROR error code in case of failure, a non
  * negative value otherwise
  */
-int avfilter_graph_create_filter(AVFilterContext **filt_ctx, AVFilter *filt,
+int avfilter_graph_create_filter(AVFilterContext **filt_ctx, const AVFilter *filt,
                                  const char *name, const char *args, void *opaque,
                                  AVFilterGraph *graph_ctx);
 
@@ -1265,7 +1316,7 @@ enum {
  *
  * @param graphctx the filter graph
  * @param log_ctx context used for logging
- * @return 0 in case of success, a negative AVERROR code otherwise
+ * @return >= 0 in case of success, a negative AVERROR code otherwise
  */
 int avfilter_graph_config(AVFilterGraph *graphctx, void *log_ctx);
 
@@ -1311,7 +1362,7 @@ AVFilterInOut *avfilter_inout_alloc(void);
  */
 void avfilter_inout_free(AVFilterInOut **inout);
 
-#if HAVE_INCOMPATIBLE_LIBAV_ABI || !FF_API_OLD_GRAPH_PARSE
+#if AV_HAVE_INCOMPATIBLE_LIBAV_ABI || !FF_API_OLD_GRAPH_PARSE
 /**
  * Add a graph described by a string to a graph.
  *
