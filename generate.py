@@ -278,6 +278,15 @@ class WrapperGenerator(GeneratorBase):
                         continue
                     else:
                         ctype_name = self.get_type_name(ctype)
+                if isinstance(ctype, ctypedescs.CtypesPointer) and isinstance(ctype.destination, ctypedescs.CtypesTypedef):
+                    try:
+                        pointer_typedef = self.typedefs_map[ctype.destination.name]
+                        if isinstance(pointer_typedef.ctype, ctypedescs.CtypesFunction):
+                            writer.out('public IntPtr %s; // %s - %s' % (name, self.get_type_name(ctype), self.get_type_name(pointer_typedef.ctype)))
+                            continue
+                    except KeyError:
+                        print "Warning: Could not find typedef:", ctype.destination.name 
+                    ctype_name = self.get_type_name(ctype)
                 else:
                     ctype_name = self.get_type_name(ctype)
 
