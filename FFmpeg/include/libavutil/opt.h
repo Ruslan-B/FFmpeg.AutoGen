@@ -64,7 +64,7 @@
  *     int      bin_len;
  * } test_struct;
  *
- * static const AVOption options[] = {
+ * static const AVOption test_options[] = {
  *   { "test_int", "This is a test option of int type.", offsetof(test_struct, int_opt),
  *     AV_OPT_TYPE_INT, { .i64 = -1 }, INT_MIN, INT_MAX },
  *   { "test_str", "This is a test option of string type.", offsetof(test_struct, str_opt),
@@ -77,7 +77,7 @@
  * static const AVClass test_class = {
  *     .class_name = "test class",
  *     .item_name  = av_default_item_name,
- *     .option     = options,
+ *     .option     = test_options,
  *     .version    = LIBAVUTIL_VERSION_INT,
  * };
  * @endcode
@@ -163,7 +163,7 @@
  *
  * @subsection avoptions_implement_named_constants Named constants
  *      It is possible to create named constants for options. Simply set the unit
- *      field of the option the constants should apply to to a string and
+ *      field of the option the constants should apply to a string and
  *      create the constants themselves as options of type AV_OPT_TYPE_CONST
  *      with their unit field set to the same string.
  *      Their default_val field should contain the value of the named
@@ -233,6 +233,7 @@ enum AVOptionType{
     AV_OPT_TYPE_VIDEO_RATE = MKBETAG('V','R','A','T'), ///< offset must point to AVRational
     AV_OPT_TYPE_DURATION   = MKBETAG('D','U','R',' '),
     AV_OPT_TYPE_COLOR      = MKBETAG('C','O','L','R'),
+    AV_OPT_TYPE_CHANNEL_LAYOUT = MKBETAG('C','H','L','A'),
 #if FF_API_OLD_AVOPTIONS
     FF_OPT_TYPE_FLAGS = 0,
     FF_OPT_TYPE_INT,
@@ -319,7 +320,7 @@ typedef struct AVOptionRanges {
 /**
  * Look for an option in obj. Look only for the options which
  * have the flags set as specified in mask and flags (that is,
- * for which it is the case that opt->flags & mask == flags).
+ * for which it is the case that (opt->flags & mask) == flags).
  *
  * @param[in] obj a pointer to a struct whose first element is a
  * pointer to an AVClass
@@ -657,6 +658,7 @@ int av_opt_set_image_size(void *obj, const char *name, int w, int h, int search_
 int av_opt_set_pixel_fmt (void *obj, const char *name, enum AVPixelFormat fmt, int search_flags);
 int av_opt_set_sample_fmt(void *obj, const char *name, enum AVSampleFormat fmt, int search_flags);
 int av_opt_set_video_rate(void *obj, const char *name, AVRational val, int search_flags);
+int av_opt_set_channel_layout(void *obj, const char *name, int64_t ch_layout, int search_flags);
 
 /**
  * Set a binary option to an integer list.
@@ -687,10 +689,10 @@ int av_opt_set_video_rate(void *obj, const char *name, AVRational val, int searc
  * @param[in] search_flags flags passed to av_opt_find2. I.e. if AV_OPT_SEARCH_CHILDREN
  * is passed here, then the option may be found in a child of obj.
  * @param[out] out_val value of the option will be written here
- * @return 0 on success, a negative error code otherwise
+ * @return >=0 on success, a negative error code otherwise
  */
 /**
- * @note the returned string will av_malloc()ed and must be av_free()ed by the caller
+ * @note the returned string will be av_malloc()ed and must be av_free()ed by the caller
  */
 int av_opt_get       (void *obj, const char *name, int search_flags, uint8_t   **out_val);
 int av_opt_get_int   (void *obj, const char *name, int search_flags, int64_t    *out_val);
@@ -700,6 +702,7 @@ int av_opt_get_image_size(void *obj, const char *name, int search_flags, int *w_
 int av_opt_get_pixel_fmt (void *obj, const char *name, int search_flags, enum AVPixelFormat *out_fmt);
 int av_opt_get_sample_fmt(void *obj, const char *name, int search_flags, enum AVSampleFormat *out_fmt);
 int av_opt_get_video_rate(void *obj, const char *name, int search_flags, AVRational *out_val);
+int av_opt_get_channel_layout(void *obj, const char *name, int search_flags, int64_t *ch_layout);
 /**
  * @}
  */
