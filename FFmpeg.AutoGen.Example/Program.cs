@@ -30,8 +30,6 @@ namespace FFmpeg.AutoGen.Example
             // decode 100 frame from url
 
             string url = @"http://hubblesource.stsci.edu/sources/video/clips/details/images/centaur_1.mpg";
-            //url = @"e:\flux.ts";
-		    url = @"e:\7343889.mpg";
 
 			FFmpegInvoke.av_register_all();
 			FFmpegInvoke.avcodec_register_all();
