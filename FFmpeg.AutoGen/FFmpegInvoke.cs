@@ -3935,6 +3935,22 @@ namespace FFmpeg.AutoGen
 		public static extern int av_find_best_stream(AVFormatContext* ic, AVMediaType type, int wanted_stream_nb, int related_stream, AVCodec** decoder_ret, int flags);
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_read_packet", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_read_packet(AVFormatContext* s, AVPacket* pkt);
+        /// <summary>
+        /// Return the next frame of a stream. This function returns what is stored in the file, and does not validate that what 
+        /// is there are valid frames for the decoder. It will split what is stored in the file into frames and return one for 
+        /// each call. It will not omit invalid data between valid frames so as to give the decoder the maximum information possible for decoding. 
+        /// If pkt->buf is NULL, then the packet is valid until the next av_read_frame() or until avformat_close_input(). Otherwise 
+        /// the packet is valid indefinitely. In both cases the packet must be freed with av_free_packet when it is no longer needed. 
+        /// For video, the packet contains exactly one frame. For audio, it contains an integer number of frames if each frame has 
+        /// a known fixed size (e.g. PCM or ADPCM data). If the audio frames have a variable size (e.g. MPEG audio), then it contains one frame.
+        /// pkt->pts, pkt->dts and pkt->duration are always set to correct values in AVStream.time_base units 
+        /// (and guessed if the format cannot provide them). pkt->pts can be AV_NOPTS_VALUE if the video format has B-frames, 
+        /// so it is better to rely on pkt->dts if you do not decompress the payload.
+        /// Return 0 if OK, < 0 on error or end of file
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="pkt"></param>
+        /// <returns></returns>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_read_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_read_frame(AVFormatContext* s, AVPacket* pkt);
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_seek_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
