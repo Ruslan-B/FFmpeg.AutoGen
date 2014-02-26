@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Text;
 
 namespace FFmpeg.AutoGen.Example
 {
@@ -29,6 +30,8 @@ namespace FFmpeg.AutoGen.Example
             // decode 100 frame from url
 
             string url = @"http://hubblesource.stsci.edu/sources/video/clips/details/images/centaur_1.mpg";
+            //url = @"e:\flux.ts";
+		    url = @"e:\7343889.mpg";
 
 			FFmpegInvoke.av_register_all();
 			FFmpegInvoke.avcodec_register_all();
@@ -89,15 +92,21 @@ namespace FFmpeg.AutoGen.Example
 			AVPacket* pPacket = &packet;
 			FFmpegInvoke.av_init_packet(pPacket);
 
+		    bool gotoEnd = false;
 			int frameNumber = 0;
-			while (frameNumber < 100)
+			while (gotoEnd || frameNumber < 100)
 			{
 				Console.WriteLine("frame: {0}", frameNumber);
+			    int ret;
+			    if ((ret = FFmpegInvoke.av_read_frame(pFormatContext, pPacket)) < 0)
+			    {
+                    if (pFormatContext->pb != null && pFormatContext->pb->eof_reached == 1)
+                        break;
 
-				if (FFmpegInvoke.av_read_frame(pFormatContext, pPacket) < 0)
-					throw new Exception("Could not read frame");
+			        throw new Exception("Could not read frame. ErrCode:" + ret);
+			    }
 
-				if (pPacket->stream_index != pStream->index)
+			    if (pPacket->stream_index != pStream->index)
 					continue;
 
 				int gotPicture = 0;
@@ -106,7 +115,13 @@ namespace FFmpeg.AutoGen.Example
 					throw new Exception(string.Format("Error while decoding frame {0}", frameNumber));
 
 				if (gotPicture == 1)
-				{
+                {
+                    var sb = new StringBuilder();
+                    sb.AppendLine("PictType = " + Enum.GetName(typeof(AVPictureType), pDecodedFrame->pict_type));
+                    sb.AppendLine("Pkt pos = " + pDecodedFrame->pkt_pos);
+                    sb.AppendLine("Pkt duration = " + pDecodedFrame->pkt_duration);
+                    Console.WriteLine(sb.ToString());
+
 					byte** src = &pDecodedFrame->data_0;
 					byte** dst = &pConvertedFrame->data_0;
 					FFmpegInvoke.sws_scale(pConvertContext, src, pDecodedFrame->linesize, 0,
@@ -117,8 +132,8 @@ namespace FFmpeg.AutoGen.Example
 					var imageBufferPtr = new IntPtr(convertedFrameAddress);
 
 					using (var bitmap = new Bitmap(width, height, pConvertedFrame->linesize[0], PixelFormat.Format24bppRgb, imageBufferPtr))
-					{
-						bitmap.Save(@"frame.buffer.jpg", ImageFormat.Jpeg);
+                    {
+                        bitmap.Save(string.Format(@"frame.buffer{0}.jpg", frameNumber), ImageFormat.Jpeg);
 					}
 				}
 				frameNumber++;
@@ -131,6 +146,8 @@ namespace FFmpeg.AutoGen.Example
 			FFmpegInvoke.av_free(pDecodedFrame);
 			FFmpegInvoke.avcodec_close(pCodecContext);
 			FFmpegInvoke.avformat_close_input(&pFormatContext);
+
+		    Console.ReadLine();
 		}
 	}
 }
