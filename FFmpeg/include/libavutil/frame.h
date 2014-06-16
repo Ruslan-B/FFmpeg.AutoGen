@@ -17,29 +17,37 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
+/**
+ * @file
+ * @ingroup lavu_frame
+ * reference-counted frame API
+ */
+
 #ifndef AVUTIL_FRAME_H
 #define AVUTIL_FRAME_H
 
 #include <stdint.h>
-
-#include "libavcodec/version.h"
 
 #include "avutil.h"
 #include "buffer.h"
 #include "dict.h"
 #include "rational.h"
 #include "samplefmt.h"
+#include "version.h"
+
 
 enum AVColorSpace{
-    AVCOL_SPC_RGB         = 0,
-    AVCOL_SPC_BT709       = 1, ///< also ITU-R BT1361 / IEC 61966-2-4 xvYCC709 / SMPTE RP177 Annex B
-    AVCOL_SPC_UNSPECIFIED = 2,
-    AVCOL_SPC_FCC         = 4,
-    AVCOL_SPC_BT470BG     = 5, ///< also ITU-R BT601-6 625 / ITU-R BT1358 625 / ITU-R BT1700 625 PAL & SECAM / IEC 61966-2-4 xvYCC601
-    AVCOL_SPC_SMPTE170M   = 6, ///< also ITU-R BT601-6 525 / ITU-R BT1358 525 / ITU-R BT1700 NTSC / functionally identical to above
-    AVCOL_SPC_SMPTE240M   = 7,
-    AVCOL_SPC_YCOCG       = 8, ///< Used by Dirac / VC-2 and H.264 FRext, see ITU-T SG16
-    AVCOL_SPC_NB             , ///< Not part of ABI
+    AVCOL_SPC_RGB         =  0,
+    AVCOL_SPC_BT709       =  1, ///< also ITU-R BT1361 / IEC 61966-2-4 xvYCC709 / SMPTE RP177 Annex B
+    AVCOL_SPC_UNSPECIFIED =  2,
+    AVCOL_SPC_FCC         =  4,
+    AVCOL_SPC_BT470BG     =  5, ///< also ITU-R BT601-6 625 / ITU-R BT1358 625 / ITU-R BT1700 625 PAL & SECAM / IEC 61966-2-4 xvYCC601
+    AVCOL_SPC_SMPTE170M   =  6, ///< also ITU-R BT601-6 525 / ITU-R BT1358 525 / ITU-R BT1700 NTSC / functionally identical to above
+    AVCOL_SPC_SMPTE240M   =  7,
+    AVCOL_SPC_YCOCG       =  8, ///< Used by Dirac / VC-2 and H.264 FRext, see ITU-T SG16
+    AVCOL_SPC_BT2020_NCL  =  9, ///< ITU-R BT2020 non-constant luminance system
+    AVCOL_SPC_BT2020_CL   = 10, ///< ITU-R BT2020 constant luminance system
+    AVCOL_SPC_NB              , ///< Not part of ABI
 };
 #define AVCOL_SPC_YCGCO AVCOL_SPC_YCOCG
 
@@ -50,11 +58,40 @@ enum AVColorRange{
     AVCOL_RANGE_NB             , ///< Not part of ABI
 };
 
+
+/**
+ * @defgroup lavu_frame AVFrame
+ * @ingroup lavu_data
+ *
+ * @{
+ * AVFrame is an abstraction for reference-counted raw multimedia data.
+ */
+
 enum AVFrameSideDataType {
     /**
      * The data is the AVPanScan struct defined in libavcodec.
      */
     AV_FRAME_DATA_PANSCAN,
+    /**
+     * ATSC A53 Part 4 Closed Captions.
+     * A53 CC bitstream is stored as uint8_t in AVFrameSideData.data.
+     * The number of bytes of CC data is AVFrameSideData.size.
+     */
+    AV_FRAME_DATA_A53_CC,
+    /**
+     * Stereoscopic 3d metadata.
+     * The data is the AVStereo3D struct defined in libavutil/stereo3d.h.
+     */
+    AV_FRAME_DATA_STEREO3D,
+    /**
+     * The data is the AVMatrixEncoding enum defined in libavutil/channel_layout.h.
+     */
+    AV_FRAME_DATA_MATRIXENCODING,
+    /**
+     * Metadata relevant to a downmix procedure.
+     * The data is the AVDownmixInfo struct defined in libavutil/downmix_info.h.
+     */
+    AV_FRAME_DATA_DOWNMIX_INFO,
 };
 
 typedef struct AVFrameSideData {
@@ -386,6 +423,26 @@ typedef struct AVFrame {
     AVFrameSideData **side_data;
     int            nb_side_data;
 
+/**
+ * @defgroup lavu_frame_flags AV_FRAME_FLAGS
+ * Flags describing additional frame properties.
+ *
+ * @{
+ */
+
+/**
+ * The frame data may be corrupted, e.g. due to decoding errors.
+ */
+#define AV_FRAME_FLAG_CORRUPT       (1 << 0)
+/**
+ * @}
+ */
+
+    /**
+     * Frame flags, a combination of @ref lavu_frame_flags
+     */
+    int flags;
+
     /**
      * frame timestamp estimated using various heuristics, in stream time base
      * Code outside libavcodec should access this field using:
@@ -539,7 +596,7 @@ AVFrame *av_frame_alloc(void);
 void av_frame_free(AVFrame **frame);
 
 /**
- * Setup a new reference to the data described by a given frame.
+ * Set up a new reference to the data described by the source frame.
  *
  * Copy frame properties from src to dst and create a new reference for each
  * AVBufferRef from src.
@@ -549,7 +606,7 @@ void av_frame_free(AVFrame **frame);
  *
  * @return 0 on success, a negative AVERROR on error
  */
-int av_frame_ref(AVFrame *dst, AVFrame *src);
+int av_frame_ref(AVFrame *dst, const AVFrame *src);
 
 /**
  * Create a new frame that references the same data as src.
@@ -558,7 +615,7 @@ int av_frame_ref(AVFrame *dst, AVFrame *src);
  *
  * @return newly created AVFrame on success, NULL on error.
  */
-AVFrame *av_frame_clone(AVFrame *src);
+AVFrame *av_frame_clone(const AVFrame *src);
 
 /**
  * Unreference all the buffers referenced by frame and reset the frame fields.
@@ -617,6 +674,19 @@ int av_frame_is_writable(AVFrame *frame);
 int av_frame_make_writable(AVFrame *frame);
 
 /**
+ * Copy the frame data from src to dst.
+ *
+ * This function does not allocate anything, dst must be already initialized and
+ * allocated with the same parameters as src.
+ *
+ * This function only copies the frame data (i.e. the contents of the data /
+ * extended data arrays), not any other properties.
+ *
+ * @return >= 0 on success, a negative AVERROR on error.
+ */
+int av_frame_copy(AVFrame *dst, const AVFrame *src);
+
+/**
  * Copy only "metadata" fields from src to dst.
  *
  * Metadata for the purpose of this function are those fields that do not affect
@@ -655,5 +725,9 @@ AVFrameSideData *av_frame_new_side_data(AVFrame *frame,
  */
 AVFrameSideData *av_frame_get_side_data(const AVFrame *frame,
                                         enum AVFrameSideDataType type);
+
+/**
+ * @}
+ */
 
 #endif /* AVUTIL_FRAME_H */

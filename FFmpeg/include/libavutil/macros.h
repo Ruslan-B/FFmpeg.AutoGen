@@ -1,6 +1,4 @@
 /*
- * copyright (c) 2006 Mans Rullgard
- *
  * This file is part of FFmpeg.
  *
  * FFmpeg is free software; you can redistribute it and/or
@@ -18,38 +16,33 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#ifndef AVUTIL_ADLER32_H
-#define AVUTIL_ADLER32_H
-
-#include <stdint.h>
-#include "attributes.h"
-
 /**
  * @file
- * Public header for libavutil Adler32 hasher
+ * @ingroup lavu
+ * Utility Preprocessor macros
+ */
+
+#ifndef AVUTIL_MACROS_H
+#define AVUTIL_MACROS_H
+
+/**
+ * @addtogroup preproc_misc Preprocessor String Macros
  *
- * @defgroup lavu_adler32 Adler32
- * @ingroup lavu_crypto
+ * String manipulation macros
+ *
  * @{
  */
 
-/**
- * Calculate the Adler32 checksum of a buffer.
- *
- * Passing the return value to a subsequent av_adler32_update() call
- * allows the checksum of multiple buffers to be calculated as though
- * they were concatenated.
- *
- * @param adler initial checksum value
- * @param buf   pointer to input buffer
- * @param len   size of input buffer
- * @return      updated checksum
- */
-unsigned long av_adler32_update(unsigned long adler, const uint8_t *buf,
-                                unsigned int len) av_pure;
+#define AV_STRINGIFY(s)         AV_TOSTRING(s)
+#define AV_TOSTRING(s) #s
+
+#define AV_GLUE(a, b) a ## b
+#define AV_JOIN(a, b) AV_GLUE(a, b)
 
 /**
  * @}
  */
 
-#endif /* AVUTIL_ADLER32_H */
+#define AV_PRAGMA(s) _Pragma(#s)
+
+#endif /* AVUTIL_MACROS_H */
