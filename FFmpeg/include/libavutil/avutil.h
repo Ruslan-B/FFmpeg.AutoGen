@@ -41,7 +41,7 @@
  * @li @ref lavu "libavutil" common utility library
  * @li @ref lswr "libswresample" audio resampling, format conversion and mixing
  * @li @ref lpp  "libpostproc" post processing library
- * @li @ref lsws "libswscale" color conversion and scaling library
+ * @li @ref libsws "libswscale" color conversion and scaling library
  *
  * @section ffmpeg_versioning Versioning and compatibility
  *
@@ -141,6 +141,12 @@
  * @defgroup lavu_internal Internal
  *
  * Not exported functions, for internal usage only
+ *
+ * @{
+ *
+ * @}
+ *
+ * @defgroup preproc_misc Preprocessor String Macros
  *
  * @{
  *
@@ -277,9 +283,9 @@ char av_get_picture_type_char(enum AVPictureType pict_type);
 #include "common.h"
 #include "error.h"
 #include "version.h"
+#include "macros.h"
 #include "mathematics.h"
 #include "rational.h"
-#include "intfloat_readwrite.h"
 #include "log.h"
 #include "pixfmt.h"
 
@@ -311,6 +317,13 @@ unsigned av_int_list_length_for_size(unsigned elsize,
  */
 #define av_int_list_length(list, term) \
     av_int_list_length_for_size(sizeof(*(list)), list, term)
+
+/**
+ * Open a file using a UTF-8 filename.
+ * The API of this function matches POSIX fopen(), errors are returned through
+ * errno.
+ */
+FILE *av_fopen_utf8(const char *path, const char *mode);
 
 /**
  * @}

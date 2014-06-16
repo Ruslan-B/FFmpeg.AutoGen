@@ -26,10 +26,15 @@
 #ifndef AVUTIL_COMMON_H
 #define AVUTIL_COMMON_H
 
+#if defined(__cplusplus) && !defined(__STDC_CONSTANT_MACROS) && !defined(UINT64_C)
+#error missing -D__STDC_CONSTANT_MACROS / #define __STDC_CONSTANT_MACROS
+#endif
+
 #include <errno.h>
 #include <inttypes.h>
 #include <limits.h>
 #include <math.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

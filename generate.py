@@ -1,5 +1,6 @@
 import re
 import os
+import platform
 import ctypesgencore
 import ctypesgencore.ctypedescs as ctypedescs
 
@@ -278,14 +279,16 @@ class WrapperGenerator(GeneratorBase):
                         continue
                     else:
                         ctype_name = self.get_type_name(ctype)
-                if isinstance(ctype, ctypedescs.CtypesPointer) and isinstance(ctype.destination, ctypedescs.CtypesTypedef):
+                if isinstance(ctype, ctypedescs.CtypesPointer) and isinstance(ctype.destination,
+                                                                              ctypedescs.CtypesTypedef):
                     try:
                         pointer_typedef = self.typedefs_map[ctype.destination.name]
                         if isinstance(pointer_typedef.ctype, ctypedescs.CtypesFunction):
-                            writer.out('public IntPtr %s; // %s - %s' % (name, self.get_type_name(ctype), self.get_type_name(pointer_typedef.ctype)))
+                            writer.out('public IntPtr %s; // %s - %s' % (
+                            name, self.get_type_name(ctype), self.get_type_name(pointer_typedef.ctype)))
                             continue
                     except KeyError:
-                        print "Warning: Could not find typedef:", ctype.destination.name 
+                        print "Warning: Could not find typedef:", ctype.destination.name
                     ctype_name = self.get_type_name(ctype)
                 else:
                     ctype_name = self.get_type_name(ctype)
@@ -391,7 +394,6 @@ class WrapperGenerator(GeneratorBase):
         writer.end_block()
         writer.end_block()
 
-
 work_path = os.path.dirname(os.path.realpath(__file__))
 
 
@@ -405,7 +407,7 @@ class Options:
                'FFmpeg/include/libswresample/swresample.h',
                'FFmpeg/include/libswscale/swscale.h']
     other_headers = []
-    cpp = 'gcc -E'
+    cpp = 'gcc -v -E'
     include_search_paths = ['./FFmpeg/include']
     all_headers = True
     save_preprocessed_headers = False
@@ -414,9 +416,15 @@ class Options:
     exclude_symbols = []
     include_symbols = []
     include_macros = True
-    compile_libdirs = ['/opt/local/lib']
-    libraries = ['libavutil.52', 'libavcodec.55', 'libavformat.55', 'libswresample.0',
-                 'libswscale.2', 'libpostproc.52', 'libavfilter.3', 'libavdevice.55']
+    if os.name == 'nt':
+        compile_libdirs = ['.\\FFmpeg\\bin\\windows\\x86']
+        libraries = ['avutil-52', 'avcodec-55', 'avformat-55', 'swresample-0',
+                     'swscale-2', 'postproc-52', 'avfilter-4', 'avdevice-55']
+    else:
+        compile_libdirs = ['/opt/local/lib']
+        libraries = ['libavutil.52', 'libavcodec.55', 'libavformat.55', 'libswresample.0',
+                     'libswscale.2', 'libpostproc.52', 'libavfilter.4', 'libavdevice.55']
+
     show_all_errors = True
     show_long_errors = True
     show_macro_warnings = True
