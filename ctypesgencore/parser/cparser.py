@@ -77,7 +77,7 @@ class CParser(object):
     Subclass and override the handle_* methods.  Call `parse` with a string
     to parse.
     '''
-    def __init__(self, options, stddef_types=True, gnu_types=True):
+    def __init__(self, options):
         self.preprocessor_parser = preprocessor.PreprocessorParser(options,self)
         self.parser = yacc.Parser()
         prototype = yacc.yacc(method        = 'LALR',
@@ -94,13 +94,13 @@ class CParser(object):
         self.parser.cparser = self
 
         self.lexer = CLexer(self)
-        if stddef_types:
+        if not options.no_stddef_types:
             self.lexer.type_names.add('wchar_t')
             self.lexer.type_names.add('ptrdiff_t')
             self.lexer.type_names.add('size_t')
-        if gnu_types:
+        if not options.no_gnu_types:
             self.lexer.type_names.add('__builtin_va_list')
-        if sys.platform == 'win32':
+        if sys.platform == 'win32' and not options.no_python_types:
             self.lexer.type_names.add('__int64')
 
     def parse(self, filename, debug=False):

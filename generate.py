@@ -1,8 +1,8 @@
 import re
 import os
-import platform
 import ctypesgencore
 import ctypesgencore.ctypedescs as ctypedescs
+from ctypesgencore.descriptions import FunctionDescription
 
 
 class DescriptionsEvaluationContext(ctypesgencore.expressions.EvaluationContext):
@@ -64,6 +64,8 @@ class GeneratorBase:
         if isinstance(ctype, ctypedescs.CtypesPointer):
             dst_type = ctype.destination
             return '%s*' % self.get_type_name(dst_type)
+        if isinstance(ctype, ctypedescs.CtypesBitfield):
+            return self.get_type_name(ctype.base)
         if isinstance(ctype, ctypedescs.CtypesSimple) or isinstance(ctype, ctypedescs.CtypesTypedef):
             if ctype.name in self.type_conversions:
                 return self.type_conversions[ctype.name]
@@ -75,13 +77,19 @@ class GeneratorBase:
             return ctype.tag
         if isinstance(ctype, ctypedescs.CtypesStruct):
             return ctype.tag
-        if isinstance(ctype, ctypedescs.CtypesFunction):
+        if isinstance(ctype, ctypedescs.CtypesFunction) or isinstance(ctype, FunctionDescription):
             restype_name = self.get_type_name(ctype.restype)
             params = ', '.join(self.get_type_name(p) for p in ctype.argtypes)
             if restype_name == 'void':
-                return "Action<%s>" % params
+                if params == '':
+                    return 'Action'
+                else:
+                    return "Action<%s>" % params
             else:
-                return "Func<%s, %s>" % (params, restype_name)
+                if params == '':
+                    return "Func<%s>" % restype_name
+                else:
+                    return "Func<%s, %s>" % (params, restype_name)
         if isinstance(ctype, ctypedescs.CtypesArray):
             return "%s*" % self.get_type_name(ctype.base)
         else:
@@ -146,36 +154,44 @@ class MethodGenerator(GeneratorBase):
         self.description = description
         self.library = library
 
-    def write_to(self, writer):
+    def get_params(self, ctype):
+        params = []
+        i = 0
+        for arg_type in ctype.argtypes:
+            if isinstance(arg_type, ctypedescs.CtypesFunction):
+                p_type_name = "IntPtr"
+                arg_name = 'func_%s_%i' % ('_'.join(x.identifier for x in arg_type.argtypes), i)
+                arg_name = self.escape_id_if_needed(arg_name)
+            else:
+                arg_name = arg_type.identifier
+                p_type_name = self.get_type_name(arg_type)
 
+            if arg_name == '' or arg_name is None:
+                arg_name = "p%i" % i
+
+            arg_name = self.escape_id_if_needed(arg_name)
+            params.append('%s %s' % (p_type_name, arg_name))
+            i += 1
+        return params
+
+    def write_to(self, writer):
+        r_type_name = self.get_type_name(self.description.restype)
+        params = self.get_params(self.description)
+        params_out = ', '.join(x for x in params)
+
+        writer.out('// %s' % self.get_type_name(self.description))
         writer.out(
             '[DllImport(%s, EntryPoint="%s", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]'
             % (self.library.id, self.description.name))
-
-        params = []
-        i = 0
-        for arg_type in self.description.argtypes:
-            arg_name = self.description.argnames[i]
-            arg_name = self.escape_id_if_needed(arg_name)
-
-            if isinstance(arg_type, ctypedescs.CtypesFunction):
-                p_type_name = "IntPtr"
-            else:
-                p_type_name = self.get_type_name(arg_type)
-
-            params.append('%s %s' % (p_type_name, arg_name))
-            i += 1
-
-        r_type_name = self.get_type_name(self.description.restype)
-
-        params_out = ', '.join(x for x in params)
         writer.out('public static extern %s %s(%s);' % (r_type_name, self.id, params_out))
+        writer.out()
 
 
 class WrapperGenerator(GeneratorBase):
     def __init__(self, descriptions, options):
         self.descriptions = descriptions
         self.options = options
+        self.known_delegates = []
         self.typedefs_map = dict((td.name, td) for td in descriptions.typedefs)
         self.evaluation_context = DescriptionsEvaluationContext(self.descriptions)
         self.indentation_level = 0
@@ -224,10 +240,21 @@ class WrapperGenerator(GeneratorBase):
         if struct.members:
             for member in struct.members:
                 name, ctype = member
+
+                if isinstance(ctype, ctypedescs.CtypesTypedef):
+                    ctype_name = self.escape_id_if_needed(ctype.name)
+
+                    if ctype_name in self.typedefs_map:
+                        ctype = self.typedefs_map[ctype_name].ctype
+
+                else:
+                    ctype_name = self.get_type_name(ctype)
+
                 name = self.escape_id_if_needed(name)
                 if isinstance(ctype, ctypedescs.CtypesFunction):
-                    writer.out('public IntPtr %s; // %s' % (name, self.get_type_name(ctype)))
+                    writer.out('public IntPtr %s; // %s' % (name, ctype_name))
                     continue
+
                 if isinstance(ctype, ctypedescs.CtypesBitfield):
                     size = self.evaluate_expression(ctype.bitfield)
                     ctype_name = ctype.base.name
@@ -246,7 +273,7 @@ class WrapperGenerator(GeneratorBase):
 
                     writer.out('//bit field %s %s:%d' % (name, ctype_name, size))
                     continue
-                    # review
+
                 if isinstance(ctype, ctypedescs.CtypesArray):
                     if ctype.count:
                         size = self.evaluate_expression(ctype.count)
@@ -263,29 +290,20 @@ class WrapperGenerator(GeneratorBase):
                             while isinstance(base_type, ctypedescs.CtypesArray) and base_type.count:
                                 size *= self.evaluate_expression(ctype.base.count)
                                 base_type = base_type.base
+
                             ctype_name = self.get_type_name(base_type)
 
-                            #if isinstance(base_type, ctypedescs.CtypesTypedef):
-                            #    if base_type.name in self.typedefs_map:
-                            #        typedef = self.typedefs_map[base_type.name]
-                            #        base_type = typedef.ctype
-
-                        #if isinstance(base_type, ctypedescs.CtypesStruct):
-                        #    self.out('[MarshalAs(UnmanagedType.ByValArray, SizeConst = %d)]' % size)
-                        #    self.out('public %s[] %s; // %s' % (ctype_name, name, ctype))
-                        #else:
                         writer.out('public fixed %s %s[%d]; // %s' % (ctype_name, name, size, ctype))
 
                         continue
-                    else:
-                        ctype_name = self.get_type_name(ctype)
+
                 if isinstance(ctype, ctypedescs.CtypesPointer) and isinstance(ctype.destination,
                                                                               ctypedescs.CtypesTypedef):
                     try:
                         pointer_typedef = self.typedefs_map[ctype.destination.name]
                         if isinstance(pointer_typedef.ctype, ctypedescs.CtypesFunction):
-                            writer.out('public IntPtr %s; // %s - %s' % (
-                            name, self.get_type_name(ctype), self.get_type_name(pointer_typedef.ctype)))
+                            writer.out('public IntPtr %s; // %s - %s' %
+                                       (name, self.get_type_name(ctype), self.get_type_name(pointer_typedef.ctype)))
                             continue
                     except KeyError:
                         print "Warning: Could not find typedef:", ctype.destination.name
@@ -299,6 +317,40 @@ class WrapperGenerator(GeneratorBase):
                 writer.out('public %s %s;' % (ctype_name, name))
 
         writer.end_block()
+        writer.out()
+
+    def write_delegate(self, delegate_name, delegate, writer):
+        r_type_name = self.get_type_name(delegate.restype)
+
+        params = []
+        i = 0
+        for arg_type in delegate.argtypes:
+            if isinstance(arg_type, ctypedescs.CtypesFunction):
+                # todo functions handling
+                p_type_name = "IntPtr"
+                arg_name = 'func_%s_%i' % ('_'.join(x.identifier for x in arg_type.argtypes), i)
+                arg_name = self.escape_id_if_needed(arg_name)
+            elif isinstance(arg_type, ctypedescs.CtypesPointer) \
+                    and isinstance(arg_type.destination, ctypedescs.CtypesTypedef) \
+                    and arg_type.destination.name in self.known_delegates:
+                p_type_name = "IntPtr"
+                arg_name = 'func_' + arg_type.identifier
+                arg_name = self.escape_id_if_needed(arg_name)
+            else:
+                arg_name = arg_type.identifier
+                p_type_name = self.get_type_name(arg_type)
+
+            if arg_name == '' or arg_name is None:
+                arg_name = "p%i" % i
+
+            arg_name = self.escape_id_if_needed(arg_name)
+            params.append('%s %s' % (p_type_name, arg_name))
+            i += 1
+
+        params_out = ', '.join(x for x in params)
+        writer.out('// %s' % self.get_type_name(delegate))
+        writer.out('[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]')
+        writer.out('public unsafe delegate %s %s(%s);' % (r_type_name, delegate_name, params_out))
         writer.out()
 
     def get_typedef(self, ctype):
@@ -317,15 +369,22 @@ class WrapperGenerator(GeneratorBase):
         # aliases
         for typedef in self.descriptions.typedefs:
             if self.type_was_included(typedef):
-                if isinstance(typedef.ctype, ctypedescs.CtypesEnum) or \
-                        isinstance(typedef.ctype, ctypedescs.CtypesStruct):
+                if isinstance(typedef.ctype, ctypedescs.CtypesEnum) or isinstance(typedef.ctype,
+                                                                                  ctypedescs.CtypesStruct):
                     type_name = typedef.ctype.tag
+                    if typedef.name != type_name:
+                        writer.out('using %s=%s;' % (typedef.name, type_name))
+                        writer.out()
+
+                elif isinstance(typedef.ctype, ctypedescs.CtypesFunction):
+                    delegate = typedef.ctype
+                    self.known_delegates.append(typedef.name)
+                    delegate_name = self.escape_id_if_needed(typedef.name)
+                    self.write_delegate(delegate_name, delegate, writer)
+
                 else:
                     # ignore rest
                     continue
-
-                if typedef.name != type_name:
-                    writer.out('using %s=%s;' % (typedef.name, type_name))
 
         writer.out()
 
@@ -394,6 +453,7 @@ class WrapperGenerator(GeneratorBase):
         writer.end_block()
         writer.end_block()
 
+
 work_path = os.path.dirname(os.path.realpath(__file__))
 
 
@@ -428,6 +488,10 @@ class Options:
     show_all_errors = True
     show_long_errors = True
     show_macro_warnings = True
+    output_language = 'c#;'
+    no_stddef_types = False,
+    no_gnu_types = False,
+    no_python_types = False,
     # printer
     strip_build_path = []
     header_template = False
