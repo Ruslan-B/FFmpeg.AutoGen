@@ -37,7 +37,7 @@ The wrapper generator uses customized version of ctypesgencore package based on 
 Prerequisites:
  - FFmpeg library binaries (see **[Usage](#usage)**)
  - Python 2.7 with packages:
-    - ctypes 1.0.2
+    - ctypes
 
  - gcc - OS dependent:
     - on OS X - XCode Command Line Tools
