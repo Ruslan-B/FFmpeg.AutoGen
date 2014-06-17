@@ -119,7 +119,7 @@ class DataCollectingParser(ctypesparser.CtypesParser,
             self.handle_struct(ctype, filename, lineno)
 
     def handle_ctypes_function(self, name, restype, argtypes, variadic,
-                               argnames, filename, lineno):
+                               filename, lineno):
         # Called by CtypesParser
         restype.visit(self)
         for argtype in argtypes:
@@ -128,7 +128,6 @@ class DataCollectingParser(ctypesparser.CtypesParser,
         function=FunctionDescription(name,
                                      restype,
                                      argtypes,
-                                     argnames,
                                      variadic = variadic,
                                      src=(filename,repr(lineno)))
 
@@ -219,7 +218,7 @@ class DataCollectingParser(ctypesparser.CtypesParser,
         if ctypeenum.opaque:
             if tag not in self.already_seen_opaque_enums:
                 enum=EnumDescription(ctypeenum.tag,
-                             ctypeenum.enumerators,
+                             None,
                              ctypeenum,
                              src = (filename,str(lineno)))
                 enum.opaque = True
@@ -236,12 +235,13 @@ class DataCollectingParser(ctypesparser.CtypesParser,
                 enum.opaque = False
                 enum.ctype = ctypeenum
                 enum.src = ctypeenum.src
+                enum.members = ctypeenum.enumerators
 
                 del self.already_seen_opaque_enums[tag]
 
             else:
                 enum=EnumDescription(ctypeenum.tag,
-                                None,
+                                ctypeenum.enumerators,
                                 src=(filename,str(lineno)),
                                 ctype=ctypeenum)
                 enum.opaque = False

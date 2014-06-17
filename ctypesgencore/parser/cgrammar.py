@@ -37,7 +37,7 @@ tokens = (
     'AND_ASSIGN', 'XOR_ASSIGN', 'OR_ASSIGN',  'PERIOD', 'TYPE_NAME',
 
     'TYPEDEF', 'EXTERN', 'STATIC', 'AUTO', 'REGISTER',
-    'CHAR', 'SHORT', 'INT', 'LONG', 'SIGNED', 'UNSIGNED', 'FLOAT', 'DOUBLE',
+    '_BOOL', 'CHAR', 'SHORT', 'INT', 'LONG', 'SIGNED', 'UNSIGNED', 'FLOAT', 'DOUBLE',
     'CONST', 'VOLATILE', 'VOID',
     'STRUCT', 'UNION', 'ENUM', 'ELLIPSIS',
 
@@ -46,7 +46,7 @@ tokens = (
 )
 
 keywords = [
-    'auto', 'break', 'case', 'char', 'const', 'continue', 'default', 'do',
+    'auto', '_Bool', 'break', 'case', 'char', 'const', 'continue', 'default', 'do',
     'double', 'else', 'enum', 'extern', 'float', 'for', 'goto', 'if', 'int',
     'long', 'register', 'return', 'short', 'signed', 'sizeof', 'static',
     'struct', 'switch', 'typedef', 'union', 'unsigned', 'void', 'volatile',
@@ -556,6 +556,7 @@ def p_storage_class_specifier(p):
 
 def p_type_specifier(p):
     '''type_specifier : VOID
+                      | _BOOL
                       | CHAR
                       | SHORT
                       | INT
@@ -622,6 +623,12 @@ def p_struct_declaration(p):
             cdeclarations.apply_specifiers(p[1], declaration)
             declaration.declarator = declarator
             r += (declaration,)
+    else:
+        # anonymous field (C11/GCC extension)
+        declaration = cdeclarations.Declaration()
+        cdeclarations.apply_specifiers(p[1], declaration)
+        r = (declaration,)
+
     p[0] = r
 
 def p_specifier_qualifier_list(p):
@@ -837,7 +844,7 @@ def p_type_name(p):
     declaration = cdeclarations.Declaration()
     declaration.declarator = declarator
     cdeclarations.apply_specifiers(typ,declaration)
-    ctype = ctypesparser.get_ctypes_type(declaration.type,
+    ctype = p.parser.cparser.get_ctypes_type(declaration.type,
                                             declaration.declarator)
     p[0] = ctype
 
@@ -1091,3 +1098,12 @@ def p_error(t):
     # Don't alter lexer: default behaviour is to pass error production
     # up until it hits the catch-all at declaration, at which point
     # parsing continues (synchronisation).
+
+
+if __name__ == '__main__':
+    # NOTE if this file is modified, run to generate a new parsetab.py
+    #   E.g.:
+    #       env PYTHONPATH=. python ctypesgencore/parser/cgrammar.py
+    # parsetab.py is generated in the current directory and needs to be
+    # manually copied (after inspection) to ctypesgencore/parser/parsetab.py
+    yacc.yacc()
