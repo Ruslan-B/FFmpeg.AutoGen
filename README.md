@@ -20,7 +20,7 @@ Install FFmpeg via [MacPorts](http://www.macports.org):
 sudo port install ffmpeg +universal
 ```
 Please ensure that ```FFmpeg.AutoGen.dll``` coupled with ```FFmpeg.AutoGen.config```. 
-By default MacPorts keeps compiled libraries at ```/opt/local/lib```.
+By default MacPorts keeps compiled libraries in ```/opt/local/lib```.
 
 - on Linux:  
 You need to update ```FFmpeg.AutoGen.config``` with full path to FFmpeg libraries.
