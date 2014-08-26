@@ -1,7 +1,7 @@
 ##FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.png)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
 
 Auto Generated FFmpeg wrapper for C#/.NET and Mono.  
-Wrapper generated for FFmpeg 2.2.2
+Wrapper generated for FFmpeg 2.2.3
 
 ##Usage
 
@@ -9,9 +9,9 @@ The basic example of the library usage: video decoding, conversion and frame ext
 For the more sophisticated operations I can recommend to read [An ffmpeg and SDL Tutorial](http://dranger.com/ffmpeg/) for C.
 
 - on Windows:  
-The native FFmpeg binaries are bundled in repository. The binaries source is [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/), v2.2.2 been used for
-[32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-2.2.2-win32-shared.7z) and
-[64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-2.2.2-win64-shared.7z) platforms.
+The native FFmpeg binaries are bundled in repository. The binaries source is [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/), v2.2.3 been used for
+[32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-2.2.3-win32-shared.7z) and
+[64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-2.2.3-win64-shared.7z) platforms.
 The example project shows how specify path to native libraries.  
 
 - on OS X:  
