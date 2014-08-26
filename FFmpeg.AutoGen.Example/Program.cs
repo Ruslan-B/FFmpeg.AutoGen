@@ -39,7 +39,7 @@ namespace FFmpeg.AutoGen.Example
 			if (FFmpegInvoke.avformat_open_input(&pFormatContext, url, null, null) != 0)
 				throw new Exception("Could not open file");
 
-			if (FFmpegInvoke.av_find_stream_info(pFormatContext) != 0)
+            if (FFmpegInvoke.avformat_find_stream_info(pFormatContext, null) != 0)
 				throw new Exception("Could not find stream info");
 
 			AVStream* pStream = null;
