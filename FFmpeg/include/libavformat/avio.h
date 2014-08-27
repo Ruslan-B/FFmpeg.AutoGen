@@ -146,6 +146,13 @@ typedef struct AVIOContext {
      * This field is internal to libavformat and access from outside is not allowed.
      */
     int writeout_count;
+
+    /**
+     * Original buffer size
+     * used internally after probing and ensure seekback to reset the buffer size
+     * This field is internal to libavformat and access from outside is not allowed.
+     */
+    int orig_buffer_size;
 } AVIOContext;
 
 /* unbuffered I/O */
@@ -269,7 +276,14 @@ int64_t avio_size(AVIOContext *s);
  * feof() equivalent for AVIOContext.
  * @return non zero if and only if end of file
  */
+int avio_feof(AVIOContext *s);
+#if FF_API_URL_FEOF
+/**
+ * @deprecated use avio_feof()
+ */
+attribute_deprecated
 int url_feof(AVIOContext *s);
+#endif
 
 /** @warning currently size is limited */
 int avio_printf(AVIOContext *s, const char *fmt, ...) av_printf_format(2, 3);
@@ -492,5 +506,16 @@ int     avio_pause(AVIOContext *h, int pause);
  */
 int64_t avio_seek_time(AVIOContext *h, int stream_index,
                        int64_t timestamp, int flags);
+
+/* Avoid a warning. The header can not be included because it breaks c++. */
+struct AVBPrint;
+
+/**
+ * Read contents of h into print buffer, up to max_size bytes, or up to EOF.
+ *
+ * @return 0 for success (max_size bytes read or EOF reached), negative error
+ * code otherwise
+ */
+int avio_read_to_bprint(AVIOContext *h, struct AVBPrint *pb, size_t max_size);
 
 #endif /* AVFORMAT_AVIO_H */

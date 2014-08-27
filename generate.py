@@ -478,12 +478,12 @@ class Options:
     include_macros = True
     if os.name == 'nt':
         compile_libdirs = ['.\\FFmpeg\\bin\\windows\\x86']
-        libraries = ['avutil-52', 'avcodec-55', 'avformat-55', 'swresample-0',
-                     'swscale-2', 'postproc-52', 'avfilter-4', 'avdevice-55']
+        libraries = ['avutil-54', 'swresample-1', 'avcodec-56', 'avformat-56',
+                     'swscale-3', 'postproc-53', 'avfilter-5', 'avdevice-56']
     else:
         compile_libdirs = ['/opt/local/lib']
-        libraries = ['libavutil.52', 'libavcodec.55', 'libavformat.55', 'libswresample.0',
-                     'libswscale.2', 'libpostproc.52', 'libavfilter.4', 'libavdevice.55']
+        libraries = ['libavutil.54', 'libswresample.1', 'libavcodec.56', 'libavformat.56',
+                     'libswscale.3', 'libpostproc.53', 'libavfilter.5', 'libavdevice.56']
 
     show_all_errors = True
     show_long_errors = True
