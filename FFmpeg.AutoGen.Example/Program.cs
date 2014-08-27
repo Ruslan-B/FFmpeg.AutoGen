@@ -39,15 +39,15 @@ namespace FFmpeg.AutoGen.Example
 			if (FFmpegInvoke.avformat_open_input(&pFormatContext, url, null, null) != 0)
 				throw new Exception("Could not open file");
 
-			if (FFmpegInvoke.av_find_stream_info(pFormatContext) != 0)
+            if (FFmpegInvoke.avformat_find_stream_info(pFormatContext, null) != 0)
 				throw new Exception("Could not find stream info");
 
 			AVStream* pStream = null;
 			for (int i = 0; i < pFormatContext->nb_streams; i++)
 			{
-				if (pFormatContext->streams[0]->codec->codec_type == AVMediaType.AVMEDIA_TYPE_VIDEO)
+                if (pFormatContext->streams[i]->codec->codec_type == AVMediaType.AVMEDIA_TYPE_VIDEO)
 				{
-					pStream = pFormatContext->streams[0];
+                    pStream = pFormatContext->streams[i];
 					break;
 				}
 			}
@@ -75,7 +75,10 @@ namespace FFmpeg.AutoGen.Example
 			if (pCodec == null)
 				throw new Exception("Unsupported codec");
 
-			AVCodecContext* pCodecContext = FFmpegInvoke.avcodec_alloc_context3(pCodec);
+            // Reusing codec context from stream info, 
+            // as an alternative way it could look like this: (but it works not for all kind of codecs)
+			// AVCodecContext* pCodecContext = FFmpegInvoke.avcodec_alloc_context3(pCodec);
+            AVCodecContext* pCodecContext = &codecContext;
 
 			if ((pCodec->capabilities & FFmpegInvoke.CODEC_CAP_TRUNCATED) == FFmpegInvoke.CODEC_CAP_TRUNCATED)
 				pCodecContext->flags |= FFmpegInvoke.CODEC_FLAG_TRUNCATED;
