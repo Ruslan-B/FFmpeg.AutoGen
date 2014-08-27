@@ -27,23 +27,35 @@
 #include "attributes.h"
 #include "pixfmt.h"
 
-typedef struct AVComponentDescriptor{
-    uint16_t plane        :2;            ///< which of the 4 planes contains the component
+typedef struct AVComponentDescriptor {
+    /**
+     * Which of the 4 planes contains the component.
+     */
+    uint16_t plane        : 2;
 
     /**
      * Number of elements between 2 horizontally consecutive pixels minus 1.
      * Elements are bits for bitstream formats, bytes otherwise.
      */
-    uint16_t step_minus1  :3;
+    uint16_t step_minus1  : 3;
 
     /**
      * Number of elements before the component of the first pixel plus 1.
      * Elements are bits for bitstream formats, bytes otherwise.
      */
-    uint16_t offset_plus1 :3;
-    uint16_t shift        :3;            ///< number of least significant bits that must be shifted away to get the value
-    uint16_t depth_minus1 :4;            ///< number of bits in the component minus 1
-}AVComponentDescriptor;
+    uint16_t offset_plus1 : 3;
+
+    /**
+     * Number of least significant bits that must be shifted away
+     * to get the value.
+     */
+    uint16_t shift        : 3;
+
+    /**
+     * Number of bits in the component minus 1.
+     */
+    uint16_t depth_minus1 : 4;
+} AVComponentDescriptor;
 
 /**
  * Descriptor that unambiguously describes how the bits of a pixel are
@@ -54,9 +66,9 @@ typedef struct AVComponentDescriptor{
  *       and all the YUV variants) AVPixFmtDescriptor just stores how values
  *       are stored not what these values represent.
  */
-typedef struct AVPixFmtDescriptor{
+typedef struct AVPixFmtDescriptor {
     const char *name;
-    uint8_t nb_components;      ///< The number of components each pixel has, (1-4)
+    uint8_t nb_components;  ///< The number of components each pixel has, (1-4)
 
     /**
      * Amount to shift the luma width right to find the chroma width.
@@ -65,7 +77,7 @@ typedef struct AVPixFmtDescriptor{
      * The note above is needed to ensure rounding up.
      * This value only refers to the chroma components.
      */
-    uint8_t log2_chroma_w;      ///< chroma_width = -((-luma_width )>>log2_chroma_w)
+    uint8_t log2_chroma_w;  ///< chroma_width = -((-luma_width )>>log2_chroma_w)
 
     /**
      * Amount to shift the luma height right to find the chroma height.
@@ -86,7 +98,12 @@ typedef struct AVPixFmtDescriptor{
      * otherwise 0 is luma, 1 is chroma-U and 2 is chroma-V.
      */
     AVComponentDescriptor comp[4];
-}AVPixFmtDescriptor;
+
+    /**
+     * Alternative comma-separated names.
+     */
+    const char *alias;
+} AVPixFmtDescriptor;
 
 /**
  * Pixel format is big-endian.
@@ -160,8 +177,9 @@ extern attribute_deprecated const AVPixFmtDescriptor av_pix_fmt_descriptors[];
  * component c in data[1] to dst, rather than the palette indexes in
  * data[0]. The behavior is undefined if the format is not paletted.
  */
-void av_read_image_line(uint16_t *dst, const uint8_t *data[4], const int linesize[4],
-                        const AVPixFmtDescriptor *desc, int x, int y, int c, int w, int read_pal_component);
+void av_read_image_line(uint16_t *dst, const uint8_t *data[4],
+                        const int linesize[4], const AVPixFmtDescriptor *desc,
+                        int x, int y, int c, int w, int read_pal_component);
 
 /**
  * Write the values from src to the pixel format component c of an
@@ -177,8 +195,9 @@ void av_read_image_line(uint16_t *dst, const uint8_t *data[4], const int linesiz
  * @param w the width of the line to write, that is the number of
  * values to write to the image line
  */
-void av_write_image_line(const uint16_t *src, uint8_t *data[4], const int linesize[4],
-                         const AVPixFmtDescriptor *desc, int x, int y, int c, int w);
+void av_write_image_line(const uint16_t *src, uint8_t *data[4],
+                         const int linesize[4], const AVPixFmtDescriptor *desc,
+                         int x, int y, int c, int w);
 
 /**
  * Return the pixel format corresponding to name.
@@ -211,7 +230,8 @@ const char *av_get_pix_fmt_name(enum AVPixelFormat pix_fmt);
  * corresponding info string, or a negative value to print the
  * corresponding header.
  */
-char *av_get_pix_fmt_string (char *buf, int buf_size, enum AVPixelFormat pix_fmt);
+char *av_get_pix_fmt_string(char *buf, int buf_size,
+                            enum AVPixelFormat pix_fmt);
 
 /**
  * Return the number of bits per pixel used by the pixel format
@@ -255,9 +275,9 @@ enum AVPixelFormat av_pix_fmt_desc_get_id(const AVPixFmtDescriptor *desc);
  * Utility function to access log2_chroma_w log2_chroma_h from
  * the pixel format AVPixFmtDescriptor.
  *
- * See avcodec_get_chroma_sub_sample() for a function that asserts a
+ * See av_get_chroma_sub_sample() for a function that asserts a
  * valid pixel format instead of returning an error code.
- * Its recommanded that you use avcodec_get_chroma_sub_sample unless
+ * Its recommended that you use avcodec_get_chroma_sub_sample unless
  * you do check the return code!
  *
  * @param[in]  pix_fmt the pixel format
@@ -287,5 +307,53 @@ void ff_check_pixfmt_descriptors(void);
  */
 enum AVPixelFormat av_pix_fmt_swap_endianness(enum AVPixelFormat pix_fmt);
 
+#define FF_LOSS_RESOLUTION  0x0001 /**< loss due to resolution change */
+#define FF_LOSS_DEPTH       0x0002 /**< loss due to color depth change */
+#define FF_LOSS_COLORSPACE  0x0004 /**< loss due to color space conversion */
+#define FF_LOSS_ALPHA       0x0008 /**< loss of alpha bits */
+#define FF_LOSS_COLORQUANT  0x0010 /**< loss due to color quantization */
+#define FF_LOSS_CHROMA      0x0020 /**< loss of chroma (e.g. RGB to gray conversion) */
 
+/**
+ * Compute what kind of losses will occur when converting from one specific
+ * pixel format to another.
+ * When converting from one pixel format to another, information loss may occur.
+ * For example, when converting from RGB24 to GRAY, the color information will
+ * be lost. Similarly, other losses occur when converting from some formats to
+ * other formats. These losses can involve loss of chroma, but also loss of
+ * resolution, loss of color depth, loss due to the color space conversion, loss
+ * of the alpha bits or loss due to color quantization.
+ * av_get_fix_fmt_loss() informs you about the various types of losses
+ * which will occur when converting from one pixel format to another.
+ *
+ * @param[in] dst_pix_fmt destination pixel format
+ * @param[in] src_pix_fmt source pixel format
+ * @param[in] has_alpha Whether the source pixel format alpha channel is used.
+ * @return Combination of flags informing you what kind of losses will occur
+ * (maximum loss for an invalid dst_pix_fmt).
+ */
+int av_get_pix_fmt_loss(enum AVPixelFormat dst_pix_fmt,
+                        enum AVPixelFormat src_pix_fmt,
+                        int has_alpha);
+
+/**
+ * Compute what kind of losses will occur when converting from one specific
+ * pixel format to another.
+ * When converting from one pixel format to another, information loss may occur.
+ * For example, when converting from RGB24 to GRAY, the color information will
+ * be lost. Similarly, other losses occur when converting from some formats to
+ * other formats. These losses can involve loss of chroma, but also loss of
+ * resolution, loss of color depth, loss due to the color space conversion, loss
+ * of the alpha bits or loss due to color quantization.
+ * av_get_fix_fmt_loss() informs you about the various types of losses
+ * which will occur when converting from one pixel format to another.
+ *
+ * @param[in] dst_pix_fmt destination pixel format
+ * @param[in] src_pix_fmt source pixel format
+ * @param[in] has_alpha Whether the source pixel format alpha channel is used.
+ * @return Combination of flags informing you what kind of losses will occur
+ * (maximum loss for an invalid dst_pix_fmt).
+ */
+enum AVPixelFormat av_find_best_pix_fmt_of_2(enum AVPixelFormat dst_pix_fmt1, enum AVPixelFormat dst_pix_fmt2,
+                                             enum AVPixelFormat src_pix_fmt, int has_alpha, int *loss_ptr);
 #endif /* AVUTIL_PIXDESC_H */
