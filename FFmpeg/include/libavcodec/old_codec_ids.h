@@ -19,6 +19,8 @@
 #ifndef AVCODEC_OLD_CODEC_IDS_H
 #define AVCODEC_OLD_CODEC_IDS_H
 
+#include "libavutil/common.h"
+
 /*
  * This header exists to prevent new codec IDs from being accidentally added to
  * the deprecated list.

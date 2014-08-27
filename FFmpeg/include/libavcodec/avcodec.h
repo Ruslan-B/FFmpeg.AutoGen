@@ -286,15 +286,6 @@ enum AVCodecID {
     AV_CODEC_ID_HNM4_VIDEO,
     AV_CODEC_ID_HEVC_DEPRECATED,
     AV_CODEC_ID_FIC,
-    AV_CODEC_ID_ALIAS_PIX,
-    AV_CODEC_ID_BRENDER_PIX_DEPRECATED,
-    AV_CODEC_ID_PAF_VIDEO_DEPRECATED,
-    AV_CODEC_ID_EXR_DEPRECATED,
-    AV_CODEC_ID_VP7_DEPRECATED,
-    AV_CODEC_ID_SANM_DEPRECATED,
-    AV_CODEC_ID_SGIRLE_DEPRECATED,
-    AV_CODEC_ID_MVC1_DEPRECATED,
-    AV_CODEC_ID_MVC2_DEPRECATED,
 
     AV_CODEC_ID_BRENDER_PIX= MKBETAG('B','P','I','X'),
     AV_CODEC_ID_Y41P       = MKBETAG('Y','4','1','P'),
@@ -323,7 +314,6 @@ enum AVCodecID {
     AV_CODEC_ID_SMVJPEG    = MKBETAG('S','M','V','J'),
     AV_CODEC_ID_HEVC       = MKBETAG('H','2','6','5'),
 #define AV_CODEC_ID_H265 AV_CODEC_ID_HEVC
-    AV_CODEC_ID_VP7        = MKBETAG('V','P','7','0'),
 
     /* various PCM "codecs" */
     AV_CODEC_ID_FIRST_AUDIO = 0x10000,     ///< A dummy id pointing at the start of audio codecs
@@ -392,8 +382,6 @@ enum AVCodecID {
     AV_CODEC_ID_ADPCM_IMA_ISS,
     AV_CODEC_ID_ADPCM_G722,
     AV_CODEC_ID_ADPCM_IMA_APC,
-    AV_CODEC_ID_ADPCM_VIMA_DEPRECATED,
-    AV_CODEC_ID_ADPCM_VIMA = MKBETAG('V','I','M','A'),
     AV_CODEC_ID_VIMA       = MKBETAG('V','I','M','A'),
     AV_CODEC_ID_ADPCM_AFC  = MKBETAG('A','F','C',' '),
     AV_CODEC_ID_ADPCM_IMA_OKI = MKBETAG('O','K','I',' '),
@@ -483,8 +471,6 @@ enum AVCodecID {
     AV_CODEC_ID_COMFORT_NOISE,
     AV_CODEC_ID_TAK_DEPRECATED,
     AV_CODEC_ID_METASOUND,
-    AV_CODEC_ID_PAF_AUDIO_DEPRECATED,
-    AV_CODEC_ID_ON2AVC,
     AV_CODEC_ID_FFWAVESYNTH = MKBETAG('F','F','W','S'),
     AV_CODEC_ID_SONIC       = MKBETAG('S','O','N','C'),
     AV_CODEC_ID_SONIC_LS    = MKBETAG('S','O','N','L'),
@@ -493,10 +479,6 @@ enum AVCodecID {
     AV_CODEC_ID_TAK         = MKBETAG('t','B','a','K'),
     AV_CODEC_ID_EVRC        = MKBETAG('s','e','v','c'),
     AV_CODEC_ID_SMV         = MKBETAG('s','s','m','v'),
-    AV_CODEC_ID_DSD_LSBF    = MKBETAG('D','S','D','L'),
-    AV_CODEC_ID_DSD_MSBF    = MKBETAG('D','S','D','M'),
-    AV_CODEC_ID_DSD_LSBF_PLANAR = MKBETAG('D','S','D','1'),
-    AV_CODEC_ID_DSD_MSBF_PLANAR = MKBETAG('D','S','D','8'),
 
     /* subtitle codecs */
     AV_CODEC_ID_FIRST_SUBTITLE = 0x17000,          ///< A dummy ID pointing at the start of subtitle codecs.
@@ -533,7 +515,6 @@ enum AVCodecID {
     AV_CODEC_ID_SMPTE_KLV  = MKBETAG('K','L','V','A'),
     AV_CODEC_ID_DVD_NAV    = MKBETAG('D','N','A','V'),
     AV_CODEC_ID_TIMED_ID3  = MKBETAG('T','I','D','3'),
-    AV_CODEC_ID_BIN_DATA   = MKBETAG('D','A','T','A'),
 
 
     AV_CODEC_ID_PROBE = 0x19000, ///< codec_id is not known (like AV_CODEC_ID_NONE) but lavf should attempt to identify it
@@ -571,13 +552,6 @@ typedef struct AVCodecDescriptor {
      * Codec properties, a combination of AV_CODEC_PROP_* flags.
      */
     int             props;
-
-    /**
-     * MIME type(s) associated with the codec.
-     * May be NULL; if not, a NULL-terminated array of MIME types.
-     * The first item is always non-NULL and is the preferred MIME type.
-     */
-    const char *const *mime_types;
 } AVCodecDescriptor;
 
 /**
@@ -595,16 +569,6 @@ typedef struct AVCodecDescriptor {
  * Codec supports lossless compression. Audio and video codecs only.
  */
 #define AV_CODEC_PROP_LOSSLESS      (1 << 2)
-/**
- * Codec supports frame reordering. That is, the coded order (the order in which
- * the encoded packets are output by the encoders / stored / input to the
- * decoders) may be different from the presentation order of the corresponding
- * frames.
- *
- * For codecs that do not have this property set, PTS and DTS should always be
- * equal.
- */
-#define AV_CODEC_PROP_REORDER       (1 << 3)
 /**
  * Subtitle codec is bitmap based
  * Decoded AVSubtitle data can be read from the AVSubtitleRect->pict field.
@@ -624,7 +588,7 @@ typedef struct AVCodecDescriptor {
  * Note: If the first 23 bits of the additional bytes are not 0, then damaged
  * MPEG bitstreams could cause overread and segfault.
  */
-#define FF_INPUT_BUFFER_PADDING_SIZE 32
+#define FF_INPUT_BUFFER_PADDING_SIZE 16
 
 /**
  * @ingroup lavc_encoding
@@ -661,9 +625,54 @@ enum AVDiscard{
     AVDISCARD_DEFAULT =  0, ///< discard useless packets like 0 size packets in avi
     AVDISCARD_NONREF  =  8, ///< discard all non reference
     AVDISCARD_BIDIR   = 16, ///< discard all bidirectional frames
-    AVDISCARD_NONINTRA= 24, ///< discard all non intra frames
     AVDISCARD_NONKEY  = 32, ///< discard all frames except keyframes
     AVDISCARD_ALL     = 48, ///< discard all
+};
+
+enum AVColorPrimaries{
+    AVCOL_PRI_BT709       = 1, ///< also ITU-R BT1361 / IEC 61966-2-4 / SMPTE RP177 Annex B
+    AVCOL_PRI_UNSPECIFIED = 2,
+    AVCOL_PRI_BT470M      = 4,
+    AVCOL_PRI_BT470BG     = 5, ///< also ITU-R BT601-6 625 / ITU-R BT1358 625 / ITU-R BT1700 625 PAL & SECAM
+    AVCOL_PRI_SMPTE170M   = 6, ///< also ITU-R BT601-6 525 / ITU-R BT1358 525 / ITU-R BT1700 NTSC
+    AVCOL_PRI_SMPTE240M   = 7, ///< functionally identical to above
+    AVCOL_PRI_FILM        = 8,
+    AVCOL_PRI_BT2020      = 9, ///< ITU-R BT2020
+    AVCOL_PRI_NB             , ///< Not part of ABI
+};
+
+enum AVColorTransferCharacteristic{
+    AVCOL_TRC_BT709        =  1, ///< also ITU-R BT1361
+    AVCOL_TRC_UNSPECIFIED  =  2,
+    AVCOL_TRC_GAMMA22      =  4, ///< also ITU-R BT470M / ITU-R BT1700 625 PAL & SECAM
+    AVCOL_TRC_GAMMA28      =  5, ///< also ITU-R BT470BG
+    AVCOL_TRC_SMPTE170M    =  6, ///< also ITU-R BT601-6 525 or 625 / ITU-R BT1358 525 or 625 / ITU-R BT1700 NTSC
+    AVCOL_TRC_SMPTE240M    =  7,
+    AVCOL_TRC_LINEAR       =  8, ///< "Linear transfer characteristics"
+    AVCOL_TRC_LOG          =  9, ///< "Logarithmic transfer characteristic (100:1 range)"
+    AVCOL_TRC_LOG_SQRT     = 10, ///< "Logarithmic transfer characteristic (100 * Sqrt( 10 ) : 1 range)"
+    AVCOL_TRC_IEC61966_2_4 = 11, ///< IEC 61966-2-4
+    AVCOL_TRC_BT1361_ECG   = 12, ///< ITU-R BT1361 Extended Colour Gamut
+    AVCOL_TRC_IEC61966_2_1 = 13, ///< IEC 61966-2-1 (sRGB or sYCC)
+    AVCOL_TRC_BT2020_10    = 14, ///< ITU-R BT2020 for 10 bit system
+    AVCOL_TRC_BT2020_12    = 15, ///< ITU-R BT2020 for 12 bit system
+    AVCOL_TRC_NB               , ///< Not part of ABI
+};
+
+/**
+ *  X   X      3 4 X      X are luma samples,
+ *             1 2        1-6 are possible chroma positions
+ *  X   X      5 6 X      0 is undefined/unknown position
+ */
+enum AVChromaLocation{
+    AVCHROMA_LOC_UNSPECIFIED = 0,
+    AVCHROMA_LOC_LEFT        = 1, ///< mpeg2/4, h264 default
+    AVCHROMA_LOC_CENTER      = 2, ///< mpeg1, jpeg, h263
+    AVCHROMA_LOC_TOPLEFT     = 3, ///< DV
+    AVCHROMA_LOC_TOP         = 4,
+    AVCHROMA_LOC_BOTTOMLEFT  = 5,
+    AVCHROMA_LOC_BOTTOM      = 6,
+    AVCHROMA_LOC_NB             , ///< Not part of ABI
 };
 
 enum AVAudioServiceType {
@@ -710,26 +719,14 @@ typedef struct RcOverride{
 #define CODEC_FLAG_4MV    0x0004  ///< 4 MV per MB allowed / advanced prediction for H.263.
 #define CODEC_FLAG_OUTPUT_CORRUPT 0x0008 ///< Output even those frames that might be corrupted
 #define CODEC_FLAG_QPEL   0x0010  ///< Use qpel MC.
-#if FF_API_GMC
-/**
- * @deprecated use the "gmc" private option of the libxvid encoder
- */
 #define CODEC_FLAG_GMC    0x0020  ///< Use GMC.
-#endif
-#if FF_API_MV0
+#define CODEC_FLAG_MV0    0x0040  ///< Always try a MB with MV=<0,0>.
 /**
- * @deprecated use the flag "mv0" in the "mpv_flags" private option of the
- * mpegvideo encoders
- */
-#define CODEC_FLAG_MV0    0x0040
-#endif
-#if FF_API_INPUT_PRESERVED
-/**
- * @deprecated passing reference-counted frames to the encoders replaces this
- * flag
+ * The parent program guarantees that the input for B-frames containing
+ * streams is not written to for at least s->max_b_frames+1 frames, if
+ * this is not set the input will be copied.
  */
 #define CODEC_FLAG_INPUT_PRESERVED 0x0100
-#endif
 #define CODEC_FLAG_PASS1           0x0200   ///< Use internal 2pass ratecontrol in first pass mode.
 #define CODEC_FLAG_PASS2           0x0400   ///< Use internal 2pass ratecontrol in second pass mode.
 #define CODEC_FLAG_GRAY            0x2000   ///< Only decode/encode grayscale.
@@ -743,13 +740,7 @@ typedef struct RcOverride{
 #define CODEC_FLAG_PSNR            0x8000   ///< error[?] variables will be set during encoding.
 #define CODEC_FLAG_TRUNCATED       0x00010000 /** Input bitstream might be truncated at a random
                                                   location instead of only at frame boundaries. */
-#if FF_API_NORMALIZE_AQP
-/**
- * @deprecated use the flag "naq" in the "mpv_flags" private option of the
- * mpegvideo encoders
- */
-#define CODEC_FLAG_NORMALIZE_AQP  0x00020000
-#endif
+#define CODEC_FLAG_NORMALIZE_AQP  0x00020000 ///< Normalize adaptive quantization.
 #define CODEC_FLAG_INTERLACED_DCT 0x00040000 ///< Use interlaced DCT.
 #define CODEC_FLAG_LOW_DELAY      0x00080000 ///< Force low delay.
 #define CODEC_FLAG_GLOBAL_HEADER  0x00400000 ///< Place global headers in extradata instead of every keyframe.
@@ -767,7 +758,6 @@ typedef struct RcOverride{
 
 #define CODEC_FLAG2_CHUNKS        0x00008000 ///< Input bitstream might be truncated at a packet boundaries instead of only at frame boundaries.
 #define CODEC_FLAG2_SHOW_ALL      0x00400000 ///< Show all frames before the first keyframe
-#define CODEC_FLAG2_EXPORT_MVS    0x10000000 ///< Export motion vectors through frame side data
 
 /* Unsupported options :
  *              Syntax Arithmetic coding (SAC)
@@ -1013,21 +1003,6 @@ enum AVPacketSideDataType {
     AV_PKT_DATA_H263_MB_INFO,
 
     /**
-     * This side data should be associated with an audio stream and contains
-     * ReplayGain information in form of the AVReplayGain struct.
-     */
-    AV_PKT_DATA_REPLAYGAIN,
-
-    /**
-     * This side data contains a 3x3 transformation matrix describing an affine
-     * transformation that needs to be applied to the decoded video frames for
-     * correct presentation.
-     *
-     * See libavutil/display.h for a detailed description of the data.
-     */
-    AV_PKT_DATA_DISPLAYMATRIX,
-
-    /**
      * Recommmends skipping the specified number of samples
      * @code
      * u32le number of samples to skip from start of this packet
@@ -1092,12 +1067,6 @@ enum AVPacketSideDataType {
     AV_PKT_DATA_METADATA_UPDATE,
 };
 
-typedef struct AVPacketSideData {
-    uint8_t *data;
-    int      size;
-    enum AVPacketSideDataType type;
-} AVPacketSideData;
-
 /**
  * This structure stores compressed data. It is typically exported by demuxers
  * and then passed as input to decoders, or received as output from encoders and
@@ -1154,7 +1123,11 @@ typedef struct AVPacket {
      * Additional packet data that can be provided by the container.
      * Packet can contain several types of side information.
      */
-    AVPacketSideData *side_data;
+    struct {
+        uint8_t *data;
+        int      size;
+        enum AVPacketSideDataType type;
+    } *side_data;
     int side_data_elems;
 
     /**
@@ -1232,13 +1205,7 @@ typedef struct AVCodecContext {
 
     enum AVMediaType codec_type; /* see AVMEDIA_TYPE_xxx */
     const struct AVCodec  *codec;
-#if FF_API_CODEC_NAME
-    /**
-     * @deprecated this field is not used for anything in libavcodec
-     */
-    attribute_deprecated
     char             codec_name[32];
-#endif
     enum AVCodecID     codec_id; /* see AV_CODEC_ID_xxx */
 
     /**
@@ -1371,17 +1338,12 @@ typedef struct AVCodecContext {
      *   encoded input.
      *
      * Audio:
-     *   For encoding, this is the number of "priming" samples added by the
-     *   encoder to the beginning of the stream. The decoded output will be
-     *   delayed by this many samples relative to the input to the encoder (or
-     *   more, if the decoder adds its own padding).
-     *   The timestamps on the output packets are adjusted by the encoder so
-     *   that they always refer to the first sample of the data actually
-     *   contained in the packet, including any added padding.
-     *   E.g. if the timebase is 1/samplerate and the timestamp of the first
-     *   input sample is 0, the timestamp of the first output packet will be
-     *   -delay.
-     *
+     *   For encoding, this is the number of "priming" samples added to the
+     *   beginning of the stream. The decoded output will be delayed by this
+     *   many samples relative to the input to the encoder. Note that this
+     *   field is purely informational and does not directly affect the pts
+     *   output by the encoder, which should always be based on the actual
+     *   presentation time, including any delay.
      *   For decoding, this is the number of samples the decoder needs to
      *   output before the decoder's output is valid. When seeking, you should
      *   start decoding this many samples prior to your desired seek point.
@@ -1691,7 +1653,6 @@ typedef struct AVCodecContext {
      */
     int me_subpel_quality;
 
-#if FF_API_AFD
     /**
      * DTG active format information (additional aspect ratio
      * information only used in DVB MPEG-2 transport streams)
@@ -1699,9 +1660,8 @@ typedef struct AVCodecContext {
      *
      * - encoding: unused
      * - decoding: Set by decoder.
-     * @deprecated Deprecated in favor of AVSideData
      */
-    attribute_deprecated int dtg_active_format;
+    int dtg_active_format;
 #define FF_DTG_AFD_SAME         8
 #define FF_DTG_AFD_4_3          9
 #define FF_DTG_AFD_16_9         10
@@ -1709,7 +1669,6 @@ typedef struct AVCodecContext {
 #define FF_DTG_AFD_4_3_SP_14_9  13
 #define FF_DTG_AFD_16_9_SP_14_9 14
 #define FF_DTG_AFD_SP_4_3       15
-#endif /* FF_API_AFD */
 
     /**
      * maximum motion estimation search range in subpel units
@@ -1895,14 +1854,12 @@ typedef struct AVCodecContext {
      */
     int chromaoffset;
 
-#if FF_API_UNUSED_MEMBERS
     /**
      * Multiplied by qscale for each frame and added to scene_change_score.
      * - encoding: Set by user.
      * - decoding: unused
      */
-    attribute_deprecated int scenechange_factor;
-#endif
+    int scenechange_factor;
 
     /**
      *
@@ -2273,7 +2230,7 @@ typedef struct AVCodecContext {
 
     /**
      * ratecontrol qmin qmax limiting method
-     * 0-> clipping, 1-> use a nice continuous function to limit qscale within qmin/qmax.
+     * 0-> clipping, 1-> use a nice continuous function to limit qscale wthin qmin/qmax.
      * - encoding: Set by user.
      * - decoding: unused
      */
@@ -2307,7 +2264,7 @@ typedef struct AVCodecContext {
     /**
      * maximum bitrate
      * - encoding: Set by user.
-     * - decoding: Set by libavcodec.
+     * - decoding: unused
      */
     int rc_max_rate;
 
@@ -2352,9 +2309,7 @@ typedef struct AVCodecContext {
 #define FF_CODER_TYPE_AC        1
 #define FF_CODER_TYPE_RAW       2
 #define FF_CODER_TYPE_RLE       3
-#if FF_API_UNUSED_MEMBERS
 #define FF_CODER_TYPE_DEFLATE   4
-#endif /* FF_API_UNUSED_MEMBERS */
     /**
      * coder type
      * - encoding: Set by user.
@@ -2370,14 +2325,14 @@ typedef struct AVCodecContext {
     int context_model;
 
     /**
-     * minimum Lagrange multiplier
+     * minimum Lagrange multipler
      * - encoding: Set by user.
      * - decoding: unused
      */
     int lmin;
 
     /**
-     * maximum Lagrange multiplier
+     * maximum Lagrange multipler
      * - encoding: Set by user.
      * - decoding: unused
      */
@@ -2538,7 +2493,6 @@ typedef struct AVCodecContext {
     int error_concealment;
 #define FF_EC_GUESS_MVS   1
 #define FF_EC_DEBLOCK     2
-#define FF_EC_FAVOR_INTER 256
 
     /**
      * debug
@@ -2560,9 +2514,7 @@ typedef struct AVCodecContext {
 #define FF_DEBUG_DCT_COEFF   0x00000040
 #define FF_DEBUG_SKIP        0x00000080
 #define FF_DEBUG_STARTCODE   0x00000100
-#if FF_API_UNUSED_MEMBERS
 #define FF_DEBUG_PTS         0x00000200
-#endif /* FF_API_UNUSED_MEMBERS */
 #define FF_DEBUG_ER          0x00000400
 #define FF_DEBUG_MMCO        0x00000800
 #define FF_DEBUG_BUGS        0x00001000
@@ -2572,7 +2524,6 @@ typedef struct AVCodecContext {
 #endif
 #define FF_DEBUG_BUFFERS     0x00008000
 #define FF_DEBUG_THREADS     0x00010000
-#define FF_DEBUG_NOMC        0x01000000
 
 #if FF_API_DEBUG_MV
     /**
@@ -2605,15 +2556,15 @@ typedef struct AVCodecContext {
 #define AV_EF_BUFFER    (1<<2)          ///< detect improper bitstream length
 #define AV_EF_EXPLODE   (1<<3)          ///< abort decoding on minor error detection
 
-#define AV_EF_IGNORE_ERR (1<<15)        ///< ignore errors and continue
 #define AV_EF_CAREFUL    (1<<16)        ///< consider things that violate the spec, are fast to calculate and have not been seen in the wild as errors
-#define AV_EF_COMPLIANT  (1<<17)        ///< consider all spec non compliances as errors
+#define AV_EF_COMPLIANT  (1<<17)        ///< consider all spec non compliancies as errors
 #define AV_EF_AGGRESSIVE (1<<18)        ///< consider things that a sane encoder should not do as an error
 
 
     /**
      * opaque 64bit number (generally a PTS) that will be reordered and
      * output in AVFrame.reordered_opaque
+     * @deprecated in favor of pkt_pts
      * - encoding: unused
      * - decoding: Set by user.
      */
@@ -2653,9 +2604,7 @@ typedef struct AVCodecContext {
     int dct_algo;
 #define FF_DCT_AUTO    0
 #define FF_DCT_FASTINT 1
-#if FF_API_UNUSED_MEMBERS
 #define FF_DCT_INT     2
-#endif /* FF_API_UNUSED_MEMBERS */
 #define FF_DCT_MMX     3
 #define FF_DCT_ALTIVEC 5
 #define FF_DCT_FAAN    6
@@ -2672,28 +2621,18 @@ typedef struct AVCodecContext {
 #define FF_IDCT_SIMPLEMMX     3
 #define FF_IDCT_ARM           7
 #define FF_IDCT_ALTIVEC       8
-#if FF_API_ARCH_SH4
 #define FF_IDCT_SH4           9
-#endif
 #define FF_IDCT_SIMPLEARM     10
-#if FF_API_UNUSED_MEMBERS
 #define FF_IDCT_IPP           13
-#endif /* FF_API_UNUSED_MEMBERS */
-#define FF_IDCT_XVID          14
-#if FF_API_IDCT_XVIDMMX
 #define FF_IDCT_XVIDMMX       14
-#endif /* FF_API_IDCT_XVIDMMX */
 #define FF_IDCT_SIMPLEARMV5TE 16
 #define FF_IDCT_SIMPLEARMV6   17
-#if FF_API_ARCH_SPARC
 #define FF_IDCT_SIMPLEVIS     18
-#endif
 #define FF_IDCT_FAAN          20
 #define FF_IDCT_SIMPLENEON    22
 #if FF_API_ARCH_ALPHA
 #define FF_IDCT_SIMPLEALPHA   23
 #endif
-#define FF_IDCT_SIMPLEAUTO    128
 
     /**
      * bits per sample/pixel from the demuxer (needed for huffyuv).
@@ -2804,7 +2743,7 @@ typedef struct AVCodecContext {
 #endif
 
     /**
-     * noise vs. sse weight for the nsse comparison function
+     * noise vs. sse weight for the nsse comparsion function
      * - encoding: Set by user.
      * - decoding: unused
      */
@@ -2892,7 +2831,6 @@ typedef struct AVCodecContext {
 #define FF_PROFILE_HEVC_MAIN                        1
 #define FF_PROFILE_HEVC_MAIN_10                     2
 #define FF_PROFILE_HEVC_MAIN_STILL_PICTURE          3
-#define FF_PROFILE_HEVC_REXT                        4
 
     /**
      * level
@@ -2958,21 +2896,6 @@ typedef struct AVCodecContext {
      * - decoding: unused.
      */
     uint64_t vbv_delay;
-
-    /**
-     * Encoding only. Allow encoders to output packets that do not contain any
-     * encoded data, only side data.
-     *
-     * Some encoders need to output such packets, e.g. to update some stream
-     * parameters at the end of encoding.
-     *
-     * All callers are strongly recommended to set this option to 1 and update
-     * their code to deal with such packets, since this behaviour may become
-     * always enabled in the future (then this option will be deprecated and
-     * later removed). To avoid ABI issues when this happens, the callers should
-     * use AVOptions to set this field.
-     */
-    int side_data_only_packets;
 
     /**
      * Timebase in which pkt_dts/pts and AVPacket.dts/pts are.
@@ -3241,19 +3164,7 @@ typedef struct AVHWAccel {
      */
     int capabilities;
 
-    /*****************************************************************
-     * No fields below this line are part of the public API. They
-     * may not be used outside of libavcodec and can be changed and
-     * removed at will.
-     * New public fields should be added right above.
-     *****************************************************************
-     */
     struct AVHWAccel *next;
-
-    /**
-     * Allocate a custom buffer
-     */
-    int (*alloc_frame)(AVCodecContext *avctx, AVFrame *frame);
 
     /**
      * Called at the beginning of each frame or field picture.
@@ -3297,47 +3208,24 @@ typedef struct AVHWAccel {
     int (*end_frame)(AVCodecContext *avctx);
 
     /**
-     * Size of per-frame hardware accelerator private data.
+     * Size of HW accelerator private data.
      *
      * Private data is allocated with av_mallocz() before
      * AVCodecContext.get_buffer() and deallocated after
      * AVCodecContext.release_buffer().
      */
-    int frame_priv_data_size;
+    int priv_data_size;
 
     /**
      * Called for every Macroblock in a slice.
      *
-     * XvMC uses it to replace the ff_mpv_decode_mb().
+     * XvMC uses it to replace the ff_MPV_decode_mb().
      * Instead of decoding to raw picture, MB parameters are
      * stored in an array provided by the video driver.
      *
      * @param s the mpeg context
      */
     void (*decode_mb)(struct MpegEncContext *s);
-
-    /**
-     * Initialize the hwaccel private data.
-     *
-     * This will be called from ff_get_format(), after hwaccel and
-     * hwaccel_context are set and the hwaccel private data in AVCodecInternal
-     * is allocated.
-     */
-    int (*init)(AVCodecContext *avctx);
-
-    /**
-     * Uninitialize the hwaccel private data.
-     *
-     * This will be called from get_format() or avcodec_close(), after hwaccel
-     * and hwaccel_context are already uninitialized.
-     */
-    int (*uninit)(AVCodecContext *avctx);
-
-    /**
-     * Size of the private data to allocate in
-     * AVCodecInternal.hwaccel_priv_data.
-     */
-    int priv_data_size;
 } AVHWAccel;
 
 /**
@@ -3462,8 +3350,9 @@ void avcodec_register(AVCodec *codec);
 void avcodec_register_all(void);
 
 /**
- * Allocate an AVCodecContext and set its fields to default values. The
- * resulting struct should be freed with avcodec_free_context().
+ * Allocate an AVCodecContext and set its fields to default values.  The
+ * resulting struct can be deallocated by calling avcodec_close() on it followed
+ * by av_free().
  *
  * @param codec if non-NULL, allocate private data and initialize defaults
  *              for the given codec. It is illegal to then call avcodec_open2()
@@ -3476,12 +3365,6 @@ void avcodec_register_all(void);
  * @see avcodec_get_context_defaults
  */
 AVCodecContext *avcodec_alloc_context3(const AVCodec *codec);
-
-/**
- * Free the codec context and everything associated with it and write NULL to
- * the provided pointer.
- */
-void avcodec_free_context(AVCodecContext **avctx);
 
 /**
  * Set the fields of the given AVCodecContext to default values corresponding
@@ -3700,14 +3583,14 @@ int av_dup_packet(AVPacket *pkt);
  *
  * @return 0 on success, negative AVERROR on fail
  */
-int av_copy_packet(AVPacket *dst, const AVPacket *src);
+int av_copy_packet(AVPacket *dst, AVPacket *src);
 
 /**
  * Copy packet side data
  *
  * @return 0 on success, negative AVERROR on fail
  */
-int av_copy_packet_side_data(AVPacket *dst, const AVPacket *src);
+int av_copy_packet_side_data(AVPacket *dst, AVPacket *src);
 
 /**
  * Free a packet.
@@ -3796,7 +3679,7 @@ void av_packet_free_side_data(AVPacket *pkt);
  *
  * @return 0 on success, a negative AVERROR on error.
  */
-int av_packet_ref(AVPacket *dst, const AVPacket *src);
+int av_packet_ref(AVPacket *dst, AVPacket *src);
 
 /**
  * Wipe the packet.
@@ -3831,19 +3714,6 @@ void av_packet_move_ref(AVPacket *dst, AVPacket *src);
  *
  */
 int av_packet_copy_props(AVPacket *dst, const AVPacket *src);
-
-/**
- * Convert valid timing fields (timestamps / durations) in a packet from one
- * timebase to another. Timestamps with unknown values (AV_NOPTS_VALUE) will be
- * ignored.
- *
- * @param pkt packet on which the conversion will be performed
- * @param tb_src source timebase, in which the timing fields in pkt are
- *               expressed
- * @param tb_dst destination timebase, to which the timing fields will be
- *               converted
- */
-void av_packet_rescale_ts(AVPacket *pkt, AVRational tb_src, AVRational tb_dst);
 
 /**
  * @}
@@ -4113,8 +3983,8 @@ int avcodec_decode_video2(AVCodecContext *avctx, AVFrame *picture,
  * marked with CODEC_CAP_DELAY, then no subtitles will be returned.
  *
  * @param avctx the codec context
- * @param[out] sub The Preallocated AVSubtitle in which the decoded subtitle will be stored,
- *                 must be freed with avsubtitle_free if *got_sub_ptr is set.
+ * @param[out] sub The AVSubtitle in which the decoded subtitle will be stored, must be
+                   freed with avsubtitle_free if *got_sub_ptr is set.
  * @param[in,out] got_sub_ptr Zero if no subtitle could be decompressed, otherwise, it is nonzero.
  * @param[in] avpkt The input AVPacket containing the input buffer.
  */
@@ -4303,7 +4173,7 @@ typedef struct AVCodecParser {
     struct AVCodecParser *next;
 } AVCodecParser;
 
-AVCodecParser *av_parser_next(const AVCodecParser *c);
+AVCodecParser *av_parser_next(AVCodecParser *c);
 
 void av_register_codec_parser(AVCodecParser *parser);
 AVCodecParserContext *av_parser_init(int codec_id);
@@ -4777,8 +4647,30 @@ void avcodec_get_chroma_sub_sample(enum AVPixelFormat pix_fmt, int *h_shift, int
  */
 unsigned int avcodec_pix_fmt_to_codec_tag(enum AVPixelFormat pix_fmt);
 
+#define FF_LOSS_RESOLUTION  0x0001 /**< loss due to resolution change */
+#define FF_LOSS_DEPTH       0x0002 /**< loss due to color depth change */
+#define FF_LOSS_COLORSPACE  0x0004 /**< loss due to color space conversion */
+#define FF_LOSS_ALPHA       0x0008 /**< loss of alpha bits */
+#define FF_LOSS_COLORQUANT  0x0010 /**< loss due to color quantization */
+#define FF_LOSS_CHROMA      0x0020 /**< loss of chroma (e.g. RGB to gray conversion) */
+
 /**
- * @deprecated see av_get_pix_fmt_loss()
+ * Compute what kind of losses will occur when converting from one specific
+ * pixel format to another.
+ * When converting from one pixel format to another, information loss may occur.
+ * For example, when converting from RGB24 to GRAY, the color information will
+ * be lost. Similarly, other losses occur when converting from some formats to
+ * other formats. These losses can involve loss of chroma, but also loss of
+ * resolution, loss of color depth, loss due to the color space conversion, loss
+ * of the alpha bits or loss due to color quantization.
+ * avcodec_get_fix_fmt_loss() informs you about the various types of losses
+ * which will occur when converting from one pixel format to another.
+ *
+ * @param[in] dst_pix_fmt destination pixel format
+ * @param[in] src_pix_fmt source pixel format
+ * @param[in] has_alpha Whether the source pixel format alpha channel is used.
+ * @return Combination of flags informing you what kind of losses will occur
+ * (maximum loss for an invalid dst_pix_fmt).
  */
 int avcodec_get_pix_fmt_loss(enum AVPixelFormat dst_pix_fmt, enum AVPixelFormat src_pix_fmt,
                              int has_alpha);
@@ -4805,7 +4697,34 @@ enum AVPixelFormat avcodec_find_best_pix_fmt_of_list(const enum AVPixelFormat *p
                                             int has_alpha, int *loss_ptr);
 
 /**
- * @deprecated see av_find_best_pix_fmt_of_2()
+ * Find the best pixel format to convert to given a certain source pixel
+ * format and a selection of two destination pixel formats. When converting from
+ * one pixel format to another, information loss may occur.  For example, when converting
+ * from RGB24 to GRAY, the color information will be lost. Similarly, other losses occur when
+ * converting from some formats to other formats. avcodec_find_best_pix_fmt_of_2() selects which of
+ * the given pixel formats should be used to suffer the least amount of loss.
+ *
+ * If one of the destination formats is AV_PIX_FMT_NONE the other pixel format (if valid) will be
+ * returned.
+ *
+ * @code
+ * src_pix_fmt = AV_PIX_FMT_YUV420P;
+ * dst_pix_fmt1= AV_PIX_FMT_RGB24;
+ * dst_pix_fmt2= AV_PIX_FMT_GRAY8;
+ * dst_pix_fmt3= AV_PIX_FMT_RGB8;
+ * loss= FF_LOSS_CHROMA; // don't care about chroma loss, so chroma loss will be ignored.
+ * dst_pix_fmt = avcodec_find_best_pix_fmt_of_2(dst_pix_fmt1, dst_pix_fmt2, src_pix_fmt, alpha, &loss);
+ * dst_pix_fmt = avcodec_find_best_pix_fmt_of_2(dst_pix_fmt, dst_pix_fmt3, src_pix_fmt, alpha, &loss);
+ * @endcode
+ *
+ * @param[in] dst_pix_fmt1 One of the two destination pixel formats to choose from
+ * @param[in] dst_pix_fmt2 The other of the two destination pixel formats to choose from
+ * @param[in] src_pix_fmt Source pixel format
+ * @param[in] has_alpha Whether the source pixel format alpha channel is used.
+ * @param[in, out] loss_ptr Combination of loss flags. In: selects which of the losses to ignore, i.e.
+ *                               NULL or value of zero means we care about all losses. Out: the loss
+ *                               that occurs when converting from src to selected dst pixel format.
+ * @return The best pixel format to convert to or -1 if none was found.
  */
 enum AVPixelFormat avcodec_find_best_pix_fmt_of_2(enum AVPixelFormat dst_pix_fmt1, enum AVPixelFormat dst_pix_fmt2,
                                             enum AVPixelFormat src_pix_fmt, int has_alpha, int *loss_ptr);
@@ -4999,7 +4918,7 @@ AVBitStreamFilterContext *av_bitstream_filter_init(const char *name);
  * @return >= 0 in case of success, or a negative error code in case of failure
  *
  * If the return value is positive, an output buffer is allocated and
- * is available in *poutbuf, and is distinct from the input buffer.
+ * is availble in *poutbuf, and is distinct from the input buffer.
  *
  * If the return value is 0, the output buffer is not allocated and
  * should be considered identical to the input buffer, or in case
@@ -5027,7 +4946,7 @@ void av_bitstream_filter_close(AVBitStreamFilterContext *bsf);
  * This function can be used to iterate over all registered bitstream
  * filters.
  */
-AVBitStreamFilter *av_bitstream_filter_next(const AVBitStreamFilter *f);
+AVBitStreamFilter *av_bitstream_filter_next(AVBitStreamFilter *f);
 
 /* memory */
 
@@ -5095,7 +5014,7 @@ void av_register_hwaccel(AVHWAccel *hwaccel);
  * if hwaccel is non-NULL, returns the next registered hardware accelerator
  * after hwaccel, or NULL if hwaccel is the last one.
  */
-AVHWAccel *av_hwaccel_next(const AVHWAccel *hwaccel);
+AVHWAccel *av_hwaccel_next(AVHWAccel *hwaccel);
 
 
 /**
