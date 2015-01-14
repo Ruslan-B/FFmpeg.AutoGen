@@ -26,8 +26,9 @@ namespace FFmpeg.AutoGen.Example
                     break;
             }
             
-            // decode 100 frame from url
+            // decode 100 frame from path
 
+            //string url = @"../../sample_mpeg4.mp4";
             string url = @"http://hubblesource.stsci.edu/sources/video/clips/details/images/centaur_1.mpg";
 
 			FFmpegInvoke.av_register_all();
@@ -95,21 +96,21 @@ namespace FFmpeg.AutoGen.Example
 			int frameNumber = 0;
 			while (frameNumber < 100)
 			{
-				Console.WriteLine("frame: {0}", frameNumber);
-
 				if (FFmpegInvoke.av_read_frame(pFormatContext, pPacket) < 0)
 					throw new Exception("Could not read frame");
 
 				if (pPacket->stream_index != pStream->index)
 					continue;
 
-				int gotPicture = 0;
+                int gotPicture = 0;
 				int size = FFmpegInvoke.avcodec_decode_video2(pCodecContext, pDecodedFrame, &gotPicture, pPacket);
 				if (size < 0)
 					throw new Exception(string.Format("Error while decoding frame {0}", frameNumber));
 
 				if (gotPicture == 1)
 				{
+                    Console.WriteLine("frame: {0}", frameNumber);
+
 					byte** src = &pDecodedFrame->data_0;
 					byte** dst = &pConvertedFrame->data_0;
 					FFmpegInvoke.sws_scale(pConvertContext, src, pDecodedFrame->linesize, 0,
@@ -119,12 +120,14 @@ namespace FFmpeg.AutoGen.Example
 
 					var imageBufferPtr = new IntPtr(convertedFrameAddress);
 
-					using (var bitmap = new Bitmap(width, height, pConvertedFrame->linesize[0], PixelFormat.Format24bppRgb, imageBufferPtr))
+                    int linesize = pConvertedFrame->linesize[0];
+                    using (var bitmap = new Bitmap(width, height, linesize, PixelFormat.Format24bppRgb, imageBufferPtr))
 					{
 						bitmap.Save(@"frame.buffer.jpg", ImageFormat.Jpeg);
 					}
+
+                    frameNumber++;
 				}
-				frameNumber++;
 			}
 
 			FFmpegInvoke.av_free(pConvertedFrame);

@@ -146,6 +146,13 @@ typedef struct AVIOContext {
      * This field is internal to libavformat and access from outside is not allowed.
      */
     int writeout_count;
+
+    /**
+     * Original buffer size
+     * used internally after probing and ensure seekback to reset the buffer size
+     * This field is internal to libavformat and access from outside is not allowed.
+     */
+    int orig_buffer_size;
 } AVIOContext;
 
 /* unbuffered I/O */
@@ -179,6 +186,9 @@ int avio_check(const char *url, int flags);
  *
  * @param buffer Memory block for input/output operations via AVIOContext.
  *        The buffer must be allocated with av_malloc() and friends.
+ *        It may be freed and replaced with a new buffer by libavformat.
+ *        AVIOContext.buffer holds the buffer currently in use,
+ *        which must be later freed with av_free().
  * @param buffer_size The buffer size is very important for performance.
  *        For protocols with fixed blocksize it should be set to this blocksize.
  *        For others a typical size is a cache page, e.g. 4kb.
@@ -269,16 +279,27 @@ int64_t avio_size(AVIOContext *s);
  * feof() equivalent for AVIOContext.
  * @return non zero if and only if end of file
  */
+int avio_feof(AVIOContext *s);
+#if FF_API_URL_FEOF
+/**
+ * @deprecated use avio_feof()
+ */
+attribute_deprecated
 int url_feof(AVIOContext *s);
+#endif
 
 /** @warning currently size is limited */
 int avio_printf(AVIOContext *s, const char *fmt, ...) av_printf_format(2, 3);
 
 /**
- * Force flushing of buffered data to the output s.
+ * Force flushing of buffered data.
  *
- * Force the buffered data to be immediately written to the output,
+ * For write streams, force the buffered data to be immediately written to the output,
  * without to wait to fill the internal buffer.
+ *
+ * For read streams, discard all currently buffered data, and advance the
+ * reported file position to that of the underlying stream. This does not
+ * read new data, and does not perform any seeks.
  */
 void avio_flush(AVIOContext *s);
 
@@ -492,5 +513,16 @@ int     avio_pause(AVIOContext *h, int pause);
  */
 int64_t avio_seek_time(AVIOContext *h, int stream_index,
                        int64_t timestamp, int flags);
+
+/* Avoid a warning. The header can not be included because it breaks c++. */
+struct AVBPrint;
+
+/**
+ * Read contents of h into print buffer, up to max_size bytes, or up to EOF.
+ *
+ * @return 0 for success (max_size bytes read or EOF reached), negative error
+ * code otherwise
+ */
+int avio_read_to_bprint(AVIOContext *h, struct AVBPrint *pb, size_t max_size);
 
 #endif /* AVFORMAT_AVIO_H */
