@@ -26,7 +26,7 @@ namespace FFmpeg.AutoGen.Example
                     break;
             }
             
-            // decode 100 frame from path
+            // decode 100 frame from url or path
 
             //string url = @"../../sample_mpeg4.mp4";
             string url = @"http://hubblesource.stsci.edu/sources/video/clips/details/images/centaur_1.mpg";
