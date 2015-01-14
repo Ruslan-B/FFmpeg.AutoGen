@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
-	using AVClassCategory=anon_5;
+	using AVClassCategory=anon_9;
 	
 	// Func<AVFormatContext*, int, void*, uint, int>
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -51,7 +51,7 @@ namespace FFmpeg.AutoGen
 		AV_ROUND_PASS_MINMAX = 0x2000, // 8192
 	}
 	
-	public enum anon_5
+	public enum anon_9
 	{
 		AV_CLASS_CATEGORY_NA,
 		AV_CLASS_CATEGORY_INPUT,
@@ -64,6 +64,12 @@ namespace FFmpeg.AutoGen
 		AV_CLASS_CATEGORY_BITSTREAM_FILTER,
 		AV_CLASS_CATEGORY_SWSCALER,
 		AV_CLASS_CATEGORY_SWRESAMPLER,
+		AV_CLASS_CATEGORY_DEVICE_VIDEO_OUTPUT = 0x28, // 40
+		AV_CLASS_CATEGORY_DEVICE_VIDEO_INPUT,
+		AV_CLASS_CATEGORY_DEVICE_AUDIO_OUTPUT,
+		AV_CLASS_CATEGORY_DEVICE_AUDIO_INPUT,
+		AV_CLASS_CATEGORY_DEVICE_OUTPUT,
+		AV_CLASS_CATEGORY_DEVICE_INPUT,
 		AV_CLASS_CATEGORY_NB,
 	}
 	
@@ -136,7 +142,9 @@ namespace FFmpeg.AutoGen
 		AV_PIX_FMT_RGB444BE,
 		AV_PIX_FMT_BGR444LE,
 		AV_PIX_FMT_BGR444BE,
-		AV_PIX_FMT_GRAY8A,
+		AV_PIX_FMT_YA8,
+		AV_PIX_FMT_Y400A = 0x42, // AV_PIX_FMT_YA8
+		AV_PIX_FMT_GRAY8A = 0x42, // AV_PIX_FMT_YA8
 		AV_PIX_FMT_BGR48BE,
 		AV_PIX_FMT_BGR48LE,
 		AV_PIX_FMT_YUV420P9BE,
@@ -185,6 +193,14 @@ namespace FFmpeg.AutoGen
 		AV_PIX_FMT_NV16,
 		AV_PIX_FMT_NV20LE,
 		AV_PIX_FMT_NV20BE,
+		AV_PIX_FMT_RGBA64BE_LIBAV,
+		AV_PIX_FMT_RGBA64LE_LIBAV,
+		AV_PIX_FMT_BGRA64BE_LIBAV,
+		AV_PIX_FMT_BGRA64LE_LIBAV,
+		AV_PIX_FMT_YVYU422,
+		AV_PIX_FMT_VDA,
+		AV_PIX_FMT_YA16BE,
+		AV_PIX_FMT_YA16LE,
 		AV_PIX_FMT_RGBA64BE = 0x123, // 291
 		AV_PIX_FMT_RGBA64LE,
 		AV_PIX_FMT_BGRA64BE,
@@ -347,6 +363,78 @@ namespace FFmpeg.AutoGen
 		PIX_FMT_NB,
 	}
 	
+	public enum AVColorPrimaries
+	{
+		AVCOL_PRI_RESERVED0,
+		AVCOL_PRI_BT709,
+		AVCOL_PRI_UNSPECIFIED,
+		AVCOL_PRI_RESERVED,
+		AVCOL_PRI_BT470M,
+		AVCOL_PRI_BT470BG,
+		AVCOL_PRI_SMPTE170M,
+		AVCOL_PRI_SMPTE240M,
+		AVCOL_PRI_FILM,
+		AVCOL_PRI_BT2020,
+		AVCOL_PRI_NB,
+	}
+	
+	public enum AVColorTransferCharacteristic
+	{
+		AVCOL_TRC_RESERVED0,
+		AVCOL_TRC_BT709,
+		AVCOL_TRC_UNSPECIFIED,
+		AVCOL_TRC_RESERVED,
+		AVCOL_TRC_GAMMA22,
+		AVCOL_TRC_GAMMA28,
+		AVCOL_TRC_SMPTE170M,
+		AVCOL_TRC_SMPTE240M,
+		AVCOL_TRC_LINEAR,
+		AVCOL_TRC_LOG,
+		AVCOL_TRC_LOG_SQRT,
+		AVCOL_TRC_IEC61966_2_4,
+		AVCOL_TRC_BT1361_ECG,
+		AVCOL_TRC_IEC61966_2_1,
+		AVCOL_TRC_BT2020_10,
+		AVCOL_TRC_BT2020_12,
+		AVCOL_TRC_NB,
+	}
+	
+	public enum AVColorSpace
+	{
+		AVCOL_SPC_RGB,
+		AVCOL_SPC_BT709,
+		AVCOL_SPC_UNSPECIFIED,
+		AVCOL_SPC_RESERVED,
+		AVCOL_SPC_FCC,
+		AVCOL_SPC_BT470BG,
+		AVCOL_SPC_SMPTE170M,
+		AVCOL_SPC_SMPTE240M,
+		AVCOL_SPC_YCOCG,
+		AVCOL_SPC_BT2020_NCL,
+		AVCOL_SPC_BT2020_CL,
+		AVCOL_SPC_NB,
+	}
+	
+	public enum AVColorRange
+	{
+		AVCOL_RANGE_UNSPECIFIED,
+		AVCOL_RANGE_MPEG,
+		AVCOL_RANGE_JPEG,
+		AVCOL_RANGE_NB,
+	}
+	
+	public enum AVChromaLocation
+	{
+		AVCHROMA_LOC_UNSPECIFIED,
+		AVCHROMA_LOC_LEFT,
+		AVCHROMA_LOC_CENTER,
+		AVCHROMA_LOC_TOPLEFT,
+		AVCHROMA_LOC_TOP,
+		AVCHROMA_LOC_BOTTOMLEFT,
+		AVCHROMA_LOC_BOTTOM,
+		AVCHROMA_LOC_NB,
+	}
+	
 	public enum AVSampleFormat
 	{
 		AV_SAMPLE_FMT_NONE = -0x1, // (-1)
@@ -375,29 +463,6 @@ namespace FFmpeg.AutoGen
 		AV_MATRIX_ENCODING_NB,
 	}
 	
-	public enum AVColorSpace
-	{
-		AVCOL_SPC_RGB,
-		AVCOL_SPC_BT709,
-		AVCOL_SPC_UNSPECIFIED,
-		AVCOL_SPC_FCC = 0x4, // 4
-		AVCOL_SPC_BT470BG,
-		AVCOL_SPC_SMPTE170M,
-		AVCOL_SPC_SMPTE240M,
-		AVCOL_SPC_YCOCG,
-		AVCOL_SPC_BT2020_NCL,
-		AVCOL_SPC_BT2020_CL,
-		AVCOL_SPC_NB,
-	}
-	
-	public enum AVColorRange
-	{
-		AVCOL_RANGE_UNSPECIFIED,
-		AVCOL_RANGE_MPEG,
-		AVCOL_RANGE_JPEG,
-		AVCOL_RANGE_NB,
-	}
-	
 	public enum AVFrameSideDataType
 	{
 		AV_FRAME_DATA_PANSCAN,
@@ -405,6 +470,22 @@ namespace FFmpeg.AutoGen
 		AV_FRAME_DATA_STEREO3D,
 		AV_FRAME_DATA_MATRIXENCODING,
 		AV_FRAME_DATA_DOWNMIX_INFO,
+		AV_FRAME_DATA_REPLAYGAIN,
+		AV_FRAME_DATA_DISPLAYMATRIX,
+		AV_FRAME_DATA_AFD,
+		AV_FRAME_DATA_MOTION_VECTORS,
+		AV_FRAME_DATA_SKIP_SAMPLES,
+	}
+	
+	public enum AVActiveFormatDescription
+	{
+		AV_AFD_SAME = 0x8, // 8
+		AV_AFD_4_3,
+		AV_AFD_16_9,
+		AV_AFD_14_9,
+		AV_AFD_4_3_SP_14_9 = 0xd, // 13
+		AV_AFD_16_9_SP_14_9,
+		AV_AFD_SP_4_3,
 	}
 	
 	public enum AVCodecID
@@ -586,6 +667,15 @@ namespace FFmpeg.AutoGen
 		AV_CODEC_ID_HNM4_VIDEO,
 		AV_CODEC_ID_HEVC_DEPRECATED,
 		AV_CODEC_ID_FIC,
+		AV_CODEC_ID_ALIAS_PIX,
+		AV_CODEC_ID_BRENDER_PIX_DEPRECATED,
+		AV_CODEC_ID_PAF_VIDEO_DEPRECATED,
+		AV_CODEC_ID_EXR_DEPRECATED,
+		AV_CODEC_ID_VP7_DEPRECATED,
+		AV_CODEC_ID_SANM_DEPRECATED,
+		AV_CODEC_ID_SGIRLE_DEPRECATED,
+		AV_CODEC_ID_MVC1_DEPRECATED,
+		AV_CODEC_ID_MVC2_DEPRECATED,
 		AV_CODEC_ID_BRENDER_PIX = 0x42504958, // ((('X' | ('I' << 8)) | ('P' << 16)) | ('B' << 24))
 		AV_CODEC_ID_Y41P = 0x59343150, // ((('P' | ('1' << 8)) | ('4' << 16)) | ('Y' << 24))
 		AV_CODEC_ID_ESCAPE130 = 0x45313330, // ((('0' | ('3' << 8)) | ('1' << 16)) | ('E' << 24))
@@ -611,6 +701,8 @@ namespace FFmpeg.AutoGen
 		AV_CODEC_ID_WEBP = 0x57454250, // ((('P' | ('B' << 8)) | ('E' << 16)) | ('W' << 24))
 		AV_CODEC_ID_SMVJPEG = 0x534d564a, // ((('J' | ('V' << 8)) | ('M' << 16)) | ('S' << 24))
 		AV_CODEC_ID_HEVC = 0x48323635, // ((('5' | ('6' << 8)) | ('2' << 16)) | ('H' << 24))
+		AV_CODEC_ID_VP7 = 0x56503730, // ((('0' | ('7' << 8)) | ('P' << 16)) | ('V' << 24))
+		AV_CODEC_ID_APNG = 0x41504e47, // ((('G' | ('N' << 8)) | ('P' << 16)) | ('A' << 24))
 		AV_CODEC_ID_FIRST_AUDIO = 0x10000, // 65536
 		AV_CODEC_ID_PCM_S16LE = 0x10000, // 65536
 		AV_CODEC_ID_PCM_S16BE,
@@ -675,6 +767,8 @@ namespace FFmpeg.AutoGen
 		AV_CODEC_ID_ADPCM_IMA_ISS,
 		AV_CODEC_ID_ADPCM_G722,
 		AV_CODEC_ID_ADPCM_IMA_APC,
+		AV_CODEC_ID_ADPCM_VIMA_DEPRECATED,
+		AV_CODEC_ID_ADPCM_VIMA = 0x56494d41, // ((('A' | ('M' << 8)) | ('I' << 16)) | ('V' << 24))
 		AV_CODEC_ID_VIMA = 0x56494d41, // ((('A' | ('M' << 8)) | ('I' << 16)) | ('V' << 24))
 		AV_CODEC_ID_ADPCM_AFC = 0x41464320, // (((' ' | ('C' << 8)) | ('F' << 16)) | ('A' << 24))
 		AV_CODEC_ID_ADPCM_IMA_OKI = 0x4f4b4920, // (((' ' | ('I' << 8)) | ('K' << 16)) | ('O' << 24))
@@ -754,6 +848,8 @@ namespace FFmpeg.AutoGen
 		AV_CODEC_ID_COMFORT_NOISE,
 		AV_CODEC_ID_TAK_DEPRECATED,
 		AV_CODEC_ID_METASOUND,
+		AV_CODEC_ID_PAF_AUDIO_DEPRECATED,
+		AV_CODEC_ID_ON2AVC,
 		AV_CODEC_ID_FFWAVESYNTH = 0x46465753, // ((('S' | ('W' << 8)) | ('F' << 16)) | ('F' << 24))
 		AV_CODEC_ID_SONIC = 0x534f4e43, // ((('C' | ('N' << 8)) | ('O' << 16)) | ('S' << 24))
 		AV_CODEC_ID_SONIC_LS = 0x534f4e4c, // ((('L' | ('N' << 8)) | ('O' << 16)) | ('S' << 24))
@@ -762,6 +858,10 @@ namespace FFmpeg.AutoGen
 		AV_CODEC_ID_TAK = 0x7442614b, // ((('K' | ('a' << 8)) | ('B' << 16)) | ('t' << 24))
 		AV_CODEC_ID_EVRC = 0x73657663, // ((('c' | ('v' << 8)) | ('e' << 16)) | ('s' << 24))
 		AV_CODEC_ID_SMV = 0x73736d76, // ((('v' | ('m' << 8)) | ('s' << 16)) | ('s' << 24))
+		AV_CODEC_ID_DSD_LSBF = 0x4453444c, // ((('L' | ('D' << 8)) | ('S' << 16)) | ('D' << 24))
+		AV_CODEC_ID_DSD_MSBF,
+		AV_CODEC_ID_DSD_LSBF_PLANAR = 0x44534431, // ((('1' | ('D' << 8)) | ('S' << 16)) | ('D' << 24))
+		AV_CODEC_ID_DSD_MSBF_PLANAR = 0x44534438, // ((('8' | ('D' << 8)) | ('S' << 16)) | ('D' << 24))
 		AV_CODEC_ID_FIRST_SUBTITLE = 0x17000, // 94208
 		AV_CODEC_ID_DVD_SUBTITLE = 0x17000, // 94208
 		AV_CODEC_ID_DVB_SUBTITLE,
@@ -777,6 +877,7 @@ namespace FFmpeg.AutoGen
 		AV_CODEC_ID_JACOSUB = 0x4a535542, // ((('B' | ('U' << 8)) | ('S' << 16)) | ('J' << 24))
 		AV_CODEC_ID_SAMI = 0x53414d49, // ((('I' | ('M' << 8)) | ('A' << 16)) | ('S' << 24))
 		AV_CODEC_ID_REALTEXT = 0x52545854, // ((('T' | ('X' << 8)) | ('T' << 16)) | ('R' << 24))
+		AV_CODEC_ID_STL = 0x5370544c, // ((('L' | ('T' << 8)) | ('p' << 16)) | ('S' << 24))
 		AV_CODEC_ID_SUBVIEWER1 = 0x53625631, // ((('1' | ('V' << 8)) | ('b' << 16)) | ('S' << 24))
 		AV_CODEC_ID_SUBVIEWER = 0x53756256, // ((('V' | ('b' << 8)) | ('u' << 16)) | ('S' << 24))
 		AV_CODEC_ID_SUBRIP = 0x53526970, // ((('p' | ('i' << 8)) | ('R' << 16)) | ('S' << 24))
@@ -794,6 +895,7 @@ namespace FFmpeg.AutoGen
 		AV_CODEC_ID_SMPTE_KLV = 0x4b4c5641, // ((('A' | ('V' << 8)) | ('L' << 16)) | ('K' << 24))
 		AV_CODEC_ID_DVD_NAV = 0x444e4156, // ((('V' | ('A' << 8)) | ('N' << 16)) | ('D' << 24))
 		AV_CODEC_ID_TIMED_ID3 = 0x54494433, // ((('3' | ('D' << 8)) | ('I' << 16)) | ('T' << 24))
+		AV_CODEC_ID_BIN_DATA = 0x44415441, // ((('A' | ('T' << 8)) | ('A' << 16)) | ('D' << 24))
 		AV_CODEC_ID_PROBE = 0x19000, // 102400
 		AV_CODEC_ID_MPEG2TS = 0x20000, // 131072
 		AV_CODEC_ID_MPEG4SYSTEMS,
@@ -1161,52 +1263,9 @@ namespace FFmpeg.AutoGen
 		AVDISCARD_DEFAULT = 0x0, // 0
 		AVDISCARD_NONREF = 0x8, // 8
 		AVDISCARD_BIDIR = 0x10, // 16
+		AVDISCARD_NONINTRA = 0x18, // 24
 		AVDISCARD_NONKEY = 0x20, // 32
 		AVDISCARD_ALL = 0x30, // 48
-	}
-	
-	public enum AVColorPrimaries
-	{
-		AVCOL_PRI_BT709 = 0x1, // 1
-		AVCOL_PRI_UNSPECIFIED,
-		AVCOL_PRI_BT470M = 0x4, // 4
-		AVCOL_PRI_BT470BG,
-		AVCOL_PRI_SMPTE170M,
-		AVCOL_PRI_SMPTE240M,
-		AVCOL_PRI_FILM,
-		AVCOL_PRI_BT2020,
-		AVCOL_PRI_NB,
-	}
-	
-	public enum AVColorTransferCharacteristic
-	{
-		AVCOL_TRC_BT709 = 0x1, // 1
-		AVCOL_TRC_UNSPECIFIED,
-		AVCOL_TRC_GAMMA22 = 0x4, // 4
-		AVCOL_TRC_GAMMA28,
-		AVCOL_TRC_SMPTE170M,
-		AVCOL_TRC_SMPTE240M,
-		AVCOL_TRC_LINEAR,
-		AVCOL_TRC_LOG,
-		AVCOL_TRC_LOG_SQRT,
-		AVCOL_TRC_IEC61966_2_4,
-		AVCOL_TRC_BT1361_ECG,
-		AVCOL_TRC_IEC61966_2_1,
-		AVCOL_TRC_BT2020_10,
-		AVCOL_TRC_BT2020_12,
-		AVCOL_TRC_NB,
-	}
-	
-	public enum AVChromaLocation
-	{
-		AVCHROMA_LOC_UNSPECIFIED,
-		AVCHROMA_LOC_LEFT,
-		AVCHROMA_LOC_CENTER,
-		AVCHROMA_LOC_TOPLEFT,
-		AVCHROMA_LOC_TOP,
-		AVCHROMA_LOC_BOTTOMLEFT,
-		AVCHROMA_LOC_BOTTOM,
-		AVCHROMA_LOC_NB,
 	}
 	
 	public enum AVAudioServiceType
@@ -1229,6 +1288,9 @@ namespace FFmpeg.AutoGen
 		AV_PKT_DATA_NEW_EXTRADATA,
 		AV_PKT_DATA_PARAM_CHANGE,
 		AV_PKT_DATA_H263_MB_INFO,
+		AV_PKT_DATA_REPLAYGAIN,
+		AV_PKT_DATA_DISPLAYMATRIX,
+		AV_PKT_DATA_STEREO3D,
 		AV_PKT_DATA_SKIP_SAMPLES = 0x46, // 70
 		AV_PKT_DATA_JP_DUALMONO,
 		AV_PKT_DATA_STRINGS_METADATA,
@@ -1281,6 +1343,41 @@ namespace FFmpeg.AutoGen
 		AV_LOCK_DESTROY,
 	}
 	
+	public enum AVOptionType
+	{
+		AV_OPT_TYPE_FLAGS,
+		AV_OPT_TYPE_INT,
+		AV_OPT_TYPE_INT64,
+		AV_OPT_TYPE_DOUBLE,
+		AV_OPT_TYPE_FLOAT,
+		AV_OPT_TYPE_STRING,
+		AV_OPT_TYPE_RATIONAL,
+		AV_OPT_TYPE_BINARY,
+		AV_OPT_TYPE_DICT,
+		AV_OPT_TYPE_CONST = 0x80, // 128
+		AV_OPT_TYPE_IMAGE_SIZE = 0x53495a45, // ((('E' | ('Z' << 8)) | ('I' << 16)) | ('S' << 24))
+		AV_OPT_TYPE_PIXEL_FMT = 0x50464d54, // ((('T' | ('M' << 8)) | ('F' << 16)) | ('P' << 24))
+		AV_OPT_TYPE_SAMPLE_FMT = 0x53464d54, // ((('T' | ('M' << 8)) | ('F' << 16)) | ('S' << 24))
+		AV_OPT_TYPE_VIDEO_RATE = 0x56524154, // ((('T' | ('A' << 8)) | ('R' << 16)) | ('V' << 24))
+		AV_OPT_TYPE_DURATION = 0x44555220, // (((' ' | ('R' << 8)) | ('U' << 16)) | ('D' << 24))
+		AV_OPT_TYPE_COLOR = 0x434f4c52, // ((('R' | ('L' << 8)) | ('O' << 16)) | ('C' << 24))
+		AV_OPT_TYPE_CHANNEL_LAYOUT = 0x43484c41, // ((('A' | ('L' << 8)) | ('H' << 16)) | ('C' << 24))
+		FF_OPT_TYPE_FLAGS = 0x0, // 0
+		FF_OPT_TYPE_INT,
+		FF_OPT_TYPE_INT64,
+		FF_OPT_TYPE_DOUBLE,
+		FF_OPT_TYPE_FLOAT,
+		FF_OPT_TYPE_STRING,
+		FF_OPT_TYPE_RATIONAL,
+		FF_OPT_TYPE_BINARY,
+		FF_OPT_TYPE_CONST = 0x80, // 128
+	}
+	
+	public enum anon_11
+	{
+		AV_OPT_FLAG_IMPLICIT_KEY = 0x1, // 1
+	}
+	
 	public enum AVStreamParseType
 	{
 		AVSTREAM_PARSE_NONE,
@@ -1303,6 +1400,15 @@ namespace FFmpeg.AutoGen
 		AV_APP_TO_DEV_NONE = 0x4e4f4e45, // ((('E' | ('N' << 8)) | ('O' << 16)) | ('N' << 24))
 		AV_APP_TO_DEV_WINDOW_SIZE = 0x47454f4d, // ((('M' | ('O' << 8)) | ('E' << 16)) | ('G' << 24))
 		AV_APP_TO_DEV_WINDOW_REPAINT = 0x52455041, // ((('A' | ('P' << 8)) | ('E' << 16)) | ('R' << 24))
+		AV_APP_TO_DEV_PAUSE = 0x50415520, // (((' ' | ('U' << 8)) | ('A' << 16)) | ('P' << 24))
+		AV_APP_TO_DEV_PLAY = 0x504c4159, // ((('Y' | ('A' << 8)) | ('L' << 16)) | ('P' << 24))
+		AV_APP_TO_DEV_TOGGLE_PAUSE = 0x50415554, // ((('T' | ('U' << 8)) | ('A' << 16)) | ('P' << 24))
+		AV_APP_TO_DEV_SET_VOLUME = 0x53564f4c, // ((('L' | ('O' << 8)) | ('V' << 16)) | ('S' << 24))
+		AV_APP_TO_DEV_MUTE = 0x204d5554, // ((('T' | ('U' << 8)) | ('M' << 16)) | (' ' << 24))
+		AV_APP_TO_DEV_UNMUTE = 0x554d5554, // ((('T' | ('U' << 8)) | ('M' << 16)) | ('U' << 24))
+		AV_APP_TO_DEV_TOGGLE_MUTE = 0x544d5554, // ((('T' | ('U' << 8)) | ('M' << 16)) | ('T' << 24))
+		AV_APP_TO_DEV_GET_VOLUME = 0x47564f4c, // ((('L' | ('O' << 8)) | ('V' << 16)) | ('G' << 24))
+		AV_APP_TO_DEV_GET_MUTE = 0x474d5554, // ((('T' | ('U' << 8)) | ('M' << 16)) | ('G' << 24))
 	}
 	
 	public enum AVDevToAppMessageType
@@ -1312,16 +1418,22 @@ namespace FFmpeg.AutoGen
 		AV_DEV_TO_APP_PREPARE_WINDOW_BUFFER = 0x42505245, // ((('E' | ('R' << 8)) | ('P' << 16)) | ('B' << 24))
 		AV_DEV_TO_APP_DISPLAY_WINDOW_BUFFER = 0x42444953, // ((('S' | ('I' << 8)) | ('D' << 16)) | ('B' << 24))
 		AV_DEV_TO_APP_DESTROY_WINDOW_BUFFER = 0x42444553, // ((('S' | ('E' << 8)) | ('D' << 16)) | ('B' << 24))
+		AV_DEV_TO_APP_BUFFER_OVERFLOW = 0x424f464c, // ((('L' | ('F' << 8)) | ('O' << 16)) | ('B' << 24))
+		AV_DEV_TO_APP_BUFFER_UNDERFLOW = 0x4255464c, // ((('L' | ('F' << 8)) | ('U' << 16)) | ('B' << 24))
+		AV_DEV_TO_APP_BUFFER_READABLE = 0x42524420, // (((' ' | ('D' << 8)) | ('R' << 16)) | ('B' << 24))
+		AV_DEV_TO_APP_BUFFER_WRITABLE = 0x42575220, // (((' ' | ('R' << 8)) | ('W' << 16)) | ('B' << 24))
+		AV_DEV_TO_APP_MUTE_STATE_CHANGED = 0x434d5554, // ((('T' | ('U' << 8)) | ('M' << 16)) | ('C' << 24))
+		AV_DEV_TO_APP_VOLUME_LEVEL_CHANGED = 0x43564f4c, // ((('L' | ('O' << 8)) | ('V' << 16)) | ('C' << 24))
 	}
 	
-	public enum anon_8
+	public enum anon_13
 	{
 		AVLINK_UNINIT,
 		AVLINK_STARTINIT,
 		AVLINK_INIT,
 	}
 	
-	public enum anon_9
+	public enum anon_14
 	{
 		AVFILTER_AUTO_CONVERT_ALL,
 		AVFILTER_AUTO_CONVERT_NONE = -0x1, // (-1)
@@ -1382,11 +1494,23 @@ namespace FFmpeg.AutoGen
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVOptionRanges
 	{
+		public AVOptionRange** range;
+		public int nb_ranges;
+		public int nb_components;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVOption
 	{
+		public byte* name;
+		public byte* help;
+		public int offset;
+		public AVOptionType type;
+		public anon_10 default_val;
+		public double min;
+		public double max;
+		public int flags;
+		public byte* unit;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -1400,7 +1524,7 @@ namespace FFmpeg.AutoGen
 		public int parent_log_context_offset;
 		public IntPtr child_next; // Func<void*, void*, void*>
 		public IntPtr child_class_next; // Func<AVClass*, AVClass*>
-		public anon_5 category;
+		public anon_9 category;
 		public IntPtr get_category; // Func<void*, AVClassCategory>
 		public IntPtr query_ranges; // Func<AVOptionRanges**, void*, String, int, int>
 	}
@@ -1650,6 +1774,9 @@ namespace FFmpeg.AutoGen
 		public int error_rate;
 		public AVPacket* pkt;
 		public ulong vbv_delay;
+		public int side_data_only_packets;
+		public int initial_padding;
+		public AVRational framerate;
 		public AVRational pkt_timebase;
 		public AVCodecDescriptor* codec_descriptor;
 		public long pts_correction_num_faulty_pts;
@@ -1661,6 +1788,8 @@ namespace FFmpeg.AutoGen
 		public int skip_alpha;
 		public int seek_preroll;
 		public ushort* chroma_intra_matrix;
+		public byte* dump_separator;
+		public byte* codec_whitelist;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -1742,6 +1871,11 @@ namespace FFmpeg.AutoGen
 		public AVFrameSideData** side_data;
 		public int nb_side_data;
 		public int flags;
+		public AVColorRange color_range;
+		public AVColorPrimaries color_primaries;
+		public AVColorTransferCharacteristic color_trc;
+		public AVColorSpace colorspace;
+		public AVChromaLocation chroma_location;
 		public long best_effort_timestamp;
 		public long pkt_pos;
 		public long pkt_duration;
@@ -1749,8 +1883,6 @@ namespace FFmpeg.AutoGen
 		public int decode_error_flags;
 		public int channels;
 		public int pkt_size;
-		public AVColorSpace colorspace;
-		public AVColorRange color_range;
 		public AVBufferRef* qp_table_buf;
 	}
 	
@@ -1762,6 +1894,7 @@ namespace FFmpeg.AutoGen
 		public byte* name;
 		public byte* long_name;
 		public int props;
+		public byte** mime_types;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -1774,7 +1907,7 @@ namespace FFmpeg.AutoGen
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-	public unsafe struct anon_6
+	public unsafe struct AVPacketSideData
 	{
 		public byte* data;
 		public int size;
@@ -1791,7 +1924,7 @@ namespace FFmpeg.AutoGen
 		public int size;
 		public int stream_index;
 		public int flags;
-		public anon_6* side_data;
+		public AVPacketSideData* side_data;
 		public int side_data_elems;
 		public int duration;
 		public IntPtr destruct; // Action<AVPacket*>
@@ -1844,11 +1977,15 @@ namespace FFmpeg.AutoGen
 		public AVPixelFormat pix_fmt;
 		public int capabilities;
 		public AVHWAccel* next;
+		public IntPtr alloc_frame; // Func<AVCodecContext*, AVFrame*, int>
 		public IntPtr start_frame; // Func<AVCodecContext*, byte*, uint, int>
 		public IntPtr decode_slice; // Func<AVCodecContext*, byte*, uint, int>
 		public IntPtr end_frame; // Func<AVCodecContext*, int>
-		public int priv_data_size;
+		public int frame_priv_data_size;
 		public IntPtr decode_mb; // Action<MpegEncContext*>
+		public IntPtr init; // Func<AVCodecContext*, int>
+		public IntPtr uninit; // Func<AVCodecContext*, int>
+		public int priv_data_size;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -1987,6 +2124,26 @@ namespace FFmpeg.AutoGen
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+	public unsafe struct anon_10
+	{
+		public long i64;
+		public double dbl;
+		public byte* str;
+		public AVRational q;
+	}
+	
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+	public unsafe struct AVOptionRange
+	{
+		public byte* str;
+		public double value_min;
+		public double value_max;
+		public double component_min;
+		public double component_max;
+		public int is_range;
+	}
+	
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVIOInterruptCB
 	{
 		public IntPtr callback; // Func<void*, int>
@@ -2022,6 +2179,7 @@ namespace FFmpeg.AutoGen
 		public long bytes_read;
 		public int seek_count;
 		public int writeout_count;
+		public int orig_buffer_size;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -2062,19 +2220,25 @@ namespace FFmpeg.AutoGen
 		public AVIOInterruptCB interrupt_callback;
 		public int debug;
 		public long max_interleave_delta;
+		public int strict_std_compliance;
+		public int event_flags;
+		public int max_ts_probe;
+		public int avoid_negative_ts;
 		public int ts_id;
 		public int audio_preload;
 		public int max_chunk_duration;
 		public int max_chunk_size;
 		public int use_wallclock_as_timestamps;
-		public int avoid_negative_ts;
 		public int avio_flags;
 		public AVDurationEstimationMethod duration_estimation_method;
-		public int skip_initial_bytes;
+		public long skip_initial_bytes;
 		public int correct_ts_overflow;
 		public int seek2any;
 		public int flush_packets;
 		public int probe_score;
+		public int format_probesize;
+		public byte* codec_whitelist;
+		public byte* format_whitelist;
 		public AVPacketList* packet_buffer;
 		public AVPacketList* packet_buffer_end;
 		public long data_offset;
@@ -2094,6 +2258,9 @@ namespace FFmpeg.AutoGen
 		public void* opaque;
 		public IntPtr control_message_cb; // av_format_control_message
 		public long output_ts_offset;
+		public long max_analyze_duration2;
+		public long probesize2;
+		public byte* dump_separator;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -2102,6 +2269,24 @@ namespace FFmpeg.AutoGen
 		public AVDeviceInfo** devices;
 		public int nb_devices;
 		public int default_device;
+	}
+	
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+	public unsafe struct AVDeviceCapabilitiesQuery
+	{
+		public AVClass* av_class;
+		public AVFormatContext* device_context;
+		public AVCodecID codec;
+		public AVSampleFormat sample_format;
+		public AVPixelFormat pixel_format;
+		public int sample_rate;
+		public int channels;
+		public long channel_layout;
+		public int window_width;
+		public int window_height;
+		public int frame_width;
+		public int frame_height;
+		public AVRational fps;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -2123,6 +2308,7 @@ namespace FFmpeg.AutoGen
 		public byte* filename;
 		public byte* buf;
 		public int buf_size;
+		public byte* mime_type;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -2149,6 +2335,8 @@ namespace FFmpeg.AutoGen
 		public IntPtr control_message; // Func<AVFormatContext*, int, void*, uint, int>
 		public IntPtr write_uncoded_frame; // Func<AVFormatContext*, int, AVFrame**, int, int>
 		public IntPtr get_device_list; // Func<AVFormatContext*, AVDeviceInfoList*, int>
+		public IntPtr create_device_capabilities; // Func<AVFormatContext*, AVDeviceCapabilitiesQuery*, int>
+		public IntPtr free_device_capabilities; // Func<AVFormatContext*, AVDeviceCapabilitiesQuery*, int>
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -2160,6 +2348,7 @@ namespace FFmpeg.AutoGen
 		public byte* extensions;
 		public AVCodecTag** codec_tag;
 		public AVClass* priv_class;
+		public byte* mime_type;
 		public AVInputFormat* next;
 		public int raw_codec_id;
 		public int priv_data_size;
@@ -2173,6 +2362,8 @@ namespace FFmpeg.AutoGen
 		public IntPtr read_pause; // Func<AVFormatContext*, int>
 		public IntPtr read_seek2; // Func<AVFormatContext*, int, long, long, long, int, int>
 		public IntPtr get_device_list; // Func<AVFormatContext*, AVDeviceInfoList*, int>
+		public IntPtr create_device_capabilities; // Func<AVFormatContext*, AVDeviceCapabilitiesQuery*, int>
+		public IntPtr free_device_capabilities; // Func<AVFormatContext*, AVDeviceCapabilitiesQuery*, int>
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -2187,7 +2378,7 @@ namespace FFmpeg.AutoGen
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-	public unsafe struct anon_7
+	public unsafe struct anon_12
 	{
 		public long last_dts;
 		public long duration_gcd;
@@ -2229,9 +2420,11 @@ namespace FFmpeg.AutoGen
 		public AVDictionary* metadata;
 		public AVRational avg_frame_rate;
 		public AVPacket attached_pic;
-		public anon_7* info;
+		public AVPacketSideData* side_data;
+		public int nb_side_data;
+		public int event_flags;
+		public anon_12* info;
 		public int pts_wrap_bits;
-		public long do_not_use;
 		public long first_dts;
 		public long cur_dts;
 		public long last_IP_pts;
@@ -2253,6 +2446,8 @@ namespace FFmpeg.AutoGen
 		public int request_probe;
 		public int skip_to_keyframe;
 		public int skip_samples;
+		public long first_discard_sample;
+		public long last_discard_sample;
 		public int nb_decoded_frames;
 		public long mux_ts_offset;
 		public long pts_wrap_reference;
@@ -2263,6 +2458,9 @@ namespace FFmpeg.AutoGen
 		public long last_dts_for_order_check;
 		public byte dts_ordered;
 		public byte dts_misordered;
+		public int inject_global_side_data;
+		public byte* recommended_encoder_configuration;
+		public AVRational display_aspect_ratio;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -2361,7 +2559,7 @@ namespace FFmpeg.AutoGen
 		public AVFilterChannelLayouts* in_channel_layouts;
 		public AVFilterChannelLayouts* out_channel_layouts;
 		public int request_samples;
-		public anon_8 init_state;
+		public anon_13 init_state;
 		public AVFilterPool* pool;
 		public AVFilterGraph* graph;
 		public long current_pts;
@@ -2586,14 +2784,13 @@ namespace FFmpeg.AutoGen
 	
 	public static unsafe partial class FFmpegInvoke
 	{
-		public const string POSTPROC_LIBRARY = "postproc-52";
-		public const string SWSCALE_LIBRARY = "swscale-2";
-		public const string AVFORMAT_LIBRARY = "avformat-55";
-		public const string AVFILTER_LIBRARY = "avfilter-4";
-		public const string SWRESAMPLE_LIBRARY = "swresample-0";
-		public const string AVUTIL_LIBRARY = "avutil-52";
-		public const string AVDEVICE_LIBRARY = "avdevice-55";
-		public const string AVCODEC_LIBRARY = "avcodec-55";
+		public const string POSTPROC_LIBRARY = "postproc-53";
+		public const string SWSCALE_LIBRARY = "swscale-3";
+		public const string AVFORMAT_LIBRARY = "avformat-56";
+		public const string AVFILTER_LIBRARY = "avfilter-5";
+		public const string AVUTIL_LIBRARY = "avutil-54";
+		public const string AVDEVICE_LIBRARY = "avdevice-56";
+		public const string AVCODEC_LIBRARY = "avcodec-56";
 		
 		public const int FF_LAMBDA_SHIFT = 0x7;
 		public const int FF_LAMBDA_SCALE = 0x1; // (1 << FF_LAMBDA_SHIFT)
@@ -2604,39 +2801,31 @@ namespace FFmpeg.AutoGen
 		public const int AV_TIME_BASE = 0xf4240;
 		public const int AV_GCC_VERSION_AT_LEAST = 0x0;
 		public const int av_always_inline = 0x1; // inline
-		public const int av_extern_inline = 0x1; // inline
 		public const int AV_NOWARN_DEPRECATED = 0x0; // code
 		public const int av_uninit = 0x0; // x
 		public const int av_builtin_constant_p = 0x0;
 		public const int AV_TOSTRING = 0x0; // s
 		public const int AV_VERSION_INT = 0x0; // (((a << 16) | (b << 8)) | c)
-		public const int LIBAVUTIL_VERSION_MAJOR = 0x34;
-		public const int LIBAVUTIL_VERSION_MINOR = 0x42;
+		public const int LIBAVUTIL_VERSION_MAJOR = 0x36;
+		public const int LIBAVUTIL_VERSION_MINOR = 0xf;
 		public const int LIBAVUTIL_VERSION_MICRO = 0x64;
 		public const int LIBAVUTIL_BUILD = 0x0; // LIBAVUTIL_VERSION_INT
-		public const int FF_API_GET_BITS_PER_SAMPLE_FMT = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_FIND_OPT = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_OLD_AVOPTIONS = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_PIX_FMT = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_CONTEXT_SIZE = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_PIX_FMT_DESC = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_AV_REVERSE = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_AUDIOCONVERT = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_CPU_FLAG_MMX2 = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_SAMPLES_UTILS_RETURN_ZERO = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_LLS_PRIVATE = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_LLS1 = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_AVFRAME_LAVC = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_VDPAU = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_GET_CHANNEL_LAYOUT_COMPAT = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_OLD_OPENCL = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_XVMC = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_INTFLOAT = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
-		public const int FF_API_OPT_TYPE_METADATA = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 54)
+		public const int FF_API_OLD_AVOPTIONS = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
+		public const int FF_API_PIX_FMT = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
+		public const int FF_API_CONTEXT_SIZE = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
+		public const int FF_API_PIX_FMT_DESC = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
+		public const int FF_API_AV_REVERSE = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
+		public const int FF_API_AUDIOCONVERT = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
+		public const int FF_API_CPU_FLAG_MMX2 = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
+		public const int FF_API_LLS_PRIVATE = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
+		public const int FF_API_AVFRAME_LAVC = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
+		public const int FF_API_VDPAU = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
+		public const int FF_API_GET_CHANNEL_LAYOUT_COMPAT = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
+		public const int FF_API_XVMC = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
+		public const int FF_API_OPT_TYPE_METADATA = 0x1; // (LIBAVUTIL_VERSION_MAJOR < 55)
 		public const int AV_HAVE_BIGENDIAN = 0x0;
 		public const int AV_HAVE_FAST_UNALIGNED = 0x1;
 		public const int AV_HAVE_INCOMPATIBLE_LIBAV_ABI = 0x0;
-		public const int AV_HAVE_INCOMPATIBLE_FORK_ABI = 0x0;
 		public const int AV_NE = 0x0; // le
 		public const int RSHIFT = -0x1; // (a > 0) and ((a + ((1 << b) >> 1)) >> b) or (((a + ((1 << b) >> 1)) - 1) >> b)
 		public const int FFABS = 0x0; // (a >= 0) and a or (-a)
@@ -2664,10 +2853,14 @@ namespace FFmpeg.AutoGen
 		public const int AVERROR = 0x0; // (-e)
 		public const int AVUNERROR = 0x0; // (-e)
 		public const int AVERROR_EXPERIMENTAL = -0x2bb2afa8; // (-733130664)
+		public const int AVERROR_INPUT_CHANGED = -0x636e6701; // (-1668179713)
+		public const int AVERROR_OUTPUT_CHANGED = -0x636e6702; // (-1668179714)
 		public const int AV_ERROR_MAX_STRING_SIZE = 0x40;
 		public const int DECLARE_ALIGNED = 0x0; // (t + v)
 		public const float M_LOG2_10 = 3.321928f; // 3.321928094887362
 		public const float M_PHI = 1.618034f; // 1.618033988749895
+		public const int AV_IS_INPUT_DEVICE = 0x0; // (((category == AV_CLASS_CATEGORY_DEVICE_VIDEO_INPUT) or (category == AV_CLASS_CATEGORY_DEVICE_AUDIO_INPUT)) or (category == AV_CLASS_CATEGORY_DEVICE_INPUT))
+		public const int AV_IS_OUTPUT_DEVICE = 0x0; // (((category == AV_CLASS_CATEGORY_DEVICE_VIDEO_OUTPUT) or (category == AV_CLASS_CATEGORY_DEVICE_AUDIO_OUTPUT)) or (category == AV_CLASS_CATEGORY_DEVICE_OUTPUT))
 		public const int AV_LOG_QUIET = -0x8; // (-8)
 		public const int AV_LOG_PANIC = 0x0;
 		public const int AV_LOG_FATAL = 0x8;
@@ -2677,14 +2870,16 @@ namespace FFmpeg.AutoGen
 		public const int AV_LOG_VERBOSE = 0x28;
 		public const int AV_LOG_DEBUG = 0x30;
 		public const int AV_LOG_MAX_OFFSET = 0x0; // (AV_LOG_DEBUG - AV_LOG_QUIET)
+		public const int AV_LOG_C = 0x0; // (x << 8)
 		public const int AV_LOG_SKIP_REPEATED = 0x1;
+		public const int AV_LOG_PRINT_LEVEL = 0x2;
 		public const int AVPALETTE_SIZE = 0x400;
 		public const int AVPALETTE_COUNT = 0x100;
 		public const int AV_PIX_FMT_XVMC = 0x10; // AV_PIX_FMT_XVMC_MPEG2_IDCT
 		public const int AV_PIX_FMT_Y400A = 0x42; // AV_PIX_FMT_GRAY8A
 		public const int AV_PIX_FMT_GBR24P = 0x52; // AV_PIX_FMT_GBRP
 		public const int PixelFormat = 0x0; // AVPixelFormat
-		public const int PIX_FMT_Y400A = 0x0; // AV_PIX_FMT_Y400A
+		public const int PIX_FMT_Y400A = 0x42; // AV_PIX_FMT_Y400A
 		public const int PIX_FMT_GBR24P = 0x0; // AV_PIX_FMT_GBR24P
 		public const int PIX_FMT_RGB32 = 0x0; // AV_PIX_FMT_RGB32
 		public const int PIX_FMT_RGB32_1 = 0x0; // AV_PIX_FMT_RGB32_1
@@ -2723,8 +2918,9 @@ namespace FFmpeg.AutoGen
 		public const int PIX_FMT_GBRP12 = 0x0; // AV_PIX_FMT_GBRP12
 		public const int PIX_FMT_GBRP14 = 0x0; // AV_PIX_FMT_GBRP14
 		public const int PIX_FMT_GBRP16 = 0x0; // AV_PIX_FMT_GBRP16
+		public const int AVCOL_SPC_YCGCO = 0x8; // AVCOL_SPC_YCOCG
 		public const int AV_BUFFER_FLAG_READONLY = 0x1; // (1 << 0)
-		public const long AV_CPU_FLAG_FORCE = 0x80000000L; // 2147483648L
+		public const uint AV_CPU_FLAG_FORCE = 0x80000000;
 		public const int AV_CPU_FLAG_MMX = 0x1;
 		public const int AV_CPU_FLAG_MMXEXT = 0x2;
 		public const int AV_CPU_FLAG_MMX2 = 0x2;
@@ -2754,6 +2950,8 @@ namespace FFmpeg.AutoGen
 		public const int AV_CPU_FLAG_VFP = 0x8; // (1 << 3)
 		public const int AV_CPU_FLAG_VFPV3 = 0x10; // (1 << 4)
 		public const int AV_CPU_FLAG_NEON = 0x20; // (1 << 5)
+		public const int AV_CPU_FLAG_ARMV8 = 0x40; // (1 << 6)
+		public const int AV_CPU_FLAG_SETEND = 0x10000; // (1 << 16)
 		public const int AV_CH_FRONT_LEFT = 0x1;
 		public const int AV_CH_FRONT_RIGHT = 0x2;
 		public const int AV_CH_FRONT_CENTER = 0x4;
@@ -2813,52 +3011,66 @@ namespace FFmpeg.AutoGen
 		public const int AV_DICT_DONT_STRDUP_VAL = 0x8;
 		public const int AV_DICT_DONT_OVERWRITE = 0x10;
 		public const int AV_DICT_APPEND = 0x20;
-		public const int AVCOL_SPC_YCGCO = 0x8; // AVCOL_SPC_YCOCG
 		public const int AV_NUM_DATA_POINTERS = 0x8;
 		public const int AV_FRAME_FLAG_CORRUPT = 0x1; // (1 << 0)
 		public const int FF_DECODE_ERROR_INVALID_BITSTREAM = 0x1;
 		public const int FF_DECODE_ERROR_MISSING_REFERENCE = 0x2;
-		public const int LIBAVCODEC_VERSION_MAJOR = 0x37;
-		public const int LIBAVCODEC_VERSION_MINOR = 0x34;
-		public const int LIBAVCODEC_VERSION_MICRO = 0x66;
+		public const int LIBAVCODEC_VERSION_MAJOR = 0x38;
+		public const int LIBAVCODEC_VERSION_MINOR = 0xd;
+		public const int LIBAVCODEC_VERSION_MICRO = 0x64;
 		public const int LIBAVCODEC_BUILD = 0x0; // LIBAVCODEC_VERSION_INT
-		public const int FF_API_REQUEST_CHANNELS = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_OLD_DECODE_AUDIO = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_OLD_ENCODE_AUDIO = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_OLD_ENCODE_VIDEO = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_CODEC_ID = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_AUDIO_CONVERT = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
+		public const int FF_API_REQUEST_CHANNELS = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_OLD_DECODE_AUDIO = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_OLD_ENCODE_AUDIO = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_OLD_ENCODE_VIDEO = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_CODEC_ID = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_AUDIO_CONVERT = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
 		public const int FF_API_AVCODEC_RESAMPLE = 0x0; // FF_API_AUDIO_CONVERT
-		public const int FF_API_DEINTERLACE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_DESTRUCT_PACKET = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_GET_BUFFER = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_MISSING_SAMPLE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_LOWRES = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_CAP_VDPAU = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_BUFS_VDPAU = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_VOXWARE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_SET_DIMENSIONS = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_DEBUG_MV = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_AC_VLC = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_OLD_MSMPEG4 = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_ASPECT_EXTENDED = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_THREAD_OPAQUE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_CODEC_PKT = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_ARCH_ALPHA = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_ERROR_RATE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_QSCALE_TYPE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_MB_TYPE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_MAX_BFRAMES = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_FAST_MALLOC = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_NEG_LINESIZES = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
-		public const int FF_API_EMU_EDGE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 56)
+		public const int FF_API_DEINTERLACE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_DESTRUCT_PACKET = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_GET_BUFFER = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_MISSING_SAMPLE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_LOWRES = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_CAP_VDPAU = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_BUFS_VDPAU = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_VOXWARE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_SET_DIMENSIONS = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_DEBUG_MV = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_AC_VLC = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_OLD_MSMPEG4 = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_ASPECT_EXTENDED = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_THREAD_OPAQUE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_CODEC_PKT = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_ARCH_ALPHA = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_ERROR_RATE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_QSCALE_TYPE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_MB_TYPE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_MAX_BFRAMES = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_NEG_LINESIZES = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_EMU_EDGE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_ARCH_SH4 = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_ARCH_SPARC = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_UNUSED_MEMBERS = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_IDCT_XVIDMMX = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_INPUT_PRESERVED = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_NORMALIZE_AQP = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_GMC = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_MV0 = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_CODEC_NAME = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_AFD = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_VISMV = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_DV_FRAME_PROFILE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 57)
+		public const int FF_API_AUDIOENC_DELAY = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 58)
+		public const int FF_API_AVCTX_TIMEBASE = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 59)
+		public const int FF_API_MPV_OPT = 0x1; // (LIBAVCODEC_VERSION_MAJOR < 59)
 		public const int AV_CODEC_ID_H265 = 0x48323635; // AV_CODEC_ID_HEVC
 		public const int AV_CODEC_PROP_INTRA_ONLY = 0x1; // (1 << 0)
 		public const int AV_CODEC_PROP_LOSSY = 0x2; // (1 << 1)
 		public const int AV_CODEC_PROP_LOSSLESS = 0x4; // (1 << 2)
+		public const int AV_CODEC_PROP_REORDER = 0x8; // (1 << 3)
 		public const int AV_CODEC_PROP_BITMAP_SUB = 0x10000; // (1 << 16)
 		public const int AV_CODEC_PROP_TEXT_SUB = 0x20000; // (1 << 17)
-		public const int FF_INPUT_BUFFER_PADDING_SIZE = 0x10;
+		public const int FF_INPUT_BUFFER_PADDING_SIZE = 0x20;
 		public const int FF_MIN_BUFFER_SIZE = 0x4000;
 		public const int FF_MAX_B_FRAMES = 0x10;
 		public const int CODEC_FLAG_UNALIGNED = 0x1;
@@ -2883,7 +3095,7 @@ namespace FFmpeg.AutoGen
 		public const int CODEC_FLAG_AC_PRED = 0x1000000;
 		public const int CODEC_FLAG_LOOP_FILTER = 0x800;
 		public const int CODEC_FLAG_INTERLACED_ME = 0x20000000;
-		public const long CODEC_FLAG_CLOSED_GOP = 0x80000000L; // 2147483648L
+		public const uint CODEC_FLAG_CLOSED_GOP = 0x80000000;
 		public const int CODEC_FLAG2_FAST = 0x1;
 		public const int CODEC_FLAG2_NO_OUTPUT = 0x4;
 		public const int CODEC_FLAG2_LOCAL_HEADER = 0x8;
@@ -2891,6 +3103,8 @@ namespace FFmpeg.AutoGen
 		public const int CODEC_FLAG2_IGNORE_CROP = 0x10000;
 		public const int CODEC_FLAG2_CHUNKS = 0x8000;
 		public const int CODEC_FLAG2_SHOW_ALL = 0x400000;
+		public const int CODEC_FLAG2_EXPORT_MVS = 0x10000000;
+		public const int CODEC_FLAG2_SKIP_MANUAL = 0x20000000;
 		public const int CODEC_CAP_DRAW_HORIZ_BAND = 0x1;
 		public const int CODEC_CAP_DR1 = 0x2;
 		public const int CODEC_CAP_TRUNCATED = 0x8;
@@ -2908,7 +3122,7 @@ namespace FFmpeg.AutoGen
 		public const int CODEC_CAP_AUTO_THREADS = 0x8000;
 		public const int CODEC_CAP_VARIABLE_FRAME_SIZE = 0x10000;
 		public const int CODEC_CAP_INTRA_ONLY = 0x40000000;
-		public const long CODEC_CAP_LOSSLESS = 0x80000000L; // 2147483648L
+		public const uint CODEC_CAP_LOSSLESS = 0x80000000;
 		public const int MB_TYPE_INTRA4x4 = 0x1;
 		public const int MB_TYPE_INTRA16x16 = 0x2;
 		public const int MB_TYPE_INTRA_PCM = 0x4;
@@ -3009,6 +3223,7 @@ namespace FFmpeg.AutoGen
 		public const int FF_COMPLIANCE_EXPERIMENTAL = -0x2; // (-2)
 		public const int FF_EC_GUESS_MVS = 0x1;
 		public const int FF_EC_DEBLOCK = 0x2;
+		public const int FF_EC_FAVOR_INTER = 0x100;
 		public const int FF_DEBUG_PICT_INFO = 0x1;
 		public const int FF_DEBUG_RC = 0x2;
 		public const int FF_DEBUG_BITSTREAM = 0x4;
@@ -3026,6 +3241,7 @@ namespace FFmpeg.AutoGen
 		public const int FF_DEBUG_VIS_MB_TYPE = 0x4000;
 		public const int FF_DEBUG_BUFFERS = 0x8000;
 		public const int FF_DEBUG_THREADS = 0x10000;
+		public const int FF_DEBUG_NOMC = 0x1000000;
 		public const int FF_DEBUG_VIS_MV_P_FOR = 0x1;
 		public const int FF_DEBUG_VIS_MV_B_FOR = 0x2;
 		public const int FF_DEBUG_VIS_MV_B_BACK = 0x4;
@@ -3033,6 +3249,7 @@ namespace FFmpeg.AutoGen
 		public const int AV_EF_BITSTREAM = 0x2; // (1 << 1)
 		public const int AV_EF_BUFFER = 0x4; // (1 << 2)
 		public const int AV_EF_EXPLODE = 0x8; // (1 << 3)
+		public const int AV_EF_IGNORE_ERR = 0x8000; // (1 << 15)
 		public const int AV_EF_CAREFUL = 0x10000; // (1 << 16)
 		public const int AV_EF_COMPLIANT = 0x20000; // (1 << 17)
 		public const int AV_EF_AGGRESSIVE = 0x40000; // (1 << 18)
@@ -3051,6 +3268,7 @@ namespace FFmpeg.AutoGen
 		public const int FF_IDCT_SH4 = 0x9;
 		public const int FF_IDCT_SIMPLEARM = 0xa;
 		public const int FF_IDCT_IPP = 0xd;
+		public const int FF_IDCT_XVID = 0xe;
 		public const int FF_IDCT_XVIDMMX = 0xe;
 		public const int FF_IDCT_SIMPLEARMV5TE = 0x10;
 		public const int FF_IDCT_SIMPLEARMV6 = 0x11;
@@ -3058,6 +3276,7 @@ namespace FFmpeg.AutoGen
 		public const int FF_IDCT_FAAN = 0x14;
 		public const int FF_IDCT_SIMPLENEON = 0x16;
 		public const int FF_IDCT_SIMPLEALPHA = 0x17;
+		public const int FF_IDCT_SIMPLEAUTO = 0x80;
 		public const int FF_THREAD_FRAME = 0x1;
 		public const int FF_THREAD_SLICE = 0x2;
 		public const int FF_PROFILE_UNKNOWN = -0x63; // (-99)
@@ -3126,38 +3345,44 @@ namespace FFmpeg.AutoGen
 		public const int FF_PROFILE_HEVC_MAIN = 0x1;
 		public const int FF_PROFILE_HEVC_MAIN_10 = 0x2;
 		public const int FF_PROFILE_HEVC_MAIN_STILL_PICTURE = 0x3;
+		public const int FF_PROFILE_HEVC_REXT = 0x4;
 		public const int FF_LEVEL_UNKNOWN = -0x63; // (-99)
 		public const int FF_SUB_CHARENC_MODE_DO_NOTHING = -0x1; // (-1)
 		public const int FF_SUB_CHARENC_MODE_AUTOMATIC = 0x0;
 		public const int FF_SUB_CHARENC_MODE_PRE_DECODER = 0x1;
+		public const int AV_HWACCEL_FLAG_IGNORE_LEVEL = 0x1; // (1 << 0)
 		public const int AV_SUBTITLE_FLAG_FORCED = 0x1;
 		public const int AV_PARSER_PTS_NB = 0x4;
 		public const int PARSER_FLAG_COMPLETE_FRAMES = 0x1;
 		public const int PARSER_FLAG_ONCE = 0x2;
 		public const int PARSER_FLAG_FETCHED_OFFSET = 0x4;
 		public const int PARSER_FLAG_USE_CODEC_TS = 0x1000;
-		public const int FF_LOSS_RESOLUTION = 0x1;
-		public const int FF_LOSS_DEPTH = 0x2;
-		public const int FF_LOSS_COLORSPACE = 0x4;
-		public const int FF_LOSS_ALPHA = 0x8;
-		public const int FF_LOSS_COLORQUANT = 0x10;
-		public const int FF_LOSS_CHROMA = 0x20;
-		public const int LIBAVDEVICE_VERSION_MAJOR = 0x37;
-		public const int LIBAVDEVICE_VERSION_MINOR = 0xa;
+		public const int LIBAVDEVICE_VERSION_MAJOR = 0x38;
+		public const int LIBAVDEVICE_VERSION_MINOR = 0x3;
 		public const int LIBAVDEVICE_VERSION_MICRO = 0x64;
 		public const int LIBAVDEVICE_BUILD = 0x0; // LIBAVDEVICE_VERSION_INT
-		public const int LIBAVFORMAT_VERSION_MAJOR = 0x37;
-		public const int LIBAVFORMAT_VERSION_MINOR = 0x21;
-		public const int LIBAVFORMAT_VERSION_MICRO = 0x64;
+		public const int AV_OPT_FLAG_ENCODING_PARAM = 0x1;
+		public const int AV_OPT_FLAG_DECODING_PARAM = 0x2;
+		public const int AV_OPT_FLAG_METADATA = 0x4;
+		public const int AV_OPT_FLAG_AUDIO_PARAM = 0x8;
+		public const int AV_OPT_FLAG_VIDEO_PARAM = 0x10;
+		public const int AV_OPT_FLAG_SUBTITLE_PARAM = 0x20;
+		public const int AV_OPT_FLAG_EXPORT = 0x40;
+		public const int AV_OPT_FLAG_READONLY = 0x80;
+		public const int AV_OPT_FLAG_FILTERING_PARAM = 0x10000; // (1 << 16)
+		public const int AV_OPT_SEARCH_CHILDREN = 0x1;
+		public const int AV_OPT_SEARCH_FAKE_OBJ = 0x2;
+		public const int AV_OPT_MULTI_COMPONENT_RANGE = 0x1000;
+		public const int AV_OPT_SERIALIZE_SKIP_DEFAULTS = 0x1;
+		public const int AV_OPT_SERIALIZE_OPT_FLAGS_EXACT = 0x2;
+		public const int LIBAVFORMAT_VERSION_MAJOR = 0x38;
+		public const int LIBAVFORMAT_VERSION_MINOR = 0xf;
+		public const int LIBAVFORMAT_VERSION_MICRO = 0x66;
 		public const int LIBAVFORMAT_BUILD = 0x0; // LIBAVFORMAT_VERSION_INT
-		public const int FF_API_REFERENCE_DTS = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 56)
-		public const int FF_API_ALLOC_OUTPUT_CONTEXT = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 56)
-		public const int FF_API_FORMAT_PARAMETERS = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 56)
-		public const int FF_API_NEW_STREAM = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 56)
-		public const int FF_API_SET_PTS_INFO = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 56)
-		public const int FF_API_CLOSE_INPUT_FILE = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 56)
-		public const int FF_API_READ_PACKET = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 56)
-		public const int FF_API_ASS_SSA = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 56)
+		public const int FF_API_LAVF_BITEXACT = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 57)
+		public const int FF_API_LAVF_FRAC = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 57)
+		public const int FF_API_LAVF_CODEC_TB = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 57)
+		public const int FF_API_URL_FEOF = 0x1; // (LIBAVFORMAT_VERSION_MAJOR < 57)
 		public const int FF_API_R_FRAME_RATE = 0x1;
 		public const int AVIO_SEEKABLE_NORMAL = 0x1;
 		public const int AVSEEK_SIZE = 0x10000;
@@ -3170,6 +3395,7 @@ namespace FFmpeg.AutoGen
 		public const int AVPROBE_SCORE_RETRY = 0x0; // (AVPROBE_SCORE_MAX / 4)
 		public const int AVPROBE_SCORE_STREAM_RETRY = -0x1; // ((AVPROBE_SCORE_MAX / 4) - 1)
 		public const int AVPROBE_SCORE_EXTENSION = 0x32;
+		public const int AVPROBE_SCORE_MIME = 0x4b;
 		public const int AVPROBE_SCORE_MAX = 0x64;
 		public const int AVPROBE_PADDING_SIZE = 0x20;
 		public const int AVFMT_NOFILE = 0x1;
@@ -3208,7 +3434,8 @@ namespace FFmpeg.AutoGen
 		public const int AV_PTS_WRAP_IGNORE = 0x0;
 		public const int AV_PTS_WRAP_ADD_OFFSET = 0x1;
 		public const int AV_PTS_WRAP_SUB_OFFSET = -0x1; // (-1)
-		public const int MAX_STD_TIMEBASES = 0x2d6; // ((60 * 12) + 6)
+		public const int AVSTREAM_EVENT_FLAG_METADATA_UPDATED = 0x1;
+		public const int MAX_STD_TIMEBASES = 0x175; // (((30 * 12) + 7) + 6)
 		public const int MAX_PROBE_PACKETS = 0x9c4;
 		public const int MAX_REORDER_DELAY = 0x10;
 		public const int AV_PROGRAM_RUNNING = 0x1;
@@ -3223,34 +3450,34 @@ namespace FFmpeg.AutoGen
 		public const int AVFMT_FLAG_CUSTOM_IO = 0x80;
 		public const int AVFMT_FLAG_DISCARD_CORRUPT = 0x100;
 		public const int AVFMT_FLAG_FLUSH_PACKETS = 0x200;
+		public const int AVFMT_FLAG_BITEXACT = 0x400;
 		public const int AVFMT_FLAG_MP4A_LATM = 0x8000;
 		public const int AVFMT_FLAG_SORT_DTS = 0x10000;
 		public const int AVFMT_FLAG_PRIV_OPT = 0x20000;
 		public const int AVFMT_FLAG_KEEP_SIDE_DATA = 0x40000;
 		public const int FF_FDEBUG_TS = 0x1;
+		public const int AVFMT_EVENT_FLAG_METADATA_UPDATED = 0x1;
+		public const int AVFMT_AVOID_NEG_TS_AUTO = -0x1; // (-1)
+		public const int AVFMT_AVOID_NEG_TS_MAKE_NON_NEGATIVE = 0x1;
+		public const int AVFMT_AVOID_NEG_TS_MAKE_ZERO = 0x2;
 		public const int RAW_PACKET_BUFFER_SIZE = 0x2625a0;
 		public const int AVSEEK_FLAG_BACKWARD = 0x1;
 		public const int AVSEEK_FLAG_BYTE = 0x2;
 		public const int AVSEEK_FLAG_ANY = 0x4;
 		public const int AVSEEK_FLAG_FRAME = 0x8;
-		public const int LIBAVFILTER_VERSION_MAJOR = 0x4;
+		public const int LIBAVFILTER_VERSION_MAJOR = 0x5;
 		public const int LIBAVFILTER_VERSION_MINOR = 0x2;
-		public const int LIBAVFILTER_VERSION_MICRO = 0x64;
+		public const int LIBAVFILTER_VERSION_MICRO = 0x67;
 		public const int LIBAVFILTER_BUILD = 0x0; // LIBAVFILTER_VERSION_INT
-		public const int FF_API_AVFILTERPAD_PUBLIC = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
-		public const int FF_API_FOO_COUNT = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
-		public const int FF_API_FILL_FRAME = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
-		public const int FF_API_BUFFERSRC_BUFFER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
-		public const int FF_API_AVFILTERBUFFER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
-		public const int FF_API_OLD_FILTER_OPTS = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
-		public const int FF_API_ACONVERT_FILTER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
-		public const int FF_API_AVFILTER_OPEN = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
-		public const int FF_API_AVFILTER_INIT_FILTER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
-		public const int FF_API_OLD_FILTER_REGISTER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
+		public const int FF_API_AVFILTERPAD_PUBLIC = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 6)
+		public const int FF_API_FOO_COUNT = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 6)
+		public const int FF_API_AVFILTERBUFFER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 6)
+		public const int FF_API_OLD_FILTER_OPTS = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 6)
+		public const int FF_API_AVFILTER_OPEN = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 6)
+		public const int FF_API_AVFILTER_INIT_FILTER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 6)
+		public const int FF_API_OLD_FILTER_REGISTER = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 6)
 		public const int FF_API_OLD_GRAPH_PARSE = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
-		public const int FF_API_DRAWTEXT_OLD_TIMELINE = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
-		public const int FF_API_NOCONST_GET_NAME = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
-		public const int FF_API_INTERLACE_LOWPASS_SET = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 5)
+		public const int FF_API_NOCONST_GET_NAME = 0x1; // (LIBAVFILTER_VERSION_MAJOR < 6)
 		public const int AV_PERM_READ = 0x1;
 		public const int AV_PERM_WRITE = 0x2;
 		public const int AV_PERM_PRESERVE = 0x4;
@@ -3268,12 +3495,12 @@ namespace FFmpeg.AutoGen
 		public const int AVFILTER_THREAD_SLICE = 0x1; // (1 << 0)
 		public const int AVFILTER_CMD_FLAG_ONE = 0x1;
 		public const int AVFILTER_CMD_FLAG_FAST = 0x2;
-		public const int LIBPOSTPROC_VERSION_MAJOR = 0x34;
+		public const int LIBPOSTPROC_VERSION_MAJOR = 0x35;
 		public const int LIBPOSTPROC_VERSION_MINOR = 0x3;
 		public const int LIBPOSTPROC_VERSION_MICRO = 0x64;
 		public const int LIBPOSTPROC_BUILD = 0x0; // LIBPOSTPROC_VERSION_INT
 		public const int PP_QUALITY_MAX = 0x6;
-		public const long PP_CPU_CAPS_MMX = 0x80000000L; // 2147483648L
+		public const uint PP_CPU_CAPS_MMX = 0x80000000;
 		public const int PP_CPU_CAPS_MMX2 = 0x20000000;
 		public const int PP_CPU_CAPS_3DNOW = 0x40000000;
 		public const int PP_CPU_CAPS_ALTIVEC = 0x10000000;
@@ -3283,20 +3510,19 @@ namespace FFmpeg.AutoGen
 		public const int PP_FORMAT_422 = 0x1; // (1 | PP_FORMAT)
 		public const int PP_FORMAT_411 = 0x2; // (2 | PP_FORMAT)
 		public const int PP_FORMAT_444 = 0x0; // (0 | PP_FORMAT)
+		public const int PP_FORMAT_440 = 0x10; // (16 | PP_FORMAT)
 		public const int PP_PICT_TYPE_QP2 = 0x10;
-		public const int LIBSWRESAMPLE_VERSION_MAJOR = 0x0;
-		public const int LIBSWRESAMPLE_VERSION_MINOR = 0x12;
+		public const int LIBSWRESAMPLE_VERSION_MAJOR = 0x1;
+		public const int LIBSWRESAMPLE_VERSION_MINOR = 0x1;
 		public const int LIBSWRESAMPLE_VERSION_MICRO = 0x64;
 		public const int LIBSWRESAMPLE_BUILD = 0x0; // LIBSWRESAMPLE_VERSION_INT
-		public const int SWR_CH_MAX = 0x20;
 		public const int SWR_FLAG_RESAMPLE = 0x1;
-		public const int LIBSWSCALE_VERSION_MAJOR = 0x2;
-		public const int LIBSWSCALE_VERSION_MINOR = 0x5;
-		public const int LIBSWSCALE_VERSION_MICRO = 0x66;
+		public const int LIBSWSCALE_VERSION_MAJOR = 0x3;
+		public const int LIBSWSCALE_VERSION_MINOR = 0x1;
+		public const int LIBSWSCALE_VERSION_MICRO = 0x65;
 		public const int LIBSWSCALE_BUILD = 0x0; // LIBSWSCALE_VERSION_INT
-		public const int FF_API_SWS_GETCONTEXT = 0x1; // (LIBSWSCALE_VERSION_MAJOR < 3)
-		public const int FF_API_SWS_CPU_CAPS = 0x1; // (LIBSWSCALE_VERSION_MAJOR < 3)
-		public const int FF_API_SWS_FORMAT_NAME = 0x1; // (LIBSWSCALE_VERSION_MAJOR < 3)
+		public const int FF_API_SWS_CPU_CAPS = 0x1; // (LIBSWSCALE_VERSION_MAJOR < 4)
+		public const int FF_API_ARCH_BFIN = 0x1; // (LIBSWSCALE_VERSION_MAJOR < 4)
 		public const int SWS_FAST_BILINEAR = 0x1;
 		public const int SWS_BILINEAR = 0x2;
 		public const int SWS_BICUBIC = 0x4;
@@ -3318,7 +3544,7 @@ namespace FFmpeg.AutoGen
 		public const int SWS_ACCURATE_RND = 0x40000;
 		public const int SWS_BITEXACT = 0x80000;
 		public const int SWS_ERROR_DIFFUSION = 0x800000;
-		public const long SWS_CPU_CAPS_MMX = 0x80000000L; // 2147483648L
+		public const uint SWS_CPU_CAPS_MMX = 0x80000000;
 		public const int SWS_CPU_CAPS_MMXEXT = 0x20000000;
 		public const int SWS_CPU_CAPS_MMX2 = 0x20000000;
 		public const int SWS_CPU_CAPS_3DNOW = 0x40000000;
@@ -3406,6 +3632,10 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_strdup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern String av_strdup(String s);
 		
+		// Func<String, uint, String>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_strndup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern String av_strndup(String s, uint len);
+		
 		// Func<void*, uint, void*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_memdup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void* av_memdup(void* p, uint size);
@@ -3417,6 +3647,10 @@ namespace FFmpeg.AutoGen
 		// Action<void*, int*, void*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_dynarray_add", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void av_dynarray_add(void* tab_ptr, int* nb_ptr, void* elem);
+		
+		// Func<void*, int*, void*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_dynarray_add_nofree", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_dynarray_add_nofree(void* tab_ptr, int* nb_ptr, void* elem);
 		
 		// Func<void**, int*, uint, byte*, void*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_dynarray2_add", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3510,6 +3744,10 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void av_log(void* avcl, int level, String fmt);
 		
+		// Action<void*, int, String, void*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_vlog", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_vlog(void* avcl, int level, String fmt, void* vl);
+		
 		// Func<int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log_get_level", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_log_get_level();
@@ -3517,6 +3755,14 @@ namespace FFmpeg.AutoGen
 		// Action<int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log_set_level", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void av_log_set_level(int level);
+		
+		// Action<Action<void*, int, String, void*>>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log_set_callback", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_log_set_callback(IntPtr func_____0);
+		
+		// Action<void*, int, String, void*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log_default_callback", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_log_default_callback(void* avcl, int level, String fmt, void* vl);
 		
 		// Func<void*, String>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_default_item_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3526,9 +3772,17 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_default_get_category", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern AVClassCategory av_default_get_category(void* ptr);
 		
+		// Action<void*, int, String, void*, String, int, int*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log_format_line", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_log_format_line(void* ptr, int level, String fmt, void* vl, String line, int line_size, int* print_prefix);
+		
 		// Action<int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log_set_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void av_log_set_flags(int arg);
+		
+		// Func<int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log_get_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_log_get_flags();
 		
 		// Func<int, void*, ulong, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_int_list_length_for_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3537,6 +3791,10 @@ namespace FFmpeg.AutoGen
 		// Func<String, String, void*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fopen_utf8", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void* av_fopen_utf8(String path, String mode);
+		
+		// Func<AVRational>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_time_base_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVRational av_get_time_base_q();
 		
 		// Func<AVSampleFormat, String>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_sample_fmt_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3561,10 +3819,6 @@ namespace FFmpeg.AutoGen
 		// Func<String, int, AVSampleFormat, String>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_sample_fmt_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern String av_get_sample_fmt_string(String buf, int buf_size, AVSampleFormat sample_fmt);
-		
-		// Func<AVSampleFormat, int>
-		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_bits_per_sample_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_get_bits_per_sample_fmt(AVSampleFormat sample_fmt);
 		
 		// Func<AVSampleFormat, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_bytes_per_sample", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3730,6 +3984,10 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_dict_set", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_dict_set(AVDictionary** pm, String key, String value, int flags);
 		
+		// Func<AVDictionary**, String, long, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_dict_set_int", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_dict_set_int(AVDictionary** pm, String key, long value, int flags);
+		
 		// Func<AVDictionary**, String, String, String, int, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_dict_parse_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_dict_parse_string(AVDictionary** pm, String str, String key_val_sep, String pairs_sep, int flags);
@@ -3741,6 +3999,10 @@ namespace FFmpeg.AutoGen
 		// Action<AVDictionary**>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_dict_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void av_dict_free(AVDictionary** m);
+		
+		// Func<AVDictionary*, byte**, byte, byte, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_dict_get_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_dict_get_string(AVDictionary* m, byte** buffer, byte key_val_sep, byte pairs_sep);
 		
 		// Func<AVFrame*, long>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_frame_get_best_effort_timestamp", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3902,6 +4164,14 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_frame_get_side_data", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern AVFrameSideData* av_frame_get_side_data(AVFrame* frame, AVFrameSideDataType type);
 		
+		// Action<AVFrame*, AVFrameSideDataType>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_frame_remove_side_data", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_frame_remove_side_data(AVFrame* frame, AVFrameSideDataType type);
+		
+		// Func<AVFrameSideDataType, String>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_frame_side_data_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern String av_frame_side_data_name(AVFrameSideDataType type);
+		
 		// Func<AVCodecContext*, AVRational>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="av_codec_get_pkt_timebase", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern AVRational av_codec_get_pkt_timebase(AVCodecContext* avctx);
@@ -3973,6 +4243,10 @@ namespace FFmpeg.AutoGen
 		// Func<AVCodec*, AVCodecContext*>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="avcodec_alloc_context3", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern AVCodecContext* avcodec_alloc_context3(AVCodec* codec);
+		
+		// Action<AVCodecContext**>
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="avcodec_free_context", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void avcodec_free_context(AVCodecContext** avctx);
 		
 		// Func<AVCodecContext*, AVCodec*, int>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="avcodec_get_context_defaults3", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4105,6 +4379,10 @@ namespace FFmpeg.AutoGen
 		// Func<AVPacket*, AVPacket*, int>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="av_packet_copy_props", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_packet_copy_props(AVPacket* dst, AVPacket* src);
+		
+		// Action<AVPacket*, AVRational, AVRational>
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="av_packet_rescale_ts", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_packet_rescale_ts(AVPacket* pkt, AVRational tb_src, AVRational tb_dst);
 		
 		// Func<AVCodecID, AVCodec*>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="avcodec_find_decoder", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4442,6 +4720,242 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="avcodec_descriptor_get_by_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern AVCodecDescriptor* avcodec_descriptor_get_by_name(String name);
 		
+		// Func<void*, String, String, int, AVOption**, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_set_string3", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_set_string3(void* obj, String name, String val, int alloc, AVOption** o_out);
+		
+		// Func<void*, String, double, AVOption*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_set_double", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVOption* av_set_double(void* obj, String name, double n);
+		
+		// Func<void*, String, AVRational, AVOption*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_set_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVOption* av_set_q(void* obj, String name, AVRational n);
+		
+		// Func<void*, String, long, AVOption*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_set_int", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVOption* av_set_int(void* obj, String name, long n);
+		
+		// Func<void*, String, AVOption**, double>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_double", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern double av_get_double(void* obj, String name, AVOption** o_out);
+		
+		// Func<void*, String, AVOption**, AVRational>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVRational av_get_q(void* obj, String name, AVOption** o_out);
+		
+		// Func<void*, String, AVOption**, long>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_int", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern long av_get_int(void* obj, String name, AVOption** o_out);
+		
+		// Func<void*, String, AVOption**, String, int, String>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern String av_get_string(void* obj, String name, AVOption** o_out, String buf, int buf_len);
+		
+		// Func<void*, AVOption*, AVOption*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_next_option", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVOption* av_next_option(void* obj, AVOption* last);
+		
+		// Func<void*, void*, int, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_show2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_show2(void* obj, void* av_log_obj, int req_flags, int rej_flags);
+		
+		// Action<void*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_defaults", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_opt_set_defaults(void* s);
+		
+		// Action<void*, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_defaults2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_opt_set_defaults2(void* s, int mask, int flags);
+		
+		// Func<void*, String, String, String, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_set_options_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_set_options_string(void* ctx, String opts, String key_val_sep, String pairs_sep);
+		
+		// Func<void*, String, byte**, String, String, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_from_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_from_string(void* ctx, String opts, byte** shorthand, String key_val_sep, String pairs_sep);
+		
+		// Action<void*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_opt_free(void* obj);
+		
+		// Func<void*, String, String, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_flag_is_set", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_flag_is_set(void* obj, String field_name, String flag_name);
+		
+		// Func<void*, AVDictionary**, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_dict", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_dict(void* obj, AVDictionary** options);
+		
+		// Func<void*, AVDictionary**, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_dict2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_dict2(void* obj, AVDictionary** options, int search_flags);
+		
+		// Func<byte**, String, String, int, byte**, byte**, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_get_key_value", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_get_key_value(byte** ropts, String key_val_sep, String pairs_sep, int flags, byte** rkey, byte** rval);
+		
+		// Func<void*, AVOption*, String, int*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_eval_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_eval_flags(void* obj, AVOption* o, String val, int* flags_out);
+		
+		// Func<void*, AVOption*, String, int*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_eval_int", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_eval_int(void* obj, AVOption* o, String val, int* int_out);
+		
+		// Func<void*, AVOption*, String, long*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_eval_int64", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_eval_int64(void* obj, AVOption* o, String val, long* int64_out);
+		
+		// Func<void*, AVOption*, String, float*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_eval_float", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_eval_float(void* obj, AVOption* o, String val, float* float_out);
+		
+		// Func<void*, AVOption*, String, double*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_eval_double", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_eval_double(void* obj, AVOption* o, String val, double* double_out);
+		
+		// Func<void*, AVOption*, String, AVRational*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_eval_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_eval_q(void* obj, AVOption* o, String val, AVRational* q_out);
+		
+		// Func<void*, String, String, int, int, AVOption*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_find", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVOption* av_opt_find(void* obj, String name, String unit, int opt_flags, int search_flags);
+		
+		// Func<void*, String, String, int, int, void**, AVOption*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_find2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVOption* av_opt_find2(void* obj, String name, String unit, int opt_flags, int search_flags, void** target_obj);
+		
+		// Func<void*, AVOption*, AVOption*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVOption* av_opt_next(void* obj, AVOption* prev);
+		
+		// Func<void*, void*, void*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_child_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void* av_opt_child_next(void* obj, void* prev);
+		
+		// Func<AVClass*, AVClass*, AVClass*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_child_class_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVClass* av_opt_child_class_next(AVClass* parent, AVClass* prev);
+		
+		// Func<void*, String, String, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set(void* obj, String name, String val, int search_flags);
+		
+		// Func<void*, String, long, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_int", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_int(void* obj, String name, long val, int search_flags);
+		
+		// Func<void*, String, double, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_double", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_double(void* obj, String name, double val, int search_flags);
+		
+		// Func<void*, String, AVRational, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_q(void* obj, String name, AVRational val, int search_flags);
+		
+		// Func<void*, String, byte*, int, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_bin", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_bin(void* obj, String name, byte* val, int size, int search_flags);
+		
+		// Func<void*, String, int, int, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_image_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_image_size(void* obj, String name, int w, int h, int search_flags);
+		
+		// Func<void*, String, AVPixelFormat, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_pixel_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_pixel_fmt(void* obj, String name, AVPixelFormat fmt, int search_flags);
+		
+		// Func<void*, String, AVSampleFormat, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_sample_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_sample_fmt(void* obj, String name, AVSampleFormat fmt, int search_flags);
+		
+		// Func<void*, String, AVRational, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_video_rate", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_video_rate(void* obj, String name, AVRational val, int search_flags);
+		
+		// Func<void*, String, long, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_channel_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_channel_layout(void* obj, String name, long ch_layout, int search_flags);
+		
+		// Func<void*, String, AVDictionary*, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_dict_val", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_set_dict_val(void* obj, String name, AVDictionary* val, int search_flags);
+		
+		// Func<void*, String, int, byte**, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_get", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_get(void* obj, String name, int search_flags, byte** out_val);
+		
+		// Func<void*, String, int, long*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_get_int", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_get_int(void* obj, String name, int search_flags, long* out_val);
+		
+		// Func<void*, String, int, double*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_get_double", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_get_double(void* obj, String name, int search_flags, double* out_val);
+		
+		// Func<void*, String, int, AVRational*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_get_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_get_q(void* obj, String name, int search_flags, AVRational* out_val);
+		
+		// Func<void*, String, int, int*, int*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_get_image_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_get_image_size(void* obj, String name, int search_flags, int* w_out, int* h_out);
+		
+		// Func<void*, String, int, AVPixelFormat*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_get_pixel_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_get_pixel_fmt(void* obj, String name, int search_flags, AVPixelFormat* out_fmt);
+		
+		// Func<void*, String, int, AVSampleFormat*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_get_sample_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_get_sample_fmt(void* obj, String name, int search_flags, AVSampleFormat* out_fmt);
+		
+		// Func<void*, String, int, AVRational*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_get_video_rate", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_get_video_rate(void* obj, String name, int search_flags, AVRational* out_val);
+		
+		// Func<void*, String, int, long*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_get_channel_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_get_channel_layout(void* obj, String name, int search_flags, long* ch_layout);
+		
+		// Func<void*, String, int, AVDictionary**, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_get_dict_val", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_get_dict_val(void* obj, String name, int search_flags, AVDictionary** out_val);
+		
+		// Func<AVClass*, void*, String, void*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_ptr", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void* av_opt_ptr(AVClass* avclass, void* obj, String name);
+		
+		// Action<AVOptionRanges**>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_freep_ranges", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_opt_freep_ranges(AVOptionRanges** ranges);
+		
+		// Func<AVOptionRanges**, void*, String, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_query_ranges", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_query_ranges(AVOptionRanges** p0, void* obj, String key, int flags);
+		
+		// Func<void*, void*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_copy", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_copy(void* dest, void* src);
+		
+		// Func<AVOptionRanges**, void*, String, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_query_ranges_default", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_query_ranges_default(AVOptionRanges** p0, void* obj, String key, int flags);
+		
+		// Func<void*, AVOption*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_is_set_to_default", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_is_set_to_default(void* obj, AVOption* o);
+		
+		// Func<void*, String, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_is_set_to_default_by_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_is_set_to_default_by_name(void* obj, String name, int search_flags);
+		
+		// Func<void*, int, int, byte**, byte, byte, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_serialize", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_opt_serialize(void* obj, int opt_flags, int flags, byte** buffer, byte key_val_sep, byte pairs_sep);
+		
 		// Func<String, String>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_find_protocol_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern String avio_find_protocol_name(String url);
@@ -4513,6 +5027,10 @@ namespace FFmpeg.AutoGen
 		// Func<AVIOContext*, long>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern long avio_size(AVIOContext* s);
+		
+		// Func<AVIOContext*, int>
+		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_feof", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avio_feof(AVIOContext* s);
 		
 		// Func<AVIOContext*, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="url_feof", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4614,6 +5132,10 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_seek_time", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern long avio_seek_time(AVIOContext* h, int stream_index, long timestamp, int flags);
 		
+		// Func<AVIOContext*, AVBPrint*, uint, int>
+		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_read_to_bprint", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avio_read_to_bprint(AVIOContext* h, AVBPrint* pb, uint max_size);
+		
 		// Func<AVIOContext*, AVPacket*, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_get_packet", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_get_packet(AVIOContext* s, AVPacket* pkt, int size);
@@ -4629,6 +5151,22 @@ namespace FFmpeg.AutoGen
 		// Action<AVStream*, AVRational>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_stream_set_r_frame_rate", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void av_stream_set_r_frame_rate(AVStream* s, AVRational r);
+		
+		// Func<AVStream*, AVCodecParserContext*>
+		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_stream_get_parser", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVCodecParserContext* av_stream_get_parser(AVStream* s);
+		
+		// Func<AVStream*, String>
+		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_stream_get_recommended_encoder_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern String av_stream_get_recommended_encoder_configuration(AVStream* s);
+		
+		// Action<AVStream*, String>
+		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_stream_set_recommended_encoder_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_stream_set_recommended_encoder_configuration(AVStream* s, String configuration);
+		
+		// Func<AVStream*, long>
+		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_stream_get_end_pts", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern long av_stream_get_end_pts(AVStream* st);
 		
 		// Func<AVFormatContext*, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_format_get_probe_score", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4681,6 +5219,10 @@ namespace FFmpeg.AutoGen
 		// Action<AVFormatContext*, av_format_control_message>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_format_set_control_message_cb", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void av_format_set_control_message_cb(AVFormatContext* s, av_format_control_message callback);
+		
+		// Action<AVFormatContext*>
+		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_format_inject_global_side_data", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_format_inject_global_side_data(AVFormatContext* s);
 		
 		// Func<AVFormatContext*, AVDurationEstimationMethod>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_fmt_ctx_get_duration_estimation_method", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4742,13 +5284,13 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avformat_new_stream", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern AVStream* avformat_new_stream(AVFormatContext* s, AVCodec* c);
 		
+		// Func<AVStream*, AVPacketSideDataType, int*, byte*>
+		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_stream_get_side_data", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern byte* av_stream_get_side_data(AVStream* stream, AVPacketSideDataType type, int* size);
+		
 		// Func<AVFormatContext*, int, AVProgram*>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_new_program", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern AVProgram* av_new_program(AVFormatContext* s, int id);
-		
-		// Func<String, AVOutputFormat*, String, AVFormatContext*>
-		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avformat_alloc_output_context", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern AVFormatContext* avformat_alloc_output_context(String format, AVOutputFormat* oformat, String filename);
 		
 		// Func<AVFormatContext**, AVOutputFormat*, String, String, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avformat_alloc_output_context2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4786,10 +5328,6 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_demuxer_open", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_demuxer_open(AVFormatContext* ic);
 		
-		// Func<AVFormatContext*, int>
-		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_find_stream_info", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_find_stream_info(AVFormatContext* ic);
-		
 		// Func<AVFormatContext*, AVDictionary**, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avformat_find_stream_info", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int avformat_find_stream_info(AVFormatContext* ic, AVDictionary** options);
@@ -4801,10 +5339,6 @@ namespace FFmpeg.AutoGen
 		// Func<AVFormatContext*, AVMediaType, int, int, AVCodec**, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_find_best_stream", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_find_best_stream(AVFormatContext* ic, AVMediaType type, int wanted_stream_nb, int related_stream, AVCodec** decoder_ret, int flags);
-		
-		// Func<AVFormatContext*, AVPacket*, int>
-		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_read_packet", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_read_packet(AVFormatContext* s, AVPacket* pkt);
 		
 		// Func<AVFormatContext*, AVPacket*, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_read_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4826,21 +5360,9 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_read_pause", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_read_pause(AVFormatContext* s);
 		
-		// Action<AVFormatContext*>
-		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_close_input_file", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern void av_close_input_file(AVFormatContext* s);
-		
 		// Action<AVFormatContext**>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avformat_close_input", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void avformat_close_input(AVFormatContext** s);
-		
-		// Func<AVFormatContext*, int, AVStream*>
-		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_new_stream", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern AVStream* av_new_stream(AVFormatContext* s, int id);
-		
-		// Action<AVStream*, int, int, int>
-		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_set_pts_info", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern void av_set_pts_info(AVStream* s, int pts_wrap_bits, int pts_num, int pts_den);
 		
 		// Func<AVFormatContext*, AVDictionary**, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avformat_write_header", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4998,6 +5520,22 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVDEVICE_LIBRARY, EntryPoint="avdevice_register_all", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void avdevice_register_all();
 		
+		// Func<AVInputFormat*, AVInputFormat*>
+		[DllImport(AVDEVICE_LIBRARY, EntryPoint="av_input_audio_device_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVInputFormat* av_input_audio_device_next(AVInputFormat* d);
+		
+		// Func<AVInputFormat*, AVInputFormat*>
+		[DllImport(AVDEVICE_LIBRARY, EntryPoint="av_input_video_device_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVInputFormat* av_input_video_device_next(AVInputFormat* d);
+		
+		// Func<AVOutputFormat*, AVOutputFormat*>
+		[DllImport(AVDEVICE_LIBRARY, EntryPoint="av_output_audio_device_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVOutputFormat* av_output_audio_device_next(AVOutputFormat* d);
+		
+		// Func<AVOutputFormat*, AVOutputFormat*>
+		[DllImport(AVDEVICE_LIBRARY, EntryPoint="av_output_video_device_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVOutputFormat* av_output_video_device_next(AVOutputFormat* d);
+		
 		// Func<AVFormatContext*, AVAppToDevMessageType, void*, uint, int>
 		[DllImport(AVDEVICE_LIBRARY, EntryPoint="avdevice_app_to_dev_control_message", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int avdevice_app_to_dev_control_message(AVFormatContext* s, AVAppToDevMessageType type, void* data, uint data_size);
@@ -5005,6 +5543,14 @@ namespace FFmpeg.AutoGen
 		// Func<AVFormatContext*, AVDevToAppMessageType, void*, uint, int>
 		[DllImport(AVDEVICE_LIBRARY, EntryPoint="avdevice_dev_to_app_control_message", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int avdevice_dev_to_app_control_message(AVFormatContext* s, AVDevToAppMessageType type, void* data, uint data_size);
+		
+		// Func<AVDeviceCapabilitiesQuery**, AVFormatContext*, AVDictionary**, int>
+		[DllImport(AVDEVICE_LIBRARY, EntryPoint="avdevice_capabilities_create", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int avdevice_capabilities_create(AVDeviceCapabilitiesQuery** caps, AVFormatContext* s, AVDictionary** device_options);
+		
+		// Action<AVDeviceCapabilitiesQuery**, AVFormatContext*>
+		[DllImport(AVDEVICE_LIBRARY, EntryPoint="avdevice_capabilities_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void avdevice_capabilities_free(AVDeviceCapabilitiesQuery** caps, AVFormatContext* s);
 		
 		// Func<AVFormatContext*, AVDeviceInfoList**, int>
 		[DllImport(AVDEVICE_LIBRARY, EntryPoint="avdevice_list_devices", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5194,9 +5740,9 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVFILTER_LIBRARY, EntryPoint="avfilter_inout_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void avfilter_inout_free(AVFilterInOut** inout);
 		
-		// Func<AVFilterGraph*, String, AVFilterInOut**, AVFilterInOut**, void*, int>
+		// Func<AVFilterGraph*, String, AVFilterInOut*, AVFilterInOut*, void*, int>
 		[DllImport(AVFILTER_LIBRARY, EntryPoint="avfilter_graph_parse", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int avfilter_graph_parse(AVFilterGraph* graph, String filters, AVFilterInOut** inputs, AVFilterInOut** outputs, void* log_ctx);
+		public static extern int avfilter_graph_parse(AVFilterGraph* graph, String filters, AVFilterInOut* inputs, AVFilterInOut* outputs, void* log_ctx);
 		
 		// Func<AVFilterGraph*, String, AVFilterInOut**, AVFilterInOut**, void*, int>
 		[DllImport(AVFILTER_LIBRARY, EntryPoint="avfilter_graph_parse_ptr", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5255,72 +5801,84 @@ namespace FFmpeg.AutoGen
 		public static extern void pp_free_context(pp_context* ppContext);
 		
 		// Func<AVClass*>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_get_class", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_get_class", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern AVClass* swr_get_class();
 		
 		// Func<SwrContext*>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern SwrContext* swr_alloc();
 		
 		// Func<SwrContext*, int>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_init", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_init", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int swr_init(SwrContext* s);
 		
 		// Func<SwrContext*, int>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_is_initialized", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_is_initialized", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int swr_is_initialized(SwrContext* s);
 		
 		// Func<SwrContext*, long, AVSampleFormat, int, long, AVSampleFormat, int, int, void*, SwrContext*>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_alloc_set_opts", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_alloc_set_opts", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern SwrContext* swr_alloc_set_opts(SwrContext* s, long out_ch_layout, AVSampleFormat out_sample_fmt, int out_sample_rate, long in_ch_layout, AVSampleFormat in_sample_fmt, int in_sample_rate, int log_offset, void* log_ctx);
 		
 		// Action<SwrContext**>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void swr_free(SwrContext** s);
 		
+		// Action<SwrContext*>
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_close", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void swr_close(SwrContext* s);
+		
 		// Func<SwrContext*, byte**, int, byte**, int, int>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_convert", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_convert", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int swr_convert(SwrContext* s, byte** @out, int out_count, byte** @in, int in_count);
 		
 		// Func<SwrContext*, long, long>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_next_pts", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_next_pts", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern long swr_next_pts(SwrContext* s, long pts);
 		
 		// Func<SwrContext*, int, int, int>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_set_compensation", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_set_compensation", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int swr_set_compensation(SwrContext* s, int sample_delta, int compensation_distance);
 		
 		// Func<SwrContext*, int*, int>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_set_channel_mapping", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_set_channel_mapping", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int swr_set_channel_mapping(SwrContext* s, int* channel_map);
 		
 		// Func<SwrContext*, double*, int, int>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_set_matrix", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_set_matrix", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int swr_set_matrix(SwrContext* s, double* matrix, int stride);
 		
 		// Func<SwrContext*, int, int>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_drop_output", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_drop_output", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int swr_drop_output(SwrContext* s, int count);
 		
 		// Func<SwrContext*, int, int>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_inject_silence", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_inject_silence", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int swr_inject_silence(SwrContext* s, int count);
 		
 		// Func<SwrContext*, long, long>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swr_get_delay", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_get_delay", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern long swr_get_delay(SwrContext* s, long @base);
 		
 		// Func<int>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swresample_version", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swresample_version", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int swresample_version();
 		
 		// Func<String>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swresample_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swresample_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern String swresample_configuration();
 		
 		// Func<String>
-		[DllImport(SWRESAMPLE_LIBRARY, EntryPoint="swresample_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swresample_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern String swresample_license();
+		
+		// Func<SwrContext*, AVFrame*, AVFrame*, int>
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_convert_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int swr_convert_frame(SwrContext* swr, AVFrame* output, AVFrame* input);
+		
+		// Func<SwrContext*, AVFrame*, AVFrame*, int>
+		[DllImport(AVCODEC_LIBRARY, EntryPoint="swr_config_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int swr_config_frame(SwrContext* swr, AVFrame* @out, AVFrame* @in);
 		
 		// Func<int>
 		[DllImport(SWSCALE_LIBRARY, EntryPoint="swscale_version", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]

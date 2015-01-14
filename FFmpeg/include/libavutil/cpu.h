@@ -63,6 +63,8 @@
 #define AV_CPU_FLAG_VFP          (1 << 3)
 #define AV_CPU_FLAG_VFPV3        (1 << 4)
 #define AV_CPU_FLAG_NEON         (1 << 5)
+#define AV_CPU_FLAG_ARMV8        (1 << 6)
+#define AV_CPU_FLAG_SETEND       (1 <<16)
 
 /**
  * Return the flags which specify extensions supported by the CPU.
