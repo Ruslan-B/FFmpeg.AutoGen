@@ -14,7 +14,7 @@ class DescriptionsEvaluationContext(ctypesgencore.expressions.EvaluationContext)
         if name in self.ids_map:
             expression = self.ids_map[name].value
             return expression.evaluate(self)
-            #warnings.warn('Attempt to evaluate identifier "%s" failed' % name)
+            # warnings.warn('Attempt to evaluate identifier "%s" failed' % name)
         return 0
 
 
@@ -60,7 +60,7 @@ class GeneratorBase:
                         'va_list': 'void*',
                         'FILE': 'void'}
 
-    def get_type_name(self, ctype):
+    def get_type_name(self, ctype, force_string_to_byte_ptr=False):
         if isinstance(ctype, ctypedescs.CtypesPointer):
             dst_type = ctype.destination
             return '%s*' % self.get_type_name(dst_type)
@@ -72,6 +72,9 @@ class GeneratorBase:
             else:
                 return ctype.name
         if isinstance(ctype, ctypedescs.CtypesSpecial):
+            if force_string_to_byte_ptr and ctype.name == 'String':
+                return 'byte* /*String*/'
+
             return ctype.name
         if isinstance(ctype, ctypedescs.CtypesEnum):
             return ctype.tag
@@ -149,10 +152,11 @@ class ConstGenerator(GeneratorBase):
 
 
 class MethodGenerator(GeneratorBase):
-    def __init__(self, description, library):
+    def __init__(self, description, library, options):
         self.id = self.escape_id_if_needed(description.name)
         self.description = description
         self.library = library
+        self.options = options
 
     def get_params(self, ctype):
         params = []
@@ -164,7 +168,8 @@ class MethodGenerator(GeneratorBase):
                 arg_name = self.escape_id_if_needed(arg_name)
             else:
                 arg_name = arg_type.identifier
-                p_type_name = self.get_type_name(arg_type)
+                force_string_to_byte_ptr = self.id in self.options.force_string_to_byte_ptr_for_methods
+                p_type_name = self.get_type_name(arg_type, force_string_to_byte_ptr)
 
             if arg_name == '' or arg_name is None:
                 arg_name = "p%i" % i
@@ -401,7 +406,7 @@ class WrapperGenerator(GeneratorBase):
                     library = LibraryGenerator(library_name)
                     libraries_map[library.name] = library
 
-                method = MethodGenerator(description, library)
+                method = MethodGenerator(description, library, options)
                 methods.append(method)
 
         libraries = libraries_map.values()
@@ -498,10 +503,27 @@ class Options:
     runtime_libdirs = []
     modules = []
     inserted_files = []
-    #printer
+    # printer
     namespace = 'FFmpeg.AutoGen'
     class_name = 'FFmpegInvoke'
     output_only_from_paths = ['./FFmpeg/include']
+    force_string_to_byte_ptr_for_methods = [
+        'av_strerror',
+        'av_strndup',
+        'av_log_format_line',
+        'av_get_codec_tag_string',
+        'av_get_sample_fmt_string',
+        'av_get_channel_layout_string',
+        'avcodec_string',
+        'av_get_string',
+        'avio_get_str',
+        'avio_get_str16le',
+        'avio_get_str16be',
+        'av_url_split',
+        'av_get_frame_filename',
+        'av_sdp_create',
+        'avfilter_process_command'
+        ]
 
 
 options = Options()

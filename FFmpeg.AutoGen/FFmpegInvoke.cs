@@ -3590,7 +3590,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<int, String, uint, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_strerror", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_strerror(int errnum, String errbuf, uint errbuf_size);
+		public static extern int av_strerror(int errnum, byte* /*String*/ errbuf, uint errbuf_size);
 		
 		// Func<uint, void*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_malloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3634,7 +3634,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<String, uint, String>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_strndup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern String av_strndup(String s, uint len);
+		public static extern String av_strndup(byte* /*String*/ s, uint len);
 		
 		// Func<void*, uint, void*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_memdup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3774,7 +3774,7 @@ namespace FFmpeg.AutoGen
 		
 		// Action<void*, int, String, void*, String, int, int*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log_format_line", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern void av_log_format_line(void* ptr, int level, String fmt, void* vl, String line, int line_size, int* print_prefix);
+		public static extern void av_log_format_line(void* ptr, int level, byte* /*String*/ fmt, void* vl, byte* /*String*/ line, int line_size, int* print_prefix);
 		
 		// Action<int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log_set_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3818,7 +3818,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<String, int, AVSampleFormat, String>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_sample_fmt_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern String av_get_sample_fmt_string(String buf, int buf_size, AVSampleFormat sample_fmt);
+		public static extern String av_get_sample_fmt_string(byte* /*String*/ buf, int buf_size, AVSampleFormat sample_fmt);
 		
 		// Func<AVSampleFormat, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_bytes_per_sample", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3938,7 +3938,7 @@ namespace FFmpeg.AutoGen
 		
 		// Action<String, int, int, ulong>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_channel_layout_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern void av_get_channel_layout_string(String buf, int buf_size, int nb_channels, ulong channel_layout);
+		public static extern void av_get_channel_layout_string(byte* /*String*/ buf, int buf_size, int nb_channels, ulong channel_layout);
 		
 		// Action<AVBPrint*, int, ulong>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_bprint_channel_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4594,11 +4594,11 @@ namespace FFmpeg.AutoGen
 		
 		// Func<String, uint, int, uint>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="av_get_codec_tag_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern uint av_get_codec_tag_string(String buf, uint buf_size, int codec_tag);
+		public static extern uint av_get_codec_tag_string(byte* /*String*/ buf, uint buf_size, int codec_tag);
 		
 		// Action<String, int, AVCodecContext*, int>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="avcodec_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern void avcodec_string(String buf, int buf_size, AVCodecContext* enc, int encode);
+		public static extern void avcodec_string(byte* /*String*/ buf, int buf_size, AVCodecContext* enc, int encode);
 		
 		// Func<AVCodec*, int, String>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="av_get_profile_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4750,7 +4750,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<void*, String, AVOption**, String, int, String>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern String av_get_string(void* obj, String name, AVOption** o_out, String buf, int buf_len);
+		public static extern String av_get_string(void* obj, byte* /*String*/ name, AVOption** o_out, byte* /*String*/ buf, int buf_len);
 		
 		// Func<void*, AVOption*, AVOption*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_next_option", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5086,15 +5086,15 @@ namespace FFmpeg.AutoGen
 		
 		// Func<AVIOContext*, int, String, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_get_str", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int avio_get_str(AVIOContext* pb, int maxlen, String buf, int buflen);
+		public static extern int avio_get_str(AVIOContext* pb, int maxlen, byte* /*String*/ buf, int buflen);
 		
 		// Func<AVIOContext*, int, String, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_get_str16le", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int avio_get_str16le(AVIOContext* pb, int maxlen, String buf, int buflen);
+		public static extern int avio_get_str16le(AVIOContext* pb, int maxlen, byte* /*String*/ buf, int buflen);
 		
 		// Func<AVIOContext*, int, String, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_get_str16be", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int avio_get_str16be(AVIOContext* pb, int maxlen, String buf, int buflen);
+		public static extern int avio_get_str16be(AVIOContext* pb, int maxlen, byte* /*String*/ buf, int buflen);
 		
 		// Func<AVIOContext**, String, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_open", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5446,7 +5446,7 @@ namespace FFmpeg.AutoGen
 		
 		// Action<String, int, String, int, String, int, int*, String, int, String>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_url_split", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern void av_url_split(String proto, int proto_size, String authorization, int authorization_size, String hostname, int hostname_size, int* port_ptr, String path, int path_size, String url);
+		public static extern void av_url_split(byte* /*String*/ proto, int proto_size, byte* /*String*/ authorization, int authorization_size, byte* /*String*/ hostname, int hostname_size, int* port_ptr, byte* /*String*/ path, int path_size, byte* /*String*/ url);
 		
 		// Action<AVFormatContext*, int, String, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_dump_format", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5454,7 +5454,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<String, int, String, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_get_frame_filename", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_get_frame_filename(String buf, int buf_size, String path, int number);
+		public static extern int av_get_frame_filename(byte* /*String*/ buf, int buf_size, byte* /*String*/ path, int number);
 		
 		// Func<String, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_filename_number_test", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5462,7 +5462,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<AVFormatContext**, int, String, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_sdp_create", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_sdp_create(AVFormatContext** ac, int n_files, String buf, int size);
+		public static extern int av_sdp_create(AVFormatContext** ac, int n_files, byte* /*String*/ buf, int size);
 		
 		// Func<String, String, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_match_ext", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5638,7 +5638,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<AVFilterContext*, String, String, String, int, int, int>
 		[DllImport(AVFILTER_LIBRARY, EntryPoint="avfilter_process_command", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int avfilter_process_command(AVFilterContext* filter, String cmd, String arg, String res, int res_len, int flags);
+		public static extern int avfilter_process_command(AVFilterContext* filter, byte* /*String*/ cmd, byte* /*String*/ arg, byte* /*String*/ res, int res_len, int flags);
 		
 		// Action
 		[DllImport(AVFILTER_LIBRARY, EntryPoint="avfilter_register_all", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
