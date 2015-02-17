@@ -25,11 +25,6 @@ By default MacPorts keeps compiled libraries in ```/opt/local/lib```.
 - on Linux:  
 You need to update ```FFmpeg.AutoGen.config``` with full path to FFmpeg libraries.
 
-##Download
-
-Compiled wrapper:
-http://sourceforge.net/projects/ffmpeg-autogen/files/
-
 ##Generation
 
 The wrapper generator uses customized version of ctypesgencore package based on [ctypesgen](http://code.google.com/p/ctypesgen/) 0.r125.
