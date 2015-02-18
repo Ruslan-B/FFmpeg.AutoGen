@@ -54,7 +54,7 @@ class GeneratorBase:
                         'int32_t': 'int', 'uint32_t': 'uint',
                         'int64_t': 'long', 'uint64_t': 'ulong',
                         'float32_t': 'float',
-                        'char': 'byte',
+                        'char': 'sbyte',
                         'intmax_t': 'long', 'uintmax_t': 'ulong',
                         'size_t': 'uint', 'SIZE_T': 'uint',
                         'va_list': 'void*',
@@ -73,7 +73,7 @@ class GeneratorBase:
                 return ctype.name
         if isinstance(ctype, ctypedescs.CtypesSpecial):
             if force_string_to_byte_ptr and ctype.name == 'String':
-                return 'byte* /*String*/'
+                return 'sbyte* /*String*/'
 
             return ctype.name
         if isinstance(ctype, ctypedescs.CtypesEnum):
@@ -317,7 +317,7 @@ class WrapperGenerator(GeneratorBase):
                     ctype_name = self.get_type_name(ctype)
 
                 if ctype_name == 'String':
-                    ctype_name = 'byte*'
+                    ctype_name = 'sbyte*'
 
                 writer.out('public %s %s;' % (ctype_name, name))
 
