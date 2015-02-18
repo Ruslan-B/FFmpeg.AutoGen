@@ -1502,21 +1502,21 @@ namespace FFmpeg.AutoGen
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVOption
 	{
-		public byte* name;
-		public byte* help;
+		public sbyte* name;
+		public sbyte* help;
 		public int offset;
 		public AVOptionType type;
 		public anon_10 default_val;
 		public double min;
 		public double max;
 		public int flags;
-		public byte* unit;
+		public sbyte* unit;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVClass
 	{
-		public byte* class_name;
+		public sbyte* class_name;
 		public IntPtr item_name; // Func<void*, String>
 		public AVOption* option;
 		public int version;
@@ -1555,8 +1555,8 @@ namespace FFmpeg.AutoGen
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVDictionaryEntry
 	{
-		public byte* key;
-		public byte* value;
+		public sbyte* key;
+		public sbyte* value;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -1589,7 +1589,7 @@ namespace FFmpeg.AutoGen
 		public int log_level_offset;
 		public AVMediaType codec_type;
 		public AVCodec* codec;
-		public fixed byte codec_name[32]; // <Ctype "c_char * 32">
+		public fixed sbyte codec_name[32]; // <Ctype "c_char * 32">
 		public AVCodecID codec_id;
 		public int codec_tag;
 		public int stream_codec_tag;
@@ -1707,7 +1707,7 @@ namespace FFmpeg.AutoGen
 		public int rc_buffer_size;
 		public int rc_override_count;
 		public RcOverride* rc_override;
-		public byte* rc_eq;
+		public sbyte* rc_eq;
 		public int rc_max_rate;
 		public int rc_min_rate;
 		public float rc_buffer_aggressivity;
@@ -1738,8 +1738,8 @@ namespace FFmpeg.AutoGen
 		public int skip_count;
 		public int misc_bits;
 		public int frame_bits;
-		public byte* stats_out;
-		public byte* stats_in;
+		public sbyte* stats_out;
+		public sbyte* stats_in;
 		public int workaround_bugs;
 		public int strict_std_compliance;
 		public int error_concealment;
@@ -1783,13 +1783,13 @@ namespace FFmpeg.AutoGen
 		public long pts_correction_num_faulty_dts;
 		public long pts_correction_last_pts;
 		public long pts_correction_last_dts;
-		public byte* sub_charenc;
+		public sbyte* sub_charenc;
 		public int sub_charenc_mode;
 		public int skip_alpha;
 		public int seek_preroll;
 		public ushort* chroma_intra_matrix;
 		public byte* dump_separator;
-		public byte* codec_whitelist;
+		public sbyte* codec_whitelist;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -1891,10 +1891,10 @@ namespace FFmpeg.AutoGen
 	{
 		public AVCodecID id;
 		public AVMediaType type;
-		public byte* name;
-		public byte* long_name;
+		public sbyte* name;
+		public sbyte* long_name;
 		public int props;
-		public byte** mime_types;
+		public sbyte** mime_types;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -1941,8 +1941,8 @@ namespace FFmpeg.AutoGen
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVCodec
 	{
-		public byte* name;
-		public byte* long_name;
+		public sbyte* name;
+		public sbyte* long_name;
 		public AVMediaType type;
 		public AVCodecID id;
 		public int capabilities;
@@ -1971,7 +1971,7 @@ namespace FFmpeg.AutoGen
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVHWAccel
 	{
-		public byte* name;
+		public sbyte* name;
 		public AVMediaType type;
 		public AVCodecID id;
 		public AVPixelFormat pix_fmt;
@@ -1992,7 +1992,7 @@ namespace FFmpeg.AutoGen
 	public unsafe struct AVProfile
 	{
 		public int profile;
-		public byte* name;
+		public sbyte* name;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -2041,8 +2041,8 @@ namespace FFmpeg.AutoGen
 		public int nb_colors;
 		public AVPicture pict;
 		public AVSubtitleType type;
-		public byte* text;
-		public byte* ass;
+		public sbyte* text;
+		public sbyte* ass;
 		public int flags;
 	}
 	
@@ -2107,7 +2107,7 @@ namespace FFmpeg.AutoGen
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVBitStreamFilter
 	{
-		public byte* name;
+		public sbyte* name;
 		public int priv_data_size;
 		public IntPtr filter; // Func<AVBitStreamFilterContext*, AVCodecContext*, String, byte**, int*, byte*, int, int, int>
 		public IntPtr close; // Action<AVBitStreamFilterContext*>
@@ -2128,14 +2128,14 @@ namespace FFmpeg.AutoGen
 	{
 		public long i64;
 		public double dbl;
-		public byte* str;
+		public sbyte* str;
 		public AVRational q;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVOptionRange
 	{
-		public byte* str;
+		public sbyte* str;
 		public double value_min;
 		public double value_max;
 		public double component_min;
@@ -2154,10 +2154,10 @@ namespace FFmpeg.AutoGen
 	public unsafe struct AVIOContext
 	{
 		public AVClass* av_class;
-		public byte* buffer;
+		public sbyte* buffer;
 		public int buffer_size;
-		public byte* buf_ptr;
-		public byte* buf_end;
+		public sbyte* buf_ptr;
+		public sbyte* buf_end;
 		public void* opaque;
 		public IntPtr read_packet; // Func<void*, byte*, int, int>
 		public IntPtr write_packet; // Func<void*, byte*, int, int>
@@ -2168,7 +2168,7 @@ namespace FFmpeg.AutoGen
 		public int write_flag;
 		public int max_packet_size;
 		public int checksum;
-		public byte* checksum_ptr;
+		public sbyte* checksum_ptr;
 		public IntPtr update_checksum; // Func<int, byte*, int, int>
 		public int error;
 		public IntPtr read_pause; // Func<void*, int, int>
@@ -2193,7 +2193,7 @@ namespace FFmpeg.AutoGen
 		public int ctx_flags;
 		public int nb_streams;
 		public AVStream** streams;
-		public fixed byte filename[1024]; // <Ctype "c_char * 1024">
+		public fixed sbyte filename[1024]; // <Ctype "c_char * 1024">
 		public long start_time;
 		public long duration;
 		public int bit_rate;
@@ -2237,8 +2237,8 @@ namespace FFmpeg.AutoGen
 		public int flush_packets;
 		public int probe_score;
 		public int format_probesize;
-		public byte* codec_whitelist;
-		public byte* format_whitelist;
+		public sbyte* codec_whitelist;
+		public sbyte* format_whitelist;
 		public AVPacketList* packet_buffer;
 		public AVPacketList* packet_buffer_end;
 		public long data_offset;
@@ -2305,19 +2305,19 @@ namespace FFmpeg.AutoGen
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVProbeData
 	{
-		public byte* filename;
-		public byte* buf;
+		public sbyte* filename;
+		public sbyte* buf;
 		public int buf_size;
-		public byte* mime_type;
+		public sbyte* mime_type;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVOutputFormat
 	{
-		public byte* name;
-		public byte* long_name;
-		public byte* mime_type;
-		public byte* extensions;
+		public sbyte* name;
+		public sbyte* long_name;
+		public sbyte* mime_type;
+		public sbyte* extensions;
 		public AVCodecID audio_codec;
 		public AVCodecID video_codec;
 		public AVCodecID subtitle_codec;
@@ -2342,13 +2342,13 @@ namespace FFmpeg.AutoGen
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVInputFormat
 	{
-		public byte* name;
-		public byte* long_name;
+		public sbyte* name;
+		public sbyte* long_name;
 		public int flags;
-		public byte* extensions;
+		public sbyte* extensions;
 		public AVCodecTag** codec_tag;
 		public AVClass* priv_class;
-		public byte* mime_type;
+		public sbyte* mime_type;
 		public AVInputFormat* next;
 		public int raw_codec_id;
 		public int priv_data_size;
@@ -2459,7 +2459,7 @@ namespace FFmpeg.AutoGen
 		public byte dts_ordered;
 		public byte dts_misordered;
 		public int inject_global_side_data;
-		public byte* recommended_encoder_configuration;
+		public sbyte* recommended_encoder_configuration;
 		public AVRational display_aspect_ratio;
 	}
 	
@@ -2508,8 +2508,8 @@ namespace FFmpeg.AutoGen
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVDeviceInfo
 	{
-		public byte* device_name;
-		public byte* device_description;
+		public sbyte* device_name;
+		public sbyte* device_description;
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -2517,7 +2517,7 @@ namespace FFmpeg.AutoGen
 	{
 		public AVClass* av_class;
 		public AVFilter* filter;
-		public byte* name;
+		public sbyte* name;
 		public AVFilterPad* input_pads;
 		public AVFilterLink** inputs;
 		public int input_count;
@@ -2531,7 +2531,7 @@ namespace FFmpeg.AutoGen
 		public int thread_type;
 		public AVFilterInternal* @internal;
 		public AVFilterCommand* command_queue;
-		public byte* enable_str;
+		public sbyte* enable_str;
 		public void* enable;
 		public double* var_values;
 		public int is_disabled;
@@ -2580,7 +2580,7 @@ namespace FFmpeg.AutoGen
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVFilterPad
 	{
-		public byte* name;
+		public sbyte* name;
 		public AVMediaType type;
 		public int min_perms;
 		public int rej_perms;
@@ -2676,8 +2676,8 @@ namespace FFmpeg.AutoGen
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVFilter
 	{
-		public byte* name;
-		public byte* description;
+		public sbyte* name;
+		public sbyte* description;
 		public AVFilterPad* inputs;
 		public AVFilterPad* outputs;
 		public AVClass* priv_class;
@@ -2703,15 +2703,15 @@ namespace FFmpeg.AutoGen
 		public AVClass* av_class;
 		public int filter_count_unused;
 		public AVFilterContext** filters;
-		public byte* scale_sws_opts;
-		public byte* resample_lavr_opts;
+		public sbyte* scale_sws_opts;
+		public sbyte* resample_lavr_opts;
 		public int nb_filters;
 		public int thread_type;
 		public int nb_threads;
 		public AVFilterGraphInternal* @internal;
 		public void* opaque;
 		public IntPtr execute; // avfilter_execute_func* - Func<AVFilterContext*, avfilter_action_func*, void*, int*, int, int>
-		public byte* aresample_swr_opts;
+		public sbyte* aresample_swr_opts;
 		public AVFilterLink** sink_links;
 		public int sink_links_count;
 		public int disable_auto_convert;
@@ -2740,7 +2740,7 @@ namespace FFmpeg.AutoGen
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVFilterInOut
 	{
-		public byte* name;
+		public sbyte* name;
 		public AVFilterContext* filter_ctx;
 		public int pad_idx;
 		public AVFilterInOut* next;
@@ -3576,9 +3576,9 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_media_type_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern String av_get_media_type_string(AVMediaType media_type);
 		
-		// Func<AVPictureType, byte>
+		// Func<AVPictureType, sbyte>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_picture_type_char", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern byte av_get_picture_type_char(AVPictureType pict_type);
+		public static extern sbyte av_get_picture_type_char(AVPictureType pict_type);
 		
 		// Func<int, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3590,7 +3590,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<int, String, uint, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_strerror", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_strerror(int errnum, byte* /*String*/ errbuf, uint errbuf_size);
+		public static extern int av_strerror(int errnum, sbyte* /*String*/ errbuf, uint errbuf_size);
 		
 		// Func<uint, void*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_malloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3634,7 +3634,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<String, uint, String>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_strndup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern String av_strndup(byte* /*String*/ s, uint len);
+		public static extern String av_strndup(sbyte* /*String*/ s, uint len);
 		
 		// Func<void*, uint, void*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_memdup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3774,7 +3774,7 @@ namespace FFmpeg.AutoGen
 		
 		// Action<void*, int, String, void*, String, int, int*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log_format_line", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern void av_log_format_line(void* ptr, int level, byte* /*String*/ fmt, void* vl, byte* /*String*/ line, int line_size, int* print_prefix);
+		public static extern void av_log_format_line(void* ptr, int level, sbyte* /*String*/ fmt, void* vl, sbyte* /*String*/ line, int line_size, int* print_prefix);
 		
 		// Action<int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_log_set_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3818,7 +3818,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<String, int, AVSampleFormat, String>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_sample_fmt_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern String av_get_sample_fmt_string(byte* /*String*/ buf, int buf_size, AVSampleFormat sample_fmt);
+		public static extern String av_get_sample_fmt_string(sbyte* /*String*/ buf, int buf_size, AVSampleFormat sample_fmt);
 		
 		// Func<AVSampleFormat, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_bytes_per_sample", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3938,7 +3938,7 @@ namespace FFmpeg.AutoGen
 		
 		// Action<String, int, int, ulong>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_channel_layout_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern void av_get_channel_layout_string(byte* /*String*/ buf, int buf_size, int nb_channels, ulong channel_layout);
+		public static extern void av_get_channel_layout_string(sbyte* /*String*/ buf, int buf_size, int nb_channels, ulong channel_layout);
 		
 		// Action<AVBPrint*, int, ulong>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_bprint_channel_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -3968,9 +3968,9 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_channel_description", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern String av_get_channel_description(ulong channel);
 		
-		// Func<int, ulong*, byte**, int>
+		// Func<int, ulong*, sbyte**, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_standard_channel_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_get_standard_channel_layout(int index, ulong* layout, byte** name);
+		public static extern int av_get_standard_channel_layout(int index, ulong* layout, sbyte** name);
 		
 		// Func<AVDictionary*, String, AVDictionaryEntry*, int, AVDictionaryEntry*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_dict_get", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4000,9 +4000,9 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_dict_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void av_dict_free(AVDictionary** m);
 		
-		// Func<AVDictionary*, byte**, byte, byte, int>
+		// Func<AVDictionary*, sbyte**, sbyte, sbyte, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_dict_get_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_dict_get_string(AVDictionary* m, byte** buffer, byte key_val_sep, byte pairs_sep);
+		public static extern int av_dict_get_string(AVDictionary* m, sbyte** buffer, sbyte key_val_sep, sbyte pairs_sep);
 		
 		// Func<AVFrame*, long>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_frame_get_best_effort_timestamp", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4536,9 +4536,9 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="avpicture_fill", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int avpicture_fill(AVPicture* picture, byte* ptr, AVPixelFormat pix_fmt, int width, int height);
 		
-		// Func<AVPicture*, AVPixelFormat, int, int, byte*, int, int>
+		// Func<AVPicture*, AVPixelFormat, int, int, sbyte*, int, int>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="avpicture_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int avpicture_layout(AVPicture* src, AVPixelFormat pix_fmt, int width, int height, byte* dest, int dest_size);
+		public static extern int avpicture_layout(AVPicture* src, AVPixelFormat pix_fmt, int width, int height, sbyte* dest, int dest_size);
 		
 		// Func<AVPixelFormat, int, int, int>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="avpicture_get_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4594,11 +4594,11 @@ namespace FFmpeg.AutoGen
 		
 		// Func<String, uint, int, uint>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="av_get_codec_tag_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern uint av_get_codec_tag_string(byte* /*String*/ buf, uint buf_size, int codec_tag);
+		public static extern uint av_get_codec_tag_string(sbyte* /*String*/ buf, uint buf_size, int codec_tag);
 		
 		// Action<String, int, AVCodecContext*, int>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="avcodec_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern void avcodec_string(byte* /*String*/ buf, int buf_size, AVCodecContext* enc, int encode);
+		public static extern void avcodec_string(sbyte* /*String*/ buf, int buf_size, AVCodecContext* enc, int encode);
 		
 		// Func<AVCodec*, int, String>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="av_get_profile_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4664,9 +4664,9 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="av_fast_padded_mallocz", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void av_fast_padded_mallocz(void* ptr, int* size, uint min_size);
 		
-		// Func<byte*, int, int>
+		// Func<sbyte*, int, int>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="av_xiphlacing", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_xiphlacing(byte* s, int v);
+		public static extern int av_xiphlacing(sbyte* s, int v);
 		
 		// Action<void*, String, int>
 		[DllImport(AVCODEC_LIBRARY, EntryPoint="av_log_missing_feature", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4750,7 +4750,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<void*, String, AVOption**, String, int, String>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern String av_get_string(void* obj, byte* /*String*/ name, AVOption** o_out, byte* /*String*/ buf, int buf_len);
+		public static extern String av_get_string(void* obj, sbyte* /*String*/ name, AVOption** o_out, sbyte* /*String*/ buf, int buf_len);
 		
 		// Func<void*, AVOption*, AVOption*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_next_option", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4772,9 +4772,9 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_set_options_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_set_options_string(void* ctx, String opts, String key_val_sep, String pairs_sep);
 		
-		// Func<void*, String, byte**, String, String, int>
+		// Func<void*, String, sbyte**, String, String, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_from_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_opt_set_from_string(void* ctx, String opts, byte** shorthand, String key_val_sep, String pairs_sep);
+		public static extern int av_opt_set_from_string(void* ctx, String opts, sbyte** shorthand, String key_val_sep, String pairs_sep);
 		
 		// Action<void*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4792,9 +4792,9 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_set_dict2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_opt_set_dict2(void* obj, AVDictionary** options, int search_flags);
 		
-		// Func<byte**, String, String, int, byte**, byte**, int>
+		// Func<sbyte**, String, String, int, sbyte**, sbyte**, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_get_key_value", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_opt_get_key_value(byte** ropts, String key_val_sep, String pairs_sep, int flags, byte** rkey, byte** rval);
+		public static extern int av_opt_get_key_value(sbyte** ropts, String key_val_sep, String pairs_sep, int flags, sbyte** rkey, sbyte** rval);
 		
 		// Func<void*, AVOption*, String, int*, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_eval_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4952,9 +4952,9 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_is_set_to_default_by_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_opt_is_set_to_default_by_name(void* obj, String name, int search_flags);
 		
-		// Func<void*, int, int, byte**, byte, byte, int>
+		// Func<void*, int, int, sbyte**, sbyte, sbyte, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_opt_serialize", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_opt_serialize(void* obj, int opt_flags, int flags, byte** buffer, byte key_val_sep, byte pairs_sep);
+		public static extern int av_opt_serialize(void* obj, int opt_flags, int flags, sbyte** buffer, sbyte key_val_sep, sbyte pairs_sep);
 		
 		// Func<String, String>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_find_protocol_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -4964,17 +4964,17 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_check", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int avio_check(String url, int flags);
 		
-		// Func<byte*, int, int, void*, Func<void*, byte*, int, int>, Func<void*, byte*, int, int>, Func<void*, long, int, long>, AVIOContext*>
+		// Func<sbyte*, int, int, void*, Func<void*, byte*, int, int>, Func<void*, byte*, int, int>, Func<void*, long, int, long>, AVIOContext*>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_alloc_context", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern AVIOContext* avio_alloc_context(byte* buffer, int buffer_size, int write_flag, void* opaque, IntPtr func_opaque_buf_buf_size_4, IntPtr func_opaque_buf_buf_size_5, IntPtr func_opaque_offset_whence_6);
+		public static extern AVIOContext* avio_alloc_context(sbyte* buffer, int buffer_size, int write_flag, void* opaque, IntPtr func_opaque_buf_buf_size_4, IntPtr func_opaque_buf_buf_size_5, IntPtr func_opaque_offset_whence_6);
 		
 		// Action<AVIOContext*, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_w8", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void avio_w8(AVIOContext* s, int b);
 		
-		// Action<AVIOContext*, byte*, int>
+		// Action<AVIOContext*, sbyte*, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_write", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern void avio_write(AVIOContext* s, byte* buf, int size);
+		public static extern void avio_write(AVIOContext* s, sbyte* buf, int size);
 		
 		// Action<AVIOContext*, ulong>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_wl64", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5044,9 +5044,9 @@ namespace FFmpeg.AutoGen
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_flush", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void avio_flush(AVIOContext* s);
 		
-		// Func<AVIOContext*, byte*, int, int>
+		// Func<AVIOContext*, sbyte*, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_read", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int avio_read(AVIOContext* s, byte* buf, int size);
+		public static extern int avio_read(AVIOContext* s, sbyte* buf, int size);
 		
 		// Func<AVIOContext*, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_r8", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5086,15 +5086,15 @@ namespace FFmpeg.AutoGen
 		
 		// Func<AVIOContext*, int, String, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_get_str", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int avio_get_str(AVIOContext* pb, int maxlen, byte* /*String*/ buf, int buflen);
+		public static extern int avio_get_str(AVIOContext* pb, int maxlen, sbyte* /*String*/ buf, int buflen);
 		
 		// Func<AVIOContext*, int, String, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_get_str16le", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int avio_get_str16le(AVIOContext* pb, int maxlen, byte* /*String*/ buf, int buflen);
+		public static extern int avio_get_str16le(AVIOContext* pb, int maxlen, sbyte* /*String*/ buf, int buflen);
 		
 		// Func<AVIOContext*, int, String, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_get_str16be", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int avio_get_str16be(AVIOContext* pb, int maxlen, byte* /*String*/ buf, int buflen);
+		public static extern int avio_get_str16be(AVIOContext* pb, int maxlen, sbyte* /*String*/ buf, int buflen);
 		
 		// Func<AVIOContext**, String, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="avio_open", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5446,7 +5446,7 @@ namespace FFmpeg.AutoGen
 		
 		// Action<String, int, String, int, String, int, int*, String, int, String>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_url_split", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern void av_url_split(byte* /*String*/ proto, int proto_size, byte* /*String*/ authorization, int authorization_size, byte* /*String*/ hostname, int hostname_size, int* port_ptr, byte* /*String*/ path, int path_size, byte* /*String*/ url);
+		public static extern void av_url_split(sbyte* /*String*/ proto, int proto_size, sbyte* /*String*/ authorization, int authorization_size, sbyte* /*String*/ hostname, int hostname_size, int* port_ptr, sbyte* /*String*/ path, int path_size, sbyte* /*String*/ url);
 		
 		// Action<AVFormatContext*, int, String, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_dump_format", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5454,7 +5454,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<String, int, String, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_get_frame_filename", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_get_frame_filename(byte* /*String*/ buf, int buf_size, byte* /*String*/ path, int number);
+		public static extern int av_get_frame_filename(sbyte* /*String*/ buf, int buf_size, sbyte* /*String*/ path, int number);
 		
 		// Func<String, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_filename_number_test", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5462,7 +5462,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<AVFormatContext**, int, String, int, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_sdp_create", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int av_sdp_create(AVFormatContext** ac, int n_files, byte* /*String*/ buf, int size);
+		public static extern int av_sdp_create(AVFormatContext** ac, int n_files, sbyte* /*String*/ buf, int size);
 		
 		// Func<String, String, int>
 		[DllImport(AVFORMAT_LIBRARY, EntryPoint="av_match_ext", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5638,7 +5638,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<AVFilterContext*, String, String, String, int, int, int>
 		[DllImport(AVFILTER_LIBRARY, EntryPoint="avfilter_process_command", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern int avfilter_process_command(AVFilterContext* filter, byte* /*String*/ cmd, byte* /*String*/ arg, byte* /*String*/ res, int res_len, int flags);
+		public static extern int avfilter_process_command(AVFilterContext* filter, sbyte* /*String*/ cmd, sbyte* /*String*/ arg, sbyte* /*String*/ res, int res_len, int flags);
 		
 		// Action
 		[DllImport(AVFILTER_LIBRARY, EntryPoint="avfilter_register_all", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
