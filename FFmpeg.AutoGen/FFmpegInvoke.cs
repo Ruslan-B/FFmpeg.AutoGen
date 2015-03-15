@@ -2747,6 +2747,29 @@ namespace FFmpeg.AutoGen
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+	public unsafe struct AVComponentDescriptor
+	{
+		public uint _bitfield0x00;
+		//bit field plane uint16_t:2
+		//bit field step_minus1 uint16_t:3
+		//bit field offset_plus1 uint16_t:3
+		//bit field shift uint16_t:3
+		//bit field depth_minus1 uint16_t:4
+	}
+	
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+	public unsafe struct AVPixFmtDescriptor
+	{
+		public sbyte* name;
+		public byte nb_components;
+		public byte log2_chroma_w;
+		public byte log2_chroma_h;
+		public byte flags;
+        public fixed uint comp[4]; // <Ctype "AVComponentDescriptor * 4">
+		public sbyte* alias;
+	}
+	
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct SwrContext
 	{
 	}
@@ -3495,6 +3518,28 @@ namespace FFmpeg.AutoGen
 		public const int AVFILTER_THREAD_SLICE = 0x1; // (1 << 0)
 		public const int AVFILTER_CMD_FLAG_ONE = 0x1;
 		public const int AVFILTER_CMD_FLAG_FAST = 0x2;
+		public const int AV_PIX_FMT_FLAG_BE = 0x1; // (1 << 0)
+		public const int AV_PIX_FMT_FLAG_PAL = 0x2; // (1 << 1)
+		public const int AV_PIX_FMT_FLAG_BITSTREAM = 0x4; // (1 << 2)
+		public const int AV_PIX_FMT_FLAG_HWACCEL = 0x8; // (1 << 3)
+		public const int AV_PIX_FMT_FLAG_PLANAR = 0x10; // (1 << 4)
+		public const int AV_PIX_FMT_FLAG_RGB = 0x20; // (1 << 5)
+		public const int AV_PIX_FMT_FLAG_PSEUDOPAL = 0x40; // (1 << 6)
+		public const int AV_PIX_FMT_FLAG_ALPHA = 0x80; // (1 << 7)
+		public const int PIX_FMT_BE = 0x0; // AV_PIX_FMT_FLAG_BE
+		public const int PIX_FMT_PAL = 0x0; // AV_PIX_FMT_FLAG_PAL
+		public const int PIX_FMT_BITSTREAM = 0x0; // AV_PIX_FMT_FLAG_BITSTREAM
+		public const int PIX_FMT_HWACCEL = 0x0; // AV_PIX_FMT_FLAG_HWACCEL
+		public const int PIX_FMT_PLANAR = 0x0; // AV_PIX_FMT_FLAG_PLANAR
+		public const int PIX_FMT_RGB = 0x0; // AV_PIX_FMT_FLAG_RGB
+		public const int PIX_FMT_PSEUDOPAL = 0x0; // AV_PIX_FMT_FLAG_PSEUDOPAL
+		public const int PIX_FMT_ALPHA = 0x0; // AV_PIX_FMT_FLAG_ALPHA
+		public const int FF_LOSS_RESOLUTION = 0x1;
+		public const int FF_LOSS_DEPTH = 0x2;
+		public const int FF_LOSS_COLORSPACE = 0x4;
+		public const int FF_LOSS_ALPHA = 0x8;
+		public const int FF_LOSS_COLORQUANT = 0x10;
+		public const int FF_LOSS_CHROMA = 0x20;
 		public const int LIBPOSTPROC_VERSION_MAJOR = 0x35;
 		public const int LIBPOSTPROC_VERSION_MINOR = 0x3;
 		public const int LIBPOSTPROC_VERSION_MICRO = 0x64;
@@ -3634,7 +3679,7 @@ namespace FFmpeg.AutoGen
 		
 		// Func<String, uint, String>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_strndup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern String av_strndup(sbyte* /*String*/ s, uint len);
+		public static extern String av_strndup(String s, uint len);
 		
 		// Func<void*, uint, void*>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_memdup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5767,6 +5812,138 @@ namespace FFmpeg.AutoGen
 		// Func<AVFilterGraph*, int>
 		[DllImport(AVFILTER_LIBRARY, EntryPoint="avfilter_graph_request_oldest", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int avfilter_graph_request_oldest(AVFilterGraph* graph);
+		
+		// Action<ushort*, byte**, int*, AVPixFmtDescriptor*, int, int, int, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_read_image_line", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_read_image_line(ushort* dst, byte** data, int* linesize, AVPixFmtDescriptor* desc, int x, int y, int c, int w, int read_pal_component);
+		
+		// Action<ushort*, byte**, int*, AVPixFmtDescriptor*, int, int, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_write_image_line", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_write_image_line(ushort* src, byte** data, int* linesize, AVPixFmtDescriptor* desc, int x, int y, int c, int w);
+		
+		// Func<String, AVPixelFormat>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_pix_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVPixelFormat av_get_pix_fmt(String name);
+		
+		// Func<AVPixelFormat, String>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_pix_fmt_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern String av_get_pix_fmt_name(AVPixelFormat pix_fmt);
+		
+		// Func<String, int, AVPixelFormat, String>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_pix_fmt_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern String av_get_pix_fmt_string(String buf, int buf_size, AVPixelFormat pix_fmt);
+		
+		// Func<AVPixFmtDescriptor*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_bits_per_pixel", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_get_bits_per_pixel(AVPixFmtDescriptor* pixdesc);
+		
+		// Func<AVPixFmtDescriptor*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_padded_bits_per_pixel", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_get_padded_bits_per_pixel(AVPixFmtDescriptor* pixdesc);
+		
+		// Func<AVPixelFormat, AVPixFmtDescriptor*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_pix_fmt_desc_get", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVPixFmtDescriptor* av_pix_fmt_desc_get(AVPixelFormat pix_fmt);
+		
+		// Func<AVPixFmtDescriptor*, AVPixFmtDescriptor*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_pix_fmt_desc_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVPixFmtDescriptor* av_pix_fmt_desc_next(AVPixFmtDescriptor* prev);
+		
+		// Func<AVPixFmtDescriptor*, AVPixelFormat>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_pix_fmt_desc_get_id", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVPixelFormat av_pix_fmt_desc_get_id(AVPixFmtDescriptor* desc);
+		
+		// Func<AVPixelFormat, int*, int*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_pix_fmt_get_chroma_sub_sample", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_pix_fmt_get_chroma_sub_sample(AVPixelFormat pix_fmt, int* h_shift, int* v_shift);
+		
+		// Func<AVPixelFormat, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_pix_fmt_count_planes", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_pix_fmt_count_planes(AVPixelFormat pix_fmt);
+		
+		// Action
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="ff_check_pixfmt_descriptors", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void ff_check_pixfmt_descriptors();
+		
+		// Func<AVPixelFormat, AVPixelFormat>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_pix_fmt_swap_endianness", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVPixelFormat av_pix_fmt_swap_endianness(AVPixelFormat pix_fmt);
+		
+		// Func<AVPixelFormat, AVPixelFormat, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_get_pix_fmt_loss", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_get_pix_fmt_loss(AVPixelFormat dst_pix_fmt, AVPixelFormat src_pix_fmt, int has_alpha);
+		
+		// Func<AVPixelFormat, AVPixelFormat, AVPixelFormat, int, int*, AVPixelFormat>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_find_best_pix_fmt_of_2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVPixelFormat av_find_best_pix_fmt_of_2(AVPixelFormat dst_pix_fmt1, AVPixelFormat dst_pix_fmt2, AVPixelFormat src_pix_fmt, int has_alpha, int* loss_ptr);
+		
+		// Func<AVColorRange, String>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_color_range_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern String av_color_range_name(AVColorRange range);
+		
+		// Func<AVColorPrimaries, String>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_color_primaries_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern String av_color_primaries_name(AVColorPrimaries primaries);
+		
+		// Func<AVColorTransferCharacteristic, String>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_color_transfer_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern String av_color_transfer_name(AVColorTransferCharacteristic transfer);
+		
+		// Func<AVColorSpace, String>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_color_space_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern String av_color_space_name(AVColorSpace space);
+		
+		// Func<AVChromaLocation, String>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_chroma_location_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern String av_chroma_location_name(AVChromaLocation location);
+		
+		// Action<int*, int*, AVPixFmtDescriptor*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_image_fill_max_pixsteps", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_image_fill_max_pixsteps(int* max_pixsteps, int* max_pixstep_comps, AVPixFmtDescriptor* pixdesc);
+		
+		// Func<AVPixelFormat, int, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_image_get_linesize", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_image_get_linesize(AVPixelFormat pix_fmt, int width, int plane);
+		
+		// Func<int*, AVPixelFormat, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_image_fill_linesizes", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_image_fill_linesizes(int* linesizes, AVPixelFormat pix_fmt, int width);
+		
+		// Func<byte**, AVPixelFormat, int, byte*, int*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_image_fill_pointers", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_image_fill_pointers(byte** data, AVPixelFormat pix_fmt, int height, byte* ptr, int* linesizes);
+		
+		// Func<byte**, int*, int, int, AVPixelFormat, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_image_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_image_alloc(byte** pointers, int* linesizes, int w, int h, AVPixelFormat pix_fmt, int align);
+		
+		// Action<byte*, int, byte*, int, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_image_copy_plane", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_image_copy_plane(byte* dst, int dst_linesize, byte* src, int src_linesize, int bytewidth, int height);
+		
+		// Action<byte**, int*, byte**, int*, AVPixelFormat, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_image_copy", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_image_copy(byte** dst_data, int* dst_linesizes, byte** src_data, int* src_linesizes, AVPixelFormat pix_fmt, int width, int height);
+		
+		// Func<byte**, int*, byte*, AVPixelFormat, int, int, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_image_fill_arrays", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_image_fill_arrays(byte** dst_data, int* dst_linesize, byte* src, AVPixelFormat pix_fmt, int width, int height, int align);
+		
+		// Func<AVPixelFormat, int, int, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_image_get_buffer_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_image_get_buffer_size(AVPixelFormat pix_fmt, int width, int height, int align);
+		
+		// Func<byte*, int, byte**, int*, AVPixelFormat, int, int, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_image_copy_to_buffer", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_image_copy_to_buffer(byte* dst, int dst_size, byte** src_data, int* src_linesize, AVPixelFormat pix_fmt, int width, int height, int align);
+		
+		// Func<int, int, int, void*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_image_check_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_image_check_size(int w, int h, int log_offset, void* log_ctx);
+		
+		// Func<int, int, AVRational, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_image_check_sar", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_image_check_sar(int w, int h, AVRational sar);
 		
 		// Func<int>
 		[DllImport(POSTPROC_LIBRARY, EntryPoint="postproc_version", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
