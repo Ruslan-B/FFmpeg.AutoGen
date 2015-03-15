@@ -468,6 +468,7 @@ class Options:
                'FFmpeg/include/libavfilter/avfilter.h',
                'FFmpeg/include/libavformat/avformat.h',
                'FFmpeg/include/libavutil/avutil.h',
+               'FFmpeg/include/libavutil/imgutils.h',
                'FFmpeg/include/libpostproc/postprocess.h',
                'FFmpeg/include/libswresample/swresample.h',
                'FFmpeg/include/libswscale/swscale.h']
@@ -509,7 +510,6 @@ class Options:
     output_only_from_paths = ['./FFmpeg/include']
     force_string_to_byte_ptr_for_methods = [
         'av_strerror',
-        'av_strndup',
         'av_log_format_line',
         'av_get_codec_tag_string',
         'av_get_sample_fmt_string',
