@@ -4,7 +4,9 @@ using System.Runtime.InteropServices;
 namespace FFmpeg.AutoGen
 {
 	using AVClassCategory=anon_9;
-	
+    using AVBufferSinkParams=anon_16;
+    using AVABufferSinkParams=anon_17;
+
 	// Func<AVFormatContext*, int, void*, uint, int>
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 	public unsafe delegate int av_format_control_message(AVFormatContext* s, int type, void* data, uint data_size);
@@ -16,11 +18,6 @@ namespace FFmpeg.AutoGen
 	// Func<AVFilterContext*, avfilter_action_func*, void*, int*, int, int>
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 	public unsafe delegate int avfilter_execute_func(AVFilterContext* ctx, IntPtr func_func, void* arg, int* ret, int nb_jobs);
-	
-	using AVBufferSinkParams=anon_16;
-	
-	using AVABufferSinkParams=anon_17;
-	
 	
 	public enum AVMediaType
 	{
@@ -2809,7 +2806,7 @@ namespace FFmpeg.AutoGen
 		public byte log2_chroma_w;
 		public byte log2_chroma_h;
 		public byte flags;
-		public fixed AVComponentDescriptor comp[4]; // <Ctype "AVComponentDescriptor * 4">
+        public fixed uint comp[4]; // <Ctype "AVComponentDescriptor * 4">
 		public sbyte* alias;
 	}
 	
