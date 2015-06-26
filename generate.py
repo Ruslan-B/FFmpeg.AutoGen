@@ -466,6 +466,7 @@ class Options:
     headers = ['FFmpeg/include/libavcodec/avcodec.h',
                'FFmpeg/include/libavdevice/avdevice.h',
                'FFmpeg/include/libavfilter/avfilter.h',
+               'FFmpeg/include/libavfilter/buffersrc.h',
                'FFmpeg/include/libavformat/avformat.h',
                'FFmpeg/include/libavutil/avutil.h',
                'FFmpeg/include/libavutil/imgutils.h',

@@ -1439,6 +1439,14 @@ namespace FFmpeg.AutoGen
 		AVFILTER_AUTO_CONVERT_NONE = -0x1, // (-1)
 	}
 	
+	public enum anon_15
+	{
+		AV_BUFFERSRC_FLAG_NO_CHECK_FORMAT = 0x1, // 1
+		AV_BUFFERSRC_FLAG_NO_COPY,
+		AV_BUFFERSRC_FLAG_PUSH = 0x4, // 4
+		AV_BUFFERSRC_FLAG_KEEP_REF = 0x8, // 8
+	}
+	
 	public enum SwrDitherType
 	{
 		SWR_DITHER_NONE,
@@ -2765,7 +2773,7 @@ namespace FFmpeg.AutoGen
 		public byte log2_chroma_w;
 		public byte log2_chroma_h;
 		public byte flags;
-        public fixed uint comp[4]; // <Ctype "AVComponentDescriptor * 4">
+		public fixed AVComponentDescriptor comp[4]; // <Ctype "AVComponentDescriptor * 4">
 		public sbyte* alias;
 	}
 	
@@ -5812,6 +5820,30 @@ namespace FFmpeg.AutoGen
 		// Func<AVFilterGraph*, int>
 		[DllImport(AVFILTER_LIBRARY, EntryPoint="avfilter_graph_request_oldest", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int avfilter_graph_request_oldest(AVFilterGraph* graph);
+		
+		// Func<AVFilterContext*, AVFilterBufferRef*, int, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersrc_add_ref", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersrc_add_ref(AVFilterContext* buffer_src, AVFilterBufferRef* picref, int flags);
+		
+		// Func<AVFilterContext*, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersrc_get_nb_failed_requests", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersrc_get_nb_failed_requests(AVFilterContext* buffer_src);
+		
+		// Func<AVFilterContext*, AVFilterBufferRef*, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersrc_buffer", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersrc_buffer(AVFilterContext* ctx, AVFilterBufferRef* buf);
+		
+		// Func<AVFilterContext*, AVFrame*, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersrc_write_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersrc_write_frame(AVFilterContext* ctx, AVFrame* frame);
+		
+		// Func<AVFilterContext*, AVFrame*, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersrc_add_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersrc_add_frame(AVFilterContext* ctx, AVFrame* frame);
+		
+		// Func<AVFilterContext*, AVFrame*, int, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersrc_add_frame_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersrc_add_frame_flags(AVFilterContext* buffer_src, AVFrame* frame, int flags);
 		
 		// Action<ushort*, byte**, int*, AVPixFmtDescriptor*, int, int, int, int, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_read_image_line", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
