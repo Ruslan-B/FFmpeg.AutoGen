@@ -467,8 +467,10 @@ class Options:
                'FFmpeg/include/libavdevice/avdevice.h',
                'FFmpeg/include/libavfilter/avfilter.h',
                'FFmpeg/include/libavfilter/buffersrc.h',
+               'FFmpeg/include/libavfilter/buffersink.h',
                'FFmpeg/include/libavformat/avformat.h',
                'FFmpeg/include/libavutil/avutil.h',
+               'FFmpeg/include/libavutil/audio_fifo.h',
                'FFmpeg/include/libavutil/imgutils.h',
                'FFmpeg/include/libpostproc/postprocess.h',
                'FFmpeg/include/libswresample/swresample.h',
@@ -484,7 +486,7 @@ class Options:
     include_symbols = []
     include_macros = True
     if os.name == 'nt':
-        compile_libdirs = ['.\\FFmpeg\\bin\\windows\\x86']
+        compile_libdirs = ['.\\FFmpeg\\bin\\windows\\x64']
         libraries = ['avutil-54', 'avcodec-56', 'avformat-56', 'swresample-1',
                      'swscale-3', 'postproc-53', 'avfilter-5', 'avdevice-56']
     else:
