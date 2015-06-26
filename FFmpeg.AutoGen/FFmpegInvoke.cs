@@ -17,6 +17,10 @@ namespace FFmpeg.AutoGen
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 	public unsafe delegate int avfilter_execute_func(AVFilterContext* ctx, IntPtr func_func, void* arg, int* ret, int nb_jobs);
 	
+	using AVBufferSinkParams=anon_16;
+	
+	using AVABufferSinkParams=anon_17;
+	
 	
 	public enum AVMediaType
 	{
@@ -2755,6 +2759,38 @@ namespace FFmpeg.AutoGen
 	}
 	
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+	public unsafe struct anon_16
+	{
+		public AVPixelFormat* pixel_fmts;
+	}
+	
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+	public unsafe struct anon_17
+	{
+		public AVSampleFormat* sample_fmts;
+		public long* channel_layouts;
+		public int* channel_counts;
+		public int all_channel_counts;
+		public int* sample_rates;
+	}
+	
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+	public unsafe struct AVFifoBuffer
+	{
+		public byte* buffer;
+		public byte* rptr;
+		public byte* wptr;
+		public byte* end;
+		public uint rndx;
+		public uint wndx;
+	}
+	
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+	public unsafe struct AVAudioFifo
+	{
+	}
+	
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public unsafe struct AVComponentDescriptor
 	{
 		public uint _bitfield0x00;
@@ -3526,6 +3562,8 @@ namespace FFmpeg.AutoGen
 		public const int AVFILTER_THREAD_SLICE = 0x1; // (1 << 0)
 		public const int AVFILTER_CMD_FLAG_ONE = 0x1;
 		public const int AVFILTER_CMD_FLAG_FAST = 0x2;
+		public const int AV_BUFFERSINK_FLAG_PEEK = 0x1;
+		public const int AV_BUFFERSINK_FLAG_NO_REQUEST = 0x2;
 		public const int AV_PIX_FMT_FLAG_BE = 0x1; // (1 << 0)
 		public const int AV_PIX_FMT_FLAG_PAL = 0x2; // (1 << 1)
 		public const int AV_PIX_FMT_FLAG_BITSTREAM = 0x4; // (1 << 2)
@@ -5844,6 +5882,134 @@ namespace FFmpeg.AutoGen
 		// Func<AVFilterContext*, AVFrame*, int, int>
 		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersrc_add_frame_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int av_buffersrc_add_frame_flags(AVFilterContext* buffer_src, AVFrame* frame, int flags);
+		
+		// Func<AVFilterContext*, AVFilterBufferRef**, int, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersink_get_buffer_ref", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersink_get_buffer_ref(AVFilterContext* buffer_sink, AVFilterBufferRef** bufref, int flags);
+		
+		// Func<AVFilterContext*, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersink_poll_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersink_poll_frame(AVFilterContext* ctx);
+		
+		// Func<AVFilterContext*, AVFilterBufferRef**, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersink_read", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersink_read(AVFilterContext* ctx, AVFilterBufferRef** buf);
+		
+		// Func<AVFilterContext*, AVFilterBufferRef**, int, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersink_read_samples", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersink_read_samples(AVFilterContext* ctx, AVFilterBufferRef** buf, int nb_samples);
+		
+		// Func<AVFilterContext*, AVFrame*, int, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersink_get_frame_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersink_get_frame_flags(AVFilterContext* ctx, AVFrame* frame, int flags);
+		
+		// Func<AVBufferSinkParams*>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersink_params_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVBufferSinkParams* av_buffersink_params_alloc();
+		
+		// Func<AVABufferSinkParams*>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_abuffersink_params_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVABufferSinkParams* av_abuffersink_params_alloc();
+		
+		// Action<AVFilterContext*, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersink_set_frame_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_buffersink_set_frame_size(AVFilterContext* ctx, int frame_size);
+		
+		// Func<AVFilterContext*, AVRational>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersink_get_frame_rate", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVRational av_buffersink_get_frame_rate(AVFilterContext* ctx);
+		
+		// Func<AVFilterContext*, AVFrame*, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersink_get_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersink_get_frame(AVFilterContext* ctx, AVFrame* frame);
+		
+		// Func<AVFilterContext*, AVFrame*, int, int>
+		[DllImport(AVFILTER_LIBRARY, EntryPoint="av_buffersink_get_samples", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_buffersink_get_samples(AVFilterContext* ctx, AVFrame* frame, int nb_samples);
+		
+		// Func<int, AVFifoBuffer*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fifo_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVFifoBuffer* av_fifo_alloc(int size);
+		
+		// Func<uint, uint, AVFifoBuffer*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fifo_alloc_array", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVFifoBuffer* av_fifo_alloc_array(uint nmemb, uint size);
+		
+		// Action<AVFifoBuffer*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fifo_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_fifo_free(AVFifoBuffer* f);
+		
+		// Action<AVFifoBuffer**>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fifo_freep", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_fifo_freep(AVFifoBuffer** f);
+		
+		// Action<AVFifoBuffer*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fifo_reset", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_fifo_reset(AVFifoBuffer* f);
+		
+		// Func<AVFifoBuffer*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fifo_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_fifo_size(AVFifoBuffer* f);
+		
+		// Func<AVFifoBuffer*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fifo_space", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_fifo_space(AVFifoBuffer* f);
+		
+		// Func<AVFifoBuffer*, void*, int, Action<void*, void*, int>, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fifo_generic_read", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_fifo_generic_read(AVFifoBuffer* f, void* dest, int buf_size, IntPtr func____3);
+		
+		// Func<AVFifoBuffer*, void*, int, Func<void*, void*, int, int>, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fifo_generic_write", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_fifo_generic_write(AVFifoBuffer* f, void* src, int size, IntPtr func____3);
+		
+		// Func<AVFifoBuffer*, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fifo_realloc2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_fifo_realloc2(AVFifoBuffer* f, int size);
+		
+		// Func<AVFifoBuffer*, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fifo_grow", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_fifo_grow(AVFifoBuffer* f, int additional_space);
+		
+		// Action<AVFifoBuffer*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_fifo_drain", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_fifo_drain(AVFifoBuffer* f, int size);
+		
+		// Action<AVAudioFifo*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_audio_fifo_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_audio_fifo_free(AVAudioFifo* af);
+		
+		// Func<AVSampleFormat, int, int, AVAudioFifo*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_audio_fifo_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern AVAudioFifo* av_audio_fifo_alloc(AVSampleFormat sample_fmt, int channels, int nb_samples);
+		
+		// Func<AVAudioFifo*, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_audio_fifo_realloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_audio_fifo_realloc(AVAudioFifo* af, int nb_samples);
+		
+		// Func<AVAudioFifo*, void**, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_audio_fifo_write", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_audio_fifo_write(AVAudioFifo* af, void** data, int nb_samples);
+		
+		// Func<AVAudioFifo*, void**, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_audio_fifo_read", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_audio_fifo_read(AVAudioFifo* af, void** data, int nb_samples);
+		
+		// Func<AVAudioFifo*, int, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_audio_fifo_drain", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_audio_fifo_drain(AVAudioFifo* af, int nb_samples);
+		
+		// Action<AVAudioFifo*>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_audio_fifo_reset", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void av_audio_fifo_reset(AVAudioFifo* af);
+		
+		// Func<AVAudioFifo*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_audio_fifo_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_audio_fifo_size(AVAudioFifo* af);
+		
+		// Func<AVAudioFifo*, int>
+		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_audio_fifo_space", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int av_audio_fifo_space(AVAudioFifo* af);
 		
 		// Action<ushort*, byte**, int*, AVPixFmtDescriptor*, int, int, int, int, int>
 		[DllImport(AVUTIL_LIBRARY, EntryPoint="av_read_image_line", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
