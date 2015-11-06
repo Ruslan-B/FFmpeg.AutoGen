@@ -1,7 +1,8 @@
 /*
- * DXVA2 HW acceleration
+ * Direct3D11 HW acceleration
  *
  * copyright (c) 2009 Laurent Aimar
+ * copyright (c) 2015 Steve Lhomme
  *
  * This file is part of FFmpeg.
  *
@@ -20,13 +21,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#ifndef AVCODEC_DXVA_H
-#define AVCODEC_DXVA_H
+#ifndef AVCODEC_D3D11VA_H
+#define AVCODEC_D3D11VA_H
 
 /**
  * @file
- * @ingroup lavc_codec_hwaccel_dxva2
- * Public libavcodec DXVA2 header.
+ * @ingroup lavc_codec_hwaccel_d3d11va
+ * Public libavcodec D3D11VA header.
  */
 
 #if !defined(_WIN32_WINNT) || _WIN32_WINNT < 0x0602
@@ -35,35 +36,39 @@
 #endif
 
 #include <stdint.h>
-#include <d3d9.h>
-#include <dxva2api.h>
+#include <d3d11.h>
 
 /**
- * @defgroup lavc_codec_hwaccel_dxva2 DXVA2
+ * @defgroup lavc_codec_hwaccel_d3d11va Direct3D11
  * @ingroup lavc_codec_hwaccel
  *
  * @{
  */
 
-#define FF_DXVA2_WORKAROUND_SCALING_LIST_ZIGZAG 1 ///< Work around for DXVA2 and old UVD/UVD+ ATI video cards
-#define FF_DXVA2_WORKAROUND_INTEL_CLEARVIDEO    2 ///< Work around for DXVA2 and old Intel GPUs with ClearVideo interface
+#define FF_DXVA2_WORKAROUND_SCALING_LIST_ZIGZAG 1 ///< Work around for Direct3D11 and old UVD/UVD+ ATI video cards
+#define FF_DXVA2_WORKAROUND_INTEL_CLEARVIDEO    2 ///< Work around for Direct3D11 and old Intel GPUs with ClearVideo interface
 
 /**
  * This structure is used to provides the necessary configurations and data
- * to the DXVA2 FFmpeg HWAccel implementation.
+ * to the Direct3D11 FFmpeg HWAccel implementation.
  *
  * The application must make it available as AVCodecContext.hwaccel_context.
  */
-struct dxva_context {
+struct AVD3D11VAContext {
     /**
-     * DXVA2 decoder object
+     * D3D11 decoder object
      */
-    IDirectXVideoDecoder *decoder;
+    ID3D11VideoDecoder *decoder;
 
     /**
-     * DXVA2 configuration used to create the decoder
+      * D3D11 VideoContext
+      */
+    ID3D11VideoContext *video_context;
+
+    /**
+     * D3D11 configuration used to create the decoder
      */
-    const DXVA2_ConfigPictureDecode *cfg;
+    D3D11_VIDEO_DECODER_CONFIG *cfg;
 
     /**
      * The number of surface in the surface array
@@ -73,7 +78,7 @@ struct dxva_context {
     /**
      * The array of Direct3D surfaces used to create the decoder
      */
-    LPDIRECT3DSURFACE9 *surface;
+    ID3D11VideoDecoderOutputView **surface;
 
     /**
      * A bit field configuring the workarounds needed for using the decoder
@@ -90,4 +95,4 @@ struct dxva_context {
  * @}
  */
 
-#endif /* AVCODEC_DXVA_H */
+#endif /* AVCODEC_D3D11VA_H */
