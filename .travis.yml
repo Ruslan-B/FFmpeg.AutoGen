@@ -1,2 +1,4 @@
 language: csharp
 solution: FFmpeg.AutoGen.sln
+script:
+  - xbuild /p:Platform=x86 FFmpeg.AutoGen.sln
