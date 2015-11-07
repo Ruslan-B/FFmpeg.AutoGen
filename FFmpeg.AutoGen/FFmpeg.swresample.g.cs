@@ -80,7 +80,7 @@ namespace FFmpeg.AutoGen
         public static extern void swr_close(SwrContext* @s);
         
         [DllImport(libswresample, EntryPoint = "swr_convert", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int swr_convert(SwrContext* @s, char** @out, int @out_count, char** @in, int @in_count);
+        public static extern int swr_convert(SwrContext* @s, sbyte** @out, int @out_count, sbyte** @in, int @in_count);
         
         [DllImport(libswresample, EntryPoint = "swr_next_pts", CallingConvention = CallingConvention.Cdecl)]
         public static extern long swr_next_pts(SwrContext* @s, long @pts);

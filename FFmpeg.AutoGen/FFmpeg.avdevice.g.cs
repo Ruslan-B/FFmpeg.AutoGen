@@ -312,7 +312,7 @@ namespace FFmpeg.AutoGen
         public static extern int av_opt_set_q(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, AVRational @val, int @search_flags);
         
         [DllImport(libavdevice, EntryPoint = "av_opt_set_bin", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_opt_set_bin(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, char* @val, int @size, int @search_flags);
+        public static extern int av_opt_set_bin(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, sbyte* @val, int @size, int @search_flags);
         
         [DllImport(libavdevice, EntryPoint = "av_opt_set_image_size", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_opt_set_image_size(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @w, int @h, int @search_flags);
@@ -333,7 +333,7 @@ namespace FFmpeg.AutoGen
         public static extern int av_opt_set_dict_val(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, AVDictionary* @val, int @search_flags);
         
         [DllImport(libavdevice, EntryPoint = "av_opt_get", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_opt_get(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, char** @out_val);
+        public static extern int av_opt_get(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, sbyte** @out_val);
         
         [DllImport(libavdevice, EntryPoint = "av_opt_get_int", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_opt_get_int(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, long* @out_val);

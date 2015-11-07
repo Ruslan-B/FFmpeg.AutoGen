@@ -37,8 +37,8 @@ namespace FFmpeg.AutoGen
     
     public unsafe partial struct AVFilterBuffer
     {
-        public char* @data0; public char* @data1; public char* @data2; public char* @data3; public char* @data4; public char* @data5; public char* @data6; public char* @data7; 
-        public char** @extended_data;
+        public sbyte* @data0; public sbyte* @data1; public sbyte* @data2; public sbyte* @data3; public sbyte* @data4; public sbyte* @data5; public sbyte* @data6; public sbyte* @data7; 
+        public sbyte** @extended_data;
         public fixed int @linesize[8]; 
         public void* @priv;
         public IntPtr @free;
@@ -73,8 +73,8 @@ namespace FFmpeg.AutoGen
     public unsafe partial struct AVFilterBufferRef
     {
         public AVFilterBuffer* @buf;
-        public char* @data0; public char* @data1; public char* @data2; public char* @data3; public char* @data4; public char* @data5; public char* @data6; public char* @data7; 
-        public char** @extended_data;
+        public sbyte* @data0; public sbyte* @data1; public sbyte* @data2; public sbyte* @data3; public sbyte* @data4; public sbyte* @data5; public sbyte* @data6; public sbyte* @data7; 
+        public sbyte** @extended_data;
         public fixed int @linesize[8]; 
         public AVFilterBufferRefVideoProps* @video;
         public AVFilterBufferRefAudioProps* @audio;
@@ -405,13 +405,13 @@ namespace FFmpeg.AutoGen
         public static extern int avfilter_config_links(AVFilterContext* @filter);
         
         [DllImport(libavfilter, EntryPoint = "avfilter_get_video_buffer_ref_from_arrays", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVFilterBufferRef* avfilter_get_video_buffer_ref_from_arrays([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] char*[] @data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesize, int @perms, int @w, int @h, AVPixelFormat @format);
+        public static extern AVFilterBufferRef* avfilter_get_video_buffer_ref_from_arrays([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] sbyte*[] @data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesize, int @perms, int @w, int @h, AVPixelFormat @format);
         
         [DllImport(libavfilter, EntryPoint = "avfilter_get_audio_buffer_ref_from_arrays", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVFilterBufferRef* avfilter_get_audio_buffer_ref_from_arrays(char** @data, int @linesize, int @perms, int @nb_samples, AVSampleFormat @sample_fmt, ulong @channel_layout);
+        public static extern AVFilterBufferRef* avfilter_get_audio_buffer_ref_from_arrays(sbyte** @data, int @linesize, int @perms, int @nb_samples, AVSampleFormat @sample_fmt, ulong @channel_layout);
         
         [DllImport(libavfilter, EntryPoint = "avfilter_get_audio_buffer_ref_from_arrays_channels", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVFilterBufferRef* avfilter_get_audio_buffer_ref_from_arrays_channels(char** @data, int @linesize, int @perms, int @nb_samples, AVSampleFormat @sample_fmt, int @channels, ulong @channel_layout);
+        public static extern AVFilterBufferRef* avfilter_get_audio_buffer_ref_from_arrays_channels(sbyte** @data, int @linesize, int @perms, int @nb_samples, AVSampleFormat @sample_fmt, int @channels, ulong @channel_layout);
         
         [DllImport(libavfilter, EntryPoint = "avfilter_process_command", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avfilter_process_command(AVFilterContext* @filter, [MarshalAs(UnmanagedType.LPStr)] string @cmd, [MarshalAs(UnmanagedType.LPStr)] string @arg, IntPtr @res, int @res_len, int @flags);

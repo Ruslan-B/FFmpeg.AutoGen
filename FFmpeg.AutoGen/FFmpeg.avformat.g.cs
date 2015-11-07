@@ -75,10 +75,10 @@ namespace FFmpeg.AutoGen
     public unsafe partial struct AVIOContext
     {
         public AVClass* @av_class;
-        public char* @buffer;
+        public sbyte* @buffer;
         public int @buffer_size;
-        public char* @buf_ptr;
-        public char* @buf_end;
+        public sbyte* @buf_ptr;
+        public sbyte* @buf_end;
         public void* @opaque;
         public IntPtr @read_packet;
         public IntPtr @write_packet;
@@ -89,7 +89,7 @@ namespace FFmpeg.AutoGen
         public int @write_flag;
         public int @max_packet_size;
         public int @checksum;
-        public char* @checksum_ptr;
+        public sbyte* @checksum_ptr;
         public IntPtr @update_checksum;
         public int @error;
         public IntPtr @read_pause;
@@ -134,7 +134,7 @@ namespace FFmpeg.AutoGen
     public unsafe partial struct AVProbeData
     {
         public sbyte* @filename;
-        public char* @buf;
+        public sbyte* @buf;
         public int @buf_size;
         public sbyte* @mime_type;
     }
@@ -254,10 +254,10 @@ namespace FFmpeg.AutoGen
         public int @pts_wrap_behavior;
         public int @update_initial_durations_done;
         public fixed long @pts_reorder_error[17]; 
-        public fixed char @pts_reorder_error_count[17]; 
+        public fixed sbyte @pts_reorder_error_count[17]; 
         public long @last_dts_for_order_check;
-        public char @dts_ordered;
-        public char @dts_misordered;
+        public sbyte @dts_ordered;
+        public sbyte @dts_misordered;
         public int @inject_global_side_data;
         public sbyte* @recommended_encoder_configuration;
         public AVRational @display_aspect_ratio;
@@ -338,7 +338,7 @@ namespace FFmpeg.AutoGen
         public int @flags;
         public uint @probesize;
         public int @max_analyze_duration;
-        public char* @key;
+        public sbyte* @key;
         public int @keylen;
         public uint @nb_programs;
         public AVProgram** @programs;
@@ -387,7 +387,7 @@ namespace FFmpeg.AutoGen
         public long @output_ts_offset;
         public long @max_analyze_duration2;
         public long @probesize2;
-        public char* @dump_separator;
+        public sbyte* @dump_separator;
         public AVCodecID @data_codec_id;
         public IntPtr @open_cb;
     }
@@ -465,13 +465,13 @@ namespace FFmpeg.AutoGen
         public static extern void avio_free_directory_entry(AVIODirEntry** @entry);
         
         [DllImport(libavformat, EntryPoint = "avio_alloc_context", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVIOContext* avio_alloc_context(char* @buffer, int @buffer_size, int @write_flag, void* @opaque, IntPtr* @read_packet, IntPtr* @write_packet, IntPtr* @seek);
+        public static extern AVIOContext* avio_alloc_context(sbyte* @buffer, int @buffer_size, int @write_flag, void* @opaque, IntPtr* @read_packet, IntPtr* @write_packet, IntPtr* @seek);
         
         [DllImport(libavformat, EntryPoint = "avio_w8", CallingConvention = CallingConvention.Cdecl)]
         public static extern void avio_w8(AVIOContext* @s, int @b);
         
         [DllImport(libavformat, EntryPoint = "avio_write", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void avio_write(AVIOContext* @s, char* @buf, int @size);
+        public static extern void avio_write(AVIOContext* @s, sbyte* @buf, int @size);
         
         [DllImport(libavformat, EntryPoint = "avio_wl64", CallingConvention = CallingConvention.Cdecl)]
         public static extern void avio_wl64(AVIOContext* @s, ulong @val);
@@ -531,7 +531,7 @@ namespace FFmpeg.AutoGen
         public static extern void avio_flush(AVIOContext* @s);
         
         [DllImport(libavformat, EntryPoint = "avio_read", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avio_read(AVIOContext* @s, char* @buf, int @size);
+        public static extern int avio_read(AVIOContext* @s, sbyte* @buf, int @size);
         
         [DllImport(libavformat, EntryPoint = "avio_r8", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avio_r8(AVIOContext* @s);
@@ -585,7 +585,7 @@ namespace FFmpeg.AutoGen
         public static extern int avio_open_dyn_buf(AVIOContext** @s);
         
         [DllImport(libavformat, EntryPoint = "avio_close_dyn_buf", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avio_close_dyn_buf(AVIOContext* @s, char** @pbuffer);
+        public static extern int avio_close_dyn_buf(AVIOContext* @s, sbyte** @pbuffer);
         
         [DllImport(libavformat, EntryPoint = "avio_enum_protocols", CallingConvention = CallingConvention.Cdecl)]
         public static extern string avio_enum_protocols(void** @opaque, int @output);
@@ -729,7 +729,7 @@ namespace FFmpeg.AutoGen
         public static extern AVStream* avformat_new_stream(AVFormatContext* @s, AVCodec* @c);
         
         [DllImport(libavformat, EntryPoint = "av_stream_get_side_data", CallingConvention = CallingConvention.Cdecl)]
-        public static extern char* av_stream_get_side_data(AVStream* @stream, AVPacketSideDataType @type, int* @size);
+        public static extern sbyte* av_stream_get_side_data(AVStream* @stream, AVPacketSideDataType @type, int* @size);
         
         [DllImport(libavformat, EntryPoint = "av_new_program", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVProgram* av_new_program(AVFormatContext* @s, int @id);
@@ -822,10 +822,10 @@ namespace FFmpeg.AutoGen
         public static extern int av_get_output_timestamp(AVFormatContext* @s, int @stream, long* @dts, long* @wall);
         
         [DllImport(libavformat, EntryPoint = "av_hex_dump", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void av_hex_dump(_iobuf* @f, char* @buf, int @size);
+        public static extern void av_hex_dump(_iobuf* @f, sbyte* @buf, int @size);
         
         [DllImport(libavformat, EntryPoint = "av_hex_dump_log", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void av_hex_dump_log(void* @avcl, int @level, char* @buf, int @size);
+        public static extern void av_hex_dump_log(void* @avcl, int @level, sbyte* @buf, int @size);
         
         [DllImport(libavformat, EntryPoint = "av_pkt_dump2", CallingConvention = CallingConvention.Cdecl)]
         public static extern void av_pkt_dump2(_iobuf* @f, AVPacket* @pkt, int @dump_payload, AVStream* @st);
@@ -864,7 +864,7 @@ namespace FFmpeg.AutoGen
         public static extern int av_filename_number_test([MarshalAs(UnmanagedType.LPStr)] string @filename);
         
         [DllImport(libavformat, EntryPoint = "av_sdp_create", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_sdp_create(AVFormatContext*[] @ac, int @n_files, IntPtr @buf, int @size);
+        public static extern int av_sdp_create(AVFormatContext** @ac, int @n_files, IntPtr @buf, int @size);
         
         [DllImport(libavformat, EntryPoint = "av_match_ext", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_match_ext([MarshalAs(UnmanagedType.LPStr)] string @filename, [MarshalAs(UnmanagedType.LPStr)] string @extensions);

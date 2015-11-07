@@ -51,7 +51,7 @@ namespace FFmpeg.AutoGen
     
     public unsafe partial struct AVPacketSideData
     {
-        public char* @data;
+        public sbyte* @data;
         public int @size;
         public AVPacketSideDataType @type;
     }
@@ -61,7 +61,7 @@ namespace FFmpeg.AutoGen
         public AVBufferRef* @buf;
         public long @pts;
         public long @dts;
-        public char* @data;
+        public sbyte* @data;
         public int @size;
         public int @stream_index;
         public int @flags;
@@ -97,7 +97,7 @@ namespace FFmpeg.AutoGen
         public int @compression_level;
         public int @flags;
         public int @flags2;
-        public char* @extradata;
+        public sbyte* @extradata;
         public int @extradata_size;
         public AVRational @time_base;
         public int @ticks_per_frame;
@@ -264,7 +264,7 @@ namespace FFmpeg.AutoGen
         public AVDiscard @skip_loop_filter;
         public AVDiscard @skip_idct;
         public AVDiscard @skip_frame;
-        public char* @subtitle_header;
+        public sbyte* @subtitle_header;
         public int @subtitle_header_size;
         public int @error_rate;
         public AVPacket* @pkt;
@@ -284,7 +284,7 @@ namespace FFmpeg.AutoGen
         public int @skip_alpha;
         public int @seek_preroll;
         public ushort* @chroma_intra_matrix;
-        public char* @dump_separator;
+        public sbyte* @dump_separator;
         public sbyte* @codec_whitelist;
         public uint @properties;
     }
@@ -323,7 +323,7 @@ namespace FFmpeg.AutoGen
         public int* @supported_samplerates;
         public AVSampleFormat* @sample_fmts;
         public ulong* @channel_layouts;
-        public char @max_lowres;
+        public sbyte @max_lowres;
         public AVClass* @priv_class;
         public AVProfile* @profiles;
         public int @priv_data_size;
@@ -366,7 +366,7 @@ namespace FFmpeg.AutoGen
     
     public unsafe partial struct AVPicture
     {
-        public char* @data0; public char* @data1; public char* @data2; public char* @data3; public char* @data4; public char* @data5; public char* @data6; public char* @data7; 
+        public sbyte* @data0; public sbyte* @data1; public sbyte* @data2; public sbyte* @data3; public sbyte* @data4; public sbyte* @data5; public sbyte* @data6; public sbyte* @data7; 
         public fixed int @linesize[8]; 
     }
     
@@ -1518,7 +1518,7 @@ namespace FFmpeg.AutoGen
         public static extern int av_grow_packet(AVPacket* @pkt, int @grow_by);
         
         [DllImport(libavcodec, EntryPoint = "av_packet_from_data", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_packet_from_data(AVPacket* @pkt, char* @data, int @size);
+        public static extern int av_packet_from_data(AVPacket* @pkt, sbyte* @data, int @size);
         
         [DllImport(libavcodec, EntryPoint = "av_dup_packet", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_dup_packet(AVPacket* @pkt);
@@ -1533,13 +1533,13 @@ namespace FFmpeg.AutoGen
         public static extern void av_free_packet(AVPacket* @pkt);
         
         [DllImport(libavcodec, EntryPoint = "av_packet_new_side_data", CallingConvention = CallingConvention.Cdecl)]
-        public static extern char* av_packet_new_side_data(AVPacket* @pkt, AVPacketSideDataType @type, int @size);
+        public static extern sbyte* av_packet_new_side_data(AVPacket* @pkt, AVPacketSideDataType @type, int @size);
         
         [DllImport(libavcodec, EntryPoint = "av_packet_shrink_side_data", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_packet_shrink_side_data(AVPacket* @pkt, AVPacketSideDataType @type, int @size);
         
         [DllImport(libavcodec, EntryPoint = "av_packet_get_side_data", CallingConvention = CallingConvention.Cdecl)]
-        public static extern char* av_packet_get_side_data(AVPacket* @pkt, AVPacketSideDataType @type, int* @size);
+        public static extern sbyte* av_packet_get_side_data(AVPacket* @pkt, AVPacketSideDataType @type, int* @size);
         
         [DllImport(libavcodec, EntryPoint = "av_packet_merge_side_data", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_packet_merge_side_data(AVPacket* @pkt);
@@ -1551,10 +1551,10 @@ namespace FFmpeg.AutoGen
         public static extern string av_packet_side_data_name(AVPacketSideDataType @type);
         
         [DllImport(libavcodec, EntryPoint = "av_packet_pack_dictionary", CallingConvention = CallingConvention.Cdecl)]
-        public static extern char* av_packet_pack_dictionary(AVDictionary* @dict, int* @size);
+        public static extern sbyte* av_packet_pack_dictionary(AVDictionary* @dict, int* @size);
         
         [DllImport(libavcodec, EntryPoint = "av_packet_unpack_dictionary", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_packet_unpack_dictionary(char* @data, int @size, AVDictionary** @dict);
+        public static extern int av_packet_unpack_dictionary(sbyte* @data, int @size, AVDictionary** @dict);
         
         [DllImport(libavcodec, EntryPoint = "av_packet_free_side_data", CallingConvention = CallingConvention.Cdecl)]
         public static extern void av_packet_free_side_data(AVPacket* @pkt);
@@ -1629,10 +1629,10 @@ namespace FFmpeg.AutoGen
         public static extern AVCodecParserContext* av_parser_init(int @codec_id);
         
         [DllImport(libavcodec, EntryPoint = "av_parser_parse2", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_parser_parse2(AVCodecParserContext* @s, AVCodecContext* @avctx, char** @poutbuf, int* @poutbuf_size, char* @buf, int @buf_size, long @pts, long @dts, long @pos);
+        public static extern int av_parser_parse2(AVCodecParserContext* @s, AVCodecContext* @avctx, sbyte** @poutbuf, int* @poutbuf_size, sbyte* @buf, int @buf_size, long @pts, long @dts, long @pos);
         
         [DllImport(libavcodec, EntryPoint = "av_parser_change", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_parser_change(AVCodecParserContext* @s, AVCodecContext* @avctx, char** @poutbuf, int* @poutbuf_size, char* @buf, int @buf_size, int @keyframe);
+        public static extern int av_parser_change(AVCodecParserContext* @s, AVCodecContext* @avctx, sbyte** @poutbuf, int* @poutbuf_size, sbyte* @buf, int @buf_size, int @keyframe);
         
         [DllImport(libavcodec, EntryPoint = "av_parser_close", CallingConvention = CallingConvention.Cdecl)]
         public static extern void av_parser_close(AVCodecParserContext* @s);
@@ -1644,19 +1644,19 @@ namespace FFmpeg.AutoGen
         public static extern AVCodec* avcodec_find_encoder_by_name([MarshalAs(UnmanagedType.LPStr)] string @name);
         
         [DllImport(libavcodec, EntryPoint = "avcodec_encode_audio", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avcodec_encode_audio(AVCodecContext* @avctx, char* @buf, int @buf_size, short* @samples);
+        public static extern int avcodec_encode_audio(AVCodecContext* @avctx, sbyte* @buf, int @buf_size, short* @samples);
         
         [DllImport(libavcodec, EntryPoint = "avcodec_encode_audio2", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avcodec_encode_audio2(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr);
         
         [DllImport(libavcodec, EntryPoint = "avcodec_encode_video", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avcodec_encode_video(AVCodecContext* @avctx, char* @buf, int @buf_size, AVFrame* @pict);
+        public static extern int avcodec_encode_video(AVCodecContext* @avctx, sbyte* @buf, int @buf_size, AVFrame* @pict);
         
         [DllImport(libavcodec, EntryPoint = "avcodec_encode_video2", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avcodec_encode_video2(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr);
         
         [DllImport(libavcodec, EntryPoint = "avcodec_encode_subtitle", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avcodec_encode_subtitle(AVCodecContext* @avctx, char* @buf, int @buf_size, AVSubtitle* @sub);
+        public static extern int avcodec_encode_subtitle(AVCodecContext* @avctx, sbyte* @buf, int @buf_size, AVSubtitle* @sub);
         
         [DllImport(libavcodec, EntryPoint = "av_audio_resample_init", CallingConvention = CallingConvention.Cdecl)]
         public static extern ReSampleContext* av_audio_resample_init(int @output_channels, int @input_channels, int @output_rate, int @input_rate, AVSampleFormat @sample_fmt_out, AVSampleFormat @sample_fmt_in, int @filter_length, int @log2_phase_count, int @linear, double @cutoff);
@@ -1686,10 +1686,10 @@ namespace FFmpeg.AutoGen
         public static extern void avpicture_free(AVPicture* @picture);
         
         [DllImport(libavcodec, EntryPoint = "avpicture_fill", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avpicture_fill(AVPicture* @picture, char* @ptr, AVPixelFormat @pix_fmt, int @width, int @height);
+        public static extern int avpicture_fill(AVPicture* @picture, sbyte* @ptr, AVPixelFormat @pix_fmt, int @width, int @height);
         
         [DllImport(libavcodec, EntryPoint = "avpicture_layout", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avpicture_layout(AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height, char* @dest, int @dest_size);
+        public static extern int avpicture_layout(AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height, sbyte* @dest, int @dest_size);
         
         [DllImport(libavcodec, EntryPoint = "avpicture_get_size", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avpicture_get_size(AVPixelFormat @pix_fmt, int @width, int @height);
@@ -1746,7 +1746,7 @@ namespace FFmpeg.AutoGen
         public static extern int avcodec_default_execute2(AVCodecContext* @c, IntPtr* @func, void* @arg, int* @ret, int @count);
         
         [DllImport(libavcodec, EntryPoint = "avcodec_fill_audio_frame", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avcodec_fill_audio_frame(AVFrame* @frame, int @nb_channels, AVSampleFormat @sample_fmt, char* @buf, int @buf_size, int @align);
+        public static extern int avcodec_fill_audio_frame(AVFrame* @frame, int @nb_channels, AVSampleFormat @sample_fmt, sbyte* @buf, int @buf_size, int @align);
         
         [DllImport(libavcodec, EntryPoint = "avcodec_flush_buffers", CallingConvention = CallingConvention.Cdecl)]
         public static extern void avcodec_flush_buffers(AVCodecContext* @avctx);
@@ -1770,7 +1770,7 @@ namespace FFmpeg.AutoGen
         public static extern AVBitStreamFilterContext* av_bitstream_filter_init([MarshalAs(UnmanagedType.LPStr)] string @name);
         
         [DllImport(libavcodec, EntryPoint = "av_bitstream_filter_filter", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_bitstream_filter_filter(AVBitStreamFilterContext* @bsfc, AVCodecContext* @avctx, [MarshalAs(UnmanagedType.LPStr)] string @args, char** @poutbuf, int* @poutbuf_size, char* @buf, int @buf_size, int @keyframe);
+        public static extern int av_bitstream_filter_filter(AVBitStreamFilterContext* @bsfc, AVCodecContext* @avctx, [MarshalAs(UnmanagedType.LPStr)] string @args, sbyte** @poutbuf, int* @poutbuf_size, sbyte* @buf, int @buf_size, int @keyframe);
         
         [DllImport(libavcodec, EntryPoint = "av_bitstream_filter_close", CallingConvention = CallingConvention.Cdecl)]
         public static extern void av_bitstream_filter_close(AVBitStreamFilterContext* @bsf);
@@ -1785,7 +1785,7 @@ namespace FFmpeg.AutoGen
         public static extern void av_fast_padded_mallocz(void* @ptr, uint* @size, ulong @min_size);
         
         [DllImport(libavcodec, EntryPoint = "av_xiphlacing", CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint av_xiphlacing(char* @s, uint @v);
+        public static extern uint av_xiphlacing(sbyte* @s, uint @v);
         
         [DllImport(libavcodec, EntryPoint = "av_log_missing_feature", CallingConvention = CallingConvention.Cdecl)]
         public static extern void av_log_missing_feature(void* @avc, [MarshalAs(UnmanagedType.LPStr)] string @feature, int @want_sample);

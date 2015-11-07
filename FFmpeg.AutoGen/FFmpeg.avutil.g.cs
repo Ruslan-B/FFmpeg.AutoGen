@@ -50,10 +50,10 @@ namespace FFmpeg.AutoGen
     
     public unsafe partial struct AVFifoBuffer
     {
-        public char* @buffer;
-        public char* @rptr;
-        public char* @wptr;
-        public char* @end;
+        public sbyte* @buffer;
+        public sbyte* @rptr;
+        public sbyte* @wptr;
+        public sbyte* @end;
         public uint @rndx;
         public uint @wndx;
     }
@@ -78,10 +78,10 @@ namespace FFmpeg.AutoGen
     public unsafe partial struct AVPixFmtDescriptor
     {
         public sbyte* @name;
-        public char @nb_components;
-        public char @log2_chroma_w;
-        public char @log2_chroma_h;
-        public char @flags;
+        public sbyte @nb_components;
+        public sbyte @log2_chroma_w;
+        public sbyte @log2_chroma_h;
+        public sbyte @flags;
         public AVComponentDescriptor @comp0; public AVComponentDescriptor @comp1; public AVComponentDescriptor @comp2; public AVComponentDescriptor @comp3; 
         public sbyte* @alias;
     }
@@ -97,7 +97,7 @@ namespace FFmpeg.AutoGen
     public unsafe partial struct AVBufferRef
     {
         public AVBuffer* @buffer;
-        public char* @data;
+        public sbyte* @data;
         public int @size;
     }
     
@@ -118,7 +118,7 @@ namespace FFmpeg.AutoGen
     public unsafe partial struct AVFrameSideData
     {
         public AVFrameSideDataType @type;
-        public char* @data;
+        public sbyte* @data;
         public int @size;
         public AVDictionary* @metadata;
         public AVBufferRef* @buf;
@@ -126,16 +126,16 @@ namespace FFmpeg.AutoGen
     
     public unsafe partial struct AVFrame
     {
-        public char* @data0; public char* @data1; public char* @data2; public char* @data3; public char* @data4; public char* @data5; public char* @data6; public char* @data7; 
+        public sbyte* @data0; public sbyte* @data1; public sbyte* @data2; public sbyte* @data3; public sbyte* @data4; public sbyte* @data5; public sbyte* @data6; public sbyte* @data7; 
         public fixed int @linesize[8]; 
-        public char** @extended_data;
+        public sbyte** @extended_data;
         public int @width;
         public int @height;
         public int @nb_samples;
         public int @format;
         public int @key_frame;
         public AVPictureType @pict_type;
-        public char* @base0; public char* @base1; public char* @base2; public char* @base3; public char* @base4; public char* @base5; public char* @base6; public char* @base7; 
+        public sbyte* @base0; public sbyte* @base1; public sbyte* @base2; public sbyte* @base3; public sbyte* @base4; public sbyte* @base5; public sbyte* @base6; public sbyte* @base7; 
         public AVRational @sample_aspect_ratio;
         public long @pts;
         public long @pkt_pts;
@@ -147,7 +147,7 @@ namespace FFmpeg.AutoGen
         public sbyte* @qscale_table;
         public int @qstride;
         public int @qscale_type;
-        public char* @mbskip_table;
+        public sbyte* @mbskip_table;
         public IntPtr @motion_val0; public IntPtr @motion_val1; 
         public uint* @mb_type;
         public short* @dct_coeff;
@@ -165,7 +165,7 @@ namespace FFmpeg.AutoGen
         public void* @hwaccel_picture_private;
         public AVCodecContext* @owner;
         public void* @thread_opaque;
-        public char @motion_subsample_log2;
+        public sbyte @motion_subsample_log2;
         public int @sample_rate;
         public ulong @channel_layout;
         public AVBufferRef* @buf0; public AVBufferRef* @buf1; public AVBufferRef* @buf2; public AVBufferRef* @buf3; public AVBufferRef* @buf4; public AVBufferRef* @buf5; public AVBufferRef* @buf6; public AVBufferRef* @buf7; 
@@ -705,7 +705,7 @@ namespace FFmpeg.AutoGen
         public static extern long av_clip64_c(long @a, long @amin, long @amax);
         
         [DllImport(libavutil, EntryPoint = "av_clip_uint8_c", CallingConvention = CallingConvention.Cdecl)]
-        public static extern char av_clip_uint8_c(int @a);
+        public static extern sbyte av_clip_uint8_c(int @a);
         
         [DllImport(libavutil, EntryPoint = "av_clip_int8_c", CallingConvention = CallingConvention.Cdecl)]
         public static extern sbyte av_clip_int8_c(int @a);
@@ -807,7 +807,7 @@ namespace FFmpeg.AutoGen
         public static extern int av_dynarray_add_nofree(void* @tab_ptr, int* @nb_ptr, void* @elem);
         
         [DllImport(libavutil, EntryPoint = "av_dynarray2_add", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void* av_dynarray2_add(void** @tab_ptr, int* @nb_ptr, ulong @elem_size, char* @elem_data);
+        public static extern void* av_dynarray2_add(void** @tab_ptr, int* @nb_ptr, ulong @elem_size, sbyte* @elem_data);
         
         [DllImport(libavutil, EntryPoint = "av_size_mult", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_size_mult(ulong @a, ulong @b, ulong* @r);
@@ -816,7 +816,7 @@ namespace FFmpeg.AutoGen
         public static extern void av_max_alloc(ulong @max);
         
         [DllImport(libavutil, EntryPoint = "av_memcpy_backptr", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void av_memcpy_backptr(char* @dst, int @back, int @cnt);
+        public static extern void av_memcpy_backptr(sbyte* @dst, int @back, int @cnt);
         
         [DllImport(libavutil, EntryPoint = "av_fast_realloc", CallingConvention = CallingConvention.Cdecl)]
         public static extern void* av_fast_realloc(void* @ptr, uint* @size, ulong @min_size);
@@ -915,7 +915,7 @@ namespace FFmpeg.AutoGen
         public static extern void av_log_set_level(int @level);
         
         [DllImport(libavutil, EntryPoint = "av_log_set_callback", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void av_log_set_callback(IntPtr @callback);
+        public static extern void av_log_set_callback(IntPtr* @callback);
         
         [DllImport(libavutil, EntryPoint = "av_log_default_callback", CallingConvention = CallingConvention.Cdecl)]
         public static extern void av_log_default_callback(void* @avcl, int @level, [MarshalAs(UnmanagedType.LPStr)] string @fmt, sbyte* @vl);
@@ -969,13 +969,13 @@ namespace FFmpeg.AutoGen
         public static extern int av_fifo_space(AVFifoBuffer* @f);
         
         [DllImport(libavutil, EntryPoint = "av_fifo_generic_peek", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_fifo_generic_peek(AVFifoBuffer* @f, void* @dest, int @buf_size, IntPtr @func);
+        public static extern int av_fifo_generic_peek(AVFifoBuffer* @f, void* @dest, int @buf_size, IntPtr* @func);
         
         [DllImport(libavutil, EntryPoint = "av_fifo_generic_read", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_fifo_generic_read(AVFifoBuffer* @f, void* @dest, int @buf_size, IntPtr @func);
+        public static extern int av_fifo_generic_read(AVFifoBuffer* @f, void* @dest, int @buf_size, IntPtr* @func);
         
         [DllImport(libavutil, EntryPoint = "av_fifo_generic_write", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_fifo_generic_write(AVFifoBuffer* @f, void* @src, int @size, IntPtr @func);
+        public static extern int av_fifo_generic_write(AVFifoBuffer* @f, void* @src, int @size, IntPtr* @func);
         
         [DllImport(libavutil, EntryPoint = "av_fifo_realloc2", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_fifo_realloc2(AVFifoBuffer* @f, uint @size);
@@ -987,7 +987,7 @@ namespace FFmpeg.AutoGen
         public static extern void av_fifo_drain(AVFifoBuffer* @f, int @size);
         
         [DllImport(libavutil, EntryPoint = "av_fifo_peek2", CallingConvention = CallingConvention.Cdecl)]
-        public static extern char* av_fifo_peek2(AVFifoBuffer* @f, int @offs);
+        public static extern sbyte* av_fifo_peek2(AVFifoBuffer* @f, int @offs);
         
         [DllImport(libavutil, EntryPoint = "av_get_sample_fmt_name", CallingConvention = CallingConvention.Cdecl)]
         public static extern string av_get_sample_fmt_name(AVSampleFormat @sample_fmt);
@@ -1017,19 +1017,19 @@ namespace FFmpeg.AutoGen
         public static extern int av_samples_get_buffer_size(int* @linesize, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align);
         
         [DllImport(libavutil, EntryPoint = "av_samples_fill_arrays", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_samples_fill_arrays(char** @audio_data, int* @linesize, char* @buf, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align);
+        public static extern int av_samples_fill_arrays(sbyte** @audio_data, int* @linesize, sbyte* @buf, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align);
         
         [DllImport(libavutil, EntryPoint = "av_samples_alloc", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_samples_alloc(char** @audio_data, int* @linesize, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align);
+        public static extern int av_samples_alloc(sbyte** @audio_data, int* @linesize, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align);
         
         [DllImport(libavutil, EntryPoint = "av_samples_alloc_array_and_samples", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_samples_alloc_array_and_samples(char*** @audio_data, int* @linesize, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align);
+        public static extern int av_samples_alloc_array_and_samples(sbyte*** @audio_data, int* @linesize, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align);
         
         [DllImport(libavutil, EntryPoint = "av_samples_copy", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_samples_copy(char** @dst, char** @src, int @dst_offset, int @src_offset, int @nb_samples, int @nb_channels, AVSampleFormat @sample_fmt);
+        public static extern int av_samples_copy(sbyte** @dst, sbyte** @src, int @dst_offset, int @src_offset, int @nb_samples, int @nb_channels, AVSampleFormat @sample_fmt);
         
         [DllImport(libavutil, EntryPoint = "av_samples_set_silence", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_samples_set_silence(char** @audio_data, int @offset, int @nb_samples, int @nb_channels, AVSampleFormat @sample_fmt);
+        public static extern int av_samples_set_silence(sbyte** @audio_data, int @offset, int @nb_samples, int @nb_channels, AVSampleFormat @sample_fmt);
         
         [DllImport(libavutil, EntryPoint = "av_audio_fifo_free", CallingConvention = CallingConvention.Cdecl)]
         public static extern void av_audio_fifo_free(AVAudioFifo* @af);
@@ -1062,10 +1062,10 @@ namespace FFmpeg.AutoGen
         public static extern int av_audio_fifo_space(AVAudioFifo* @af);
         
         [DllImport(libavutil, EntryPoint = "av_read_image_line", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void av_read_image_line(ushort* @dst, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] char*[] @data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component);
+        public static extern void av_read_image_line(ushort* @dst, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] sbyte*[] @data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component);
         
         [DllImport(libavutil, EntryPoint = "av_write_image_line", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void av_write_image_line(ushort* @src, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] char*[] @data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w);
+        public static extern void av_write_image_line(ushort* @src, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] sbyte*[] @data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w);
         
         [DllImport(libavutil, EntryPoint = "av_get_pix_fmt", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVPixelFormat av_get_pix_fmt([MarshalAs(UnmanagedType.LPStr)] string @name);
@@ -1131,25 +1131,25 @@ namespace FFmpeg.AutoGen
         public static extern int av_image_fill_linesizes([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesizes, AVPixelFormat @pix_fmt, int @width);
         
         [DllImport(libavutil, EntryPoint = "av_image_fill_pointers", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_image_fill_pointers([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] char*[] @data, AVPixelFormat @pix_fmt, int @height, char* @ptr, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesizes);
+        public static extern int av_image_fill_pointers([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] sbyte*[] @data, AVPixelFormat @pix_fmt, int @height, sbyte* @ptr, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesizes);
         
         [DllImport(libavutil, EntryPoint = "av_image_alloc", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_image_alloc([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] char*[] @pointers, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesizes, int @w, int @h, AVPixelFormat @pix_fmt, int @align);
+        public static extern int av_image_alloc([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] sbyte*[] @pointers, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesizes, int @w, int @h, AVPixelFormat @pix_fmt, int @align);
         
         [DllImport(libavutil, EntryPoint = "av_image_copy_plane", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void av_image_copy_plane(char* @dst, int @dst_linesize, char* @src, int @src_linesize, int @bytewidth, int @height);
+        public static extern void av_image_copy_plane(sbyte* @dst, int @dst_linesize, sbyte* @src, int @src_linesize, int @bytewidth, int @height);
         
         [DllImport(libavutil, EntryPoint = "av_image_copy", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void av_image_copy([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] char*[] @dst_data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @dst_linesizes, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] char*[] @src_data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
+        public static extern void av_image_copy([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] sbyte*[] @dst_data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @dst_linesizes, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] sbyte*[] @src_data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
         
         [DllImport(libavutil, EntryPoint = "av_image_fill_arrays", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_image_fill_arrays([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] char*[] @dst_data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @dst_linesize, char* @src, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
+        public static extern int av_image_fill_arrays([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] sbyte*[] @dst_data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @dst_linesize, sbyte* @src, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
         
         [DllImport(libavutil, EntryPoint = "av_image_get_buffer_size", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_image_get_buffer_size(AVPixelFormat @pix_fmt, int @width, int @height, int @align);
         
         [DllImport(libavutil, EntryPoint = "av_image_copy_to_buffer", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_image_copy_to_buffer(char* @dst, int @dst_size, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] char*[] @src_data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
+        public static extern int av_image_copy_to_buffer(sbyte* @dst, int @dst_size, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] sbyte*[] @src_data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
         
         [DllImport(libavutil, EntryPoint = "av_image_check_size", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_image_check_size(uint @w, uint @h, int @log_offset, void* @log_ctx);
@@ -1164,10 +1164,10 @@ namespace FFmpeg.AutoGen
         public static extern AVBufferRef* av_buffer_allocz(int @size);
         
         [DllImport(libavutil, EntryPoint = "av_buffer_create", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVBufferRef* av_buffer_create(char* @data, int @size, IntPtr @free, void* @opaque, int @flags);
+        public static extern AVBufferRef* av_buffer_create(sbyte* @data, int @size, IntPtr* @free, void* @opaque, int @flags);
         
         [DllImport(libavutil, EntryPoint = "av_buffer_default_free", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void av_buffer_default_free(void* @opaque, char* @data);
+        public static extern void av_buffer_default_free(void* @opaque, sbyte* @data);
         
         [DllImport(libavutil, EntryPoint = "av_buffer_ref", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVBufferRef* av_buffer_ref(AVBufferRef* @buf);
@@ -1191,7 +1191,7 @@ namespace FFmpeg.AutoGen
         public static extern int av_buffer_realloc(AVBufferRef** @buf, int @size);
         
         [DllImport(libavutil, EntryPoint = "av_buffer_pool_init", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVBufferPool* av_buffer_pool_init(int @size, IntPtr @alloc);
+        public static extern AVBufferPool* av_buffer_pool_init(int @size, IntPtr* @alloc);
         
         [DllImport(libavutil, EntryPoint = "av_buffer_pool_uninit", CallingConvention = CallingConvention.Cdecl)]
         public static extern void av_buffer_pool_uninit(AVBufferPool** @pool);

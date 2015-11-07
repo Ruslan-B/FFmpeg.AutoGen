@@ -35,7 +35,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                     return @"bool";
                 case CXTypeKind.CXType_UChar:
                 case CXTypeKind.CXType_Char_U:
-                    return @"char";
+                    return @"sbyte";//@"char";
                 case CXTypeKind.CXType_SChar:
                 case CXTypeKind.CXType_Char_S:
                     return @"sbyte";

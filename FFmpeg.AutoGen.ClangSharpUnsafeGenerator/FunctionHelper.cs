@@ -77,24 +77,33 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                             tw.Write(@"void*");
                             break;
                         case CXTypeKind.CXType_Unexposed:
-                        {
-                            var declaration = clang.getTypeDeclaration(pointee);
-                            if (declaration.kind == CXCursorKind.CXCursor_NoDeclFound)
                             {
-                                tw.Write(@"IntPtr"); // no declaration found
+                                var declaration = clang.getTypeDeclaration(pointee);
+                                if (declaration.kind == CXCursorKind.CXCursor_NoDeclFound)
+                                {
+                                    tw.Write(@"IntPtr"); // no declaration found
+                                }
+                                var typeName = clang.getCursorSpelling(declaration) + @"*";
+                                tw.Write(typeName);
+                                break;
                             }
-                            var typeName = clang.getCursorSpelling(declaration) + @"*";
-                            tw.Write(typeName);
-                            break;
-                        }
                         default:
-                        {
-                            var typeName = type.ToPlainTypeString();
-                            tw.Write(typeName);
-                            break;
-                        }
+                            {
+                                var typeName = type.ToPlainTypeString();
+                                tw.Write(typeName);
+                                break;
+                            }
                     }
                     break;
+                //case CXTypeKind.CXType_IncompleteArray:
+                //case CXTypeKind.CXType_DependentSizedArray:
+                //case CXTypeKind.CXType_VariableArray:
+                //{
+                //    var elementType = clang.getArrayElementType(type);
+                //    var typeName = elementType.ToPlainTypeString();
+                //    tw.Write(typeName + @"*");
+                //    break;
+                //}
                 default:
                     WriteCommonType(type, tw);
                     break;
@@ -135,7 +144,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                     break;
                 case CXTypeKind.CXType_IncompleteArray:
                     WriteCommonType(clang.getArrayElementType(type), tw);
-                    spelling = @"[]";
+                    spelling = @"*";
                     break;
                 case CXTypeKind.CXType_ConstantArray:
                     tw.Write(@"[MarshalAs(UnmanagedType.LPArray, SizeConst={0})] ", clang.getArraySize(type));
