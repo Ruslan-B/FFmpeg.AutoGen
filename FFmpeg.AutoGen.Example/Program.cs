@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Example
 {
@@ -18,12 +17,12 @@ namespace FFmpeg.AutoGen.Example
                 case PlatformID.Win32NT:
                 case PlatformID.Win32S:
                 case PlatformID.Win32Windows:
-                    string ffmpegPath = string.Format(@"../../../../FFmpeg/bin/{0}", Environment.Is64BitProcess ? @"x64" : @"x86");
+                    var ffmpegPath = string.Format(@"../../../../FFmpeg/bin/{0}", Environment.Is64BitProcess ? @"x64" : @"x86");
                     InteropHelper.RegisterLibrariesSearchPath(ffmpegPath);
                     break;
                 case PlatformID.Unix:
                 case PlatformID.MacOSX:
-                    string libraryPath = Environment.GetEnvironmentVariable(InteropHelper.LD_LIBRARY_PATH);
+                    var libraryPath = Environment.GetEnvironmentVariable(InteropHelper.LD_LIBRARY_PATH);
                     InteropHelper.RegisterLibrariesSearchPath(libraryPath);
                     break;
             }
@@ -31,14 +30,14 @@ namespace FFmpeg.AutoGen.Example
             // decode 100 frame from url or path
 
             //string url = @"../../sample_mpeg4.mp4";
-            string url = @"http://hubblesource.stsci.edu/sources/video/clips/details/images/centaur_1.mpg";
+            var url = @"http://hubblesource.stsci.edu/sources/video/clips/details/images/centaur_1.mpg";
 
             ffmpeg.av_register_all();
             ffmpeg.avcodec_register_all();
             ffmpeg.avformat_network_init();
 
 
-            AVFormatContext* pFormatContext = ffmpeg.avformat_alloc_context();
+            var pFormatContext = ffmpeg.avformat_alloc_context();
             if (ffmpeg.avformat_open_input(&pFormatContext, url, null, null) != 0)
             {
                 throw new ApplicationException(@"Could not open file");
@@ -50,7 +49,7 @@ namespace FFmpeg.AutoGen.Example
             }
 
             AVStream* pStream = null;
-            for (int i = 0; i < pFormatContext->nb_streams; i++)
+            for (var i = 0; i < pFormatContext->nb_streams; i++)
             {
                 if (pFormatContext->streams[i]->codec->codec_type == AVMediaType.AVMEDIA_TYPE_VIDEO)
                 {
@@ -63,27 +62,27 @@ namespace FFmpeg.AutoGen.Example
                 throw new ApplicationException(@"Could not found video stream");
             }
 
-            AVCodecContext codecContext = *(pStream->codec);
-            int width = codecContext.width;
-            int height = codecContext.height;
-            AVPixelFormat sourcePixFmt = codecContext.pix_fmt;
-            AVCodecID codecId = codecContext.codec_id;
+            var codecContext = *pStream->codec;
+            var width = codecContext.width;
+            var height = codecContext.height;
+            var sourcePixFmt = codecContext.pix_fmt;
+            var codecId = codecContext.codec_id;
             var convertToPixFmt = AVPixelFormat.PIX_FMT_BGR24;
             const int SWS_FAST_BILINEAR = 1;
-            SwsContext* pConvertContext = ffmpeg.sws_getContext(width, height, sourcePixFmt,
-                                                                       width, height, convertToPixFmt,
-                                                                       SWS_FAST_BILINEAR, null, null, null);
+            var pConvertContext = ffmpeg.sws_getContext(width, height, sourcePixFmt,
+                width, height, convertToPixFmt,
+                SWS_FAST_BILINEAR, null, null, null);
             if (pConvertContext == null)
             {
                 throw new ApplicationException(@"Could not initialize the conversion context");
             }
 
             var pConvertedFrame = ffmpeg.avcodec_alloc_frame();
-            int convertedFrameBufferSize = ffmpeg.avpicture_get_size(convertToPixFmt, width, height);
-            char* pConvertedFrameBuffer = (char*)ffmpeg.av_malloc((ulong)convertedFrameBufferSize);
+            var convertedFrameBufferSize = ffmpeg.avpicture_get_size(convertToPixFmt, width, height);
+            var pConvertedFrameBuffer = (sbyte*)ffmpeg.av_malloc((ulong)convertedFrameBufferSize);
             ffmpeg.avpicture_fill((AVPicture*)pConvertedFrame, pConvertedFrameBuffer, convertToPixFmt, width, height);
 
-            AVCodec* pCodec = ffmpeg.avcodec_find_decoder(codecId);
+            var pCodec = ffmpeg.avcodec_find_decoder(codecId);
             if (pCodec == null)
             {
                 throw new ApplicationException(@"Unsupported codec");
@@ -91,10 +90,10 @@ namespace FFmpeg.AutoGen.Example
 
             // Reusing codec context from stream info, initally it was looking like this: 
             // AVCodecContext* pCodecContext = ffmpeg.avcodec_alloc_context3(pCodec); // but it is not working for all kind of codecs
-            AVCodecContext* pCodecContext = &codecContext;
+            var pCodecContext = &codecContext;
 
-            const int CODEC_CAP_TRUNCATED = (1 << 3);
-            const int CODEC_FLAG_TRUNCATED = (1 << 16);
+            const int CODEC_CAP_TRUNCATED = 1 << 3;
+            const int CODEC_FLAG_TRUNCATED = 1 << 16;
             if ((pCodec->capabilities & CODEC_CAP_TRUNCATED) == CODEC_CAP_TRUNCATED)
             {
                 pCodecContext->flags |= CODEC_FLAG_TRUNCATED;
@@ -105,13 +104,13 @@ namespace FFmpeg.AutoGen.Example
                 throw new ApplicationException(@"Could not open codec");
             }
 
-            AVFrame* pDecodedFrame = ffmpeg.av_frame_alloc();
+            var pDecodedFrame = ffmpeg.av_frame_alloc();
 
             var packet = new AVPacket();
-            AVPacket* pPacket = &packet;
+            var pPacket = &packet;
             ffmpeg.av_init_packet(pPacket);
 
-            int frameNumber = 0;
+            var frameNumber = 0;
             while (frameNumber < 100)
             {
                 if (ffmpeg.av_read_frame(pFormatContext, pPacket) < 0)
@@ -120,10 +119,12 @@ namespace FFmpeg.AutoGen.Example
                 }
 
                 if (pPacket->stream_index != pStream->index)
+                {
                     continue;
+                }
 
-                int gotPicture = 0;
-                int size = ffmpeg.avcodec_decode_video2(pCodecContext, pDecodedFrame, &gotPicture, pPacket);
+                var gotPicture = 0;
+                var size = ffmpeg.avcodec_decode_video2(pCodecContext, pDecodedFrame, &gotPicture, pPacket);
                 if (size < 0)
                 {
                     throw new ApplicationException(string.Format(@"Error while decoding frame {0}", frameNumber));
@@ -133,16 +134,17 @@ namespace FFmpeg.AutoGen.Example
                 {
                     Console.WriteLine(@"frame: {0}", frameNumber);
 
-                    char** src = &pDecodedFrame->data0;
-                    char** dst = &pConvertedFrame->data0;
-                    ffmpeg.sws_scale(pConvertContext, src, pDecodedFrame->linesize, 0,
-                                            height, dst, pConvertedFrame->linesize);
+                    var src = &pDecodedFrame->data0;
+                    var dst = &pConvertedFrame->data0;
+                    var srcStride = pDecodedFrame->linesize;
+                    var dstStride = pConvertedFrame->linesize;
+                    ffmpeg.sws_scale(pConvertContext, src, srcStride, 0, height, dst, dstStride);
 
-                    char* convertedFrameAddress = pConvertedFrame->data0;
+                    var convertedFrameAddress = pConvertedFrame->data0;
 
                     var imageBufferPtr = new IntPtr(convertedFrameAddress);
 
-                    int linesize = pConvertedFrame->linesize[0];
+                    var linesize = dstStride[0];
                     using (var bitmap = new Bitmap(width, height, linesize, PixelFormat.Format24bppRgb, imageBufferPtr))
                     {
                         bitmap.Save(@"frame.buffer.jpg", ImageFormat.Jpeg);

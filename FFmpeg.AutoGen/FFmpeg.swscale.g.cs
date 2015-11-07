@@ -63,7 +63,7 @@ namespace FFmpeg.AutoGen
         public static extern SwsContext* sws_getContext(int @srcW, int @srcH, AVPixelFormat @srcFormat, int @dstW, int @dstH, AVPixelFormat @dstFormat, int @flags, SwsFilter* @srcFilter, SwsFilter* @dstFilter, double* @param);
         
         [DllImport(libswscale, EntryPoint = "sws_scale", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int sws_scale(SwsContext* @c, char** @srcSlice, int* @srcStride, int @srcSliceY, int @srcSliceH, char** @dst, int* @dstStride);
+        public static extern int sws_scale(SwsContext* @c, sbyte** @srcSlice, int* @srcStride, int @srcSliceY, int @srcSliceH, sbyte** @dst, int* @dstStride);
         
         [DllImport(libswscale, EntryPoint = "sws_setColorspaceDetails", CallingConvention = CallingConvention.Cdecl)]
         public static extern int sws_setColorspaceDetails(SwsContext* @c, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @inv_table, int @srcRange, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @table, int @dstRange, int @brightness, int @contrast, int @saturation);
@@ -120,10 +120,10 @@ namespace FFmpeg.AutoGen
         public static extern SwsContext* sws_getCachedContext(SwsContext* @context, int @srcW, int @srcH, AVPixelFormat @srcFormat, int @dstW, int @dstH, AVPixelFormat @dstFormat, int @flags, SwsFilter* @srcFilter, SwsFilter* @dstFilter, double* @param);
         
         [DllImport(libswscale, EntryPoint = "sws_convertPalette8ToPacked32", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void sws_convertPalette8ToPacked32(char* @src, char* @dst, int @num_pixels, char* @palette);
+        public static extern void sws_convertPalette8ToPacked32(sbyte* @src, sbyte* @dst, int @num_pixels, sbyte* @palette);
         
         [DllImport(libswscale, EntryPoint = "sws_convertPalette8ToPacked24", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void sws_convertPalette8ToPacked24(char* @src, char* @dst, int @num_pixels, char* @palette);
+        public static extern void sws_convertPalette8ToPacked24(sbyte* @src, sbyte* @dst, int @num_pixels, sbyte* @palette);
         
         [DllImport(libswscale, EntryPoint = "sws_get_class", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVClass* sws_get_class();

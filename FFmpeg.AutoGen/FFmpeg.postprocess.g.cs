@@ -21,7 +21,7 @@ namespace FFmpeg.AutoGen
         public static extern string postproc_license();
         
         [DllImport(libpostprocess, EntryPoint = "pp_postprocess", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void pp_postprocess([MarshalAs(UnmanagedType.LPArray, SizeConst=3)] char*[] @src, [MarshalAs(UnmanagedType.LPArray, SizeConst=3)] int[] @srcStride, [MarshalAs(UnmanagedType.LPArray, SizeConst=3)] char*[] @dst, [MarshalAs(UnmanagedType.LPArray, SizeConst=3)] int[] @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
+        public static extern void pp_postprocess([MarshalAs(UnmanagedType.LPArray, SizeConst=3)] sbyte*[] @src, [MarshalAs(UnmanagedType.LPArray, SizeConst=3)] int[] @srcStride, [MarshalAs(UnmanagedType.LPArray, SizeConst=3)] sbyte*[] @dst, [MarshalAs(UnmanagedType.LPArray, SizeConst=3)] int[] @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
         
         [DllImport(libpostprocess, EntryPoint = "pp_get_mode_by_name_and_quality", CallingConvention = CallingConvention.Cdecl)]
         public static extern void* pp_get_mode_by_name_and_quality([MarshalAs(UnmanagedType.LPStr)] string @name, int @quality);
