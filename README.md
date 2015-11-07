@@ -9,17 +9,15 @@ The basic example of the library usage: video decoding, conversion and frame ext
 For the more sophisticated operations please refer to offical [ffmpeg Documentation](https://www.ffmpeg.org/documentation.html) expecially API section of it.
 
 - on Windows:  
-The native FFmpeg binaries are bundled in repository. The binaries source is [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/), v2.5.2 been used for
-[32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-2.8.1-win32-shared.7z) and
-[64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-2.8.1-win64-shared.7z) platforms.
-The example project shows how specify path to native libraries.  
+Native FFmpeg binaries are pre bundled in the repository. The binaries source from [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/).
+Please check to example project it shows how specify path to libraries.  
 
 - on OS X:  
 Install FFmpeg via [MacPorts](http://www.macports.org):
 ```bash
 sudo port install ffmpeg +universal
 ```
-Please ensure that ```FFmpeg.AutoGen.dll``` coupled with ```FFmpeg.AutoGen.config```. 
+Please make sure that ```FFmpeg.AutoGen.dll``` coupled with ```FFmpeg.AutoGen.config``` and all paths are correct. 
 By default MacPorts keeps compiled libraries in ```/opt/local/lib```.
 
 - on Linux:  
@@ -27,19 +25,21 @@ You need to update ```FFmpeg.AutoGen.config``` with full path to FFmpeg librarie
 
 ##Generation
 
-The wrapper generator uses  [ctypesgen](http://www.clangsharp.org).
+The wrapper generator uses [clangsharp](http://www.clangsharp.org).
 
 Prerequisites:
- - FFmpeg library binaries (see **[Usage](#usage)**)
- - TODO
+ - FFmpeg library include files ```./ffmpeg/include```
 
 Steps to generate:
-- TODO
-- File ```./FFmpeg.AutoGen/FFmpegInvoke.cs``` will be regenerated.
+- Run FFmpeg.AutoGen.ClangSharpUnsafeGenerator;
+- All files with extension ```*.g.cs```  in ```FFmpeg.AutoGen``` project will be regenerated.
 
 ##License
 
-GNU Lesser General Public License (LGPL) version 3 or later.  
+Copyright © Ruslan Balanukhin 2015
+All rights reserved.
+
+Distributed under the GNU Lesser General Public License (LGPL) version 3.  
 http://www.gnu.org/licenses/lgpl.html
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS

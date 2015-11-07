@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FFmpeg.AutoGen.Example")]
+[assembly: AssemblyTitle("FFmpeg.AutoGen.ClangSharpUnsafeGenerator")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("85fa8101-8bfd-410d-ba4e-762144a63ba9")]
+[assembly: Guid("aed33e7d-58fe-4fbd-86e0-a6cf496c0c5b")]
 
 // Version information for an assembly consists of the following four values:
 //
