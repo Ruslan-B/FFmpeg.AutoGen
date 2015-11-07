@@ -30,10 +30,10 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                 return CXChildVisitResult.CXChildVisit_Continue;
             }
 
-            var curKind = clang.getCursorKind(cursor);
+            var cursorKind = clang.getCursorKind(cursor);
 
             // look only at function decls
-            if (curKind == CXCursorKind.CXCursor_FunctionDecl)
+            if (cursorKind == CXCursorKind.CXCursor_FunctionDecl)
             {
                 var functionName = clang.getCursorSpelling(cursor).ToString();
 

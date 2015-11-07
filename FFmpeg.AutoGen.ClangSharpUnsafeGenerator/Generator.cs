@@ -10,12 +10,13 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
     internal class Generator
     {
         private readonly string[] m_includeDirs;
-        private readonly string m_namespace;
         private readonly string m_methodClassName;
+        private readonly string m_namespace;
         private readonly ISet<string> m_visitedEnums = new HashSet<string>();
         private readonly ISet<string> m_visitedFunction = new HashSet<string>();
         private readonly ISet<string> m_visitedStructs = new HashSet<string>();
         private readonly ISet<string> m_visitedTypeDefs = new HashSet<string>();
+        private readonly ISet<string> m_visitedMacros = new HashSet<string>();
 
         public Generator(string[] includeDirs, string @namespace, string methodClassName)
         {
@@ -32,13 +33,15 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
 
             var translationUnits = new List<CXTranslationUnit>();
 
-            var createIndex = clang.createIndex(0, 0);
+            var index = clang.createIndex(0, 1);
+
 
             foreach (var file in inputFiles)
             {
                 CXTranslationUnit translationUnit;
                 CXUnsavedFile unsavedFile;
-                var translationUnitError = clang.parseTranslationUnit2(createIndex, file, arr, 3, out unsavedFile, 0, 0, out translationUnit);
+                var options = (uint)CXTranslationUnit_Flags.CXTranslationUnit_DetailedPreprocessingRecord;
+                var translationUnitError = clang.parseTranslationUnit2(index, file, arr, 3, out unsavedFile, 0, options, out translationUnit);
 
                 if (translationUnitError != CXErrorCode.CXError_Success)
                 {
@@ -94,6 +97,12 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
 
                         sw.Indent++;
 
+                        var macroVisitor = new MacroVisitor(sw, m_visitedMacros);
+                        foreach (var tu in translationUnits)
+                        {
+                            clang.visitChildren(clang.getTranslationUnitCursor(tu), macroVisitor.Visit, new CXClientData(IntPtr.Zero));
+                        }
+
                         var functionVisitor = new FunctionVisitor(sw, m_visitedFunction, libraryName, libraryVarName);
                         foreach (var tu in translationUnits)
                         {
@@ -113,7 +122,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
 
             translationUnits.ForEach(clang.disposeTranslationUnit);
 
-            clang.disposeIndex(createIndex);
+            clang.disposeIndex(index);
         }
     }
 }

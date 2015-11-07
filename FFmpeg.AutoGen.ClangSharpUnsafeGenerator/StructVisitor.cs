@@ -27,8 +27,8 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                 return CXChildVisitResult.CXChildVisit_Continue;
             }
 
-            var curKind = clang.getCursorKind(cursor);
-            if (curKind == CXCursorKind.CXCursor_StructDecl || curKind == CXCursorKind.CXCursor_UnionDecl)
+            var cursorKind = clang.getCursorKind(cursor);
+            if (cursorKind == CXCursorKind.CXCursor_StructDecl || cursorKind == CXCursorKind.CXCursor_UnionDecl)
             {
                 if (m_writingStruct)
                 {
@@ -87,7 +87,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                 return CXChildVisitResult.CXChildVisit_Continue;
             }
 
-            if (curKind == CXCursorKind.CXCursor_FieldDecl)
+            if (cursorKind == CXCursorKind.CXCursor_FieldDecl)
             {
                 m_hasChildren = true;
 

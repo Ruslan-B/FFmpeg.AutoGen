@@ -354,6 +354,28 @@ namespace FFmpeg.AutoGen
     
     public unsafe static partial class ffmpeg
     {
+        public const ulong LIBAVFILTER_VERSION_MAJOR = 5;
+        public const ulong LIBAVFILTER_VERSION_MINOR = 40;
+        public const ulong LIBAVFILTER_VERSION_MICRO = 101;
+        public const ulong AV_PERM_READ = 0x01;
+        public const ulong AV_PERM_WRITE = 0x02;
+        public const ulong AV_PERM_PRESERVE = 0x04;
+        public const ulong AV_PERM_REUSE = 0x08;
+        public const ulong AV_PERM_REUSE2 = 0x10;
+        public const ulong AV_PERM_NEG_LINESIZES = 0x20;
+        public const ulong AV_PERM_ALIGN = 0x40;
+        public const ulong AVFILTER_ALIGN = 16;
+        public const ulong AVFILTER_FLAG_DYNAMIC_INPUTS = (1<<0);
+        public const ulong AVFILTER_FLAG_DYNAMIC_OUTPUTS = (1<<1);
+        public const ulong AVFILTER_FLAG_SLICE_THREADS = (1<<2);
+        public const ulong AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC = (1<<16);
+        public const ulong AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL = (1<<17);
+        public const ulong AVFILTER_FLAG_SUPPORT_TIMELINE = (AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC|AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL);
+        public const ulong AVFILTER_THREAD_SLICE = (1<<0);
+        public const ulong AVFILTER_CMD_FLAG_ONE = 1;
+        public const ulong AVFILTER_CMD_FLAG_FAST = 2;
+        public const ulong AV_BUFFERSINK_FLAG_PEEK = 1;
+        public const ulong AV_BUFFERSINK_FLAG_NO_REQUEST = 2;
         private const string libavfilter = "avfilter-5";
         
         [DllImport(libavfilter, EntryPoint = "avfilter_version", CallingConvention = CallingConvention.Cdecl)]

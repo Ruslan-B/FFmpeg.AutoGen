@@ -24,19 +24,8 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                 return CXChildVisitResult.CXChildVisit_Continue;
             }
 
-            var value = cursor.ToString();
-            if (!string.IsNullOrEmpty(value))
-            {
-                Console.WriteLine(value);
-
-                if (value.Contains(@"SWS_FAST_BILINEAR"))
-                {
-                    Debug.Assert(false);
-                }
-            }
-
-            var curKind = clang.getCursorKind(cursor);
-            if (curKind == CXCursorKind.CXCursor_TypedefDecl)
+            var cursorKind = clang.getCursorKind(cursor);
+            if (cursorKind == CXCursorKind.CXCursor_TypedefDecl)
             {
                 var spelling = clang.getCursorSpelling(cursor).ToString();
 
