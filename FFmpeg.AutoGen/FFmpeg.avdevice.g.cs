@@ -207,6 +207,23 @@ namespace FFmpeg.AutoGen
     
     public unsafe static partial class ffmpeg
     {
+        public const ulong LIBAVDEVICE_VERSION_MAJOR = 56;
+        public const ulong LIBAVDEVICE_VERSION_MINOR = 4;
+        public const ulong LIBAVDEVICE_VERSION_MICRO = 100;
+        public const ulong AV_OPT_FLAG_ENCODING_PARAM = 1;
+        public const ulong AV_OPT_FLAG_DECODING_PARAM = 2;
+        public const ulong AV_OPT_FLAG_METADATA = 4;
+        public const ulong AV_OPT_FLAG_AUDIO_PARAM = 8;
+        public const ulong AV_OPT_FLAG_VIDEO_PARAM = 16;
+        public const ulong AV_OPT_FLAG_SUBTITLE_PARAM = 32;
+        public const ulong AV_OPT_FLAG_EXPORT = 64;
+        public const ulong AV_OPT_FLAG_READONLY = 128;
+        public const ulong AV_OPT_FLAG_FILTERING_PARAM = (1<<16);
+        public const ulong AV_OPT_SEARCH_CHILDREN = 0x0001;
+        public const ulong AV_OPT_SEARCH_FAKE_OBJ = 0x0002;
+        public const ulong AV_OPT_MULTI_COMPONENT_RANGE = 0x1000;
+        public const ulong AV_OPT_SERIALIZE_SKIP_DEFAULTS = 0x00000001;
+        public const ulong AV_OPT_SERIALIZE_OPT_FLAGS_EXACT = 0x00000002;
         private const string libavdevice = "avdevice-56";
         
         [DllImport(libavdevice, EntryPoint = "av_set_string3", CallingConvention = CallingConvention.Cdecl)]

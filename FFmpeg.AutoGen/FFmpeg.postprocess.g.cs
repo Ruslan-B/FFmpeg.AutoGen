@@ -9,6 +9,22 @@ namespace FFmpeg.AutoGen
     
     public unsafe static partial class ffmpeg
     {
+        public const ulong LIBPOSTPROC_VERSION_MAJOR = 53;
+        public const ulong LIBPOSTPROC_VERSION_MINOR = 3;
+        public const ulong LIBPOSTPROC_VERSION_MICRO = 100;
+        public const ulong PP_QUALITY_MAX = 6;
+        public const ulong PP_CPU_CAPS_MMX = 0x80000000;
+        public const ulong PP_CPU_CAPS_MMX2 = 0x20000000;
+        public const ulong PP_CPU_CAPS_3DNOW = 0x40000000;
+        public const ulong PP_CPU_CAPS_ALTIVEC = 0x10000000;
+        public const ulong PP_CPU_CAPS_AUTO = 0x00080000;
+        public const ulong PP_FORMAT = 0x00000008;
+        public const ulong PP_FORMAT_420 = (0x00000011|PP_FORMAT);
+        public const ulong PP_FORMAT_422 = (0x00000001|PP_FORMAT);
+        public const ulong PP_FORMAT_411 = (0x00000002|PP_FORMAT);
+        public const ulong PP_FORMAT_444 = (0x00000000|PP_FORMAT);
+        public const ulong PP_FORMAT_440 = (0x00000010|PP_FORMAT);
+        public const ulong PP_PICT_TYPE_QP2 = 0x00000010;
         private const string libpostprocess = "postprocess-53";
         
         [DllImport(libpostprocess, EntryPoint = "postproc_version", CallingConvention = CallingConvention.Cdecl)]

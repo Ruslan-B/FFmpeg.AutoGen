@@ -56,6 +56,10 @@ namespace FFmpeg.AutoGen
     
     public unsafe static partial class ffmpeg
     {
+        public const ulong LIBSWRESAMPLE_VERSION_MAJOR = 1;
+        public const ulong LIBSWRESAMPLE_VERSION_MINOR = 2;
+        public const ulong LIBSWRESAMPLE_VERSION_MICRO = 101;
+        public const ulong SWR_FLAG_RESAMPLE = 1;
         private const string libswresample = "swresample-1";
         
         [DllImport(libswresample, EntryPoint = "swr_get_class", CallingConvention = CallingConvention.Cdecl)]

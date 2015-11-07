@@ -68,10 +68,9 @@ namespace FFmpeg.AutoGen.Example
             var sourcePixFmt = codecContext.pix_fmt;
             var codecId = codecContext.codec_id;
             var convertToPixFmt = AVPixelFormat.PIX_FMT_BGR24;
-            const int SWS_FAST_BILINEAR = 1;
             var pConvertContext = ffmpeg.sws_getContext(width, height, sourcePixFmt,
                 width, height, convertToPixFmt,
-                SWS_FAST_BILINEAR, null, null, null);
+                ffmpeg.SWS_FAST_BILINEAR, null, null, null);
             if (pConvertContext == null)
             {
                 throw new ApplicationException(@"Could not initialize the conversion context");
@@ -92,11 +91,9 @@ namespace FFmpeg.AutoGen.Example
             // AVCodecContext* pCodecContext = ffmpeg.avcodec_alloc_context3(pCodec); // but it is not working for all kind of codecs
             var pCodecContext = &codecContext;
 
-            const int CODEC_CAP_TRUNCATED = 1 << 3;
-            const int CODEC_FLAG_TRUNCATED = 1 << 16;
-            if ((pCodec->capabilities & CODEC_CAP_TRUNCATED) == CODEC_CAP_TRUNCATED)
+            if ((pCodec->capabilities & ffmpeg.AV_CODEC_CAP_TRUNCATED) == ffmpeg.AV_CODEC_CAP_TRUNCATED)
             {
-                pCodecContext->flags |= CODEC_FLAG_TRUNCATED;
+                pCodecContext->flags |= ffmpeg.AV_CODEC_FLAG_TRUNCATED;
             }
 
             if (ffmpeg.avcodec_open2(pCodecContext, pCodec, null) < 0)
