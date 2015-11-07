@@ -1,7 +1,7 @@
 ##FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.png)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
 
-Auto Generated FFmpeg wrapper for C#/.NET and Mono.  
-Wrapper generated for FFmpeg 2.8.1
+FFmpeg auto generated unsafe bindings for C#/.NET and Mono.  
+The bindings are generated for FFmpeg 2.8.1.
 
 ##Usage
 
@@ -9,11 +9,12 @@ The basic example of the library usage: video decoding, conversion and frame ext
 For the more sophisticated operations please refer to offical [ffmpeg Documentation](https://www.ffmpeg.org/documentation.html) expecially API section of it.
 
 - on Windows:  
-Native FFmpeg binaries are pre bundled in the repository. The binaries source from [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/).
+Native ffmpeg binaries are pre bundled in the repository. 
+The binaries source from [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/).
 Please check to example project it shows how specify path to libraries.  
 
 - on OS X:  
-Install FFmpeg via [MacPorts](http://www.macports.org):
+Install ffmpeg via [MacPorts](http://www.macports.org):
 ```bash
 sudo port install ffmpeg +universal
 ```
@@ -25,7 +26,7 @@ You need to update ```FFmpeg.AutoGen.config``` with full path to FFmpeg librarie
 
 ##Generation
 
-The wrapper generator uses [clangsharp](http://www.clangsharp.org).
+The bindings generator uses [clangsharp](http://www.clangsharp.org).
 
 Prerequisites:
  - FFmpeg library include files ```./ffmpeg/include```
