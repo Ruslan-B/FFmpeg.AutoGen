@@ -1,4 +1,6 @@
 language: csharp
 solution: FFmpeg.AutoGen.sln
+install:
+  - nuget restore FFmpeg.AutoGen.sln
 script:
   - xbuild /p:Platform=x64  /p:Configuration=Release FFmpeg.AutoGen.sln
