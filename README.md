@@ -3,6 +3,8 @@
 Auto Generated FFmpeg wrapper for C#/.NET and Mono.  
 Wrapper generated for FFmpeg 2.5.2
 
+If you are looking newer version of bindings to FFmpeg please check [experemental](https://github.com/Ruslan-B/FFmpeg.AutoGen/tree/experemental) branch.
+
 ##Usage
 
 The basic example of the library usage: video decoding, conversion and frame extraction to jpeg is included in ```FFmpeg.AutoGen.Example``` project.  
