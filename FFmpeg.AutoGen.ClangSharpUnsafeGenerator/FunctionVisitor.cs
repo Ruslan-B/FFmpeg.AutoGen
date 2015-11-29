@@ -7,19 +7,28 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
 {
     internal class FunctionVisitor
     {
+        private readonly string m_libraryName;
         private readonly string m_libraryVarName;
+        private readonly Dictionary<string, string> m_exportMap;
         private readonly string m_prefixStrip;
         private readonly IndentedTextWriter m_tw;
         private readonly ISet<string> m_visitedFunctions;
 
-        public FunctionVisitor(IndentedTextWriter tw, ISet<string> visitedFunctions, string libraryName, string libraryVarName, string prefixStrip = @"")
+        public FunctionVisitor(IndentedTextWriter tw,
+            ISet<string> visitedFunctions,
+            string libraryName,
+            string libraryVarName,
+            Dictionary<string, string> exportMap,
+            string prefixStrip = @"")
         {
             m_tw = tw;
             m_visitedFunctions = visitedFunctions;
+            m_libraryName = libraryName;
             m_libraryVarName = libraryVarName;
+            m_exportMap = exportMap;
             m_prefixStrip = prefixStrip;
 
-            m_tw.WriteLine(@"private const string {0} = ""{1}"";", m_libraryVarName, libraryName);
+            m_tw.WriteLine(@"private const string {0} = ""{1}"";", m_libraryVarName, m_libraryName);
             m_tw.WriteLine();
         }
 
@@ -36,9 +45,30 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
             if (cursorKind == CXCursorKind.CXCursor_FunctionDecl)
             {
                 var functionName = clang.getCursorSpelling(cursor).ToString();
-
+                
                 if (m_visitedFunctions.Contains(functionName))
                 {
+                    return CXChildVisitResult.CXChildVisit_Continue;
+                }
+
+                string libraryName;
+                if (m_exportMap.TryGetValue(functionName, out libraryName))
+                {
+                    if (!string.Equals(libraryName, m_libraryName, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        string message = string.Format(@"Warning: Function {0} belongs to {1}. Skipping generation for {2}.",
+                            functionName, libraryName, m_libraryName);
+                        Console.WriteLine(message);
+                        return CXChildVisitResult.CXChildVisit_Continue;
+                    }
+                }
+                else
+                {
+                    m_visitedFunctions.Add(functionName);
+
+                    string message = string.Format(@"Info: Unknow function export {0}. Skipping generation for {1}.",
+                           functionName, m_libraryName);
+                    Console.WriteLine(message);
                     return CXChildVisitResult.CXChildVisit_Continue;
                 }
 

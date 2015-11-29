@@ -9,25 +9,27 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
 {
     internal class Generator
     {
+        private readonly Dictionary<string, string> m_exportMap;
         private readonly string[] m_includeDirs;
         private readonly string m_methodClassName;
         private readonly string m_namespace;
         private readonly ISet<string> m_visitedEnums = new HashSet<string>();
         private readonly ISet<string> m_visitedFunction = new HashSet<string>();
+        private readonly ISet<string> m_visitedMacros = new HashSet<string>();
         private readonly ISet<string> m_visitedStructs = new HashSet<string>();
         private readonly ISet<string> m_visitedTypeDefs = new HashSet<string>();
-        private readonly ISet<string> m_visitedMacros = new HashSet<string>();
 
-        public Generator(string[] includeDirs, string @namespace, string methodClassName)
+        public Generator(string[] includeDirs, string @namespace, string methodClassName, IEnumerable<FunctionExport> exports)
         {
             m_includeDirs = includeDirs;
             m_namespace = @namespace;
             m_methodClassName = methodClassName;
+            m_exportMap = exports.ToDictionary(x => x.Name, x => x.Library);
         }
 
         public void Generate(string[] inputFiles, string outputFile, string libraryVarName, string libraryName)
         {
-            string[] arr = { @"-x", @"c++" };
+            string[] arr = {@"-x", @"c++"};
 
             arr = arr.Concat(m_includeDirs.Select(x => @"-I" + x)).ToArray();
 
@@ -40,7 +42,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
             {
                 CXTranslationUnit translationUnit;
                 CXUnsavedFile unsavedFile;
-                var options = (uint)CXTranslationUnit_Flags.CXTranslationUnit_DetailedPreprocessingRecord;
+                var options = (uint) CXTranslationUnit_Flags.CXTranslationUnit_DetailedPreprocessingRecord;
                 var translationUnitError = clang.parseTranslationUnit2(index, file, arr, 3, out unsavedFile, 0, options, out translationUnit);
 
                 if (translationUnitError != CXErrorCode.CXError_Success)
@@ -103,7 +105,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                             clang.visitChildren(clang.getTranslationUnitCursor(tu), macroVisitor.Visit, new CXClientData(IntPtr.Zero));
                         }
 
-                        var functionVisitor = new FunctionVisitor(sw, m_visitedFunction, libraryName, libraryVarName);
+                        var functionVisitor = new FunctionVisitor(sw, m_visitedFunction, libraryName, libraryVarName, m_exportMap);
                         foreach (var tu in translationUnits)
                         {
                             clang.visitChildren(clang.getTranslationUnitCursor(tu), functionVisitor.Visit, new CXClientData(IntPtr.Zero));
@@ -123,6 +125,15 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
             translationUnits.ForEach(clang.disposeTranslationUnit);
 
             clang.disposeIndex(index);
+        }
+
+        public void OutputStatistic()
+        {
+            Console.WriteLine(@"Enums: {0}.", m_visitedEnums.Count);
+            Console.WriteLine(@"Structs: {0}.", m_visitedStructs.Count);
+            Console.WriteLine(@"Defs: {0}.", m_visitedTypeDefs.Count);
+            Console.WriteLine(@"Macros: {0}.", m_visitedMacros.Count);
+            Console.WriteLine(@"Functions: {0}.", m_visitedFunction.Count);
         }
     }
 }

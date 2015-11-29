@@ -43,7 +43,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                     return CXChildVisitResult.CXChildVisit_Continue;
                 }
 
-                m_tw.WriteLine(@"public const ulong {0} = {1};", macroName, expression);
+                m_tw.WriteLine(@"public const int {0} = {1};", macroName, expression);
             }
 
             return CXChildVisitResult.CXChildVisit_Continue;

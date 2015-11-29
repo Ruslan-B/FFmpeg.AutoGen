@@ -3,10 +3,6 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
-    public unsafe partial struct AVOptionRanges
-    {
-    }
-    
     public unsafe partial struct AVDictionary
     {
     }
@@ -237,10 +233,6 @@ namespace FFmpeg.AutoGen
         public AVFilterInOut* @next;
     }
     
-    public unsafe partial struct AVOptionRanges
-    {
-    }
-    
     public unsafe partial struct AVBuffer
     {
     }
@@ -286,10 +278,6 @@ namespace FFmpeg.AutoGen
     }
     
     public unsafe partial struct AVFilterGraphInternal
-    {
-    }
-    
-    public unsafe partial struct AVOptionRanges
     {
     }
     
@@ -354,28 +342,38 @@ namespace FFmpeg.AutoGen
     
     public unsafe static partial class ffmpeg
     {
-        public const ulong LIBAVFILTER_VERSION_MAJOR = 5;
-        public const ulong LIBAVFILTER_VERSION_MINOR = 40;
-        public const ulong LIBAVFILTER_VERSION_MICRO = 101;
-        public const ulong AV_PERM_READ = 0x01;
-        public const ulong AV_PERM_WRITE = 0x02;
-        public const ulong AV_PERM_PRESERVE = 0x04;
-        public const ulong AV_PERM_REUSE = 0x08;
-        public const ulong AV_PERM_REUSE2 = 0x10;
-        public const ulong AV_PERM_NEG_LINESIZES = 0x20;
-        public const ulong AV_PERM_ALIGN = 0x40;
-        public const ulong AVFILTER_ALIGN = 16;
-        public const ulong AVFILTER_FLAG_DYNAMIC_INPUTS = (1<<0);
-        public const ulong AVFILTER_FLAG_DYNAMIC_OUTPUTS = (1<<1);
-        public const ulong AVFILTER_FLAG_SLICE_THREADS = (1<<2);
-        public const ulong AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC = (1<<16);
-        public const ulong AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL = (1<<17);
-        public const ulong AVFILTER_FLAG_SUPPORT_TIMELINE = (AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC|AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL);
-        public const ulong AVFILTER_THREAD_SLICE = (1<<0);
-        public const ulong AVFILTER_CMD_FLAG_ONE = 1;
-        public const ulong AVFILTER_CMD_FLAG_FAST = 2;
-        public const ulong AV_BUFFERSINK_FLAG_PEEK = 1;
-        public const ulong AV_BUFFERSINK_FLAG_NO_REQUEST = 2;
+        public const int LIBAVFILTER_VERSION_MAJOR = 5;
+        public const int LIBAVFILTER_VERSION_MINOR = 40;
+        public const int LIBAVFILTER_VERSION_MICRO = 101;
+        public const bool FF_API_AVFILTERPAD_PUBLIC = (LIBAVFILTER_VERSION_MAJOR < 6);
+        public const bool FF_API_FOO_COUNT = (LIBAVFILTER_VERSION_MAJOR < 6);
+        public const bool FF_API_AVFILTERBUFFER = (LIBAVFILTER_VERSION_MAJOR < 6);
+        public const bool FF_API_OLD_FILTER_OPTS = (LIBAVFILTER_VERSION_MAJOR < 6);
+        public const bool FF_API_OLD_FILTER_OPTS_ERROR = (LIBAVFILTER_VERSION_MAJOR < 7);
+        public const bool FF_API_AVFILTER_OPEN = (LIBAVFILTER_VERSION_MAJOR < 6);
+        public const bool FF_API_AVFILTER_INIT_FILTER = (LIBAVFILTER_VERSION_MAJOR < 6);
+        public const bool FF_API_OLD_FILTER_REGISTER = (LIBAVFILTER_VERSION_MAJOR < 6);
+        public const bool FF_API_OLD_GRAPH_PARSE = (LIBAVFILTER_VERSION_MAJOR < 5);
+        public const bool FF_API_NOCONST_GET_NAME = (LIBAVFILTER_VERSION_MAJOR < 6);
+        public const int AV_PERM_READ = 0x01;
+        public const int AV_PERM_WRITE = 0x02;
+        public const int AV_PERM_PRESERVE = 0x04;
+        public const int AV_PERM_REUSE = 0x08;
+        public const int AV_PERM_REUSE2 = 0x10;
+        public const int AV_PERM_NEG_LINESIZES = 0x20;
+        public const int AV_PERM_ALIGN = 0x40;
+        public const int AVFILTER_ALIGN = 16;
+        public const int AVFILTER_FLAG_DYNAMIC_INPUTS = (1<<0);
+        public const int AVFILTER_FLAG_DYNAMIC_OUTPUTS = (1<<1);
+        public const int AVFILTER_FLAG_SLICE_THREADS = (1<<2);
+        public const int AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC = (1<<16);
+        public const int AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL = (1<<17);
+        public const int AVFILTER_FLAG_SUPPORT_TIMELINE = (AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC|AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL);
+        public const int AVFILTER_THREAD_SLICE = (1<<0);
+        public const int AVFILTER_CMD_FLAG_ONE = 1;
+        public const int AVFILTER_CMD_FLAG_FAST = 2;
+        public const int AV_BUFFERSINK_FLAG_PEEK = 1;
+        public const int AV_BUFFERSINK_FLAG_NO_REQUEST = 2;
         private const string libavfilter = "avfilter-5";
         
         [DllImport(libavfilter, EntryPoint = "avfilter_version", CallingConvention = CallingConvention.Cdecl)]
