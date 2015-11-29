@@ -85,8 +85,11 @@
     <Compile Include="EnumVisitor.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ForwardDeclarationVisitor.cs" />
+    <Compile Include="FunctionExport.cs" />
     <Compile Include="FunctionHelper.cs" />
+    <Compile Include="FunctionExportHelper.cs" />
     <Compile Include="FunctionVisitor.cs" />
+    <Compile Include="GenerationException.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="MacroVisitor.cs" />
     <Compile Include="Program.cs" />

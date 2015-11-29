@@ -3,10 +3,6 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
-    public unsafe partial struct AVOptionRanges
-    {
-    }
-    
     public unsafe partial struct SwsVector
     {
         public double* @coeff;
@@ -27,45 +23,47 @@ namespace FFmpeg.AutoGen
     
     public unsafe static partial class ffmpeg
     {
-        public const ulong LIBSWSCALE_VERSION_MAJOR = 3;
-        public const ulong LIBSWSCALE_VERSION_MINOR = 1;
-        public const ulong LIBSWSCALE_VERSION_MICRO = 101;
+        public const int LIBSWSCALE_VERSION_MAJOR = 3;
+        public const int LIBSWSCALE_VERSION_MINOR = 1;
+        public const int LIBSWSCALE_VERSION_MICRO = 101;
+        public const bool FF_API_SWS_CPU_CAPS = (LIBSWSCALE_VERSION_MAJOR<4);
+        public const bool FF_API_ARCH_BFIN = (LIBSWSCALE_VERSION_MAJOR < 4);
         public const int SWS_FAST_BILINEAR = 1;
-        public const ulong SWS_BILINEAR = 2;
-        public const ulong SWS_BICUBIC = 4;
-        public const ulong SWS_X = 8;
-        public const ulong SWS_POINT = 0x10;
-        public const ulong SWS_AREA = 0x20;
-        public const ulong SWS_BICUBLIN = 0x40;
-        public const ulong SWS_GAUSS = 0x80;
-        public const ulong SWS_SINC = 0x100;
-        public const ulong SWS_LANCZOS = 0x200;
-        public const ulong SWS_SPLINE = 0x400;
-        public const ulong SWS_SRC_V_CHR_DROP_MASK = 0x30000;
-        public const ulong SWS_SRC_V_CHR_DROP_SHIFT = 16;
-        public const ulong SWS_PARAM_DEFAULT = 123456;
-        public const ulong SWS_PRINT_INFO = 0x1000;
-        public const ulong SWS_FULL_CHR_H_INT = 0x2000;
-        public const ulong SWS_FULL_CHR_H_INP = 0x4000;
-        public const ulong SWS_DIRECT_BGR = 0x8000;
-        public const ulong SWS_ACCURATE_RND = 0x40000;
-        public const ulong SWS_BITEXACT = 0x80000;
-        public const ulong SWS_ERROR_DIFFUSION = 0x800000;
-        public const ulong SWS_CPU_CAPS_MMX = 0x80000000;
-        public const ulong SWS_CPU_CAPS_MMXEXT = 0x20000000;
-        public const ulong SWS_CPU_CAPS_MMX2 = 0x20000000;
-        public const ulong SWS_CPU_CAPS_3DNOW = 0x40000000;
-        public const ulong SWS_CPU_CAPS_ALTIVEC = 0x10000000;
-        public const ulong SWS_CPU_CAPS_BFIN = 0x01000000;
-        public const ulong SWS_CPU_CAPS_SSE2 = 0x02000000;
+        public const int SWS_BILINEAR = 2;
+        public const int SWS_BICUBIC = 4;
+        public const int SWS_X = 8;
+        public const int SWS_POINT = 0x10;
+        public const int SWS_AREA = 0x20;
+        public const int SWS_BICUBLIN = 0x40;
+        public const int SWS_GAUSS = 0x80;
+        public const int SWS_SINC = 0x100;
+        public const int SWS_LANCZOS = 0x200;
+        public const int SWS_SPLINE = 0x400;
+        public const int SWS_SRC_V_CHR_DROP_MASK = 0x30000;
+        public const int SWS_SRC_V_CHR_DROP_SHIFT = 16;
+        public const int SWS_PARAM_DEFAULT = 123456;
+        public const int SWS_PRINT_INFO = 0x1000;
+        public const int SWS_FULL_CHR_H_INT = 0x2000;
+        public const int SWS_FULL_CHR_H_INP = 0x4000;
+        public const int SWS_DIRECT_BGR = 0x8000;
+        public const int SWS_ACCURATE_RND = 0x40000;
+        public const int SWS_BITEXACT = 0x80000;
+        public const int SWS_ERROR_DIFFUSION = 0x800000;
+        public const uint SWS_CPU_CAPS_MMX = 0x80000000;
+        public const int SWS_CPU_CAPS_MMXEXT = 0x20000000;
+        public const int SWS_CPU_CAPS_MMX2 = 0x20000000;
+        public const int SWS_CPU_CAPS_3DNOW = 0x40000000;
+        public const int SWS_CPU_CAPS_ALTIVEC = 0x10000000;
+        public const int SWS_CPU_CAPS_BFIN = 0x01000000;
+        public const int SWS_CPU_CAPS_SSE2 = 0x02000000;
         public const double SWS_MAX_REDUCE_CUTOFF = 0.002;
-        public const ulong SWS_CS_ITU709 = 1;
-        public const ulong SWS_CS_FCC = 4;
-        public const ulong SWS_CS_ITU601 = 5;
-        public const ulong SWS_CS_ITU624 = 5;
-        public const ulong SWS_CS_SMPTE170M = 5;
-        public const ulong SWS_CS_SMPTE240M = 7;
-        public const ulong SWS_CS_DEFAULT = 5;
+        public const int SWS_CS_ITU709 = 1;
+        public const int SWS_CS_FCC = 4;
+        public const int SWS_CS_ITU601 = 5;
+        public const int SWS_CS_ITU624 = 5;
+        public const int SWS_CS_SMPTE170M = 5;
+        public const int SWS_CS_SMPTE240M = 7;
+        public const int SWS_CS_DEFAULT = 5;
         private const string libswscale = "swscale-3";
         
         [DllImport(libswscale, EntryPoint = "swscale_version", CallingConvention = CallingConvention.Cdecl)]

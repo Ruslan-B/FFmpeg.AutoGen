@@ -3,10 +3,6 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
-    public unsafe partial struct AVOptionRanges
-    {
-    }
-    
     public unsafe partial struct AVBuffer
     {
     }
@@ -438,90 +434,95 @@ namespace FFmpeg.AutoGen
     
     public unsafe static partial class ffmpeg
     {
-        public const ulong LIBAVFORMAT_VERSION_MAJOR = 56;
-        public const ulong LIBAVFORMAT_VERSION_MINOR = 40;
-        public const ulong LIBAVFORMAT_VERSION_MICRO = 101;
-        public const ulong FF_API_R_FRAME_RATE = 1;
-        public const ulong AVIO_SEEKABLE_NORMAL = 0x0001;
-        public const ulong AVSEEK_SIZE = 0x10000;
-        public const ulong AVSEEK_FORCE = 0x20000;
-        public const ulong AVIO_FLAG_READ = 1;
-        public const ulong AVIO_FLAG_WRITE = 2;
-        public const ulong AVIO_FLAG_READ_WRITE = (AVIO_FLAG_READ|AVIO_FLAG_WRITE);
-        public const ulong AVIO_FLAG_NONBLOCK = 8;
-        public const ulong AVIO_FLAG_DIRECT = 0x8000;
-        public const ulong AVPROBE_SCORE_RETRY = (AVPROBE_SCORE_MAX/4);
-        public const ulong AVPROBE_SCORE_STREAM_RETRY = (AVPROBE_SCORE_MAX/4-1);
-        public const ulong AVPROBE_SCORE_EXTENSION = 50;
-        public const ulong AVPROBE_SCORE_MIME = 75;
-        public const ulong AVPROBE_SCORE_MAX = 100;
-        public const ulong AVPROBE_PADDING_SIZE = 32;
-        public const ulong AVFMT_NOFILE = 0x0001;
-        public const ulong AVFMT_NEEDNUMBER = 0x0002;
-        public const ulong AVFMT_SHOW_IDS = 0x0008;
-        public const ulong AVFMT_RAWPICTURE = 0x0020;
-        public const ulong AVFMT_GLOBALHEADER = 0x0040;
-        public const ulong AVFMT_NOTIMESTAMPS = 0x0080;
-        public const ulong AVFMT_GENERIC_INDEX = 0x0100;
-        public const ulong AVFMT_TS_DISCONT = 0x0200;
-        public const ulong AVFMT_VARIABLE_FPS = 0x0400;
-        public const ulong AVFMT_NODIMENSIONS = 0x0800;
-        public const ulong AVFMT_NOSTREAMS = 0x1000;
-        public const ulong AVFMT_NOBINSEARCH = 0x2000;
-        public const ulong AVFMT_NOGENSEARCH = 0x4000;
-        public const ulong AVFMT_NO_BYTE_SEEK = 0x8000;
-        public const ulong AVFMT_ALLOW_FLUSH = 0x10000;
-        public const ulong AVFMT_TS_NONSTRICT = 0x20000;
-        public const ulong AVFMT_TS_NEGATIVE = 0x40000;
-        public const ulong AVFMT_SEEK_TO_PTS = 0x4000000;
-        public const ulong AVINDEX_KEYFRAME = 0x0001;
-        public const ulong AV_DISPOSITION_DEFAULT = 0x0001;
-        public const ulong AV_DISPOSITION_DUB = 0x0002;
-        public const ulong AV_DISPOSITION_ORIGINAL = 0x0004;
-        public const ulong AV_DISPOSITION_COMMENT = 0x0008;
-        public const ulong AV_DISPOSITION_LYRICS = 0x0010;
-        public const ulong AV_DISPOSITION_KARAOKE = 0x0020;
-        public const ulong AV_DISPOSITION_FORCED = 0x0040;
-        public const ulong AV_DISPOSITION_HEARING_IMPAIRED = 0x0080;
-        public const ulong AV_DISPOSITION_VISUAL_IMPAIRED = 0x0100;
-        public const ulong AV_DISPOSITION_CLEAN_EFFECTS = 0x0200;
-        public const ulong AV_DISPOSITION_ATTACHED_PIC = 0x0400;
-        public const ulong AV_DISPOSITION_CAPTIONS = 0x10000;
-        public const ulong AV_DISPOSITION_DESCRIPTIONS = 0x20000;
-        public const ulong AV_DISPOSITION_METADATA = 0x40000;
-        public const ulong AV_PTS_WRAP_IGNORE = 0;
-        public const ulong AV_PTS_WRAP_ADD_OFFSET = 1;
-        public const long AV_PTS_WRAP_SUB_OFFSET = -1;
-        public const ulong AVSTREAM_EVENT_FLAG_METADATA_UPDATED = 0x0001;
-        public const ulong MAX_STD_TIMEBASES = (30*12+7+6);
-        public const ulong MAX_REORDER_DELAY = 16;
-        public const ulong AV_PROGRAM_RUNNING = 1;
-        public const ulong AVFMTCTX_NOHEADER = 0x0001;
-        public const ulong AVFMT_FLAG_GENPTS = 0x0001;
-        public const ulong AVFMT_FLAG_IGNIDX = 0x0002;
-        public const ulong AVFMT_FLAG_NONBLOCK = 0x0004;
-        public const ulong AVFMT_FLAG_IGNDTS = 0x0008;
-        public const ulong AVFMT_FLAG_NOFILLIN = 0x0010;
-        public const ulong AVFMT_FLAG_NOPARSE = 0x0020;
-        public const ulong AVFMT_FLAG_NOBUFFER = 0x0040;
-        public const ulong AVFMT_FLAG_CUSTOM_IO = 0x0080;
-        public const ulong AVFMT_FLAG_DISCARD_CORRUPT = 0x0100;
-        public const ulong AVFMT_FLAG_FLUSH_PACKETS = 0x0200;
-        public const ulong AVFMT_FLAG_BITEXACT = 0x0400;
-        public const ulong AVFMT_FLAG_MP4A_LATM = 0x8000;
-        public const ulong AVFMT_FLAG_SORT_DTS = 0x10000;
-        public const ulong AVFMT_FLAG_PRIV_OPT = 0x20000;
-        public const ulong AVFMT_FLAG_KEEP_SIDE_DATA = 0x40000;
-        public const ulong AVFMT_FLAG_FAST_SEEK = 0x80000;
-        public const ulong FF_FDEBUG_TS = 0x0001;
-        public const ulong AVFMT_EVENT_FLAG_METADATA_UPDATED = 0x0001;
-        public const long AVFMT_AVOID_NEG_TS_AUTO = -1;
-        public const ulong AVFMT_AVOID_NEG_TS_MAKE_NON_NEGATIVE = 1;
-        public const ulong AVFMT_AVOID_NEG_TS_MAKE_ZERO = 2;
-        public const ulong AVSEEK_FLAG_BACKWARD = 1;
-        public const ulong AVSEEK_FLAG_BYTE = 2;
-        public const ulong AVSEEK_FLAG_ANY = 4;
-        public const ulong AVSEEK_FLAG_FRAME = 8;
+        public const int LIBAVFORMAT_VERSION_MAJOR = 56;
+        public const int LIBAVFORMAT_VERSION_MINOR = 40;
+        public const int LIBAVFORMAT_VERSION_MICRO = 101;
+        public const bool FF_API_LAVF_BITEXACT = (LIBAVFORMAT_VERSION_MAJOR < 57);
+        public const bool FF_API_LAVF_FRAC = (LIBAVFORMAT_VERSION_MAJOR < 57);
+        public const bool FF_API_LAVF_CODEC_TB = (LIBAVFORMAT_VERSION_MAJOR < 57);
+        public const bool FF_API_URL_FEOF = (LIBAVFORMAT_VERSION_MAJOR < 57);
+        public const bool FF_API_PROBESIZE_32 = (LIBAVFORMAT_VERSION_MAJOR < 57);
+        public const int FF_API_R_FRAME_RATE = 1;
+        public const int AVIO_SEEKABLE_NORMAL = 0x0001;
+        public const int AVSEEK_SIZE = 0x10000;
+        public const int AVSEEK_FORCE = 0x20000;
+        public const int AVIO_FLAG_READ = 1;
+        public const int AVIO_FLAG_WRITE = 2;
+        public const int AVIO_FLAG_READ_WRITE = (AVIO_FLAG_READ|AVIO_FLAG_WRITE);
+        public const int AVIO_FLAG_NONBLOCK = 8;
+        public const int AVIO_FLAG_DIRECT = 0x8000;
+        public const int AVPROBE_SCORE_RETRY = (AVPROBE_SCORE_MAX/4);
+        public const int AVPROBE_SCORE_STREAM_RETRY = (AVPROBE_SCORE_MAX/4-1);
+        public const int AVPROBE_SCORE_EXTENSION = 50;
+        public const int AVPROBE_SCORE_MIME = 75;
+        public const int AVPROBE_SCORE_MAX = 100;
+        public const int AVPROBE_PADDING_SIZE = 32;
+        public const int AVFMT_NOFILE = 0x0001;
+        public const int AVFMT_NEEDNUMBER = 0x0002;
+        public const int AVFMT_SHOW_IDS = 0x0008;
+        public const int AVFMT_RAWPICTURE = 0x0020;
+        public const int AVFMT_GLOBALHEADER = 0x0040;
+        public const int AVFMT_NOTIMESTAMPS = 0x0080;
+        public const int AVFMT_GENERIC_INDEX = 0x0100;
+        public const int AVFMT_TS_DISCONT = 0x0200;
+        public const int AVFMT_VARIABLE_FPS = 0x0400;
+        public const int AVFMT_NODIMENSIONS = 0x0800;
+        public const int AVFMT_NOSTREAMS = 0x1000;
+        public const int AVFMT_NOBINSEARCH = 0x2000;
+        public const int AVFMT_NOGENSEARCH = 0x4000;
+        public const int AVFMT_NO_BYTE_SEEK = 0x8000;
+        public const int AVFMT_ALLOW_FLUSH = 0x10000;
+        public const int AVFMT_TS_NONSTRICT = 0x20000;
+        public const int AVFMT_TS_NEGATIVE = 0x40000;
+        public const int AVFMT_SEEK_TO_PTS = 0x4000000;
+        public const int AVINDEX_KEYFRAME = 0x0001;
+        public const int AV_DISPOSITION_DEFAULT = 0x0001;
+        public const int AV_DISPOSITION_DUB = 0x0002;
+        public const int AV_DISPOSITION_ORIGINAL = 0x0004;
+        public const int AV_DISPOSITION_COMMENT = 0x0008;
+        public const int AV_DISPOSITION_LYRICS = 0x0010;
+        public const int AV_DISPOSITION_KARAOKE = 0x0020;
+        public const int AV_DISPOSITION_FORCED = 0x0040;
+        public const int AV_DISPOSITION_HEARING_IMPAIRED = 0x0080;
+        public const int AV_DISPOSITION_VISUAL_IMPAIRED = 0x0100;
+        public const int AV_DISPOSITION_CLEAN_EFFECTS = 0x0200;
+        public const int AV_DISPOSITION_ATTACHED_PIC = 0x0400;
+        public const int AV_DISPOSITION_CAPTIONS = 0x10000;
+        public const int AV_DISPOSITION_DESCRIPTIONS = 0x20000;
+        public const int AV_DISPOSITION_METADATA = 0x40000;
+        public const int AV_PTS_WRAP_IGNORE = 0;
+        public const int AV_PTS_WRAP_ADD_OFFSET = 1;
+        public const int AV_PTS_WRAP_SUB_OFFSET = -1;
+        public const int AVSTREAM_EVENT_FLAG_METADATA_UPDATED = 0x0001;
+        public const int MAX_STD_TIMEBASES = (30*12+7+6);
+        public const int MAX_REORDER_DELAY = 16;
+        public const int AV_PROGRAM_RUNNING = 1;
+        public const int AVFMTCTX_NOHEADER = 0x0001;
+        public const int AVFMT_FLAG_GENPTS = 0x0001;
+        public const int AVFMT_FLAG_IGNIDX = 0x0002;
+        public const int AVFMT_FLAG_NONBLOCK = 0x0004;
+        public const int AVFMT_FLAG_IGNDTS = 0x0008;
+        public const int AVFMT_FLAG_NOFILLIN = 0x0010;
+        public const int AVFMT_FLAG_NOPARSE = 0x0020;
+        public const int AVFMT_FLAG_NOBUFFER = 0x0040;
+        public const int AVFMT_FLAG_CUSTOM_IO = 0x0080;
+        public const int AVFMT_FLAG_DISCARD_CORRUPT = 0x0100;
+        public const int AVFMT_FLAG_FLUSH_PACKETS = 0x0200;
+        public const int AVFMT_FLAG_BITEXACT = 0x0400;
+        public const int AVFMT_FLAG_MP4A_LATM = 0x8000;
+        public const int AVFMT_FLAG_SORT_DTS = 0x10000;
+        public const int AVFMT_FLAG_PRIV_OPT = 0x20000;
+        public const int AVFMT_FLAG_KEEP_SIDE_DATA = 0x40000;
+        public const int AVFMT_FLAG_FAST_SEEK = 0x80000;
+        public const int FF_FDEBUG_TS = 0x0001;
+        public const int AVFMT_EVENT_FLAG_METADATA_UPDATED = 0x0001;
+        public const int AVFMT_AVOID_NEG_TS_AUTO = -1;
+        public const int AVFMT_AVOID_NEG_TS_MAKE_NON_NEGATIVE = 1;
+        public const int AVFMT_AVOID_NEG_TS_MAKE_ZERO = 2;
+        public const int AVSEEK_FLAG_BACKWARD = 1;
+        public const int AVSEEK_FLAG_BYTE = 2;
+        public const int AVSEEK_FLAG_ANY = 4;
+        public const int AVSEEK_FLAG_FRAME = 8;
         private const string libavformat = "avformat-56";
         
         [DllImport(libavformat, EntryPoint = "avio_find_protocol_name", CallingConvention = CallingConvention.Cdecl)]
@@ -595,9 +596,6 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavformat, EntryPoint = "avio_skip", CallingConvention = CallingConvention.Cdecl)]
         public static extern long avio_skip(AVIOContext* @s, long @offset);
-        
-        [DllImport(libavformat, EntryPoint = "avio_tell", CallingConvention = CallingConvention.Cdecl)]
-        public static extern long avio_tell(AVIOContext* @s);
         
         [DllImport(libavformat, EntryPoint = "avio_size", CallingConvention = CallingConvention.Cdecl)]
         public static extern long avio_size(AVIOContext* @s);
