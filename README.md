@@ -1,27 +1,26 @@
 ##FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.png)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
 
-Auto Generated FFmpeg wrapper for C#/.NET and Mono.  
-Wrapper generated for FFmpeg 2.5.2
+FFmpeg auto generated unsafe bindings for C#/.NET and Mono.  
+The bindings are generated for FFmpeg 2.8.1.
 
 If you are looking newer version of bindings to FFmpeg please check [experemental](https://github.com/Ruslan-B/FFmpeg.AutoGen/tree/experemental) branch.
 
 ##Usage
 
 The basic example of the library usage: video decoding, conversion and frame extraction to jpeg is included in ```FFmpeg.AutoGen.Example``` project.  
-For the more sophisticated operations I can recommend to read [An ffmpeg and SDL Tutorial](http://dranger.com/ffmpeg/) for C.
+For the more sophisticated operations please refer to offical [ffmpeg Documentation](https://www.ffmpeg.org/documentation.html) expecially API section of it.
 
 - on Windows:  
-The native FFmpeg binaries are bundled in repository. The binaries source is [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/), v2.5.2 been used for
-[32-bit](http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-2.5.2-win32-shared.7z) and
-[64-bit](http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-2.5.2-win64-shared.7z) platforms.
-The example project shows how specify path to native libraries.  
+Native ffmpeg binaries are pre bundled in the repository. 
+The binaries source from [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/).
+Please check to example project it shows how specify path to libraries.  
 
 - on OS X:  
-Install FFmpeg via [MacPorts](http://www.macports.org):
+Install ffmpeg via [MacPorts](http://www.macports.org):
 ```bash
 sudo port install ffmpeg +universal
 ```
-Please ensure that ```FFmpeg.AutoGen.dll``` coupled with ```FFmpeg.AutoGen.config```. 
+Please make sure that ```FFmpeg.AutoGen.dll``` coupled with ```FFmpeg.AutoGen.config``` and all paths are correct. 
 By default MacPorts keeps compiled libraries in ```/opt/local/lib```.
 
 - on Linux:  
@@ -29,24 +28,21 @@ You need to update ```FFmpeg.AutoGen.config``` with full path to FFmpeg librarie
 
 ##Generation
 
-The wrapper generator uses customized version of ctypesgencore package based on [ctypesgen](http://code.google.com/p/ctypesgen/) 0.r125.
+The bindings generator uses [clangsharp](http://www.clangsharp.org).
 
 Prerequisites:
- - FFmpeg library binaries (see **[Usage](#usage)**)
- - Python 2.7 with packages:
-    - ctypes
-
- - gcc - OS dependent:
-    - on OS X - XCode Command Line Tools
-    - on Windows - [MinGW](http://www.mingw.org)
+ - FFmpeg library include files ```./ffmpeg/include```
 
 Steps to generate:
-- Execute: python generate.py
-- File ```./FFmpeg.AutoGen/FFmpegInvoke.cs``` will be regenerated.
+- Run FFmpeg.AutoGen.ClangSharpUnsafeGenerator;
+- All files with extension ```*.g.cs```  in ```FFmpeg.AutoGen``` project will be regenerated.
 
 ##License
 
-GNU Lesser General Public License (LGPL) version 3 or later.  
+Copyright © Ruslan Balanukhin 2015
+All rights reserved.
+
+Distributed under the GNU Lesser General Public License (LGPL) version 3.  
 http://www.gnu.org/licenses/lgpl.html
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
