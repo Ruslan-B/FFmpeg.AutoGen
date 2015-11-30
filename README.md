@@ -3,8 +3,6 @@
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.  
 The bindings are generated for FFmpeg 2.8.1.
 
-If you are looking newer version of bindings to FFmpeg please check [experemental](https://github.com/Ruslan-B/FFmpeg.AutoGen/tree/experemental) branch.
-
 ##Usage
 
 The basic example of the library usage: video decoding, conversion and frame extraction to jpeg is included in ```FFmpeg.AutoGen.Example``` project.  
@@ -39,7 +37,7 @@ Steps to generate:
 
 ##License
 
-Copyright © Ruslan Balanukhin 2015
+Copyright Â© Ruslan Balanukhin 2015
 All rights reserved.
 
 Distributed under the GNU Lesser General Public License (LGPL) version 3.  
