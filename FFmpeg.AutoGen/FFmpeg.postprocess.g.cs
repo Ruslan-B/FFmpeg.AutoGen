@@ -8,9 +8,9 @@ namespace FFmpeg.AutoGen
         public const int LIBPOSTPROC_VERSION_MAJOR = 53;
         public const int LIBPOSTPROC_VERSION_MINOR = 3;
         public const int LIBPOSTPROC_VERSION_MICRO = 100;
-        public const bool FF_API_QP_TYPE = (LIBPOSTPROC_VERSION_MAJOR < 55);
+        public const bool FF_API_QP_TYPE = (LIBPOSTPROC_VERSION_MAJOR<55);
         public const int PP_QUALITY_MAX = 6;
-        public const uint PP_CPU_CAPS_MMX = 0x80000000;
+        public const ulong PP_CPU_CAPS_MMX = 0x80000000;
         public const int PP_CPU_CAPS_MMX2 = 0x20000000;
         public const int PP_CPU_CAPS_3DNOW = 0x40000000;
         public const int PP_CPU_CAPS_ALTIVEC = 0x10000000;
