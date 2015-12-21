@@ -54,6 +54,7 @@ namespace FFmpeg.AutoGen
     {
         public const int LIBSWRESAMPLE_VERSION_MAJOR = 1;
         public const int LIBSWRESAMPLE_VERSION_MINOR = 2;
+        public const int LIBSWRESAMPLE_VERSION_MICRO = 101;
         public const int SWR_FLAG_RESAMPLE = 1;
         private const string libswresample = "swresample-1";
         

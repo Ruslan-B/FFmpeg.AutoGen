@@ -49,7 +49,7 @@ namespace FFmpeg.AutoGen
         public const int SWS_ACCURATE_RND = 0x40000;
         public const int SWS_BITEXACT = 0x80000;
         public const int SWS_ERROR_DIFFUSION = 0x800000;
-        public const uint SWS_CPU_CAPS_MMX = 0x80000000;
+        public const ulong SWS_CPU_CAPS_MMX = 0x80000000;
         public const int SWS_CPU_CAPS_MMXEXT = 0x20000000;
         public const int SWS_CPU_CAPS_MMX2 = 0x20000000;
         public const int SWS_CPU_CAPS_3DNOW = 0x40000000;

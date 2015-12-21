@@ -437,7 +437,7 @@ namespace FFmpeg.AutoGen
         public const int LIBAVFORMAT_VERSION_MAJOR = 56;
         public const int LIBAVFORMAT_VERSION_MINOR = 40;
         public const int LIBAVFORMAT_VERSION_MICRO = 101;
-        public const bool FF_API_LAVF_BITEXACT = (LIBAVFORMAT_VERSION_MAJOR < 57);
+        public const bool FF_API_LAVF_BITEXACT = (LIBAVFORMAT_VERSION_MAJOR<57);
         public const bool FF_API_LAVF_FRAC = (LIBAVFORMAT_VERSION_MAJOR < 57);
         public const bool FF_API_LAVF_CODEC_TB = (LIBAVFORMAT_VERSION_MAJOR < 57);
         public const bool FF_API_URL_FEOF = (LIBAVFORMAT_VERSION_MAJOR < 57);

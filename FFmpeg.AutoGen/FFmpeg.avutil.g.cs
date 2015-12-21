@@ -770,7 +770,7 @@ namespace FFmpeg.AutoGen
         public const int FF_QP2LAMBDA = 118;
         public const int FF_LAMBDA_MAX = (256*128-1);
         public const int FF_QUALITY_SCALE = FF_LAMBDA_SCALE;
-        public const ulong AV_NOPTS_VALUE = 0x8000000000000000L;
+        public const ulong AV_NOPTS_VALUE = 0x8000000000000000;
         public const int AV_TIME_BASE = 1000000;
         public const int LIBAVUTIL_VERSION_MAJOR = 54;
         public const int LIBAVUTIL_VERSION_MINOR = 31;
@@ -818,6 +818,7 @@ namespace FFmpeg.AutoGen
         public const int AV_LOG_TRACE = 56;
         public const int AV_LOG_MAX_OFFSET = (AV_LOG_TRACE-AV_LOG_QUIET);
         public const int AV_LOG_SKIP_REPEATED = 1;
+        public const int AV_LOG_PRINT_LEVEL = 2;
         public const int AVPALETTE_SIZE = 1024;
         public const int AVPALETTE_COUNT = 256;
         public const int AV_CH_FRONT_LEFT = 0x00000001;
@@ -874,7 +875,7 @@ namespace FFmpeg.AutoGen
         public const int AV_CH_LAYOUT_OCTAGONAL = (AV_CH_LAYOUT_5POINT0|AV_CH_BACK_LEFT|AV_CH_BACK_CENTER|AV_CH_BACK_RIGHT);
         public const ulong AV_CH_LAYOUT_HEXADECAGONAL = (AV_CH_LAYOUT_OCTAGONAL|AV_CH_WIDE_LEFT|AV_CH_WIDE_RIGHT|AV_CH_TOP_BACK_LEFT|AV_CH_TOP_BACK_RIGHT|AV_CH_TOP_BACK_CENTER|AV_CH_TOP_FRONT_CENTER|AV_CH_TOP_FRONT_LEFT|AV_CH_TOP_FRONT_RIGHT);
         public const int AV_CH_LAYOUT_STEREO_DOWNMIX = (AV_CH_STEREO_LEFT|AV_CH_STEREO_RIGHT);
-        public const uint AV_CPU_FLAG_FORCE = 0x80000000;
+        public const ulong AV_CPU_FLAG_FORCE = 0x80000000;
         public const int AV_CPU_FLAG_MMX = 0x0001;
         public const int AV_CPU_FLAG_MMXEXT = 0x0002;
         public const int AV_CPU_FLAG_MMX2 = 0x0002;
