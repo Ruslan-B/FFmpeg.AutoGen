@@ -5,12 +5,12 @@ namespace FFmpeg.AutoGen
 {
     public unsafe static partial class ffmpeg
     {
-        public const int LIBPOSTPROC_VERSION_MAJOR = 53;
-        public const int LIBPOSTPROC_VERSION_MINOR = 3;
+        public const int LIBPOSTPROC_VERSION_MAJOR = 54;
+        public const int LIBPOSTPROC_VERSION_MINOR = 0;
         public const int LIBPOSTPROC_VERSION_MICRO = 100;
         public const bool FF_API_QP_TYPE = (LIBPOSTPROC_VERSION_MAJOR<55);
         public const int PP_QUALITY_MAX = 6;
-        public const ulong PP_CPU_CAPS_MMX = 0x80000000;
+        public const uint PP_CPU_CAPS_MMX = 0x80000000;
         public const int PP_CPU_CAPS_MMX2 = 0x20000000;
         public const int PP_CPU_CAPS_3DNOW = 0x40000000;
         public const int PP_CPU_CAPS_ALTIVEC = 0x10000000;
@@ -22,7 +22,7 @@ namespace FFmpeg.AutoGen
         public const int PP_FORMAT_444 = (0x00000000|PP_FORMAT);
         public const int PP_FORMAT_440 = (0x00000010|PP_FORMAT);
         public const int PP_PICT_TYPE_QP2 = 0x00000010;
-        private const string libpostproc = "postproc-53";
+        private const string libpostproc = "postproc-54";
         
         [DllImport(libpostproc, EntryPoint = "postproc_version", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint postproc_version();

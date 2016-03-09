@@ -52,11 +52,11 @@ namespace FFmpeg.AutoGen
     
     public unsafe static partial class ffmpeg
     {
-        public const int LIBSWRESAMPLE_VERSION_MAJOR = 1;
-        public const int LIBSWRESAMPLE_VERSION_MINOR = 2;
+        public const int LIBSWRESAMPLE_VERSION_MAJOR = 2;
+        public const int LIBSWRESAMPLE_VERSION_MINOR = 0;
         public const int LIBSWRESAMPLE_VERSION_MICRO = 101;
         public const int SWR_FLAG_RESAMPLE = 1;
-        private const string libswresample = "swresample-1";
+        private const string libswresample = "swresample-2";
         
         [DllImport(libswresample, EntryPoint = "swr_get_class", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVClass* swr_get_class();

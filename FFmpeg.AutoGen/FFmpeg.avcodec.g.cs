@@ -27,6 +27,11 @@ namespace FFmpeg.AutoGen
         public sbyte* @long_name;
         public int @props;
         public sbyte** @mime_types;
+        public AVProfile* @profiles;
+    }
+    
+    public unsafe partial struct AVProfile
+    {
     }
     
     public unsafe partial struct RcOverride
@@ -43,6 +48,15 @@ namespace FFmpeg.AutoGen
         public int @width;
         public int @height;
         public fixed short @position0[2]; public fixed short @position1[2]; public fixed short @position2[2]; 
+    }
+    
+    public unsafe partial struct AVCPBProperties
+    {
+        public int @max_bitrate;
+        public int @min_bitrate;
+        public int @avg_bitrate;
+        public int @buffer_size;
+        public ulong @vbv_delay;
     }
     
     public unsafe partial struct AVPacketSideData
@@ -63,9 +77,7 @@ namespace FFmpeg.AutoGen
         public int @flags;
         public AVPacketSideData* @side_data;
         public int @side_data_elems;
-        public int @duration;
-        public IntPtr @destruct;
-        public void* @priv;
+        public long @duration;
         public long @pos;
         public long @convergence_duration;
     }
@@ -87,7 +99,7 @@ namespace FFmpeg.AutoGen
         public void* @priv_data;
         public AVCodecInternal* @internal;
         public void* @opaque;
-        public int @bit_rate;
+        public long @bit_rate;
         public int @bit_rate_tolerance;
         public int @global_quality;
         public int @compression_level;
@@ -177,14 +189,10 @@ namespace FFmpeg.AutoGen
         public int @frame_number;
         public int @block_align;
         public int @cutoff;
-        public int @request_channels;
         public ulong @channel_layout;
         public ulong @request_channel_layout;
         public AVAudioServiceType @audio_service_type;
         public AVSampleFormat @request_sample_fmt;
-        public IntPtr @get_buffer;
-        public IntPtr @release_buffer;
-        public IntPtr @reget_buffer;
         public IntPtr @get_buffer2;
         public int @refcounted_frames;
         public float @qcompress;
@@ -199,8 +207,8 @@ namespace FFmpeg.AutoGen
         public int @rc_override_count;
         public RcOverride* @rc_override;
         public sbyte* @rc_eq;
-        public int @rc_max_rate;
-        public int @rc_min_rate;
+        public long @rc_max_rate;
+        public long @rc_min_rate;
         public float @rc_buffer_aggressivity;
         public float @rc_initial_cplx;
         public float @rc_max_available_vbv_use;
@@ -253,7 +261,6 @@ namespace FFmpeg.AutoGen
         public int @thread_safe_callbacks;
         public IntPtr @execute;
         public IntPtr @execute2;
-        public void* @thread_opaque;
         public int @nsse_weight;
         public int @profile;
         public int @level;
@@ -263,7 +270,6 @@ namespace FFmpeg.AutoGen
         public sbyte* @subtitle_header;
         public int @subtitle_header_size;
         public int @error_rate;
-        public AVPacket* @pkt;
         public ulong @vbv_delay;
         public int @side_data_only_packets;
         public int @initial_padding;
@@ -283,6 +289,8 @@ namespace FFmpeg.AutoGen
         public sbyte* @dump_separator;
         public sbyte* @codec_whitelist;
         public uint @properties;
+        public AVPacketSideData* @coded_side_data;
+        public int @nb_coded_side_data;
     }
     
     public unsafe partial struct AVHWAccel
@@ -374,6 +382,8 @@ namespace FFmpeg.AutoGen
         public int @h;
         public int @nb_colors;
         public AVPicture @pict;
+        public sbyte* @data0; public sbyte* @data1; public sbyte* @data2; public sbyte* @data3; 
+        public fixed int @linesize[4]; 
         public AVSubtitleType @type;
         public sbyte* @text;
         public sbyte* @ass;
@@ -459,6 +469,7 @@ namespace FFmpeg.AutoGen
         public AVBitStreamFilter* @filter;
         public AVCodecParserContext* @parser;
         public AVBitStreamFilterContext* @next;
+        public sbyte* @args;
     }
     
     public unsafe partial struct AVBitStreamFilter
@@ -614,86 +625,78 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_ANM = 135,
         @AV_CODEC_ID_BINKVIDEO = 136,
         @AV_CODEC_ID_IFF_ILBM = 137,
-        @AV_CODEC_ID_IFF_BYTERUN1 = 138,
-        @AV_CODEC_ID_KGV1 = 139,
-        @AV_CODEC_ID_YOP = 140,
-        @AV_CODEC_ID_VP8 = 141,
-        @AV_CODEC_ID_PICTOR = 142,
-        @AV_CODEC_ID_ANSI = 143,
-        @AV_CODEC_ID_A64_MULTI = 144,
-        @AV_CODEC_ID_A64_MULTI5 = 145,
-        @AV_CODEC_ID_R10K = 146,
-        @AV_CODEC_ID_MXPEG = 147,
-        @AV_CODEC_ID_LAGARITH = 148,
-        @AV_CODEC_ID_PRORES = 149,
-        @AV_CODEC_ID_JV = 150,
-        @AV_CODEC_ID_DFA = 151,
-        @AV_CODEC_ID_WMV3IMAGE = 152,
-        @AV_CODEC_ID_VC1IMAGE = 153,
-        @AV_CODEC_ID_UTVIDEO = 154,
-        @AV_CODEC_ID_BMV_VIDEO = 155,
-        @AV_CODEC_ID_VBLE = 156,
-        @AV_CODEC_ID_DXTORY = 157,
-        @AV_CODEC_ID_V410 = 158,
-        @AV_CODEC_ID_XWD = 159,
-        @AV_CODEC_ID_CDXL = 160,
-        @AV_CODEC_ID_XBM = 161,
-        @AV_CODEC_ID_ZEROCODEC = 162,
-        @AV_CODEC_ID_MSS1 = 163,
-        @AV_CODEC_ID_MSA1 = 164,
-        @AV_CODEC_ID_TSCC2 = 165,
-        @AV_CODEC_ID_MTS2 = 166,
-        @AV_CODEC_ID_CLLC = 167,
-        @AV_CODEC_ID_MSS2 = 168,
-        @AV_CODEC_ID_VP9 = 169,
-        @AV_CODEC_ID_AIC = 170,
-        @AV_CODEC_ID_ESCAPE130_DEPRECATED = 171,
-        @AV_CODEC_ID_G2M_DEPRECATED = 172,
-        @AV_CODEC_ID_WEBP_DEPRECATED = 173,
-        @AV_CODEC_ID_HNM4_VIDEO = 174,
-        @AV_CODEC_ID_HEVC_DEPRECATED = 175,
-        @AV_CODEC_ID_FIC = 176,
-        @AV_CODEC_ID_ALIAS_PIX = 177,
-        @AV_CODEC_ID_BRENDER_PIX_DEPRECATED = 178,
-        @AV_CODEC_ID_PAF_VIDEO_DEPRECATED = 179,
-        @AV_CODEC_ID_EXR_DEPRECATED = 180,
-        @AV_CODEC_ID_VP7_DEPRECATED = 181,
-        @AV_CODEC_ID_SANM_DEPRECATED = 182,
-        @AV_CODEC_ID_SGIRLE_DEPRECATED = 183,
-        @AV_CODEC_ID_MVC1_DEPRECATED = 184,
-        @AV_CODEC_ID_MVC2_DEPRECATED = 185,
-        @AV_CODEC_ID_HQX = 186,
-        @AV_CODEC_ID_TDSC = 187,
-        @AV_CODEC_ID_HQ_HQA = 188,
-        @AV_CODEC_ID_HAP = 189,
-        @AV_CODEC_ID_DDS = 190,
-        @AV_CODEC_ID_BRENDER_PIX = 1112557912,
-        @AV_CODEC_ID_Y41P = 1496592720,
-        @AV_CODEC_ID_ESCAPE130 = 1160852272,
-        @AV_CODEC_ID_EXR = 809850962,
-        @AV_CODEC_ID_AVRP = 1096176208,
-        @AV_CODEC_ID_012V = 808530518,
-        @AV_CODEC_ID_G2M = 4665933,
-        @AV_CODEC_ID_AVUI = 1096176969,
-        @AV_CODEC_ID_AYUV = 1096373590,
-        @AV_CODEC_ID_TARGA_Y216 = 1412575542,
-        @AV_CODEC_ID_V308 = 1446195256,
-        @AV_CODEC_ID_V408 = 1446260792,
-        @AV_CODEC_ID_YUV4 = 1498764852,
-        @AV_CODEC_ID_SANM = 1396788813,
-        @AV_CODEC_ID_PAF_VIDEO = 1346455126,
-        @AV_CODEC_ID_AVRN = 1096176238,
-        @AV_CODEC_ID_CPIA = 1129335105,
-        @AV_CODEC_ID_XFACE = 1480999235,
-        @AV_CODEC_ID_SGIRLE = 1397180754,
-        @AV_CODEC_ID_MVC1 = 1297498929,
-        @AV_CODEC_ID_MVC2 = 1297498930,
-        @AV_CODEC_ID_SNOW = 1397641047,
-        @AV_CODEC_ID_WEBP = 1464156752,
-        @AV_CODEC_ID_SMVJPEG = 1397577290,
-        @AV_CODEC_ID_HEVC = 1211250229,
-        @AV_CODEC_ID_VP7 = 1448097584,
-        @AV_CODEC_ID_APNG = 1095781959,
+        @AV_CODEC_ID_KGV1 = 138,
+        @AV_CODEC_ID_YOP = 139,
+        @AV_CODEC_ID_VP8 = 140,
+        @AV_CODEC_ID_PICTOR = 141,
+        @AV_CODEC_ID_ANSI = 142,
+        @AV_CODEC_ID_A64_MULTI = 143,
+        @AV_CODEC_ID_A64_MULTI5 = 144,
+        @AV_CODEC_ID_R10K = 145,
+        @AV_CODEC_ID_MXPEG = 146,
+        @AV_CODEC_ID_LAGARITH = 147,
+        @AV_CODEC_ID_PRORES = 148,
+        @AV_CODEC_ID_JV = 149,
+        @AV_CODEC_ID_DFA = 150,
+        @AV_CODEC_ID_WMV3IMAGE = 151,
+        @AV_CODEC_ID_VC1IMAGE = 152,
+        @AV_CODEC_ID_UTVIDEO = 153,
+        @AV_CODEC_ID_BMV_VIDEO = 154,
+        @AV_CODEC_ID_VBLE = 155,
+        @AV_CODEC_ID_DXTORY = 156,
+        @AV_CODEC_ID_V410 = 157,
+        @AV_CODEC_ID_XWD = 158,
+        @AV_CODEC_ID_CDXL = 159,
+        @AV_CODEC_ID_XBM = 160,
+        @AV_CODEC_ID_ZEROCODEC = 161,
+        @AV_CODEC_ID_MSS1 = 162,
+        @AV_CODEC_ID_MSA1 = 163,
+        @AV_CODEC_ID_TSCC2 = 164,
+        @AV_CODEC_ID_MTS2 = 165,
+        @AV_CODEC_ID_CLLC = 166,
+        @AV_CODEC_ID_MSS2 = 167,
+        @AV_CODEC_ID_VP9 = 168,
+        @AV_CODEC_ID_AIC = 169,
+        @AV_CODEC_ID_ESCAPE130 = 170,
+        @AV_CODEC_ID_G2M = 171,
+        @AV_CODEC_ID_WEBP = 172,
+        @AV_CODEC_ID_HNM4_VIDEO = 173,
+        @AV_CODEC_ID_HEVC = 174,
+        @AV_CODEC_ID_FIC = 175,
+        @AV_CODEC_ID_ALIAS_PIX = 176,
+        @AV_CODEC_ID_BRENDER_PIX = 177,
+        @AV_CODEC_ID_PAF_VIDEO = 178,
+        @AV_CODEC_ID_EXR = 179,
+        @AV_CODEC_ID_VP7 = 180,
+        @AV_CODEC_ID_SANM = 181,
+        @AV_CODEC_ID_SGIRLE = 182,
+        @AV_CODEC_ID_MVC1 = 183,
+        @AV_CODEC_ID_MVC2 = 184,
+        @AV_CODEC_ID_HQX = 185,
+        @AV_CODEC_ID_TDSC = 186,
+        @AV_CODEC_ID_HQ_HQA = 187,
+        @AV_CODEC_ID_HAP = 188,
+        @AV_CODEC_ID_DDS = 189,
+        @AV_CODEC_ID_DXV = 190,
+        @AV_CODEC_ID_SCREENPRESSO = 191,
+        @AV_CODEC_ID_RSCC = 192,
+        @AV_CODEC_ID_Y41P = 32768,
+        @AV_CODEC_ID_AVRP = 32769,
+        @AV_CODEC_ID_012V = 32770,
+        @AV_CODEC_ID_AVUI = 32771,
+        @AV_CODEC_ID_AYUV = 32772,
+        @AV_CODEC_ID_TARGA_Y216 = 32773,
+        @AV_CODEC_ID_V308 = 32774,
+        @AV_CODEC_ID_V408 = 32775,
+        @AV_CODEC_ID_YUV4 = 32776,
+        @AV_CODEC_ID_AVRN = 32777,
+        @AV_CODEC_ID_CPIA = 32778,
+        @AV_CODEC_ID_XFACE = 32779,
+        @AV_CODEC_ID_SNOW = 32780,
+        @AV_CODEC_ID_SMVJPEG = 32781,
+        @AV_CODEC_ID_APNG = 32782,
+        @AV_CODEC_ID_DAALA = 32783,
+        @AV_CODEC_ID_CFHD = 32784,
         @AV_CODEC_ID_FIRST_AUDIO = 65536,
         @AV_CODEC_ID_PCM_S16LE = 65536,
         @AV_CODEC_ID_PCM_S16BE = 65537,
@@ -723,12 +726,9 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_PCM_LXF = 65561,
         @AV_CODEC_ID_S302M = 65562,
         @AV_CODEC_ID_PCM_S8_PLANAR = 65563,
-        @AV_CODEC_ID_PCM_S24LE_PLANAR_DEPRECATED = 65564,
-        @AV_CODEC_ID_PCM_S32LE_PLANAR_DEPRECATED = 65565,
-        @AV_CODEC_ID_PCM_S16BE_PLANAR_DEPRECATED = 65566,
-        @AV_CODEC_ID_PCM_S24LE_PLANAR = 407917392,
-        @AV_CODEC_ID_PCM_S32LE_PLANAR = 542135120,
-        @AV_CODEC_ID_PCM_S16BE_PLANAR = 1347637264,
+        @AV_CODEC_ID_PCM_S24LE_PLANAR = 65564,
+        @AV_CODEC_ID_PCM_S32LE_PLANAR = 65565,
+        @AV_CODEC_ID_PCM_S16BE_PLANAR = 65566,
         @AV_CODEC_ID_ADPCM_IMA_QT = 69632,
         @AV_CODEC_ID_ADPCM_IMA_WAV = 69633,
         @AV_CODEC_ID_ADPCM_IMA_DK3 = 69634,
@@ -759,15 +759,16 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_ADPCM_IMA_ISS = 69659,
         @AV_CODEC_ID_ADPCM_G722 = 69660,
         @AV_CODEC_ID_ADPCM_IMA_APC = 69661,
-        @AV_CODEC_ID_ADPCM_VIMA_DEPRECATED = 69662,
-        @AV_CODEC_ID_ADPCM_VIMA = 1447644481,
-        @AV_CODEC_ID_VIMA = 1447644481,
-        @AV_CODEC_ID_ADPCM_AFC = 1095123744,
-        @AV_CODEC_ID_ADPCM_IMA_OKI = 1330333984,
-        @AV_CODEC_ID_ADPCM_DTK = 1146374944,
-        @AV_CODEC_ID_ADPCM_IMA_RAD = 1380008992,
-        @AV_CODEC_ID_ADPCM_G726LE = 909260615,
-        @AV_CODEC_ID_ADPCM_THP_LE = 1414025292,
+        @AV_CODEC_ID_ADPCM_VIMA = 69662,
+        @AV_CODEC_ID_VIMA = 69662,
+        @AV_CODEC_ID_ADPCM_AFC = 71680,
+        @AV_CODEC_ID_ADPCM_IMA_OKI = 71681,
+        @AV_CODEC_ID_ADPCM_DTK = 71682,
+        @AV_CODEC_ID_ADPCM_IMA_RAD = 71683,
+        @AV_CODEC_ID_ADPCM_G726LE = 71684,
+        @AV_CODEC_ID_ADPCM_THP_LE = 71685,
+        @AV_CODEC_ID_ADPCM_PSX = 71686,
+        @AV_CODEC_ID_ADPCM_AICA = 71687,
         @AV_CODEC_ID_AMR_NB = 73728,
         @AV_CODEC_ID_AMR_WB = 73729,
         @AV_CODEC_ID_RA_144 = 77824,
@@ -776,6 +777,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_INTERPLAY_DPCM = 81921,
         @AV_CODEC_ID_XAN_DPCM = 81922,
         @AV_CODEC_ID_SOL_DPCM = 81923,
+        @AV_CODEC_ID_SDX2_DPCM = 83968,
         @AV_CODEC_ID_MP2 = 86016,
         @AV_CODEC_ID_MP3 = 86017,
         @AV_CODEC_ID_AAC = 86018,
@@ -837,26 +839,26 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_RALF = 86074,
         @AV_CODEC_ID_IAC = 86075,
         @AV_CODEC_ID_ILBC = 86076,
-        @AV_CODEC_ID_OPUS_DEPRECATED = 86077,
+        @AV_CODEC_ID_OPUS = 86077,
         @AV_CODEC_ID_COMFORT_NOISE = 86078,
-        @AV_CODEC_ID_TAK_DEPRECATED = 86079,
+        @AV_CODEC_ID_TAK = 86079,
         @AV_CODEC_ID_METASOUND = 86080,
-        @AV_CODEC_ID_PAF_AUDIO_DEPRECATED = 86081,
+        @AV_CODEC_ID_PAF_AUDIO = 86081,
         @AV_CODEC_ID_ON2AVC = 86082,
         @AV_CODEC_ID_DSS_SP = 86083,
-        @AV_CODEC_ID_FFWAVESYNTH = 1179014995,
-        @AV_CODEC_ID_SONIC = 1397706307,
-        @AV_CODEC_ID_SONIC_LS = 1397706316,
-        @AV_CODEC_ID_PAF_AUDIO = 1346455105,
-        @AV_CODEC_ID_OPUS = 1330664787,
-        @AV_CODEC_ID_TAK = 1950507339,
-        @AV_CODEC_ID_EVRC = 1936029283,
-        @AV_CODEC_ID_SMV = 1936944502,
-        @AV_CODEC_ID_DSD_LSBF = 1146307660,
-        @AV_CODEC_ID_DSD_MSBF = 1146307661,
-        @AV_CODEC_ID_DSD_LSBF_PLANAR = 1146307633,
-        @AV_CODEC_ID_DSD_MSBF_PLANAR = 1146307640,
-        @AV_CODEC_ID_4GV = 1932814198,
+        @AV_CODEC_ID_FFWAVESYNTH = 88064,
+        @AV_CODEC_ID_SONIC = 88065,
+        @AV_CODEC_ID_SONIC_LS = 88066,
+        @AV_CODEC_ID_EVRC = 88067,
+        @AV_CODEC_ID_SMV = 88068,
+        @AV_CODEC_ID_DSD_LSBF = 88069,
+        @AV_CODEC_ID_DSD_MSBF = 88070,
+        @AV_CODEC_ID_DSD_LSBF_PLANAR = 88071,
+        @AV_CODEC_ID_DSD_MSBF_PLANAR = 88072,
+        @AV_CODEC_ID_4GV = 88073,
+        @AV_CODEC_ID_INTERPLAY_ACM = 88074,
+        @AV_CODEC_ID_XMA1 = 88075,
+        @AV_CODEC_ID_XMA2 = 88076,
         @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
         @AV_CODEC_ID_DVD_SUBTITLE = 94208,
         @AV_CODEC_ID_DVB_SUBTITLE = 94209,
@@ -867,376 +869,36 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_HDMV_PGS_SUBTITLE = 94214,
         @AV_CODEC_ID_DVB_TELETEXT = 94215,
         @AV_CODEC_ID_SRT = 94216,
-        @AV_CODEC_ID_MICRODVD = 1833195076,
-        @AV_CODEC_ID_EIA_608 = 1664495672,
-        @AV_CODEC_ID_JACOSUB = 1246975298,
-        @AV_CODEC_ID_SAMI = 1396788553,
-        @AV_CODEC_ID_REALTEXT = 1381259348,
-        @AV_CODEC_ID_STL = 1399870540,
-        @AV_CODEC_ID_SUBVIEWER1 = 1398953521,
-        @AV_CODEC_ID_SUBVIEWER = 1400201814,
-        @AV_CODEC_ID_SUBRIP = 1397909872,
-        @AV_CODEC_ID_WEBVTT = 1465275476,
-        @AV_CODEC_ID_MPL2 = 1297108018,
-        @AV_CODEC_ID_VPLAYER = 1448111218,
-        @AV_CODEC_ID_PJS = 1349012051,
-        @AV_CODEC_ID_ASS = 1095979808,
-        @AV_CODEC_ID_HDMV_TEXT_SUBTITLE = 1111774296,
+        @AV_CODEC_ID_MICRODVD = 96256,
+        @AV_CODEC_ID_EIA_608 = 96257,
+        @AV_CODEC_ID_JACOSUB = 96258,
+        @AV_CODEC_ID_SAMI = 96259,
+        @AV_CODEC_ID_REALTEXT = 96260,
+        @AV_CODEC_ID_STL = 96261,
+        @AV_CODEC_ID_SUBVIEWER1 = 96262,
+        @AV_CODEC_ID_SUBVIEWER = 96263,
+        @AV_CODEC_ID_SUBRIP = 96264,
+        @AV_CODEC_ID_WEBVTT = 96265,
+        @AV_CODEC_ID_MPL2 = 96266,
+        @AV_CODEC_ID_VPLAYER = 96267,
+        @AV_CODEC_ID_PJS = 96268,
+        @AV_CODEC_ID_ASS = 96269,
+        @AV_CODEC_ID_HDMV_TEXT_SUBTITLE = 96270,
         @AV_CODEC_ID_FIRST_UNKNOWN = 98304,
         @AV_CODEC_ID_TTF = 98304,
-        @AV_CODEC_ID_BINTEXT = 1112823892,
-        @AV_CODEC_ID_XBIN = 1480739150,
-        @AV_CODEC_ID_IDF = 4801606,
-        @AV_CODEC_ID_OTF = 5198918,
-        @AV_CODEC_ID_SMPTE_KLV = 1263294017,
-        @AV_CODEC_ID_DVD_NAV = 1145979222,
-        @AV_CODEC_ID_TIMED_ID3 = 1414087731,
-        @AV_CODEC_ID_BIN_DATA = 1145132097,
+        @AV_CODEC_ID_BINTEXT = 100352,
+        @AV_CODEC_ID_XBIN = 100353,
+        @AV_CODEC_ID_IDF = 100354,
+        @AV_CODEC_ID_OTF = 100355,
+        @AV_CODEC_ID_SMPTE_KLV = 100356,
+        @AV_CODEC_ID_DVD_NAV = 100357,
+        @AV_CODEC_ID_TIMED_ID3 = 100358,
+        @AV_CODEC_ID_BIN_DATA = 100359,
         @AV_CODEC_ID_PROBE = 102400,
         @AV_CODEC_ID_MPEG2TS = 131072,
         @AV_CODEC_ID_MPEG4SYSTEMS = 131073,
         @AV_CODEC_ID_FFMETADATA = 135168,
-        @CODEC_ID_NONE = 0,
-        @CODEC_ID_MPEG1VIDEO = 1,
-        @CODEC_ID_MPEG2VIDEO = 2,
-        @CODEC_ID_MPEG2VIDEO_XVMC = 3,
-        @CODEC_ID_H261 = 4,
-        @CODEC_ID_H263 = 5,
-        @CODEC_ID_RV10 = 6,
-        @CODEC_ID_RV20 = 7,
-        @CODEC_ID_MJPEG = 8,
-        @CODEC_ID_MJPEGB = 9,
-        @CODEC_ID_LJPEG = 10,
-        @CODEC_ID_SP5X = 11,
-        @CODEC_ID_JPEGLS = 12,
-        @CODEC_ID_MPEG4 = 13,
-        @CODEC_ID_RAWVIDEO = 14,
-        @CODEC_ID_MSMPEG4V1 = 15,
-        @CODEC_ID_MSMPEG4V2 = 16,
-        @CODEC_ID_MSMPEG4V3 = 17,
-        @CODEC_ID_WMV1 = 18,
-        @CODEC_ID_WMV2 = 19,
-        @CODEC_ID_H263P = 20,
-        @CODEC_ID_H263I = 21,
-        @CODEC_ID_FLV1 = 22,
-        @CODEC_ID_SVQ1 = 23,
-        @CODEC_ID_SVQ3 = 24,
-        @CODEC_ID_DVVIDEO = 25,
-        @CODEC_ID_HUFFYUV = 26,
-        @CODEC_ID_CYUV = 27,
-        @CODEC_ID_H264 = 28,
-        @CODEC_ID_INDEO3 = 29,
-        @CODEC_ID_VP3 = 30,
-        @CODEC_ID_THEORA = 31,
-        @CODEC_ID_ASV1 = 32,
-        @CODEC_ID_ASV2 = 33,
-        @CODEC_ID_FFV1 = 34,
-        @CODEC_ID_4XM = 35,
-        @CODEC_ID_VCR1 = 36,
-        @CODEC_ID_CLJR = 37,
-        @CODEC_ID_MDEC = 38,
-        @CODEC_ID_ROQ = 39,
-        @CODEC_ID_INTERPLAY_VIDEO = 40,
-        @CODEC_ID_XAN_WC3 = 41,
-        @CODEC_ID_XAN_WC4 = 42,
-        @CODEC_ID_RPZA = 43,
-        @CODEC_ID_CINEPAK = 44,
-        @CODEC_ID_WS_VQA = 45,
-        @CODEC_ID_MSRLE = 46,
-        @CODEC_ID_MSVIDEO1 = 47,
-        @CODEC_ID_IDCIN = 48,
-        @CODEC_ID_8BPS = 49,
-        @CODEC_ID_SMC = 50,
-        @CODEC_ID_FLIC = 51,
-        @CODEC_ID_TRUEMOTION1 = 52,
-        @CODEC_ID_VMDVIDEO = 53,
-        @CODEC_ID_MSZH = 54,
-        @CODEC_ID_ZLIB = 55,
-        @CODEC_ID_QTRLE = 56,
-        @CODEC_ID_TSCC = 57,
-        @CODEC_ID_ULTI = 58,
-        @CODEC_ID_QDRAW = 59,
-        @CODEC_ID_VIXL = 60,
-        @CODEC_ID_QPEG = 61,
-        @CODEC_ID_PNG = 62,
-        @CODEC_ID_PPM = 63,
-        @CODEC_ID_PBM = 64,
-        @CODEC_ID_PGM = 65,
-        @CODEC_ID_PGMYUV = 66,
-        @CODEC_ID_PAM = 67,
-        @CODEC_ID_FFVHUFF = 68,
-        @CODEC_ID_RV30 = 69,
-        @CODEC_ID_RV40 = 70,
-        @CODEC_ID_VC1 = 71,
-        @CODEC_ID_WMV3 = 72,
-        @CODEC_ID_LOCO = 73,
-        @CODEC_ID_WNV1 = 74,
-        @CODEC_ID_AASC = 75,
-        @CODEC_ID_INDEO2 = 76,
-        @CODEC_ID_FRAPS = 77,
-        @CODEC_ID_TRUEMOTION2 = 78,
-        @CODEC_ID_BMP = 79,
-        @CODEC_ID_CSCD = 80,
-        @CODEC_ID_MMVIDEO = 81,
-        @CODEC_ID_ZMBV = 82,
-        @CODEC_ID_AVS = 83,
-        @CODEC_ID_SMACKVIDEO = 84,
-        @CODEC_ID_NUV = 85,
-        @CODEC_ID_KMVC = 86,
-        @CODEC_ID_FLASHSV = 87,
-        @CODEC_ID_CAVS = 88,
-        @CODEC_ID_JPEG2000 = 89,
-        @CODEC_ID_VMNC = 90,
-        @CODEC_ID_VP5 = 91,
-        @CODEC_ID_VP6 = 92,
-        @CODEC_ID_VP6F = 93,
-        @CODEC_ID_TARGA = 94,
-        @CODEC_ID_DSICINVIDEO = 95,
-        @CODEC_ID_TIERTEXSEQVIDEO = 96,
-        @CODEC_ID_TIFF = 97,
-        @CODEC_ID_GIF = 98,
-        @CODEC_ID_DXA = 99,
-        @CODEC_ID_DNXHD = 100,
-        @CODEC_ID_THP = 101,
-        @CODEC_ID_SGI = 102,
-        @CODEC_ID_C93 = 103,
-        @CODEC_ID_BETHSOFTVID = 104,
-        @CODEC_ID_PTX = 105,
-        @CODEC_ID_TXD = 106,
-        @CODEC_ID_VP6A = 107,
-        @CODEC_ID_AMV = 108,
-        @CODEC_ID_VB = 109,
-        @CODEC_ID_PCX = 110,
-        @CODEC_ID_SUNRAST = 111,
-        @CODEC_ID_INDEO4 = 112,
-        @CODEC_ID_INDEO5 = 113,
-        @CODEC_ID_MIMIC = 114,
-        @CODEC_ID_RL2 = 115,
-        @CODEC_ID_ESCAPE124 = 116,
-        @CODEC_ID_DIRAC = 117,
-        @CODEC_ID_BFI = 118,
-        @CODEC_ID_CMV = 119,
-        @CODEC_ID_MOTIONPIXELS = 120,
-        @CODEC_ID_TGV = 121,
-        @CODEC_ID_TGQ = 122,
-        @CODEC_ID_TQI = 123,
-        @CODEC_ID_AURA = 124,
-        @CODEC_ID_AURA2 = 125,
-        @CODEC_ID_V210X = 126,
-        @CODEC_ID_TMV = 127,
-        @CODEC_ID_V210 = 128,
-        @CODEC_ID_DPX = 129,
-        @CODEC_ID_MAD = 130,
-        @CODEC_ID_FRWU = 131,
-        @CODEC_ID_FLASHSV2 = 132,
-        @CODEC_ID_CDGRAPHICS = 133,
-        @CODEC_ID_R210 = 134,
-        @CODEC_ID_ANM = 135,
-        @CODEC_ID_BINKVIDEO = 136,
-        @CODEC_ID_IFF_ILBM = 137,
-        @CODEC_ID_IFF_BYTERUN1 = 138,
-        @CODEC_ID_KGV1 = 139,
-        @CODEC_ID_YOP = 140,
-        @CODEC_ID_VP8 = 141,
-        @CODEC_ID_PICTOR = 142,
-        @CODEC_ID_ANSI = 143,
-        @CODEC_ID_A64_MULTI = 144,
-        @CODEC_ID_A64_MULTI5 = 145,
-        @CODEC_ID_R10K = 146,
-        @CODEC_ID_MXPEG = 147,
-        @CODEC_ID_LAGARITH = 148,
-        @CODEC_ID_PRORES = 149,
-        @CODEC_ID_JV = 150,
-        @CODEC_ID_DFA = 151,
-        @CODEC_ID_WMV3IMAGE = 152,
-        @CODEC_ID_VC1IMAGE = 153,
-        @CODEC_ID_UTVIDEO = 154,
-        @CODEC_ID_BMV_VIDEO = 155,
-        @CODEC_ID_VBLE = 156,
-        @CODEC_ID_DXTORY = 157,
-        @CODEC_ID_V410 = 158,
-        @CODEC_ID_XWD = 159,
-        @CODEC_ID_CDXL = 160,
-        @CODEC_ID_XBM = 161,
-        @CODEC_ID_ZEROCODEC = 162,
-        @CODEC_ID_MSS1 = 163,
-        @CODEC_ID_MSA1 = 164,
-        @CODEC_ID_TSCC2 = 165,
-        @CODEC_ID_MTS2 = 166,
-        @CODEC_ID_CLLC = 167,
-        @CODEC_ID_Y41P = 1496592720,
-        @CODEC_ID_ESCAPE130 = 1160852272,
-        @CODEC_ID_EXR = 809850962,
-        @CODEC_ID_AVRP = 1096176208,
-        @CODEC_ID_G2M = 4665933,
-        @CODEC_ID_AVUI = 1096176969,
-        @CODEC_ID_AYUV = 1096373590,
-        @CODEC_ID_V308 = 1446195256,
-        @CODEC_ID_V408 = 1446260792,
-        @CODEC_ID_YUV4 = 1498764852,
-        @CODEC_ID_SANM = 1396788813,
-        @CODEC_ID_PAF_VIDEO = 1346455126,
-        @CODEC_ID_SNOW = 1397641047,
-        @CODEC_ID_FIRST_AUDIO = 65536,
-        @CODEC_ID_PCM_S16LE = 65536,
-        @CODEC_ID_PCM_S16BE = 65537,
-        @CODEC_ID_PCM_U16LE = 65538,
-        @CODEC_ID_PCM_U16BE = 65539,
-        @CODEC_ID_PCM_S8 = 65540,
-        @CODEC_ID_PCM_U8 = 65541,
-        @CODEC_ID_PCM_MULAW = 65542,
-        @CODEC_ID_PCM_ALAW = 65543,
-        @CODEC_ID_PCM_S32LE = 65544,
-        @CODEC_ID_PCM_S32BE = 65545,
-        @CODEC_ID_PCM_U32LE = 65546,
-        @CODEC_ID_PCM_U32BE = 65547,
-        @CODEC_ID_PCM_S24LE = 65548,
-        @CODEC_ID_PCM_S24BE = 65549,
-        @CODEC_ID_PCM_U24LE = 65550,
-        @CODEC_ID_PCM_U24BE = 65551,
-        @CODEC_ID_PCM_S24DAUD = 65552,
-        @CODEC_ID_PCM_ZORK = 65553,
-        @CODEC_ID_PCM_S16LE_PLANAR = 65554,
-        @CODEC_ID_PCM_DVD = 65555,
-        @CODEC_ID_PCM_F32BE = 65556,
-        @CODEC_ID_PCM_F32LE = 65557,
-        @CODEC_ID_PCM_F64BE = 65558,
-        @CODEC_ID_PCM_F64LE = 65559,
-        @CODEC_ID_PCM_BLURAY = 65560,
-        @CODEC_ID_PCM_LXF = 65561,
-        @CODEC_ID_S302M = 65562,
-        @CODEC_ID_PCM_S8_PLANAR = 65563,
-        @CODEC_ID_ADPCM_IMA_QT = 69632,
-        @CODEC_ID_ADPCM_IMA_WAV = 69633,
-        @CODEC_ID_ADPCM_IMA_DK3 = 69634,
-        @CODEC_ID_ADPCM_IMA_DK4 = 69635,
-        @CODEC_ID_ADPCM_IMA_WS = 69636,
-        @CODEC_ID_ADPCM_IMA_SMJPEG = 69637,
-        @CODEC_ID_ADPCM_MS = 69638,
-        @CODEC_ID_ADPCM_4XM = 69639,
-        @CODEC_ID_ADPCM_XA = 69640,
-        @CODEC_ID_ADPCM_ADX = 69641,
-        @CODEC_ID_ADPCM_EA = 69642,
-        @CODEC_ID_ADPCM_G726 = 69643,
-        @CODEC_ID_ADPCM_CT = 69644,
-        @CODEC_ID_ADPCM_SWF = 69645,
-        @CODEC_ID_ADPCM_YAMAHA = 69646,
-        @CODEC_ID_ADPCM_SBPRO_4 = 69647,
-        @CODEC_ID_ADPCM_SBPRO_3 = 69648,
-        @CODEC_ID_ADPCM_SBPRO_2 = 69649,
-        @CODEC_ID_ADPCM_THP = 69650,
-        @CODEC_ID_ADPCM_IMA_AMV = 69651,
-        @CODEC_ID_ADPCM_EA_R1 = 69652,
-        @CODEC_ID_ADPCM_EA_R3 = 69653,
-        @CODEC_ID_ADPCM_EA_R2 = 69654,
-        @CODEC_ID_ADPCM_IMA_EA_SEAD = 69655,
-        @CODEC_ID_ADPCM_IMA_EA_EACS = 69656,
-        @CODEC_ID_ADPCM_EA_XAS = 69657,
-        @CODEC_ID_ADPCM_EA_MAXIS_XA = 69658,
-        @CODEC_ID_ADPCM_IMA_ISS = 69659,
-        @CODEC_ID_ADPCM_G722 = 69660,
-        @CODEC_ID_ADPCM_IMA_APC = 69661,
-        @CODEC_ID_VIMA = 1447644481,
-        @CODEC_ID_AMR_NB = 73728,
-        @CODEC_ID_AMR_WB = 73729,
-        @CODEC_ID_RA_144 = 77824,
-        @CODEC_ID_RA_288 = 77825,
-        @CODEC_ID_ROQ_DPCM = 81920,
-        @CODEC_ID_INTERPLAY_DPCM = 81921,
-        @CODEC_ID_XAN_DPCM = 81922,
-        @CODEC_ID_SOL_DPCM = 81923,
-        @CODEC_ID_MP2 = 86016,
-        @CODEC_ID_MP3 = 86017,
-        @CODEC_ID_AAC = 86018,
-        @CODEC_ID_AC3 = 86019,
-        @CODEC_ID_DTS = 86020,
-        @CODEC_ID_VORBIS = 86021,
-        @CODEC_ID_DVAUDIO = 86022,
-        @CODEC_ID_WMAV1 = 86023,
-        @CODEC_ID_WMAV2 = 86024,
-        @CODEC_ID_MACE3 = 86025,
-        @CODEC_ID_MACE6 = 86026,
-        @CODEC_ID_VMDAUDIO = 86027,
-        @CODEC_ID_FLAC = 86028,
-        @CODEC_ID_MP3ADU = 86029,
-        @CODEC_ID_MP3ON4 = 86030,
-        @CODEC_ID_SHORTEN = 86031,
-        @CODEC_ID_ALAC = 86032,
-        @CODEC_ID_WESTWOOD_SND1 = 86033,
-        @CODEC_ID_GSM = 86034,
-        @CODEC_ID_QDM2 = 86035,
-        @CODEC_ID_COOK = 86036,
-        @CODEC_ID_TRUESPEECH = 86037,
-        @CODEC_ID_TTA = 86038,
-        @CODEC_ID_SMACKAUDIO = 86039,
-        @CODEC_ID_QCELP = 86040,
-        @CODEC_ID_WAVPACK = 86041,
-        @CODEC_ID_DSICINAUDIO = 86042,
-        @CODEC_ID_IMC = 86043,
-        @CODEC_ID_MUSEPACK7 = 86044,
-        @CODEC_ID_MLP = 86045,
-        @CODEC_ID_GSM_MS = 86046,
-        @CODEC_ID_ATRAC3 = 86047,
-        @CODEC_ID_VOXWARE = 86048,
-        @CODEC_ID_APE = 86049,
-        @CODEC_ID_NELLYMOSER = 86050,
-        @CODEC_ID_MUSEPACK8 = 86051,
-        @CODEC_ID_SPEEX = 86052,
-        @CODEC_ID_WMAVOICE = 86053,
-        @CODEC_ID_WMAPRO = 86054,
-        @CODEC_ID_WMALOSSLESS = 86055,
-        @CODEC_ID_ATRAC3P = 86056,
-        @CODEC_ID_EAC3 = 86057,
-        @CODEC_ID_SIPR = 86058,
-        @CODEC_ID_MP1 = 86059,
-        @CODEC_ID_TWINVQ = 86060,
-        @CODEC_ID_TRUEHD = 86061,
-        @CODEC_ID_MP4ALS = 86062,
-        @CODEC_ID_ATRAC1 = 86063,
-        @CODEC_ID_BINKAUDIO_RDFT = 86064,
-        @CODEC_ID_BINKAUDIO_DCT = 86065,
-        @CODEC_ID_AAC_LATM = 86066,
-        @CODEC_ID_QDMC = 86067,
-        @CODEC_ID_CELT = 86068,
-        @CODEC_ID_G723_1 = 86069,
-        @CODEC_ID_G729 = 86070,
-        @CODEC_ID_8SVX_EXP = 86071,
-        @CODEC_ID_8SVX_FIB = 86072,
-        @CODEC_ID_BMV_AUDIO = 86073,
-        @CODEC_ID_RALF = 86074,
-        @CODEC_ID_IAC = 86075,
-        @CODEC_ID_ILBC = 86076,
-        @CODEC_ID_FFWAVESYNTH = 1179014995,
-        @CODEC_ID_SONIC = 1397706307,
-        @CODEC_ID_SONIC_LS = 1397706316,
-        @CODEC_ID_PAF_AUDIO = 1346455105,
-        @CODEC_ID_OPUS = 1330664787,
-        @CODEC_ID_FIRST_SUBTITLE = 94208,
-        @CODEC_ID_DVD_SUBTITLE = 94208,
-        @CODEC_ID_DVB_SUBTITLE = 94209,
-        @CODEC_ID_TEXT = 94210,
-        @CODEC_ID_XSUB = 94211,
-        @CODEC_ID_SSA = 94212,
-        @CODEC_ID_MOV_TEXT = 94213,
-        @CODEC_ID_HDMV_PGS_SUBTITLE = 94214,
-        @CODEC_ID_DVB_TELETEXT = 94215,
-        @CODEC_ID_SRT = 94216,
-        @CODEC_ID_MICRODVD = 1833195076,
-        @CODEC_ID_EIA_608 = 1664495672,
-        @CODEC_ID_JACOSUB = 1246975298,
-        @CODEC_ID_SAMI = 1396788553,
-        @CODEC_ID_REALTEXT = 1381259348,
-        @CODEC_ID_SUBVIEWER = 1400201814,
-        @CODEC_ID_FIRST_UNKNOWN = 98304,
-        @CODEC_ID_TTF = 98304,
-        @CODEC_ID_BINTEXT = 1112823892,
-        @CODEC_ID_XBIN = 1480739150,
-        @CODEC_ID_IDF = 4801606,
-        @CODEC_ID_OTF = 5198918,
-        @CODEC_ID_PROBE = 102400,
-        @CODEC_ID_MPEG2TS = 131072,
-        @CODEC_ID_MPEG4SYSTEMS = 131073,
-        @CODEC_ID_FFMETADATA = 135168,
+        @AV_CODEC_ID_WRAPPED_AVFRAME = 135169,
     }
     
     public enum Motion_Est_ID : int
@@ -1289,6 +951,8 @@ namespace FFmpeg.AutoGen
         @AV_PKT_DATA_STEREO3D = 6,
         @AV_PKT_DATA_AUDIO_SERVICE_TYPE = 7,
         @AV_PKT_DATA_QUALITY_STATS = 8,
+        @AV_PKT_DATA_FALLBACK_TRACK = 9,
+        @AV_PKT_DATA_CPB_PROPERTIES = 10,
         @AV_PKT_DATA_SKIP_SAMPLES = 70,
         @AV_PKT_DATA_JP_DUALMONO = 71,
         @AV_PKT_DATA_STRINGS_METADATA = 72,
@@ -1343,51 +1007,41 @@ namespace FFmpeg.AutoGen
     
     public unsafe static partial class ffmpeg
     {
-        public const int LIBAVCODEC_VERSION_MAJOR = 56;
-        public const int LIBAVCODEC_VERSION_MINOR = 60;
-        public const int LIBAVCODEC_VERSION_MICRO = 100;
-        public const bool FF_API_VIMA_DECODER = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_REQUEST_CHANNELS = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_OLD_DECODE_AUDIO = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_OLD_ENCODE_AUDIO = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_OLD_ENCODE_VIDEO = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_CODEC_ID = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_AUDIO_CONVERT = (LIBAVCODEC_VERSION_MAJOR < 57);
+        public const int LIBAVCODEC_VERSION_MAJOR = 57;
+        public const int LIBAVCODEC_VERSION_MINOR = 24;
+        public const int LIBAVCODEC_VERSION_MICRO = 102;
+        public const bool FF_API_VIMA_DECODER = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_AUDIO_CONVERT = (LIBAVCODEC_VERSION_MAJOR<58);
         public const bool FF_API_AVCODEC_RESAMPLE = FF_API_AUDIO_CONVERT;
-        public const bool FF_API_DEINTERLACE = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_DESTRUCT_PACKET = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_GET_BUFFER = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_MISSING_SAMPLE = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_LOWRES = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_CAP_VDPAU = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_BUFS_VDPAU = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_VOXWARE = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_SET_DIMENSIONS = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_DEBUG_MV = (LIBAVCODEC_VERSION_MAJOR < 57);
-        public const bool FF_API_AC_VLC = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_OLD_MSMPEG4 = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_ASPECT_EXTENDED = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_THREAD_OPAQUE = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_CODEC_PKT = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_ARCH_ALPHA = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_ERROR_RATE = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_QSCALE_TYPE = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_MB_TYPE = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_MAX_BFRAMES = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_NEG_LINESIZES = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_EMU_EDGE = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_ARCH_SH4 = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_ARCH_SPARC = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_UNUSED_MEMBERS = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_IDCT_XVIDMMX = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_INPUT_PRESERVED = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_NORMALIZE_AQP = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_GMC = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_MV0 = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_CODEC_NAME = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_AFD = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_VISMV = (LIBAVCODEC_VERSION_MAJOR<57);
-        public const bool FF_API_DV_FRAME_PROFILE = (LIBAVCODEC_VERSION_MAJOR<57);
+        public const bool FF_API_GETCHROMA = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_MISSING_SAMPLE = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_LOWRES = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_CAP_VDPAU = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_BUFS_VDPAU = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_VOXWARE = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_SET_DIMENSIONS = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_DEBUG_MV = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_AC_VLC = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_OLD_MSMPEG4 = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_ASPECT_EXTENDED = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_ARCH_ALPHA = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_ERROR_RATE = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_QSCALE_TYPE = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_MB_TYPE = (LIBAVCODEC_VERSION_MAJOR < 58);
+        public const bool FF_API_MAX_BFRAMES = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_NEG_LINESIZES = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_EMU_EDGE = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_ARCH_SH4 = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_ARCH_SPARC = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_UNUSED_MEMBERS = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_IDCT_XVIDMMX = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_INPUT_PRESERVED = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_NORMALIZE_AQP = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_GMC = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_MV0 = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_CODEC_NAME = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_AFD = (LIBAVCODEC_VERSION_MAJOR<58);
+        public const bool FF_API_VISMV = (LIBAVCODEC_VERSION_MAJOR<58);
         public const bool FF_API_AUDIOENC_DELAY = (LIBAVCODEC_VERSION_MAJOR<58);
         public const bool FF_API_VAAPI_CONTEXT = (LIBAVCODEC_VERSION_MAJOR<58);
         public const bool FF_API_AVCTX_TIMEBASE = (LIBAVCODEC_VERSION_MAJOR<59);
@@ -1398,6 +1052,16 @@ namespace FFmpeg.AutoGen
         public const bool FF_API_CODED_FRAME = (LIBAVCODEC_VERSION_MAJOR<59);
         public const bool FF_API_MOTION_EST = (LIBAVCODEC_VERSION_MAJOR<59);
         public const bool FF_API_WITHOUT_PREFIX = (LIBAVCODEC_VERSION_MAJOR<59);
+        public const bool FF_API_SIDEDATA_ONLY_PKT = (LIBAVCODEC_VERSION_MAJOR<59);
+        public const bool FF_API_VDPAU_PROFILE = (LIBAVCODEC_VERSION_MAJOR<59);
+        public const bool FF_API_CONVERGENCE_DURATION = (LIBAVCODEC_VERSION_MAJOR<59);
+        public const bool FF_API_AVPICTURE = (LIBAVCODEC_VERSION_MAJOR<59);
+        public const bool FF_API_AVPACKET_OLD_API = (LIBAVCODEC_VERSION_MAJOR<59);
+        public const bool FF_API_RTP_CALLBACK = (LIBAVCODEC_VERSION_MAJOR<59);
+        public const bool FF_API_VBV_DELAY = (LIBAVCODEC_VERSION_MAJOR<59);
+        public const bool FF_API_CODER_TYPE = (LIBAVCODEC_VERSION_MAJOR<59);
+        public const bool FF_API_STAT_BITS = (LIBAVCODEC_VERSION_MAJOR<59);
+        public const bool FF_API_PRIVATE_OPT = (LIBAVCODEC_VERSION_MAJOR<59);
         public const int AV_CODEC_PROP_INTRA_ONLY = (1<<0);
         public const int AV_CODEC_PROP_LOSSY = (1<<1);
         public const int AV_CODEC_PROP_LOSSLESS = (1<<2);
@@ -1426,7 +1090,7 @@ namespace FFmpeg.AutoGen
         public const int AV_CODEC_FLAG_BITEXACT = (1<<23);
         public const int AV_CODEC_FLAG_AC_PRED = (1<<24);
         public const int AV_CODEC_FLAG_INTERLACED_ME = (1<<29);
-        public const ulong AV_CODEC_FLAG_CLOSED_GOP = (1U<<31);
+        public const uint AV_CODEC_FLAG_CLOSED_GOP = (1U<<31);
         public const int AV_CODEC_FLAG2_FAST = (1<<0);
         public const int AV_CODEC_FLAG2_NO_OUTPUT = (1<<2);
         public const int AV_CODEC_FLAG2_LOCAL_HEADER = (1<<3);
@@ -1451,7 +1115,7 @@ namespace FFmpeg.AutoGen
         public const int AV_CODEC_CAP_AUTO_THREADS = (1<<15);
         public const int AV_CODEC_CAP_VARIABLE_FRAME_SIZE = (1<<16);
         public const int AV_CODEC_CAP_INTRA_ONLY = 0x40000000;
-        public const ulong AV_CODEC_CAP_LOSSLESS = 0x80000000;
+        public const uint AV_CODEC_CAP_LOSSLESS = 0x80000000;
         public const int CODEC_FLAG_UNALIGNED = AV_CODEC_FLAG_UNALIGNED;
         public const int CODEC_FLAG_QSCALE = AV_CODEC_FLAG_QSCALE;
         public const int CODEC_FLAG_4MV = AV_CODEC_FLAG_4MV;
@@ -1474,7 +1138,7 @@ namespace FFmpeg.AutoGen
         public const int CODEC_FLAG_AC_PRED = AV_CODEC_FLAG_AC_PRED;
         public const int CODEC_FLAG_LOOP_FILTER = AV_CODEC_FLAG_LOOP_FILTER;
         public const int CODEC_FLAG_INTERLACED_ME = AV_CODEC_FLAG_INTERLACED_ME;
-        public const ulong CODEC_FLAG_CLOSED_GOP = AV_CODEC_FLAG_CLOSED_GOP;
+        public const uint CODEC_FLAG_CLOSED_GOP = AV_CODEC_FLAG_CLOSED_GOP;
         public const int CODEC_FLAG2_FAST = AV_CODEC_FLAG2_FAST;
         public const int CODEC_FLAG2_NO_OUTPUT = AV_CODEC_FLAG2_NO_OUTPUT;
         public const int CODEC_FLAG2_LOCAL_HEADER = AV_CODEC_FLAG2_LOCAL_HEADER;
@@ -1501,7 +1165,7 @@ namespace FFmpeg.AutoGen
         public const int CODEC_CAP_AUTO_THREADS = AV_CODEC_CAP_AUTO_THREADS;
         public const int CODEC_CAP_VARIABLE_FRAME_SIZE = AV_CODEC_CAP_VARIABLE_FRAME_SIZE;
         public const int CODEC_CAP_INTRA_ONLY = AV_CODEC_CAP_INTRA_ONLY;
-        public const ulong CODEC_CAP_LOSSLESS = AV_CODEC_CAP_LOSSLESS;
+        public const uint CODEC_CAP_LOSSLESS = AV_CODEC_CAP_LOSSLESS;
         public const int HWACCEL_CODEC_CAP_EXPERIMENTAL = 0x0200;
         public const int MB_TYPE_INTRA4x4 = 0x0001;
         public const int MB_TYPE_INTRA16x16 = 0x0002;
@@ -1528,14 +1192,6 @@ namespace FFmpeg.AutoGen
         public const int FF_QSCALE_TYPE_MPEG2 = 1;
         public const int FF_QSCALE_TYPE_H264 = 2;
         public const int FF_QSCALE_TYPE_VP56 = 3;
-        public const int FF_BUFFER_TYPE_INTERNAL = 1;
-        public const int FF_BUFFER_TYPE_USER = 2;
-        public const int FF_BUFFER_TYPE_SHARED = 4;
-        public const int FF_BUFFER_TYPE_COPY = 8;
-        public const int FF_BUFFER_HINTS_VALID = 0x01;
-        public const int FF_BUFFER_HINTS_READABLE = 0x02;
-        public const int FF_BUFFER_HINTS_PRESERVE = 0x04;
-        public const int FF_BUFFER_HINTS_REUSABLE = 0x08;
         public const int AV_GET_BUFFER_FLAG_REF = (1<<0);
         public const int AV_PKT_FLAG_KEY = 0x0001;
         public const int AV_PKT_FLAG_CORRUPT = 0x0002;
@@ -1746,7 +1402,7 @@ namespace FFmpeg.AutoGen
         public const int PARSER_FLAG_ONCE = 0x0002;
         public const int PARSER_FLAG_FETCHED_OFFSET = 0x0004;
         public const int PARSER_FLAG_USE_CODEC_TS = 0x1000;
-        private const string libavcodec = "avcodec-56";
+        private const string libavcodec = "avcodec-57";
         
         [DllImport(libavcodec, EntryPoint = "av_codec_get_pkt_timebase", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVRational av_codec_get_pkt_timebase(AVCodecContext* @avctx);
@@ -1823,15 +1479,6 @@ namespace FFmpeg.AutoGen
         [DllImport(libavcodec, EntryPoint = "avcodec_copy_context", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avcodec_copy_context(AVCodecContext* @dest, AVCodecContext* @src);
         
-        [DllImport(libavcodec, EntryPoint = "avcodec_alloc_frame", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVFrame* avcodec_alloc_frame();
-        
-        [DllImport(libavcodec, EntryPoint = "avcodec_get_frame_defaults", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void avcodec_get_frame_defaults(AVFrame* @frame);
-        
-        [DllImport(libavcodec, EntryPoint = "avcodec_free_frame", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void avcodec_free_frame(AVFrame** @frame);
-        
         [DllImport(libavcodec, EntryPoint = "avcodec_open2", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avcodec_open2(AVCodecContext* @avctx, AVCodec* @codec, AVDictionary** @options);
         
@@ -1841,8 +1488,14 @@ namespace FFmpeg.AutoGen
         [DllImport(libavcodec, EntryPoint = "avsubtitle_free", CallingConvention = CallingConvention.Cdecl)]
         public static extern void avsubtitle_free(AVSubtitle* @sub);
         
-        [DllImport(libavcodec, EntryPoint = "av_destruct_packet", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void av_destruct_packet(AVPacket* @pkt);
+        [DllImport(libavcodec, EntryPoint = "av_packet_alloc", CallingConvention = CallingConvention.Cdecl)]
+        public static extern AVPacket* av_packet_alloc();
+        
+        [DllImport(libavcodec, EntryPoint = "av_packet_clone", CallingConvention = CallingConvention.Cdecl)]
+        public static extern AVPacket* av_packet_clone(AVPacket* @src);
+        
+        [DllImport(libavcodec, EntryPoint = "av_packet_free", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void av_packet_free(AVPacket** @pkt);
         
         [DllImport(libavcodec, EntryPoint = "av_init_packet", CallingConvention = CallingConvention.Cdecl)]
         public static extern void av_init_packet(AVPacket* @pkt);
@@ -1873,6 +1526,9 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavcodec, EntryPoint = "av_packet_new_side_data", CallingConvention = CallingConvention.Cdecl)]
         public static extern sbyte* av_packet_new_side_data(AVPacket* @pkt, AVPacketSideDataType @type, int @size);
+        
+        [DllImport(libavcodec, EntryPoint = "av_packet_add_side_data", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int av_packet_add_side_data(AVPacket* @pkt, AVPacketSideDataType @type, sbyte* @data, ulong @size);
         
         [DllImport(libavcodec, EntryPoint = "av_packet_shrink_side_data", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_packet_shrink_side_data(AVPacket* @pkt, AVPacketSideDataType @type, int @size);
@@ -1919,15 +1575,6 @@ namespace FFmpeg.AutoGen
         [DllImport(libavcodec, EntryPoint = "avcodec_find_decoder_by_name", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVCodec* avcodec_find_decoder_by_name([MarshalAs(UnmanagedType.LPStr)] string @name);
         
-        [DllImport(libavcodec, EntryPoint = "avcodec_default_get_buffer", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avcodec_default_get_buffer(AVCodecContext* @s, AVFrame* @pic);
-        
-        [DllImport(libavcodec, EntryPoint = "avcodec_default_release_buffer", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void avcodec_default_release_buffer(AVCodecContext* @s, AVFrame* @pic);
-        
-        [DllImport(libavcodec, EntryPoint = "avcodec_default_reget_buffer", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avcodec_default_reget_buffer(AVCodecContext* @s, AVFrame* @pic);
-        
         [DllImport(libavcodec, EntryPoint = "avcodec_default_get_buffer2", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avcodec_default_get_buffer2(AVCodecContext* @s, AVFrame* @frame, int @flags);
         
@@ -1945,9 +1592,6 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavcodec, EntryPoint = "avcodec_chroma_pos_to_enum", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVChromaLocation avcodec_chroma_pos_to_enum(int @xpos, int @ypos);
-        
-        [DllImport(libavcodec, EntryPoint = "avcodec_decode_audio3", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avcodec_decode_audio3(AVCodecContext* @avctx, short* @samples, int* @frame_size_ptr, AVPacket* @avpkt);
         
         [DllImport(libavcodec, EntryPoint = "avcodec_decode_audio4", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avcodec_decode_audio4(AVCodecContext* @avctx, AVFrame* @frame, int* @got_frame_ptr, AVPacket* @avpkt);
@@ -1982,14 +1626,8 @@ namespace FFmpeg.AutoGen
         [DllImport(libavcodec, EntryPoint = "avcodec_find_encoder_by_name", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVCodec* avcodec_find_encoder_by_name([MarshalAs(UnmanagedType.LPStr)] string @name);
         
-        [DllImport(libavcodec, EntryPoint = "avcodec_encode_audio", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avcodec_encode_audio(AVCodecContext* @avctx, sbyte* @buf, int @buf_size, short* @samples);
-        
         [DllImport(libavcodec, EntryPoint = "avcodec_encode_audio2", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avcodec_encode_audio2(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr);
-        
-        [DllImport(libavcodec, EntryPoint = "avcodec_encode_video", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avcodec_encode_video(AVCodecContext* @avctx, sbyte* @buf, int @buf_size, AVFrame* @pict);
         
         [DllImport(libavcodec, EntryPoint = "avcodec_encode_video2", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avcodec_encode_video2(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr);
@@ -2033,9 +1671,6 @@ namespace FFmpeg.AutoGen
         [DllImport(libavcodec, EntryPoint = "avpicture_get_size", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avpicture_get_size(AVPixelFormat @pix_fmt, int @width, int @height);
         
-        [DllImport(libavcodec, EntryPoint = "avpicture_deinterlace", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avpicture_deinterlace(AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height);
-        
         [DllImport(libavcodec, EntryPoint = "av_picture_copy", CallingConvention = CallingConvention.Cdecl)]
         public static extern void av_picture_copy(AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height);
         
@@ -2077,6 +1712,9 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavcodec, EntryPoint = "av_get_profile_name", CallingConvention = CallingConvention.Cdecl)]
         public static extern string av_get_profile_name(AVCodec* @codec, int @profile);
+        
+        [DllImport(libavcodec, EntryPoint = "avcodec_profile_name", CallingConvention = CallingConvention.Cdecl)]
+        public static extern string avcodec_profile_name(AVCodecID @codec_id, int @profile);
         
         [DllImport(libavcodec, EntryPoint = "avcodec_default_execute", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avcodec_default_execute(AVCodecContext* @c, IntPtr* @func, void* @arg, int* @ret, int @count, int @size);
@@ -2164,6 +1802,9 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavcodec, EntryPoint = "avcodec_descriptor_get_by_name", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVCodecDescriptor* avcodec_descriptor_get_by_name([MarshalAs(UnmanagedType.LPStr)] string @name);
+        
+        [DllImport(libavcodec, EntryPoint = "av_cpb_properties_alloc", CallingConvention = CallingConvention.Cdecl)]
+        public static extern AVCPBProperties* av_cpb_properties_alloc(ulong* @size);
         
     }
 }

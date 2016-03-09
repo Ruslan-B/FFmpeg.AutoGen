@@ -115,7 +115,6 @@ namespace FFmpeg.AutoGen
         public int @format;
         public int @key_frame;
         public AVPictureType @pict_type;
-        public sbyte* @base0; public sbyte* @base1; public sbyte* @base2; public sbyte* @base3; public sbyte* @base4; public sbyte* @base5; public sbyte* @base6; public sbyte* @base7; 
         public AVRational @sample_aspect_ratio;
         public long @pts;
         public long @pkt_pts;
@@ -123,29 +122,13 @@ namespace FFmpeg.AutoGen
         public int @coded_picture_number;
         public int @display_picture_number;
         public int @quality;
-        public int @reference;
-        public sbyte* @qscale_table;
-        public int @qstride;
-        public int @qscale_type;
-        public sbyte* @mbskip_table;
-        public IntPtr @motion_val0; public IntPtr @motion_val1; 
-        public uint* @mb_type;
-        public short* @dct_coeff;
-        public sbyte* @ref_index0; public sbyte* @ref_index1; 
         public void* @opaque;
         public fixed ulong @error[8]; 
-        public int @type;
         public int @repeat_pict;
         public int @interlaced_frame;
         public int @top_field_first;
         public int @palette_has_changed;
-        public int @buffer_hints;
-        public AVPanScan* @pan_scan;
         public long @reordered_opaque;
-        public void* @hwaccel_picture_private;
-        public AVCodecContext* @owner;
-        public void* @thread_opaque;
-        public sbyte @motion_subsample_log2;
         public int @sample_rate;
         public ulong @channel_layout;
         public AVBufferRef* @buf0; public AVBufferRef* @buf1; public AVBufferRef* @buf2; public AVBufferRef* @buf3; public AVBufferRef* @buf4; public AVBufferRef* @buf5; public AVBufferRef* @buf6; public AVBufferRef* @buf7; 
@@ -166,15 +149,10 @@ namespace FFmpeg.AutoGen
         public int @decode_error_flags;
         public int @channels;
         public int @pkt_size;
+        public sbyte* @qscale_table;
+        public int @qstride;
+        public int @qscale_type;
         public AVBufferRef* @qp_table_buf;
-    }
-    
-    public unsafe partial struct AVCodecContext
-    {
-    }
-    
-    public unsafe partial struct AVPanScan
-    {
     }
     
     public unsafe partial struct AVOptionRanges
@@ -225,11 +203,14 @@ namespace FFmpeg.AutoGen
     
     public unsafe partial struct AVComponentDescriptor
     {
-        public ushort @plane;
-        public ushort @step_minus1;
-        public ushort @offset_plus1;
-        public ushort @shift;
-        public ushort @depth_minus1;
+        public int @plane;
+        public int @step;
+        public int @offset;
+        public int @shift;
+        public int @depth;
+        public int @step_minus1;
+        public int @depth_minus1;
+        public int @offset_plus1;
     }
     
     public unsafe partial struct AVPixFmtDescriptor
@@ -238,7 +219,7 @@ namespace FFmpeg.AutoGen
         public sbyte @nb_components;
         public sbyte @log2_chroma_w;
         public sbyte @log2_chroma_h;
-        public sbyte @flags;
+        public ulong @flags;
         public AVComponentDescriptor @comp0; public AVComponentDescriptor @comp1; public AVComponentDescriptor @comp2; public AVComponentDescriptor @comp3; 
         public sbyte* @alias;
     }
@@ -393,8 +374,8 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_GBRP10LE = 86,
         @AV_PIX_FMT_GBRP16BE = 87,
         @AV_PIX_FMT_GBRP16LE = 88,
-        @AV_PIX_FMT_YUVA422P_LIBAV = 89,
-        @AV_PIX_FMT_YUVA444P_LIBAV = 90,
+        @AV_PIX_FMT_YUVA422P = 89,
+        @AV_PIX_FMT_YUVA444P = 90,
         @AV_PIX_FMT_YUVA420P9BE = 91,
         @AV_PIX_FMT_YUVA420P9LE = 92,
         @AV_PIX_FMT_YUVA422P9BE = 93,
@@ -419,187 +400,63 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_NV16 = 112,
         @AV_PIX_FMT_NV20LE = 113,
         @AV_PIX_FMT_NV20BE = 114,
-        @AV_PIX_FMT_RGBA64BE_LIBAV = 115,
-        @AV_PIX_FMT_RGBA64LE_LIBAV = 116,
-        @AV_PIX_FMT_BGRA64BE_LIBAV = 117,
-        @AV_PIX_FMT_BGRA64LE_LIBAV = 118,
+        @AV_PIX_FMT_RGBA64BE = 115,
+        @AV_PIX_FMT_RGBA64LE = 116,
+        @AV_PIX_FMT_BGRA64BE = 117,
+        @AV_PIX_FMT_BGRA64LE = 118,
         @AV_PIX_FMT_YVYU422 = 119,
         @AV_PIX_FMT_VDA = 120,
         @AV_PIX_FMT_YA16BE = 121,
         @AV_PIX_FMT_YA16LE = 122,
-        @AV_PIX_FMT_GBRAP_LIBAV = 123,
-        @AV_PIX_FMT_GBRAP16BE_LIBAV = 124,
-        @AV_PIX_FMT_GBRAP16LE_LIBAV = 125,
+        @AV_PIX_FMT_GBRAP = 123,
+        @AV_PIX_FMT_GBRAP16BE = 124,
+        @AV_PIX_FMT_GBRAP16LE = 125,
         @AV_PIX_FMT_QSV = 126,
         @AV_PIX_FMT_MMAL = 127,
         @AV_PIX_FMT_D3D11VA_VLD = 128,
-        @AV_PIX_FMT_RGBA64BE = 291,
-        @AV_PIX_FMT_RGBA64LE = 292,
-        @AV_PIX_FMT_BGRA64BE = 293,
-        @AV_PIX_FMT_BGRA64LE = 294,
         @AV_PIX_FMT_0RGB = 295,
         @AV_PIX_FMT_RGB0 = 296,
         @AV_PIX_FMT_0BGR = 297,
         @AV_PIX_FMT_BGR0 = 298,
-        @AV_PIX_FMT_YUVA444P = 299,
-        @AV_PIX_FMT_YUVA422P = 300,
-        @AV_PIX_FMT_YUV420P12BE = 301,
-        @AV_PIX_FMT_YUV420P12LE = 302,
-        @AV_PIX_FMT_YUV420P14BE = 303,
-        @AV_PIX_FMT_YUV420P14LE = 304,
-        @AV_PIX_FMT_YUV422P12BE = 305,
-        @AV_PIX_FMT_YUV422P12LE = 306,
-        @AV_PIX_FMT_YUV422P14BE = 307,
-        @AV_PIX_FMT_YUV422P14LE = 308,
-        @AV_PIX_FMT_YUV444P12BE = 309,
-        @AV_PIX_FMT_YUV444P12LE = 310,
-        @AV_PIX_FMT_YUV444P14BE = 311,
-        @AV_PIX_FMT_YUV444P14LE = 312,
-        @AV_PIX_FMT_GBRP12BE = 313,
-        @AV_PIX_FMT_GBRP12LE = 314,
-        @AV_PIX_FMT_GBRP14BE = 315,
-        @AV_PIX_FMT_GBRP14LE = 316,
-        @AV_PIX_FMT_GBRAP = 317,
-        @AV_PIX_FMT_GBRAP16BE = 318,
-        @AV_PIX_FMT_GBRAP16LE = 319,
-        @AV_PIX_FMT_YUVJ411P = 320,
-        @AV_PIX_FMT_BAYER_BGGR8 = 321,
-        @AV_PIX_FMT_BAYER_RGGB8 = 322,
-        @AV_PIX_FMT_BAYER_GBRG8 = 323,
-        @AV_PIX_FMT_BAYER_GRBG8 = 324,
-        @AV_PIX_FMT_BAYER_BGGR16LE = 325,
-        @AV_PIX_FMT_BAYER_BGGR16BE = 326,
-        @AV_PIX_FMT_BAYER_RGGB16LE = 327,
-        @AV_PIX_FMT_BAYER_RGGB16BE = 328,
-        @AV_PIX_FMT_BAYER_GBRG16LE = 329,
-        @AV_PIX_FMT_BAYER_GBRG16BE = 330,
-        @AV_PIX_FMT_BAYER_GRBG16LE = 331,
-        @AV_PIX_FMT_BAYER_GRBG16BE = 332,
-        @AV_PIX_FMT_YUV440P10LE = 333,
-        @AV_PIX_FMT_YUV440P10BE = 334,
-        @AV_PIX_FMT_YUV440P12LE = 335,
-        @AV_PIX_FMT_YUV440P12BE = 336,
-        @AV_PIX_FMT_AYUV64LE = 337,
-        @AV_PIX_FMT_AYUV64BE = 338,
-        @AV_PIX_FMT_VIDEOTOOLBOX = 339,
-        @AV_PIX_FMT_NB = 340,
-        @PIX_FMT_NONE = -1,
-        @PIX_FMT_YUV420P = 0,
-        @PIX_FMT_YUYV422 = 1,
-        @PIX_FMT_RGB24 = 2,
-        @PIX_FMT_BGR24 = 3,
-        @PIX_FMT_YUV422P = 4,
-        @PIX_FMT_YUV444P = 5,
-        @PIX_FMT_YUV410P = 6,
-        @PIX_FMT_YUV411P = 7,
-        @PIX_FMT_GRAY8 = 8,
-        @PIX_FMT_MONOWHITE = 9,
-        @PIX_FMT_MONOBLACK = 10,
-        @PIX_FMT_PAL8 = 11,
-        @PIX_FMT_YUVJ420P = 12,
-        @PIX_FMT_YUVJ422P = 13,
-        @PIX_FMT_YUVJ444P = 14,
-        @PIX_FMT_XVMC_MPEG2_MC = 15,
-        @PIX_FMT_XVMC_MPEG2_IDCT = 16,
-        @PIX_FMT_UYVY422 = 17,
-        @PIX_FMT_UYYVYY411 = 18,
-        @PIX_FMT_BGR8 = 19,
-        @PIX_FMT_BGR4 = 20,
-        @PIX_FMT_BGR4_BYTE = 21,
-        @PIX_FMT_RGB8 = 22,
-        @PIX_FMT_RGB4 = 23,
-        @PIX_FMT_RGB4_BYTE = 24,
-        @PIX_FMT_NV12 = 25,
-        @PIX_FMT_NV21 = 26,
-        @PIX_FMT_ARGB = 27,
-        @PIX_FMT_RGBA = 28,
-        @PIX_FMT_ABGR = 29,
-        @PIX_FMT_BGRA = 30,
-        @PIX_FMT_GRAY16BE = 31,
-        @PIX_FMT_GRAY16LE = 32,
-        @PIX_FMT_YUV440P = 33,
-        @PIX_FMT_YUVJ440P = 34,
-        @PIX_FMT_YUVA420P = 35,
-        @PIX_FMT_VDPAU_H264 = 36,
-        @PIX_FMT_VDPAU_MPEG1 = 37,
-        @PIX_FMT_VDPAU_MPEG2 = 38,
-        @PIX_FMT_VDPAU_WMV3 = 39,
-        @PIX_FMT_VDPAU_VC1 = 40,
-        @PIX_FMT_RGB48BE = 41,
-        @PIX_FMT_RGB48LE = 42,
-        @PIX_FMT_RGB565BE = 43,
-        @PIX_FMT_RGB565LE = 44,
-        @PIX_FMT_RGB555BE = 45,
-        @PIX_FMT_RGB555LE = 46,
-        @PIX_FMT_BGR565BE = 47,
-        @PIX_FMT_BGR565LE = 48,
-        @PIX_FMT_BGR555BE = 49,
-        @PIX_FMT_BGR555LE = 50,
-        @PIX_FMT_VAAPI_MOCO = 51,
-        @PIX_FMT_VAAPI_IDCT = 52,
-        @PIX_FMT_VAAPI_VLD = 53,
-        @PIX_FMT_YUV420P16LE = 54,
-        @PIX_FMT_YUV420P16BE = 55,
-        @PIX_FMT_YUV422P16LE = 56,
-        @PIX_FMT_YUV422P16BE = 57,
-        @PIX_FMT_YUV444P16LE = 58,
-        @PIX_FMT_YUV444P16BE = 59,
-        @PIX_FMT_VDPAU_MPEG4 = 60,
-        @PIX_FMT_DXVA2_VLD = 61,
-        @PIX_FMT_RGB444LE = 62,
-        @PIX_FMT_RGB444BE = 63,
-        @PIX_FMT_BGR444LE = 64,
-        @PIX_FMT_BGR444BE = 65,
-        @PIX_FMT_GRAY8A = 66,
-        @PIX_FMT_BGR48BE = 67,
-        @PIX_FMT_BGR48LE = 68,
-        @PIX_FMT_YUV420P9BE = 69,
-        @PIX_FMT_YUV420P9LE = 70,
-        @PIX_FMT_YUV420P10BE = 71,
-        @PIX_FMT_YUV420P10LE = 72,
-        @PIX_FMT_YUV422P10BE = 73,
-        @PIX_FMT_YUV422P10LE = 74,
-        @PIX_FMT_YUV444P9BE = 75,
-        @PIX_FMT_YUV444P9LE = 76,
-        @PIX_FMT_YUV444P10BE = 77,
-        @PIX_FMT_YUV444P10LE = 78,
-        @PIX_FMT_YUV422P9BE = 79,
-        @PIX_FMT_YUV422P9LE = 80,
-        @PIX_FMT_VDA_VLD = 81,
-        @PIX_FMT_GBRP = 82,
-        @PIX_FMT_GBRP9BE = 83,
-        @PIX_FMT_GBRP9LE = 84,
-        @PIX_FMT_GBRP10BE = 85,
-        @PIX_FMT_GBRP10LE = 86,
-        @PIX_FMT_GBRP16BE = 87,
-        @PIX_FMT_GBRP16LE = 88,
-        @PIX_FMT_RGBA64BE = 291,
-        @PIX_FMT_RGBA64LE = 292,
-        @PIX_FMT_BGRA64BE = 293,
-        @PIX_FMT_BGRA64LE = 294,
-        @PIX_FMT_0RGB = 295,
-        @PIX_FMT_RGB0 = 296,
-        @PIX_FMT_0BGR = 297,
-        @PIX_FMT_BGR0 = 298,
-        @PIX_FMT_YUVA444P = 299,
-        @PIX_FMT_YUVA422P = 300,
-        @PIX_FMT_YUV420P12BE = 301,
-        @PIX_FMT_YUV420P12LE = 302,
-        @PIX_FMT_YUV420P14BE = 303,
-        @PIX_FMT_YUV420P14LE = 304,
-        @PIX_FMT_YUV422P12BE = 305,
-        @PIX_FMT_YUV422P12LE = 306,
-        @PIX_FMT_YUV422P14BE = 307,
-        @PIX_FMT_YUV422P14LE = 308,
-        @PIX_FMT_YUV444P12BE = 309,
-        @PIX_FMT_YUV444P12LE = 310,
-        @PIX_FMT_YUV444P14BE = 311,
-        @PIX_FMT_YUV444P14LE = 312,
-        @PIX_FMT_GBRP12BE = 313,
-        @PIX_FMT_GBRP12LE = 314,
-        @PIX_FMT_GBRP14BE = 315,
-        @PIX_FMT_GBRP14LE = 316,
-        @PIX_FMT_NB = 317,
+        @AV_PIX_FMT_YUV420P12BE = 299,
+        @AV_PIX_FMT_YUV420P12LE = 300,
+        @AV_PIX_FMT_YUV420P14BE = 301,
+        @AV_PIX_FMT_YUV420P14LE = 302,
+        @AV_PIX_FMT_YUV422P12BE = 303,
+        @AV_PIX_FMT_YUV422P12LE = 304,
+        @AV_PIX_FMT_YUV422P14BE = 305,
+        @AV_PIX_FMT_YUV422P14LE = 306,
+        @AV_PIX_FMT_YUV444P12BE = 307,
+        @AV_PIX_FMT_YUV444P12LE = 308,
+        @AV_PIX_FMT_YUV444P14BE = 309,
+        @AV_PIX_FMT_YUV444P14LE = 310,
+        @AV_PIX_FMT_GBRP12BE = 311,
+        @AV_PIX_FMT_GBRP12LE = 312,
+        @AV_PIX_FMT_GBRP14BE = 313,
+        @AV_PIX_FMT_GBRP14LE = 314,
+        @AV_PIX_FMT_YUVJ411P = 315,
+        @AV_PIX_FMT_BAYER_BGGR8 = 316,
+        @AV_PIX_FMT_BAYER_RGGB8 = 317,
+        @AV_PIX_FMT_BAYER_GBRG8 = 318,
+        @AV_PIX_FMT_BAYER_GRBG8 = 319,
+        @AV_PIX_FMT_BAYER_BGGR16LE = 320,
+        @AV_PIX_FMT_BAYER_BGGR16BE = 321,
+        @AV_PIX_FMT_BAYER_RGGB16LE = 322,
+        @AV_PIX_FMT_BAYER_RGGB16BE = 323,
+        @AV_PIX_FMT_BAYER_GBRG16LE = 324,
+        @AV_PIX_FMT_BAYER_GBRG16BE = 325,
+        @AV_PIX_FMT_BAYER_GRBG16LE = 326,
+        @AV_PIX_FMT_BAYER_GRBG16BE = 327,
+        @AV_PIX_FMT_YUV440P10LE = 328,
+        @AV_PIX_FMT_YUV440P10BE = 329,
+        @AV_PIX_FMT_YUV440P12LE = 330,
+        @AV_PIX_FMT_YUV440P12BE = 331,
+        @AV_PIX_FMT_AYUV64LE = 332,
+        @AV_PIX_FMT_AYUV64BE = 333,
+        @AV_PIX_FMT_VIDEOTOOLBOX = 334,
+        @AV_PIX_FMT_P010LE = 335,
+        @AV_PIX_FMT_P010BE = 336,
+        @AV_PIX_FMT_NB = 337,
     }
     
     public enum AVColorPrimaries : int
@@ -614,7 +471,8 @@ namespace FFmpeg.AutoGen
         @AVCOL_PRI_SMPTE240M = 7,
         @AVCOL_PRI_FILM = 8,
         @AVCOL_PRI_BT2020 = 9,
-        @AVCOL_PRI_NB = 10,
+        @AVCOL_PRI_SMPTEST428_1 = 10,
+        @AVCOL_PRI_NB = 11,
     }
     
     public enum AVColorTransferCharacteristic : int
@@ -635,7 +493,9 @@ namespace FFmpeg.AutoGen
         @AVCOL_TRC_IEC61966_2_1 = 13,
         @AVCOL_TRC_BT2020_10 = 14,
         @AVCOL_TRC_BT2020_12 = 15,
-        @AVCOL_TRC_NB = 16,
+        @AVCOL_TRC_SMPTEST2084 = 16,
+        @AVCOL_TRC_SMPTEST428_1 = 17,
+        @AVCOL_TRC_NB = 18,
     }
     
     public enum AVColorSpace : int
@@ -715,6 +575,8 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_MOTION_VECTORS = 8,
         @AV_FRAME_DATA_SKIP_SAMPLES = 9,
         @AV_FRAME_DATA_AUDIO_SERVICE_TYPE = 10,
+        @AV_FRAME_DATA_MASTERING_DISPLAY_METADATA = 11,
+        @AV_FRAME_DATA_GOP_TIMECODE = 12,
     }
     
     public enum AVActiveFormatDescription : int
@@ -747,15 +609,7 @@ namespace FFmpeg.AutoGen
         @AV_OPT_TYPE_DURATION = 1146442272,
         @AV_OPT_TYPE_COLOR = 1129270354,
         @AV_OPT_TYPE_CHANNEL_LAYOUT = 1128811585,
-        @FF_OPT_TYPE_FLAGS = 0,
-        @FF_OPT_TYPE_INT = 1,
-        @FF_OPT_TYPE_INT64 = 2,
-        @FF_OPT_TYPE_DOUBLE = 3,
-        @FF_OPT_TYPE_FLOAT = 4,
-        @FF_OPT_TYPE_STRING = 5,
-        @FF_OPT_TYPE_RATIONAL = 6,
-        @FF_OPT_TYPE_BINARY = 7,
-        @FF_OPT_TYPE_CONST = 128,
+        @AV_OPT_TYPE_BOOL = 1112493900,
     }
     
     public enum av_opt_eval_flags : int
@@ -772,25 +626,18 @@ namespace FFmpeg.AutoGen
         public const int FF_QUALITY_SCALE = FF_LAMBDA_SCALE;
         public const ulong AV_NOPTS_VALUE = 0x8000000000000000;
         public const int AV_TIME_BASE = 1000000;
-        public const int LIBAVUTIL_VERSION_MAJOR = 54;
-        public const int LIBAVUTIL_VERSION_MINOR = 31;
-        public const int LIBAVUTIL_VERSION_MICRO = 100;
-        public const bool FF_API_OLD_AVOPTIONS = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_PIX_FMT = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_CONTEXT_SIZE = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_PIX_FMT_DESC = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_AV_REVERSE = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_AUDIOCONVERT = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_CPU_FLAG_MMX2 = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_LLS_PRIVATE = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_AVFRAME_LAVC = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_VDPAU = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_GET_CHANNEL_LAYOUT_COMPAT = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_XVMC = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_OPT_TYPE_METADATA = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_DLOG = (LIBAVUTIL_VERSION_MAJOR<55);
-        public const bool FF_API_HMAC = (LIBAVUTIL_VERSION_MAJOR<55);
+        public const int LIBAVUTIL_VERSION_MAJOR = 55;
+        public const int LIBAVUTIL_VERSION_MINOR = 17;
+        public const int LIBAVUTIL_VERSION_MICRO = 103;
+        public const bool FF_API_VDPAU = (LIBAVUTIL_VERSION_MAJOR<56);
+        public const bool FF_API_XVMC = (LIBAVUTIL_VERSION_MAJOR<56);
+        public const bool FF_API_OPT_TYPE_METADATA = (LIBAVUTIL_VERSION_MAJOR<56);
+        public const bool FF_API_DLOG = (LIBAVUTIL_VERSION_MAJOR<56);
         public const bool FF_API_VAAPI = (LIBAVUTIL_VERSION_MAJOR<56);
+        public const bool FF_API_FRAME_QP = (LIBAVUTIL_VERSION_MAJOR<56);
+        public const bool FF_API_PLUS1_MINUS1 = (LIBAVUTIL_VERSION_MAJOR<56);
+        public const bool FF_API_ERROR_FRAME = (LIBAVUTIL_VERSION_MAJOR<56);
+        public const bool FF_API_CRC_BIG_TABLE = (LIBAVUTIL_VERSION_MAJOR<56);
         public const int AV_HAVE_BIGENDIAN = 0;
         public const int AV_HAVE_FAST_UNALIGNED = 1;
         public const int AV_HAVE_INCOMPATIBLE_LIBAV_ABI = 0;
@@ -875,7 +722,7 @@ namespace FFmpeg.AutoGen
         public const int AV_CH_LAYOUT_OCTAGONAL = (AV_CH_LAYOUT_5POINT0|AV_CH_BACK_LEFT|AV_CH_BACK_CENTER|AV_CH_BACK_RIGHT);
         public const ulong AV_CH_LAYOUT_HEXADECAGONAL = (AV_CH_LAYOUT_OCTAGONAL|AV_CH_WIDE_LEFT|AV_CH_WIDE_RIGHT|AV_CH_TOP_BACK_LEFT|AV_CH_TOP_BACK_RIGHT|AV_CH_TOP_BACK_CENTER|AV_CH_TOP_FRONT_CENTER|AV_CH_TOP_FRONT_LEFT|AV_CH_TOP_FRONT_RIGHT);
         public const int AV_CH_LAYOUT_STEREO_DOWNMIX = (AV_CH_STEREO_LEFT|AV_CH_STEREO_RIGHT);
-        public const ulong AV_CPU_FLAG_FORCE = 0x80000000;
+        public const uint AV_CPU_FLAG_FORCE = 0x80000000;
         public const int AV_CPU_FLAG_MMX = 0x0001;
         public const int AV_CPU_FLAG_MMXEXT = 0x0002;
         public const int AV_CPU_FLAG_MMX2 = 0x0002;
@@ -890,11 +737,12 @@ namespace FFmpeg.AutoGen
         public const int AV_CPU_FLAG_ATOM = 0x10000000;
         public const int AV_CPU_FLAG_SSE4 = 0x0100;
         public const int AV_CPU_FLAG_SSE42 = 0x0200;
+        public const int AV_CPU_FLAG_AESNI = 0x80000;
         public const int AV_CPU_FLAG_AVX = 0x4000;
         public const int AV_CPU_FLAG_AVXSLOW = 0x8000000;
         public const int AV_CPU_FLAG_XOP = 0x0400;
         public const int AV_CPU_FLAG_FMA4 = 0x0800;
-        public const int AV_CPU_FLAG_CMOV = 0x1001000;
+        public const int AV_CPU_FLAG_CMOV = 0x1000;
         public const int AV_CPU_FLAG_AVX2 = 0x8000;
         public const int AV_CPU_FLAG_FMA3 = 0x10000;
         public const int AV_CPU_FLAG_BMI1 = 0x20000;
@@ -909,6 +757,7 @@ namespace FFmpeg.AutoGen
         public const int AV_CPU_FLAG_VFPV3 = (1<<4);
         public const int AV_CPU_FLAG_NEON = (1<<5);
         public const int AV_CPU_FLAG_ARMV8 = (1<<6);
+        public const int AV_CPU_FLAG_VFP_VM = (1<<7);
         public const int AV_CPU_FLAG_SETEND = (1<<16);
         public const int AV_BUFFER_FLAG_READONLY = (1<<0);
         public const int AV_DICT_MATCH_CASE = 1;
@@ -930,9 +779,10 @@ namespace FFmpeg.AutoGen
         public const int AV_OPT_FLAG_EXPORT = 64;
         public const int AV_OPT_FLAG_READONLY = 128;
         public const int AV_OPT_FLAG_FILTERING_PARAM = (1<<16);
-        public const int AV_OPT_SEARCH_CHILDREN = 0x0001;
-        public const int AV_OPT_SEARCH_FAKE_OBJ = 0x0002;
-        public const int AV_OPT_MULTI_COMPONENT_RANGE = 0x1000;
+        public const int AV_OPT_SEARCH_CHILDREN = (1<<0);
+        public const int AV_OPT_SEARCH_FAKE_OBJ = (1<<1);
+        public const int AV_OPT_ALLOW_NULL = (1<<2);
+        public const int AV_OPT_MULTI_COMPONENT_RANGE = (1<<12);
         public const int AV_OPT_SERIALIZE_SKIP_DEFAULTS = 0x00000001;
         public const int AV_OPT_SERIALIZE_OPT_FLAGS_EXACT = 0x00000002;
         public const int AV_PIX_FMT_FLAG_BE = (1<<0);
@@ -943,21 +793,13 @@ namespace FFmpeg.AutoGen
         public const int AV_PIX_FMT_FLAG_RGB = (1<<5);
         public const int AV_PIX_FMT_FLAG_PSEUDOPAL = (1<<6);
         public const int AV_PIX_FMT_FLAG_ALPHA = (1<<7);
-        public const int PIX_FMT_BE = AV_PIX_FMT_FLAG_BE;
-        public const int PIX_FMT_PAL = AV_PIX_FMT_FLAG_PAL;
-        public const int PIX_FMT_BITSTREAM = AV_PIX_FMT_FLAG_BITSTREAM;
-        public const int PIX_FMT_HWACCEL = AV_PIX_FMT_FLAG_HWACCEL;
-        public const int PIX_FMT_PLANAR = AV_PIX_FMT_FLAG_PLANAR;
-        public const int PIX_FMT_RGB = AV_PIX_FMT_FLAG_RGB;
-        public const int PIX_FMT_PSEUDOPAL = AV_PIX_FMT_FLAG_PSEUDOPAL;
-        public const int PIX_FMT_ALPHA = AV_PIX_FMT_FLAG_ALPHA;
         public const int FF_LOSS_RESOLUTION = 0x0001;
         public const int FF_LOSS_DEPTH = 0x0002;
         public const int FF_LOSS_COLORSPACE = 0x0004;
         public const int FF_LOSS_ALPHA = 0x0008;
         public const int FF_LOSS_COLORQUANT = 0x0010;
         public const int FF_LOSS_CHROMA = 0x0020;
-        private const string libavutil = "avutil-54";
+        private const string libavutil = "avutil-55";
         
         [DllImport(libavutil, EntryPoint = "avutil_version", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint avutil_version();
@@ -1045,6 +887,9 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavutil, EntryPoint = "av_fast_malloc", CallingConvention = CallingConvention.Cdecl)]
         public static extern void av_fast_malloc(void* @ptr, uint* @size, ulong @min_size);
+        
+        [DllImport(libavutil, EntryPoint = "av_fast_mallocz", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void av_fast_mallocz(void* @ptr, uint* @size, ulong @min_size);
         
         [DllImport(libavutil, EntryPoint = "av_reduce", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_reduce(int* @dst_num, int* @dst_den, long @num, long @den, long @max);
@@ -1162,6 +1007,9 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavutil, EntryPoint = "av_fifo_space", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_fifo_space(AVFifoBuffer* @f);
+        
+        [DllImport(libavutil, EntryPoint = "av_fifo_generic_peek_at", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int av_fifo_generic_peek_at(AVFifoBuffer* @f, void* @dest, int @offset, int @buf_size, IntPtr* @func);
         
         [DllImport(libavutil, EntryPoint = "av_fifo_generic_peek", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_fifo_generic_peek(AVFifoBuffer* @f, void* @dest, int @buf_size, IntPtr* @func);
@@ -1359,7 +1207,7 @@ namespace FFmpeg.AutoGen
         public static extern int av_dict_parse_string(AVDictionary** @pm, [MarshalAs(UnmanagedType.LPStr)] string @str, [MarshalAs(UnmanagedType.LPStr)] string @key_val_sep, [MarshalAs(UnmanagedType.LPStr)] string @pairs_sep, int @flags);
         
         [DllImport(libavutil, EntryPoint = "av_dict_copy", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void av_dict_copy(AVDictionary** @dst, AVDictionary* @src, int @flags);
+        public static extern int av_dict_copy(AVDictionary** @dst, AVDictionary* @src, int @flags);
         
         [DllImport(libavutil, EntryPoint = "av_dict_free", CallingConvention = CallingConvention.Cdecl)]
         public static extern void av_dict_free(AVDictionary** @m);
@@ -1492,33 +1340,6 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavutil, EntryPoint = "av_frame_side_data_name", CallingConvention = CallingConvention.Cdecl)]
         public static extern string av_frame_side_data_name(AVFrameSideDataType @type);
-        
-        [DllImport(libavutil, EntryPoint = "av_set_string3", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_set_string3(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, [MarshalAs(UnmanagedType.LPStr)] string @val, int @alloc, AVOption** @o_out);
-        
-        [DllImport(libavutil, EntryPoint = "av_set_double", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVOption* av_set_double(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, double @n);
-        
-        [DllImport(libavutil, EntryPoint = "av_set_q", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVOption* av_set_q(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, AVRational @n);
-        
-        [DllImport(libavutil, EntryPoint = "av_set_int", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVOption* av_set_int(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, long @n);
-        
-        [DllImport(libavutil, EntryPoint = "av_get_double", CallingConvention = CallingConvention.Cdecl)]
-        public static extern double av_get_double(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, AVOption** @o_out);
-        
-        [DllImport(libavutil, EntryPoint = "av_get_q", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVRational av_get_q(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, AVOption** @o_out);
-        
-        [DllImport(libavutil, EntryPoint = "av_get_int", CallingConvention = CallingConvention.Cdecl)]
-        public static extern long av_get_int(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, AVOption** @o_out);
-        
-        [DllImport(libavutil, EntryPoint = "av_get_string", CallingConvention = CallingConvention.Cdecl)]
-        public static extern string av_get_string(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, AVOption** @o_out, IntPtr @buf, int @buf_len);
-        
-        [DllImport(libavutil, EntryPoint = "av_next_option", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVOption* av_next_option(void* @obj, AVOption* @last);
         
         [DllImport(libavutil, EntryPoint = "av_opt_show2", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_opt_show2(void* @obj, void* @av_log_obj, int @req_flags, int @rej_flags);

@@ -23,11 +23,9 @@ namespace FFmpeg.AutoGen
     
     public unsafe static partial class ffmpeg
     {
-        public const int LIBSWSCALE_VERSION_MAJOR = 3;
-        public const int LIBSWSCALE_VERSION_MINOR = 1;
-        public const int LIBSWSCALE_VERSION_MICRO = 101;
-        public const bool FF_API_SWS_CPU_CAPS = (LIBSWSCALE_VERSION_MAJOR<4);
-        public const bool FF_API_ARCH_BFIN = (LIBSWSCALE_VERSION_MAJOR < 4);
+        public const int LIBSWSCALE_VERSION_MAJOR = 4;
+        public const int LIBSWSCALE_VERSION_MINOR = 0;
+        public const int LIBSWSCALE_VERSION_MICRO = 100;
         public const int SWS_FAST_BILINEAR = 1;
         public const int SWS_BILINEAR = 2;
         public const int SWS_BICUBIC = 4;
@@ -49,13 +47,6 @@ namespace FFmpeg.AutoGen
         public const int SWS_ACCURATE_RND = 0x40000;
         public const int SWS_BITEXACT = 0x80000;
         public const int SWS_ERROR_DIFFUSION = 0x800000;
-        public const ulong SWS_CPU_CAPS_MMX = 0x80000000;
-        public const int SWS_CPU_CAPS_MMXEXT = 0x20000000;
-        public const int SWS_CPU_CAPS_MMX2 = 0x20000000;
-        public const int SWS_CPU_CAPS_3DNOW = 0x40000000;
-        public const int SWS_CPU_CAPS_ALTIVEC = 0x10000000;
-        public const int SWS_CPU_CAPS_BFIN = 0x01000000;
-        public const int SWS_CPU_CAPS_SSE2 = 0x02000000;
         public const double SWS_MAX_REDUCE_CUTOFF = 0.002;
         public const int SWS_CS_ITU709 = 1;
         public const int SWS_CS_FCC = 4;
@@ -64,7 +55,7 @@ namespace FFmpeg.AutoGen
         public const int SWS_CS_SMPTE170M = 5;
         public const int SWS_CS_SMPTE240M = 7;
         public const int SWS_CS_DEFAULT = 5;
-        private const string libswscale = "swscale-3";
+        private const string libswscale = "swscale-4";
         
         [DllImport(libswscale, EntryPoint = "swscale_version", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint swscale_version();

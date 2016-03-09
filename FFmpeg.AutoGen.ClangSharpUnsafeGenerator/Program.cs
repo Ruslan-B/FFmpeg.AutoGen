@@ -34,34 +34,34 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                     @"./ffmpeg/include/libavutil/imgutils.h"
                 },
                 outputFile: @"./FFmpeg.AutoGen/FFmpeg.avutil.g.cs",
-                libraryVarName: @"libavutil", libraryName: @"avutil-54");
+                libraryVarName: @"libavutil", libraryName: @"avutil-55");
 
             g.Generate(
                 inputFiles: new[] { @"./ffmpeg/include/libswresample/swresample.h" },
                 outputFile: @"./FFmpeg.AutoGen/FFmpeg.swresample.g.cs",
-                libraryVarName: @"libswresample", libraryName: @"swresample-1");
+                libraryVarName: @"libswresample", libraryName: @"swresample-2");
 
             g.Generate(
                 inputFiles: new[] { @"./ffmpeg/include/libpostproc/postprocess.h" },
                 outputFile: @"./FFmpeg.AutoGen/FFmpeg.postprocess.g.cs",
-                libraryVarName: @"libpostproc", libraryName: @"postproc-53");
+                libraryVarName: @"libpostproc", libraryName: @"postproc-54");
 
             g.Generate(
                 inputFiles: new[] { @"./ffmpeg/include/libswscale/swscale.h" },
                 outputFile: @"./FFmpeg.AutoGen/FFmpeg.swscale.g.cs",
-                libraryVarName: @"libswscale", libraryName: @"swscale-3");
+                libraryVarName: @"libswscale", libraryName: @"swscale-4");
 
 
             g.Generate(
                 inputFiles: new[] { @"./ffmpeg/include/libavcodec/avcodec.h" },
                 outputFile: @"./FFmpeg.AutoGen/FFmpeg.avcodec.g.cs",
-                libraryVarName: @"libavcodec", libraryName: @"avcodec-56");
+                libraryVarName: @"libavcodec", libraryName: @"avcodec-57");
 
 
             g.Generate(
                 inputFiles: new[] { @"./ffmpeg/include/libavformat/avformat.h" },
                 outputFile: @"./FFmpeg.AutoGen/FFmpeg.avformat.g.cs",
-                libraryVarName: @"libavformat", libraryName: @"avformat-56");
+                libraryVarName: @"libavformat", libraryName: @"avformat-57");
 
             g.Generate(
                 inputFiles: new[]
@@ -71,12 +71,12 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                     @"./ffmpeg/include/libavfilter/buffersink.h"
                 },
                 outputFile: @"./FFmpeg.AutoGen/FFmpeg.avfilter.g.cs",
-                libraryVarName: @"libavfilter", libraryName: @"avfilter-5");
+                libraryVarName: @"libavfilter", libraryName: @"avfilter-6");
 
             g.Generate(
                 inputFiles: new[] { @"./ffmpeg/include/libavdevice/avdevice.h" },
                 outputFile: @"./FFmpeg.AutoGen/FFmpeg.avdevice.g.cs",
-                libraryVarName: @"libavdevice", libraryName: @"avdevice-56");
+                libraryVarName: @"libavdevice", libraryName: @"avdevice-57");
 
             g.OutputStatistic();
         }
