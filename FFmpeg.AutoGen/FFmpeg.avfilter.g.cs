@@ -31,76 +31,6 @@ namespace FFmpeg.AutoGen
     {
     }
     
-    public unsafe partial struct AVFilterBuffer
-    {
-        public sbyte* @data0; public sbyte* @data1; public sbyte* @data2; public sbyte* @data3; public sbyte* @data4; public sbyte* @data5; public sbyte* @data6; public sbyte* @data7; 
-        public sbyte** @extended_data;
-        public fixed int @linesize[8]; 
-        public void* @priv;
-        public IntPtr @free;
-        public int @format;
-        public int @w;
-        public int @h;
-        public uint @refcount;
-    }
-    
-    public unsafe partial struct AVFilterBufferRefAudioProps
-    {
-        public ulong @channel_layout;
-        public int @nb_samples;
-        public int @sample_rate;
-        public int @channels;
-    }
-    
-    public unsafe partial struct AVFilterBufferRefVideoProps
-    {
-        public int @w;
-        public int @h;
-        public AVRational @sample_aspect_ratio;
-        public int @interlaced;
-        public int @top_field_first;
-        public AVPictureType @pict_type;
-        public int @key_frame;
-        public int @qp_table_linesize;
-        public int @qp_table_size;
-        public sbyte* @qp_table;
-    }
-    
-    public unsafe partial struct AVFilterBufferRef
-    {
-        public AVFilterBuffer* @buf;
-        public sbyte* @data0; public sbyte* @data1; public sbyte* @data2; public sbyte* @data3; public sbyte* @data4; public sbyte* @data5; public sbyte* @data6; public sbyte* @data7; 
-        public sbyte** @extended_data;
-        public fixed int @linesize[8]; 
-        public AVFilterBufferRefVideoProps* @video;
-        public AVFilterBufferRefAudioProps* @audio;
-        public long @pts;
-        public long @pos;
-        public int @format;
-        public int @perms;
-        public AVMediaType @type;
-        public AVDictionary* @metadata;
-    }
-    
-    public unsafe partial struct AVFilterPad
-    {
-        public sbyte* @name;
-        public AVMediaType @type;
-        public int @min_perms;
-        public int @rej_perms;
-        public IntPtr @start_frame;
-        public IntPtr @get_video_buffer;
-        public IntPtr @get_audio_buffer;
-        public IntPtr @end_frame;
-        public IntPtr @draw_slice;
-        public IntPtr @filter_frame;
-        public IntPtr @poll_frame;
-        public IntPtr @request_frame;
-        public IntPtr @config_props;
-        public int @needs_fifo;
-        public int @needs_writable;
-    }
-    
     public unsafe partial struct AVFilter
     {
         public sbyte* @name;
@@ -130,11 +60,9 @@ namespace FFmpeg.AutoGen
         public sbyte* @name;
         public AVFilterPad* @input_pads;
         public AVFilterLink** @inputs;
-        public uint @input_count;
         public uint @nb_inputs;
         public AVFilterPad* @output_pads;
         public AVFilterLink** @outputs;
-        public uint @output_count;
         public uint @nb_outputs;
         public void* @priv;
         public AVFilterGraph* @graph;
@@ -177,25 +105,22 @@ namespace FFmpeg.AutoGen
         public AVFilterChannelLayouts* @out_channel_layouts;
         public int @request_samples;
         public init_state @init_state;
-        public AVFilterPool* @pool;
         public AVFilterGraph* @graph;
         public long @current_pts;
+        public long @current_pts_us;
         public int @age_index;
         public AVRational @frame_rate;
         public AVFrame* @partial_buf;
         public int @partial_buf_size;
         public int @min_samples;
         public int @max_samples;
-        public AVFilterBufferRef* @cur_buf_copy;
-        public int @closed;
+        public int @status;
         public int @channels;
-        public uint @frame_requested;
         public uint @flags;
         public long @frame_count;
-    }
-    
-    public unsafe partial struct AVFilterPool
-    {
+        public void* @video_frame_pool;
+        public int @frame_wanted_in;
+        public int @frame_wanted_out;
     }
     
     public unsafe partial struct AVFilterChannelLayouts
@@ -209,11 +134,10 @@ namespace FFmpeg.AutoGen
     public unsafe partial struct AVFilterGraph
     {
         public AVClass* @av_class;
-        public uint @filter_count_unused;
         public AVFilterContext** @filters;
+        public uint @nb_filters;
         public sbyte* @scale_sws_opts;
         public sbyte* @resample_lavr_opts;
-        public uint @nb_filters;
         public int @thread_type;
         public int @nb_threads;
         public AVFilterGraphInternal* @internal;
@@ -269,6 +193,10 @@ namespace FFmpeg.AutoGen
     {
     }
     
+    public unsafe partial struct AVFilterPad
+    {
+    }
+    
     public unsafe partial struct AVFilterFormats
     {
     }
@@ -290,6 +218,10 @@ namespace FFmpeg.AutoGen
     }
     
     public unsafe partial struct AVBufferPool
+    {
+    }
+    
+    public unsafe partial struct AVFilterPad
     {
     }
     
@@ -332,37 +264,24 @@ namespace FFmpeg.AutoGen
         @AVFILTER_AUTO_CONVERT_NONE = -1,
     }
     
-    public enum av_buffersrc_add_ref : int
+    public enum av_buffersrc_get_nb_failed_requests : int
     {
         @AV_BUFFERSRC_FLAG_NO_CHECK_FORMAT = 1,
-        @AV_BUFFERSRC_FLAG_NO_COPY = 2,
         @AV_BUFFERSRC_FLAG_PUSH = 4,
         @AV_BUFFERSRC_FLAG_KEEP_REF = 8,
     }
     
     public unsafe static partial class ffmpeg
     {
-        public const int LIBAVFILTER_VERSION_MAJOR = 5;
-        public const int LIBAVFILTER_VERSION_MINOR = 40;
-        public const int LIBAVFILTER_VERSION_MICRO = 101;
-        public const bool FF_API_AVFILTERPAD_PUBLIC = (LIBAVFILTER_VERSION_MAJOR<6);
-        public const bool FF_API_FOO_COUNT = (LIBAVFILTER_VERSION_MAJOR<6);
-        public const bool FF_API_AVFILTERBUFFER = (LIBAVFILTER_VERSION_MAJOR<6);
-        public const bool FF_API_OLD_FILTER_OPTS = (LIBAVFILTER_VERSION_MAJOR<6);
+        public const int LIBAVFILTER_VERSION_MAJOR = 6;
+        public const int LIBAVFILTER_VERSION_MINOR = 31;
+        public const int LIBAVFILTER_VERSION_MICRO = 100;
+        public const bool FF_API_OLD_FILTER_OPTS = (LIBAVFILTER_VERSION_MAJOR<7);
         public const bool FF_API_OLD_FILTER_OPTS_ERROR = (LIBAVFILTER_VERSION_MAJOR<7);
-        public const bool FF_API_AVFILTER_OPEN = (LIBAVFILTER_VERSION_MAJOR<6);
-        public const bool FF_API_AVFILTER_INIT_FILTER = (LIBAVFILTER_VERSION_MAJOR<6);
-        public const bool FF_API_OLD_FILTER_REGISTER = (LIBAVFILTER_VERSION_MAJOR<6);
-        public const bool FF_API_OLD_GRAPH_PARSE = (LIBAVFILTER_VERSION_MAJOR<5);
-        public const bool FF_API_NOCONST_GET_NAME = (LIBAVFILTER_VERSION_MAJOR<6);
-        public const int AV_PERM_READ = 0x01;
-        public const int AV_PERM_WRITE = 0x02;
-        public const int AV_PERM_PRESERVE = 0x04;
-        public const int AV_PERM_REUSE = 0x08;
-        public const int AV_PERM_REUSE2 = 0x10;
-        public const int AV_PERM_NEG_LINESIZES = 0x20;
-        public const int AV_PERM_ALIGN = 0x40;
-        public const int AVFILTER_ALIGN = 16;
+        public const bool FF_API_AVFILTER_OPEN = (LIBAVFILTER_VERSION_MAJOR<7);
+        public const bool FF_API_AVFILTER_INIT_FILTER = (LIBAVFILTER_VERSION_MAJOR<7);
+        public const bool FF_API_OLD_FILTER_REGISTER = (LIBAVFILTER_VERSION_MAJOR<7);
+        public const bool FF_API_NOCONST_GET_NAME = (LIBAVFILTER_VERSION_MAJOR<7);
         public const int AVFILTER_FLAG_DYNAMIC_INPUTS = (1<<0);
         public const int AVFILTER_FLAG_DYNAMIC_OUTPUTS = (1<<1);
         public const int AVFILTER_FLAG_SLICE_THREADS = (1<<2);
@@ -374,7 +293,7 @@ namespace FFmpeg.AutoGen
         public const int AVFILTER_CMD_FLAG_FAST = 2;
         public const int AV_BUFFERSINK_FLAG_PEEK = 1;
         public const int AV_BUFFERSINK_FLAG_NO_REQUEST = 2;
-        private const string libavfilter = "avfilter-5";
+        private const string libavfilter = "avfilter-6";
         
         [DllImport(libavfilter, EntryPoint = "avfilter_version", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint avfilter_version();
@@ -384,21 +303,6 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavfilter, EntryPoint = "avfilter_license", CallingConvention = CallingConvention.Cdecl)]
         public static extern string avfilter_license();
-        
-        [DllImport(libavfilter, EntryPoint = "avfilter_copy_buffer_ref_props", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void avfilter_copy_buffer_ref_props(AVFilterBufferRef* @dst, AVFilterBufferRef* @src);
-        
-        [DllImport(libavfilter, EntryPoint = "avfilter_ref_buffer", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVFilterBufferRef* avfilter_ref_buffer(AVFilterBufferRef* @ref, int @pmask);
-        
-        [DllImport(libavfilter, EntryPoint = "avfilter_unref_buffer", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void avfilter_unref_buffer(AVFilterBufferRef* @ref);
-        
-        [DllImport(libavfilter, EntryPoint = "avfilter_unref_bufferp", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void avfilter_unref_bufferp(AVFilterBufferRef** @ref);
-        
-        [DllImport(libavfilter, EntryPoint = "avfilter_ref_get_channels", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avfilter_ref_get_channels(AVFilterBufferRef* @ref);
         
         [DllImport(libavfilter, EntryPoint = "avfilter_pad_count", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avfilter_pad_count(AVFilterPad* @pads);
@@ -423,15 +327,6 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavfilter, EntryPoint = "avfilter_config_links", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avfilter_config_links(AVFilterContext* @filter);
-        
-        [DllImport(libavfilter, EntryPoint = "avfilter_get_video_buffer_ref_from_arrays", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVFilterBufferRef* avfilter_get_video_buffer_ref_from_arrays([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] sbyte*[] @data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesize, int @perms, int @w, int @h, AVPixelFormat @format);
-        
-        [DllImport(libavfilter, EntryPoint = "avfilter_get_audio_buffer_ref_from_arrays", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVFilterBufferRef* avfilter_get_audio_buffer_ref_from_arrays(sbyte** @data, int @linesize, int @perms, int @nb_samples, AVSampleFormat @sample_fmt, ulong @channel_layout);
-        
-        [DllImport(libavfilter, EntryPoint = "avfilter_get_audio_buffer_ref_from_arrays_channels", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AVFilterBufferRef* avfilter_get_audio_buffer_ref_from_arrays_channels(sbyte** @data, int @linesize, int @perms, int @nb_samples, AVSampleFormat @sample_fmt, int @channels, ulong @channel_layout);
         
         [DllImport(libavfilter, EntryPoint = "avfilter_process_command", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avfilter_process_command(AVFilterContext* @filter, [MarshalAs(UnmanagedType.LPStr)] string @cmd, [MarshalAs(UnmanagedType.LPStr)] string @arg, IntPtr @res, int @res_len, int @flags);
@@ -471,12 +366,6 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavfilter, EntryPoint = "avfilter_insert_filter", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avfilter_insert_filter(AVFilterLink* @link, AVFilterContext* @filt, uint @filt_srcpad_idx, uint @filt_dstpad_idx);
-        
-        [DllImport(libavfilter, EntryPoint = "avfilter_copy_frame_props", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avfilter_copy_frame_props(AVFilterBufferRef* @dst, AVFrame* @src);
-        
-        [DllImport(libavfilter, EntryPoint = "avfilter_copy_buf_props", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avfilter_copy_buf_props(AVFrame* @dst, AVFilterBufferRef* @src);
         
         [DllImport(libavfilter, EntryPoint = "avfilter_get_class", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVClass* avfilter_get_class();
@@ -532,14 +421,8 @@ namespace FFmpeg.AutoGen
         [DllImport(libavfilter, EntryPoint = "avfilter_graph_request_oldest", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avfilter_graph_request_oldest(AVFilterGraph* @graph);
         
-        [DllImport(libavfilter, EntryPoint = "av_buffersrc_add_ref", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_buffersrc_add_ref(AVFilterContext* @buffer_src, AVFilterBufferRef* @picref, int @flags);
-        
         [DllImport(libavfilter, EntryPoint = "av_buffersrc_get_nb_failed_requests", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint av_buffersrc_get_nb_failed_requests(AVFilterContext* @buffer_src);
-        
-        [DllImport(libavfilter, EntryPoint = "av_buffersrc_buffer", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_buffersrc_buffer(AVFilterContext* @ctx, AVFilterBufferRef* @buf);
         
         [DllImport(libavfilter, EntryPoint = "av_buffersrc_write_frame", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_buffersrc_write_frame(AVFilterContext* @ctx, AVFrame* @frame);
@@ -549,18 +432,6 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavfilter, EntryPoint = "av_buffersrc_add_frame_flags", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_buffersrc_add_frame_flags(AVFilterContext* @buffer_src, AVFrame* @frame, int @flags);
-        
-        [DllImport(libavfilter, EntryPoint = "av_buffersink_get_buffer_ref", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_buffersink_get_buffer_ref(AVFilterContext* @buffer_sink, AVFilterBufferRef** @bufref, int @flags);
-        
-        [DllImport(libavfilter, EntryPoint = "av_buffersink_poll_frame", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_buffersink_poll_frame(AVFilterContext* @ctx);
-        
-        [DllImport(libavfilter, EntryPoint = "av_buffersink_read", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_buffersink_read(AVFilterContext* @ctx, AVFilterBufferRef** @buf);
-        
-        [DllImport(libavfilter, EntryPoint = "av_buffersink_read_samples", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_buffersink_read_samples(AVFilterContext* @ctx, AVFilterBufferRef** @buf, int @nb_samples);
         
         [DllImport(libavfilter, EntryPoint = "av_buffersink_get_frame_flags", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_buffersink_get_frame_flags(AVFilterContext* @ctx, AVFrame* @frame, int @flags);

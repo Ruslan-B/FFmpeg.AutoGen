@@ -67,7 +67,7 @@ namespace FFmpeg.AutoGen.Example
             var height = codecContext.height;
             var sourcePixFmt = codecContext.pix_fmt;
             var codecId = codecContext.codec_id;
-            var convertToPixFmt = AVPixelFormat.PIX_FMT_BGR24;
+            var convertToPixFmt = AVPixelFormat.AV_PIX_FMT_BGR24;
             var pConvertContext = ffmpeg.sws_getContext(width, height, sourcePixFmt,
                 width, height, convertToPixFmt,
                 ffmpeg.SWS_FAST_BILINEAR, null, null, null);
@@ -76,7 +76,7 @@ namespace FFmpeg.AutoGen.Example
                 throw new ApplicationException(@"Could not initialize the conversion context");
             }
 
-            var pConvertedFrame = ffmpeg.avcodec_alloc_frame();
+            var pConvertedFrame = ffmpeg.av_frame_alloc();
             var convertedFrameBufferSize = ffmpeg.avpicture_get_size(convertToPixFmt, width, height);
             var pConvertedFrameBuffer = (sbyte*)ffmpeg.av_malloc((ulong)convertedFrameBufferSize);
             ffmpeg.avpicture_fill((AVPicture*)pConvertedFrame, pConvertedFrameBuffer, convertToPixFmt, width, height);

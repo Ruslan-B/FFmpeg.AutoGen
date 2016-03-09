@@ -55,6 +55,10 @@ namespace FFmpeg.AutoGen
     {
     }
     
+    public unsafe partial struct AVStreamInternal
+    {
+    }
+    
     public unsafe partial struct AVFormatInternal
     {
     }
@@ -130,10 +134,10 @@ namespace FFmpeg.AutoGen
     
     public unsafe static partial class ffmpeg
     {
-        public const int LIBAVDEVICE_VERSION_MAJOR = 56;
-        public const int LIBAVDEVICE_VERSION_MINOR = 4;
-        public const int LIBAVDEVICE_VERSION_MICRO = 100;
-        private const string libavdevice = "avdevice-56";
+        public const int LIBAVDEVICE_VERSION_MAJOR = 57;
+        public const int LIBAVDEVICE_VERSION_MINOR = 0;
+        public const int LIBAVDEVICE_VERSION_MICRO = 101;
+        private const string libavdevice = "avdevice-57";
         
         [DllImport(libavdevice, EntryPoint = "avdevice_version", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint avdevice_version();

@@ -98,6 +98,7 @@ namespace FFmpeg.AutoGen
         public int @writeout_count;
         public int @orig_buffer_size;
         public int @short_seek_threshold;
+        public sbyte* @protocol_whitelist;
     }
     
     public unsafe partial struct AVBPrint
@@ -161,6 +162,9 @@ namespace FFmpeg.AutoGen
         public IntPtr @create_device_capabilities;
         public IntPtr @free_device_capabilities;
         public AVCodecID @data_codec;
+        public IntPtr @init;
+        public IntPtr @deinit;
+        public IntPtr @check_bitstream;
     }
     
     public unsafe partial struct AVInputFormat
@@ -196,6 +200,10 @@ namespace FFmpeg.AutoGen
         public int @flags;
         public int @size;
         public int @min_distance;
+    }
+    
+    public unsafe partial struct AVStreamInternal
+    {
     }
     
     public unsafe partial struct AVStream
@@ -258,6 +266,7 @@ namespace FFmpeg.AutoGen
         public sbyte* @recommended_encoder_configuration;
         public AVRational @display_aspect_ratio;
         public FFFrac* @priv_pts;
+        public AVStreamInternal* @internal;
     }
     
     public unsafe partial struct FFFrac
@@ -328,12 +337,12 @@ namespace FFmpeg.AutoGen
         public fixed sbyte @filename[1024]; 
         public long @start_time;
         public long @duration;
-        public int @bit_rate;
+        public long @bit_rate;
         public uint @packet_size;
         public int @max_delay;
         public int @flags;
-        public uint @probesize;
-        public int @max_analyze_duration;
+        public long @probesize;
+        public long @max_analyze_duration;
         public sbyte* @key;
         public int @keylen;
         public uint @nb_programs;
@@ -381,11 +390,12 @@ namespace FFmpeg.AutoGen
         public void* @opaque;
         public IntPtr @control_message_cb;
         public long @output_ts_offset;
-        public long @max_analyze_duration2;
-        public long @probesize2;
         public sbyte* @dump_separator;
         public AVCodecID @data_codec_id;
         public IntPtr @open_cb;
+        public sbyte* @protocol_whitelist;
+        public IntPtr @io_open;
+        public IntPtr @io_close;
     }
     
     public unsafe partial struct AVPacketList
@@ -434,14 +444,16 @@ namespace FFmpeg.AutoGen
     
     public unsafe static partial class ffmpeg
     {
-        public const int LIBAVFORMAT_VERSION_MAJOR = 56;
-        public const int LIBAVFORMAT_VERSION_MINOR = 40;
-        public const int LIBAVFORMAT_VERSION_MICRO = 101;
-        public const bool FF_API_LAVF_BITEXACT = (LIBAVFORMAT_VERSION_MAJOR<57);
-        public const bool FF_API_LAVF_FRAC = (LIBAVFORMAT_VERSION_MAJOR < 57);
-        public const bool FF_API_LAVF_CODEC_TB = (LIBAVFORMAT_VERSION_MAJOR < 57);
-        public const bool FF_API_URL_FEOF = (LIBAVFORMAT_VERSION_MAJOR < 57);
-        public const bool FF_API_PROBESIZE_32 = (LIBAVFORMAT_VERSION_MAJOR < 57);
+        public const int LIBAVFORMAT_VERSION_MAJOR = 57;
+        public const int LIBAVFORMAT_VERSION_MINOR = 25;
+        public const int LIBAVFORMAT_VERSION_MICRO = 100;
+        public const bool FF_API_LAVF_BITEXACT = (LIBAVFORMAT_VERSION_MAJOR<58);
+        public const bool FF_API_LAVF_FRAC = (LIBAVFORMAT_VERSION_MAJOR<58);
+        public const bool FF_API_LAVF_CODEC_TB = (LIBAVFORMAT_VERSION_MAJOR<58);
+        public const bool FF_API_URL_FEOF = (LIBAVFORMAT_VERSION_MAJOR<58);
+        public const bool FF_API_LAVF_FMT_RAWPICTURE = (LIBAVFORMAT_VERSION_MAJOR<58);
+        public const bool FF_API_COMPUTE_PKT_FIELDS2 = (LIBAVFORMAT_VERSION_MAJOR<58);
+        public const bool FF_API_OLD_OPEN_CALLBACKS = (LIBAVFORMAT_VERSION_MAJOR<58);
         public const int FF_API_R_FRAME_RATE = 1;
         public const int AVIO_SEEKABLE_NORMAL = 0x0001;
         public const int AVSEEK_SIZE = 0x10000;
@@ -494,7 +506,7 @@ namespace FFmpeg.AutoGen
         public const int AV_PTS_WRAP_ADD_OFFSET = 1;
         public const int AV_PTS_WRAP_SUB_OFFSET = -1;
         public const int AVSTREAM_EVENT_FLAG_METADATA_UPDATED = 0x0001;
-        public const int MAX_STD_TIMEBASES = (30*12+7+6);
+        public const int MAX_STD_TIMEBASES = (30*12+30+3+6);
         public const int MAX_REORDER_DELAY = 16;
         public const int AV_PROGRAM_RUNNING = 1;
         public const int AVFMTCTX_NOHEADER = 0x0001;
@@ -523,7 +535,7 @@ namespace FFmpeg.AutoGen
         public const int AVSEEK_FLAG_BYTE = 2;
         public const int AVSEEK_FLAG_ANY = 4;
         public const int AVSEEK_FLAG_FRAME = 8;
-        private const string libavformat = "avformat-56";
+        private const string libavformat = "avformat-57";
         
         [DllImport(libavformat, EntryPoint = "avio_find_protocol_name", CallingConvention = CallingConvention.Cdecl)]
         public static extern string avio_find_protocol_name([MarshalAs(UnmanagedType.LPStr)] string @url);
@@ -810,6 +822,9 @@ namespace FFmpeg.AutoGen
         [DllImport(libavformat, EntryPoint = "avformat_new_stream", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVStream* avformat_new_stream(AVFormatContext* @s, AVCodec* @c);
         
+        [DllImport(libavformat, EntryPoint = "av_stream_new_side_data", CallingConvention = CallingConvention.Cdecl)]
+        public static extern sbyte* av_stream_new_side_data(AVStream* @stream, AVPacketSideDataType @type, int @size);
+        
         [DllImport(libavformat, EntryPoint = "av_stream_get_side_data", CallingConvention = CallingConvention.Cdecl)]
         public static extern sbyte* av_stream_get_side_data(AVStream* @stream, AVPacketSideDataType @type, int* @size);
         
@@ -832,13 +847,13 @@ namespace FFmpeg.AutoGen
         public static extern AVInputFormat* av_probe_input_format3(AVProbeData* @pd, int @is_opened, int* @score_ret);
         
         [DllImport(libavformat, EntryPoint = "av_probe_input_buffer2", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_probe_input_buffer2(AVIOContext* @pb, AVInputFormat** @fmt, [MarshalAs(UnmanagedType.LPStr)] string @filename, void* @logctx, uint @offset, uint @max_probe_size);
+        public static extern int av_probe_input_buffer2(AVIOContext* @pb, AVInputFormat** @fmt, [MarshalAs(UnmanagedType.LPStr)] string @url, void* @logctx, uint @offset, uint @max_probe_size);
         
         [DllImport(libavformat, EntryPoint = "av_probe_input_buffer", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int av_probe_input_buffer(AVIOContext* @pb, AVInputFormat** @fmt, [MarshalAs(UnmanagedType.LPStr)] string @filename, void* @logctx, uint @offset, uint @max_probe_size);
+        public static extern int av_probe_input_buffer(AVIOContext* @pb, AVInputFormat** @fmt, [MarshalAs(UnmanagedType.LPStr)] string @url, void* @logctx, uint @offset, uint @max_probe_size);
         
         [DllImport(libavformat, EntryPoint = "avformat_open_input", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int avformat_open_input(AVFormatContext** @ps, [MarshalAs(UnmanagedType.LPStr)] string @filename, AVInputFormat* @fmt, AVDictionary** @options);
+        public static extern int avformat_open_input(AVFormatContext** @ps, [MarshalAs(UnmanagedType.LPStr)] string @url, AVInputFormat* @fmt, AVDictionary** @options);
         
         [DllImport(libavformat, EntryPoint = "av_demuxer_open", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_demuxer_open(AVFormatContext* @ic);
@@ -848,6 +863,9 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavformat, EntryPoint = "av_find_program_from_stream", CallingConvention = CallingConvention.Cdecl)]
         public static extern AVProgram* av_find_program_from_stream(AVFormatContext* @ic, AVProgram* @last, int @s);
+        
+        [DllImport(libavformat, EntryPoint = "av_program_add_stream_index", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void av_program_add_stream_index(AVFormatContext* @ac, int @progid, uint @idx);
         
         [DllImport(libavformat, EntryPoint = "av_find_best_stream", CallingConvention = CallingConvention.Cdecl)]
         public static extern int av_find_best_stream(AVFormatContext* @ic, AVMediaType @type, int @wanted_stream_nb, int @related_stream, AVCodec** @decoder_ret, int @flags);
@@ -977,6 +995,9 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavformat, EntryPoint = "avformat_queue_attached_pictures", CallingConvention = CallingConvention.Cdecl)]
         public static extern int avformat_queue_attached_pictures(AVFormatContext* @s);
+        
+        [DllImport(libavformat, EntryPoint = "av_apply_bitstream_filters", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int av_apply_bitstream_filters(AVCodecContext* @codec, AVPacket* @pkt, AVBitStreamFilterContext* @bsfc);
         
     }
 }
