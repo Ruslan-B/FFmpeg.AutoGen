@@ -30,7 +30,7 @@ namespace FFmpeg.AutoGen.Example
             // decode 100 frame from url or path
 
             //string url = @"../../sample_mpeg4.mp4";
-            var url = @"http://hubblesource.stsci.edu/sources/video/clips/details/images/centaur_1.mpg";
+            var url = @"http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4";
 
             ffmpeg.av_register_all();
             ffmpeg.avcodec_register_all();
