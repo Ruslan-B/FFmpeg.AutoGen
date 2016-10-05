@@ -80,6 +80,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConstCharPtrMarshaler.cs" />
     <Compile Include="FFmpeg.avcodec.g.cs" />
     <Compile Include="FFmpeg.avdevice.g.cs" />
     <Compile Include="FFmpeg.avfilter.g.cs" />

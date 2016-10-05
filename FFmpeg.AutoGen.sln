@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen", "FFmpeg.AutoGen\FFmpeg.AutoGen.csproj", "{A536B02A-B0B1-4753-8328-17369EF09976}"
 EndProject
@@ -25,6 +25,7 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|x64.ActiveCfg = Debug|x64
+		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|x64.Build.0 = Debug|x64
 		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|x86.ActiveCfg = Debug|x86
 		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|x86.Build.0 = Debug|x86
 		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|x64.ActiveCfg = Release|x64
@@ -32,6 +33,7 @@ Global
 		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|x86.ActiveCfg = Release|x86
 		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|x86.Build.0 = Release|x86
 		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|x64.ActiveCfg = Debug|x64
+		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|x64.Build.0 = Debug|x64
 		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|x86.ActiveCfg = Debug|x86
 		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|x86.Build.0 = Debug|x86
 		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|x64.ActiveCfg = Release|x64
@@ -39,11 +41,9 @@ Global
 		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|x86.ActiveCfg = Release|x86
 		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|x86.Build.0 = Release|x86
 		{CE274092-C152-4712-809D-7A81EBD8290A}.Debug|x64.ActiveCfg = Debug|x64
-		{CE274092-C152-4712-809D-7A81EBD8290A}.Debug|x64.Build.0 = Debug|x64
 		{CE274092-C152-4712-809D-7A81EBD8290A}.Debug|x86.ActiveCfg = Debug|x86
 		{CE274092-C152-4712-809D-7A81EBD8290A}.Debug|x86.Build.0 = Debug|x86
 		{CE274092-C152-4712-809D-7A81EBD8290A}.Release|x64.ActiveCfg = Release|x64
-		{CE274092-C152-4712-809D-7A81EBD8290A}.Release|x64.Build.0 = Release|x64
 		{CE274092-C152-4712-809D-7A81EBD8290A}.Release|x86.ActiveCfg = Release|x86
 		{CE274092-C152-4712-809D-7A81EBD8290A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection

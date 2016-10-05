@@ -1,7 +1,8 @@
 ##FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.png)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
 
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.  
-The bindings are generated for FFmpeg 3.0.
+The bindings are generated against:
+ffmpeg-20161004-be1d324-win64-shared.zip    03-Oct-2016 23:35   17M  
 
 ##Usage
 
@@ -10,8 +11,9 @@ For the more sophisticated operations please refer to offical [ffmpeg Documentat
 
 - on Windows:  
 Native ffmpeg binaries are pre bundled in the repository. 
-The binaries source from [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/).
+The x64 binaries source from [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/).
 Please check to example project it shows how specify path to libraries.  
+In case you need x86 binaries, feel free to use same source.
 
 - on OS X:  
 Install ffmpeg via [MacPorts](http://www.macports.org):
@@ -22,7 +24,7 @@ Please make sure that ```FFmpeg.AutoGen.dll``` coupled with ```FFmpeg.AutoGen.co
 By default MacPorts keeps compiled libraries in ```/opt/local/lib```.
 
 - on Linux:  
-You need to update ```FFmpeg.AutoGen.config``` with full path to FFmpeg libraries.
+You need to patch ```FFmpeg.AutoGen.config``` with full path to FFmpeg libraries.
 
 ##Generation
 

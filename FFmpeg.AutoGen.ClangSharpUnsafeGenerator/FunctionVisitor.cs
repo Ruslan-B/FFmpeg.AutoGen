@@ -88,7 +88,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
             var functionName = clang.getCursorSpelling(cursor).ToString();
             var resultType = clang.getCursorResultType(cursor);
 
-            m_tw.WriteLine(@"[DllImport({0}, EntryPoint = ""{1}"", CallingConvention = {2})]",
+            m_tw.WriteLine(@"[DllImport({0}, EntryPoint = ""{1}"", CallingConvention = {2}, CharSet = CharSet.Ansi)]",
                 m_libraryVarName,
                 functionName,
                 functionType.CallingConventionSpelling());

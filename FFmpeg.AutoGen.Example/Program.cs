@@ -17,7 +17,7 @@ namespace FFmpeg.AutoGen.Example
                 case PlatformID.Win32NT:
                 case PlatformID.Win32S:
                 case PlatformID.Win32Windows:
-                    var ffmpegPath = string.Format(@"../../../../FFmpeg/bin/{0}", Environment.Is64BitProcess ? @"x64" : @"x86");
+                    var ffmpegPath = $@"../../../../FFmpeg/bin/{(Environment.Is64BitProcess ? @"x64" : @"x86")}";
                     InteropHelper.RegisterLibrariesSearchPath(ffmpegPath);
                     break;
                 case PlatformID.Unix:
@@ -36,6 +36,8 @@ namespace FFmpeg.AutoGen.Example
             ffmpeg.avcodec_register_all();
             ffmpeg.avformat_network_init();
 
+
+            Console.WriteLine($"FFmpeg version info: {ffmpeg.av_version_info()}");
 
             var pFormatContext = ffmpeg.avformat_alloc_context();
             if (ffmpeg.avformat_open_input(&pFormatContext, url, null, null) != 0)
@@ -62,7 +64,11 @@ namespace FFmpeg.AutoGen.Example
                 throw new ApplicationException(@"Could not found video stream");
             }
 
+
             var codecContext = *pStream->codec;
+           
+            Console.WriteLine($"codec name: { ffmpeg.avcodec_get_name(codecContext.codec_id)}");
+            
             var width = codecContext.width;
             var height = codecContext.height;
             var sourcePixFmt = codecContext.pix_fmt;
@@ -77,7 +83,7 @@ namespace FFmpeg.AutoGen.Example
             }
 
             var pConvertedFrame = ffmpeg.av_frame_alloc();
-            var convertedFrameBufferSize = ffmpeg.avpicture_get_size(convertToPixFmt, width, height);
+            var convertedFrameBufferSize = ffmpeg.av_image_get_buffer_size(convertToPixFmt, width, height, 1);
             var pConvertedFrameBuffer = (sbyte*)ffmpeg.av_malloc((ulong)convertedFrameBufferSize);
             ffmpeg.avpicture_fill((AVPicture*)pConvertedFrame, pConvertedFrameBuffer, convertToPixFmt, width, height);
 
@@ -108,10 +114,13 @@ namespace FFmpeg.AutoGen.Example
             ffmpeg.av_init_packet(pPacket);
 
             var frameNumber = 0;
-            while (frameNumber < 100)
+            while (frameNumber < 1400)
             {
                 if (ffmpeg.av_read_frame(pFormatContext, pPacket) < 0)
                 {
+                    ffmpeg.av_packet_unref(pPacket);
+                    ffmpeg.av_frame_unref(pDecodedFrame);
+
                     throw new ApplicationException(@"Could not read frame");
                 }
 
@@ -120,35 +129,43 @@ namespace FFmpeg.AutoGen.Example
                     continue;
                 }
 
-                var gotPicture = 0;
-                var size = ffmpeg.avcodec_decode_video2(pCodecContext, pDecodedFrame, &gotPicture, pPacket);
-                if (size < 0)
+                if (ffmpeg.avcodec_send_packet(pCodecContext, pPacket) < 0)
                 {
-                    throw new ApplicationException(string.Format(@"Error while decoding frame {0}", frameNumber));
+                    ffmpeg.av_packet_unref(pPacket);
+                    ffmpeg.av_frame_unref(pDecodedFrame);
+
+                    throw new ApplicationException($@"Error while sending packet {frameNumber}");
                 }
 
-                if (gotPicture == 1)
+                if (ffmpeg.avcodec_receive_frame(pCodecContext, pDecodedFrame) < 0)
                 {
-                    Console.WriteLine(@"frame: {0}", frameNumber);
-
-                    var src = &pDecodedFrame->data0;
-                    var dst = &pConvertedFrame->data0;
-                    var srcStride = pDecodedFrame->linesize;
-                    var dstStride = pConvertedFrame->linesize;
-                    ffmpeg.sws_scale(pConvertContext, src, srcStride, 0, height, dst, dstStride);
-
-                    var convertedFrameAddress = pConvertedFrame->data0;
-
-                    var imageBufferPtr = new IntPtr(convertedFrameAddress);
-
-                    var linesize = dstStride[0];
-                    using (var bitmap = new Bitmap(width, height, linesize, PixelFormat.Format24bppRgb, imageBufferPtr))
-                    {
-                        bitmap.Save(@"frame.buffer.jpg", ImageFormat.Jpeg);
-                    }
-
-                    frameNumber++;
+                    ffmpeg.av_frame_unref(pDecodedFrame);
+                    throw new ApplicationException($@"Error while receiving frame {frameNumber}");
                 }
+
+                ffmpeg.av_packet_unref(pPacket);
+
+                Console.WriteLine($@"frame: {frameNumber}");
+
+                var src = &pDecodedFrame->data0;
+                var dst = &pConvertedFrame->data0;
+                var srcStride = pDecodedFrame->linesize;
+                var dstStride = pConvertedFrame->linesize;
+                ffmpeg.sws_scale(pConvertContext, src, srcStride, 0, height, dst, dstStride);
+
+                var convertedFrameAddress = pConvertedFrame->data0;
+
+                var imageBufferPtr = new IntPtr(convertedFrameAddress);
+
+                var linesize = dstStride[0];
+                using (var bitmap = new Bitmap(width, height, linesize, PixelFormat.Format24bppRgb, imageBufferPtr))
+                {
+                    bitmap.Save(@"frame.buffer.jpg", ImageFormat.Jpeg);
+                }
+
+                ffmpeg.av_frame_unref(pDecodedFrame);
+                ffmpeg.av_frame_unref(pDecodedFrame);
+                frameNumber++;
             }
 
             ffmpeg.av_free(pConvertedFrame);
