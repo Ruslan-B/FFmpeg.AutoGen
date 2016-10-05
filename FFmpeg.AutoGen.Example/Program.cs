@@ -164,7 +164,6 @@ namespace FFmpeg.AutoGen.Example
                 }
 
                 ffmpeg.av_frame_unref(pDecodedFrame);
-                ffmpeg.av_frame_unref(pDecodedFrame);
                 frameNumber++;
             }
 

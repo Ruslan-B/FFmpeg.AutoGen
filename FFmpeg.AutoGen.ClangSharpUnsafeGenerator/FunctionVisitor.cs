@@ -7,12 +7,12 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
 {
     internal class FunctionVisitor
     {
-        private readonly string m_libraryName;
-        private readonly string m_libraryVarName;
-        private readonly Dictionary<string, string> m_exportMap;
-        private readonly string m_prefixStrip;
-        private readonly IndentedTextWriter m_tw;
-        private readonly ISet<string> m_visitedFunctions;
+        private readonly Dictionary<string, string> _exportMap;
+        private readonly string _libraryName;
+        private readonly string _libraryVarName;
+        private readonly string _prefixStrip;
+        private readonly IndentedTextWriter _tw;
+        private readonly ISet<string> _visitedFunctions;
 
         public FunctionVisitor(IndentedTextWriter tw,
             ISet<string> visitedFunctions,
@@ -21,23 +21,21 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
             Dictionary<string, string> exportMap,
             string prefixStrip = @"")
         {
-            m_tw = tw;
-            m_visitedFunctions = visitedFunctions;
-            m_libraryName = libraryName;
-            m_libraryVarName = libraryVarName;
-            m_exportMap = exportMap;
-            m_prefixStrip = prefixStrip;
+            _tw = tw;
+            _visitedFunctions = visitedFunctions;
+            _libraryName = libraryName;
+            _libraryVarName = libraryVarName;
+            _exportMap = exportMap;
+            _prefixStrip = prefixStrip;
 
-            m_tw.WriteLine(@"private const string {0} = ""{1}"";", m_libraryVarName, m_libraryName);
-            m_tw.WriteLine();
+            _tw.WriteLine($@"private const string {_libraryVarName} = ""{_libraryName}"";");
+            _tw.WriteLine();
         }
 
         public CXChildVisitResult Visit(CXCursor cursor, CXCursor parent, IntPtr data)
         {
             if (cursor.IsInSystemHeader())
-            {
                 return CXChildVisitResult.CXChildVisit_Continue;
-            }
 
             var cursorKind = clang.getCursorKind(cursor);
 
@@ -45,36 +43,32 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
             if (cursorKind == CXCursorKind.CXCursor_FunctionDecl)
             {
                 var functionName = clang.getCursorSpelling(cursor).ToString();
-                
-                if (m_visitedFunctions.Contains(functionName))
-                {
+
+                if (_visitedFunctions.Contains(functionName))
                     return CXChildVisitResult.CXChildVisit_Continue;
-                }
 
                 string libraryName;
-                if (m_exportMap.TryGetValue(functionName, out libraryName))
+                if (_exportMap.TryGetValue(functionName, out libraryName))
                 {
-                    if (!string.Equals(libraryName, m_libraryName, StringComparison.InvariantCultureIgnoreCase))
+                    if (!string.Equals(libraryName, _libraryName, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        string message = string.Format(@"Warning: Function {0} belongs to {1}. Skipping generation for {2}.",
-                            functionName, libraryName, m_libraryName);
+                        string message = $@"Warning: Function {functionName} belongs to {libraryName}. Skipping generation for {_libraryName}.";
                         Console.WriteLine(message);
                         return CXChildVisitResult.CXChildVisit_Continue;
                     }
                 }
                 else
                 {
-                    m_visitedFunctions.Add(functionName);
+                    _visitedFunctions.Add(functionName);
 
-                    string message = string.Format(@"Info: Unknow function export {0}. Skipping generation for {1}.",
-                           functionName, m_libraryName);
+                    string message = $@"Info: Unknow function export {functionName}. Skipping generation for {_libraryName}.";
                     Console.WriteLine(message);
                     return CXChildVisitResult.CXChildVisit_Continue;
                 }
 
-                m_visitedFunctions.Add(functionName);
+                _visitedFunctions.Add(functionName);
 
-                WriteFunction(cursor, m_prefixStrip);
+                WriteFunction(cursor, _prefixStrip);
 
                 return CXChildVisitResult.CXChildVisit_Continue;
             }
@@ -82,36 +76,35 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
             return CXChildVisitResult.CXChildVisit_Recurse;
         }
 
-        public void WriteFunction(CXCursor cursor, string prefixStrip)
+        private void WriteFunction(CXCursor cursor, string prefixStrip)
         {
             var functionType = clang.getCursorType(cursor);
             var functionName = clang.getCursorSpelling(cursor).ToString();
             var resultType = clang.getCursorResultType(cursor);
 
-            m_tw.WriteLine(@"[DllImport({0}, EntryPoint = ""{1}"", CallingConvention = {2}, CharSet = CharSet.Ansi)]",
-                m_libraryVarName,
-                functionName,
-                functionType.CallingConventionSpelling());
-            m_tw.Write(@"public static extern ");
+            _tw.WriteLine($@"[DllImport({_libraryVarName}, " +
+                          $@"EntryPoint = ""{functionName}"", " +
+                          $@"CallingConvention = {functionType.CallingConventionSpelling()}, CharSet = CharSet.Ansi)]");
 
-            FunctionHelper.WriteReturnType(resultType, m_tw);
+            if (resultType.IsPtrToConstChar())
+                _tw.WriteLine(@"[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]");
+
+            _tw.Write(@"public static extern ");
+
+            FunctionHelper.WriteReturnType(resultType, _tw);
 
             if (functionName.StartsWith(prefixStrip))
-            {
                 functionName = functionName.Substring(prefixStrip.Length);
-            }
 
-            m_tw.Write(@" " + functionName + @"(");
+            _tw.Write(@" " + functionName + @"(");
 
             var numArgTypes = clang.getNumArgTypes(functionType);
 
             for (uint i = 0; i < numArgTypes; ++i)
-            {
-                FunctionHelper.WriteArgument(functionType, clang.Cursor_getArgument(cursor, i), m_tw, i);
-            }
+                FunctionHelper.WriteArgument(functionType, clang.Cursor_getArgument(cursor, i), _tw, i);
 
-            m_tw.WriteLine(@");");
-            m_tw.WriteLine();
+            _tw.WriteLine(@");");
+            _tw.WriteLine();
         }
     }
 }
