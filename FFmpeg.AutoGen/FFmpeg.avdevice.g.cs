@@ -148,7 +148,6 @@ namespace FFmpeg.AutoGen
         private const string libavdevice = "avdevice-57";
         
         [DllImport(libavdevice, EntryPoint = "avdevice_version", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         public static extern uint avdevice_version();
         
         [DllImport(libavdevice, EntryPoint = "avdevice_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -156,6 +155,7 @@ namespace FFmpeg.AutoGen
         public static extern string avdevice_configuration();
         
         [DllImport(libavdevice, EntryPoint = "avdevice_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         public static extern string avdevice_license();
         
         [DllImport(libavdevice, EntryPoint = "avdevice_register_all", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]

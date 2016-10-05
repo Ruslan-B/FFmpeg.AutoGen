@@ -681,10 +681,6 @@ namespace FFmpeg.AutoGen
         public const int AV_LOG_DEBUG = 48;
         public const int AV_LOG_TRACE = 56;
         public const int AV_LOG_MAX_OFFSET = (AV_LOG_TRACE-AV_LOG_QUIET);
-        public const int AV_LOG_SKIP_REPEATED = 1;
-        public const int AV_LOG_PRINT_LEVEL = 2;
-        public const int AVPALETTE_SIZE = 1024;
-        public const int AVPALETTE_COUNT = 256;
         public const int AV_CH_FRONT_LEFT = 0x00000001;
         public const int AV_CH_FRONT_RIGHT = 0x00000002;
         public const int AV_CH_FRONT_CENTER = 0x00000004;

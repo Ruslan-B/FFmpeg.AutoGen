@@ -1246,7 +1246,6 @@ namespace FFmpeg.AutoGen
         public const int CODEC_CAP_AUTO_THREADS = AV_CODEC_CAP_AUTO_THREADS;
         public const int CODEC_CAP_VARIABLE_FRAME_SIZE = AV_CODEC_CAP_VARIABLE_FRAME_SIZE;
         public const int CODEC_CAP_INTRA_ONLY = AV_CODEC_CAP_INTRA_ONLY;
-        public const uint CODEC_CAP_LOSSLESS = AV_CODEC_CAP_LOSSLESS;
         public const int HWACCEL_CODEC_CAP_EXPERIMENTAL = 0x0200;
         public const int MB_TYPE_INTRA4x4 = 0x0001;
         public const int MB_TYPE_INTRA16x16 = 0x0002;
