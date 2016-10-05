@@ -3,15 +3,15 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
-    public unsafe partial struct AVDictionary
-    {
-    }
-    
     public unsafe partial struct AVBuffer
     {
     }
     
     public unsafe partial struct AVBufferPool
+    {
+    }
+    
+    public unsafe partial struct AVDictionary
     {
     }
     
@@ -73,6 +73,8 @@ namespace FFmpeg.AutoGen
         public void* @enable;
         public double* @var_values;
         public int @is_disabled;
+        public AVBufferRef* @hw_device_ctx;
+        public int @nb_threads;
     }
     
     public unsafe partial struct AVFilterCommand
@@ -121,6 +123,7 @@ namespace FFmpeg.AutoGen
         public void* @video_frame_pool;
         public int @frame_wanted_in;
         public int @frame_wanted_out;
+        public AVBufferRef* @hw_frames_ctx;
     }
     
     public unsafe partial struct AVFilterChannelLayouts
@@ -193,6 +196,14 @@ namespace FFmpeg.AutoGen
     {
     }
     
+    public unsafe partial struct AVBSFInternal
+    {
+    }
+    
+    public unsafe partial struct AVBSFList
+    {
+    }
+    
     public unsafe partial struct AVFilterPad
     {
     }
@@ -209,8 +220,17 @@ namespace FFmpeg.AutoGen
     {
     }
     
-    public unsafe partial struct AVDictionary
+    public unsafe partial struct AVBufferSrcParameters
     {
+        public int @format;
+        public AVRational @time_base;
+        public int @width;
+        public int @height;
+        public AVRational @sample_aspect_ratio;
+        public AVRational @frame_rate;
+        public AVBufferRef* @hw_frames_ctx;
+        public int @sample_rate;
+        public ulong @channel_layout;
     }
     
     public unsafe partial struct AVBuffer
@@ -218,6 +238,10 @@ namespace FFmpeg.AutoGen
     }
     
     public unsafe partial struct AVBufferPool
+    {
+    }
+    
+    public unsafe partial struct AVDictionary
     {
     }
     
@@ -274,7 +298,7 @@ namespace FFmpeg.AutoGen
     public unsafe static partial class ffmpeg
     {
         public const int LIBAVFILTER_VERSION_MAJOR = 6;
-        public const int LIBAVFILTER_VERSION_MINOR = 31;
+        public const int LIBAVFILTER_VERSION_MINOR = 63;
         public const int LIBAVFILTER_VERSION_MICRO = 100;
         public const bool FF_API_OLD_FILTER_OPTS = (LIBAVFILTER_VERSION_MAJOR<7);
         public const bool FF_API_OLD_FILTER_OPTS_ERROR = (LIBAVFILTER_VERSION_MAJOR<7);
@@ -295,163 +319,172 @@ namespace FFmpeg.AutoGen
         public const int AV_BUFFERSINK_FLAG_NO_REQUEST = 2;
         private const string libavfilter = "avfilter-6";
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_version", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_version", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern uint avfilter_version();
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_configuration", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         public static extern string avfilter_configuration();
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_license", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         public static extern string avfilter_license();
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_pad_count", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_pad_count", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_pad_count(AVFilterPad* @pads);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_pad_get_name", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_pad_get_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         public static extern string avfilter_pad_get_name(AVFilterPad* @pads, int @pad_idx);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_pad_get_type", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_pad_get_type", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVMediaType avfilter_pad_get_type(AVFilterPad* @pads, int @pad_idx);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_link", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_link", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_link(AVFilterContext* @src, uint @srcpad, AVFilterContext* @dst, uint @dstpad);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_link_free", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_link_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avfilter_link_free(AVFilterLink** @link);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_link_get_channels", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_link_get_channels", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_link_get_channels(AVFilterLink* @link);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_link_set_closed", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_link_set_closed", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avfilter_link_set_closed(AVFilterLink* @link, int @closed);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_config_links", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_config_links", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_config_links(AVFilterContext* @filter);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_process_command", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_process_command", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_process_command(AVFilterContext* @filter, [MarshalAs(UnmanagedType.LPStr)] string @cmd, [MarshalAs(UnmanagedType.LPStr)] string @arg, IntPtr @res, int @res_len, int @flags);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_register_all", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_register_all", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avfilter_register_all();
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_uninit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_uninit", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avfilter_uninit();
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_register", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_register", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_register(AVFilter* @filter);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_get_by_name", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_get_by_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVFilter* avfilter_get_by_name([MarshalAs(UnmanagedType.LPStr)] string @name);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_next", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVFilter* avfilter_next(AVFilter* @prev);
         
-        [DllImport(libavfilter, EntryPoint = "av_filter_next", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "av_filter_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVFilter** av_filter_next(AVFilter** @filter);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_open", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_open", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_open(AVFilterContext** @filter_ctx, AVFilter* @filter, [MarshalAs(UnmanagedType.LPStr)] string @inst_name);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_init_filter", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_init_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_init_filter(AVFilterContext* @filter, [MarshalAs(UnmanagedType.LPStr)] string @args, void* @opaque);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_init_str", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_init_str", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_init_str(AVFilterContext* @ctx, [MarshalAs(UnmanagedType.LPStr)] string @args);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_init_dict", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_init_dict", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_init_dict(AVFilterContext* @ctx, AVDictionary** @options);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_free", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avfilter_free(AVFilterContext* @filter);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_insert_filter", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_insert_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_insert_filter(AVFilterLink* @link, AVFilterContext* @filt, uint @filt_srcpad_idx, uint @filt_dstpad_idx);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_get_class", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_get_class", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVClass* avfilter_get_class();
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_alloc", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVFilterGraph* avfilter_graph_alloc();
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_alloc_filter", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_alloc_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVFilterContext* avfilter_graph_alloc_filter(AVFilterGraph* @graph, AVFilter* @filter, [MarshalAs(UnmanagedType.LPStr)] string @name);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_get_filter", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_get_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVFilterContext* avfilter_graph_get_filter(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @name);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_add_filter", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_add_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_graph_add_filter(AVFilterGraph* @graphctx, AVFilterContext* @filter);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_create_filter", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_create_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_graph_create_filter(AVFilterContext** @filt_ctx, AVFilter* @filt, [MarshalAs(UnmanagedType.LPStr)] string @name, [MarshalAs(UnmanagedType.LPStr)] string @args, void* @opaque, AVFilterGraph* @graph_ctx);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_set_auto_convert", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_set_auto_convert", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avfilter_graph_set_auto_convert(AVFilterGraph* @graph, uint @flags);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_config", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_config", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_graph_config(AVFilterGraph* @graphctx, void* @log_ctx);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_free", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avfilter_graph_free(AVFilterGraph** @graph);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_inout_alloc", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_inout_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVFilterInOut* avfilter_inout_alloc();
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_inout_free", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_inout_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avfilter_inout_free(AVFilterInOut** @inout);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_parse", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_parse", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_graph_parse(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @filters, AVFilterInOut* @inputs, AVFilterInOut* @outputs, void* @log_ctx);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_parse_ptr", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_parse_ptr", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_graph_parse_ptr(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs, void* @log_ctx);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_parse2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_parse2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_graph_parse2(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_send_command", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_send_command", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_graph_send_command(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @target, [MarshalAs(UnmanagedType.LPStr)] string @cmd, [MarshalAs(UnmanagedType.LPStr)] string @arg, IntPtr @res, int @res_len, int @flags);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_queue_command", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_queue_command", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_graph_queue_command(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @target, [MarshalAs(UnmanagedType.LPStr)] string @cmd, [MarshalAs(UnmanagedType.LPStr)] string @arg, int @flags, double @ts);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_dump", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_dump", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern sbyte* avfilter_graph_dump(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @options);
         
-        [DllImport(libavfilter, EntryPoint = "avfilter_graph_request_oldest", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "avfilter_graph_request_oldest", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_graph_request_oldest(AVFilterGraph* @graph);
         
-        [DllImport(libavfilter, EntryPoint = "av_buffersrc_get_nb_failed_requests", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "av_buffersrc_get_nb_failed_requests", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern uint av_buffersrc_get_nb_failed_requests(AVFilterContext* @buffer_src);
         
-        [DllImport(libavfilter, EntryPoint = "av_buffersrc_write_frame", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "av_buffersrc_parameters_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern AVBufferSrcParameters* av_buffersrc_parameters_alloc();
+        
+        [DllImport(libavfilter, EntryPoint = "av_buffersrc_parameters_set", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_buffersrc_parameters_set(AVFilterContext* @ctx, AVBufferSrcParameters* @param);
+        
+        [DllImport(libavfilter, EntryPoint = "av_buffersrc_write_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_buffersrc_write_frame(AVFilterContext* @ctx, AVFrame* @frame);
         
-        [DllImport(libavfilter, EntryPoint = "av_buffersrc_add_frame", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "av_buffersrc_add_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_buffersrc_add_frame(AVFilterContext* @ctx, AVFrame* @frame);
         
-        [DllImport(libavfilter, EntryPoint = "av_buffersrc_add_frame_flags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "av_buffersrc_add_frame_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_buffersrc_add_frame_flags(AVFilterContext* @buffer_src, AVFrame* @frame, int @flags);
         
-        [DllImport(libavfilter, EntryPoint = "av_buffersink_get_frame_flags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "av_buffersink_get_frame_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_buffersink_get_frame_flags(AVFilterContext* @ctx, AVFrame* @frame, int @flags);
         
-        [DllImport(libavfilter, EntryPoint = "av_buffersink_params_alloc", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "av_buffersink_params_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVBufferSinkParams* av_buffersink_params_alloc();
         
-        [DllImport(libavfilter, EntryPoint = "av_abuffersink_params_alloc", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "av_abuffersink_params_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVABufferSinkParams* av_abuffersink_params_alloc();
         
-        [DllImport(libavfilter, EntryPoint = "av_buffersink_set_frame_size", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "av_buffersink_set_frame_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_buffersink_set_frame_size(AVFilterContext* @ctx, uint @frame_size);
         
-        [DllImport(libavfilter, EntryPoint = "av_buffersink_get_frame_rate", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "av_buffersink_get_frame_rate", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVRational av_buffersink_get_frame_rate(AVFilterContext* @ctx);
         
-        [DllImport(libavfilter, EntryPoint = "av_buffersink_get_frame", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "av_buffersink_get_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_buffersink_get_frame(AVFilterContext* @ctx, AVFrame* @frame);
         
-        [DllImport(libavfilter, EntryPoint = "av_buffersink_get_samples", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(libavfilter, EntryPoint = "av_buffersink_get_samples", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_buffersink_get_samples(AVFilterContext* @ctx, AVFrame* @frame, int @nb_samples);
         
     }

@@ -29,7 +29,9 @@
  */
 
 /**
- * @defgroup lavfi Libavfilter - graph-based frame editing library
+ * @defgroup lavfi libavfilter
+ * Graph-based frame editing library.
+ *
  * @{
  */
 
@@ -37,6 +39,7 @@
 
 #include "libavutil/attributes.h"
 #include "libavutil/avutil.h"
+#include "libavutil/buffer.h"
 #include "libavutil/dict.h"
 #include "libavutil/frame.h"
 #include "libavutil/log.h"
@@ -349,6 +352,22 @@ struct AVFilterContext {
     void *enable;                   ///< parsed expression (AVExpr*)
     double *var_values;             ///< variable values for the enable expression
     int is_disabled;                ///< the enabled state from the last expression evaluation
+
+    /**
+     * For filters which will create hardware frames, sets the device the
+     * filter should create them in.  All other filters will ignore this field:
+     * in particular, a filter which consumes or processes hardware frames will
+     * instead use the hw_frames_ctx field in AVFilterLink to carry the
+     * hardware context information.
+     */
+    AVBufferRef *hw_device_ctx;
+
+    /**
+     * Max number of threads allowed in this filter instance.
+     * If <= 0, its value is ignored.
+     * Overrides global number of threads set per filter graph.
+     */
+    int nb_threads;
 };
 
 /**
@@ -534,6 +553,12 @@ struct AVFilterLink {
      * cleared when a frame is filtered.
      */
     int frame_wanted_out;
+
+    /**
+     * For hwaccel pixel formats, this should be a reference to the
+     * AVHWFramesContext describing the frames.
+     */
+    AVBufferRef *hw_frames_ctx;
 };
 
 /**

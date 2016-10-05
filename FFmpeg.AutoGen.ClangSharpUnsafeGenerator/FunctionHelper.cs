@@ -79,12 +79,16 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                         case CXTypeKind.CXType_Unexposed:
                             {
                                 var declaration = clang.getTypeDeclaration(pointee);
-                                if (declaration.kind == CXCursorKind.CXCursor_NoDeclFound)
+                                switch (declaration.kind)
                                 {
-                                    tw.Write(@"IntPtr"); // no declaration found
+                                    case CXCursorKind.CXCursor_NoDeclFound:
+                                        tw.Write(@"IntPtr"); // no declaration found
+                                        break;
+                                    default:
+                                        var typeName = clang.getCursorSpelling(declaration) + @"*";
+                                        tw.Write(typeName);
+                                        break;
                                 }
-                                var typeName = clang.getCursorSpelling(declaration) + @"*";
-                                tw.Write(typeName);
                                 break;
                             }
                         default:
