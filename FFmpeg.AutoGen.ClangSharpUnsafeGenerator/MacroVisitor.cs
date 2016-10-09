@@ -89,7 +89,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
             return sbValue.ToString();
         }
 
-        [DllImport(@"libclang.dll", EntryPoint = @"clang_disposeTokens", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(@"libclang", EntryPoint = @"clang_disposeTokens", CallingConvention = CallingConvention.Cdecl)]
         private static extern void disposeTokens(CXTranslationUnit tu, IntPtr tokens, uint numTokens);
     }
 }

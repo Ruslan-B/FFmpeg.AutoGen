@@ -35,9 +35,7 @@
 #include "version.h"
 
 /**
- * @defgroup libsws libswscale
- * Color conversion and scaling library.
- *
+ * @defgroup libsws Color conversion and scaling
  * @{
  *
  * Return the LIBSWSCALE_VERSION_INT constant.

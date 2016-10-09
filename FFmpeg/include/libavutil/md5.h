@@ -18,12 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-/**
- * @file
- * @ingroup lavu_md5
- * Public header for MD5 hash function implementation.
- */
-
 #ifndef AVUTIL_MD5_H
 #define AVUTIL_MD5_H
 
@@ -34,9 +28,7 @@
 
 /**
  * @defgroup lavu_md5 MD5
- * @ingroup lavu_hash
- * MD5 hash function implementation.
- *
+ * @ingroup lavu_crypto
  * @{
  */
 

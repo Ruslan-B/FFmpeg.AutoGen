@@ -28,9 +28,8 @@
  */
 
 /**
- * @defgroup lavd libavdevice
- * Special devices muxing/demuxing library.
- *
+ * @defgroup lavd Special devices muxing/demuxing library
+ * @{
  * Libavdevice is a complementary library to @ref libavf "libavformat". It
  * provides various "special" platform-specific muxers and demuxers, e.g. for
  * grabbing devices, audio capture and playback etc. As a consequence, the
@@ -41,8 +40,7 @@
  *
  * To use libavdevice, simply call avdevice_register_all() to register all
  * compiled muxers and demuxers. They all use standard libavformat API.
- *
- * @{
+ * @}
  */
 
 #include "libavutil/log.h"
@@ -507,9 +505,5 @@ int avdevice_list_input_sources(struct AVInputFormat *device, const char *device
                                 AVDictionary *device_options, AVDeviceInfoList **device_list);
 int avdevice_list_output_sinks(struct AVOutputFormat *device, const char *device_name,
                                AVDictionary *device_options, AVDeviceInfoList **device_list);
-
-/**
- * @}
- */
 
 #endif /* AVDEVICE_AVDEVICE_H */

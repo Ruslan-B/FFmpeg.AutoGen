@@ -28,8 +28,8 @@
  */
 
 /**
- * @defgroup libavf libavformat
- * I/O and Muxing/Demuxing Library
+ * @defgroup libavf I/O and Muxing/Demuxing Library
+ * @{
  *
  * Libavformat (lavf) is a library for dealing with various media container
  * formats. Its main two purposes are demuxing - i.e. splitting a media file
@@ -89,8 +89,6 @@
  * Note that some schemes/protocols are quite powerful, allowing access to
  * both local and remote files, parts of them, concatenations of them, local
  * audio and video devices and so on.
- *
- * @{
  *
  * @defgroup lavf_decoding Demuxing
  * @{
@@ -814,9 +812,6 @@ typedef struct AVIndexEntry {
                                * is known
                                */
 #define AVINDEX_KEYFRAME 0x0001
-#define AVINDEX_DISCARD_FRAME  0x0002    /**
-                                          * Flag is used to indicate which frame should be discarded after decoding.
-                                          */
     int flags:2;
     int size:30; //Yeah, trying to keep the size of this small to reduce memory requirements (it is 24 vs. 32 bytes due to possible 8-byte alignment).
     int min_distance;         /**< Minimum distance between this and the previous keyframe, used to avoid unneeded searching. */
@@ -1451,8 +1446,6 @@ typedef struct AVFormatContext {
 #define AVFMT_FLAG_PRIV_OPT    0x20000 ///< Enable use of private options by delaying codec open (this could be made default once all code is converted)
 #define AVFMT_FLAG_KEEP_SIDE_DATA 0x40000 ///< Don't merge side data but keep it separate.
 #define AVFMT_FLAG_FAST_SEEK   0x80000 ///< Enable fast, but inaccurate seeks for some formats
-#define AVFMT_FLAG_SHORTEST   0x100000 ///< Stop muxing when the shortest stream stops.
-#define AVFMT_FLAG_AUTO_BSF   0x200000 ///< Wait for packet data before writing a header, and add bitstream filters as requested by the muxer
 
     /**
      * Maximum size of the data read from input for determining
@@ -2058,13 +2051,8 @@ uint8_t *av_stream_new_side_data(AVStream *stream,
  * @param size pointer for side information size to store (optional)
  * @return pointer to data if present or NULL otherwise
  */
-#if FF_API_NOCONST_GET_SIDE_DATA
 uint8_t *av_stream_get_side_data(AVStream *stream,
                                  enum AVPacketSideDataType type, int *size);
-#else
-uint8_t *av_stream_get_side_data(const AVStream *stream,
-                                 enum AVPacketSideDataType type, int *size);
-#endif
 
 AVProgram *av_new_program(AVFormatContext *s, int id);
 
@@ -2730,9 +2718,6 @@ void av_dump_format(AVFormatContext *ic,
                     const char *url,
                     int is_output);
 
-
-#define AV_FRAME_FILENAME_FLAGS_MULTIPLE 1 ///< Allow multiple %d
-
 /**
  * Return in 'buf' the path with '%d' replaced by a number.
  *
@@ -2743,12 +2728,8 @@ void av_dump_format(AVFormatContext *ic,
  * @param buf_size destination buffer size
  * @param path numbered sequence string
  * @param number frame number
- * @param flags AV_FRAME_FILENAME_FLAGS_*
  * @return 0 if OK, -1 on format error
  */
-int av_get_frame_filename2(char *buf, int buf_size,
-                          const char *path, int number, int flags);
-
 int av_get_frame_filename(char *buf, int buf_size,
                           const char *path, int number);
 
@@ -2897,36 +2878,6 @@ attribute_deprecated
 int av_apply_bitstream_filters(AVCodecContext *codec, AVPacket *pkt,
                                AVBitStreamFilterContext *bsfc);
 #endif
-
-enum AVTimebaseSource {
-    AVFMT_TBCF_AUTO = -1,
-    AVFMT_TBCF_DECODER,
-    AVFMT_TBCF_DEMUXER,
-#if FF_API_R_FRAME_RATE
-    AVFMT_TBCF_R_FRAMERATE,
-#endif
-};
-
-/**
- * Transfer internal timing information from one stream to another.
- *
- * This function is useful when doing stream copy.
- *
- * @param ofmt     target output format for ost
- * @param ost      output stream which needs timings copy and adjustments
- * @param ist      reference input stream to copy timings from
- * @param copy_tb  define from where the stream codec timebase needs to be imported
- */
-int avformat_transfer_internal_stream_timing_info(const AVOutputFormat *ofmt,
-                                                  AVStream *ost, const AVStream *ist,
-                                                  enum AVTimebaseSource copy_tb);
-
-/**
- * Get the internal codec timebase from a stream.
- *
- * @param st  input stream to extract the timebase from
- */
-AVRational av_stream_get_codec_timebase(const AVStream *st);
 
 /**
  * @}

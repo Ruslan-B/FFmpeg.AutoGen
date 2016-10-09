@@ -28,9 +28,7 @@
  */
 
 /**
- * @defgroup lpp libpostproc
- * Video postprocessing library.
- *
+ * @defgroup lpp Libpostproc
  * @{
  */
 
