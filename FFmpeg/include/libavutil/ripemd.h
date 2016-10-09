@@ -19,12 +19,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-/**
- * @file
- * @ingroup lavu_ripemd
- * Public header for RIPEMD hash function implementation.
- */
-
 #ifndef AVUTIL_RIPEMD_H
 #define AVUTIL_RIPEMD_H
 
@@ -35,9 +29,7 @@
 
 /**
  * @defgroup lavu_ripemd RIPEMD
- * @ingroup lavu_hash
- * RIPEMD hash function implementation.
- *
+ * @ingroup lavu_crypto
  * @{
  */
 

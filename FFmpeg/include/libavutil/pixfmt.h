@@ -303,8 +303,6 @@ enum AVPixelFormat {
     AV_PIX_FMT_GBRAP10BE,  ///< planar GBR 4:4:4:4 40bpp, big-endian
     AV_PIX_FMT_GBRAP10LE,  ///< planar GBR 4:4:4:4 40bpp, little-endian
 
-    AV_PIX_FMT_MEDIACODEC, ///< hardware decoding through MediaCodec
-
     AV_PIX_FMT_NB,        ///< number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions
 };
 
@@ -400,9 +398,7 @@ enum AVColorPrimaries {
     AVCOL_PRI_SMPTE240M   = 7,  ///< functionally identical to above
     AVCOL_PRI_FILM        = 8,  ///< colour filters using Illuminant C
     AVCOL_PRI_BT2020      = 9,  ///< ITU-R BT2020
-    AVCOL_PRI_SMPTEST428_1 = 10, ///< SMPTE ST 428-1 (CIE 1931 XYZ)
-    AVCOL_PRI_SMPTE431    = 11, ///< SMPTE ST 431-2 (2011)
-    AVCOL_PRI_SMPTE432    = 12, ///< SMPTE ST 432-1 D65 (2010)
+    AVCOL_PRI_SMPTEST428_1= 10, ///< SMPTE ST 428-1 (CIE 1931 XYZ)
     AVCOL_PRI_NB,               ///< Not part of ABI
 };
 
@@ -447,7 +443,6 @@ enum AVColorSpace {
     AVCOL_SPC_YCOCG       = 8,  ///< Used by Dirac / VC-2 and H.264 FRext, see ITU-T SG16
     AVCOL_SPC_BT2020_NCL  = 9,  ///< ITU-R BT2020 non-constant luminance system
     AVCOL_SPC_BT2020_CL   = 10, ///< ITU-R BT2020 constant luminance system
-    AVCOL_SPC_SMPTE2085   = 11, ///< SMPTE 2085, Y'D'zD'x
     AVCOL_SPC_NB,               ///< Not part of ABI
 };
 #define AVCOL_SPC_YCGCO AVCOL_SPC_YCOCG

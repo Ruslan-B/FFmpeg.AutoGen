@@ -462,8 +462,7 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_GBRAP12LE = 338,
         @AV_PIX_FMT_GBRAP10BE = 339,
         @AV_PIX_FMT_GBRAP10LE = 340,
-        @AV_PIX_FMT_MEDIACODEC = 341,
-        @AV_PIX_FMT_NB = 342,
+        @AV_PIX_FMT_NB = 341,
     }
     
     public enum AVColorPrimaries : int
@@ -479,9 +478,7 @@ namespace FFmpeg.AutoGen
         @AVCOL_PRI_FILM = 8,
         @AVCOL_PRI_BT2020 = 9,
         @AVCOL_PRI_SMPTEST428_1 = 10,
-        @AVCOL_PRI_SMPTE431 = 11,
-        @AVCOL_PRI_SMPTE432 = 12,
-        @AVCOL_PRI_NB = 13,
+        @AVCOL_PRI_NB = 11,
     }
     
     public enum AVColorTransferCharacteristic : int
@@ -521,8 +518,7 @@ namespace FFmpeg.AutoGen
         @AVCOL_SPC_YCOCG = 8,
         @AVCOL_SPC_BT2020_NCL = 9,
         @AVCOL_SPC_BT2020_CL = 10,
-        @AVCOL_SPC_SMPTE2085 = 11,
-        @AVCOL_SPC_NB = 12,
+        @AVCOL_SPC_NB = 11,
     }
     
     public enum AVColorRange : int
@@ -558,9 +554,7 @@ namespace FFmpeg.AutoGen
         @AV_SAMPLE_FMT_S32P = 7,
         @AV_SAMPLE_FMT_FLTP = 8,
         @AV_SAMPLE_FMT_DBLP = 9,
-        @AV_SAMPLE_FMT_S64 = 10,
-        @AV_SAMPLE_FMT_S64P = 11,
-        @AV_SAMPLE_FMT_NB = 12,
+        @AV_SAMPLE_FMT_NB = 10,
     }
     
     public enum AVMatrixEncoding : int
@@ -648,7 +642,7 @@ namespace FFmpeg.AutoGen
         public const ulong AV_NOPTS_VALUE = 0x8000000000000000;
         public const int AV_TIME_BASE = 1000000;
         public const int LIBAVUTIL_VERSION_MAJOR = 55;
-        public const int LIBAVUTIL_VERSION_MINOR = 32;
+        public const int LIBAVUTIL_VERSION_MINOR = 28;
         public const int LIBAVUTIL_VERSION_MICRO = 100;
         public const bool FF_API_VDPAU = (LIBAVUTIL_VERSION_MAJOR<56);
         public const bool FF_API_XVMC = (LIBAVUTIL_VERSION_MAJOR<56);
@@ -662,6 +656,7 @@ namespace FFmpeg.AutoGen
         public const int AV_HAVE_BIGENDIAN = 0;
         public const int AV_HAVE_FAST_UNALIGNED = 1;
         public const int AV_HAVE_INCOMPATIBLE_LIBAV_ABI = 0;
+        public const int AV_ERROR_MAX_STRING_SIZE = 64;
         public const double M_E = 2.7182818284590452354;
         public const double M_LN2 = 0.69314718055994530942;
         public const double M_LN10 = 2.30258509299404568402;
@@ -681,6 +676,10 @@ namespace FFmpeg.AutoGen
         public const int AV_LOG_DEBUG = 48;
         public const int AV_LOG_TRACE = 56;
         public const int AV_LOG_MAX_OFFSET = (AV_LOG_TRACE-AV_LOG_QUIET);
+        public const int AV_LOG_SKIP_REPEATED = 1;
+        public const int AV_LOG_PRINT_LEVEL = 2;
+        public const int AVPALETTE_SIZE = 1024;
+        public const int AVPALETTE_COUNT = 256;
         public const int AV_CH_FRONT_LEFT = 0x00000001;
         public const int AV_CH_FRONT_RIGHT = 0x00000002;
         public const int AV_CH_FRONT_CENTER = 0x00000004;
@@ -782,7 +781,6 @@ namespace FFmpeg.AutoGen
         public const int AV_DICT_MULTIKEY = 64;
         public const int AV_NUM_DATA_POINTERS = 8;
         public const int AV_FRAME_FLAG_CORRUPT = (1<<0);
-        public const int AV_FRAME_FLAG_DISCARD = (1<<2);
         public const int FF_DECODE_ERROR_INVALID_BITSTREAM = 1;
         public const int FF_DECODE_ERROR_MISSING_REFERENCE = 2;
         public const int AV_OPT_FLAG_ENCODING_PARAM = 1;
@@ -850,20 +848,14 @@ namespace FFmpeg.AutoGen
         [DllImport(libavutil, EntryPoint = "av_malloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void* av_malloc(ulong @size);
         
-        [DllImport(libavutil, EntryPoint = "av_mallocz", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void* av_mallocz(ulong @size);
-        
-        [DllImport(libavutil, EntryPoint = "av_calloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void* av_calloc(ulong @nmemb, ulong @size);
-        
         [DllImport(libavutil, EntryPoint = "av_realloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void* av_realloc(void* @ptr, ulong @size);
         
-        [DllImport(libavutil, EntryPoint = "av_reallocp", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_reallocp(void* @ptr, ulong @size);
-        
         [DllImport(libavutil, EntryPoint = "av_realloc_f", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void* av_realloc_f(void* @ptr, ulong @nelem, ulong @elsize);
+        
+        [DllImport(libavutil, EntryPoint = "av_reallocp", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_reallocp(void* @ptr, ulong @size);
         
         [DllImport(libavutil, EntryPoint = "av_realloc_array", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void* av_realloc_array(void* @ptr, ulong @nmemb, ulong @size);
@@ -871,20 +863,14 @@ namespace FFmpeg.AutoGen
         [DllImport(libavutil, EntryPoint = "av_reallocp_array", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_reallocp_array(void* @ptr, ulong @nmemb, ulong @size);
         
-        [DllImport(libavutil, EntryPoint = "av_fast_realloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void* av_fast_realloc(void* @ptr, uint* @size, ulong @min_size);
-        
-        [DllImport(libavutil, EntryPoint = "av_fast_malloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_fast_malloc(void* @ptr, uint* @size, ulong @min_size);
-        
-        [DllImport(libavutil, EntryPoint = "av_fast_mallocz", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_fast_mallocz(void* @ptr, uint* @size, ulong @min_size);
-        
         [DllImport(libavutil, EntryPoint = "av_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_free(void* @ptr);
         
-        [DllImport(libavutil, EntryPoint = "av_freep", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_freep(void* @ptr);
+        [DllImport(libavutil, EntryPoint = "av_mallocz", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern void* av_mallocz(ulong @size);
+        
+        [DllImport(libavutil, EntryPoint = "av_calloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern void* av_calloc(ulong @nmemb, ulong @size);
         
         [DllImport(libavutil, EntryPoint = "av_strdup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern sbyte* av_strdup([MarshalAs(UnmanagedType.LPStr)] string @s);
@@ -895,8 +881,8 @@ namespace FFmpeg.AutoGen
         [DllImport(libavutil, EntryPoint = "av_memdup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void* av_memdup(void* @p, ulong @size);
         
-        [DllImport(libavutil, EntryPoint = "av_memcpy_backptr", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_memcpy_backptr(sbyte* @dst, int @back, int @cnt);
+        [DllImport(libavutil, EntryPoint = "av_freep", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern void av_freep(void* @ptr);
         
         [DllImport(libavutil, EntryPoint = "av_dynarray_add", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_dynarray_add(void* @tab_ptr, int* @nb_ptr, void* @elem);
@@ -909,6 +895,18 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavutil, EntryPoint = "av_max_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_max_alloc(ulong @max);
+        
+        [DllImport(libavutil, EntryPoint = "av_memcpy_backptr", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern void av_memcpy_backptr(sbyte* @dst, int @back, int @cnt);
+        
+        [DllImport(libavutil, EntryPoint = "av_fast_realloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern void* av_fast_realloc(void* @ptr, uint* @size, ulong @min_size);
+        
+        [DllImport(libavutil, EntryPoint = "av_fast_malloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern void av_fast_malloc(void* @ptr, uint* @size, ulong @min_size);
+        
+        [DllImport(libavutil, EntryPoint = "av_fast_mallocz", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern void av_fast_mallocz(void* @ptr, uint* @size, ulong @min_size);
         
         [DllImport(libavutil, EntryPoint = "av_reduce", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_reduce(int* @dst_num, int* @dst_den, long @num, long @den, long @max);
@@ -944,13 +942,13 @@ namespace FFmpeg.AutoGen
         public static extern long av_rescale(long @a, long @b, long @c);
         
         [DllImport(libavutil, EntryPoint = "av_rescale_rnd", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern long av_rescale_rnd(long @a, long @b, long @c, AVRounding @rnd);
+        public static extern long av_rescale_rnd(long @a, long @b, long @c, AVRounding @param3);
         
         [DllImport(libavutil, EntryPoint = "av_rescale_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern long av_rescale_q(long @a, AVRational @bq, AVRational @cq);
         
         [DllImport(libavutil, EntryPoint = "av_rescale_q_rnd", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern long av_rescale_q_rnd(long @a, AVRational @bq, AVRational @cq, AVRounding @rnd);
+        public static extern long av_rescale_q_rnd(long @a, AVRational @bq, AVRational @cq, AVRounding @param3);
         
         [DllImport(libavutil, EntryPoint = "av_compare_ts", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_compare_ts(long @ts_a, AVRational @tb_a, long @ts_b, AVRational @tb_b);
@@ -1005,7 +1003,7 @@ namespace FFmpeg.AutoGen
         public static extern uint av_int_list_length_for_size(uint @elsize, void* @list, ulong @term);
         
         [DllImport(libavutil, EntryPoint = "av_fopen_utf8", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int* av_fopen_utf8([MarshalAs(UnmanagedType.LPStr)] string @path, [MarshalAs(UnmanagedType.LPStr)] string @mode);
+        public static extern _iobuf* av_fopen_utf8([MarshalAs(UnmanagedType.LPStr)] string @path, [MarshalAs(UnmanagedType.LPStr)] string @mode);
         
         [DllImport(libavutil, EntryPoint = "av_get_time_base_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVRational av_get_time_base_q();

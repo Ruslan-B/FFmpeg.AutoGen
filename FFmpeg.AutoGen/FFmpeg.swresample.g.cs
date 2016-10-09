@@ -7,10 +7,6 @@ namespace FFmpeg.AutoGen
     {
     }
     
-    public unsafe partial struct AVBPrint
-    {
-    }
-    
     public unsafe partial struct AVBuffer
     {
     }
@@ -61,7 +57,7 @@ namespace FFmpeg.AutoGen
     public unsafe static partial class ffmpeg
     {
         public const int LIBSWRESAMPLE_VERSION_MAJOR = 2;
-        public const int LIBSWRESAMPLE_VERSION_MINOR = 2;
+        public const int LIBSWRESAMPLE_VERSION_MINOR = 1;
         public const int LIBSWRESAMPLE_VERSION_MICRO = 100;
         public const int SWR_FLAG_RESAMPLE = 1;
         private const string libswresample = "swresample-2";
@@ -98,9 +94,6 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libswresample, EntryPoint = "swr_set_channel_mapping", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int swr_set_channel_mapping(SwrContext* @s, int* @channel_map);
-        
-        [DllImport(libswresample, EntryPoint = "swr_build_matrix", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int swr_build_matrix(ulong @in_layout, ulong @out_layout, double @center_mix_level, double @surround_mix_level, double @lfe_mix_level, double @rematrix_maxval, double @rematrix_volume, double* @matrix, int @stride, AVMatrixEncoding @matrix_encoding, void* @log_ctx);
         
         [DllImport(libswresample, EntryPoint = "swr_set_matrix", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int swr_set_matrix(SwrContext* @s, double* @matrix, int @stride);

@@ -385,7 +385,6 @@ typedef struct AVFrame {
 
 /**
  * @defgroup lavu_frame_flags AV_FRAME_FLAGS
- * @ingroup lavu_frame
  * Flags describing additional frame properties.
  *
  * @{
@@ -395,10 +394,6 @@ typedef struct AVFrame {
  * The frame data may be corrupted, e.g. due to decoding errors.
  */
 #define AV_FRAME_FLAG_CORRUPT       (1 << 0)
-/**
- * A flag to mark the frames which need to be decoded, but shouldn't be output.
- */
-#define AV_FRAME_FLAG_DISCARD   (1 << 2)
 /**
  * @}
  */

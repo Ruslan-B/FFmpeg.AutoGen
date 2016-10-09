@@ -2,7 +2,7 @@
 
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.  
 The bindings are generated against:
-ffmpeg-20161004-be1d324-win64-shared.zip    03-Oct-2016 23:35   17M  
+ffmpeg-3.1.4-win64-shared.zip               07-Oct-2016 01:43
 
 ##Usage
 
