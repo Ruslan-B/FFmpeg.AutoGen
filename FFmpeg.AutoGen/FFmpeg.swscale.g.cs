@@ -24,7 +24,7 @@ namespace FFmpeg.AutoGen
     public unsafe static partial class ffmpeg
     {
         public const int LIBSWSCALE_VERSION_MAJOR = 4;
-        public const int LIBSWSCALE_VERSION_MINOR = 1;
+        public const int LIBSWSCALE_VERSION_MINOR = 2;
         public const int LIBSWSCALE_VERSION_MICRO = 100;
         public const bool FF_API_SWS_VECTOR = (LIBSWSCALE_VERSION_MAJOR<6);
         public const int SWS_FAST_BILINEAR = 1;

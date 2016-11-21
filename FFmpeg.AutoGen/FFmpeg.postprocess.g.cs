@@ -6,7 +6,7 @@ namespace FFmpeg.AutoGen
     public unsafe static partial class ffmpeg
     {
         public const int LIBPOSTPROC_VERSION_MAJOR = 54;
-        public const int LIBPOSTPROC_VERSION_MINOR = 0;
+        public const int LIBPOSTPROC_VERSION_MINOR = 1;
         public const int LIBPOSTPROC_VERSION_MICRO = 100;
         public const bool FF_API_QP_TYPE = (LIBPOSTPROC_VERSION_MAJOR<55);
         public const int PP_QUALITY_MAX = 6;

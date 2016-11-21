@@ -74,6 +74,7 @@ namespace FFmpeg.AutoGen
         public double* @var_values;
         public int @is_disabled;
         public AVBufferRef* @hw_device_ctx;
+        public int @nb_threads;
     }
     
     public unsafe partial struct AVFilterCommand
@@ -167,35 +168,7 @@ namespace FFmpeg.AutoGen
     {
     }
     
-    public unsafe partial struct AVBPrint
-    {
-    }
-    
     public unsafe partial struct AVDictionary
-    {
-    }
-    
-    public unsafe partial struct AVCodecInternal
-    {
-    }
-    
-    public unsafe partial struct AVCodecDefault
-    {
-    }
-    
-    public unsafe partial struct MpegEncContext
-    {
-    }
-    
-    public unsafe partial struct ReSampleContext
-    {
-    }
-    
-    public unsafe partial struct AVResampleContext
-    {
-    }
-    
-    public unsafe partial struct AVBSFInternal
     {
     }
     
@@ -293,7 +266,7 @@ namespace FFmpeg.AutoGen
     public unsafe static partial class ffmpeg
     {
         public const int LIBAVFILTER_VERSION_MAJOR = 6;
-        public const int LIBAVFILTER_VERSION_MINOR = 47;
+        public const int LIBAVFILTER_VERSION_MINOR = 65;
         public const int LIBAVFILTER_VERSION_MICRO = 100;
         public const bool FF_API_OLD_FILTER_OPTS = (LIBAVFILTER_VERSION_MAJOR<7);
         public const bool FF_API_OLD_FILTER_OPTS_ERROR = (LIBAVFILTER_VERSION_MAJOR<7);

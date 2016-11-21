@@ -1,8 +1,7 @@
 ##FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.png)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
 
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.  
-The bindings are generated against:
-ffmpeg-3.1.4-win64-shared.zip               07-Oct-2016 01:43
+The bindings are generated against: ffmpeg 3.2
 
 ##Usage
 

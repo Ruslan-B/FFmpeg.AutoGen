@@ -43,6 +43,10 @@ namespace FFmpeg.AutoGen
     {
     }
     
+    public unsafe partial struct AVBSFList
+    {
+    }
+    
     public unsafe partial struct AVIOInterruptCB
     {
         public IntPtr @callback;
@@ -462,10 +466,18 @@ namespace FFmpeg.AutoGen
         @AVFMT_DURATION_FROM_BITRATE = 2,
     }
     
+    public enum AVTimebaseSource : int
+    {
+        @AVFMT_TBCF_AUTO = -1,
+        @AVFMT_TBCF_DECODER = 0,
+        @AVFMT_TBCF_DEMUXER = 1,
+        @AVFMT_TBCF_R_FRAMERATE = 2,
+    }
+    
     public unsafe static partial class ffmpeg
     {
         public const int LIBAVFORMAT_VERSION_MAJOR = 57;
-        public const int LIBAVFORMAT_VERSION_MINOR = 41;
+        public const int LIBAVFORMAT_VERSION_MINOR = 56;
         public const int LIBAVFORMAT_VERSION_MICRO = 100;
         public const bool FF_API_LAVF_BITEXACT = (LIBAVFORMAT_VERSION_MAJOR<58);
         public const bool FF_API_LAVF_FRAC = (LIBAVFORMAT_VERSION_MAJOR<58);
@@ -475,6 +487,8 @@ namespace FFmpeg.AutoGen
         public const bool FF_API_COMPUTE_PKT_FIELDS2 = (LIBAVFORMAT_VERSION_MAJOR<58);
         public const bool FF_API_OLD_OPEN_CALLBACKS = (LIBAVFORMAT_VERSION_MAJOR<58);
         public const bool FF_API_LAVF_AVCTX = (LIBAVFORMAT_VERSION_MAJOR<58);
+        public const bool FF_API_NOCONST_GET_SIDE_DATA = (LIBAVFORMAT_VERSION_MAJOR<58);
+        public const bool FF_API_HTTP_USER_AGENT = (LIBAVFORMAT_VERSION_MAJOR<58);
         public const int FF_API_R_FRAME_RATE = 1;
         public const int AVIO_SEEKABLE_NORMAL = 0x0001;
         public const int AVSEEK_SIZE = 0x10000;
@@ -509,6 +523,7 @@ namespace FFmpeg.AutoGen
         public const int AVFMT_TS_NEGATIVE = 0x40000;
         public const int AVFMT_SEEK_TO_PTS = 0x4000000;
         public const int AVINDEX_KEYFRAME = 0x0001;
+        public const int AVINDEX_DISCARD_FRAME = 0x0002;
         public const int AV_DISPOSITION_DEFAULT = 0x0001;
         public const int AV_DISPOSITION_DUB = 0x0002;
         public const int AV_DISPOSITION_ORIGINAL = 0x0004;
@@ -520,6 +535,7 @@ namespace FFmpeg.AutoGen
         public const int AV_DISPOSITION_VISUAL_IMPAIRED = 0x0100;
         public const int AV_DISPOSITION_CLEAN_EFFECTS = 0x0200;
         public const int AV_DISPOSITION_ATTACHED_PIC = 0x0400;
+        public const int AV_DISPOSITION_TIMED_THUMBNAILS = 0x0800;
         public const int AV_DISPOSITION_CAPTIONS = 0x10000;
         public const int AV_DISPOSITION_DESCRIPTIONS = 0x20000;
         public const int AV_DISPOSITION_METADATA = 0x40000;
@@ -547,6 +563,8 @@ namespace FFmpeg.AutoGen
         public const int AVFMT_FLAG_PRIV_OPT = 0x20000;
         public const int AVFMT_FLAG_KEEP_SIDE_DATA = 0x40000;
         public const int AVFMT_FLAG_FAST_SEEK = 0x80000;
+        public const int AVFMT_FLAG_SHORTEST = 0x100000;
+        public const int AVFMT_FLAG_AUTO_BSF = 0x200000;
         public const int FF_FDEBUG_TS = 0x0001;
         public const int AVFMT_EVENT_FLAG_METADATA_UPDATED = 0x0001;
         public const int AVFMT_AVOID_NEG_TS_AUTO = -1;
@@ -556,6 +574,9 @@ namespace FFmpeg.AutoGen
         public const int AVSEEK_FLAG_BYTE = 2;
         public const int AVSEEK_FLAG_ANY = 4;
         public const int AVSEEK_FLAG_FRAME = 8;
+        public const int AVSTREAM_INIT_IN_WRITE_HEADER = 0;
+        public const int AVSTREAM_INIT_IN_INIT_OUTPUT = 1;
+        public const int AV_FRAME_FILENAME_FLAGS_MULTIPLE = 1;
         private const string libavformat = "avformat-57";
         
         [DllImport(libavformat, EntryPoint = "avio_find_protocol_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -922,6 +943,9 @@ namespace FFmpeg.AutoGen
         [DllImport(libavformat, EntryPoint = "avformat_write_header", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avformat_write_header(AVFormatContext* @s, AVDictionary** @options);
         
+        [DllImport(libavformat, EntryPoint = "avformat_init_output", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int avformat_init_output(AVFormatContext* @s, AVDictionary** @options);
+        
         [DllImport(libavformat, EntryPoint = "av_write_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_write_frame(AVFormatContext* @s, AVPacket* @pkt);
         
@@ -985,6 +1009,9 @@ namespace FFmpeg.AutoGen
         [DllImport(libavformat, EntryPoint = "av_dump_format", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_dump_format(AVFormatContext* @ic, int @index, [MarshalAs(UnmanagedType.LPStr)] string @url, int @is_output);
         
+        [DllImport(libavformat, EntryPoint = "av_get_frame_filename2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_get_frame_filename2(IntPtr @buf, int @buf_size, [MarshalAs(UnmanagedType.LPStr)] string @path, int @number, int @flags);
+        
         [DllImport(libavformat, EntryPoint = "av_get_frame_filename", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_get_frame_filename(IntPtr @buf, int @buf_size, [MarshalAs(UnmanagedType.LPStr)] string @path, int @number);
         
@@ -1026,6 +1053,12 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavformat, EntryPoint = "av_apply_bitstream_filters", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_apply_bitstream_filters(AVCodecContext* @codec, AVPacket* @pkt, AVBitStreamFilterContext* @bsfc);
+        
+        [DllImport(libavformat, EntryPoint = "avformat_transfer_internal_stream_timing_info", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int avformat_transfer_internal_stream_timing_info(AVOutputFormat* @ofmt, AVStream* @ost, AVStream* @ist, AVTimebaseSource @copy_tb);
+        
+        [DllImport(libavformat, EntryPoint = "av_stream_get_codec_timebase", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern AVRational av_stream_get_codec_timebase(AVStream* @st);
         
     }
 }
