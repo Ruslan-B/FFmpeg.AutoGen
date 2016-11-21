@@ -293,6 +293,7 @@ namespace FFmpeg.AutoGen
         public int @nb_coded_side_data;
         public AVBufferRef* @hw_frames_ctx;
         public int @sub_text_format;
+        public int @trailing_padding;
     }
     
     public unsafe partial struct AVHWAccel
@@ -540,6 +541,10 @@ namespace FFmpeg.AutoGen
         public IntPtr @init;
         public IntPtr @filter;
         public IntPtr @close;
+    }
+    
+    public unsafe partial struct AVBSFList
+    {
     }
     
     public enum AVCodecID : int
@@ -791,6 +796,8 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_PCM_S24LE_PLANAR = 65564,
         @AV_CODEC_ID_PCM_S32LE_PLANAR = 65565,
         @AV_CODEC_ID_PCM_S16BE_PLANAR = 65566,
+        @AV_CODEC_ID_PCM_S64LE = 67584,
+        @AV_CODEC_ID_PCM_S64BE = 67585,
         @AV_CODEC_ID_ADPCM_IMA_QT = 69632,
         @AV_CODEC_ID_ADPCM_IMA_WAV = 69633,
         @AV_CODEC_ID_ADPCM_IMA_DK3 = 69634,
@@ -951,6 +958,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_HDMV_TEXT_SUBTITLE = 96270,
         @AV_CODEC_ID_FIRST_UNKNOWN = 98304,
         @AV_CODEC_ID_TTF = 98304,
+        @AV_CODEC_ID_SCTE_35 = 98305,
         @AV_CODEC_ID_BINTEXT = 100352,
         @AV_CODEC_ID_XBIN = 100353,
         @AV_CODEC_ID_IDF = 100354,
@@ -1075,8 +1083,8 @@ namespace FFmpeg.AutoGen
     public unsafe static partial class ffmpeg
     {
         public const int LIBAVCODEC_VERSION_MAJOR = 57;
-        public const int LIBAVCODEC_VERSION_MINOR = 48;
-        public const int LIBAVCODEC_VERSION_MICRO = 101;
+        public const int LIBAVCODEC_VERSION_MINOR = 64;
+        public const int LIBAVCODEC_VERSION_MICRO = 100;
         public const bool FF_API_VIMA_DECODER = (LIBAVCODEC_VERSION_MAJOR<58);
         public const bool FF_API_AUDIO_CONVERT = (LIBAVCODEC_VERSION_MAJOR<58);
         public const bool FF_API_AVCODEC_RESAMPLE = FF_API_AUDIO_CONVERT;
@@ -1187,6 +1195,7 @@ namespace FFmpeg.AutoGen
         public const int AV_CODEC_CAP_PARAM_CHANGE = (1<<14);
         public const int AV_CODEC_CAP_AUTO_THREADS = (1<<15);
         public const int AV_CODEC_CAP_VARIABLE_FRAME_SIZE = (1<<16);
+        public const int AV_CODEC_CAP_AVOID_PROBING = (1<<17);
         public const int AV_CODEC_CAP_INTRA_ONLY = 0x40000000;
         public const uint AV_CODEC_CAP_LOSSLESS = 0x80000000;
         public const int CODEC_FLAG_UNALIGNED = AV_CODEC_FLAG_UNALIGNED;
@@ -1268,6 +1277,7 @@ namespace FFmpeg.AutoGen
         public const int AV_GET_BUFFER_FLAG_REF = (1<<0);
         public const int AV_PKT_FLAG_KEY = 0x0001;
         public const int AV_PKT_FLAG_CORRUPT = 0x0002;
+        public const int AV_PKT_FLAG_DISCARD = 0x0004;
         public const int FF_COMPRESSION_DEFAULT = -1;
         public const int FF_ASPECT_EXTENDED = 15;
         public const int FF_RC_STRATEGY_XVID = 1;
@@ -1289,6 +1299,7 @@ namespace FFmpeg.AutoGen
         public const int FF_CMP_W97 = 12;
         public const int FF_CMP_DCTMAX = 13;
         public const int FF_CMP_DCT264 = 14;
+        public const int FF_CMP_MEDIAN_SAD = 15;
         public const int FF_CMP_CHROMA = 256;
         public const int FF_DTG_AFD_SAME = 8;
         public const int FF_DTG_AFD_4_3 = 9;
@@ -1401,6 +1412,12 @@ namespace FFmpeg.AutoGen
         public const int FF_PROFILE_AAC_ELD = 38;
         public const int FF_PROFILE_MPEG2_AAC_LOW = 128;
         public const int FF_PROFILE_MPEG2_AAC_HE = 131;
+        public const int FF_PROFILE_DNXHD = 0;
+        public const int FF_PROFILE_DNXHR_LB = 1;
+        public const int FF_PROFILE_DNXHR_SQ = 2;
+        public const int FF_PROFILE_DNXHR_HQ = 3;
+        public const int FF_PROFILE_DNXHR_HQX = 4;
+        public const int FF_PROFILE_DNXHR_444 = 5;
         public const int FF_PROFILE_DTS = 20;
         public const int FF_PROFILE_DTS_ES = 30;
         public const int FF_PROFILE_DTS_96_24 = 40;
@@ -1422,8 +1439,10 @@ namespace FFmpeg.AutoGen
         public const int FF_PROFILE_H264_HIGH = 100;
         public const int FF_PROFILE_H264_HIGH_10 = 110;
         public const int FF_PROFILE_H264_HIGH_10_INTRA = (110|FF_PROFILE_H264_INTRA);
+        public const int FF_PROFILE_H264_MULTIVIEW_HIGH = 118;
         public const int FF_PROFILE_H264_HIGH_422 = 122;
         public const int FF_PROFILE_H264_HIGH_422_INTRA = (122|FF_PROFILE_H264_INTRA);
+        public const int FF_PROFILE_H264_STEREO_HIGH = 128;
         public const int FF_PROFILE_H264_HIGH_444 = 144;
         public const int FF_PROFILE_H264_HIGH_444_PREDICTIVE = 244;
         public const int FF_PROFILE_H264_HIGH_444_INTRA = (244|FF_PROFILE_H264_INTRA);
@@ -1888,6 +1907,27 @@ namespace FFmpeg.AutoGen
         
         [DllImport(libavcodec, EntryPoint = "av_bsf_get_class", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVClass* av_bsf_get_class();
+        
+        [DllImport(libavcodec, EntryPoint = "av_bsf_list_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern AVBSFList* av_bsf_list_alloc();
+        
+        [DllImport(libavcodec, EntryPoint = "av_bsf_list_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern void av_bsf_list_free(AVBSFList** @lst);
+        
+        [DllImport(libavcodec, EntryPoint = "av_bsf_list_append", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_bsf_list_append(AVBSFList* @lst, AVBSFContext* @bsf);
+        
+        [DllImport(libavcodec, EntryPoint = "av_bsf_list_append2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_bsf_list_append2(AVBSFList* @lst, [MarshalAs(UnmanagedType.LPStr)] string @bsf_name, AVDictionary** @options);
+        
+        [DllImport(libavcodec, EntryPoint = "av_bsf_list_finalize", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_bsf_list_finalize(AVBSFList** @lst, AVBSFContext** @bsf);
+        
+        [DllImport(libavcodec, EntryPoint = "av_bsf_list_parse_str", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_bsf_list_parse_str([MarshalAs(UnmanagedType.LPStr)] string @str, AVBSFContext** @bsf);
+        
+        [DllImport(libavcodec, EntryPoint = "av_bsf_get_null_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_bsf_get_null_filter(AVBSFContext** @bsf);
         
         [DllImport(libavcodec, EntryPoint = "av_fast_padded_malloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_fast_padded_malloc(void* @ptr, uint* @size, ulong @min_size);
