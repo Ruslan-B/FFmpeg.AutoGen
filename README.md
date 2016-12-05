@@ -1,3 +1,12 @@
+#Important
+The FFmpeg API is wast and complex, this project exposes it with minum modifications to get it work in .NET. 
+Thus support is very limited.
+If you have *how to* question please consider to ask it on stackoverflow.com. 
+The community may be able to offer some assistance but you will largely be on your own.
+As another option you can search for a solutin in c(lang) as with some effort you can convert them to C#.
+Please be adviced that some functions might be obsolete by now as ffmpeg api exist for years thus please consider to check official API documentation as well.
+
+
 ##FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.png)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
 
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.  
