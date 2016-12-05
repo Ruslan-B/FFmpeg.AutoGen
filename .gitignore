@@ -12,6 +12,8 @@ TestResults
 *.suo
 *.user
 *.sln.docstates
+/.vs
+
 
 # Build results
 [Dd]ebug/
@@ -61,15 +63,6 @@ _ReSharper*
 # Installshield output folder 
 [Ee]xpress
 
-# DocProject is a documentation generator add-in
-DocProject/buildhelp/
-DocProject/Help/*.HxT
-DocProject/Help/*.HxC
-DocProject/Help/*.hhc
-DocProject/Help/*.hhk
-DocProject/Help/*.hhp
-DocProject/Help/Html2
-DocProject/Help/html
 
 # Click-Once directory
 publish
@@ -110,9 +103,3 @@ UpgradeLog*.XML
 # OS X
 .DS_Store
 
-# Python
-
-*.py[cod]
-
-# PyCharm
-.idea/
