@@ -147,7 +147,14 @@ namespace FFmpeg.AutoGen.Example
 
                 Console.WriteLine($@"frame: {frameNumber}");
 
-                var src = &pDecodedFrame->data0;
+                sbyte** src = &(pDecodedFrame->data0);
+
+                var data = new sbyte[pDecodedFrame->linesize[0] * pDecodedFrame->height];
+                for (int i = 0; i < data.Length; i++)
+                {
+                     data[i] = *(pDecodedFrame->data0 + i);
+                }
+
                 var dst = &pConvertedFrame->data0;
                 var srcStride = pDecodedFrame->linesize;
                 var dstStride = pConvertedFrame->linesize;
