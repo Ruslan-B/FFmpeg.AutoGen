@@ -13,6 +13,10 @@
     {
     }
 
+    public struct FILE
+    {
+    }
+
     public struct size_t
     {
         public uint Value;

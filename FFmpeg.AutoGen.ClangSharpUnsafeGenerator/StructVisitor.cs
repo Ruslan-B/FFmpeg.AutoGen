@@ -8,16 +8,16 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
 {
     internal class StructVisitor
     {
-        private readonly Stack<Action> m_defferedVisits = new Stack<Action>();
-        private readonly IndentedTextWriter m_tw;
-        private readonly ISet<string> m_visitedStructs;
-        private bool m_hasChildren;
-        private bool m_writingStruct;
+        private readonly Stack<Action> _defferedVisits = new Stack<Action>();
+        private readonly IndentedTextWriter _tw;
+        private readonly ISet<string> _visitedStructs;
+        private bool _hasChildren;
+        private bool _writingStruct;
 
         public StructVisitor(IndentedTextWriter tw, ISet<string> visitedStructs)
         {
-            m_tw = tw;
-            m_visitedStructs = visitedStructs;
+            _tw = tw;
+            _visitedStructs = visitedStructs;
         }
 
         public CXChildVisitResult Visit(CXCursor cursor, CXCursor parent, IntPtr clientData)
@@ -30,14 +30,14 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
             var cursorKind = clang.getCursorKind(cursor);
             if (cursorKind == CXCursorKind.CXCursor_StructDecl || cursorKind == CXCursorKind.CXCursor_UnionDecl)
             {
-                if (m_writingStruct)
+                if (_writingStruct)
                 {
                     Action defferedVisit = () => Visit(cursor, parent, clientData);
-                    m_defferedVisits.Push(defferedVisit);
+                    _defferedVisits.Push(defferedVisit);
                     return CXChildVisitResult.CXChildVisit_Continue;
                 }
 
-                m_writingStruct = true;
+                _writingStruct = true;
 
                 var structName = clang.getCursorSpelling(cursor).ToString();
 
@@ -54,31 +54,31 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                     }
                 }
 
-                if (!m_visitedStructs.Contains(structName))
+                if (!_visitedStructs.Contains(structName))
                 {
-                    //m_tw.WriteLine(@"[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]");
-                    m_tw.WriteLine(@"public unsafe partial struct " + structName);
-                    m_tw.WriteLine(@"{");
+                    //_tw.WriteLine(@"[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]");
+                    _tw.WriteLine(@"public unsafe partial struct " + structName);
+                    _tw.WriteLine(@"{");
 
-                    m_hasChildren = false;
+                    _hasChildren = false;
 
-                    m_tw.Indent++;
+                    _tw.Indent++;
                     clang.visitChildren(cursor, Visit, new CXClientData(IntPtr.Zero));
-                    m_tw.Indent--;
+                    _tw.Indent--;
 
-                    m_tw.WriteLine(@"}");
-                    m_tw.WriteLine();
+                    _tw.WriteLine(@"}");
+                    _tw.WriteLine();
 
-                    if (m_hasChildren)
+                    if (_hasChildren)
                     {
-                        m_visitedStructs.Add(structName);
+                        _visitedStructs.Add(structName);
                     }
                 }
 
-                m_writingStruct = false;
-                while (m_defferedVisits.Count > 0)
+                _writingStruct = false;
+                while (_defferedVisits.Count > 0)
                 {
-                    var defferedVisit = m_defferedVisits.Pop();
+                    var defferedVisit = _defferedVisits.Pop();
                     defferedVisit();
                 }
 
@@ -89,7 +89,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
 
             if (cursorKind == CXCursorKind.CXCursor_FieldDecl)
             {
-                m_hasChildren = true;
+                _hasChildren = true;
 
                 var fieldName = clang.getCursorSpelling(cursor).ToString();
                 if (string.IsNullOrEmpty(fieldName))
@@ -100,7 +100,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
 
                 //fieldPosition++;
 
-                m_tw.WriteLine(ToMarshalString(cursor, fieldName));
+                _tw.WriteLine(ToMarshalString(cursor, fieldName));
 
                 return CXChildVisitResult.CXChildVisit_Continue;
             }
@@ -145,7 +145,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                             var sb = new StringBuilder();
                             var nestedElementType = clang.getCanonicalType(clang.getArrayElementType(elementType));
                             var nestedArraySize = clang.getArraySize(elementType);
-                            var typeString = GetTypeName(cursorSpelling, nestedElementType);
+                            var typeString = GetTypeName(cursor, cursorSpelling, nestedElementType);
                             for (var i = 0; i < arraySize; ++i)
                             {
                                 sb.AppendFormat(@"public fixed {0} @{1}{2}[{3}]; ", typeString, cursorSpelling, i, nestedArraySize);
@@ -155,7 +155,7 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                         default:
                         {
                             var sb = new StringBuilder();
-                            var typeString = GetTypeName(cursorSpelling, elementType);
+                            var typeString = GetTypeName(cursor, cursorSpelling, elementType);
                             for (var i = 0; i < arraySize; ++i)
                             {
                                 sb.AppendFormat(@"public {0} @{1}{2}; ", typeString, cursorSpelling, i);
@@ -173,13 +173,13 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                     return @"[MarshalAs(UnmanagedType.LPWStr)] public string @" + cursorSpelling + @";";
                 default:
                 {
-                    var typeString = GetTypeName(cursorSpelling, canonical);
+                    var typeString = GetTypeName(cursor, cursorSpelling, canonical);
                     return @"public " + typeString + @" @" + cursorSpelling + @";";
                 }
             }
         }
 
-        private static string GetTypeName(string cursorSpelling, CXType type)
+        private string GetTypeName(CXCursor cursor, string cursorSpelling, CXType type)
         {
             var canonical = clang.getCanonicalType(type);
             switch (canonical.kind)
@@ -190,9 +190,11 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                     {
                         case CXTypeKind.CXType_ConstantArray:
                         case CXTypeKind.CXType_FunctionProto:
-                            return @"IntPtr";
+                            var spelling = cursorSpelling + "_func";
+                            WriteDelegate(cursor, pointeeType, spelling);
+                            return spelling;
                         default:
-                            return GetTypeName(cursorSpelling, pointeeType) + @"*";
+                            return GetTypeName(cursor, cursorSpelling, pointeeType) + @"*";
                     }
 
                 default:
@@ -203,6 +205,30 @@ namespace FFmpeg.AutoGen.ClangSharpUnsafeGenerator
                     }
                     return typeString;
             }
+        }
+
+        private void WriteDelegate(CXCursor cursor, CXType pointee, string spelling)
+        {
+            _tw.WriteLine(@"[UnmanagedFunctionPointer(" + pointee.CallingConventionSpelling() + ")]");
+            _tw.Write(@"public unsafe delegate ");
+            FunctionHelper.WriteReturnType(clang.getResultType(pointee), _tw);
+            _tw.Write(@" ");
+            _tw.Write(spelling);
+            _tw.Write(@"(");
+
+            uint argumentCounter = 0;
+
+            clang.visitChildren(cursor, delegate (CXCursor cxCursor, CXCursor parent1, IntPtr ptr)
+            {
+                if (cxCursor.kind == CXCursorKind.CXCursor_ParmDecl)
+                {
+                    FunctionHelper.WriteArgument(pointee, cxCursor, _tw, argumentCounter++);
+                }
+
+                return CXChildVisitResult.CXChildVisit_Continue;
+            }, new CXClientData(IntPtr.Zero));
+
+            _tw.WriteLine(@");");
         }
     }
 }
