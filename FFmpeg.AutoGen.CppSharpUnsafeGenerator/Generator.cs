@@ -33,6 +33,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public string Namespace { get; set; }
         public string LibraryName { get; set; }
         public string OutputFile { get; set; }
+        public string LibraryConstantName { get; set; }
 
         public void Run()
         {
@@ -116,7 +117,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             using (var streamWriter = File.CreateText(OutputFile))
             using (var textWriter = new IndentedTextWriter(streamWriter))
             {
-                var writer = new Writer(textWriter);
+                var writer = new Writer(textWriter, LibraryConstantName);
                 textWriter.WriteLine("using System;");
                 textWriter.WriteLine("using System.Runtime.InteropServices;");
                 textWriter.WriteLine();
@@ -140,6 +141,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     textWriter.WriteLine($"public unsafe static partial class {className}");
                     using (textWriter.BeginBlock())
                     {
+                        textWriter.WriteLine($"public const string {LibraryConstantName} = \"{LibraryName}\";");
+                        
                         units.OfType<FunctionDefinition>().ToList().ForEach(x =>
                         {
                             writer.Write(x);

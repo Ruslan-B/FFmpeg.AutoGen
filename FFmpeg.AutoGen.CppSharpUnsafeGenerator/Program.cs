@@ -38,6 +38,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 Exports = Exports,
                 Namespace = Namespace,
                 LibraryName = "avutil-55",
+                LibraryConstantName = "libavutil",
                 OutputFile = OutputDirectory + "FFmpeg.avutil.g.cs",
                 SourceFiles = new[]
                 {

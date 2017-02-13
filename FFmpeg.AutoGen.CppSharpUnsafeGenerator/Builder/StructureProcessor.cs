@@ -79,7 +79,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
             {
                 Name = className,
                 Fileds = @class.Fields.SelectMany(ToDefinition).ToArray(),
-                Summary = @class.Comment?.BriefText,
+                Content = @class.Comment?.BriefText,
             };
         }
 
@@ -89,7 +89,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
             {
                 Name = name,
                 TypeName = typeName,
-                Summary = field.Comment?.BriefText,
+                Content = field.Comment?.BriefText,
             };
         }
     }

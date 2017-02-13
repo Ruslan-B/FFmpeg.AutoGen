@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom.Compiler;
+using System.Linq;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Writers;
 
@@ -7,11 +8,13 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     internal class Writer
     {
+        private readonly string _libraryConstantName;
         private readonly IndentedTextWriter _writer;
 
-        public Writer(IndentedTextWriter writer)
+        public Writer(IndentedTextWriter writer, string libraryConstantName)
         {
             _writer = writer;
+            _libraryConstantName = libraryConstantName;
         }
 
         public void Write(EnumerationDefinition enumeration)
@@ -20,7 +23,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteLine($"public enum {enumeration.Name} : {enumeration.TypeName}");
             using (BeginBlock())
             {
-
                 foreach (var item in enumeration.Items)
                 {
                     WriteSummary(item);
@@ -50,17 +52,22 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public void Write(FunctionDefinition function)
         {
             WriteSummary(function);
-            var entryPoint = "todo";
-            string library = "todo";
-            WriteLine($"[DllImport({library}, EntryPoint = \"{entryPoint}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
-            WriteLine($"public static extern {function.ReturnTypeName} {function.Name}();");
+            function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
+            WriteLine($"[DllImport({_libraryConstantName}, EntryPoint = \"{function.Name}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
+            var @params = string.Join(", ", function.Parameters.Select(x => $"{x.TypeName} @{x.Name}"));
+            WriteLine($"public static extern {function.ReturnTypeName} {function.Name}({@params});");
         }
-        
-        private void WriteSummary(ICanGenerateSummary value)
+
+        private void WriteSummary(ICanGenerateXmlDoc value)
         {
-            if (!string.IsNullOrWhiteSpace(value.Summary)) WriteLine($"/// <summary> {value.Summary} </summary>");
+            if (!string.IsNullOrWhiteSpace(value.Content)) WriteLine($"/// <summary>{value.Content.Trim()}</summary>");
         }
-        
+
+        private void WriteParam(ICanGenerateXmlDoc value, string name)
+        {
+            if (!string.IsNullOrWhiteSpace(value.Content)) WriteLine($"/// <param name=\"{name}\">{value.Content.Trim()}</param>");
+        }
+
         private void WriteLine(string line) => _writer.WriteLine(line);
         private IDisposable BeginBlock() => _writer.BeginBlock();
     }
