@@ -24,6 +24,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
         public static string GetTypeName(TypedefType type)
         {
             if (type.Declaration.Type is BuiltinType) return GetTypeName((BuiltinType) type.Declaration.Type);
+            if (type.Declaration.Type is PointerType) return GetTypeName((PointerType) type.Declaration.Type);
             return type.Declaration.Name;
         }
 
@@ -36,6 +37,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
         {
             if (type.QualifiedPointee.Type is BuiltinType) return GetTypeName((BuiltinType) type.QualifiedPointee.Type) + "*";
             if (type.QualifiedPointee.Type is TypedefType) return GetTypeName((TypedefType)type.QualifiedPointee.Type) + "*";
+            if (type.QualifiedPointee.Type is PointerType) return GetTypeName((PointerType) type.QualifiedPointee.Type) + "*";
             return "IntPtr";
         }
 

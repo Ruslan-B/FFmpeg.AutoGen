@@ -29,14 +29,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
                 {
                     Name = enumerationName,
                     TypeName = TypeHelper.GetTypeName(enumeration.Type),
-                    Summary = enumeration.Comment?.BriefText,
+                    Content = enumeration.Comment?.BriefText,
                     Items = enumeration.Items
                         .Select(x =>
                             new EnumerationItem
                             {
                                 Name = x.Name,
                                 Value = ConvertValue(x.Value, enumeration.BuiltinType.Type).ToString(),
-                                Summary = x.Comment?.BriefText
+                                Content = x.Comment?.BriefText
                             })
                         .ToArray()
                 };
@@ -58,30 +58,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
                     return value;
                 default:
                     throw new NotSupportedException();
-            }
-        }
-    }
-
-    internal class FunctionProcessor
-    {
-        private readonly GenerationContext _context;
-
-        public FunctionProcessor(GenerationContext context)
-        {
-            _context = context;
-        }
-
-        public void Process(TranslationUnit translationUnit)
-        {
-            foreach (var function in translationUnit.Functions)
-            {
-                var functionDefinition = new FunctionDefinition
-                {
-                    Name = function.Name,
-                    ReturnTypeName = TypeHelper.GetTypeName(function.ReturnType.Type),
-                    Summary = function.Comment?.BriefText
-                };
-                _context.Units.Add(functionDefinition);
             }
         }
     }
