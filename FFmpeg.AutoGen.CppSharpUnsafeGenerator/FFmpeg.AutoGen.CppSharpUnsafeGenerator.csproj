@@ -116,6 +116,7 @@
     <Compile Include="Definitions\ICanGenerateDefinition.cs" />
     <Compile Include="Definitions\StructureField.cs" />
     <Compile Include="Builder\TypeHelper.cs" />
+    <Compile Include="GenerationContext.cs" />
     <Compile Include="Writer.cs" />
     <Compile Include="FunctionExport.cs" />
     <Compile Include="FunctionExportHelper.cs" />

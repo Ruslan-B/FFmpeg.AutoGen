@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace FFmpeg.AutoGen.Example
+namespace FFmpeg.AutoGen_.Example
 {
     public class InteropHelper
     {

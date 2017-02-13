@@ -89,7 +89,7 @@
     <Compile Include="FFmpeg.postprocess.g.cs" />
     <Compile Include="FFmpeg.swresample.g.cs" />
     <Compile Include="FFmpeg.swscale.g.cs" />
-    <Compile Include="New\FFmpeg.avutil.g.cs" />
+    <Compile Include="New\FFmpeg.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unresolved.cs" />
   </ItemGroup>

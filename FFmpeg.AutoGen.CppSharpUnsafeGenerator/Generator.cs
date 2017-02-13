@@ -1,5 +1,7 @@
-﻿using System.CodeDom.Compiler;
+﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using CppSharp;
@@ -12,17 +14,12 @@ using ClangParser = CppSharp.ClangParser;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
-    internal class GenerationContext
-    {
-        public List<ICanGenerateDefinition> Units { get; } = new List<ICanGenerateDefinition>();
-    }
-
     internal class Generator
     {
-        private readonly GenerationContext _generationContext = new GenerationContext();
         private ASTContext _astContext;
         private bool _hasParsingErrors;
         private ParserTargetInfo _targetInfo;
+        private GenerationContext _generationContext;
 
 
         public string[] Defines { get; set; } = {};
@@ -34,6 +31,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public string LibraryName { get; set; }
         public string OutputFile { get; set; }
         public string LibraryConstantName { get; set; }
+        public string ClassName { get; set; }
 
         public void Run()
         {
@@ -100,6 +98,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         private void Generate()
         {
+            _generationContext = new GenerationContext
+            {
+                FunctionExportMap = Exports.ToDictionary(x => x.Name)
+            };
+
             var ep = new EnumerationProcessor(_generationContext);
             var sp = new StructureProcessor(_generationContext);
             var fp = new FunctionProcessor(_generationContext);
@@ -137,14 +140,18 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                         textWriter.WriteLine();
                     });
 
-                    string className = "ffmpeg";
-                    textWriter.WriteLine($"public unsafe static partial class {className}");
+                    textWriter.WriteLine($"public unsafe static partial class {ClassName}");
                     using (textWriter.BeginBlock())
                     {
-                        textWriter.WriteLine($"public const string {LibraryConstantName} = \"{LibraryName}\";");
+                        //textWriter.WriteLine($"public const string {LibraryConstantName} = \"{LibraryName}\";");
                         
                         units.OfType<FunctionDefinition>().ToList().ForEach(x =>
                         {
+                            //if (x.LibraryName != LibraryName)
+                            //{
+                            //    Console.WriteLine($"Function {x.Name} exported in {x.LibraryName}.");
+                            //}
+
                             writer.Write(x);
                             textWriter.WriteLine();
                         });
