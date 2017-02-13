@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using FFmpeg.AutoGen.New;
 
-namespace FFmpeg.AutoGen.Example
+namespace FFmpeg.AutoGen_.Example
 {
     internal class Program
     {
@@ -84,7 +85,7 @@ namespace FFmpeg.AutoGen.Example
 
             var pConvertedFrame = ffmpeg.av_frame_alloc();
             var convertedFrameBufferSize = ffmpeg.av_image_get_buffer_size(convertToPixFmt, width, height, 1);
-            var pConvertedFrameBuffer = (sbyte*)ffmpeg.av_malloc((ulong)convertedFrameBufferSize);
+            var pConvertedFrameBuffer = (byte*)ffmpeg.av_malloc((ulong)convertedFrameBufferSize);
             ffmpeg.avpicture_fill((AVPicture*)pConvertedFrame, pConvertedFrameBuffer, convertToPixFmt, width, height);
 
             var pCodec = ffmpeg.avcodec_find_decoder(codecId);
@@ -147,17 +148,17 @@ namespace FFmpeg.AutoGen.Example
 
                 Console.WriteLine($@"frame: {frameNumber}");
 
-                sbyte** src = &(pDecodedFrame->data0);
+                byte* src = pDecodedFrame->data0;
 
-                var data = new sbyte[pDecodedFrame->linesize[0] * pDecodedFrame->height];
+                var data = new byte[pDecodedFrame->linesize0 * pDecodedFrame->height];
                 for (int i = 0; i < data.Length; i++)
                 {
                      data[i] = *(pDecodedFrame->data0 + i);
                 }
 
                 var dst = &pConvertedFrame->data0;
-                var srcStride = pDecodedFrame->linesize;
-                var dstStride = pConvertedFrame->linesize;
+                var srcStride = &pDecodedFrame->linesize0;
+                var dstStride = pConvertedFrame->linesize0;
                 ffmpeg.sws_scale(pConvertContext, src, srcStride, 0, height, dst, dstStride);
 
                 var convertedFrameAddress = pConvertedFrame->data0;

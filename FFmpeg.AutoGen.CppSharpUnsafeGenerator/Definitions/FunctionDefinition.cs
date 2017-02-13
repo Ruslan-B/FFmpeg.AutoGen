@@ -4,6 +4,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
     {
         public string Name { get; set; }
         public string ReturnTypeName { get; set; }
+        public string LibraryName { get; set; }
         public string Content { get; set; }
         public FunctionParameter[] Parameters { get; set; }
     }

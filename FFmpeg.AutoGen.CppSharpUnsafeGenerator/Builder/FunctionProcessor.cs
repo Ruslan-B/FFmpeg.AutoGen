@@ -1,6 +1,6 @@
+using System;
 using System.Linq;
 using CppSharp.AST;
-using CppSharp.Generators.CSharp;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
@@ -17,13 +17,22 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
         public void Process(TranslationUnit translationUnit)
         {
             int counter = 0;
-            foreach (var function in translationUnit.Functions)
+            foreach (var function in translationUnit.Functions.Where(x => !x.IsInline))
             {
+                var functionName = function.Name;
+                FunctionExport export;
+                if (!_context.FunctionExportMap.TryGetValue(functionName, out export))
+                {
+                    Console.WriteLine($"Export not found. Skipping {functionName} function.");
+                    continue;
+                }
+
                 var functionDefinition = new FunctionDefinition
                 {
-                    Name = function.Name,
+                    Name = functionName,
                     ReturnTypeName = TypeHelper.GetTypeName(function.ReturnType.Type),
                     Content = function.Comment?.BriefText,
+                    LibraryName = export.Library,
                     Parameters = function.Parameters.Select(x => new FunctionParameter
                     {
                         Name = string.IsNullOrEmpty(x.Name) ? $"p{counter}" : x.Name,

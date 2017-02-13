@@ -25,23 +25,29 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
                 if (string.IsNullOrEmpty(enumerationName))
                     continue;
 
-                var enumerationDefinition = new EnumerationDefinition
-                {
-                    Name = enumerationName,
-                    TypeName = TypeHelper.GetTypeName(enumeration.Type),
-                    Content = enumeration.Comment?.BriefText,
-                    Items = enumeration.Items
-                        .Select(x =>
-                            new EnumerationItem
-                            {
-                                Name = x.Name,
-                                Value = ConvertValue(x.Value, enumeration.BuiltinType.Type).ToString(),
-                                Content = x.Comment?.BriefText
-                            })
-                        .ToArray()
-                };
+                var enumerationDefinition = ToDefinition(enumeration, enumerationName);
                 _context.Units.Add(enumerationDefinition);
             }
+        }
+
+        public static EnumerationDefinition ToDefinition(Enumeration enumeration, string name)
+        {
+            var enumerationDefinition = new EnumerationDefinition
+            {
+                Name = name,
+                TypeName = TypeHelper.GetTypeName(enumeration.Type),
+                Content = enumeration.Comment?.BriefText,
+                Items = enumeration.Items
+                    .Select(x =>
+                        new EnumerationItem
+                        {
+                            Name = x.Name,
+                            Value = ConvertValue(x.Value, enumeration.BuiltinType.Type).ToString(),
+                            Content = x.Comment?.BriefText
+                        })
+                    .ToArray()
+            };
+            return enumerationDefinition;
         }
 
         public static object ConvertValue(ulong value, PrimitiveType primitiveType)

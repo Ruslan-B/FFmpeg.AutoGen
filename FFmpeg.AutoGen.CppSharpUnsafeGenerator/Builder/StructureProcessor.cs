@@ -25,13 +25,17 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
                     continue;
 
                 var className = @class.Name;
-                _context.Units.Add(ToDeclaration(className, @class));
+                _context.Units.Add(ToDefinition(@class, className));
             }
         }
 
         private  IEnumerable<StructureField> ToDefinition(Field field)
         {
-            if (field.IsBitField) throw new NotSupportedException();
+            if (field.IsBitField)
+            {
+                Console.WriteLine("TODO bit fileds processing");
+                //throw new NotSupportedException();
+            }
 
             var arrayType = field.Type as ArrayType;
             if (arrayType != null && arrayType.SizeType == ArrayType.ArraySize.Constant) return FixedArray(field, arrayType);
@@ -39,7 +43,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
             var tagType = field.Type as TagType;
             if (tagType != null && field.Class.Declarations.Contains(tagType.Declaration)) return NestedDefinition(field, tagType);
             
-            return new[] { ToDeclaration(field, field.Name, TypeHelper.GetTypeName(field.Type)) };
+            return new[] { ToDefinition(field, field.Name, TypeHelper.GetTypeName(field.Type)) };
         }
 
         private IEnumerable<StructureField> NestedDefinition(Field field, TagType tagType)
@@ -48,8 +52,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
             if (@class != null)
             {
                 var typeName = field.Class.Name + "_" + field.Name;
-                _context.Units.Add(ToDeclaration(typeName, @class));
-                return new[] { ToDeclaration(field, field.Name, typeName)};
+                _context.Units.Add(ToDefinition(@class, typeName));
+                return new[] { ToDefinition(field, field.Name, typeName)};
+            }
+            var @enum = tagType.Declaration as Enumeration;
+            if(@enum != null){
+                var typeName = field.Class.Name + "_" + field.Name;
+                _context.Units.Add(EnumerationProcessor.ToDefinition(@enum, typeName));
+                return new[] { ToDefinition(field, field.Name, typeName) };
             }
             throw new NotSupportedException();
         }
@@ -69,11 +79,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
             //        };
 
             for (var i = 0; i < arrayType.Size; i++)
-                yield return ToDeclaration(field, $"{field.Name}{i}", elementTypeName);
+                yield return ToDefinition(field, $"{field.Name}{i}", elementTypeName);
         }
 
 
-        private StructureDefinition ToDeclaration(string className, Class @class)
+        private StructureDefinition ToDefinition(Class @class, string className)
         {
             return new StructureDefinition
             {
@@ -83,7 +93,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
             };
         }
 
-        private static StructureField ToDeclaration(Field field, string name, string typeName)
+        private static StructureField ToDefinition(Field field, string name, string typeName)
         {
             return new StructureField
             {
