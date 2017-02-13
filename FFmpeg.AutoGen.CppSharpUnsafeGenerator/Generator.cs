@@ -7,8 +7,8 @@ using System.Linq;
 using CppSharp;
 using CppSharp.AST;
 using CppSharp.Parser;
-using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
+using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Writers;
 using ClangParser = CppSharp.ClangParser;
 

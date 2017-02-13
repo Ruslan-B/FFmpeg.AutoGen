@@ -103,8 +103,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\FunctionProcessor.cs" />
-    <Compile Include="Builder\StructureProcessor.cs" />
+    <Compile Include="Definitions\TypeDefinition.cs" />
+    <Compile Include="Processors\FunctionProcessor.cs" />
+    <Compile Include="Processors\StructureProcessor.cs" />
     <Compile Include="Definitions\FunctionParameter.cs" />
     <Compile Include="Definitions\FunctionDefinition.cs" />
     <Compile Include="Definitions\ICanGenerateXmlDoc.cs" />
@@ -112,10 +113,10 @@
     <Compile Include="Definitions\StructureDefinition.cs" />
     <Compile Include="Definitions\EnumerationDefinition.cs" />
     <Compile Include="Definitions\EnumerationItem.cs" />
-    <Compile Include="Builder\EnumerationProcessor.cs" />
+    <Compile Include="Processors\EnumerationProcessor.cs" />
     <Compile Include="Definitions\ICanGenerateDefinition.cs" />
     <Compile Include="Definitions\StructureField.cs" />
-    <Compile Include="Builder\TypeHelper.cs" />
+    <Compile Include="Processors\TypeHelper.cs" />
     <Compile Include="GenerationContext.cs" />
     <Compile Include="Writer.cs" />
     <Compile Include="FunctionExport.cs" />

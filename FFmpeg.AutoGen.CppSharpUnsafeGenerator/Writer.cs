@@ -54,8 +54,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteSummary(function);
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
             WriteLine($"[DllImport(\"{function.LibraryName}\", EntryPoint = \"{function.Name}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
-            var @params = string.Join(", ", function.Parameters.Select(x => $"{x.TypeName} @{x.Name}"));
-            WriteLine($"public static extern {function.ReturnTypeName} {function.Name}({@params});");
+            function.ReturnType.Attributes.ToList().ForEach(WriteLine);
+            var @params = string.Join(", ", function.Parameters.Select(x => $"{string.Join("", x.Type.Attributes)}{x.Type.Name} @{x.Name}"));
+            WriteLine($"public static extern {function.ReturnType.Name} {function.Name}({@params});");
         }
 
         private void WriteSummary(ICanGenerateXmlDoc value)
