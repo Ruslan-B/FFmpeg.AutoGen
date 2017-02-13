@@ -4,7 +4,7 @@ using CppSharp.AST;
 using CppSharp.AST.Extensions;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
     internal class EnumerationProcessor
     {

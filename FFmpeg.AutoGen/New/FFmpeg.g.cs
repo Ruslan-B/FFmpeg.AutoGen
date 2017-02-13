@@ -5512,7 +5512,7 @@ namespace FFmpeg.AutoGen.New
         /// <summary>Opaque user data. May be set by the caller to an arbitrary value, e.g. to be used from callbacks like Libavfilter will not touch this field in any way.</summary>
         public void* @opaque;
         /// <summary>This callback may be set by the caller immediately after allocating the graph and before adding any filters to it, to provide a custom multithreading implementation.</summary>
-        public avfilter_execute_func* @execute;
+        public IntPtr @execute;
         /// <summary>swr options to use for the auto-inserted aresample filters, Access ONLY through AVOptions</summary>
         public byte* @aresample_swr_opts;
         /// <summary>Private fields</summary>
@@ -5637,19 +5637,23 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Return an informative version string. This usually is the actual release version number or a git commit description. This string has no fixed format and can change any time. It should never be parsed by code.</summary>
         [DllImport("avutil-55", EntryPoint = "av_version_info", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_version_info();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_version_info();
         
         /// <summary>Return the libavutil build-time configuration.</summary>
         [DllImport("avutil-55", EntryPoint = "avutil_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avutil_configuration();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avutil_configuration();
         
         /// <summary>Return the libavutil license.</summary>
         [DllImport("avutil-55", EntryPoint = "avutil_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avutil_license();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avutil_license();
         
         /// <summary>Return a string describing the media_type enum, NULL if media_type is unknown.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_media_type_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_get_media_type_string(AVMediaType @media_type);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_get_media_type_string(AVMediaType @media_type);
         
         /// <summary>Return a single letter to describe the given picture type pict_type.</summary>
         /// <param name="pict_type">the picture type</param>
@@ -5665,7 +5669,7 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Open a file using a UTF-8 filename. The API of this function matches POSIX fopen(), errors are returned through errno.</summary>
         [DllImport("avutil-55", EntryPoint = "av_fopen_utf8", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern FILE* av_fopen_utf8(byte* @path, byte* @mode);
+        public static extern FILE* av_fopen_utf8([MarshalAs(UnmanagedType.LPStr)] string @path, [MarshalAs(UnmanagedType.LPStr)] string @mode);
         
         /// <summary>Return the fractional representation of the internal time base.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_time_base_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5762,13 +5766,13 @@ namespace FFmpeg.AutoGen.New
         /// <summary>Duplicate a string.</summary>
         /// <param name="s">String to be duplicated</param>
         [DllImport("avutil-55", EntryPoint = "av_strdup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_strdup(byte* @s);
+        public static extern byte* av_strdup([MarshalAs(UnmanagedType.LPStr)] string @s);
         
         /// <summary>Duplicate a substring of a string.</summary>
         /// <param name="s">String to be duplicated</param>
         /// <param name="len">Maximum length of the resulting string (not counting the terminating byte)</param>
         [DllImport("avutil-55", EntryPoint = "av_strndup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_strndup(byte* @s, ulong @len);
+        public static extern byte* av_strndup([MarshalAs(UnmanagedType.LPStr)] string @s, ulong @len);
         
         /// <summary>Duplicate a buffer with av_malloc().</summary>
         /// <param name="p">Buffer to be duplicated</param>
@@ -5914,7 +5918,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="level">The importance level of the message expressed using a</param>
         /// <param name="fmt">The format string (printf-compatible) that specifies how subsequent arguments are converted to output.</param>
         [DllImport("avutil-55", EntryPoint = "av_log", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_log(void* @avcl, int @level, byte* @fmt);
+        public static extern void av_log(void* @avcl, int @level, [MarshalAs(UnmanagedType.LPStr)] string @fmt);
         
         /// <summary>Send the specified message to the log if the level is less than or equal to the current av_log_level. By default, all logging messages are sent to stderr. This behavior can be altered by setting a different logging callback function.</summary>
         /// <param name="avcl">A pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct.</param>
@@ -5922,7 +5926,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="fmt">The format string (printf-compatible) that specifies how subsequent arguments are converted to output.</param>
         /// <param name="vl">The arguments referenced by the format string.</param>
         [DllImport("avutil-55", EntryPoint = "av_vlog", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_vlog(void* @avcl, int @level, byte* @fmt, byte* @vl);
+        public static extern void av_vlog(void* @avcl, int @level, [MarshalAs(UnmanagedType.LPStr)] string @fmt, byte* @vl);
         
         /// <summary>Get the current log level</summary>
         [DllImport("avutil-55", EntryPoint = "av_log_get_level", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -5944,12 +5948,13 @@ namespace FFmpeg.AutoGen.New
         /// <param name="fmt">The format string (printf-compatible) that specifies how subsequent arguments are converted to output.</param>
         /// <param name="vl">The arguments referenced by the format string.</param>
         [DllImport("avutil-55", EntryPoint = "av_log_default_callback", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_log_default_callback(void* @avcl, int @level, byte* @fmt, byte* @vl);
+        public static extern void av_log_default_callback(void* @avcl, int @level, [MarshalAs(UnmanagedType.LPStr)] string @fmt, byte* @vl);
         
         /// <summary>Return the context name</summary>
         /// <param name="ctx">The AVClass context</param>
         [DllImport("avutil-55", EntryPoint = "av_default_item_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_default_item_name(void* @ctx);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_default_item_name(void* @ctx);
         
         [DllImport("avutil-55", EntryPoint = "av_default_get_category", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVClassCategory av_default_get_category(void* @ptr);
@@ -5959,14 +5964,14 @@ namespace FFmpeg.AutoGen.New
         /// <param name="line_size">size of the buffer</param>
         /// <param name="print_prefix">used to store whether the prefix must be printed; must point to a persistent integer initially set to 1</param>
         [DllImport("avutil-55", EntryPoint = "av_log_format_line", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_log_format_line(void* @ptr, int @level, byte* @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix);
+        public static extern void av_log_format_line(void* @ptr, int @level, [MarshalAs(UnmanagedType.LPStr)] string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix);
         
         /// <summary>Format a line of log the same way as the default callback.</summary>
         /// <param name="line">buffer to receive the formatted line; may be NULL if line_size is 0</param>
         /// <param name="line_size">size of the buffer; at most line_size-1 characters will be written to the buffer, plus one null terminator</param>
         /// <param name="print_prefix">used to store whether the prefix must be printed; must point to a persistent integer initially set to 1</param>
         [DllImport("avutil-55", EntryPoint = "av_log_format_line2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_log_format_line2(void* @ptr, int @level, byte* @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix);
+        public static extern int av_log_format_line2(void* @ptr, int @level, [MarshalAs(UnmanagedType.LPStr)] string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix);
         
         [DllImport("avutil-55", EntryPoint = "av_log_set_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_log_set_flags(int @arg);
@@ -6063,11 +6068,12 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Return the name of sample_fmt, or NULL if sample_fmt is not recognized.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_sample_fmt_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_get_sample_fmt_name(AVSampleFormat @sample_fmt);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_get_sample_fmt_name(AVSampleFormat @sample_fmt);
         
         /// <summary>Return a sample format corresponding to name, or AV_SAMPLE_FMT_NONE on error.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_sample_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVSampleFormat av_get_sample_fmt(byte* @name);
+        public static extern AVSampleFormat av_get_sample_fmt([MarshalAs(UnmanagedType.LPStr)] string @name);
         
         /// <summary>Return the planar<->packed alternative form of the given sample format, or AV_SAMPLE_FMT_NONE on error. If the passed sample_fmt is already in the requested planar/packed format, the format returned is the same as the input.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_alt_sample_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -6221,7 +6227,7 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Return a channel layout id that matches name, or 0 if no match is found.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_channel_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern ulong av_get_channel_layout(byte* @name);
+        public static extern ulong av_get_channel_layout([MarshalAs(UnmanagedType.LPStr)] string @name);
         
         /// <summary>Return a description of a channel layout. If nb_channels is <= 0, it is guessed from the channel_layout.</summary>
         /// <param name="buf">put here the string containing the channel layout</param>
@@ -6252,12 +6258,14 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Get the name of a given channel.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_channel_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_get_channel_name(ulong @channel);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_get_channel_name(ulong @channel);
         
         /// <summary>Get the description of a given channel.</summary>
         /// <param name="channel">a channel layout with a single channel</param>
         [DllImport("avutil-55", EntryPoint = "av_get_channel_description", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_get_channel_description(ulong @channel);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_get_channel_description(ulong @channel);
         
         /// <summary>Get the value and name of a standard channel layout.</summary>
         /// <param name="index">index in an internal list, starting at 0</param>
@@ -6280,11 +6288,11 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Parse CPU flags from a string.</summary>
         [DllImport("avutil-55", EntryPoint = "av_parse_cpu_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_parse_cpu_flags(byte* @s);
+        public static extern int av_parse_cpu_flags([MarshalAs(UnmanagedType.LPStr)] string @s);
         
         /// <summary>Parse CPU caps from a string and update the given AV_CPU_* flags based on that.</summary>
         [DllImport("avutil-55", EntryPoint = "av_parse_cpu_caps", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_parse_cpu_caps(uint* @flags, byte* @s);
+        public static extern int av_parse_cpu_caps(uint* @flags, [MarshalAs(UnmanagedType.LPStr)] string @s);
         
         /// <summary>Returns the number of logical CPU cores present.</summary>
         [DllImport("avutil-55", EntryPoint = "av_cpu_count", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -6370,7 +6378,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="prev">Set to the previous matching element to find the next. If set to NULL the first matching element is returned.</param>
         /// <param name="flags">a collection of AV_DICT_* flags controlling how the entry is retrieved</param>
         [DllImport("avutil-55", EntryPoint = "av_dict_get", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVDictionaryEntry* av_dict_get(AVDictionary* @m, byte* @key, AVDictionaryEntry* @prev, int @flags);
+        public static extern AVDictionaryEntry* av_dict_get(AVDictionary* @m, [MarshalAs(UnmanagedType.LPStr)] string @key, AVDictionaryEntry* @prev, int @flags);
         
         /// <summary>Get number of entries in dictionary.</summary>
         /// <param name="m">dictionary</param>
@@ -6382,18 +6390,18 @@ namespace FFmpeg.AutoGen.New
         /// <param name="key">entry key to add to *pm (will either be av_strduped or added as a new key depending on flags)</param>
         /// <param name="value">entry value to add to *pm (will be av_strduped or added as a new key depending on flags). Passing a NULL value will cause an existing entry to be deleted.</param>
         [DllImport("avutil-55", EntryPoint = "av_dict_set", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_dict_set(AVDictionary** @pm, byte* @key, byte* @value, int @flags);
+        public static extern int av_dict_set(AVDictionary** @pm, [MarshalAs(UnmanagedType.LPStr)] string @key, [MarshalAs(UnmanagedType.LPStr)] string @value, int @flags);
         
         /// <summary>Convenience wrapper for av_dict_set that converts the value to a string and stores it.</summary>
         [DllImport("avutil-55", EntryPoint = "av_dict_set_int", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_dict_set_int(AVDictionary** @pm, byte* @key, long @value, int @flags);
+        public static extern int av_dict_set_int(AVDictionary** @pm, [MarshalAs(UnmanagedType.LPStr)] string @key, long @value, int @flags);
         
         /// <summary>Parse the key/value pairs list and add the parsed entries to a dictionary.</summary>
         /// <param name="key_val_sep">a 0-terminated list of characters used to separate key from value</param>
         /// <param name="pairs_sep">a 0-terminated list of characters used to separate two pairs from each other</param>
         /// <param name="flags">flags to use when adding to dictionary. AV_DICT_DONT_STRDUP_KEY and AV_DICT_DONT_STRDUP_VAL are ignored since the key/value tokens will always be duplicated.</param>
         [DllImport("avutil-55", EntryPoint = "av_dict_parse_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_dict_parse_string(AVDictionary** @pm, byte* @str, byte* @key_val_sep, byte* @pairs_sep, int @flags);
+        public static extern int av_dict_parse_string(AVDictionary** @pm, [MarshalAs(UnmanagedType.LPStr)] string @str, [MarshalAs(UnmanagedType.LPStr)] string @key_val_sep, [MarshalAs(UnmanagedType.LPStr)] string @pairs_sep, int @flags);
         
         /// <summary>Copy entries from one AVDictionary struct into another.</summary>
         /// <param name="dst">pointer to a pointer to a AVDictionary struct. If *dst is NULL, this function will allocate a struct for you and put it in *dst</param>
@@ -6492,7 +6500,8 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Get the name of a colorspace.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_colorspace_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_get_colorspace_name(AVColorSpace @val);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_get_colorspace_name(AVColorSpace @val);
         
         /// <summary>Allocate an AVFrame and set its fields to default values. The resulting struct must be freed using av_frame_free().</summary>
         [DllImport("avutil-55", EntryPoint = "av_frame_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -6563,7 +6572,8 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Returns a string identifying the side data type</summary>
         [DllImport("avutil-55", EntryPoint = "av_frame_side_data_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_frame_side_data_name(AVFrameSideDataType @type);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_frame_side_data_name(AVFrameSideDataType @type);
         
         /// <summary>Show the obj options.</summary>
         /// <param name="av_log_obj">log context to use for showing the options</param>
@@ -6589,7 +6599,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="key_val_sep">a 0-terminated list of characters used to separate key from value</param>
         /// <param name="pairs_sep">a 0-terminated list of characters used to separate two pairs from each other</param>
         [DllImport("avutil-55", EntryPoint = "av_set_options_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_set_options_string(void* @ctx, byte* @opts, byte* @key_val_sep, byte* @pairs_sep);
+        public static extern int av_set_options_string(void* @ctx, [MarshalAs(UnmanagedType.LPStr)] string @opts, [MarshalAs(UnmanagedType.LPStr)] string @key_val_sep, [MarshalAs(UnmanagedType.LPStr)] string @pairs_sep);
         
         /// <summary>Parse the key-value pairs list in opts. For each key=value pair found, set the value of the corresponding option in ctx.</summary>
         /// <param name="ctx">the AVClass object to set options on</param>
@@ -6598,7 +6608,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="key_val_sep">a 0-terminated list of characters used to separate key from value, for example '='</param>
         /// <param name="pairs_sep">a 0-terminated list of characters used to separate two pairs from each other, for example ':' or ','</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_set_from_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_set_from_string(void* @ctx, byte* @opts, byte** @shorthand, byte* @key_val_sep, byte* @pairs_sep);
+        public static extern int av_opt_set_from_string(void* @ctx, [MarshalAs(UnmanagedType.LPStr)] string @opts, byte** @shorthand, [MarshalAs(UnmanagedType.LPStr)] string @key_val_sep, [MarshalAs(UnmanagedType.LPStr)] string @pairs_sep);
         
         /// <summary>Free all allocated objects in obj.</summary>
         [DllImport("avutil-55", EntryPoint = "av_opt_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -6608,7 +6618,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="field_name">the name of the flag field option</param>
         /// <param name="flag_name">the name of the flag to check</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_flag_is_set", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_flag_is_set(void* @obj, byte* @field_name, byte* @flag_name);
+        public static extern int av_opt_flag_is_set(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @field_name, [MarshalAs(UnmanagedType.LPStr)] string @flag_name);
         
         /// <summary>Set all the options from a given dictionary on an object.</summary>
         /// <param name="obj">a struct whose first element is a pointer to AVClass</param>
@@ -6631,29 +6641,29 @@ namespace FFmpeg.AutoGen.New
         /// <param name="rkey">parsed key; must be freed using av_free()</param>
         /// <param name="rval">parsed value; must be freed using av_free()</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_get_key_value", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_get_key_value(byte** @ropts, byte* @key_val_sep, byte* @pairs_sep, uint @flags, byte** @rkey, byte** @rval);
+        public static extern int av_opt_get_key_value(byte** @ropts, [MarshalAs(UnmanagedType.LPStr)] string @key_val_sep, [MarshalAs(UnmanagedType.LPStr)] string @pairs_sep, uint @flags, byte** @rkey, byte** @rval);
         
         /// <summary>@{ This group of functions can be used to evaluate option strings and get numbers out of them. They do the same thing as av_opt_set(), except the result is written into the caller-supplied pointer.</summary>
         /// <param name="obj">a struct whose first element is a pointer to AVClass.</param>
         /// <param name="o">an option for which the string is to be evaluated.</param>
         /// <param name="val">string to be evaluated.</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_eval_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_eval_flags(void* @obj, AVOption* @o, byte* @val, int* @flags_out);
+        public static extern int av_opt_eval_flags(void* @obj, AVOption* @o, [MarshalAs(UnmanagedType.LPStr)] string @val, int* @flags_out);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_eval_int", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_eval_int(void* @obj, AVOption* @o, byte* @val, int* @int_out);
+        public static extern int av_opt_eval_int(void* @obj, AVOption* @o, [MarshalAs(UnmanagedType.LPStr)] string @val, int* @int_out);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_eval_int64", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_eval_int64(void* @obj, AVOption* @o, byte* @val, long* @int64_out);
+        public static extern int av_opt_eval_int64(void* @obj, AVOption* @o, [MarshalAs(UnmanagedType.LPStr)] string @val, long* @int64_out);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_eval_float", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_eval_float(void* @obj, AVOption* @o, byte* @val, float* @float_out);
+        public static extern int av_opt_eval_float(void* @obj, AVOption* @o, [MarshalAs(UnmanagedType.LPStr)] string @val, float* @float_out);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_eval_double", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_eval_double(void* @obj, AVOption* @o, byte* @val, double* @double_out);
+        public static extern int av_opt_eval_double(void* @obj, AVOption* @o, [MarshalAs(UnmanagedType.LPStr)] string @val, double* @double_out);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_eval_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_eval_q(void* @obj, AVOption* @o, byte* @val, AVRational* @q_out);
+        public static extern int av_opt_eval_q(void* @obj, AVOption* @o, [MarshalAs(UnmanagedType.LPStr)] string @val, AVRational* @q_out);
         
         /// <summary>Look for an option in an object. Consider only options which have all the specified flags set.</summary>
         /// <param name="obj">A pointer to a struct whose first element is a pointer to an AVClass. Alternatively a double pointer to an AVClass, if AV_OPT_SEARCH_FAKE_OBJ search flag is set.</param>
@@ -6662,7 +6672,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="opt_flags">Find only options with all the specified flags set (AV_OPT_FLAG).</param>
         /// <param name="search_flags">A combination of AV_OPT_SEARCH_*.</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_find", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVOption* av_opt_find(void* @obj, byte* @name, byte* @unit, int @opt_flags, int @search_flags);
+        public static extern AVOption* av_opt_find(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, [MarshalAs(UnmanagedType.LPStr)] string @unit, int @opt_flags, int @search_flags);
         
         /// <summary>Look for an option in an object. Consider only options which have all the specified flags set.</summary>
         /// <param name="obj">A pointer to a struct whose first element is a pointer to an AVClass. Alternatively a double pointer to an AVClass, if AV_OPT_SEARCH_FAKE_OBJ search flag is set.</param>
@@ -6672,7 +6682,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="search_flags">A combination of AV_OPT_SEARCH_*.</param>
         /// <param name="target_obj">if non-NULL, an object to which the option belongs will be written here. It may be different from obj if AV_OPT_SEARCH_CHILDREN is present in search_flags. This parameter is ignored if search_flags contain AV_OPT_SEARCH_FAKE_OBJ.</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_find2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVOption* av_opt_find2(void* @obj, byte* @name, byte* @unit, int @opt_flags, int @search_flags, void** @target_obj);
+        public static extern AVOption* av_opt_find2(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, [MarshalAs(UnmanagedType.LPStr)] string @unit, int @opt_flags, int @search_flags, void** @target_obj);
         
         /// <summary>Iterate over all AVOptions belonging to obj.</summary>
         /// <param name="obj">an AVOptions-enabled struct or a double pointer to an AVClass describing it.</param>
@@ -6696,37 +6706,37 @@ namespace FFmpeg.AutoGen.New
         /// <param name="val">The value to set. In case of av_opt_set() if the field is not of a string type, then the given string is parsed. SI postfixes and some named scalars are supported. If the field is of a numeric type, it has to be a numeric or named scalar. Behavior with more than one scalar and +- infix operators is undefined. If the field is of a flags type, it has to be a sequence of numeric scalars or named flags separated by '+' or '-'. Prefixing a flag with '+' causes it to be set without affecting the other flags; similarly, '-' unsets a flag.</param>
         /// <param name="search_flags">flags passed to av_opt_find2. I.e. if AV_OPT_SEARCH_CHILDREN is passed here, then the option may be set on a child of obj.</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_set", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_set(void* @obj, byte* @name, byte* @val, int @search_flags);
+        public static extern int av_opt_set(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, [MarshalAs(UnmanagedType.LPStr)] string @val, int @search_flags);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_set_int", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_set_int(void* @obj, byte* @name, long @val, int @search_flags);
+        public static extern int av_opt_set_int(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, long @val, int @search_flags);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_set_double", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_set_double(void* @obj, byte* @name, double @val, int @search_flags);
+        public static extern int av_opt_set_double(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, double @val, int @search_flags);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_set_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_set_q(void* @obj, byte* @name, AVRational @val, int @search_flags);
+        public static extern int av_opt_set_q(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, AVRational @val, int @search_flags);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_set_bin", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_set_bin(void* @obj, byte* @name, byte* @val, int @size, int @search_flags);
+        public static extern int av_opt_set_bin(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, byte* @val, int @size, int @search_flags);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_set_image_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_set_image_size(void* @obj, byte* @name, int @w, int @h, int @search_flags);
+        public static extern int av_opt_set_image_size(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @w, int @h, int @search_flags);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_set_pixel_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_set_pixel_fmt(void* @obj, byte* @name, AVPixelFormat @fmt, int @search_flags);
+        public static extern int av_opt_set_pixel_fmt(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, AVPixelFormat @fmt, int @search_flags);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_set_sample_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_set_sample_fmt(void* @obj, byte* @name, AVSampleFormat @fmt, int @search_flags);
+        public static extern int av_opt_set_sample_fmt(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, AVSampleFormat @fmt, int @search_flags);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_set_video_rate", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_set_video_rate(void* @obj, byte* @name, AVRational @val, int @search_flags);
+        public static extern int av_opt_set_video_rate(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, AVRational @val, int @search_flags);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_set_channel_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_set_channel_layout(void* @obj, byte* @name, long @ch_layout, int @search_flags);
+        public static extern int av_opt_set_channel_layout(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, long @ch_layout, int @search_flags);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_set_dict_val", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_set_dict_val(void* @obj, byte* @name, AVDictionary* @val, int @search_flags);
+        public static extern int av_opt_set_dict_val(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, AVDictionary* @val, int @search_flags);
         
         /// <summary>@{ Those functions get a value of the option with the given name from an object.</summary>
         /// <param name="obj">a struct whose first element is a pointer to an AVClass.</param>
@@ -6734,39 +6744,39 @@ namespace FFmpeg.AutoGen.New
         /// <param name="search_flags">flags passed to av_opt_find2. I.e. if AV_OPT_SEARCH_CHILDREN is passed here, then the option may be found in a child of obj.</param>
         /// <param name="out_val">value of the option will be written here</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_get", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_get(void* @obj, byte* @name, int @search_flags, byte** @out_val);
+        public static extern int av_opt_get(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, byte** @out_val);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_get_int", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_get_int(void* @obj, byte* @name, int @search_flags, long* @out_val);
+        public static extern int av_opt_get_int(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, long* @out_val);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_get_double", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_get_double(void* @obj, byte* @name, int @search_flags, double* @out_val);
+        public static extern int av_opt_get_double(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, double* @out_val);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_get_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_get_q(void* @obj, byte* @name, int @search_flags, AVRational* @out_val);
+        public static extern int av_opt_get_q(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, AVRational* @out_val);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_get_image_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_get_image_size(void* @obj, byte* @name, int @search_flags, int* @w_out, int* @h_out);
+        public static extern int av_opt_get_image_size(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, int* @w_out, int* @h_out);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_get_pixel_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_get_pixel_fmt(void* @obj, byte* @name, int @search_flags, IntPtr @out_fmt);
+        public static extern int av_opt_get_pixel_fmt(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, IntPtr @out_fmt);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_get_sample_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_get_sample_fmt(void* @obj, byte* @name, int @search_flags, IntPtr @out_fmt);
+        public static extern int av_opt_get_sample_fmt(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, IntPtr @out_fmt);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_get_video_rate", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_get_video_rate(void* @obj, byte* @name, int @search_flags, AVRational* @out_val);
+        public static extern int av_opt_get_video_rate(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, AVRational* @out_val);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_get_channel_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_get_channel_layout(void* @obj, byte* @name, int @search_flags, long* @ch_layout);
+        public static extern int av_opt_get_channel_layout(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, long* @ch_layout);
         
         /// <param name="out_val">The returned dictionary is a copy of the actual value and must be freed with av_dict_free() by the caller</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_get_dict_val", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_get_dict_val(void* @obj, byte* @name, int @search_flags, AVDictionary** @out_val);
+        public static extern int av_opt_get_dict_val(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags, AVDictionary** @out_val);
         
         /// <summary>@}</summary>
         [DllImport("avutil-55", EntryPoint = "av_opt_ptr", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void* av_opt_ptr(AVClass* @avclass, void* @obj, byte* @name);
+        public static extern void* av_opt_ptr(AVClass* @avclass, void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name);
         
         /// <summary>Free an AVOptionRanges struct and set it to NULL.</summary>
         [DllImport("avutil-55", EntryPoint = "av_opt_freep_ranges", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -6775,7 +6785,7 @@ namespace FFmpeg.AutoGen.New
         /// <summary>Get a list of allowed ranges for the given option.</summary>
         /// <param name="flags">is a bitmask of flags, undefined flags should not be set and should be ignored AV_OPT_SEARCH_FAKE_OBJ indicates that the obj is a double pointer to a AVClass instead of a full instance AV_OPT_MULTI_COMPONENT_RANGE indicates that function may return more than one component,</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_query_ranges", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_query_ranges(AVOptionRanges** @p44, void* @obj, byte* @key, int @flags);
+        public static extern int av_opt_query_ranges(AVOptionRanges** @p44, void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @key, int @flags);
         
         /// <summary>Copy options from src object into dest object.</summary>
         /// <param name="dest">Object to copy from</param>
@@ -6786,7 +6796,7 @@ namespace FFmpeg.AutoGen.New
         /// <summary>Get a default list of allowed ranges for the given option.</summary>
         /// <param name="flags">is a bitmask of flags, undefined flags should not be set and should be ignored AV_OPT_SEARCH_FAKE_OBJ indicates that the obj is a double pointer to a AVClass instead of a full instance AV_OPT_MULTI_COMPONENT_RANGE indicates that function may return more than one component,</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_query_ranges_default", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_query_ranges_default(AVOptionRanges** @p46, void* @obj, byte* @key, int @flags);
+        public static extern int av_opt_query_ranges_default(AVOptionRanges** @p46, void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @key, int @flags);
         
         /// <summary>Check if given option is set to its default value.</summary>
         /// <param name="obj">AVClass object to check option on</param>
@@ -6799,7 +6809,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="name">option name</param>
         /// <param name="search_flags">combination of AV_OPT_SEARCH_*</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_is_set_to_default_by_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_is_set_to_default_by_name(void* @obj, byte* @name, int @search_flags);
+        public static extern int av_opt_is_set_to_default_by_name(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags);
         
         /// <summary>Serialize object's options.</summary>
         /// <param name="obj">AVClass object to serialize</param>
@@ -6845,31 +6855,37 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Returns the name for provided color range or NULL if unknown.</summary>
         [DllImport("avutil-55", EntryPoint = "av_color_range_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_color_range_name(AVColorRange @range);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_color_range_name(AVColorRange @range);
         
         /// <summary>Returns the name for provided color primaries or NULL if unknown.</summary>
         [DllImport("avutil-55", EntryPoint = "av_color_primaries_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_color_primaries_name(AVColorPrimaries @primaries);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_color_primaries_name(AVColorPrimaries @primaries);
         
         /// <summary>Returns the name for provided color transfer or NULL if unknown.</summary>
         [DllImport("avutil-55", EntryPoint = "av_color_transfer_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_color_transfer_name(AVColorTransferCharacteristic @transfer);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_color_transfer_name(AVColorTransferCharacteristic @transfer);
         
         /// <summary>Returns the name for provided color space or NULL if unknown.</summary>
         [DllImport("avutil-55", EntryPoint = "av_color_space_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_color_space_name(AVColorSpace @space);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_color_space_name(AVColorSpace @space);
         
         /// <summary>Returns the name for provided chroma location or NULL if unknown.</summary>
         [DllImport("avutil-55", EntryPoint = "av_chroma_location_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_chroma_location_name(AVChromaLocation @location);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_chroma_location_name(AVChromaLocation @location);
         
         /// <summary>Return the pixel format corresponding to name.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_pix_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVPixelFormat av_get_pix_fmt(byte* @name);
+        public static extern AVPixelFormat av_get_pix_fmt([MarshalAs(UnmanagedType.LPStr)] string @name);
         
         /// <summary>Return the short name for a pixel format, NULL in case pix_fmt is unknown.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_pix_fmt_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_get_pix_fmt_name(AVPixelFormat @pix_fmt);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_get_pix_fmt_name(AVPixelFormat @pix_fmt);
         
         /// <summary>Print in buf the string corresponding to the pixel format with number pix_fmt, or a header if pix_fmt is negative.</summary>
         /// <param name="buf">the buffer where to write the string</param>
@@ -7115,11 +7131,13 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Return the swr build-time configuration.</summary>
         [DllImport("swresample-2", EntryPoint = "swresample_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* swresample_configuration();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string swresample_configuration();
         
         /// <summary>Return the swr license.</summary>
         [DllImport("swresample-2", EntryPoint = "swresample_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* swresample_license();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string swresample_license();
         
         /// <summary>Convert the samples in the input AVFrame and write them to the output AVFrame.</summary>
         /// <param name="swr">audio resample context</param>
@@ -7139,11 +7157,13 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Return the libpostproc build-time configuration.</summary>
         [DllImport("postproc-54", EntryPoint = "postproc_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* postproc_configuration();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string postproc_configuration();
         
         /// <summary>Return the libpostproc license.</summary>
         [DllImport("postproc-54", EntryPoint = "postproc_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* postproc_license();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string postproc_license();
         
         [DllImport("postproc-54", EntryPoint = "pp_postprocess", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void pp_postprocess(byte*[] @src, int[] @srcStride, byte*[] @dst, int[] @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
@@ -7152,7 +7172,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="name">the string after "-pp" on the command line</param>
         /// <param name="quality">a number from 0 to PP_QUALITY_MAX</param>
         [DllImport("postproc-54", EntryPoint = "pp_get_mode_by_name_and_quality", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void* pp_get_mode_by_name_and_quality(byte* @name, int @quality);
+        public static extern void* pp_get_mode_by_name_and_quality([MarshalAs(UnmanagedType.LPStr)] string @name, int @quality);
         
         [DllImport("postproc-54", EntryPoint = "pp_free_mode", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void pp_free_mode(void* @mode);
@@ -7169,11 +7189,13 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Return the libswscale build-time configuration.</summary>
         [DllImport("swscale-4", EntryPoint = "swscale_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* swscale_configuration();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string swscale_configuration();
         
         /// <summary>Return the libswscale license.</summary>
         [DllImport("swscale-4", EntryPoint = "swscale_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* swscale_license();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string swscale_license();
         
         /// <summary>Return a pointer to yuv<->rgb coefficients for the given colorspace suitable for sws_setColorspaceDetails().</summary>
         /// <param name="colorspace">One of the SWS_CS_* macros. If invalid, SWS_CS_DEFAULT is used.</param>
@@ -7362,11 +7384,13 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Return the libavcodec build-time configuration.</summary>
         [DllImport("avcodec-57", EntryPoint = "avcodec_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avcodec_configuration();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avcodec_configuration();
         
         /// <summary>Return the libavcodec license.</summary>
         [DllImport("avcodec-57", EntryPoint = "avcodec_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avcodec_license();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avcodec_license();
         
         /// <summary>Register the codec codec and initialize libavcodec.</summary>
         [DllImport("avcodec-57", EntryPoint = "avcodec_register", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -7536,7 +7560,8 @@ namespace FFmpeg.AutoGen.New
         public static extern int av_packet_split_side_data(AVPacket* @pkt);
         
         [DllImport("avcodec-57", EntryPoint = "av_packet_side_data_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_packet_side_data_name(AVPacketSideDataType @type);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_packet_side_data_name(AVPacketSideDataType @type);
         
         /// <summary>Pack a dictionary for use in side_data.</summary>
         /// <param name="dict">The dictionary to pack.</param>
@@ -7594,7 +7619,7 @@ namespace FFmpeg.AutoGen.New
         /// <summary>Find a registered decoder with the specified name.</summary>
         /// <param name="name">name of the requested decoder</param>
         [DllImport("avcodec-57", EntryPoint = "avcodec_find_decoder_by_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVCodec* avcodec_find_decoder_by_name(byte* @name);
+        public static extern AVCodec* avcodec_find_decoder_by_name([MarshalAs(UnmanagedType.LPStr)] string @name);
         
         /// <summary>The default callback for AVCodecContext.get_buffer2(). It is made public so it can be called by custom get_buffer2() implementations for decoders without AV_CODEC_CAP_DR1 set.</summary>
         [DllImport("avcodec-57", EntryPoint = "avcodec_default_get_buffer2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -7709,7 +7734,7 @@ namespace FFmpeg.AutoGen.New
         /// <summary>Find a registered encoder with the specified name.</summary>
         /// <param name="name">name of the requested encoder</param>
         [DllImport("avcodec-57", EntryPoint = "avcodec_find_encoder_by_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVCodec* avcodec_find_encoder_by_name(byte* @name);
+        public static extern AVCodec* avcodec_find_encoder_by_name([MarshalAs(UnmanagedType.LPStr)] string @name);
         
         /// <summary>Encode a frame of audio.</summary>
         /// <param name="avctx">codec context</param>
@@ -7850,13 +7875,15 @@ namespace FFmpeg.AutoGen.New
         /// <param name="codec">the codec that is searched for the given profile</param>
         /// <param name="profile">the profile value for which a name is requested</param>
         [DllImport("avcodec-57", EntryPoint = "av_get_profile_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* av_get_profile_name(AVCodec* @codec, int @profile);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string av_get_profile_name(AVCodec* @codec, int @profile);
         
         /// <summary>Return a name for the specified profile, if available.</summary>
         /// <param name="codec_id">the ID of the codec to which the requested profile belongs</param>
         /// <param name="profile">the profile value for which a name is requested</param>
         [DllImport("avcodec-57", EntryPoint = "avcodec_profile_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avcodec_profile_name(AVCodecID @codec_id, int @profile);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avcodec_profile_name(AVCodecID @codec_id, int @profile);
         
         [DllImport("avcodec-57", EntryPoint = "avcodec_default_execute", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avcodec_default_execute(AVCodecContext* @c, IntPtr @func, void* @arg, int* @ret, int @count, int @size);
@@ -7910,7 +7937,7 @@ namespace FFmpeg.AutoGen.New
         /// <summary>Create and initialize a bitstream filter context given a bitstream filter name.</summary>
         /// <param name="name">the name of the bitstream filter</param>
         [DllImport("avcodec-57", EntryPoint = "av_bitstream_filter_init", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVBitStreamFilterContext* av_bitstream_filter_init(byte* @name);
+        public static extern AVBitStreamFilterContext* av_bitstream_filter_init([MarshalAs(UnmanagedType.LPStr)] string @name);
         
         /// <summary>Filter bitstream.</summary>
         /// <param name="bsfc">bitstream filter context created by av_bitstream_filter_init()</param>
@@ -7922,7 +7949,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="buf_size">size in bytes of buf</param>
         /// <param name="keyframe">set to non-zero if the buffer to filter corresponds to a key-frame packet data</param>
         [DllImport("avcodec-57", EntryPoint = "av_bitstream_filter_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_bitstream_filter_filter(AVBitStreamFilterContext* @bsfc, AVCodecContext* @avctx, byte* @args, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe);
+        public static extern int av_bitstream_filter_filter(AVBitStreamFilterContext* @bsfc, AVCodecContext* @avctx, [MarshalAs(UnmanagedType.LPStr)] string @args, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe);
         
         /// <summary>Release bitstream filter context.</summary>
         /// <param name="bsf">the bitstream filter context created with av_bitstream_filter_init(), can be NULL</param>
@@ -7935,7 +7962,7 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Returns a bitstream filter with the specified name or NULL if no such bitstream filter exists.</summary>
         [DllImport("avcodec-57", EntryPoint = "av_bsf_get_by_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVBitStreamFilter* av_bsf_get_by_name(byte* @name);
+        public static extern AVBitStreamFilter* av_bsf_get_by_name([MarshalAs(UnmanagedType.LPStr)] string @name);
         
         /// <summary>Iterate over all registered bitstream filters.</summary>
         /// <param name="opaque">a pointer where libavcodec will store the iteration state. Must point to NULL to start the iteration.</param>
@@ -7990,7 +8017,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="bsf_name">Name of the bitstream filter</param>
         /// <param name="options">Options for the bitstream filter, can be set to NULL</param>
         [DllImport("avcodec-57", EntryPoint = "av_bsf_list_append2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_bsf_list_append2(AVBSFList* @lst, byte* @bsf_name, AVDictionary** @options);
+        public static extern int av_bsf_list_append2(AVBSFList* @lst, [MarshalAs(UnmanagedType.LPStr)] string @bsf_name, AVDictionary** @options);
         
         /// <summary>Finalize list of bitstream filters.</summary>
         /// <param name="lst">Filter list structure to be transformed</param>
@@ -8002,7 +8029,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="str">String describing chain of bitstream filters in format `bsf1[=opt1=val1:opt2=val2][,bsf2]`</param>
         /// <param name="bsf">Pointer to be set to newly created</param>
         [DllImport("avcodec-57", EntryPoint = "av_bsf_list_parse_str", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_bsf_list_parse_str(byte* @str, AVBSFContext** @bsf);
+        public static extern int av_bsf_list_parse_str([MarshalAs(UnmanagedType.LPStr)] string @str, AVBSFContext** @bsf);
         
         /// <summary>Get null/pass-through bitstream filter.</summary>
         /// <param name="bsf">Pointer to be set to new instance of pass-through bitstream filter</param>
@@ -8028,13 +8055,13 @@ namespace FFmpeg.AutoGen.New
         /// <param name="feature">string containing the name of the missing feature</param>
         /// <param name="want_sample">indicates if samples are wanted which exhibit this feature. If want_sample is non-zero, additional verbiage will be added to the log message which tells the user how to report samples to the development mailing list.</param>
         [DllImport("avcodec-57", EntryPoint = "av_log_missing_feature", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_log_missing_feature(void* @avc, byte* @feature, int @want_sample);
+        public static extern void av_log_missing_feature(void* @avc, [MarshalAs(UnmanagedType.LPStr)] string @feature, int @want_sample);
         
         /// <summary>Log a generic warning message asking for a sample. This function is intended to be used internally by FFmpeg (libavcodec, libavformat, etc.) only, and would normally not be used by applications.</summary>
         /// <param name="avc">a pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct</param>
         /// <param name="msg">string containing an optional message, or NULL if no message</param>
         [DllImport("avcodec-57", EntryPoint = "av_log_ask_for_sample", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_log_ask_for_sample(void* @avc, byte* @msg);
+        public static extern void av_log_ask_for_sample(void* @avc, [MarshalAs(UnmanagedType.LPStr)] string @msg);
         
         /// <summary>Register the hardware accelerator hwaccel.</summary>
         [DllImport("avcodec-57", EntryPoint = "av_register_hwaccel", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -8055,7 +8082,8 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Get the name of a codec.</summary>
         [DllImport("avcodec-57", EntryPoint = "avcodec_get_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avcodec_get_name(AVCodecID @id);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avcodec_get_name(AVCodecID @id);
         
         /// <summary>Returns a positive value if s is open (i.e. avcodec_open2() was called on it with no corresponding avcodec_close()), 0 otherwise.</summary>
         [DllImport("avcodec-57", EntryPoint = "avcodec_is_open", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -8080,7 +8108,7 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Returns codec descriptor with the given name or NULL if no such descriptor exists.</summary>
         [DllImport("avcodec-57", EntryPoint = "avcodec_descriptor_get_by_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVCodecDescriptor* avcodec_descriptor_get_by_name(byte* @name);
+        public static extern AVCodecDescriptor* avcodec_descriptor_get_by_name([MarshalAs(UnmanagedType.LPStr)] string @name);
         
         /// <summary>Allocate a CPB properties structure and initialize its fields to default values.</summary>
         /// <param name="size">if non-NULL, the size of the allocated struct will be written here. This is useful for embedding it in side data.</param>
@@ -8089,29 +8117,30 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Return the name of the protocol that will handle the passed URL.</summary>
         [DllImport("avformat-57", EntryPoint = "avio_find_protocol_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avio_find_protocol_name(byte* @url);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avio_find_protocol_name([MarshalAs(UnmanagedType.LPStr)] string @url);
         
         /// <summary>Return AVIO_FLAG_* access flags corresponding to the access permissions of the resource in url, or a negative value corresponding to an AVERROR code in case of failure. The returned access flags are masked by the value in flags.</summary>
         [DllImport("avformat-57", EntryPoint = "avio_check", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avio_check(byte* @url, int @flags);
+        public static extern int avio_check([MarshalAs(UnmanagedType.LPStr)] string @url, int @flags);
         
         /// <summary>Move or rename a resource.</summary>
         /// <param name="url_src">url to resource to be moved</param>
         /// <param name="url_dst">new url to resource if the operation succeeded</param>
         [DllImport("avformat-57", EntryPoint = "avpriv_io_move", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avpriv_io_move(byte* @url_src, byte* @url_dst);
+        public static extern int avpriv_io_move([MarshalAs(UnmanagedType.LPStr)] string @url_src, [MarshalAs(UnmanagedType.LPStr)] string @url_dst);
         
         /// <summary>Delete a resource.</summary>
         /// <param name="url">resource to be deleted.</param>
         [DllImport("avformat-57", EntryPoint = "avpriv_io_delete", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avpriv_io_delete(byte* @url);
+        public static extern int avpriv_io_delete([MarshalAs(UnmanagedType.LPStr)] string @url);
         
         /// <summary>Open directory for reading.</summary>
         /// <param name="s">directory read context. Pointer to a NULL pointer must be passed.</param>
         /// <param name="url">directory to be listed.</param>
         /// <param name="options">A dictionary filled with protocol-private options. On return this parameter will be destroyed and replaced with a dictionary containing options that were not found. May be NULL.</param>
         [DllImport("avformat-57", EntryPoint = "avio_open_dir", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avio_open_dir(AVIODirContext** @s, byte* @url, AVDictionary** @options);
+        public static extern int avio_open_dir(AVIODirContext** @s, [MarshalAs(UnmanagedType.LPStr)] string @url, AVDictionary** @options);
         
         /// <summary>Get next directory entry.</summary>
         /// <param name="s">directory read context.</param>
@@ -8172,19 +8201,19 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Write a NULL-terminated string.</summary>
         [DllImport("avformat-57", EntryPoint = "avio_put_str", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avio_put_str(AVIOContext* @s, byte* @str);
+        public static extern int avio_put_str(AVIOContext* @s, [MarshalAs(UnmanagedType.LPStr)] string @str);
         
         /// <summary>Convert an UTF-8 string to UTF-16LE and write it.</summary>
         /// <param name="s">the AVIOContext</param>
         /// <param name="str">NULL-terminated UTF-8 string</param>
         [DllImport("avformat-57", EntryPoint = "avio_put_str16le", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avio_put_str16le(AVIOContext* @s, byte* @str);
+        public static extern int avio_put_str16le(AVIOContext* @s, [MarshalAs(UnmanagedType.LPStr)] string @str);
         
         /// <summary>Convert an UTF-8 string to UTF-16BE and write it.</summary>
         /// <param name="s">the AVIOContext</param>
         /// <param name="str">NULL-terminated UTF-8 string</param>
         [DllImport("avformat-57", EntryPoint = "avio_put_str16be", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avio_put_str16be(AVIOContext* @s, byte* @str);
+        public static extern int avio_put_str16be(AVIOContext* @s, [MarshalAs(UnmanagedType.LPStr)] string @str);
         
         /// <summary>Mark the written bytestream as a specific type.</summary>
         /// <param name="time">the stream time the current bytestream pos corresponds to (in AV_TIME_BASE units), or AV_NOPTS_VALUE if unknown or not applicable</param>
@@ -8212,7 +8241,7 @@ namespace FFmpeg.AutoGen.New
         public static extern int url_feof(AVIOContext* @s);
         
         [DllImport("avformat-57", EntryPoint = "avio_printf", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avio_printf(AVIOContext* @s, byte* @fmt);
+        public static extern int avio_printf(AVIOContext* @s, [MarshalAs(UnmanagedType.LPStr)] string @fmt);
         
         /// <summary>Force flushing of buffered data.</summary>
         [DllImport("avformat-57", EntryPoint = "avio_flush", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -8266,7 +8295,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="url">resource to access</param>
         /// <param name="flags">flags which control how the resource indicated by url is to be opened</param>
         [DllImport("avformat-57", EntryPoint = "avio_open", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avio_open(AVIOContext** @s, byte* @url, int @flags);
+        public static extern int avio_open(AVIOContext** @s, [MarshalAs(UnmanagedType.LPStr)] string @url, int @flags);
         
         /// <summary>Create and initialize a AVIOContext for accessing the resource indicated by url.</summary>
         /// <param name="s">Used to return the pointer to the created AVIOContext. In case of failure the pointed to value is set to NULL.</param>
@@ -8275,7 +8304,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="int_cb">an interrupt callback to be used at the protocols level</param>
         /// <param name="options">A dictionary filled with protocol-private options. On return this parameter will be destroyed and replaced with a dict containing options that were not found. May be NULL.</param>
         [DllImport("avformat-57", EntryPoint = "avio_open2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avio_open2(AVIOContext** @s, byte* @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options);
+        public static extern int avio_open2(AVIOContext** @s, [MarshalAs(UnmanagedType.LPStr)] string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options);
         
         /// <summary>Close the resource accessed by the AVIOContext s and free it. This function can only be used if s was opened by avio_open().</summary>
         [DllImport("avformat-57", EntryPoint = "avio_close", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -8300,7 +8329,8 @@ namespace FFmpeg.AutoGen.New
         /// <param name="opaque">A private pointer representing current protocol. It must be a pointer to NULL on first iteration and will be updated by successive calls to avio_enum_protocols.</param>
         /// <param name="output">If set to 1, iterate over output protocols, otherwise over input protocols.</param>
         [DllImport("avformat-57", EntryPoint = "avio_enum_protocols", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avio_enum_protocols(void** @opaque, int @output);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avio_enum_protocols(void** @opaque, int @output);
         
         /// <summary>Pause and resume playing - only meaningful if using a network streaming protocol (e.g. MMS).</summary>
         /// <param name="h">IO context from which to call the read_pause function pointer</param>
@@ -8429,11 +8459,13 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Return the libavformat build-time configuration.</summary>
         [DllImport("avformat-57", EntryPoint = "avformat_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avformat_configuration();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avformat_configuration();
         
         /// <summary>Return the libavformat license.</summary>
         [DllImport("avformat-57", EntryPoint = "avformat_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avformat_license();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avformat_license();
         
         /// <summary>Initialize libavformat and register all the muxers, demuxers and protocols. If you do not call this function, then you can select exactly which formats you want to support.</summary>
         [DllImport("avformat-57", EntryPoint = "av_register_all", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -8498,11 +8530,11 @@ namespace FFmpeg.AutoGen.New
         /// <param name="format_name">the name of output format to use for allocating the context, if NULL filename is used instead</param>
         /// <param name="filename">the name of the filename to use for allocating the context, may be NULL</param>
         [DllImport("avformat-57", EntryPoint = "avformat_alloc_output_context2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avformat_alloc_output_context2(AVFormatContext** @ctx, AVOutputFormat* @oformat, byte* @format_name, byte* @filename);
+        public static extern int avformat_alloc_output_context2(AVFormatContext** @ctx, AVOutputFormat* @oformat, [MarshalAs(UnmanagedType.LPStr)] string @format_name, [MarshalAs(UnmanagedType.LPStr)] string @filename);
         
         /// <summary>Find AVInputFormat based on the short name of the input format.</summary>
         [DllImport("avformat-57", EntryPoint = "av_find_input_format", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVInputFormat* av_find_input_format(byte* @short_name);
+        public static extern AVInputFormat* av_find_input_format([MarshalAs(UnmanagedType.LPStr)] string @short_name);
         
         /// <summary>Guess the file format.</summary>
         /// <param name="pd">data to be probed</param>
@@ -8531,11 +8563,11 @@ namespace FFmpeg.AutoGen.New
         /// <param name="offset">the offset within the bytestream to probe from</param>
         /// <param name="max_probe_size">the maximum probe buffer size (zero for default)</param>
         [DllImport("avformat-57", EntryPoint = "av_probe_input_buffer2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_probe_input_buffer2(AVIOContext* @pb, AVInputFormat** @fmt, byte* @url, void* @logctx, uint @offset, uint @max_probe_size);
+        public static extern int av_probe_input_buffer2(AVIOContext* @pb, AVInputFormat** @fmt, [MarshalAs(UnmanagedType.LPStr)] string @url, void* @logctx, uint @offset, uint @max_probe_size);
         
         /// <summary>Like av_probe_input_buffer2() but returns 0 on success</summary>
         [DllImport("avformat-57", EntryPoint = "av_probe_input_buffer", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_probe_input_buffer(AVIOContext* @pb, AVInputFormat** @fmt, byte* @url, void* @logctx, uint @offset, uint @max_probe_size);
+        public static extern int av_probe_input_buffer(AVIOContext* @pb, AVInputFormat** @fmt, [MarshalAs(UnmanagedType.LPStr)] string @url, void* @logctx, uint @offset, uint @max_probe_size);
         
         /// <summary>Open an input stream and read the header. The codecs are not opened. The stream must be closed with avformat_close_input().</summary>
         /// <param name="ps">Pointer to user-supplied AVFormatContext (allocated by avformat_alloc_context). May be a pointer to NULL, in which case an AVFormatContext is allocated by this function and written into ps. Note that a user-supplied AVFormatContext will be freed on failure.</param>
@@ -8543,7 +8575,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="fmt">If non-NULL, this parameter forces a specific input format. Otherwise the format is autodetected.</param>
         /// <param name="options">A dictionary filled with AVFormatContext and demuxer-private options. On return this parameter will be destroyed and replaced with a dict containing options that were not found. May be NULL.</param>
         [DllImport("avformat-57", EntryPoint = "avformat_open_input", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avformat_open_input(AVFormatContext** @ps, byte* @url, AVInputFormat* @fmt, AVDictionary** @options);
+        public static extern int avformat_open_input(AVFormatContext** @ps, [MarshalAs(UnmanagedType.LPStr)] string @url, AVInputFormat* @fmt, AVDictionary** @options);
         
         [DllImport("avformat-57", EntryPoint = "av_demuxer_open", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_demuxer_open(AVFormatContext* @ic);
@@ -8659,11 +8691,11 @@ namespace FFmpeg.AutoGen.New
         /// <param name="filename">if non-NULL checks if filename terminates with the extensions of the registered formats</param>
         /// <param name="mime_type">if non-NULL checks if mime_type matches with the MIME type of the registered formats</param>
         [DllImport("avformat-57", EntryPoint = "av_guess_format", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVOutputFormat* av_guess_format(byte* @short_name, byte* @filename, byte* @mime_type);
+        public static extern AVOutputFormat* av_guess_format([MarshalAs(UnmanagedType.LPStr)] string @short_name, [MarshalAs(UnmanagedType.LPStr)] string @filename, [MarshalAs(UnmanagedType.LPStr)] string @mime_type);
         
         /// <summary>Guess the codec ID based upon muxer and filename.</summary>
         [DllImport("avformat-57", EntryPoint = "av_guess_codec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVCodecID av_guess_codec(AVOutputFormat* @fmt, byte* @short_name, byte* @filename, byte* @mime_type, AVMediaType @type);
+        public static extern AVCodecID av_guess_codec(AVOutputFormat* @fmt, [MarshalAs(UnmanagedType.LPStr)] string @short_name, [MarshalAs(UnmanagedType.LPStr)] string @filename, [MarshalAs(UnmanagedType.LPStr)] string @mime_type, AVMediaType @type);
         
         /// <summary>Get timing information for the data currently output. The exact meaning of "currently output" depends on the format. It is mostly relevant for devices that have an internal buffer and/or work in real time.</summary>
         /// <param name="s">media file handle</param>
@@ -8751,7 +8783,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="path_size">the size of the path buffer</param>
         /// <param name="url">the URL to split</param>
         [DllImport("avformat-57", EntryPoint = "av_url_split", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_url_split(byte* @proto, int @proto_size, byte* @authorization, int @authorization_size, byte* @hostname, int @hostname_size, int* @port_ptr, byte* @path, int @path_size, byte* @url);
+        public static extern void av_url_split(byte* @proto, int @proto_size, byte* @authorization, int @authorization_size, byte* @hostname, int @hostname_size, int* @port_ptr, byte* @path, int @path_size, [MarshalAs(UnmanagedType.LPStr)] string @url);
         
         /// <summary>Print detailed information about the input or output format, such as duration, bitrate, streams, container, programs, metadata, side data, codec and time base.</summary>
         /// <param name="ic">the context to analyze</param>
@@ -8759,7 +8791,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="url">the URL to print, such as source or destination file</param>
         /// <param name="is_output">Select whether the specified context is an input(0) or output(1)</param>
         [DllImport("avformat-57", EntryPoint = "av_dump_format", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_dump_format(AVFormatContext* @ic, int @index, byte* @url, int @is_output);
+        public static extern void av_dump_format(AVFormatContext* @ic, int @index, [MarshalAs(UnmanagedType.LPStr)] string @url, int @is_output);
         
         /// <summary>Return in 'buf' the path with '%d' replaced by a number.</summary>
         /// <param name="buf">destination buffer</param>
@@ -8768,15 +8800,15 @@ namespace FFmpeg.AutoGen.New
         /// <param name="number">frame number</param>
         /// <param name="flags">AV_FRAME_FILENAME_FLAGS_*</param>
         [DllImport("avformat-57", EntryPoint = "av_get_frame_filename2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_get_frame_filename2(byte* @buf, int @buf_size, byte* @path, int @number, int @flags);
+        public static extern int av_get_frame_filename2(byte* @buf, int @buf_size, [MarshalAs(UnmanagedType.LPStr)] string @path, int @number, int @flags);
         
         [DllImport("avformat-57", EntryPoint = "av_get_frame_filename", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_get_frame_filename(byte* @buf, int @buf_size, byte* @path, int @number);
+        public static extern int av_get_frame_filename(byte* @buf, int @buf_size, [MarshalAs(UnmanagedType.LPStr)] string @path, int @number);
         
         /// <summary>Check whether filename actually is a numbered sequence generator.</summary>
         /// <param name="filename">possible numbered sequence string</param>
         [DllImport("avformat-57", EntryPoint = "av_filename_number_test", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_filename_number_test(byte* @filename);
+        public static extern int av_filename_number_test([MarshalAs(UnmanagedType.LPStr)] string @filename);
         
         /// <summary>Generate an SDP for an RTP session.</summary>
         /// <param name="ac">array of AVFormatContexts describing the RTP streams. If the array is composed by only one context, such context can contain multiple AVStreams (one AVStream per RTP stream). Otherwise, all the contexts in the array (an AVCodecContext per RTP stream) must contain only one AVStream.</param>
@@ -8790,7 +8822,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="filename">file name to check against the given extensions</param>
         /// <param name="extensions">a comma-separated list of filename extensions</param>
         [DllImport("avformat-57", EntryPoint = "av_match_ext", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_match_ext(byte* @filename, byte* @extensions);
+        public static extern int av_match_ext([MarshalAs(UnmanagedType.LPStr)] string @filename, [MarshalAs(UnmanagedType.LPStr)] string @extensions);
         
         /// <summary>Test if the given container can store a codec.</summary>
         /// <param name="ofmt">container to check for compatibility</param>
@@ -8831,7 +8863,7 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Check if the stream st contained in s is matched by the stream specifier spec.</summary>
         [DllImport("avformat-57", EntryPoint = "avformat_match_stream_specifier", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avformat_match_stream_specifier(AVFormatContext* @s, AVStream* @st, byte* @spec);
+        public static extern int avformat_match_stream_specifier(AVFormatContext* @s, AVStream* @st, [MarshalAs(UnmanagedType.LPStr)] string @spec);
         
         [DllImport("avformat-57", EntryPoint = "avformat_queue_attached_pictures", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avformat_queue_attached_pictures(AVFormatContext* @s);
@@ -8858,11 +8890,13 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Return the libavfilter build-time configuration.</summary>
         [DllImport("avfilter-6", EntryPoint = "avfilter_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avfilter_configuration();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avfilter_configuration();
         
         /// <summary>Return the libavfilter license.</summary>
         [DllImport("avfilter-6", EntryPoint = "avfilter_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avfilter_license();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avfilter_license();
         
         /// <summary>Get the number of elements in a NULL-terminated array of AVFilterPads (e.g. AVFilter.inputs/outputs).</summary>
         [DllImport("avfilter-6", EntryPoint = "avfilter_pad_count", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -8872,7 +8906,8 @@ namespace FFmpeg.AutoGen.New
         /// <param name="pads">an array of AVFilterPads</param>
         /// <param name="pad_idx">index of the pad in the array it; is the caller's responsibility to ensure the index is valid</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_pad_get_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avfilter_pad_get_name(AVFilterPad* @pads, int @pad_idx);
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avfilter_pad_get_name(AVFilterPad* @pads, int @pad_idx);
         
         /// <summary>Get the type of an AVFilterPad.</summary>
         /// <param name="pads">an array of AVFilterPads</param>
@@ -8907,7 +8942,7 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Make the filter instance process a command. It is recommended to use avfilter_graph_send_command().</summary>
         [DllImport("avfilter-6", EntryPoint = "avfilter_process_command", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avfilter_process_command(AVFilterContext* @filter, byte* @cmd, byte* @arg, byte* @res, int @res_len, int @flags);
+        public static extern int avfilter_process_command(AVFilterContext* @filter, [MarshalAs(UnmanagedType.LPStr)] string @cmd, [MarshalAs(UnmanagedType.LPStr)] string @arg, byte* @res, int @res_len, int @flags);
         
         /// <summary>Initialize the filter system. Register all builtin filters.</summary>
         [DllImport("avfilter-6", EntryPoint = "avfilter_register_all", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -8923,7 +8958,7 @@ namespace FFmpeg.AutoGen.New
         public static extern int avfilter_register(AVFilter* @filter);
         
         [DllImport("avfilter-6", EntryPoint = "avfilter_get_by_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVFilter* avfilter_get_by_name(byte* @name);
+        public static extern AVFilter* avfilter_get_by_name([MarshalAs(UnmanagedType.LPStr)] string @name);
         
         /// <summary>Iterate over all registered filters.</summary>
         [DllImport("avfilter-6", EntryPoint = "avfilter_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -8938,20 +8973,20 @@ namespace FFmpeg.AutoGen.New
         /// <param name="filter">the filter to create an instance of</param>
         /// <param name="inst_name">Name to give to the new instance. Can be NULL for none.</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_open", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avfilter_open(AVFilterContext** @filter_ctx, AVFilter* @filter, byte* @inst_name);
+        public static extern int avfilter_open(AVFilterContext** @filter_ctx, AVFilter* @filter, [MarshalAs(UnmanagedType.LPStr)] string @inst_name);
         
         /// <summary>Initialize a filter.</summary>
         /// <param name="filter">the filter to initialize</param>
         /// <param name="args">A string of parameters to use when initializing the filter. The format and meaning of this string varies by filter.</param>
         /// <param name="opaque">Any extra non-string data needed by the filter. The meaning of this parameter varies by filter.</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_init_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avfilter_init_filter(AVFilterContext* @filter, byte* @args, void* @opaque);
+        public static extern int avfilter_init_filter(AVFilterContext* @filter, [MarshalAs(UnmanagedType.LPStr)] string @args, void* @opaque);
         
         /// <summary>Initialize a filter with the supplied parameters.</summary>
         /// <param name="ctx">uninitialized filter context to initialize</param>
         /// <param name="args">Options to initialize the filter with. This must be a ':'-separated list of options in the 'key=value' form. May be NULL if the options have been set directly using the AVOptions API or there are no options that need to be set.</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_init_str", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avfilter_init_str(AVFilterContext* @ctx, byte* @args);
+        public static extern int avfilter_init_str(AVFilterContext* @ctx, [MarshalAs(UnmanagedType.LPStr)] string @args);
         
         /// <summary>Initialize a filter with the supplied dictionary of options.</summary>
         /// <param name="ctx">uninitialized filter context to initialize</param>
@@ -8985,13 +9020,13 @@ namespace FFmpeg.AutoGen.New
         /// <param name="filter">the filter to create an instance of</param>
         /// <param name="name">Name to give to the new instance (will be copied to AVFilterContext.name). This may be used by the caller to identify different filters, libavfilter itself assigns no semantics to this parameter. May be NULL.</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_graph_alloc_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVFilterContext* avfilter_graph_alloc_filter(AVFilterGraph* @graph, AVFilter* @filter, byte* @name);
+        public static extern AVFilterContext* avfilter_graph_alloc_filter(AVFilterGraph* @graph, AVFilter* @filter, [MarshalAs(UnmanagedType.LPStr)] string @name);
         
         /// <summary>Get a filter instance identified by instance name from graph.</summary>
         /// <param name="graph">filter graph to search through.</param>
         /// <param name="name">filter instance name (should be unique in the graph).</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_graph_get_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVFilterContext* avfilter_graph_get_filter(AVFilterGraph* @graph, byte* @name);
+        public static extern AVFilterContext* avfilter_graph_get_filter(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @name);
         
         /// <summary>Add an existing filter instance to a filter graph.</summary>
         /// <param name="graphctx">the filter graph</param>
@@ -9003,7 +9038,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="name">the instance name to give to the created filter instance</param>
         /// <param name="graph_ctx">the filter graph</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_graph_create_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avfilter_graph_create_filter(AVFilterContext** @filt_ctx, AVFilter* @filt, byte* @name, byte* @args, void* @opaque, AVFilterGraph* @graph_ctx);
+        public static extern int avfilter_graph_create_filter(AVFilterContext** @filt_ctx, AVFilter* @filt, [MarshalAs(UnmanagedType.LPStr)] string @name, [MarshalAs(UnmanagedType.LPStr)] string @args, void* @opaque, AVFilterGraph* @graph_ctx);
         
         /// <summary>Enable or disable automatic format conversion inside the graph.</summary>
         /// <param name="flags">any of the AVFILTER_AUTO_CONVERT_* constants</param>
@@ -9034,7 +9069,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="inputs">linked list to the inputs of the graph</param>
         /// <param name="outputs">linked list to the outputs of the graph</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_graph_parse", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avfilter_graph_parse(AVFilterGraph* @graph, byte* @filters, AVFilterInOut* @inputs, AVFilterInOut* @outputs, void* @log_ctx);
+        public static extern int avfilter_graph_parse(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @filters, AVFilterInOut* @inputs, AVFilterInOut* @outputs, void* @log_ctx);
         
         /// <summary>Add a graph described by a string to a graph.</summary>
         /// <param name="graph">the filter graph where to link the parsed graph context</param>
@@ -9042,7 +9077,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="inputs">pointer to a linked list to the inputs of the graph, may be NULL. If non-NULL, *inputs is updated to contain the list of open inputs after the parsing, should be freed with avfilter_inout_free().</param>
         /// <param name="outputs">pointer to a linked list to the outputs of the graph, may be NULL. If non-NULL, *outputs is updated to contain the list of open outputs after the parsing, should be freed with avfilter_inout_free().</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_graph_parse_ptr", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avfilter_graph_parse_ptr(AVFilterGraph* @graph, byte* @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs, void* @log_ctx);
+        public static extern int avfilter_graph_parse_ptr(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs, void* @log_ctx);
         
         /// <summary>Add a graph described by a string to a graph.</summary>
         /// <param name="graph">the filter graph where to link the parsed graph context</param>
@@ -9050,7 +9085,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="inputs">a linked list of all free (unlinked) inputs of the parsed graph will be returned here. It is to be freed by the caller using avfilter_inout_free().</param>
         /// <param name="outputs">a linked list of all free (unlinked) outputs of the parsed graph will be returned here. It is to be freed by the caller using avfilter_inout_free().</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_graph_parse2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avfilter_graph_parse2(AVFilterGraph* @graph, byte* @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs);
+        public static extern int avfilter_graph_parse2(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs);
         
         /// <summary>Send a command to one or more filter instances.</summary>
         /// <param name="graph">the filter graph</param>
@@ -9059,7 +9094,7 @@ namespace FFmpeg.AutoGen.New
         /// <param name="arg">the argument for the command</param>
         /// <param name="res">a buffer with size res_size where the filter(s) can return a response.</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_graph_send_command", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avfilter_graph_send_command(AVFilterGraph* @graph, byte* @target, byte* @cmd, byte* @arg, byte* @res, int @res_len, int @flags);
+        public static extern int avfilter_graph_send_command(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @target, [MarshalAs(UnmanagedType.LPStr)] string @cmd, [MarshalAs(UnmanagedType.LPStr)] string @arg, byte* @res, int @res_len, int @flags);
         
         /// <summary>Queue a command for one or more filter instances.</summary>
         /// <param name="graph">the filter graph</param>
@@ -9068,13 +9103,13 @@ namespace FFmpeg.AutoGen.New
         /// <param name="arg">the argument for the command</param>
         /// <param name="ts">time at which the command should be sent to the filter</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_graph_queue_command", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avfilter_graph_queue_command(AVFilterGraph* @graph, byte* @target, byte* @cmd, byte* @arg, int @flags, double @ts);
+        public static extern int avfilter_graph_queue_command(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @target, [MarshalAs(UnmanagedType.LPStr)] string @cmd, [MarshalAs(UnmanagedType.LPStr)] string @arg, int @flags, double @ts);
         
         /// <summary>Dump a graph into a human-readable string representation.</summary>
         /// <param name="graph">the graph to dump</param>
         /// <param name="options">formatting options; currently ignored</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_graph_dump", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avfilter_graph_dump(AVFilterGraph* @graph, byte* @options);
+        public static extern byte* avfilter_graph_dump(AVFilterGraph* @graph, [MarshalAs(UnmanagedType.LPStr)] string @options);
         
         /// <summary>Request a frame on the oldest sink link.</summary>
         [DllImport("avfilter-6", EntryPoint = "avfilter_graph_request_oldest", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -9154,11 +9189,13 @@ namespace FFmpeg.AutoGen.New
         
         /// <summary>Return the libavdevice build-time configuration.</summary>
         [DllImport("avdevice-57", EntryPoint = "avdevice_configuration", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avdevice_configuration();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avdevice_configuration();
         
         /// <summary>Return the libavdevice license.</summary>
         [DllImport("avdevice-57", EntryPoint = "avdevice_license", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern byte* avdevice_license();
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        public static extern string avdevice_license();
         
         /// <summary>Initialize libavdevice and register all the input and output devices.</summary>
         [DllImport("avdevice-57", EntryPoint = "avdevice_register_all", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -9225,10 +9262,10 @@ namespace FFmpeg.AutoGen.New
         /// <param name="device_options">An AVDictionary filled with device-private options. May be NULL. The same options must be passed later to avformat_write_header() for output devices or avformat_open_input() for input devices, or at any other place that affects device-private options.</param>
         /// <param name="device_list">list of autodetected devices</param>
         [DllImport("avdevice-57", EntryPoint = "avdevice_list_input_sources", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avdevice_list_input_sources(IntPtr @device, byte* @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list);
+        public static extern int avdevice_list_input_sources(IntPtr @device, [MarshalAs(UnmanagedType.LPStr)] string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list);
         
         [DllImport("avdevice-57", EntryPoint = "avdevice_list_output_sinks", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int avdevice_list_output_sinks(IntPtr @device, byte* @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list);
+        public static extern int avdevice_list_output_sinks(IntPtr @device, [MarshalAs(UnmanagedType.LPStr)] string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list);
         
     }
 }

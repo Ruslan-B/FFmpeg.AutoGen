@@ -41,6 +41,7 @@ namespace FFmpeg.AutoGen_.Example
             Console.WriteLine($"FFmpeg version info: {ffmpeg.av_version_info()}");
 
             var pFormatContext = ffmpeg.avformat_alloc_context();
+
             if (ffmpeg.avformat_open_input(&pFormatContext, url, null, null) != 0)
             {
                 throw new ApplicationException(@"Could not open file");
@@ -70,6 +71,7 @@ namespace FFmpeg.AutoGen_.Example
            
             Console.WriteLine($"codec name: { ffmpeg.avcodec_get_name(codecContext.codec_id)}");
             
+            /*
             var width = codecContext.width;
             var height = codecContext.height;
             var sourcePixFmt = codecContext.pix_fmt;
@@ -97,7 +99,7 @@ namespace FFmpeg.AutoGen_.Example
             // Reusing codec context from stream info, initally it was looking like this: 
             // AVCodecContext* pCodecContext = ffmpeg.avcodec_alloc_context3(pCodec); // but it is not working for all kind of codecs
             var pCodecContext = &codecContext;
-
+            
             if ((pCodec->capabilities & ffmpeg.AV_CODEC_CAP_TRUNCATED) == ffmpeg.AV_CODEC_CAP_TRUNCATED)
             {
                 pCodecContext->flags |= ffmpeg.AV_CODEC_FLAG_TRUNCATED;
@@ -182,6 +184,7 @@ namespace FFmpeg.AutoGen_.Example
             ffmpeg.av_free(pDecodedFrame);
             ffmpeg.avcodec_close(pCodecContext);
             ffmpeg.avformat_close_input(&pFormatContext);
+            */
         }
     }
 }

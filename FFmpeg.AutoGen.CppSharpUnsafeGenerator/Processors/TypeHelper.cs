@@ -2,7 +2,7 @@ using System;
 using CppSharp.AST;
 using Type = CppSharp.AST.Type;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Builder
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
     internal class TypeHelper
     {
