@@ -8,13 +8,16 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     internal class Writer
     {
-        private readonly string _libraryConstantName;
         private readonly IndentedTextWriter _writer;
 
-        public Writer(IndentedTextWriter writer, string libraryConstantName)
+        public Writer(IndentedTextWriter writer)
         {
             _writer = writer;
-            _libraryConstantName = libraryConstantName;
+        }
+
+        public void Write(MacroDefinition macro)
+        {
+            WriteLine($"public static int {macro.Name} = {macro.Expression};");
         }
 
         public void Write(EnumerationDefinition enumeration)
@@ -22,13 +25,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteSummary(enumeration);
             WriteLine($"public enum {enumeration.Name} : {enumeration.TypeName}");
             using (BeginBlock())
-            {
                 foreach (var item in enumeration.Items)
                 {
                     WriteSummary(item);
                     WriteLine($"@{item.Name} = {item.Value},");
                 }
-            }
         }
 
         public void Write(StructureDefinition structure)
@@ -36,7 +37,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteSummary(structure);
             WriteLine($"public unsafe struct {structure.Name}");
             using (BeginBlock())
-            {
                 foreach (var item in structure.Fileds)
                 {
                     WriteSummary(item);
@@ -46,7 +46,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     else
                         WriteLine($"public {item.TypeName} @{item.Name};");
                 }
-            }
         }
 
         public void Write(FunctionDefinition function)

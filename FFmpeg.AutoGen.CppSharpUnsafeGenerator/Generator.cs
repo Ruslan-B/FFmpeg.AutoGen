@@ -1,7 +1,5 @@
-﻿using System;
-using System.CodeDom.Compiler;
+﻿using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using CppSharp;
@@ -11,6 +9,7 @@ using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Writers;
 using ClangParser = CppSharp.ClangParser;
+using MacroDefinition = FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions.MacroDefinition;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
@@ -28,9 +27,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public FunctionExport[] Exports { get; set; }
 
         public string Namespace { get; set; }
-        public string LibraryName { get; set; }
         public string OutputFile { get; set; }
-        public string LibraryConstantName { get; set; }
         public string ClassName { get; set; }
 
         public void Run()
@@ -46,16 +43,17 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         private void Parse()
         {
-            var parserOptions = new ParserOptions();
+            var parserOptions = new ParserOptions
+            {
+                Verbose = true,
+                ASTContext = new CppSharp.Parser.AST.ASTContext(),
+                LanguageVersion = LanguageVersion.GNUC
+            };
             parserOptions.SetupIncludes();
-            parserOptions.ASTContext = new CppSharp.Parser.AST.ASTContext();
 
+            foreach (var includeDir in IncludeDirs) parserOptions.AddIncludeDirs(includeDir);
 
-            foreach (var includeDir in IncludeDirs)
-                parserOptions.AddIncludeDirs(includeDir);
-
-            foreach (var define in Defines)
-                parserOptions.AddDefines(define);
+            foreach (var define in Defines) parserOptions.AddDefines(define);
 
             var project = new Project();
             foreach (var filePath in SourceFiles)
@@ -98,16 +96,22 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         private void Generate()
         {
-            _generationContext = new GenerationContext
+            if (_generationContext == null)
             {
-                FunctionExportMap = Exports.ToDictionary(x => x.Name)
-            };
+                _generationContext = new GenerationContext
+                {
+                    FunctionExportMap = Exports.ToDictionary(x => x.Name)
+                };
+            }
+            _generationContext.ClearUnits();
 
+            var mp = new MacroProcessor(_generationContext);
             var ep = new EnumerationProcessor(_generationContext);
             var sp = new StructureProcessor(_generationContext);
             var fp = new FunctionProcessor(_generationContext);
             foreach (var translationUnit in _astContext.TranslationUnits.Where(x => !x.IsSystemHeader))
             {
+                mp.Process(translationUnit);
                 ep.Process(translationUnit);
                 sp.Process(translationUnit);
                 fp.Process(translationUnit);
@@ -120,7 +124,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             using (var streamWriter = File.CreateText(OutputFile))
             using (var textWriter = new IndentedTextWriter(streamWriter))
             {
-                var writer = new Writer(textWriter, LibraryConstantName);
+                var writer = new Writer(textWriter);
                 textWriter.WriteLine("using System;");
                 textWriter.WriteLine("using System.Runtime.InteropServices;");
                 textWriter.WriteLine();
@@ -144,7 +148,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     using (textWriter.BeginBlock())
                     {
                         //textWriter.WriteLine($"public const string {LibraryConstantName} = \"{LibraryName}\";");
-                        
+
+                        units.OfType<MacroDefinition>().ToList().ForEach(x => { writer.Write(x); });
+                        textWriter.WriteLine();
+
                         units.OfType<FunctionDefinition>().ToList().ForEach(x =>
                         {
                             //if (x.LibraryName != LibraryName)
