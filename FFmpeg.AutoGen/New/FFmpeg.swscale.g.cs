@@ -19,30 +19,34 @@ namespace FFmpeg.AutoGen.New
         public SwsVector* @chrV;
     }
     
+    public unsafe struct __NSConstantString_tag
+    {
+    }
+    
     public unsafe static partial class ffmpeg
     {
         public static int SWS_FAST_BILINEAR = 1;
         public static int SWS_BILINEAR = 2;
         public static int SWS_BICUBIC = 4;
         public static int SWS_X = 8;
-        public static int SWS_POINT = 0x10;
-        public static int SWS_AREA = 0x20;
-        public static int SWS_BICUBLIN = 0x40;
-        public static int SWS_GAUSS = 0x80;
-        public static int SWS_SINC = 0x100;
-        public static int SWS_LANCZOS = 0x200;
-        public static int SWS_SPLINE = 0x400;
-        public static int SWS_SRC_V_CHR_DROP_MASK = 0x30000;
+        public static int SWS_POINT = 16;
+        public static int SWS_AREA = 32;
+        public static int SWS_BICUBLIN = 64;
+        public static int SWS_GAUSS = 128;
+        public static int SWS_SINC = 256;
+        public static int SWS_LANCZOS = 512;
+        public static int SWS_SPLINE = 1024;
+        public static int SWS_SRC_V_CHR_DROP_MASK = 196608;
         public static int SWS_SRC_V_CHR_DROP_SHIFT = 16;
         public static int SWS_PARAM_DEFAULT = 123456;
-        public static int SWS_PRINT_INFO = 0x1000;
-        public static int SWS_FULL_CHR_H_INT = 0x2000;
-        public static int SWS_FULL_CHR_H_INP = 0x4000;
-        public static int SWS_DIRECT_BGR = 0x8000;
-        public static int SWS_ACCURATE_RND = 0x40000;
-        public static int SWS_BITEXACT = 0x80000;
-        public static int SWS_ERROR_DIFFUSION = 0x800000;
-        public static double SWS_MAX_REDUCE_CUTOFF = 0.002;
+        public static int SWS_PRINT_INFO = 4096;
+        public static int SWS_FULL_CHR_H_INT = 8192;
+        public static int SWS_FULL_CHR_H_INP = 16384;
+        public static int SWS_DIRECT_BGR = 32768;
+        public static int SWS_ACCURATE_RND = 262144;
+        public static int SWS_BITEXACT = 524288;
+        public static int SWS_ERROR_DIFFUSION = 8388608;
+        public static float SWS_MAX_REDUCE_CUTOFF = 0.002f;
         public static int SWS_CS_ITU709 = 1;
         public static int SWS_CS_FCC = 4;
         public static int SWS_CS_ITU601 = 5;
@@ -54,7 +58,11 @@ namespace FFmpeg.AutoGen.New
         public static int LIBSWSCALE_VERSION_MAJOR = 4;
         public static int LIBSWSCALE_VERSION_MINOR = 2;
         public static int LIBSWSCALE_VERSION_MICRO = 100;
-        public static bool FF_API_SWS_VECTOR = (LIBSWSCALE_VERSION_MAJOR < 6);
+        // public static  LIBSWSCALE_VERSION_INT = AV_VERSION_INT(LIBSWSCALE_VERSION_MAJOR, LIBSWSCALE_VERSION_MINOR, LIBSWSCALE_VERSION_MICRO);
+        // public static  LIBSWSCALE_VERSION = AV_VERSION(LIBSWSCALE_VERSION_MAJOR, LIBSWSCALE_VERSION_MINOR, LIBSWSCALE_VERSION_MICRO);
+        // public static  LIBSWSCALE_BUILD = LIBSWSCALE_VERSION_INT;
+        // public static  LIBSWSCALE_IDENT = "SwS" AV_STRINGIFY(LIBSWSCALE_VERSION);
+        // public static  FF_API_SWS_VECTOR = (LIBSWSCALE_VERSION_MAJOR < 6);
         
         /// <summary>Color conversion and scaling library.</summary>
         [DllImport("swscale-4", EntryPoint = "swscale_version", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]

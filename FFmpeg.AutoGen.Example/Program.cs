@@ -98,10 +98,10 @@ namespace FFmpeg.AutoGen_.Example
             // AVCodecContext* pCodecContext = ffmpeg.avcodec_alloc_context3(pCodec); // but it is not working for all kind of codecs
             var pCodecContext = &codecContext;
             
-            if ((pCodec->capabilities & ffmpeg.AV_CODEC_CAP_TRUNCATED) == ffmpeg.AV_CODEC_CAP_TRUNCATED)
-            {
-                pCodecContext->flags |= ffmpeg.AV_CODEC_FLAG_TRUNCATED;
-            }
+            //if ((pCodec->capabilities & ffmpeg.AV_CODEC_CAP_TRUNCATED) == ffmpeg.AV_CODEC_CAP_TRUNCATED)
+            //{
+            //    pCodecContext->flags |= ffmpeg.AV_CODEC_FLAG_TRUNCATED;
+            //}
 
             if (ffmpeg.avcodec_open2(pCodecContext, pCodec, null) < 0)
             {
