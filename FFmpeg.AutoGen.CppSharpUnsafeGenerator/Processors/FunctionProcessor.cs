@@ -41,7 +41,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                         Content = GetParamComment(function, x)
                     }).ToArray()
                 };
-                _context.Units.Add(functionDefinition);
+                _context.AddUnit(functionDefinition);
                 counter++;
             }
         }

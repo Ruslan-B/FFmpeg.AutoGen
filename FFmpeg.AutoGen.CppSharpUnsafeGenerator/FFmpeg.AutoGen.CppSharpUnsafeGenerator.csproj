@@ -104,6 +104,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Definitions\TypeDefinition.cs" />
+    <Compile Include="Definitions\MacroDefinition.cs" />
+    <Compile Include="Processors\MacroProcessor.cs" />
     <Compile Include="Processors\FunctionProcessor.cs" />
     <Compile Include="Processors\StructureProcessor.cs" />
     <Compile Include="Definitions\FunctionParameter.cs" />

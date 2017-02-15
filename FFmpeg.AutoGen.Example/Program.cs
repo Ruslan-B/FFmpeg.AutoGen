@@ -36,8 +36,7 @@ namespace FFmpeg.AutoGen_.Example
             ffmpeg.av_register_all();
             ffmpeg.avcodec_register_all();
             ffmpeg.avformat_network_init();
-
-
+            
             Console.WriteLine($"FFmpeg version info: {ffmpeg.av_version_info()}");
 
             var pFormatContext = ffmpeg.avformat_alloc_context();
@@ -71,7 +70,6 @@ namespace FFmpeg.AutoGen_.Example
            
             Console.WriteLine($"codec name: { ffmpeg.avcodec_get_name(codecContext.codec_id)}");
             
-            /*
             var width = codecContext.width;
             var height = codecContext.height;
             var sourcePixFmt = codecContext.pix_fmt;
@@ -150,17 +148,17 @@ namespace FFmpeg.AutoGen_.Example
 
                 Console.WriteLine($@"frame: {frameNumber}");
 
-                byte* src = pDecodedFrame->data0;
 
-                var data = new byte[pDecodedFrame->linesize0 * pDecodedFrame->height];
-                for (int i = 0; i < data.Length; i++)
-                {
-                     data[i] = *(pDecodedFrame->data0 + i);
-                }
+                //var data = new byte[pDecodedFrame->linesize0 * pDecodedFrame->height];
+                //for (int i = 0; i < data.Length; i++)
+                //{
+                //     data[i] = *(pDecodedFrame->data0 + i);
+                //}
 
-                var dst = &pConvertedFrame->data0;
-                var srcStride = &pDecodedFrame->linesize0;
-                var dstStride = pConvertedFrame->linesize0;
+                byte*[] src = {pDecodedFrame->data0, pDecodedFrame->data1, pDecodedFrame->data2};
+                var srcStride = new[] { pDecodedFrame->linesize[0], pDecodedFrame->linesize[1], pDecodedFrame->linesize[2] };
+                byte*[] dst = {pConvertedFrame->data0};
+                var dstStride = new[]{ pConvertedFrame->linesize[0] };
                 ffmpeg.sws_scale(pConvertContext, src, srcStride, 0, height, dst, dstStride);
 
                 var convertedFrameAddress = pConvertedFrame->data0;
@@ -184,7 +182,6 @@ namespace FFmpeg.AutoGen_.Example
             ffmpeg.av_free(pDecodedFrame);
             ffmpeg.avcodec_close(pCodecContext);
             ffmpeg.avformat_close_input(&pFormatContext);
-            */
         }
     }
 }

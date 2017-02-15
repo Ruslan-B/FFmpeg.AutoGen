@@ -7,7 +7,7 @@ using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
-    internal  class StructureProcessor
+    internal class StructureProcessor
     {
         private readonly GenerationContext _context;
 
@@ -25,11 +25,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     continue;
 
                 var className = @class.Name;
-                _context.Units.Add(ToDefinition(@class, className));
+                _context.AddUnit(ToDefinition(@class, className));
             }
         }
 
-        private  IEnumerable<StructureField> ToDefinition(Field field)
+        private IEnumerable<StructureField> ToDefinition(Field field)
         {
             if (field.IsBitField)
             {
@@ -42,8 +42,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
             var tagType = field.Type as TagType;
             if (tagType != null && field.Class.Declarations.Contains(tagType.Declaration)) return NestedDefinition(field, tagType);
-            
-            return new[] { ToDefinition(field, field.Name, TypeHelper.GetTypeName(field.Type)) };
+
+            return new[] {ToDefinition(field, field.Name, TypeHelper.GetTypeName(field.Type))};
         }
 
         private IEnumerable<StructureField> NestedDefinition(Field field, TagType tagType)
@@ -52,34 +52,36 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             if (@class != null)
             {
                 var typeName = field.Class.Name + "_" + field.Name;
-                _context.Units.Add(ToDefinition(@class, typeName));
-                return new[] { ToDefinition(field, field.Name, typeName)};
+                _context.AddUnit(ToDefinition(@class, typeName));
+                return new[] {ToDefinition(field, field.Name, typeName)};
             }
             var @enum = tagType.Declaration as Enumeration;
-            if(@enum != null){
+            if (@enum != null)
+            {
                 var typeName = field.Class.Name + "_" + field.Name;
-                _context.Units.Add(EnumerationProcessor.ToDefinition(@enum, typeName));
-                return new[] { ToDefinition(field, field.Name, typeName) };
+                _context.AddUnit(EnumerationProcessor.ToDefinition(@enum, typeName));
+                return new[] {ToDefinition(field, field.Name, typeName)};
             }
             throw new NotSupportedException();
         }
 
-        private  IEnumerable<StructureField> FixedArray(Field field, ArrayType arrayType)
+        private IEnumerable<StructureField> FixedArray(Field field, ArrayType arrayType)
         {
             var elementTypeName = TypeHelper.GetTypeName(arrayType.Type);
-            
-            //if (arrayType.Type.IsPrimitiveType())
-            //    yield return
-            //        new StructureField
-            //        {
-            //            Name = field.Name,
-            //            TypeName = elementTypeName,
-            //            IsFixed = true,
-            //            FixedSize = arrayType.Size
-            //        };
 
-            for (var i = 0; i < arrayType.Size; i++)
-                yield return ToDefinition(field, $"{field.Name}{i}", elementTypeName);
+            if (arrayType.Type.IsPrimitiveType())
+            {
+                yield return new StructureField
+                {
+                    Name = field.Name,
+                    TypeName = elementTypeName,
+                    IsFixed = true,
+                    FixedSize = arrayType.Size
+                };
+                yield break;
+            }
+
+            for (var i = 0; i < arrayType.Size; i++) yield return ToDefinition(field, $"{field.Name}{i}", elementTypeName);
         }
 
 
@@ -89,7 +91,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             {
                 Name = className,
                 Fileds = @class.Fields.SelectMany(ToDefinition).ToArray(),
-                Content = @class.Comment?.BriefText,
+                Content = @class.Comment?.BriefText
             };
         }
 
@@ -99,7 +101,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             {
                 Name = name,
                 TypeName = typeName,
-                Content = field.Comment?.BriefText,
+                Content = field.Comment?.BriefText
             };
         }
     }

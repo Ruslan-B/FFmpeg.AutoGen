@@ -28,67 +28,61 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         private static void Main(string[] args)
         {
             Console.WriteLine("Current directory: " + Environment.CurrentDirectory);
-
-            //new Generator
-            //{
-            //    IncludeDirs = IncludeDirs,
-            //    Defines = Defines,
-            //    Exports = Exports,
-            //    Namespace = Namespace,
-            //    ClassName = ClassName,
-            //    LibraryName = "avutil-55",
-            //    LibraryConstantName = "libavutil",
-            //    OutputFile = OutputDirectory + "FFmpeg.avutil.g.cs",
-            //    SourceFiles = new[]
-            //    {
-            //        "libavutil/avutil.h",
-            //        "libavutil/audio_fifo.h",
-            //        "libavutil/channel_layout.h",
-            //        "libavutil/cpu.h",
-            //        "libavutil/frame.h",
-            //        "libavutil/opt.h",
-            //        "libavutil/imgutils.h"
-            //    }
-            //}.Run();
-
-            new Generator
+            
+            var g = new Generator
             {
                 IncludeDirs = IncludeDirs,
                 Defines = Defines,
                 Exports = Exports,
                 Namespace = Namespace,
                 ClassName = ClassName,
-                LibraryName = "avutil-55",
-                LibraryConstantName = "libavutil",
-                OutputFile = OutputDirectory + "FFmpeg.g.cs",
-                SourceFiles = new[]
-                {
-                    //libavutil
-                    "libavutil/avutil.h",
-                    "libavutil/audio_fifo.h",
-                    "libavutil/channel_layout.h",
-                    "libavutil/cpu.h",
-                    "libavutil/frame.h",
-                    "libavutil/opt.h",
-                    "libavutil/imgutils.h",
-                    //libswresample
-                    "libswresample/swresample.h",
-                    //libpostproc
-                    "libpostproc/postprocess.h",
-                    //libswscale
-                    "libswscale/swscale.h",
-                    //libavcodec
-                    "libavcodec/avcodec.h",
-                    //libavformat
-                    "libavformat/avformat.h",
-                    // libavfilter
-                    "libavfilter/avfilter.h",
-                    "libavfilter/buffersrc.h",
-                    "libavfilter/buffersink.h",
-                    //libavdevice
-                    "libavdevice/avdevice.h"
-                }
-            }.Run();
+            };
+
+            g.OutputFile = OutputDirectory + "FFmpeg.avutil.g.cs";
+            g.SourceFiles = new[]
+            {
+                "libavutil/avutil.h",
+                "libavutil/audio_fifo.h",
+                "libavutil/channel_layout.h",
+                "libavutil/cpu.h",
+                "libavutil/frame.h",
+                "libavutil/opt.h",
+                "libavutil/imgutils.h",
+            };
+            g.Run();
+
+            g.OutputFile = OutputDirectory + "FFmpeg.swresample.g.cs";
+            g.SourceFiles = new[] { "libswresample/swresample.h" };
+            g.Run();
+
+            g.OutputFile = OutputDirectory + "FFmpeg.postprocess.g.cs";
+            g.SourceFiles = new[] {"libpostproc/postprocess.h"};
+            g.Run();
+
+            g.OutputFile = OutputDirectory + "FFmpeg.swscale.g.cs";
+            g.SourceFiles = new[] { "libswscale/swscale.h" };
+            g.Run();
+
+            g.OutputFile = OutputDirectory + "FFmpeg.avcodec.g.cs";
+            g.SourceFiles = new[] { "libavcodec/avcodec.h" };
+            g.Run();
+
+            g.OutputFile = OutputDirectory + "FFmpeg.avformat.g.cs";
+            g.SourceFiles = new[] { "libavformat/avformat.h" };
+            g.Run();
+
+            g.OutputFile = OutputDirectory + "FFmpeg.avfilter.g.cs";
+            g.SourceFiles = new[]
+            {
+                "libavfilter/avfilter.h",
+                "libavfilter/buffersrc.h",
+                "libavfilter/buffersink.h",
+            };
+            g.Run();
+
+            g.OutputFile = OutputDirectory + "FFmpeg.avdevice.g.cs";
+            g.SourceFiles = new[] {"libavdevice/avdevice.h"};
+            g.Run();
 
             //    new Generator
             //    {

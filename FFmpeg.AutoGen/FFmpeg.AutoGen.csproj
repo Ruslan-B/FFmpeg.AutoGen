@@ -89,7 +89,14 @@
     <Compile Include="FFmpeg.postprocess.g.cs" />
     <Compile Include="FFmpeg.swresample.g.cs" />
     <Compile Include="FFmpeg.swscale.g.cs" />
-    <Compile Include="New\FFmpeg.g.cs" />
+    <Compile Include="New\FFmpeg.avcodec.g.cs" />
+    <Compile Include="New\FFmpeg.avdevice.g.cs" />
+    <Compile Include="New\FFmpeg.avfilter.g.cs" />
+    <Compile Include="New\FFmpeg.avformat.g.cs" />
+    <Compile Include="New\FFmpeg.avutil.g.cs" />
+    <Compile Include="New\FFmpeg.postprocess.g.cs" />
+    <Compile Include="New\FFmpeg.swresample.g.cs" />
+    <Compile Include="New\FFmpeg.swscale.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unresolved.cs" />
   </ItemGroup>

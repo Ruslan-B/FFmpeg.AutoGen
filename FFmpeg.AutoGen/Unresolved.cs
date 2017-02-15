@@ -21,4 +21,9 @@
     {
         public uint Value;
     }
+
+    public struct avfilter_execute_func
+    {
+        
+    }
 }

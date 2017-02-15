@@ -26,7 +26,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     continue;
 
                 var enumerationDefinition = ToDefinition(enumeration, enumerationName);
-                _context.Units.Add(enumerationDefinition);
+                _context.AddUnit(enumerationDefinition);
             }
         }
 
