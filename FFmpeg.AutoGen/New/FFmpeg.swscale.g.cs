@@ -19,10 +19,6 @@ namespace FFmpeg.AutoGen.New
         public SwsVector* @chrV;
     }
     
-    public unsafe struct __NSConstantString_tag
-    {
-    }
-    
     public unsafe static partial class ffmpeg
     {
         public static int SWS_FAST_BILINEAR = 1;

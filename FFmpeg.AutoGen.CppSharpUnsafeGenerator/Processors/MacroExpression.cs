@@ -46,7 +46,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         internal class Double : Expression
         {
-            private static readonly Regex Regex = new Regex(@"^0.\d+$", RegexOptions.Compiled);
+            private static readonly Regex Regex = new Regex(@"^-?0.\d+$", RegexOptions.Compiled);
 
             public Double(string expression)
             {
@@ -104,7 +104,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         internal class Int : Expression
         {
-            private static readonly Regex Regex = new Regex(@"^\d+$", RegexOptions.Compiled);
+            private static readonly Regex Regex = new Regex(@"^-?\d+$", RegexOptions.Compiled);
 
             public Int(string expression)
             {
