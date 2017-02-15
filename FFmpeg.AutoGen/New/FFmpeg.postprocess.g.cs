@@ -6,22 +6,27 @@ namespace FFmpeg.AutoGen.New
     public unsafe static partial class ffmpeg
     {
         public static int PP_QUALITY_MAX = 6;
-        public static long PP_CPU_CAPS_MMX = 0x80000000;
-        public static int PP_CPU_CAPS_MMX2 = 0x20000000;
-        public static int PP_CPU_CAPS_3DNOW = 0x40000000;
-        public static int PP_CPU_CAPS_ALTIVEC = 0x10000000;
-        public static int PP_CPU_CAPS_AUTO = 0x00080000;
-        public static int PP_FORMAT = 0x00000008;
-        public static int PP_FORMAT_420 = (0x00000011|PP_FORMAT);
-        public static int PP_FORMAT_422 = (0x00000001|PP_FORMAT);
-        public static int PP_FORMAT_411 = (0x00000002|PP_FORMAT);
-        public static int PP_FORMAT_444 = (0x00000000|PP_FORMAT);
-        public static int PP_FORMAT_440 = (0x00000010|PP_FORMAT);
-        public static int PP_PICT_TYPE_QP2 = 0x00000010;
+        // public static  QP_STORE_T = int8_t;
+        public static int PP_CPU_CAPS_MMX = -2147483648;
+        public static int PP_CPU_CAPS_MMX2 = 536870912;
+        public static int PP_CPU_CAPS_3DNOW = 1073741824;
+        public static int PP_CPU_CAPS_ALTIVEC = 268435456;
+        public static int PP_CPU_CAPS_AUTO = 524288;
+        public static int PP_FORMAT = 8;
+        // public static  PP_FORMAT_420 = (0x00000011|PP_FORMAT);
+        // public static  PP_FORMAT_422 = (0x00000001|PP_FORMAT);
+        // public static  PP_FORMAT_411 = (0x00000002|PP_FORMAT);
+        // public static  PP_FORMAT_444 = (0x00000000|PP_FORMAT);
+        // public static  PP_FORMAT_440 = (0x00000010|PP_FORMAT);
+        public static int PP_PICT_TYPE_QP2 = 16;
         public static int LIBPOSTPROC_VERSION_MAJOR = 54;
         public static int LIBPOSTPROC_VERSION_MINOR = 1;
         public static int LIBPOSTPROC_VERSION_MICRO = 100;
-        public static bool FF_API_QP_TYPE = (LIBPOSTPROC_VERSION_MAJOR < 55);
+        // public static  LIBPOSTPROC_VERSION_INT = AV_VERSION_INT(LIBPOSTPROC_VERSION_MAJOR, LIBPOSTPROC_VERSION_MINOR, LIBPOSTPROC_VERSION_MICRO);
+        // public static  LIBPOSTPROC_VERSION = AV_VERSION(LIBPOSTPROC_VERSION_MAJOR, LIBPOSTPROC_VERSION_MINOR, LIBPOSTPROC_VERSION_MICRO);
+        // public static  LIBPOSTPROC_BUILD = LIBPOSTPROC_VERSION_INT;
+        // public static  LIBPOSTPROC_IDENT = "postproc" AV_STRINGIFY(LIBPOSTPROC_VERSION);
+        // public static  FF_API_QP_TYPE = (LIBPOSTPROC_VERSION_MAJOR < 55);
         
         /// <summary>Return the LIBPOSTPROC_VERSION_INT constant.</summary>
         [DllImport("postproc-54", EntryPoint = "postproc_version", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]

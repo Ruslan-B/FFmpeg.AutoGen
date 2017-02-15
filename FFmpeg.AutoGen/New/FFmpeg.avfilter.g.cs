@@ -268,24 +268,28 @@ namespace FFmpeg.AutoGen.New
     
     public unsafe static partial class ffmpeg
     {
-        public static int AVFILTER_FLAG_DYNAMIC_INPUTS = (1 << 0);
-        public static int AVFILTER_FLAG_DYNAMIC_OUTPUTS = (1 << 1);
-        public static int AVFILTER_FLAG_SLICE_THREADS = (1 << 2);
-        public static int AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC = (1 << 16);
-        public static int AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL = (1 << 17);
-        public static int AVFILTER_FLAG_SUPPORT_TIMELINE = (AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC | AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL);
-        public static int AVFILTER_THREAD_SLICE = (1 << 0);
+        // public static  AVFILTER_FLAG_DYNAMIC_INPUTS = (1 << 0);
+        // public static  AVFILTER_FLAG_DYNAMIC_OUTPUTS = (1 << 1);
+        // public static  AVFILTER_FLAG_SLICE_THREADS = (1 << 2);
+        // public static  AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC = (1 << 16);
+        // public static  AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL = (1 << 17);
+        // public static  AVFILTER_FLAG_SUPPORT_TIMELINE = (AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC | AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL);
+        // public static  AVFILTER_THREAD_SLICE = (1 << 0);
         public static int AVFILTER_CMD_FLAG_ONE = 1;
         public static int AVFILTER_CMD_FLAG_FAST = 2;
         public static int LIBAVFILTER_VERSION_MAJOR = 6;
         public static int LIBAVFILTER_VERSION_MINOR = 65;
         public static int LIBAVFILTER_VERSION_MICRO = 100;
-        public static bool FF_API_OLD_FILTER_OPTS = (LIBAVFILTER_VERSION_MAJOR < 7);
-        public static bool FF_API_OLD_FILTER_OPTS_ERROR = (LIBAVFILTER_VERSION_MAJOR < 7);
-        public static bool FF_API_AVFILTER_OPEN = (LIBAVFILTER_VERSION_MAJOR < 7);
-        public static bool FF_API_AVFILTER_INIT_FILTER = (LIBAVFILTER_VERSION_MAJOR < 7);
-        public static bool FF_API_OLD_FILTER_REGISTER = (LIBAVFILTER_VERSION_MAJOR < 7);
-        public static bool FF_API_NOCONST_GET_NAME = (LIBAVFILTER_VERSION_MAJOR < 7);
+        // public static  LIBAVFILTER_VERSION_INT = AV_VERSION_INT(LIBAVFILTER_VERSION_MAJOR, LIBAVFILTER_VERSION_MINOR, LIBAVFILTER_VERSION_MICRO);
+        // public static  LIBAVFILTER_VERSION = AV_VERSION(LIBAVFILTER_VERSION_MAJOR,   LIBAVFILTER_VERSION_MINOR,   LIBAVFILTER_VERSION_MICRO);
+        // public static  LIBAVFILTER_BUILD = LIBAVFILTER_VERSION_INT;
+        // public static  LIBAVFILTER_IDENT = "Lavfi" AV_STRINGIFY(LIBAVFILTER_VERSION);
+        // public static  FF_API_OLD_FILTER_OPTS = (LIBAVFILTER_VERSION_MAJOR < 7);
+        // public static  FF_API_OLD_FILTER_OPTS_ERROR = (LIBAVFILTER_VERSION_MAJOR < 7);
+        // public static  FF_API_AVFILTER_OPEN = (LIBAVFILTER_VERSION_MAJOR < 7);
+        // public static  FF_API_AVFILTER_INIT_FILTER = (LIBAVFILTER_VERSION_MAJOR < 7);
+        // public static  FF_API_OLD_FILTER_REGISTER = (LIBAVFILTER_VERSION_MAJOR < 7);
+        // public static  FF_API_NOCONST_GET_NAME = (LIBAVFILTER_VERSION_MAJOR < 7);
         
         /// <summary>Return the LIBAVFILTER_VERSION_INT constant.</summary>
         [DllImport("avfilter-6", EntryPoint = "avfilter_version", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]

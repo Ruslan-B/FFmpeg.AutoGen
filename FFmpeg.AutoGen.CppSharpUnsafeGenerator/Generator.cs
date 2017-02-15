@@ -1,7 +1,9 @@
 ﻿using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using CppSharp;
 using CppSharp.AST;
 using CppSharp.Parser;
@@ -17,7 +19,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
     {
         private ASTContext _astContext;
         private bool _hasParsingErrors;
-        private ParserTargetInfo _targetInfo;
         private GenerationContext _generationContext;
 
 
@@ -47,7 +48,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             {
                 Verbose = true,
                 ASTContext = new CppSharp.Parser.AST.ASTContext(),
-                LanguageVersion = LanguageVersion.GNUC
+                LanguageVersion = LanguageVersion.GNUC,
             };
             parserOptions.SetupIncludes();
 
@@ -65,7 +66,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             var clangParser = new ClangParser(new CppSharp.Parser.AST.ASTContext());
             clangParser.SourcesParsed += OnSourceFileParsed;
             clangParser.ParseProject(project, false);
-            _targetInfo = clangParser.GetTargetInfo(parserOptions);
             _astContext = ClangParser.ConvertASTContext(clangParser.ASTContext);
         }
 
@@ -116,9 +116,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 sp.Process(translationUnit);
                 fp.Process(translationUnit);
             }
+            var mpp = new MacroPostProcessor();
+            var macros = _generationContext.Units.OfType<MacroDefinition>().ToArray();
+            mpp.Process(macros);
         }
-
-
+        
         private void Write()
         {
             using (var streamWriter = File.CreateText(OutputFile))
