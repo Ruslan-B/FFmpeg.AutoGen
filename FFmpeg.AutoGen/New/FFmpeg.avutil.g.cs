@@ -1086,7 +1086,7 @@ namespace FFmpeg.AutoGen.New
         // public static  M_PI_2 = 1.57079632679489661923;
         public static float M_SQRT1_2 = 0.70710678118654752440f;
         // public static  M_SQRT2 = 1.41421356237309504880;
-        // public static  AV_LOG_QUIET = -8;
+        public static int AV_LOG_QUIET = -8;
         public static int AV_LOG_PANIC = 0;
         public static int AV_LOG_FATAL = 8;
         public static int AV_LOG_ERROR = 16;

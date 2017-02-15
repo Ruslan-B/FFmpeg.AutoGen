@@ -1532,7 +1532,7 @@ namespace FFmpeg.AutoGen.New
         public static int AV_PKT_FLAG_KEY = 1;
         public static int AV_PKT_FLAG_CORRUPT = 2;
         public static int AV_PKT_FLAG_DISCARD = 4;
-        // public static  FF_COMPRESSION_DEFAULT = -1;
+        public static int FF_COMPRESSION_DEFAULT = -1;
         public static int FF_ASPECT_EXTENDED = 15;
         public static int FF_RC_STRATEGY_XVID = 1;
         public static int FF_PRED_LEFT = 0;
@@ -1594,8 +1594,8 @@ namespace FFmpeg.AutoGen.New
         public static int FF_COMPLIANCE_VERY_STRICT = 2;
         public static int FF_COMPLIANCE_STRICT = 1;
         public static int FF_COMPLIANCE_NORMAL = 0;
-        // public static  FF_COMPLIANCE_UNOFFICIAL = -1;
-        // public static  FF_COMPLIANCE_EXPERIMENTAL = -2;
+        public static int FF_COMPLIANCE_UNOFFICIAL = -1;
+        public static int FF_COMPLIANCE_EXPERIMENTAL = -2;
         public static int FF_EC_GUESS_MVS = 1;
         public static int FF_EC_DEBLOCK = 2;
         public static int FF_EC_FAVOR_INTER = 256;
@@ -1655,8 +1655,8 @@ namespace FFmpeg.AutoGen.New
         public static int FF_IDCT_SIMPLEAUTO = 128;
         public static int FF_THREAD_FRAME = 1;
         public static int FF_THREAD_SLICE = 2;
-        // public static  FF_PROFILE_UNKNOWN = -99;
-        // public static  FF_PROFILE_RESERVED = -100;
+        public static int FF_PROFILE_UNKNOWN = -99;
+        public static int FF_PROFILE_RESERVED = -100;
         public static int FF_PROFILE_AAC_MAIN = 0;
         public static int FF_PROFILE_AAC_LOW = 1;
         public static int FF_PROFILE_AAC_SSR = 2;
@@ -1735,8 +1735,8 @@ namespace FFmpeg.AutoGen.New
         public static int FF_PROFILE_HEVC_MAIN_10 = 2;
         public static int FF_PROFILE_HEVC_MAIN_STILL_PICTURE = 3;
         public static int FF_PROFILE_HEVC_REXT = 4;
-        // public static  FF_LEVEL_UNKNOWN = -99;
-        // public static  FF_SUB_CHARENC_MODE_DO_NOTHING = -1;
+        public static int FF_LEVEL_UNKNOWN = -99;
+        public static int FF_SUB_CHARENC_MODE_DO_NOTHING = -1;
         public static int FF_SUB_CHARENC_MODE_AUTOMATIC = 0;
         public static int FF_SUB_CHARENC_MODE_PRE_DECODER = 1;
         public static int FF_CODEC_PROPERTY_LOSSLESS = 1;

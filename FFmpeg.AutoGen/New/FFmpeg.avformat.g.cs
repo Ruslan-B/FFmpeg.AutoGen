@@ -640,7 +640,7 @@ namespace FFmpeg.AutoGen.New
         public static int AV_DISPOSITION_METADATA = 262144;
         public static int AV_PTS_WRAP_IGNORE = 0;
         public static int AV_PTS_WRAP_ADD_OFFSET = 1;
-        // public static  AV_PTS_WRAP_SUB_OFFSET = -1;
+        public static int AV_PTS_WRAP_SUB_OFFSET = -1;
         public static int AVSTREAM_EVENT_FLAG_METADATA_UPDATED = 1;
         // public static  MAX_STD_TIMEBASES = (30*12+30+3+6);
         public static int MAX_REORDER_DELAY = 16;
@@ -666,7 +666,7 @@ namespace FFmpeg.AutoGen.New
         public static int AVFMT_FLAG_AUTO_BSF = 2097152;
         public static int FF_FDEBUG_TS = 1;
         public static int AVFMT_EVENT_FLAG_METADATA_UPDATED = 1;
-        // public static  AVFMT_AVOID_NEG_TS_AUTO = -1;
+        public static int AVFMT_AVOID_NEG_TS_AUTO = -1;
         public static int AVFMT_AVOID_NEG_TS_MAKE_NON_NEGATIVE = 1;
         public static int AVFMT_AVOID_NEG_TS_MAKE_ZERO = 2;
         public static int AVSEEK_FLAG_BACKWARD = 1;

@@ -97,11 +97,11 @@ namespace FFmpeg.AutoGen_.Example
             // Reusing codec context from stream info, initally it was looking like this: 
             // AVCodecContext* pCodecContext = ffmpeg.avcodec_alloc_context3(pCodec); // but it is not working for all kind of codecs
             var pCodecContext = &codecContext;
-            
-            //if ((pCodec->capabilities & ffmpeg.AV_CODEC_CAP_TRUNCATED) == ffmpeg.AV_CODEC_CAP_TRUNCATED)
-            //{
-            //    pCodecContext->flags |= ffmpeg.AV_CODEC_FLAG_TRUNCATED;
-            //}
+
+            if ((pCodec->capabilities & ffmpeg.AV_CODEC_CAP_TRUNCATED) == ffmpeg.AV_CODEC_CAP_TRUNCATED)
+            {
+                pCodecContext->flags |= ffmpeg.AV_CODEC_FLAG_TRUNCATED;
+            }
 
             if (ffmpeg.avcodec_open2(pCodecContext, pCodec, null) < 0)
             {
@@ -147,14 +147,7 @@ namespace FFmpeg.AutoGen_.Example
                 ffmpeg.av_packet_unref(pPacket);
 
                 Console.WriteLine($@"frame: {frameNumber}");
-
-
-                //var data = new byte[pDecodedFrame->linesize0 * pDecodedFrame->height];
-                //for (int i = 0; i < data.Length; i++)
-                //{
-                //     data[i] = *(pDecodedFrame->data0 + i);
-                //}
-
+                
                 byte*[] src = {pDecodedFrame->data0, pDecodedFrame->data1, pDecodedFrame->data2};
                 var srcStride = new[] { pDecodedFrame->linesize[0], pDecodedFrame->linesize[1], pDecodedFrame->linesize[2] };
                 byte*[] dst = {pConvertedFrame->data0};
