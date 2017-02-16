@@ -725,10 +725,6 @@ namespace FFmpeg.AutoGen.New
         public IntPtr @query_ranges;
     }
     
-    public unsafe struct __NSConstantString_tag
-    {
-    }
-    
     public unsafe struct AVFifoBuffer
     {
         public byte* @buffer;
@@ -1071,9 +1067,9 @@ namespace FFmpeg.AutoGen.New
         // public static  AVERROR_STREAM_NOT_FOUND = FFERRTAG(0xF8,'S','T','R');
         // public static  AVERROR_BUG2 = FFERRTAG( 'B','U','G',' ');
         // public static  AVERROR_UNKNOWN = FFERRTAG( 'U','N','K','N');
-        // public static  AVERROR_EXPERIMENTAL = (-0x2bb2afa8);
-        // public static  AVERROR_INPUT_CHANGED = (-0x636e6701);
-        // public static  AVERROR_OUTPUT_CHANGED = (-0x636e6702);
+        public static long AVERROR_EXPERIMENTAL = -0x2bb2afa8;
+        public static long AVERROR_INPUT_CHANGED = -0x636e6701;
+        public static long AVERROR_OUTPUT_CHANGED = -0x636e6702;
         // public static  AVERROR_HTTP_BAD_REQUEST = FFERRTAG(0xF8,'4','0','0');
         // public static  AVERROR_HTTP_UNAUTHORIZED = FFERRTAG(0xF8,'4','0','1');
         // public static  AVERROR_HTTP_FORBIDDEN = FFERRTAG(0xF8,'4','0','3');

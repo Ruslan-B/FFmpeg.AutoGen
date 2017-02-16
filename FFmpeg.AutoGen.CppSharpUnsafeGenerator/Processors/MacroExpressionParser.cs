@@ -13,8 +13,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         private static readonly Regex GroupRegex = new Regex(@"^\((.+)\)$", RegexOptions.Compiled);
         private static readonly Regex BinaryRegex = new Regex(@"^(\w+)\s*(<<|>>|\+|\-|\*|\/|<|>|>=|<=)\s*(\w+)$", RegexOptions.Compiled);
 
-        private static readonly Regex DoubleRegex = new Regex(@"^-?\d\.\d+$", RegexOptions.Compiled);
-        private static readonly Regex IntHexRegex = new Regex(@"^0x(\d+)$", RegexOptions.Compiled);
+        private static readonly Regex DoubleRegex = new Regex(@"^-?\s*\d\.\d+$", RegexOptions.Compiled);
+        private static readonly Regex IntHexRegex = new Regex(@"^(-?)\s*0x([0-9a-fA-F]+)$", RegexOptions.Compiled);
         private static readonly Regex IntDecimalRegex = new Regex(@"^-?\d+$", RegexOptions.Compiled);
         private readonly Dictionary<string, Tuple<Expression, string>> _macroMap;
 
@@ -109,12 +109,15 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             var matchHex = IntHexRegex.Match(expression);
             if (matchHex.Success)
             {
-                var value = matchHex.Groups[1].Value;
+                var sign = matchHex.Groups[1].Value == "-" ? -1 : 1;
+                var value = matchHex.Groups[2].Value;
 
                 int @int;
-                if (int.TryParse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out @int) && @int != int.MinValue)
+                if (int.TryParse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out @int) && sign * @int != int.MinValue)
                 {
-                    result = new Expression.Constant {Value = expression, ValueTypeName = "int"};
+                    result = sign == 1
+                        ? new Expression.Constant {Value = expression, ValueTypeName = "int"}
+                        : new Expression.Constant {Value = expression, ValueTypeName = "long"};
                     return true;
                 }
 
