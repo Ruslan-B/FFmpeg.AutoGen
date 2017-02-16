@@ -49,6 +49,10 @@ namespace FFmpeg.AutoGen.New
     {
     }
     
+    public unsafe struct __NSConstantString_tag
+    {
+    }
+    
     public unsafe static partial class ffmpeg
     {
         public static int SWR_FLAG_RESAMPLE = 1;
