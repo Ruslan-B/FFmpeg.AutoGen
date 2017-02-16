@@ -725,6 +725,10 @@ namespace FFmpeg.AutoGen.New
         public IntPtr @query_ranges;
     }
     
+    public unsafe struct __NSConstantString_tag
+    {
+    }
+    
     public unsafe struct AVFifoBuffer
     {
         public byte* @buffer;
@@ -1077,15 +1081,15 @@ namespace FFmpeg.AutoGen.New
         // public static  AVERROR_HTTP_OTHER_4XX = FFERRTAG(0xF8,'4','X','X');
         // public static  AVERROR_HTTP_SERVER_ERROR = FFERRTAG(0xF8,'5','X','X');
         public static int AV_ERROR_MAX_STRING_SIZE = 64;
-        // public static  M_E = 2.7182818284590452354;
+        public static float M_E = 2.7182818284590452354f;
         public static float M_LN2 = 0.69314718055994530942f;
-        // public static  M_LN10 = 2.30258509299404568402;
-        // public static  M_LOG2_10 = 3.32192809488736234787;
-        // public static  M_PHI = 1.61803398874989484820;
-        // public static  M_PI = 3.14159265358979323846;
-        // public static  M_PI_2 = 1.57079632679489661923;
+        public static float M_LN10 = 2.30258509299404568402f;
+        public static float M_LOG2_10 = 3.32192809488736234787f;
+        public static float M_PHI = 1.61803398874989484820f;
+        public static float M_PI = 3.14159265358979323846f;
+        public static float M_PI_2 = 1.57079632679489661923f;
         public static float M_SQRT1_2 = 0.70710678118654752440f;
-        // public static  M_SQRT2 = 1.41421356237309504880;
+        public static float M_SQRT2 = 1.41421356237309504880f;
         public static int AV_LOG_QUIET = -8;
         public static int AV_LOG_PANIC = 0;
         public static int AV_LOG_FATAL = 8;

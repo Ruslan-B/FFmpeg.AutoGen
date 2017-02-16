@@ -49,33 +49,29 @@ namespace FFmpeg.AutoGen.New
     {
     }
     
-    public unsafe struct __NSConstantString_tag
-    {
-    }
-    
     public unsafe static partial class ffmpeg
     {
         public static int SWR_FLAG_RESAMPLE = 1;
-        public static int AV_CH_FRONT_LEFT = 1;
-        public static int AV_CH_FRONT_RIGHT = 2;
-        public static int AV_CH_FRONT_CENTER = 4;
-        public static int AV_CH_LOW_FREQUENCY = 8;
-        public static int AV_CH_BACK_LEFT = 16;
-        public static int AV_CH_BACK_RIGHT = 32;
-        public static int AV_CH_FRONT_LEFT_OF_CENTER = 64;
-        public static int AV_CH_FRONT_RIGHT_OF_CENTER = 128;
-        public static int AV_CH_BACK_CENTER = 256;
-        public static int AV_CH_SIDE_LEFT = 512;
-        public static int AV_CH_SIDE_RIGHT = 1024;
-        public static int AV_CH_TOP_CENTER = 2048;
-        public static int AV_CH_TOP_FRONT_LEFT = 4096;
-        public static int AV_CH_TOP_FRONT_CENTER = 8192;
-        public static int AV_CH_TOP_FRONT_RIGHT = 16384;
-        public static int AV_CH_TOP_BACK_LEFT = 32768;
-        public static int AV_CH_TOP_BACK_CENTER = 65536;
-        public static int AV_CH_TOP_BACK_RIGHT = 131072;
-        public static int AV_CH_STEREO_LEFT = 536870912;
-        public static int AV_CH_STEREO_RIGHT = 1073741824;
+        public static int AV_CH_FRONT_LEFT = 0x00000001;
+        public static int AV_CH_FRONT_RIGHT = 0x00000002;
+        public static int AV_CH_FRONT_CENTER = 0x00000004;
+        public static int AV_CH_LOW_FREQUENCY = 0x00000008;
+        public static int AV_CH_BACK_LEFT = 0x00000010;
+        public static int AV_CH_BACK_RIGHT = 0x00000020;
+        public static int AV_CH_FRONT_LEFT_OF_CENTER = 0x00000040;
+        public static int AV_CH_FRONT_RIGHT_OF_CENTER = 0x00000080;
+        public static int AV_CH_BACK_CENTER = 0x00000100;
+        public static int AV_CH_SIDE_LEFT = 0x00000200;
+        public static int AV_CH_SIDE_RIGHT = 0x00000400;
+        public static int AV_CH_TOP_CENTER = 0x00000800;
+        public static int AV_CH_TOP_FRONT_LEFT = 0x00001000;
+        public static int AV_CH_TOP_FRONT_CENTER = 0x00002000;
+        public static int AV_CH_TOP_FRONT_RIGHT = 0x00004000;
+        public static int AV_CH_TOP_BACK_LEFT = 0x00008000;
+        public static int AV_CH_TOP_BACK_CENTER = 0x00010000;
+        public static int AV_CH_TOP_BACK_RIGHT = 0x00020000;
+        public static int AV_CH_STEREO_LEFT = 0x20000000;
+        public static int AV_CH_STEREO_RIGHT = 0x40000000;
         // public static  AV_CH_WIDE_LEFT = 0x0000000080000000ULL;
         // public static  AV_CH_WIDE_RIGHT = 0x0000000100000000ULL;
         // public static  AV_CH_SURROUND_DIRECT_LEFT = 0x0000000200000000ULL;
@@ -110,7 +106,7 @@ namespace FFmpeg.AutoGen.New
         // public static  AV_CH_LAYOUT_OCTAGONAL = (AV_CH_LAYOUT_5POINT0|AV_CH_BACK_LEFT|AV_CH_BACK_CENTER|AV_CH_BACK_RIGHT);
         // public static  AV_CH_LAYOUT_HEXADECAGONAL = (AV_CH_LAYOUT_OCTAGONAL|AV_CH_WIDE_LEFT|AV_CH_WIDE_RIGHT|AV_CH_TOP_BACK_LEFT|AV_CH_TOP_BACK_RIGHT|AV_CH_TOP_BACK_CENTER|AV_CH_TOP_FRONT_CENTER|AV_CH_TOP_FRONT_LEFT|AV_CH_TOP_FRONT_RIGHT);
         // public static  AV_CH_LAYOUT_STEREO_DOWNMIX = (AV_CH_STEREO_LEFT|AV_CH_STEREO_RIGHT);
-        // public static  AV_BUFFER_FLAG_READONLY = (1 << 0);
+        public static int AV_BUFFER_FLAG_READONLY = 1 << 0;
         public static int AV_DICT_MATCH_CASE = 1;
         public static int AV_DICT_IGNORE_SUFFIX = 2;
         public static int AV_DICT_DONT_STRDUP_KEY = 4;
@@ -119,8 +115,8 @@ namespace FFmpeg.AutoGen.New
         public static int AV_DICT_APPEND = 32;
         public static int AV_DICT_MULTIKEY = 64;
         public static int AV_NUM_DATA_POINTERS = 8;
-        // public static  AV_FRAME_FLAG_CORRUPT = (1 << 0);
-        // public static  AV_FRAME_FLAG_DISCARD = (1 << 2);
+        public static int AV_FRAME_FLAG_CORRUPT = 1 << 0;
+        public static int AV_FRAME_FLAG_DISCARD = 1 << 2;
         public static int FF_DECODE_ERROR_INVALID_BITSTREAM = 1;
         public static int FF_DECODE_ERROR_MISSING_REFERENCE = 2;
         public static int LIBSWRESAMPLE_VERSION_MAJOR = 2;

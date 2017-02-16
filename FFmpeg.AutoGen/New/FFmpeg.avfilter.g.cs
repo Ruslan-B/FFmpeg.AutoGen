@@ -268,13 +268,13 @@ namespace FFmpeg.AutoGen.New
     
     public unsafe static partial class ffmpeg
     {
-        // public static  AVFILTER_FLAG_DYNAMIC_INPUTS = (1 << 0);
-        // public static  AVFILTER_FLAG_DYNAMIC_OUTPUTS = (1 << 1);
-        // public static  AVFILTER_FLAG_SLICE_THREADS = (1 << 2);
-        // public static  AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC = (1 << 16);
-        // public static  AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL = (1 << 17);
+        public static int AVFILTER_FLAG_DYNAMIC_INPUTS = 1 << 0;
+        public static int AVFILTER_FLAG_DYNAMIC_OUTPUTS = 1 << 1;
+        public static int AVFILTER_FLAG_SLICE_THREADS = 1 << 2;
+        public static int AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC = 1 << 16;
+        public static int AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL = 1 << 17;
         // public static  AVFILTER_FLAG_SUPPORT_TIMELINE = (AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC | AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL);
-        // public static  AVFILTER_THREAD_SLICE = (1 << 0);
+        public static int AVFILTER_THREAD_SLICE = 1 << 0;
         public static int AVFILTER_CMD_FLAG_ONE = 1;
         public static int AVFILTER_CMD_FLAG_FAST = 2;
         public static int LIBAVFILTER_VERSION_MAJOR = 6;
