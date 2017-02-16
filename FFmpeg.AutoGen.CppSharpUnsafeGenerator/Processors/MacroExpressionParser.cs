@@ -15,7 +15,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private static readonly Regex DoubleRegex = new Regex(@"^-?\s*\d\.\d+$", RegexOptions.Compiled);
         private static readonly Regex IntHexRegex = new Regex(@"^(-?)\s*0x([0-9a-fA-F]+)$", RegexOptions.Compiled);
-        private static readonly Regex IntDecimalRegex = new Regex(@"^-?\d+$", RegexOptions.Compiled);
+        private static readonly Regex IntDecimalRegex = new Regex(@"^(-?\d+)([uU]|[lL])?$", RegexOptions.Compiled);
         private readonly Dictionary<string, Tuple<Expression, string>> _macroMap;
 
         public MacroExpressionParser(Dictionary<string, string> macroMap)
@@ -55,19 +55,16 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             Expression left;
             Expression right;
             if (!TryParse(l, out left) || !TryParse(r, out right)) return false;
-            result = new Expression.Binary {Operator = o, Left = left, Right = right, Value = expression};
+            result = new Expression.Binary { Operator = o, Left = left, Right = right, Value = expression };
             switch (o)
             {
                 case "<<":
                 case ">>":
-                {
-                    if (left.ValueTypeName == right.ValueTypeName)
                     {
+
                         result.ValueTypeName = left.ValueTypeName;
                         return true;
                     }
-                    return false;
-                }
                 case ">":
                 case "<":
                 case ">=":
@@ -89,14 +86,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             float @float;
             if (float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out @float))
             {
-                result = new Expression.Constant {Value = $"{value}f", ValueTypeName = "float"};
+                result = new Expression.Constant { Value = $"{value}f", ValueTypeName = "float" };
                 return true;
             }
 
             double @double;
             if (double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out @double))
             {
-                result = new Expression.Constant {Value = expression, ValueTypeName = "double"};
+                result = new Expression.Constant { Value = expression, ValueTypeName = "double" };
                 return true;
             }
 
@@ -116,36 +113,37 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 if (int.TryParse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out @int) && sign * @int != int.MinValue)
                 {
                     result = sign == 1
-                        ? new Expression.Constant {Value = expression, ValueTypeName = "int"}
-                        : new Expression.Constant {Value = expression, ValueTypeName = "long"};
+                        ? new Expression.Constant { Value = expression, ValueTypeName = "int" }
+                        : new Expression.Constant { Value = expression, ValueTypeName = "long" };
                     return true;
                 }
 
                 long @long;
                 if (long.TryParse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out @long))
                 {
-                    result = new Expression.Constant {Value = expression, ValueTypeName = "long"};
+                    result = new Expression.Constant { Value = expression, ValueTypeName = "long" };
                     return true;
                 }
             }
             else
             {
-                var match = IntDecimalRegex.Match(expression);
-                if (!match.Success) return false;
+                var matchDecimal = IntDecimalRegex.Match(expression);
+                if (!matchDecimal.Success) return false;
 
-                var value = match.Groups[0].Value;
+                var value = matchDecimal.Groups[1].Value;
+                var sign = string.Equals(matchDecimal.Groups[2].Value, "U", StringComparison.InvariantCultureIgnoreCase) ? "u" : string.Empty;
 
                 int @int;
-                if (int.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out @int))
+                if (int.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out @int) && @int != int.MinValue)
                 {
-                    result = new Expression.Constant {Value = expression, ValueTypeName = "int"};
+                    result = new Expression.Constant { Value = expression, ValueTypeName = sign + "int" };
                     return true;
                 }
 
                 long @long;
                 if (long.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out @long))
                 {
-                    result = new Expression.Constant {Value = expression, ValueTypeName = "long"};
+                    result = new Expression.Constant { Value = expression, ValueTypeName = sign + "long" };
                     return true;
                 }
             }

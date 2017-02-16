@@ -1423,7 +1423,7 @@ namespace FFmpeg.AutoGen.New
         public static int AV_CODEC_FLAG_BITEXACT = 1 << 23;
         public static int AV_CODEC_FLAG_AC_PRED = 1 << 24;
         public static int AV_CODEC_FLAG_INTERLACED_ME = 1 << 29;
-        // public static  AV_CODEC_FLAG_CLOSED_GOP = (1U << 31);
+        public static uint AV_CODEC_FLAG_CLOSED_GOP = 1U << 31;
         public static int AV_CODEC_FLAG2_FAST = 1 <<  0;
         public static int AV_CODEC_FLAG2_NO_OUTPUT = 1 <<  2;
         public static int AV_CODEC_FLAG2_LOCAL_HEADER = 1 <<  3;
