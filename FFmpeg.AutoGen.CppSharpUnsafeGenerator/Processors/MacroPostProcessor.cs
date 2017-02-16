@@ -10,12 +10,15 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         private static readonly Regex EolEscapeRegex = new Regex(@"\\\s*[\r\n|\r|\n]\s*", RegexOptions.Compiled | RegexOptions.Multiline);
 
 
-        private Dictionary<string, MacroDefinition> _macroMap;
+        private Dictionary<string, string> _macroMap;
+        private MacroExpressionParser _parser;
 
         public void Process(IReadOnlyList<MacroDefinition> macros)
         {
-            _macroMap = macros.ToDictionary(x => x.Name);
             foreach (var macro in macros) macro.Expression = CleanUp(macro.Expression);
+
+            _macroMap = macros.ToDictionary(x => x.Name, x => x.Expression);
+            _parser = new MacroExpressionParser(_macroMap);
             foreach (var macro in macros) Evaluate(macro);
         }
 
@@ -30,16 +33,15 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         {
             if (macro.IsEvaluated) return;
 
+            macro.IsEvaluated = true;
+            
+            Expression expression;
+            if (!_parser.TryParse(macro.Expression, out expression)) return;
 
-            var e = MacroExpression.Parse(macro.Expression);
-            if (e == null) return;
 
-            if (!string.IsNullOrWhiteSpace(e.ValueTypeName))
-            {
-                macro.TypeName = e.ValueTypeName;
-                macro.IsValid = true;
-                macro.Expression = e.Value.ToString();
-            }
+            macro.TypeName = expression.ValueTypeName;
+            macro.IsValid = true;
+            macro.Expression = expression.Value.ToString();
         }
     }
 }

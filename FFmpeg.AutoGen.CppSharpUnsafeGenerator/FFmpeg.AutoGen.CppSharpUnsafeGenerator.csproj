@@ -105,6 +105,7 @@
   <ItemGroup>
     <Compile Include="Definitions\TypeDefinition.cs" />
     <Compile Include="Definitions\MacroDefinition.cs" />
+    <Compile Include="Processors\MacroExpressionParser.cs" />
     <Compile Include="Processors\MacroPostProcessor.cs" />
     <Compile Include="Processors\MacroProcessor.cs" />
     <Compile Include="Processors\FunctionProcessor.cs" />
@@ -119,7 +120,7 @@
     <Compile Include="Processors\EnumerationProcessor.cs" />
     <Compile Include="Definitions\ICanGenerateDefinition.cs" />
     <Compile Include="Definitions\StructureField.cs" />
-    <Compile Include="Processors\MacroExpression.cs" />
+    <Compile Include="Processors\Expression.cs" />
     <Compile Include="Processors\TypeHelper.cs" />
     <Compile Include="GenerationContext.cs" />
     <Compile Include="Writer.cs" />
