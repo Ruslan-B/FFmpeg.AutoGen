@@ -3,6 +3,105 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVCodecContext_draw_horiz_band (IntPtr @s, AVFrame* @src, [MarshalAs(UnmanagedType.LPArray, SizeConst=8)] int[] @offset, int @y, int @type, int @height);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate AVPixelFormat AVCodecContext_get_format (IntPtr @s, IntPtr @fmt);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodecContext_get_buffer2 (IntPtr @s, AVFrame* @frame, int @flags);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVCodecContext_rtp_callback (IntPtr @avctx, void* @data, int @size, int @mb_nb);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodecContext_execute (IntPtr @c, IntPtr @func, void* @arg2, int* @ret, int @count, int @size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodecContext_execute2 (IntPtr @c, IntPtr @func, void* @arg2, int* @ret, int @count);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodec_init_thread_copy (AVCodecContext* @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodec_update_thread_context (AVCodecContext* @dst, AVCodecContext* @src);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVCodec_init_static_data (IntPtr @codec);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodec_init (AVCodecContext* @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodec_encode_sub (AVCodecContext* @p0, byte* @buf, int @buf_size, IntPtr @sub);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodec_encode2 (AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodec_decode (AVCodecContext* @p0, void* @outdata, int* @outdata_size, AVPacket* @avpkt);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodec_close (AVCodecContext* @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodec_send_frame (AVCodecContext* @avctx, AVFrame* @frame);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodec_send_packet (AVCodecContext* @avctx, AVPacket* @avpkt);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodec_receive_frame (AVCodecContext* @avctx, AVFrame* @frame);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodec_receive_packet (AVCodecContext* @avctx, AVPacket* @avpkt);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVCodec_flush (AVCodecContext* @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVHWAccel_alloc_frame (AVCodecContext* @avctx, AVFrame* @frame);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVHWAccel_start_frame (AVCodecContext* @avctx, byte* @buf, uint @buf_size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVHWAccel_decode_slice (AVCodecContext* @avctx, byte* @buf, uint @buf_size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVHWAccel_end_frame (AVCodecContext* @avctx);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVHWAccel_decode_mb (IntPtr @s);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVHWAccel_init (AVCodecContext* @avctx);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVHWAccel_uninit (AVCodecContext* @avctx);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodecParser_parser_init (AVCodecParserContext* @s);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodecParser_parser_parse (AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVCodecParser_parser_close (AVCodecParserContext* @s);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodecParser_split (AVCodecContext* @avctx, byte* @buf, int @buf_size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVBitStreamFilter_init (AVBSFContext* @ctx);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVBitStreamFilter_filter (AVBSFContext* @ctx, AVPacket* @pkt);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVBitStreamFilter_close (AVBSFContext* @ctx);
+    
     /// <summary>Identify the syntax and semantics of the bitstream. The principle is roughly: Two decoders with the same ID can decode the same streams. Two encoders with the same ID can encode compatible streams. There may be slight deviations from the principle due to implementation details.</summary>
     public enum AVCodecID : int
     {
@@ -727,6 +826,42 @@ namespace FFmpeg.AutoGen
         public byte[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7, at8, at9, at10, at11, at12, at13, at14, at15, at16, at17, at18, at19, at20, at21, at22, at23, at24, at25, at26, at27, at28, at29, at30, at31};
     }
     
+    public unsafe struct AVCodecContext_draw_horiz_band_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodecContext_draw_horiz_band_wrapper(AVCodecContext_draw_horiz_band func) => new AVCodecContext_draw_horiz_band_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodecContext_get_format_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodecContext_get_format_wrapper(AVCodecContext_get_format func) => new AVCodecContext_get_format_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodecContext_get_buffer2_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodecContext_get_buffer2_wrapper(AVCodecContext_get_buffer2 func) => new AVCodecContext_get_buffer2_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodecContext_rtp_callback_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodecContext_rtp_callback_wrapper(AVCodecContext_rtp_callback func) => new AVCodecContext_rtp_callback_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodecContext_execute_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodecContext_execute_wrapper(AVCodecContext_execute func) => new AVCodecContext_execute_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodecContext_execute2_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodecContext_execute2_wrapper(AVCodecContext_execute2 func) => new AVCodecContext_execute2_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
     /// <summary>main external API structure. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. Please use AVOptions (av_opt* / av_set/get*()) to access these fields from user applications. The name string for AVOptions options matches the associated command line parameter name and can be found in libavcodec/options_table.h The AVOption/command line parameter names differ in some cases from the C structure field names for historic reasons or brevity. sizeof(AVCodecContext) must not be used outside libav*.</summary>
     public unsafe struct AVCodecContext
     {
@@ -781,9 +916,9 @@ namespace FFmpeg.AutoGen
         /// <summary>This option does nothing</summary>
         public int @me_method;
         /// <summary>If non NULL, 'draw_horiz_band' is called by the libavcodec decoder to draw a horizontal band. It improves cache usage. Not all codecs can do that. You must check the codec capabilities beforehand. When multithreading is used, it may be called from multiple threads at the same time; threads might draw different parts of the same AVFrame, or multiple AVFrames, and there is no guarantee that slices will be drawn in order. The function is also used by hardware acceleration APIs. It is called at least once during frame decoding to pass the data needed for hardware render. In that mode instead of pixel data, AVFrame points to a structure specific to the acceleration API. The application reads the structure and can change some fields to indicate progress or mark state. - encoding: unused - decoding: Set by user.</summary>
-        public IntPtr @draw_horiz_band;
+        public AVCodecContext_draw_horiz_band_wrapper @draw_horiz_band;
         /// <summary>callback to negotiate the pixelFormat</summary>
-        public IntPtr @get_format;
+        public AVCodecContext_get_format_wrapper @get_format;
         /// <summary>maximum number of B-frames between non-B-frames Note: The output will be delayed by max_b_frames+1 relative to the input. - encoding: Set by user. - decoding: unused</summary>
         public int @max_b_frames;
         /// <summary>qscale factor between IP and B-frames If > 0 then the last P-frame quantizer will be used (q= lastp_q*factor+offset). If < 0 then normal ratecontrol will be done (q= -normal_q*factor+offset). - encoding: Set by user. - decoding: unused</summary>
@@ -917,7 +1052,7 @@ namespace FFmpeg.AutoGen
         /// <summary>desired sample format - encoding: Not used. - decoding: Set by user. Decoder will decode to this format if it can.</summary>
         public AVSampleFormat @request_sample_fmt;
         /// <summary>This callback is called at the beginning of each frame to get data buffer(s) for it. There may be one contiguous buffer for all the data or there may be a buffer per each data plane or anything in between. What this means is, you may set however many entries in buf[] you feel necessary. Each buffer must be reference-counted using the AVBuffer API (see description of buf[] below).</summary>
-        public IntPtr @get_buffer2;
+        public AVCodecContext_get_buffer2_wrapper @get_buffer2;
         /// <summary>If non-zero, the decoded audio and video frames returned from avcodec_decode_video2() and avcodec_decode_audio4() are reference-counted and are valid indefinitely. The caller must free them with av_frame_unref() when they are not needed anymore. Otherwise, the decoded frames must not be freed by the caller and are only valid until the next decode call.</summary>
         public int @refcounted_frames;
         /// <summary>amount of qscale change between easy & hard scenes (0.0-1.0)</summary>
@@ -964,7 +1099,7 @@ namespace FFmpeg.AutoGen
         public int @min_prediction_order;
         public int @max_prediction_order;
         public long @timecode_frame_start;
-        public IntPtr @rtp_callback;
+        public AVCodecContext_rtp_callback_wrapper @rtp_callback;
         public int @rtp_payload_size;
         public int @mv_bits;
         public int @header_bits;
@@ -1020,9 +1155,9 @@ namespace FFmpeg.AutoGen
         /// <summary>Set by the client if its custom get_buffer() callback can be called synchronously from another thread, which allows faster multithreaded decoding. draw_horiz_band() will be called from other threads regardless of this setting. Ignored if the default get_buffer() is used. - encoding: Set by user. - decoding: Set by user.</summary>
         public int @thread_safe_callbacks;
         /// <summary>The codec may call this to execute several independent things. It will return only after finishing all tasks. The user may replace this with some multithreaded implementation, the default implementation will execute the parts serially.</summary>
-        public IntPtr @execute;
+        public AVCodecContext_execute_wrapper @execute;
         /// <summary>The codec may call this to execute several independent things. It will return only after finishing all tasks. The user may replace this with some multithreaded implementation, the default implementation will execute the parts serially. Also see avcodec_thread_init and e.g. the --enable-pthread configure option.</summary>
-        public IntPtr @execute2;
+        public AVCodecContext_execute2_wrapper @execute2;
         /// <summary>noise vs. sse weight for the nsse comparison function - encoding: Set by user. - decoding: unused</summary>
         public int @nsse_weight;
         /// <summary>profile - encoding: Set by user. - decoding: Set by libavcodec.</summary>
@@ -1151,6 +1286,84 @@ namespace FFmpeg.AutoGen
         public int @flags;
     }
     
+    public unsafe struct AVCodec_init_thread_copy_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_init_thread_copy_wrapper(AVCodec_init_thread_copy func) => new AVCodec_init_thread_copy_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodec_update_thread_context_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_update_thread_context_wrapper(AVCodec_update_thread_context func) => new AVCodec_update_thread_context_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodec_init_static_data_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_init_static_data_wrapper(AVCodec_init_static_data func) => new AVCodec_init_static_data_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodec_init_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_init_wrapper(AVCodec_init func) => new AVCodec_init_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodec_encode_sub_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_encode_sub_wrapper(AVCodec_encode_sub func) => new AVCodec_encode_sub_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodec_encode2_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_encode2_wrapper(AVCodec_encode2 func) => new AVCodec_encode2_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodec_decode_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_decode_wrapper(AVCodec_decode func) => new AVCodec_decode_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodec_close_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_close_wrapper(AVCodec_close func) => new AVCodec_close_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodec_send_frame_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_send_frame_wrapper(AVCodec_send_frame func) => new AVCodec_send_frame_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodec_send_packet_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_send_packet_wrapper(AVCodec_send_packet func) => new AVCodec_send_packet_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodec_receive_frame_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_receive_frame_wrapper(AVCodec_receive_frame func) => new AVCodec_receive_frame_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodec_receive_packet_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_receive_packet_wrapper(AVCodec_receive_packet func) => new AVCodec_receive_packet_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodec_flush_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodec_flush_wrapper(AVCodec_flush func) => new AVCodec_flush_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
     /// <summary>AVCodec.</summary>
     public unsafe struct AVCodec
     {
@@ -1182,28 +1395,70 @@ namespace FFmpeg.AutoGen
         public int @priv_data_size;
         public IntPtr @next;
         /// <summary>@{</summary>
-        public IntPtr @init_thread_copy;
+        public AVCodec_init_thread_copy_wrapper @init_thread_copy;
         /// <summary>Copy necessary context variables from a previous thread context to the current one. If not defined, the next thread will start automatically; otherwise, the codec must call ff_thread_finish_setup().</summary>
-        public IntPtr @update_thread_context;
+        public AVCodec_update_thread_context_wrapper @update_thread_context;
         /// <summary>Private codec-specific defaults.</summary>
         public AVCodecDefault* @defaults;
         /// <summary>Initialize codec static data, called from avcodec_register().</summary>
-        public IntPtr @init_static_data;
-        public IntPtr @init;
-        public IntPtr @encode_sub;
+        public AVCodec_init_static_data_wrapper @init_static_data;
+        public AVCodec_init_wrapper @init;
+        public AVCodec_encode_sub_wrapper @encode_sub;
         /// <summary>Encode data to an AVPacket.</summary>
-        public IntPtr @encode2;
-        public IntPtr @decode;
-        public IntPtr @close;
+        public AVCodec_encode2_wrapper @encode2;
+        public AVCodec_decode_wrapper @decode;
+        public AVCodec_close_wrapper @close;
         /// <summary>Decode/encode API with decoupled packet/frame dataflow. The API is the same as the avcodec_ prefixed APIs (avcodec_send_frame() etc.), except that: - never called if the codec is closed or the wrong type, - AVPacket parameter change side data is applied right before calling AVCodec->send_packet, - if AV_CODEC_CAP_DELAY is not set, drain packets or frames are never sent, - only one drain packet is ever passed down (until the next flush()), - a drain AVPacket is always NULL (no need to check for avpkt->size).</summary>
-        public IntPtr @send_frame;
-        public IntPtr @send_packet;
-        public IntPtr @receive_frame;
-        public IntPtr @receive_packet;
+        public AVCodec_send_frame_wrapper @send_frame;
+        public AVCodec_send_packet_wrapper @send_packet;
+        public AVCodec_receive_frame_wrapper @receive_frame;
+        public AVCodec_receive_packet_wrapper @receive_packet;
         /// <summary>Flush buffers. Will be called when seeking</summary>
-        public IntPtr @flush;
+        public AVCodec_flush_wrapper @flush;
         /// <summary>Internal codec capabilities. See FF_CODEC_CAP_* in internal.h</summary>
         public int @caps_internal;
+    }
+    
+    public unsafe struct AVHWAccel_alloc_frame_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVHWAccel_alloc_frame_wrapper(AVHWAccel_alloc_frame func) => new AVHWAccel_alloc_frame_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVHWAccel_start_frame_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVHWAccel_start_frame_wrapper(AVHWAccel_start_frame func) => new AVHWAccel_start_frame_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVHWAccel_decode_slice_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVHWAccel_decode_slice_wrapper(AVHWAccel_decode_slice func) => new AVHWAccel_decode_slice_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVHWAccel_end_frame_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVHWAccel_end_frame_wrapper(AVHWAccel_end_frame func) => new AVHWAccel_end_frame_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVHWAccel_decode_mb_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVHWAccel_decode_mb_wrapper(AVHWAccel_decode_mb func) => new AVHWAccel_decode_mb_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVHWAccel_init_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVHWAccel_init_wrapper(AVHWAccel_init func) => new AVHWAccel_init_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVHWAccel_uninit_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVHWAccel_uninit_wrapper(AVHWAccel_uninit func) => new AVHWAccel_uninit_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
     }
     
     /// <summary>@{</summary>
@@ -1222,21 +1477,21 @@ namespace FFmpeg.AutoGen
         /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavcodec and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
         public IntPtr @next;
         /// <summary>Allocate a custom buffer</summary>
-        public IntPtr @alloc_frame;
+        public AVHWAccel_alloc_frame_wrapper @alloc_frame;
         /// <summary>Called at the beginning of each frame or field picture.</summary>
-        public IntPtr @start_frame;
+        public AVHWAccel_start_frame_wrapper @start_frame;
         /// <summary>Callback for each slice.</summary>
-        public IntPtr @decode_slice;
+        public AVHWAccel_decode_slice_wrapper @decode_slice;
         /// <summary>Called at the end of each frame or field picture.</summary>
-        public IntPtr @end_frame;
+        public AVHWAccel_end_frame_wrapper @end_frame;
         /// <summary>Size of per-frame hardware accelerator private data.</summary>
         public int @frame_priv_data_size;
         /// <summary>Called for every Macroblock in a slice.</summary>
-        public IntPtr @decode_mb;
+        public AVHWAccel_decode_mb_wrapper @decode_mb;
         /// <summary>Initialize the hwaccel private data.</summary>
-        public IntPtr @init;
+        public AVHWAccel_init_wrapper @init;
         /// <summary>Uninitialize the hwaccel private data.</summary>
-        public IntPtr @uninit;
+        public AVHWAccel_uninit_wrapper @uninit;
         /// <summary>Size of the private data to allocate in AVCodecInternal.hwaccel_priv_data.</summary>
         public int @priv_data_size;
     }
@@ -1390,14 +1645,38 @@ namespace FFmpeg.AutoGen
         public int[] ToArray() => new[] {at0, at1, at2, at3, at4};
     }
     
+    public unsafe struct AVCodecParser_parser_init_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodecParser_parser_init_wrapper(AVCodecParser_parser_init func) => new AVCodecParser_parser_init_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodecParser_parser_parse_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodecParser_parser_parse_wrapper(AVCodecParser_parser_parse func) => new AVCodecParser_parser_parse_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodecParser_parser_close_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodecParser_parser_close_wrapper(AVCodecParser_parser_close func) => new AVCodecParser_parser_close_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVCodecParser_split_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodecParser_split_wrapper(AVCodecParser_split func) => new AVCodecParser_split_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
     public unsafe struct AVCodecParser
     {
         public int_array5 @codec_ids;
         public int @priv_data_size;
-        public IntPtr @parser_init;
-        public IntPtr @parser_parse;
-        public IntPtr @parser_close;
-        public IntPtr @split;
+        public AVCodecParser_parser_init_wrapper @parser_init;
+        public AVCodecParser_parser_parse_wrapper @parser_parse;
+        public AVCodecParser_parser_close_wrapper @parser_close;
+        public AVCodecParser_split_wrapper @split;
         public IntPtr @next;
     }
     
@@ -1440,6 +1719,24 @@ namespace FFmpeg.AutoGen
         public byte* @args;
     }
     
+    public unsafe struct AVBitStreamFilter_init_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVBitStreamFilter_init_wrapper(AVBitStreamFilter_init func) => new AVBitStreamFilter_init_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVBitStreamFilter_filter_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVBitStreamFilter_filter_wrapper(AVBitStreamFilter_filter func) => new AVBitStreamFilter_filter_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVBitStreamFilter_close_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVBitStreamFilter_close_wrapper(AVBitStreamFilter_close func) => new AVBitStreamFilter_close_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
     public unsafe struct AVBitStreamFilter
     {
         public byte* @name;
@@ -1449,9 +1746,9 @@ namespace FFmpeg.AutoGen
         public AVClass* @priv_class;
         /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavcodec and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
         public int @priv_data_size;
-        public IntPtr @init;
-        public IntPtr @filter;
-        public IntPtr @close;
+        public AVBitStreamFilter_init_wrapper @init;
+        public AVBitStreamFilter_filter_wrapper @filter;
+        public AVBitStreamFilter_close_wrapper @close;
     }
     
     public unsafe struct AVBSFList

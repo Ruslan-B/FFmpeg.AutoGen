@@ -1,5 +1,6 @@
 using System;
 using CppSharp.AST;
+using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 using Type = CppSharp.AST.Type;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
@@ -101,6 +102,26 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     throw new ArgumentOutOfRangeException();
             }
             throw new NotSupportedException();
+        }
+
+
+        internal static TypeDefinition GetReturnTypeName(Type type)
+        {
+            var pointerType = type as PointerType;
+            var builtinType = pointerType?.Pointee as BuiltinType;
+            if (pointerType != null && builtinType != null && builtinType.Type == PrimitiveType.Char)
+            {
+                if (pointerType.QualifiedPointee.Qualifiers.IsConst)
+                {
+                    return
+                        new TypeDefinition
+                        {
+                            Name = "string",
+                            Attributes = new[] { "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]" }
+                        };
+                }
+            }
+            return new TypeDefinition { Name = GetTypeName(type) };
         }
     }
 }

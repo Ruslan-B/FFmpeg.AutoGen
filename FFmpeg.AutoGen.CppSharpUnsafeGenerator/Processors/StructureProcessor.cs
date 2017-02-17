@@ -61,7 +61,34 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             if (tagType != null && field.Class.Declarations.Contains(tagType.Declaration))
                 return GetFieldTypeForNestedDeclaration(field, name, tagType);
 
+            FunctionType functionType;
+            if (type.IsPointerTo(out functionType))
+                return GetPointerToFunction(field, name, functionType);
+
             return new FieldType {Name = TypeHelper.GetTypeName(type)};
+        }
+
+        private FieldType GetPointerToFunction(Field field, string name, FunctionType functionType)
+        {
+            var delegateTypeName = field.Class.Name + "_" + name;
+            var @delegate = new DelegateDefinition
+            {
+                Name = delegateTypeName,
+                ReturnType = TypeHelper.GetReturnTypeName(functionType.ReturnType.Type),
+                Content = field.Comment?.BriefText,
+                Parameters = functionType.Parameters.Select((x, i) => FunctionProcessor.GetParameter(null, x, i)).ToArray()
+            };
+            _context.AddUnit(@delegate);
+
+            var wrapperTypeName = delegateTypeName + "_wrapper";
+            var wrapperDefinition = new StructureDefinition
+            {
+                Name = wrapperTypeName,
+                Delegate = @delegate
+            };
+            _context.AddUnit(wrapperDefinition);
+
+            return new FieldType {Name = wrapperTypeName};
         }
 
         private FieldType GetFieldTypeForNestedDeclaration(Field field, string name, TagType tagType)
@@ -87,9 +114,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             var fixedSize = (int) arrayType.Size;
 
             if (arrayType.Type.IsPrimitiveType())
-            {
                 name = TypeHelper.GetTypeName(arrayType.Type) + "_array" + fixedSize;
-            }
 
             //  var indexerTypeName = field.Class.Name + "_" + name;
             var fieldType = GetFieldType(field, name, arrayType.Type);
@@ -105,7 +130,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             };
             _context.AddUnit(indexerDefinition);
 
-            return new FieldType {Name = name };
+            return new FieldType {Name = name};
         }
     }
 }

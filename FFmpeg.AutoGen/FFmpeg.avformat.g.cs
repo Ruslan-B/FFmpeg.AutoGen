@@ -3,6 +3,117 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVOutputFormat_write_header (IntPtr @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVOutputFormat_write_packet (IntPtr @p0, AVPacket* @pkt);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVOutputFormat_write_trailer (IntPtr @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVOutputFormat_interleave_packet (IntPtr @p0, AVPacket* @out, AVPacket* @in, int @flush);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVOutputFormat_query_codec (AVCodecID @id, int @std_compliance);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVOutputFormat_get_output_timestamp (IntPtr @s, int @stream, long* @dts, long* @wall);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVOutputFormat_control_message (IntPtr @s, int @type, void* @data, ulong @data_size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVOutputFormat_write_uncoded_frame (IntPtr @p0, int @stream_index, AVFrame** @frame, uint @flags);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVOutputFormat_get_device_list (IntPtr @s, IntPtr @device_list);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVOutputFormat_create_device_capabilities (IntPtr @s, IntPtr @caps);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVOutputFormat_free_device_capabilities (IntPtr @s, IntPtr @caps);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVOutputFormat_init (IntPtr @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVOutputFormat_deinit (IntPtr @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVOutputFormat_check_bitstream (IntPtr @p0, AVPacket* @pkt);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVInputFormat_read_probe (AVProbeData* @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVInputFormat_read_header (IntPtr @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVInputFormat_read_packet (IntPtr @p0, AVPacket* @pkt);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVInputFormat_read_close (IntPtr @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVInputFormat_read_seek (IntPtr @p0, int @stream_index, long @timestamp, int @flags);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate long AVInputFormat_read_timestamp (IntPtr @s, int @stream_index, long* @pos, long @pos_limit);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVInputFormat_read_play (IntPtr @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVInputFormat_read_pause (IntPtr @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVInputFormat_read_seek2 (IntPtr @s, int @stream_index, long @min_ts, long @ts, long @max_ts, int @flags);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVInputFormat_get_device_list (IntPtr @s, IntPtr @device_list);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVInputFormat_create_device_capabilities (IntPtr @s, IntPtr @caps);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVInputFormat_free_device_capabilities (IntPtr @s, IntPtr @caps);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVFormatContext_open_cb (IntPtr @s, AVIOContext** @p, [MarshalAs(UnmanagedType.LPStr)] string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVFormatContext_io_open (IntPtr @s, AVIOContext** @pb, [MarshalAs(UnmanagedType.LPStr)] string @url, int @flags, AVDictionary** @options);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVFormatContext_io_close (IntPtr @s, AVIOContext* @pb);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVIOInterruptCB_callback (void* @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVIOContext_read_packet (void* @opaque, byte* @buf, int @buf_size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVIOContext_write_packet (void* @opaque, byte* @buf, int @buf_size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate long AVIOContext_seek (void* @opaque, long @offset, int @whence);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate ulong AVIOContext_update_checksum (ulong @checksum, byte* @buf, uint @size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVIOContext_read_pause (void* @opaque, int @pause);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate long AVIOContext_read_seek (void* @opaque, int @stream_index, long @timestamp, int @flags);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVIOContext_write_data_type (void* @opaque, byte* @buf, int @buf_size, AVIODataMarkerType @type, long @time);
+    
     /// <summary>@}</summary>
     public enum AVStreamParseType : int
     {
@@ -271,6 +382,90 @@ namespace FFmpeg.AutoGen
         public long @den;
     }
     
+    public unsafe struct AVOutputFormat_write_header_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_write_header_wrapper(AVOutputFormat_write_header func) => new AVOutputFormat_write_header_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_write_packet_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_write_packet_wrapper(AVOutputFormat_write_packet func) => new AVOutputFormat_write_packet_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_write_trailer_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_write_trailer_wrapper(AVOutputFormat_write_trailer func) => new AVOutputFormat_write_trailer_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_interleave_packet_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_interleave_packet_wrapper(AVOutputFormat_interleave_packet func) => new AVOutputFormat_interleave_packet_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_query_codec_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_query_codec_wrapper(AVOutputFormat_query_codec func) => new AVOutputFormat_query_codec_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_get_output_timestamp_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_get_output_timestamp_wrapper(AVOutputFormat_get_output_timestamp func) => new AVOutputFormat_get_output_timestamp_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_control_message_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_control_message_wrapper(AVOutputFormat_control_message func) => new AVOutputFormat_control_message_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_write_uncoded_frame_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_write_uncoded_frame_wrapper(AVOutputFormat_write_uncoded_frame func) => new AVOutputFormat_write_uncoded_frame_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_get_device_list_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_get_device_list_wrapper(AVOutputFormat_get_device_list func) => new AVOutputFormat_get_device_list_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_create_device_capabilities_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_create_device_capabilities_wrapper(AVOutputFormat_create_device_capabilities func) => new AVOutputFormat_create_device_capabilities_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_free_device_capabilities_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_free_device_capabilities_wrapper(AVOutputFormat_free_device_capabilities func) => new AVOutputFormat_free_device_capabilities_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_init_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_init_wrapper(AVOutputFormat_init func) => new AVOutputFormat_init_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_deinit_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_deinit_wrapper(AVOutputFormat_deinit func) => new AVOutputFormat_deinit_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVOutputFormat_check_bitstream_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVOutputFormat_check_bitstream_wrapper(AVOutputFormat_check_bitstream func) => new AVOutputFormat_check_bitstream_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
     /// <summary>@{</summary>
     public unsafe struct AVOutputFormat
     {
@@ -296,33 +491,105 @@ namespace FFmpeg.AutoGen
         public IntPtr @next;
         /// <summary>size of private data so that it can be allocated in the wrapper</summary>
         public int @priv_data_size;
-        public IntPtr @write_header;
+        public AVOutputFormat_write_header_wrapper @write_header;
         /// <summary>Write a packet. If AVFMT_ALLOW_FLUSH is set in flags, pkt can be NULL in order to flush data buffered in the muxer. When flushing, return 0 if there still is more data to flush, or 1 if everything was flushed and there is no more buffered data.</summary>
-        public IntPtr @write_packet;
-        public IntPtr @write_trailer;
+        public AVOutputFormat_write_packet_wrapper @write_packet;
+        public AVOutputFormat_write_trailer_wrapper @write_trailer;
         /// <summary>Currently only used to set pixel format if not YUV420P.</summary>
-        public IntPtr @interleave_packet;
+        public AVOutputFormat_interleave_packet_wrapper @interleave_packet;
         /// <summary>Test if the given codec can be stored in this container.</summary>
-        public IntPtr @query_codec;
-        public IntPtr @get_output_timestamp;
+        public AVOutputFormat_query_codec_wrapper @query_codec;
+        public AVOutputFormat_get_output_timestamp_wrapper @get_output_timestamp;
         /// <summary>Allows sending messages from application to device.</summary>
-        public IntPtr @control_message;
+        public AVOutputFormat_control_message_wrapper @control_message;
         /// <summary>Write an uncoded AVFrame.</summary>
-        public IntPtr @write_uncoded_frame;
+        public AVOutputFormat_write_uncoded_frame_wrapper @write_uncoded_frame;
         /// <summary>Returns device list with it properties.</summary>
-        public IntPtr @get_device_list;
+        public AVOutputFormat_get_device_list_wrapper @get_device_list;
         /// <summary>Initialize device capabilities submodule.</summary>
-        public IntPtr @create_device_capabilities;
+        public AVOutputFormat_create_device_capabilities_wrapper @create_device_capabilities;
         /// <summary>Free device capabilities submodule.</summary>
-        public IntPtr @free_device_capabilities;
+        public AVOutputFormat_free_device_capabilities_wrapper @free_device_capabilities;
         /// <summary>default data codec</summary>
         public AVCodecID @data_codec;
         /// <summary>Initialize format. May allocate data here, and set any AVFormatContext or AVStream parameters that need to be set before packets are sent. This method must not write output.</summary>
-        public IntPtr @init;
+        public AVOutputFormat_init_wrapper @init;
         /// <summary>Deinitialize format. If present, this is called whenever the muxer is being destroyed, regardless of whether or not the header has been written.</summary>
-        public IntPtr @deinit;
+        public AVOutputFormat_deinit_wrapper @deinit;
         /// <summary>Set up any necessary bitstream filtering and extract any extra data needed for the global header. Return 0 if more packets from this stream must be checked; 1 if not.</summary>
-        public IntPtr @check_bitstream;
+        public AVOutputFormat_check_bitstream_wrapper @check_bitstream;
+    }
+    
+    public unsafe struct AVInputFormat_read_probe_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVInputFormat_read_probe_wrapper(AVInputFormat_read_probe func) => new AVInputFormat_read_probe_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVInputFormat_read_header_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVInputFormat_read_header_wrapper(AVInputFormat_read_header func) => new AVInputFormat_read_header_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVInputFormat_read_packet_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVInputFormat_read_packet_wrapper(AVInputFormat_read_packet func) => new AVInputFormat_read_packet_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVInputFormat_read_close_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVInputFormat_read_close_wrapper(AVInputFormat_read_close func) => new AVInputFormat_read_close_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVInputFormat_read_seek_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVInputFormat_read_seek_wrapper(AVInputFormat_read_seek func) => new AVInputFormat_read_seek_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVInputFormat_read_timestamp_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVInputFormat_read_timestamp_wrapper(AVInputFormat_read_timestamp func) => new AVInputFormat_read_timestamp_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVInputFormat_read_play_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVInputFormat_read_play_wrapper(AVInputFormat_read_play func) => new AVInputFormat_read_play_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVInputFormat_read_pause_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVInputFormat_read_pause_wrapper(AVInputFormat_read_pause func) => new AVInputFormat_read_pause_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVInputFormat_read_seek2_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVInputFormat_read_seek2_wrapper(AVInputFormat_read_seek2 func) => new AVInputFormat_read_seek2_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVInputFormat_get_device_list_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVInputFormat_get_device_list_wrapper(AVInputFormat_get_device_list func) => new AVInputFormat_get_device_list_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVInputFormat_create_device_capabilities_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVInputFormat_create_device_capabilities_wrapper(AVInputFormat_create_device_capabilities func) => new AVInputFormat_create_device_capabilities_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVInputFormat_free_device_capabilities_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVInputFormat_free_device_capabilities_wrapper(AVInputFormat_free_device_capabilities func) => new AVInputFormat_free_device_capabilities_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
     }
     
     /// <summary>@{</summary>
@@ -348,29 +615,29 @@ namespace FFmpeg.AutoGen
         /// <summary>Size of private data so that it can be allocated in the wrapper.</summary>
         public int @priv_data_size;
         /// <summary>Tell if a given file has a chance of being parsed as this format. The buffer provided is guaranteed to be AVPROBE_PADDING_SIZE bytes big so you do not have to check for that unless you need more.</summary>
-        public IntPtr @read_probe;
+        public AVInputFormat_read_probe_wrapper @read_probe;
         /// <summary>Read the format header and initialize the AVFormatContext structure. Return 0 if OK. 'avformat_new_stream' should be called to create new streams.</summary>
-        public IntPtr @read_header;
+        public AVInputFormat_read_header_wrapper @read_header;
         /// <summary>Read one packet and put it in 'pkt'. pts and flags are also set. 'avformat_new_stream' can be called only if the flag AVFMTCTX_NOHEADER is used and only in the calling thread (not in a background thread).</summary>
-        public IntPtr @read_packet;
+        public AVInputFormat_read_packet_wrapper @read_packet;
         /// <summary>Close the stream. The AVFormatContext and AVStreams are not freed by this function</summary>
-        public IntPtr @read_close;
+        public AVInputFormat_read_close_wrapper @read_close;
         /// <summary>Seek to a given timestamp relative to the frames in stream component stream_index.</summary>
-        public IntPtr @read_seek;
+        public AVInputFormat_read_seek_wrapper @read_seek;
         /// <summary>Get the next timestamp in stream[stream_index].time_base units.</summary>
-        public IntPtr @read_timestamp;
+        public AVInputFormat_read_timestamp_wrapper @read_timestamp;
         /// <summary>Start/resume playing - only meaningful if using a network-based format (RTSP).</summary>
-        public IntPtr @read_play;
+        public AVInputFormat_read_play_wrapper @read_play;
         /// <summary>Pause playing - only meaningful if using a network-based format (RTSP).</summary>
-        public IntPtr @read_pause;
+        public AVInputFormat_read_pause_wrapper @read_pause;
         /// <summary>Seek to timestamp ts. Seeking will be done so that the point from which all active streams can be presented successfully will be closest to ts and within min/max_ts. Active streams are all streams that have AVStream.discard < AVDISCARD_ALL.</summary>
-        public IntPtr @read_seek2;
+        public AVInputFormat_read_seek2_wrapper @read_seek2;
         /// <summary>Returns device list with it properties.</summary>
-        public IntPtr @get_device_list;
+        public AVInputFormat_get_device_list_wrapper @get_device_list;
         /// <summary>Initialize device capabilities submodule.</summary>
-        public IntPtr @create_device_capabilities;
+        public AVInputFormat_create_device_capabilities_wrapper @create_device_capabilities;
         /// <summary>Free device capabilities submodule.</summary>
-        public IntPtr @free_device_capabilities;
+        public AVInputFormat_free_device_capabilities_wrapper @free_device_capabilities;
     }
     
     /// <summary>input or output filename</summary>
@@ -385,6 +652,24 @@ namespace FFmpeg.AutoGen
         }
         
         public byte[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7, at8, at9, at10, at11, at12, at13, at14, at15, at16, at17, at18, at19, at20, at21, at22, at23, at24, at25, at26, at27, at28, at29, at30, at31, at32, at33, at34, at35, at36, at37, at38, at39, at40, at41, at42, at43, at44, at45, at46, at47, at48, at49, at50, at51, at52, at53, at54, at55, at56, at57, at58, at59, at60, at61, at62, at63, at64, at65, at66, at67, at68, at69, at70, at71, at72, at73, at74, at75, at76, at77, at78, at79, at80, at81, at82, at83, at84, at85, at86, at87, at88, at89, at90, at91, at92, at93, at94, at95, at96, at97, at98, at99, at100, at101, at102, at103, at104, at105, at106, at107, at108, at109, at110, at111, at112, at113, at114, at115, at116, at117, at118, at119, at120, at121, at122, at123, at124, at125, at126, at127, at128, at129, at130, at131, at132, at133, at134, at135, at136, at137, at138, at139, at140, at141, at142, at143, at144, at145, at146, at147, at148, at149, at150, at151, at152, at153, at154, at155, at156, at157, at158, at159, at160, at161, at162, at163, at164, at165, at166, at167, at168, at169, at170, at171, at172, at173, at174, at175, at176, at177, at178, at179, at180, at181, at182, at183, at184, at185, at186, at187, at188, at189, at190, at191, at192, at193, at194, at195, at196, at197, at198, at199, at200, at201, at202, at203, at204, at205, at206, at207, at208, at209, at210, at211, at212, at213, at214, at215, at216, at217, at218, at219, at220, at221, at222, at223, at224, at225, at226, at227, at228, at229, at230, at231, at232, at233, at234, at235, at236, at237, at238, at239, at240, at241, at242, at243, at244, at245, at246, at247, at248, at249, at250, at251, at252, at253, at254, at255, at256, at257, at258, at259, at260, at261, at262, at263, at264, at265, at266, at267, at268, at269, at270, at271, at272, at273, at274, at275, at276, at277, at278, at279, at280, at281, at282, at283, at284, at285, at286, at287, at288, at289, at290, at291, at292, at293, at294, at295, at296, at297, at298, at299, at300, at301, at302, at303, at304, at305, at306, at307, at308, at309, at310, at311, at312, at313, at314, at315, at316, at317, at318, at319, at320, at321, at322, at323, at324, at325, at326, at327, at328, at329, at330, at331, at332, at333, at334, at335, at336, at337, at338, at339, at340, at341, at342, at343, at344, at345, at346, at347, at348, at349, at350, at351, at352, at353, at354, at355, at356, at357, at358, at359, at360, at361, at362, at363, at364, at365, at366, at367, at368, at369, at370, at371, at372, at373, at374, at375, at376, at377, at378, at379, at380, at381, at382, at383, at384, at385, at386, at387, at388, at389, at390, at391, at392, at393, at394, at395, at396, at397, at398, at399, at400, at401, at402, at403, at404, at405, at406, at407, at408, at409, at410, at411, at412, at413, at414, at415, at416, at417, at418, at419, at420, at421, at422, at423, at424, at425, at426, at427, at428, at429, at430, at431, at432, at433, at434, at435, at436, at437, at438, at439, at440, at441, at442, at443, at444, at445, at446, at447, at448, at449, at450, at451, at452, at453, at454, at455, at456, at457, at458, at459, at460, at461, at462, at463, at464, at465, at466, at467, at468, at469, at470, at471, at472, at473, at474, at475, at476, at477, at478, at479, at480, at481, at482, at483, at484, at485, at486, at487, at488, at489, at490, at491, at492, at493, at494, at495, at496, at497, at498, at499, at500, at501, at502, at503, at504, at505, at506, at507, at508, at509, at510, at511, at512, at513, at514, at515, at516, at517, at518, at519, at520, at521, at522, at523, at524, at525, at526, at527, at528, at529, at530, at531, at532, at533, at534, at535, at536, at537, at538, at539, at540, at541, at542, at543, at544, at545, at546, at547, at548, at549, at550, at551, at552, at553, at554, at555, at556, at557, at558, at559, at560, at561, at562, at563, at564, at565, at566, at567, at568, at569, at570, at571, at572, at573, at574, at575, at576, at577, at578, at579, at580, at581, at582, at583, at584, at585, at586, at587, at588, at589, at590, at591, at592, at593, at594, at595, at596, at597, at598, at599, at600, at601, at602, at603, at604, at605, at606, at607, at608, at609, at610, at611, at612, at613, at614, at615, at616, at617, at618, at619, at620, at621, at622, at623, at624, at625, at626, at627, at628, at629, at630, at631, at632, at633, at634, at635, at636, at637, at638, at639, at640, at641, at642, at643, at644, at645, at646, at647, at648, at649, at650, at651, at652, at653, at654, at655, at656, at657, at658, at659, at660, at661, at662, at663, at664, at665, at666, at667, at668, at669, at670, at671, at672, at673, at674, at675, at676, at677, at678, at679, at680, at681, at682, at683, at684, at685, at686, at687, at688, at689, at690, at691, at692, at693, at694, at695, at696, at697, at698, at699, at700, at701, at702, at703, at704, at705, at706, at707, at708, at709, at710, at711, at712, at713, at714, at715, at716, at717, at718, at719, at720, at721, at722, at723, at724, at725, at726, at727, at728, at729, at730, at731, at732, at733, at734, at735, at736, at737, at738, at739, at740, at741, at742, at743, at744, at745, at746, at747, at748, at749, at750, at751, at752, at753, at754, at755, at756, at757, at758, at759, at760, at761, at762, at763, at764, at765, at766, at767, at768, at769, at770, at771, at772, at773, at774, at775, at776, at777, at778, at779, at780, at781, at782, at783, at784, at785, at786, at787, at788, at789, at790, at791, at792, at793, at794, at795, at796, at797, at798, at799, at800, at801, at802, at803, at804, at805, at806, at807, at808, at809, at810, at811, at812, at813, at814, at815, at816, at817, at818, at819, at820, at821, at822, at823, at824, at825, at826, at827, at828, at829, at830, at831, at832, at833, at834, at835, at836, at837, at838, at839, at840, at841, at842, at843, at844, at845, at846, at847, at848, at849, at850, at851, at852, at853, at854, at855, at856, at857, at858, at859, at860, at861, at862, at863, at864, at865, at866, at867, at868, at869, at870, at871, at872, at873, at874, at875, at876, at877, at878, at879, at880, at881, at882, at883, at884, at885, at886, at887, at888, at889, at890, at891, at892, at893, at894, at895, at896, at897, at898, at899, at900, at901, at902, at903, at904, at905, at906, at907, at908, at909, at910, at911, at912, at913, at914, at915, at916, at917, at918, at919, at920, at921, at922, at923, at924, at925, at926, at927, at928, at929, at930, at931, at932, at933, at934, at935, at936, at937, at938, at939, at940, at941, at942, at943, at944, at945, at946, at947, at948, at949, at950, at951, at952, at953, at954, at955, at956, at957, at958, at959, at960, at961, at962, at963, at964, at965, at966, at967, at968, at969, at970, at971, at972, at973, at974, at975, at976, at977, at978, at979, at980, at981, at982, at983, at984, at985, at986, at987, at988, at989, at990, at991, at992, at993, at994, at995, at996, at997, at998, at999, at1000, at1001, at1002, at1003, at1004, at1005, at1006, at1007, at1008, at1009, at1010, at1011, at1012, at1013, at1014, at1015, at1016, at1017, at1018, at1019, at1020, at1021, at1022, at1023};
+    }
+    
+    public unsafe struct AVFormatContext_open_cb_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVFormatContext_open_cb_wrapper(AVFormatContext_open_cb func) => new AVFormatContext_open_cb_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVFormatContext_io_open_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVFormatContext_io_open_wrapper(AVFormatContext_io_open func) => new AVFormatContext_io_open_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVFormatContext_io_close_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVFormatContext_io_close_wrapper(AVFormatContext_io_close func) => new AVFormatContext_io_close_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
     }
     
     /// <summary>Format I/O context. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. sizeof(AVFormatContext) must not be used outside libav*, use avformat_alloc_context() to create an AVFormatContext.</summary>
@@ -516,12 +801,12 @@ namespace FFmpeg.AutoGen
         /// <summary>Forced Data codec_id. Demuxing: Set by user.</summary>
         public AVCodecID @data_codec_id;
         /// <summary>Called to open further IO contexts when needed for demuxing.</summary>
-        public IntPtr @open_cb;
+        public AVFormatContext_open_cb_wrapper @open_cb;
         /// <summary>',' separated list of allowed protocols. - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
         public byte* @protocol_whitelist;
-        public IntPtr @io_open;
+        public AVFormatContext_io_open_wrapper @io_open;
         /// <summary>A callback for closing the streams opened with AVFormatContext.io_open().</summary>
-        public IntPtr @io_close;
+        public AVFormatContext_io_close_wrapper @io_close;
         /// <summary>',' separated list of disallowed protocols. - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
         public byte* @protocol_blacklist;
     }
@@ -532,10 +817,16 @@ namespace FFmpeg.AutoGen
         public IntPtr @next;
     }
     
+    public unsafe struct AVIOInterruptCB_callback_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVIOInterruptCB_callback_wrapper(AVIOInterruptCB_callback func) => new AVIOInterruptCB_callback_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
     /// <summary>Callback for checking whether to abort blocking functions. AVERROR_EXIT is returned in this case by the interrupted function. During blocking operations, callback is called with opaque as parameter. If the callback returns 1, the blocking operation will be aborted.</summary>
     public unsafe struct AVIOInterruptCB
     {
-        public IntPtr @callback;
+        public AVIOInterruptCB_callback_wrapper @callback;
         public void* @opaque;
     }
     
@@ -569,6 +860,48 @@ namespace FFmpeg.AutoGen
         public IntPtr @url_context;
     }
     
+    public unsafe struct AVIOContext_read_packet_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVIOContext_read_packet_wrapper(AVIOContext_read_packet func) => new AVIOContext_read_packet_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVIOContext_write_packet_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVIOContext_write_packet_wrapper(AVIOContext_write_packet func) => new AVIOContext_write_packet_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVIOContext_seek_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVIOContext_seek_wrapper(AVIOContext_seek func) => new AVIOContext_seek_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVIOContext_update_checksum_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVIOContext_update_checksum_wrapper(AVIOContext_update_checksum func) => new AVIOContext_update_checksum_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVIOContext_read_pause_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVIOContext_read_pause_wrapper(AVIOContext_read_pause func) => new AVIOContext_read_pause_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVIOContext_read_seek_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVIOContext_read_seek_wrapper(AVIOContext_read_seek func) => new AVIOContext_read_seek_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVIOContext_write_data_type_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVIOContext_write_data_type_wrapper(AVIOContext_write_data_type func) => new AVIOContext_write_data_type_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
     /// <summary>Bytestream IO Context. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. sizeof(AVIOContext) must not be used outside libav*.</summary>
     public unsafe struct AVIOContext
     {
@@ -584,9 +917,9 @@ namespace FFmpeg.AutoGen
         public byte* @buf_end;
         /// <summary>A private pointer, passed to the read/write/seek/... functions.</summary>
         public void* @opaque;
-        public IntPtr @read_packet;
-        public IntPtr @write_packet;
-        public IntPtr @seek;
+        public AVIOContext_read_packet_wrapper @read_packet;
+        public AVIOContext_write_packet_wrapper @write_packet;
+        public AVIOContext_seek_wrapper @seek;
         /// <summary>position in the file of the current buffer</summary>
         public long @pos;
         /// <summary>true if the next seek should flush</summary>
@@ -598,13 +931,13 @@ namespace FFmpeg.AutoGen
         public int @max_packet_size;
         public ulong @checksum;
         public byte* @checksum_ptr;
-        public IntPtr @update_checksum;
+        public AVIOContext_update_checksum_wrapper @update_checksum;
         /// <summary>contains the error code or 0 if no error happened</summary>
         public int @error;
         /// <summary>Pause or resume playback for network streaming protocols - e.g. MMS.</summary>
-        public IntPtr @read_pause;
+        public AVIOContext_read_pause_wrapper @read_pause;
         /// <summary>Seek to a given timestamp in stream with the specified stream_index. Needed for some network streaming protocols which don't support seeking to byte position.</summary>
-        public IntPtr @read_seek;
+        public AVIOContext_read_seek_wrapper @read_seek;
         /// <summary>A combination of AVIO_SEEKABLE_ flags or 0 when the stream is not seekable.</summary>
         public int @seekable;
         /// <summary>max filesize, used to limit allocations This field is internal to libavformat and access from outside is not allowed.</summary>
@@ -626,7 +959,7 @@ namespace FFmpeg.AutoGen
         /// <summary>',' separated list of disallowed protocols.</summary>
         public byte* @protocol_blacklist;
         /// <summary>A callback that is used instead of write_packet.</summary>
-        public IntPtr @write_data_type;
+        public AVIOContext_write_data_type_wrapper @write_data_type;
         /// <summary>If set, don't call write_data_type separately for AVIO_DATA_MARKER_BOUNDARY_POINT, but ignore them and treat them as AVIO_DATA_MARKER_UNKNOWN (to avoid needlessly small chunks of data returned from the callback).</summary>
         public int @ignore_boundary_point;
         /// <summary>Internal, not meant to be used from outside of AVIOContext.</summary>

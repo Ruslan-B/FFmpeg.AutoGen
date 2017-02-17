@@ -2,7 +2,8 @@
 {
     internal class StructureDefinition : NamedDefinition, ICanGenerateDefinition
     {
-        public StructureField[] Fileds { get; set; }
+        public StructureField[] Fileds { get; set; } = {};
         public StructureIndexer Indexer { get; set; }
+        public DelegateDefinition Delegate { get; set; }
     }
 }
