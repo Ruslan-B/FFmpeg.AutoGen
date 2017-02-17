@@ -777,26 +777,68 @@ namespace FFmpeg.AutoGen
         public AVBufferRef* @buf;
     }
     
+    /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte</summary>
+    public unsafe struct data_array8
+    {
+        public byte* @at0; public byte* @at1; public byte* @at2; public byte* @at3; public byte* @at4; public byte* @at5; public byte* @at6; public byte* @at7;
+        
+        public byte* this[int index]
+        {
+            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; case 5: return at5; case 6: return at6; case 7: return at7; default: throw new ArgumentOutOfRangeException(); }}
+            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; case 5: at5 = value; return; case 6: at6 = value; return; case 7: at7 = value; return; default: throw new ArgumentOutOfRangeException(); }}
+        }
+        
+        public byte*[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7};
+    }
+    
+    /// <summary>For video, size in bytes of each picture line. For audio, size in bytes of each plane.</summary>
+    public unsafe struct int_array8
+    {
+        public int @at0; public int @at1; public int @at2; public int @at3; public int @at4; public int @at5; public int @at6; public int @at7;
+        
+        public int this[int index]
+        {
+            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; case 5: return at5; case 6: return at6; case 7: return at7; default: throw new ArgumentOutOfRangeException(); }}
+            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; case 5: at5 = value; return; case 6: at6 = value; return; case 7: at7 = value; return; default: throw new ArgumentOutOfRangeException(); }}
+        }
+        
+        public int[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7};
+    }
+    
+    public unsafe struct ulong_array8
+    {
+        public ulong @at0; public ulong @at1; public ulong @at2; public ulong @at3; public ulong @at4; public ulong @at5; public ulong @at6; public ulong @at7;
+        
+        public ulong this[int index]
+        {
+            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; case 5: return at5; case 6: return at6; case 7: return at7; default: throw new ArgumentOutOfRangeException(); }}
+            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; case 5: at5 = value; return; case 6: at6 = value; return; case 7: at7 = value; return; default: throw new ArgumentOutOfRangeException(); }}
+        }
+        
+        public ulong[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7};
+    }
+    
+    /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j < i.</summary>
+    public unsafe struct buf_array8
+    {
+        public AVBufferRef* @at0; public AVBufferRef* @at1; public AVBufferRef* @at2; public AVBufferRef* @at3; public AVBufferRef* @at4; public AVBufferRef* @at5; public AVBufferRef* @at6; public AVBufferRef* @at7;
+        
+        public AVBufferRef* this[int index]
+        {
+            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; case 5: return at5; case 6: return at6; case 7: return at7; default: throw new ArgumentOutOfRangeException(); }}
+            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; case 5: at5 = value; return; case 6: at6 = value; return; case 7: at7 = value; return; default: throw new ArgumentOutOfRangeException(); }}
+        }
+        
+        public AVBufferRef*[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7};
+    }
+    
     /// <summary>This structure describes decoded (raw) audio or video data.</summary>
     public unsafe struct AVFrame
     {
         /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte</summary>
-        public byte* @data0;
-        /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte</summary>
-        public byte* @data1;
-        /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte</summary>
-        public byte* @data2;
-        /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte</summary>
-        public byte* @data3;
-        /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte</summary>
-        public byte* @data4;
-        /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte</summary>
-        public byte* @data5;
-        /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte</summary>
-        public byte* @data6;
-        /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte</summary>
-        public byte* @data7;
-        public fixed int @linesize[8];
+        public data_array8 @data;
+        /// <summary>For video, size in bytes of each picture line. For audio, size in bytes of each plane.</summary>
+        public int_array8 @linesize;
         /// <summary>pointers to the data planes/channels.</summary>
         public byte** @extended_data;
         /// <summary>width and height of the video frame</summary>
@@ -827,7 +869,7 @@ namespace FFmpeg.AutoGen
         public int @quality;
         /// <summary>for some private data of the user</summary>
         public void* @opaque;
-        public fixed ulong @error[8];
+        public ulong_array8 @error;
         /// <summary>When decoding, this signals how much the picture must be delayed. extra_delay = repeat_pict / (2*fps)</summary>
         public int @repeat_pict;
         /// <summary>The content of the picture is interlaced.</summary>
@@ -843,21 +885,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Channel layout of the audio data.</summary>
         public ulong @channel_layout;
         /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j < i.</summary>
-        public AVBufferRef* @buf0;
-        /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j < i.</summary>
-        public AVBufferRef* @buf1;
-        /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j < i.</summary>
-        public AVBufferRef* @buf2;
-        /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j < i.</summary>
-        public AVBufferRef* @buf3;
-        /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j < i.</summary>
-        public AVBufferRef* @buf4;
-        /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j < i.</summary>
-        public AVBufferRef* @buf5;
-        /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j < i.</summary>
-        public AVBufferRef* @buf6;
-        /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j < i.</summary>
-        public AVBufferRef* @buf7;
+        public buf_array8 @buf;
         /// <summary>For planar audio which requires more than AV_NUM_DATA_POINTERS AVBufferRef pointers, this array will hold all the references which cannot fit into AVFrame.buf.</summary>
         public AVBufferRef** @extended_buf;
         /// <summary>Number of elements in extended_buf.</summary>
@@ -973,6 +1001,20 @@ namespace FFmpeg.AutoGen
         public int @offset_plus1;
     }
     
+    /// <summary>Parameters that describe how pixels are packed. If the format has 1 or 2 components, then luma is 0. If the format has 3 or 4 components: if the RGB flag is set then 0 is red, 1 is green and 2 is blue; otherwise 0 is luma, 1 is chroma-U and 2 is chroma-V.</summary>
+    public unsafe struct comp_array4
+    {
+        public AVComponentDescriptor @at0; public AVComponentDescriptor @at1; public AVComponentDescriptor @at2; public AVComponentDescriptor @at3;
+        
+        public AVComponentDescriptor this[int index]
+        {
+            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; default: throw new ArgumentOutOfRangeException(); }}
+            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; default: throw new ArgumentOutOfRangeException(); }}
+        }
+        
+        public AVComponentDescriptor[] ToArray() => new[] {at0, at1, at2, at3};
+    }
+    
     /// <summary>Descriptor that unambiguously describes how the bits of a pixel are stored in the up to 4 data planes of an image. It also stores the subsampling factors and number of components.</summary>
     public unsafe struct AVPixFmtDescriptor
     {
@@ -986,13 +1028,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Combination of AV_PIX_FMT_FLAG_... flags.</summary>
         public ulong @flags;
         /// <summary>Parameters that describe how pixels are packed. If the format has 1 or 2 components, then luma is 0. If the format has 3 or 4 components: if the RGB flag is set then 0 is red, 1 is green and 2 is blue; otherwise 0 is luma, 1 is chroma-U and 2 is chroma-V.</summary>
-        public AVComponentDescriptor @comp0;
-        /// <summary>Parameters that describe how pixels are packed. If the format has 1 or 2 components, then luma is 0. If the format has 3 or 4 components: if the RGB flag is set then 0 is red, 1 is green and 2 is blue; otherwise 0 is luma, 1 is chroma-U and 2 is chroma-V.</summary>
-        public AVComponentDescriptor @comp1;
-        /// <summary>Parameters that describe how pixels are packed. If the format has 1 or 2 components, then luma is 0. If the format has 3 or 4 components: if the RGB flag is set then 0 is red, 1 is green and 2 is blue; otherwise 0 is luma, 1 is chroma-U and 2 is chroma-V.</summary>
-        public AVComponentDescriptor @comp2;
-        /// <summary>Parameters that describe how pixels are packed. If the format has 1 or 2 components, then luma is 0. If the format has 3 or 4 components: if the RGB flag is set then 0 is red, 1 is green and 2 is blue; otherwise 0 is luma, 1 is chroma-U and 2 is chroma-V.</summary>
-        public AVComponentDescriptor @comp3;
+        public comp_array4 @comp;
         /// <summary>Alternative comma-separated names.</summary>
         public byte* @alias;
     }

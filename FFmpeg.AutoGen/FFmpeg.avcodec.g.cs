@@ -620,6 +620,34 @@ namespace FFmpeg.AutoGen
         public float @quality_factor;
     }
     
+    /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
+    public unsafe struct short_array2
+    {
+        public short @at0; public short @at1;
+        
+        public short this[int index]
+        {
+            get { switch (index) {case 0: return at0; case 1: return at1; default: throw new ArgumentOutOfRangeException(); }}
+            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; default: throw new ArgumentOutOfRangeException(); }}
+        }
+        
+        public short[] ToArray() => new[] {at0, at1};
+    }
+    
+    /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
+    public unsafe struct position_array6
+    {
+        public short_array2 @at0; public short_array2 @at1; public short_array2 @at2; public short_array2 @at3; public short_array2 @at4; public short_array2 @at5;
+        
+        public short_array2 this[int index]
+        {
+            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; case 5: return at5; default: throw new ArgumentOutOfRangeException(); }}
+            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; case 5: at5 = value; return; default: throw new ArgumentOutOfRangeException(); }}
+        }
+        
+        public short_array2[] ToArray() => new[] {at0, at1, at2, at3, at4, at5};
+    }
+    
     /// <summary>Pan Scan area. This specifies the area which should be displayed. Note there may be multiple such areas for one frame.</summary>
     public unsafe struct AVPanScan
     {
@@ -629,17 +657,7 @@ namespace FFmpeg.AutoGen
         public int @width;
         public int @height;
         /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
-        public short[] @position0;
-        /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
-        public short[] @position1;
-        /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
-        public short[] @position2;
-        /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
-        public short[] @position3;
-        /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
-        public short[] @position4;
-        /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
-        public short[] @position5;
+        public position_array6 @position;
     }
     
     /// <summary>This structure describes the bitrate properties of an encoded bitstream. It roughly corresponds to a subset the VBV parameters for MPEG-2 or HRD parameters for H.264/HEVC.</summary>
@@ -696,6 +714,19 @@ namespace FFmpeg.AutoGen
         public byte* @name;
     }
     
+    public unsafe struct byte_array32
+    {
+        public byte @at0; public byte @at1; public byte @at2; public byte @at3; public byte @at4; public byte @at5; public byte @at6; public byte @at7; public byte @at8; public byte @at9; public byte @at10; public byte @at11; public byte @at12; public byte @at13; public byte @at14; public byte @at15; public byte @at16; public byte @at17; public byte @at18; public byte @at19; public byte @at20; public byte @at21; public byte @at22; public byte @at23; public byte @at24; public byte @at25; public byte @at26; public byte @at27; public byte @at28; public byte @at29; public byte @at30; public byte @at31;
+        
+        public byte this[int index]
+        {
+            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; case 5: return at5; case 6: return at6; case 7: return at7; case 8: return at8; case 9: return at9; case 10: return at10; case 11: return at11; case 12: return at12; case 13: return at13; case 14: return at14; case 15: return at15; case 16: return at16; case 17: return at17; case 18: return at18; case 19: return at19; case 20: return at20; case 21: return at21; case 22: return at22; case 23: return at23; case 24: return at24; case 25: return at25; case 26: return at26; case 27: return at27; case 28: return at28; case 29: return at29; case 30: return at30; case 31: return at31; default: throw new ArgumentOutOfRangeException(); }}
+            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; case 5: at5 = value; return; case 6: at6 = value; return; case 7: at7 = value; return; case 8: at8 = value; return; case 9: at9 = value; return; case 10: at10 = value; return; case 11: at11 = value; return; case 12: at12 = value; return; case 13: at13 = value; return; case 14: at14 = value; return; case 15: at15 = value; return; case 16: at16 = value; return; case 17: at17 = value; return; case 18: at18 = value; return; case 19: at19 = value; return; case 20: at20 = value; return; case 21: at21 = value; return; case 22: at22 = value; return; case 23: at23 = value; return; case 24: at24 = value; return; case 25: at25 = value; return; case 26: at26 = value; return; case 27: at27 = value; return; case 28: at28 = value; return; case 29: at29 = value; return; case 30: at30 = value; return; case 31: at31 = value; return; default: throw new ArgumentOutOfRangeException(); }}
+        }
+        
+        public byte[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7, at8, at9, at10, at11, at12, at13, at14, at15, at16, at17, at18, at19, at20, at21, at22, at23, at24, at25, at26, at27, at28, at29, at30, at31};
+    }
+    
     /// <summary>main external API structure. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. Please use AVOptions (av_opt* / av_set/get*()) to access these fields from user applications. The name string for AVOptions options matches the associated command line parameter name and can be found in libavcodec/options_table.h The AVOption/command line parameter names differ in some cases from the C structure field names for historic reasons or brevity. sizeof(AVCodecContext) must not be used outside libav*.</summary>
     public unsafe struct AVCodecContext
     {
@@ -704,7 +735,7 @@ namespace FFmpeg.AutoGen
         public int @log_level_offset;
         public AVMediaType @codec_type;
         public IntPtr @codec;
-        public fixed byte @codec_name[32];
+        public byte_array32 @codec_name;
         public AVCodecID @codec_id;
         /// <summary>fourcc (LSB first, so "ABCD" -> ('D'<<24) + ('C'<<16) + ('B'<<8) + 'A'). This is used to work around some encoder bugs. A demuxer should set this to what is stored in the field used to identify the codec. If there are multiple such fields in a container then the demuxer should choose the one which maximizes the information about the used codec. If the codec tag field in a container is larger than 32 bits then the demuxer should remap the longer ID to 32 bits with a table or other structure. Alternatively a new extra_codec_tag + size could be added but for this a clear advantage must be demonstrated first. - encoding: Set by user, if not then the default based on codec_id will be used. - decoding: Set by user, will be converted to uppercase by libavcodec during init.</summary>
         public uint @codec_tag;
@@ -966,7 +997,8 @@ namespace FFmpeg.AutoGen
         public IntPtr @hwaccel;
         /// <summary>Hardware accelerator context. For some hardware accelerators, a global context needs to be provided by the user. In that case, this holds display-dependent data FFmpeg cannot instantiate itself. Please refer to the FFmpeg HW accelerator documentation to know how to fill this is. e.g. for VA API, this is a struct vaapi_context. - encoding: unused - decoding: Set by user</summary>
         public void* @hwaccel_context;
-        public fixed ulong @error[8];
+        /// <summary>error - encoding: Set by libavcodec if flags & AV_CODEC_FLAG_PSNR. - decoding: unused</summary>
+        public ulong_array8 @error;
         /// <summary>DCT algorithm, see FF_DCT_* below - encoding: Set by user. - decoding: unused</summary>
         public int @dct_algo;
         /// <summary>IDCT algorithm, see FF_IDCT_* below. - encoding: Set by user. - decoding: Set by user.</summary>
@@ -1063,22 +1095,36 @@ namespace FFmpeg.AutoGen
     public unsafe struct AVPicture
     {
         /// <summary>pointers to the image data planes</summary>
-        public byte* @data0;
-        /// <summary>pointers to the image data planes</summary>
-        public byte* @data1;
-        /// <summary>pointers to the image data planes</summary>
-        public byte* @data2;
-        /// <summary>pointers to the image data planes</summary>
-        public byte* @data3;
-        /// <summary>pointers to the image data planes</summary>
-        public byte* @data4;
-        /// <summary>pointers to the image data planes</summary>
-        public byte* @data5;
-        /// <summary>pointers to the image data planes</summary>
-        public byte* @data6;
-        /// <summary>pointers to the image data planes</summary>
-        public byte* @data7;
-        public fixed int @linesize[8];
+        public data_array8 @data;
+        /// <summary>number of bytes per line</summary>
+        public int_array8 @linesize;
+    }
+    
+    /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
+    public unsafe struct data_array4
+    {
+        public byte* @at0; public byte* @at1; public byte* @at2; public byte* @at3;
+        
+        public byte* this[int index]
+        {
+            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; default: throw new ArgumentOutOfRangeException(); }}
+            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; default: throw new ArgumentOutOfRangeException(); }}
+        }
+        
+        public byte*[] ToArray() => new[] {at0, at1, at2, at3};
+    }
+    
+    public unsafe struct int_array4
+    {
+        public int @at0; public int @at1; public int @at2; public int @at3;
+        
+        public int this[int index]
+        {
+            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; default: throw new ArgumentOutOfRangeException(); }}
+            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; default: throw new ArgumentOutOfRangeException(); }}
+        }
+        
+        public int[] ToArray() => new[] {at0, at1, at2, at3};
     }
     
     public unsafe struct AVSubtitleRect
@@ -1095,14 +1141,8 @@ namespace FFmpeg.AutoGen
         public int @nb_colors;
         public AVPicture @pict;
         /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
-        public byte* @data0;
-        /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
-        public byte* @data1;
-        /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
-        public byte* @data2;
-        /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
-        public byte* @data3;
-        public fixed int @linesize[4];
+        public data_array4 @data;
+        public int_array4 @linesize;
         public AVSubtitleType @type;
         /// <summary>0 terminated plain UTF-8 text</summary>
         public byte* @text;
@@ -1269,6 +1309,19 @@ namespace FFmpeg.AutoGen
         public int @seek_preroll;
     }
     
+    public unsafe struct long_array4
+    {
+        public long @at0; public long @at1; public long @at2; public long @at3;
+        
+        public long this[int index]
+        {
+            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; default: throw new ArgumentOutOfRangeException(); }}
+            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; default: throw new ArgumentOutOfRangeException(); }}
+        }
+        
+        public long[] ToArray() => new[] {at0, at1, at2, at3};
+    }
+    
     public unsafe struct AVCodecParserContext
     {
         public void* @priv_data;
@@ -1285,13 +1338,13 @@ namespace FFmpeg.AutoGen
         public long @last_dts;
         public int @fetch_timestamp;
         public int @cur_frame_start_index;
-        public fixed long @cur_frame_offset[4];
-        public fixed long @cur_frame_pts[4];
-        public fixed long @cur_frame_dts[4];
+        public long_array4 @cur_frame_offset;
+        public long_array4 @cur_frame_pts;
+        public long_array4 @cur_frame_dts;
         public int @flags;
         /// <summary>byte offset from starting packet start</summary>
         public long @offset;
-        public fixed long @cur_frame_end[4];
+        public long_array4 @cur_frame_end;
         /// <summary>Set by parser to 1 for key frames and 0 for non-key frames. It is initialized to -1, so if the parser doesn't set this flag, old-style fallback using AV_PICTURE_TYPE_I picture type as key frames will be used.</summary>
         public int @key_frame;
         public long @convergence_duration;
@@ -1301,7 +1354,8 @@ namespace FFmpeg.AutoGen
         public int @dts_ref_dts_delta;
         /// <summary>Presentation delay of current frame in units of AVCodecContext.time_base.</summary>
         public int @pts_dts_delta;
-        public fixed long @cur_frame_pos[4];
+        /// <summary>Position of the packet in file.</summary>
+        public long_array4 @cur_frame_pos;
         /// <summary>Byte position of currently parsed frame in stream.</summary>
         public long @pos;
         /// <summary>Previous frame byte position.</summary>
@@ -1323,9 +1377,22 @@ namespace FFmpeg.AutoGen
         public int @format;
     }
     
+    public unsafe struct int_array5
+    {
+        public int @at0; public int @at1; public int @at2; public int @at3; public int @at4;
+        
+        public int this[int index]
+        {
+            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; default: throw new ArgumentOutOfRangeException(); }}
+            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; default: throw new ArgumentOutOfRangeException(); }}
+        }
+        
+        public int[] ToArray() => new[] {at0, at1, at2, at3, at4};
+    }
+    
     public unsafe struct AVCodecParser
     {
-        public fixed int @codec_ids[5];
+        public int_array5 @codec_ids;
         public int @priv_data_size;
         public IntPtr @parser_init;
         public IntPtr @parser_parse;

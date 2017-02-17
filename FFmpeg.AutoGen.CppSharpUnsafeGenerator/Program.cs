@@ -83,23 +83,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             g.OutputFile = OutputDirectory + "FFmpeg.avdevice.g.cs";
             g.SourceFiles = new[] {"libavdevice/avdevice.h"};
             g.Run();
-
-            //    new Generator
-            //    {
-            //        IncludeDirs = IncludeDirs,
-            //        Defines = Defines,
-            //        Exports = Exports,
-            //        Namespace = Namespace,
-            //        ClassName = ClassName,
-            //        LibraryName = "swresample-2",
-            //        LibraryConstantName = "libswresample",
-            //        OutputFile = OutputDirectory + "FFmpeg.swresample.g.cs",
-            //        SourceFiles = new[]
-            //        {
-            //            @"libswresample/swresample.h"
-            //        }
-            //    }.Run();
-            //}
         }
     }
 }

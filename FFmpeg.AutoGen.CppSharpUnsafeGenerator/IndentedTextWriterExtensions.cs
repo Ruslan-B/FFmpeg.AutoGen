@@ -1,7 +1,7 @@
 using System;
 using System.CodeDom.Compiler;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Writers
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     public static class IndentedTextWriterExtensions
     {

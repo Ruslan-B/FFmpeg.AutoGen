@@ -109,6 +109,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Definitions\FieldType.cs" />
+    <Compile Include="Definitions\StructureIndexer.cs" />
     <Compile Include="Definitions\TypeDefinition.cs" />
     <Compile Include="Definitions\MacroDefinition.cs" />
     <Compile Include="Processors\MacroExpressionParser.cs" />

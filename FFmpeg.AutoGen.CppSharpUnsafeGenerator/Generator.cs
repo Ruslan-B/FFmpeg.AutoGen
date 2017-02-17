@@ -1,15 +1,12 @@
 ﻿using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using CppSharp;
 using CppSharp.AST;
 using CppSharp.Parser;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
-using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Writers;
 using ClangParser = CppSharp.ClangParser;
 using MacroDefinition = FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions.MacroDefinition;
 
