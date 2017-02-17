@@ -126,11 +126,11 @@ namespace FFmpeg.AutoGen.New
         public static int AV_OPT_FLAG_SUBTITLE_PARAM = 32;
         public static int AV_OPT_FLAG_EXPORT = 64;
         public static int AV_OPT_FLAG_READONLY = 128;
-        public static int AV_OPT_FLAG_FILTERING_PARAM = 1<<16;
-        public static int AV_OPT_SEARCH_CHILDREN = 1 << 0;
-        public static int AV_OPT_SEARCH_FAKE_OBJ = 1 << 1;
-        public static int AV_OPT_ALLOW_NULL = 1 << 2;
-        public static int AV_OPT_MULTI_COMPONENT_RANGE = 1 << 12;
+        public static int AV_OPT_FLAG_FILTERING_PARAM = (1 << 16);
+        public static int AV_OPT_SEARCH_CHILDREN = (1 << 0);
+        public static int AV_OPT_SEARCH_FAKE_OBJ = (1 << 1);
+        public static int AV_OPT_ALLOW_NULL = (1 << 2);
+        public static int AV_OPT_MULTI_COMPONENT_RANGE = (1 << 12);
         public static int AV_OPT_SERIALIZE_SKIP_DEFAULTS = 0x00000001;
         public static int AV_OPT_SERIALIZE_OPT_FLAGS_EXACT = 0x00000002;
         

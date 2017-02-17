@@ -1000,10 +1000,10 @@ namespace FFmpeg.AutoGen.New
     public unsafe static partial class ffmpeg
     {
         public static int FF_LAMBDA_SHIFT = 7;
-        // public static  FF_LAMBDA_SCALE = (1<<FF_LAMBDA_SHIFT);
+        public static int FF_LAMBDA_SCALE = (1 << FF_LAMBDA_SHIFT);
         public static int FF_QP2LAMBDA = 118;
-        // public static  FF_LAMBDA_MAX = (256*128-1);
-        // public static  FF_QUALITY_SCALE = FF_LAMBDA_SCALE;
+        public static int FF_LAMBDA_MAX = (256 * 128);
+        public static int FF_QUALITY_SCALE = FF_LAMBDA_SCALE;
         // public static  AV_NOPTS_VALUE = ((int64_t)UINT64_C(0x8000000000000000));
         public static int AV_TIME_BASE = 1000000;
         // public static  AV_TIME_BASE_Q = (AVRational){1, AV_TIME_BASE};
@@ -1037,16 +1037,16 @@ namespace FFmpeg.AutoGen.New
         // public static  LIBAVUTIL_VERSION = AV_VERSION(LIBAVUTIL_VERSION_MAJOR,     LIBAVUTIL_VERSION_MINOR,     LIBAVUTIL_VERSION_MICRO);
         // public static  LIBAVUTIL_BUILD = LIBAVUTIL_VERSION_INT;
         // public static  LIBAVUTIL_IDENT = "Lavu" AV_STRINGIFY(LIBAVUTIL_VERSION);
-        // public static  FF_API_VDPAU = (LIBAVUTIL_VERSION_MAJOR < 56);
-        // public static  FF_API_XVMC = (LIBAVUTIL_VERSION_MAJOR < 56);
-        // public static  FF_API_OPT_TYPE_METADATA = (LIBAVUTIL_VERSION_MAJOR < 56);
-        // public static  FF_API_DLOG = (LIBAVUTIL_VERSION_MAJOR < 56);
-        // public static  FF_API_VAAPI = (LIBAVUTIL_VERSION_MAJOR < 56);
-        // public static  FF_API_FRAME_QP = (LIBAVUTIL_VERSION_MAJOR < 56);
-        // public static  FF_API_PLUS1_MINUS1 = (LIBAVUTIL_VERSION_MAJOR < 56);
-        // public static  FF_API_ERROR_FRAME = (LIBAVUTIL_VERSION_MAJOR < 56);
-        // public static  FF_API_CRC_BIG_TABLE = (LIBAVUTIL_VERSION_MAJOR < 56);
-        // public static  FF_API_PKT_PTS = (LIBAVUTIL_VERSION_MAJOR < 56);
+        public static bool FF_API_VDPAU = (LIBAVUTIL_VERSION_MAJOR < 56);
+        public static bool FF_API_XVMC = (LIBAVUTIL_VERSION_MAJOR < 56);
+        public static bool FF_API_OPT_TYPE_METADATA = (LIBAVUTIL_VERSION_MAJOR < 56);
+        public static bool FF_API_DLOG = (LIBAVUTIL_VERSION_MAJOR < 56);
+        public static bool FF_API_VAAPI = (LIBAVUTIL_VERSION_MAJOR < 56);
+        public static bool FF_API_FRAME_QP = (LIBAVUTIL_VERSION_MAJOR < 56);
+        public static bool FF_API_PLUS1_MINUS1 = (LIBAVUTIL_VERSION_MAJOR < 56);
+        public static bool FF_API_ERROR_FRAME = (LIBAVUTIL_VERSION_MAJOR < 56);
+        public static bool FF_API_CRC_BIG_TABLE = (LIBAVUTIL_VERSION_MAJOR < 56);
+        public static bool FF_API_PKT_PTS = (LIBAVUTIL_VERSION_MAJOR < 56);
         public static int AV_HAVE_BIGENDIAN = 0;
         public static int AV_HAVE_FAST_UNALIGNED = 1;
         // public static  AVERROR_BSF_NOT_FOUND = FFERRTAG(0xF8,'B','S','F');
@@ -1067,9 +1067,9 @@ namespace FFmpeg.AutoGen.New
         // public static  AVERROR_STREAM_NOT_FOUND = FFERRTAG(0xF8,'S','T','R');
         // public static  AVERROR_BUG2 = FFERRTAG( 'B','U','G',' ');
         // public static  AVERROR_UNKNOWN = FFERRTAG( 'U','N','K','N');
-        public static long AVERROR_EXPERIMENTAL = -0x2bb2afa8;
-        public static long AVERROR_INPUT_CHANGED = -0x636e6701;
-        public static long AVERROR_OUTPUT_CHANGED = -0x636e6702;
+        public static long AVERROR_EXPERIMENTAL = (0x2bb2afa8);
+        public static long AVERROR_INPUT_CHANGED = (0x636e6701);
+        public static long AVERROR_OUTPUT_CHANGED = (0x636e6702);
         // public static  AVERROR_HTTP_BAD_REQUEST = FFERRTAG(0xF8,'4','0','0');
         // public static  AVERROR_HTTP_UNAUTHORIZED = FFERRTAG(0xF8,'4','0','1');
         // public static  AVERROR_HTTP_FORBIDDEN = FFERRTAG(0xF8,'4','0','3');
@@ -1095,7 +1095,7 @@ namespace FFmpeg.AutoGen.New
         public static int AV_LOG_VERBOSE = 40;
         public static int AV_LOG_DEBUG = 48;
         public static int AV_LOG_TRACE = 56;
-        // public static  AV_LOG_MAX_OFFSET = (AV_LOG_TRACE - AV_LOG_QUIET);
+        public static int AV_LOG_MAX_OFFSET = (AV_LOG_TRACE - AV_LOG_QUIET);
         public static int AV_LOG_SKIP_REPEATED = 1;
         public static int AV_LOG_PRINT_LEVEL = 2;
         public static int AVPALETTE_SIZE = 1024;

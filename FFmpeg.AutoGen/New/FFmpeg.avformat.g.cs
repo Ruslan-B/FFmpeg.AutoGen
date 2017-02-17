@@ -597,8 +597,8 @@ namespace FFmpeg.AutoGen.New
     
     public unsafe static partial class ffmpeg
     {
-        // public static  AVPROBE_SCORE_RETRY = (AVPROBE_SCORE_MAX/4);
-        // public static  AVPROBE_SCORE_STREAM_RETRY = (AVPROBE_SCORE_MAX/4-1);
+        public static int AVPROBE_SCORE_RETRY = (AVPROBE_SCORE_MAX / 4);
+        public static int AVPROBE_SCORE_STREAM_RETRY = (AVPROBE_SCORE_MAX / 4);
         public static int AVPROBE_SCORE_EXTENSION = 50;
         public static int AVPROBE_SCORE_MIME = 75;
         public static int AVPROBE_SCORE_MAX = 100;
@@ -642,7 +642,7 @@ namespace FFmpeg.AutoGen.New
         public static int AV_PTS_WRAP_ADD_OFFSET = 1;
         public static int AV_PTS_WRAP_SUB_OFFSET = -1;
         public static int AVSTREAM_EVENT_FLAG_METADATA_UPDATED = 0x0001;
-        // public static  MAX_STD_TIMEBASES = (30*12+30+3+6);
+        public static int MAX_STD_TIMEBASES = (30 * 12);
         public static int MAX_REORDER_DELAY = 16;
         public static int AV_PROGRAM_RUNNING = 1;
         public static int AVFMTCTX_NOHEADER = 0x0001;
@@ -683,23 +683,23 @@ namespace FFmpeg.AutoGen.New
         // public static  LIBAVFORMAT_VERSION = AV_VERSION(LIBAVFORMAT_VERSION_MAJOR,   LIBAVFORMAT_VERSION_MINOR,   LIBAVFORMAT_VERSION_MICRO);
         // public static  LIBAVFORMAT_BUILD = LIBAVFORMAT_VERSION_INT;
         // public static  LIBAVFORMAT_IDENT = "Lavf" AV_STRINGIFY(LIBAVFORMAT_VERSION);
-        // public static  FF_API_LAVF_BITEXACT = (LIBAVFORMAT_VERSION_MAJOR < 58);
-        // public static  FF_API_LAVF_FRAC = (LIBAVFORMAT_VERSION_MAJOR < 58);
-        // public static  FF_API_LAVF_CODEC_TB = (LIBAVFORMAT_VERSION_MAJOR < 58);
-        // public static  FF_API_URL_FEOF = (LIBAVFORMAT_VERSION_MAJOR < 58);
-        // public static  FF_API_LAVF_FMT_RAWPICTURE = (LIBAVFORMAT_VERSION_MAJOR < 58);
-        // public static  FF_API_COMPUTE_PKT_FIELDS2 = (LIBAVFORMAT_VERSION_MAJOR < 58);
-        // public static  FF_API_OLD_OPEN_CALLBACKS = (LIBAVFORMAT_VERSION_MAJOR < 58);
-        // public static  FF_API_LAVF_AVCTX = (LIBAVFORMAT_VERSION_MAJOR < 58);
-        // public static  FF_API_NOCONST_GET_SIDE_DATA = (LIBAVFORMAT_VERSION_MAJOR < 58);
-        // public static  FF_API_HTTP_USER_AGENT = (LIBAVFORMAT_VERSION_MAJOR < 58);
+        public static bool FF_API_LAVF_BITEXACT = (LIBAVFORMAT_VERSION_MAJOR < 58);
+        public static bool FF_API_LAVF_FRAC = (LIBAVFORMAT_VERSION_MAJOR < 58);
+        public static bool FF_API_LAVF_CODEC_TB = (LIBAVFORMAT_VERSION_MAJOR < 58);
+        public static bool FF_API_URL_FEOF = (LIBAVFORMAT_VERSION_MAJOR < 58);
+        public static bool FF_API_LAVF_FMT_RAWPICTURE = (LIBAVFORMAT_VERSION_MAJOR < 58);
+        public static bool FF_API_COMPUTE_PKT_FIELDS2 = (LIBAVFORMAT_VERSION_MAJOR < 58);
+        public static bool FF_API_OLD_OPEN_CALLBACKS = (LIBAVFORMAT_VERSION_MAJOR < 58);
+        public static bool FF_API_LAVF_AVCTX = (LIBAVFORMAT_VERSION_MAJOR < 58);
+        public static bool FF_API_NOCONST_GET_SIDE_DATA = (LIBAVFORMAT_VERSION_MAJOR < 58);
+        public static bool FF_API_HTTP_USER_AGENT = (LIBAVFORMAT_VERSION_MAJOR < 58);
         public static int FF_API_R_FRAME_RATE = 1;
         public static int AVIO_SEEKABLE_NORMAL = 0x0001;
         public static int AVSEEK_SIZE = 0x10000;
         public static int AVSEEK_FORCE = 0x20000;
         public static int AVIO_FLAG_READ = 1;
         public static int AVIO_FLAG_WRITE = 2;
-        // public static  AVIO_FLAG_READ_WRITE = (AVIO_FLAG_READ|AVIO_FLAG_WRITE);
+        public static int AVIO_FLAG_READ_WRITE = (AVIO_FLAG_READ | AVIO_FLAG_WRITE);
         public static int AVIO_FLAG_NONBLOCK = 8;
         public static int AVIO_FLAG_DIRECT = 0x8000;
         
