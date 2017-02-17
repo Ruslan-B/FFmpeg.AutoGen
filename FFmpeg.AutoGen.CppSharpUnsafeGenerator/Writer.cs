@@ -17,7 +17,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public void Write(MacroDefinition macro)
         {
-            string valid = macro.IsValid ? string.Empty : "// ";
+            var valid = macro.IsValid ? string.Empty : "// ";
             WriteLine($"{valid}public static {macro.TypeName} {macro.Name} = {macro.Expression};");
         }
 
@@ -55,7 +55,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
             WriteLine($"[DllImport(\"{function.LibraryName}\", EntryPoint = \"{function.Name}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
             function.ReturnType.Attributes.ToList().ForEach(WriteLine);
-            var @params = string.Join(", ", function.Parameters.Select(x => $"{string.Join("", x.Type.Attributes)}{x.Type.Name} @{x.Name}"));
+            var @params = string.Join(", ", function.Parameters.Select(x =>
+                x.Type.Attributes.Any()
+                    ? $"{string.Join("", x.Type.Attributes)} {x.Type.Name} @{x.Name}"
+                    : $"{x.Type.Name} @{x.Name}"));
             WriteLine($"public static extern {function.ReturnType.Name} {function.Name}({@params});");
         }
 
