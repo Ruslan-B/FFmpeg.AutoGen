@@ -16,6 +16,9 @@ namespace FFmpeg.AutoGen
     public unsafe delegate void AVCodecContext_rtp_callback (IntPtr @avctx, void* @data, int @size, int @mb_nb);
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int func (IntPtr @c2, void* @arg);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate int AVCodecContext_execute (IntPtr @c, IntPtr @func, void* @arg2, int* @ret, int @count, int @size);
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -101,6 +104,15 @@ namespace FFmpeg.AutoGen
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void AVBitStreamFilter_close (AVBSFContext* @ctx);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int avcodec_default_execute_func (AVCodecContext* @c2, void* @arg2);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int avcodec_default_execute2_func (AVCodecContext* @c2, void* @arg2, int @p2, int @p3);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int av_lockmgr_register_cb (void** @mutex, AVLockOp @op);
     
     /// <summary>Identify the syntax and semantics of the bitstream. The principle is roughly: Two decoders with the same ID can decode the same streams. Two encoders with the same ID can encode compatible streams. There may be slight deviations from the principle due to implementation details.</summary>
     public enum AVCodecID : int

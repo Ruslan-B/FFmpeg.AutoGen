@@ -18,6 +18,33 @@ namespace FFmpeg.AutoGen
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate int AVClass_query_ranges (IntPtr* @p0, void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @key, int @flags);
     
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void av_log_set_callback_callback (void* @p0, int @p1, [MarshalAs(UnmanagedType.LPStr)] string @p2, byte* @p3);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void av_fifo_generic_peek_at_func (void* @p0, void* @p1, int @p2);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void av_fifo_generic_peek_func (void* @p0, void* @p1, int @p2);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void av_fifo_generic_read_func (void* @p0, void* @p1, int @p2);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int av_fifo_generic_write_func (void* @p0, void* @p1, int @p2);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void av_buffer_create_free (void* @opaque, byte* @data);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate AVBufferRef* av_buffer_pool_init_alloc (int @size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate AVBufferRef* av_buffer_pool_init2_alloc (void* @opaque, int @size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void av_buffer_pool_init2_pool_free (void* @opaque);
+    
     /// <summary>Media Type</summary>
     public enum AVMediaType : int
     {

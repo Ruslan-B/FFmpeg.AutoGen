@@ -76,7 +76,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 Name = delegateTypeName,
                 ReturnType = TypeHelper.GetReturnTypeName(functionType.ReturnType.Type),
                 Content = field.Comment?.BriefText,
-                Parameters = functionType.Parameters.Select((x, i) => FunctionProcessor.GetParameter(null, x, i)).ToArray()
+                Parameters = functionType.Parameters.Select((x, i) => GetParameter(x, i)).ToArray()
             };
             _context.AddUnit(@delegate);
 
@@ -90,6 +90,17 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
             return new FieldType {Name = wrapperTypeName};
         }
+
+        internal FunctionParameter GetParameter(Parameter parameter, int position)
+        {
+            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
+            return new FunctionParameter
+            {
+                Name = name,
+                Type = FunctionProcessor.GetParameterType(_context, name, parameter.Type),
+            };
+        }
+
 
         private FieldType GetFieldTypeForNestedDeclaration(Field field, string name, TagType tagType)
         {
