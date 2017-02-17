@@ -148,13 +148,13 @@ namespace FFmpeg.AutoGen.Example
 
                 Console.WriteLine($@"frame: {frameNumber}");
                 
-                byte*[] src = {pDecodedFrame->data0, pDecodedFrame->data1, pDecodedFrame->data2};
-                var srcStride = new[] { pDecodedFrame->linesize[0], pDecodedFrame->linesize[1], pDecodedFrame->linesize[2] };
-                byte*[] dst = {pConvertedFrame->data0};
-                var dstStride = new[]{ pConvertedFrame->linesize[0] };
+                byte*[] src = pDecodedFrame->data.ToArray();
+                var srcStride = pDecodedFrame->linesize.ToArray();
+                byte*[] dst = pConvertedFrame->data.ToArray();
+                var dstStride = pConvertedFrame->linesize.ToArray();
                 ffmpeg.sws_scale(pConvertContext, src, srcStride, 0, height, dst, dstStride);
 
-                var convertedFrameAddress = pConvertedFrame->data0;
+                var convertedFrameAddress = pConvertedFrame->data[0];
 
                 var imageBufferPtr = new IntPtr(convertedFrameAddress);
 

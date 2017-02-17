@@ -2,7 +2,6 @@
 using System.CodeDom.Compiler;
 using System.Linq;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
-using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Writers;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
@@ -38,15 +37,44 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteSummary(structure);
             WriteLine($"public unsafe struct {structure.Name}");
             using (BeginBlock())
-                foreach (var item in structure.Fileds)
-                {
-                    WriteSummary(item);
+            {
+                Func<StructureField, string> toString = x => x.FieldType.IsFixed
+                    ? $"public fixed {x.FieldType.Name} @{x.Name}[{x.FieldType.FixedSize}];"
+                    : $"public {x.FieldType.Name} @{x.Name};";
 
-                    if (item.IsFixed)
-                        WriteLine($"public fixed {item.TypeName} @{item.Name}[{item.FixedSize}];");
-                    else
-                        WriteLine($"public {item.TypeName} @{item.Name};");
+                var indexer = structure.Indexer;
+                if (indexer == null)
+                {
+                    foreach (var item in structure.Fileds)
+                    {
+                        WriteSummary(item);
+                        WriteLine(toString(item));
+                    }
                 }
+                else
+                {
+                    var size = indexer.FieldType.FixedSize;
+                    var prefix = indexer.FieldPrefix;
+
+                    WriteLine(string.Join(" ", structure.Fileds.Select(toString)));
+
+                    WriteLine();
+
+                    WriteLine($"public {indexer.FieldType.Name} this[int index]");
+                    using (BeginBlock())
+                    {
+                        var getCases = Enumerable.Range(0, size).Select(i => $"case {i}: return {prefix}{i};");
+                        WriteLine($"get {{ switch (index) {{{string.Join(" ", getCases)} default: throw new ArgumentOutOfRangeException(); }}}}");
+                        var setCases = Enumerable.Range(0, size).Select(i => $"case {i}: {prefix}{i} = value; return;");
+                        WriteLine($"set {{ switch (index) {{{string.Join(" ", setCases)} default: throw new ArgumentOutOfRangeException(); }}}}");
+                    }
+
+                    WriteLine();
+
+                    var fields = Enumerable.Range(0, size).Select(i => $"{prefix}{i}");
+                    WriteLine($"public {indexer.FieldType.Name}[] ToArray() => new[] {{{string.Join(", ", fields)}}};");
+                }
+            }
         }
 
         public void Write(FunctionDefinition function)
@@ -72,7 +100,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             if (!string.IsNullOrWhiteSpace(value.Content)) WriteLine($"/// <param name=\"{name}\">{value.Content.Trim()}</param>");
         }
 
+        private void WriteLine() => _writer.WriteLine();
         private void WriteLine(string line) => _writer.WriteLine(line);
+        private void Write(string value) => _writer.Write(value);
         private IDisposable BeginBlock() => _writer.BeginBlock();
     }
 }

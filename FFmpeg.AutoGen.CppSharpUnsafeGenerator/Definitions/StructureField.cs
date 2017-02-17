@@ -1,8 +1,9 @@
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
 {
-    internal class StructureField : NamedDefinition
+    internal class StructureField : ICanGenerateXmlDoc
     {
-        public bool IsFixed { get; set; }
-        public long FixedSize { get; set; }
+        public string Name { get; set; }
+        public FieldType FieldType { get; set; }
+        public string Content { get; set; }
     }
 }

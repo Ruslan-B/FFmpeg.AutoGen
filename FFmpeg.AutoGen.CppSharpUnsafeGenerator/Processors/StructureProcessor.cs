@@ -4,6 +4,7 @@ using System.Linq;
 using CppSharp.AST;
 using CppSharp.AST.Extensions;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
+using Type = CppSharp.AST.Type;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
@@ -29,61 +30,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             }
         }
 
-        private IEnumerable<StructureField> ToDefinition(Field field)
-        {
-            if (field.IsBitField)
-            {
-                Console.WriteLine("TODO bit fileds processing");
-            }
-
-            var arrayType = field.Type as ArrayType;
-            if (arrayType != null && arrayType.SizeType == ArrayType.ArraySize.Constant) return FixedArray(field, arrayType);
-
-            var tagType = field.Type as TagType;
-            if (tagType != null && field.Class.Declarations.Contains(tagType.Declaration)) return NestedDefinition(field, tagType);
-
-            return new[] {ToDefinition(field, field.Name, TypeHelper.GetTypeName(field.Type))};
-        }
-
-        private IEnumerable<StructureField> NestedDefinition(Field field, TagType tagType)
-        {
-            var @class = tagType.Declaration as Class;
-            if (@class != null)
-            {
-                var typeName = field.Class.Name + "_" + field.Name;
-                _context.AddUnit(ToDefinition(@class, typeName));
-                return new[] {ToDefinition(field, field.Name, typeName)};
-            }
-            var @enum = tagType.Declaration as Enumeration;
-            if (@enum != null)
-            {
-                var typeName = field.Class.Name + "_" + field.Name;
-                _context.AddUnit(EnumerationProcessor.ToDefinition(@enum, typeName));
-                return new[] {ToDefinition(field, field.Name, typeName)};
-            }
-            throw new NotSupportedException();
-        }
-
-        private IEnumerable<StructureField> FixedArray(Field field, ArrayType arrayType)
-        {
-            var elementTypeName = TypeHelper.GetTypeName(arrayType.Type);
-
-            if (arrayType.Type.IsPrimitiveType())
-            {
-                yield return new StructureField
-                {
-                    Name = field.Name,
-                    TypeName = elementTypeName,
-                    IsFixed = true,
-                    FixedSize = arrayType.Size
-                };
-                yield break;
-            }
-
-            for (var i = 0; i < arrayType.Size; i++) yield return ToDefinition(field, $"{field.Name}{i}", elementTypeName);
-        }
-
-
         private StructureDefinition ToDefinition(Class @class, string className)
         {
             return new StructureDefinition
@@ -94,14 +40,72 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             };
         }
 
-        private static StructureField ToDefinition(Field field, string name, string typeName)
+        private IEnumerable<StructureField> ToDefinition(Field field)
         {
-            return new StructureField
+            if (field.IsBitField)
+            {
+                Console.WriteLine("TODO bit fileds processing");
+                yield break;
+            }
+
+            yield return new StructureField {Name = field.Name, Content = field.Comment?.BriefText, FieldType = GetFieldType(field, field.Name, field.Type)};
+        }
+
+        private FieldType GetFieldType(Field field, string name, Type type)
+        {
+            var arrayType = type as ArrayType;
+            if (arrayType != null && arrayType.SizeType == ArrayType.ArraySize.Constant)
+                return GetFieldTypeForFixedArray(field, $"{name}_array{arrayType.Size}", arrayType);
+
+            var tagType = type as TagType;
+            if (tagType != null && field.Class.Declarations.Contains(tagType.Declaration))
+                return GetFieldTypeForNestedDeclaration(field, name, tagType);
+
+            return new FieldType {Name = TypeHelper.GetTypeName(type)};
+        }
+
+        private FieldType GetFieldTypeForNestedDeclaration(Field field, string name, TagType tagType)
+        {
+            var typeName = field.Class.Name + "_" + name;
+            var @class = tagType.Declaration as Class;
+            if (@class != null)
+            {
+                _context.AddUnit(ToDefinition(@class, typeName));
+                return new FieldType {Name = typeName};
+            }
+            var @enum = tagType.Declaration as Enumeration;
+            if (@enum != null)
+            {
+                _context.AddUnit(EnumerationProcessor.ToDefinition(@enum, typeName));
+                return new FieldType {Name = typeName};
+            }
+            throw new NotSupportedException();
+        }
+
+        private FieldType GetFieldTypeForFixedArray(Field field, string name, ArrayType arrayType)
+        {
+            var fixedSize = (int) arrayType.Size;
+
+            if (arrayType.Type.IsPrimitiveType())
+            {
+                name = TypeHelper.GetTypeName(arrayType.Type) + "_array" + fixedSize;
+            }
+
+            //  var indexerTypeName = field.Class.Name + "_" + name;
+            var fieldType = GetFieldType(field, name, arrayType.Type);
+            var prefix = "at";
+            var indexerDefinition = new StructureDefinition
             {
                 Name = name,
-                TypeName = typeName,
-                Content = field.Comment?.BriefText
+                Content = field.Comment?.BriefText,
+                Indexer = new StructureIndexer {FieldType = new FieldType {FixedSize = fixedSize, Name = fieldType.Name}, FieldPrefix = prefix},
+                Fileds = Enumerable.Range(0, fixedSize)
+                    .Select(i => new StructureField {Name = $"{prefix}{i}", FieldType = fieldType})
+                    .ToArray()
             };
+            _context.AddUnit(indexerDefinition);
+
+            return new FieldType {Name = name };
         }
     }
 }
