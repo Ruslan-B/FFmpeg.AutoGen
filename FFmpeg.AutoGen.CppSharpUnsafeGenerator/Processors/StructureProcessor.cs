@@ -34,7 +34,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             if (field.IsBitField)
             {
                 Console.WriteLine("TODO bit fileds processing");
-                //throw new NotSupportedException();
             }
 
             var arrayType = field.Type as ArrayType;
