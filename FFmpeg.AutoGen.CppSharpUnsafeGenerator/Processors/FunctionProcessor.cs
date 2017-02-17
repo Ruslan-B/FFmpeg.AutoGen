@@ -48,22 +48,30 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private static TypeDefinition GetParameterType(Type type)
         {
+            var arrayType = type as ArrayType;
+            if (arrayType != null && arrayType.SizeType == ArrayType.ArraySize.Constant)
+            {
+                return new TypeDefinition
+                {
+                    Name = TypeHelper.GetTypeName(type),
+                    Attributes = new[] {$"[MarshalAs(UnmanagedType.LPArray, SizeConst={arrayType.Size})]"}
+                };
+            }
+            
             var pointerType = type as PointerType;
             var builtinType = pointerType?.Pointee as BuiltinType;
             if (pointerType != null && builtinType != null && builtinType.Type == PrimitiveType.Char)
+            {
                 if (pointerType.QualifiedPointee.Qualifiers.IsConst)
-                    return
-                        new TypeDefinition
-                        {
-                            Name = "string",
-                            Attributes = new[] { "[MarshalAs(UnmanagedType.LPStr)] " }
-                        };
-                else
                 {
-                    // todo check what to do here
-
+                    return new TypeDefinition
+                    {
+                        Name = "string",
+                        Attributes = new[] {"[MarshalAs(UnmanagedType.LPStr)]"}
+                    };
                 }
-            return new TypeDefinition { Name = TypeHelper.GetTypeName(type) };
+            }
+            return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
         }
 
         private static TypeDefinition GetReturnTypeName(Type type)
@@ -71,18 +79,17 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             var pointerType = type as PointerType;
             var builtinType = pointerType?.Pointee as BuiltinType;
             if (pointerType != null && builtinType != null && builtinType.Type == PrimitiveType.Char)
+            {
                 if (pointerType.QualifiedPointee.Qualifiers.IsConst)
+                {
                     return
                         new TypeDefinition
                         {
                             Name = "string",
-                            Attributes = new[] { "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]" }
+                            Attributes = new[] {"[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"}
                         };
-                else
-                {
-                    // todo check what to do here
-                    
                 }
+            }
             return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
         }
 

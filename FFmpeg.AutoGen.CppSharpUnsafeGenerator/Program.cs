@@ -6,9 +6,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     internal class Program
     {
-        private static readonly string Namespace = "FFmpeg.AutoGen.New";
+        private static readonly string Namespace = "FFmpeg.AutoGen";
         public static string ClassName = "ffmpeg";
-        private static readonly string OutputDirectory = "../../../../FFmpeg.AutoGen/New/";
+        private static readonly string OutputDirectory = "../../../../FFmpeg.AutoGen/";
 
         private static readonly FunctionExport[] Exports = FunctionExportHelper.LoadFromFile("../../../../ffmpeg/exports.txt").ToArray();
         private static readonly string[] IncludeDirs = {Path.GetFullPath("../../../../ffmpeg/include")};
