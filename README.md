@@ -8,6 +8,7 @@ As another option you can search for a solution in C(lang) as with some effort y
 
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.  
 The bindings are generated against: ffmpeg 3.2.2
+
 The 3.2 ClangSharp based version is [here](https://github.com/Ruslan-B/FFmpeg.AutoGen/tree/3.2).
 
 ##Usage
