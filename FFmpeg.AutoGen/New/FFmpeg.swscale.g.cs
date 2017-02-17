@@ -58,7 +58,7 @@ namespace FFmpeg.AutoGen.New
         // public static  LIBSWSCALE_VERSION = AV_VERSION(LIBSWSCALE_VERSION_MAJOR, LIBSWSCALE_VERSION_MINOR, LIBSWSCALE_VERSION_MICRO);
         // public static  LIBSWSCALE_BUILD = LIBSWSCALE_VERSION_INT;
         // public static  LIBSWSCALE_IDENT = "SwS" AV_STRINGIFY(LIBSWSCALE_VERSION);
-        // public static  FF_API_SWS_VECTOR = (LIBSWSCALE_VERSION_MAJOR < 6);
+        public static bool FF_API_SWS_VECTOR = (LIBSWSCALE_VERSION_MAJOR < 6);
         
         /// <summary>Color conversion and scaling library.</summary>
         [DllImport("swscale-4", EntryPoint = "swscale_version", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]

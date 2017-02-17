@@ -3,9 +3,13 @@
     internal class Expression
     {
         public object Value { get; set; }
-        public string ValueTypeName { get; set; }
+        public string TypeName { get; set; }
 
-        internal class Constant : Expression
+        internal class Constant: Expression
+        {
+        }
+
+        internal class Group : Expression
         {
         }
 
