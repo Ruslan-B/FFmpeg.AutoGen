@@ -3,6 +3,21 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate string AVClass_item_name (void* @ctx);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void* AVClass_child_next (void* @obj, void* @prev);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate IntPtr AVClass_child_class_next (IntPtr @prev);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate AVClassCategory AVClass_get_category (void* @ctx);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVClass_query_ranges (IntPtr* @p0, void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @key, int @flags);
+    
     /// <summary>Media Type</summary>
     public enum AVMediaType : int
     {
@@ -698,13 +713,43 @@ namespace FFmpeg.AutoGen
         public int @den;
     }
     
+    public unsafe struct AVClass_item_name_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVClass_item_name_wrapper(AVClass_item_name func) => new AVClass_item_name_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVClass_child_next_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVClass_child_next_wrapper(AVClass_child_next func) => new AVClass_child_next_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVClass_child_class_next_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVClass_child_class_next_wrapper(AVClass_child_class_next func) => new AVClass_child_class_next_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVClass_get_category_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVClass_get_category_wrapper(AVClass_get_category func) => new AVClass_get_category_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVClass_query_ranges_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVClass_query_ranges_wrapper(AVClass_query_ranges func) => new AVClass_query_ranges_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
     /// <summary>Describe the class of an AVClass context structure. That is an arbitrary struct of which the first field is a pointer to an AVClass struct (e.g. AVCodecContext, AVFormatContext etc.).</summary>
     public unsafe struct AVClass
     {
         /// <summary>The name of the class; usually it is the same name as the context structure type to which the AVClass is associated.</summary>
         public byte* @class_name;
         /// <summary>A pointer to a function which returns the name of a context instance ctx associated with the class.</summary>
-        public IntPtr @item_name;
+        public AVClass_item_name_wrapper @item_name;
         /// <summary>a pointer to the first option specified in the class if any or NULL</summary>
         public IntPtr @option;
         /// <summary>LIBAVUTIL_VERSION with which this structure was created. This is used to allow fields to be added without requiring major version bumps everywhere.</summary>
@@ -714,15 +759,15 @@ namespace FFmpeg.AutoGen
         /// <summary>Offset in the structure where a pointer to the parent context for logging is stored. For example a decoder could pass its AVCodecContext to eval as such a parent context, which an av_log() implementation could then leverage to display the parent context. The offset can be NULL.</summary>
         public int @parent_log_context_offset;
         /// <summary>Return next AVOptions-enabled child or NULL</summary>
-        public IntPtr @child_next;
+        public AVClass_child_next_wrapper @child_next;
         /// <summary>Return an AVClass corresponding to the next potential AVOptions-enabled child.</summary>
-        public IntPtr @child_class_next;
+        public AVClass_child_class_next_wrapper @child_class_next;
         /// <summary>Category used for visualization (like color) This is only set if the category is equal for all objects using this class. available since version (51 << 16 | 56 << 8 | 100)</summary>
         public AVClassCategory @category;
         /// <summary>Callback to return the category. available since version (51 << 16 | 59 << 8 | 100)</summary>
-        public IntPtr @get_category;
+        public AVClass_get_category_wrapper @get_category;
         /// <summary>Callback to return the supported/allowed ranges. available since version (52.12)</summary>
-        public IntPtr @query_ranges;
+        public AVClass_query_ranges_wrapper @query_ranges;
     }
     
     public unsafe struct AVFifoBuffer
@@ -2352,7 +2397,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Get a list of allowed ranges for the given option.</summary>
         /// <param name="flags">is a bitmask of flags, undefined flags should not be set and should be ignored AV_OPT_SEARCH_FAKE_OBJ indicates that the obj is a double pointer to a AVClass instead of a full instance AV_OPT_MULTI_COMPONENT_RANGE indicates that function may return more than one component,</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_query_ranges", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_query_ranges(AVOptionRanges** @p44, void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @key, int @flags);
+        public static extern int av_opt_query_ranges(AVOptionRanges** @p0, void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @key, int @flags);
         
         /// <summary>Copy options from src object into dest object.</summary>
         /// <param name="dest">Object to copy from</param>
@@ -2363,7 +2408,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Get a default list of allowed ranges for the given option.</summary>
         /// <param name="flags">is a bitmask of flags, undefined flags should not be set and should be ignored AV_OPT_SEARCH_FAKE_OBJ indicates that the obj is a double pointer to a AVClass instead of a full instance AV_OPT_MULTI_COMPONENT_RANGE indicates that function may return more than one component,</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_query_ranges_default", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_query_ranges_default(AVOptionRanges** @p46, void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @key, int @flags);
+        public static extern int av_opt_query_ranges_default(AVOptionRanges** @p0, void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @key, int @flags);
         
         /// <summary>Check if given option is set to its default value.</summary>
         /// <param name="obj">AVClass object to check option on</param>

@@ -19,7 +19,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             var valid = macro.IsValid ? string.Empty : "// ";
             WriteLine($"{valid}public static {macro.TypeName} {macro.Name} = {macro.Expression};");
         }
-
+        
         public void Write(EnumerationDefinition enumeration)
         {
             WriteSummary(enumeration);
@@ -74,6 +74,15 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     var fields = Enumerable.Range(0, size).Select(i => $"{prefix}{i}");
                     WriteLine($"public {indexer.FieldType.Name}[] ToArray() => new[] {{{string.Join(", ", fields)}}};");
                 }
+
+                var @delegate = structure.Delegate;
+                if (@delegate != null)
+                {
+                    WriteLine($"public IntPtr Pointer;");
+                    Write($"public static implicit operator {structure.Name}({@delegate.Name} func) => ");
+                    Write($"new {structure.Name} {{ Pointer = Marshal.GetFunctionPointerForDelegate(func) }};");
+                    WriteLine();
+                }
             }
         }
 
@@ -83,11 +92,26 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
             WriteLine($"[DllImport(\"{function.LibraryName}\", EntryPoint = \"{function.Name}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
             function.ReturnType.Attributes.ToList().ForEach(WriteLine);
-            var @params = string.Join(", ", function.Parameters.Select(x =>
+            var parameters = GetParameters(function.Parameters);
+            WriteLine($"public static extern {function.ReturnType.Name} {function.Name}({parameters});");
+        }
+
+        public void Write(DelegateDefinition @delegate)
+        {
+            WriteSummary(@delegate);
+            @delegate.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
+            WriteSummary(@delegate);
+            var parameters = GetParameters(@delegate.Parameters);
+            WriteLine("[UnmanagedFunctionPointer(CallingConvention.Cdecl)]");
+            WriteLine($"public unsafe delegate {@delegate.ReturnType.Name} {@delegate.Name} ({parameters});");
+        }
+
+        private static string GetParameters(FunctionParameter[] parameters)
+        {
+            return string.Join(", ", parameters.Select(x =>
                 x.Type.Attributes.Any()
                     ? $"{string.Join("", x.Type.Attributes)} {x.Type.Name} @{x.Name}"
                     : $"{x.Type.Name} @{x.Name}"));
-            WriteLine($"public static extern {function.ReturnType.Name} {function.Name}({@params});");
         }
 
         private void WriteSummary(ICanGenerateXmlDoc value)

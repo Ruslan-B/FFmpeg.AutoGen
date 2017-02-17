@@ -3,6 +3,24 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVFilter_init (AVFilterContext* @ctx);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVFilter_init_dict (AVFilterContext* @ctx, AVDictionary** @options);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVFilter_uninit (AVFilterContext* @ctx);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVFilter_query_formats (AVFilterContext* @p0);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVFilter_process_command (AVFilterContext* @p0, [MarshalAs(UnmanagedType.LPStr)] string @cmd, [MarshalAs(UnmanagedType.LPStr)] string @arg, byte* @res, int @res_len, int @flags);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVFilter_init_opaque (AVFilterContext* @ctx, void* @opaque);
+    
     /// <summary>stage of the initialization of the link properties (dimensions, etc)</summary>
     public enum AVFilterLink_init_state : int
     {
@@ -62,6 +80,42 @@ namespace FFmpeg.AutoGen
         public int @nb_threads;
     }
     
+    public unsafe struct AVFilter_init_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVFilter_init_wrapper(AVFilter_init func) => new AVFilter_init_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVFilter_init_dict_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVFilter_init_dict_wrapper(AVFilter_init_dict func) => new AVFilter_init_dict_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVFilter_uninit_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVFilter_uninit_wrapper(AVFilter_uninit func) => new AVFilter_uninit_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVFilter_query_formats_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVFilter_query_formats_wrapper(AVFilter_query_formats func) => new AVFilter_query_formats_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVFilter_process_command_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVFilter_process_command_wrapper(AVFilter_process_command func) => new AVFilter_process_command_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    public unsafe struct AVFilter_init_opaque_wrapper
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVFilter_init_opaque_wrapper(AVFilter_init_opaque func) => new AVFilter_init_opaque_wrapper { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
     /// <summary>Filter definition. This defines the pads a filter contains, and all the callback functions used to interact with the filter.</summary>
     public unsafe struct AVFilter
     {
@@ -78,21 +132,21 @@ namespace FFmpeg.AutoGen
         /// <summary>A combination of AVFILTER_FLAG_*</summary>
         public int @flags;
         /// <summary>Filter initialization function.</summary>
-        public IntPtr @init;
+        public AVFilter_init_wrapper @init;
         /// <summary>Should be set instead of want to pass a dictionary of AVOptions to nested contexts that are allocated during init.</summary>
-        public IntPtr @init_dict;
+        public AVFilter_init_dict_wrapper @init_dict;
         /// <summary>Filter uninitialization function.</summary>
-        public IntPtr @uninit;
+        public AVFilter_uninit_wrapper @uninit;
         /// <summary>Query formats supported by the filter on its inputs and outputs.</summary>
-        public IntPtr @query_formats;
+        public AVFilter_query_formats_wrapper @query_formats;
         /// <summary>size of private data to allocate for the filter</summary>
         public int @priv_size;
         /// <summary>Used by the filter registration system. Must not be touched by any other code.</summary>
         public IntPtr @next;
         /// <summary>Make the filter instance process a command.</summary>
-        public IntPtr @process_command;
+        public AVFilter_process_command_wrapper @process_command;
         /// <summary>Filter initialization function, alternative to the init() callback. Args contains the user-supplied parameters, opaque is used for providing binary data.</summary>
-        public IntPtr @init_opaque;
+        public AVFilter_init_opaque_wrapper @init_opaque;
     }
     
     public unsafe struct AVFilterFormats

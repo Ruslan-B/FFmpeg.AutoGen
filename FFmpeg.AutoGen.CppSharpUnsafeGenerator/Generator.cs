@@ -130,6 +130,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 using (textWriter.BeginBlock())
                 {
                     var units = _generationContext.Units;
+                    units.OfType<DelegateDefinition>().ToList().ForEach(x =>
+                    {
+                        writer.Write(x);
+                        textWriter.WriteLine();
+                    });
+
                     units.OfType<EnumerationDefinition>().ToList().ForEach(x =>
                     {
                         writer.Write(x);

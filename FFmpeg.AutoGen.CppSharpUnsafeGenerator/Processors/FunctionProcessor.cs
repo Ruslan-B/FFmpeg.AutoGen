@@ -31,19 +31,24 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 var functionDefinition = new FunctionDefinition
                 {
                     Name = functionName,
-                    ReturnType = GetReturnTypeName(function.ReturnType.Type),
+                    ReturnType = TypeHelper.GetReturnTypeName(function.ReturnType.Type),
                     Content = function.Comment?.BriefText,
                     LibraryName = export.Library,
-                    Parameters = function.Parameters.Select(x => new FunctionParameter
-                    {
-                        Name = string.IsNullOrEmpty(x.Name) ? $"p{counter}" : x.Name,
-                        Type = GetParameterType(x.Type),
-                        Content = GetParamComment(function, x)
-                    }).ToArray()
+                    Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray()
                 };
                 _context.AddUnit(functionDefinition);
                 counter++;
             }
+        }
+
+        internal static FunctionParameter GetParameter(Function function, Parameter parameter, int position)
+        {
+            return new FunctionParameter
+            {
+                Name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name,
+                Type = GetParameterType(parameter.Type),
+                Content = GetParamComment(function, parameter.Name)
+            };
         }
 
         private static TypeDefinition GetParameterType(Type type)
@@ -74,30 +79,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
         }
 
-        private static TypeDefinition GetReturnTypeName(Type type)
+        private static string GetParamComment(Function function, string parameterName)
         {
-            var pointerType = type as PointerType;
-            var builtinType = pointerType?.Pointee as BuiltinType;
-            if (pointerType != null && builtinType != null && builtinType.Type == PrimitiveType.Char)
-            {
-                if (pointerType.QualifiedPointee.Qualifiers.IsConst)
-                {
-                    return
-                        new TypeDefinition
-                        {
-                            Name = "string",
-                            Attributes = new[] {"[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"}
-                        };
-                }
-            }
-            return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
-        }
-
-        private static string GetParamComment(Function function, Parameter parameter)
-        {
-            var comment = function.Comment?.FullComment.Blocks
+            var comment = function?.Comment?.FullComment.Blocks
                 .OfType<ParamCommandComment>()
-                .FirstOrDefault(x => x.Arguments.Count == 1 && x.Arguments[0].Text == parameter.Name);
+                .FirstOrDefault(x => x.Arguments.Count == 1 && x.Arguments[0].Text == parameterName);
             return comment == null ? null : string.Join(" ", comment.ParagraphComment.Content.OfType<TextComment>().Select(x => x.Text.Trim()));
         }
     }

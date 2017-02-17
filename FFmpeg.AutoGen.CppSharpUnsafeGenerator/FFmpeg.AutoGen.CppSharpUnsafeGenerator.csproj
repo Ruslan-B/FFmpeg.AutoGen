@@ -109,6 +109,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Definitions\DelegateDefinition.cs" />
     <Compile Include="Definitions\FieldType.cs" />
     <Compile Include="Definitions\StructureIndexer.cs" />
     <Compile Include="Definitions\TypeDefinition.cs" />
