@@ -114,6 +114,15 @@ namespace FFmpeg.AutoGen
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate int AVIOContext_write_data_type (void* @opaque, byte* @buf, int @buf_size, AVIODataMarkerType @type, long @time);
     
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int avio_alloc_context_read_packet (void* @opaque, byte* @buf, int @buf_size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int avio_alloc_context_write_packet (void* @opaque, byte* @buf, int @buf_size);
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate long avio_alloc_context_seek (void* @opaque, long @offset, int @whence);
+    
     /// <summary>@}</summary>
     public enum AVStreamParseType : int
     {

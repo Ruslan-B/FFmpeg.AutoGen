@@ -41,17 +41,19 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             }
         }
 
-        internal static FunctionParameter GetParameter(Function function, Parameter parameter, int position)
+        internal FunctionParameter GetParameter(Function function, Parameter parameter, int position)
         {
+            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
             return new FunctionParameter
             {
-                Name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name,
-                Type = GetParameterType(parameter.Type),
+                Name = name,
+                Type = GetParameterType(_context, function.Name + "_" + name, parameter.Type),
                 Content = GetParamComment(function, parameter.Name)
             };
         }
 
-        private static TypeDefinition GetParameterType(Type type)
+
+        internal static TypeDefinition GetParameterType(GenerationContext context, string name, Type type)
         {
             var arrayType = type as ArrayType;
             if (arrayType != null && arrayType.SizeType == ArrayType.ArraySize.Constant)
@@ -62,22 +64,53 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     Attributes = new[] {$"[MarshalAs(UnmanagedType.LPArray, SizeConst={arrayType.Size})]"}
                 };
             }
-            
+
             var pointerType = type as PointerType;
-            var builtinType = pointerType?.Pointee as BuiltinType;
-            if (pointerType != null && builtinType != null && builtinType.Type == PrimitiveType.Char)
+            if (pointerType != null)
             {
-                if (pointerType.QualifiedPointee.Qualifiers.IsConst)
+                var builtinType = pointerType.Pointee as BuiltinType;
+                if (builtinType != null && builtinType.Type == PrimitiveType.Char)
                 {
-                    return new TypeDefinition
+                    if (pointerType.QualifiedPointee.Qualifiers.IsConst)
                     {
-                        Name = "string",
-                        Attributes = new[] {"[MarshalAs(UnmanagedType.LPStr)]"}
-                    };
+                        return new TypeDefinition
+                        {
+                            Name = "string",
+                            Attributes = new[] {"[MarshalAs(UnmanagedType.LPStr)]"}
+                        };
+                    }
+                }
+
+                var functionType = pointerType.Pointee as FunctionType;
+                if (functionType != null)
+                {
+                    var @delegate = GetDelegate(context, name, functionType);
+                    context.AddUnit(@delegate);
+                    return new TypeDefinition { Name = TypeHelper.GetTypeName(type) };
                 }
             }
             return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
         }
+
+        private static DelegateDefinition GetDelegate(GenerationContext context, string name, FunctionType functionType)
+        {
+            return new DelegateDefinition
+            {
+                Name = name,
+                ReturnType = TypeHelper.GetReturnTypeName(functionType.ReturnType.Type),
+                Parameters = functionType.Parameters.Select((x, i) => GetParameter(context, x, i)).ToArray()
+            };
+        }
+        internal static FunctionParameter GetParameter(GenerationContext context, Parameter parameter, int position)
+        {
+            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
+            return new FunctionParameter
+            {
+                Name = name,
+                Type = GetParameterType(context, name, parameter.Type),
+            };
+        }
+
 
         private static string GetParamComment(Function function, string parameterName)
         {
