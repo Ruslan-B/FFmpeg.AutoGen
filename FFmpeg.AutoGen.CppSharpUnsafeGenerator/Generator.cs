@@ -21,7 +21,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         private bool _hasParsingErrors;
         private GenerationContext _generationContext;
 
-
         public string[] Defines { get; set; } = {};
         public string[] IncludeDirs { get; set; } = {};
         public string[] SourceFiles { get; set; } = {};

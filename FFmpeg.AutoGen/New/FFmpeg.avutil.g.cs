@@ -725,10 +725,6 @@ namespace FFmpeg.AutoGen.New
         public IntPtr @query_ranges;
     }
     
-    public unsafe struct __NSConstantString_tag
-    {
-    }
-    
     public unsafe struct AVFifoBuffer
     {
         public byte* @buffer;

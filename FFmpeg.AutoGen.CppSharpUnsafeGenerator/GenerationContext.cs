@@ -5,9 +5,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     internal class GenerationContext
     {
+        private static readonly string[] IgnoreUnits = { "__NSConstantString_tag" };
         private readonly List<ICanGenerateDefinition> _units = new List<ICanGenerateDefinition>();
-
-        public HashSet<string> KnownUnitName = new HashSet<string>();
+        public HashSet<string> KnownUnitName = new HashSet<string>(IgnoreUnits);
         public Dictionary<string, FunctionExport> FunctionExportMap { get; set; }
         public IReadOnlyList<ICanGenerateDefinition> Units => _units;
 
