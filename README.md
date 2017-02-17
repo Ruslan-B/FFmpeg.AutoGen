@@ -7,7 +7,7 @@ As another option you can search for a solution in C(lang) as with some effort y
 ##FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.png)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
 
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.  
-The bindings are generated against: ffmpeg 3.2
+The bindings are generated against: ffmpeg 3.2.2
 
 ##Usage
 
@@ -33,13 +33,14 @@ You need to patch ```FFmpeg.AutoGen.config``` with full path to FFmpeg libraries
 
 ##Generation
 
-The bindings generator uses [clangsharp](http://www.clangsharp.org).
+The bindings generator uses [CppSharp](https://github.com/mono/CppSharp).
 
 Prerequisites:
  - FFmpeg library include files ```./ffmpeg/include```
 
 Steps to generate:
-- Run FFmpeg.AutoGen.ClangSharpUnsafeGenerator;
+- Run ```dump-expots.cmd``` to create exports map
+- Run ```FFmpeg.AutoGen.CppSharpUnsafeGenerator;```
 - All files with extension ```*.g.cs```  in ```FFmpeg.AutoGen``` project will be regenerated.
 
 ##License
