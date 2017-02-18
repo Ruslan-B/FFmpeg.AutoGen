@@ -131,11 +131,11 @@
     <Compile Include="Definitions\StructureField.cs" />
     <Compile Include="Processors\Expression.cs" />
     <Compile Include="Processors\TypeHelper.cs" />
-    <Compile Include="GenerationContext.cs" />
+    <Compile Include="Processors\ASTProcessor.cs" />
     <Compile Include="Writer.cs" />
     <Compile Include="FunctionExport.cs" />
     <Compile Include="FunctionExportHelper.cs" />
-    <Compile Include="Generator.cs" />
+    <Compile Include="Processors\Generator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IndentedTextWriterExtensions.cs" />

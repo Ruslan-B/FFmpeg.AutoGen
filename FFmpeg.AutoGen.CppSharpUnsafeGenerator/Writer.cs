@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using System.Linq;
+using System.Security;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
@@ -90,7 +91,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         {
             WriteSummary(function);
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
-            if (function.IsObsolete) WriteLine("[Obsolete]");
+            if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]");
             WriteLine($"[DllImport(\"{function.LibraryName}\", EntryPoint = \"{function.Name}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
             function.ReturnType.Attributes.ToList().ForEach(WriteLine);
             var parameters = GetParameters(function.Parameters);
@@ -117,12 +118,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         private void WriteSummary(ICanGenerateXmlDoc value)
         {
-            if (!string.IsNullOrWhiteSpace(value.Content)) WriteLine($"/// <summary>{value.Content.Trim()}</summary>");
+            if (!string.IsNullOrWhiteSpace(value.Content)) WriteLine($"/// <summary>{SecurityElement.Escape(value.Content.Trim())}</summary>");
         }
 
         private void WriteParam(ICanGenerateXmlDoc value, string name)
         {
-            if (!string.IsNullOrWhiteSpace(value.Content)) WriteLine($"/// <param name=\"{name}\">{value.Content.Trim()}</param>");
+            if (!string.IsNullOrWhiteSpace(value.Content)) WriteLine($"/// <param name=\"{name}\">{SecurityElement.Escape(value.Content.Trim())}</param>");
         }
 
         private void WriteLine() => _writer.WriteLine();

@@ -125,7 +125,7 @@ namespace FFmpeg.AutoGen
     public enum AVPixelFormat : int
     {
         @AV_PIX_FMT_NONE = -1,
-        /// <summary>planar YUV 4:2:0, 12bpp, (1 Cr & Cb sample per 2x2 Y samples)</summary>
+        /// <summary>planar YUV 4:2:0, 12bpp, (1 Cr &amp; Cb sample per 2x2 Y samples)</summary>
         @AV_PIX_FMT_YUV420P = 0,
         /// <summary>packed YUV 4:2:2, 16bpp, Y0 Cb Y1 Cr</summary>
         @AV_PIX_FMT_YUYV422 = 1,
@@ -133,13 +133,13 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_RGB24 = 2,
         /// <summary>packed RGB 8:8:8, 24bpp, BGRBGR...</summary>
         @AV_PIX_FMT_BGR24 = 3,
-        /// <summary>planar YUV 4:2:2, 16bpp, (1 Cr & Cb sample per 2x1 Y samples)</summary>
+        /// <summary>planar YUV 4:2:2, 16bpp, (1 Cr &amp; Cb sample per 2x1 Y samples)</summary>
         @AV_PIX_FMT_YUV422P = 4,
-        /// <summary>planar YUV 4:4:4, 24bpp, (1 Cr & Cb sample per 1x1 Y samples)</summary>
+        /// <summary>planar YUV 4:4:4, 24bpp, (1 Cr &amp; Cb sample per 1x1 Y samples)</summary>
         @AV_PIX_FMT_YUV444P = 5,
-        /// <summary>planar YUV 4:1:0, 9bpp, (1 Cr & Cb sample per 4x4 Y samples)</summary>
+        /// <summary>planar YUV 4:1:0, 9bpp, (1 Cr &amp; Cb sample per 4x4 Y samples)</summary>
         @AV_PIX_FMT_YUV410P = 6,
-        /// <summary>planar YUV 4:1:1, 12bpp, (1 Cr & Cb sample per 4x1 Y samples)</summary>
+        /// <summary>planar YUV 4:1:1, 12bpp, (1 Cr &amp; Cb sample per 4x1 Y samples)</summary>
         @AV_PIX_FMT_YUV411P = 7,
         /// <summary>Y , 8bpp</summary>
         @AV_PIX_FMT_GRAY8 = 8,
@@ -191,11 +191,11 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_GRAY16BE = 31,
         /// <summary>Y , 16bpp, little-endian</summary>
         @AV_PIX_FMT_GRAY16LE = 32,
-        /// <summary>planar YUV 4:4:0 (1 Cr & Cb sample per 1x2 Y samples)</summary>
+        /// <summary>planar YUV 4:4:0 (1 Cr &amp; Cb sample per 1x2 Y samples)</summary>
         @AV_PIX_FMT_YUV440P = 33,
         /// <summary>planar YUV 4:4:0 full scale (JPEG), deprecated in favor of AV_PIX_FMT_YUV440P and setting color_range</summary>
         @AV_PIX_FMT_YUVJ440P = 34,
-        /// <summary>planar YUV 4:2:0, 20bpp, (1 Cr & Cb sample per 2x2 Y & A samples)</summary>
+        /// <summary>planar YUV 4:2:0, 20bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples)</summary>
         @AV_PIX_FMT_YUVA420P = 35,
         /// <summary>H.264 HW decoding with VDPAU, data[0] contains a vdpau_render_state struct which contains the bitstream of the slices as well as various fields extracted from headers</summary>
         @AV_PIX_FMT_VDPAU_H264 = 36,
@@ -235,17 +235,17 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_VAAPI_VLD = 53,
         /// <summary>@}</summary>
         @AV_PIX_FMT_VAAPI = 53,
-        /// <summary>planar YUV 4:2:0, 24bpp, (1 Cr & Cb sample per 2x2 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:2:0, 24bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV420P16LE = 54,
-        /// <summary>planar YUV 4:2:0, 24bpp, (1 Cr & Cb sample per 2x2 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:2:0, 24bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV420P16BE = 55,
-        /// <summary>planar YUV 4:2:2, 32bpp, (1 Cr & Cb sample per 2x1 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:2:2, 32bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV422P16LE = 56,
-        /// <summary>planar YUV 4:2:2, 32bpp, (1 Cr & Cb sample per 2x1 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:2:2, 32bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV422P16BE = 57,
-        /// <summary>planar YUV 4:4:4, 48bpp, (1 Cr & Cb sample per 1x1 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:4:4, 48bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV444P16LE = 58,
-        /// <summary>planar YUV 4:4:4, 48bpp, (1 Cr & Cb sample per 1x1 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:4:4, 48bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV444P16BE = 59,
         /// <summary>MPEG-4 HW decoding with VDPAU, data[0] contains a vdpau_render_state struct which contains the bitstream of the slices as well as various fields extracted from headers</summary>
         @AV_PIX_FMT_VDPAU_MPEG4 = 60,
@@ -269,29 +269,29 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_BGR48BE = 67,
         /// <summary>packed RGB 16:16:16, 48bpp, 16B, 16G, 16R, the 2-byte value for each R/G/B component is stored as little-endian</summary>
         @AV_PIX_FMT_BGR48LE = 68,
-        /// <summary>planar YUV 4:2:0, 13.5bpp, (1 Cr & Cb sample per 2x2 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:2:0, 13.5bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV420P9BE = 69,
-        /// <summary>planar YUV 4:2:0, 13.5bpp, (1 Cr & Cb sample per 2x2 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:2:0, 13.5bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV420P9LE = 70,
-        /// <summary>planar YUV 4:2:0, 15bpp, (1 Cr & Cb sample per 2x2 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:2:0, 15bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV420P10BE = 71,
-        /// <summary>planar YUV 4:2:0, 15bpp, (1 Cr & Cb sample per 2x2 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:2:0, 15bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV420P10LE = 72,
-        /// <summary>planar YUV 4:2:2, 20bpp, (1 Cr & Cb sample per 2x1 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:2:2, 20bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV422P10BE = 73,
-        /// <summary>planar YUV 4:2:2, 20bpp, (1 Cr & Cb sample per 2x1 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:2:2, 20bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV422P10LE = 74,
-        /// <summary>planar YUV 4:4:4, 27bpp, (1 Cr & Cb sample per 1x1 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:4:4, 27bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV444P9BE = 75,
-        /// <summary>planar YUV 4:4:4, 27bpp, (1 Cr & Cb sample per 1x1 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:4:4, 27bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV444P9LE = 76,
-        /// <summary>planar YUV 4:4:4, 30bpp, (1 Cr & Cb sample per 1x1 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:4:4, 30bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV444P10BE = 77,
-        /// <summary>planar YUV 4:4:4, 30bpp, (1 Cr & Cb sample per 1x1 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:4:4, 30bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV444P10LE = 78,
-        /// <summary>planar YUV 4:2:2, 18bpp, (1 Cr & Cb sample per 2x1 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:2:2, 18bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV422P9BE = 79,
-        /// <summary>planar YUV 4:2:2, 18bpp, (1 Cr & Cb sample per 2x1 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:2:2, 18bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV422P9LE = 80,
         /// <summary>hardware decoding through VDA</summary>
         @AV_PIX_FMT_VDA_VLD = 81,
@@ -310,45 +310,45 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_GBRP16BE = 87,
         /// <summary>planar GBR 4:4:4 48bpp, little-endian</summary>
         @AV_PIX_FMT_GBRP16LE = 88,
-        /// <summary>planar YUV 4:2:2 24bpp, (1 Cr & Cb sample per 2x1 Y & A samples)</summary>
+        /// <summary>planar YUV 4:2:2 24bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples)</summary>
         @AV_PIX_FMT_YUVA422P = 89,
-        /// <summary>planar YUV 4:4:4 32bpp, (1 Cr & Cb sample per 1x1 Y & A samples)</summary>
+        /// <summary>planar YUV 4:4:4 32bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples)</summary>
         @AV_PIX_FMT_YUVA444P = 90,
-        /// <summary>planar YUV 4:2:0 22.5bpp, (1 Cr & Cb sample per 2x2 Y & A samples), big-endian</summary>
+        /// <summary>planar YUV 4:2:0 22.5bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples), big-endian</summary>
         @AV_PIX_FMT_YUVA420P9BE = 91,
-        /// <summary>planar YUV 4:2:0 22.5bpp, (1 Cr & Cb sample per 2x2 Y & A samples), little-endian</summary>
+        /// <summary>planar YUV 4:2:0 22.5bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples), little-endian</summary>
         @AV_PIX_FMT_YUVA420P9LE = 92,
-        /// <summary>planar YUV 4:2:2 27bpp, (1 Cr & Cb sample per 2x1 Y & A samples), big-endian</summary>
+        /// <summary>planar YUV 4:2:2 27bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples), big-endian</summary>
         @AV_PIX_FMT_YUVA422P9BE = 93,
-        /// <summary>planar YUV 4:2:2 27bpp, (1 Cr & Cb sample per 2x1 Y & A samples), little-endian</summary>
+        /// <summary>planar YUV 4:2:2 27bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples), little-endian</summary>
         @AV_PIX_FMT_YUVA422P9LE = 94,
-        /// <summary>planar YUV 4:4:4 36bpp, (1 Cr & Cb sample per 1x1 Y & A samples), big-endian</summary>
+        /// <summary>planar YUV 4:4:4 36bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples), big-endian</summary>
         @AV_PIX_FMT_YUVA444P9BE = 95,
-        /// <summary>planar YUV 4:4:4 36bpp, (1 Cr & Cb sample per 1x1 Y & A samples), little-endian</summary>
+        /// <summary>planar YUV 4:4:4 36bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples), little-endian</summary>
         @AV_PIX_FMT_YUVA444P9LE = 96,
-        /// <summary>planar YUV 4:2:0 25bpp, (1 Cr & Cb sample per 2x2 Y & A samples, big-endian)</summary>
+        /// <summary>planar YUV 4:2:0 25bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples, big-endian)</summary>
         @AV_PIX_FMT_YUVA420P10BE = 97,
-        /// <summary>planar YUV 4:2:0 25bpp, (1 Cr & Cb sample per 2x2 Y & A samples, little-endian)</summary>
+        /// <summary>planar YUV 4:2:0 25bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples, little-endian)</summary>
         @AV_PIX_FMT_YUVA420P10LE = 98,
-        /// <summary>planar YUV 4:2:2 30bpp, (1 Cr & Cb sample per 2x1 Y & A samples, big-endian)</summary>
+        /// <summary>planar YUV 4:2:2 30bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples, big-endian)</summary>
         @AV_PIX_FMT_YUVA422P10BE = 99,
-        /// <summary>planar YUV 4:2:2 30bpp, (1 Cr & Cb sample per 2x1 Y & A samples, little-endian)</summary>
+        /// <summary>planar YUV 4:2:2 30bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples, little-endian)</summary>
         @AV_PIX_FMT_YUVA422P10LE = 100,
-        /// <summary>planar YUV 4:4:4 40bpp, (1 Cr & Cb sample per 1x1 Y & A samples, big-endian)</summary>
+        /// <summary>planar YUV 4:4:4 40bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples, big-endian)</summary>
         @AV_PIX_FMT_YUVA444P10BE = 101,
-        /// <summary>planar YUV 4:4:4 40bpp, (1 Cr & Cb sample per 1x1 Y & A samples, little-endian)</summary>
+        /// <summary>planar YUV 4:4:4 40bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples, little-endian)</summary>
         @AV_PIX_FMT_YUVA444P10LE = 102,
-        /// <summary>planar YUV 4:2:0 40bpp, (1 Cr & Cb sample per 2x2 Y & A samples, big-endian)</summary>
+        /// <summary>planar YUV 4:2:0 40bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples, big-endian)</summary>
         @AV_PIX_FMT_YUVA420P16BE = 103,
-        /// <summary>planar YUV 4:2:0 40bpp, (1 Cr & Cb sample per 2x2 Y & A samples, little-endian)</summary>
+        /// <summary>planar YUV 4:2:0 40bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples, little-endian)</summary>
         @AV_PIX_FMT_YUVA420P16LE = 104,
-        /// <summary>planar YUV 4:2:2 48bpp, (1 Cr & Cb sample per 2x1 Y & A samples, big-endian)</summary>
+        /// <summary>planar YUV 4:2:2 48bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples, big-endian)</summary>
         @AV_PIX_FMT_YUVA422P16BE = 105,
-        /// <summary>planar YUV 4:2:2 48bpp, (1 Cr & Cb sample per 2x1 Y & A samples, little-endian)</summary>
+        /// <summary>planar YUV 4:2:2 48bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples, little-endian)</summary>
         @AV_PIX_FMT_YUVA422P16LE = 106,
-        /// <summary>planar YUV 4:4:4 64bpp, (1 Cr & Cb sample per 1x1 Y & A samples, big-endian)</summary>
+        /// <summary>planar YUV 4:4:4 64bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples, big-endian)</summary>
         @AV_PIX_FMT_YUVA444P16BE = 107,
-        /// <summary>planar YUV 4:4:4 64bpp, (1 Cr & Cb sample per 1x1 Y & A samples, little-endian)</summary>
+        /// <summary>planar YUV 4:4:4 64bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples, little-endian)</summary>
         @AV_PIX_FMT_YUVA444P16LE = 108,
         /// <summary>HW acceleration through VDPAU, Picture.data[3] contains a VdpVideoSurface</summary>
         @AV_PIX_FMT_VDPAU = 109,
@@ -356,11 +356,11 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_XYZ12LE = 110,
         /// <summary>packed XYZ 4:4:4, 36 bpp, (msb) 12X, 12Y, 12Z (lsb), the 2-byte value for each X/Y/Z is stored as big-endian, the 4 lower bits are set to 0</summary>
         @AV_PIX_FMT_XYZ12BE = 111,
-        /// <summary>interleaved chroma YUV 4:2:2, 16bpp, (1 Cr & Cb sample per 2x1 Y samples)</summary>
+        /// <summary>interleaved chroma YUV 4:2:2, 16bpp, (1 Cr &amp; Cb sample per 2x1 Y samples)</summary>
         @AV_PIX_FMT_NV16 = 112,
-        /// <summary>interleaved chroma YUV 4:2:2, 20bpp, (1 Cr & Cb sample per 2x1 Y samples), little-endian</summary>
+        /// <summary>interleaved chroma YUV 4:2:2, 20bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), little-endian</summary>
         @AV_PIX_FMT_NV20LE = 113,
-        /// <summary>interleaved chroma YUV 4:2:2, 20bpp, (1 Cr & Cb sample per 2x1 Y samples), big-endian</summary>
+        /// <summary>interleaved chroma YUV 4:2:2, 20bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), big-endian</summary>
         @AV_PIX_FMT_NV20BE = 114,
         /// <summary>packed RGBA 16:16:16:16, 64bpp, 16R, 16G, 16B, 16A, the 2-byte value for each R/G/B/A component is stored as big-endian</summary>
         @AV_PIX_FMT_RGBA64BE = 115,
@@ -400,29 +400,29 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_0BGR = 297,
         /// <summary>packed BGR 8:8:8, 32bpp, BGRXBGRX... X=unused/undefined</summary>
         @AV_PIX_FMT_BGR0 = 298,
-        /// <summary>planar YUV 4:2:0,18bpp, (1 Cr & Cb sample per 2x2 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:2:0,18bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV420P12BE = 299,
-        /// <summary>planar YUV 4:2:0,18bpp, (1 Cr & Cb sample per 2x2 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:2:0,18bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV420P12LE = 300,
-        /// <summary>planar YUV 4:2:0,21bpp, (1 Cr & Cb sample per 2x2 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:2:0,21bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV420P14BE = 301,
-        /// <summary>planar YUV 4:2:0,21bpp, (1 Cr & Cb sample per 2x2 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:2:0,21bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV420P14LE = 302,
-        /// <summary>planar YUV 4:2:2,24bpp, (1 Cr & Cb sample per 2x1 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:2:2,24bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV422P12BE = 303,
-        /// <summary>planar YUV 4:2:2,24bpp, (1 Cr & Cb sample per 2x1 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:2:2,24bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV422P12LE = 304,
-        /// <summary>planar YUV 4:2:2,28bpp, (1 Cr & Cb sample per 2x1 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:2:2,28bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV422P14BE = 305,
-        /// <summary>planar YUV 4:2:2,28bpp, (1 Cr & Cb sample per 2x1 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:2:2,28bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV422P14LE = 306,
-        /// <summary>planar YUV 4:4:4,36bpp, (1 Cr & Cb sample per 1x1 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:4:4,36bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV444P12BE = 307,
-        /// <summary>planar YUV 4:4:4,36bpp, (1 Cr & Cb sample per 1x1 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:4:4,36bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV444P12LE = 308,
-        /// <summary>planar YUV 4:4:4,42bpp, (1 Cr & Cb sample per 1x1 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:4:4,42bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV444P14BE = 309,
-        /// <summary>planar YUV 4:4:4,42bpp, (1 Cr & Cb sample per 1x1 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:4:4,42bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV444P14LE = 310,
         /// <summary>planar GBR 4:4:4 36bpp, big-endian</summary>
         @AV_PIX_FMT_GBRP12BE = 311,
@@ -432,7 +432,7 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_GBRP14BE = 313,
         /// <summary>planar GBR 4:4:4 42bpp, little-endian</summary>
         @AV_PIX_FMT_GBRP14LE = 314,
-        /// <summary>planar YUV 4:1:1, 12bpp, (1 Cr & Cb sample per 4x1 Y samples) full scale (JPEG), deprecated in favor of AV_PIX_FMT_YUV411P and setting color_range</summary>
+        /// <summary>planar YUV 4:1:1, 12bpp, (1 Cr &amp; Cb sample per 4x1 Y samples) full scale (JPEG), deprecated in favor of AV_PIX_FMT_YUV411P and setting color_range</summary>
         @AV_PIX_FMT_YUVJ411P = 315,
         /// <summary>bayer, BGBG..(odd line), GRGR..(even line), 8-bit samples */</summary>
         @AV_PIX_FMT_BAYER_BGGR8 = 316,
@@ -458,17 +458,17 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_BAYER_GRBG16LE = 326,
         /// <summary>bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, big-endian */</summary>
         @AV_PIX_FMT_BAYER_GRBG16BE = 327,
-        /// <summary>planar YUV 4:4:0,20bpp, (1 Cr & Cb sample per 1x2 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:4:0,20bpp, (1 Cr &amp; Cb sample per 1x2 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV440P10LE = 328,
-        /// <summary>planar YUV 4:4:0,20bpp, (1 Cr & Cb sample per 1x2 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:4:0,20bpp, (1 Cr &amp; Cb sample per 1x2 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV440P10BE = 329,
-        /// <summary>planar YUV 4:4:0,24bpp, (1 Cr & Cb sample per 1x2 Y samples), little-endian</summary>
+        /// <summary>planar YUV 4:4:0,24bpp, (1 Cr &amp; Cb sample per 1x2 Y samples), little-endian</summary>
         @AV_PIX_FMT_YUV440P12LE = 330,
-        /// <summary>planar YUV 4:4:0,24bpp, (1 Cr & Cb sample per 1x2 Y samples), big-endian</summary>
+        /// <summary>planar YUV 4:4:0,24bpp, (1 Cr &amp; Cb sample per 1x2 Y samples), big-endian</summary>
         @AV_PIX_FMT_YUV440P12BE = 331,
-        /// <summary>packed AYUV 4:4:4,64bpp (1 Cr & Cb sample per 1x1 Y & A samples), little-endian</summary>
+        /// <summary>packed AYUV 4:4:4,64bpp (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples), little-endian</summary>
         @AV_PIX_FMT_AYUV64LE = 332,
-        /// <summary>packed AYUV 4:4:4,64bpp (1 Cr & Cb sample per 1x1 Y & A samples), big-endian</summary>
+        /// <summary>packed AYUV 4:4:4,64bpp (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples), big-endian</summary>
         @AV_PIX_FMT_AYUV64BE = 333,
         /// <summary>hardware decoding through Videotoolbox</summary>
         @AV_PIX_FMT_VIDEOTOOLBOX = 334,
@@ -500,7 +500,7 @@ namespace FFmpeg.AutoGen
         @AVCOL_PRI_RESERVED = 3,
         /// <summary>also FCC Title 47 Code of Federal Regulations 73.682 (a)(20)</summary>
         @AVCOL_PRI_BT470M = 4,
-        /// <summary>also ITU-R BT601-6 625 / ITU-R BT1358 625 / ITU-R BT1700 625 PAL & SECAM</summary>
+        /// <summary>also ITU-R BT601-6 625 / ITU-R BT1358 625 / ITU-R BT1700 625 PAL &amp; SECAM</summary>
         @AVCOL_PRI_BT470BG = 5,
         /// <summary>also ITU-R BT601-6 525 / ITU-R BT1358 525 / ITU-R BT1700 NTSC</summary>
         @AVCOL_PRI_SMPTE170M = 6,
@@ -528,18 +528,18 @@ namespace FFmpeg.AutoGen
         @AVCOL_TRC_BT709 = 1,
         @AVCOL_TRC_UNSPECIFIED = 2,
         @AVCOL_TRC_RESERVED = 3,
-        /// <summary>also ITU-R BT470M / ITU-R BT1700 625 PAL & SECAM</summary>
+        /// <summary>also ITU-R BT470M / ITU-R BT1700 625 PAL &amp; SECAM</summary>
         @AVCOL_TRC_GAMMA22 = 4,
         /// <summary>also ITU-R BT470BG</summary>
         @AVCOL_TRC_GAMMA28 = 5,
         /// <summary>also ITU-R BT601-6 525 or 625 / ITU-R BT1358 525 or 625 / ITU-R BT1700 NTSC</summary>
         @AVCOL_TRC_SMPTE170M = 6,
         @AVCOL_TRC_SMPTE240M = 7,
-        /// <summary>"Linear transfer characteristics"</summary>
+        /// <summary>&quot;Linear transfer characteristics&quot;</summary>
         @AVCOL_TRC_LINEAR = 8,
-        /// <summary>"Logarithmic transfer characteristic (100:1 range)"</summary>
+        /// <summary>&quot;Logarithmic transfer characteristic (100:1 range)&quot;</summary>
         @AVCOL_TRC_LOG = 9,
-        /// <summary>"Logarithmic transfer characteristic (100 * Sqrt(10) : 1 range)"</summary>
+        /// <summary>&quot;Logarithmic transfer characteristic (100 * Sqrt(10) : 1 range)&quot;</summary>
         @AVCOL_TRC_LOG_SQRT = 10,
         /// <summary>IEC 61966-2-4</summary>
         @AVCOL_TRC_IEC61966_2_4 = 11,
@@ -555,7 +555,7 @@ namespace FFmpeg.AutoGen
         @AVCOL_TRC_SMPTEST2084 = 16,
         /// <summary>SMPTE ST 428-1</summary>
         @AVCOL_TRC_SMPTEST428_1 = 17,
-        /// <summary>ARIB STD-B67, known as "Hybrid log-gamma"</summary>
+        /// <summary>ARIB STD-B67, known as &quot;Hybrid log-gamma&quot;</summary>
         @AVCOL_TRC_ARIB_STD_B67 = 18,
         /// <summary>Not part of ABI</summary>
         @AVCOL_TRC_NB = 19,
@@ -572,7 +572,7 @@ namespace FFmpeg.AutoGen
         @AVCOL_SPC_RESERVED = 3,
         /// <summary>FCC Title 47 Code of Federal Regulations 73.682 (a)(20)</summary>
         @AVCOL_SPC_FCC = 4,
-        /// <summary>also ITU-R BT601-6 625 / ITU-R BT1358 625 / ITU-R BT1700 625 PAL & SECAM / IEC 61966-2-4 xvYCC601</summary>
+        /// <summary>also ITU-R BT601-6 625 / ITU-R BT1358 625 / ITU-R BT1700 625 PAL &amp; SECAM / IEC 61966-2-4 xvYCC601</summary>
         @AVCOL_SPC_BT470BG = 5,
         /// <summary>also ITU-R BT601-6 525 / ITU-R BT1358 525 / ITU-R BT1700 NTSC</summary>
         @AVCOL_SPC_SMPTE170M = 6,
@@ -584,7 +584,7 @@ namespace FFmpeg.AutoGen
         @AVCOL_SPC_BT2020_NCL = 9,
         /// <summary>ITU-R BT2020 constant luminance system</summary>
         @AVCOL_SPC_BT2020_CL = 10,
-        /// <summary>SMPTE 2085, Y'D'zD'x</summary>
+        /// <summary>SMPTE 2085, Y&apos;D&apos;zD&apos;x</summary>
         @AVCOL_SPC_SMPTE2085 = 11,
         /// <summary>Not part of ABI</summary>
         @AVCOL_SPC_NB = 12,
@@ -594,9 +594,9 @@ namespace FFmpeg.AutoGen
     public enum AVColorRange : int
     {
         @AVCOL_RANGE_UNSPECIFIED = 0,
-        /// <summary>the normal 219*2^(n-8) "MPEG" YUV ranges</summary>
+        /// <summary>the normal 219*2^(n-8) &quot;MPEG&quot; YUV ranges</summary>
         @AVCOL_RANGE_MPEG = 1,
-        /// <summary>the normal 2^n-1 "JPEG" YUV ranges</summary>
+        /// <summary>the normal 2^n-1 &quot;JPEG&quot; YUV ranges</summary>
         @AVCOL_RANGE_JPEG = 2,
         /// <summary>Not part of ABI</summary>
         @AVCOL_RANGE_NB = 3,
@@ -684,7 +684,7 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_AFD = 7,
         /// <summary>Motion vectors exported by some codecs (on demand through the export_mvs flag set in the libavcodec AVCodecContext flags2 option). The data is the AVMotionVector struct defined in libavutil/motion_vector.h.</summary>
         @AV_FRAME_DATA_MOTION_VECTORS = 8,
-        /// <summary>Recommmends skipping the specified number of samples. This is exported only if the "skip_manual" AVOption is set in libavcodec. This has the same format as AV_PKT_DATA_SKIP_SAMPLES.</summary>
+        /// <summary>Recommmends skipping the specified number of samples. This is exported only if the &quot;skip_manual&quot; AVOption is set in libavcodec. This has the same format as AV_PKT_DATA_SKIP_SAMPLES.</summary>
         @AV_FRAME_DATA_SKIP_SAMPLES = 9,
         /// <summary>This side data must be associated with an audio frame and corresponds to enum AVAudioServiceType defined in avcodec.h.</summary>
         @AV_FRAME_DATA_AUDIO_SERVICE_TYPE = 10,
@@ -705,7 +705,7 @@ namespace FFmpeg.AutoGen
         @AV_AFD_SP_4_3 = 15,
     }
     
-    /// <summary>@{ AVOptions provide a generic system to declare options on arbitrary structs ("objects"). An option can have a help text, a type and a range of possible values. Options may then be enumerated, read and written to.</summary>
+    /// <summary>@{ AVOptions provide a generic system to declare options on arbitrary structs (&quot;objects&quot;). An option can have a help text, a type and a range of possible values. Options may then be enumerated, read and written to.</summary>
     public enum AVOptionType : int
     {
         @AV_OPT_TYPE_FLAGS = 0,
@@ -789,9 +789,9 @@ namespace FFmpeg.AutoGen
         public AVClass_child_next_wrapper @child_next;
         /// <summary>Return an AVClass corresponding to the next potential AVOptions-enabled child.</summary>
         public AVClass_child_class_next_wrapper @child_class_next;
-        /// <summary>Category used for visualization (like color) This is only set if the category is equal for all objects using this class. available since version (51 << 16 | 56 << 8 | 100)</summary>
+        /// <summary>Category used for visualization (like color) This is only set if the category is equal for all objects using this class. available since version (51 &lt;&lt; 16 | 56 &lt;&lt; 8 | 100)</summary>
         public AVClassCategory @category;
-        /// <summary>Callback to return the category. available since version (51 << 16 | 59 << 8 | 100)</summary>
+        /// <summary>Callback to return the category. available since version (51 &lt;&lt; 16 | 59 &lt;&lt; 8 | 100)</summary>
         public AVClass_get_category_wrapper @get_category;
         /// <summary>Callback to return the supported/allowed ranges. available since version (52.12)</summary>
         public AVClass_query_ranges_wrapper @query_ranges;
@@ -890,7 +890,7 @@ namespace FFmpeg.AutoGen
         public ulong[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7};
     }
     
-    /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j < i.</summary>
+    /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j &lt; i.</summary>
     public unsafe struct buf_array8
     {
         public AVBufferRef* @at0; public AVBufferRef* @at1; public AVBufferRef* @at2; public AVBufferRef* @at3; public AVBufferRef* @at4; public AVBufferRef* @at5; public AVBufferRef* @at6; public AVBufferRef* @at7;
@@ -921,7 +921,7 @@ namespace FFmpeg.AutoGen
         public int @nb_samples;
         /// <summary>format of the frame, -1 if unknown or unset Values correspond to enum AVPixelFormat for video frames, enum AVSampleFormat for audio)</summary>
         public int @format;
-        /// <summary>1 -> keyframe, 0-> not</summary>
+        /// <summary>1 -&gt; keyframe, 0-&gt; not</summary>
         public int @key_frame;
         /// <summary>Picture type of the frame.</summary>
         public AVPictureType @pict_type;
@@ -931,7 +931,7 @@ namespace FFmpeg.AutoGen
         public long @pts;
         /// <summary>PTS copied from the AVPacket that was decoded to produce this frame.</summary>
         public long @pkt_pts;
-        /// <summary>DTS copied from the AVPacket that triggered returning this frame. (if frame threading isn't used) This is also the Presentation time of this AVFrame calculated from only AVPacket.dts values without pts values.</summary>
+        /// <summary>DTS copied from the AVPacket that triggered returning this frame. (if frame threading isn&apos;t used) This is also the Presentation time of this AVFrame calculated from only AVPacket.dts values without pts values.</summary>
         public long @pkt_dts;
         /// <summary>picture number in bitstream order</summary>
         public int @coded_picture_number;
@@ -956,7 +956,7 @@ namespace FFmpeg.AutoGen
         public int @sample_rate;
         /// <summary>Channel layout of the audio data.</summary>
         public ulong @channel_layout;
-        /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j < i.</summary>
+        /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j &lt; i.</summary>
         public buf_array8 @buf;
         /// <summary>For planar audio which requires more than AV_NUM_DATA_POINTERS AVBufferRef pointers, this array will hold all the references which cannot fit into AVFrame.buf.</summary>
         public AVBufferRef** @extended_buf;
@@ -977,7 +977,7 @@ namespace FFmpeg.AutoGen
         public long @best_effort_timestamp;
         /// <summary>reordered pos from the last AVPacket that has been input into the decoder Code outside libavutil should access this field using: av_frame_get_pkt_pos(frame) - encoding: unused - decoding: Read by user.</summary>
         public long @pkt_pos;
-        /// <summary>duration of the corresponding packet, expressed in AVStream->time_base units, 0 if unknown. Code outside libavutil should access this field using: av_frame_get_pkt_duration(frame) - encoding: unused - decoding: Read by user.</summary>
+        /// <summary>duration of the corresponding packet, expressed in AVStream-&gt;time_base units, 0 if unknown. Code outside libavutil should access this field using: av_frame_get_pkt_duration(frame) - encoding: unused - decoding: Read by user.</summary>
         public long @pkt_duration;
         /// <summary>metadata. Code outside libavutil should access this field using: av_frame_get_metadata(frame) - encoding: Set by user. - decoding: Set by libavcodec.</summary>
         public AVDictionary* @metadata;
@@ -1034,9 +1034,9 @@ namespace FFmpeg.AutoGen
         public double @value_min;
         /// <summary>Value range. For string ranges this represents the min/max length. For dimensions this represents the min/max pixel count or width/height in multi-component case.</summary>
         public double @value_max;
-        /// <summary>Value's component range. For string this represents the unicode range for chars, 0-127 limits to ASCII.</summary>
+        /// <summary>Value&apos;s component range. For string this represents the unicode range for chars, 0-127 limits to ASCII.</summary>
         public double @component_min;
-        /// <summary>Value's component range. For string this represents the unicode range for chars, 0-127 limits to ASCII.</summary>
+        /// <summary>Value&apos;s component range. For string this represents the unicode range for chars, 0-127 limits to ASCII.</summary>
         public double @component_max;
         /// <summary>Range flag. If set to 1 the struct encodes a range, if set to 0 a single value.</summary>
         public int @is_range;
@@ -1421,8 +1421,8 @@ namespace FFmpeg.AutoGen
         
         /// <summary>Overlapping memcpy() implementation.</summary>
         /// <param name="dst">Destination buffer</param>
-        /// <param name="back">Number of bytes back to start copying (i.e. the initial size of the overlapping window); must be > 0</param>
-        /// <param name="cnt">Number of bytes to copy; must be >= 0</param>
+        /// <param name="back">Number of bytes back to start copying (i.e. the initial size of the overlapping window); must be &gt; 0</param>
+        /// <param name="cnt">Number of bytes to copy; must be &gt;= 0</param>
         [DllImport("avutil-55", EntryPoint = "av_memcpy_backptr", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_memcpy_backptr(byte* @dst, int @back, int @cnt);
         
@@ -1455,7 +1455,7 @@ namespace FFmpeg.AutoGen
         /// <param name="dst_den">Destination denominator</param>
         /// <param name="num">Source numerator</param>
         /// <param name="den">Source denominator</param>
-        /// <param name="max">Maximum allowed values for `dst_num` & `dst_den`</param>
+        /// <param name="max">Maximum allowed values for `dst_num` &amp; `dst_den`</param>
         [DllImport("avutil-55", EntryPoint = "av_reduce", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_reduce(int* @dst_num, int* @dst_den, long @num, long @den, long @max);
         
@@ -1683,7 +1683,7 @@ namespace FFmpeg.AutoGen
         /// <param name="f">AVFifoBuffer to write to</param>
         /// <param name="src">data source; non-const since it may be used as a modifiable context by the function defined in func</param>
         /// <param name="size">number of bytes to write</param>
-        /// <param name="func">generic write function; the first parameter is src, the second is dest_buf, the third is dest_buf_size. func must return the number of bytes written to dest_buf, or < = 0 to indicate no more data available to write. If func is NULL, src is interpreted as a simple byte array for source data.</param>
+        /// <param name="func">generic write function; the first parameter is src, the second is dest_buf, the third is dest_buf_size. func must return the number of bytes written to dest_buf, or &lt; = 0 to indicate no more data available to write. If func is NULL, src is interpreted as a simple byte array for source data.</param>
         [DllImport("avutil-55", EntryPoint = "av_fifo_generic_write", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_fifo_generic_write(AVFifoBuffer* @f, void* @src, int @size, IntPtr @func);
         
@@ -1714,7 +1714,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avutil-55", EntryPoint = "av_get_sample_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVSampleFormat av_get_sample_fmt([MarshalAs(UnmanagedType.LPStr)] string @name);
         
-        /// <summary>Return the planar<->packed alternative form of the given sample format, or AV_SAMPLE_FMT_NONE on error. If the passed sample_fmt is already in the requested planar/packed format, the format returned is the same as the input.</summary>
+        /// <summary>Return the planar&lt;-&gt;packed alternative form of the given sample format, or AV_SAMPLE_FMT_NONE on error. If the passed sample_fmt is already in the requested planar/packed format, the format returned is the same as the input.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_alt_sample_fmt", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVSampleFormat av_get_alt_sample_fmt(AVSampleFormat @sample_fmt, int @planar);
         
@@ -1763,7 +1763,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avutil-55", EntryPoint = "av_samples_fill_arrays", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_samples_fill_arrays(byte** @audio_data, int* @linesize, byte* @buf, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align);
         
-        /// <summary>Allocate a samples buffer for nb_samples samples, and fill data pointers and linesize accordingly. The allocated samples buffer can be freed by using av_freep(&audio_data[0]) Allocated data will be initialized to silence.</summary>
+        /// <summary>Allocate a samples buffer for nb_samples samples, and fill data pointers and linesize accordingly. The allocated samples buffer can be freed by using av_freep(&amp;audio_data[0]) Allocated data will be initialized to silence.</summary>
         /// <param name="audio_data">array to be filled with the pointer for each channel</param>
         /// <param name="linesize">aligned size for audio buffer(s), may be NULL</param>
         /// <param name="nb_channels">number of audio channels</param>
@@ -1868,7 +1868,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avutil-55", EntryPoint = "av_get_channel_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern ulong av_get_channel_layout([MarshalAs(UnmanagedType.LPStr)] string @name);
         
-        /// <summary>Return a description of a channel layout. If nb_channels is <= 0, it is guessed from the channel_layout.</summary>
+        /// <summary>Return a description of a channel layout. If nb_channels is &lt;= 0, it is guessed from the channel_layout.</summary>
         /// <param name="buf">put here the string containing the channel layout</param>
         /// <param name="buf_size">size in bytes of the buffer</param>
         [DllImport("avutil-55", EntryPoint = "av_get_channel_layout_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -1922,12 +1922,12 @@ namespace FFmpeg.AutoGen
         public static extern void av_force_cpu_flags(int @flags);
         
         /// <summary>Set a mask on flags returned by av_get_cpu_flags(). This function is mainly useful for testing. Please use av_force_cpu_flags() and av_get_cpu_flags() instead which are more flexible</summary>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avutil-55", EntryPoint = "av_set_cpu_flags_mask", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_set_cpu_flags_mask(int @mask);
         
         /// <summary>Parse CPU flags from a string.</summary>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avutil-55", EntryPoint = "av_parse_cpu_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_parse_cpu_flags([MarshalAs(UnmanagedType.LPStr)] string @s);
         
@@ -1950,7 +1950,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Create an AVBuffer from an existing array.</summary>
         /// <param name="data">data array</param>
         /// <param name="size">size of data in bytes</param>
-        /// <param name="free">a callback for freeing this buffer's data</param>
+        /// <param name="free">a callback for freeing this buffer&apos;s data</param>
         /// <param name="opaque">parameter to be got for processing or passed to free</param>
         /// <param name="flags">a combination of AV_BUFFER_FLAG_*</param>
         [DllImport("avutil-55", EntryPoint = "av_buffer_create", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -2187,12 +2187,12 @@ namespace FFmpeg.AutoGen
         [DllImport("avutil-55", EntryPoint = "av_frame_copy", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_frame_copy(AVFrame* @dst, AVFrame* @src);
         
-        /// <summary>Copy only "metadata" fields from src to dst.</summary>
+        /// <summary>Copy only &quot;metadata&quot; fields from src to dst.</summary>
         [DllImport("avutil-55", EntryPoint = "av_frame_copy_props", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_frame_copy_props(AVFrame* @dst, AVFrame* @src);
         
         /// <summary>Get the buffer reference a given data plane is stored in.</summary>
-        /// <param name="plane">index of the data plane of interest in frame->extended_data.</param>
+        /// <param name="plane">index of the data plane of interest in frame-&gt;extended_data.</param>
         [DllImport("avutil-55", EntryPoint = "av_frame_get_plane_buffer", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVBufferRef* av_frame_get_plane_buffer(AVFrame* @frame, int @plane);
         
@@ -2218,8 +2218,8 @@ namespace FFmpeg.AutoGen
         
         /// <summary>Show the obj options.</summary>
         /// <param name="av_log_obj">log context to use for showing the options</param>
-        /// <param name="req_flags">requested flags for the options to show. Show only the options for which it is opt->flags & req_flags.</param>
-        /// <param name="rej_flags">rejected flags for the options to show. Show only the options for which it is !(opt->flags & req_flags).</param>
+        /// <param name="req_flags">requested flags for the options to show. Show only the options for which it is opt-&gt;flags &amp; req_flags.</param>
+        /// <param name="rej_flags">rejected flags for the options to show. Show only the options for which it is !(opt-&gt;flags &amp; req_flags).</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_show2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_opt_show2(void* @obj, void* @av_log_obj, int @req_flags, int @rej_flags);
         
@@ -2228,7 +2228,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avutil-55", EntryPoint = "av_opt_set_defaults", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_opt_set_defaults(void* @s);
         
-        /// <summary>Set the values of all AVOption fields to their default values. Only these AVOption fields for which (opt->flags & mask) == flags will have their default applied to s.</summary>
+        /// <summary>Set the values of all AVOption fields to their default values. Only these AVOption fields for which (opt-&gt;flags &amp; mask) == flags will have their default applied to s.</summary>
         /// <param name="s">an AVOption-enabled struct (its first member must be a pointer to AVClass)</param>
         /// <param name="mask">combination of AV_OPT_FLAG_*</param>
         /// <param name="flags">combination of AV_OPT_FLAG_*</param>
@@ -2246,8 +2246,8 @@ namespace FFmpeg.AutoGen
         /// <param name="ctx">the AVClass object to set options on</param>
         /// <param name="opts">the options string, key-value pairs separated by a delimiter</param>
         /// <param name="shorthand">a NULL-terminated array of options names for shorthand notation: if the first field in opts has no key part, the key is taken from the first element of shorthand; then again for the second, etc., until either opts is finished, shorthand is finished or a named option is found; after that, all options must be named</param>
-        /// <param name="key_val_sep">a 0-terminated list of characters used to separate key from value, for example '='</param>
-        /// <param name="pairs_sep">a 0-terminated list of characters used to separate two pairs from each other, for example ':' or ','</param>
+        /// <param name="key_val_sep">a 0-terminated list of characters used to separate key from value, for example &apos;=&apos;</param>
+        /// <param name="pairs_sep">a 0-terminated list of characters used to separate two pairs from each other, for example &apos;:&apos; or &apos;,&apos;</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_set_from_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_opt_set_from_string(void* @ctx, [MarshalAs(UnmanagedType.LPStr)] string @opts, byte** @shorthand, [MarshalAs(UnmanagedType.LPStr)] string @key_val_sep, [MarshalAs(UnmanagedType.LPStr)] string @pairs_sep);
         
@@ -2276,8 +2276,8 @@ namespace FFmpeg.AutoGen
         
         /// <summary>Extract a key-value pair from the beginning of a string.</summary>
         /// <param name="ropts">pointer to the options string, will be updated to point to the rest of the string (one of the pairs_sep or the final NUL)</param>
-        /// <param name="key_val_sep">a 0-terminated list of characters used to separate key from value, for example '='</param>
-        /// <param name="pairs_sep">a 0-terminated list of characters used to separate two pairs from each other, for example ':' or ','</param>
+        /// <param name="key_val_sep">a 0-terminated list of characters used to separate key from value, for example &apos;=&apos;</param>
+        /// <param name="pairs_sep">a 0-terminated list of characters used to separate two pairs from each other, for example &apos;:&apos; or &apos;,&apos;</param>
         /// <param name="flags">flags; see the AV_OPT_FLAG_* values below</param>
         /// <param name="rkey">parsed key; must be freed using av_free()</param>
         /// <param name="rval">parsed value; must be freed using av_free()</param>
@@ -2344,7 +2344,7 @@ namespace FFmpeg.AutoGen
         /// <summary>@{ Those functions set the field of obj with the given name to value.</summary>
         /// <param name="obj">A struct whose first element is a pointer to an AVClass.</param>
         /// <param name="name">the name of the field to set</param>
-        /// <param name="val">The value to set. In case of av_opt_set() if the field is not of a string type, then the given string is parsed. SI postfixes and some named scalars are supported. If the field is of a numeric type, it has to be a numeric or named scalar. Behavior with more than one scalar and +- infix operators is undefined. If the field is of a flags type, it has to be a sequence of numeric scalars or named flags separated by '+' or '-'. Prefixing a flag with '+' causes it to be set without affecting the other flags; similarly, '-' unsets a flag.</param>
+        /// <param name="val">The value to set. In case of av_opt_set() if the field is not of a string type, then the given string is parsed. SI postfixes and some named scalars are supported. If the field is of a numeric type, it has to be a numeric or named scalar. Behavior with more than one scalar and +- infix operators is undefined. If the field is of a flags type, it has to be a sequence of numeric scalars or named flags separated by &apos;+&apos; or &apos;-&apos;. Prefixing a flag with &apos;+&apos; causes it to be set without affecting the other flags; similarly, &apos;-&apos; unsets a flag.</param>
         /// <param name="search_flags">flags passed to av_opt_find2. I.e. if AV_OPT_SEARCH_CHILDREN is passed here, then the option may be set on a child of obj.</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_set", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_opt_set(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, [MarshalAs(UnmanagedType.LPStr)] string @val, int @search_flags);
@@ -2452,7 +2452,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avutil-55", EntryPoint = "av_opt_is_set_to_default_by_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_opt_is_set_to_default_by_name(void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @name, int @search_flags);
         
-        /// <summary>Serialize object's options.</summary>
+        /// <summary>Serialize object&apos;s options.</summary>
         /// <param name="obj">AVClass object to serialize</param>
         /// <param name="opt_flags">serialize options with all the specified flags set (AV_OPT_FLAG)</param>
         /// <param name="flags">combination of AV_OPT_SERIALIZE_* flags</param>
@@ -2597,12 +2597,12 @@ namespace FFmpeg.AutoGen
         [DllImport("avutil-55", EntryPoint = "av_image_fill_pointers", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_image_fill_pointers([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] byte*[] @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesizes);
         
-        /// <summary>Allocate an image with size w and h and pixel format pix_fmt, and fill pointers and linesizes accordingly. The allocated image buffer has to be freed by using av_freep(&pointers[0]).</summary>
+        /// <summary>Allocate an image with size w and h and pixel format pix_fmt, and fill pointers and linesizes accordingly. The allocated image buffer has to be freed by using av_freep(&amp;pointers[0]).</summary>
         /// <param name="align">the value to use for buffer size alignment</param>
         [DllImport("avutil-55", EntryPoint = "av_image_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_image_alloc([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] byte*[] @pointers, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesizes, int @w, int @h, AVPixelFormat @pix_fmt, int @align);
         
-        /// <summary>Copy image plane from src to dst. That is, copy "height" number of lines of "bytewidth" bytes each. The first byte of each successive line is separated by *_linesize bytes.</summary>
+        /// <summary>Copy image plane from src to dst. That is, copy &quot;height&quot; number of lines of &quot;bytewidth&quot; bytes each. The first byte of each successive line is separated by *_linesize bytes.</summary>
         /// <param name="dst_linesize">linesize for the image plane in dst</param>
         /// <param name="src_linesize">linesize for the image plane in src</param>
         [DllImport("avutil-55", EntryPoint = "av_image_copy_plane", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
