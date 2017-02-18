@@ -34,7 +34,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     ReturnType = TypeHelper.GetReturnTypeName(function.ReturnType.Type),
                     Content = function.Comment?.BriefText,
                     LibraryName = export.Library,
-                    Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray()
+                    Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray(),
+                    IsObsolete = function.PreprocessedEntities.OfType<MacroExpansion>().Any(x => x.Text == "attribute_deprecated")
                 };
                 _context.AddUnit(functionDefinition);
                 counter++;
@@ -86,10 +87,20 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 {
                     var @delegate = GetDelegate(context, name, functionType);
                     context.AddUnit(@delegate);
-                    return new TypeDefinition { Name = TypeHelper.GetTypeName(type) };
+                    return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
                 }
             }
             return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
+        }
+
+        internal static FunctionParameter GetParameter(GenerationContext context, Parameter parameter, int position)
+        {
+            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
+            return new FunctionParameter
+            {
+                Name = name,
+                Type = GetParameterType(context, name, parameter.Type)
+            };
         }
 
         private static DelegateDefinition GetDelegate(GenerationContext context, string name, FunctionType functionType)
@@ -99,15 +110,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 Name = name,
                 ReturnType = TypeHelper.GetReturnTypeName(functionType.ReturnType.Type),
                 Parameters = functionType.Parameters.Select((x, i) => GetParameter(context, x, i)).ToArray()
-            };
-        }
-        internal static FunctionParameter GetParameter(GenerationContext context, Parameter parameter, int position)
-        {
-            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
-            return new FunctionParameter
-            {
-                Name = name,
-                Type = GetParameterType(context, name, parameter.Type),
             };
         }
 
