@@ -56,24 +56,32 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 {
                     var size = indexer.FieldType.FixedSize;
                     var prefix = indexer.FieldPrefix;
+                    var typeName = indexer.FieldType.Name;
 
                     WriteLine(string.Join(" ", structure.Fileds.Select(toString)));
-
                     WriteLine();
 
-                    WriteLine($"public {indexer.FieldType.Name} this[int index]");
+                    WriteLine($"public static readonly int Size = {size};");
+
+                    var @fixed = $"fixed ({typeName}* p0 = &{prefix}0)";
+                    WriteLine($"public {typeName} this[uint index]");
                     using (BeginBlock())
                     {
-                        var getCases = Enumerable.Range(0, size).Select(i => $"case {i}: return {prefix}{i};");
-                        WriteLine($"get {{ switch (index) {{{string.Join(" ", getCases)} default: throw new ArgumentOutOfRangeException(); }}}}");
-                        var setCases = Enumerable.Range(0, size).Select(i => $"case {i}: {prefix}{i} = value; return;");
-                        WriteLine($"set {{ switch (index) {{{string.Join(" ", setCases)} default: throw new ArgumentOutOfRangeException(); }}}}");
+                        WriteLine($"get {{ {@fixed} {{ if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); }} }}");
+                        WriteLine($"set {{ {@fixed} {{ if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  }} }}");
                     }
 
-                    WriteLine();
-
-                    var fields = Enumerable.Range(0, size).Select(i => $"{prefix}{i}");
-                    WriteLine($"public {indexer.FieldType.Name}[] ToArray() => new[] {{{string.Join(", ", fields)}}};");
+                    WriteLine($"public {typeName}[] ToArray()");
+                    using (BeginBlock())
+                    {
+                        WriteLine($"{@fixed} {{ var array = new {typeName}[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }}");
+                    }
+                    WriteLine($"public void FromArray({typeName}[] array)");
+                    using (BeginBlock())
+                    {
+                        WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ *(p0 + i++) = value; if (i >= Size) return; }} }}");
+                    }
+                    WriteLine($"public static implicit operator {typeName}[]({structure.Name} @struct) => @struct.ToArray();");
                 }
 
                 var @delegate = structure.Delegate;

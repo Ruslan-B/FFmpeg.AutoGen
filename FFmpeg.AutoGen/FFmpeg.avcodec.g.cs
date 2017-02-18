@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace FFmpeg.AutoGen
 {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void AVCodecContext_draw_horiz_band (IntPtr @s, AVFrame* @src, [MarshalAs(UnmanagedType.LPArray, SizeConst=8)] int[] @offset, int @y, int @type, int @height);
+    public unsafe delegate void AVCodecContext_draw_horiz_band (IntPtr @s, AVFrame* @src, ref int_array8 @offset, int @y, int @type, int @height);
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate AVPixelFormat AVCodecContext_get_format (IntPtr @s, IntPtr @fmt);
@@ -706,6 +706,111 @@ namespace FFmpeg.AutoGen
         @AV_LOCK_DESTROY = 3,
     }
     
+    public unsafe struct short_array2
+    {
+        public short @at0; public short @at1;
+        
+        public static readonly int Size = 2;
+        public short this[uint index]
+        {
+            get { fixed (short* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (short* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public short[] ToArray()
+        {
+            fixed (short* p0 = &at0) { var array = new short[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(short[] array)
+        {
+            fixed (short* p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator short[](short_array2 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct position_array6
+    {
+        public short_array2 @at0; public short_array2 @at1; public short_array2 @at2; public short_array2 @at3; public short_array2 @at4; public short_array2 @at5;
+        
+        public static readonly int Size = 6;
+        public short_array2 this[uint index]
+        {
+            get { fixed (short_array2* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (short_array2* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public short_array2[] ToArray()
+        {
+            fixed (short_array2* p0 = &at0) { var array = new short_array2[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(short_array2[] array)
+        {
+            fixed (short_array2* p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator short_array2[](position_array6 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct byte_array32
+    {
+        public byte @at0; public byte @at1; public byte @at2; public byte @at3; public byte @at4; public byte @at5; public byte @at6; public byte @at7; public byte @at8; public byte @at9; public byte @at10; public byte @at11; public byte @at12; public byte @at13; public byte @at14; public byte @at15; public byte @at16; public byte @at17; public byte @at18; public byte @at19; public byte @at20; public byte @at21; public byte @at22; public byte @at23; public byte @at24; public byte @at25; public byte @at26; public byte @at27; public byte @at28; public byte @at29; public byte @at30; public byte @at31;
+        
+        public static readonly int Size = 32;
+        public byte this[uint index]
+        {
+            get { fixed (byte* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (byte* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public byte[] ToArray()
+        {
+            fixed (byte* p0 = &at0) { var array = new byte[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(byte[] array)
+        {
+            fixed (byte* p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator byte[](byte_array32 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct long_array4
+    {
+        public long @at0; public long @at1; public long @at2; public long @at3;
+        
+        public static readonly int Size = 4;
+        public long this[uint index]
+        {
+            get { fixed (long* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (long* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public long[] ToArray()
+        {
+            fixed (long* p0 = &at0) { var array = new long[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(long[] array)
+        {
+            fixed (long* p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator long[](long_array4 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct int_array5
+    {
+        public int @at0; public int @at1; public int @at2; public int @at3; public int @at4;
+        
+        public static readonly int Size = 5;
+        public int this[uint index]
+        {
+            get { fixed (int* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (int* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public int[] ToArray()
+        {
+            fixed (int* p0 = &at0) { var array = new int[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(int[] array)
+        {
+            fixed (int* p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator int[](int_array5 @struct) => @struct.ToArray();
+    }
+    
     /// <summary>This struct describes the properties of a single codec described by an AVCodecID.</summary>
     public unsafe struct AVCodecDescriptor
     {
@@ -729,34 +834,6 @@ namespace FFmpeg.AutoGen
         public int @end_frame;
         public int @qscale;
         public float @quality_factor;
-    }
-    
-    /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
-    public unsafe struct short_array2
-    {
-        public short @at0; public short @at1;
-        
-        public short this[int index]
-        {
-            get { switch (index) {case 0: return at0; case 1: return at1; default: throw new ArgumentOutOfRangeException(); }}
-            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; default: throw new ArgumentOutOfRangeException(); }}
-        }
-        
-        public short[] ToArray() => new[] {at0, at1};
-    }
-    
-    /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
-    public unsafe struct position_array6
-    {
-        public short_array2 @at0; public short_array2 @at1; public short_array2 @at2; public short_array2 @at3; public short_array2 @at4; public short_array2 @at5;
-        
-        public short_array2 this[int index]
-        {
-            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; case 5: return at5; default: throw new ArgumentOutOfRangeException(); }}
-            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; case 5: at5 = value; return; default: throw new ArgumentOutOfRangeException(); }}
-        }
-        
-        public short_array2[] ToArray() => new[] {at0, at1, at2, at3, at4, at5};
     }
     
     /// <summary>Pan Scan area. This specifies the area which should be displayed. Note there may be multiple such areas for one frame.</summary>
@@ -823,19 +900,6 @@ namespace FFmpeg.AutoGen
         public int @profile;
         /// <summary>short name for the profile</summary>
         public byte* @name;
-    }
-    
-    public unsafe struct byte_array32
-    {
-        public byte @at0; public byte @at1; public byte @at2; public byte @at3; public byte @at4; public byte @at5; public byte @at6; public byte @at7; public byte @at8; public byte @at9; public byte @at10; public byte @at11; public byte @at12; public byte @at13; public byte @at14; public byte @at15; public byte @at16; public byte @at17; public byte @at18; public byte @at19; public byte @at20; public byte @at21; public byte @at22; public byte @at23; public byte @at24; public byte @at25; public byte @at26; public byte @at27; public byte @at28; public byte @at29; public byte @at30; public byte @at31;
-        
-        public byte this[int index]
-        {
-            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; case 5: return at5; case 6: return at6; case 7: return at7; case 8: return at8; case 9: return at9; case 10: return at10; case 11: return at11; case 12: return at12; case 13: return at13; case 14: return at14; case 15: return at15; case 16: return at16; case 17: return at17; case 18: return at18; case 19: return at19; case 20: return at20; case 21: return at21; case 22: return at22; case 23: return at23; case 24: return at24; case 25: return at25; case 26: return at26; case 27: return at27; case 28: return at28; case 29: return at29; case 30: return at30; case 31: return at31; default: throw new ArgumentOutOfRangeException(); }}
-            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; case 5: at5 = value; return; case 6: at6 = value; return; case 7: at7 = value; return; case 8: at8 = value; return; case 9: at9 = value; return; case 10: at10 = value; return; case 11: at11 = value; return; case 12: at12 = value; return; case 13: at13 = value; return; case 14: at14 = value; return; case 15: at15 = value; return; case 16: at16 = value; return; case 17: at17 = value; return; case 18: at18 = value; return; case 19: at19 = value; return; case 20: at20 = value; return; case 21: at21 = value; return; case 22: at22 = value; return; case 23: at23 = value; return; case 24: at24 = value; return; case 25: at25 = value; return; case 26: at26 = value; return; case 27: at27 = value; return; case 28: at28 = value; return; case 29: at29 = value; return; case 30: at30 = value; return; case 31: at31 = value; return; default: throw new ArgumentOutOfRangeException(); }}
-        }
-        
-        public byte[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7, at8, at9, at10, at11, at12, at13, at14, at15, at16, at17, at18, at19, at20, at21, at22, at23, at24, at25, at26, at27, at28, at29, at30, at31};
     }
     
     public unsafe struct AVCodecContext_draw_horiz_band_wrapper
@@ -1242,36 +1306,9 @@ namespace FFmpeg.AutoGen
     public unsafe struct AVPicture
     {
         /// <summary>pointers to the image data planes</summary>
-        public data_array8 @data;
+        public byte_ptr_array8 @data;
         /// <summary>number of bytes per line</summary>
         public int_array8 @linesize;
-    }
-    
-    /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
-    public unsafe struct data_array4
-    {
-        public byte* @at0; public byte* @at1; public byte* @at2; public byte* @at3;
-        
-        public byte* this[int index]
-        {
-            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; default: throw new ArgumentOutOfRangeException(); }}
-            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; default: throw new ArgumentOutOfRangeException(); }}
-        }
-        
-        public byte*[] ToArray() => new[] {at0, at1, at2, at3};
-    }
-    
-    public unsafe struct int_array4
-    {
-        public int @at0; public int @at1; public int @at2; public int @at3;
-        
-        public int this[int index]
-        {
-            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; default: throw new ArgumentOutOfRangeException(); }}
-            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; default: throw new ArgumentOutOfRangeException(); }}
-        }
-        
-        public int[] ToArray() => new[] {at0, at1, at2, at3};
     }
     
     public unsafe struct AVSubtitleRect
@@ -1288,7 +1325,7 @@ namespace FFmpeg.AutoGen
         public int @nb_colors;
         public AVPicture @pict;
         /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
-        public data_array4 @data;
+        public byte_ptr_array4 @data;
         public int_array4 @linesize;
         public AVSubtitleType @type;
         /// <summary>0 terminated plain UTF-8 text</summary>
@@ -1576,19 +1613,6 @@ namespace FFmpeg.AutoGen
         public int @seek_preroll;
     }
     
-    public unsafe struct long_array4
-    {
-        public long @at0; public long @at1; public long @at2; public long @at3;
-        
-        public long this[int index]
-        {
-            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; default: throw new ArgumentOutOfRangeException(); }}
-            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; default: throw new ArgumentOutOfRangeException(); }}
-        }
-        
-        public long[] ToArray() => new[] {at0, at1, at2, at3};
-    }
-    
     public unsafe struct AVCodecParserContext
     {
         public void* @priv_data;
@@ -1642,19 +1666,6 @@ namespace FFmpeg.AutoGen
         public int @coded_height;
         /// <summary>The format of the coded data, corresponds to enum AVPixelFormat for video and for enum AVSampleFormat for audio.</summary>
         public int @format;
-    }
-    
-    public unsafe struct int_array5
-    {
-        public int @at0; public int @at1; public int @at2; public int @at3; public int @at4;
-        
-        public int this[int index]
-        {
-            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; default: throw new ArgumentOutOfRangeException(); }}
-            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; default: throw new ArgumentOutOfRangeException(); }}
-        }
-        
-        public int[] ToArray() => new[] {at0, at1, at2, at3, at4};
     }
     
     public unsafe struct AVCodecParser_parser_init_wrapper
@@ -2530,7 +2541,7 @@ namespace FFmpeg.AutoGen
         
         /// <summary>Modify width and height values so that they will result in a memory buffer that is acceptable for the codec if you also ensure that all line sizes are a multiple of the respective linesize_align[i].</summary>
         [DllImport("avcodec-57", EntryPoint = "avcodec_align_dimensions2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void avcodec_align_dimensions2(AVCodecContext* @s, int* @width, int* @height, [MarshalAs(UnmanagedType.LPArray, SizeConst=8)] int[] @linesize_align);
+        public static extern void avcodec_align_dimensions2(AVCodecContext* @s, int* @width, int* @height, ref int_array8 @linesize_align);
         
         /// <summary>Converts AVChromaLocation to swscale x/y chroma position.</summary>
         /// <param name="xpos">horizontal chroma sample position</param>

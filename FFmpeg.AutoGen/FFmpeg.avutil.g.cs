@@ -731,6 +731,153 @@ namespace FFmpeg.AutoGen
         @AV_OPT_TYPE_BOOL = 1112493900,
     }
     
+    public unsafe struct byte_ptr_array8
+    {
+        public byte* @at0; public byte* @at1; public byte* @at2; public byte* @at3; public byte* @at4; public byte* @at5; public byte* @at6; public byte* @at7;
+        
+        public static readonly int Size = 8;
+        public byte* this[uint index]
+        {
+            get { fixed (byte** p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (byte** p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public byte*[] ToArray()
+        {
+            fixed (byte** p0 = &at0) { var array = new byte*[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(byte*[] array)
+        {
+            fixed (byte** p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator byte*[](byte_ptr_array8 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct int_array8
+    {
+        public int @at0; public int @at1; public int @at2; public int @at3; public int @at4; public int @at5; public int @at6; public int @at7;
+        
+        public static readonly int Size = 8;
+        public int this[uint index]
+        {
+            get { fixed (int* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (int* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public int[] ToArray()
+        {
+            fixed (int* p0 = &at0) { var array = new int[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(int[] array)
+        {
+            fixed (int* p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator int[](int_array8 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct ulong_array8
+    {
+        public ulong @at0; public ulong @at1; public ulong @at2; public ulong @at3; public ulong @at4; public ulong @at5; public ulong @at6; public ulong @at7;
+        
+        public static readonly int Size = 8;
+        public ulong this[uint index]
+        {
+            get { fixed (ulong* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (ulong* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public ulong[] ToArray()
+        {
+            fixed (ulong* p0 = &at0) { var array = new ulong[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(ulong[] array)
+        {
+            fixed (ulong* p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator ulong[](ulong_array8 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct buf_array8
+    {
+        public AVBufferRef* @at0; public AVBufferRef* @at1; public AVBufferRef* @at2; public AVBufferRef* @at3; public AVBufferRef* @at4; public AVBufferRef* @at5; public AVBufferRef* @at6; public AVBufferRef* @at7;
+        
+        public static readonly int Size = 8;
+        public AVBufferRef* this[uint index]
+        {
+            get { fixed (AVBufferRef** p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (AVBufferRef** p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public AVBufferRef*[] ToArray()
+        {
+            fixed (AVBufferRef** p0 = &at0) { var array = new AVBufferRef*[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(AVBufferRef*[] array)
+        {
+            fixed (AVBufferRef** p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator AVBufferRef*[](buf_array8 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct comp_array4
+    {
+        public AVComponentDescriptor @at0; public AVComponentDescriptor @at1; public AVComponentDescriptor @at2; public AVComponentDescriptor @at3;
+        
+        public static readonly int Size = 4;
+        public AVComponentDescriptor this[uint index]
+        {
+            get { fixed (AVComponentDescriptor* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (AVComponentDescriptor* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public AVComponentDescriptor[] ToArray()
+        {
+            fixed (AVComponentDescriptor* p0 = &at0) { var array = new AVComponentDescriptor[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(AVComponentDescriptor[] array)
+        {
+            fixed (AVComponentDescriptor* p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator AVComponentDescriptor[](comp_array4 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct byte_ptr_array4
+    {
+        public byte* @at0; public byte* @at1; public byte* @at2; public byte* @at3;
+        
+        public static readonly int Size = 4;
+        public byte* this[uint index]
+        {
+            get { fixed (byte** p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (byte** p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public byte*[] ToArray()
+        {
+            fixed (byte** p0 = &at0) { var array = new byte*[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(byte*[] array)
+        {
+            fixed (byte** p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator byte*[](byte_ptr_array4 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct int_array4
+    {
+        public int @at0; public int @at1; public int @at2; public int @at3;
+        
+        public static readonly int Size = 4;
+        public int this[uint index]
+        {
+            get { fixed (int* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (int* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public int[] ToArray()
+        {
+            fixed (int* p0 = &at0) { var array = new int[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(int[] array)
+        {
+            fixed (int* p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator int[](int_array4 @struct) => @struct.ToArray();
+    }
+    
     /// <summary>Rational number (pair of numerator and denominator).</summary>
     public unsafe struct AVRational
     {
@@ -849,66 +996,11 @@ namespace FFmpeg.AutoGen
         public AVBufferRef* @buf;
     }
     
-    /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte</summary>
-    public unsafe struct data_array8
-    {
-        public byte* @at0; public byte* @at1; public byte* @at2; public byte* @at3; public byte* @at4; public byte* @at5; public byte* @at6; public byte* @at7;
-        
-        public byte* this[int index]
-        {
-            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; case 5: return at5; case 6: return at6; case 7: return at7; default: throw new ArgumentOutOfRangeException(); }}
-            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; case 5: at5 = value; return; case 6: at6 = value; return; case 7: at7 = value; return; default: throw new ArgumentOutOfRangeException(); }}
-        }
-        
-        public byte*[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7};
-    }
-    
-    /// <summary>For video, size in bytes of each picture line. For audio, size in bytes of each plane.</summary>
-    public unsafe struct int_array8
-    {
-        public int @at0; public int @at1; public int @at2; public int @at3; public int @at4; public int @at5; public int @at6; public int @at7;
-        
-        public int this[int index]
-        {
-            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; case 5: return at5; case 6: return at6; case 7: return at7; default: throw new ArgumentOutOfRangeException(); }}
-            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; case 5: at5 = value; return; case 6: at6 = value; return; case 7: at7 = value; return; default: throw new ArgumentOutOfRangeException(); }}
-        }
-        
-        public int[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7};
-    }
-    
-    public unsafe struct ulong_array8
-    {
-        public ulong @at0; public ulong @at1; public ulong @at2; public ulong @at3; public ulong @at4; public ulong @at5; public ulong @at6; public ulong @at7;
-        
-        public ulong this[int index]
-        {
-            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; case 5: return at5; case 6: return at6; case 7: return at7; default: throw new ArgumentOutOfRangeException(); }}
-            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; case 5: at5 = value; return; case 6: at6 = value; return; case 7: at7 = value; return; default: throw new ArgumentOutOfRangeException(); }}
-        }
-        
-        public ulong[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7};
-    }
-    
-    /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j &lt; i.</summary>
-    public unsafe struct buf_array8
-    {
-        public AVBufferRef* @at0; public AVBufferRef* @at1; public AVBufferRef* @at2; public AVBufferRef* @at3; public AVBufferRef* @at4; public AVBufferRef* @at5; public AVBufferRef* @at6; public AVBufferRef* @at7;
-        
-        public AVBufferRef* this[int index]
-        {
-            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; case 4: return at4; case 5: return at5; case 6: return at6; case 7: return at7; default: throw new ArgumentOutOfRangeException(); }}
-            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; case 4: at4 = value; return; case 5: at5 = value; return; case 6: at6 = value; return; case 7: at7 = value; return; default: throw new ArgumentOutOfRangeException(); }}
-        }
-        
-        public AVBufferRef*[] ToArray() => new[] {at0, at1, at2, at3, at4, at5, at6, at7};
-    }
-    
     /// <summary>This structure describes decoded (raw) audio or video data.</summary>
     public unsafe struct AVFrame
     {
         /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte</summary>
-        public data_array8 @data;
+        public byte_ptr_array8 @data;
         /// <summary>For video, size in bytes of each picture line. For audio, size in bytes of each plane.</summary>
         public int_array8 @linesize;
         /// <summary>pointers to the data planes/channels.</summary>
@@ -1071,20 +1163,6 @@ namespace FFmpeg.AutoGen
         public int @depth_minus1;
         /// <summary>deprecated, use offset instead</summary>
         public int @offset_plus1;
-    }
-    
-    /// <summary>Parameters that describe how pixels are packed. If the format has 1 or 2 components, then luma is 0. If the format has 3 or 4 components: if the RGB flag is set then 0 is red, 1 is green and 2 is blue; otherwise 0 is luma, 1 is chroma-U and 2 is chroma-V.</summary>
-    public unsafe struct comp_array4
-    {
-        public AVComponentDescriptor @at0; public AVComponentDescriptor @at1; public AVComponentDescriptor @at2; public AVComponentDescriptor @at3;
-        
-        public AVComponentDescriptor this[int index]
-        {
-            get { switch (index) {case 0: return at0; case 1: return at1; case 2: return at2; case 3: return at3; default: throw new ArgumentOutOfRangeException(); }}
-            set { switch (index) {case 0: at0 = value; return; case 1: at1 = value; return; case 2: at2 = value; return; case 3: at3 = value; return; default: throw new ArgumentOutOfRangeException(); }}
-        }
-        
-        public AVComponentDescriptor[] ToArray() => new[] {at0, at1, at2, at3};
     }
     
     /// <summary>Descriptor that unambiguously describes how the bits of a pixel are stored in the up to 4 data planes of an image. It also stores the subsampling factors and number of components.</summary>
@@ -2544,7 +2622,7 @@ namespace FFmpeg.AutoGen
         /// <param name="w">the width of the line to read, that is the number of values to write to dst</param>
         /// <param name="read_pal_component">if not zero and the format is a paletted format writes the values corresponding to the palette component c in data[1] to dst, rather than the palette indexes in data[0]. The behavior is undefined if the format is not paletted.</param>
         [DllImport("avutil-55", EntryPoint = "av_read_image_line", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_read_image_line(ushort* @dst, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] byte*[] @data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component);
+        public static extern void av_read_image_line(ushort* @dst, ref byte_ptr_array4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component);
         
         /// <summary>Write the values from src to the pixel format component c of an image line.</summary>
         /// <param name="src">array containing the values to write</param>
@@ -2555,7 +2633,7 @@ namespace FFmpeg.AutoGen
         /// <param name="y">the vertical coordinate of the first pixel to write</param>
         /// <param name="w">the width of the line to write, that is the number of values to write to the image line</param>
         [DllImport("avutil-55", EntryPoint = "av_write_image_line", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_write_image_line(ushort* @src, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] byte*[] @data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w);
+        public static extern void av_write_image_line(ushort* @src, ref byte_ptr_array4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w);
         
         /// <summary>Utility function to swap the endianness of a pixel format.</summary>
         /// <param name="pix_fmt">the pixel format</param>
@@ -2579,7 +2657,7 @@ namespace FFmpeg.AutoGen
         /// <param name="max_pixsteps">an array which is filled with the max pixel step for each plane. Since a plane may contain different pixel components, the computed max_pixsteps[plane] is relative to the component in the plane with the max pixel step.</param>
         /// <param name="max_pixstep_comps">an array which is filled with the component for each plane which has the max pixel step. May be NULL.</param>
         [DllImport("avutil-55", EntryPoint = "av_image_fill_max_pixsteps", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_image_fill_max_pixsteps([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @max_pixsteps, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc);
+        public static extern void av_image_fill_max_pixsteps(ref int_array4 @max_pixsteps, ref int_array4 @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc);
         
         /// <summary>Compute the size of an image line with format pix_fmt and width width for the plane plane.</summary>
         [DllImport("avutil-55", EntryPoint = "av_image_get_linesize", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -2588,19 +2666,19 @@ namespace FFmpeg.AutoGen
         /// <summary>Fill plane linesizes for an image with pixel format pix_fmt and width width.</summary>
         /// <param name="linesizes">array to be filled with the linesize for each plane</param>
         [DllImport("avutil-55", EntryPoint = "av_image_fill_linesizes", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_image_fill_linesizes([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesizes, AVPixelFormat @pix_fmt, int @width);
+        public static extern int av_image_fill_linesizes(ref int_array4 @linesizes, AVPixelFormat @pix_fmt, int @width);
         
         /// <summary>Fill plane data pointers for an image with pixel format pix_fmt and height height.</summary>
         /// <param name="data">pointers array to be filled with the pointer for each image plane</param>
         /// <param name="ptr">the pointer to a buffer which will contain the image</param>
         /// <param name="linesizes">the array containing the linesize for each plane, should be filled by av_image_fill_linesizes()</param>
         [DllImport("avutil-55", EntryPoint = "av_image_fill_pointers", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_image_fill_pointers([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] byte*[] @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesizes);
+        public static extern int av_image_fill_pointers(ref byte_ptr_array4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int_array4 @linesizes);
         
         /// <summary>Allocate an image with size w and h and pixel format pix_fmt, and fill pointers and linesizes accordingly. The allocated image buffer has to be freed by using av_freep(&amp;pointers[0]).</summary>
         /// <param name="align">the value to use for buffer size alignment</param>
         [DllImport("avutil-55", EntryPoint = "av_image_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_image_alloc([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] byte*[] @pointers, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @linesizes, int @w, int @h, AVPixelFormat @pix_fmt, int @align);
+        public static extern int av_image_alloc(ref byte_ptr_array4 @pointers, ref int_array4 @linesizes, int @w, int @h, AVPixelFormat @pix_fmt, int @align);
         
         /// <summary>Copy image plane from src to dst. That is, copy &quot;height&quot; number of lines of &quot;bytewidth&quot; bytes each. The first byte of each successive line is separated by *_linesize bytes.</summary>
         /// <param name="dst_linesize">linesize for the image plane in dst</param>
@@ -2612,7 +2690,7 @@ namespace FFmpeg.AutoGen
         /// <param name="dst_linesizes">linesizes for the image in dst_data</param>
         /// <param name="src_linesizes">linesizes for the image in src_data</param>
         [DllImport("avutil-55", EntryPoint = "av_image_copy", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void av_image_copy([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] byte*[] @dst_data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @dst_linesizes, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] byte*[] @src_data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
+        public static extern void av_image_copy(ref byte_ptr_array4 @dst_data, ref int_array4 @dst_linesizes, ref byte_ptr_array4 @src_data, int_array4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
         
         /// <summary>Setup the data pointers and linesizes based on the specified image parameters and the provided array.</summary>
         /// <param name="dst_data">data pointers to be filled in</param>
@@ -2622,7 +2700,7 @@ namespace FFmpeg.AutoGen
         /// <param name="height">the height of the image in pixels</param>
         /// <param name="align">the value used in src for linesize alignment</param>
         [DllImport("avutil-55", EntryPoint = "av_image_fill_arrays", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_image_fill_arrays([MarshalAs(UnmanagedType.LPArray, SizeConst=4)] byte*[] @dst_data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @dst_linesize, byte* @src, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
+        public static extern int av_image_fill_arrays(ref byte_ptr_array4 @dst_data, ref int_array4 @dst_linesize, byte* @src, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
         
         /// <summary>Return the size in bytes of the amount of data required to store an image with the given parameters.</summary>
         /// <param name="align">the assumed linesize alignment</param>
@@ -2638,7 +2716,7 @@ namespace FFmpeg.AutoGen
         /// <param name="height">the height of the source image in pixels</param>
         /// <param name="align">the assumed linesize alignment for dst</param>
         [DllImport("avutil-55", EntryPoint = "av_image_copy_to_buffer", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_image_copy_to_buffer(byte* @dst, int @dst_size, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] byte*[] @src_data, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
+        public static extern int av_image_copy_to_buffer(byte* @dst, int @dst_size, byte_ptr_array4 @src_data, int_array4 @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
         
         /// <summary>Check if the given dimension of an image is valid, meaning that all bytes of the image can be addressed with a signed int.</summary>
         /// <param name="w">the width of the picture</param>

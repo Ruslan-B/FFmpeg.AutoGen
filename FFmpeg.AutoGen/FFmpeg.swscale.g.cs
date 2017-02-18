@@ -136,7 +136,7 @@ namespace FFmpeg.AutoGen
         /// <param name="contrast">16.16 fixed point contrast correction</param>
         /// <param name="saturation">16.16 fixed point saturation correction</param>
         [DllImport("swscale-4", EntryPoint = "sws_setColorspaceDetails", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int sws_setColorspaceDetails(IntPtr @c, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @inv_table, int @srcRange, [MarshalAs(UnmanagedType.LPArray, SizeConst=4)] int[] @table, int @dstRange, int @brightness, int @contrast, int @saturation);
+        public static extern int sws_setColorspaceDetails(IntPtr @c, int_array4 @inv_table, int @srcRange, int_array4 @table, int @dstRange, int @brightness, int @contrast, int @saturation);
         
         /// <summary>Returns -1 if not supported</summary>
         [DllImport("swscale-4", EntryPoint = "sws_getColorspaceDetails", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
