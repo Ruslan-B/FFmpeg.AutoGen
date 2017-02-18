@@ -76,7 +76,7 @@ namespace FFmpeg.AutoGen
         public int @is_disabled;
         /// <summary>For filters which will create hardware frames, sets the device the filter should create them in. All other filters will ignore this field: in particular, a filter which consumes or processes hardware frames will instead use the hw_frames_ctx field in AVFilterLink to carry the hardware context information.</summary>
         public AVBufferRef* @hw_device_ctx;
-        /// <summary>Max number of threads allowed in this filter instance. If <= 0, its value is ignored. Overrides global number of threads set per filter graph.</summary>
+        /// <summary>Max number of threads allowed in this filter instance. If &lt;= 0, its value is ignored. Overrides global number of threads set per filter graph.</summary>
         public int @nb_threads;
     }
     
@@ -365,14 +365,14 @@ namespace FFmpeg.AutoGen
         
         /// <summary>Get the name of an AVFilterPad.</summary>
         /// <param name="pads">an array of AVFilterPads</param>
-        /// <param name="pad_idx">index of the pad in the array it; is the caller's responsibility to ensure the index is valid</param>
+        /// <param name="pad_idx">index of the pad in the array it; is the caller&apos;s responsibility to ensure the index is valid</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_pad_get_name", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         public static extern string avfilter_pad_get_name(AVFilterPad* @pads, int @pad_idx);
         
         /// <summary>Get the type of an AVFilterPad.</summary>
         /// <param name="pads">an array of AVFilterPads</param>
-        /// <param name="pad_idx">index of the pad in the array; it is the caller's responsibility to ensure the index is valid</param>
+        /// <param name="pad_idx">index of the pad in the array; it is the caller&apos;s responsibility to ensure the index is valid</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_pad_get_type", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVMediaType avfilter_pad_get_type(AVFilterPad* @pads, int @pad_idx);
         
@@ -393,7 +393,7 @@ namespace FFmpeg.AutoGen
         public static extern int avfilter_link_get_channels(AVFilterLink* @link);
         
         /// <summary>Set the closed field of a link.</summary>
-        [Obsolete]
+        [Obsolete("applications are not supposed to mess with links, they should close the sinks.")]
         [DllImport("avfilter-6", EntryPoint = "avfilter_link_set_closed", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avfilter_link_set_closed(AVFilterLink* @link, int @closed);
         
@@ -411,7 +411,7 @@ namespace FFmpeg.AutoGen
         public static extern void avfilter_register_all();
         
         /// <summary>Uninitialize the filter system. Unregister all filters.</summary>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avfilter-6", EntryPoint = "avfilter_uninit", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avfilter_uninit();
         
@@ -428,7 +428,7 @@ namespace FFmpeg.AutoGen
         public static extern AVFilter* avfilter_next(AVFilter* @prev);
         
         /// <summary>If filter is NULL, returns a pointer to the first registered filter pointer, if filter is non-NULL, returns the next pointer after filter. If the returned pointer points to NULL, the last registered filter was already reached.</summary>
-        [Obsolete]
+        [Obsolete("use avfilter_next()")]
         [DllImport("avfilter-6", EntryPoint = "av_filter_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVFilter** av_filter_next(AVFilter** @filter);
         
@@ -436,7 +436,7 @@ namespace FFmpeg.AutoGen
         /// <param name="filter_ctx">put here a pointer to the created filter context on success, NULL on failure</param>
         /// <param name="filter">the filter to create an instance of</param>
         /// <param name="inst_name">Name to give to the new instance. Can be NULL for none.</param>
-        [Obsolete]
+        [Obsolete("use avfilter_graph_alloc_filter() instead")]
         [DllImport("avfilter-6", EntryPoint = "avfilter_open", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_open(AVFilterContext** @filter_ctx, AVFilter* @filter, [MarshalAs(UnmanagedType.LPStr)] string @inst_name);
         
@@ -444,13 +444,13 @@ namespace FFmpeg.AutoGen
         /// <param name="filter">the filter to initialize</param>
         /// <param name="args">A string of parameters to use when initializing the filter. The format and meaning of this string varies by filter.</param>
         /// <param name="opaque">Any extra non-string data needed by the filter. The meaning of this parameter varies by filter.</param>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avfilter-6", EntryPoint = "avfilter_init_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_init_filter(AVFilterContext* @filter, [MarshalAs(UnmanagedType.LPStr)] string @args, void* @opaque);
         
         /// <summary>Initialize a filter with the supplied parameters.</summary>
         /// <param name="ctx">uninitialized filter context to initialize</param>
-        /// <param name="args">Options to initialize the filter with. This must be a ':'-separated list of options in the 'key=value' form. May be NULL if the options have been set directly using the AVOptions API or there are no options that need to be set.</param>
+        /// <param name="args">Options to initialize the filter with. This must be a &apos;:&apos;-separated list of options in the &apos;key=value&apos; form. May be NULL if the options have been set directly using the AVOptions API or there are no options that need to be set.</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_init_str", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_init_str(AVFilterContext* @ctx, [MarshalAs(UnmanagedType.LPStr)] string @args);
         
@@ -460,7 +460,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avfilter-6", EntryPoint = "avfilter_init_dict", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_init_dict(AVFilterContext* @ctx, AVDictionary** @options);
         
-        /// <summary>Free a filter context. This will also remove the filter from its filtergraph's list of filters.</summary>
+        /// <summary>Free a filter context. This will also remove the filter from its filtergraph&apos;s list of filters.</summary>
         /// <param name="filter">the filter to free</param>
         [DllImport("avfilter-6", EntryPoint = "avfilter_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avfilter_free(AVFilterContext* @filter);
@@ -497,7 +497,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Add an existing filter instance to a filter graph.</summary>
         /// <param name="graphctx">the filter graph</param>
         /// <param name="filter">the filter to be added</param>
-        [Obsolete]
+        [Obsolete("use avfilter_graph_alloc_filter() to allocate a filter in a filter graph")]
         [DllImport("avfilter-6", EntryPoint = "avfilter_graph_add_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avfilter_graph_add_filter(AVFilterGraph* @graphctx, AVFilterContext* @filter);
         
@@ -556,7 +556,7 @@ namespace FFmpeg.AutoGen
         
         /// <summary>Send a command to one or more filter instances.</summary>
         /// <param name="graph">the filter graph</param>
-        /// <param name="target">the filter(s) to which the command should be sent "all" sends to all filters otherwise it can be a filter or filter instance name which will send the command to all matching filters.</param>
+        /// <param name="target">the filter(s) to which the command should be sent &quot;all&quot; sends to all filters otherwise it can be a filter or filter instance name which will send the command to all matching filters.</param>
         /// <param name="cmd">the command to send, for handling simplicity all commands must be alphanumeric only</param>
         /// <param name="arg">the argument for the command</param>
         /// <param name="res">a buffer with size res_size where the filter(s) can return a response.</param>
@@ -565,7 +565,7 @@ namespace FFmpeg.AutoGen
         
         /// <summary>Queue a command for one or more filter instances.</summary>
         /// <param name="graph">the filter graph</param>
-        /// <param name="target">the filter(s) to which the command should be sent "all" sends to all filters otherwise it can be a filter or filter instance name which will send the command to all matching filters.</param>
+        /// <param name="target">the filter(s) to which the command should be sent &quot;all&quot; sends to all filters otherwise it can be a filter or filter instance name which will send the command to all matching filters.</param>
         /// <param name="cmd">the command to sent, for handling simplicity all commands must be alphanumeric only</param>
         /// <param name="arg">the argument for the command</param>
         /// <param name="ts">time at which the command should be sent to the filter</param>

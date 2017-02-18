@@ -6,17 +6,16 @@ using CppSharp;
 using CppSharp.AST;
 using CppSharp.Parser;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
-using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
 using ClangParser = CppSharp.ClangParser;
 using MacroDefinition = FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions.MacroDefinition;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
     internal class Generator
     {
         private ASTContext _astContext;
         private bool _hasParsingErrors;
-        private GenerationContext _generationContext;
+        private ASTProcessor _astProcessor;
 
         public string[] Defines { get; set; } = {};
         public string[] IncludeDirs { get; set; } = {};
@@ -92,29 +91,16 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         private void Generate()
         {
-            if (_generationContext == null)
+            if (_astProcessor == null)
             {
-                _generationContext = new GenerationContext
+                _astProcessor = new ASTProcessor
                 {
                     FunctionExportMap = Exports.ToDictionary(x => x.Name)
                 };
             }
-            _generationContext.ClearUnits();
+            _astProcessor.ClearUnits();
 
-            var mp = new MacroProcessor(_generationContext);
-            var ep = new EnumerationProcessor(_generationContext);
-            var sp = new StructureProcessor(_generationContext);
-            var fp = new FunctionProcessor(_generationContext);
-            foreach (var translationUnit in _astContext.TranslationUnits.Where(x => !x.IsSystemHeader))
-            {
-                mp.Process(translationUnit);
-                ep.Process(translationUnit);
-                sp.Process(translationUnit);
-                fp.Process(translationUnit);
-            }
-            var mpp = new MacroPostProcessor();
-            var macros = _generationContext.Units.OfType<MacroDefinition>().ToArray();
-            mpp.Process(macros);
+            _astProcessor.Process(_astContext.TranslationUnits.Where(x => !x.IsSystemHeader));
         }
         
         private void Write()
@@ -129,7 +115,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 textWriter.WriteLine($"namespace {Namespace}");
                 using (textWriter.BeginBlock())
                 {
-                    var units = _generationContext.Units;
+                    var units = _astProcessor.Units;
                     units.OfType<DelegateDefinition>().ToList().ForEach(x =>
                     {
                         writer.Write(x);

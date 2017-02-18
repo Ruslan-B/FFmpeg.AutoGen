@@ -8,9 +8,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
     internal class FunctionProcessor
     {
-        private readonly GenerationContext _context;
+        private readonly ASTProcessor _context;
 
-        public FunctionProcessor(GenerationContext context)
+        public FunctionProcessor(ASTProcessor context)
         {
             _context = context;
         }
@@ -35,11 +35,26 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     Content = function.Comment?.BriefText,
                     LibraryName = export.Library,
                     Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray(),
-                    IsObsolete = function.PreprocessedEntities.OfType<MacroExpansion>().Any(x => x.Text == "attribute_deprecated")
+                    IsObsolete = IsObsolete(function),
+                    ObsoleteMessage = GetObsoleteMessage(function)
                 };
                 _context.AddUnit(functionDefinition);
                 counter++;
             }
+        }
+        private static bool IsObsolete(Function function)
+        {
+            return function.PreprocessedEntities.OfType<MacroExpansion>().Any(x => x.Text == "attribute_deprecated");
+        }
+
+        private static string GetObsoleteMessage(Function function)
+        {
+            var lines = function.Comment?.FullComment?.Blocks
+                .OfType<BlockCommandComment>()
+                .Where(x => x.CommandKind == CommentCommandKind.Deprecated)
+                .SelectMany(x => x.ParagraphComment.Content.OfType<TextComment>().Select(c => c.Text.Trim()));
+            var obsoleteMessage = lines == null ? string.Empty : string.Join(" ", lines);
+            return obsoleteMessage;
         }
 
         internal FunctionParameter GetParameter(Function function, Parameter parameter, int position)
@@ -48,13 +63,13 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return new FunctionParameter
             {
                 Name = name,
-                Type = GetParameterType(_context, function.Name + "_" + name, parameter.Type),
+                Type = GetParameterType(function.Name + "_" + name, parameter.Type),
                 Content = GetParamComment(function, parameter.Name)
             };
         }
 
 
-        internal static TypeDefinition GetParameterType(GenerationContext context, string name, Type type)
+        internal TypeDefinition GetParameterType(string name, Type type)
         {
             var arrayType = type as ArrayType;
             if (arrayType != null && arrayType.SizeType == ArrayType.ArraySize.Constant)
@@ -85,31 +100,32 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 var functionType = pointerType.Pointee as FunctionType;
                 if (functionType != null)
                 {
-                    var @delegate = GetDelegate(context, name, functionType);
-                    context.AddUnit(@delegate);
+                    var @delegate = GetDelegate(name, functionType);
+                    _context.AddUnit(@delegate);
+
                     return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
                 }
             }
             return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
         }
 
-        internal static FunctionParameter GetParameter(GenerationContext context, Parameter parameter, int position)
+        internal FunctionParameter GetParameter(Parameter parameter, int position)
         {
             var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
             return new FunctionParameter
             {
                 Name = name,
-                Type = GetParameterType(context, name, parameter.Type)
+                Type = GetParameterType(name, parameter.Type)
             };
         }
 
-        private static DelegateDefinition GetDelegate(GenerationContext context, string name, FunctionType functionType)
+        private DelegateDefinition GetDelegate(string name, FunctionType functionType)
         {
             return new DelegateDefinition
             {
                 Name = name,
                 ReturnType = TypeHelper.GetReturnTypeName(functionType.ReturnType.Type),
-                Parameters = functionType.Parameters.Select((x, i) => GetParameter(context, x, i)).ToArray()
+                Parameters = functionType.Parameters.Select(GetParameter).ToArray()
             };
         }
 

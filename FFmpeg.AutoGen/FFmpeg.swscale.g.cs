@@ -74,7 +74,7 @@ namespace FFmpeg.AutoGen
         [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         public static extern string swscale_license();
         
-        /// <summary>Return a pointer to yuv<->rgb coefficients for the given colorspace suitable for sws_setColorspaceDetails().</summary>
+        /// <summary>Return a pointer to yuv&lt;-&gt;rgb coefficients for the given colorspace suitable for sws_setColorspaceDetails().</summary>
         /// <param name="colorspace">One of the SWS_CS_* macros. If invalid, SWS_CS_DEFAULT is used.</param>
         [DllImport("swscale-4", EntryPoint = "sws_getCoefficients", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int* sws_getCoefficients(int @colorspace);
@@ -158,35 +158,35 @@ namespace FFmpeg.AutoGen
         [DllImport("swscale-4", EntryPoint = "sws_normalizeVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void sws_normalizeVec(SwsVector* @a, double @height);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("swscale-4", EntryPoint = "sws_getConstVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern SwsVector* sws_getConstVec(double @c, int @length);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("swscale-4", EntryPoint = "sws_getIdentityVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern SwsVector* sws_getIdentityVec();
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("swscale-4", EntryPoint = "sws_convVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void sws_convVec(SwsVector* @a, SwsVector* @b);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("swscale-4", EntryPoint = "sws_addVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void sws_addVec(SwsVector* @a, SwsVector* @b);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("swscale-4", EntryPoint = "sws_subVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void sws_subVec(SwsVector* @a, SwsVector* @b);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("swscale-4", EntryPoint = "sws_shiftVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void sws_shiftVec(SwsVector* @a, int @shift);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("swscale-4", EntryPoint = "sws_cloneVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern SwsVector* sws_cloneVec(SwsVector* @a);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("swscale-4", EntryPoint = "sws_printVec2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void sws_printVec2(SwsVector* @a, AVClass* @log_ctx, int @log_level);
         

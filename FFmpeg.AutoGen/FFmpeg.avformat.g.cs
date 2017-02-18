@@ -185,7 +185,7 @@ namespace FFmpeg.AutoGen
         @AVIO_DATA_MARKER_BOUNDARY_POINT = 2,
         /// <summary>This is any, unlabelled data. It can either be a muxer not marking any positions at all, it can be an actual boundary/sync point that the muxer chooses not to mark, or a later part of a packet/fragment that is cut into multiple write callbacks due to limited IO buffer size.</summary>
         @AVIO_DATA_MARKER_UNKNOWN = 3,
-        /// <summary>Trailer data, which doesn't contain actual content, but only for finalizing the output file.</summary>
+        /// <summary>Trailer data, which doesn&apos;t contain actual content, but only for finalizing the output file.</summary>
         @AVIO_DATA_MARKER_TRAILER = 4,
     }
     
@@ -303,7 +303,7 @@ namespace FFmpeg.AutoGen
         public int @stream_identifier;
         public long @interleaver_chunk_size;
         public long @interleaver_chunk_duration;
-        /// <summary>stream probing state -1 -> probing finished 0 -> no probing requested rest -> perform probing with request_probe being the minimum score to accept. NOT PART OF PUBLIC API</summary>
+        /// <summary>stream probing state -1 -&gt; probing finished 0 -&gt; no probing requested rest -&gt; perform probing with request_probe being the minimum score to accept. NOT PART OF PUBLIC API</summary>
         public int @request_probe;
         /// <summary>Indicates that everything up to the next keyframe should be discarded.</summary>
         public int @skip_to_keyframe;
@@ -311,7 +311,7 @@ namespace FFmpeg.AutoGen
         public int @skip_samples;
         /// <summary>If not 0, the number of samples that should be skipped from the start of the stream (the samples are removed from packets with pts==0, which also assumes negative timestamps do not happen). Intended for use with formats such as mp3 with ad-hoc gapless audio support.</summary>
         public long @start_skip_samples;
-        /// <summary>If not 0, the first audio sample that should be discarded from the stream. This is broken by design (needs global sample count), but can't be avoided for broken by design formats such as mp3 with ad-hoc gapless audio support.</summary>
+        /// <summary>If not 0, the first audio sample that should be discarded from the stream. This is broken by design (needs global sample count), but can&apos;t be avoided for broken by design formats such as mp3 with ad-hoc gapless audio support.</summary>
         public long @first_discard_sample;
         /// <summary>The sample after last sample that is intended to be discarded after first_discard_sample. Works on frame boundaries only. Used to prevent early EOF if the gapless info is broken (considered concatenated mp3s).</summary>
         public long @last_discard_sample;
@@ -334,7 +334,7 @@ namespace FFmpeg.AutoGen
         public byte @dts_misordered;
         /// <summary>Internal data to inject global side data</summary>
         public int @inject_global_side_data;
-        /// <summary>String containing paris of key and values describing recommended encoder configuration. Paris are separated by ','. Keys are separated from values by '='.</summary>
+        /// <summary>String containing paris of key and values describing recommended encoder configuration. Paris are separated by &apos;,&apos;. Keys are separated from values by &apos;=&apos;.</summary>
         public byte* @recommended_encoder_configuration;
         /// <summary>display aspect ratio (0 if unknown) - encoding: unused - decoding: Set by libavformat to calculate sample_aspect_ratio internally</summary>
         public AVRational @display_aspect_ratio;
@@ -383,7 +383,7 @@ namespace FFmpeg.AutoGen
     {
     }
     
-    /// <summary>The exact value of the fractional number is: 'val + num / den'. num is assumed to be 0 <= num < den.</summary>
+    /// <summary>The exact value of the fractional number is: &apos;val + num / den&apos;. num is assumed to be 0 &lt;= num &lt; den.</summary>
     public unsafe struct AVFrac
     {
         public long @val;
@@ -492,7 +492,7 @@ namespace FFmpeg.AutoGen
         public AVCodecID @subtitle_codec;
         /// <summary>can use flags: AVFMT_NOFILE, AVFMT_NEEDNUMBER, AVFMT_GLOBALHEADER, AVFMT_NOTIMESTAMPS, AVFMT_VARIABLE_FPS, AVFMT_NODIMENSIONS, AVFMT_NOSTREAMS, AVFMT_ALLOW_FLUSH, AVFMT_TS_NONSTRICT, AVFMT_TS_NEGATIVE</summary>
         public int @flags;
-        /// <summary>List of supported codec_id-codec_tag pairs, ordered by "better choice first". The arrays are all terminated by AV_CODEC_ID_NONE.</summary>
+        /// <summary>List of supported codec_id-codec_tag pairs, ordered by &quot;better choice first&quot;. The arrays are all terminated by AV_CODEC_ID_NONE.</summary>
         public IntPtr* @codec_tag;
         /// <summary>AVClass for the private context</summary>
         public AVClass* @priv_class;
@@ -625,9 +625,9 @@ namespace FFmpeg.AutoGen
         public int @priv_data_size;
         /// <summary>Tell if a given file has a chance of being parsed as this format. The buffer provided is guaranteed to be AVPROBE_PADDING_SIZE bytes big so you do not have to check for that unless you need more.</summary>
         public AVInputFormat_read_probe_wrapper @read_probe;
-        /// <summary>Read the format header and initialize the AVFormatContext structure. Return 0 if OK. 'avformat_new_stream' should be called to create new streams.</summary>
+        /// <summary>Read the format header and initialize the AVFormatContext structure. Return 0 if OK. &apos;avformat_new_stream&apos; should be called to create new streams.</summary>
         public AVInputFormat_read_header_wrapper @read_header;
-        /// <summary>Read one packet and put it in 'pkt'. pts and flags are also set. 'avformat_new_stream' can be called only if the flag AVFMTCTX_NOHEADER is used and only in the calling thread (not in a background thread).</summary>
+        /// <summary>Read one packet and put it in &apos;pkt&apos;. pts and flags are also set. &apos;avformat_new_stream&apos; can be called only if the flag AVFMTCTX_NOHEADER is used and only in the calling thread (not in a background thread).</summary>
         public AVInputFormat_read_packet_wrapper @read_packet;
         /// <summary>Close the stream. The AVFormatContext and AVStreams are not freed by this function</summary>
         public AVInputFormat_read_close_wrapper @read_close;
@@ -639,7 +639,7 @@ namespace FFmpeg.AutoGen
         public AVInputFormat_read_play_wrapper @read_play;
         /// <summary>Pause playing - only meaningful if using a network-based format (RTSP).</summary>
         public AVInputFormat_read_pause_wrapper @read_pause;
-        /// <summary>Seek to timestamp ts. Seeking will be done so that the point from which all active streams can be presented successfully will be closest to ts and within min/max_ts. Active streams are all streams that have AVStream.discard < AVDISCARD_ALL.</summary>
+        /// <summary>Seek to timestamp ts. Seeking will be done so that the point from which all active streams can be presented successfully will be closest to ts and within min/max_ts. Active streams are all streams that have AVStream.discard &lt; AVDISCARD_ALL.</summary>
         public AVInputFormat_read_seek2_wrapper @read_seek2;
         /// <summary>Returns device list with it properties.</summary>
         public AVInputFormat_get_device_list_wrapper @get_device_list;
@@ -781,9 +781,9 @@ namespace FFmpeg.AutoGen
         public int @probe_score;
         /// <summary>number of bytes to read maximally to identify format. - encoding: unused - decoding: set by user through AVOPtions (NO direct access)</summary>
         public int @format_probesize;
-        /// <summary>',' separated list of allowed decoders. If NULL then all are allowed - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
+        /// <summary>&apos;,&apos; separated list of allowed decoders. If NULL then all are allowed - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
         public byte* @codec_whitelist;
-        /// <summary>',' separated list of allowed demuxers. If NULL then all are allowed - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
+        /// <summary>&apos;,&apos; separated list of allowed demuxers. If NULL then all are allowed - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
         public byte* @format_whitelist;
         /// <summary>An opaque field for libavformat internal usage. Must not be accessed in any way by callers.</summary>
         public AVFormatInternal* @internal;
@@ -805,18 +805,18 @@ namespace FFmpeg.AutoGen
         public IntPtr @control_message_cb;
         /// <summary>Output timestamp offset, in microseconds. Muxing: set by user via AVOptions (NO direct access)</summary>
         public long @output_ts_offset;
-        /// <summary>dump format separator. can be ", " or " " or anything else Code outside libavformat should access this field using AVOptions (NO direct access). - muxing: Set by user. - demuxing: Set by user.</summary>
+        /// <summary>dump format separator. can be &quot;, &quot; or &quot; &quot; or anything else Code outside libavformat should access this field using AVOptions (NO direct access). - muxing: Set by user. - demuxing: Set by user.</summary>
         public byte* @dump_separator;
         /// <summary>Forced Data codec_id. Demuxing: Set by user.</summary>
         public AVCodecID @data_codec_id;
         /// <summary>Called to open further IO contexts when needed for demuxing.</summary>
         public AVFormatContext_open_cb_wrapper @open_cb;
-        /// <summary>',' separated list of allowed protocols. - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
+        /// <summary>&apos;,&apos; separated list of allowed protocols. - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
         public byte* @protocol_whitelist;
         public AVFormatContext_io_open_wrapper @io_open;
         /// <summary>A callback for closing the streams opened with AVFormatContext.io_open().</summary>
         public AVFormatContext_io_close_wrapper @io_close;
-        /// <summary>',' separated list of disallowed protocols. - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
+        /// <summary>&apos;,&apos; separated list of disallowed protocols. - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
         public byte* @protocol_blacklist;
     }
     
@@ -945,7 +945,7 @@ namespace FFmpeg.AutoGen
         public int @error;
         /// <summary>Pause or resume playback for network streaming protocols - e.g. MMS.</summary>
         public AVIOContext_read_pause_wrapper @read_pause;
-        /// <summary>Seek to a given timestamp in stream with the specified stream_index. Needed for some network streaming protocols which don't support seeking to byte position.</summary>
+        /// <summary>Seek to a given timestamp in stream with the specified stream_index. Needed for some network streaming protocols which don&apos;t support seeking to byte position.</summary>
         public AVIOContext_read_seek_wrapper @read_seek;
         /// <summary>A combination of AVIO_SEEKABLE_ flags or 0 when the stream is not seekable.</summary>
         public int @seekable;
@@ -963,13 +963,13 @@ namespace FFmpeg.AutoGen
         public int @orig_buffer_size;
         /// <summary>Threshold to favor readahead over seek. This is current internal only, do not use from outside.</summary>
         public int @short_seek_threshold;
-        /// <summary>',' separated list of allowed protocols.</summary>
+        /// <summary>&apos;,&apos; separated list of allowed protocols.</summary>
         public byte* @protocol_whitelist;
-        /// <summary>',' separated list of disallowed protocols.</summary>
+        /// <summary>&apos;,&apos; separated list of disallowed protocols.</summary>
         public byte* @protocol_blacklist;
         /// <summary>A callback that is used instead of write_packet.</summary>
         public AVIOContext_write_data_type_wrapper @write_data_type;
-        /// <summary>If set, don't call write_data_type separately for AVIO_DATA_MARKER_BOUNDARY_POINT, but ignore them and treat them as AVIO_DATA_MARKER_UNKNOWN (to avoid needlessly small chunks of data returned from the callback).</summary>
+        /// <summary>If set, don&apos;t call write_data_type separately for AVIO_DATA_MARKER_BOUNDARY_POINT, but ignore them and treat them as AVIO_DATA_MARKER_UNKNOWN (to avoid needlessly small chunks of data returned from the callback).</summary>
         public int @ignore_boundary_point;
         /// <summary>Internal, not meant to be used from outside of AVIOContext.</summary>
         public AVIODataMarkerType @current_type;
@@ -1091,7 +1091,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "av_get_packet", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_get_packet(AVIOContext* @s, AVPacket* @pkt, int @size);
         
-        /// <summary>Read data and append it to the current content of the AVPacket. If pkt->size is 0 this is identical to av_get_packet. Note that this uses av_grow_packet and thus involves a realloc which is inefficient. Thus this function should only be used when there is no reasonable way to know (an upper bound of) the final size.</summary>
+        /// <summary>Read data and append it to the current content of the AVPacket. If pkt-&gt;size is 0 this is identical to av_get_packet. Note that this uses av_grow_packet and thus involves a realloc which is inefficient. Thus this function should only be used when there is no reasonable way to know (an upper bound of) the final size.</summary>
         /// <param name="s">associated IO context</param>
         /// <param name="pkt">packet</param>
         /// <param name="size">amount of data to read</param>
@@ -1162,11 +1162,11 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "av_format_set_control_message_cb", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_format_set_control_message_cb(AVFormatContext* @s, IntPtr @callback);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avformat-57", EntryPoint = "av_format_get_open_cb", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern IntPtr av_format_get_open_cb(AVFormatContext* @s);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avformat-57", EntryPoint = "av_format_set_open_cb", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_format_set_open_cb(AVFormatContext* @s, IntPtr @callback);
         
@@ -1174,7 +1174,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "av_format_inject_global_side_data", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_format_inject_global_side_data(AVFormatContext* @s);
         
-        /// <summary>Returns the method used to set ctx->duration.</summary>
+        /// <summary>Returns the method used to set ctx-&gt;duration.</summary>
         [DllImport("avformat-57", EntryPoint = "av_fmt_ctx_get_duration_estimation_method", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVDurationEstimationMethod av_fmt_ctx_get_duration_estimation_method(AVFormatContext* @ctx);
         
@@ -1270,7 +1270,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Guess the file format.</summary>
         /// <param name="pd">data to be probed</param>
         /// <param name="is_opened">Whether the file is already opened; determines whether demuxers with or without AVFMT_NOFILE are probed.</param>
-        /// <param name="score_max">A probe score larger that this is required to accept a detection, the variable is set to the actual detection score afterwards. If the score is < = AVPROBE_SCORE_MAX / 4 it is recommended to retry with a larger probe buffer.</param>
+        /// <param name="score_max">A probe score larger that this is required to accept a detection, the variable is set to the actual detection score afterwards. If the score is &lt; = AVPROBE_SCORE_MAX / 4 it is recommended to retry with a larger probe buffer.</param>
         [DllImport("avformat-57", EntryPoint = "av_probe_input_format2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVInputFormat* av_probe_input_format2(AVProbeData* @pd, int @is_opened, int* @score_max);
         
@@ -1302,7 +1302,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "avformat_open_input", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avformat_open_input(AVFormatContext** @ps, [MarshalAs(UnmanagedType.LPStr)] string @url, AVInputFormat* @fmt, AVDictionary** @options);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avformat-57", EntryPoint = "av_demuxer_open", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_demuxer_open(AVFormatContext* @ic);
         
@@ -1322,7 +1322,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "av_program_add_stream_index", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_program_add_stream_index(AVFormatContext* @ac, int @progid, uint @idx);
         
-        /// <summary>Find the "best" stream in the file. The best stream is determined according to various heuristics as the most likely to be what the user expects. If the decoder parameter is non-NULL, av_find_best_stream will find the default decoder for the stream's codec; streams for which no decoder can be found are ignored.</summary>
+        /// <summary>Find the &quot;best&quot; stream in the file. The best stream is determined according to various heuristics as the most likely to be what the user expects. If the decoder parameter is non-NULL, av_find_best_stream will find the default decoder for the stream&apos;s codec; streams for which no decoder can be found are ignored.</summary>
         /// <param name="ic">media file handle</param>
         /// <param name="type">stream type: video, audio, subtitles, etc.</param>
         /// <param name="wanted_stream_nb">user-requested stream number, or -1 for automatic selection</param>
@@ -1336,7 +1336,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "av_read_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_read_frame(AVFormatContext* @s, AVPacket* @pkt);
         
-        /// <summary>Seek to the keyframe at timestamp. 'timestamp' in 'stream_index'.</summary>
+        /// <summary>Seek to the keyframe at timestamp. &apos;timestamp&apos; in &apos;stream_index&apos;.</summary>
         /// <param name="s">media file handle</param>
         /// <param name="stream_index">If stream_index is (-1), a default stream is selected, and timestamp is automatically converted from AV_TIME_BASE units to the stream specific time_base.</param>
         /// <param name="timestamp">Timestamp in AVStream.time_base units or, if no stream is specified, in AV_TIME_BASE units.</param>
@@ -1344,7 +1344,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "av_seek_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_seek_frame(AVFormatContext* @s, int @stream_index, long @timestamp, int @flags);
         
-        /// <summary>Seek to timestamp ts. Seeking will be done so that the point from which all active streams can be presented successfully will be closest to ts and within min/max_ts. Active streams are all streams that have AVStream.discard < AVDISCARD_ALL.</summary>
+        /// <summary>Seek to timestamp ts. Seeking will be done so that the point from which all active streams can be presented successfully will be closest to ts and within min/max_ts. Active streams are all streams that have AVStream.discard &lt; AVDISCARD_ALL.</summary>
         /// <param name="s">media file handle</param>
         /// <param name="stream_index">index of the stream which is used as time base reference</param>
         /// <param name="min_ts">smallest acceptable timestamp</param>
@@ -1385,13 +1385,13 @@ namespace FFmpeg.AutoGen
         
         /// <summary>Write a packet to an output media file.</summary>
         /// <param name="s">media file handle</param>
-        /// <param name="pkt">The packet containing the data to be written. Note that unlike av_interleaved_write_frame(), this function does not take ownership of the packet passed to it (though some muxers may make an internal reference to the input packet).  This parameter can be NULL (at any time, not just at the end), in order to immediately flush data buffered within the muxer, for muxers that buffer up data internally before writing it to the output.  Packet's</param>
+        /// <param name="pkt">The packet containing the data to be written. Note that unlike av_interleaved_write_frame(), this function does not take ownership of the packet passed to it (though some muxers may make an internal reference to the input packet).  This parameter can be NULL (at any time, not just at the end), in order to immediately flush data buffered within the muxer, for muxers that buffer up data internally before writing it to the output.  Packet&apos;s</param>
         [DllImport("avformat-57", EntryPoint = "av_write_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_write_frame(AVFormatContext* @s, AVPacket* @pkt);
         
         /// <summary>Write a packet to an output media file ensuring correct interleaving.</summary>
         /// <param name="s">media file handle</param>
-        /// <param name="pkt">The packet containing the data to be written.  If the packet is reference-counted, this function will take ownership of this reference and unreference it later when it sees fit. The caller must not access the data through this reference after this function returns. If the packet is not reference-counted, libavformat will make a copy.  This parameter can be NULL (at any time, not just at the end), to flush the interleaving queues.  Packet's</param>
+        /// <param name="pkt">The packet containing the data to be written.  If the packet is reference-counted, this function will take ownership of this reference and unreference it later when it sees fit. The caller must not access the data through this reference after this function returns. If the packet is not reference-counted, libavformat will make a copy.  This parameter can be NULL (at any time, not just at the end), to flush the interleaving queues.  Packet&apos;s</param>
         [DllImport("avformat-57", EntryPoint = "av_interleaved_write_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_interleaved_write_frame(AVFormatContext* @s, AVPacket* @pkt);
         
@@ -1423,7 +1423,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "av_guess_codec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVCodecID av_guess_codec(AVOutputFormat* @fmt, [MarshalAs(UnmanagedType.LPStr)] string @short_name, [MarshalAs(UnmanagedType.LPStr)] string @filename, [MarshalAs(UnmanagedType.LPStr)] string @mime_type, AVMediaType @type);
         
-        /// <summary>Get timing information for the data currently output. The exact meaning of "currently output" depends on the format. It is mostly relevant for devices that have an internal buffer and/or work in real time.</summary>
+        /// <summary>Get timing information for the data currently output. The exact meaning of &quot;currently output&quot; depends on the format. It is mostly relevant for devices that have an internal buffer and/or work in real time.</summary>
         /// <param name="s">media file handle</param>
         /// <param name="stream">stream in the media file</param>
         /// <param name="dts">DTS of the last packet output for the stream, in stream time_base units</param>
@@ -1488,7 +1488,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Get the index for a specific timestamp.</summary>
         /// <param name="st">stream that the timestamp belongs to</param>
         /// <param name="timestamp">timestamp to retrieve the index for</param>
-        /// <param name="flags">if AVSEEK_FLAG_BACKWARD then the returned index will correspond to the timestamp which is < = the requested one, if backward is 0, then it will be >= if AVSEEK_FLAG_ANY seek to any frame, only keyframes otherwise</param>
+        /// <param name="flags">if AVSEEK_FLAG_BACKWARD then the returned index will correspond to the timestamp which is &lt; = the requested one, if backward is 0, then it will be &gt;= if AVSEEK_FLAG_ANY seek to any frame, only keyframes otherwise</param>
         [DllImport("avformat-57", EntryPoint = "av_index_search_timestamp", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_index_search_timestamp(AVStream* @st, long @timestamp, int @flags);
         
@@ -1519,7 +1519,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "av_dump_format", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_dump_format(AVFormatContext* @ic, int @index, [MarshalAs(UnmanagedType.LPStr)] string @url, int @is_output);
         
-        /// <summary>Return in 'buf' the path with '%d' replaced by a number.</summary>
+        /// <summary>Return in &apos;buf&apos; the path with &apos;%d&apos; replaced by a number.</summary>
         /// <param name="buf">destination buffer</param>
         /// <param name="buf_size">destination buffer size</param>
         /// <param name="path">numbered sequence string</param>
@@ -1594,7 +1594,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "avformat_queue_attached_pictures", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avformat_queue_attached_pictures(AVFormatContext* @s);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avformat-57", EntryPoint = "av_apply_bitstream_filters", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_apply_bitstream_filters(AVCodecContext* @codec, AVPacket* @pkt, AVBitStreamFilterContext* @bsfc);
         
@@ -1733,7 +1733,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "avio_feof", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avio_feof(AVIOContext* @s);
         
-        [Obsolete]
+        [Obsolete("use avio_feof()")]
         [DllImport("avformat-57", EntryPoint = "url_feof", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int url_feof(AVIOContext* @s);
         
@@ -1837,7 +1837,7 @@ namespace FFmpeg.AutoGen
         
         /// <summary>Seek to a given timestamp relative to some component stream. Only meaningful if using a network streaming protocol (e.g. MMS.).</summary>
         /// <param name="h">IO context from which to call the seek function pointers</param>
-        /// <param name="stream_index">The stream index that the timestamp is relative to. If stream_index is (-1) the timestamp should be in AV_TIME_BASE units from the beginning of the presentation. If a stream_index >= 0 is used and the protocol does not support seeking based on component streams, the call will fail.</param>
+        /// <param name="stream_index">The stream index that the timestamp is relative to. If stream_index is (-1) the timestamp should be in AV_TIME_BASE units from the beginning of the presentation. If a stream_index &gt;= 0 is used and the protocol does not support seeking based on component streams, the call will fail.</param>
         /// <param name="timestamp">timestamp in AVStream.time_base units or if there is no stream specified then in AV_TIME_BASE units.</param>
         /// <param name="flags">Optional combination of AVSEEK_FLAG_BACKWARD, AVSEEK_FLAG_BYTE and AVSEEK_FLAG_ANY. The protocol may silently ignore AVSEEK_FLAG_BACKWARD and AVSEEK_FLAG_ANY, but AVSEEK_FLAG_BYTE will fail if used and not supported.</param>
         [DllImport("avformat-57", EntryPoint = "avio_seek_time", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]

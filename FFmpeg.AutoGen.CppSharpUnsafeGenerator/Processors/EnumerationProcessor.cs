@@ -8,9 +8,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
     internal class EnumerationProcessor
     {
-        private readonly GenerationContext _context;
+        private readonly ASTProcessor _context;
 
-        public EnumerationProcessor(GenerationContext context)
+        public EnumerationProcessor(ASTProcessor context)
         {
             _context = context;
         }

@@ -46,7 +46,7 @@ namespace FFmpeg.AutoGen
         public static extern void pp_postprocess([MarshalAs(UnmanagedType.LPArray, SizeConst=3)] byte*[] @src, [MarshalAs(UnmanagedType.LPArray, SizeConst=3)] int[] @srcStride, [MarshalAs(UnmanagedType.LPArray, SizeConst=3)] byte*[] @dst, [MarshalAs(UnmanagedType.LPArray, SizeConst=3)] int[] @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
         
         /// <summary>Return a pp_mode or NULL if an error occurred.</summary>
-        /// <param name="name">the string after "-pp" on the command line</param>
+        /// <param name="name">the string after &quot;-pp&quot; on the command line</param>
         /// <param name="quality">a number from 0 to PP_QUALITY_MAX</param>
         [DllImport("postproc-54", EntryPoint = "pp_get_mode_by_name_and_quality", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void* pp_get_mode_by_name_and_quality([MarshalAs(UnmanagedType.LPStr)] string @name, int @quality);

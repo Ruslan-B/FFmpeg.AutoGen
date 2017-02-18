@@ -629,13 +629,13 @@ namespace FFmpeg.AutoGen
         @AV_PKT_DATA_AUDIO_SERVICE_TYPE = 7,
         /// <summary>This side data contains quality related information from the encoder.</summary>
         @AV_PKT_DATA_QUALITY_STATS = 8,
-        /// <summary>This side data contains an integer value representing the stream index of a "fallback" track. A fallback track indicates an alternate track to use when the current track can not be decoded for some reason. e.g. no decoder available for codec.</summary>
+        /// <summary>This side data contains an integer value representing the stream index of a &quot;fallback&quot; track. A fallback track indicates an alternate track to use when the current track can not be decoded for some reason. e.g. no decoder available for codec.</summary>
         @AV_PKT_DATA_FALLBACK_TRACK = 9,
         /// <summary>This side data corresponds to the AVCPBProperties struct.</summary>
         @AV_PKT_DATA_CPB_PROPERTIES = 10,
         /// <summary>Recommmends skipping the specified number of samples</summary>
         @AV_PKT_DATA_SKIP_SAMPLES = 70,
-        /// <summary>An AV_PKT_DATA_JP_DUALMONO side data packet indicates that the packet may contain "dual mono" audio specific to Japanese DTV and if it is true, recommends only the selected channel to be used.</summary>
+        /// <summary>An AV_PKT_DATA_JP_DUALMONO side data packet indicates that the packet may contain &quot;dual mono&quot; audio specific to Japanese DTV and if it is true, recommends only the selected channel to be used.</summary>
         @AV_PKT_DATA_JP_DUALMONO = 71,
         /// <summary>A list of zero terminated key/value strings. There is no end marker for the list, so it is required to rely on the side data size to stop.</summary>
         @AV_PKT_DATA_STRINGS_METADATA = 72,
@@ -711,7 +711,7 @@ namespace FFmpeg.AutoGen
     {
         public AVCodecID @id;
         public AVMediaType @type;
-        /// <summary>Name of the codec described by this descriptor. It is non-empty and unique for each codec descriptor. It should contain alphanumeric characters and '_' only.</summary>
+        /// <summary>Name of the codec described by this descriptor. It is non-empty and unique for each codec descriptor. It should contain alphanumeric characters and &apos;_&apos; only.</summary>
         public byte* @name;
         /// <summary>A more descriptive name for this codec. May be NULL.</summary>
         public byte* @long_name;
@@ -798,9 +798,9 @@ namespace FFmpeg.AutoGen
     {
         /// <summary>A reference to the reference-counted buffer where the packet data is stored. May be NULL, then the packet data is not reference-counted.</summary>
         public AVBufferRef* @buf;
-        /// <summary>Presentation timestamp in AVStream->time_base units; the time at which the decompressed packet will be presented to the user. Can be AV_NOPTS_VALUE if it is not stored in the file. pts MUST be larger or equal to dts as presentation cannot happen before decompression, unless one wants to view hex dumps. Some formats misuse the terms dts and pts/cts to mean something different. Such timestamps must be converted to true pts/dts before they are stored in AVPacket.</summary>
+        /// <summary>Presentation timestamp in AVStream-&gt;time_base units; the time at which the decompressed packet will be presented to the user. Can be AV_NOPTS_VALUE if it is not stored in the file. pts MUST be larger or equal to dts as presentation cannot happen before decompression, unless one wants to view hex dumps. Some formats misuse the terms dts and pts/cts to mean something different. Such timestamps must be converted to true pts/dts before they are stored in AVPacket.</summary>
         public long @pts;
-        /// <summary>Decompression timestamp in AVStream->time_base units; the time at which the packet is decompressed. Can be AV_NOPTS_VALUE if it is not stored in the file.</summary>
+        /// <summary>Decompression timestamp in AVStream-&gt;time_base units; the time at which the packet is decompressed. Can be AV_NOPTS_VALUE if it is not stored in the file.</summary>
         public long @dts;
         public byte* @data;
         public int @size;
@@ -810,7 +810,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Additional packet data that can be provided by the container. Packet can contain several types of side information.</summary>
         public AVPacketSideData* @side_data;
         public int @side_data_elems;
-        /// <summary>Duration of this packet in AVStream->time_base units, 0 if unknown. Equals next_pts - this_pts in presentation order.</summary>
+        /// <summary>Duration of this packet in AVStream-&gt;time_base units, 0 if unknown. Equals next_pts - this_pts in presentation order.</summary>
         public long @duration;
         /// <summary>byte position in stream, -1 if unknown</summary>
         public long @pos;
@@ -884,7 +884,7 @@ namespace FFmpeg.AutoGen
         public IntPtr @codec;
         public byte_array32 @codec_name;
         public AVCodecID @codec_id;
-        /// <summary>fourcc (LSB first, so "ABCD" -> ('D'<<24) + ('C'<<16) + ('B'<<8) + 'A'). This is used to work around some encoder bugs. A demuxer should set this to what is stored in the field used to identify the codec. If there are multiple such fields in a container then the demuxer should choose the one which maximizes the information about the used codec. If the codec tag field in a container is larger than 32 bits then the demuxer should remap the longer ID to 32 bits with a table or other structure. Alternatively a new extra_codec_tag + size could be added but for this a clear advantage must be demonstrated first. - encoding: Set by user, if not then the default based on codec_id will be used. - decoding: Set by user, will be converted to uppercase by libavcodec during init.</summary>
+        /// <summary>fourcc (LSB first, so &quot;ABCD&quot; -&gt; (&apos;D&apos;&lt;&lt;24) + (&apos;C&apos;&lt;&lt;16) + (&apos;B&apos;&lt;&lt;8) + &apos;A&apos;). This is used to work around some encoder bugs. A demuxer should set this to what is stored in the field used to identify the codec. If there are multiple such fields in a container then the demuxer should choose the one which maximizes the information about the used codec. If the codec tag field in a container is larger than 32 bits then the demuxer should remap the longer ID to 32 bits with a table or other structure. Alternatively a new extra_codec_tag + size could be added but for this a clear advantage must be demonstrated first. - encoding: Set by user, if not then the default based on codec_id will be used. - decoding: Set by user, will be converted to uppercase by libavcodec during init.</summary>
         public uint @codec_tag;
         public uint @stream_codec_tag;
         public void* @priv_data;
@@ -927,13 +927,13 @@ namespace FFmpeg.AutoGen
         public AVPixelFormat @pix_fmt;
         /// <summary>This option does nothing</summary>
         public int @me_method;
-        /// <summary>If non NULL, 'draw_horiz_band' is called by the libavcodec decoder to draw a horizontal band. It improves cache usage. Not all codecs can do that. You must check the codec capabilities beforehand. When multithreading is used, it may be called from multiple threads at the same time; threads might draw different parts of the same AVFrame, or multiple AVFrames, and there is no guarantee that slices will be drawn in order. The function is also used by hardware acceleration APIs. It is called at least once during frame decoding to pass the data needed for hardware render. In that mode instead of pixel data, AVFrame points to a structure specific to the acceleration API. The application reads the structure and can change some fields to indicate progress or mark state. - encoding: unused - decoding: Set by user.</summary>
+        /// <summary>If non NULL, &apos;draw_horiz_band&apos; is called by the libavcodec decoder to draw a horizontal band. It improves cache usage. Not all codecs can do that. You must check the codec capabilities beforehand. When multithreading is used, it may be called from multiple threads at the same time; threads might draw different parts of the same AVFrame, or multiple AVFrames, and there is no guarantee that slices will be drawn in order. The function is also used by hardware acceleration APIs. It is called at least once during frame decoding to pass the data needed for hardware render. In that mode instead of pixel data, AVFrame points to a structure specific to the acceleration API. The application reads the structure and can change some fields to indicate progress or mark state. - encoding: unused - decoding: Set by user.</summary>
         public AVCodecContext_draw_horiz_band_wrapper @draw_horiz_band;
         /// <summary>callback to negotiate the pixelFormat</summary>
         public AVCodecContext_get_format_wrapper @get_format;
         /// <summary>maximum number of B-frames between non-B-frames Note: The output will be delayed by max_b_frames+1 relative to the input. - encoding: Set by user. - decoding: unused</summary>
         public int @max_b_frames;
-        /// <summary>qscale factor between IP and B-frames If > 0 then the last P-frame quantizer will be used (q= lastp_q*factor+offset). If < 0 then normal ratecontrol will be done (q= -normal_q*factor+offset). - encoding: Set by user. - decoding: unused</summary>
+        /// <summary>qscale factor between IP and B-frames If &gt; 0 then the last P-frame quantizer will be used (q= lastp_q*factor+offset). If &lt; 0 then normal ratecontrol will be done (q= -normal_q*factor+offset). - encoding: Set by user. - decoding: unused</summary>
         public float @b_quant_factor;
         public int @rc_strategy;
         public int @b_frame_strategy;
@@ -942,19 +942,19 @@ namespace FFmpeg.AutoGen
         /// <summary>Size of the frame reordering buffer in the decoder. For MPEG-2 it is 1 IPB or 0 low delay IP. - encoding: Set by libavcodec. - decoding: Set by libavcodec.</summary>
         public int @has_b_frames;
         public int @mpeg_quant;
-        /// <summary>qscale factor between P- and I-frames If > 0 then the last P-frame quantizer will be used (q = lastp_q * factor + offset). If < 0 then normal ratecontrol will be done (q= -normal_q*factor+offset). - encoding: Set by user. - decoding: unused</summary>
+        /// <summary>qscale factor between P- and I-frames If &gt; 0 then the last P-frame quantizer will be used (q = lastp_q * factor + offset). If &lt; 0 then normal ratecontrol will be done (q= -normal_q*factor+offset). - encoding: Set by user. - decoding: unused</summary>
         public float @i_quant_factor;
         /// <summary>qscale offset between P and I-frames - encoding: Set by user. - decoding: unused</summary>
         public float @i_quant_offset;
-        /// <summary>luminance masking (0-> disabled) - encoding: Set by user. - decoding: unused</summary>
+        /// <summary>luminance masking (0-&gt; disabled) - encoding: Set by user. - decoding: unused</summary>
         public float @lumi_masking;
-        /// <summary>temporary complexity masking (0-> disabled) - encoding: Set by user. - decoding: unused</summary>
+        /// <summary>temporary complexity masking (0-&gt; disabled) - encoding: Set by user. - decoding: unused</summary>
         public float @temporal_cplx_masking;
-        /// <summary>spatial complexity masking (0-> disabled) - encoding: Set by user. - decoding: unused</summary>
+        /// <summary>spatial complexity masking (0-&gt; disabled) - encoding: Set by user. - decoding: unused</summary>
         public float @spatial_cplx_masking;
-        /// <summary>p block masking (0-> disabled) - encoding: Set by user. - decoding: unused</summary>
+        /// <summary>p block masking (0-&gt; disabled) - encoding: Set by user. - decoding: unused</summary>
         public float @p_masking;
-        /// <summary>darkness masking (0-> disabled) - encoding: Set by user. - decoding: unused</summary>
+        /// <summary>darkness masking (0-&gt; disabled) - encoding: Set by user. - decoding: unused</summary>
         public float @dark_masking;
         /// <summary>slice count - encoding: Set by libavcodec. - decoding: Set by user (or 0).</summary>
         public int @slice_count;
@@ -971,14 +971,14 @@ namespace FFmpeg.AutoGen
         public int @mb_cmp;
         /// <summary>interlaced DCT comparison function - encoding: Set by user. - decoding: unused</summary>
         public int @ildct_cmp;
-        /// <summary>ME diamond size & shape - encoding: Set by user. - decoding: unused</summary>
+        /// <summary>ME diamond size &amp; shape - encoding: Set by user. - decoding: unused</summary>
         public int @dia_size;
         /// <summary>amount of previous MV predictors (2a+1 x 2a+1 square) - encoding: Set by user. - decoding: unused</summary>
         public int @last_predictor_count;
         public int @pre_me;
         /// <summary>motion estimation prepass comparison function - encoding: Set by user. - decoding: unused</summary>
         public int @me_pre_cmp;
-        /// <summary>ME prepass diamond size & shape - encoding: Set by user. - decoding: unused</summary>
+        /// <summary>ME prepass diamond size &amp; shape - encoding: Set by user. - decoding: unused</summary>
         public int @pre_dia_size;
         /// <summary>subpel ME quality - encoding: Set by user. - decoding: unused</summary>
         public int @me_subpel_quality;
@@ -1053,7 +1053,7 @@ namespace FFmpeg.AutoGen
         public int @frame_number;
         /// <summary>number of bytes per packet if constant and known or 0 Used by some WAV based audio codecs.</summary>
         public int @block_align;
-        /// <summary>Audio cutoff bandwidth (0 means "automatic") - encoding: Set by user. - decoding: unused</summary>
+        /// <summary>Audio cutoff bandwidth (0 means &quot;automatic&quot;) - encoding: Set by user. - decoding: unused</summary>
         public int @cutoff;
         /// <summary>Audio channel layout. - encoding: set by user. - decoding: set by user, may be overwritten by libavcodec.</summary>
         public ulong @channel_layout;
@@ -1067,7 +1067,7 @@ namespace FFmpeg.AutoGen
         public AVCodecContext_get_buffer2_wrapper @get_buffer2;
         /// <summary>If non-zero, the decoded audio and video frames returned from avcodec_decode_video2() and avcodec_decode_audio4() are reference-counted and are valid indefinitely. The caller must free them with av_frame_unref() when they are not needed anymore. Otherwise, the decoded frames must not be freed by the caller and are only valid until the next decode call.</summary>
         public int @refcounted_frames;
-        /// <summary>amount of qscale change between easy & hard scenes (0.0-1.0)</summary>
+        /// <summary>amount of qscale change between easy &amp; hard scenes (0.0-1.0)</summary>
         public float @qcompress;
         /// <summary>amount of qscale smoothing over time (0.0-1.0)</summary>
         public float @qblur;
@@ -1092,9 +1092,9 @@ namespace FFmpeg.AutoGen
         public long @rc_min_rate;
         public float @rc_buffer_aggressivity;
         public float @rc_initial_cplx;
-        /// <summary>Ratecontrol attempt to use, at maximum, <value> of what can be used without an underflow. - encoding: Set by user. - decoding: unused.</summary>
+        /// <summary>Ratecontrol attempt to use, at maximum, &lt;value&gt; of what can be used without an underflow. - encoding: Set by user. - decoding: unused.</summary>
         public float @rc_max_available_vbv_use;
-        /// <summary>Ratecontrol attempt to use, at least, <value> times the amount needed to prevent a vbv overflow. - encoding: Set by user. - decoding: unused.</summary>
+        /// <summary>Ratecontrol attempt to use, at least, &lt;value&gt; times the amount needed to prevent a vbv overflow. - encoding: Set by user. - decoding: unused.</summary>
         public float @rc_min_vbv_overflow_use;
         /// <summary>Number of bits which should be loaded into the rc buffer before decoding starts. - encoding: Set by user. - decoding: unused</summary>
         public int @rc_initial_buffer_occupancy;
@@ -1128,7 +1128,7 @@ namespace FFmpeg.AutoGen
         public byte* @stats_in;
         /// <summary>Work around bugs in encoders which sometimes cannot be detected automatically. - encoding: Set by user - decoding: Set by user</summary>
         public int @workaround_bugs;
-        /// <summary>strictly follow the standard (MPEG-4, ...). - encoding: Set by user. - decoding: Set by user. Setting this to STRICT or higher means the encoder and decoder will generally do stupid things, whereas setting it to unofficial or lower will mean the encoder might produce output that is not supported by all spec-compliant decoders. Decoders don't differentiate between normal, unofficial and experimental (that is, they always try to decode things when they can) unless they are explicitly asked to behave stupidly (=strictly conform to the specs)</summary>
+        /// <summary>strictly follow the standard (MPEG-4, ...). - encoding: Set by user. - decoding: Set by user. Setting this to STRICT or higher means the encoder and decoder will generally do stupid things, whereas setting it to unofficial or lower will mean the encoder might produce output that is not supported by all spec-compliant decoders. Decoders don&apos;t differentiate between normal, unofficial and experimental (that is, they always try to decode things when they can) unless they are explicitly asked to behave stupidly (=strictly conform to the specs)</summary>
         public int @strict_std_compliance;
         /// <summary>error concealment flags - encoding: unused - decoding: Set by user.</summary>
         public int @error_concealment;
@@ -1144,7 +1144,7 @@ namespace FFmpeg.AutoGen
         public IntPtr @hwaccel;
         /// <summary>Hardware accelerator context. For some hardware accelerators, a global context needs to be provided by the user. In that case, this holds display-dependent data FFmpeg cannot instantiate itself. Please refer to the FFmpeg HW accelerator documentation to know how to fill this is. e.g. for VA API, this is a struct vaapi_context. - encoding: unused - decoding: Set by user</summary>
         public void* @hwaccel_context;
-        /// <summary>error - encoding: Set by libavcodec if flags & AV_CODEC_FLAG_PSNR. - decoding: unused</summary>
+        /// <summary>error - encoding: Set by libavcodec if flags &amp; AV_CODEC_FLAG_PSNR. - decoding: unused</summary>
         public ulong_array8 @error;
         /// <summary>DCT algorithm, see FF_DCT_* below - encoding: Set by user. - decoding: unused</summary>
         public int @dct_algo;
@@ -1154,7 +1154,7 @@ namespace FFmpeg.AutoGen
         public int @bits_per_coded_sample;
         /// <summary>Bits per sample/pixel of internal libavcodec pixel/sample format. - encoding: set by user. - decoding: set by libavcodec.</summary>
         public int @bits_per_raw_sample;
-        /// <summary>low resolution decoding, 1-> 1/2 size, 2->1/4 size - encoding: unused - decoding: Set by user. Code outside libavcodec should access this field using: av_codec_{get,set}_lowres(avctx)</summary>
+        /// <summary>low resolution decoding, 1-&gt; 1/2 size, 2-&gt;1/4 size - encoding: unused - decoding: Set by user. Code outside libavcodec should access this field using: av_codec_{get,set}_lowres(avctx)</summary>
         public int @lowres;
         /// <summary>the picture in the bitstream - encoding: Set by libavcodec. - decoding: unused</summary>
         public AVFrame* @coded_frame;
@@ -1182,7 +1182,7 @@ namespace FFmpeg.AutoGen
         public AVDiscard @skip_idct;
         /// <summary>Skip decoding for selected frames. - encoding: unused - decoding: Set by user.</summary>
         public AVDiscard @skip_frame;
-        /// <summary>Header containing style information for text subtitles. For SUBTITLE_ASS subtitle type, it should contain the whole ASS [Script Info] and [V4+ Styles] section, plus the [Events] line and the Format line following. It shouldn't include any Dialogue line. - encoding: Set/allocated/freed by user (before avcodec_open2()) - decoding: Set/allocated/freed by libavcodec (by avcodec_open2())</summary>
+        /// <summary>Header containing style information for text subtitles. For SUBTITLE_ASS subtitle type, it should contain the whole ASS [Script Info] and [V4+ Styles] section, plus the [Events] line and the Format line following. It shouldn&apos;t include any Dialogue line. - encoding: Set/allocated/freed by user (before avcodec_open2()) - decoding: Set/allocated/freed by libavcodec (by avcodec_open2())</summary>
         public byte* @subtitle_header;
         public int @subtitle_header_size;
         public int @error_rate;
@@ -1190,7 +1190,7 @@ namespace FFmpeg.AutoGen
         public ulong @vbv_delay;
         /// <summary>Encoding only and set by default. Allow encoders to output packets that do not contain any encoded data, only side data.</summary>
         public int @side_data_only_packets;
-        /// <summary>Audio only. The number of "priming" samples (padding) inserted by the encoder at the beginning of the audio. I.e. this number of leading decoded samples must be discarded by the caller to get the original audio without leading padding.</summary>
+        /// <summary>Audio only. The number of &quot;priming&quot; samples (padding) inserted by the encoder at the beginning of the audio. I.e. this number of leading decoded samples must be discarded by the caller to get the original audio without leading padding.</summary>
         public int @initial_padding;
         /// <summary>- decoding: For codecs that store a framerate value in the compressed bitstream, the decoder may export it here. { 0, 1} when unknown. - encoding: May be used to signal the framerate of CFR content to an encoder.</summary>
         public AVRational @framerate;
@@ -1218,9 +1218,9 @@ namespace FFmpeg.AutoGen
         public int @seek_preroll;
         /// <summary>custom intra quantization matrix Code outside libavcodec should access this field using av_codec_g/set_chroma_intra_matrix() - encoding: Set by user, can be NULL. - decoding: unused.</summary>
         public ushort* @chroma_intra_matrix;
-        /// <summary>dump format separator. can be ", " or " " or anything else Code outside libavcodec should access this field using AVOptions (NO direct access). - encoding: Set by user. - decoding: Set by user.</summary>
+        /// <summary>dump format separator. can be &quot;, &quot; or &quot; &quot; or anything else Code outside libavcodec should access this field using AVOptions (NO direct access). - encoding: Set by user. - decoding: Set by user.</summary>
         public byte* @dump_separator;
-        /// <summary>',' separated list of allowed decoders. If NULL then all are allowed - encoding: unused - decoding: set by user through AVOPtions (NO direct access)</summary>
+        /// <summary>&apos;,&apos; separated list of allowed decoders. If NULL then all are allowed - encoding: unused - decoding: set by user through AVOPtions (NO direct access)</summary>
         public byte* @codec_whitelist;
         public uint @properties;
         /// <summary>Additional data associated with the entire coded stream.</summary>
@@ -1228,7 +1228,7 @@ namespace FFmpeg.AutoGen
         public int @nb_coded_side_data;
         /// <summary>A reference to the AVHWFramesContext describing the input (for encoding) or output (decoding) frames. The reference is set by the caller and afterwards owned (and freed) by libavcodec.</summary>
         public AVBufferRef* @hw_frames_ctx;
-        /// <summary>Control the form of AVSubtitle.rects[N]->ass - decoding: set by user - encoding: unused</summary>
+        /// <summary>Control the form of AVSubtitle.rects[N]-&gt;ass - decoding: set by user - encoding: unused</summary>
         public int @sub_text_format;
         /// <summary>Audio only. The amount of padding (in samples) appended by the encoder to the end of the audio. I.e. this number of decoded samples must be discarded by the caller from the end of the stream to get the original audio without any trailing padding.</summary>
         public int @trailing_padding;
@@ -1420,7 +1420,7 @@ namespace FFmpeg.AutoGen
         public AVCodec_encode2_wrapper @encode2;
         public AVCodec_decode_wrapper @decode;
         public AVCodec_close_wrapper @close;
-        /// <summary>Decode/encode API with decoupled packet/frame dataflow. The API is the same as the avcodec_ prefixed APIs (avcodec_send_frame() etc.), except that: - never called if the codec is closed or the wrong type, - AVPacket parameter change side data is applied right before calling AVCodec->send_packet, - if AV_CODEC_CAP_DELAY is not set, drain packets or frames are never sent, - only one drain packet is ever passed down (until the next flush()), - a drain AVPacket is always NULL (no need to check for avpkt->size).</summary>
+        /// <summary>Decode/encode API with decoupled packet/frame dataflow. The API is the same as the avcodec_ prefixed APIs (avcodec_send_frame() etc.), except that: - never called if the codec is closed or the wrong type, - AVPacket parameter change side data is applied right before calling AVCodec-&gt;send_packet, - if AV_CODEC_CAP_DELAY is not set, drain packets or frames are never sent, - only one drain packet is ever passed down (until the next flush()), - a drain AVPacket is always NULL (no need to check for avpkt-&gt;size).</summary>
         public AVCodec_send_frame_wrapper @send_frame;
         public AVCodec_send_packet_wrapper @send_packet;
         public AVCodec_receive_frame_wrapper @receive_frame;
@@ -1538,7 +1538,7 @@ namespace FFmpeg.AutoGen
         public long @bit_rate;
         /// <summary>The number of bits per sample in the codedwords.</summary>
         public int @bits_per_coded_sample;
-        /// <summary>This is the number of valid bits in each output sample. If the sample format has more bits, the least significant bits are additional padding bits, which are always 0. Use right shifts to reduce the sample to its actual size. For example, audio formats with 24 bit samples will have bits_per_raw_sample set to 24, and format set to AV_SAMPLE_FMT_S32. To get the original sample use "(int32_t)sample >> 8"."</summary>
+        /// <summary>This is the number of valid bits in each output sample. If the sample format has more bits, the least significant bits are additional padding bits, which are always 0. Use right shifts to reduce the sample to its actual size. For example, audio formats with 24 bit samples will have bits_per_raw_sample set to 24, and format set to AV_SAMPLE_FMT_S32. To get the original sample use &quot;(int32_t)sample &gt;&gt; 8&quot;.&quot;</summary>
         public int @bits_per_raw_sample;
         /// <summary>Codec-specific bitstream restrictions that the stream conforms to.</summary>
         public int @profile;
@@ -1612,7 +1612,7 @@ namespace FFmpeg.AutoGen
         /// <summary>byte offset from starting packet start</summary>
         public long @offset;
         public long_array4 @cur_frame_end;
-        /// <summary>Set by parser to 1 for key frames and 0 for non-key frames. It is initialized to -1, so if the parser doesn't set this flag, old-style fallback using AV_PICTURE_TYPE_I picture type as key frames will be used.</summary>
+        /// <summary>Set by parser to 1 for key frames and 0 for non-key frames. It is initialized to -1, so if the parser doesn&apos;t set this flag, old-style fallback using AV_PICTURE_TYPE_I picture type as key frames will be used.</summary>
         public int @key_frame;
         public long @convergence_duration;
         /// <summary>Synchronization point for start of timestamp generation.</summary>
@@ -1709,7 +1709,7 @@ namespace FFmpeg.AutoGen
         public IntPtr @filter;
         /// <summary>Opaque libavcodec internal data. Must not be touched by the caller in any way.</summary>
         public AVBSFInternal* @internal;
-        /// <summary>Opaque filter-specific private data. If filter->priv_class is non-NULL, this is an AVOptions-enabled struct.</summary>
+        /// <summary>Opaque filter-specific private data. If filter-&gt;priv_class is non-NULL, this is an AVOptions-enabled struct.</summary>
         public void* @priv_data;
         /// <summary>Parameters of the input stream. Set by the caller before av_bsf_init().</summary>
         public AVCodecParameters* @par_in;
@@ -2292,7 +2292,7 @@ namespace FFmpeg.AutoGen
         public static extern void avcodec_register_all();
         
         /// <summary>Allocate an AVCodecContext and set its fields to default values. The resulting struct should be freed with avcodec_free_context().</summary>
-        /// <param name="codec">if non-NULL, allocate private data and initialize defaults for the given codec. It is illegal to then call avcodec_open2() with a different codec. If NULL, then the codec-specific defaults won't be initialized, which may result in suboptimal default settings (this is important mainly for encoders, e.g. libx264).</param>
+        /// <param name="codec">if non-NULL, allocate private data and initialize defaults for the given codec. It is illegal to then call avcodec_open2() with a different codec. If NULL, then the codec-specific defaults won&apos;t be initialized, which may result in suboptimal default settings (this is important mainly for encoders, e.g. libx264).</param>
         [DllImport("avcodec-57", EntryPoint = "avcodec_alloc_context3", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVCodecContext* avcodec_alloc_context3(AVCodec* @codec);
         
@@ -2318,7 +2318,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Copy the settings of the source AVCodecContext into the destination AVCodecContext. The resulting destination codec context will be unopened, i.e. you are required to call avcodec_open2() before you can use this AVCodecContext to decode/encode video/audio data.</summary>
         /// <param name="dest">target codec context, should be initialized with avcodec_alloc_context3(NULL), but otherwise uninitialized</param>
         /// <param name="src">source codec context</param>
-        [Obsolete]
+        [Obsolete("The semantics of this function are ill-defined and it should not be used. If you need to transfer the stream parameters from one codec context to another, use an intermediate AVCodecParameters instance and the avcodec_parameters_from_context() / avcodec_parameters_to_context() functions.")]
         [DllImport("avcodec-57", EntryPoint = "avcodec_copy_context", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avcodec_copy_context(AVCodecContext* @dest, AVCodecContext* @src);
         
@@ -2400,7 +2400,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avcodec-57", EntryPoint = "av_packet_from_data", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_packet_from_data(AVPacket* @pkt, byte* @data, int @size);
         
-        [Obsolete]
+        [Obsolete("Use av_packet_ref")]
         [DllImport("avcodec-57", EntryPoint = "av_dup_packet", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_dup_packet(AVPacket* @pkt);
         
@@ -2414,7 +2414,7 @@ namespace FFmpeg.AutoGen
         
         /// <summary>Free a packet.</summary>
         /// <param name="pkt">packet to free</param>
-        [Obsolete]
+        [Obsolete("Use av_packet_unref")]
         [DllImport("avcodec-57", EntryPoint = "av_free_packet", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_free_packet(AVPacket* @pkt);
         
@@ -2492,7 +2492,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avcodec-57", EntryPoint = "av_packet_move_ref", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_packet_move_ref(AVPacket* @dst, AVPacket* @src);
         
-        /// <summary>Copy only "properties" fields from src to dst.</summary>
+        /// <summary>Copy only &quot;properties&quot; fields from src to dst.</summary>
         /// <param name="dst">Destination packet</param>
         /// <param name="src">Source packet</param>
         [DllImport("avcodec-57", EntryPoint = "av_packet_copy_props", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -2520,7 +2520,7 @@ namespace FFmpeg.AutoGen
         public static extern int avcodec_default_get_buffer2(AVCodecContext* @s, AVFrame* @frame, int @flags);
         
         /// <summary>Return the amount of padding in pixels which the get_buffer callback must provide around the edge of the image for codecs which do not have the CODEC_FLAG_EMU_EDGE flag.</summary>
-        [Obsolete]
+        [Obsolete("CODEC_FLAG_EMU_EDGE is deprecated, so this function is no longer needed")]
         [DllImport("avcodec-57", EntryPoint = "avcodec_get_edge_width", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern uint avcodec_get_edge_width();
         
@@ -2544,21 +2544,21 @@ namespace FFmpeg.AutoGen
         [DllImport("avcodec-57", EntryPoint = "avcodec_chroma_pos_to_enum", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVChromaLocation avcodec_chroma_pos_to_enum(int @xpos, int @ypos);
         
-        /// <summary>Decode the audio frame of size avpkt->size from avpkt->data into frame.</summary>
+        /// <summary>Decode the audio frame of size avpkt-&gt;size from avpkt-&gt;data into frame.</summary>
         /// <param name="avctx">the codec context</param>
         /// <param name="frame">The AVFrame in which to store decoded audio samples. The decoder will allocate a buffer for the decoded frame by calling the AVCodecContext.get_buffer2() callback. When AVCodecContext.refcounted_frames is set to 1, the frame is reference counted and the returned reference belongs to the caller. The caller must release the frame using av_frame_unref() when the frame is no longer needed. The caller may safely write to the frame if av_frame_is_writable() returns 1. When AVCodecContext.refcounted_frames is set to 0, the returned reference belongs to the decoder and is valid only until the next call to this function or until closing or flushing the decoder. The caller may not write to it.</param>
         /// <param name="got_frame_ptr">Zero if no frame could be decoded, otherwise it is non-zero. Note that this field being set to zero does not mean that an error has occurred. For decoders with AV_CODEC_CAP_DELAY set, no given decode call is guaranteed to produce a frame.</param>
-        /// <param name="avpkt">The input AVPacket containing the input buffer. At least avpkt->data and avpkt->size should be set. Some decoders might also require additional fields to be set.</param>
-        [Obsolete]
+        /// <param name="avpkt">The input AVPacket containing the input buffer. At least avpkt-&gt;data and avpkt-&gt;size should be set. Some decoders might also require additional fields to be set.</param>
+        [Obsolete("Use avcodec_send_packet() and avcodec_receive_frame().")]
         [DllImport("avcodec-57", EntryPoint = "avcodec_decode_audio4", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avcodec_decode_audio4(AVCodecContext* @avctx, AVFrame* @frame, int* @got_frame_ptr, AVPacket* @avpkt);
         
-        /// <summary>Decode the video frame of size avpkt->size from avpkt->data into picture. Some decoders may support multiple frames in a single AVPacket, such decoders would then just decode the first frame.</summary>
+        /// <summary>Decode the video frame of size avpkt-&gt;size from avpkt-&gt;data into picture. Some decoders may support multiple frames in a single AVPacket, such decoders would then just decode the first frame.</summary>
         /// <param name="avctx">the codec context</param>
         /// <param name="picture">The AVFrame in which the decoded video frame will be stored. Use av_frame_alloc() to get an AVFrame. The codec will allocate memory for the actual bitmap by calling the AVCodecContext.get_buffer2() callback. When AVCodecContext.refcounted_frames is set to 1, the frame is reference counted and the returned reference belongs to the caller. The caller must release the frame using av_frame_unref() when the frame is no longer needed. The caller may safely write to the frame if av_frame_is_writable() returns 1. When AVCodecContext.refcounted_frames is set to 0, the returned reference belongs to the decoder and is valid only until the next call to this function or until closing or flushing the decoder. The caller may not write to it.</param>
         /// <param name="got_picture_ptr">Zero if no frame could be decompressed, otherwise, it is nonzero.</param>
-        /// <param name="avpkt">The input AVPacket containing the input buffer. You can create such packet with av_init_packet() and by then setting data and size, some decoders might in addition need other fields like flags &AV _PKT_FLAG_KEY. All decoders are designed to use the least fields possible.</param>
-        [Obsolete]
+        /// <param name="avpkt">The input AVPacket containing the input buffer. You can create such packet with av_init_packet() and by then setting data and size, some decoders might in addition need other fields like flags &amp;AV _PKT_FLAG_KEY. All decoders are designed to use the least fields possible.</param>
+        [Obsolete("Use avcodec_send_packet() and avcodec_receive_frame().")]
         [DllImport("avcodec-57", EntryPoint = "avcodec_decode_video2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avcodec_decode_video2(AVCodecContext* @avctx, AVFrame* @picture, int* @got_picture_ptr, AVPacket* @avpkt);
         
@@ -2635,19 +2635,19 @@ namespace FFmpeg.AutoGen
         
         /// <summary>Encode a frame of audio.</summary>
         /// <param name="avctx">codec context</param>
-        /// <param name="avpkt">output AVPacket. The user can supply an output buffer by setting avpkt->data and avpkt->size prior to calling the function, but if the size of the user-provided data is not large enough, encoding will fail. If avpkt->data and avpkt->size are set, avpkt->destruct must also be set. All other AVPacket fields will be reset by the encoder using av_init_packet(). If avpkt->data is NULL, the encoder will allocate it. The encoder will set avpkt->size to the size of the output packet.</param>
-        /// <param name="frame">AVFrame containing the raw audio data to be encoded. May be NULL when flushing an encoder that has the AV_CODEC_CAP_DELAY capability set. If AV_CODEC_CAP_VARIABLE_FRAME_SIZE is set, then each frame can have any number of samples. If it is not set, frame->nb_samples must be equal to avctx->frame_size for all frames except the last. The final frame may be smaller than avctx->frame_size.</param>
+        /// <param name="avpkt">output AVPacket. The user can supply an output buffer by setting avpkt-&gt;data and avpkt-&gt;size prior to calling the function, but if the size of the user-provided data is not large enough, encoding will fail. If avpkt-&gt;data and avpkt-&gt;size are set, avpkt-&gt;destruct must also be set. All other AVPacket fields will be reset by the encoder using av_init_packet(). If avpkt-&gt;data is NULL, the encoder will allocate it. The encoder will set avpkt-&gt;size to the size of the output packet.</param>
+        /// <param name="frame">AVFrame containing the raw audio data to be encoded. May be NULL when flushing an encoder that has the AV_CODEC_CAP_DELAY capability set. If AV_CODEC_CAP_VARIABLE_FRAME_SIZE is set, then each frame can have any number of samples. If it is not set, frame-&gt;nb_samples must be equal to avctx-&gt;frame_size for all frames except the last. The final frame may be smaller than avctx-&gt;frame_size.</param>
         /// <param name="got_packet_ptr">This field is set to 1 by libavcodec if the output packet is non-empty, and to 0 if it is empty. If the function returns an error, the packet can be assumed to be invalid, and the value of got_packet_ptr is undefined and should not be used.</param>
-        [Obsolete]
+        [Obsolete("use avcodec_send_frame()/avcodec_receive_packet() instead")]
         [DllImport("avcodec-57", EntryPoint = "avcodec_encode_audio2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avcodec_encode_audio2(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr);
         
         /// <summary>Encode a frame of video.</summary>
         /// <param name="avctx">codec context</param>
-        /// <param name="avpkt">output AVPacket. The user can supply an output buffer by setting avpkt->data and avpkt->size prior to calling the function, but if the size of the user-provided data is not large enough, encoding will fail. All other AVPacket fields will be reset by the encoder using av_init_packet(). If avpkt->data is NULL, the encoder will allocate it. The encoder will set avpkt->size to the size of the output packet. The returned data (if any) belongs to the caller, he is responsible for freeing it.</param>
+        /// <param name="avpkt">output AVPacket. The user can supply an output buffer by setting avpkt-&gt;data and avpkt-&gt;size prior to calling the function, but if the size of the user-provided data is not large enough, encoding will fail. All other AVPacket fields will be reset by the encoder using av_init_packet(). If avpkt-&gt;data is NULL, the encoder will allocate it. The encoder will set avpkt-&gt;size to the size of the output packet. The returned data (if any) belongs to the caller, he is responsible for freeing it.</param>
         /// <param name="frame">AVFrame containing the raw video data to be encoded. May be NULL when flushing an encoder that has the AV_CODEC_CAP_DELAY capability set.</param>
         /// <param name="got_packet_ptr">This field is set to 1 by libavcodec if the output packet is non-empty, and to 0 if it is empty. If the function returns an error, the packet can be assumed to be invalid, and the value of got_packet_ptr is undefined and should not be used.</param>
-        [Obsolete]
+        [Obsolete("use avcodec_send_frame()/avcodec_receive_packet() instead")]
         [DllImport("avcodec-57", EntryPoint = "avcodec_encode_video2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avcodec_encode_video2(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr);
         
@@ -2665,17 +2665,17 @@ namespace FFmpeg.AutoGen
         /// <param name="log2_phase_count">log2 of the number of entries in the polyphase filterbank</param>
         /// <param name="linear">if 1 then the used FIR filter will be linearly interpolated between the 2 closest, if 0 the closest will be used</param>
         /// <param name="cutoff">cutoff frequency, 1.0 corresponds to half the output sampling rate</param>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "av_audio_resample_init", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern ReSampleContext* av_audio_resample_init(int @output_channels, int @input_channels, int @output_rate, int @input_rate, AVSampleFormat @sample_fmt_out, AVSampleFormat @sample_fmt_in, int @filter_length, int @log2_phase_count, int @linear, double @cutoff);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "audio_resample", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int audio_resample(ReSampleContext* @s, short* @output, short* @input, int @nb_samples);
         
         /// <summary>Free resample context.</summary>
         /// <param name="s">a non-NULL pointer to a resample context previously created with av_audio_resample_init()</param>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "audio_resample_close", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void audio_resample_close(ReSampleContext* @s);
         
@@ -2684,7 +2684,7 @@ namespace FFmpeg.AutoGen
         /// <param name="log2_phase_count">log2 of the number of entries in the polyphase filterbank</param>
         /// <param name="linear">If 1 then the used FIR filter will be linearly interpolated between the 2 closest, if 0 the closest will be used</param>
         /// <param name="cutoff">cutoff frequency, 1.0 corresponds to half the output sampling rate</param>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "av_resample_init", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern IntPtr av_resample_init(int @out_rate, int @in_rate, int @filter_length, int @log2_phase_count, int @linear, double @cutoff);
         
@@ -2694,50 +2694,50 @@ namespace FFmpeg.AutoGen
         /// <param name="src_size">the number of unconsumed samples available</param>
         /// <param name="dst_size">the amount of space in samples available in dst</param>
         /// <param name="update_ctx">If this is 0 then the context will not be modified, that way several channels can be resampled with the same context.</param>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "av_resample", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_resample(IntPtr @c, short* @dst, short* @src, int* @consumed, int @src_size, int @dst_size, int @update_ctx);
         
         /// <summary>Compensate samplerate/timestamp drift. The compensation is done by changing the resampler parameters, so no audible clicks or similar distortions occur</summary>
         /// <param name="sample_delta">number of output samples which should be output less</param>
         /// <param name="compensation_distance">distance in output samples over which the compensation should be performed</param>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "av_resample_compensate", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_resample_compensate(IntPtr @c, int @sample_delta, int @compensation_distance);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "av_resample_close", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_resample_close(IntPtr @c);
         
-        [Obsolete]
+        [Obsolete("unused")]
         [DllImport("avcodec-57", EntryPoint = "avpicture_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avpicture_alloc(AVPicture* @picture, AVPixelFormat @pix_fmt, int @width, int @height);
         
-        [Obsolete]
+        [Obsolete("unused")]
         [DllImport("avcodec-57", EntryPoint = "avpicture_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avpicture_free(AVPicture* @picture);
         
-        [Obsolete]
+        [Obsolete("use av_image_fill_arrays() instead.")]
         [DllImport("avcodec-57", EntryPoint = "avpicture_fill", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avpicture_fill(AVPicture* @picture, byte* @ptr, AVPixelFormat @pix_fmt, int @width, int @height);
         
-        [Obsolete]
+        [Obsolete("use av_image_copy_to_buffer() instead.")]
         [DllImport("avcodec-57", EntryPoint = "avpicture_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avpicture_layout(AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height, byte* @dest, int @dest_size);
         
-        [Obsolete]
+        [Obsolete("use av_image_get_buffer_size() instead.")]
         [DllImport("avcodec-57", EntryPoint = "avpicture_get_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avpicture_get_size(AVPixelFormat @pix_fmt, int @width, int @height);
         
-        [Obsolete]
+        [Obsolete("av_image_copy() instead.")]
         [DllImport("avcodec-57", EntryPoint = "av_picture_copy", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_picture_copy(AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height);
         
-        [Obsolete]
+        [Obsolete("unused")]
         [DllImport("avcodec-57", EntryPoint = "av_picture_crop", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_picture_crop(AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @top_band, int @left_band);
         
-        [Obsolete]
+        [Obsolete("unused")]
         [DllImport("avcodec-57", EntryPoint = "av_picture_pad", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_picture_pad(AVPicture* @dst, AVPicture* @src, int @height, int @width, AVPixelFormat @pix_fmt, int @padtop, int @padbottom, int @padleft, int @padright, int* @color);
         
@@ -2766,14 +2766,14 @@ namespace FFmpeg.AutoGen
         [DllImport("avcodec-57", EntryPoint = "avcodec_find_best_pix_fmt_of_2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVPixelFormat avcodec_find_best_pix_fmt_of_2(AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr);
         
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "avcodec_find_best_pix_fmt2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVPixelFormat avcodec_find_best_pix_fmt2(AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr);
         
         [DllImport("avcodec-57", EntryPoint = "avcodec_default_get_format", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVPixelFormat avcodec_default_get_format(IntPtr @s, IntPtr @fmt);
         
-        [Obsolete]
+        [Obsolete("this function is not supposed to be used from outside of lavc")]
         [DllImport("avcodec-57", EntryPoint = "avcodec_set_dimensions", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avcodec_set_dimensions(AVCodecContext* @s, int @width, int @height);
         
@@ -2808,7 +2808,7 @@ namespace FFmpeg.AutoGen
         public static extern int avcodec_default_execute2(AVCodecContext* @c, IntPtr @func, void* @arg, int* @ret, int @count);
         
         /// <summary>Fill AVFrame audio data and linesize pointers.</summary>
-        /// <param name="frame">the AVFrame frame->nb_samples must be set prior to calling the function. This function fills in frame->data, frame->extended_data, frame->linesize[0].</param>
+        /// <param name="frame">the AVFrame frame-&gt;nb_samples must be set prior to calling the function. This function fills in frame-&gt;data, frame-&gt;extended_data, frame-&gt;linesize[0].</param>
         /// <param name="nb_channels">channel count</param>
         /// <param name="sample_fmt">sample format</param>
         /// <param name="buf">buffer to use for frame data</param>
@@ -2847,13 +2847,13 @@ namespace FFmpeg.AutoGen
         public static extern int av_get_audio_frame_duration2(AVCodecParameters* @par, int @frame_bytes);
         
         /// <summary>Register a bitstream filter.</summary>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "av_register_bitstream_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_register_bitstream_filter(AVBitStreamFilter* @bsf);
         
         /// <summary>Create and initialize a bitstream filter context given a bitstream filter name.</summary>
         /// <param name="name">the name of the bitstream filter</param>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "av_bitstream_filter_init", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVBitStreamFilterContext* av_bitstream_filter_init([MarshalAs(UnmanagedType.LPStr)] string @name);
         
@@ -2866,18 +2866,18 @@ namespace FFmpeg.AutoGen
         /// <param name="buf">buffer containing the data to filter</param>
         /// <param name="buf_size">size in bytes of buf</param>
         /// <param name="keyframe">set to non-zero if the buffer to filter corresponds to a key-frame packet data</param>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "av_bitstream_filter_filter", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_bitstream_filter_filter(AVBitStreamFilterContext* @bsfc, AVCodecContext* @avctx, [MarshalAs(UnmanagedType.LPStr)] string @args, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe);
         
         /// <summary>Release bitstream filter context.</summary>
         /// <param name="bsf">the bitstream filter context created with av_bitstream_filter_init(), can be NULL</param>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "av_bitstream_filter_close", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_bitstream_filter_close(AVBitStreamFilterContext* @bsf);
         
         /// <summary>If f is NULL, return the first registered bitstream filter, if f is non-NULL, return the next registered bitstream filter after f, or NULL if f is the last one.</summary>
-        [Obsolete]
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "av_bitstream_filter_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVBitStreamFilter* av_bitstream_filter_next(AVBitStreamFilter* @f);
         
@@ -2906,7 +2906,7 @@ namespace FFmpeg.AutoGen
         public static extern int av_bsf_send_packet(AVBSFContext* @ctx, AVPacket* @pkt);
         
         /// <summary>Retrieve a filtered packet.</summary>
-        /// <param name="pkt">this struct will be filled with the contents of the filtered packet. It is owned by the caller and must be freed using av_packet_unref() when it is no longer needed. This parameter should be "clean" (i.e. freshly allocated with av_packet_alloc() or unreffed with av_packet_unref()) when this function is called. If this function returns successfully, the contents of pkt will be completely overwritten by the returned data. On failure, pkt is not touched.</param>
+        /// <param name="pkt">this struct will be filled with the contents of the filtered packet. It is owned by the caller and must be freed using av_packet_unref() when it is no longer needed. This parameter should be &quot;clean&quot; (i.e. freshly allocated with av_packet_alloc() or unreffed with av_packet_unref()) when this function is called. If this function returns successfully, the contents of pkt will be completely overwritten by the returned data. On failure, pkt is not touched.</param>
         [DllImport("avcodec-57", EntryPoint = "av_bsf_receive_packet", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_bsf_receive_packet(AVBSFContext* @ctx, AVPacket* @pkt);
         
@@ -2933,7 +2933,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avcodec-57", EntryPoint = "av_bsf_list_append", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_bsf_list_append(AVBSFList* @lst, AVBSFContext* @bsf);
         
-        /// <summary>Construct new bitstream filter context given it's name and options and append it to the list of bitstream filters.</summary>
+        /// <summary>Construct new bitstream filter context given it&apos;s name and options and append it to the list of bitstream filters.</summary>
         /// <param name="lst">List to append to</param>
         /// <param name="bsf_name">Name of the bitstream filter</param>
         /// <param name="options">Options for the bitstream filter, can be set to NULL</param>
@@ -2975,14 +2975,14 @@ namespace FFmpeg.AutoGen
         /// <param name="avc">a pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct</param>
         /// <param name="feature">string containing the name of the missing feature</param>
         /// <param name="want_sample">indicates if samples are wanted which exhibit this feature. If want_sample is non-zero, additional verbiage will be added to the log message which tells the user how to report samples to the development mailing list.</param>
-        [Obsolete]
+        [Obsolete("Use avpriv_report_missing_feature() instead.")]
         [DllImport("avcodec-57", EntryPoint = "av_log_missing_feature", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_log_missing_feature(void* @avc, [MarshalAs(UnmanagedType.LPStr)] string @feature, int @want_sample);
         
         /// <summary>Log a generic warning message asking for a sample. This function is intended to be used internally by FFmpeg (libavcodec, libavformat, etc.) only, and would normally not be used by applications.</summary>
         /// <param name="avc">a pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct</param>
         /// <param name="msg">string containing an optional message, or NULL if no message</param>
-        [Obsolete]
+        [Obsolete("Use avpriv_request_sample() instead.")]
         [DllImport("avcodec-57", EntryPoint = "av_log_ask_for_sample", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_log_ask_for_sample(void* @avc, [MarshalAs(UnmanagedType.LPStr)] string @msg);
         
@@ -2994,7 +2994,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avcodec-57", EntryPoint = "av_hwaccel_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVHWAccel* av_hwaccel_next(AVHWAccel* @hwaccel);
         
-        /// <summary>Register a user provided lock manager supporting the operations specified by AVLockOp. The "mutex" argument to the function points to a (void *) where the lockmgr should store/get a pointer to a user allocated mutex. It is NULL upon AV_LOCK_CREATE and equal to the value left by the last call for all other ops. If the lock manager is unable to perform the op then it should leave the mutex in the same state as when it was called and return a non-zero value. However, when called with AV_LOCK_DESTROY the mutex will always be assumed to have been successfully destroyed. If av_lockmgr_register succeeds it will return a non-negative value, if it fails it will return a negative value and destroy all mutex and unregister all callbacks. av_lockmgr_register is not thread-safe, it must be called from a single thread before any calls which make use of locking are used.</summary>
+        /// <summary>Register a user provided lock manager supporting the operations specified by AVLockOp. The &quot;mutex&quot; argument to the function points to a (void *) where the lockmgr should store/get a pointer to a user allocated mutex. It is NULL upon AV_LOCK_CREATE and equal to the value left by the last call for all other ops. If the lock manager is unable to perform the op then it should leave the mutex in the same state as when it was called and return a non-zero value. However, when called with AV_LOCK_DESTROY the mutex will always be assumed to have been successfully destroyed. If av_lockmgr_register succeeds it will return a non-negative value, if it fails it will return a negative value and destroy all mutex and unregister all callbacks. av_lockmgr_register is not thread-safe, it must be called from a single thread before any calls which make use of locking are used.</summary>
         /// <param name="cb">User defined callback. av_lockmgr_register invokes calls to this callback and the previously registered callback. The callback will be used to create more than one mutex each of which must be backed by its own underlying locking mechanism (i.e. do not use a single static object to implement your lock manager). If cb is set to NULL the lockmgr will be unregistered.</param>
         [DllImport("avcodec-57", EntryPoint = "av_lockmgr_register", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_lockmgr_register(IntPtr @cb);

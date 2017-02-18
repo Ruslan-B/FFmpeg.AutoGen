@@ -181,7 +181,7 @@ namespace FFmpeg.AutoGen
         [DllImport("swresample-2", EntryPoint = "swr_next_pts", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern long swr_next_pts(IntPtr @s, long @pts);
         
-        /// <summary>Activate resampling compensation ("soft" compensation). This function is internally called when needed in swr_next_pts().</summary>
+        /// <summary>Activate resampling compensation (&quot;soft&quot; compensation). This function is internally called when needed in swr_next_pts().</summary>
         /// <param name="s">allocated Swr context. If it is not initialized, or SWR_FLAG_RESAMPLE is not set, swr_init() is called with the flag set.</param>
         /// <param name="sample_delta">delta in PTS per sample</param>
         /// <param name="compensation_distance">number of samples to compensate for</param>

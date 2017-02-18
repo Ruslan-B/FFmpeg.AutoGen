@@ -5,9 +5,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
     internal class MacroProcessor
     {
-        private readonly GenerationContext _context;
+        private readonly ASTProcessor _context;
 
-        public MacroProcessor(GenerationContext context)
+        public MacroProcessor(ASTProcessor context)
         {
             _context = context;
         }

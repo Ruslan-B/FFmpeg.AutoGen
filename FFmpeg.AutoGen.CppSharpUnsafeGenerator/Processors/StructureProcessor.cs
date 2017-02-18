@@ -10,9 +10,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
     internal class StructureProcessor
     {
-        private readonly GenerationContext _context;
+        private readonly ASTProcessor _context;
 
-        public StructureProcessor(GenerationContext context)
+        public StructureProcessor(ASTProcessor context)
         {
             _context = context;
         }
@@ -76,7 +76,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 Name = delegateTypeName,
                 ReturnType = TypeHelper.GetReturnTypeName(functionType.ReturnType.Type),
                 Content = field.Comment?.BriefText,
-                Parameters = functionType.Parameters.Select((x, i) => GetParameter(x, i)).ToArray()
+                Parameters = functionType.Parameters.Select(GetParameter).ToArray()
             };
             _context.AddUnit(@delegate);
 
@@ -97,7 +97,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return new FunctionParameter
             {
                 Name = name,
-                Type = FunctionProcessor.GetParameterType(_context, name, parameter.Type),
+                Type = _context.FunctionProcessor.GetParameterType(name, parameter.Type),
             };
         }
 
