@@ -1922,10 +1922,12 @@ namespace FFmpeg.AutoGen
         public static extern void av_force_cpu_flags(int @flags);
         
         /// <summary>Set a mask on flags returned by av_get_cpu_flags(). This function is mainly useful for testing. Please use av_force_cpu_flags() and av_get_cpu_flags() instead which are more flexible</summary>
+        [Obsolete]
         [DllImport("avutil-55", EntryPoint = "av_set_cpu_flags_mask", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_set_cpu_flags_mask(int @mask);
         
         /// <summary>Parse CPU flags from a string.</summary>
+        [Obsolete]
         [DllImport("avutil-55", EntryPoint = "av_parse_cpu_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_parse_cpu_flags([MarshalAs(UnmanagedType.LPStr)] string @s);
         

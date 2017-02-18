@@ -158,27 +158,35 @@ namespace FFmpeg.AutoGen
         [DllImport("swscale-4", EntryPoint = "sws_normalizeVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void sws_normalizeVec(SwsVector* @a, double @height);
         
+        [Obsolete]
         [DllImport("swscale-4", EntryPoint = "sws_getConstVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern SwsVector* sws_getConstVec(double @c, int @length);
         
+        [Obsolete]
         [DllImport("swscale-4", EntryPoint = "sws_getIdentityVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern SwsVector* sws_getIdentityVec();
         
+        [Obsolete]
         [DllImport("swscale-4", EntryPoint = "sws_convVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void sws_convVec(SwsVector* @a, SwsVector* @b);
         
+        [Obsolete]
         [DllImport("swscale-4", EntryPoint = "sws_addVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void sws_addVec(SwsVector* @a, SwsVector* @b);
         
+        [Obsolete]
         [DllImport("swscale-4", EntryPoint = "sws_subVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void sws_subVec(SwsVector* @a, SwsVector* @b);
         
+        [Obsolete]
         [DllImport("swscale-4", EntryPoint = "sws_shiftVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void sws_shiftVec(SwsVector* @a, int @shift);
         
+        [Obsolete]
         [DllImport("swscale-4", EntryPoint = "sws_cloneVec", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern SwsVector* sws_cloneVec(SwsVector* @a);
         
+        [Obsolete]
         [DllImport("swscale-4", EntryPoint = "sws_printVec2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void sws_printVec2(SwsVector* @a, AVClass* @log_ctx, int @log_level);
         

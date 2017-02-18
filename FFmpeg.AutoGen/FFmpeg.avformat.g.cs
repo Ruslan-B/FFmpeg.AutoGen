@@ -1162,9 +1162,11 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "av_format_set_control_message_cb", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_format_set_control_message_cb(AVFormatContext* @s, IntPtr @callback);
         
+        [Obsolete]
         [DllImport("avformat-57", EntryPoint = "av_format_get_open_cb", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern IntPtr av_format_get_open_cb(AVFormatContext* @s);
         
+        [Obsolete]
         [DllImport("avformat-57", EntryPoint = "av_format_set_open_cb", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_format_set_open_cb(AVFormatContext* @s, IntPtr @callback);
         
@@ -1300,6 +1302,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "avformat_open_input", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avformat_open_input(AVFormatContext** @ps, [MarshalAs(UnmanagedType.LPStr)] string @url, AVInputFormat* @fmt, AVDictionary** @options);
         
+        [Obsolete]
         [DllImport("avformat-57", EntryPoint = "av_demuxer_open", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_demuxer_open(AVFormatContext* @ic);
         
@@ -1591,6 +1594,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "avformat_queue_attached_pictures", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avformat_queue_attached_pictures(AVFormatContext* @s);
         
+        [Obsolete]
         [DllImport("avformat-57", EntryPoint = "av_apply_bitstream_filters", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_apply_bitstream_filters(AVCodecContext* @codec, AVPacket* @pkt, AVBitStreamFilterContext* @bsfc);
         
@@ -1729,6 +1733,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "avio_feof", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int avio_feof(AVIOContext* @s);
         
+        [Obsolete]
         [DllImport("avformat-57", EntryPoint = "url_feof", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int url_feof(AVIOContext* @s);
         

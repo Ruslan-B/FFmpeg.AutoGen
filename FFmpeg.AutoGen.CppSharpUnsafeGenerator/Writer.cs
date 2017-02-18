@@ -90,6 +90,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         {
             WriteSummary(function);
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
+            if (function.IsObsolete) WriteLine("[Obsolete]");
             WriteLine($"[DllImport(\"{function.LibraryName}\", EntryPoint = \"{function.Name}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
             function.ReturnType.Attributes.ToList().ForEach(WriteLine);
             var parameters = GetParameters(function.Parameters);
