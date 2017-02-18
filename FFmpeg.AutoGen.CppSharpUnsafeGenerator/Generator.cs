@@ -6,10 +6,11 @@ using CppSharp;
 using CppSharp.AST;
 using CppSharp.Parser;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
+using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
 using ClangParser = CppSharp.ClangParser;
 using MacroDefinition = FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions.MacroDefinition;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     internal class Generator
     {
@@ -128,7 +129,13 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                         textWriter.WriteLine();
                     });
 
-                    units.OfType<StructureDefinition>().ToList().ForEach(x =>
+                    units.OfType<StructureDefinition>().Where(x => x.Indexer != null).ToList().ForEach(x =>
+                    {
+                        writer.Write(x);
+                        textWriter.WriteLine();
+                    });
+
+                    units.OfType<StructureDefinition>().Where(x => x.Indexer == null).ToList().ForEach(x =>
                     {
                         writer.Write(x);
                         textWriter.WriteLine();

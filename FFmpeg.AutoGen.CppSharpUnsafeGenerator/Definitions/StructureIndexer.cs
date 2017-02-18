@@ -2,7 +2,7 @@
 {
     internal class StructureIndexer
     {
-        public FieldType FieldType { get; set; }
+        public TypeDefinition FieldType { get; set; }
         public string FieldPrefix { get; set; }
     }
 }

@@ -86,8 +86,10 @@ namespace FFmpeg.AutoGen.Example
             var pConvertedFrame = ffmpeg.av_frame_alloc();
             var convertedFrameBufferSize = ffmpeg.av_image_get_buffer_size(convertToPixFmt, width, height, 1);
             var pConvertedFrameBuffer = (byte*)ffmpeg.av_malloc((ulong)convertedFrameBufferSize);
-            ffmpeg.avpicture_fill((AVPicture*)pConvertedFrame, pConvertedFrameBuffer, convertToPixFmt, width, height);
-
+            var dstData = new byte_ptr_array4();
+            var dstLinesize = new int_array4();
+            ffmpeg.av_image_fill_arrays(ref dstData, ref dstLinesize, pConvertedFrameBuffer, convertToPixFmt, width, height, 1);
+           
             var pCodec = ffmpeg.avcodec_find_decoder(codecId);
             if (pCodec == null)
             {
@@ -150,12 +152,11 @@ namespace FFmpeg.AutoGen.Example
                 
                 byte*[] src = pDecodedFrame->data.ToArray();
                 var srcStride = pDecodedFrame->linesize.ToArray();
-                byte*[] dst = pConvertedFrame->data.ToArray();
-                var dstStride = pConvertedFrame->linesize.ToArray();
+                byte*[] dst = dstData.ToArray();
+                var dstStride = dstLinesize.ToArray();
                 ffmpeg.sws_scale(pConvertContext, src, srcStride, 0, height, dst, dstStride);
 
-                var convertedFrameAddress = pConvertedFrame->data[0];
-
+                var convertedFrameAddress = dstData[0];
                 var imageBufferPtr = new IntPtr(convertedFrameAddress);
 
                 var linesize = dstStride[0];

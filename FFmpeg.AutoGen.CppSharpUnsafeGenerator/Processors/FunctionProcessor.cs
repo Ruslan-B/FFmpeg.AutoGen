@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using CppSharp.AST;
+using CppSharp.AST.Extensions;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 using Type = CppSharp.AST.Type;
 
@@ -74,11 +75,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             var arrayType = type as ArrayType;
             if (arrayType != null && arrayType.SizeType == ArrayType.ArraySize.Constant)
             {
-                return new TypeDefinition
-                {
-                    Name = TypeHelper.GetTypeName(type),
-                    Attributes = new[] {$"[MarshalAs(UnmanagedType.LPArray, SizeConst={arrayType.Size})]"}
-                };
+                return GetTypeForFixedArray(arrayType);
             }
 
             var pointerType = type as PointerType;
@@ -107,6 +104,31 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 }
             }
             return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
+        }
+
+        private TypeDefinition GetTypeForFixedArray(ArrayType arrayType)
+        {
+            var fixedSize = (int)arrayType.Size;
+
+            string name = TypeHelper.GetTypeName(arrayType);
+            var elementType = arrayType.Type;
+            if (elementType.IsPrimitiveType()) name = TypeHelper.GetTypeName(elementType) + "_array" + fixedSize;
+            if (elementType.IsPointerToPrimitiveType()) name = TypeHelper.GetTypeName(elementType.GetPointee()) + "_ptr_array" + fixedSize;
+
+            var fieldType = GetParameterType(name, elementType);
+            var prefix = "at";
+            var indexerDefinition = new StructureDefinition
+            {
+                Name = name,
+                Indexer = new StructureIndexer { FieldType = new TypeDefinition { FixedSize = fixedSize, Name = fieldType.Name }, FieldPrefix = prefix },
+                Fileds = Enumerable.Range(0, fixedSize)
+                    .Select(i => new StructureField { Name = $"{prefix}{i}", FieldType = fieldType })
+                    .ToArray()
+            };
+            _context.AddUnit(indexerDefinition);
+
+            if (!arrayType.QualifiedType.Qualifiers.IsConst) name = "ref " + name;
+            return new TypeDefinition { Name = name };
         }
 
         internal FunctionParameter GetParameter(Parameter parameter, int position)

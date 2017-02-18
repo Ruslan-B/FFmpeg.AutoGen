@@ -3,6 +3,48 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
+    public unsafe struct byte_ptr_array3
+    {
+        public byte* @at0; public byte* @at1; public byte* @at2;
+        
+        public static readonly int Size = 3;
+        public byte* this[uint index]
+        {
+            get { fixed (byte** p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (byte** p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public byte*[] ToArray()
+        {
+            fixed (byte** p0 = &at0) { var array = new byte*[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(byte*[] array)
+        {
+            fixed (byte** p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator byte*[](byte_ptr_array3 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct int_array3
+    {
+        public int @at0; public int @at1; public int @at2;
+        
+        public static readonly int Size = 3;
+        public int this[uint index]
+        {
+            get { fixed (int* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); } }
+            set { fixed (int* p0 = &at0) { if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  } }
+        }
+        public int[] ToArray()
+        {
+            fixed (int* p0 = &at0) { var array = new int[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }
+        }
+        public void FromArray(int[] array)
+        {
+            fixed (int* p0 = &at0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator int[](int_array3 @struct) => @struct.ToArray();
+    }
+    
     public unsafe static partial class ffmpeg
     {
         public static int PP_QUALITY_MAX = 6;
@@ -43,7 +85,7 @@ namespace FFmpeg.AutoGen
         public static extern string postproc_license();
         
         [DllImport("postproc-54", EntryPoint = "pp_postprocess", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void pp_postprocess([MarshalAs(UnmanagedType.LPArray, SizeConst=3)] byte*[] @src, [MarshalAs(UnmanagedType.LPArray, SizeConst=3)] int[] @srcStride, [MarshalAs(UnmanagedType.LPArray, SizeConst=3)] byte*[] @dst, [MarshalAs(UnmanagedType.LPArray, SizeConst=3)] int[] @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
+        public static extern void pp_postprocess(ref byte_ptr_array3 @src, int_array3 @srcStride, ref byte_ptr_array3 @dst, int_array3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
         
         /// <summary>Return a pp_mode or NULL if an error occurred.</summary>
         /// <param name="name">the string after &quot;-pp&quot; on the command line</param>
