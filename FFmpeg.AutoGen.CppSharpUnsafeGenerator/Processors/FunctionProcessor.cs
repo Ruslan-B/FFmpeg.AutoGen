@@ -55,6 +55,42 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return @delegate;
         }
 
+        internal TypeDefinition GetReturnTypeName(Type type, string name)
+        {
+            var pointerType = type as PointerType;
+            var builtinType = pointerType?.Pointee as BuiltinType;
+            if (pointerType != null)
+            {
+                if (pointerType.QualifiedPointee.Qualifiers.IsConst && builtinType != null)
+                {
+                    switch (builtinType.Type)
+                    {
+                        case PrimitiveType.Char:
+                            return new TypeDefinition
+                            {
+                                Name = "string",
+                                Attributes = new[] {"[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"}
+                            };
+                        case PrimitiveType.Void:
+                            return new TypeDefinition {Name = "IntPtr"};
+                        default:
+                            return new TypeDefinition {Name = TypeHelper.GetTypeName(pointerType)};
+                    }
+                }
+            }
+            return GetParameterType(type, name);
+        }
+
+        private FunctionParameter GetParameter(Parameter parameter, int position)
+        {
+            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
+            return new FunctionParameter
+            {
+                Name = name,
+                Type = GetParameterType(parameter.Type, name)
+            };
+        }
+
         private FunctionParameter GetParameter(Function function, Parameter parameter, int position)
         {
             var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
@@ -90,42 +126,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             }
 
             return _context.StructureProcessor.GetTypeDefinition(type, name);
-        }
-
-        private TypeDefinition GetReturnTypeName(Type type, string name)
-        {
-            var pointerType = type as PointerType;
-            var builtinType = pointerType?.Pointee as BuiltinType;
-            if (pointerType != null)
-            {
-                if (pointerType.QualifiedPointee.Qualifiers.IsConst && builtinType != null)
-                {
-                    switch (builtinType.Type)
-                    {
-                        case PrimitiveType.Char:
-                            return new TypeDefinition
-                            {
-                                Name = "string",
-                                Attributes = new[] {"[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"}
-                            };
-                        case PrimitiveType.Void:
-                            return new TypeDefinition {Name = "IntPtr"};
-                        default:
-                            return new TypeDefinition {Name = TypeHelper.GetTypeName(pointerType)};
-                    }
-                }
-            }
-            return GetParameterType(type, name);
-        }
-
-        private FunctionParameter GetParameter(Parameter parameter, int position)
-        {
-            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
-            return new FunctionParameter
-            {
-                Name = name,
-                Type = GetParameterType(parameter.Type, name)
-            };
         }
 
         private static bool IsObsolete(Function function)

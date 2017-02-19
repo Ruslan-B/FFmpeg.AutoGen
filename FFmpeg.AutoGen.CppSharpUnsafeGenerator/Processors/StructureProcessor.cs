@@ -30,33 +30,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             }
         }
 
-        private void MakeDefinition(Class @class, string name)
-        {
-            name = string.IsNullOrEmpty(@class.Name) ? name : @class.Name;
-
-            var definition = _context.Units.OfType<StructureDefinition>().FirstOrDefault(x => x.Name == name);
-            if (definition == null)
-            {
-                definition = new StructureDefinition {Name = name};
-                _context.AddUnit(definition);
-            }
-
-            if (!@class.IsIncomplete && !definition.IsComplete)
-            {
-                definition.IsComplete = true;
-                definition.Fileds = @class.Fields.SelectMany(ToDefinition).ToArray();
-                definition.Content = @class.Comment?.BriefText;
-            }
-        }
-
         internal TypeDefinition GetTypeDefinition(Type type, string name = null)
         {
             var typedefType = type as TypedefType;
             if (typedefType != null)
-            {
                 type = typedefType.Declaration.Type;
-            }
-            
+
             var arrayType = type as ArrayType;
             if (arrayType?.SizeType == ArrayType.ArraySize.Constant)
                 return GetFieldTypeForFixedArray(arrayType);
@@ -77,28 +56,43 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
         }
 
-        internal TypeDefinition GetTypeDefinition(PointerType pointerType, string name)
+        private void MakeDefinition(Class @class, string name)
+        {
+            name = string.IsNullOrEmpty(@class.Name) ? name : @class.Name;
+
+            var definition = _context.Units.OfType<StructureDefinition>().FirstOrDefault(x => x.Name == name);
+            if (definition == null)
+            {
+                definition = new StructureDefinition {Name = name};
+                _context.AddUnit(definition);
+            }
+
+            if (!@class.IsIncomplete && !definition.IsComplete)
+            {
+                definition.IsComplete = true;
+                definition.Fileds = @class.Fields.SelectMany(ToDefinition).ToArray();
+                definition.Content = @class.Comment?.BriefText;
+            }
+        }
+
+        private TypeDefinition GetTypeDefinition(PointerType pointerType, string name)
         {
             var pointee = pointerType.Pointee;
 
             var typedefType = pointee as TypedefType;
             if (typedefType != null)
-            {
                 pointee = typedefType.Declaration.Type;
-            }
 
             var functionType = pointee as FunctionType;
             if (functionType != null)
-            {
                 return _context.FunctionProcessor.GetDelegateType(functionType, name);
-            }
 
             var pointerTypeDefinition = GetTypeDefinition(pointee, name);
             pointerTypeDefinition.Name += "*";
             return pointerTypeDefinition;
         }
-        
-        internal TypeDefinition GetFieldTypeForNestedDeclaration(Declaration declaration, string name)
+
+        private TypeDefinition GetFieldTypeForNestedDeclaration(Declaration declaration, string name)
         {
             var typeName = string.IsNullOrEmpty(declaration.Name) ? name : declaration.Name;
             var @class = declaration as Class;
@@ -134,10 +128,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
             var elementType = arrayType.Type;
             var elementTypeDefinition = GetTypeDefinition(elementType);
-            
-            string name = elementTypeDefinition.Name + "_array" + fixedSize;
+
+            var name = elementTypeDefinition.Name + "_array" + fixedSize;
             if (elementType.IsPointer()) name = TypeHelper.GetTypeName(elementType.GetPointee()) + "_ptrArray" + fixedSize;
-            if (elementType is ArrayType) name = TypeHelper.GetTypeName(((ArrayType)elementType).Type) + "_arrayOfArray" + fixedSize;
+            if (elementType is ArrayType) name = TypeHelper.GetTypeName(((ArrayType) elementType).Type) + "_arrayOfArray" + fixedSize;
 
             if (!_context.IsKnownUnitName(name))
             {

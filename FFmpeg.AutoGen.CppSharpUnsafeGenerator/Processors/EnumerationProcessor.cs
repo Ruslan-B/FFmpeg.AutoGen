@@ -50,7 +50,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return result;
         }
 
-        public static object ConvertValue(ulong value, PrimitiveType primitiveType)
+        private static object ConvertValue(ulong value, PrimitiveType primitiveType)
         {
             switch (primitiveType)
             {

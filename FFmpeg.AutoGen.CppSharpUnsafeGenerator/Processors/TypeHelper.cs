@@ -4,7 +4,7 @@ using Type = CppSharp.AST.Type;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
-    internal class TypeHelper
+    internal static class TypeHelper
     {
         public static string GetTypeName(Type type)
         {
@@ -16,24 +16,24 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             throw new NotSupportedException();
         }
 
-        public static string GetTypeName(ArrayType type)
+        private static string GetTypeName(ArrayType type)
         {
             return GetTypeName(type.Type) + "[]";
         }
 
-        public static string GetTypeName(TypedefType type)
+        private static string GetTypeName(TypedefType type)
         {
             if (type.Declaration.Type is BuiltinType) return GetTypeName((BuiltinType) type.Declaration.Type);
             if (type.Declaration.Type is PointerType) return GetTypeName((PointerType) type.Declaration.Type);
             return type.Declaration.Name;
         }
 
-        public static string GetTypeName(TagType type)
+        private static string GetTypeName(TagType type)
         {
             return type.Declaration.Name;
         }
 
-        public static string GetTypeName(PointerType type)
+        private static string GetTypeName(PointerType type)
         {
             if (type.QualifiedPointee.Type is BuiltinType) return GetTypeName((BuiltinType) type.QualifiedPointee.Type) + "*";
             if (type.QualifiedPointee.Type is TypedefType) return GetTypeName((TypedefType) type.QualifiedPointee.Type) + "*";
@@ -43,7 +43,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return "IntPtr";
         }
 
-        public static string GetTypeName(BuiltinType type)
+        private static string GetTypeName(BuiltinType type)
         {
             switch (type.Type)
             {

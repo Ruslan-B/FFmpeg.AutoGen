@@ -11,7 +11,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         private static readonly Regex FuncRegex = new Regex(@"^([\w]+)\s?\((.*)\)$", RegexOptions.Compiled);
         private static readonly Regex GroupRegex = new Regex(@"^\((.+)\)$", RegexOptions.Compiled);
         private static readonly Regex BinaryRegex = new Regex(@"^(\w+)\s*(<<|>>|\+|\-|\*|\/|<|>|>=|<=|\|)\s*(\w+)", RegexOptions.Compiled);
-
         private static readonly Regex DoubleRegex = new Regex(@"^-?\s*\d\.\d+$", RegexOptions.Compiled);
         private static readonly Regex IntHexRegex = new Regex(@"^(-?)\s*0x([0-9a-fA-F]+)(u|U)?([l|L]|[l|L][l|L])?$", RegexOptions.Compiled);
         private static readonly Regex IntDecimalRegex = new Regex(@"^(-?\d+)(u|U)?([l|L]|[l|L][l|L])?$", RegexOptions.Compiled);
