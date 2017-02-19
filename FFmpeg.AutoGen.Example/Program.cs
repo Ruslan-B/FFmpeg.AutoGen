@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Example
 {
@@ -26,17 +27,32 @@ namespace FFmpeg.AutoGen.Example
                     InteropHelper.RegisterLibrariesSearchPath(libraryPath);
                     break;
             }
-
-            // decode N frames from url or path
-
-            //string url = @"../../sample_mpeg4.mp4";
-            var url = @"http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4";
-
+            
             ffmpeg.av_register_all();
             ffmpeg.avcodec_register_all();
             ffmpeg.avformat_network_init();
 
             Console.WriteLine($"FFmpeg version info: {ffmpeg.av_version_info()}");
+
+            // setup logging
+            ffmpeg.av_log_set_level(ffmpeg.AV_LOG_VERBOSE);
+            av_log_set_callback_callback logCallback = (p0, level, format, vl) =>
+            {
+                if (level > ffmpeg.av_log_get_level() || string.IsNullOrWhiteSpace(format)) return;
+                
+                var lineSize = 1024;
+                var lineBuffer = stackalloc byte[lineSize];
+                var printPrefix = 1;
+                ffmpeg.av_log_format_line(p0, level, format, vl, lineBuffer, lineSize, &printPrefix);
+                var line = Marshal.PtrToStringAnsi((IntPtr) lineBuffer);
+                Console.Write(line);
+            };
+            ffmpeg.av_log_set_callback(logCallback);
+
+            // decode N frames from url or path
+
+            //string url = @"../../sample_mpeg4.mp4";
+            var url = @"http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4";
 
             var pFormatContext = ffmpeg.avformat_alloc_context();
 
@@ -126,7 +142,7 @@ namespace FFmpeg.AutoGen.Example
                     ffmpeg.av_frame_unref(pDecodedFrame);
                 }
 
-                var convertedFrameBufferPtr = new IntPtr(convertedFrameBuffer);
+                var convertedFrameBufferPtr = (IntPtr) convertedFrameBuffer;
 
                 using (var bitmap = new Bitmap(width, height, dstLinesize[0], PixelFormat.Format24bppRgb, convertedFrameBufferPtr))
                     bitmap.Save(@"frame.buffer.jpg", ImageFormat.Jpeg);
