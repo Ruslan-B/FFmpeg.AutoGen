@@ -1,6 +1,5 @@
 ﻿using System;
 using System.CodeDom.Compiler;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Security;
 using System.Text;

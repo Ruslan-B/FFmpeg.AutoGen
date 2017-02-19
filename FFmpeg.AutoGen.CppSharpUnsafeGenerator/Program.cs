@@ -66,7 +66,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             g.WriteStructures(OutputDirectory + "FFmpeg.structs.g.cs");
             g.WriteIncompleteStructures(OutputDirectory + "FFmpeg.structs.incomplete.g.cs");
             g.WriteFunctions(OutputDirectory + "FFmpeg.functions.g.cs");
-
         }
     }
 }

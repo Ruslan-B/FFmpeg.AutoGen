@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
-    internal class FunctionExportHelper
+    internal static class FunctionExportHelper
     {
         private static readonly Regex LibraryRegex = new Regex(@"Section contains the following exports for ([\w-]+).dll", RegexOptions.Compiled);
         private static readonly Regex FunctionRegex = new Regex(@"\d+\s+[a-fA-F0-9]+\s+[a-fA-F0-9]+\s+([\w]+)", RegexOptions.Compiled);

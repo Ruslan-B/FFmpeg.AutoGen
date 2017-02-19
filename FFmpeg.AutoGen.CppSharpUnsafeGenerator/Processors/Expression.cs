@@ -5,7 +5,7 @@
         public object Value { get; set; }
         public string TypeName { get; set; }
 
-        internal class Constant: Expression
+        internal class Constant : Expression
         {
         }
 
@@ -18,7 +18,6 @@
             public string Operator { get; set; }
             public Expression Left { get; set; }
             public Expression Right { get; set; }
-
         }
     }
 }
