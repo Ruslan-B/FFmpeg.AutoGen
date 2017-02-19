@@ -39,8 +39,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             if (type.QualifiedPointee.Type is TypedefType) return GetTypeName((TypedefType) type.QualifiedPointee.Type) + "*";
             if (type.QualifiedPointee.Type is TagType) return GetTypeName((TagType) type.QualifiedPointee.Type) + "*";
             if (type.QualifiedPointee.Type is PointerType) return GetTypeName((PointerType) type.QualifiedPointee.Type) + "*";
-            if (type.QualifiedPointee.Type is FunctionType) throw new NotSupportedException();
-            return "IntPtr";
+            throw new NotSupportedException();
         }
 
         private static string GetTypeName(BuiltinType type)
