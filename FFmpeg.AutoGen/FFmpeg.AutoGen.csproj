@@ -89,7 +89,6 @@
     <Compile Include="FFmpeg.structs.g.cs" />
     <Compile Include="FFmpeg.structs.incomplete.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Unresolved.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FFmpeg.AutoGen.dll.config">
