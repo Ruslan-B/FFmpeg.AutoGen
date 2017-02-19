@@ -27,7 +27,7 @@ namespace FFmpeg.AutoGen.Example
                     break;
             }
 
-            // decode 100 frame from url or path
+            // decode N frames from url or path
 
             //string url = @"../../sample_mpeg4.mp4";
             var url = @"http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4";
@@ -83,7 +83,7 @@ namespace FFmpeg.AutoGen.Example
             if (pCodec == null)
                 throw new ApplicationException(@"Unsupported codec");
 
-            // Reusing codec context from stream info, initally it was looking like this: 
+            // reusing codec context from stream info, initally it was looking like this: 
             // AVCodecContext* pCodecContext = ffmpeg.avcodec_alloc_context3(pCodec); // but this is not working for all kind of codecs
             var pCodecContext = &codecContext;
 
