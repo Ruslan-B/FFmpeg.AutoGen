@@ -70,9 +70,71 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             if (!@class.IsIncomplete && !definition.IsComplete)
             {
                 definition.IsComplete = true;
-                definition.Fileds = @class.Fields.SelectMany(ToDefinition).ToArray();
+
+                var bitFieldNames = new List<string>();
+                var bitFieldComments = new List<string>();
+                long bitCounter = 0;
+                var fields = new List<StructureField>();
+                foreach (var field in @class.Fields)
+                {
+                    if (field.IsBitField)
+                    {
+                        bitFieldNames.Add($"{field.Name}{field.BitWidth}");
+                        bitFieldComments.Add(field.Comment?.BriefText ?? string.Empty);
+                        bitCounter += field.BitWidth;
+                        if (bitCounter % 8 == 0)
+                        {
+                            fields.Add(GetBitField(bitFieldNames, bitCounter, bitFieldComments));
+                            bitFieldNames.Clear();
+                            bitFieldComments.Clear();
+                            bitCounter = 0;
+                        }
+                        continue;
+                    }
+
+                    var typeName = field.Class.Name + "_" + field.Name;
+                    fields.Add(new StructureField
+                    {
+                        Name = field.Name,
+                        FieldType = GetTypeDefinition(field.Type, typeName),
+                        Content = field.Comment?.BriefText
+                    });
+                }
+
+                if (bitFieldNames.Any() || bitCounter > 0) throw new InvalidOperationException();
+
+                definition.Fileds = fields.ToArray();
                 definition.Content = @class.Comment?.BriefText;
             }
+        }
+
+        private static StructureField GetBitField(IEnumerable<string> names, long bitCounter, List<string> comments)
+        {
+            var fieldName = string.Join("_", names);
+            string fieldType;
+            switch (bitCounter)
+            {
+                case 8:
+                    fieldType = "byte";
+                    break;
+                case 16:
+                    fieldType = "short";
+                    break;
+                case 32:
+                    fieldType = "int";
+                    break;
+                case 64:
+                    fieldType = "long";
+                    break;
+                default:
+                    throw new NotSupportedException();
+            }
+            return new StructureField
+            {
+                Name = fieldName,
+                FieldType = new TypeDefinition {Name = fieldType},
+                Content = string.Join(" ", comments.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()))
+            };
         }
 
         private TypeDefinition GetTypeDefinition(PointerType pointerType, string name)
@@ -110,17 +172,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             throw new NotSupportedException();
         }
 
-        private IEnumerable<StructureField> ToDefinition(Field field)
-        {
-            if (field.IsBitField)
-            {
-                Console.WriteLine("TODO bit fileds processing");
-                yield break;
-            }
-
-            var typeName = field.Class.Name + "_" + field.Name;
-            yield return new StructureField {Name = field.Name, Content = field.Comment?.BriefText, FieldType = GetTypeDefinition(field.Type, typeName)};
-        }
 
         private TypeDefinition GetFieldTypeForFixedArray(ArrayType arrayType)
         {
