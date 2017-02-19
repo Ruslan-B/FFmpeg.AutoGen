@@ -2773,7 +2773,7 @@ namespace FFmpeg.AutoGen
         /// <param name="list">pointer to the list</param>
         /// <param name="term">list terminator (usually 0 or -1)</param>
         [DllImport("avutil-55", EntryPoint = "av_int_list_length_for_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern uint av_int_list_length_for_size(uint @elsize, IntPtr @list, ulong @term);
+        public static extern uint av_int_list_length_for_size(uint @elsize, void* @list, ulong @term);
         
         /// <summary>Send the specified message to the log if the level is less than or equal to the current av_log_level. By default, all logging messages are sent to stderr. This behavior can be altered by setting a different logging callback function.</summary>
         /// <param name="avcl">A pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct or NULL if general log.</param>
@@ -2856,7 +2856,7 @@ namespace FFmpeg.AutoGen
         /// <param name="p">Buffer to be duplicated</param>
         /// <param name="size">Size in bytes of the buffer copied</param>
         [DllImport("avutil-55", EntryPoint = "av_memdup", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern void* av_memdup(IntPtr @p, ulong @size);
+        public static extern void* av_memdup(void* @p, ulong @size);
         
         /// <summary>Multiply two rationals.</summary>
         /// <param name="b">First rational</param>
@@ -2883,7 +2883,7 @@ namespace FFmpeg.AutoGen
         /// <param name="dest">Object to copy from</param>
         /// <param name="src">Object to copy into</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_copy", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern int av_opt_copy(void* @dest, IntPtr @src);
+        public static extern int av_opt_copy(void* @dest, void* @src);
         
         [DllImport("avutil-55", EntryPoint = "av_opt_eval_double", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_opt_eval_double(void* @obj, AVOption* @o, [MarshalAs(UnmanagedType.LPStr)] string @val, double* @double_out);
@@ -3003,7 +3003,7 @@ namespace FFmpeg.AutoGen
         /// <param name="obj">an AVOptions-enabled struct or a double pointer to an AVClass describing it.</param>
         /// <param name="prev">result of the previous call to av_opt_next() on this object or NULL</param>
         [DllImport("avutil-55", EntryPoint = "av_opt_next", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        public static extern AVOption* av_opt_next(IntPtr @obj, AVOption* @prev);
+        public static extern AVOption* av_opt_next(void* @obj, AVOption* @prev);
         
         /// <summary>@}</summary>
         [DllImport("avutil-55", EntryPoint = "av_opt_ptr", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
