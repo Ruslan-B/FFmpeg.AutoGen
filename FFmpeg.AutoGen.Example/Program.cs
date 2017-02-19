@@ -38,7 +38,7 @@ namespace FFmpeg.AutoGen.Example
             ffmpeg.av_log_set_level(ffmpeg.AV_LOG_VERBOSE);
             av_log_set_callback_callback logCallback = (p0, level, format, vl) =>
             {
-                if (level > ffmpeg.av_log_get_level() || string.IsNullOrWhiteSpace(format)) return;
+                if (level > ffmpeg.av_log_get_level()) return;
                 
                 var lineSize = 1024;
                 var lineBuffer = stackalloc byte[lineSize];
