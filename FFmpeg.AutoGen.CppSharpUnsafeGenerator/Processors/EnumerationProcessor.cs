@@ -25,29 +25,29 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 if (string.IsNullOrEmpty(enumerationName))
                     continue;
 
-                var enumerationDefinition = ToDefinition(enumeration, enumerationName);
-                _context.AddUnit(enumerationDefinition);
+                MakeDefinition(enumeration, enumerationName);
             }
         }
 
-        public static EnumerationDefinition ToDefinition(Enumeration enumeration, string name)
+        public EnumerationDefinition MakeDefinition(Enumeration enumeration, string name)
         {
-            var enumerationDefinition = new EnumerationDefinition
-            {
-                Name = name,
-                TypeName = TypeHelper.GetTypeName(enumeration.Type),
-                Content = enumeration.Comment?.BriefText,
-                Items = enumeration.Items
-                    .Select(x =>
-                        new EnumerationItem
-                        {
-                            Name = x.Name,
-                            Value = ConvertValue(x.Value, enumeration.BuiltinType.Type).ToString(),
-                            Content = x.Comment?.BriefText
-                        })
-                    .ToArray()
-            };
-            return enumerationDefinition;
+            name = string.IsNullOrEmpty(enumeration.Name) ? name : enumeration.Name;
+            var result = new EnumerationDefinition {Name = name};
+            if (_context.IsKnownUnitName(name)) return result;
+            _context.AddUnit(result);
+
+            result.TypeName = TypeHelper.GetTypeName(enumeration.Type);
+            result.Content = enumeration.Comment?.BriefText;
+            result.Items = enumeration.Items
+                .Select(x =>
+                    new EnumerationItem
+                    {
+                        Name = x.Name,
+                        Value = ConvertValue(x.Value, enumeration.BuiltinType.Type).ToString(),
+                        Content = x.Comment?.BriefText
+                    })
+                .ToArray();
+            return result;
         }
 
         public static object ConvertValue(ulong value, PrimitiveType primitiveType)

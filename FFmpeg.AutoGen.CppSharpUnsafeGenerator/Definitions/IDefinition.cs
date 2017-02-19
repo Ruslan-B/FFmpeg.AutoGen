@@ -1,6 +1,6 @@
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
 {
-    internal interface ICanGenerateDefinition
+    internal interface IDefinition
     {
         string Name { get; }
     }

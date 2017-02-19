@@ -1,6 +1,5 @@
 using System;
 using CppSharp.AST;
-using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 using Type = CppSharp.AST.Type;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
@@ -37,8 +36,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         public static string GetTypeName(PointerType type)
         {
             if (type.QualifiedPointee.Type is BuiltinType) return GetTypeName((BuiltinType) type.QualifiedPointee.Type) + "*";
-            if (type.QualifiedPointee.Type is TypedefType) return GetTypeName((TypedefType)type.QualifiedPointee.Type) + "*";
+            if (type.QualifiedPointee.Type is TypedefType) return GetTypeName((TypedefType) type.QualifiedPointee.Type) + "*";
+            if (type.QualifiedPointee.Type is TagType) return GetTypeName((TagType) type.QualifiedPointee.Type) + "*";
             if (type.QualifiedPointee.Type is PointerType) return GetTypeName((PointerType) type.QualifiedPointee.Type) + "*";
+            if (type.QualifiedPointee.Type is FunctionType) throw new NotSupportedException();
             return "IntPtr";
         }
 
@@ -102,26 +103,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     throw new ArgumentOutOfRangeException();
             }
             throw new NotSupportedException();
-        }
-
-
-        internal static TypeDefinition GetReturnTypeName(Type type)
-        {
-            var pointerType = type as PointerType;
-            var builtinType = pointerType?.Pointee as BuiltinType;
-            if (pointerType != null && builtinType != null && builtinType.Type == PrimitiveType.Char)
-            {
-                if (pointerType.QualifiedPointee.Qualifiers.IsConst)
-                {
-                    return
-                        new TypeDefinition
-                        {
-                            Name = "string",
-                            Attributes = new[] { "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]" }
-                        };
-                }
-            }
-            return new TypeDefinition { Name = GetTypeName(type) };
         }
     }
 }

@@ -26,28 +26,94 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     continue;
 
                 var className = @class.Name;
-                _context.AddUnit(ToDefinition(@class, className));
+                MakeDefinition(@class, className);
             }
         }
 
-        internal FunctionParameter GetParameter(Parameter parameter, int position)
+        private void MakeDefinition(Class @class, string name)
         {
-            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
-            return new FunctionParameter
+            name = string.IsNullOrEmpty(@class.Name) ? name : @class.Name;
+
+            var definition = _context.Units.OfType<StructureDefinition>().FirstOrDefault(x => x.Name == name);
+            if (definition == null)
             {
-                Name = name,
-                Type = _context.FunctionProcessor.GetParameterType(name, parameter.Type)
-            };
+                definition = new StructureDefinition {Name = name};
+                _context.AddUnit(definition);
+            }
+
+            if (!@class.IsIncomplete && !definition.IsComplete)
+            {
+                definition.IsComplete = true;
+                definition.Fileds = @class.Fields.SelectMany(ToDefinition).ToArray();
+                definition.Content = @class.Comment?.BriefText;
+            }
         }
 
-        private StructureDefinition ToDefinition(Class @class, string className)
+        internal TypeDefinition GetTypeDefinition(Type type, string name = null)
         {
-            return new StructureDefinition
+            var typedefType = type as TypedefType;
+            if (typedefType != null)
             {
-                Name = className,
-                Fileds = @class.Fields.SelectMany(ToDefinition).ToArray(),
-                Content = @class.Comment?.BriefText
-            };
+                type = typedefType.Declaration.Type;
+            }
+            
+            var arrayType = type as ArrayType;
+            if (arrayType?.SizeType == ArrayType.ArraySize.Constant)
+                return GetFieldTypeForFixedArray(arrayType);
+
+            var tagType = type as TagType;
+            if (tagType != null)
+                return GetFieldTypeForNestedDeclaration(tagType.Declaration, name);
+
+            var pointerType = type as PointerType;
+            if (pointerType != null)
+                return GetTypeDefinition(pointerType, name);
+
+
+            var declaration = type as TypedefType;
+            if (declaration != null)
+                return GetTypeDefinition(declaration.Declaration.Type, name);
+
+            return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
+        }
+
+        internal TypeDefinition GetTypeDefinition(PointerType pointerType, string name)
+        {
+            var pointee = pointerType.Pointee;
+
+            var typedefType = pointee as TypedefType;
+            if (typedefType != null)
+            {
+                pointee = typedefType.Declaration.Type;
+            }
+
+            var functionType = pointee as FunctionType;
+            if (functionType != null)
+            {
+                return _context.FunctionProcessor.GetDelegateType(functionType, name);
+            }
+
+            var pointerTypeDefinition = GetTypeDefinition(pointee, name);
+            pointerTypeDefinition.Name += "*";
+            return pointerTypeDefinition;
+        }
+        
+        internal TypeDefinition GetFieldTypeForNestedDeclaration(Declaration declaration, string name)
+        {
+            var typeName = string.IsNullOrEmpty(declaration.Name) ? name : declaration.Name;
+            var @class = declaration as Class;
+            if (@class != null)
+            {
+                MakeDefinition(@class, typeName);
+                return new TypeDefinition {Name = typeName};
+            }
+            var @enum = declaration as Enumeration;
+            if (@enum != null)
+            {
+                _context.EnumerationProcessor.MakeDefinition(@enum, typeName);
+                return new TypeDefinition {Name = typeName};
+            }
+            throw new NotSupportedException();
         }
 
         private IEnumerable<StructureField> ToDefinition(Field field)
@@ -58,90 +124,34 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 yield break;
             }
 
-            yield return new StructureField {Name = field.Name, Content = field.Comment?.BriefText, FieldType = GetFieldType(field, field.Name, field.Type)};
+            var typeName = field.Class.Name + "_" + field.Name;
+            yield return new StructureField {Name = field.Name, Content = field.Comment?.BriefText, FieldType = GetTypeDefinition(field.Type, typeName)};
         }
 
-        private TypeDefinition GetFieldType(Field field, string name, Type type)
-        {
-            var arrayType = type as ArrayType;
-            if (arrayType != null && arrayType.SizeType == ArrayType.ArraySize.Constant)
-                return GetFieldTypeForFixedArray(field, $"{name}_array{arrayType.Size}", arrayType);
-
-            var tagType = type as TagType;
-            if (tagType != null && field.Class.Declarations.Contains(tagType.Declaration))
-                return GetFieldTypeForNestedDeclaration(field, name, tagType);
-
-            FunctionType functionType;
-            if (type.IsPointerTo(out functionType))
-                return GetPointerToFunction(field, name, functionType);
-
-            return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
-        }
-
-        private TypeDefinition GetPointerToFunction(Field field, string name, FunctionType functionType)
-        {
-            var delegateTypeName = field.Class.Name + "_" + name;
-            var @delegate = new DelegateDefinition
-            {
-                Name = delegateTypeName,
-                ReturnType = TypeHelper.GetReturnTypeName(functionType.ReturnType.Type),
-                Content = field.Comment?.BriefText,
-                Parameters = functionType.Parameters.Select(GetParameter).ToArray()
-            };
-            _context.AddUnit(@delegate);
-
-            var wrapperTypeName = delegateTypeName + "_wrapper";
-            var wrapperDefinition = new StructureDefinition
-            {
-                Name = wrapperTypeName,
-                Delegate = @delegate
-            };
-            _context.AddUnit(wrapperDefinition);
-
-            return new TypeDefinition {Name = wrapperTypeName};
-        }
-
-
-        private TypeDefinition GetFieldTypeForNestedDeclaration(Field field, string name, TagType tagType)
-        {
-            var typeName = field.Class.Name + "_" + name;
-            var @class = tagType.Declaration as Class;
-            if (@class != null)
-            {
-                _context.AddUnit(ToDefinition(@class, typeName));
-                return new TypeDefinition {Name = typeName};
-            }
-            var @enum = tagType.Declaration as Enumeration;
-            if (@enum != null)
-            {
-                _context.AddUnit(EnumerationProcessor.ToDefinition(@enum, typeName));
-                return new TypeDefinition {Name = typeName};
-            }
-            throw new NotSupportedException();
-        }
-
-        private TypeDefinition GetFieldTypeForFixedArray(Field field, string name, ArrayType arrayType)
+        private TypeDefinition GetFieldTypeForFixedArray(ArrayType arrayType)
         {
             var fixedSize = (int) arrayType.Size;
 
             var elementType = arrayType.Type;
-            if (elementType.IsPrimitiveType()) name = TypeHelper.GetTypeName(elementType) + "_array" + fixedSize;
-            if (elementType.IsPointerToPrimitiveType()) name = TypeHelper.GetTypeName(elementType.GetPointee()) + "_ptr_array" + fixedSize;
+            var elementTypeDefinition = GetTypeDefinition(elementType);
+            
+            string name = elementTypeDefinition.Name + "_array" + fixedSize;
+            if (elementType.IsPointer()) name = TypeHelper.GetTypeName(elementType.GetPointee()) + "_ptrArray" + fixedSize;
+            if (elementType is ArrayType) name = TypeHelper.GetTypeName(((ArrayType)elementType).Type) + "_arrayOfArray" + fixedSize;
 
-            //  var indexerTypeName = field.Class.Name + "_" + name;
-            var fieldType = GetFieldType(field, name, elementType);
-            var prefix = "at";
-            var indexerDefinition = new StructureDefinition
+            if (!_context.IsKnownUnitName(name))
             {
-                Name = name,
-                Indexer = new StructureIndexer {FieldType = new TypeDefinition {FixedSize = fixedSize, Name = fieldType.Name}, FieldPrefix = prefix},
-                Fileds = Enumerable.Range(0, fixedSize)
-                    .Select(i => new StructureField {Name = $"{prefix}{i}", FieldType = fieldType})
-                    .ToArray()
-            };
-            _context.AddUnit(indexerDefinition);
+                var fixedArray = new FixedArrayDefinition
+                {
+                    Name = name,
+                    Size = fixedSize,
+                    ElementType = elementTypeDefinition,
+                    IsPrimitive = elementType.IsPrimitiveType()
+                };
+                _context.AddUnit(fixedArray);
+            }
 
-            return new TypeDefinition {Name = name};
+            return new TypeDefinition {Name = name, ByReference = !arrayType.QualifiedType.Qualifiers.IsConst};
         }
     }
 }

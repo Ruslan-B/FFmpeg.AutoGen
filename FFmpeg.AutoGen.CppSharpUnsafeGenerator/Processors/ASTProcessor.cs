@@ -8,9 +8,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
     internal class ASTProcessor
     {
-        private static readonly string[] IgnoreUnits = {"__NSConstantString_tag"};
-        private readonly List<ICanGenerateDefinition> _units = new List<ICanGenerateDefinition>();
-        public HashSet<string> KnownUnitName = new HashSet<string>(IgnoreUnits);
+        private readonly List<IDefinition> _units = new List<IDefinition>();
+        public HashSet<string> IgnoreUnitNames = new HashSet<string>(new[] {"__NSConstantString_tag"});
 
         public ASTProcessor()
         {
@@ -28,13 +27,18 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         public MacroPostProcessor MacroPostProcessor { get; }
 
         public Dictionary<string, FunctionExport> FunctionExportMap { get; set; }
-        public IReadOnlyList<ICanGenerateDefinition> Units => _units;
+        public IReadOnlyList<IDefinition> Units => _units;
 
-        public void AddUnit(ICanGenerateDefinition definition)
+        public bool IsKnownUnitName(string name) => _units.Any(x => x.Name == name);
+
+        public T GetUnitByName<T>(string name) where T : IDefinition => _units.OfType<T>().FirstOrDefault(x => x.Name == name);
+
+        public void AddUnit(IDefinition definition)
         {
-            var definitionName = definition.Name;
-            if (KnownUnitName.Contains(definitionName)) return;
-            KnownUnitName.Add(definitionName);
+            if (IgnoreUnitNames.Contains(definition.Name)) return;
+            var existing = _units.FirstOrDefault(x => x.Name == definition.Name);
+            if (existing != null)
+                _units.Remove(existing);
             _units.Add(definition);
         }
 
