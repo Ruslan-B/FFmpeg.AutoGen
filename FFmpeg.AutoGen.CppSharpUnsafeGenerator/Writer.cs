@@ -1,7 +1,9 @@
 ﻿using System;
 using System.CodeDom.Compiler;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Security;
+using System.Text;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
@@ -20,7 +22,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             var valid = macro.IsValid ? string.Empty : "// ";
             WriteLine($"{valid}public static {macro.TypeName} {macro.Name} = {macro.Expression};");
         }
-        
+
         public void Write(EnumerationDefinition enumeration)
         {
             WriteSummary(enumeration);
@@ -39,59 +41,83 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteLine($"public unsafe struct {structure.Name}");
             using (BeginBlock())
             {
-                Func<StructureField, string> toString = x => x.FieldType.IsFixed
-                    ? $"public fixed {x.FieldType.Name} @{x.Name}[{x.FieldType.FixedSize}];"
-                    : $"public {x.FieldType.Name} @{x.Name};";
-
-                var indexer = structure.Indexer;
-                if (indexer == null)
+                foreach (var item in structure.Fileds)
                 {
-                    foreach (var item in structure.Fileds)
-                    {
-                        WriteSummary(item);
-                        WriteLine(toString(item));
-                    }
+                    WriteSummary(item);
+                    WriteLine($"public {item.FieldType.Name} @{item.Name};");
                 }
-                else
-                {
-                    var size = indexer.FieldType.FixedSize;
-                    var prefix = indexer.FieldPrefix;
-                    var typeName = indexer.FieldType.Name;
+            }
+        }
 
-                    WriteLine(string.Join(" ", structure.Fileds.Select(toString)));
-                    WriteLine();
+        public void Write(FixedArrayDefinition array)
+        {
+            WriteLine($"public unsafe struct {array.Name}");
+            using (BeginBlock())
+            {
+                var prefix = "_";
+                var size = array.Size;
+                var elementType = array.ElementType.Name;
 
-                    WriteLine($"public static readonly int Size = {size};");
+                WriteLine($"public static readonly int Size = {size};");
 
-                    var @fixed = $"fixed ({typeName}* p0 = &{prefix}0)";
-                    WriteLine($"public {typeName} this[uint index]");
-                    using (BeginBlock())
-                    {
-                        WriteLine($"get {{ {@fixed} {{ if (index > Size) throw new ArgumentOutOfRangeException(); return *(p0 + index); }} }}");
-                        WriteLine($"set {{ {@fixed} {{ if (index > Size) throw new ArgumentOutOfRangeException(); *(p0 + index) = value;  }} }}");
-                    }
+                if (array.IsPrimitive) WritePrimitiveFixedArray(array.Name, elementType, size, prefix);
+                else WriteComplexFixedArray(elementType, size, prefix);
 
-                    WriteLine($"public {typeName}[] ToArray()");
-                    using (BeginBlock())
-                    {
-                        WriteLine($"{@fixed} {{ var array = new {typeName}[Size]; for (uint i = 0; i < Size; i++) array[i] = *(p0 + i); return array; }}");
-                    }
-                    WriteLine($"public void FromArray({typeName}[] array)");
-                    using (BeginBlock())
-                    {
-                        WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ *(p0 + i++) = value; if (i >= Size) return; }} }}");
-                    }
-                    WriteLine($"public static implicit operator {typeName}[]({structure.Name} @struct) => @struct.ToArray();");
-                }
+                WriteLine($"public static implicit operator {elementType}[]({array.Name} @struct) => @struct.ToArray();");
+            }
+        }
 
-                var @delegate = structure.Delegate;
-                if (@delegate != null)
-                {
-                    WriteLine($"public IntPtr Pointer;");
-                    Write($"public static implicit operator {structure.Name}({@delegate.Name} func) => ");
-                    Write($"new {structure.Name} {{ Pointer = Marshal.GetFunctionPointerForDelegate(func) }};");
-                    WriteLine();
-                }
+        private void WritePrimitiveFixedArray(string arrayName, string elementType, int size, string prefix)
+        {
+            WriteLine($"fixed {elementType} {prefix}[{size}];");
+            WriteLine();
+
+            var @fixed = $"fixed ({arrayName}* p = &this)";
+
+            WriteLine($"public {elementType} this[uint i]");
+            using (BeginBlock())
+            {
+                WriteLine($"get {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return p->{prefix}[i]; }} }}");
+                WriteLine($"set {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ p->{prefix}[i] = value; }} }}");
+            }
+
+            WriteLine($"public {elementType}[] ToArray()");
+            using (BeginBlock())
+            {
+                WriteLine($"{@fixed} {{ var a = new {elementType}[Size]; for (uint i = 0; i < Size; i++) a[i] = p->{prefix}[i]; return a; }}");
+            }
+
+            WriteLine($"public void UpdateFrom({elementType}[] array)");
+            using (BeginBlock())
+            {
+                WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ p->{prefix}[i++] = value; if (i >= Size) return; }} }}");
+            }
+        }
+
+        private void WriteComplexFixedArray(string elementType, int size, string prefix)
+        {
+            WriteLine(string.Join(" ", Enumerable.Range(0, size).Select(i => $"{elementType} {prefix}{i};")));
+            WriteLine();
+
+            var @fixed = $"fixed ({elementType}* p0 = &{prefix}0)";
+
+            WriteLine($"public {elementType} this[uint i]");
+            using (BeginBlock())
+            {
+                WriteLine($"get {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return *(p0 + i); }} }}");
+                WriteLine($"set {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ *(p0 + i) = value;  }} }}");
+            }
+
+            WriteLine($"public {elementType}[] ToArray()");
+            using (BeginBlock())
+            {
+                WriteLine($"{@fixed} {{ var a = new {elementType}[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }}");
+            }
+
+            WriteLine($"public void UpdateFrom({elementType}[] array)");
+            using (BeginBlock())
+            {
+                WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ *(p0 + i++) = value; if (i >= Size) return; }} }}");
             }
         }
 
@@ -113,15 +139,28 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteSummary(@delegate);
             var parameters = GetParameters(@delegate.Parameters);
             WriteLine("[UnmanagedFunctionPointer(CallingConvention.Cdecl)]");
-            WriteLine($"public unsafe delegate {@delegate.ReturnType.Name} {@delegate.Name} ({parameters});");
+            WriteLine($"public unsafe delegate {@delegate.ReturnType.Name} {@delegate.FunctionName} ({parameters});");
+
+            WriteLine($"public unsafe struct {@delegate.Name}");
+            using (BeginBlock())
+            {
+                WriteLine($"public IntPtr Pointer;");
+                Write($"public static implicit operator {@delegate.Name}({@delegate.FunctionName} func) => ");
+                Write($"new {@delegate.Name} {{ Pointer = Marshal.GetFunctionPointerForDelegate(func) }};");
+                WriteLine();
+            }
         }
 
         private static string GetParameters(FunctionParameter[] parameters)
         {
             return string.Join(", ", parameters.Select(x =>
-                x.Type.Attributes.Any()
-                    ? $"{string.Join("", x.Type.Attributes)} {x.Type.Name} @{x.Name}"
-                    : $"{x.Type.Name} @{x.Name}"));
+            {
+                var sb = new StringBuilder();
+                if (x.Type.Attributes.Any()) sb.Append($"{string.Join("", x.Type.Attributes)} ");
+                if (x.Type.ByReference) sb.Append("ref ");
+                sb.Append($"{x.Type.Name} @{x.Name}");
+                return sb.ToString();
+            }));
         }
 
         private void WriteSummary(ICanGenerateXmlDoc value)
@@ -134,9 +173,31 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             if (!string.IsNullOrWhiteSpace(value.Content)) WriteLine($"/// <param name=\"{name}\">{SecurityElement.Escape(value.Content.Trim())}</param>");
         }
 
-        private void WriteLine() => _writer.WriteLine();
-        private void WriteLine(string line) => _writer.WriteLine(line);
+        public void WriteLine() => _writer.WriteLine();
+        public void WriteLine(string line) => _writer.WriteLine(line);
         private void Write(string value) => _writer.Write(value);
-        private IDisposable BeginBlock() => _writer.BeginBlock();
+        public IDisposable BeginBlock()
+        {
+            WriteLine("{");
+            _writer.Indent++;
+            return new End(() =>
+            {
+                _writer.Indent--;
+                _writer.WriteLine("}");
+            });
+        }
+
+        private class End : IDisposable
+        {
+            private readonly Action _action;
+
+            public End(Action action)
+            {
+                _action = action;
+            }
+
+            public void Dispose() => _action();
+        }
+
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using CppSharp.AST;
-using CppSharp.AST.Extensions;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 using Type = CppSharp.AST.Type;
 
@@ -18,7 +17,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         public void Process(TranslationUnit translationUnit)
         {
-            var counter = 0;
             foreach (var function in translationUnit.Functions.Where(x => !x.IsInline))
             {
                 var functionName = function.Name;
@@ -32,7 +30,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 var functionDefinition = new FunctionDefinition
                 {
                     Name = functionName,
-                    ReturnType = TypeHelper.GetReturnTypeName(function.ReturnType.Type),
+                    ReturnType = GetReturnTypeName(function.ReturnType.Type, functionName),
                     Content = function.Comment?.BriefText,
                     LibraryName = export.Library,
                     Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray(),
@@ -40,9 +38,96 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     ObsoleteMessage = GetObsoleteMessage(function)
                 };
                 _context.AddUnit(functionDefinition);
-                counter++;
             }
         }
+
+        internal TypeDefinition GetDelegateType(FunctionType functionType, string name)
+        {
+            var @delegate = new DelegateDefinition
+            {
+                Name = name + "_func",
+                FunctionName = name,
+                ReturnType = GetReturnTypeName(functionType.ReturnType.Type, name),
+                Parameters = functionType.Parameters.Select(GetParameter).ToArray()
+            };
+            _context.AddUnit(@delegate);
+
+            return @delegate;
+        }
+
+        private FunctionParameter GetParameter(Function function, Parameter parameter, int position)
+        {
+            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
+            return new FunctionParameter
+            {
+                Name = name,
+                Type = GetParameterType(parameter.Type, function.Name + "_" + name),
+                Content = GetParamComment(function, parameter.Name)
+            };
+        }
+
+        private TypeDefinition GetParameterType(Type type, string name)
+        {
+            var pointerType = type as PointerType;
+            if (pointerType != null)
+            {
+                if (pointerType.QualifiedPointee.Qualifiers.IsConst)
+                {
+                    var builtinType = pointerType.Pointee as BuiltinType;
+                    if (builtinType != null)
+                    {
+                        switch (builtinType.Type)
+                        {
+                            case PrimitiveType.Char:
+                                return new TypeDefinition {Name = "string", Attributes = new[] {"[MarshalAs(UnmanagedType.LPStr)]"}};
+                            case PrimitiveType.Void:
+                                return new TypeDefinition {Name = "IntPtr"};
+                            default:
+                                return new TypeDefinition {Name = TypeHelper.GetTypeName(pointerType)};
+                        }
+                    }
+                }
+            }
+
+            return _context.StructureProcessor.GetTypeDefinition(type, name);
+        }
+
+        private TypeDefinition GetReturnTypeName(Type type, string name)
+        {
+            var pointerType = type as PointerType;
+            var builtinType = pointerType?.Pointee as BuiltinType;
+            if (pointerType != null)
+            {
+                if (pointerType.QualifiedPointee.Qualifiers.IsConst && builtinType != null)
+                {
+                    switch (builtinType.Type)
+                    {
+                        case PrimitiveType.Char:
+                            return new TypeDefinition
+                            {
+                                Name = "string",
+                                Attributes = new[] {"[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"}
+                            };
+                        case PrimitiveType.Void:
+                            return new TypeDefinition {Name = "IntPtr"};
+                        default:
+                            return new TypeDefinition {Name = TypeHelper.GetTypeName(pointerType)};
+                    }
+                }
+            }
+            return GetParameterType(type, name);
+        }
+
+        private FunctionParameter GetParameter(Parameter parameter, int position)
+        {
+            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
+            return new FunctionParameter
+            {
+                Name = name,
+                Type = GetParameterType(parameter.Type, name)
+            };
+        }
+
         private static bool IsObsolete(Function function)
         {
             return function.PreprocessedEntities.OfType<MacroExpansion>().Any(x => x.Text == "attribute_deprecated");
@@ -57,100 +142,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             var obsoleteMessage = lines == null ? string.Empty : string.Join(" ", lines);
             return obsoleteMessage;
         }
-
-        internal FunctionParameter GetParameter(Function function, Parameter parameter, int position)
-        {
-            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
-            return new FunctionParameter
-            {
-                Name = name,
-                Type = GetParameterType(function.Name + "_" + name, parameter.Type),
-                Content = GetParamComment(function, parameter.Name)
-            };
-        }
-
-
-        internal TypeDefinition GetParameterType(string name, Type type)
-        {
-            var arrayType = type as ArrayType;
-            if (arrayType != null && arrayType.SizeType == ArrayType.ArraySize.Constant)
-            {
-                return GetTypeForFixedArray(arrayType);
-            }
-
-            var pointerType = type as PointerType;
-            if (pointerType != null)
-            {
-                var builtinType = pointerType.Pointee as BuiltinType;
-                if (builtinType != null && builtinType.Type == PrimitiveType.Char)
-                {
-                    if (pointerType.QualifiedPointee.Qualifiers.IsConst)
-                    {
-                        return new TypeDefinition
-                        {
-                            Name = "string",
-                            Attributes = new[] {"[MarshalAs(UnmanagedType.LPStr)]"}
-                        };
-                    }
-                }
-
-                var functionType = pointerType.Pointee as FunctionType;
-                if (functionType != null)
-                {
-                    var @delegate = GetDelegate(name, functionType);
-                    _context.AddUnit(@delegate);
-
-                    return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
-                }
-            }
-            return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
-        }
-
-        private TypeDefinition GetTypeForFixedArray(ArrayType arrayType)
-        {
-            var fixedSize = (int)arrayType.Size;
-
-            string name = TypeHelper.GetTypeName(arrayType);
-            var elementType = arrayType.Type;
-            if (elementType.IsPrimitiveType()) name = TypeHelper.GetTypeName(elementType) + "_array" + fixedSize;
-            if (elementType.IsPointerToPrimitiveType()) name = TypeHelper.GetTypeName(elementType.GetPointee()) + "_ptr_array" + fixedSize;
-
-            var fieldType = GetParameterType(name, elementType);
-            var prefix = "at";
-            var indexerDefinition = new StructureDefinition
-            {
-                Name = name,
-                Indexer = new StructureIndexer { FieldType = new TypeDefinition { FixedSize = fixedSize, Name = fieldType.Name }, FieldPrefix = prefix },
-                Fileds = Enumerable.Range(0, fixedSize)
-                    .Select(i => new StructureField { Name = $"{prefix}{i}", FieldType = fieldType })
-                    .ToArray()
-            };
-            _context.AddUnit(indexerDefinition);
-
-            if (!arrayType.QualifiedType.Qualifiers.IsConst) name = "ref " + name;
-            return new TypeDefinition { Name = name };
-        }
-
-        internal FunctionParameter GetParameter(Parameter parameter, int position)
-        {
-            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
-            return new FunctionParameter
-            {
-                Name = name,
-                Type = GetParameterType(name, parameter.Type)
-            };
-        }
-
-        private DelegateDefinition GetDelegate(string name, FunctionType functionType)
-        {
-            return new DelegateDefinition
-            {
-                Name = name,
-                ReturnType = TypeHelper.GetReturnTypeName(functionType.ReturnType.Type),
-                Parameters = functionType.Parameters.Select(GetParameter).ToArray()
-            };
-        }
-
 
         private static string GetParamComment(Function function, string parameterName)
         {

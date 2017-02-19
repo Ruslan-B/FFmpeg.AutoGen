@@ -86,7 +86,7 @@ namespace FFmpeg.AutoGen.Example
             var pConvertedFrame = ffmpeg.av_frame_alloc();
             var convertedFrameBufferSize = ffmpeg.av_image_get_buffer_size(convertToPixFmt, width, height, 1);
             var pConvertedFrameBuffer = (byte*)ffmpeg.av_malloc((ulong)convertedFrameBufferSize);
-            var dstData = new byte_ptr_array4();
+            var dstData = new byte_ptrArray4();
             var dstLinesize = new int_array4();
             ffmpeg.av_image_fill_arrays(ref dstData, ref dstLinesize, pConvertedFrameBuffer, convertToPixFmt, width, height, 1);
            
@@ -117,7 +117,7 @@ namespace FFmpeg.AutoGen.Example
             ffmpeg.av_init_packet(pPacket);
 
             var frameNumber = 0;
-            while (frameNumber < 1400)
+            while (frameNumber < 200)
             {
                 if (ffmpeg.av_read_frame(pFormatContext, pPacket) < 0)
                 {
