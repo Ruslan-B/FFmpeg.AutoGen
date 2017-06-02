@@ -1,17 +1,17 @@
-#Important
+# Important
 **The FFmpeg API is wast and complex and this project exposes it with minimum modifications - support is very limited.
 Please consider to ask *how to* questions on stackoverflow.com. 
 The community may be able to offer some assistance but you will largely be on your own.
 As another option you can search for a solution in C(lang) as with some effort you can convert them to C#.**
 
-##FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.png)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
+## FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.png)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
 
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.  
 The bindings are generated against: ffmpeg 3.2.2
 
 The 3.2 ClangSharp based version is [here](https://github.com/Ruslan-B/FFmpeg.AutoGen/tree/3.2).
 
-##Usage
+## Usage
 
 The basic example of the library usage: video decoding, conversion and frame extraction to jpeg is included in ```FFmpeg.AutoGen.Example``` project.  
 For the more sophisticated operations please refer to offical [ffmpeg Documentation](https://www.ffmpeg.org/documentation.html) expecially API section of it.
@@ -33,7 +33,7 @@ By default MacPorts keeps compiled libraries in ```/opt/local/lib```.
 - on Linux:  
 You need to patch ```FFmpeg.AutoGen.config``` with full path to FFmpeg libraries.
 
-##Generation
+## Generation
 
 The bindings generator uses [CppSharp](https://github.com/mono/CppSharp).
 
@@ -45,7 +45,7 @@ Steps to generate:
 - Run ```FFmpeg.AutoGen.CppSharpUnsafeGenerator;```
 - All files with extension ```*.g.cs```  in ```FFmpeg.AutoGen``` project will be regenerated.
 
-##License
+## License
 
 Copyright © Ruslan Balanukhin 2015
 All rights reserved.
