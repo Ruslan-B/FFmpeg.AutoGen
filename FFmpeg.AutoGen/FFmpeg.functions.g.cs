@@ -234,6 +234,7 @@ namespace FFmpeg.AutoGen
         /// <param name="buf">buffer to place codec tag in</param>
         /// <param name="buf_size">size in bytes of buf</param>
         /// <param name="codec_tag">codec tag to assign</param>
+        [Obsolete("see av_fourcc_make_string() and av_fourcc2str().")]
         [DllImport("avcodec-57", EntryPoint = "av_get_codec_tag_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern ulong av_get_codec_tag_string(byte* @buf, ulong @buf_size, uint @codec_tag);
         
@@ -340,6 +341,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avcodec-57", EntryPoint = "av_packet_get_side_data", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern byte* av_packet_get_side_data(AVPacket* @pkt, AVPacketSideDataType @type, int* @size);
         
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "av_packet_merge_side_data", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_packet_merge_side_data(AVPacket* @pkt);
         
@@ -386,6 +388,7 @@ namespace FFmpeg.AutoGen
         [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         public static extern string av_packet_side_data_name(AVPacketSideDataType @type);
         
+        [Obsolete("")]
         [DllImport("avcodec-57", EntryPoint = "av_packet_split_side_data", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_packet_split_side_data(AVPacket* @pkt);
         
@@ -902,6 +905,15 @@ namespace FFmpeg.AutoGen
         [DllImport("avfilter-6", EntryPoint = "av_abuffersink_params_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVABufferSinkParams* av_abuffersink_params_alloc();
         
+        [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_channel_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern ulong av_buffersink_get_channel_layout(AVFilterContext* @ctx);
+        
+        [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_channels", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_buffersink_get_channels(AVFilterContext* @ctx);
+        
+        [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_format", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_buffersink_get_format(AVFilterContext* @ctx);
+        
         /// <summary>Get a frame with filtered data from sink and put it in frame.</summary>
         /// <param name="ctx">pointer to a context of a buffersink or abuffersink AVFilter.</param>
         /// <param name="frame">pointer to an allocated frame that will be filled with data. The data must be freed using av_frame_unref() / av_frame_free()</param>
@@ -915,15 +927,36 @@ namespace FFmpeg.AutoGen
         [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_frame_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_buffersink_get_frame_flags(AVFilterContext* @ctx, AVFrame* @frame, int @flags);
         
-        /// <summary>Get the frame rate of the input.</summary>
         [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_frame_rate", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVRational av_buffersink_get_frame_rate(AVFilterContext* @ctx);
+        
+        [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_h", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_buffersink_get_h(AVFilterContext* @ctx);
+        
+        [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_hw_frames_ctx", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern AVBufferRef* av_buffersink_get_hw_frames_ctx(AVFilterContext* @ctx);
+        
+        [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_sample_aspect_ratio", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern AVRational av_buffersink_get_sample_aspect_ratio(AVFilterContext* @ctx);
+        
+        [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_sample_rate", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_buffersink_get_sample_rate(AVFilterContext* @ctx);
         
         /// <summary>Same as av_buffersink_get_frame(), but with the ability to specify the number of samples read. This function is less efficient than av_buffersink_get_frame(), because it copies the data around.</summary>
         /// <param name="ctx">pointer to a context of the abuffersink AVFilter.</param>
         /// <param name="frame">pointer to an allocated frame that will be filled with data. The data must be freed using av_frame_unref() / av_frame_free() frame will contain exactly nb_samples audio samples, except at the end of stream, when it can contain less than nb_samples.</param>
         [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_samples", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_buffersink_get_samples(AVFilterContext* @ctx, AVFrame* @frame, int @nb_samples);
+        
+        [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_time_base", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern AVRational av_buffersink_get_time_base(AVFilterContext* @ctx);
+        
+        /// <summary>Get the properties of the stream @{</summary>
+        [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_type", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern AVMediaType av_buffersink_get_type(AVFilterContext* @ctx);
+        
+        [DllImport("avfilter-6", EntryPoint = "av_buffersink_get_w", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_buffersink_get_w(AVFilterContext* @ctx);
         
         /// <summary>Create an AVBufferSinkParams structure.</summary>
         [DllImport("avfilter-6", EntryPoint = "av_buffersink_params_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -1302,6 +1335,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avformat-57", EntryPoint = "av_format_get_open_cb", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern av_format_get_open_cb_func av_format_get_open_cb(AVFormatContext* @s);
         
+        /// <summary>Accessors for some AVFormatContext fields. These used to be provided for ABI compatibility, and do not need to be used anymore.</summary>
         [DllImport("avformat-57", EntryPoint = "av_format_get_probe_score", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_format_get_probe_score(AVFormatContext* @s);
         
@@ -1531,6 +1565,14 @@ namespace FFmpeg.AutoGen
         /// <param name="flags">flags which select direction and seeking mode</param>
         [DllImport("avformat-57", EntryPoint = "av_seek_frame", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_seek_frame(AVFormatContext* @s, int @stream_index, long @timestamp, int @flags);
+        
+        /// <summary>Wrap an existing array as stream side data.</summary>
+        /// <param name="st">stream</param>
+        /// <param name="type">side information type</param>
+        /// <param name="data">the side data array. It must be allocated with the av_malloc() family of functions. The ownership of the data is transferred to st.</param>
+        /// <param name="size">side information size</param>
+        [DllImport("avformat-57", EntryPoint = "av_stream_add_side_data", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_stream_add_side_data(AVStream* @st, AVPacketSideDataType @type, byte* @data, ulong @size);
         
         /// <summary>Get the internal codec timebase from a stream.</summary>
         /// <param name="st">input stream to extract the timebase from</param>
@@ -1794,6 +1836,12 @@ namespace FFmpeg.AutoGen
         /// <param name="entry">entry to be freed.</param>
         [DllImport("avformat-57", EntryPoint = "avio_free_directory_entry", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void avio_free_directory_entry(AVIODirEntry** @entry);
+        
+        /// <summary>Return the written size and a pointer to the buffer. The AVIOContext stream is left intact. The buffer must NOT be freed. No padding is added to the buffer.</summary>
+        /// <param name="s">IO context</param>
+        /// <param name="pbuffer">pointer to a byte buffer</param>
+        [DllImport("avformat-57", EntryPoint = "avio_get_dyn_buf", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int avio_get_dyn_buf(AVIOContext* @s, byte** @pbuffer);
         
         /// <summary>Read a string from pb into buf. The reading will terminate when either a NULL character was encountered, maxlen bytes have been read, or nothing more can be read from pb. The result is guaranteed to be NULL-terminated, it will be truncated if buf is too small. Note that the string is not interpreted or validated in any way, it might get truncated in the middle of a sequence for multi-byte encodings.</summary>
         [DllImport("avformat-57", EntryPoint = "avio_get_str", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
@@ -2114,7 +2162,7 @@ namespace FFmpeg.AutoGen
         /// <param name="size">size of each buffer in this pool</param>
         /// <param name="opaque">arbitrary user data used by the allocator</param>
         /// <param name="alloc">a function that will be used to allocate new buffers when the pool is empty.</param>
-        /// <param name="pool_free">a function that will be called immediately before the pool is freed. I.e. after av_buffer_pool_can_uninit() is called by the pool and all the frames are returned to the pool and freed. It is intended to uninitialize the user opaque data.</param>
+        /// <param name="pool_free">a function that will be called immediately before the pool is freed. I.e. after av_buffer_pool_uninit() is called by the caller and all the frames are returned to the pool and freed. It is intended to uninitialize the user opaque data.</param>
         [DllImport("avutil-55", EntryPoint = "av_buffer_pool_init2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVBufferPool* av_buffer_pool_init2(int @size, void* @opaque, av_buffer_pool_init2_alloc_func @alloc, av_buffer_pool_init2_pool_free_func @pool_free);
         
@@ -2401,6 +2449,12 @@ namespace FFmpeg.AutoGen
         [DllImport("avutil-55", EntryPoint = "av_force_cpu_flags", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_force_cpu_flags(int @flags);
         
+        /// <summary>Fill the provided buffer with a string containing a FourCC (four-character code) representation.</summary>
+        /// <param name="buf">a buffer with size in bytes of at least AV_FOURCC_MAX_STRING_SIZE</param>
+        /// <param name="fourcc">the fourcc to represent</param>
+        [DllImport("avutil-55", EntryPoint = "av_fourcc_make_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern byte* av_fourcc_make_string(byte* @buf, uint @fourcc);
+        
         /// <summary>Allocate an AVFrame and set its fields to default values. The resulting struct must be freed using av_frame_free().</summary>
         [DllImport("avutil-55", EntryPoint = "av_frame_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVFrame* av_frame_alloc();
@@ -2422,7 +2476,7 @@ namespace FFmpeg.AutoGen
         [DllImport("avutil-55", EntryPoint = "av_frame_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void av_frame_free(AVFrame** @frame);
         
-        /// <summary>Accessors for some AVFrame fields. The position of these field in the structure is not part of the ABI, they should not be accessed directly outside libavutil.</summary>
+        /// <summary>Accessors for some AVFrame fields. These used to be provided for ABI compatibility, and do not need to be used anymore.</summary>
         [DllImport("avutil-55", EntryPoint = "av_frame_get_best_effort_timestamp", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern long av_frame_get_best_effort_timestamp(AVFrame* @frame);
         
@@ -2616,6 +2670,13 @@ namespace FFmpeg.AutoGen
         [DllImport("avutil-55", EntryPoint = "av_get_default_channel_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern long av_get_default_channel_layout(int @nb_channels);
         
+        /// <summary>Return a channel layout and the number of channels based on the specified name.</summary>
+        /// <param name="name">channel layout specification string</param>
+        /// <param name="channel_layout">parsed channel layout (0 if unknown)</param>
+        /// <param name="nb_channels">number of channels</param>
+        [DllImport("avutil-55", EntryPoint = "av_get_extended_channel_layout", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_get_extended_channel_layout([MarshalAs(UnmanagedType.LPStr)] string @name, ulong* @channel_layout, int* @nb_channels);
+        
         /// <summary>Return a string describing the media_type enum, NULL if media_type is unknown.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_media_type_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
@@ -2708,6 +2769,16 @@ namespace FFmpeg.AutoGen
         [DllImport("avutil-55", EntryPoint = "av_image_check_size", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_image_check_size(uint @w, uint @h, int @log_offset, void* @log_ctx);
         
+        /// <summary>Check if the given dimension of an image is valid, meaning that all bytes of a plane of an image with the specified pix_fmt can be addressed with a signed int.</summary>
+        /// <param name="w">the width of the picture</param>
+        /// <param name="h">the height of the picture</param>
+        /// <param name="max_pixels">the maximum number of pixels the user wants to accept</param>
+        /// <param name="pix_fmt">the pixel format, can be AV_PIX_FMT_NONE if unknown.</param>
+        /// <param name="log_offset">the offset to sum to the log level for logging with log_ctx</param>
+        /// <param name="log_ctx">the parent logging context, it may be NULL</param>
+        [DllImport("avutil-55", EntryPoint = "av_image_check_size2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_image_check_size2(uint @w, uint @h, long @max_pixels, AVPixelFormat @pix_fmt, int @log_offset, void* @log_ctx);
+        
         /// <summary>Copy image in src_data to dst_data.</summary>
         /// <param name="dst_linesizes">linesizes for the image in dst_data</param>
         /// <param name="src_linesizes">linesizes for the image in src_data</param>
@@ -2730,6 +2801,10 @@ namespace FFmpeg.AutoGen
         /// <param name="align">the assumed linesize alignment for dst</param>
         [DllImport("avutil-55", EntryPoint = "av_image_copy_to_buffer", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_image_copy_to_buffer(byte* @dst, int @dst_size, byte_ptrArray4 @src_data, int_array4 @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
+        
+        /// <summary>Copy image data located in uncacheable (e.g. GPU mapped) memory. Where available, this function will use special functionality for reading from such memory, which may result in greatly improved performance compared to plain av_image_copy().</summary>
+        [DllImport("avutil-55", EntryPoint = "av_image_copy_uc_from", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern void av_image_copy_uc_from(ref byte_ptrArray4 @dst_data, long_array4 @dst_linesizes, ref byte_ptrArray4 @src_data, long_array4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
         
         /// <summary>Setup the data pointers and linesizes based on the specified image parameters and the provided array.</summary>
         /// <param name="dst_data">data pointers to be filled in</param>
@@ -3321,6 +3396,59 @@ namespace FFmpeg.AutoGen
         [DllImport("avutil-55", EntryPoint = "av_sub_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVRational av_sub_q(AVRational @b, AVRational @c);
         
+        /// <summary>Adjust frame number for NTSC drop frame time code.</summary>
+        /// <param name="framenum">frame number to adjust</param>
+        /// <param name="fps">frame per second, 30 or 60</param>
+        [DllImport("avutil-55", EntryPoint = "av_timecode_adjust_ntsc_framenum2", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_timecode_adjust_ntsc_framenum2(int @framenum, int @fps);
+        
+        /// <summary>Check if the timecode feature is available for the given frame rate</summary>
+        [DllImport("avutil-55", EntryPoint = "av_timecode_check_frame_rate", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_timecode_check_frame_rate(AVRational @rate);
+        
+        /// <summary>Convert frame number to SMPTE 12M binary representation.</summary>
+        /// <param name="tc">timecode data correctly initialized</param>
+        /// <param name="framenum">frame number</param>
+        [DllImport("avutil-55", EntryPoint = "av_timecode_get_smpte_from_framenum", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern uint av_timecode_get_smpte_from_framenum(AVTimecode* @tc, int @framenum);
+        
+        /// <summary>Init a timecode struct with the passed parameters.</summary>
+        /// <param name="tc">pointer to an allocated AVTimecode</param>
+        /// <param name="rate">frame rate in rational form</param>
+        /// <param name="flags">miscellaneous flags such as drop frame, +24 hours, ... (see AVTimecodeFlag)</param>
+        /// <param name="frame_start">the first frame number</param>
+        /// <param name="log_ctx">a pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct (used for av_log)</param>
+        [DllImport("avutil-55", EntryPoint = "av_timecode_init", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_timecode_init(AVTimecode* @tc, AVRational @rate, int @flags, int @frame_start, void* @log_ctx);
+        
+        /// <summary>Parse timecode representation (hh:mm:ss[:;.]ff).</summary>
+        /// <param name="tc">pointer to an allocated AVTimecode</param>
+        /// <param name="rate">frame rate in rational form</param>
+        /// <param name="str">timecode string which will determine the frame start</param>
+        /// <param name="log_ctx">a pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct (used for av_log).</param>
+        [DllImport("avutil-55", EntryPoint = "av_timecode_init_from_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_timecode_init_from_string(AVTimecode* @tc, AVRational @rate, [MarshalAs(UnmanagedType.LPStr)] string @str, void* @log_ctx);
+        
+        /// <summary>Get the timecode string from the 25-bit timecode format (MPEG GOP format).</summary>
+        /// <param name="buf">destination buffer, must be at least AV_TIMECODE_STR_SIZE long</param>
+        /// <param name="tc25bit">the 25-bits timecode</param>
+        [DllImport("avutil-55", EntryPoint = "av_timecode_make_mpeg_tc_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern byte* av_timecode_make_mpeg_tc_string(byte* @buf, uint @tc25bit);
+        
+        /// <summary>Get the timecode string from the SMPTE timecode format.</summary>
+        /// <param name="buf">destination buffer, must be at least AV_TIMECODE_STR_SIZE long</param>
+        /// <param name="tcsmpte">the 32-bit SMPTE timecode</param>
+        /// <param name="prevent_df">prevent the use of a drop flag when it is known the DF bit is arbitrary</param>
+        [DllImport("avutil-55", EntryPoint = "av_timecode_make_smpte_tc_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern byte* av_timecode_make_smpte_tc_string(byte* @buf, uint @tcsmpte, int @prevent_df);
+        
+        /// <summary>Load timecode string in buf.</summary>
+        /// <param name="tc">timecode data correctly initialized</param>
+        /// <param name="buf">destination buffer, must be at least AV_TIMECODE_STR_SIZE long</param>
+        /// <param name="framenum">frame number</param>
+        [DllImport("avutil-55", EntryPoint = "av_timecode_make_string", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern byte* av_timecode_make_string(AVTimecode* @tc, byte* @buf, int @framenum);
+        
         /// <summary>Return an informative version string. This usually is the actual release version number or a git commit description. This string has no fixed format and can change any time. It should never be parsed by code.</summary>
         [DllImport("avutil-55", EntryPoint = "av_version_info", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
@@ -3606,7 +3734,7 @@ namespace FFmpeg.AutoGen
         /// <param name="dstH">the height of the destination image</param>
         /// <param name="dstFormat">the destination image format</param>
         /// <param name="flags">specify which algorithm and options to use for rescaling</param>
-        /// <param name="param">extra parameters to tune the used scaler For SWS_BICUBIC param[0] and [1] tune the shape of the basis function, param[0] tunes f(1) and param[1] f´(1) For SWS_GAUSS param[0] tunes the exponent and thus cutoff frequency For SWS_LANCZOS param[0] tunes the width of the window function</param>
+        /// <param name="param">extra parameters to tune the used scaler For SWS_BICUBIC param[0] and [1] tune the shape of the basis function, param[0] tunes f(1) and param[1] fÂ´(1) For SWS_GAUSS param[0] tunes the exponent and thus cutoff frequency For SWS_LANCZOS param[0] tunes the width of the window function</param>
         [DllImport("swscale-4", EntryPoint = "sws_getContext", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern SwsContext* sws_getContext(int @srcW, int @srcH, AVPixelFormat @srcFormat, int @dstW, int @dstH, AVPixelFormat @dstFormat, int @flags, SwsFilter* @srcFilter, SwsFilter* @dstFilter, double* @param);
         

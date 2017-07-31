@@ -492,6 +492,14 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVIOContext_short_seek_get (void* @opaque);
+    public unsafe struct AVIOContext_short_seek_get_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVIOContext_short_seek_get_func(AVIOContext_short_seek_get func) => new AVIOContext_short_seek_get_func { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate int AVIOInterruptCB_callback (void* @p0);
     public unsafe struct AVIOInterruptCB_callback_func
     {
@@ -689,6 +697,14 @@ namespace FFmpeg.AutoGen
     {
         public IntPtr Pointer;
         public static implicit operator AVFilter_init_opaque_func(AVFilter_init_opaque func) => new AVFilter_init_opaque_func { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVFilter_activate (AVFilterContext* @ctx);
+    public unsafe struct AVFilter_activate_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVFilter_activate_func(AVFilter_activate func) => new AVFilter_activate_func { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

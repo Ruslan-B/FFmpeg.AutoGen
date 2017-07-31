@@ -76,28 +76,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CppSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.8.4\lib\CppSharp.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\CppSharp.0.8.10\lib\CppSharp.dll</HintPath>
     </Reference>
     <Reference Include="CppSharp.AST, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.8.4\lib\CppSharp.AST.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\CppSharp.0.8.10\lib\CppSharp.AST.dll</HintPath>
     </Reference>
     <Reference Include="CppSharp.Generator, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.8.4\lib\CppSharp.Generator.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\CppSharp.0.8.10\lib\CppSharp.Generator.dll</HintPath>
     </Reference>
     <Reference Include="CppSharp.Parser, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.8.4\lib\CppSharp.Parser.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\CppSharp.0.8.10\lib\CppSharp.Parser.dll</HintPath>
     </Reference>
-    <Reference Include="CppSharp.Parser.CLI, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\CppSharp.0.8.4\lib\CppSharp.Parser.CLI.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CppSharp.Parser.CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CppSharp.0.8.10\lib\CppSharp.Parser.CSharp.dll</HintPath>
     </Reference>
     <Reference Include="CppSharp.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.8.4\lib\CppSharp.Runtime.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\CppSharp.0.8.10\lib\CppSharp.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -144,11 +138,11 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Baseclass.Contrib.Nuget.Output.2.1.0\build\net40\Baseclass.Contrib.Nuget.Output.targets" Condition="Exists('..\packages\Baseclass.Contrib.Nuget.Output.2.1.0\build\net40\Baseclass.Contrib.Nuget.Output.targets')" />
+  <Import Project="..\packages\Baseclass.Contrib.Nuget.Output.2.3.0\build\net40\Baseclass.Contrib.Nuget.Output.targets" Condition="Exists('..\packages\Baseclass.Contrib.Nuget.Output.2.3.0\build\net40\Baseclass.Contrib.Nuget.Output.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Baseclass.Contrib.Nuget.Output.2.1.0\build\net40\Baseclass.Contrib.Nuget.Output.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Baseclass.Contrib.Nuget.Output.2.1.0\build\net40\Baseclass.Contrib.Nuget.Output.targets'))" />
+    <Error Condition="!Exists('..\packages\Baseclass.Contrib.Nuget.Output.2.3.0\build\net40\Baseclass.Contrib.Nuget.Output.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Baseclass.Contrib.Nuget.Output.2.3.0\build\net40\Baseclass.Contrib.Nuget.Output.targets'))" />
   </Target>
 </Project>

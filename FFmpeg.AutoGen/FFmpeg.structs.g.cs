@@ -172,36 +172,37 @@ namespace FFmpeg.AutoGen
         public int @nb_side_data;
         /// <summary>Frame flags, a combination of</summary>
         public int @flags;
-        /// <summary>MPEG vs JPEG YUV range. It must be accessed using av_frame_get_color_range() and av_frame_set_color_range(). - encoding: Set by user - decoding: Set by libavcodec</summary>
+        /// <summary>MPEG vs JPEG YUV range. - encoding: Set by user - decoding: Set by libavcodec</summary>
         public AVColorRange @color_range;
         public AVColorPrimaries @color_primaries;
         public AVColorTransferCharacteristic @color_trc;
-        /// <summary>YUV colorspace type. It must be accessed using av_frame_get_colorspace() and av_frame_set_colorspace(). - encoding: Set by user - decoding: Set by libavcodec</summary>
+        /// <summary>YUV colorspace type. - encoding: Set by user - decoding: Set by libavcodec</summary>
         public AVColorSpace @colorspace;
         public AVChromaLocation @chroma_location;
-        /// <summary>frame timestamp estimated using various heuristics, in stream time base Code outside libavutil should access this field using: av_frame_get_best_effort_timestamp(frame) - encoding: unused - decoding: set by libavcodec, read by user.</summary>
+        /// <summary>frame timestamp estimated using various heuristics, in stream time base - encoding: unused - decoding: set by libavcodec, read by user.</summary>
         public long @best_effort_timestamp;
-        /// <summary>reordered pos from the last AVPacket that has been input into the decoder Code outside libavutil should access this field using: av_frame_get_pkt_pos(frame) - encoding: unused - decoding: Read by user.</summary>
+        /// <summary>reordered pos from the last AVPacket that has been input into the decoder - encoding: unused - decoding: Read by user.</summary>
         public long @pkt_pos;
-        /// <summary>duration of the corresponding packet, expressed in AVStream-&gt;time_base units, 0 if unknown. Code outside libavutil should access this field using: av_frame_get_pkt_duration(frame) - encoding: unused - decoding: Read by user.</summary>
+        /// <summary>duration of the corresponding packet, expressed in AVStream-&gt;time_base units, 0 if unknown. - encoding: unused - decoding: Read by user.</summary>
         public long @pkt_duration;
-        /// <summary>metadata. Code outside libavutil should access this field using: av_frame_get_metadata(frame) - encoding: Set by user. - decoding: Set by libavcodec.</summary>
+        /// <summary>metadata. - encoding: Set by user. - decoding: Set by libavcodec.</summary>
         public AVDictionary* @metadata;
-        /// <summary>decode error flags of the frame, set to a combination of FF_DECODE_ERROR_xxx flags if the decoder produced a frame, but there were errors during the decoding. Code outside libavutil should access this field using: av_frame_get_decode_error_flags(frame) - encoding: unused - decoding: set by libavcodec, read by user.</summary>
+        /// <summary>decode error flags of the frame, set to a combination of FF_DECODE_ERROR_xxx flags if the decoder produced a frame, but there were errors during the decoding. - encoding: unused - decoding: set by libavcodec, read by user.</summary>
         public int @decode_error_flags;
-        /// <summary>number of audio channels, only used for audio. Code outside libavutil should access this field using: av_frame_get_channels(frame) - encoding: unused - decoding: Read by user.</summary>
+        /// <summary>number of audio channels, only used for audio. - encoding: unused - decoding: Read by user.</summary>
         public int @channels;
-        /// <summary>size of the corresponding packet containing the compressed frame. It must be accessed using av_frame_get_pkt_size() and av_frame_set_pkt_size(). It is set to a negative value if unknown. - encoding: unused - decoding: set by libavcodec, read by user.</summary>
+        /// <summary>size of the corresponding packet containing the compressed frame. It is set to a negative value if unknown. - encoding: unused - decoding: set by libavcodec, read by user.</summary>
         public int @pkt_size;
-        /// <summary>QP table Not to be accessed directly from outside libavutil</summary>
+        /// <summary>QP table</summary>
         public sbyte* @qscale_table;
-        /// <summary>QP store stride Not to be accessed directly from outside libavutil</summary>
+        /// <summary>QP store stride</summary>
         public int @qstride;
         public int @qscale_type;
-        /// <summary>Not to be accessed directly from outside libavutil</summary>
         public AVBufferRef* @qp_table_buf;
         /// <summary>For hwaccel-format frames, this should be a reference to the AVHWFramesContext describing the frame.</summary>
         public AVBufferRef* @hw_frames_ctx;
+        /// <summary>AVBufferRef for free use by the API user. FFmpeg will never check the contents of the buffer ref. FFmpeg calls av_buffer_unref() on it when the frame is unreferenced. av_frame_copy_props() calls create a new reference with av_buffer_ref() for the target frame&apos;s opaque_ref field.</summary>
+        public AVBufferRef* @opaque_ref;
     }
     
     /// <summary>the default value for scalar options</summary>
@@ -265,6 +266,18 @@ namespace FFmpeg.AutoGen
         public AVComponentDescriptor_array4 @comp;
         /// <summary>Alternative comma-separated names.</summary>
         public byte* @alias;
+    }
+    
+    public unsafe struct AVTimecode
+    {
+        /// <summary>timecode frame start (first base frame number)</summary>
+        public int @start;
+        /// <summary>flags such as drop frame, +24 hours support, ...</summary>
+        public uint @flags;
+        /// <summary>frame rate in rational form</summary>
+        public AVRational @rate;
+        /// <summary>frame per second; must be consistent with the rate field</summary>
+        public uint @fps;
     }
     
     public unsafe struct SwsVector
@@ -374,7 +387,7 @@ namespace FFmpeg.AutoGen
         public long @convergence_duration;
     }
     
-    /// <summary>main external API structure. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. Please use AVOptions (av_opt* / av_set/get*()) to access these fields from user applications. The name string for AVOptions options matches the associated command line parameter name and can be found in libavcodec/options_table.h The AVOption/command line parameter names differ in some cases from the C structure field names for historic reasons or brevity. sizeof(AVCodecContext) must not be used outside libav*.</summary>
+    /// <summary>main external API structure. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. You can use AVOptions (av_opt* / av_set/get*()) to access these fields from user applications. The name string for AVOptions options matches the associated command line parameter name and can be found in libavcodec/options_table.h The AVOption/command line parameter names differ in some cases from the C structure field names for historic reasons or brevity. sizeof(AVCodecContext) must not be used outside libav*.</summary>
     public unsafe struct AVCodecContext
     {
         /// <summary>information on struct for av_log - set by avcodec_alloc_context3</summary>
@@ -634,7 +647,7 @@ namespace FFmpeg.AutoGen
         public int @error_concealment;
         /// <summary>debug - encoding: Set by user. - decoding: Set by user.</summary>
         public int @debug;
-        /// <summary>debug Code outside libavcodec should access this field using AVOptions - encoding: Set by user. - decoding: Set by user.</summary>
+        /// <summary>debug - encoding: Set by user. - decoding: Set by user.</summary>
         public int @debug_mv;
         /// <summary>Error recognition; may misdetect some more or less valid parts as errors. - encoding: unused - decoding: Set by user.</summary>
         public int @err_recognition;
@@ -654,7 +667,7 @@ namespace FFmpeg.AutoGen
         public int @bits_per_coded_sample;
         /// <summary>Bits per sample/pixel of internal libavcodec pixel/sample format. - encoding: set by user. - decoding: set by libavcodec.</summary>
         public int @bits_per_raw_sample;
-        /// <summary>low resolution decoding, 1-&gt; 1/2 size, 2-&gt;1/4 size - encoding: unused - decoding: Set by user. Code outside libavcodec should access this field using: av_codec_{get,set}_lowres(avctx)</summary>
+        /// <summary>low resolution decoding, 1-&gt; 1/2 size, 2-&gt;1/4 size - encoding: unused - decoding: Set by user.</summary>
         public int @lowres;
         /// <summary>the picture in the bitstream - encoding: Set by libavcodec. - decoding: unused</summary>
         public AVFrame* @coded_frame;
@@ -696,9 +709,9 @@ namespace FFmpeg.AutoGen
         public AVRational @framerate;
         /// <summary>Nominal unaccelerated pixel format, see AV_PIX_FMT_xxx. - encoding: unused. - decoding: Set by libavcodec before calling get_format()</summary>
         public AVPixelFormat @sw_pix_fmt;
-        /// <summary>Timebase in which pkt_dts/pts and AVPacket.dts/pts are. Code outside libavcodec should access this field using: av_codec_{get,set}_pkt_timebase(avctx) - encoding unused. - decoding set by user.</summary>
+        /// <summary>Timebase in which pkt_dts/pts and AVPacket.dts/pts are. - encoding unused. - decoding set by user.</summary>
         public AVRational @pkt_timebase;
-        /// <summary>AVCodecDescriptor Code outside libavcodec should access this field using: av_codec_{get,set}_codec_descriptor(avctx) - encoding: unused. - decoding: set by libavcodec.</summary>
+        /// <summary>AVCodecDescriptor - encoding: unused. - decoding: set by libavcodec.</summary>
         public AVCodecDescriptor* @codec_descriptor;
         /// <summary>Current statistics for PTS correction. - decoding: maintained and used by libavcodec, not intended to be used by user apps - encoding: unused</summary>
         public long @pts_correction_num_faulty_pts;
@@ -712,26 +725,32 @@ namespace FFmpeg.AutoGen
         public byte* @sub_charenc;
         /// <summary>Subtitles character encoding mode. Formats or codecs might be adjusting this setting (if they are doing the conversion themselves for instance). - decoding: set by libavcodec - encoding: unused</summary>
         public int @sub_charenc_mode;
-        /// <summary>Skip processing alpha if supported by codec. Note that if the format uses pre-multiplied alpha (common with VP6, and recommended due to better video quality/compression) the image will look as if alpha-blended onto a black background. However for formats that do not use pre-multiplied alpha there might be serious artefacts (though e.g. libswscale currently assumes pre-multiplied alpha anyway). Code outside libavcodec should access this field using AVOptions</summary>
+        /// <summary>Skip processing alpha if supported by codec. Note that if the format uses pre-multiplied alpha (common with VP6, and recommended due to better video quality/compression) the image will look as if alpha-blended onto a black background. However for formats that do not use pre-multiplied alpha there might be serious artefacts (though e.g. libswscale currently assumes pre-multiplied alpha anyway).</summary>
         public int @skip_alpha;
         /// <summary>Number of samples to skip after a discontinuity - decoding: unused - encoding: set by libavcodec</summary>
         public int @seek_preroll;
-        /// <summary>custom intra quantization matrix Code outside libavcodec should access this field using av_codec_g/set_chroma_intra_matrix() - encoding: Set by user, can be NULL. - decoding: unused.</summary>
+        /// <summary>custom intra quantization matrix - encoding: Set by user, can be NULL. - decoding: unused.</summary>
         public ushort* @chroma_intra_matrix;
-        /// <summary>dump format separator. can be &quot;, &quot; or &quot; &quot; or anything else Code outside libavcodec should access this field using AVOptions (NO direct access). - encoding: Set by user. - decoding: Set by user.</summary>
+        /// <summary>dump format separator. can be &quot;, &quot; or &quot; &quot; or anything else - encoding: Set by user. - decoding: Set by user.</summary>
         public byte* @dump_separator;
-        /// <summary>&apos;,&apos; separated list of allowed decoders. If NULL then all are allowed - encoding: unused - decoding: set by user through AVOPtions (NO direct access)</summary>
+        /// <summary>&apos;,&apos; separated list of allowed decoders. If NULL then all are allowed - encoding: unused - decoding: set by user</summary>
         public byte* @codec_whitelist;
         public uint @properties;
         /// <summary>Additional data associated with the entire coded stream.</summary>
         public AVPacketSideData* @coded_side_data;
         public int @nb_coded_side_data;
-        /// <summary>A reference to the AVHWFramesContext describing the input (for encoding) or output (decoding) frames. The reference is set by the caller and afterwards owned (and freed) by libavcodec.</summary>
+        /// <summary>A reference to the AVHWFramesContext describing the input (for encoding) or output (decoding) frames. The reference is set by the caller and afterwards owned (and freed) by libavcodec - it should never be read by the caller after being set.</summary>
         public AVBufferRef* @hw_frames_ctx;
         /// <summary>Control the form of AVSubtitle.rects[N]-&gt;ass - decoding: set by user - encoding: unused</summary>
         public int @sub_text_format;
         /// <summary>Audio only. The amount of padding (in samples) appended by the encoder to the end of the audio. I.e. this number of decoded samples must be discarded by the caller from the end of the stream to get the original audio without any trailing padding.</summary>
         public int @trailing_padding;
+        /// <summary>The number of pixels per image to maximally accept.</summary>
+        public long @max_pixels;
+        /// <summary>A reference to the AVHWDeviceContext describing the device which will be used by a hardware encoder/decoder. The reference is set by the caller and afterwards owned (and freed) by libavcodec.</summary>
+        public AVBufferRef* @hw_device_ctx;
+        /// <summary>Bit set of AV_HWACCEL_FLAG_* flags, which affect hardware accelerated decoding (if active). - encoding: unused - decoding: Set by user (either before avcodec_open2(), or in the AVCodecContext.get_format callback)</summary>
+        public int @hwaccel_flags;
     }
     
     /// <summary>AVCodec.</summary>
@@ -755,7 +774,7 @@ namespace FFmpeg.AutoGen
         public AVSampleFormat* @sample_fmts;
         /// <summary>array of support channel layouts, or NULL if unknown. array is terminated by 0</summary>
         public ulong* @channel_layouts;
-        /// <summary>maximum value for lowres supported by the decoder, no direct access, use av_codec_get_max_lowres()</summary>
+        /// <summary>maximum value for lowres supported by the decoder</summary>
         public byte @max_lowres;
         /// <summary>AVClass for the private context</summary>
         public AVClass* @priv_class;
@@ -866,6 +885,8 @@ namespace FFmpeg.AutoGen
         public AVHWAccel_uninit_func @uninit;
         /// <summary>Size of the private data to allocate in AVCodecInternal.hwaccel_priv_data.</summary>
         public int @priv_data_size;
+        /// <summary>Internal hwaccel capabilities.</summary>
+        public int @caps_internal;
     }
     
     /// <summary>This struct describes the properties of an encoded stream.</summary>
@@ -1002,9 +1023,9 @@ namespace FFmpeg.AutoGen
         public AVBSFInternal* @internal;
         /// <summary>Opaque filter-specific private data. If filter-&gt;priv_class is non-NULL, this is an AVOptions-enabled struct.</summary>
         public void* @priv_data;
-        /// <summary>Parameters of the input stream. Set by the caller before av_bsf_init().</summary>
+        /// <summary>Parameters of the input stream. This field is allocated in av_bsf_alloc(), it needs to be filled by the caller before av_bsf_init().</summary>
         public AVCodecParameters* @par_in;
-        /// <summary>Parameters of the output stream. Set by the filter in av_bsf_init().</summary>
+        /// <summary>Parameters of the output stream. This field is allocated in av_bsf_alloc(), it is set by the filter in av_bsf_init().</summary>
         public AVCodecParameters* @par_out;
         /// <summary>The timebase used for the timestamps of the input packets. Set by the caller before av_bsf_init().</summary>
         public AVRational @time_base_in;
@@ -1104,7 +1125,7 @@ namespace FFmpeg.AutoGen
         public int @last_IP_duration;
         /// <summary>Number of packets to buffer for codec probing</summary>
         public int @probe_packets;
-        /// <summary>Number of frames that have been demuxed during av_find_stream_info()</summary>
+        /// <summary>Number of frames that have been demuxed during avformat_find_stream_info()</summary>
         public int @codec_info_nb_frames;
         public AVStreamParseType @need_parsing;
         public AVCodecParserContext* @parser;
@@ -1361,45 +1382,45 @@ namespace FFmpeg.AutoGen
         public int @avoid_negative_ts;
         /// <summary>Transport stream id. This will be moved into demuxer private options. Thus no API/ABI compatibility</summary>
         public int @ts_id;
-        /// <summary>Audio preload in microseconds. Note, not all formats support this and unpredictable things may happen if it is used when not supported. - encoding: Set by user via AVOptions (NO direct access) - decoding: unused</summary>
+        /// <summary>Audio preload in microseconds. Note, not all formats support this and unpredictable things may happen if it is used when not supported. - encoding: Set by user - decoding: unused</summary>
         public int @audio_preload;
-        /// <summary>Max chunk time in microseconds. Note, not all formats support this and unpredictable things may happen if it is used when not supported. - encoding: Set by user via AVOptions (NO direct access) - decoding: unused</summary>
+        /// <summary>Max chunk time in microseconds. Note, not all formats support this and unpredictable things may happen if it is used when not supported. - encoding: Set by user - decoding: unused</summary>
         public int @max_chunk_duration;
-        /// <summary>Max chunk size in bytes Note, not all formats support this and unpredictable things may happen if it is used when not supported. - encoding: Set by user via AVOptions (NO direct access) - decoding: unused</summary>
+        /// <summary>Max chunk size in bytes Note, not all formats support this and unpredictable things may happen if it is used when not supported. - encoding: Set by user - decoding: unused</summary>
         public int @max_chunk_size;
-        /// <summary>forces the use of wallclock timestamps as pts/dts of packets This has undefined results in the presence of B frames. - encoding: unused - decoding: Set by user via AVOptions (NO direct access)</summary>
+        /// <summary>forces the use of wallclock timestamps as pts/dts of packets This has undefined results in the presence of B frames. - encoding: unused - decoding: Set by user</summary>
         public int @use_wallclock_as_timestamps;
-        /// <summary>avio flags, used to force AVIO_FLAG_DIRECT. - encoding: unused - decoding: Set by user via AVOptions (NO direct access)</summary>
+        /// <summary>avio flags, used to force AVIO_FLAG_DIRECT. - encoding: unused - decoding: Set by user</summary>
         public int @avio_flags;
-        /// <summary>The duration field can be estimated through various ways, and this field can be used to know how the duration was estimated. - encoding: unused - decoding: Read by user via AVOptions (NO direct access)</summary>
+        /// <summary>The duration field can be estimated through various ways, and this field can be used to know how the duration was estimated. - encoding: unused - decoding: Read by user</summary>
         public AVDurationEstimationMethod @duration_estimation_method;
-        /// <summary>Skip initial bytes when opening stream - encoding: unused - decoding: Set by user via AVOptions (NO direct access)</summary>
+        /// <summary>Skip initial bytes when opening stream - encoding: unused - decoding: Set by user</summary>
         public long @skip_initial_bytes;
-        /// <summary>Correct single timestamp overflows - encoding: unused - decoding: Set by user via AVOptions (NO direct access)</summary>
+        /// <summary>Correct single timestamp overflows - encoding: unused - decoding: Set by user</summary>
         public uint @correct_ts_overflow;
-        /// <summary>Force seeking to any (also non key) frames. - encoding: unused - decoding: Set by user via AVOptions (NO direct access)</summary>
+        /// <summary>Force seeking to any (also non key) frames. - encoding: unused - decoding: Set by user</summary>
         public int @seek2any;
-        /// <summary>Flush the I/O context after each packet. - encoding: Set by user via AVOptions (NO direct access) - decoding: unused</summary>
+        /// <summary>Flush the I/O context after each packet. - encoding: Set by user - decoding: unused</summary>
         public int @flush_packets;
-        /// <summary>format probing score. The maximal score is AVPROBE_SCORE_MAX, its set when the demuxer probes the format. - encoding: unused - decoding: set by avformat, read by user via av_format_get_probe_score() (NO direct access)</summary>
+        /// <summary>format probing score. The maximal score is AVPROBE_SCORE_MAX, its set when the demuxer probes the format. - encoding: unused - decoding: set by avformat, read by user</summary>
         public int @probe_score;
-        /// <summary>number of bytes to read maximally to identify format. - encoding: unused - decoding: set by user through AVOPtions (NO direct access)</summary>
+        /// <summary>number of bytes to read maximally to identify format. - encoding: unused - decoding: set by user</summary>
         public int @format_probesize;
-        /// <summary>&apos;,&apos; separated list of allowed decoders. If NULL then all are allowed - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
+        /// <summary>&apos;,&apos; separated list of allowed decoders. If NULL then all are allowed - encoding: unused - decoding: set by user</summary>
         public byte* @codec_whitelist;
-        /// <summary>&apos;,&apos; separated list of allowed demuxers. If NULL then all are allowed - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
+        /// <summary>&apos;,&apos; separated list of allowed demuxers. If NULL then all are allowed - encoding: unused - decoding: set by user</summary>
         public byte* @format_whitelist;
         /// <summary>An opaque field for libavformat internal usage. Must not be accessed in any way by callers.</summary>
         public AVFormatInternal* @internal;
         /// <summary>IO repositioned flag. This is set by avformat when the underlaying IO context read pointer is repositioned, for example when doing byte based seeking. Demuxers can use the flag to detect such changes.</summary>
         public int @io_repositioned;
-        /// <summary>Forced video codec. This allows forcing a specific decoder, even when there are multiple with the same codec_id. Demuxing: Set by user via av_format_set_video_codec (NO direct access).</summary>
+        /// <summary>Forced video codec. This allows forcing a specific decoder, even when there are multiple with the same codec_id. Demuxing: Set by user</summary>
         public AVCodec* @video_codec;
-        /// <summary>Forced audio codec. This allows forcing a specific decoder, even when there are multiple with the same codec_id. Demuxing: Set by user via av_format_set_audio_codec (NO direct access).</summary>
+        /// <summary>Forced audio codec. This allows forcing a specific decoder, even when there are multiple with the same codec_id. Demuxing: Set by user</summary>
         public AVCodec* @audio_codec;
-        /// <summary>Forced subtitle codec. This allows forcing a specific decoder, even when there are multiple with the same codec_id. Demuxing: Set by user via av_format_set_subtitle_codec (NO direct access).</summary>
+        /// <summary>Forced subtitle codec. This allows forcing a specific decoder, even when there are multiple with the same codec_id. Demuxing: Set by user</summary>
         public AVCodec* @subtitle_codec;
-        /// <summary>Forced data codec. This allows forcing a specific decoder, even when there are multiple with the same codec_id. Demuxing: Set by user via av_format_set_data_codec (NO direct access).</summary>
+        /// <summary>Forced data codec. This allows forcing a specific decoder, even when there are multiple with the same codec_id. Demuxing: Set by user</summary>
         public AVCodec* @data_codec;
         /// <summary>Number of bytes to be written as padding in a metadata header. Demuxing: Unused. Muxing: Set by user via av_format_set_metadata_header_padding.</summary>
         public int @metadata_header_padding;
@@ -1407,21 +1428,23 @@ namespace FFmpeg.AutoGen
         public void* @opaque;
         /// <summary>Callback used by devices to communicate with application.</summary>
         public AVFormatContext_control_message_cb_func @control_message_cb;
-        /// <summary>Output timestamp offset, in microseconds. Muxing: set by user via AVOptions (NO direct access)</summary>
+        /// <summary>Output timestamp offset, in microseconds. Muxing: set by user</summary>
         public long @output_ts_offset;
-        /// <summary>dump format separator. can be &quot;, &quot; or &quot; &quot; or anything else Code outside libavformat should access this field using AVOptions (NO direct access). - muxing: Set by user. - demuxing: Set by user.</summary>
+        /// <summary>dump format separator. can be &quot;, &quot; or &quot; &quot; or anything else - muxing: Set by user. - demuxing: Set by user.</summary>
         public byte* @dump_separator;
         /// <summary>Forced Data codec_id. Demuxing: Set by user.</summary>
         public AVCodecID @data_codec_id;
         /// <summary>Called to open further IO contexts when needed for demuxing.</summary>
         public AVFormatContext_open_cb_func @open_cb;
-        /// <summary>&apos;,&apos; separated list of allowed protocols. - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
+        /// <summary>&apos;,&apos; separated list of allowed protocols. - encoding: unused - decoding: set by user</summary>
         public byte* @protocol_whitelist;
         public AVFormatContext_io_open_func @io_open;
         /// <summary>A callback for closing the streams opened with AVFormatContext.io_open().</summary>
         public AVFormatContext_io_close_func @io_close;
-        /// <summary>&apos;,&apos; separated list of disallowed protocols. - encoding: unused - decoding: set by user through AVOptions (NO direct access)</summary>
+        /// <summary>&apos;,&apos; separated list of disallowed protocols. - encoding: unused - decoding: set by user</summary>
         public byte* @protocol_blacklist;
+        /// <summary>The maximum number of streams. - encoding: unused - decoding: set by user</summary>
+        public int @max_streams;
     }
     
     /// <summary>@{</summary>
@@ -1564,6 +1587,8 @@ namespace FFmpeg.AutoGen
         /// <summary>Internal, not meant to be used from outside of AVIOContext.</summary>
         public AVIODataMarkerType @current_type;
         public long @last_time;
+        /// <summary>A callback that is used instead of short_seek_threshold. This is current internal only, do not use from outside.</summary>
+        public AVIOContext_short_seek_get_func @short_seek_get;
     }
     
     /// <summary>Callback for checking whether to abort blocking functions. AVERROR_EXIT is returned in this case by the interrupted function. During blocking operations, callback is called with opaque as parameter. If the callback returns 1, the blocking operation will be aborted.</summary>
@@ -1645,6 +1670,8 @@ namespace FFmpeg.AutoGen
         public AVBufferRef* @hw_device_ctx;
         /// <summary>Max number of threads allowed in this filter instance. If &lt;= 0, its value is ignored. Overrides global number of threads set per filter graph.</summary>
         public int @nb_threads;
+        /// <summary>Ready status of the filter. A non-0 value means that the filter needs activating; a higher value suggests a more urgent activation.</summary>
+        public uint @ready;
     }
     
     /// <summary>Filter definition. This defines the pads a filter contains, and all the callback functions used to interact with the filter.</summary>
@@ -1672,12 +1699,16 @@ namespace FFmpeg.AutoGen
         public AVFilter_query_formats_func @query_formats;
         /// <summary>size of private data to allocate for the filter</summary>
         public int @priv_size;
+        /// <summary>Additional flags for avfilter internal use only.</summary>
+        public int @flags_internal;
         /// <summary>Used by the filter registration system. Must not be touched by any other code.</summary>
         public AVFilter* @next;
         /// <summary>Make the filter instance process a command.</summary>
         public AVFilter_process_command_func @process_command;
         /// <summary>Filter initialization function, alternative to the init() callback. Args contains the user-supplied parameters, opaque is used for providing binary data.</summary>
         public AVFilter_init_opaque_func @init_opaque;
+        /// <summary>Filter activation function.</summary>
+        public AVFilter_activate_func @activate;
     }
     
     /// <summary>A link between two filters. This contains pointers to the source and destination filters between which this link exists, and the indexes of the pads involved. In addition, this link also contains the parameters which have been negotiated and agreed upon between the filter, such as image dimensions, format, etc.</summary>
@@ -1736,22 +1767,22 @@ namespace FFmpeg.AutoGen
         public int @min_samples;
         /// <summary>Maximum number of samples to filter at once. If filter_frame() is called with more samples, it will split them.</summary>
         public int @max_samples;
-        /// <summary>Link status. If not zero, all attempts of filter_frame or request_frame will fail with the corresponding code, and if necessary the reference will be destroyed. If request_frame returns an error, the status is set on the corresponding link. It can be set also be set by either the source or the destination filter.</summary>
-        public int @status;
         /// <summary>Number of channels.</summary>
         public int @channels;
         /// <summary>Link processing flags.</summary>
         public uint @flags;
         /// <summary>Number of past frames sent through the link.</summary>
-        public long @frame_count;
-        /// <summary>A pointer to a FFVideoFramePool struct.</summary>
-        public void* @video_frame_pool;
-        /// <summary>True if a frame is currently wanted on the input of this filter. Set when ff_request_frame() is called by the output, cleared when the request is handled or forwarded.</summary>
-        public int @frame_wanted_in;
+        public long @frame_count_in;
+        /// <summary>Number of past frames sent through the link.</summary>
+        public long @frame_count_out;
+        /// <summary>A pointer to a FFFramePool struct.</summary>
+        public void* @frame_pool;
         /// <summary>True if a frame is currently wanted on the output of this filter. Set when ff_request_frame() is called by the output, cleared when a frame is filtered.</summary>
         public int @frame_wanted_out;
         /// <summary>For hwaccel pixel formats, this should be a reference to the AVHWFramesContext describing the frames.</summary>
         public AVBufferRef* @hw_frames_ctx;
+        /// <summary>Internal structure members. The fields below this limit are internal for libavfilter&apos;s use and must in no way be accessed by applications.</summary>
+        public byte_array61440 @reserved;
     }
     
     public unsafe struct AVFilterGraph
