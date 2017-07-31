@@ -148,7 +148,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 LanguageVersion = LanguageVersion.GNUC
             };
             parserOptions.SetupIncludes();
-
+            parserOptions.AddSystemIncludeDirs(@"C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\ucrt");
+            
             foreach (var includeDir in IncludeDirs) parserOptions.AddIncludeDirs(includeDir);
 
             foreach (var define in Defines) parserOptions.AddDefines(define);

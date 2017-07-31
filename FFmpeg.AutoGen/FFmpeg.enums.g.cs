@@ -317,6 +317,14 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_MAGICYUV = 32787,
         @AV_CODEC_ID_SHEERVIDEO = 32788,
         @AV_CODEC_ID_YLC = 32789,
+        @AV_CODEC_ID_PSD = 32790,
+        @AV_CODEC_ID_PIXLET = 32791,
+        @AV_CODEC_ID_SPEEDHQ = 32792,
+        @AV_CODEC_ID_FMVC = 32793,
+        @AV_CODEC_ID_SCPR = 32794,
+        @AV_CODEC_ID_CLEARVIDEO = 32795,
+        @AV_CODEC_ID_XPM = 32796,
+        @AV_CODEC_ID_AV1 = 32797,
         /// <summary>A dummy id pointing at the start of audio codecs</summary>
         @AV_CODEC_ID_FIRST_AUDIO = 65536,
         @AV_CODEC_ID_PCM_S16LE = 65536,
@@ -352,6 +360,8 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_PCM_S16BE_PLANAR = 65566,
         @AV_CODEC_ID_PCM_S64LE = 67584,
         @AV_CODEC_ID_PCM_S64BE = 67585,
+        @AV_CODEC_ID_PCM_F16LE = 67586,
+        @AV_CODEC_ID_PCM_F24LE = 67587,
         @AV_CODEC_ID_ADPCM_IMA_QT = 69632,
         @AV_CODEC_ID_ADPCM_IMA_WAV = 69633,
         @AV_CODEC_ID_ADPCM_IMA_DK3 = 69634,
@@ -487,6 +497,8 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_XMA1 = 88075,
         @AV_CODEC_ID_XMA2 = 88076,
         @AV_CODEC_ID_DST = 88077,
+        @AV_CODEC_ID_ATRAC3AL = 88078,
+        @AV_CODEC_ID_ATRAC3PAL = 88079,
         /// <summary>A dummy ID pointing at the start of subtitle codecs.</summary>
         @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
         @AV_CODEC_ID_DVD_SUBTITLE = 94208,
@@ -560,13 +572,16 @@ namespace FFmpeg.AutoGen
         /// <summary>ITU-R BT2020</summary>
         @AVCOL_PRI_BT2020 = 9,
         /// <summary>SMPTE ST 428-1 (CIE 1931 XYZ)</summary>
+        @AVCOL_PRI_SMPTE428 = 10,
         @AVCOL_PRI_SMPTEST428_1 = 10,
-        /// <summary>SMPTE ST 431-2 (2011)</summary>
+        /// <summary>SMPTE ST 431-2 (2011) / DCI P3</summary>
         @AVCOL_PRI_SMPTE431 = 11,
-        /// <summary>SMPTE ST 432-1 D65 (2010)</summary>
+        /// <summary>SMPTE ST 432-1 (2010) / P3 D65 / Display P3</summary>
         @AVCOL_PRI_SMPTE432 = 12,
+        /// <summary>JEDEC P22 phosphors</summary>
+        @AVCOL_PRI_JEDEC_P22 = 22,
         /// <summary>Not part of ABI</summary>
-        @AVCOL_PRI_NB = 13,
+        @AVCOL_PRI_NB = 23,
     }
     
     /// <summary>MPEG vs JPEG YUV range.</summary>
@@ -599,6 +614,7 @@ namespace FFmpeg.AutoGen
         /// <summary>functionally identical to above</summary>
         @AVCOL_SPC_SMPTE240M = 7,
         /// <summary>Used by Dirac / VC-2 and H.264 FRext, see ITU-T SG16</summary>
+        @AVCOL_SPC_YCGCO = 8,
         @AVCOL_SPC_YCOCG = 8,
         /// <summary>ITU-R BT2020 non-constant luminance system</summary>
         @AVCOL_SPC_BT2020_NCL = 9,
@@ -642,8 +658,10 @@ namespace FFmpeg.AutoGen
         /// <summary>ITU-R BT2020 for 12-bit system</summary>
         @AVCOL_TRC_BT2020_12 = 15,
         /// <summary>SMPTE ST 2084 for 10-, 12-, 14- and 16-bit systems</summary>
+        @AVCOL_TRC_SMPTE2084 = 16,
         @AVCOL_TRC_SMPTEST2084 = 16,
         /// <summary>SMPTE ST 428-1</summary>
+        @AVCOL_TRC_SMPTE428 = 17,
         @AVCOL_TRC_SMPTEST428_1 = 17,
         /// <summary>ARIB STD-B67, known as &quot;Hybrid log-gamma&quot;</summary>
         @AVCOL_TRC_ARIB_STD_B67 = 18,
@@ -757,6 +775,8 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_MASTERING_DISPLAY_METADATA = 11,
         /// <summary>The GOP timecode in 25 bit timecode format. Data format is 64-bit integer. This is set on the first frame of a GOP that has a temporal reference of 0.</summary>
         @AV_FRAME_DATA_GOP_TIMECODE = 12,
+        /// <summary>The data represents the AVSphericalMapping structure defined in libavutil/spherical.h.</summary>
+        @AV_FRAME_DATA_SPHERICAL = 13,
     }
     
     /// <summary>Different data types that can be returned via the AVIO write_data_type callback.</summary>
@@ -843,6 +863,7 @@ namespace FFmpeg.AutoGen
         /// <summary>offset must point to a pointer immediately followed by an int for the length</summary>
         @AV_OPT_TYPE_BINARY = 7,
         @AV_OPT_TYPE_DICT = 8,
+        @AV_OPT_TYPE_UINT64 = 9,
         @AV_OPT_TYPE_CONST = 128,
         /// <summary>offset must point to two consecutive integers</summary>
         @AV_OPT_TYPE_IMAGE_SIZE = 1397316165,
@@ -859,6 +880,7 @@ namespace FFmpeg.AutoGen
     /// <summary>Types and functions for working with AVPacket. @{</summary>
     public enum AVPacketSideDataType : int
     {
+        /// <summary>An AV_PKT_DATA_PALETTE side data packet contains exactly AVPALETTE_SIZE bytes worth of palette. This side data signals that a new palette is present.</summary>
         @AV_PKT_DATA_PALETTE = 0,
         /// <summary>The AV_PKT_DATA_NEW_EXTRADATA is used to notify the codec or the format that the extradata buffer was changed and the receiving side should act upon it appropriately. The new extradata is embedded in the side data buffer and should be immediately used for processing the current frame or packet.</summary>
         @AV_PKT_DATA_NEW_EXTRADATA = 1,
@@ -900,6 +922,10 @@ namespace FFmpeg.AutoGen
         @AV_PKT_DATA_MPEGTS_STREAM_ID = 78,
         /// <summary>Mastering display metadata (based on SMPTE-2086:2014). This metadata should be associated with a video stream and containts data in the form of the AVMasteringDisplayMetadata struct.</summary>
         @AV_PKT_DATA_MASTERING_DISPLAY_METADATA = 79,
+        /// <summary>This side data should be associated with a video stream and corresponds to the AVSphericalMapping structure.</summary>
+        @AV_PKT_DATA_SPHERICAL = 80,
+        /// <summary>The number of side data elements (in fact a bit more than it). This is not part of the public API/ABI in the sense that it may change when new side data types are added. This must stay the last enum value. If its value becomes huge, some code using it needs to be updated as it assumes it to be smaller than other limits.</summary>
+        @AV_PKT_DATA_NB = 81,
     }
     
     /// <summary>@{</summary>
@@ -1297,8 +1323,20 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_GBRAP10LE = 340,
         /// <summary>hardware decoding through MediaCodec</summary>
         @AV_PIX_FMT_MEDIACODEC = 341,
+        /// <summary>Y , 12bpp, big-endian</summary>
+        @AV_PIX_FMT_GRAY12BE = 342,
+        /// <summary>Y , 12bpp, little-endian</summary>
+        @AV_PIX_FMT_GRAY12LE = 343,
+        /// <summary>Y , 10bpp, big-endian</summary>
+        @AV_PIX_FMT_GRAY10BE = 344,
+        /// <summary>Y , 10bpp, little-endian</summary>
+        @AV_PIX_FMT_GRAY10LE = 345,
+        /// <summary>like NV12, with 16bpp per component, little-endian</summary>
+        @AV_PIX_FMT_P016LE = 346,
+        /// <summary>like NV12, with 16bpp per component, big-endian</summary>
+        @AV_PIX_FMT_P016BE = 347,
         /// <summary>number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions</summary>
-        @AV_PIX_FMT_NB = 342,
+        @AV_PIX_FMT_NB = 348,
     }
     
     /// <summary>Rounding methods.</summary>
@@ -1391,6 +1429,16 @@ namespace FFmpeg.AutoGen
         @AVFMT_TBCF_DECODER = 0,
         @AVFMT_TBCF_DEMUXER = 1,
         @AVFMT_TBCF_R_FRAMERATE = 2,
+    }
+    
+    public enum AVTimecodeFlag : int
+    {
+        /// <summary>timecode is drop frame</summary>
+        @AV_TIMECODE_FLAG_DROPFRAME = 1,
+        /// <summary>timecode wraps after 24 hours</summary>
+        @AV_TIMECODE_FLAG_24HOURSMAX = 2,
+        /// <summary>negative time values are allowed</summary>
+        @AV_TIMECODE_FLAG_ALLOWNEGATIVE = 4,
     }
     
     public enum Motion_Est_ID : int

@@ -38,21 +38,23 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 ClassName = ClassName
             };
 
-            g.Parse("libavutil/avutil.h", "libavutil/audio_fifo.h", "libavutil/channel_layout.h", "libavutil/cpu.h", "libavutil/frame.h", "libavutil/opt.h", "libavutil/imgutils.h");
-            g.Parse();
-
+            g.Parse("libavutil/avutil.h", 
+                "libavutil/audio_fifo.h", 
+                "libavutil/channel_layout.h", 
+                "libavutil/cpu.h", 
+                "libavutil/frame.h", 
+                "libavutil/opt.h", 
+                "libavutil/imgutils.h",
+                "libavutil/timecode.h");
+            
             g.Parse("libswresample/swresample.h");
-            g.Parse();
-
+            
             g.Parse("libpostproc/postprocess.h");
-            g.Parse();
-
+            
             g.Parse("libswscale/swscale.h");
-            g.Parse();
-
+            
             g.Parse("libavcodec/avcodec.h");
-            g.Parse();
-
+            
             g.Parse("libavformat/avformat.h");
 
             g.Parse("libavfilter/avfilter.h", "libavfilter/buffersrc.h", "libavfilter/buffersink.h");

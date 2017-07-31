@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <NoWarn>1701;1702;1705;CS0169</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <NoWarn>1701;1702;1705;CS0169</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\FFmpeg.AutoGen\ConstCharPtrMarshaler.cs" Link="ConstCharPtrMarshaler.cs" />
+    <Compile Include="..\FFmpeg.AutoGen\FFmpeg.arrays.g.cs" Link="FFmpeg.arrays.g.cs" />
+    <Compile Include="..\FFmpeg.AutoGen\FFmpeg.delegates.g.cs" Link="FFmpeg.delegates.g.cs" />
+    <Compile Include="..\FFmpeg.AutoGen\FFmpeg.enums.g.cs" Link="FFmpeg.enums.g.cs" />
+    <Compile Include="..\FFmpeg.AutoGen\FFmpeg.functions.g.cs" Link="FFmpeg.functions.g.cs" />
+    <Compile Include="..\FFmpeg.AutoGen\FFmpeg.macros.g.cs" Link="FFmpeg.macros.g.cs" />
+    <Compile Include="..\FFmpeg.AutoGen\FFmpeg.structs.g.cs" Link="FFmpeg.structs.g.cs" />
+    <Compile Include="..\FFmpeg.AutoGen\FFmpeg.structs.incomplete.g.cs" Link="FFmpeg.structs.incomplete.g.cs" />
+  </ItemGroup>
+
+</Project>
