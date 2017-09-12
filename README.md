@@ -7,7 +7,7 @@ As another option you can search for a solution in C(lang) as with some effort y
 ## FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.png)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
 
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.  
-The bindings are generated against: ffmpeg 3.3.2
+The bindings are generated against: ffmpeg 3.3.3
 
 The 3.2 ClangSharp based version is [here](https://github.com/Ruslan-B/FFmpeg.AutoGen/tree/3.2).
 
