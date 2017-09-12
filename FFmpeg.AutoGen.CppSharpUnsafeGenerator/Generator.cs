@@ -15,11 +15,21 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     internal class Generator
     {
+        private static readonly string VsSdkPath = Path.GetFullPath(Path.Combine(MSVCToolchain.GetVSToolchain(VisualStudioVersion.Latest).Directory, @"../../SDK/ScopeCppSDK"));
+
+        private static readonly string[] AdditionalSystemIncludeDirs =
+        {
+            Path.Combine(VsSdkPath, @"VC\include"),
+            Path.Combine(VsSdkPath, @"SDK\include\shared"),
+            Path.Combine(VsSdkPath, @"SDK\include\ucrt"),
+            Path.Combine(VsSdkPath, @"SDK\include\um")
+        };
+
         private bool _hasParsingErrors;
         private ASTProcessor _astProcessor;
 
-        public string[] Defines { get; set; } = {};
-        public string[] IncludeDirs { get; set; } = {};
+        public string[] Defines { get; set; } = { };
+        public string[] IncludeDirs { get; set; } = { };
         public FunctionExport[] Exports { get; set; }
 
         public string Namespace { get; set; }
@@ -97,6 +107,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         {
             WriteInternal(outputFile, (units, writer) =>
             {
+                writer.WriteLine("#pragma warning disable 169");
+                writer.WriteLine();
                 units.OfType<FixedArrayDefinition>()
                     .OrderBy(x => x.Size)
                     .ThenBy(x => x.Name)
@@ -113,29 +125,28 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteInternal(outputFile, (units, writer) =>
             {
                 units.OfType<StructureDefinition>()
-                .Where(x => x.IsComplete)
-                .ToList()
-                .ForEach(x =>
-                {
-                    writer.Write(x);
-                    writer.WriteLine();
-                });
+                    .Where(x => x.IsComplete)
+                    .ToList()
+                    .ForEach(x =>
+                    {
+                        writer.Write(x);
+                        writer.WriteLine();
+                    });
             });
         }
-        
+
         public void WriteIncompleteStructures(string outputFile)
         {
-
             WriteInternal(outputFile, (units, writer) =>
             {
                 units.OfType<StructureDefinition>()
-                .Where(x => !x.IsComplete)
-                .ToList()
-                .ForEach(x =>
-                {
-                    writer.Write(x);
-                    writer.WriteLine();
-                });
+                    .Where(x => !x.IsComplete)
+                    .ToList()
+                    .ForEach(x =>
+                    {
+                        writer.Write(x);
+                        writer.WriteLine();
+                    });
             });
         }
 
@@ -147,9 +158,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 ASTContext = new CppSharp.Parser.AST.ASTContext(),
                 LanguageVersion = LanguageVersion.GNUC
             };
-            parserOptions.SetupIncludes();
-            parserOptions.AddSystemIncludeDirs(@"C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\ucrt");
-            
+
+            parserOptions.SetupMSVC(VisualStudioVersion.Latest);
+
+            foreach (var includeDir in AdditionalSystemIncludeDirs) parserOptions.AddSystemIncludeDirs(includeDir);
+
             foreach (var includeDir in IncludeDirs) parserOptions.AddIncludeDirs(includeDir);
 
             foreach (var define in Defines) parserOptions.AddDefines(define);

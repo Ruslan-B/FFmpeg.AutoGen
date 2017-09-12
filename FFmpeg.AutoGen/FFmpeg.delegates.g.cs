@@ -76,6 +76,22 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVHWDeviceContext_free (AVHWDeviceContext* @ctx);
+    public unsafe struct AVHWDeviceContext_free_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVHWDeviceContext_free_func(AVHWDeviceContext_free func) => new AVHWDeviceContext_free_func { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVHWFramesContext_free (AVHWFramesContext* @ctx);
+    public unsafe struct AVHWFramesContext_free_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVHWFramesContext_free_func(AVHWFramesContext_free func) => new AVHWFramesContext_free_func { Pointer = Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate int AVCodec_init_thread_copy (AVCodecContext* @p0);
     public unsafe struct AVCodec_init_thread_copy_func
     {

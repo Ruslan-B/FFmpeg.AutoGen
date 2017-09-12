@@ -280,6 +280,151 @@ namespace FFmpeg.AutoGen
         public uint @fps;
     }
     
+    /// <summary>This struct aggregates all the (hardware/vendor-specific) &quot;high-level&quot; state, i.e. state that is not tied to a concrete processing configuration. E.g., in an API that supports hardware-accelerated encoding and decoding, this struct will (if possible) wrap the state that is common to both encoding and decoding and from which specific instances of encoders or decoders can be derived.</summary>
+    public unsafe struct AVHWDeviceContext
+    {
+        /// <summary>A class for logging. Set by av_hwdevice_ctx_alloc().</summary>
+        public AVClass* @av_class;
+        /// <summary>Private data used internally by libavutil. Must not be accessed in any way by the caller.</summary>
+        public AVHWDeviceInternal* @internal;
+        /// <summary>This field identifies the underlying API used for hardware access.</summary>
+        public AVHWDeviceType @type;
+        /// <summary>The format-specific data, allocated and freed by libavutil along with this context.</summary>
+        public void* @hwctx;
+        /// <summary>This field may be set by the caller before calling av_hwdevice_ctx_init().</summary>
+        public AVHWDeviceContext_free_func @free;
+        /// <summary>Arbitrary user data, to be used e.g. by the free() callback.</summary>
+        public void* @user_opaque;
+    }
+    
+    /// <summary>This struct describes a set or pool of &quot;hardware&quot; frames (i.e. those with data not located in normal system memory). All the frames in the pool are assumed to be allocated in the same way and interchangeable.</summary>
+    public unsafe struct AVHWFramesContext
+    {
+        /// <summary>A class for logging.</summary>
+        public AVClass* @av_class;
+        /// <summary>Private data used internally by libavutil. Must not be accessed in any way by the caller.</summary>
+        public AVHWFramesInternal* @internal;
+        /// <summary>A reference to the parent AVHWDeviceContext. This reference is owned and managed by the enclosing AVHWFramesContext, but the caller may derive additional references from it.</summary>
+        public AVBufferRef* @device_ref;
+        /// <summary>The parent AVHWDeviceContext. This is simply a pointer to device_ref-&gt;data provided for convenience.</summary>
+        public AVHWDeviceContext* @device_ctx;
+        /// <summary>The format-specific data, allocated and freed automatically along with this context.</summary>
+        public void* @hwctx;
+        /// <summary>This field may be set by the caller before calling av_hwframe_ctx_init().</summary>
+        public AVHWFramesContext_free_func @free;
+        /// <summary>Arbitrary user data, to be used e.g. by the free() callback.</summary>
+        public void* @user_opaque;
+        /// <summary>A pool from which the frames are allocated by av_hwframe_get_buffer(). This field may be set by the caller before calling av_hwframe_ctx_init(). The buffers returned by calling av_buffer_pool_get() on this pool must have the properties described in the documentation in the corresponding hw type&apos;s header (hwcontext_*.h). The pool will be freed strictly before this struct&apos;s free() callback is invoked.</summary>
+        public AVBufferPool* @pool;
+        /// <summary>Initial size of the frame pool. If a device type does not support dynamically resizing the pool, then this is also the maximum pool size.</summary>
+        public int @initial_pool_size;
+        /// <summary>The pixel format identifying the underlying HW surface type.</summary>
+        public AVPixelFormat @format;
+        /// <summary>The pixel format identifying the actual data layout of the hardware frames.</summary>
+        public AVPixelFormat @sw_format;
+        /// <summary>The allocated dimensions of the frames in this pool.</summary>
+        public int @width;
+        /// <summary>The allocated dimensions of the frames in this pool.</summary>
+        public int @height;
+    }
+    
+    /// <summary>This struct describes the constraints on hardware frames attached to a given device with a hardware-specific configuration. This is returned by av_hwdevice_get_hwframe_constraints() and must be freed by av_hwframe_constraints_free() after use.</summary>
+    public unsafe struct AVHWFramesConstraints
+    {
+        /// <summary>A list of possible values for format in the hw_frames_ctx, terminated by AV_PIX_FMT_NONE. This member will always be filled.</summary>
+        public AVPixelFormat* @valid_hw_formats;
+        /// <summary>A list of possible values for sw_format in the hw_frames_ctx, terminated by AV_PIX_FMT_NONE. Can be NULL if this information is not known.</summary>
+        public AVPixelFormat* @valid_sw_formats;
+        /// <summary>The minimum size of frames in this hw_frames_ctx. (Zero if not known.)</summary>
+        public int @min_width;
+        public int @min_height;
+        /// <summary>The maximum size of frames in this hw_frames_ctx. (INT_MAX if not known / no limit.)</summary>
+        public int @max_width;
+        public int @max_height;
+    }
+    
+    /// <summary>This struct is allocated as AVHWDeviceContext.hwctx</summary>
+    public unsafe struct AVDXVA2DeviceContext
+    {
+        public IDirect3DDeviceManager9* @devmgr;
+    }
+    
+    public unsafe struct IDirect3DDeviceManager9
+    {
+        public IDirect3DDeviceManager9Vtbl* @lpVtbl;
+    }
+    
+    public unsafe struct IDirect3DDeviceManager9Vtbl
+    {
+        public void* @QueryInterface;
+        public void* @AddRef;
+        public void* @Release;
+        public void* @ResetDevice;
+        public void* @OpenDeviceHandle;
+        public void* @CloseDeviceHandle;
+        public void* @TestDevice;
+        public void* @LockDevice;
+        public void* @UnlockDevice;
+        public void* @GetVideoService;
+    }
+    
+    /// <summary>This struct is allocated as AVHWFramesContext.hwctx</summary>
+    public unsafe struct AVDXVA2FramesContext
+    {
+        /// <summary>The surface type (e.g. DXVA2_VideoProcessorRenderTarget or DXVA2_VideoDecoderRenderTarget). Must be set by the caller.</summary>
+        public ulong @surface_type;
+        /// <summary>The surface pool. When an external pool is not provided by the caller, this will be managed (allocated and filled on init, freed on uninit) by libavutil.</summary>
+        public IDirect3DSurface9** @surfaces;
+        public int @nb_surfaces;
+        /// <summary>Certain drivers require the decoder to be destroyed before the surfaces. To allow internally managed pools to work properly in such cases, this field is provided.</summary>
+        public IDirectXVideoDecoder* @decoder_to_release;
+    }
+    
+    public unsafe struct IDirect3DSurface9
+    {
+        public IDirect3DSurface9Vtbl* @lpVtbl;
+    }
+    
+    public unsafe struct IDirect3DSurface9Vtbl
+    {
+        public void* @QueryInterface;
+        public void* @AddRef;
+        public void* @Release;
+        public void* @GetDevice;
+        public void* @SetPrivateData;
+        public void* @GetPrivateData;
+        public void* @FreePrivateData;
+        public void* @SetPriority;
+        public void* @GetPriority;
+        public void* @PreLoad;
+        public void* @GetType;
+        public void* @GetContainer;
+        public void* @GetDesc;
+        public void* @LockRect;
+        public void* @UnlockRect;
+        public void* @GetDC;
+        public void* @ReleaseDC;
+    }
+    
+    public unsafe struct IDirectXVideoDecoder
+    {
+        public IDirectXVideoDecoderVtbl* @lpVtbl;
+    }
+    
+    public unsafe struct IDirectXVideoDecoderVtbl
+    {
+        public void* @QueryInterface;
+        public void* @AddRef;
+        public void* @Release;
+        public void* @GetVideoDecoderService;
+        public void* @GetCreationParameters;
+        public void* @GetBuffer;
+        public void* @ReleaseBuffer;
+        public void* @BeginFrame;
+        public void* @EndFrame;
+        public void* @Execute;
+    }
+    
     public unsafe struct SwsVector
     {
         /// <summary>pointer to the list of coefficients</summary>
@@ -1055,6 +1200,166 @@ namespace FFmpeg.AutoGen
         public AVBitStreamFilterContext* @next;
         /// <summary>Internal default arguments, used if NULL is passed to av_bitstream_filter_filter(). Not for access by library users.</summary>
         public byte* @args;
+    }
+    
+    /// <summary>This structure is used to provides the necessary configurations and data to the Direct3D11 FFmpeg HWAccel implementation.</summary>
+    public unsafe struct AVD3D11VAContext
+    {
+        /// <summary>D3D11 decoder object</summary>
+        public ID3D11VideoDecoder* @decoder;
+        /// <summary>D3D11 VideoContext</summary>
+        public ID3D11VideoContext* @video_context;
+        /// <summary>D3D11 configuration used to create the decoder</summary>
+        public D3D11_VIDEO_DECODER_CONFIG* @cfg;
+        /// <summary>The number of surface in the surface array</summary>
+        public uint @surface_count;
+        /// <summary>The array of Direct3D surfaces used to create the decoder</summary>
+        public ID3D11VideoDecoderOutputView** @surface;
+        /// <summary>A bit field configuring the workarounds needed for using the decoder</summary>
+        public ulong @workaround;
+        /// <summary>Private to the FFmpeg AVHWAccel implementation</summary>
+        public uint @report_id;
+        /// <summary>Mutex to access video_context</summary>
+        public void* @context_mutex;
+    }
+    
+    public unsafe struct ID3D11VideoDecoder
+    {
+        public ID3D11VideoDecoderVtbl* @lpVtbl;
+    }
+    
+    public unsafe struct ID3D11VideoDecoderVtbl
+    {
+        public void* @QueryInterface;
+        public void* @AddRef;
+        public void* @Release;
+        public void* @GetDevice;
+        public void* @GetPrivateData;
+        public void* @SetPrivateData;
+        public void* @SetPrivateDataInterface;
+        public void* @GetCreationParameters;
+        public void* @GetDriverHandle;
+    }
+    
+    public unsafe struct ID3D11VideoContext
+    {
+        public ID3D11VideoContextVtbl* @lpVtbl;
+    }
+    
+    public unsafe struct ID3D11VideoContextVtbl
+    {
+        public void* @QueryInterface;
+        public void* @AddRef;
+        public void* @Release;
+        public void* @GetDevice;
+        public void* @GetPrivateData;
+        public void* @SetPrivateData;
+        public void* @SetPrivateDataInterface;
+        public void* @GetDecoderBuffer;
+        public void* @ReleaseDecoderBuffer;
+        public void* @DecoderBeginFrame;
+        public void* @DecoderEndFrame;
+        public void* @SubmitDecoderBuffers;
+        public void* @DecoderExtension;
+        public void* @VideoProcessorSetOutputTargetRect;
+        public void* @VideoProcessorSetOutputBackgroundColor;
+        public void* @VideoProcessorSetOutputColorSpace;
+        public void* @VideoProcessorSetOutputAlphaFillMode;
+        public void* @VideoProcessorSetOutputConstriction;
+        public void* @VideoProcessorSetOutputStereoMode;
+        public void* @VideoProcessorSetOutputExtension;
+        public void* @VideoProcessorGetOutputTargetRect;
+        public void* @VideoProcessorGetOutputBackgroundColor;
+        public void* @VideoProcessorGetOutputColorSpace;
+        public void* @VideoProcessorGetOutputAlphaFillMode;
+        public void* @VideoProcessorGetOutputConstriction;
+        public void* @VideoProcessorGetOutputStereoMode;
+        public void* @VideoProcessorGetOutputExtension;
+        public void* @VideoProcessorSetStreamFrameFormat;
+        public void* @VideoProcessorSetStreamColorSpace;
+        public void* @VideoProcessorSetStreamOutputRate;
+        public void* @VideoProcessorSetStreamSourceRect;
+        public void* @VideoProcessorSetStreamDestRect;
+        public void* @VideoProcessorSetStreamAlpha;
+        public void* @VideoProcessorSetStreamPalette;
+        public void* @VideoProcessorSetStreamPixelAspectRatio;
+        public void* @VideoProcessorSetStreamLumaKey;
+        public void* @VideoProcessorSetStreamStereoFormat;
+        public void* @VideoProcessorSetStreamAutoProcessingMode;
+        public void* @VideoProcessorSetStreamFilter;
+        public void* @VideoProcessorSetStreamExtension;
+        public void* @VideoProcessorGetStreamFrameFormat;
+        public void* @VideoProcessorGetStreamColorSpace;
+        public void* @VideoProcessorGetStreamOutputRate;
+        public void* @VideoProcessorGetStreamSourceRect;
+        public void* @VideoProcessorGetStreamDestRect;
+        public void* @VideoProcessorGetStreamAlpha;
+        public void* @VideoProcessorGetStreamPalette;
+        public void* @VideoProcessorGetStreamPixelAspectRatio;
+        public void* @VideoProcessorGetStreamLumaKey;
+        public void* @VideoProcessorGetStreamStereoFormat;
+        public void* @VideoProcessorGetStreamAutoProcessingMode;
+        public void* @VideoProcessorGetStreamFilter;
+        public void* @VideoProcessorGetStreamExtension;
+        public void* @VideoProcessorBlt;
+        public void* @NegotiateCryptoSessionKeyExchange;
+        public void* @EncryptionBlt;
+        public void* @DecryptionBlt;
+        public void* @StartSessionKeyRefresh;
+        public void* @FinishSessionKeyRefresh;
+        public void* @GetEncryptionBltKey;
+        public void* @NegotiateAuthenticatedChannelKeyExchange;
+        public void* @QueryAuthenticatedChannel;
+        public void* @ConfigureAuthenticatedChannel;
+        public void* @VideoProcessorSetStreamRotation;
+        public void* @VideoProcessorGetStreamRotation;
+    }
+    
+    public unsafe struct D3D11_VIDEO_DECODER_CONFIG
+    {
+        public _GUID @guidConfigBitstreamEncryption;
+        public _GUID @guidConfigMBcontrolEncryption;
+        public _GUID @guidConfigResidDiffEncryption;
+        public uint @ConfigBitstreamRaw;
+        public uint @ConfigMBcontrolRasterOrder;
+        public uint @ConfigResidDiffHost;
+        public uint @ConfigSpatialResid8;
+        public uint @ConfigResid8Subtraction;
+        public uint @ConfigSpatialHost8or9Clipping;
+        public uint @ConfigSpatialResidInterleaved;
+        public uint @ConfigIntraResidUnsigned;
+        public uint @ConfigResidDiffAccelerator;
+        public uint @ConfigHostInverseScan;
+        public uint @ConfigSpecificIDCT;
+        public uint @Config4GroupedCoefs;
+        public ushort @ConfigMinRenderTargetBuffCount;
+        public ushort @ConfigDecoderSpecific;
+    }
+    
+    public unsafe struct _GUID
+    {
+        public ulong @Data1;
+        public ushort @Data2;
+        public ushort @Data3;
+        public byte_array8 @Data4;
+    }
+    
+    public unsafe struct ID3D11VideoDecoderOutputView
+    {
+        public ID3D11VideoDecoderOutputViewVtbl* @lpVtbl;
+    }
+    
+    public unsafe struct ID3D11VideoDecoderOutputViewVtbl
+    {
+        public void* @QueryInterface;
+        public void* @AddRef;
+        public void* @Release;
+        public void* @GetDevice;
+        public void* @GetPrivateData;
+        public void* @SetPrivateData;
+        public void* @SetPrivateDataInterface;
+        public void* @GetResource;
+        public void* @GetDesc;
     }
     
     /// <summary>This structure contains the data a format has to probe a file.</summary>

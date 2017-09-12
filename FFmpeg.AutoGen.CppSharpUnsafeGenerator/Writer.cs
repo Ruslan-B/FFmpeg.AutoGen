@@ -39,13 +39,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteSummary(structure);
             WriteLine($"public unsafe struct {structure.Name}");
             using (BeginBlock())
-            {
                 foreach (var item in structure.Fileds)
                 {
                     WriteSummary(item);
                     WriteLine($"public {item.FieldType.Name} @{item.Name};");
                 }
-            }
         }
 
         public void Write(FixedArrayDefinition array)
@@ -63,60 +61,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 else WriteComplexFixedArray(elementType, size, prefix);
 
                 WriteLine($"public static implicit operator {elementType}[]({array.Name} @struct) => @struct.ToArray();");
-            }
-        }
-
-        private void WritePrimitiveFixedArray(string arrayName, string elementType, int size, string prefix)
-        {
-            WriteLine($"fixed {elementType} {prefix}[{size}];");
-            WriteLine();
-
-            var @fixed = $"fixed ({arrayName}* p = &this)";
-
-            WriteLine($"public {elementType} this[uint i]");
-            using (BeginBlock())
-            {
-                WriteLine($"get {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return p->{prefix}[i]; }} }}");
-                WriteLine($"set {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ p->{prefix}[i] = value; }} }}");
-            }
-
-            WriteLine($"public {elementType}[] ToArray()");
-            using (BeginBlock())
-            {
-                WriteLine($"{@fixed} {{ var a = new {elementType}[Size]; for (uint i = 0; i < Size; i++) a[i] = p->{prefix}[i]; return a; }}");
-            }
-
-            WriteLine($"public void UpdateFrom({elementType}[] array)");
-            using (BeginBlock())
-            {
-                WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ p->{prefix}[i++] = value; if (i >= Size) return; }} }}");
-            }
-        }
-
-        private void WriteComplexFixedArray(string elementType, int size, string prefix)
-        {
-            WriteLine(string.Join(" ", Enumerable.Range(0, size).Select(i => $"{elementType} {prefix}{i};")));
-            WriteLine();
-
-            var @fixed = $"fixed ({elementType}* p0 = &{prefix}0)";
-
-            WriteLine($"public {elementType} this[uint i]");
-            using (BeginBlock())
-            {
-                WriteLine($"get {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return *(p0 + i); }} }}");
-                WriteLine($"set {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ *(p0 + i) = value;  }} }}");
-            }
-
-            WriteLine($"public {elementType}[] ToArray()");
-            using (BeginBlock())
-            {
-                WriteLine($"{@fixed} {{ var a = new {elementType}[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }}");
-            }
-
-            WriteLine($"public void UpdateFrom({elementType}[] array)");
-            using (BeginBlock())
-            {
-                WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ *(p0 + i++) = value; if (i >= Size) return; }} }}");
             }
         }
 
@@ -150,6 +94,73 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             }
         }
 
+        public void WriteLine()
+        {
+            _writer.WriteLine();
+        }
+
+        public void WriteLine(string line)
+        {
+            _writer.WriteLine(line);
+        }
+
+        public IDisposable BeginBlock()
+        {
+            WriteLine("{");
+            _writer.Indent++;
+            return new End(() =>
+            {
+                _writer.Indent--;
+                _writer.WriteLine("}");
+            });
+        }
+
+        private void WritePrimitiveFixedArray(string arrayName, string elementType, int size, string prefix)
+        {
+            WriteLine($"fixed {elementType} {prefix}[{size}];");
+            WriteLine();
+
+            var @fixed = $"fixed ({arrayName}* p = &this)";
+
+            WriteLine($"public {elementType} this[uint i]");
+            using (BeginBlock())
+            {
+                WriteLine($"get {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return p->{prefix}[i]; }} }}");
+                WriteLine($"set {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ p->{prefix}[i] = value; }} }}");
+            }
+
+            WriteLine($"public {elementType}[] ToArray()");
+            using (BeginBlock())
+                WriteLine($"{@fixed} {{ var a = new {elementType}[Size]; for (uint i = 0; i < Size; i++) a[i] = p->{prefix}[i]; return a; }}");
+
+            WriteLine($"public void UpdateFrom({elementType}[] array)");
+            using (BeginBlock())
+                WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ p->{prefix}[i++] = value; if (i >= Size) return; }} }}");
+        }
+
+        private void WriteComplexFixedArray(string elementType, int size, string prefix)
+        {
+            WriteLine(string.Join(" ", Enumerable.Range(0, size).Select(i => $"{elementType} {prefix}{i};")));
+            WriteLine();
+
+            var @fixed = $"fixed ({elementType}* p0 = &{prefix}0)";
+
+            WriteLine($"public {elementType} this[uint i]");
+            using (BeginBlock())
+            {
+                WriteLine($"get {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return *(p0 + i); }} }}");
+                WriteLine($"set {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ *(p0 + i) = value;  }} }}");
+            }
+
+            WriteLine($"public {elementType}[] ToArray()");
+            using (BeginBlock())
+                WriteLine($"{@fixed} {{ var a = new {elementType}[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }}");
+
+            WriteLine($"public void UpdateFrom({elementType}[] array)");
+            using (BeginBlock())
+                WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ *(p0 + i++) = value; if (i >= Size) return; }} }}");
+        }
+
         private static string GetParameters(FunctionParameter[] parameters)
         {
             return string.Join(", ", parameters.Select(x =>
@@ -172,18 +183,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             if (!string.IsNullOrWhiteSpace(value.Content)) WriteLine($"/// <param name=\"{name}\">{SecurityElement.Escape(value.Content.Trim())}</param>");
         }
 
-        public void WriteLine() => _writer.WriteLine();
-        public void WriteLine(string line) => _writer.WriteLine(line);
-        private void Write(string value) => _writer.Write(value);
-        public IDisposable BeginBlock()
+        private void Write(string value)
         {
-            WriteLine("{");
-            _writer.Indent++;
-            return new End(() =>
-            {
-                _writer.Indent--;
-                _writer.WriteLine("}");
-            });
+            _writer.Write(value);
         }
 
         private class End : IDisposable
@@ -195,8 +197,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 _action = action;
             }
 
-            public void Dispose() => _action();
+            public void Dispose()
+            {
+                _action();
+            }
         }
-
     }
 }

@@ -779,6 +779,23 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_SPHERICAL = 13,
     }
     
+    public enum AVHWDeviceType : int
+    {
+        @AV_HWDEVICE_TYPE_VDPAU = 0,
+        @AV_HWDEVICE_TYPE_CUDA = 1,
+        @AV_HWDEVICE_TYPE_VAAPI = 2,
+        @AV_HWDEVICE_TYPE_DXVA2 = 3,
+        @AV_HWDEVICE_TYPE_QSV = 4,
+    }
+    
+    public enum AVHWFrameTransferDirection : int
+    {
+        /// <summary>Transfer the data from the queried hw frame.</summary>
+        @AV_HWFRAME_TRANSFER_DIRECTION_FROM = 0,
+        /// <summary>Transfer the data to the queried hw frame.</summary>
+        @AV_HWFRAME_TRANSFER_DIRECTION_TO = 1,
+    }
+    
     /// <summary>Different data types that can be returned via the AVIO write_data_type callback.</summary>
     public enum AVIODataMarkerType : int
     {

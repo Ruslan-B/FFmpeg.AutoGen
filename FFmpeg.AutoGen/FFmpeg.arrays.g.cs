@@ -3,6 +3,8 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
+    #pragma warning disable 169
+    
     public unsafe struct short_array2
     {
         public static readonly int Size = 2;
@@ -211,6 +213,27 @@ namespace FFmpeg.AutoGen
             fixed (AVBufferRef** p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
         }
         public static implicit operator AVBufferRef*[](AVBufferRef_ptrArray8 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct byte_array8
+    {
+        public static readonly int Size = 8;
+        fixed byte _[8];
+        
+        public byte this[uint i]
+        {
+            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte_array8* p = &this) { return p->_[i]; } }
+            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte_array8* p = &this) { p->_[i] = value; } }
+        }
+        public byte[] ToArray()
+        {
+            fixed (byte_array8* p = &this) { var a = new byte[Size]; for (uint i = 0; i < Size; i++) a[i] = p->_[i]; return a; }
+        }
+        public void UpdateFrom(byte[] array)
+        {
+            fixed (byte_array8* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
+        }
+        public static implicit operator byte[](byte_array8 @struct) => @struct.ToArray();
     }
     
     public unsafe struct byte_ptrArray8

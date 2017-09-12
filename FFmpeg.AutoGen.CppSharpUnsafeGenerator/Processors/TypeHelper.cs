@@ -8,12 +8,17 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
     {
         public static string GetTypeName(Type type)
         {
-            if (type is PointerType) return GetTypeName((PointerType) type);
-            if (type is BuiltinType) return GetTypeName((BuiltinType) type);
-            if (type is TypedefType) return GetTypeName((TypedefType) type);
-            if (type is TagType) return GetTypeName((TagType) type);
-            if (type is ArrayType) return GetTypeName((ArrayType) type);
-            throw new NotSupportedException();
+            switch (type)
+            {
+                case PointerType x: return GetTypeName(x);
+                case BuiltinType x: return GetTypeName(x);
+                case TypedefType x: return GetTypeName(x);
+                case TagType x: return GetTypeName(x);
+                case ArrayType x: return GetTypeName(x);
+                case AttributedType x: return GetTypeName(x);
+                default:
+                    throw new NotSupportedException();
+            }
         }
 
         private static string GetTypeName(ArrayType type)
@@ -23,9 +28,13 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private static string GetTypeName(TypedefType type)
         {
-            if (type.Declaration.Type is BuiltinType) return GetTypeName((BuiltinType) type.Declaration.Type);
-            if (type.Declaration.Type is PointerType) return GetTypeName((PointerType) type.Declaration.Type);
-            return type.Declaration.Name;
+            switch (type.Declaration.Type)
+            {
+                case BuiltinType x: return GetTypeName(x);
+                case PointerType x: return GetTypeName(x);
+                default:
+                    return type.Declaration.Name;
+            }
         }
 
         private static string GetTypeName(TagType type)
@@ -35,16 +44,30 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private static string GetTypeName(PointerType type)
         {
-            if (type.QualifiedPointee.Type is BuiltinType) return GetTypeName((BuiltinType) type.QualifiedPointee.Type) + "*";
-            if (type.QualifiedPointee.Type is TypedefType) return GetTypeName((TypedefType) type.QualifiedPointee.Type) + "*";
-            if (type.QualifiedPointee.Type is TagType) return GetTypeName((TagType) type.QualifiedPointee.Type) + "*";
-            if (type.QualifiedPointee.Type is PointerType) return GetTypeName((PointerType) type.QualifiedPointee.Type) + "*";
-            throw new NotSupportedException();
+            switch (type.QualifiedPointee.Type)
+            {
+                case BuiltinType x: return GetTypeName(x) + "*";
+                case TypedefType x: return GetTypeName(x) + "*";
+                case TagType x: return GetTypeName(x) + "*";
+                case PointerType x: return GetTypeName(x) + "*";
+                default:
+                    throw new NotSupportedException();
+            }
+        }
+
+        private static string GetTypeName(AttributedType type)
+        {
+            return GetTypeName(PrimitiveType.Void);
         }
 
         private static string GetTypeName(BuiltinType type)
         {
-            switch (type.Type)
+            return GetTypeName(type.Type);
+        }
+
+        private static string GetTypeName(PrimitiveType type)
+        {
+            switch (type)
             {
                 case PrimitiveType.Null:
                     break;
@@ -99,7 +122,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 case PrimitiveType.UIntPtr:
                     return "UIntPtr";
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(type));
             }
             throw new NotSupportedException();
         }

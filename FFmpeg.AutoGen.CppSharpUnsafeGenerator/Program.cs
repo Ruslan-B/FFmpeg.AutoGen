@@ -15,14 +15,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         private static readonly string[] Defines =
         {
-            "__STDC_CONSTANT_MACROS",
-            "AVCODEC_D3D11VA_H",
-            "AVCODEC_DXVA2_H",
-            "AVCODEC_QSV_H",
-            "AVCODEC_VDA_H",
-            "AVCODEC_VDPAU_H",
-            "AVCODEC_VIDEOTOOLBOX_H",
-            "AVCODEC_XVMC_H"
+            "__STDC_CONSTANT_MACROS"
         };
 
         private static void Main(string[] args)
@@ -38,26 +31,34 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 ClassName = ClassName
             };
 
-            g.Parse("libavutil/avutil.h", 
-                "libavutil/audio_fifo.h", 
-                "libavutil/channel_layout.h", 
-                "libavutil/cpu.h", 
-                "libavutil/frame.h", 
-                "libavutil/opt.h", 
+            g.Parse("libavutil/avutil.h",
+                "libavutil/audio_fifo.h",
+                "libavutil/channel_layout.h",
+                "libavutil/cpu.h",
+                "libavutil/frame.h",
+                "libavutil/opt.h",
                 "libavutil/imgutils.h",
-                "libavutil/timecode.h");
-            
+                "libavutil/timecode.h",
+                "libavutil/hwcontext.h",
+                "libavutil/hwcontext_dxva2.h"
+                //"libavutil/hwcontext_qsv.h",
+            );
+
             g.Parse("libswresample/swresample.h");
-            
+
             g.Parse("libpostproc/postprocess.h");
-            
+
             g.Parse("libswscale/swscale.h");
-            
-            g.Parse("libavcodec/avcodec.h");
-            
+
+            g.Parse("libavcodec/avcodec.h",
+                "libavcodec/dxva2.h",
+                "libavcodec/d3d11va.h");
+
             g.Parse("libavformat/avformat.h");
 
-            g.Parse("libavfilter/avfilter.h", "libavfilter/buffersrc.h", "libavfilter/buffersink.h");
+            g.Parse("libavfilter/avfilter.h",
+                "libavfilter/buffersrc.h",
+                "libavfilter/buffersink.h");
 
             g.Parse("libavdevice/avdevice.h");
 
