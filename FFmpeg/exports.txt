@@ -1,4 +1,4 @@
-Microsoft (R) COFF/PE Dumper Version 14.11.25303.0
+Microsoft (R) COFF/PE Dumper Version 14.00.23506.0
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
 
@@ -9,7 +9,7 @@ File Type: DLL
   Section contains the following exports for avcodec-57.dll
 
     00000000 characteristics
-    59527955 time date stamp Tue Jun 27 17:27:17 2017
+    5988DAB6 time date stamp Mon Aug  7 23:25:10 2017
         0.00 version
            1 ordinal base
          243 number of functions
@@ -17,249 +17,249 @@ File Type: DLL
 
     ordinal hint RVA      name
 
-          1    0 004EFAB0 audio_resample
-          2    1 004F06D0 audio_resample_close
-          3    2 000BDDC0 av_audio_convert
-          4    3 000BDD70 av_audio_convert_alloc
-          5    4 000BDDB0 av_audio_convert_free
-          6    5 004EF6F0 av_audio_resample_init
-          7    6 000CAB10 av_bitstream_filter_close
-          8    7 000CAB50 av_bitstream_filter_filter
-          9    8 000CAA90 av_bitstream_filter_init
-         10    9 000CAA40 av_bitstream_filter_next
-         11    A 000CDA10 av_bsf_alloc
-         12    B 000CD970 av_bsf_free
-         13    C 000CAE10 av_bsf_get_by_name
-         14    D 000CDA00 av_bsf_get_class
-         15    E 000CE770 av_bsf_get_null_filter
-         16    F 000CDB90 av_bsf_init
-         17   10 000CDE50 av_bsf_list_alloc
-         18   11 000CDF50 av_bsf_list_append
-         19   12 000CDF60 av_bsf_list_append2
-         20   13 000CE1D0 av_bsf_list_finalize
-         21   14 000CDE60 av_bsf_list_free
-         22   15 000CE390 av_bsf_list_parse_str
-         23   16 000CADF0 av_bsf_next
-         24   17 000CDD90 av_bsf_receive_packet
-         25   18 000CDD00 av_bsf_send_packet
-         26   19 017386F0 av_codec_ffversion
-         27   1A 005AA480 av_codec_get_chroma_intra_matrix
-         28   1B 005AA420 av_codec_get_codec_descriptor
-         29   1C 005AA4A0 av_codec_get_codec_properties
-         30   1D 005AA440 av_codec_get_lowres
-         31   1E 005AA4B0 av_codec_get_max_lowres
-         32   1F 005AA400 av_codec_get_pkt_timebase
-         33   20 005AA460 av_codec_get_seek_preroll
-         34   21 005A8030 av_codec_is_decoder
-         35   22 005A7FF0 av_codec_is_encoder
-         36   23 005A7FD0 av_codec_next
-         37   24 005AA490 av_codec_set_chroma_intra_matrix
-         38   25 005AA430 av_codec_set_codec_descriptor
-         39   26 005AA450 av_codec_set_lowres
-         40   27 005AA410 av_codec_set_pkt_timebase
-         41   28 005AA470 av_codec_set_seek_preroll
-         42   29 000BF4E0 av_copy_packet
-         43   2A 000BF1B0 av_copy_packet_side_data
-         44   2B 005B21E0 av_cpb_properties_alloc
-         45   2C 000F40B0 av_d3d11va_alloc_context
-         46   2D 000BECB0 av_dct_calc
-         47   2E 0142463F av_dct_end
-         48   2F 000BEC60 av_dct_init
-         49   30 00122D00 av_dirac_parse_sequence_header
-         50   31 000BF370 av_dup_packet
-         51   32 001451D0 av_dv_codec_profile
-         52   33 00145330 av_dv_codec_profile2
-         53   34 00145060 av_dv_frame_profile
-         54   35 005A7E80 av_fast_padded_malloc
-         55   36 005A7F30 av_fast_padded_mallocz
-         56   37 000BEB60 av_fft_calc
-         57   38 014245D0 av_fft_end
-         58   39 000BEB00 av_fft_init
-         59   3A 000BEB50 av_fft_permute
-         60   3B 000BF710 av_free_packet
-         61   3C 005AEFD0 av_get_audio_frame_duration
-         62   3D 005AFA10 av_get_audio_frame_duration2
-         63   3E 005AEE30 av_get_bits_per_sample
-         64   3F 005ADF60 av_get_codec_tag_string
-         65   40 005AE180 av_get_exact_bits_per_sample
-         66   41 005AEE00 av_get_pcm_codec
-         67   42 005AE010 av_get_profile_name
-         68   43 000BEFD0 av_grow_packet
-         69   44 005B0590 av_hwaccel_next
-         70   45 000BEBD0 av_imdct_calc
-         71   46 000BEBE0 av_imdct_half
-         72   47 000BECC0 av_init_packet
-         73   48 0037BD70 av_jni_get_java_vm
-         74   49 0037BD60 av_jni_set_java_vm
-         75   4A 005B05B0 av_lockmgr_register
-         76   4B 005B04C0 av_log_ask_for_sample
-         77   4C 005B0510 av_log_missing_feature
-         78   4D 000BEBF0 av_mdct_calc
-         79   4E 014245F5 av_mdct_end
-         80   4F 000BEB70 av_mdct_init
-         81   50 003B1270 av_mediacodec_alloc_context
-         82   51 003B1290 av_mediacodec_default_free
-         83   52 003B1280 av_mediacodec_default_init
-         84   53 003B12A0 av_mediacodec_release_buffer
-         85   54 000BEEC0 av_new_packet
-         86   55 000BF780 av_packet_add_side_data
-         87   56 000BED10 av_packet_alloc
-         88   57 000C0540 av_packet_clone
-         89   58 000C0190 av_packet_copy_props
-         90   59 000BEDE0 av_packet_free
-         91   5A 000BF6C0 av_packet_free_side_data
-         92   5B 000BF150 av_packet_from_data
-         93   5C 000BF930 av_packet_get_side_data
-         94   5D 000BFAF0 av_packet_merge_side_data
-         95   5E 000C07C0 av_packet_move_ref
-         96   5F 000BF840 av_packet_new_side_data
-         97   60 000BFF60 av_packet_pack_dictionary
-         98   61 000C0420 av_packet_ref
-         99   62 000C0870 av_packet_rescale_ts
-        100   63 000C0120 av_packet_shrink_side_data
-        101   64 000BF990 av_packet_side_data_name
-        102   65 000BFD70 av_packet_split_side_data
-        103   66 000C0070 av_packet_unpack_dictionary
-        104   67 000C0370 av_packet_unref
-        105   68 00496BC0 av_parser_change
-        106   69 00496CC0 av_parser_close
-        107   6A 00495FB0 av_parser_init
-        108   6B 00495F70 av_parser_next
-        109   6C 00496820 av_parser_parse2
-        110   6D 000C0AD0 av_picture_copy
-        111   6E 00353450 av_picture_crop
-        112   6F 00353650 av_picture_pad
-        113   70 004DF400 av_qsv_alloc_context
-        114   71 000BEC50 av_rdft_calc
-        115   72 0142461A av_rdft_end
-        116   73 000BEC00 av_rdft_init
-        117   74 000CAA80 av_register_bitstream_filter
-        118   75 00495F90 av_register_codec_parser
-        119   76 005B0550 av_register_hwaccel
-        120   77 004F0CB0 av_resample
-        121   78 004F0C50 av_resample_close
-        122   79 004F0C80 av_resample_compensate
-        123   7A 004F0740 av_resample_init
-        124   7B 000BEF90 av_shrink_packet
-        125   7C 005F5E60 av_vorbis_parse_frame
-        126   7D 005F5D50 av_vorbis_parse_frame_flags
-        127   7E 005F5F30 av_vorbis_parse_free
-        128   7F 005F5F40 av_vorbis_parse_init
-        129   80 005F5F20 av_vorbis_parse_reset
-        130   81 005B0440 av_xiphlacing
-        131   82 0119AFE0 available_bits
-        132   83 005A84C0 avcodec_align_dimensions
-        133   84 005A8280 avcodec_align_dimensions2
-        134   85 0047F490 avcodec_alloc_context3
-        135   86 005A8760 avcodec_chroma_pos_to_enum
-        136   87 01465FFF avcodec_close
-        137   88 005AE0C0 avcodec_configuration
-        138   89 0047F710 avcodec_copy_context
-        139   8A 000BE9C0 avcodec_dct_alloc
-        140   8B 000BE9B0 avcodec_dct_get_class
-        141   8C 000BEA00 avcodec_dct_init
-        142   8D 005ABCD0 avcodec_decode_audio4
-        143   8E 005AC5F0 avcodec_decode_subtitle2
-        144   8F 005AB600 avcodec_decode_video2
-        145   90 005A9F70 avcodec_default_execute
-        146   91 005AA000 avcodec_default_execute2
-        147   92 005A8AC0 avcodec_default_get_buffer2
-        148   93 005AA0B0 avcodec_default_get_format
-        149   94 000EFAC0 avcodec_descriptor_get
-        150   95 000EFB60 avcodec_descriptor_get_by_name
-        151   96 000EFB20 avcodec_descriptor_next
-        152   97 005AA7C0 avcodec_encode_audio2
-        153   98 005AB5C0 avcodec_encode_subtitle
-        154   99 005AB230 avcodec_encode_video2
-        155   9A 005A8720 avcodec_enum_to_chroma_pos
-        156   9B 005A8810 avcodec_fill_audio_frame
-        157   9C 003533F0 avcodec_find_best_pix_fmt2
-        158   9D 003533E0 avcodec_find_best_pix_fmt_of_2
-        159   9E 00353400 avcodec_find_best_pix_fmt_of_list
-        160   9F 005ADD80 avcodec_find_decoder
-        161   A0 005ADDE0 avcodec_find_decoder_by_name
-        162   A1 005ADC90 avcodec_find_encoder
-        163   A2 005ADD00 avcodec_find_encoder_by_name
-        164   A3 005AE0E0 avcodec_flush_buffers
-        165   A4 0047F6A0 avcodec_free_context
-        166   A5 00353370 avcodec_get_chroma_sub_sample
-        167   A6 0047FD20 avcodec_get_class
-        168   A7 0047F2B0 avcodec_get_context_defaults3
-        169   A8 005A8060 avcodec_get_edge_width
-        170   A9 0047FD30 avcodec_get_frame_class
-        171   AA 005ADE50 avcodec_get_name
-        172   AB 003533D0 avcodec_get_pix_fmt_loss
-        173   AC 0047FD40 avcodec_get_subtitle_rect_class
-        174   AD 000EFC00 avcodec_get_type
-        175   AE 005B2050 avcodec_is_open
-        176   AF 005AE0D0 avcodec_license
-        177   B0 005B0860 avcodec_open2
-        178   B1 005B22C0 avcodec_parameters_alloc
-        179   B2 005B2440 avcodec_parameters_copy
-        180   B3 005B2380 avcodec_parameters_free
-        181   B4 005B25D0 avcodec_parameters_from_context
-        182   B5 005B2800 avcodec_parameters_to_context
-        183   B6 004EDE60 avcodec_pix_fmt_to_codec_tag
-        184   B7 005AE050 avcodec_profile_name
-        185   B8 005AD710 avcodec_receive_frame
-        186   B9 005ADB90 avcodec_receive_packet
-        187   BA 01465F8A avcodec_register
-        188   BB 00094E60 avcodec_register_all
-        189   BC 005ADAE0 avcodec_send_frame
-        190   BD 005AD370 avcodec_send_packet
-        191   BE 005A8070 avcodec_set_dimensions
-        192   BF 005AE2F0 avcodec_string
-        193   C0 005AE0B0 avcodec_version
-        194   C1 0136E870 aver_isf_history
-        195   C2 0107C450 average_split_mvs
-        196   C3 000C0A60 avpicture_alloc
-        197   C4 000C09D0 avpicture_fill
-        198   C5 000C0AC0 avpicture_free
-        199   C6 000C0A50 avpicture_get_size
-        200   C7 000C0A10 avpicture_layout
+          1    0 004EFE10 audio_resample
+          2    1 004F0A30 audio_resample_close
+          3    2 000BDE80 av_audio_convert
+          4    3 000BDE30 av_audio_convert_alloc
+          5    4 000BDE70 av_audio_convert_free
+          6    5 004EFA50 av_audio_resample_init
+          7    6 000CABD0 av_bitstream_filter_close
+          8    7 000CAC10 av_bitstream_filter_filter
+          9    8 000CAB50 av_bitstream_filter_init
+         10    9 000CAB00 av_bitstream_filter_next
+         11    A 000CDAD0 av_bsf_alloc
+         12    B 000CDA30 av_bsf_free
+         13    C 000CAED0 av_bsf_get_by_name
+         14    D 000CDAC0 av_bsf_get_class
+         15    E 000CE830 av_bsf_get_null_filter
+         16    F 000CDC50 av_bsf_init
+         17   10 000CDF10 av_bsf_list_alloc
+         18   11 000CE010 av_bsf_list_append
+         19   12 000CE020 av_bsf_list_append2
+         20   13 000CE290 av_bsf_list_finalize
+         21   14 000CDF20 av_bsf_list_free
+         22   15 000CE450 av_bsf_list_parse_str
+         23   16 000CAEB0 av_bsf_next
+         24   17 000CDE50 av_bsf_receive_packet
+         25   18 000CDDC0 av_bsf_send_packet
+         26   19 017397F0 av_codec_ffversion
+         27   1A 005AA920 av_codec_get_chroma_intra_matrix
+         28   1B 005AA8C0 av_codec_get_codec_descriptor
+         29   1C 005AA940 av_codec_get_codec_properties
+         30   1D 005AA8E0 av_codec_get_lowres
+         31   1E 005AA950 av_codec_get_max_lowres
+         32   1F 005AA8A0 av_codec_get_pkt_timebase
+         33   20 005AA900 av_codec_get_seek_preroll
+         34   21 005A84D0 av_codec_is_decoder
+         35   22 005A8490 av_codec_is_encoder
+         36   23 005A8470 av_codec_next
+         37   24 005AA930 av_codec_set_chroma_intra_matrix
+         38   25 005AA8D0 av_codec_set_codec_descriptor
+         39   26 005AA8F0 av_codec_set_lowres
+         40   27 005AA8B0 av_codec_set_pkt_timebase
+         41   28 005AA910 av_codec_set_seek_preroll
+         42   29 000BF5A0 av_copy_packet
+         43   2A 000BF270 av_copy_packet_side_data
+         44   2B 005B2680 av_cpb_properties_alloc
+         45   2C 000F4140 av_d3d11va_alloc_context
+         46   2D 000BED70 av_dct_calc
+         47   2E 01424D2F av_dct_end
+         48   2F 000BED20 av_dct_init
+         49   30 00122D90 av_dirac_parse_sequence_header
+         50   31 000BF430 av_dup_packet
+         51   32 001452A0 av_dv_codec_profile
+         52   33 00145400 av_dv_codec_profile2
+         53   34 00145130 av_dv_frame_profile
+         54   35 005A8320 av_fast_padded_malloc
+         55   36 005A83D0 av_fast_padded_mallocz
+         56   37 000BEC20 av_fft_calc
+         57   38 01424CC0 av_fft_end
+         58   39 000BEBC0 av_fft_init
+         59   3A 000BEC10 av_fft_permute
+         60   3B 000BF7D0 av_free_packet
+         61   3C 005AF470 av_get_audio_frame_duration
+         62   3D 005AFEB0 av_get_audio_frame_duration2
+         63   3E 005AF2D0 av_get_bits_per_sample
+         64   3F 005AE400 av_get_codec_tag_string
+         65   40 005AE620 av_get_exact_bits_per_sample
+         66   41 005AF2A0 av_get_pcm_codec
+         67   42 005AE4B0 av_get_profile_name
+         68   43 000BF090 av_grow_packet
+         69   44 005B0A30 av_hwaccel_next
+         70   45 000BEC90 av_imdct_calc
+         71   46 000BECA0 av_imdct_half
+         72   47 000BED80 av_init_packet
+         73   48 0037BF20 av_jni_get_java_vm
+         74   49 0037BF10 av_jni_set_java_vm
+         75   4A 005B0A50 av_lockmgr_register
+         76   4B 005B0960 av_log_ask_for_sample
+         77   4C 005B09B0 av_log_missing_feature
+         78   4D 000BECB0 av_mdct_calc
+         79   4E 01424CE5 av_mdct_end
+         80   4F 000BEC30 av_mdct_init
+         81   50 003B1420 av_mediacodec_alloc_context
+         82   51 003B1440 av_mediacodec_default_free
+         83   52 003B1430 av_mediacodec_default_init
+         84   53 003B1450 av_mediacodec_release_buffer
+         85   54 000BEF80 av_new_packet
+         86   55 000BF840 av_packet_add_side_data
+         87   56 000BEDD0 av_packet_alloc
+         88   57 000C0600 av_packet_clone
+         89   58 000C0250 av_packet_copy_props
+         90   59 000BEEA0 av_packet_free
+         91   5A 000BF780 av_packet_free_side_data
+         92   5B 000BF210 av_packet_from_data
+         93   5C 000BF9F0 av_packet_get_side_data
+         94   5D 000BFBB0 av_packet_merge_side_data
+         95   5E 000C0880 av_packet_move_ref
+         96   5F 000BF900 av_packet_new_side_data
+         97   60 000C0020 av_packet_pack_dictionary
+         98   61 000C04E0 av_packet_ref
+         99   62 000C0930 av_packet_rescale_ts
+        100   63 000C01E0 av_packet_shrink_side_data
+        101   64 000BFA50 av_packet_side_data_name
+        102   65 000BFE30 av_packet_split_side_data
+        103   66 000C0130 av_packet_unpack_dictionary
+        104   67 000C0430 av_packet_unref
+        105   68 00496F30 av_parser_change
+        106   69 00497030 av_parser_close
+        107   6A 00496320 av_parser_init
+        108   6B 004962E0 av_parser_next
+        109   6C 00496B90 av_parser_parse2
+        110   6D 000C0B90 av_picture_copy
+        111   6E 003535F0 av_picture_crop
+        112   6F 003537F0 av_picture_pad
+        113   70 004DF760 av_qsv_alloc_context
+        114   71 000BED10 av_rdft_calc
+        115   72 01424D0A av_rdft_end
+        116   73 000BECC0 av_rdft_init
+        117   74 000CAB40 av_register_bitstream_filter
+        118   75 00496300 av_register_codec_parser
+        119   76 005B09F0 av_register_hwaccel
+        120   77 004F1010 av_resample
+        121   78 004F0FB0 av_resample_close
+        122   79 004F0FE0 av_resample_compensate
+        123   7A 004F0AA0 av_resample_init
+        124   7B 000BF050 av_shrink_packet
+        125   7C 005F6340 av_vorbis_parse_frame
+        126   7D 005F6230 av_vorbis_parse_frame_flags
+        127   7E 005F6410 av_vorbis_parse_free
+        128   7F 005F6420 av_vorbis_parse_init
+        129   80 005F6400 av_vorbis_parse_reset
+        130   81 005B08E0 av_xiphlacing
+        131   82 0119B6E0 available_bits
+        132   83 005A8960 avcodec_align_dimensions
+        133   84 005A8720 avcodec_align_dimensions2
+        134   85 0047F800 avcodec_alloc_context3
+        135   86 005A8C00 avcodec_chroma_pos_to_enum
+        136   87 014666FF avcodec_close
+        137   88 005AE560 avcodec_configuration
+        138   89 0047FA80 avcodec_copy_context
+        139   8A 000BEA80 avcodec_dct_alloc
+        140   8B 000BEA70 avcodec_dct_get_class
+        141   8C 000BEAC0 avcodec_dct_init
+        142   8D 005AC170 avcodec_decode_audio4
+        143   8E 005ACA90 avcodec_decode_subtitle2
+        144   8F 005ABAA0 avcodec_decode_video2
+        145   90 005AA410 avcodec_default_execute
+        146   91 005AA4A0 avcodec_default_execute2
+        147   92 005A8F60 avcodec_default_get_buffer2
+        148   93 005AA550 avcodec_default_get_format
+        149   94 000EFB50 avcodec_descriptor_get
+        150   95 000EFBF0 avcodec_descriptor_get_by_name
+        151   96 000EFBB0 avcodec_descriptor_next
+        152   97 005AAC60 avcodec_encode_audio2
+        153   98 005ABA60 avcodec_encode_subtitle
+        154   99 005AB6D0 avcodec_encode_video2
+        155   9A 005A8BC0 avcodec_enum_to_chroma_pos
+        156   9B 005A8CB0 avcodec_fill_audio_frame
+        157   9C 00353590 avcodec_find_best_pix_fmt2
+        158   9D 00353580 avcodec_find_best_pix_fmt_of_2
+        159   9E 003535A0 avcodec_find_best_pix_fmt_of_list
+        160   9F 005AE220 avcodec_find_decoder
+        161   A0 005AE280 avcodec_find_decoder_by_name
+        162   A1 005AE130 avcodec_find_encoder
+        163   A2 005AE1A0 avcodec_find_encoder_by_name
+        164   A3 005AE580 avcodec_flush_buffers
+        165   A4 0047FA10 avcodec_free_context
+        166   A5 00353510 avcodec_get_chroma_sub_sample
+        167   A6 00480090 avcodec_get_class
+        168   A7 0047F620 avcodec_get_context_defaults3
+        169   A8 005A8500 avcodec_get_edge_width
+        170   A9 004800A0 avcodec_get_frame_class
+        171   AA 005AE2F0 avcodec_get_name
+        172   AB 00353570 avcodec_get_pix_fmt_loss
+        173   AC 004800B0 avcodec_get_subtitle_rect_class
+        174   AD 000EFC90 avcodec_get_type
+        175   AE 005B24F0 avcodec_is_open
+        176   AF 005AE570 avcodec_license
+        177   B0 005B0D00 avcodec_open2
+        178   B1 005B2760 avcodec_parameters_alloc
+        179   B2 005B28E0 avcodec_parameters_copy
+        180   B3 005B2820 avcodec_parameters_free
+        181   B4 005B2A70 avcodec_parameters_from_context
+        182   B5 005B2CA0 avcodec_parameters_to_context
+        183   B6 004EE1C0 avcodec_pix_fmt_to_codec_tag
+        184   B7 005AE4F0 avcodec_profile_name
+        185   B8 005ADBB0 avcodec_receive_frame
+        186   B9 005AE030 avcodec_receive_packet
+        187   BA 0146668A avcodec_register
+        188   BB 00094F10 avcodec_register_all
+        189   BC 005ADF80 avcodec_send_frame
+        190   BD 005AD810 avcodec_send_packet
+        191   BE 005A8510 avcodec_set_dimensions
+        192   BF 005AE790 avcodec_string
+        193   C0 005AE550 avcodec_version
+        194   C1 0136EF90 aver_isf_history
+        195   C2 0107CB50 average_split_mvs
+        196   C3 000C0B20 avpicture_alloc
+        197   C4 000C0A90 avpicture_fill
+        198   C5 000C0B80 avpicture_free
+        199   C6 000C0B10 avpicture_get_size
+        200   C7 000C0AD0 avpicture_layout
         201   C8 00005330 avpriv_aac_parse_header
-        202   C9 0150F7C0 avpriv_ac3_channel_layout_tab
-        203   CA 0005F280 avpriv_ac3_parse_header
-        204   CB 000C9A60 avpriv_align_put_bits
-        205   CC 005B2060 avpriv_bprint_to_extradata
-        206   CD 005AA4C0 avpriv_codec_get_cap_skip_frame_fill_param
-        207   CE 000C9C10 avpriv_copy_bits
-        208   CF 00400E50 avpriv_copy_pce_data
-        209   D0 000F40D0 avpriv_dca_convert_bitstream
-        210   D1 0153F2A0 avpriv_dca_sample_rates
-        211   D2 00138A50 avpriv_dnxhd_get_frame_size
-        212   D3 00138AC0 avpriv_dnxhd_get_interlaced
-        213   D4 00138B30 avpriv_dnxhd_parse_header_prefix
-        214   D5 00166ED0 avpriv_do_elbg
-        215   D6 00173E00 avpriv_exif_decode_ifd
-        216   D7 005AA080 avpriv_find_pix_fmt
-        217   D8 005B20B0 avpriv_find_start_code
-        218   D9 004EDE50 avpriv_get_raw_pix_fmt_tags
-        219   DA 00242680 avpriv_h264_has_num_reorder_frames
-        220   DB 00168280 avpriv_init_elbg
-        221   DC 005B1EC0 avpriv_lock_avformat
-        222   DD 015E23F0 avpriv_mjpeg_bits_ac_chrominance
-        223   DE 015E24D0 avpriv_mjpeg_bits_ac_luminance
-        224   DF 015E24F0 avpriv_mjpeg_bits_dc_chrominance
-        225   E0 015E2520 avpriv_mjpeg_bits_dc_luminance
-        226   E1 015E2340 avpriv_mjpeg_val_ac_chrominance
-        227   E2 015E2420 avpriv_mjpeg_val_ac_luminance
-        228   E3 015E2508 avpriv_mjpeg_val_dc
-        229   E4 01641D80 avpriv_mpa_bitrate_tab
-        230   E5 004235B0 avpriv_mpa_decode_header
-        231   E6 004233C0 avpriv_mpa_decode_header2
-        232   E7 01641D64 avpriv_mpa_freq_tab
-        233   E8 00400DF0 avpriv_mpeg4audio_get_config
-        234   E9 0163DDE0 avpriv_mpeg4audio_sample_rates
-        235   EA 00423000 avpriv_mpegaudio_decode_header
-        236   EB 016C4540 avpriv_pix_fmt_bps_avi
-        237   EC 016C44E0 avpriv_pix_fmt_bps_mov
-        238   ED 000C9AE0 avpriv_put_string
-        239   EE 008ACE60 avpriv_split_xiph_headers
-        240   EF 0057EBF0 avpriv_tak_parse_streaminfo
-        241   F0 005B1F40 avpriv_toupper4
-        242   F1 005B1F00 avpriv_unlock_avformat
-        243   F2 005AD290 avsubtitle_free
+        202   C9 01510840 avpriv_ac3_channel_layout_tab
+        203   CA 0005F330 avpriv_ac3_parse_header
+        204   CB 000C9B20 avpriv_align_put_bits
+        205   CC 005B2500 avpriv_bprint_to_extradata
+        206   CD 005AA960 avpriv_codec_get_cap_skip_frame_fill_param
+        207   CE 000C9CD0 avpriv_copy_bits
+        208   CF 00401020 avpriv_copy_pce_data
+        209   D0 000F4160 avpriv_dca_convert_bitstream
+        210   D1 01540360 avpriv_dca_sample_rates
+        211   D2 00138B00 avpriv_dnxhd_get_frame_size
+        212   D3 00138B70 avpriv_dnxhd_get_interlaced
+        213   D4 00138BE0 avpriv_dnxhd_parse_header_prefix
+        214   D5 00166FA0 avpriv_do_elbg
+        215   D6 00173ED0 avpriv_exif_decode_ifd
+        216   D7 005AA520 avpriv_find_pix_fmt
+        217   D8 005B2550 avpriv_find_start_code
+        218   D9 004EE1B0 avpriv_get_raw_pix_fmt_tags
+        219   DA 00242770 avpriv_h264_has_num_reorder_frames
+        220   DB 00168350 avpriv_init_elbg
+        221   DC 005B2360 avpriv_lock_avformat
+        222   DD 015E3490 avpriv_mjpeg_bits_ac_chrominance
+        223   DE 015E3570 avpriv_mjpeg_bits_ac_luminance
+        224   DF 015E3590 avpriv_mjpeg_bits_dc_chrominance
+        225   E0 015E35C0 avpriv_mjpeg_bits_dc_luminance
+        226   E1 015E33E0 avpriv_mjpeg_val_ac_chrominance
+        227   E2 015E34C0 avpriv_mjpeg_val_ac_luminance
+        228   E3 015E35A8 avpriv_mjpeg_val_dc
+        229   E4 01642E40 avpriv_mpa_bitrate_tab
+        230   E5 00423920 avpriv_mpa_decode_header
+        231   E6 00423730 avpriv_mpa_decode_header2
+        232   E7 01642E24 avpriv_mpa_freq_tab
+        233   E8 00400FC0 avpriv_mpeg4audio_get_config
+        234   E9 0163EEA0 avpriv_mpeg4audio_sample_rates
+        235   EA 00423370 avpriv_mpegaudio_decode_header
+        236   EB 016C5600 avpriv_pix_fmt_bps_avi
+        237   EC 016C55A0 avpriv_pix_fmt_bps_mov
+        238   ED 000C9BA0 avpriv_put_string
+        239   EE 008AD2E0 avpriv_split_xiph_headers
+        240   EF 0057F080 avpriv_tak_parse_streaminfo
+        241   F0 005B23E0 avpriv_toupper4
+        242   F1 005B23A0 avpriv_unlock_avformat
+        243   F2 005AD730 avsubtitle_free
 
 Dump of file avdevice-57.dll
 
@@ -268,7 +268,7 @@ File Type: DLL
   Section contains the following exports for avdevice-57.dll
 
     00000000 characteristics
-    59527958 time date stamp Tue Jun 27 17:27:20 2017
+    5988DABA time date stamp Mon Aug  7 23:25:14 2017
         0.00 version
            1 ordinal base
           18 number of functions
@@ -303,7 +303,7 @@ LINK : warning LNK4078: multiple '.rodata' sections found with different attribu
   Section contains the following exports for avfilter-6.dll
 
     00000000 characteristics
-    59527957 time date stamp Tue Jun 27 17:27:19 2017
+    5988DAB9 time date stamp Mon Aug  7 23:25:13 2017
         0.00 version
            1 ordinal base
           73 number of functions
@@ -334,10 +334,10 @@ LINK : warning LNK4078: multiple '.rodata' sections found with different attribu
          21   14 000487E0 av_buffersrc_parameters_alloc
          22   15 00048800 av_buffersrc_parameters_set
          23   16 00048920 av_buffersrc_write_frame
-         24   17 0032DBF0 av_filter_ffversion
+         24   17 00334BF0 av_filter_ffversion
          25   18 00041FC0 av_filter_next
          26   19 0006E5F0 avfilter_add_matrix
-         27   1A 00337040 avfilter_all_channel_layouts
+         27   1A 0033E040 avfilter_all_channel_layouts
          28   1B 00041700 avfilter_config_links
          29   1C 00040A40 avfilter_configuration
          30   1D 00042550 avfilter_free
@@ -392,7 +392,7 @@ File Type: DLL
   Section contains the following exports for avformat-57.dll
 
     00000000 characteristics
-    59527956 time date stamp Tue Jun 27 17:27:18 2017
+    5988DAB8 time date stamp Mon Aug  7 23:25:12 2017
         0.00 version
            1 ordinal base
          181 number of functions
@@ -400,56 +400,56 @@ File Type: DLL
 
     ordinal hint RVA      name
 
-          1    0 001510B0 av_add_index_entry
-          2    1 0014D570 av_append_packet
-          3    2 0015A880 av_apply_bitstream_filters
-          4    3 001548D0 av_codec_get_id
-          5    4 00154840 av_codec_get_tag
-          6    5 00154880 av_codec_get_tag2
+          1    0 001510C0 av_add_index_entry
+          2    1 0014D580 av_append_packet
+          3    2 0015A890 av_apply_bitstream_filters
+          4    3 001548E0 av_codec_get_id
+          5    4 00154850 av_codec_get_tag
+          6    5 00154890 av_codec_get_tag2
           7    6 0002E140 av_convert_lang_to
-          8    7 0014D5F0 av_demuxer_open
+          8    7 0014D600 av_demuxer_open
           9    8 0003FD50 av_dump_format
-         10    9 0014D5D0 av_filename_number_test
-         11    A 00158040 av_find_best_stream
-         12    B 00150910 av_find_default_stream_index
+         10    9 0014D5E0 av_filename_number_test
+         11    A 00158050 av_find_best_stream
+         12    B 00150920 av_find_default_stream_index
          13    C 00051830 av_find_input_format
-         14    D 00157FB0 av_find_program_from_stream
-         15    E 000FECF0 av_fmt_ctx_get_duration_estimation_method
+         14    D 00157FC0 av_find_program_from_stream
+         15    E 000FED00 av_fmt_ctx_get_duration_estimation_method
          16    F 00455B30 av_format_ffversion
-         17   10 0014D190 av_format_get_audio_codec
-         18   11 0014D230 av_format_get_control_message_cb
-         19   12 0014D1D0 av_format_get_data_codec
-         20   13 0014D1F0 av_format_get_metadata_header_padding
-         21   14 0014D210 av_format_get_opaque
-         22   15 0014D250 av_format_get_open_cb
-         23   16 0014D420 av_format_get_probe_score
-         24   17 0014D1B0 av_format_get_subtitle_codec
-         25   18 0014D170 av_format_get_video_codec
-         26   19 0014D2A0 av_format_inject_global_side_data
-         27   1A 0014D1A0 av_format_set_audio_codec
-         28   1B 0014D240 av_format_set_control_message_cb
-         29   1C 0014D1E0 av_format_set_data_codec
-         30   1D 0014D200 av_format_set_metadata_header_padding
-         31   1E 0014D220 av_format_set_opaque
-         32   1F 0014D260 av_format_set_open_cb
-         33   20 0014D1C0 av_format_set_subtitle_codec
-         34   21 0014D180 av_format_set_video_codec
-         35   22 00158C40 av_get_frame_filename
-         36   23 00158AC0 av_get_frame_filename2
+         17   10 0014D1A0 av_format_get_audio_codec
+         18   11 0014D240 av_format_get_control_message_cb
+         19   12 0014D1E0 av_format_get_data_codec
+         20   13 0014D200 av_format_get_metadata_header_padding
+         21   14 0014D220 av_format_get_opaque
+         22   15 0014D260 av_format_get_open_cb
+         23   16 0014D430 av_format_get_probe_score
+         24   17 0014D1C0 av_format_get_subtitle_codec
+         25   18 0014D180 av_format_get_video_codec
+         26   19 0014D2B0 av_format_inject_global_side_data
+         27   1A 0014D1B0 av_format_set_audio_codec
+         28   1B 0014D250 av_format_set_control_message_cb
+         29   1C 0014D1F0 av_format_set_data_codec
+         30   1D 0014D210 av_format_set_metadata_header_padding
+         31   1E 0014D230 av_format_set_opaque
+         32   1F 0014D270 av_format_set_open_cb
+         33   20 0014D1D0 av_format_set_subtitle_codec
+         34   21 0014D190 av_format_set_video_codec
+         35   22 00158C50 av_get_frame_filename
+         36   23 00158AD0 av_get_frame_filename2
          37   24 000D9010 av_get_output_timestamp
-         38   25 0014D520 av_get_packet
+         38   25 0014D530 av_get_packet
          39   26 00051760 av_guess_codec
          40   27 000515F0 av_guess_format
-         41   28 00159BE0 av_guess_frame_rate
-         42   29 00159AD0 av_guess_sample_aspect_ratio
+         41   28 00159BF0 av_guess_frame_rate
+         42   29 00159AE0 av_guess_sample_aspect_ratio
          43   2A 0003F850 av_hex_dump
          44   2B 0003F870 av_hex_dump_log
          45   2C 000514B0 av_iformat_next
-         46   2D 001528F0 av_index_search_timestamp
+         46   2D 00152900 av_index_search_timestamp
          47   2E 000D7E50 av_interleaved_write_frame
          48   2F 000D94C0 av_interleaved_write_uncoded_frame
          49   30 000515B0 av_match_ext
-         50   31 001587E0 av_new_program
+         50   31 001587F0 av_new_program
          51   32 000514D0 av_oformat_next
          52   33 0003F880 av_pkt_dump2
          53   34 0003FB80 av_pkt_dump_log2
@@ -458,54 +458,54 @@ File Type: DLL
          56   37 00051BB0 av_probe_input_format
          57   38 00051B80 av_probe_input_format2
          58   39 00051880 av_probe_input_format3
-         59   3A 001589A0 av_program_add_stream_index
-         60   3B 00152110 av_read_frame
-         61   3C 00158380 av_read_pause
-         62   3D 00158350 av_read_play
+         59   3A 001589B0 av_program_add_stream_index
+         60   3B 00152120 av_read_frame
+         61   3C 00158390 av_read_pause
+         62   3D 00158360 av_read_play
          63   3E 00007400 av_register_all
          64   3F 000514F0 av_register_input_format
          65   40 00051550 av_register_output_format
-         66   41 0012F0D0 av_sdp_create
-         67   42 00153C00 av_seek_frame
-         68   43 0015A510 av_stream_add_side_data
-         69   44 0015B200 av_stream_get_codec_timebase
-         70   45 0014D270 av_stream_get_end_pts
-         71   46 0014D290 av_stream_get_parser
-         72   47 0014D130 av_stream_get_r_frame_rate
-         73   48 0014D150 av_stream_get_recommended_encoder_configuration
-         74   49 0015A4B0 av_stream_get_side_data
-         75   4A 0015A5F0 av_stream_new_side_data
-         76   4B 0014D140 av_stream_set_r_frame_rate
-         77   4C 0014D160 av_stream_set_recommended_encoder_configuration
-         78   4D 00158DB0 av_url_split
+         66   41 0012F0E0 av_sdp_create
+         67   42 00153C10 av_seek_frame
+         68   43 0015A520 av_stream_add_side_data
+         69   44 0015B210 av_stream_get_codec_timebase
+         70   45 0014D280 av_stream_get_end_pts
+         71   46 0014D2A0 av_stream_get_parser
+         72   47 0014D140 av_stream_get_r_frame_rate
+         73   48 0014D160 av_stream_get_recommended_encoder_configuration
+         74   49 0015A4C0 av_stream_get_side_data
+         75   4A 0015A600 av_stream_new_side_data
+         76   4B 0014D150 av_stream_set_r_frame_rate
+         77   4C 0014D170 av_stream_set_recommended_encoder_configuration
+         78   4D 00158DC0 av_url_split
          79   4E 000D71B0 av_write_frame
          80   4F 000D8A00 av_write_trailer
          81   50 000D9280 av_write_uncoded_frame
          82   51 000D9560 av_write_uncoded_frame_query
-         83   52 000FEC30 avformat_alloc_context
+         83   52 000FEC40 avformat_alloc_context
          84   53 000D6380 avformat_alloc_output_context2
-         85   54 00158610 avformat_close_input
-         86   55 0014D110 avformat_configuration
-         87   56 001556B0 avformat_find_stream_info
-         88   57 00154670 avformat_flush
-         89   58 001585F0 avformat_free_context
-         90   59 000FED00 avformat_get_class
+         85   54 00158620 avformat_close_input
+         86   55 0014D120 avformat_configuration
+         87   56 001556C0 avformat_find_stream_info
+         88   57 00154680 avformat_flush
+         89   58 00158600 avformat_free_context
+         90   59 000FED10 avformat_get_class
          91   5A 0007B4C0 avformat_get_mov_audio_tags
          92   5B 0007B4B0 avformat_get_mov_video_tags
-         93   5C 00105D70 avformat_get_riff_audio_tags
-         94   5D 00105D60 avformat_get_riff_video_tags
+         93   5C 00105D80 avformat_get_riff_audio_tags
+         94   5D 00105D70 avformat_get_riff_video_tags
          95   5E 000D64D0 avformat_init_output
-         96   5F 0014D120 avformat_license
-         97   60 00159D90 avformat_match_stream_specifier
-         98   61 00159900 avformat_network_deinit
-         99   62 001598D0 avformat_network_init
-        100   63 001592F0 avformat_new_stream
-        101   64 0014D7B0 avformat_open_input
-        102   65 00159830 avformat_query_codec
-        103   66 0014D6A0 avformat_queue_attached_pictures
-        104   67 00153A00 avformat_seek_file
-        105   68 0015AE60 avformat_transfer_internal_stream_timing_info
-        106   69 0014D100 avformat_version
+         96   5F 0014D130 avformat_license
+         97   60 00159DA0 avformat_match_stream_specifier
+         98   61 00159910 avformat_network_deinit
+         99   62 001598E0 avformat_network_init
+        100   63 00159300 avformat_new_stream
+        101   64 0014D7C0 avformat_open_input
+        102   65 00159840 avformat_query_codec
+        103   66 0014D6B0 avformat_queue_attached_pictures
+        104   67 00153A10 avformat_seek_file
+        105   68 0015AE70 avformat_transfer_internal_stream_timing_info
+        106   69 0014D110 avformat_version
         107   6A 000D6FF0 avformat_write_header
         108   6B 0002C990 avio_accept
         109   6C 00023930 avio_alloc_context
@@ -514,7 +514,7 @@ File Type: DLL
         112   6F 00022D30 avio_close_dir
         113   70 0002D070 avio_close_dyn_buf
         114   71 0002C040 avio_closep
-        115   72 00100FD0 avio_enum_protocols
+        115   72 00100FE0 avio_enum_protocols
         116   73 000245B0 avio_feof
         117   74 00021900 avio_find_protocol_name
         118   75 00023F70 avio_flush
@@ -568,13 +568,13 @@ File Type: DLL
         166   A5 000CE280 avpriv_mpegts_parse_close
         167   A6 000CE070 avpriv_mpegts_parse_open
         168   A7 000CE200 avpriv_mpegts_parse_packet
-        169   A8 001588A0 avpriv_new_chapter
-        170   A9 001591F0 avpriv_set_pts_info
-        171   AA 000FED40 ff_inet_aton
-        172   AB 0011FD80 ff_rtp_get_local_rtcp_port
-        173   AC 0011FD70 ff_rtp_get_local_rtp_port
-        174   AD 00123F90 ff_rtsp_parse_line
-        175   AE 000FEEA0 ff_socket_nonblock
+        169   A8 001588B0 avpriv_new_chapter
+        170   A9 00159200 avpriv_set_pts_info
+        171   AA 000FED50 ff_inet_aton
+        172   AB 0011FD90 ff_rtp_get_local_rtcp_port
+        173   AC 0011FD80 ff_rtp_get_local_rtp_port
+        174   AD 00123FA0 ff_rtsp_parse_line
+        175   AE 000FEEB0 ff_socket_nonblock
         176   AF 0002CDD0 ffio_open_dyn_packet_buf
         177   B0 0002B0D0 ffio_set_buf_size
         178   B1 00021860 ffurl_close
@@ -589,7 +589,7 @@ File Type: DLL
   Section contains the following exports for avutil-55.dll
 
     00000000 characteristics
-    5952794A time date stamp Tue Jun 27 17:27:06 2017
+    5988DAAD time date stamp Mon Aug  7 23:25:01 2017
         0.00 version
            1 ordinal base
          497 number of functions
@@ -1102,7 +1102,7 @@ File Type: DLL
   Section contains the following exports for postproc-54.dll
 
     00000000 characteristics
-    59527953 time date stamp Tue Jun 27 17:27:15 2017
+    5988DAB5 time date stamp Mon Aug  7 23:25:09 2017
         0.00 version
            1 ordinal base
           10 number of functions
@@ -1128,7 +1128,7 @@ File Type: DLL
   Section contains the following exports for swresample-2.dll
 
     00000000 characteristics
-    59527954 time date stamp Tue Jun 27 17:27:16 2017
+    5988DAB5 time date stamp Mon Aug  7 23:25:09 2017
         0.00 version
            1 ordinal base
           23 number of functions
@@ -1167,7 +1167,7 @@ File Type: DLL
   Section contains the following exports for swscale-4.dll
 
     00000000 characteristics
-    59527954 time date stamp Tue Jun 27 17:27:16 2017
+    5988DAB5 time date stamp Mon Aug  7 23:25:09 2017
         0.00 version
            1 ordinal base
           34 number of functions
@@ -1224,6 +1224,6 @@ File Type: DLL
         3000 .rodata
        1E000 .rotext
         8000 .rsrc
-     1DCF000 .text
+     1DD7000 .text
         8000 .tls
-       9C000 .xdata
+       9D000 .xdata
