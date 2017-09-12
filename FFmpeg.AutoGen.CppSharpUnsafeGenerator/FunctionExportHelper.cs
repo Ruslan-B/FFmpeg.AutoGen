@@ -19,9 +19,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 {
                     var lMatch = LibraryRegex.Match(line);
                     if (lMatch.Success)
-                    {
                         library = lMatch.Groups[1].Value;
-                    }
                     var fMatch = FunctionRegex.Match(line);
                     if (fMatch.Success)
                     {

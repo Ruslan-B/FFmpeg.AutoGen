@@ -197,6 +197,10 @@ namespace FFmpeg.AutoGen
         [DllImport("avcodec-57", EntryPoint = "av_cpb_properties_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVCPBProperties* av_cpb_properties_alloc(ulong* @size);
         
+        /// <summary>Allocate an AVD3D11VAContext.</summary>
+        [DllImport("avcodec-57", EntryPoint = "av_d3d11va_alloc_context", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern AVD3D11VAContext* av_d3d11va_alloc_context();
+        
         [Obsolete("Use av_packet_ref")]
         [DllImport("avcodec-57", EntryPoint = "av_dup_packet", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern int av_dup_packet(AVPacket* @pkt);
@@ -2748,6 +2752,87 @@ namespace FFmpeg.AutoGen
         /// <summary>Return the fractional representation of the internal time base.</summary>
         [DllImport("avutil-55", EntryPoint = "av_get_time_base_q", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern AVRational av_get_time_base_q();
+        
+        /// <summary>Allocate an AVHWDeviceContext for a given hardware type.</summary>
+        /// <param name="type">the type of the hardware device to allocate.</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwdevice_ctx_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern AVBufferRef* av_hwdevice_ctx_alloc(AVHWDeviceType @type);
+        
+        /// <summary>Open a device of the specified type and create an AVHWDeviceContext for it.</summary>
+        /// <param name="device_ctx">On success, a reference to the newly-created device context will be written here. The reference is owned by the caller and must be released with av_buffer_unref() when no longer needed. On failure, NULL will be written to this pointer.</param>
+        /// <param name="type">The type of the device to create.</param>
+        /// <param name="device">A type-specific string identifying the device to open.</param>
+        /// <param name="opts">A dictionary of additional (type-specific) options to use in opening the device. The dictionary remains owned by the caller.</param>
+        /// <param name="flags">currently unused</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwdevice_ctx_create", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_hwdevice_ctx_create(AVBufferRef** @device_ctx, AVHWDeviceType @type, [MarshalAs(UnmanagedType.LPStr)] string @device, AVDictionary* @opts, int @flags);
+        
+        /// <summary>Finalize the device context before use. This function must be called after the context is filled with all the required information and before it is used in any way.</summary>
+        /// <param name="ref">a reference to the AVHWDeviceContext</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwdevice_ctx_init", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_hwdevice_ctx_init(AVBufferRef* @ref);
+        
+        /// <summary>Get the constraints on HW frames given a device and the HW-specific configuration to be used with that device. If no HW-specific configuration is provided, returns the maximum possible capabilities of the device.</summary>
+        /// <param name="hwconfig">a filled HW-specific configuration structure, or NULL to return the maximum possible capabilities of the device.</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwdevice_get_hwframe_constraints", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern AVHWFramesConstraints* av_hwdevice_get_hwframe_constraints(AVBufferRef* @ref, void* @hwconfig);
+        
+        /// <summary>Allocate a HW-specific configuration structure for a given HW device. After use, the user must free all members as required by the specific hardware structure being used, then free the structure itself with av_free().</summary>
+        /// <param name="device_ctx">a reference to the associated AVHWDeviceContext.</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwdevice_hwconfig_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern void* av_hwdevice_hwconfig_alloc(AVBufferRef* @device_ctx);
+        
+        /// <summary>Free an AVHWFrameConstraints structure.</summary>
+        /// <param name="constraints">The (filled or unfilled) AVHWFrameConstraints structure.</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwframe_constraints_free", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern void av_hwframe_constraints_free(AVHWFramesConstraints** @constraints);
+        
+        /// <summary>Allocate an AVHWFramesContext tied to a given device context.</summary>
+        /// <param name="device_ctx">a reference to a AVHWDeviceContext. This function will make a new reference for internal use, the one passed to the function remains owned by the caller.</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwframe_ctx_alloc", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern AVBufferRef* av_hwframe_ctx_alloc(AVBufferRef* @device_ctx);
+        
+        /// <summary>Create and initialise an AVHWFramesContext as a mapping of another existing AVHWFramesContext on a different device.</summary>
+        /// <param name="derived_frame_ctx">On success, a reference to the newly created AVHWFramesContext.</param>
+        /// <param name="derived_device_ctx">A reference to the device to create the new AVHWFramesContext on.</param>
+        /// <param name="source_frame_ctx">A reference to an existing AVHWFramesContext which will be mapped to the derived context.</param>
+        /// <param name="flags">Currently unused; should be set to zero.</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwframe_ctx_create_derived", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_hwframe_ctx_create_derived(AVBufferRef** @derived_frame_ctx, AVPixelFormat @format, AVBufferRef* @derived_device_ctx, AVBufferRef* @source_frame_ctx, int @flags);
+        
+        /// <summary>Finalize the context before use. This function must be called after the context is filled with all the required information and before it is attached to any frames.</summary>
+        /// <param name="ref">a reference to the AVHWFramesContext</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwframe_ctx_init", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_hwframe_ctx_init(AVBufferRef* @ref);
+        
+        /// <summary>Allocate a new frame attached to the given AVHWFramesContext.</summary>
+        /// <param name="hwframe_ctx">a reference to an AVHWFramesContext</param>
+        /// <param name="frame">an empty (freshly allocated or unreffed) frame to be filled with newly allocated buffers.</param>
+        /// <param name="flags">currently unused, should be set to zero</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwframe_get_buffer", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_hwframe_get_buffer(AVBufferRef* @hwframe_ctx, AVFrame* @frame, int @flags);
+        
+        /// <summary>Map a hardware frame.</summary>
+        /// <param name="dst">Destination frame, to contain the mapping.</param>
+        /// <param name="src">Source frame, to be mapped.</param>
+        /// <param name="flags">Some combination of AV_HWFRAME_MAP_* flags.</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwframe_map", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_hwframe_map(AVFrame* @dst, AVFrame* @src, int @flags);
+        
+        /// <summary>Copy data to or from a hw surface. At least one of dst/src must have an AVHWFramesContext attached.</summary>
+        /// <param name="dst">the destination frame. dst is not touched on failure.</param>
+        /// <param name="src">the source frame.</param>
+        /// <param name="flags">currently unused, should be set to zero</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwframe_transfer_data", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_hwframe_transfer_data(AVFrame* @dst, AVFrame* @src, int @flags);
+        
+        /// <summary>Get a list of possible source or target formats usable in av_hwframe_transfer_data().</summary>
+        /// <param name="hwframe_ctx">the frame context to obtain the information for</param>
+        /// <param name="dir">the direction of the transfer</param>
+        /// <param name="formats">the pointer to the output format list will be written here. The list is terminated with AV_PIX_FMT_NONE and must be freed by the caller when no longer needed using av_free(). If this function returns successfully, the format list will have at least one item (not counting the terminator). On failure, the contents of this pointer are unspecified.</param>
+        /// <param name="flags">currently unused, should be set to zero</param>
+        [DllImport("avutil-55", EntryPoint = "av_hwframe_transfer_get_formats", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int av_hwframe_transfer_get_formats(AVBufferRef* @hwframe_ctx, AVHWFrameTransferDirection @dir, AVPixelFormat** @formats, int @flags);
         
         /// <summary>Allocate an image with size w and h and pixel format pix_fmt, and fill pointers and linesizes accordingly. The allocated image buffer has to be freed by using av_freep(&amp;pointers[0]).</summary>
         /// <param name="align">the value to use for buffer size alignment</param>

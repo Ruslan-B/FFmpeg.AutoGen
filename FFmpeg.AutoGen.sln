@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26510.0
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen", "FFmpeg.AutoGen\FFmpeg.AutoGen.csproj", "{A536B02A-B0B1-4753-8328-17369EF09976}"
 EndProject
@@ -15,10 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen.CppSharpUnsafeGenerator", "FFmpeg.AutoGen.CppSharpUnsafeGenerator\FFmpeg.AutoGen.CppSharpUnsafeGenerator.csproj", "{2A8E06C6-5A68-4FB4-AE0C-F43B644E3737}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Core", "FFmpeg.AutoGen.Core\FFmpeg.AutoGen.Core.csproj", "{347A2389-32B4-47E3-92C7-91AA0D638304}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Example.Core", "FFmpeg.AutoGen.Example.Core\FFmpeg.AutoGen.Example.Core.csproj", "{DE581902-D3AD-4506-949B-7C2C56B127AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,33 +62,12 @@ Global
 		{2A8E06C6-5A68-4FB4-AE0C-F43B644E3737}.Release|x64.Build.0 = Release|x64
 		{2A8E06C6-5A68-4FB4-AE0C-F43B644E3737}.Release|x86.ActiveCfg = Release|x86
 		{2A8E06C6-5A68-4FB4-AE0C-F43B644E3737}.Release|x86.Build.0 = Release|x86
-		{347A2389-32B4-47E3-92C7-91AA0D638304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{347A2389-32B4-47E3-92C7-91AA0D638304}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{347A2389-32B4-47E3-92C7-91AA0D638304}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{347A2389-32B4-47E3-92C7-91AA0D638304}.Debug|x64.Build.0 = Debug|Any CPU
-		{347A2389-32B4-47E3-92C7-91AA0D638304}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{347A2389-32B4-47E3-92C7-91AA0D638304}.Debug|x86.Build.0 = Debug|Any CPU
-		{347A2389-32B4-47E3-92C7-91AA0D638304}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{347A2389-32B4-47E3-92C7-91AA0D638304}.Release|Any CPU.Build.0 = Release|Any CPU
-		{347A2389-32B4-47E3-92C7-91AA0D638304}.Release|x64.ActiveCfg = Release|Any CPU
-		{347A2389-32B4-47E3-92C7-91AA0D638304}.Release|x64.Build.0 = Release|Any CPU
-		{347A2389-32B4-47E3-92C7-91AA0D638304}.Release|x86.ActiveCfg = Release|Any CPU
-		{347A2389-32B4-47E3-92C7-91AA0D638304}.Release|x86.Build.0 = Release|Any CPU
-		{DE581902-D3AD-4506-949B-7C2C56B127AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE581902-D3AD-4506-949B-7C2C56B127AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE581902-D3AD-4506-949B-7C2C56B127AA}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DE581902-D3AD-4506-949B-7C2C56B127AA}.Debug|x64.Build.0 = Debug|Any CPU
-		{DE581902-D3AD-4506-949B-7C2C56B127AA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DE581902-D3AD-4506-949B-7C2C56B127AA}.Debug|x86.Build.0 = Debug|Any CPU
-		{DE581902-D3AD-4506-949B-7C2C56B127AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE581902-D3AD-4506-949B-7C2C56B127AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE581902-D3AD-4506-949B-7C2C56B127AA}.Release|x64.ActiveCfg = Release|Any CPU
-		{DE581902-D3AD-4506-949B-7C2C56B127AA}.Release|x64.Build.0 = Release|Any CPU
-		{DE581902-D3AD-4506-949B-7C2C56B127AA}.Release|x86.ActiveCfg = Release|Any CPU
-		{DE581902-D3AD-4506-949B-7C2C56B127AA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4BAFD2E8-8AAC-4483-B5FA-6E4C136A59F5}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = FFmpeg.AutoGen.Example\FFmpeg.AutoGen.Example.csproj

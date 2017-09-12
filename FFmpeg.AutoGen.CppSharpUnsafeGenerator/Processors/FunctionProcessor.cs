@@ -90,12 +90,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                             return new TypeDefinition
                             {
                                 Name = "string",
-                                Attributes = new[] { "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]" }
+                                Attributes = new[] {"[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"}
                             };
                         case PrimitiveType.Void:
-                            return new TypeDefinition { Name = "void*" };
+                            return new TypeDefinition {Name = "void*"};
                         default:
-                            return new TypeDefinition { Name = TypeHelper.GetTypeName(pointerType) };
+                            return new TypeDefinition {Name = TypeHelper.GetTypeName(pointerType)};
                     }
                 }
             }
@@ -104,13 +104,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private TypeDefinition GetParameterType(Type type, string name)
         {
-            var pointerType = type as PointerType;
-            if (pointerType != null)
+            if (type is PointerType pointerType)
             {
                 if (pointerType.QualifiedPointee.Qualifiers.IsConst)
                 {
-                    var builtinType = pointerType.Pointee as BuiltinType;
-                    if (builtinType != null)
+                    if (pointerType.Pointee is BuiltinType builtinType)
                     {
                         switch (builtinType.Type)
                         {

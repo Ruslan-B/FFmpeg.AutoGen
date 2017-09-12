@@ -29,9 +29,15 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         public Dictionary<string, FunctionExport> FunctionExportMap { get; set; }
         public IReadOnlyList<IDefinition> Units => _units;
 
-        public bool IsKnownUnitName(string name) => _units.Any(x => x.Name == name);
+        public bool IsKnownUnitName(string name)
+        {
+            return _units.Any(x => x.Name == name);
+        }
 
-        public T GetUnitByName<T>(string name) where T : IDefinition => _units.OfType<T>().FirstOrDefault(x => x.Name == name);
+        public T GetUnitByName<T>(string name) where T : IDefinition
+        {
+            return _units.OfType<T>().FirstOrDefault(x => x.Name == name);
+        }
 
         public void AddUnit(IDefinition definition)
         {
@@ -42,7 +48,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             _units.Add(definition);
         }
 
-        public void ClearUnits() => _units.Clear();
+        public void ClearUnits()
+        {
+            _units.Clear();
+        }
 
         public void Generate()
         {
