@@ -4,7 +4,7 @@ Please consider to ask *how to* questions on stackoverflow.com.
 The community may be able to offer some assistance but you will largely be on your own.
 As another option you can search for a solution in C(lang) as with some effort you can convert them to C#.**
 
-## FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.png)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)[![#](https://img.shields.io/nuget/v/FFmpeg.AutoGen.svg)](https://www.nuget.org/packages/FFmpeg.AutoGen/)
+## FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.svg)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)[![#](https://img.shields.io/nuget/v/FFmpeg.AutoGen.svg)](https://www.nuget.org/packages/FFmpeg.AutoGen/)
 
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.  
 The bindings are generated against: ffmpeg 3.3.3
