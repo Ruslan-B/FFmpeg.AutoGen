@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0;net40;net45;net46</TargetFrameworks>
     <PackageId>FFmpeg.AutoGen</PackageId>
-    <Version>3.3.3.1</Version>
+    <Version>3.3.3.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Ruslan Balanukhin</Authors>
     <Company>Rational Core</Company>
@@ -12,31 +12,19 @@
     <Copyright>Copyright © Ruslan Balanukhin 2015 All rights reserved.</Copyright>
     <PackageLicenseUrl>https://github.com/Ruslan-B/FFmpeg.AutoGen/blob/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Ruslan-B/FFmpeg.AutoGen</PackageProjectUrl>
-    <AssemblyVersion>3.3.3.1</AssemblyVersion>
-    <FileVersion>3.3.3.1</FileVersion>
+    <AssemblyVersion>3.3.3.2</AssemblyVersion>
+    <FileVersion>3.3.3.2</FileVersion>
     <PackageTags>ffmpeg</PackageTags>
     <AssemblyName>FFmpeg.AutoGen</AssemblyName>
     <RootNamespace>FFmpeg.AutoGen</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <PropertyGroup>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <NoWarn>1701;1702;1705;169;108</NoWarn>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <NoWarn>1701;1702;1705;169;108</NoWarn>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.0|AnyCPU'">
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>1701;1702;1705;169;108;1591;1573;1591</NoWarn>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp2.0|AnyCPU'">
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <WarningsAsErrors />
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\FFmpeg.AutoGen.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net40' OR '$(TargetFramework)'=='net45' OR '$(TargetFramework)'=='net46'">
