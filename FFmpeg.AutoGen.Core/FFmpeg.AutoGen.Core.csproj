@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0;net40;net45;net46</TargetFrameworks>
     <PackageId>FFmpeg.AutoGen</PackageId>
-    <Version>3.3.3.2</Version>
+    <Version>3.3.3.3</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Ruslan Balanukhin</Authors>
     <Company>Rational Core</Company>
@@ -12,8 +12,8 @@
     <Copyright>Copyright © Ruslan Balanukhin 2015 All rights reserved.</Copyright>
     <PackageLicenseUrl>https://github.com/Ruslan-B/FFmpeg.AutoGen/blob/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Ruslan-B/FFmpeg.AutoGen</PackageProjectUrl>
-    <AssemblyVersion>3.3.3.2</AssemblyVersion>
-    <FileVersion>3.3.3.2</FileVersion>
+    <AssemblyVersion>3.3.3.3</AssemblyVersion>
+    <FileVersion>3.3.3.3</FileVersion>
     <PackageTags>ffmpeg</PackageTags>
     <AssemblyName>FFmpeg.AutoGen</AssemblyName>
     <RootNamespace>FFmpeg.AutoGen</RootNamespace>
