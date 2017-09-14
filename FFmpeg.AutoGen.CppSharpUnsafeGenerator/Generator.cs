@@ -15,16 +15,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     internal class Generator
     {
-        private static readonly string VsSdkPath = Path.GetFullPath(Path.Combine(MSVCToolchain.GetVSToolchain(VisualStudioVersion.Latest).Directory, @"../../SDK/ScopeCppSDK"));
-
-        private static readonly string[] AdditionalSystemIncludeDirs =
-        {
-            Path.Combine(VsSdkPath, @"VC\include"),
-            Path.Combine(VsSdkPath, @"SDK\include\shared"),
-            Path.Combine(VsSdkPath, @"SDK\include\ucrt"),
-            Path.Combine(VsSdkPath, @"SDK\include\um")
-        };
-
         private bool _hasParsingErrors;
         private ASTProcessor _astProcessor;
 
@@ -160,9 +150,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             };
 
             parserOptions.SetupMSVC(VisualStudioVersion.Latest);
-
-            foreach (var includeDir in AdditionalSystemIncludeDirs) parserOptions.AddSystemIncludeDirs(includeDir);
-
+            
             foreach (var includeDir in IncludeDirs) parserOptions.AddIncludeDirs(includeDir);
 
             foreach (var define in Defines) parserOptions.AddDefines(define);
