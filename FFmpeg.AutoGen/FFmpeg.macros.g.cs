@@ -5,9 +5,12 @@ namespace FFmpeg.AutoGen
 {
     public unsafe static partial class ffmpeg
     {
+        public static int _WIN32_WINNT = 0x0602;
         // public static  attribute_deprecated = __declspec(deprecated);
         // public static  av_always_inline = __forceinline;
         public static int AV_BUFFER_FLAG_READONLY = (1 << 0);
+        public static int AV_BUFFERSINK_FLAG_NO_REQUEST = 2;
+        public static int AV_BUFFERSINK_FLAG_PEEK = 1;
         // public static  av_ceil_log2 = av_ceil_log2_c;
         public static int AV_CH_BACK_CENTER = 0x00000100;
         public static int AV_CH_BACK_LEFT = 0x00000010;
@@ -255,6 +258,15 @@ namespace FFmpeg.AutoGen
         // public static  AV_PIX_FMT_BGR555 = AV_PIX_FMT_NE(BGR555BE, BGR555LE);
         // public static  AV_PIX_FMT_BGR565 = AV_PIX_FMT_NE(BGR565BE, BGR565LE);
         // public static  AV_PIX_FMT_BGRA64 = AV_PIX_FMT_NE(BGRA64BE, BGRA64LE);
+        public static int AV_PIX_FMT_FLAG_ALPHA = (1 << 7);
+        public static int AV_PIX_FMT_FLAG_BAYER = (1 << 8);
+        public static int AV_PIX_FMT_FLAG_BE = (1 << 0);
+        public static int AV_PIX_FMT_FLAG_BITSTREAM = (1 << 2);
+        public static int AV_PIX_FMT_FLAG_HWACCEL = (1 << 3);
+        public static int AV_PIX_FMT_FLAG_PAL = (1 << 1);
+        public static int AV_PIX_FMT_FLAG_PLANAR = (1 << 4);
+        public static int AV_PIX_FMT_FLAG_PSEUDOPAL = (1 << 6);
+        public static int AV_PIX_FMT_FLAG_RGB = (1 << 5);
         // public static  AV_PIX_FMT_GBRAP10 = AV_PIX_FMT_NE(GBRAP10BE,   GBRAP10LE);
         // public static  AV_PIX_FMT_GBRAP12 = AV_PIX_FMT_NE(GBRAP12BE,   GBRAP12LE);
         // public static  AV_PIX_FMT_GBRAP16 = AV_PIX_FMT_NE(GBRAP16BE,   GBRAP16LE);
@@ -319,6 +331,7 @@ namespace FFmpeg.AutoGen
         public static int AV_SUBTITLE_FLAG_FORCED = 0x00000001;
         public static int AV_TIME_BASE = 1000000;
         // public static  AV_TIME_BASE_Q = (AVRational){1, AV_TIME_BASE};
+        public static int AV_TIMECODE_STR_SIZE = 16;
         // public static  av_unused = __attribute__((unused));
         // public static  av_used = __attribute__((used));
         // public static  AVCOL_SPC_YCGCO = AVCOL_SPC_YCOCG;
@@ -657,6 +670,8 @@ namespace FFmpeg.AutoGen
         public static int FF_DTG_AFD_4_3_SP_14_9 = 13;
         public static int FF_DTG_AFD_SAME = 8;
         public static int FF_DTG_AFD_SP_4_3 = 15;
+        public static int FF_DXVA2_WORKAROUND_INTEL_CLEARVIDEO = 2;
+        public static int FF_DXVA2_WORKAROUND_SCALING_LIST_ZIGZAG = 1;
         public static int FF_EC_DEBLOCK = 2;
         public static int FF_EC_FAVOR_INTER = 256;
         public static int FF_EC_GUESS_MVS = 1;
@@ -684,6 +699,12 @@ namespace FFmpeg.AutoGen
         public static int FF_LAMBDA_SCALE = (1 << FF_LAMBDA_SHIFT);
         public static int FF_LAMBDA_SHIFT = 7;
         public static int FF_LEVEL_UNKNOWN = -99;
+        public static int FF_LOSS_ALPHA = 0x0008;
+        public static int FF_LOSS_CHROMA = 0x0020;
+        public static int FF_LOSS_COLORQUANT = 0x0010;
+        public static int FF_LOSS_COLORSPACE = 0x0004;
+        public static int FF_LOSS_DEPTH = 0x0002;
+        public static int FF_LOSS_RESOLUTION = 0x0001;
         public static int FF_MAX_B_FRAMES = 16;
         public static int FF_MB_DECISION_BITS = 1;
         public static int FF_MB_DECISION_RD = 2;

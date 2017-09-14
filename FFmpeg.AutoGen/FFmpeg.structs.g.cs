@@ -84,22 +84,6 @@ namespace FFmpeg.AutoGen
         public uint @wndx;
     }
     
-    /// <summary>A reference to a data buffer.</summary>
-    public unsafe struct AVBufferRef
-    {
-        public AVBuffer* @buffer;
-        /// <summary>The data buffer. It is considered writable if and only if this is the only reference to the buffer, in which case av_buffer_is_writable() returns 1.</summary>
-        public byte* @data;
-        /// <summary>Size of data in bytes.</summary>
-        public int @size;
-    }
-    
-    public unsafe struct AVDictionaryEntry
-    {
-        public byte* @key;
-        public byte* @value;
-    }
-    
     /// <summary>Structure to hold side data for an AVFrame.</summary>
     public unsafe struct AVFrameSideData
     {
@@ -108,6 +92,16 @@ namespace FFmpeg.AutoGen
         public int @size;
         public AVDictionary* @metadata;
         public AVBufferRef* @buf;
+    }
+    
+    /// <summary>A reference to a data buffer.</summary>
+    public unsafe struct AVBufferRef
+    {
+        public AVBuffer* @buffer;
+        /// <summary>The data buffer. It is considered writable if and only if this is the only reference to the buffer, in which case av_buffer_is_writable() returns 1.</summary>
+        public byte* @data;
+        /// <summary>Size of data in bytes.</summary>
+        public int @size;
     }
     
     /// <summary>This structure describes decoded (raw) audio or video data.</summary>
@@ -205,13 +199,10 @@ namespace FFmpeg.AutoGen
         public AVBufferRef* @opaque_ref;
     }
     
-    /// <summary>the default value for scalar options</summary>
-    public unsafe struct AVOption_default_val
+    public unsafe struct AVDictionaryEntry
     {
-        public long @i64;
-        public double @dbl;
-        public byte* @str;
-        public AVRational @q;
+        public byte* @key;
+        public byte* @value;
     }
     
     /// <summary>A single allowed range of values, or a single allowed value.</summary>
@@ -228,6 +219,33 @@ namespace FFmpeg.AutoGen
         public double @component_max;
         /// <summary>Range flag. If set to 1 the struct encodes a range, if set to 0 a single value.</summary>
         public int @is_range;
+    }
+    
+    /// <summary>the default value for scalar options</summary>
+    public unsafe struct AVOption_default_val
+    {
+        public long @i64;
+        public double @dbl;
+        public byte* @str;
+        public AVRational @q;
+    }
+    
+    /// <summary>Descriptor that unambiguously describes how the bits of a pixel are stored in the up to 4 data planes of an image. It also stores the subsampling factors and number of components.</summary>
+    public unsafe struct AVPixFmtDescriptor
+    {
+        public byte* @name;
+        /// <summary>The number of components each pixel has, (1-4)</summary>
+        public byte @nb_components;
+        /// <summary>Amount to shift the luma width right to find the chroma width. For YV12 this is 1 for example. chroma_width = AV_CEIL_RSHIFT(luma_width, log2_chroma_w) The note above is needed to ensure rounding up. This value only refers to the chroma components.</summary>
+        public byte @log2_chroma_w;
+        /// <summary>Amount to shift the luma height right to find the chroma height. For YV12 this is 1 for example. chroma_height= AV_CEIL_RSHIFT(luma_height, log2_chroma_h) The note above is needed to ensure rounding up. This value only refers to the chroma components.</summary>
+        public byte @log2_chroma_h;
+        /// <summary>Combination of AV_PIX_FMT_FLAG_... flags.</summary>
+        public ulong @flags;
+        /// <summary>Parameters that describe how pixels are packed. If the format has 1 or 2 components, then luma is 0. If the format has 3 or 4 components: if the RGB flag is set then 0 is red, 1 is green and 2 is blue; otherwise 0 is luma, 1 is chroma-U and 2 is chroma-V.</summary>
+        public AVComponentDescriptor_array4 @comp;
+        /// <summary>Alternative comma-separated names.</summary>
+        public byte* @alias;
     }
     
     public unsafe struct AVComponentDescriptor
@@ -248,24 +266,6 @@ namespace FFmpeg.AutoGen
         public int @depth_minus1;
         /// <summary>deprecated, use offset instead</summary>
         public int @offset_plus1;
-    }
-    
-    /// <summary>Descriptor that unambiguously describes how the bits of a pixel are stored in the up to 4 data planes of an image. It also stores the subsampling factors and number of components.</summary>
-    public unsafe struct AVPixFmtDescriptor
-    {
-        public byte* @name;
-        /// <summary>The number of components each pixel has, (1-4)</summary>
-        public byte @nb_components;
-        /// <summary>Amount to shift the luma width right to find the chroma width. For YV12 this is 1 for example. chroma_width = AV_CEIL_RSHIFT(luma_width, log2_chroma_w) The note above is needed to ensure rounding up. This value only refers to the chroma components.</summary>
-        public byte @log2_chroma_w;
-        /// <summary>Amount to shift the luma height right to find the chroma height. For YV12 this is 1 for example. chroma_height= AV_CEIL_RSHIFT(luma_height, log2_chroma_h) The note above is needed to ensure rounding up. This value only refers to the chroma components.</summary>
-        public byte @log2_chroma_h;
-        /// <summary>Combination of AV_PIX_FMT_FLAG_... flags.</summary>
-        public ulong @flags;
-        /// <summary>Parameters that describe how pixels are packed. If the format has 1 or 2 components, then luma is 0. If the format has 3 or 4 components: if the RGB flag is set then 0 is red, 1 is green and 2 is blue; otherwise 0 is luma, 1 is chroma-U and 2 is chroma-V.</summary>
-        public AVComponentDescriptor_array4 @comp;
-        /// <summary>Alternative comma-separated names.</summary>
-        public byte* @alias;
     }
     
     public unsafe struct AVTimecode
