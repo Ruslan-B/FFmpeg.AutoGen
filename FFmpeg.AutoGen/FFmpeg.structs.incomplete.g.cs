@@ -11,15 +11,15 @@ namespace FFmpeg.AutoGen
     {
     }
     
+    public unsafe struct AVDictionary
+    {
+    }
+    
     public unsafe struct AVBuffer
     {
     }
     
     public unsafe struct AVBufferPool
-    {
-    }
-    
-    public unsafe struct AVDictionary
     {
     }
     
