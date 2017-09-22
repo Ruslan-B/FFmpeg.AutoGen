@@ -1,16 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen", "FFmpeg.AutoGen\FFmpeg.AutoGen.csproj", "{A536B02A-B0B1-4753-8328-17369EF09976}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen.Example", "FFmpeg.AutoGen.Example\FFmpeg.AutoGen.Example.csproj", "{5BD870D6-27B4-4208-ACBF-496F2809326A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Example", "FFmpeg.AutoGen.Example\FFmpeg.AutoGen.Example.csproj", "{5BD870D6-27B4-4208-ACBF-496F2809326A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CF48D45D-979F-4574-9E33-A3AC1CB542B5}"
 	ProjectSection(SolutionItems) = preProject
 		.travis.yml = .travis.yml
-		dump-expots.cmd = dump-expots.cmd
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -28,28 +27,28 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|x64.ActiveCfg = Debug|x64
-		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|x64.Build.0 = Debug|x64
-		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|x86.ActiveCfg = Debug|x86
-		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|x86.Build.0 = Debug|x86
+		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|x64.Build.0 = Debug|Any CPU
+		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A536B02A-B0B1-4753-8328-17369EF09976}.Debug|x86.Build.0 = Debug|Any CPU
 		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|x64.ActiveCfg = Release|x64
-		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|x64.Build.0 = Release|x64
-		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|x86.ActiveCfg = Release|x86
-		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|x86.Build.0 = Release|x86
+		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|x64.ActiveCfg = Release|Any CPU
+		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|x64.Build.0 = Release|Any CPU
+		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|x86.ActiveCfg = Release|Any CPU
+		{A536B02A-B0B1-4753-8328-17369EF09976}.Release|x86.Build.0 = Release|Any CPU
 		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|x64.ActiveCfg = Debug|x64
-		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|x64.Build.0 = Debug|x64
-		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|x86.ActiveCfg = Debug|x86
-		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|x86.Build.0 = Debug|x86
+		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|x64.Build.0 = Debug|Any CPU
+		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Debug|x86.Build.0 = Debug|Any CPU
 		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|x64.ActiveCfg = Release|x64
-		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|x64.Build.0 = Release|x64
-		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|x86.ActiveCfg = Release|x86
-		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|x86.Build.0 = Release|x86
+		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|x64.ActiveCfg = Release|Any CPU
+		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|x64.Build.0 = Release|Any CPU
+		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|x86.ActiveCfg = Release|Any CPU
+		{5BD870D6-27B4-4208-ACBF-496F2809326A}.Release|x86.Build.0 = Release|Any CPU
 		{2A8E06C6-5A68-4FB4-AE0C-F43B644E3737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2A8E06C6-5A68-4FB4-AE0C-F43B644E3737}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A8E06C6-5A68-4FB4-AE0C-F43B644E3737}.Debug|x64.ActiveCfg = Debug|x64

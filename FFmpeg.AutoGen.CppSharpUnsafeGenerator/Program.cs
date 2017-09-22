@@ -6,17 +6,17 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     internal class Program
     {
-        private static readonly string Namespace = "FFmpeg.AutoGen";
+        private const string SolutionDir = "../../../../";
+        private const string FfmpegDir = SolutionDir + "ffmpeg/";
+        private const string FfmpegBinDir = FfmpegDir + "bin/x64";
+        private const string FfmpegIncludeDir = FfmpegDir + "include";
+        private const string Namespace = "FFmpeg.AutoGen";
+        private const string OutputDir = SolutionDir + "FFmpeg.AutoGen/";
         public static string ClassName = "ffmpeg";
-        private static readonly string OutputDirectory = "../../../../FFmpeg.AutoGen/";
 
-        private static readonly FunctionExport[] Exports = FunctionExportHelper.LoadFromFile("../../../../ffmpeg/exports.txt").ToArray();
-        private static readonly string[] IncludeDirs = { Path.GetFullPath("../../../../ffmpeg/include") };
-
-        private static readonly string[] Defines =
-        {
-            "__STDC_CONSTANT_MACROS"
-        };
+        private static readonly string[] IncludeDirs = {Path.GetFullPath(FfmpegIncludeDir)};
+        private static readonly string[] Defines = {"__STDC_CONSTANT_MACROS"};
+        private static readonly FunctionExport[] Exports = FunctionExportHelper.LoadFunctionExports(FfmpegBinDir).ToArray();
 
         private static void Main(string[] args)
         {
@@ -60,13 +60,13 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
             g.Parse("libavdevice/avdevice.h");
 
-            g.WriteMacros(OutputDirectory + "FFmpeg.macros.g.cs");
-            g.WriteEnums(OutputDirectory + "FFmpeg.enums.g.cs");
-            g.WriteDelegates(OutputDirectory + "FFmpeg.delegates.g.cs");
-            g.WriteArrays(OutputDirectory + "FFmpeg.arrays.g.cs");
-            g.WriteStructures(OutputDirectory + "FFmpeg.structs.g.cs");
-            g.WriteIncompleteStructures(OutputDirectory + "FFmpeg.structs.incomplete.g.cs");
-            g.WriteFunctions(OutputDirectory + "FFmpeg.functions.g.cs");
+            g.WriteMacros(OutputDir + "FFmpeg.macros.g.cs");
+            g.WriteEnums(OutputDir + "FFmpeg.enums.g.cs");
+            g.WriteDelegates(OutputDir + "FFmpeg.delegates.g.cs");
+            g.WriteArrays(OutputDir + "FFmpeg.arrays.g.cs");
+            g.WriteStructures(OutputDir + "FFmpeg.structs.g.cs");
+            g.WriteIncompleteStructures(OutputDir + "FFmpeg.structs.incomplete.g.cs");
+            g.WriteFunctions(OutputDir + "FFmpeg.functions.g.cs");
         }
     }
 }

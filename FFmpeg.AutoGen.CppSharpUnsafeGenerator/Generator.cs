@@ -146,7 +146,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             {
                 Verbose = true,
                 ASTContext = new CppSharp.Parser.AST.ASTContext(),
-                LanguageVersion = LanguageVersion.GNUC
+                LanguageVersion = LanguageVersion.C99_GNU
             };
 
             parserOptions.SetupMSVC(VisualStudioVersion.Latest);
@@ -154,21 +154,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             foreach (var includeDir in IncludeDirs) parserOptions.AddIncludeDirs(includeDir);
 
             foreach (var define in Defines) parserOptions.AddDefines(define);
-
-            var project = new Project();
-            foreach (var filePath in sourceFiles)
-            {
-                var sourceFile = project.AddFile(filePath);
-                sourceFile.Options = parserOptions;
-            }
-
+            
             var clangParser = new ClangParser(new CppSharp.Parser.AST.ASTContext());
             clangParser.SourcesParsed += OnSourceFileParsed;
-            clangParser.ParseProject(project, false);
+            clangParser.ParseSourceFiles(sourceFiles, parserOptions);
             return ClangParser.ConvertASTContext(clangParser.ASTContext);
         }
 
-        private void OnSourceFileParsed(IList<SourceFile> files, ParserResult result)
+        private void OnSourceFileParsed(IEnumerable<string> files, ParserResult result)
         {
             switch (result.Kind)
             {
