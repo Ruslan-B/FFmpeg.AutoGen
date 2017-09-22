@@ -2,7 +2,7 @@
 **The FFmpeg API is wast and complex and this project exposes it with minimum modifications - support is very limited.
 Please consider to ask *how to* questions on stackoverflow.com. 
 The community may be able to offer some assistance but you will largely be on your own.
-As another option you can search for a solution in C(lang) as with some effort you can convert them to C#.**
+As another option you can search for a solution in C(lang) as with some effort you can convert it to C#.**
 
 ## FFmpeg.AutoGen [![Build Status](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.svg)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)[![#](https://img.shields.io/nuget/v/FFmpeg.AutoGen.svg)](https://www.nuget.org/packages/FFmpeg.AutoGen/)
 
@@ -38,10 +38,9 @@ You need to patch ```FFmpeg.AutoGen.config``` with full path to FFmpeg libraries
 The bindings generator uses [CppSharp](https://github.com/mono/CppSharp).
 
 Prerequisites:
- - FFmpeg library include files ```./ffmpeg/include```
+ - Visual Studio 2017 with C# and C++ desktop development workloads and Windows SDK for desktop.
 
 Steps to generate:
-- Run ```dump-expots.cmd``` to create exports map
 - Run ```FFmpeg.AutoGen.CppSharpUnsafeGenerator;```
 - All files with extension ```*.g.cs```  in ```FFmpeg.AutoGen``` project will be regenerated.
 
