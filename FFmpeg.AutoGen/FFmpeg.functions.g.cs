@@ -3819,7 +3819,7 @@ namespace FFmpeg.AutoGen
         /// <param name="dstH">the height of the destination image</param>
         /// <param name="dstFormat">the destination image format</param>
         /// <param name="flags">specify which algorithm and options to use for rescaling</param>
-        /// <param name="param">extra parameters to tune the used scaler For SWS_BICUBIC param[0] and [1] tune the shape of the basis function, param[0] tunes f(1) and param[1] fÂ´(1) For SWS_GAUSS param[0] tunes the exponent and thus cutoff frequency For SWS_LANCZOS param[0] tunes the width of the window function</param>
+        /// <param name="param">extra parameters to tune the used scaler For SWS_BICUBIC param[0] and [1] tune the shape of the basis function, param[0] tunes f(1) and param[1] f´(1) For SWS_GAUSS param[0] tunes the exponent and thus cutoff frequency For SWS_LANCZOS param[0] tunes the width of the window function</param>
         [DllImport("swscale-4", EntryPoint = "sws_getContext", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern SwsContext* sws_getContext(int @srcW, int @srcH, AVPixelFormat @srcFormat, int @dstW, int @dstH, AVPixelFormat @dstFormat, int @flags, SwsFilter* @srcFilter, SwsFilter* @dstFilter, double* @param);
         

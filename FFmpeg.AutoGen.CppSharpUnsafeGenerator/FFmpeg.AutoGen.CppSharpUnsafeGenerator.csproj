@@ -76,22 +76,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CppSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.8.13\lib\CppSharp.dll</HintPath>
+      <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.dll</HintPath>
     </Reference>
     <Reference Include="CppSharp.AST, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.8.13\lib\CppSharp.AST.dll</HintPath>
+      <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.AST.dll</HintPath>
     </Reference>
     <Reference Include="CppSharp.Generator, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.8.13\lib\CppSharp.Generator.dll</HintPath>
+      <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.Generator.dll</HintPath>
     </Reference>
     <Reference Include="CppSharp.Parser, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.8.13\lib\CppSharp.Parser.dll</HintPath>
+      <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.Parser.dll</HintPath>
     </Reference>
-    <Reference Include="CppSharp.Parser.CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.8.13\lib\CppSharp.Parser.CSharp.dll</HintPath>
+    <Reference Include="CppSharp.Parser.CLI, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.Parser.CLI.dll</HintPath>
     </Reference>
     <Reference Include="CppSharp.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.8.13\lib\CppSharp.Runtime.dll</HintPath>
+      <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

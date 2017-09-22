@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("FFmpeg.AutoGen.CppSharpUnsafeGenerator")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Rational Core")]
 [assembly: AssemblyProduct("FFmpeg.AutoGen")]
 [assembly: AssemblyCopyright("Copyright © Ruslan Balanukhin 2015")]
 [assembly: AssemblyTrademark("")]
