@@ -1,8 +1,7 @@
 sudo: false
 language: csharp
-solution: FFmpeg.AutoGen.sln
-install:
-  - nuget restore FFmpeg.AutoGen.sln
+mono: none
+dotnet: 2.0.0
 script:
   - dotnet restore
   - dotnet build .\FFmpeg.AutoGen.Example\FFmpeg.AutoGen.Example.csproj
