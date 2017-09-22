@@ -89,7 +89,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             {
                 WriteLine($"public IntPtr Pointer;");
                 Write($"public static implicit operator {@delegate.Name}({@delegate.FunctionName} func) => ");
-                Write($"new {@delegate.Name} {{ Pointer = Marshal.GetFunctionPointerForDelegate(func) }};");
+                Write($"new {@delegate.Name} {{ Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) }};");
                 WriteLine();
             }
         }
