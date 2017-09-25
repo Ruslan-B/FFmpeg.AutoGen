@@ -1,5 +1,6 @@
 ﻿using System;
-using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Example
@@ -29,7 +30,7 @@ namespace FFmpeg.AutoGen.Example
                 var lineBuffer = stackalloc byte[lineSize];
                 var printPrefix = 1;
                 ffmpeg.av_log_format_line(p0, level, format, vl, lineBuffer, lineSize, &printPrefix);
-                var line = Marshal.PtrToStringAnsi((IntPtr)lineBuffer);
+                var line = Marshal.PtrToStringAnsi((IntPtr) lineBuffer);
                 Console.Write(line);
             };
             ffmpeg.av_log_set_callback(logCallback);
@@ -78,7 +79,7 @@ namespace FFmpeg.AutoGen.Example
             var convertedFrameBufferPtr = Marshal.AllocHGlobal(convertedFrameBufferSize);
             var dstData = new byte_ptrArray4();
             var dstLinesize = new int_array4();
-            ffmpeg.av_image_fill_arrays(ref dstData, ref dstLinesize, (byte*)convertedFrameBufferPtr, destinationPixFmt, width, height, 1);
+            ffmpeg.av_image_fill_arrays(ref dstData, ref dstLinesize, (byte*) convertedFrameBufferPtr, destinationPixFmt, width, height, 1);
 
             var pCodec = ffmpeg.avcodec_find_decoder(codecId);
             if (pCodec == null)
@@ -125,11 +126,8 @@ namespace FFmpeg.AutoGen.Example
                     ffmpeg.av_frame_unref(pDecodedFrame);
                 }
 
-#if !NETCOREAPP2_0
-
-                using (var bitmap = new System.Drawing.Bitmap(width, height, dstLinesize[0], System.Drawing.Imaging.PixelFormat.Format24bppRgb, convertedFrameBufferPtr))
-                    bitmap.Save(@"frame.buffer.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-#endif
+                using (var bitmap = new Bitmap(width, height, dstLinesize[0], PixelFormat.Format24bppRgb, convertedFrameBufferPtr))
+                    bitmap.Save(@"frame.buffer.jpg", ImageFormat.Jpeg);
 
                 frameNumber++;
             }
