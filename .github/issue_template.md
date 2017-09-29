@@ -1,32 +1,33 @@
-Issue tracker is **ONLY** used for reporting bugs in bindings and requesting new features. NO QUESTIONS ACCEPTED! Use [stackoverflow](https://stackoverflow.com/search?q=ffmpeg+autogen) for supporting issues.
+**Note: for support questions, please use [stackoverflow](https://stackoverflow.com/search?q=ffmpeg+autogen)**. This repository's issues are reserved for feature requests and bug reports.
 
-<!--- Provide a general summary of the issue or feature in the Title above -->
+* **I'm submitting a ... **
+  - [ ] bug report
+  - [ ] feature request
+  - [ ] support request or question => Please do not submit support request or questions here, see note at the top of this template.
 
-## Expected Behavior
-<!--- Tell us what should happen -->
 
-## Current Behavior
-<!--- Tell us what happens instead of the expected behavior -->
+* **Do you want to request a *feature* or report a *bug*?**
 
-## Possible Solution
-<!--- Not obligatory, but suggest a fix/reason for the bug, -->
 
-## Steps to Reproduce
-<!--- Provide a link to a live example, or an unambiguous set of steps to -->
-<!--- reproduce this bug. Include code to reproduce, if relevant -->
-1.
-2.
-3.
-4.
 
-## Context (Environment)
-<!--- How has this issue affected you? What are you trying to accomplish? -->
-<!--- Providing context helps us come up with a solution that is most useful in the real world -->
+* **What is the current behavior?**
 
-<!--- Provide a general summary of the issue in the Title above -->
 
-## Detailed Description
-<!--- Provide a detailed description of the change or addition you are proposing -->
 
-## Possible Implementation
-<!--- Not obligatory, but suggest an idea for implementing addition or change -->
+* **If the current behavior is a bug, please provide the steps to reproduce and if possible a minimal demo of the problem*:
+
+
+
+* **What is the expected behavior?**
+
+
+
+* **What is the motivation / use case for changing the behavior?**
+
+
+
+* **Please tell us about your environment:**
+
+- version: 3.3.3.3
+
+* **Other information** (e.g. detailed explanation, stacktraces, related issues, suggestions how to fix, links for us to have context, eg. stackoverflow, gitter, etc)
