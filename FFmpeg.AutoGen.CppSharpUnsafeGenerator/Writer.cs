@@ -19,7 +19,15 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public void Write(MacroDefinition macro)
         {
             var valid = macro.IsValid ? string.Empty : "// ";
-            WriteLine($"{valid}public static {macro.TypeName} {macro.Name} = {macro.Expression};");
+
+            if (macro.IsConstant)
+            {
+                WriteLine($"{valid}public const {macro.TypeName} {macro.Name} = {macro.Expression};");
+            }
+            else
+            {
+                WriteLine($"{valid}public static {macro.TypeName} {macro.Name} = {macro.Expression};");
+            }
         }
 
         public void Write(EnumerationDefinition enumeration)

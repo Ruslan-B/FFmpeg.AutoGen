@@ -10,7 +10,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         private static readonly Regex IdRegex = new Regex(@"^([\w]+)$", RegexOptions.Compiled);
         private static readonly Regex FuncRegex = new Regex(@"^([\w]+)\s?\((.*)\)$", RegexOptions.Compiled);
         private static readonly Regex GroupRegex = new Regex(@"^\((.+)\)$", RegexOptions.Compiled);
-        private static readonly Regex BinaryRegex = new Regex(@"^(\w+)\s*(<<|>>|\+|\-|\*|\/|<|>|>=|<=|\|)\s*(\w+)", RegexOptions.Compiled);
+        private static readonly Regex BinaryRegex = new Regex(@"^(\s*\()?(\w+)\s*(<<|>>|\+|\-|\*|\/|<|>|>=|<=|\|)\s*(\w+)(\)\s*)?", RegexOptions.Compiled);
         private static readonly Regex DoubleRegex = new Regex(@"^-?\s*\d\.\d+$", RegexOptions.Compiled);
         private static readonly Regex IntHexRegex = new Regex(@"^(-?)\s*0x([0-9a-fA-F]+)(u|U)?([l|L]|[l|L][l|L])?$", RegexOptions.Compiled);
         private static readonly Regex IntDecimalRegex = new Regex(@"^(-?\d+)(u|U)?([l|L]|[l|L][l|L])?$", RegexOptions.Compiled);
@@ -39,11 +39,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private bool TryParseInternal(string expression, out Expression result)
         {
-            if (TryParseGroup(expression, out result)) return true;
             if (TryParseDouble(expression, out result)) return true;
             if (TryParseInt(expression, out result)) return true;
             if (TryParseId(expression, out result)) return true;
             if (TryParseBinary(expression, out result)) return true;
+            if (TryParseGroup(expression, out result)) return true;
             return false;
         }
 
@@ -53,9 +53,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             var match = BinaryRegex.Match(expression);
             if (!match.Success) return false;
 
-            var leftExpression = match.Groups[1].Value;
-            var @operator = match.Groups[2].Value;
-            var rightExpression = match.Groups[3].Value;
+            var leftExpression = match.Groups[2].Value;
+            var @operator = match.Groups[3].Value;
+            var rightExpression = match.Groups[4].Value;
             Expression left;
             Expression right;
             if (!TryParse(leftExpression, out left) || !TryParse(rightExpression, out right)) return false;
