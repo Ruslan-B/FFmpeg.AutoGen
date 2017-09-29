@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
-    internal class MacroExpressionParser
+    public class MacroExpressionParser
     {
         private static readonly Regex IdRegex = new Regex(@"^([\w]+)$", RegexOptions.Compiled);
         private static readonly Regex FuncRegex = new Regex(@"^([\w]+)\s?\((.*)\)$", RegexOptions.Compiled);

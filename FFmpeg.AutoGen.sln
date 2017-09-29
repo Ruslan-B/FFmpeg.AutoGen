@@ -2,6 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.26923.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen", "FFmpeg.AutoGen\FFmpeg.AutoGen.csproj", "{A536B02A-B0B1-4753-8328-17369EF09976}"
 EndProject
@@ -14,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen.CppSharpUnsafeGenerator", "FFmpeg.AutoGen.CppSharpUnsafeGenerator\FFmpeg.AutoGen.CppSharpUnsafeGenerator.csproj", "{2A8E06C6-5A68-4FB4-AE0C-F43B644E3737}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen.CppSharpUnsafeGenerator.Tests", "FFmpeg.AutoGen.CppSharpUnsafeGenerator.Tests\FFmpeg.AutoGen.CppSharpUnsafeGenerator.Tests.csproj", "{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +64,18 @@ Global
 		{2A8E06C6-5A68-4FB4-AE0C-F43B644E3737}.Release|x64.Build.0 = Release|x64
 		{2A8E06C6-5A68-4FB4-AE0C-F43B644E3737}.Release|x86.ActiveCfg = Release|x86
 		{2A8E06C6-5A68-4FB4-AE0C-F43B644E3737}.Release|x86.Build.0 = Release|x86
+		{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}.Debug|x64.Build.0 = Debug|Any CPU
+		{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}.Debug|x86.Build.0 = Debug|Any CPU
+		{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}.Release|x64.ActiveCfg = Release|Any CPU
+		{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}.Release|x64.Build.0 = Release|Any CPU
+		{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}.Release|x86.ActiveCfg = Release|Any CPU
+		{9D1F1C7C-17FC-453A-BABA-47AD57D36B92}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
