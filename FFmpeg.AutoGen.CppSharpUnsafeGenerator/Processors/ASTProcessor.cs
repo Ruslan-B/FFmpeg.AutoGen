@@ -8,18 +8,24 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
     internal class ASTProcessor
     {
-        private readonly List<IDefinition> _units = new List<IDefinition>();
-        public HashSet<string> IgnoreUnitNames = new HashSet<string>(new[] {"__NSConstantString_tag"});
+        private readonly List<IDefinition> _units;
 
         public ASTProcessor()
         {
+            _units = new List<IDefinition>();
+            IgnoreUnitNames = new HashSet<string>();
+            TypeAliases = new Dictionary<string, TypeOrAlias>();
+            WellKnownMaros = new Dictionary<string, TypeOrAlias>();
             FunctionProcessor = new FunctionProcessor(this);
             StructureProcessor = new StructureProcessor(this);
             EnumerationProcessor = new EnumerationProcessor(this);
             MacroProcessor = new MacroProcessor(this);
-            MacroPostProcessor = new MacroPostProcessor();
+            MacroPostProcessor = new MacroPostProcessor(this);
         }
 
+        public HashSet<string> IgnoreUnitNames { get; }
+        public Dictionary<string, TypeOrAlias> TypeAliases { get; }
+        public Dictionary<string, TypeOrAlias> WellKnownMaros { get; }
         public MacroProcessor MacroProcessor { get; }
         public EnumerationProcessor EnumerationProcessor { get; }
         public StructureProcessor StructureProcessor { get; }

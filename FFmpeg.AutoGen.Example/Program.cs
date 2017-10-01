@@ -100,11 +100,13 @@ namespace FFmpeg.AutoGen.Example
             ffmpeg.av_init_packet(pPacket);
 
             var frameNumber = 0;
-            while (frameNumber < 200)
+            while (frameNumber < 2000)
             {
                 try
                 {
-                    if (ffmpeg.av_read_frame(pFormatContext, pPacket) < 0)
+                    var r = ffmpeg.av_read_frame(pFormatContext, pPacket);
+                    if (r == ffmpeg.AVERROR_EOF) break;
+                    if (r < 0)
                         throw new ApplicationException(@"Could not read frame.");
 
                     if (pPacket->stream_index != pStream->index)

@@ -11,15 +11,20 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
     {
         private readonly IndentedTextWriter _writer;
 
-        public Writer(IndentedTextWriter writer)
-        {
-            _writer = writer;
-        }
+        public Writer(IndentedTextWriter writer) => _writer = writer;
 
         public void Write(MacroDefinition macro)
         {
-            var valid = macro.IsValid ? string.Empty : "// ";
-            WriteLine($"{valid}public static {macro.TypeName} {macro.Name} = {macro.Expression};");
+            if (macro.IsValid)
+            {
+                WriteSummary(macro);
+                var constOrStatic = macro.IsConst ? "const" : "static";
+                WriteLine($"public {constOrStatic} {macro.TypeName} {macro.Name} = {macro.Expression};");
+            }
+            else
+            {
+                WriteLine($"// public static {macro.Name} = {macro.Expression};");
+            }
         }
 
         public void Write(EnumerationDefinition enumeration)
