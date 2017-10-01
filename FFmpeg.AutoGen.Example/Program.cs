@@ -104,19 +104,26 @@ namespace FFmpeg.AutoGen.Example
             {
                 try
                 {
-                    var r = ffmpeg.av_read_frame(pFormatContext, pPacket);
-                    if (r == ffmpeg.AVERROR_EOF) break;
-                    if (r < 0)
-                        throw new ApplicationException(@"Could not read frame.");
+                    int error;
+                    do
+                    {
+                        error = ffmpeg.av_read_frame(pFormatContext, pPacket);
+                        if (error == ffmpeg.AVERROR_EOF) break;
+                        if (error < 0)
+                            throw new ApplicationException(@"Could not read frame.");
 
-                    if (pPacket->stream_index != pStream->index)
-                        continue;
+                        if (pPacket->stream_index != pStream->index) continue;
 
-                    if (ffmpeg.avcodec_send_packet(pCodecContext, pPacket) < 0)
-                        throw new ApplicationException($@"Error while sending packet {frameNumber}.");
+                        if (ffmpeg.avcodec_send_packet(pCodecContext, pPacket) < 0)
+                            throw new ApplicationException($@"Error while sending packet {frameNumber}.");
 
-                    if (ffmpeg.avcodec_receive_frame(pCodecContext, pDecodedFrame) < 0)
+                        error = ffmpeg.avcodec_receive_frame(pCodecContext, pDecodedFrame);
+                    } while (error == -11);// AVERROR(EAGAIN)
+                    if (error == ffmpeg.AVERROR_EOF) break;
+                    if (error < 0)
                         throw new ApplicationException($@"Error while receiving frame {frameNumber}.");
+
+                    if (pPacket->stream_index != pStream->index) continue;
 
                     Console.WriteLine($@"frame: {frameNumber}");
 
