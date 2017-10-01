@@ -16,7 +16,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
     internal class Generator
     {
         private bool _hasParsingErrors;
-        private ASTProcessor _astProcessor;
+        private readonly ASTProcessor _astProcessor;
+
+        public Generator(ASTProcessor astProcessor)
+        {
+            _astProcessor = astProcessor;
+        }
 
         public string[] Defines { get; set; } = { };
         public string[] IncludeDirs { get; set; } = { };
@@ -186,12 +191,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             }
         }
 
-        private void Process(ASTContext context)
-        {
-            if (_astProcessor == null)
-                _astProcessor = new ASTProcessor {FunctionExportMap = Exports.ToDictionary(x => x.Name)};
-            _astProcessor.Process(context.TranslationUnits.Where(x => !x.IsSystemHeader));
-        }
+        private void Process(ASTContext context) => _astProcessor.Process(context.TranslationUnits.Where(x => !x.IsSystemHeader));
 
         private void WriteInternal(string outputFile, Action<IReadOnlyList<IDefinition>, Writer> execute)
         {

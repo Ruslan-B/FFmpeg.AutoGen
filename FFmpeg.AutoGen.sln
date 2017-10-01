@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen", "FFmpeg.AutoGen\FFmpeg.AutoGen.csproj", "{A536B02A-B0B1-4753-8328-17369EF09976}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen", "FFmpeg.AutoGen\FFmpeg.AutoGen.csproj", "{A536B02A-B0B1-4753-8328-17369EF09976}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Example", "FFmpeg.AutoGen.Example\FFmpeg.AutoGen.Example.csproj", "{5BD870D6-27B4-4208-ACBF-496F2809326A}"
 EndProject

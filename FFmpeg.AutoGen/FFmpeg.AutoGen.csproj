@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <PackageId>FFmpeg.AutoGen</PackageId>
-    <Version>3.3.3.5</Version>
+    <Version>3.3.3.6</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Ruslan Balanukhin</Authors>
     <Company>Rational Core</Company>
@@ -24,7 +24,7 @@
     <NoWarn>1701;1702;1705;169;108;1591;1573;1591</NoWarn>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\FFmpeg.AutoGen.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>

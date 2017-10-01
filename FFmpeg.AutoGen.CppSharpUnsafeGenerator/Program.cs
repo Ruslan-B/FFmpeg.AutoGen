@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
@@ -14,15 +15,22 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         private const string OutputDir = SolutionDir + "FFmpeg.AutoGen/";
         public static string ClassName = "ffmpeg";
 
-        private static readonly string[] IncludeDirs = {Path.GetFullPath(FfmpegIncludeDir)};
-        private static readonly string[] Defines = {"__STDC_CONSTANT_MACROS"};
+        private static readonly string[] IncludeDirs = { Path.GetFullPath(FfmpegIncludeDir) };
+        private static readonly string[] Defines = { "__STDC_CONSTANT_MACROS" };
         private static readonly FunctionExport[] Exports = FunctionExportHelper.LoadFunctionExports(FfmpegBinDir).ToArray();
 
         private static void Main(string[] args)
         {
             Console.WriteLine("Current directory: " + Environment.CurrentDirectory);
 
-            var g = new Generator
+            var astProcessor = new ASTProcessor { FunctionExportMap = Exports.ToDictionary(x => x.Name) };
+            astProcessor.IgnoreUnitNames.Add("__NSConstantString_tag");
+            astProcessor.TypeAliases.Add("int64_t", typeof(long));
+            astProcessor.WellKnownMaros.Add("FFERRTAG", typeof(int));
+            astProcessor.WellKnownMaros.Add("MKTAG", typeof(int));
+            astProcessor.WellKnownMaros.Add("UINT64_C", typeof(ulong));
+
+            var g = new Generator(astProcessor)
             {
                 IncludeDirs = IncludeDirs,
                 Defines = Defines,
