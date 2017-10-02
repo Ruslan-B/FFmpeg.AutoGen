@@ -47,7 +47,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             expression = Rewrite(expression);
 
             macro.TypeName = typeOrAlias.ToString();
-            macro.Content = macro.Expression;
+            macro.Content = $"{macro.Name} = {macro.Expression}";
             macro.Expression = Serialize(expression);
             macro.IsConst = IsConst(expression);
             macro.IsValid = true;
@@ -122,7 +122,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 case BinaryExpression e: return $"{Serialize(e.Left)} {e.OperationType.ToOperationTypeString()} {Serialize(e.Right)}";
                 case UnaryExpression e: return $"{e.OperationType.ToOperationTypeString()}{Serialize(e.Operand)}";
                 case CastExpression e: return $"({GetTypeAlias(e.TargetType)})({Serialize(e.Operand)})";
-                case CallExpression e: return $"{e.Name}({string.Join(",", e.Arguments.Select(Serialize))})";
+                case CallExpression e: return $"{e.Name}({string.Join(", ", e.Arguments.Select(Serialize))})";
                 case VariableExpression e: return e.Name;
                 case ConstantExpression e: return Serialize(e.Value);
                 default: throw new NotSupportedException();

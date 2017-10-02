@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <PackageId>FFmpeg.AutoGen</PackageId>
-    <Version>3.3.3.6</Version>
+    <Version>3.3.3.7</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Ruslan Balanukhin</Authors>
     <Company>Rational Core</Company>
