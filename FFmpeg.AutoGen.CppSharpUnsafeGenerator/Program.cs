@@ -29,6 +29,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             astProcessor.WellKnownMaros.Add("FFERRTAG", typeof(int));
             astProcessor.WellKnownMaros.Add("MKTAG", typeof(int));
             astProcessor.WellKnownMaros.Add("UINT64_C", typeof(ulong));
+            astProcessor.WellKnownMaros.Add("AV_VERSION_INT", typeof(int));
+            astProcessor.WellKnownMaros.Add("AV_VERSION", typeof(string));
 
             var g = new Generator(astProcessor)
             {
