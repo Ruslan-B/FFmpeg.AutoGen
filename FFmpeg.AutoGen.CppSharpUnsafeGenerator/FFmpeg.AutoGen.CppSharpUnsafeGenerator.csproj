@@ -93,8 +93,8 @@
     <Reference Include="CppSharp.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="RCore.ClangMacroParser, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RCore.ClangMacroParser.0.0.0.2\lib\net45\RCore.ClangMacroParser.dll</HintPath>
+    <Reference Include="RCore.ClangMacroParser, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RCore.ClangMacroParser.0.0.0.3\lib\net45\RCore.ClangMacroParser.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
