@@ -129,7 +129,7 @@ namespace FFmpeg.AutoGen.Example
                             throw new ApplicationException(GetErrorMessage(error));
 
                         error = ffmpeg.avcodec_receive_frame(pCodecContext, pDecodedFrame);
-                    } while (error == -11); // AVERROR(EAGAIN)
+                    } while (error == ffmpeg.AVERROR(ffmpeg.EAGAIN));
                     if (error == ffmpeg.AVERROR_EOF) break;
                     if (error < 0)
                         throw new ApplicationException(GetErrorMessage(error));
