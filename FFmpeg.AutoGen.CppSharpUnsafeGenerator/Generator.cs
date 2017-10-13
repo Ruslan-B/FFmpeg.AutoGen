@@ -86,6 +86,52 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             {
                 writer.WriteLine($"public unsafe static partial class {ClassName}");
                 using (writer.BeginBlock())
+                {
+                    units.OfType<FunctionDefinition>()
+                        .GroupBy(x => new { LibraryName = x.LibraryName })
+                        .ToList()
+                        .ForEach(l =>
+                        {
+                            writer.WriteLine($"public static IntPtr {l.Key.LibraryName}_handle;");
+                        });
+                    writer.WriteLine();
+
+                    writer.WriteLine("static ffmpeg()");
+                    writer.WriteLine("{");
+                    writer.WriteLine("    LoadLibraries();");
+                    writer.WriteLine("    LoadFunctions();");
+                    writer.WriteLine("}");
+                    writer.WriteLine();
+
+                    writer.WriteLine("public static void LoadLibraries()");
+                    writer.WriteLine("{");
+
+                    units.OfType<FunctionDefinition>()
+                        .GroupBy(x => new { LibraryName = x.LibraryName, LibraryVersion = x.LibraryVersion })
+                        .ToList()
+                        .ForEach(l =>
+                        {
+                            writer.WriteLine($"    {l.Key.LibraryName}_handle = FunctionLoader.LoadNativeLibrary(new string[] {{ \"{l.Key.LibraryName}-{l.Key.LibraryVersion}.dll\" }}, new string[] {{ \"{l.Key.LibraryName}.so.{l.Key.LibraryVersion}\" }}, new string[] {{ \"{l.Key.LibraryName}.{l.Key.LibraryVersion}.dylib\" }});");
+                        });
+
+                    writer.WriteLine("}");
+                    writer.WriteLine();
+
+                    writer.WriteLine("public static void LoadFunctions()");
+                    writer.WriteLine("{");
+
+                    units.OfType<FunctionDefinition>()
+                        .OrderBy(x => x.LibraryName)
+                        .ThenBy(x => x.Name)
+                        .ToList()
+                        .ForEach(x =>
+                        {
+                            writer.WriteLine($"    {x.Name}_fptr = FunctionLoader.LoadFunctionDelegate<{x.Name}_delegate>({x.LibraryName}_handle, \"{x.Name}\", throwOnError: false);");
+                        });
+
+                    writer.WriteLine("}");
+                    writer.WriteLine();
+
                     units.OfType<FunctionDefinition>()
                         .OrderBy(x => x.LibraryName)
                         .ThenBy(x => x.Name)
@@ -95,6 +141,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                             writer.Write(x);
                             writer.WriteLine();
                         });
+                }
             });
         }
 

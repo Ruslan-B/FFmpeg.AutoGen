@@ -71,13 +71,29 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public void Write(FunctionDefinition function)
         {
+            function.ReturnType.Attributes.ToList().ForEach(WriteLine);
+            var parameterNames = GetParameterNames(function.Parameters);
+            var parameters = GetParameters(function.Parameters);
+            var returnCommand = function.ReturnType.Name == "void" ? string.Empty : "return ";
+
+            WriteLine($"[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
+            WriteLine($"private delegate {function.ReturnType.Name} {function.Name}_delegate({parameters});");
+            WriteLine($"private static {function.Name}_delegate {function.Name}_fptr;");
+            WriteLine();
+
             WriteSummary(function);
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
-            if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]");
-            WriteLine($"[DllImport(\"{function.LibraryName}\", EntryPoint = \"{function.Name}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
-            function.ReturnType.Attributes.ToList().ForEach(WriteLine);
-            var parameters = GetParameters(function.Parameters);
-            WriteLine($"public static extern {function.ReturnType.Name} {function.Name}({parameters});");
+            if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]"); WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
+            WriteLine($"{{");
+            WriteLine($"    if ({function.Name}_fptr != null)");
+            WriteLine($"    {{");
+            WriteLine($"        {returnCommand}{function.Name}_fptr({parameterNames});");
+            WriteLine($"    }}");
+            WriteLine($"    else");
+            WriteLine($"    {{");
+            WriteLine($"        throw new PlatformNotSupportedException(\"{function.Name} is not supported on this platform.\");");
+            WriteLine($"    }}");
+            WriteLine($"}}");
         }
 
         public void Write(DelegateDefinition @delegate)
@@ -178,6 +194,17 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             }));
         }
 
+        private static string GetParameterNames(FunctionParameter[] parameters)
+        {
+            return string.Join(", ", parameters.Select(x =>
+            {
+                var sb = new StringBuilder();
+                if (x.Type.ByReference) sb.Append("ref ");
+                sb.Append($"@{x.Name}");
+                return sb.ToString();
+            }));
+        }
+
         private void WriteSummary(ICanGenerateXmlDoc value)
         {
             if (!string.IsNullOrWhiteSpace(value.Content)) WriteLine($"/// <summary>{SecurityElement.Escape(value.Content.Trim())}</summary>");
@@ -209,3 +236,4 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         }
     }
 }
+ 

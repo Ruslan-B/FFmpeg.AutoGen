@@ -6,6 +6,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
     internal class FunctionExport
     {
         public string Name { get; set; }
-        public string Library { get; set; }
+        public string LibraryName { get; set; }
+        public int LibraryVersion { get; set; }
     }
 }

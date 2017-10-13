@@ -32,7 +32,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     Name = functionName,
                     ReturnType = GetReturnTypeName(function.ReturnType.Type, functionName),
                     Content = function.Comment?.BriefText,
-                    LibraryName = export.Library,
+                    LibraryName = export.LibraryName,
+                    LibraryVersion = export.LibraryVersion,
                     Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray(),
                     IsObsolete = IsObsolete(function),
                     ObsoleteMessage = GetObsoleteMessage(function)
