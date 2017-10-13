@@ -13,9 +13,13 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             var libraries = Directory.EnumerateFiles(path, "*.dll");
             foreach (var libraryPath in libraries)
             {
-                var libraryName = Path.GetFileNameWithoutExtension(libraryPath);
-                var expots = GetExports(libraryPath);
-                foreach (var export in expots) yield return new FunctionExport {Library = libraryName, Name = export};
+                var libraryFullName = Path.GetFileNameWithoutExtension(libraryPath);
+                var libraryNameParts = libraryFullName.Split('-');
+                var libraryName = libraryNameParts[0];
+                var libraryVersion = int.Parse(libraryNameParts[1]);
+
+                var exports = GetExports(libraryPath);
+                foreach (var export in exports) yield return new FunctionExport { LibraryName = libraryName, LibraryVersion = libraryVersion, Name = export};
             }
         }
 
