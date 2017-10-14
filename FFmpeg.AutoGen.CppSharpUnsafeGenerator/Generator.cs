@@ -15,13 +15,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     internal class Generator
     {
-        private bool _hasParsingErrors;
         private readonly ASTProcessor _astProcessor;
+        private bool _hasParsingErrors;
 
-        public Generator(ASTProcessor astProcessor)
-        {
-            _astProcessor = astProcessor;
-        }
+        public Generator(ASTProcessor astProcessor) => _astProcessor = astProcessor;
 
         public string[] Defines { get; set; } = { };
         public string[] IncludeDirs { get; set; } = { };
@@ -49,7 +46,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     .ToList()
                     .ForEach(x =>
                     {
-                        writer.Write(x);
+                        writer.WriteEnumeration(x);
                         writer.WriteLine();
                     });
             });
@@ -61,7 +58,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             {
                 units.OfType<DelegateDefinition>().ToList().ForEach(x =>
                 {
-                    writer.Write(x);
+                    writer.WriteDelegate(x);
                     writer.WriteLine();
                 });
             });
@@ -76,7 +73,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     units.OfType<MacroDefinition>()
                         .OrderBy(x => x.Name)
                         .ToList()
-                        .ForEach(writer.Write);
+                        .ForEach(writer.WriteMacro);
             });
         }
 
@@ -88,57 +85,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 using (writer.BeginBlock())
                 {
                     units.OfType<FunctionDefinition>()
-                        .GroupBy(x => new { LibraryName = x.LibraryName })
-                        .ToList()
-                        .ForEach(l =>
-                        {
-                            writer.WriteLine($"public static IntPtr {l.Key.LibraryName}_handle;");
-                        });
-                    writer.WriteLine();
-
-                    writer.WriteLine("static ffmpeg()");
-                    writer.WriteLine("{");
-                    writer.WriteLine("    LoadLibraries();");
-                    writer.WriteLine("    LoadFunctions();");
-                    writer.WriteLine("}");
-                    writer.WriteLine();
-
-                    writer.WriteLine("public static void LoadLibraries()");
-                    writer.WriteLine("{");
-
-                    units.OfType<FunctionDefinition>()
-                        .GroupBy(x => new { LibraryName = x.LibraryName, LibraryVersion = x.LibraryVersion })
-                        .ToList()
-                        .ForEach(l =>
-                        {
-                            writer.WriteLine($"    {l.Key.LibraryName}_handle = FunctionLoader.LoadNativeLibrary(new string[] {{ \"{l.Key.LibraryName}-{l.Key.LibraryVersion}.dll\" }}, new string[] {{ \"{l.Key.LibraryName}.so.{l.Key.LibraryVersion}\" }}, new string[] {{ \"{l.Key.LibraryName}.{l.Key.LibraryVersion}.dylib\" }});");
-                        });
-
-                    writer.WriteLine("}");
-                    writer.WriteLine();
-
-                    writer.WriteLine("public static void LoadFunctions()");
-                    writer.WriteLine("{");
-
-                    units.OfType<FunctionDefinition>()
                         .OrderBy(x => x.LibraryName)
                         .ThenBy(x => x.Name)
                         .ToList()
                         .ForEach(x =>
                         {
-                            writer.WriteLine($"    {x.Name}_fptr = FunctionLoader.LoadFunctionDelegate<{x.Name}_delegate>({x.LibraryName}_handle, \"{x.Name}\", throwOnError: false);");
-                        });
-
-                    writer.WriteLine("}");
-                    writer.WriteLine();
-
-                    units.OfType<FunctionDefinition>()
-                        .OrderBy(x => x.LibraryName)
-                        .ThenBy(x => x.Name)
-                        .ToList()
-                        .ForEach(x =>
-                        {
-                            writer.Write(x);
+                            writer.WriteFunction(x);
                             writer.WriteLine();
                         });
                 }
@@ -156,7 +108,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     .ThenBy(x => x.Name)
                     .ToList().ForEach(x =>
                     {
-                        writer.Write(x);
+                        writer.WriteFixedArray(x);
                         writer.WriteLine();
                     });
             });
@@ -171,7 +123,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     .ToList()
                     .ForEach(x =>
                     {
-                        writer.Write(x);
+                        writer.WriteStructure(x);
                         writer.WriteLine();
                     });
             });
@@ -186,7 +138,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     .ToList()
                     .ForEach(x =>
                     {
-                        writer.Write(x);
+                        writer.WriteStructure(x);
                         writer.WriteLine();
                     });
             });
@@ -202,11 +154,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             };
 
             parserOptions.SetupMSVC(VisualStudioVersion.Latest);
-            
+
             foreach (var includeDir in IncludeDirs) parserOptions.AddIncludeDirs(includeDir);
 
             foreach (var define in Defines) parserOptions.AddDefines(define);
-            
+
             var clangParser = new ClangParser(new CppSharp.Parser.AST.ASTContext());
             clangParser.SourcesParsed += OnSourceFileParsed;
             clangParser.ParseSourceFiles(sourceFiles, parserOptions);

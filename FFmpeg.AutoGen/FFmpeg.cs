@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using FFmpeg.AutoGen.Native;
 
 namespace FFmpeg.AutoGen
 {
+    public delegate IntPtr GetOrLoadLibrary(string libraryName, int version);
+
     public static partial class ffmpeg
     {
         public const int EAGAIN = 11;
@@ -10,12 +14,31 @@ namespace FFmpeg.AutoGen
 
         public const int EINVAL = 22;
 
+        static ffmpeg()
+        {
+            var loadedLibraries = new Dictionary<string, IntPtr>();
+
+            GetOrLoadLibrary = (name, version) =>
+            {
+                var key = $"{name}{version}";
+                if (loadedLibraries.TryGetValue(key, out var ptr)) return ptr;
+                ptr = LibraryLoader.LoadNativeLibraryUsingPlatformNamingConvention(string.Empty, name, version);
+                loadedLibraries.Add(key, ptr);
+                return ptr;
+            };
+        }
+
+        public static GetOrLoadLibrary GetOrLoadLibrary { get; set; }
+
+        public static T GetFunctionDelegate<T>(IntPtr libraryHandle, string functionName)
+            => FunctionLoader.GetFunctionDelegate<T>(libraryHandle, functionName);
+
         public static ulong UINT64_C<T>(T a)
             => Convert.ToUInt64(a);
 
         public static int AVERROR<T1>(T1 a)
             => -Convert.ToInt32(a);
-        
+
         public static int MKTAG<T1, T2, T3, T4>(T1 a, T2 b, T3 c, T4 d)
             => (int) (Convert.ToUInt32(a) | (Convert.ToUInt32(b) << 8) | (Convert.ToUInt32(c) << 16) | (Convert.ToUInt32(d) << 24));
 
