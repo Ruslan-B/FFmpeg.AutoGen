@@ -13,7 +13,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public Writer(IndentedTextWriter writer) => _writer = writer;
 
-        public void Write(MacroDefinition macro)
+        public void WriteMacro(MacroDefinition macro)
         {
             if (macro.IsValid)
             {
@@ -27,7 +27,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             }
         }
 
-        public void Write(EnumerationDefinition enumeration)
+        public void WriteEnumeration(EnumerationDefinition enumeration)
         {
             WriteSummary(enumeration);
             WriteLine($"public enum {enumeration.Name} : {enumeration.TypeName}");
@@ -39,7 +39,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 }
         }
 
-        public void Write(StructureDefinition structure)
+        public void WriteStructure(StructureDefinition structure)
         {
             WriteSummary(structure);
             WriteLine($"public unsafe struct {structure.Name}");
@@ -51,7 +51,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 }
         }
 
-        public void Write(FixedArrayDefinition array)
+        public void WriteFixedArray(FixedArrayDefinition array)
         {
             WriteLine($"public unsafe struct {array.Name}");
             using (BeginBlock())
@@ -69,34 +69,33 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             }
         }
 
-        public void Write(FunctionDefinition function)
+        public void WriteFunction(FunctionDefinition function)
         {
             function.ReturnType.Attributes.ToList().ForEach(WriteLine);
             var parameterNames = GetParameterNames(function.Parameters);
             var parameters = GetParameters(function.Parameters);
+            var functionPtrName = function.Name + "_fptr";
+            var functionDelegateName = function.Name + "_delegate";
             var returnCommand = function.ReturnType.Name == "void" ? string.Empty : "return ";
 
             WriteLine($"[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
-            WriteLine($"private delegate {function.ReturnType.Name} {function.Name}_delegate({parameters});");
-            WriteLine($"private static {function.Name}_delegate {function.Name}_fptr;");
+            WriteLine($"private delegate {function.ReturnType.Name} {functionDelegateName}({parameters});");
+            WriteLine($"private static {functionDelegateName} {functionPtrName};");
             WriteLine();
 
             WriteSummary(function);
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
             if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]"); WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
-            WriteLine($"{{");
-            WriteLine($"    if ({function.Name}_fptr != null)");
-            WriteLine($"    {{");
-            WriteLine($"        {returnCommand}{function.Name}_fptr({parameterNames});");
-            WriteLine($"    }}");
-            WriteLine($"    else");
-            WriteLine($"    {{");
-            WriteLine($"        throw new PlatformNotSupportedException(\"{function.Name} is not supported on this platform.\");");
-            WriteLine($"    }}");
-            WriteLine($"}}");
+            using (BeginBlock())
+            {
+                var getDelegate = $"GetFunctionDelegate<{functionDelegateName}>(GetOrLoadLibrary(\"{function.LibraryName}\", {function.LibraryVersion}), \"{function.Name}\")";
+                WriteLine($"if ({functionPtrName} == null && ({functionPtrName} = {getDelegate}) == null) throw new PlatformNotSupportedException(\"{function.Name} is not supported on this platform.\");");
+                WriteLine($"{returnCommand}{functionPtrName}({parameterNames});");
+            }
+            WriteLine();
         }
 
-        public void Write(DelegateDefinition @delegate)
+        public void WriteDelegate(DelegateDefinition @delegate)
         {
             WriteSummary(@delegate);
             @delegate.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
@@ -224,15 +223,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         {
             private readonly Action _action;
 
-            public End(Action action)
-            {
-                _action = action;
-            }
+            public End(Action action) => _action = action;
 
-            public void Dispose()
-            {
-                _action();
-            }
+            public void Dispose() => _action();
         }
     }
 }

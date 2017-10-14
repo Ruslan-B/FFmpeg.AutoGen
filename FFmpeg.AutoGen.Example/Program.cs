@@ -44,12 +44,10 @@ namespace FFmpeg.AutoGen.Example
 
             int error;
             error = ffmpeg.avformat_open_input(&pFormatContext, url, null, null);
-            if (error != 0)
-                throw new ApplicationException(GetErrorMessage(error));
+            if (error != 0) throw new ApplicationException(GetErrorMessage(error));
 
             error = ffmpeg.avformat_find_stream_info(pFormatContext, null);
-            if (error != 0)
-                throw new ApplicationException(GetErrorMessage(error));
+            if (error != 0) throw new ApplicationException(GetErrorMessage(error));
 
             AVDictionaryEntry* tag = null;
             while ((tag = ffmpeg.av_dict_get(pFormatContext->metadata, "", tag, ffmpeg.AV_DICT_IGNORE_SUFFIX)) != null)
@@ -66,9 +64,8 @@ namespace FFmpeg.AutoGen.Example
                     pStream = pFormatContext->streams[i];
                     break;
                 }
-            if (pStream == null)
-                throw new ApplicationException(@"Could not found video stream.");
-            
+            if (pStream == null) throw new ApplicationException(@"Could not found video stream.");
+
             var codecContext = *pStream->codec;
 
             Console.WriteLine($"codec name: {ffmpeg.avcodec_get_name(codecContext.codec_id)}");
@@ -81,8 +78,7 @@ namespace FFmpeg.AutoGen.Example
             var pConvertContext = ffmpeg.sws_getContext(width, height, sourcePixFmt,
                 width, height, destinationPixFmt,
                 ffmpeg.SWS_FAST_BILINEAR, null, null, null);
-            if (pConvertContext == null)
-                throw new ApplicationException(@"Could not initialize the conversion context.");
+            if (pConvertContext == null) throw new ApplicationException(@"Could not initialize the conversion context.");
 
             var pConvertedFrame = ffmpeg.av_frame_alloc();
             var convertedFrameBufferSize = ffmpeg.av_image_get_buffer_size(destinationPixFmt, width, height, 1);
@@ -92,8 +88,7 @@ namespace FFmpeg.AutoGen.Example
             ffmpeg.av_image_fill_arrays(ref dstData, ref dstLinesize, (byte*) convertedFrameBufferPtr, destinationPixFmt, width, height, 1);
 
             var pCodec = ffmpeg.avcodec_find_decoder(codecId);
-            if (pCodec == null)
-                throw new ApplicationException(@"Unsupported codec.");
+            if (pCodec == null) throw new ApplicationException(@"Unsupported codec.");
 
             var pCodecContext = &codecContext;
 
@@ -101,8 +96,7 @@ namespace FFmpeg.AutoGen.Example
                 pCodecContext->flags |= ffmpeg.AV_CODEC_FLAG_TRUNCATED;
 
             error = ffmpeg.avcodec_open2(pCodecContext, pCodec, null);
-            if (error < 0)
-                throw new ApplicationException(GetErrorMessage(error));
+            if (error < 0) throw new ApplicationException(GetErrorMessage(error));
 
             var pDecodedFrame = ffmpeg.av_frame_alloc();
 
@@ -119,20 +113,17 @@ namespace FFmpeg.AutoGen.Example
                     {
                         error = ffmpeg.av_read_frame(pFormatContext, pPacket);
                         if (error == ffmpeg.AVERROR_EOF) break;
-                        if (error < 0)
-                            throw new ApplicationException(GetErrorMessage(error));
+                        if (error < 0) throw new ApplicationException(GetErrorMessage(error));
 
                         if (pPacket->stream_index != pStream->index) continue;
 
                         error = ffmpeg.avcodec_send_packet(pCodecContext, pPacket);
-                        if (error < 0)
-                            throw new ApplicationException(GetErrorMessage(error));
+                        if (error < 0) throw new ApplicationException(GetErrorMessage(error));
 
                         error = ffmpeg.avcodec_receive_frame(pCodecContext, pDecodedFrame);
                     } while (error == ffmpeg.AVERROR(ffmpeg.EAGAIN));
                     if (error == ffmpeg.AVERROR_EOF) break;
-                    if (error < 0)
-                        throw new ApplicationException(GetErrorMessage(error));
+                    if (error < 0) throw new ApplicationException(GetErrorMessage(error));
 
                     if (pPacket->stream_index != pStream->index) continue;
 
@@ -166,7 +157,7 @@ namespace FFmpeg.AutoGen.Example
             var bufferSize = 1024;
             var buffer = stackalloc byte[bufferSize];
             ffmpeg.av_strerror(error, buffer, (ulong) bufferSize);
-            var message = Marshal.PtrToStringAnsi((IntPtr)buffer);
+            var message = Marshal.PtrToStringAnsi((IntPtr) buffer);
             return message;
         }
     }

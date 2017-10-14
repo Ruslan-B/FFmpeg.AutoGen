@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace FFmpeg.AutoGen
+namespace FFmpeg.AutoGen.Native
 {
     internal static class MacNativeMethods
     {
