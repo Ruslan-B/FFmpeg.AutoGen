@@ -121,7 +121,21 @@ namespace FFmpeg.AutoGen
 #if NET45
             return (T)(object)Marshal.GetDelegateForFunctionPointer(ptr, typeof(T));
 #else
-            return Marshal.GetDelegateForFunctionPointer<T>(ptr);
+            try
+            {
+                return Marshal.GetDelegateForFunctionPointer<T>(ptr);
+            }
+            catch (MarshalDirectiveException)
+            {
+                if (throwOnError)
+                {
+                    throw;
+                }
+                else
+                {
+                    return null;
+                }
+            }
 #endif
         }
 
