@@ -145,8 +145,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteLine($"public {elementType} this[uint i]");
             using (BeginBlock())
             {
-                WriteLine($"get {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return p->{prefix}[i]; }} }}");
-                WriteLine($"set {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ p->{prefix}[i] = value; }} }}");
+                WriteLine($"get {{ if (i >= Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return p->{prefix}[i]; }} }}");
+                WriteLine($"set {{ if (i >= Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ p->{prefix}[i] = value; }} }}");
             }
 
             WriteLine($"public {elementType}[] ToArray()");
@@ -168,8 +168,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteLine($"public {elementType} this[uint i]");
             using (BeginBlock())
             {
-                WriteLine($"get {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return *(p0 + i); }} }}");
-                WriteLine($"set {{ if (i > Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ *(p0 + i) = value;  }} }}");
+                WriteLine($"get {{ if (i >= Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return *(p0 + i); }} }}");
+                WriteLine($"set {{ if (i >= Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ *(p0 + i) = value;  }} }}");
             }
 
             WriteLine($"public {elementType}[] ToArray()");
