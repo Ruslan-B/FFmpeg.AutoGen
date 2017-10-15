@@ -26,7 +26,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
             FunctionExport[] exports = FunctionExportHelper.LoadFunctionExports(options.FFmpegBinDir).ToArray();
 
-            var astProcessor = new ASTProcessor { FunctionExportMap = exports.ToDictionary(x => x.Name) };
+            var astProcessor = new ASTProcessor
+            {
+                FunctionExportMap = exports
+                    .GroupBy(x => x.Name).Select(x => x.First())    // Eliminate duplicated names
+                    .ToDictionary(x => x.Name)
+            };
             astProcessor.IgnoreUnitNames.Add("__NSConstantString_tag");
             astProcessor.TypeAliases.Add("int64_t", typeof(long));
             astProcessor.WellKnownMaros.Add("FFERRTAG", typeof(int));
