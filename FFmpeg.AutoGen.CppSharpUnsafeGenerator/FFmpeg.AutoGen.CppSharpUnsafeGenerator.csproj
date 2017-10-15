@@ -75,6 +75,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
+    </Reference>
     <Reference Include="CppSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.dll</HintPath>
     </Reference>
@@ -104,6 +107,7 @@
     <Compile Include="Definitions\FixedArrayDefinition.cs" />
     <Compile Include="Definitions\TypeDefinition.cs" />
     <Compile Include="Definitions\MacroDefinition.cs" />
+    <Compile Include="CliOptions.cs" />
     <Compile Include="Processors\MacroPostProcessor.cs" />
     <Compile Include="Processors\MacroProcessor.cs" />
     <Compile Include="Processors\FunctionProcessor.cs" />
