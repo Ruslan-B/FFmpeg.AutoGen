@@ -12,8 +12,8 @@ namespace FFmpeg.AutoGen
         
         public short this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (short_array2* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (short_array2* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (short_array2* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (short_array2* p = &this) { p->_[i] = value; } }
         }
         public short[] ToArray()
         {
@@ -33,8 +33,8 @@ namespace FFmpeg.AutoGen
         
         public byte* this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte** p0 = &_0) { return *(p0 + i); } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte** p0 = &_0) { *(p0 + i) = value;  } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte** p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte** p0 = &_0) { *(p0 + i) = value;  } }
         }
         public byte*[] ToArray()
         {
@@ -54,8 +54,8 @@ namespace FFmpeg.AutoGen
         
         public int this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (int_array3* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (int_array3* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (int_array3* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (int_array3* p = &this) { p->_[i] = value; } }
         }
         public int[] ToArray()
         {
@@ -75,8 +75,8 @@ namespace FFmpeg.AutoGen
         
         public AVComponentDescriptor this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (AVComponentDescriptor* p0 = &_0) { return *(p0 + i); } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (AVComponentDescriptor* p0 = &_0) { *(p0 + i) = value;  } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVComponentDescriptor* p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVComponentDescriptor* p0 = &_0) { *(p0 + i) = value;  } }
         }
         public AVComponentDescriptor[] ToArray()
         {
@@ -96,8 +96,8 @@ namespace FFmpeg.AutoGen
         
         public byte* this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte** p0 = &_0) { return *(p0 + i); } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte** p0 = &_0) { *(p0 + i) = value;  } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte** p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte** p0 = &_0) { *(p0 + i) = value;  } }
         }
         public byte*[] ToArray()
         {
@@ -117,8 +117,8 @@ namespace FFmpeg.AutoGen
         
         public int this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (int_array4* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (int_array4* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (int_array4* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (int_array4* p = &this) { p->_[i] = value; } }
         }
         public int[] ToArray()
         {
@@ -138,8 +138,8 @@ namespace FFmpeg.AutoGen
         
         public long this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (long_array4* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (long_array4* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (long_array4* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (long_array4* p = &this) { p->_[i] = value; } }
         }
         public long[] ToArray()
         {
@@ -159,8 +159,8 @@ namespace FFmpeg.AutoGen
         
         public int this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (int_array5* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (int_array5* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (int_array5* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (int_array5* p = &this) { p->_[i] = value; } }
         }
         public int[] ToArray()
         {
@@ -180,8 +180,8 @@ namespace FFmpeg.AutoGen
         
         public short_array2 this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (short_array2* p0 = &_0) { return *(p0 + i); } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (short_array2* p0 = &_0) { *(p0 + i) = value;  } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (short_array2* p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (short_array2* p0 = &_0) { *(p0 + i) = value;  } }
         }
         public short_array2[] ToArray()
         {
@@ -201,8 +201,8 @@ namespace FFmpeg.AutoGen
         
         public AVBufferRef* this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (AVBufferRef** p0 = &_0) { return *(p0 + i); } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (AVBufferRef** p0 = &_0) { *(p0 + i) = value;  } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVBufferRef** p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVBufferRef** p0 = &_0) { *(p0 + i) = value;  } }
         }
         public AVBufferRef*[] ToArray()
         {
@@ -222,8 +222,8 @@ namespace FFmpeg.AutoGen
         
         public byte this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte_array8* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte_array8* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array8* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array8* p = &this) { p->_[i] = value; } }
         }
         public byte[] ToArray()
         {
@@ -243,8 +243,8 @@ namespace FFmpeg.AutoGen
         
         public byte* this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte** p0 = &_0) { return *(p0 + i); } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte** p0 = &_0) { *(p0 + i) = value;  } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte** p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte** p0 = &_0) { *(p0 + i) = value;  } }
         }
         public byte*[] ToArray()
         {
@@ -264,8 +264,8 @@ namespace FFmpeg.AutoGen
         
         public int this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (int_array8* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (int_array8* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (int_array8* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (int_array8* p = &this) { p->_[i] = value; } }
         }
         public int[] ToArray()
         {
@@ -285,8 +285,8 @@ namespace FFmpeg.AutoGen
         
         public ulong this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (ulong_array8* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (ulong_array8* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (ulong_array8* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (ulong_array8* p = &this) { p->_[i] = value; } }
         }
         public ulong[] ToArray()
         {
@@ -306,8 +306,8 @@ namespace FFmpeg.AutoGen
         
         public byte this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte_array17* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte_array17* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array17* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array17* p = &this) { p->_[i] = value; } }
         }
         public byte[] ToArray()
         {
@@ -327,8 +327,8 @@ namespace FFmpeg.AutoGen
         
         public long this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (long_array17* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (long_array17* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (long_array17* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (long_array17* p = &this) { p->_[i] = value; } }
         }
         public long[] ToArray()
         {
@@ -348,8 +348,8 @@ namespace FFmpeg.AutoGen
         
         public byte this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte_array32* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte_array32* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array32* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array32* p = &this) { p->_[i] = value; } }
         }
         public byte[] ToArray()
         {
@@ -369,8 +369,8 @@ namespace FFmpeg.AutoGen
         
         public double this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (double_array399* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (double_array399* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (double_array399* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (double_array399* p = &this) { p->_[i] = value; } }
         }
         public double[] ToArray()
         {
@@ -390,8 +390,8 @@ namespace FFmpeg.AutoGen
         
         public double_array399 this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (double_array399* p0 = &_0) { return *(p0 + i); } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (double_array399* p0 = &_0) { *(p0 + i) = value;  } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (double_array399* p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (double_array399* p0 = &_0) { *(p0 + i) = value;  } }
         }
         public double_array399[] ToArray()
         {
@@ -411,8 +411,8 @@ namespace FFmpeg.AutoGen
         
         public byte this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte_array1024* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte_array1024* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array1024* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array1024* p = &this) { p->_[i] = value; } }
         }
         public byte[] ToArray()
         {
@@ -432,8 +432,8 @@ namespace FFmpeg.AutoGen
         
         public byte this[uint i]
         {
-            get { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte_array61440* p = &this) { return p->_[i]; } }
-            set { if (i > Size) throw new ArgumentOutOfRangeException(); fixed (byte_array61440* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array61440* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array61440* p = &this) { p->_[i] = value; } }
         }
         public byte[] ToArray()
         {
