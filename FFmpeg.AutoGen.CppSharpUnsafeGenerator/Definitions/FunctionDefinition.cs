@@ -7,6 +7,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
         public int LibraryVersion { get; set; }
         public FunctionParameter[] Parameters { get; set; }
         public bool IsObsolete { get; set; }
+        public bool SuppressUnmanagedCodeSecurity { get; set; }
         public string ObsoleteMessage { get; set; }
         public string Content { get; set; }
         public string Name { get; set; }

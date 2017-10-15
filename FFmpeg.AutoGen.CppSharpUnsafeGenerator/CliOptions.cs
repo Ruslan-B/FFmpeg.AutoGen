@@ -18,6 +18,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             HelpText = "The name of the class that contains the FFmpeg unmanaged method calls.")]
         public string ClassName { get; set; }
 
+        /// <summary>
+        /// See http://ybeernet.blogspot.ro/2011/03/techniques-of-calling-unmanaged-code.html.
+        /// </summary>
+        [Option('f', "SuppressUnmanagedCodeSecurity",
+            HelpText = "Add the [SuppressUnmanagedCodeSecurity] attribute to unmanaged method calls " +
+                       "(faster invocation).")]
+        public bool SuppressUnmanagedCodeSecurity { get; set; }
+
         [Option('i', "input", Required = false,
             HelpText = "The path to the directory that contains the FFmpeg header and binary files " +
                        "(must have the default structure).")]

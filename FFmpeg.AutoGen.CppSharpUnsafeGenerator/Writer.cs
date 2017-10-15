@@ -79,6 +79,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             var functionDelegateName = function.Name + "_delegate";
             var returnCommand = function.ReturnType.Name == "void" ? string.Empty : "return ";
 
+            if (function.SuppressUnmanagedCodeSecurity) WriteLine("[SuppressUnmanagedCodeSecurity]");
             WriteLine("[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
             WriteLine($"private delegate {function.ReturnType.Name} {functionDelegateName}({parameters});");
             Write($"private static {functionDelegateName} {functionPtrName} = ");
