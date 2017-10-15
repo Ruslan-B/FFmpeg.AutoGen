@@ -3,6 +3,7 @@ using System.CodeDom.Compiler;
 using System.Linq;
 using System.Security;
 using System.Text;
+
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
@@ -78,21 +79,54 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             var functionDelegateName = function.Name + "_delegate";
             var returnCommand = function.ReturnType.Name == "void" ? string.Empty : "return ";
 
-            WriteLine($"[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
+            WriteLine("[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
             WriteLine($"private delegate {function.ReturnType.Name} {functionDelegateName}({parameters});");
-            WriteLine($"private static {functionDelegateName} {functionPtrName};");
-            WriteLine();
+            Write($"private static {functionDelegateName} {functionPtrName} = ");
+            WriteDefaultFunctionDelegateExpression(function, parameterNames, functionDelegateName, functionPtrName, returnCommand);
+            WriteLine(";");
 
             WriteSummary(function);
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
-            if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]"); WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
+            if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]");
+            WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
             using (BeginBlock())
             {
-                var getDelegate = $"GetFunctionDelegate<{functionDelegateName}>(GetOrLoadLibrary(\"{function.LibraryName}\", {function.LibraryVersion}), \"{function.Name}\")";
-                WriteLine($"if ({functionPtrName} == null && ({functionPtrName} = {getDelegate}) == null) throw new PlatformNotSupportedException(\"{function.Name} is not supported on this platform.\");");
                 WriteLine($"{returnCommand}{functionPtrName}({parameterNames});");
             }
             WriteLine();
+        }
+
+        private void WriteDefaultFunctionDelegateExpression(FunctionDefinition function,
+            string parameterNames, string functionDelegateName, string functionPtrName, string returnCommand)
+        {
+            var delegateParameters = GetParameters(function.Parameters, withAttributes: false);
+
+            WriteLine($"({delegateParameters}) =>");
+            using (BeginBlock(inline: true))
+            {
+                var getOrLoadLibrary = $"GetOrLoadLibrary(\"{function.LibraryName}\", {function.LibraryVersion})";
+                var getDelegate = $"GetFunctionDelegate<{functionDelegateName}>({getOrLoadLibrary}, \"{function.Name}\")";
+
+                WriteLine($"{functionPtrName} = {getDelegate};");
+                WriteLine($"if ({functionPtrName} == null)");
+                using (BeginBlock())
+                {
+                    Write($"{functionPtrName} = ");
+                    WriteNotSupportedFunctionDelegateExpression(function);
+                    WriteLine(";");
+                }
+                WriteLine($"{returnCommand}{functionPtrName}({parameterNames});");
+            }
+        }
+
+        private void WriteNotSupportedFunctionDelegateExpression(FunctionDefinition function)
+        {
+            WriteLine("delegate ");
+            using (BeginBlock(inline: true))
+            {
+                WriteLine(
+                    $"throw new PlatformNotSupportedException(\"{function.Name} is not supported on this platform.\");");
+            }
         }
 
         public void WriteDelegate(DelegateDefinition @delegate)
@@ -124,14 +158,22 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             _writer.WriteLine(line);
         }
 
-        public IDisposable BeginBlock()
+        public IDisposable BeginBlock(bool inline = false)
         {
             WriteLine("{");
             _writer.Indent++;
             return new End(() =>
             {
                 _writer.Indent--;
-                _writer.WriteLine("}");
+
+                if (inline)
+                {
+                    _writer.Write("}");
+                }
+                else
+                {
+                    _writer.WriteLine("}");
+                }
             });
         }
 
@@ -181,12 +223,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ *(p0 + i++) = value; if (i >= Size) return; }} }}");
         }
 
-        private static string GetParameters(FunctionParameter[] parameters)
+        private static string GetParameters(FunctionParameter[] parameters, bool withAttributes = true)
         {
             return string.Join(", ", parameters.Select(x =>
             {
                 var sb = new StringBuilder();
-                if (x.Type.Attributes.Any()) sb.Append($"{string.Join("", x.Type.Attributes)} ");
+                if (withAttributes && x.Type.Attributes.Any()) sb.Append($"{string.Join("", x.Type.Attributes)} ");
                 if (x.Type.ByReference) sb.Append("ref ");
                 sb.Append($"{x.Type.Name} @{x.Name}");
                 return sb.ToString();
