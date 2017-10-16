@@ -27,6 +27,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public string Namespace { get; set; }
         public string ClassName { get; set; }
 
+        public bool SuppressUnmanagedCodeSecurity { get; set; }
+
         public void Parse(params string[] sourceFiles)
         {
             _hasParsingErrors = false;
@@ -90,6 +92,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                         .ToList()
                         .ForEach(x =>
                         {
+                            x.SuppressUnmanagedCodeSecurity = SuppressUnmanagedCodeSecurity;
+
                             writer.WriteFunction(x);
                             writer.WriteLine();
                         });
@@ -200,6 +204,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 var writer = new Writer(textWriter);
                 writer.WriteLine("using System;");
                 writer.WriteLine("using System.Runtime.InteropServices;");
+                if (SuppressUnmanagedCodeSecurity) writer.WriteLine("using System.Security;");
                 writer.WriteLine();
                 writer.WriteLine($"namespace {Namespace}");
                 using (writer.BeginBlock()) execute(_astProcessor.Units, writer);
