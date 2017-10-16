@@ -1,29 +1,37 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     internal class Program
     {
-        private const string SolutionDir = "../../../../";
-        private const string FfmpegDir = SolutionDir + "ffmpeg/";
-        private const string FfmpegBinDir = FfmpegDir + "bin/x64";
-        private const string FfmpegIncludeDir = FfmpegDir + "include";
-        private const string Namespace = "FFmpeg.AutoGen";
-        private const string OutputDir = SolutionDir + "FFmpeg.AutoGen/";
-        public static string ClassName = "ffmpeg";
-
-        private static readonly string[] IncludeDirs = { Path.GetFullPath(FfmpegIncludeDir) };
-        private static readonly string[] Defines = { "__STDC_CONSTANT_MACROS" };
-        private static readonly FunctionExport[] Exports = FunctionExportHelper.LoadFunctionExports(FfmpegBinDir).ToArray();
-
         private static void Main(string[] args)
         {
-            Console.WriteLine("Current directory: " + Environment.CurrentDirectory);
+            CliOptions options = CliOptions.ParseArgumentsStrict(args);
 
-            var astProcessor = new ASTProcessor { FunctionExportMap = Exports.ToDictionary(x => x.Name) };
+            if (options.Verbose)
+            {
+                Console.WriteLine("Working dir: " + Environment.CurrentDirectory);
+                Console.WriteLine("Output dir: " + options.OutputDir);
+                Console.WriteLine("FFmpeg headers dir: " + options.FFmpegIncludesDir);
+                Console.WriteLine("FFmpeg bin dir: " + options.FFmpegBinDir);
+                Console.WriteLine("Namespace name: " + options.Namespace);
+                Console.WriteLine("Class name: " + options.ClassName);
+            }
+
+            var defines = new[] {"__STDC_CONSTANT_MACROS"};
+
+            FunctionExport[] exports = FunctionExportHelper.LoadFunctionExports(options.FFmpegBinDir).ToArray();
+
+            var astProcessor = new ASTProcessor
+            {
+                FunctionExportMap = exports
+                    .GroupBy(x => x.Name).Select(x => x.First())    // Eliminate duplicated names
+                    .ToDictionary(x => x.Name)
+            };
             astProcessor.IgnoreUnitNames.Add("__NSConstantString_tag");
             astProcessor.TypeAliases.Add("int64_t", typeof(long));
             astProcessor.WellKnownMaros.Add("FFERRTAG", typeof(int));
@@ -34,11 +42,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
             var g = new Generator(astProcessor)
             {
-                IncludeDirs = IncludeDirs,
-                Defines = Defines,
-                Exports = Exports,
-                Namespace = Namespace,
-                ClassName = ClassName
+                IncludeDirs = new[] {options.FFmpegIncludesDir},
+                Defines = defines,
+                Exports = exports,
+                Namespace = options.Namespace,
+                ClassName = options.ClassName,
+                SuppressUnmanagedCodeSecurity = options.SuppressUnmanagedCodeSecurity
             };
 
             g.Parse("libavutil/avutil.h");
@@ -70,13 +79,13 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
             g.Parse("libavdevice/avdevice.h");
 
-            g.WriteMacros(OutputDir + "FFmpeg.macros.g.cs");
-            g.WriteEnums(OutputDir + "FFmpeg.enums.g.cs");
-            g.WriteDelegates(OutputDir + "FFmpeg.delegates.g.cs");
-            g.WriteArrays(OutputDir + "FFmpeg.arrays.g.cs");
-            g.WriteStructures(OutputDir + "FFmpeg.structs.g.cs");
-            g.WriteIncompleteStructures(OutputDir + "FFmpeg.structs.incomplete.g.cs");
-            g.WriteFunctions(OutputDir + "FFmpeg.functions.g.cs");
+            g.WriteMacros(Path.Combine(options.OutputDir, "FFmpeg.macros.g.cs"));
+            g.WriteEnums(Path.Combine(options.OutputDir, "FFmpeg.enums.g.cs"));
+            g.WriteDelegates(Path.Combine(options.OutputDir, "FFmpeg.delegates.g.cs"));
+            g.WriteArrays(Path.Combine(options.OutputDir, "FFmpeg.arrays.g.cs"));
+            g.WriteStructures(Path.Combine(options.OutputDir, "FFmpeg.structs.g.cs"));
+            g.WriteIncompleteStructures(Path.Combine(options.OutputDir, "FFmpeg.structs.incomplete.g.cs"));
+            g.WriteFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.g.cs"));
         }
     }
 }
