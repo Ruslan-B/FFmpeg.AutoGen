@@ -503,7 +503,7 @@ namespace FFmpeg.AutoGen
             return av_bsf_send_packet_fptr(@ctx, @pkt);
         };
         /// <summary>Submit a packet for filtering.</summary>
-        /// <param name="pkt">the packet to filter. pkt must contain some payload (i.e data or side data must be present in pkt). The bitstream filter will take ownership of the packet and reset the contents of pkt. pkt is not touched if an error occurs. This parameter may be NULL, which signals the end of the stream (i.e. no more packets will be sent). That will cause the filter to output any packets it may have buffered internally.</param>
+        /// <param name="pkt">the packet to filter. The bitstream filter will take ownership of the packet and reset the contents of pkt. pkt is not touched if an error occurs. This parameter may be NULL, which signals the end of the stream (i.e. no more packets will be sent). That will cause the filter to output any packets it may have buffered internally.</param>
         public static int av_bsf_send_packet(AVBSFContext* @ctx, AVPacket* @pkt)
         {
             return av_bsf_send_packet_fptr(@ctx, @pkt);
@@ -828,6 +828,7 @@ namespace FFmpeg.AutoGen
             return av_copy_packet_fptr(@dst, @src);
         };
         /// <summary>Copy packet, including contents</summary>
+        [Obsolete("Use av_packet_ref")]
         public static int av_copy_packet(AVPacket* @dst, AVPacket* @src)
         {
             return av_copy_packet_fptr(@dst, @src);
@@ -849,6 +850,7 @@ namespace FFmpeg.AutoGen
             return av_copy_packet_side_data_fptr(@dst, @src);
         };
         /// <summary>Copy packet side data</summary>
+        [Obsolete("Use av_packet_copy_props")]
         public static int av_copy_packet_side_data(AVPacket* @dst, AVPacket* @src)
         {
             return av_copy_packet_side_data_fptr(@dst, @src);
@@ -1408,6 +1410,7 @@ namespace FFmpeg.AutoGen
             av_packet_free_fptr(@pkt);
         };
         /// <summary>Free the packet, if the packet is reference counted, it will be unreferenced first.</summary>
+        /// <param name="pkt">packet to be freed. The pointer will be set to NULL.</param>
         public static void av_packet_free(AVPacket** @pkt)
         {
             av_packet_free_fptr(@pkt);
@@ -2823,10 +2826,7 @@ namespace FFmpeg.AutoGen
             }
             avcodec_get_chroma_sub_sample_fptr(@pix_fmt, @h_shift, @v_shift);
         };
-        /// <summary>Utility function to access log2_chroma_w log2_chroma_h from the pixel format AVPixFmtDescriptor.</summary>
-        /// <param name="pix_fmt">the pixel format</param>
-        /// <param name="h_shift">store log2_chroma_w</param>
-        /// <param name="v_shift">store log2_chroma_h</param>
+        [Obsolete("Use av_pix_fmt_get_chroma_sub_sample")]
         public static void avcodec_get_chroma_sub_sample(AVPixelFormat @pix_fmt, int* @h_shift, int* @v_shift)
         {
             avcodec_get_chroma_sub_sample_fptr(@pix_fmt, @h_shift, @v_shift);
@@ -4299,6 +4299,27 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_buffersrc_close_delegate(AVFilterContext* @ctx, long @pts, uint @flags);
+        private static av_buffersrc_close_delegate av_buffersrc_close_fptr = (AVFilterContext* @ctx, long @pts, uint @flags) =>
+        {
+            av_buffersrc_close_fptr = GetFunctionDelegate<av_buffersrc_close_delegate>(GetOrLoadLibrary("avfilter", 6), "av_buffersrc_close");
+            if (av_buffersrc_close_fptr == null)
+            {
+                av_buffersrc_close_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_buffersrc_close is not supported on this platform.");
+                };
+            }
+            return av_buffersrc_close_fptr(@ctx, @pts, @flags);
+        };
+        /// <summary>Close the buffer source after EOF.</summary>
+        public static int av_buffersrc_close(AVFilterContext* @ctx, long @pts, uint @flags)
+        {
+            return av_buffersrc_close_fptr(@ctx, @pts, @flags);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate uint av_buffersrc_get_nb_failed_requests_delegate(AVFilterContext* @buffer_src);
         private static av_buffersrc_get_nb_failed_requests_delegate av_buffersrc_get_nb_failed_requests_fptr = (AVFilterContext* @buffer_src) =>
         {
@@ -5397,6 +5418,10 @@ namespace FFmpeg.AutoGen
             }
             return av_apply_bitstream_filters_fptr(@codec, @pkt, @bsfc);
         };
+        /// <summary>Apply a list of bitstream filters to a packet.</summary>
+        /// <param name="codec">AVCodecContext, usually from an AVStream</param>
+        /// <param name="pkt">the packet to apply filters to. If, on success, the returned packet has size == 0 and side_data_elems == 0, it indicates that the packet should be dropped</param>
+        /// <param name="bsfc">a NULL-terminated list of filters to apply</param>
         [Obsolete("")]
         public static int av_apply_bitstream_filters(AVCodecContext* @codec, AVPacket* @pkt, AVBitStreamFilterContext* @bsfc)
         {
@@ -7695,7 +7720,7 @@ namespace FFmpeg.AutoGen
             }
             return avio_alloc_context_fptr(@buffer, @buffer_size, @write_flag, @opaque, @read_packet, @write_packet, @seek);
         };
-        /// <summary>Allocate and initialize an AVIOContext for buffered I/O. It must be later freed with av_free().</summary>
+        /// <summary>Allocate and initialize an AVIOContext for buffered I/O. It must be later freed with avio_context_free().</summary>
         /// <param name="buffer">Memory block for input/output operations via AVIOContext. The buffer must be allocated with av_malloc() and friends. It may be freed and replaced with a new buffer by libavformat. AVIOContext.buffer holds the buffer currently in use, which must be later freed with av_free().</param>
         /// <param name="buffer_size">The buffer size is very important for performance. For protocols with fixed blocksize it should be set to this blocksize. For others a typical size is a cache page, e.g. 4kb.</param>
         /// <param name="write_flag">Set to 1 if the buffer should be writable, 0 otherwise.</param>
@@ -7814,6 +7839,28 @@ namespace FFmpeg.AutoGen
         public static int avio_closep(AVIOContext** @s)
         {
             return avio_closep_fptr(@s);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void avio_context_free_delegate(AVIOContext** @s);
+        private static avio_context_free_delegate avio_context_free_fptr = (AVIOContext** @s) =>
+        {
+            avio_context_free_fptr = GetFunctionDelegate<avio_context_free_delegate>(GetOrLoadLibrary("avformat", 57), "avio_context_free");
+            if (avio_context_free_fptr == null)
+            {
+                avio_context_free_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("avio_context_free is not supported on this platform.");
+                };
+            }
+            avio_context_free_fptr(@s);
+        };
+        /// <summary>Free the supplied IO context and everything associated with it.</summary>
+        /// <param name="s">Double pointer to the IO context. This function will write NULL into s.</param>
+        public static void avio_context_free(AVIOContext** @s)
+        {
+            avio_context_free_fptr(@s);
         }
         
         
@@ -8382,6 +8429,27 @@ namespace FFmpeg.AutoGen
         public static int avio_read_dir(AVIODirContext* @s, AVIODirEntry** @next)
         {
             return avio_read_dir_fptr(@s, @next);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int avio_read_partial_delegate(AVIOContext* @s, byte* @buf, int @size);
+        private static avio_read_partial_delegate avio_read_partial_fptr = (AVIOContext* @s, byte* @buf, int @size) =>
+        {
+            avio_read_partial_fptr = GetFunctionDelegate<avio_read_partial_delegate>(GetOrLoadLibrary("avformat", 57), "avio_read_partial");
+            if (avio_read_partial_fptr == null)
+            {
+                avio_read_partial_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("avio_read_partial is not supported on this platform.");
+                };
+            }
+            return avio_read_partial_fptr(@s, @buf, @size);
+        };
+        /// <summary>Read size bytes from AVIOContext into buf. Unlike avio_read(), this is allowed to read fewer bytes than requested. The missing bytes can be read in the next call. This always tries to read at least 1 byte. Useful to reduce latency in certain cases.</summary>
+        public static int avio_read_partial(AVIOContext* @s, byte* @buf, int @size)
+        {
+            return avio_read_partial_fptr(@s, @buf, @size);
         }
         
         
@@ -9559,6 +9627,27 @@ namespace FFmpeg.AutoGen
         }
         
         
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_chroma_location_from_name_delegate([MarshalAs(UnmanagedType.LPStr)] string @name);
+        private static av_chroma_location_from_name_delegate av_chroma_location_from_name_fptr = (string @name) =>
+        {
+            av_chroma_location_from_name_fptr = GetFunctionDelegate<av_chroma_location_from_name_delegate>(GetOrLoadLibrary("avutil", 55), "av_chroma_location_from_name");
+            if (av_chroma_location_from_name_fptr == null)
+            {
+                av_chroma_location_from_name_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_chroma_location_from_name is not supported on this platform.");
+                };
+            }
+            return av_chroma_location_from_name_fptr(@name);
+        };
+        /// <summary>Returns the AVChromaLocation value for name or an AVError if not found.</summary>
+        public static int av_chroma_location_from_name([MarshalAs(UnmanagedType.LPStr)] string @name)
+        {
+            return av_chroma_location_from_name_fptr(@name);
+        }
+        
+        
         [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate string av_chroma_location_name_delegate(AVChromaLocation @location);
@@ -9578,6 +9667,27 @@ namespace FFmpeg.AutoGen
         public static string av_chroma_location_name(AVChromaLocation @location)
         {
             return av_chroma_location_name_fptr(@location);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_color_primaries_from_name_delegate([MarshalAs(UnmanagedType.LPStr)] string @name);
+        private static av_color_primaries_from_name_delegate av_color_primaries_from_name_fptr = (string @name) =>
+        {
+            av_color_primaries_from_name_fptr = GetFunctionDelegate<av_color_primaries_from_name_delegate>(GetOrLoadLibrary("avutil", 55), "av_color_primaries_from_name");
+            if (av_color_primaries_from_name_fptr == null)
+            {
+                av_color_primaries_from_name_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_color_primaries_from_name is not supported on this platform.");
+                };
+            }
+            return av_color_primaries_from_name_fptr(@name);
+        };
+        /// <summary>Returns the AVColorPrimaries value for name or an AVError if not found.</summary>
+        public static int av_color_primaries_from_name([MarshalAs(UnmanagedType.LPStr)] string @name)
+        {
+            return av_color_primaries_from_name_fptr(@name);
         }
         
         
@@ -9603,6 +9713,27 @@ namespace FFmpeg.AutoGen
         }
         
         
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_color_range_from_name_delegate([MarshalAs(UnmanagedType.LPStr)] string @name);
+        private static av_color_range_from_name_delegate av_color_range_from_name_fptr = (string @name) =>
+        {
+            av_color_range_from_name_fptr = GetFunctionDelegate<av_color_range_from_name_delegate>(GetOrLoadLibrary("avutil", 55), "av_color_range_from_name");
+            if (av_color_range_from_name_fptr == null)
+            {
+                av_color_range_from_name_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_color_range_from_name is not supported on this platform.");
+                };
+            }
+            return av_color_range_from_name_fptr(@name);
+        };
+        /// <summary>Returns the AVColorRange value for name or an AVError if not found.</summary>
+        public static int av_color_range_from_name([MarshalAs(UnmanagedType.LPStr)] string @name)
+        {
+            return av_color_range_from_name_fptr(@name);
+        }
+        
+        
         [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate string av_color_range_name_delegate(AVColorRange @range);
@@ -9625,6 +9756,27 @@ namespace FFmpeg.AutoGen
         }
         
         
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_color_space_from_name_delegate([MarshalAs(UnmanagedType.LPStr)] string @name);
+        private static av_color_space_from_name_delegate av_color_space_from_name_fptr = (string @name) =>
+        {
+            av_color_space_from_name_fptr = GetFunctionDelegate<av_color_space_from_name_delegate>(GetOrLoadLibrary("avutil", 55), "av_color_space_from_name");
+            if (av_color_space_from_name_fptr == null)
+            {
+                av_color_space_from_name_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_color_space_from_name is not supported on this platform.");
+                };
+            }
+            return av_color_space_from_name_fptr(@name);
+        };
+        /// <summary>Returns the AVColorSpace value for name or an AVError if not found.</summary>
+        public static int av_color_space_from_name([MarshalAs(UnmanagedType.LPStr)] string @name)
+        {
+            return av_color_space_from_name_fptr(@name);
+        }
+        
+        
         [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate string av_color_space_name_delegate(AVColorSpace @space);
@@ -9644,6 +9796,27 @@ namespace FFmpeg.AutoGen
         public static string av_color_space_name(AVColorSpace @space)
         {
             return av_color_space_name_fptr(@space);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_color_transfer_from_name_delegate([MarshalAs(UnmanagedType.LPStr)] string @name);
+        private static av_color_transfer_from_name_delegate av_color_transfer_from_name_fptr = (string @name) =>
+        {
+            av_color_transfer_from_name_fptr = GetFunctionDelegate<av_color_transfer_from_name_delegate>(GetOrLoadLibrary("avutil", 55), "av_color_transfer_from_name");
+            if (av_color_transfer_from_name_fptr == null)
+            {
+                av_color_transfer_from_name_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_color_transfer_from_name is not supported on this platform.");
+                };
+            }
+            return av_color_transfer_from_name_fptr(@name);
+        };
+        /// <summary>Returns the AVColorTransferCharacteristic value for name or an AVError if not found.</summary>
+        public static int av_color_transfer_from_name([MarshalAs(UnmanagedType.LPStr)] string @name)
+        {
+            return av_color_transfer_from_name_fptr(@name);
         }
         
         
@@ -9730,6 +9903,27 @@ namespace FFmpeg.AutoGen
         public static int av_cpu_count()
         {
             return av_cpu_count_fptr();
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate ulong av_cpu_max_align_delegate();
+        private static av_cpu_max_align_delegate av_cpu_max_align_fptr = () =>
+        {
+            av_cpu_max_align_fptr = GetFunctionDelegate<av_cpu_max_align_delegate>(GetOrLoadLibrary("avutil", 55), "av_cpu_max_align");
+            if (av_cpu_max_align_fptr == null)
+            {
+                av_cpu_max_align_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_cpu_max_align is not supported on this platform.");
+                };
+            }
+            return av_cpu_max_align_fptr();
+        };
+        /// <summary>Get the maximum data alignment that may be required by FFmpeg.</summary>
+        public static ulong av_cpu_max_align()
+        {
+            return av_cpu_max_align_fptr();
         }
         
         
@@ -10607,6 +10801,29 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_frame_apply_cropping_delegate(AVFrame* @frame, int @flags);
+        private static av_frame_apply_cropping_delegate av_frame_apply_cropping_fptr = (AVFrame* @frame, int @flags) =>
+        {
+            av_frame_apply_cropping_fptr = GetFunctionDelegate<av_frame_apply_cropping_delegate>(GetOrLoadLibrary("avutil", 55), "av_frame_apply_cropping");
+            if (av_frame_apply_cropping_fptr == null)
+            {
+                av_frame_apply_cropping_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_frame_apply_cropping is not supported on this platform.");
+                };
+            }
+            return av_frame_apply_cropping_fptr(@frame, @flags);
+        };
+        /// <summary>Crop the given video AVFrame according to its crop_left/crop_top/crop_right/ crop_bottom fields. If cropping is successful, the function will adjust the data pointers and the width/height fields, and set the crop fields to 0.</summary>
+        /// <param name="frame">the frame which should be cropped</param>
+        /// <param name="flags">Some combination of AV_FRAME_CROP_* flags, or 0.</param>
+        public static int av_frame_apply_cropping(AVFrame* @frame, int @flags)
+        {
+            return av_frame_apply_cropping_fptr(@frame, @flags);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVFrame* av_frame_clone_delegate(AVFrame* @src);
         private static av_frame_clone_delegate av_frame_clone_fptr = (AVFrame* @src) =>
         {
@@ -10728,7 +10945,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Allocate new buffer(s) for audio or video data.</summary>
         /// <param name="frame">frame in which to store the new buffers.</param>
-        /// <param name="align">required buffer size alignment</param>
+        /// <param name="align">Required buffer size alignment. If equal to 0, alignment will be chosen automatically for the current CPU. It is highly recommended to pass 0 here unless you know what you are doing.</param>
         public static int av_frame_get_buffer(AVFrame* @frame, int @align)
         {
             return av_frame_get_buffer_fptr(@frame, @align);
@@ -12118,6 +12335,31 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_hwdevice_ctx_create_derived_delegate(AVBufferRef** @dst_ctx, AVHWDeviceType @type, AVBufferRef* @src_ctx, int @flags);
+        private static av_hwdevice_ctx_create_derived_delegate av_hwdevice_ctx_create_derived_fptr = (AVBufferRef** @dst_ctx, AVHWDeviceType @type, AVBufferRef* @src_ctx, int @flags) =>
+        {
+            av_hwdevice_ctx_create_derived_fptr = GetFunctionDelegate<av_hwdevice_ctx_create_derived_delegate>(GetOrLoadLibrary("avutil", 55), "av_hwdevice_ctx_create_derived");
+            if (av_hwdevice_ctx_create_derived_fptr == null)
+            {
+                av_hwdevice_ctx_create_derived_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_hwdevice_ctx_create_derived is not supported on this platform.");
+                };
+            }
+            return av_hwdevice_ctx_create_derived_fptr(@dst_ctx, @type, @src_ctx, @flags);
+        };
+        /// <summary>Create a new device of the specified type from an existing device.</summary>
+        /// <param name="dst_ctx">On success, a reference to the newly-created AVHWDeviceContext.</param>
+        /// <param name="type">The type of the new device to create.</param>
+        /// <param name="src_ctx">A reference to an existing AVHWDeviceContext which will be used to create the new device.</param>
+        /// <param name="flags">Currently unused; should be set to zero.</param>
+        public static int av_hwdevice_ctx_create_derived(AVBufferRef** @dst_ctx, AVHWDeviceType @type, AVBufferRef* @src_ctx, int @flags)
+        {
+            return av_hwdevice_ctx_create_derived_fptr(@dst_ctx, @type, @src_ctx, @flags);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int av_hwdevice_ctx_init_delegate(AVBufferRef* @ref);
         private static av_hwdevice_ctx_init_delegate av_hwdevice_ctx_init_fptr = (AVBufferRef* @ref) =>
         {
@@ -12140,6 +12382,28 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVHWDeviceType av_hwdevice_find_type_by_name_delegate([MarshalAs(UnmanagedType.LPStr)] string @name);
+        private static av_hwdevice_find_type_by_name_delegate av_hwdevice_find_type_by_name_fptr = (string @name) =>
+        {
+            av_hwdevice_find_type_by_name_fptr = GetFunctionDelegate<av_hwdevice_find_type_by_name_delegate>(GetOrLoadLibrary("avutil", 55), "av_hwdevice_find_type_by_name");
+            if (av_hwdevice_find_type_by_name_fptr == null)
+            {
+                av_hwdevice_find_type_by_name_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_hwdevice_find_type_by_name is not supported on this platform.");
+                };
+            }
+            return av_hwdevice_find_type_by_name_fptr(@name);
+        };
+        /// <summary>Look up an AVHWDeviceType by name.</summary>
+        /// <param name="name">String name of the device type (case-insensitive).</param>
+        public static AVHWDeviceType av_hwdevice_find_type_by_name([MarshalAs(UnmanagedType.LPStr)] string @name)
+        {
+            return av_hwdevice_find_type_by_name_fptr(@name);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVHWFramesConstraints* av_hwdevice_get_hwframe_constraints_delegate(AVBufferRef* @ref, void* @hwconfig);
         private static av_hwdevice_get_hwframe_constraints_delegate av_hwdevice_get_hwframe_constraints_fptr = (AVBufferRef* @ref, void* @hwconfig) =>
         {
@@ -12154,10 +12418,34 @@ namespace FFmpeg.AutoGen
             return av_hwdevice_get_hwframe_constraints_fptr(@ref, @hwconfig);
         };
         /// <summary>Get the constraints on HW frames given a device and the HW-specific configuration to be used with that device. If no HW-specific configuration is provided, returns the maximum possible capabilities of the device.</summary>
+        /// <param name="ref">a reference to the associated AVHWDeviceContext.</param>
         /// <param name="hwconfig">a filled HW-specific configuration structure, or NULL to return the maximum possible capabilities of the device.</param>
         public static AVHWFramesConstraints* av_hwdevice_get_hwframe_constraints(AVBufferRef* @ref, void* @hwconfig)
         {
             return av_hwdevice_get_hwframe_constraints_fptr(@ref, @hwconfig);
+        }
+        
+        
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate string av_hwdevice_get_type_name_delegate(AVHWDeviceType @type);
+        private static av_hwdevice_get_type_name_delegate av_hwdevice_get_type_name_fptr = (AVHWDeviceType @type) =>
+        {
+            av_hwdevice_get_type_name_fptr = GetFunctionDelegate<av_hwdevice_get_type_name_delegate>(GetOrLoadLibrary("avutil", 55), "av_hwdevice_get_type_name");
+            if (av_hwdevice_get_type_name_fptr == null)
+            {
+                av_hwdevice_get_type_name_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_hwdevice_get_type_name is not supported on this platform.");
+                };
+            }
+            return av_hwdevice_get_type_name_fptr(@type);
+        };
+        /// <summary>Get the string name of an AVHWDeviceType.</summary>
+        /// <param name="type">Type from enum AVHWDeviceType.</param>
+        public static string av_hwdevice_get_type_name(AVHWDeviceType @type)
+        {
+            return av_hwdevice_get_type_name_fptr(@type);
         }
         
         
@@ -12180,6 +12468,27 @@ namespace FFmpeg.AutoGen
         public static void* av_hwdevice_hwconfig_alloc(AVBufferRef* @device_ctx)
         {
             return av_hwdevice_hwconfig_alloc_fptr(@device_ctx);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVHWDeviceType av_hwdevice_iterate_types_delegate(AVHWDeviceType @prev);
+        private static av_hwdevice_iterate_types_delegate av_hwdevice_iterate_types_fptr = (AVHWDeviceType @prev) =>
+        {
+            av_hwdevice_iterate_types_fptr = GetFunctionDelegate<av_hwdevice_iterate_types_delegate>(GetOrLoadLibrary("avutil", 55), "av_hwdevice_iterate_types");
+            if (av_hwdevice_iterate_types_fptr == null)
+            {
+                av_hwdevice_iterate_types_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_hwdevice_iterate_types is not supported on this platform.");
+                };
+            }
+            return av_hwdevice_iterate_types_fptr(@prev);
+        };
+        /// <summary>Iterate over supported device types.</summary>
+        public static AVHWDeviceType av_hwdevice_iterate_types(AVHWDeviceType @prev)
+        {
+            return av_hwdevice_iterate_types_fptr(@prev);
         }
         
         
@@ -12245,7 +12554,7 @@ namespace FFmpeg.AutoGen
         /// <param name="derived_frame_ctx">On success, a reference to the newly created AVHWFramesContext.</param>
         /// <param name="derived_device_ctx">A reference to the device to create the new AVHWFramesContext on.</param>
         /// <param name="source_frame_ctx">A reference to an existing AVHWFramesContext which will be mapped to the derived context.</param>
-        /// <param name="flags">Currently unused; should be set to zero.</param>
+        /// <param name="flags">Some combination of AV_HWFRAME_MAP_* flags, defining the mapping parameters to apply to frames which are allocated in the derived device.</param>
         public static int av_hwframe_ctx_create_derived(AVBufferRef** @derived_frame_ctx, AVPixelFormat @format, AVBufferRef* @derived_device_ctx, AVBufferRef* @source_frame_ctx, int @flags)
         {
             return av_hwframe_ctx_create_derived_fptr(@derived_frame_ctx, @format, @derived_device_ctx, @source_frame_ctx, @flags);
@@ -12533,6 +12842,7 @@ namespace FFmpeg.AutoGen
         /// <param name="dst">a buffer into which picture data will be copied</param>
         /// <param name="dst_size">the size in bytes of dst</param>
         /// <param name="src_data">pointers containing the source image data</param>
+        /// <param name="src_linesize">linesizes for the image in src_data</param>
         /// <param name="pix_fmt">the pixel format of the source image</param>
         /// <param name="width">the width of the source image in pixels</param>
         /// <param name="height">the height of the source image in pixels</param>
@@ -12580,6 +12890,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Setup the data pointers and linesizes based on the specified image parameters and the provided array.</summary>
         /// <param name="dst_data">data pointers to be filled in</param>
+        /// <param name="dst_linesize">linesizes for the image in dst_data to be filled in</param>
         /// <param name="src">buffer which will contain or contains the actual image data, can be NULL</param>
         /// <param name="pix_fmt">the pixel format of the image</param>
         /// <param name="width">the width of the image in pixels</param>
@@ -12588,6 +12899,33 @@ namespace FFmpeg.AutoGen
         public static int av_image_fill_arrays(ref byte_ptrArray4 @dst_data, ref int_array4 @dst_linesize, byte* @src, AVPixelFormat @pix_fmt, int @width, int @height, int @align)
         {
             return av_image_fill_arrays_fptr(ref @dst_data, ref @dst_linesize, @src, @pix_fmt, @width, @height, @align);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_image_fill_black_delegate(ref byte_ptrArray4 @dst_data, long_array4 @dst_linesize, AVPixelFormat @pix_fmt, AVColorRange @range, int @width, int @height);
+        private static av_image_fill_black_delegate av_image_fill_black_fptr = (ref byte_ptrArray4 @dst_data, long_array4 @dst_linesize, AVPixelFormat @pix_fmt, AVColorRange @range, int @width, int @height) =>
+        {
+            av_image_fill_black_fptr = GetFunctionDelegate<av_image_fill_black_delegate>(GetOrLoadLibrary("avutil", 55), "av_image_fill_black");
+            if (av_image_fill_black_fptr == null)
+            {
+                av_image_fill_black_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_image_fill_black is not supported on this platform.");
+                };
+            }
+            return av_image_fill_black_fptr(ref @dst_data, @dst_linesize, @pix_fmt, @range, @width, @height);
+        };
+        /// <summary>Overwrite the image data with black. This is suitable for filling a sub-rectangle of an image, meaning the padding between the right most pixel and the left most pixel on the next line will not be overwritten. For some formats, the image size might be rounded up due to inherent alignment.</summary>
+        /// <param name="dst_data">data pointers to destination image</param>
+        /// <param name="dst_linesize">linesizes for the destination image</param>
+        /// <param name="pix_fmt">the pixel format of the image</param>
+        /// <param name="range">the color range of the image (important for colorspaces such as YUV)</param>
+        /// <param name="width">the width of the image in pixels</param>
+        /// <param name="height">the height of the image in pixels</param>
+        public static int av_image_fill_black(ref byte_ptrArray4 @dst_data, long_array4 @dst_linesize, AVPixelFormat @pix_fmt, AVColorRange @range, int @width, int @height)
+        {
+            return av_image_fill_black_fptr(ref @dst_data, @dst_linesize, @pix_fmt, @range, @width, @height);
         }
         
         
@@ -12675,6 +13013,9 @@ namespace FFmpeg.AutoGen
             return av_image_get_buffer_size_fptr(@pix_fmt, @width, @height, @align);
         };
         /// <summary>Return the size in bytes of the amount of data required to store an image with the given parameters.</summary>
+        /// <param name="pix_fmt">the pixel format of the image</param>
+        /// <param name="width">the width of the image in pixels</param>
+        /// <param name="height">the height of the image in pixels</param>
         /// <param name="align">the assumed linesize alignment</param>
         public static int av_image_get_buffer_size(AVPixelFormat @pix_fmt, int @width, int @height, int @align)
         {

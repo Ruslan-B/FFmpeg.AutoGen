@@ -325,6 +325,12 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_CLEARVIDEO = 32795,
         @AV_CODEC_ID_XPM = 32796,
         @AV_CODEC_ID_AV1 = 32797,
+        @AV_CODEC_ID_BITPACKED = 32798,
+        @AV_CODEC_ID_MSCC = 32799,
+        @AV_CODEC_ID_SRGC = 32800,
+        @AV_CODEC_ID_SVG = 32801,
+        @AV_CODEC_ID_GDV = 32802,
+        @AV_CODEC_ID_FITS = 32803,
         /// <summary>A dummy id pointing at the start of audio codecs</summary>
         @AV_CODEC_ID_FIRST_AUDIO = 65536,
         @AV_CODEC_ID_PCM_S16LE = 65536,
@@ -413,6 +419,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_XAN_DPCM = 81922,
         @AV_CODEC_ID_SOL_DPCM = 81923,
         @AV_CODEC_ID_SDX2_DPCM = 83968,
+        @AV_CODEC_ID_GREMLIN_DPCM = 83969,
         @AV_CODEC_ID_MP2 = 86016,
         /// <summary>preferred ID for decoding MPEG audio layer 1, 2 or 3</summary>
         @AV_CODEC_ID_MP3 = 86017,
@@ -499,6 +506,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_DST = 88077,
         @AV_CODEC_ID_ATRAC3AL = 88078,
         @AV_CODEC_ID_ATRAC3PAL = 88079,
+        @AV_CODEC_ID_DOLBY_E = 88080,
         /// <summary>A dummy ID pointing at the start of subtitle codecs.</summary>
         @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
         @AV_CODEC_ID_DVD_SUBTITLE = 94208,
@@ -551,7 +559,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_WRAPPED_AVFRAME = 135169,
     }
     
-    /// <summary>Chromaticity coordinates of the source primaries.</summary>
+    /// <summary>Chromaticity coordinates of the source primaries. These values match the ones defined by ISO/IEC 23001-8_2013 § 7.1.</summary>
     public enum AVColorPrimaries : int
     {
         @AVCOL_PRI_RESERVED0 = 0,
@@ -596,7 +604,7 @@ namespace FFmpeg.AutoGen
         @AVCOL_RANGE_NB = 3,
     }
     
-    /// <summary>YUV colorspace type.</summary>
+    /// <summary>YUV colorspace type. These values match the ones defined by ISO/IEC 23001-8_2013 § 7.3.</summary>
     public enum AVColorSpace : int
     {
         /// <summary>order of coefficients is actually GBR, also IEC 61966-2-1 (sRGB)</summary>
@@ -622,11 +630,17 @@ namespace FFmpeg.AutoGen
         @AVCOL_SPC_BT2020_CL = 10,
         /// <summary>SMPTE 2085, Y&apos;D&apos;zD&apos;x</summary>
         @AVCOL_SPC_SMPTE2085 = 11,
+        /// <summary>Chromaticity-derived non-constant luminance system</summary>
+        @AVCOL_SPC_CHROMA_DERIVED_NCL = 12,
+        /// <summary>Chromaticity-derived constant luminance system</summary>
+        @AVCOL_SPC_CHROMA_DERIVED_CL = 13,
+        /// <summary>ITU-R BT.2100-0, ICtCp</summary>
+        @AVCOL_SPC_ICTCP = 14,
         /// <summary>Not part of ABI</summary>
-        @AVCOL_SPC_NB = 12,
+        @AVCOL_SPC_NB = 15,
     }
     
-    /// <summary>Color Transfer Characteristic.</summary>
+    /// <summary>Color Transfer Characteristic. These values match the ones defined by ISO/IEC 23001-8_2013 § 7.2.</summary>
     public enum AVColorTransferCharacteristic : int
     {
         @AVCOL_TRC_RESERVED0 = 0,
@@ -777,6 +791,10 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_GOP_TIMECODE = 12,
         /// <summary>The data represents the AVSphericalMapping structure defined in libavutil/spherical.h.</summary>
         @AV_FRAME_DATA_SPHERICAL = 13,
+        /// <summary>Content light level (based on CTA-861.3). This payload contains data in the form of the AVContentLightMetadata struct.</summary>
+        @AV_FRAME_DATA_CONTENT_LIGHT_LEVEL = 14,
+        /// <summary>The data contains an ICC profile as an opaque octet buffer following the format described by ISO 15076-1 with an optional name defined in the metadata key entry &quot;name&quot;.</summary>
+        @AV_FRAME_DATA_ICC_PROFILE = 15,
     }
     
     public enum AVHWDeviceType : int
@@ -786,6 +804,10 @@ namespace FFmpeg.AutoGen
         @AV_HWDEVICE_TYPE_VAAPI = 2,
         @AV_HWDEVICE_TYPE_DXVA2 = 3,
         @AV_HWDEVICE_TYPE_QSV = 4,
+        @AV_HWDEVICE_TYPE_VIDEOTOOLBOX = 5,
+        @AV_HWDEVICE_TYPE_NONE = 6,
+        @AV_HWDEVICE_TYPE_D3D11VA = 7,
+        @AV_HWDEVICE_TYPE_DRM = 8,
     }
     
     public enum AVHWFrameTransferDirection : int
@@ -809,6 +831,8 @@ namespace FFmpeg.AutoGen
         @AVIO_DATA_MARKER_UNKNOWN = 3,
         /// <summary>Trailer data, which doesn&apos;t contain actual content, but only for finalizing the output file.</summary>
         @AVIO_DATA_MARKER_TRAILER = 4,
+        /// <summary>A point in the output bytestream where the underlying AVIOContext might flush the buffer depending on latency or buffering requirements. Typically means the end of a packet.</summary>
+        @AVIO_DATA_MARKER_FLUSH_POINT = 5,
     }
     
     /// <summary>Directory entry types.</summary>
@@ -937,12 +961,16 @@ namespace FFmpeg.AutoGen
         @AV_PKT_DATA_METADATA_UPDATE = 77,
         /// <summary>MPEGTS stream ID, this is required to pass the stream ID information from the demuxer to the corresponding muxer.</summary>
         @AV_PKT_DATA_MPEGTS_STREAM_ID = 78,
-        /// <summary>Mastering display metadata (based on SMPTE-2086:2014). This metadata should be associated with a video stream and containts data in the form of the AVMasteringDisplayMetadata struct.</summary>
+        /// <summary>Mastering display metadata (based on SMPTE-2086:2014). This metadata should be associated with a video stream and contains data in the form of the AVMasteringDisplayMetadata struct.</summary>
         @AV_PKT_DATA_MASTERING_DISPLAY_METADATA = 79,
         /// <summary>This side data should be associated with a video stream and corresponds to the AVSphericalMapping structure.</summary>
         @AV_PKT_DATA_SPHERICAL = 80,
+        /// <summary>Content light level (based on CTA-861.3). This metadata should be associated with a video stream and contains data in the form of the AVContentLightMetadata struct.</summary>
+        @AV_PKT_DATA_CONTENT_LIGHT_LEVEL = 81,
+        /// <summary>ATSC A53 Part 4 Closed Captions. This metadata should be associated with a video stream. A53 CC bitstream is stored as uint8_t in AVPacketSideData.data. The number of bytes of CC data is AVPacketSideData.size.</summary>
+        @AV_PKT_DATA_A53_CC = 82,
         /// <summary>The number of side data elements (in fact a bit more than it). This is not part of the public API/ABI in the sense that it may change when new side data types are added. This must stay the last enum value. If its value becomes huge, some code using it needs to be updated as it assumes it to be smaller than other limits.</summary>
-        @AV_PKT_DATA_NB = 81,
+        @AV_PKT_DATA_NB = 83,
     }
     
     /// <summary>@{</summary>
@@ -1242,7 +1270,7 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_QSV = 126,
         /// <summary>HW acceleration though MMAL, data[3] contains a pointer to the MMAL_BUFFER_HEADER_T structure.</summary>
         @AV_PIX_FMT_MMAL = 127,
-        /// <summary>HW decoding through Direct3D11, Picture.data[3] contains a ID3D11VideoDecoderOutputView pointer</summary>
+        /// <summary>HW decoding through Direct3D11 via old API, Picture.data[3] contains a ID3D11VideoDecoderOutputView pointer</summary>
         @AV_PIX_FMT_D3D11VA_VLD = 128,
         /// <summary>HW acceleration through CUDA. data[i] contain CUdeviceptr pointers exactly as for system memory frames.</summary>
         @AV_PIX_FMT_CUDA = 129,
@@ -1352,8 +1380,24 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_P016LE = 346,
         /// <summary>like NV12, with 16bpp per component, big-endian</summary>
         @AV_PIX_FMT_P016BE = 347,
+        /// <summary>Hardware surfaces for Direct3D11.</summary>
+        @AV_PIX_FMT_D3D11 = 348,
+        /// <summary>Y , 9bpp, big-endian</summary>
+        @AV_PIX_FMT_GRAY9BE = 349,
+        /// <summary>Y , 9bpp, little-endian</summary>
+        @AV_PIX_FMT_GRAY9LE = 350,
+        /// <summary>IEEE-754 single precision planar GBR 4:4:4, 96bpp, big-endian</summary>
+        @AV_PIX_FMT_GBRPF32BE = 351,
+        /// <summary>IEEE-754 single precision planar GBR 4:4:4, 96bpp, little-endian</summary>
+        @AV_PIX_FMT_GBRPF32LE = 352,
+        /// <summary>IEEE-754 single precision planar GBRA 4:4:4:4, 128bpp, big-endian</summary>
+        @AV_PIX_FMT_GBRAPF32BE = 353,
+        /// <summary>IEEE-754 single precision planar GBRA 4:4:4:4, 128bpp, little-endian</summary>
+        @AV_PIX_FMT_GBRAPF32LE = 354,
+        /// <summary>DRM-managed buffers exposed through PRIME buffer sharing.</summary>
+        @AV_PIX_FMT_DRM_PRIME = 355,
         /// <summary>number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions</summary>
-        @AV_PIX_FMT_NB = 348,
+        @AV_PIX_FMT_NB = 356,
     }
     
     /// <summary>Rounding methods.</summary>
