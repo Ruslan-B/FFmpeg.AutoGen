@@ -113,9 +113,9 @@ namespace FFmpeg.AutoGen
         public int_array8 @linesize;
         /// <summary>pointers to the data planes/channels.</summary>
         public byte** @extended_data;
-        /// <summary>width and height of the video frame</summary>
+        /// <summary>Video frames only. The coded dimensions (in pixels) of the video frame, i.e. the size of the rectangle that contains some well-defined values.</summary>
         public int @width;
-        /// <summary>width and height of the video frame</summary>
+        /// <summary>Video frames only. The coded dimensions (in pixels) of the video frame, i.e. the size of the rectangle that contains some well-defined values.</summary>
         public int @height;
         /// <summary>number of audio samples (per channel) described by this frame</summary>
         public int @nb_samples;
@@ -197,6 +197,11 @@ namespace FFmpeg.AutoGen
         public AVBufferRef* @hw_frames_ctx;
         /// <summary>AVBufferRef for free use by the API user. FFmpeg will never check the contents of the buffer ref. FFmpeg calls av_buffer_unref() on it when the frame is unreferenced. av_frame_copy_props() calls create a new reference with av_buffer_ref() for the target frame&apos;s opaque_ref field.</summary>
         public AVBufferRef* @opaque_ref;
+        /// <summary>cropping Video frames only. The number of pixels to discard from the the top/bottom/left/right border of the frame to obtain the sub-rectangle of the frame intended for presentation. @{</summary>
+        public ulong @crop_top;
+        public ulong @crop_bottom;
+        public ulong @crop_left;
+        public ulong @crop_right;
     }
     
     public unsafe struct AVDictionaryEntry
@@ -423,6 +428,342 @@ namespace FFmpeg.AutoGen
         public void* @BeginFrame;
         public void* @EndFrame;
         public void* @Execute;
+    }
+    
+    /// <summary>This struct is allocated as AVHWDeviceContext.hwctx</summary>
+    public unsafe struct AVD3D11VADeviceContext
+    {
+        /// <summary>Device used for texture creation and access. This can also be used to set the libavcodec decoding device.</summary>
+        public ID3D11Device* @device;
+        /// <summary>If unset, this will be set from the device field on init.</summary>
+        public ID3D11DeviceContext* @device_context;
+        /// <summary>If unset, this will be set from the device field on init.</summary>
+        public ID3D11VideoDevice* @video_device;
+        /// <summary>If unset, this will be set from the device_context field on init.</summary>
+        public ID3D11VideoContext* @video_context;
+        /// <summary>Callbacks for locking. They protect accesses to device_context and video_context calls. They also protect access to the internal staging texture (for av_hwframe_transfer_data() calls). They do NOT protect access to hwcontext or decoder state in general.</summary>
+        public AVD3D11VADeviceContext_lock_func @lock;
+        public AVD3D11VADeviceContext_unlock_func @unlock;
+        public void* @lock_ctx;
+    }
+    
+    public unsafe struct ID3D11Device
+    {
+        public ID3D11DeviceVtbl* @lpVtbl;
+    }
+    
+    public unsafe struct ID3D11DeviceVtbl
+    {
+        public void* @QueryInterface;
+        public void* @AddRef;
+        public void* @Release;
+        public void* @CreateBuffer;
+        public void* @CreateTexture1D;
+        public void* @CreateTexture2D;
+        public void* @CreateTexture3D;
+        public void* @CreateShaderResourceView;
+        public void* @CreateUnorderedAccessView;
+        public void* @CreateRenderTargetView;
+        public void* @CreateDepthStencilView;
+        public void* @CreateInputLayout;
+        public void* @CreateVertexShader;
+        public void* @CreateGeometryShader;
+        public void* @CreateGeometryShaderWithStreamOutput;
+        public void* @CreatePixelShader;
+        public void* @CreateHullShader;
+        public void* @CreateDomainShader;
+        public void* @CreateComputeShader;
+        public void* @CreateClassLinkage;
+        public void* @CreateBlendState;
+        public void* @CreateDepthStencilState;
+        public void* @CreateRasterizerState;
+        public void* @CreateSamplerState;
+        public void* @CreateQuery;
+        public void* @CreatePredicate;
+        public void* @CreateCounter;
+        public void* @CreateDeferredContext;
+        public void* @OpenSharedResource;
+        public void* @CheckFormatSupport;
+        public void* @CheckMultisampleQualityLevels;
+        public void* @CheckCounterInfo;
+        public void* @CheckCounter;
+        public void* @CheckFeatureSupport;
+        public void* @GetPrivateData;
+        public void* @SetPrivateData;
+        public void* @SetPrivateDataInterface;
+        public void* @GetFeatureLevel;
+        public void* @GetCreationFlags;
+        public void* @GetDeviceRemovedReason;
+        public void* @GetImmediateContext;
+        public void* @SetExceptionMode;
+        public void* @GetExceptionMode;
+    }
+    
+    public unsafe struct ID3D11DeviceContext
+    {
+        public ID3D11DeviceContextVtbl* @lpVtbl;
+    }
+    
+    public unsafe struct ID3D11DeviceContextVtbl
+    {
+        public void* @QueryInterface;
+        public void* @AddRef;
+        public void* @Release;
+        public void* @GetDevice;
+        public void* @GetPrivateData;
+        public void* @SetPrivateData;
+        public void* @SetPrivateDataInterface;
+        public void* @VSSetConstantBuffers;
+        public void* @PSSetShaderResources;
+        public void* @PSSetShader;
+        public void* @PSSetSamplers;
+        public void* @VSSetShader;
+        public void* @DrawIndexed;
+        public void* @Draw;
+        public void* @Map;
+        public void* @Unmap;
+        public void* @PSSetConstantBuffers;
+        public void* @IASetInputLayout;
+        public void* @IASetVertexBuffers;
+        public void* @IASetIndexBuffer;
+        public void* @DrawIndexedInstanced;
+        public void* @DrawInstanced;
+        public void* @GSSetConstantBuffers;
+        public void* @GSSetShader;
+        public void* @IASetPrimitiveTopology;
+        public void* @VSSetShaderResources;
+        public void* @VSSetSamplers;
+        public void* @Begin;
+        public void* @End;
+        public void* @GetData;
+        public void* @SetPredication;
+        public void* @GSSetShaderResources;
+        public void* @GSSetSamplers;
+        public void* @OMSetRenderTargets;
+        public void* @OMSetRenderTargetsAndUnorderedAccessViews;
+        public void* @OMSetBlendState;
+        public void* @OMSetDepthStencilState;
+        public void* @SOSetTargets;
+        public void* @DrawAuto;
+        public void* @DrawIndexedInstancedIndirect;
+        public void* @DrawInstancedIndirect;
+        public void* @Dispatch;
+        public void* @DispatchIndirect;
+        public void* @RSSetState;
+        public void* @RSSetViewports;
+        public void* @RSSetScissorRects;
+        public void* @CopySubresourceRegion;
+        public void* @CopyResource;
+        public void* @UpdateSubresource;
+        public void* @CopyStructureCount;
+        public void* @ClearRenderTargetView;
+        public void* @ClearUnorderedAccessViewUint;
+        public void* @ClearUnorderedAccessViewFloat;
+        public void* @ClearDepthStencilView;
+        public void* @GenerateMips;
+        public void* @SetResourceMinLOD;
+        public void* @GetResourceMinLOD;
+        public void* @ResolveSubresource;
+        public void* @ExecuteCommandList;
+        public void* @HSSetShaderResources;
+        public void* @HSSetShader;
+        public void* @HSSetSamplers;
+        public void* @HSSetConstantBuffers;
+        public void* @DSSetShaderResources;
+        public void* @DSSetShader;
+        public void* @DSSetSamplers;
+        public void* @DSSetConstantBuffers;
+        public void* @CSSetShaderResources;
+        public void* @CSSetUnorderedAccessViews;
+        public void* @CSSetShader;
+        public void* @CSSetSamplers;
+        public void* @CSSetConstantBuffers;
+        public void* @VSGetConstantBuffers;
+        public void* @PSGetShaderResources;
+        public void* @PSGetShader;
+        public void* @PSGetSamplers;
+        public void* @VSGetShader;
+        public void* @PSGetConstantBuffers;
+        public void* @IAGetInputLayout;
+        public void* @IAGetVertexBuffers;
+        public void* @IAGetIndexBuffer;
+        public void* @GSGetConstantBuffers;
+        public void* @GSGetShader;
+        public void* @IAGetPrimitiveTopology;
+        public void* @VSGetShaderResources;
+        public void* @VSGetSamplers;
+        public void* @GetPredication;
+        public void* @GSGetShaderResources;
+        public void* @GSGetSamplers;
+        public void* @OMGetRenderTargets;
+        public void* @OMGetRenderTargetsAndUnorderedAccessViews;
+        public void* @OMGetBlendState;
+        public void* @OMGetDepthStencilState;
+        public void* @SOGetTargets;
+        public void* @RSGetState;
+        public void* @RSGetViewports;
+        public void* @RSGetScissorRects;
+        public void* @HSGetShaderResources;
+        public void* @HSGetShader;
+        public void* @HSGetSamplers;
+        public void* @HSGetConstantBuffers;
+        public void* @DSGetShaderResources;
+        public void* @DSGetShader;
+        public void* @DSGetSamplers;
+        public void* @DSGetConstantBuffers;
+        public void* @CSGetShaderResources;
+        public void* @CSGetUnorderedAccessViews;
+        public void* @CSGetShader;
+        public void* @CSGetSamplers;
+        public void* @CSGetConstantBuffers;
+        public void* @ClearState;
+        public void* @Flush;
+        public void* @GetType;
+        public void* @GetContextFlags;
+        public void* @FinishCommandList;
+    }
+    
+    public unsafe struct ID3D11VideoDevice
+    {
+        public ID3D11VideoDeviceVtbl* @lpVtbl;
+    }
+    
+    public unsafe struct ID3D11VideoDeviceVtbl
+    {
+        public void* @QueryInterface;
+        public void* @AddRef;
+        public void* @Release;
+        public void* @CreateVideoDecoder;
+        public void* @CreateVideoProcessor;
+        public void* @CreateAuthenticatedChannel;
+        public void* @CreateCryptoSession;
+        public void* @CreateVideoDecoderOutputView;
+        public void* @CreateVideoProcessorInputView;
+        public void* @CreateVideoProcessorOutputView;
+        public void* @CreateVideoProcessorEnumerator;
+        public void* @GetVideoDecoderProfileCount;
+        public void* @GetVideoDecoderProfile;
+        public void* @CheckVideoDecoderFormat;
+        public void* @GetVideoDecoderConfigCount;
+        public void* @GetVideoDecoderConfig;
+        public void* @GetContentProtectionCaps;
+        public void* @CheckCryptoKeyExchange;
+        public void* @SetPrivateData;
+        public void* @SetPrivateDataInterface;
+    }
+    
+    public unsafe struct ID3D11VideoContext
+    {
+        public ID3D11VideoContextVtbl* @lpVtbl;
+    }
+    
+    public unsafe struct ID3D11VideoContextVtbl
+    {
+        public void* @QueryInterface;
+        public void* @AddRef;
+        public void* @Release;
+        public void* @GetDevice;
+        public void* @GetPrivateData;
+        public void* @SetPrivateData;
+        public void* @SetPrivateDataInterface;
+        public void* @GetDecoderBuffer;
+        public void* @ReleaseDecoderBuffer;
+        public void* @DecoderBeginFrame;
+        public void* @DecoderEndFrame;
+        public void* @SubmitDecoderBuffers;
+        public void* @DecoderExtension;
+        public void* @VideoProcessorSetOutputTargetRect;
+        public void* @VideoProcessorSetOutputBackgroundColor;
+        public void* @VideoProcessorSetOutputColorSpace;
+        public void* @VideoProcessorSetOutputAlphaFillMode;
+        public void* @VideoProcessorSetOutputConstriction;
+        public void* @VideoProcessorSetOutputStereoMode;
+        public void* @VideoProcessorSetOutputExtension;
+        public void* @VideoProcessorGetOutputTargetRect;
+        public void* @VideoProcessorGetOutputBackgroundColor;
+        public void* @VideoProcessorGetOutputColorSpace;
+        public void* @VideoProcessorGetOutputAlphaFillMode;
+        public void* @VideoProcessorGetOutputConstriction;
+        public void* @VideoProcessorGetOutputStereoMode;
+        public void* @VideoProcessorGetOutputExtension;
+        public void* @VideoProcessorSetStreamFrameFormat;
+        public void* @VideoProcessorSetStreamColorSpace;
+        public void* @VideoProcessorSetStreamOutputRate;
+        public void* @VideoProcessorSetStreamSourceRect;
+        public void* @VideoProcessorSetStreamDestRect;
+        public void* @VideoProcessorSetStreamAlpha;
+        public void* @VideoProcessorSetStreamPalette;
+        public void* @VideoProcessorSetStreamPixelAspectRatio;
+        public void* @VideoProcessorSetStreamLumaKey;
+        public void* @VideoProcessorSetStreamStereoFormat;
+        public void* @VideoProcessorSetStreamAutoProcessingMode;
+        public void* @VideoProcessorSetStreamFilter;
+        public void* @VideoProcessorSetStreamExtension;
+        public void* @VideoProcessorGetStreamFrameFormat;
+        public void* @VideoProcessorGetStreamColorSpace;
+        public void* @VideoProcessorGetStreamOutputRate;
+        public void* @VideoProcessorGetStreamSourceRect;
+        public void* @VideoProcessorGetStreamDestRect;
+        public void* @VideoProcessorGetStreamAlpha;
+        public void* @VideoProcessorGetStreamPalette;
+        public void* @VideoProcessorGetStreamPixelAspectRatio;
+        public void* @VideoProcessorGetStreamLumaKey;
+        public void* @VideoProcessorGetStreamStereoFormat;
+        public void* @VideoProcessorGetStreamAutoProcessingMode;
+        public void* @VideoProcessorGetStreamFilter;
+        public void* @VideoProcessorGetStreamExtension;
+        public void* @VideoProcessorBlt;
+        public void* @NegotiateCryptoSessionKeyExchange;
+        public void* @EncryptionBlt;
+        public void* @DecryptionBlt;
+        public void* @StartSessionKeyRefresh;
+        public void* @FinishSessionKeyRefresh;
+        public void* @GetEncryptionBltKey;
+        public void* @NegotiateAuthenticatedChannelKeyExchange;
+        public void* @QueryAuthenticatedChannel;
+        public void* @ConfigureAuthenticatedChannel;
+        public void* @VideoProcessorSetStreamRotation;
+        public void* @VideoProcessorGetStreamRotation;
+    }
+    
+    /// <summary>D3D11 frame descriptor for pool allocation.</summary>
+    public unsafe struct AVD3D11FrameDescriptor
+    {
+        /// <summary>The texture in which the frame is located. The reference count is managed by the AVBufferRef, and destroying the reference will release the interface.</summary>
+        public ID3D11Texture2D* @texture;
+        /// <summary>The index into the array texture element representing the frame, or 0 if the texture is not an array texture.</summary>
+        public long @index;
+    }
+    
+    public unsafe struct ID3D11Texture2D
+    {
+        public ID3D11Texture2DVtbl* @lpVtbl;
+    }
+    
+    public unsafe struct ID3D11Texture2DVtbl
+    {
+        public void* @QueryInterface;
+        public void* @AddRef;
+        public void* @Release;
+        public void* @GetDevice;
+        public void* @GetPrivateData;
+        public void* @SetPrivateData;
+        public void* @SetPrivateDataInterface;
+        public void* @GetType;
+        public void* @SetEvictionPriority;
+        public void* @GetEvictionPriority;
+        public void* @GetDesc;
+    }
+    
+    /// <summary>This struct is allocated as AVHWFramesContext.hwctx</summary>
+    public unsafe struct AVD3D11VAFramesContext
+    {
+        /// <summary>The canonical texture used for pool allocation. If this is set to NULL on init, the hwframes implementation will allocate and set an array texture if initial_pool_size &gt; 0.</summary>
+        public ID3D11Texture2D* @texture;
+        /// <summary>D3D11_TEXTURE2D_DESC.BindFlags used for texture creation. The user must at least set D3D11_BIND_DECODER if the frames context is to be used for video decoding. This field is ignored/invalid if a user-allocated texture is provided.</summary>
+        public uint @BindFlags;
+        /// <summary>D3D11_TEXTURE2D_DESC.MiscFlags used for texture creation. This field is ignored/invalid if a user-allocated texture is provided.</summary>
+        public uint @MiscFlags;
     }
     
     public unsafe struct SwsVector
@@ -880,6 +1221,7 @@ namespace FFmpeg.AutoGen
         public byte* @dump_separator;
         /// <summary>&apos;,&apos; separated list of allowed decoders. If NULL then all are allowed - encoding: unused - decoding: set by user</summary>
         public byte* @codec_whitelist;
+        /// <summary>Properties of the stream that gets decoded - encoding: unused - decoding: set by libavcodec</summary>
         public uint @properties;
         /// <summary>Additional data associated with the entire coded stream.</summary>
         public AVPacketSideData* @coded_side_data;
@@ -896,6 +1238,8 @@ namespace FFmpeg.AutoGen
         public AVBufferRef* @hw_device_ctx;
         /// <summary>Bit set of AV_HWACCEL_FLAG_* flags, which affect hardware accelerated decoding (if active). - encoding: unused - decoding: Set by user (either before avcodec_open2(), or in the AVCodecContext.get_format callback)</summary>
         public int @hwaccel_flags;
+        /// <summary>Video decoding only. Certain video codecs support cropping, meaning that only a sub-rectangle of the decoded frame is intended for display. This option controls how cropping is handled by libavcodec.</summary>
+        public int @apply_cropping;
     }
     
     /// <summary>AVCodec.</summary>
@@ -942,15 +1286,17 @@ namespace FFmpeg.AutoGen
         public AVCodec_encode2_func @encode2;
         public AVCodec_decode_func @decode;
         public AVCodec_close_func @close;
-        /// <summary>Decode/encode API with decoupled packet/frame dataflow. The API is the same as the avcodec_ prefixed APIs (avcodec_send_frame() etc.), except that: - never called if the codec is closed or the wrong type, - AVPacket parameter change side data is applied right before calling AVCodec-&gt;send_packet, - if AV_CODEC_CAP_DELAY is not set, drain packets or frames are never sent, - only one drain packet is ever passed down (until the next flush()), - a drain AVPacket is always NULL (no need to check for avpkt-&gt;size).</summary>
+        /// <summary>Encode API with decoupled packet/frame dataflow. The API is the same as the avcodec_ prefixed APIs (avcodec_send_frame() etc.), except that: - never called if the codec is closed or the wrong type, - if AV_CODEC_CAP_DELAY is not set, drain frames are never sent, - only one drain frame is ever passed down,</summary>
         public AVCodec_send_frame_func @send_frame;
-        public AVCodec_send_packet_func @send_packet;
-        public AVCodec_receive_frame_func @receive_frame;
         public AVCodec_receive_packet_func @receive_packet;
+        /// <summary>Decode API with decoupled packet/frame dataflow. This function is called to get one output frame. It should call ff_decode_get_packet() to obtain input data.</summary>
+        public AVCodec_receive_frame_func @receive_frame;
         /// <summary>Flush buffers. Will be called when seeking</summary>
         public AVCodec_flush_func @flush;
         /// <summary>Internal codec capabilities. See FF_CODEC_CAP_* in internal.h</summary>
         public int @caps_internal;
+        /// <summary>Decoding only, a comma-separated list of bitstream filters to apply to packets before decoding.</summary>
+        public byte* @bsfs;
     }
     
     public unsafe struct AVSubtitle
@@ -1008,7 +1354,7 @@ namespace FFmpeg.AutoGen
         public AVCodecID @id;
         /// <summary>Supported pixel format.</summary>
         public AVPixelFormat @pix_fmt;
-        /// <summary>Hardware accelerated codec capabilities. see HWACCEL_CODEC_CAP_*</summary>
+        /// <summary>Hardware accelerated codec capabilities. see AV_HWACCEL_CODEC_CAP_*</summary>
         public int @capabilities;
         /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavcodec and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
         public AVHWAccel* @next;
@@ -1239,80 +1585,6 @@ namespace FFmpeg.AutoGen
         public void* @SetPrivateDataInterface;
         public void* @GetCreationParameters;
         public void* @GetDriverHandle;
-    }
-    
-    public unsafe struct ID3D11VideoContext
-    {
-        public ID3D11VideoContextVtbl* @lpVtbl;
-    }
-    
-    public unsafe struct ID3D11VideoContextVtbl
-    {
-        public void* @QueryInterface;
-        public void* @AddRef;
-        public void* @Release;
-        public void* @GetDevice;
-        public void* @GetPrivateData;
-        public void* @SetPrivateData;
-        public void* @SetPrivateDataInterface;
-        public void* @GetDecoderBuffer;
-        public void* @ReleaseDecoderBuffer;
-        public void* @DecoderBeginFrame;
-        public void* @DecoderEndFrame;
-        public void* @SubmitDecoderBuffers;
-        public void* @DecoderExtension;
-        public void* @VideoProcessorSetOutputTargetRect;
-        public void* @VideoProcessorSetOutputBackgroundColor;
-        public void* @VideoProcessorSetOutputColorSpace;
-        public void* @VideoProcessorSetOutputAlphaFillMode;
-        public void* @VideoProcessorSetOutputConstriction;
-        public void* @VideoProcessorSetOutputStereoMode;
-        public void* @VideoProcessorSetOutputExtension;
-        public void* @VideoProcessorGetOutputTargetRect;
-        public void* @VideoProcessorGetOutputBackgroundColor;
-        public void* @VideoProcessorGetOutputColorSpace;
-        public void* @VideoProcessorGetOutputAlphaFillMode;
-        public void* @VideoProcessorGetOutputConstriction;
-        public void* @VideoProcessorGetOutputStereoMode;
-        public void* @VideoProcessorGetOutputExtension;
-        public void* @VideoProcessorSetStreamFrameFormat;
-        public void* @VideoProcessorSetStreamColorSpace;
-        public void* @VideoProcessorSetStreamOutputRate;
-        public void* @VideoProcessorSetStreamSourceRect;
-        public void* @VideoProcessorSetStreamDestRect;
-        public void* @VideoProcessorSetStreamAlpha;
-        public void* @VideoProcessorSetStreamPalette;
-        public void* @VideoProcessorSetStreamPixelAspectRatio;
-        public void* @VideoProcessorSetStreamLumaKey;
-        public void* @VideoProcessorSetStreamStereoFormat;
-        public void* @VideoProcessorSetStreamAutoProcessingMode;
-        public void* @VideoProcessorSetStreamFilter;
-        public void* @VideoProcessorSetStreamExtension;
-        public void* @VideoProcessorGetStreamFrameFormat;
-        public void* @VideoProcessorGetStreamColorSpace;
-        public void* @VideoProcessorGetStreamOutputRate;
-        public void* @VideoProcessorGetStreamSourceRect;
-        public void* @VideoProcessorGetStreamDestRect;
-        public void* @VideoProcessorGetStreamAlpha;
-        public void* @VideoProcessorGetStreamPalette;
-        public void* @VideoProcessorGetStreamPixelAspectRatio;
-        public void* @VideoProcessorGetStreamLumaKey;
-        public void* @VideoProcessorGetStreamStereoFormat;
-        public void* @VideoProcessorGetStreamAutoProcessingMode;
-        public void* @VideoProcessorGetStreamFilter;
-        public void* @VideoProcessorGetStreamExtension;
-        public void* @VideoProcessorBlt;
-        public void* @NegotiateCryptoSessionKeyExchange;
-        public void* @EncryptionBlt;
-        public void* @DecryptionBlt;
-        public void* @StartSessionKeyRefresh;
-        public void* @FinishSessionKeyRefresh;
-        public void* @GetEncryptionBltKey;
-        public void* @NegotiateAuthenticatedChannelKeyExchange;
-        public void* @QueryAuthenticatedChannel;
-        public void* @ConfigureAuthenticatedChannel;
-        public void* @VideoProcessorSetStreamRotation;
-        public void* @VideoProcessorGetStreamRotation;
     }
     
     public unsafe struct D3D11_VIDEO_DECODER_CONFIG
@@ -1849,7 +2121,7 @@ namespace FFmpeg.AutoGen
         public AVIOContext_seek_func @seek;
         /// <summary>position in the file of the current buffer</summary>
         public long @pos;
-        /// <summary>true if the next seek should flush</summary>
+        /// <summary>unused</summary>
         public int @must_flush;
         /// <summary>true if eof reached</summary>
         public int @eof_reached;
@@ -1894,6 +2166,11 @@ namespace FFmpeg.AutoGen
         public long @last_time;
         /// <summary>A callback that is used instead of short_seek_threshold. This is current internal only, do not use from outside.</summary>
         public AVIOContext_short_seek_get_func @short_seek_get;
+        public long @written;
+        /// <summary>Maximum reached position before a backward seek in the write buffer, used keeping track of already written data for a later flush.</summary>
+        public byte* @buf_ptr_max;
+        /// <summary>Try to buffer at least this amount of data before flushing it</summary>
+        public int @min_packet_size;
     }
     
     /// <summary>Callback for checking whether to abort blocking functions. AVERROR_EXIT is returned in this case by the interrupted function. During blocking operations, callback is called with opaque as parameter. If the callback returns 1, the blocking operation will be aborted.</summary>
@@ -1994,6 +2271,8 @@ namespace FFmpeg.AutoGen
         public AVClass* @priv_class;
         /// <summary>A combination of AVFILTER_FLAG_*</summary>
         public int @flags;
+        /// <summary>Filter pre-initialization function</summary>
+        public AVFilter_preinit_func @preinit;
         /// <summary>Filter initialization function.</summary>
         public AVFilter_init_func @init;
         /// <summary>Should be set instead of want to pass a dictionary of AVOptions to nested contexts that are allocated during init.</summary>

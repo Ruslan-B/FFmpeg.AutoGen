@@ -92,6 +92,22 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVD3D11VADeviceContext_lock (void* @lock_ctx);
+    public unsafe struct AVD3D11VADeviceContext_lock_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVD3D11VADeviceContext_lock_func(AVD3D11VADeviceContext_lock func) => new AVD3D11VADeviceContext_lock_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVD3D11VADeviceContext_unlock (void* @lock_ctx);
+    public unsafe struct AVD3D11VADeviceContext_unlock_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVD3D11VADeviceContext_unlock_func(AVD3D11VADeviceContext_unlock func) => new AVD3D11VADeviceContext_unlock_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate int AVCodec_init_thread_copy (AVCodecContext* @p0);
     public unsafe struct AVCodec_init_thread_copy_func
     {
@@ -164,11 +180,11 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int AVCodec_send_packet (AVCodecContext* @avctx, AVPacket* @avpkt);
-    public unsafe struct AVCodec_send_packet_func
+    public unsafe delegate int AVCodec_receive_packet (AVCodecContext* @avctx, AVPacket* @avpkt);
+    public unsafe struct AVCodec_receive_packet_func
     {
         public IntPtr Pointer;
-        public static implicit operator AVCodec_send_packet_func(AVCodec_send_packet func) => new AVCodec_send_packet_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+        public static implicit operator AVCodec_receive_packet_func(AVCodec_receive_packet func) => new AVCodec_receive_packet_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -177,14 +193,6 @@ namespace FFmpeg.AutoGen
     {
         public IntPtr Pointer;
         public static implicit operator AVCodec_receive_frame_func(AVCodec_receive_frame func) => new AVCodec_receive_frame_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-    }
-    
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int AVCodec_receive_packet (AVCodecContext* @avctx, AVPacket* @avpkt);
-    public unsafe struct AVCodec_receive_packet_func
-    {
-        public IntPtr Pointer;
-        public static implicit operator AVCodec_receive_packet_func(AVCodec_receive_packet func) => new AVCodec_receive_packet_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -665,6 +673,14 @@ namespace FFmpeg.AutoGen
     {
         public IntPtr Pointer;
         public static implicit operator AVOutputFormat_check_bitstream_func(AVOutputFormat_check_bitstream func) => new AVOutputFormat_check_bitstream_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVFilter_preinit (AVFilterContext* @ctx);
+    public unsafe struct AVFilter_preinit_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVFilter_preinit_func(AVFilter_preinit func) => new AVFilter_preinit_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
