@@ -14,6 +14,12 @@ namespace FFmpeg.AutoGen
 
         public const int EINVAL = 22;
 
+        /// <summary>
+        /// Gets or sets the root path for loading libraries.
+        /// </summary>
+        /// <value>The root path.</value>
+        public static string RootPath { get; set; } = string.Empty;
+
         static ffmpeg()
         {
             var loadedLibraries = new Dictionary<string, IntPtr>();
@@ -22,7 +28,7 @@ namespace FFmpeg.AutoGen
             {
                 var key = $"{name}{version}";
                 if (loadedLibraries.TryGetValue(key, out var ptr)) return ptr;
-                ptr = LibraryLoader.LoadNativeLibraryUsingPlatformNamingConvention(string.Empty, name, version);
+                ptr = LibraryLoader.LoadNativeLibraryUsingPlatformNamingConvention(RootPath, name, version);
                 loadedLibraries.Add(key, ptr);
                 return ptr;
             };
