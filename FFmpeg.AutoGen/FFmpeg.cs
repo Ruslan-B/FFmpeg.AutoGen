@@ -14,6 +14,8 @@ namespace FFmpeg.AutoGen
 
         public const int EINVAL = 22;
 
+        private static readonly object LockObject = new object();
+
         /// <summary>
         /// Gets or sets the root path for loading libraries.
         /// </summary>
@@ -28,8 +30,14 @@ namespace FFmpeg.AutoGen
             {
                 var key = $"{name}{version}";
                 if (loadedLibraries.TryGetValue(key, out var ptr)) return ptr;
-                ptr = LibraryLoader.LoadNativeLibraryUsingPlatformNamingConvention(RootPath, name, version);
-                loadedLibraries.Add(key, ptr);
+
+                lock (LockObject)
+                {
+                    if (loadedLibraries.TryGetValue(key, out ptr)) return ptr;
+                    ptr = LibraryLoader.LoadNativeLibraryUsingPlatformNamingConvention(RootPath, name, version);
+                    loadedLibraries.Add(key, ptr);
+                }
+
                 return ptr;
             };
         }
