@@ -8,14 +8,15 @@ namespace FFmpeg.AutoGen
 
     public static partial class ffmpeg
     {
+        private static readonly object SyncRoot = new object();
+
         public const int EAGAIN = 11;
 
         public const int ENOMEM = 12;
 
         public const int EINVAL = 22;
 
-        private static readonly object LockObject = new object();
-
+        
         /// <summary>
         /// Gets or sets the root path for loading libraries.
         /// </summary>
@@ -31,9 +32,10 @@ namespace FFmpeg.AutoGen
                 var key = $"{name}{version}";
                 if (loadedLibraries.TryGetValue(key, out var ptr)) return ptr;
 
-                lock (LockObject)
+                lock (SyncRoot)
                 {
                     if (loadedLibraries.TryGetValue(key, out ptr)) return ptr;
+
                     ptr = LibraryLoader.LoadNativeLibraryUsingPlatformNamingConvention(RootPath, name, version);
                     loadedLibraries.Add(key, ptr);
                 }
