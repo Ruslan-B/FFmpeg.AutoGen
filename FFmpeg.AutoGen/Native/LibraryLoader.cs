@@ -49,9 +49,7 @@ namespace FFmpeg.AutoGen.Native
         /// <summary>
         ///     Attempts to load a native library.
         /// </summary>
-        /// <param name="path">Path of the library.</param>
         /// <param name="libraryName">Name of the library.</param>
-        /// <param name="version">Version of the library.</param>
         /// <returns>
         ///     A handle to the library when found; otherwise, <see cref="IntPtr.Zero" />.
         /// </returns>

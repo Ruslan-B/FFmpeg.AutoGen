@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
@@ -27,6 +28,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 }
                 catch (Exception)
                 {
+                    Trace.TraceError($"Cannot parse macro expression: {x.Expression}");
                     return null;
                 }
             });
@@ -130,14 +132,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private string Serialize(object value)
         {
-            if (value is double d) return $"{d}d";
-            if (value is float f) return $"{f}f";
+            if (value is double d) return $"{d}D";
+            if (value is float f) return $"{f}F";
             if (value is char c) return $"\'{c}\'";
             if (value is string s) return $"\"{s}\"";
-            if (value is long l) return $"0x{l:x}l";
-            if (value is ulong ul) return $"0x{ul:x}ul";
+            if (value is long l) return $"0x{l:x}L";
+            if (value is ulong ul) return $"0x{ul:x}UL";
             if (value is int i) return $"0x{i:x}";
-            if (value is uint ui) return $"0x{ui:x}u";
+            if (value is uint ui) return $"0x{ui:x}U";
             if (value is bool b) return b ? "true" : "false";
             throw new NotSupportedException();
         }
