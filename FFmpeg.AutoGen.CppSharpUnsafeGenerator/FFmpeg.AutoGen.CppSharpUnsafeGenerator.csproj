@@ -78,23 +78,29 @@
     <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
       <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
     </Reference>
-    <Reference Include="CppSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CppSharp">
       <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="CppSharp.AST, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CppSharp.AST">
       <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.AST.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="CppSharp.Generator, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CppSharp.Generator">
       <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.Generator.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="CppSharp.Parser, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CppSharp.Parser">
       <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.Parser.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="CppSharp.Parser.CLI, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+    <Reference Include="CppSharp.Parser.CLI">
       <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.Parser.CLI.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="CppSharp.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CppSharp.Runtime">
       <HintPath>..\packages\CppSharp.0.8.14\lib\CppSharp.Runtime.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RCore.ClangMacroParser, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RCore.ClangMacroParser.0.0.0.3\lib\net45\RCore.ClangMacroParser.dll</HintPath>

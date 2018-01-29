@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Rational Core")]
 [assembly: AssemblyProduct("FFmpeg.AutoGen")]
-[assembly: AssemblyCopyright("Copyright © Ruslan Balanukhin 2015")]
+[assembly: AssemblyCopyright("Copyright © Ruslan Balanukhin 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
