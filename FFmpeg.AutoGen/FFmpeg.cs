@@ -8,20 +8,13 @@ namespace FFmpeg.AutoGen
 
     public static partial class ffmpeg
     {
-        private static readonly object SyncRoot = new object();
-
         public const int EAGAIN = 11;
 
         public const int ENOMEM = 12;
 
         public const int EINVAL = 22;
 
-        
-        /// <summary>
-        /// Gets or sets the root path for loading libraries.
-        /// </summary>
-        /// <value>The root path.</value>
-        public static string RootPath { get; set; } = string.Empty;
+        private static readonly object SyncRoot = new object();
 
         static ffmpeg()
         {
@@ -37,12 +30,19 @@ namespace FFmpeg.AutoGen
                     if (loadedLibraries.TryGetValue(key, out ptr)) return ptr;
 
                     ptr = LibraryLoader.LoadNativeLibraryUsingPlatformNamingConvention(RootPath, name, version);
+                    if (ptr == IntPtr.Zero) throw new DllNotFoundException($"Unable to load DLL '{name}.{version}': The specified module could not be found.");
                     loadedLibraries.Add(key, ptr);
                 }
 
                 return ptr;
             };
         }
+
+        /// <summary>
+        ///     Gets or sets the root path for loading libraries.
+        /// </summary>
+        /// <value>The root path.</value>
+        public static string RootPath { get; set; } = string.Empty;
 
         public static GetOrLoadLibrary GetOrLoadLibrary { get; set; }
 
