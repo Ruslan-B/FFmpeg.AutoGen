@@ -34,12 +34,12 @@ namespace FFmpeg.AutoGen.Native
             }
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                var fullName = Path.Combine(path, $"{libraryName}.so{version}");
+                var fullName = Path.Combine(path, $"lib{libraryName}.so{version}");
                 return LoadNativeLibrary(fullName);
             }
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                var fullName = Path.Combine(path, $"{libraryName}.{version}.dylib");
+                var fullName = Path.Combine(path, $"lib{libraryName}.{version}.dylib");
                 return LoadNativeLibrary(fullName);
             }
             throw new PlatformNotSupportedException();
