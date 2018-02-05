@@ -32,28 +32,19 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         internal TypeDefinition GetTypeDefinition(Type type, string name = null)
         {
-            var typedefType = type as TypedefType;
-            if (typedefType != null)
-                type = typedefType.Declaration.Type;
-
-            var arrayType = type as ArrayType;
-            if (arrayType?.SizeType == ArrayType.ArraySize.Constant)
-                return GetFieldTypeForFixedArray(arrayType);
-
-            var tagType = type as TagType;
-            if (tagType != null)
-                return GetFieldTypeForNestedDeclaration(tagType.Declaration, name);
-
-            var pointerType = type as PointerType;
-            if (pointerType != null)
-                return GetTypeDefinition(pointerType, name);
-
-
-            var declaration = type as TypedefType;
-            if (declaration != null)
-                return GetTypeDefinition(declaration.Declaration.Type, name);
-
-            return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
+            switch (type)
+            {
+                case TypedefType declaration:
+                    return GetTypeDefinition(declaration.Declaration.Type, name);
+                case ArrayType arrayType when arrayType.SizeType == ArrayType.ArraySize.Constant:
+                    return GetFieldTypeForFixedArray(arrayType);
+                case TagType tagType:
+                    return GetFieldTypeForNestedDeclaration(tagType.Declaration, name);
+                case PointerType pointerType:
+                    return GetTypeDefinition(pointerType, name);
+                default:
+                    return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
+            }
         }
 
         private void MakeDefinition(Class @class, string name)

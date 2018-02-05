@@ -10,20 +10,15 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         {
             switch (type)
             {
-                case PointerType x: return GetTypeName(x);
-                case BuiltinType x: return GetTypeName(x);
+                case PointerType x: return GetTypeName(x.QualifiedPointee.Type) + "*";
+                case BuiltinType x: return GetTypeName(x.Type);
                 case TypedefType x: return GetTypeName(x);
-                case TagType x: return GetTypeName(x);
-                case ArrayType x: return GetTypeName(x);
-                case AttributedType x: return GetTypeName(x);
+                case TagType x: return x.Declaration.Name;
+                case ArrayType x: return GetTypeName(x.Type) + "[]";
+                case AttributedType x: return GetTypeName(PrimitiveType.Void);
                 default:
                     throw new NotSupportedException();
             }
-        }
-
-        private static string GetTypeName(ArrayType type)
-        {
-            return GetTypeName(type.Type) + "[]";
         }
 
         private static string GetTypeName(TypedefType type)
@@ -36,35 +31,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     return type.Declaration.Name;
             }
         }
-
-        private static string GetTypeName(TagType type)
-        {
-            return type.Declaration.Name;
-        }
-
-        private static string GetTypeName(PointerType type)
-        {
-            switch (type.QualifiedPointee.Type)
-            {
-                case BuiltinType x: return GetTypeName(x) + "*";
-                case TypedefType x: return GetTypeName(x) + "*";
-                case TagType x: return GetTypeName(x) + "*";
-                case PointerType x: return GetTypeName(x) + "*";
-                default:
-                    throw new NotSupportedException();
-            }
-        }
-
-        private static string GetTypeName(AttributedType type)
-        {
-            return GetTypeName(PrimitiveType.Void);
-        }
-
-        private static string GetTypeName(BuiltinType type)
-        {
-            return GetTypeName(type.Type);
-        }
-
+        
         private static string GetTypeName(PrimitiveType type)
         {
             switch (type)

@@ -6748,8 +6748,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_sdp_create_delegate(AVFormatContext*[] @ac, int @n_files, byte* @buf, int @size);
-        private static av_sdp_create_delegate av_sdp_create_fptr = (AVFormatContext*[] @ac, int @n_files, byte* @buf, int @size) =>
+        private delegate int av_sdp_create_delegate(AVFormatContext** @ac, int @n_files, byte* @buf, int @size);
+        private static av_sdp_create_delegate av_sdp_create_fptr = (AVFormatContext** @ac, int @n_files, byte* @buf, int @size) =>
         {
             av_sdp_create_fptr = GetFunctionDelegate<av_sdp_create_delegate>(GetOrLoadLibrary("avformat", 57), "av_sdp_create");
             if (av_sdp_create_fptr == null)
@@ -6766,7 +6766,7 @@ namespace FFmpeg.AutoGen
         /// <param name="n_files">number of AVCodecContexts contained in ac</param>
         /// <param name="buf">buffer where the SDP will be stored (must be allocated by the caller)</param>
         /// <param name="size">the size of the buffer</param>
-        public static int av_sdp_create(AVFormatContext*[] @ac, int @n_files, byte* @buf, int @size)
+        public static int av_sdp_create(AVFormatContext** @ac, int @n_files, byte* @buf, int @size)
         {
             return av_sdp_create_fptr(@ac, @n_files, @buf, @size);
         }
