@@ -79,49 +79,52 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private TypeDefinition GetReturnTypeName(Type type, string name)
         {
-            var pointerType = type as PointerType;
-            var builtinType = pointerType?.Pointee as BuiltinType;
-            if (pointerType != null)
+            if (type is PointerType pointerType &&
+                pointerType.QualifiedPointee.Qualifiers.IsConst && 
+                pointerType.Pointee is BuiltinType builtinType)
             {
-                if (pointerType.QualifiedPointee.Qualifiers.IsConst && builtinType != null)
+                switch (builtinType.Type)
                 {
-                    switch (builtinType.Type)
-                    {
-                        case PrimitiveType.Char:
-                            return new TypeDefinition
-                            {
-                                Name = "string",
-                                Attributes = new[] {"[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"}
-                            };
-                        case PrimitiveType.Void:
-                            return new TypeDefinition {Name = "void*"};
-                        default:
-                            return new TypeDefinition {Name = TypeHelper.GetTypeName(pointerType)};
-                    }
+                    case PrimitiveType.Char:
+                        return new TypeDefinition
+                        {
+                            Name = "string",
+                            Attributes = new[] {"[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"}
+                        };
+                    case PrimitiveType.Void:
+                        return new TypeDefinition {Name = "void*"};
+                    default:
+                        return new TypeDefinition {Name = TypeHelper.GetTypeName(type) };
                 }
             }
+
             return GetParameterType(type, name);
         }
 
         private TypeDefinition GetParameterType(Type type, string name)
         {
-            if (type is PointerType pointerType)
+            if (type is PointerType pointerType &&
+                pointerType.QualifiedPointee.Qualifiers.IsConst &&
+                pointerType.Pointee is BuiltinType builtinType)
             {
-                if (pointerType.QualifiedPointee.Qualifiers.IsConst)
+                switch (builtinType.Type)
                 {
-                    if (pointerType.Pointee is BuiltinType builtinType)
-                    {
-                        switch (builtinType.Type)
-                        {
-                            case PrimitiveType.Char:
-                                return new TypeDefinition {Name = "string", Attributes = new[] {"[MarshalAs(UnmanagedType.LPStr)]"}};
-                            case PrimitiveType.Void:
-                                return new TypeDefinition {Name = "void*"};
-                            default:
-                                return new TypeDefinition {Name = TypeHelper.GetTypeName(pointerType)};
-                        }
-                    }
+                    case PrimitiveType.Char:
+                        return new TypeDefinition {Name = "string", Attributes = new[] {"[MarshalAs(UnmanagedType.LPStr)]"}};
+                    case PrimitiveType.Void:
+                        return new TypeDefinition {Name = "void*"};
+                    default:
+                        return new TypeDefinition {Name = TypeHelper.GetTypeName(type) };
                 }
+            }
+
+            // edge case when type is array of pointers to none builtin type (type[]* -> type**)
+            if (type is ArrayType arrayType &&
+                arrayType.SizeType == ArrayType.ArraySize.Incomplete &&
+                arrayType.Type is PointerType arrayPointerType &&
+                !(arrayPointerType.Pointee is BuiltinType || arrayPointerType.Pointee is TypedefType typedefType && typedefType.Declaration.Type is BuiltinType))
+            {
+                return new TypeDefinition { Name = TypeHelper.GetTypeName(arrayPointerType) + "*" };
             }
 
             return _context.StructureProcessor.GetTypeDefinition(type, name);
