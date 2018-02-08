@@ -106,4 +106,4 @@ UpgradeLog*.XML
 
 *.stackdump
 
-/FFmpeg.AutoGen.Example/frame.buffer.jpg
+/FFmpeg.AutoGen.Example/frame.*.jpg

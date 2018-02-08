@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Example
 {
     internal class Program
     {
-        private static unsafe void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Console.WriteLine(@"Current directory: " + Environment.CurrentDirectory);
-            Console.WriteLine(@"Runnung in {0}-bit mode.", Environment.Is64BitProcess ? @"64" : @"32");
+            Console.WriteLine("Current directory: " + Environment.CurrentDirectory);
+            Console.WriteLine("Runnung in {0}-bit mode.", Environment.Is64BitProcess ? "64" : "32");
 
             FFmpegBinariesHelper.RegisterFFmpegBinaries();
 
@@ -19,9 +21,21 @@ namespace FFmpeg.AutoGen.Example
             ffmpeg.avformat_network_init();
 
             Console.WriteLine($"FFmpeg version info: {ffmpeg.av_version_info()}");
+            
+            SetupLogging();
 
-            // setup logging
+            Console.WriteLine("Decoding...");
+            DecodeAllFramesToImages();
+
+            Console.WriteLine("Encoding...");
+            EncodeImagesToH264();
+        }
+
+        private static unsafe void SetupLogging()
+        {
             ffmpeg.av_log_set_level(ffmpeg.AV_LOG_VERBOSE);
+
+            // do not convert to local function
             av_log_set_callback_callback logCallback = (p0, level, format, vl) =>
             {
                 if (level > ffmpeg.av_log_get_level()) return;
@@ -31,134 +45,111 @@ namespace FFmpeg.AutoGen.Example
                 var printPrefix = 1;
                 ffmpeg.av_log_format_line(p0, level, format, vl, lineBuffer, lineSize, &printPrefix);
                 var line = Marshal.PtrToStringAnsi((IntPtr) lineBuffer);
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write(line);
+                Console.ResetColor();
             };
+
             ffmpeg.av_log_set_callback(logCallback);
-
-            // decode N frames from url or path
-
-            //string url = @"../../sample_mpeg4.mp4";
-            var url = @"http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4";
-
-            var pFormatContext = ffmpeg.avformat_alloc_context();
-
-            int error;
-            error = ffmpeg.avformat_open_input(&pFormatContext, url, null, null);
-            if (error != 0) throw new ApplicationException(GetErrorMessage(error));
-
-            error = ffmpeg.avformat_find_stream_info(pFormatContext, null);
-            if (error != 0) throw new ApplicationException(GetErrorMessage(error));
-
-            AVDictionaryEntry* tag = null;
-            while ((tag = ffmpeg.av_dict_get(pFormatContext->metadata, "", tag, ffmpeg.AV_DICT_IGNORE_SUFFIX)) != null)
-            {
-                var key = Marshal.PtrToStringAnsi((IntPtr) tag->key);
-                var value = Marshal.PtrToStringAnsi((IntPtr) tag->value);
-                Console.WriteLine($"{key} = {value}");
-            }
-
-            AVStream* pStream = null;
-            for (var i = 0; i < pFormatContext->nb_streams; i++)
-                if (pFormatContext->streams[i]->codec->codec_type == AVMediaType.AVMEDIA_TYPE_VIDEO)
-                {
-                    pStream = pFormatContext->streams[i];
-                    break;
-                }
-            if (pStream == null) throw new ApplicationException(@"Could not found video stream.");
-
-            var codecContext = *pStream->codec;
-
-            Console.WriteLine($"codec name: {ffmpeg.avcodec_get_name(codecContext.codec_id)}");
-
-            var width = codecContext.width;
-            var height = codecContext.height;
-            var sourcePixFmt = codecContext.pix_fmt;
-            var codecId = codecContext.codec_id;
-            var destinationPixFmt = AVPixelFormat.AV_PIX_FMT_BGR24;
-            var pConvertContext = ffmpeg.sws_getContext(width, height, sourcePixFmt,
-                width, height, destinationPixFmt,
-                ffmpeg.SWS_FAST_BILINEAR, null, null, null);
-            if (pConvertContext == null) throw new ApplicationException(@"Could not initialize the conversion context.");
-
-            var pConvertedFrame = ffmpeg.av_frame_alloc();
-            var convertedFrameBufferSize = ffmpeg.av_image_get_buffer_size(destinationPixFmt, width, height, 1);
-            var convertedFrameBufferPtr = Marshal.AllocHGlobal(convertedFrameBufferSize);
-            var dstData = new byte_ptrArray4();
-            var dstLinesize = new int_array4();
-            ffmpeg.av_image_fill_arrays(ref dstData, ref dstLinesize, (byte*) convertedFrameBufferPtr, destinationPixFmt, width, height, 1);
-
-            var pCodec = ffmpeg.avcodec_find_decoder(codecId);
-            if (pCodec == null) throw new ApplicationException(@"Unsupported codec.");
-
-            var pCodecContext = &codecContext;
-
-            if ((pCodec->capabilities & ffmpeg.AV_CODEC_CAP_TRUNCATED) == ffmpeg.AV_CODEC_CAP_TRUNCATED)
-                pCodecContext->flags |= ffmpeg.AV_CODEC_FLAG_TRUNCATED;
-
-            error = ffmpeg.avcodec_open2(pCodecContext, pCodec, null);
-            if (error < 0) throw new ApplicationException(GetErrorMessage(error));
-
-            var pDecodedFrame = ffmpeg.av_frame_alloc();
-
-            var packet = new AVPacket();
-            var pPacket = &packet;
-            ffmpeg.av_init_packet(pPacket);
-
-            var frameNumber = 0;
-            while (frameNumber < 2000)
-            {
-                try
-                {
-                    do
-                    {
-                        error = ffmpeg.av_read_frame(pFormatContext, pPacket);
-                        if (error == ffmpeg.AVERROR_EOF) break;
-                        if (error < 0) throw new ApplicationException(GetErrorMessage(error));
-
-                        if (pPacket->stream_index != pStream->index) continue;
-
-                        error = ffmpeg.avcodec_send_packet(pCodecContext, pPacket);
-                        if (error < 0) throw new ApplicationException(GetErrorMessage(error));
-
-                        error = ffmpeg.avcodec_receive_frame(pCodecContext, pDecodedFrame);
-                    } while (error == ffmpeg.AVERROR(ffmpeg.EAGAIN));
-                    if (error == ffmpeg.AVERROR_EOF) break;
-                    if (error < 0) throw new ApplicationException(GetErrorMessage(error));
-
-                    if (pPacket->stream_index != pStream->index) continue;
-
-                    Console.WriteLine($@"frame: {frameNumber}");
-
-                    ffmpeg.sws_scale(pConvertContext, pDecodedFrame->data, pDecodedFrame->linesize, 0, height, dstData, dstLinesize);
-                }
-                finally
-                {
-                    ffmpeg.av_packet_unref(pPacket);
-                    ffmpeg.av_frame_unref(pDecodedFrame);
-                }
-
-                using (var bitmap = new Bitmap(width, height, dstLinesize[0], PixelFormat.Format24bppRgb, convertedFrameBufferPtr))
-                    bitmap.Save(@"frame.buffer.jpg", ImageFormat.Jpeg);
-
-                frameNumber++;
-            }
-
-            Marshal.FreeHGlobal(convertedFrameBufferPtr);
-            ffmpeg.av_free(pConvertedFrame);
-            ffmpeg.sws_freeContext(pConvertContext);
-
-            ffmpeg.av_free(pDecodedFrame);
-            ffmpeg.avcodec_close(pCodecContext);
-            ffmpeg.avformat_close_input(&pFormatContext);
         }
 
-        private static unsafe string GetErrorMessage(int error)
+        private static unsafe void DecodeAllFramesToImages()
         {
-            var bufferSize = 1024;
-            var buffer = stackalloc byte[bufferSize];
-            ffmpeg.av_strerror(error, buffer, (ulong) bufferSize);
-            var message = Marshal.PtrToStringAnsi((IntPtr) buffer);
-            return message;
+            // decode all frames from url, please not it might local resorce, e.g. string url = "../../sample_mpeg4.mp4";
+            var url = "http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4"; // be advised this file holds 1440 frames
+            using (var vsd = new VideoStreamDecoder(url))
+            {
+                Console.WriteLine($"codec name: {vsd.CodecName}");
+
+                var info = vsd.GetContextInfo();
+                info.ToList().ForEach(x => Console.WriteLine($"{x.Key} = {x.Value}"));
+
+                var sourceSize = vsd.FrameSize;
+                var sourcePixelFormat = vsd.PixelFormat;
+                var destinationSize = sourceSize;
+                var destinationPixelFormat = AVPixelFormat.AV_PIX_FMT_BGR24;
+                using (var vfc = new VideoFrameConverter(sourceSize, sourcePixelFormat, destinationSize, destinationPixelFormat))
+                {
+                    var frameNumber = 0;
+                    while (vsd.TryDecodeNextFrame(out var frame))
+                    {
+                        var convertedFrame = vfc.Convert(frame);
+
+                        using (var bitmap = new Bitmap(convertedFrame.width, convertedFrame.height, convertedFrame.linesize[0], PixelFormat.Format24bppRgb, (IntPtr) convertedFrame.data[0]))
+                            bitmap.Save($"frame.{frameNumber:D8}.jpg", ImageFormat.Jpeg);
+                        
+                        Console.WriteLine($"frame: {frameNumber}");
+                        frameNumber++;
+                    }
+                }
+            }
+        }
+
+        private static unsafe void EncodeImagesToH264()
+        {
+            var frameFiles = Directory.GetFiles(".", "frame.*.jpg").OrderBy(x => x).ToArray();
+            var fistFrameImage = Image.FromFile(frameFiles.First());
+
+            var outputFileName = "out.h264";
+            var fps = 25;
+            var sourceSize = fistFrameImage.Size;
+            var sourcePixelFormat = AVPixelFormat.AV_PIX_FMT_BGR24;
+            var destinationSize = sourceSize;
+            var destinationPixelFormat = AVPixelFormat.AV_PIX_FMT_YUV420P;
+            using (var vfc = new VideoFrameConverter(sourceSize, sourcePixelFormat, destinationSize, destinationPixelFormat))
+            {
+                using (var fs = File.Open(outputFileName, FileMode.Create)) // be advise only ffmpeg based player (like ffplay or vlc) can play this file, for the others you need to go through muxing
+                {
+                    using (var vse = new H264VideoStreamEncoder(fs, fps, destinationSize))
+                    {
+                        var frameNumber = 0;
+                        foreach (var frameFile in frameFiles)
+                        {
+                            byte[] bitmapData;
+
+                            using (var frameImage = Image.FromFile(frameFile))
+                            using (var frameBitmap = frameImage is Bitmap bitmap ? bitmap : new Bitmap(frameImage))
+                            {
+                                bitmapData = GetBitmapData(frameBitmap);
+                            }
+                    
+                            fixed (byte* pBitmapData = bitmapData)
+                            {
+                                var data = new byte_ptrArray8 { [0] = pBitmapData };
+                                var linesize = new int_array8 { [0] = bitmapData.Length / sourceSize.Height };
+                                var frame = new AVFrame
+                                {
+                                    data = data,
+                                    linesize = linesize,
+                                    height = sourceSize.Height
+                                };
+                                var convertedFrame = vfc.Convert(frame);
+                                convertedFrame.pts = frameNumber * fps;
+                                vse.Encode(convertedFrame);
+                            }
+
+                            Console.WriteLine($"frame: {frameNumber}");
+                            frameNumber++;
+                        }
+                    }
+                }
+            }
+        }
+
+        private static byte[] GetBitmapData(Bitmap frameBitmap)
+        {
+            var bitmapData = frameBitmap.LockBits(new Rectangle(Point.Empty, frameBitmap.Size), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            try
+            {
+                var length = bitmapData.Stride * bitmapData.Height;
+                var data = new byte[length];
+                Marshal.Copy(bitmapData.Scan0, data, 0, length);
+                return data;
+            }
+            finally
+            {
+                frameBitmap.UnlockBits(bitmapData);
+            }
         }
     }
 }

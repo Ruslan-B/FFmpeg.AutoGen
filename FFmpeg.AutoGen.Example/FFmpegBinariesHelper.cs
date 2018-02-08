@@ -16,7 +16,7 @@ namespace FFmpeg.AutoGen.Example
                 case PlatformID.Win32S:
                 case PlatformID.Win32Windows:
                     var current = Environment.CurrentDirectory;
-                    var probe = $"FFmpeg/bin/{(Environment.Is64BitProcess ? @"x64" : @"x86")}";
+                    var probe = $"FFmpeg/bin/{(Environment.Is64BitProcess ? "x64" : "x86")}";
                     while (current != null)
                     {
                         var ffmpegDirectory = Path.Combine(current, probe);
