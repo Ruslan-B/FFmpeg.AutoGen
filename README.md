@@ -44,7 +44,7 @@ Steps to generate:
 
 ## License
 
-Copyright © Ruslan Balanukhin 2015
+Copyright © Ruslan Balanukhin 2018
 All rights reserved.
 
 Distributed under the GNU Lesser General Public License (LGPL) version 3.  
