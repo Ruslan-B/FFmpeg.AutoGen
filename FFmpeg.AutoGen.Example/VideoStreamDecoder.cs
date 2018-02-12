@@ -18,9 +18,9 @@ namespace FFmpeg.AutoGen.Example
             _pFormatContext = ffmpeg.avformat_alloc_context();
 
             var pFormatContext = _pFormatContext;
-            ffmpeg.avformat_open_input(&pFormatContext, url, null, null).ThrowExectionIfError();
+            ffmpeg.avformat_open_input(&pFormatContext, url, null, null).ThrowExceptionIfError();
 
-            ffmpeg.avformat_find_stream_info(_pFormatContext, null).ThrowExectionIfError();
+            ffmpeg.avformat_find_stream_info(_pFormatContext, null).ThrowExceptionIfError();
 
             // find the first video stream
             AVStream* pStream = null;
@@ -40,7 +40,7 @@ namespace FFmpeg.AutoGen.Example
             var pCodec = ffmpeg.avcodec_find_decoder(codecId);
             if (pCodec == null) throw new InvalidOperationException("Unsupported codec.");
 
-            ffmpeg.avcodec_open2(_pCodecContext, pCodec, null).ThrowExectionIfError();
+            ffmpeg.avcodec_open2(_pCodecContext, pCodec, null).ThrowExceptionIfError();
 
             CodecName = ffmpeg.avcodec_get_name(codecId);
             FrameSize = new Size(_pCodecContext->width, _pCodecContext->height);
@@ -84,10 +84,10 @@ namespace FFmpeg.AutoGen.Example
                             return false;
                         }
 
-                        error.ThrowExectionIfError();
+                        error.ThrowExceptionIfError();
                     } while (_pPacket->stream_index != _streamIndex);
 
-                    ffmpeg.avcodec_send_packet(_pCodecContext, _pPacket).ThrowExectionIfError();
+                    ffmpeg.avcodec_send_packet(_pCodecContext, _pPacket).ThrowExceptionIfError();
                 }
                 finally
                 {
@@ -97,7 +97,7 @@ namespace FFmpeg.AutoGen.Example
                 error = ffmpeg.avcodec_receive_frame(_pCodecContext, _pFrame);
             } while (error == ffmpeg.AVERROR(ffmpeg.EAGAIN));
 
-            error.ThrowExectionIfError();
+            error.ThrowExceptionIfError();
             frame = *_pFrame;
             return true;
         }

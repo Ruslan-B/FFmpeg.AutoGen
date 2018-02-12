@@ -37,7 +37,7 @@ namespace FFmpeg.AutoGen.Example
             _pCodecContext->pix_fmt = AVPixelFormat.AV_PIX_FMT_YUV420P;
             ffmpeg.av_opt_set(_pCodecContext->priv_data, "preset", "veryslow", 0);
 
-            ffmpeg.avcodec_open2(_pCodecContext, _pCodec, null).ThrowExectionIfError();
+            ffmpeg.avcodec_open2(_pCodecContext, _pCodec, null).ThrowExceptionIfError();
 
             _linesizeY = frameSize.Width;
             _linesizeU = frameSize.Width / 2;
@@ -71,12 +71,12 @@ namespace FFmpeg.AutoGen.Example
                 int error;
                 do
                 {
-                    ffmpeg.avcodec_send_frame(_pCodecContext, &frame).ThrowExectionIfError();
+                    ffmpeg.avcodec_send_frame(_pCodecContext, &frame).ThrowExceptionIfError();
 
                     error = ffmpeg.avcodec_receive_packet(_pCodecContext, pPacket);
                 } while (error == ffmpeg.AVERROR(ffmpeg.EAGAIN));
 
-                error.ThrowExectionIfError();
+                error.ThrowExceptionIfError();
 
                 using (var packetStream = new UnmanagedMemoryStream(pPacket->data, pPacket->size)) packetStream.CopyTo(_stream);
             }
