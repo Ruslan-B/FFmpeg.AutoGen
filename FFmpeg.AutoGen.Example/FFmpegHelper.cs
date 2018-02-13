@@ -14,7 +14,7 @@ namespace FFmpeg.AutoGen.Example
             return message;
         }
 
-        public static int ThrowExectionIfError(this int error)
+        public static int ThrowExceptionIfError(this int error)
         {
             if (error < 0) throw new ApplicationException(av_strerror(error));
             return error;
