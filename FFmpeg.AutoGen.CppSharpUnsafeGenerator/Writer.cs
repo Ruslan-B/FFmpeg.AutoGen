@@ -88,6 +88,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
             WriteSummary(function);
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
+            WriteReturnComment(function.ReturnComment);
+
             if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]");
             WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
             using (BeginBlock())
@@ -134,7 +136,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         {
             WriteSummary(@delegate);
             @delegate.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
-            WriteSummary(@delegate);
+
             var parameters = GetParameters(@delegate.Parameters);
             WriteLine("[UnmanagedFunctionPointer(CallingConvention.Cdecl)]");
             WriteLine($"public unsafe delegate {@delegate.ReturnType.Name} {@delegate.FunctionName} ({parameters});");
@@ -257,6 +259,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             if (!string.IsNullOrWhiteSpace(value.Content)) WriteLine($"/// <param name=\"{name}\">{SecurityElement.Escape(value.Content.Trim())}</param>");
         }
 
+        private void WriteReturnComment(string content)
+        {
+            if (!string.IsNullOrWhiteSpace(content)) WriteLine($"/// <returns>{SecurityElement.Escape(content.Trim())}</returns>");
+        }
+        
         private void Write(string value)
         {
             _writer.Write(value);

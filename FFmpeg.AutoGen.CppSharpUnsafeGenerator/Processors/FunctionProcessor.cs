@@ -32,6 +32,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     Name = functionName,
                     ReturnType = GetReturnTypeName(function.ReturnType.Type, functionName),
                     Content = function.Comment?.BriefText,
+                    ReturnComment = GetReturnComment(function),
                     LibraryName = export.LibraryName,
                     LibraryVersion = export.LibraryVersion,
                     Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray(),
@@ -49,7 +50,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 Name = name + "_func",
                 FunctionName = name,
                 ReturnType = GetReturnTypeName(functionType.ReturnType.Type, name),
-                Parameters = functionType.Parameters.Select(GetParameter).ToArray()
+                Parameters = functionType.Parameters.Select(GetParameter).ToArray(),
             };
             _context.AddUnit(@delegate);
 
@@ -150,6 +151,19 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             var comment = function?.Comment?.FullComment.Blocks
                 .OfType<ParamCommandComment>()
                 .FirstOrDefault(x => x.Arguments.Count == 1 && x.Arguments[0].Text == parameterName);
+            return GetCommentString(comment);
+        }
+
+        private string GetReturnComment(Function function)
+        {
+             var comment = function?.Comment?.FullComment.Blocks
+                .OfType<BlockCommandComment>()
+                .FirstOrDefault(x => x.CommandKind == CommentCommandKind.Return);
+            return GetCommentString(comment);
+        }
+
+        private static string GetCommentString(BlockCommandComment comment)
+        {
             return comment == null ? null : string.Join(" ", comment.ParagraphComment.Content.OfType<TextComment>().Select(x => x.Text.Trim()));
         }
     }
