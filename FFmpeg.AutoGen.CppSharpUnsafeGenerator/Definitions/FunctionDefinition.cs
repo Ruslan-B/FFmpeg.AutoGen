@@ -10,6 +10,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
         public bool SuppressUnmanagedCodeSecurity { get; set; }
         public string ObsoleteMessage { get; set; }
         public string Content { get; set; }
+        public string ReturnComment { get; set; }
         public string Name { get; set; }
     }
 }
