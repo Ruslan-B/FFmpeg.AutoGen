@@ -43,15 +43,15 @@ namespace FFmpeg.AutoGen
     {
     }
     
+    public unsafe struct AVCodecHWConfigInternal
+    {
+    }
+    
     public unsafe struct AVCodecInternal
     {
     }
     
     public unsafe struct MpegEncContext
-    {
-    }
-    
-    public unsafe struct ReSampleContext
     {
     }
     
@@ -63,15 +63,7 @@ namespace FFmpeg.AutoGen
     {
     }
     
-    public unsafe struct AVResampleContext
-    {
-    }
-    
     public unsafe struct AVStreamInternal
-    {
-    }
-    
-    public unsafe struct FFFrac
     {
     }
     
