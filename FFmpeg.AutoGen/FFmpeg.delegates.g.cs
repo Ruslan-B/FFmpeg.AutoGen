@@ -252,6 +252,14 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVHWAccel_decode_params (AVCodecContext* @avctx, int @type, byte* @buf, uint @buf_size);
+    public unsafe struct AVHWAccel_decode_params_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVHWAccel_decode_params_func(AVHWAccel_decode_params func) => new AVHWAccel_decode_params_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate int AVHWAccel_decode_slice (AVCodecContext* @avctx, byte* @buf, uint @buf_size);
     public unsafe struct AVHWAccel_decode_slice_func
     {
@@ -289,6 +297,14 @@ namespace FFmpeg.AutoGen
     {
         public IntPtr Pointer;
         public static implicit operator AVHWAccel_uninit_func(AVHWAccel_uninit func) => new AVHWAccel_uninit_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVHWAccel_frame_params (AVCodecContext* @avctx, AVBufferRef* @hw_frames_ctx);
+    public unsafe struct AVHWAccel_frame_params_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVHWAccel_frame_params_func(AVHWAccel_frame_params func) => new AVHWAccel_frame_params_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

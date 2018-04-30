@@ -202,6 +202,8 @@ namespace FFmpeg.AutoGen
         public ulong @crop_bottom;
         public ulong @crop_left;
         public ulong @crop_right;
+        /// <summary>AVBufferRef for internal use by a single libav* library. Must not be used to transfer data between libraries. Has to be NULL when ownership of the frame leaves the respective library.</summary>
+        public AVBufferRef* @private_ref;
     }
     
     public unsafe struct AVDictionaryEntry
@@ -881,11 +883,9 @@ namespace FFmpeg.AutoGen
         public int @log_level_offset;
         public AVMediaType @codec_type;
         public AVCodec* @codec;
-        public byte_array32 @codec_name;
         public AVCodecID @codec_id;
         /// <summary>fourcc (LSB first, so &quot;ABCD&quot; -&gt; (&apos;D&apos;&lt;&lt;24) + (&apos;C&apos;&lt;&lt;16) + (&apos;B&apos;&lt;&lt;8) + &apos;A&apos;). This is used to work around some encoder bugs. A demuxer should set this to what is stored in the field used to identify the codec. If there are multiple such fields in a container then the demuxer should choose the one which maximizes the information about the used codec. If the codec tag field in a container is larger than 32 bits then the demuxer should remap the longer ID to 32 bits with a table or other structure. Alternatively a new extra_codec_tag + size could be added but for this a clear advantage must be demonstrated first. - encoding: Set by user, if not then the default based on codec_id will be used. - decoding: Set by user, will be converted to uppercase by libavcodec during init.</summary>
         public uint @codec_tag;
-        public uint @stream_codec_tag;
         public void* @priv_data;
         /// <summary>Private context used for internal data.</summary>
         public AVCodecInternal* @internal;
@@ -924,8 +924,6 @@ namespace FFmpeg.AutoGen
         public int @gop_size;
         /// <summary>Pixel format, see AV_PIX_FMT_xxx. May be set by the demuxer if known from headers. May be overridden by the decoder if it knows better.</summary>
         public AVPixelFormat @pix_fmt;
-        /// <summary>This option does nothing</summary>
-        public int @me_method;
         /// <summary>If non NULL, &apos;draw_horiz_band&apos; is called by the libavcodec decoder to draw a horizontal band. It improves cache usage. Not all codecs can do that. You must check the codec capabilities beforehand. When multithreading is used, it may be called from multiple threads at the same time; threads might draw different parts of the same AVFrame, or multiple AVFrames, and there is no guarantee that slices will be drawn in order. The function is also used by hardware acceleration APIs. It is called at least once during frame decoding to pass the data needed for hardware render. In that mode instead of pixel data, AVFrame points to a structure specific to the acceleration API. The application reads the structure and can change some fields to indicate progress or mark state. - encoding: unused - decoding: Set by user.</summary>
         public AVCodecContext_draw_horiz_band_func @draw_horiz_band;
         /// <summary>callback to negotiate the pixelFormat</summary>
@@ -934,7 +932,6 @@ namespace FFmpeg.AutoGen
         public int @max_b_frames;
         /// <summary>qscale factor between IP and B-frames If &gt; 0 then the last P-frame quantizer will be used (q= lastp_q*factor+offset). If &lt; 0 then normal ratecontrol will be done (q= -normal_q*factor+offset). - encoding: Set by user. - decoding: unused</summary>
         public float @b_quant_factor;
-        public int @rc_strategy;
         public int @b_frame_strategy;
         /// <summary>qscale offset between IP and B-frames - encoding: Set by user. - decoding: unused</summary>
         public float @b_quant_offset;
@@ -981,16 +978,10 @@ namespace FFmpeg.AutoGen
         public int @pre_dia_size;
         /// <summary>subpel ME quality - encoding: Set by user. - decoding: unused</summary>
         public int @me_subpel_quality;
-        /// <summary>DTG active format information (additional aspect ratio information only used in DVB MPEG-2 transport streams) 0 if not set.</summary>
-        public int @dtg_active_format;
         /// <summary>maximum motion estimation search range in subpel units If 0 then no limit.</summary>
         public int @me_range;
-        public int @intra_quant_bias;
-        public int @inter_quant_bias;
         /// <summary>slice flags - encoding: unused - decoding: Set by user.</summary>
         public int @slice_flags;
-        /// <summary>XVideo Motion Acceleration - encoding: forbidden - decoding: set by decoder</summary>
-        public int @xvmc_acceleration;
         /// <summary>macroblock decision mode - encoding: Set by user. - decoding: unused</summary>
         public int @mb_decision;
         /// <summary>custom intra quantization matrix - encoding: Set by user, can be NULL. - decoding: Set by libavcodec.</summary>
@@ -999,15 +990,12 @@ namespace FFmpeg.AutoGen
         public ushort* @inter_matrix;
         public int @scenechange_threshold;
         public int @noise_reduction;
-        public int @me_threshold;
-        public int @mb_threshold;
         /// <summary>precision of the intra DC coefficient - 8 - encoding: Set by user. - decoding: Set by libavcodec</summary>
         public int @intra_dc_precision;
         /// <summary>Number of macroblock rows at the top which are skipped. - encoding: unused - decoding: Set by user.</summary>
         public int @skip_top;
         /// <summary>Number of macroblock rows at the bottom which are skipped. - encoding: unused - decoding: Set by user.</summary>
         public int @skip_bottom;
-        public float @border_masking;
         /// <summary>minimum MB Lagrange multiplier - encoding: Set by user. - decoding: unused</summary>
         public int @mb_lmin;
         /// <summary>maximum MB Lagrange multiplier - encoding: Set by user. - decoding: unused</summary>
@@ -1021,8 +1009,6 @@ namespace FFmpeg.AutoGen
         /// <summary>number of reference frames - encoding: Set by user. - decoding: Set by lavc.</summary>
         public int @refs;
         public int @chromaoffset;
-        /// <summary>Multiplied by qscale for each frame and added to scene_change_score. - encoding: Set by user. - decoding: unused</summary>
-        public int @scenechange_factor;
         /// <summary>Note: Value depends upon the compare function used for fullpel ME. - encoding: Set by user. - decoding: unused</summary>
         public int @mv0_threshold;
         public int @b_sensitivity;
@@ -1076,21 +1062,15 @@ namespace FFmpeg.AutoGen
         public int @qmax;
         /// <summary>maximum quantizer difference between frames - encoding: Set by user. - decoding: unused</summary>
         public int @max_qdiff;
-        public float @rc_qsquish;
-        public float @rc_qmod_amp;
-        public int @rc_qmod_freq;
         /// <summary>decoder bitstream buffer size - encoding: Set by user. - decoding: unused</summary>
         public int @rc_buffer_size;
         /// <summary>ratecontrol override, see RcOverride - encoding: Allocated/set/freed by user. - decoding: unused</summary>
         public int @rc_override_count;
         public RcOverride* @rc_override;
-        public byte* @rc_eq;
         /// <summary>maximum bitrate - encoding: Set by user. - decoding: Set by user, may be overwritten by libavcodec.</summary>
         public long @rc_max_rate;
         /// <summary>minimum bitrate - encoding: Set by user. - decoding: unused</summary>
         public long @rc_min_rate;
-        public float @rc_buffer_aggressivity;
-        public float @rc_initial_cplx;
         /// <summary>Ratecontrol attempt to use, at maximum, &lt;value&gt; of what can be used without an underflow. - encoding: Set by user. - decoding: unused.</summary>
         public float @rc_max_available_vbv_use;
         /// <summary>Ratecontrol attempt to use, at least, &lt;value&gt; times the amount needed to prevent a vbv overflow. - encoding: Set by user. - decoding: unused.</summary>
@@ -1099,8 +1079,6 @@ namespace FFmpeg.AutoGen
         public int @rc_initial_buffer_occupancy;
         public int @coder_type;
         public int @context_model;
-        public int @lmin;
-        public int @lmax;
         public int @frame_skip_threshold;
         public int @frame_skip_factor;
         public int @frame_skip_exp;
@@ -1133,8 +1111,6 @@ namespace FFmpeg.AutoGen
         public int @error_concealment;
         /// <summary>debug - encoding: Set by user. - decoding: Set by user.</summary>
         public int @debug;
-        /// <summary>debug - encoding: Set by user. - decoding: Set by user.</summary>
-        public int @debug_mv;
         /// <summary>Error recognition; may misdetect some more or less valid parts as errors. - encoding: unused - decoding: Set by user.</summary>
         public int @err_recognition;
         /// <summary>opaque 64-bit number (generally a PTS) that will be reordered and output in AVFrame.reordered_opaque - encoding: unused - decoding: Set by user.</summary>
@@ -1184,7 +1160,6 @@ namespace FFmpeg.AutoGen
         /// <summary>Header containing style information for text subtitles. For SUBTITLE_ASS subtitle type, it should contain the whole ASS [Script Info] and [V4+ Styles] section, plus the [Events] line and the Format line following. It shouldn&apos;t include any Dialogue line. - encoding: Set/allocated/freed by user (before avcodec_open2()) - decoding: Set/allocated/freed by libavcodec (by avcodec_open2())</summary>
         public byte* @subtitle_header;
         public int @subtitle_header_size;
-        public int @error_rate;
         /// <summary>VBV delay coded in the last frame (in periods of a 27 MHz clock). Used for compliant TS muxing. - encoding: Set by libavcodec. - decoding: unused.</summary>
         public ulong @vbv_delay;
         /// <summary>Encoding only and set by default. Allow encoders to output packets that do not contain any encoded data, only side data.</summary>
@@ -1215,6 +1190,8 @@ namespace FFmpeg.AutoGen
         public int @skip_alpha;
         /// <summary>Number of samples to skip after a discontinuity - decoding: unused - encoding: set by libavcodec</summary>
         public int @seek_preroll;
+        /// <summary>debug motion vectors - encoding: Set by user. - decoding: Set by user.</summary>
+        public int @debug_mv;
         /// <summary>custom intra quantization matrix - encoding: Set by user, can be NULL. - decoding: unused.</summary>
         public ushort* @chroma_intra_matrix;
         /// <summary>dump format separator. can be &quot;, &quot; or &quot; &quot; or anything else - encoding: Set by user. - decoding: Set by user.</summary>
@@ -1240,6 +1217,7 @@ namespace FFmpeg.AutoGen
         public int @hwaccel_flags;
         /// <summary>Video decoding only. Certain video codecs support cropping, meaning that only a sub-rectangle of the decoded frame is intended for display. This option controls how cropping is handled by libavcodec.</summary>
         public int @apply_cropping;
+        public int @extra_hw_frames;
     }
     
     /// <summary>AVCodec.</summary>
@@ -1269,6 +1247,8 @@ namespace FFmpeg.AutoGen
         public AVClass* @priv_class;
         /// <summary>array of recognized profiles, or NULL if unknown, array is terminated by {FF_PROFILE_UNKNOWN}</summary>
         public AVProfile* @profiles;
+        /// <summary>Group name of the codec implementation. This is a short symbolic name of the wrapper backing this codec. A wrapper uses some kind of external implementation for the codec, such as an external library, or a codec implementation provided by the OS or the hardware. If this field is NULL, this is a builtin, libavcodec native codec. If non-NULL, this will be the suffix in AVCodec.name in most cases (usually AVCodec.name will be of the form &quot;&lt;codec_name&gt;_&lt;wrapper_name&gt;&quot;).</summary>
+        public byte* @wrapper_name;
         /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavcodec and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
         public int @priv_data_size;
         public AVCodec* @next;
@@ -1297,6 +1277,8 @@ namespace FFmpeg.AutoGen
         public int @caps_internal;
         /// <summary>Decoding only, a comma-separated list of bitstream filters to apply to packets before decoding.</summary>
         public byte* @bsfs;
+        /// <summary>Array of pointers to hardware configurations supported by the codec, or NULL if no hardware supported. The array is terminated by a NULL pointer.</summary>
+        public AVCodecHWConfigInternal** @hw_configs;
     }
     
     public unsafe struct AVSubtitle
@@ -1343,7 +1325,6 @@ namespace FFmpeg.AutoGen
         public int_array8 @linesize;
     }
     
-    /// <summary>@{</summary>
     public unsafe struct AVHWAccel
     {
         /// <summary>Name of the hardware accelerated codec. The name is globally unique among encoders and among decoders (but an encoder and a decoder can share the same name).</summary>
@@ -1356,12 +1337,12 @@ namespace FFmpeg.AutoGen
         public AVPixelFormat @pix_fmt;
         /// <summary>Hardware accelerated codec capabilities. see AV_HWACCEL_CODEC_CAP_*</summary>
         public int @capabilities;
-        /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavcodec and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
-        public AVHWAccel* @next;
         /// <summary>Allocate a custom buffer</summary>
         public AVHWAccel_alloc_frame_func @alloc_frame;
         /// <summary>Called at the beginning of each frame or field picture.</summary>
         public AVHWAccel_start_frame_func @start_frame;
+        /// <summary>Callback for parameter data (SPS/PPS/VPS etc).</summary>
+        public AVHWAccel_decode_params_func @decode_params;
         /// <summary>Callback for each slice.</summary>
         public AVHWAccel_decode_slice_func @decode_slice;
         /// <summary>Called at the end of each frame or field picture.</summary>
@@ -1378,6 +1359,18 @@ namespace FFmpeg.AutoGen
         public int @priv_data_size;
         /// <summary>Internal hwaccel capabilities.</summary>
         public int @caps_internal;
+        /// <summary>Fill the given hw_frames context with current codec parameters. Called from get_format. Refer to avcodec_get_hw_frames_parameters() for details.</summary>
+        public AVHWAccel_frame_params_func @frame_params;
+    }
+    
+    public unsafe struct AVCodecHWConfig
+    {
+        /// <summary>A hardware pixel format which the codec can use.</summary>
+        public AVPixelFormat @pix_fmt;
+        /// <summary>Bit set of AV_CODEC_HW_CONFIG_METHOD_* flags, describing the possible setup methods which can be used with this configuration.</summary>
+        public int @methods;
+        /// <summary>The device type associated with the configuration.</summary>
+        public AVHWDeviceType @device_type;
     }
     
     /// <summary>This struct describes the properties of an encoded stream.</summary>
@@ -1666,7 +1659,6 @@ namespace FFmpeg.AutoGen
         public int @id;
         public AVCodecContext* @codec;
         public void* @priv_data;
-        public AVFrac @pts;
         /// <summary>This is the fundamental unit of time (in seconds) in terms of which frame timestamps are represented.</summary>
         public AVRational @time_base;
         /// <summary>Decoding: pts of the first frame of the stream in presentation order, in stream time base. Only set this if you are absolutely 100% sure that the value you set it to really is the pts of the first frame. This may be undefined (AV_NOPTS_VALUE).</summary>
@@ -1692,6 +1684,12 @@ namespace FFmpeg.AutoGen
         public int @nb_side_data;
         /// <summary>Flags for the user to detect events happening on the stream. Flags must be cleared by the user once the event has been handled. A combination of AVSTREAM_EVENT_FLAG_*.</summary>
         public int @event_flags;
+        /// <summary>Real base framerate of the stream. This is the lowest framerate with which all timestamps can be represented accurately (it is the least common multiple of all framerates in the stream). Note, this value is just a guess! For example, if the time base is 1/90000 and all frames have either approximately 3600 or 1800 timer ticks, then r_frame_rate will be 50/1.</summary>
+        public AVRational @r_frame_rate;
+        /// <summary>String containing pairs of key and values describing recommended encoder configuration. Pairs are separated by &apos;,&apos;. Keys are separated from values by &apos;=&apos;.</summary>
+        public byte* @recommended_encoder_configuration;
+        /// <summary>Codec parameters associated with this stream. Allocated and freed by libavformat in avformat_new_stream() and avformat_free_context() respectively.</summary>
+        public AVCodecParameters* @codecpar;
         public AVStream_info* @info;
         /// <summary>number of bits in pts (used for wrapping control)</summary>
         public int @pts_wrap_bits;
@@ -1714,8 +1712,6 @@ namespace FFmpeg.AutoGen
         public AVIndexEntry* @index_entries;
         public int @nb_index_entries;
         public uint @index_entries_allocated_size;
-        /// <summary>Real base framerate of the stream. This is the lowest framerate with which all timestamps can be represented accurately (it is the least common multiple of all framerates in the stream). Note, this value is just a guess! For example, if the time base is 1/90000 and all frames have either approximately 3600 or 1800 timer ticks, then r_frame_rate will be 50/1.</summary>
-        public AVRational @r_frame_rate;
         /// <summary>Stream Identifier This is the MPEG-TS stream identifier +1 0 means unknown</summary>
         public int @stream_identifier;
         public long @interleaver_chunk_size;
@@ -1751,24 +1747,13 @@ namespace FFmpeg.AutoGen
         public byte @dts_misordered;
         /// <summary>Internal data to inject global side data</summary>
         public int @inject_global_side_data;
-        /// <summary>String containing paris of key and values describing recommended encoder configuration. Paris are separated by &apos;,&apos;. Keys are separated from values by &apos;=&apos;.</summary>
-        public byte* @recommended_encoder_configuration;
         /// <summary>display aspect ratio (0 if unknown) - encoding: unused - decoding: Set by libavformat to calculate sample_aspect_ratio internally</summary>
         public AVRational @display_aspect_ratio;
-        public FFFrac* @priv_pts;
         /// <summary>An opaque field for libavformat internal usage. Must not be accessed in any way by callers.</summary>
         public AVStreamInternal* @internal;
-        public AVCodecParameters* @codecpar;
     }
     
-    /// <summary>The exact value of the fractional number is: &apos;val + num / den&apos;. num is assumed to be 0 &lt;= num &lt; den.</summary>
-    public unsafe struct AVFrac
-    {
-        public long @val;
-        public long @num;
-        public long @den;
-    }
-    
+    /// <summary>Stream information used internally by avformat_find_stream_info()</summary>
     public unsafe struct AVStream_info
     {
         public long @last_dts;
@@ -1778,6 +1763,7 @@ namespace FFmpeg.AutoGen
         public double_arrayOfArray798* @duration_error;
         public long @codec_info_duration;
         public long @codec_info_duration_fields;
+        public int @frame_delay_evidence;
         /// <summary>0 -&gt; decoder has not been searched for yet. &gt;0 -&gt; decoder found &lt;0 -&gt; decoder with codec_id == -found_decoder has not been found</summary>
         public int @found_decoder;
         public long @last_duration;
@@ -1904,6 +1890,8 @@ namespace FFmpeg.AutoGen
         public AVStream** @streams;
         /// <summary>input or output filename</summary>
         public byte_array1024 @filename;
+        /// <summary>input or output URL. Unlike the old filename field, this field has no length restriction.</summary>
+        public byte* @url;
         /// <summary>Position of the first frame of the component, in AV_TIME_BASE fractional seconds. NEVER set this value directly: It is deduced from the AVStream values.</summary>
         public long @start_time;
         /// <summary>Duration of the stream, in AV_TIME_BASE fractional seconds. Only set this value if you know none of the individual stream durations and also do not set any of them. This is deduced from the AVStream values if not set.</summary>
@@ -2015,6 +2003,7 @@ namespace FFmpeg.AutoGen
         public AVFormatContext_open_cb_func @open_cb;
         /// <summary>&apos;,&apos; separated list of allowed protocols. - encoding: unused - decoding: set by user</summary>
         public byte* @protocol_whitelist;
+        /// <summary>A callback for opening new IO streams.</summary>
         public AVFormatContext_io_open_func @io_open;
         /// <summary>A callback for closing the streams opened with AVFormatContext.io_open().</summary>
         public AVFormatContext_io_close_func @io_close;
@@ -2121,8 +2110,6 @@ namespace FFmpeg.AutoGen
         public AVIOContext_seek_func @seek;
         /// <summary>position in the file of the current buffer</summary>
         public long @pos;
-        /// <summary>unused</summary>
-        public int @must_flush;
         /// <summary>true if eof reached</summary>
         public int @eof_reached;
         /// <summary>true if open for writing</summary>
@@ -2254,6 +2241,8 @@ namespace FFmpeg.AutoGen
         public int @nb_threads;
         /// <summary>Ready status of the filter. A non-0 value means that the filter needs activating; a higher value suggests a more urgent activation.</summary>
         public uint @ready;
+        /// <summary>Sets the number of extra hardware frames which the filter will allocate on its output links for use in following filters or by the caller.</summary>
+        public int @extra_hw_frames;
     }
     
     /// <summary>Filter definition. This defines the pads a filter contains, and all the callback functions used to interact with the filter.</summary>

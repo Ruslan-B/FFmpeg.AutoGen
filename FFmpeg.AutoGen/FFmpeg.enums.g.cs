@@ -105,196 +105,195 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_MPEG1VIDEO = 1,
         /// <summary>preferred ID for MPEG-1/2 video decoding</summary>
         @AV_CODEC_ID_MPEG2VIDEO = 2,
-        @AV_CODEC_ID_MPEG2VIDEO_XVMC = 3,
-        @AV_CODEC_ID_H261 = 4,
-        @AV_CODEC_ID_H263 = 5,
-        @AV_CODEC_ID_RV10 = 6,
-        @AV_CODEC_ID_RV20 = 7,
-        @AV_CODEC_ID_MJPEG = 8,
-        @AV_CODEC_ID_MJPEGB = 9,
-        @AV_CODEC_ID_LJPEG = 10,
-        @AV_CODEC_ID_SP5X = 11,
-        @AV_CODEC_ID_JPEGLS = 12,
-        @AV_CODEC_ID_MPEG4 = 13,
-        @AV_CODEC_ID_RAWVIDEO = 14,
-        @AV_CODEC_ID_MSMPEG4V1 = 15,
-        @AV_CODEC_ID_MSMPEG4V2 = 16,
-        @AV_CODEC_ID_MSMPEG4V3 = 17,
-        @AV_CODEC_ID_WMV1 = 18,
-        @AV_CODEC_ID_WMV2 = 19,
-        @AV_CODEC_ID_H263P = 20,
-        @AV_CODEC_ID_H263I = 21,
-        @AV_CODEC_ID_FLV1 = 22,
-        @AV_CODEC_ID_SVQ1 = 23,
-        @AV_CODEC_ID_SVQ3 = 24,
-        @AV_CODEC_ID_DVVIDEO = 25,
-        @AV_CODEC_ID_HUFFYUV = 26,
-        @AV_CODEC_ID_CYUV = 27,
-        @AV_CODEC_ID_H264 = 28,
-        @AV_CODEC_ID_INDEO3 = 29,
-        @AV_CODEC_ID_VP3 = 30,
-        @AV_CODEC_ID_THEORA = 31,
-        @AV_CODEC_ID_ASV1 = 32,
-        @AV_CODEC_ID_ASV2 = 33,
-        @AV_CODEC_ID_FFV1 = 34,
-        @AV_CODEC_ID_4XM = 35,
-        @AV_CODEC_ID_VCR1 = 36,
-        @AV_CODEC_ID_CLJR = 37,
-        @AV_CODEC_ID_MDEC = 38,
-        @AV_CODEC_ID_ROQ = 39,
-        @AV_CODEC_ID_INTERPLAY_VIDEO = 40,
-        @AV_CODEC_ID_XAN_WC3 = 41,
-        @AV_CODEC_ID_XAN_WC4 = 42,
-        @AV_CODEC_ID_RPZA = 43,
-        @AV_CODEC_ID_CINEPAK = 44,
-        @AV_CODEC_ID_WS_VQA = 45,
-        @AV_CODEC_ID_MSRLE = 46,
-        @AV_CODEC_ID_MSVIDEO1 = 47,
-        @AV_CODEC_ID_IDCIN = 48,
-        @AV_CODEC_ID_8BPS = 49,
-        @AV_CODEC_ID_SMC = 50,
-        @AV_CODEC_ID_FLIC = 51,
-        @AV_CODEC_ID_TRUEMOTION1 = 52,
-        @AV_CODEC_ID_VMDVIDEO = 53,
-        @AV_CODEC_ID_MSZH = 54,
-        @AV_CODEC_ID_ZLIB = 55,
-        @AV_CODEC_ID_QTRLE = 56,
-        @AV_CODEC_ID_TSCC = 57,
-        @AV_CODEC_ID_ULTI = 58,
-        @AV_CODEC_ID_QDRAW = 59,
-        @AV_CODEC_ID_VIXL = 60,
-        @AV_CODEC_ID_QPEG = 61,
-        @AV_CODEC_ID_PNG = 62,
-        @AV_CODEC_ID_PPM = 63,
-        @AV_CODEC_ID_PBM = 64,
-        @AV_CODEC_ID_PGM = 65,
-        @AV_CODEC_ID_PGMYUV = 66,
-        @AV_CODEC_ID_PAM = 67,
-        @AV_CODEC_ID_FFVHUFF = 68,
-        @AV_CODEC_ID_RV30 = 69,
-        @AV_CODEC_ID_RV40 = 70,
-        @AV_CODEC_ID_VC1 = 71,
-        @AV_CODEC_ID_WMV3 = 72,
-        @AV_CODEC_ID_LOCO = 73,
-        @AV_CODEC_ID_WNV1 = 74,
-        @AV_CODEC_ID_AASC = 75,
-        @AV_CODEC_ID_INDEO2 = 76,
-        @AV_CODEC_ID_FRAPS = 77,
-        @AV_CODEC_ID_TRUEMOTION2 = 78,
-        @AV_CODEC_ID_BMP = 79,
-        @AV_CODEC_ID_CSCD = 80,
-        @AV_CODEC_ID_MMVIDEO = 81,
-        @AV_CODEC_ID_ZMBV = 82,
-        @AV_CODEC_ID_AVS = 83,
-        @AV_CODEC_ID_SMACKVIDEO = 84,
-        @AV_CODEC_ID_NUV = 85,
-        @AV_CODEC_ID_KMVC = 86,
-        @AV_CODEC_ID_FLASHSV = 87,
-        @AV_CODEC_ID_CAVS = 88,
-        @AV_CODEC_ID_JPEG2000 = 89,
-        @AV_CODEC_ID_VMNC = 90,
-        @AV_CODEC_ID_VP5 = 91,
-        @AV_CODEC_ID_VP6 = 92,
-        @AV_CODEC_ID_VP6F = 93,
-        @AV_CODEC_ID_TARGA = 94,
-        @AV_CODEC_ID_DSICINVIDEO = 95,
-        @AV_CODEC_ID_TIERTEXSEQVIDEO = 96,
-        @AV_CODEC_ID_TIFF = 97,
-        @AV_CODEC_ID_GIF = 98,
-        @AV_CODEC_ID_DXA = 99,
-        @AV_CODEC_ID_DNXHD = 100,
-        @AV_CODEC_ID_THP = 101,
-        @AV_CODEC_ID_SGI = 102,
-        @AV_CODEC_ID_C93 = 103,
-        @AV_CODEC_ID_BETHSOFTVID = 104,
-        @AV_CODEC_ID_PTX = 105,
-        @AV_CODEC_ID_TXD = 106,
-        @AV_CODEC_ID_VP6A = 107,
-        @AV_CODEC_ID_AMV = 108,
-        @AV_CODEC_ID_VB = 109,
-        @AV_CODEC_ID_PCX = 110,
-        @AV_CODEC_ID_SUNRAST = 111,
-        @AV_CODEC_ID_INDEO4 = 112,
-        @AV_CODEC_ID_INDEO5 = 113,
-        @AV_CODEC_ID_MIMIC = 114,
-        @AV_CODEC_ID_RL2 = 115,
-        @AV_CODEC_ID_ESCAPE124 = 116,
-        @AV_CODEC_ID_DIRAC = 117,
-        @AV_CODEC_ID_BFI = 118,
-        @AV_CODEC_ID_CMV = 119,
-        @AV_CODEC_ID_MOTIONPIXELS = 120,
-        @AV_CODEC_ID_TGV = 121,
-        @AV_CODEC_ID_TGQ = 122,
-        @AV_CODEC_ID_TQI = 123,
-        @AV_CODEC_ID_AURA = 124,
-        @AV_CODEC_ID_AURA2 = 125,
-        @AV_CODEC_ID_V210X = 126,
-        @AV_CODEC_ID_TMV = 127,
-        @AV_CODEC_ID_V210 = 128,
-        @AV_CODEC_ID_DPX = 129,
-        @AV_CODEC_ID_MAD = 130,
-        @AV_CODEC_ID_FRWU = 131,
-        @AV_CODEC_ID_FLASHSV2 = 132,
-        @AV_CODEC_ID_CDGRAPHICS = 133,
-        @AV_CODEC_ID_R210 = 134,
-        @AV_CODEC_ID_ANM = 135,
-        @AV_CODEC_ID_BINKVIDEO = 136,
-        @AV_CODEC_ID_IFF_ILBM = 137,
-        @AV_CODEC_ID_KGV1 = 138,
-        @AV_CODEC_ID_YOP = 139,
-        @AV_CODEC_ID_VP8 = 140,
-        @AV_CODEC_ID_PICTOR = 141,
-        @AV_CODEC_ID_ANSI = 142,
-        @AV_CODEC_ID_A64_MULTI = 143,
-        @AV_CODEC_ID_A64_MULTI5 = 144,
-        @AV_CODEC_ID_R10K = 145,
-        @AV_CODEC_ID_MXPEG = 146,
-        @AV_CODEC_ID_LAGARITH = 147,
-        @AV_CODEC_ID_PRORES = 148,
-        @AV_CODEC_ID_JV = 149,
-        @AV_CODEC_ID_DFA = 150,
-        @AV_CODEC_ID_WMV3IMAGE = 151,
-        @AV_CODEC_ID_VC1IMAGE = 152,
-        @AV_CODEC_ID_UTVIDEO = 153,
-        @AV_CODEC_ID_BMV_VIDEO = 154,
-        @AV_CODEC_ID_VBLE = 155,
-        @AV_CODEC_ID_DXTORY = 156,
-        @AV_CODEC_ID_V410 = 157,
-        @AV_CODEC_ID_XWD = 158,
-        @AV_CODEC_ID_CDXL = 159,
-        @AV_CODEC_ID_XBM = 160,
-        @AV_CODEC_ID_ZEROCODEC = 161,
-        @AV_CODEC_ID_MSS1 = 162,
-        @AV_CODEC_ID_MSA1 = 163,
-        @AV_CODEC_ID_TSCC2 = 164,
-        @AV_CODEC_ID_MTS2 = 165,
-        @AV_CODEC_ID_CLLC = 166,
-        @AV_CODEC_ID_MSS2 = 167,
-        @AV_CODEC_ID_VP9 = 168,
-        @AV_CODEC_ID_AIC = 169,
-        @AV_CODEC_ID_ESCAPE130 = 170,
-        @AV_CODEC_ID_G2M = 171,
-        @AV_CODEC_ID_WEBP = 172,
-        @AV_CODEC_ID_HNM4_VIDEO = 173,
-        @AV_CODEC_ID_HEVC = 174,
-        @AV_CODEC_ID_FIC = 175,
-        @AV_CODEC_ID_ALIAS_PIX = 176,
-        @AV_CODEC_ID_BRENDER_PIX = 177,
-        @AV_CODEC_ID_PAF_VIDEO = 178,
-        @AV_CODEC_ID_EXR = 179,
-        @AV_CODEC_ID_VP7 = 180,
-        @AV_CODEC_ID_SANM = 181,
-        @AV_CODEC_ID_SGIRLE = 182,
-        @AV_CODEC_ID_MVC1 = 183,
-        @AV_CODEC_ID_MVC2 = 184,
-        @AV_CODEC_ID_HQX = 185,
-        @AV_CODEC_ID_TDSC = 186,
-        @AV_CODEC_ID_HQ_HQA = 187,
-        @AV_CODEC_ID_HAP = 188,
-        @AV_CODEC_ID_DDS = 189,
-        @AV_CODEC_ID_DXV = 190,
-        @AV_CODEC_ID_SCREENPRESSO = 191,
-        @AV_CODEC_ID_RSCC = 192,
+        @AV_CODEC_ID_H261 = 3,
+        @AV_CODEC_ID_H263 = 4,
+        @AV_CODEC_ID_RV10 = 5,
+        @AV_CODEC_ID_RV20 = 6,
+        @AV_CODEC_ID_MJPEG = 7,
+        @AV_CODEC_ID_MJPEGB = 8,
+        @AV_CODEC_ID_LJPEG = 9,
+        @AV_CODEC_ID_SP5X = 10,
+        @AV_CODEC_ID_JPEGLS = 11,
+        @AV_CODEC_ID_MPEG4 = 12,
+        @AV_CODEC_ID_RAWVIDEO = 13,
+        @AV_CODEC_ID_MSMPEG4V1 = 14,
+        @AV_CODEC_ID_MSMPEG4V2 = 15,
+        @AV_CODEC_ID_MSMPEG4V3 = 16,
+        @AV_CODEC_ID_WMV1 = 17,
+        @AV_CODEC_ID_WMV2 = 18,
+        @AV_CODEC_ID_H263P = 19,
+        @AV_CODEC_ID_H263I = 20,
+        @AV_CODEC_ID_FLV1 = 21,
+        @AV_CODEC_ID_SVQ1 = 22,
+        @AV_CODEC_ID_SVQ3 = 23,
+        @AV_CODEC_ID_DVVIDEO = 24,
+        @AV_CODEC_ID_HUFFYUV = 25,
+        @AV_CODEC_ID_CYUV = 26,
+        @AV_CODEC_ID_H264 = 27,
+        @AV_CODEC_ID_INDEO3 = 28,
+        @AV_CODEC_ID_VP3 = 29,
+        @AV_CODEC_ID_THEORA = 30,
+        @AV_CODEC_ID_ASV1 = 31,
+        @AV_CODEC_ID_ASV2 = 32,
+        @AV_CODEC_ID_FFV1 = 33,
+        @AV_CODEC_ID_4XM = 34,
+        @AV_CODEC_ID_VCR1 = 35,
+        @AV_CODEC_ID_CLJR = 36,
+        @AV_CODEC_ID_MDEC = 37,
+        @AV_CODEC_ID_ROQ = 38,
+        @AV_CODEC_ID_INTERPLAY_VIDEO = 39,
+        @AV_CODEC_ID_XAN_WC3 = 40,
+        @AV_CODEC_ID_XAN_WC4 = 41,
+        @AV_CODEC_ID_RPZA = 42,
+        @AV_CODEC_ID_CINEPAK = 43,
+        @AV_CODEC_ID_WS_VQA = 44,
+        @AV_CODEC_ID_MSRLE = 45,
+        @AV_CODEC_ID_MSVIDEO1 = 46,
+        @AV_CODEC_ID_IDCIN = 47,
+        @AV_CODEC_ID_8BPS = 48,
+        @AV_CODEC_ID_SMC = 49,
+        @AV_CODEC_ID_FLIC = 50,
+        @AV_CODEC_ID_TRUEMOTION1 = 51,
+        @AV_CODEC_ID_VMDVIDEO = 52,
+        @AV_CODEC_ID_MSZH = 53,
+        @AV_CODEC_ID_ZLIB = 54,
+        @AV_CODEC_ID_QTRLE = 55,
+        @AV_CODEC_ID_TSCC = 56,
+        @AV_CODEC_ID_ULTI = 57,
+        @AV_CODEC_ID_QDRAW = 58,
+        @AV_CODEC_ID_VIXL = 59,
+        @AV_CODEC_ID_QPEG = 60,
+        @AV_CODEC_ID_PNG = 61,
+        @AV_CODEC_ID_PPM = 62,
+        @AV_CODEC_ID_PBM = 63,
+        @AV_CODEC_ID_PGM = 64,
+        @AV_CODEC_ID_PGMYUV = 65,
+        @AV_CODEC_ID_PAM = 66,
+        @AV_CODEC_ID_FFVHUFF = 67,
+        @AV_CODEC_ID_RV30 = 68,
+        @AV_CODEC_ID_RV40 = 69,
+        @AV_CODEC_ID_VC1 = 70,
+        @AV_CODEC_ID_WMV3 = 71,
+        @AV_CODEC_ID_LOCO = 72,
+        @AV_CODEC_ID_WNV1 = 73,
+        @AV_CODEC_ID_AASC = 74,
+        @AV_CODEC_ID_INDEO2 = 75,
+        @AV_CODEC_ID_FRAPS = 76,
+        @AV_CODEC_ID_TRUEMOTION2 = 77,
+        @AV_CODEC_ID_BMP = 78,
+        @AV_CODEC_ID_CSCD = 79,
+        @AV_CODEC_ID_MMVIDEO = 80,
+        @AV_CODEC_ID_ZMBV = 81,
+        @AV_CODEC_ID_AVS = 82,
+        @AV_CODEC_ID_SMACKVIDEO = 83,
+        @AV_CODEC_ID_NUV = 84,
+        @AV_CODEC_ID_KMVC = 85,
+        @AV_CODEC_ID_FLASHSV = 86,
+        @AV_CODEC_ID_CAVS = 87,
+        @AV_CODEC_ID_JPEG2000 = 88,
+        @AV_CODEC_ID_VMNC = 89,
+        @AV_CODEC_ID_VP5 = 90,
+        @AV_CODEC_ID_VP6 = 91,
+        @AV_CODEC_ID_VP6F = 92,
+        @AV_CODEC_ID_TARGA = 93,
+        @AV_CODEC_ID_DSICINVIDEO = 94,
+        @AV_CODEC_ID_TIERTEXSEQVIDEO = 95,
+        @AV_CODEC_ID_TIFF = 96,
+        @AV_CODEC_ID_GIF = 97,
+        @AV_CODEC_ID_DXA = 98,
+        @AV_CODEC_ID_DNXHD = 99,
+        @AV_CODEC_ID_THP = 100,
+        @AV_CODEC_ID_SGI = 101,
+        @AV_CODEC_ID_C93 = 102,
+        @AV_CODEC_ID_BETHSOFTVID = 103,
+        @AV_CODEC_ID_PTX = 104,
+        @AV_CODEC_ID_TXD = 105,
+        @AV_CODEC_ID_VP6A = 106,
+        @AV_CODEC_ID_AMV = 107,
+        @AV_CODEC_ID_VB = 108,
+        @AV_CODEC_ID_PCX = 109,
+        @AV_CODEC_ID_SUNRAST = 110,
+        @AV_CODEC_ID_INDEO4 = 111,
+        @AV_CODEC_ID_INDEO5 = 112,
+        @AV_CODEC_ID_MIMIC = 113,
+        @AV_CODEC_ID_RL2 = 114,
+        @AV_CODEC_ID_ESCAPE124 = 115,
+        @AV_CODEC_ID_DIRAC = 116,
+        @AV_CODEC_ID_BFI = 117,
+        @AV_CODEC_ID_CMV = 118,
+        @AV_CODEC_ID_MOTIONPIXELS = 119,
+        @AV_CODEC_ID_TGV = 120,
+        @AV_CODEC_ID_TGQ = 121,
+        @AV_CODEC_ID_TQI = 122,
+        @AV_CODEC_ID_AURA = 123,
+        @AV_CODEC_ID_AURA2 = 124,
+        @AV_CODEC_ID_V210X = 125,
+        @AV_CODEC_ID_TMV = 126,
+        @AV_CODEC_ID_V210 = 127,
+        @AV_CODEC_ID_DPX = 128,
+        @AV_CODEC_ID_MAD = 129,
+        @AV_CODEC_ID_FRWU = 130,
+        @AV_CODEC_ID_FLASHSV2 = 131,
+        @AV_CODEC_ID_CDGRAPHICS = 132,
+        @AV_CODEC_ID_R210 = 133,
+        @AV_CODEC_ID_ANM = 134,
+        @AV_CODEC_ID_BINKVIDEO = 135,
+        @AV_CODEC_ID_IFF_ILBM = 136,
+        @AV_CODEC_ID_KGV1 = 137,
+        @AV_CODEC_ID_YOP = 138,
+        @AV_CODEC_ID_VP8 = 139,
+        @AV_CODEC_ID_PICTOR = 140,
+        @AV_CODEC_ID_ANSI = 141,
+        @AV_CODEC_ID_A64_MULTI = 142,
+        @AV_CODEC_ID_A64_MULTI5 = 143,
+        @AV_CODEC_ID_R10K = 144,
+        @AV_CODEC_ID_MXPEG = 145,
+        @AV_CODEC_ID_LAGARITH = 146,
+        @AV_CODEC_ID_PRORES = 147,
+        @AV_CODEC_ID_JV = 148,
+        @AV_CODEC_ID_DFA = 149,
+        @AV_CODEC_ID_WMV3IMAGE = 150,
+        @AV_CODEC_ID_VC1IMAGE = 151,
+        @AV_CODEC_ID_UTVIDEO = 152,
+        @AV_CODEC_ID_BMV_VIDEO = 153,
+        @AV_CODEC_ID_VBLE = 154,
+        @AV_CODEC_ID_DXTORY = 155,
+        @AV_CODEC_ID_V410 = 156,
+        @AV_CODEC_ID_XWD = 157,
+        @AV_CODEC_ID_CDXL = 158,
+        @AV_CODEC_ID_XBM = 159,
+        @AV_CODEC_ID_ZEROCODEC = 160,
+        @AV_CODEC_ID_MSS1 = 161,
+        @AV_CODEC_ID_MSA1 = 162,
+        @AV_CODEC_ID_TSCC2 = 163,
+        @AV_CODEC_ID_MTS2 = 164,
+        @AV_CODEC_ID_CLLC = 165,
+        @AV_CODEC_ID_MSS2 = 166,
+        @AV_CODEC_ID_VP9 = 167,
+        @AV_CODEC_ID_AIC = 168,
+        @AV_CODEC_ID_ESCAPE130 = 169,
+        @AV_CODEC_ID_G2M = 170,
+        @AV_CODEC_ID_WEBP = 171,
+        @AV_CODEC_ID_HNM4_VIDEO = 172,
+        @AV_CODEC_ID_HEVC = 173,
+        @AV_CODEC_ID_FIC = 174,
+        @AV_CODEC_ID_ALIAS_PIX = 175,
+        @AV_CODEC_ID_BRENDER_PIX = 176,
+        @AV_CODEC_ID_PAF_VIDEO = 177,
+        @AV_CODEC_ID_EXR = 178,
+        @AV_CODEC_ID_VP7 = 179,
+        @AV_CODEC_ID_SANM = 180,
+        @AV_CODEC_ID_SGIRLE = 181,
+        @AV_CODEC_ID_MVC1 = 182,
+        @AV_CODEC_ID_MVC2 = 183,
+        @AV_CODEC_ID_HQX = 184,
+        @AV_CODEC_ID_TDSC = 185,
+        @AV_CODEC_ID_HQ_HQA = 186,
+        @AV_CODEC_ID_HAP = 187,
+        @AV_CODEC_ID_DDS = 188,
+        @AV_CODEC_ID_DXV = 189,
+        @AV_CODEC_ID_SCREENPRESSO = 190,
+        @AV_CODEC_ID_RSCC = 191,
         @AV_CODEC_ID_Y41P = 32768,
         @AV_CODEC_ID_AVRP = 32769,
         @AV_CODEC_ID_012V = 32770,
@@ -399,7 +398,6 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_ADPCM_G722 = 69660,
         @AV_CODEC_ID_ADPCM_IMA_APC = 69661,
         @AV_CODEC_ID_ADPCM_VIMA = 69662,
-        @AV_CODEC_ID_VIMA = 69662,
         @AV_CODEC_ID_ADPCM_AFC = 71680,
         @AV_CODEC_ID_ADPCM_IMA_OKI = 71681,
         @AV_CODEC_ID_ADPCM_DTK = 71682,
@@ -454,42 +452,42 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_MLP = 86045,
         @AV_CODEC_ID_GSM_MS = 86046,
         @AV_CODEC_ID_ATRAC3 = 86047,
-        @AV_CODEC_ID_VOXWARE = 86048,
-        @AV_CODEC_ID_APE = 86049,
-        @AV_CODEC_ID_NELLYMOSER = 86050,
-        @AV_CODEC_ID_MUSEPACK8 = 86051,
-        @AV_CODEC_ID_SPEEX = 86052,
-        @AV_CODEC_ID_WMAVOICE = 86053,
-        @AV_CODEC_ID_WMAPRO = 86054,
-        @AV_CODEC_ID_WMALOSSLESS = 86055,
-        @AV_CODEC_ID_ATRAC3P = 86056,
-        @AV_CODEC_ID_EAC3 = 86057,
-        @AV_CODEC_ID_SIPR = 86058,
-        @AV_CODEC_ID_MP1 = 86059,
-        @AV_CODEC_ID_TWINVQ = 86060,
-        @AV_CODEC_ID_TRUEHD = 86061,
-        @AV_CODEC_ID_MP4ALS = 86062,
-        @AV_CODEC_ID_ATRAC1 = 86063,
-        @AV_CODEC_ID_BINKAUDIO_RDFT = 86064,
-        @AV_CODEC_ID_BINKAUDIO_DCT = 86065,
-        @AV_CODEC_ID_AAC_LATM = 86066,
-        @AV_CODEC_ID_QDMC = 86067,
-        @AV_CODEC_ID_CELT = 86068,
-        @AV_CODEC_ID_G723_1 = 86069,
-        @AV_CODEC_ID_G729 = 86070,
-        @AV_CODEC_ID_8SVX_EXP = 86071,
-        @AV_CODEC_ID_8SVX_FIB = 86072,
-        @AV_CODEC_ID_BMV_AUDIO = 86073,
-        @AV_CODEC_ID_RALF = 86074,
-        @AV_CODEC_ID_IAC = 86075,
-        @AV_CODEC_ID_ILBC = 86076,
-        @AV_CODEC_ID_OPUS = 86077,
-        @AV_CODEC_ID_COMFORT_NOISE = 86078,
-        @AV_CODEC_ID_TAK = 86079,
-        @AV_CODEC_ID_METASOUND = 86080,
-        @AV_CODEC_ID_PAF_AUDIO = 86081,
-        @AV_CODEC_ID_ON2AVC = 86082,
-        @AV_CODEC_ID_DSS_SP = 86083,
+        @AV_CODEC_ID_APE = 86048,
+        @AV_CODEC_ID_NELLYMOSER = 86049,
+        @AV_CODEC_ID_MUSEPACK8 = 86050,
+        @AV_CODEC_ID_SPEEX = 86051,
+        @AV_CODEC_ID_WMAVOICE = 86052,
+        @AV_CODEC_ID_WMAPRO = 86053,
+        @AV_CODEC_ID_WMALOSSLESS = 86054,
+        @AV_CODEC_ID_ATRAC3P = 86055,
+        @AV_CODEC_ID_EAC3 = 86056,
+        @AV_CODEC_ID_SIPR = 86057,
+        @AV_CODEC_ID_MP1 = 86058,
+        @AV_CODEC_ID_TWINVQ = 86059,
+        @AV_CODEC_ID_TRUEHD = 86060,
+        @AV_CODEC_ID_MP4ALS = 86061,
+        @AV_CODEC_ID_ATRAC1 = 86062,
+        @AV_CODEC_ID_BINKAUDIO_RDFT = 86063,
+        @AV_CODEC_ID_BINKAUDIO_DCT = 86064,
+        @AV_CODEC_ID_AAC_LATM = 86065,
+        @AV_CODEC_ID_QDMC = 86066,
+        @AV_CODEC_ID_CELT = 86067,
+        @AV_CODEC_ID_G723_1 = 86068,
+        @AV_CODEC_ID_G729 = 86069,
+        @AV_CODEC_ID_8SVX_EXP = 86070,
+        @AV_CODEC_ID_8SVX_FIB = 86071,
+        @AV_CODEC_ID_BMV_AUDIO = 86072,
+        @AV_CODEC_ID_RALF = 86073,
+        @AV_CODEC_ID_IAC = 86074,
+        @AV_CODEC_ID_ILBC = 86075,
+        @AV_CODEC_ID_OPUS = 86076,
+        @AV_CODEC_ID_COMFORT_NOISE = 86077,
+        @AV_CODEC_ID_TAK = 86078,
+        @AV_CODEC_ID_METASOUND = 86079,
+        @AV_CODEC_ID_PAF_AUDIO = 86080,
+        @AV_CODEC_ID_ON2AVC = 86081,
+        @AV_CODEC_ID_DSS_SP = 86082,
+        @AV_CODEC_ID_CODEC2 = 86083,
         @AV_CODEC_ID_FFWAVESYNTH = 88064,
         @AV_CODEC_ID_SONIC = 88065,
         @AV_CODEC_ID_SONIC_LS = 88066,
@@ -507,6 +505,9 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_ATRAC3AL = 88078,
         @AV_CODEC_ID_ATRAC3PAL = 88079,
         @AV_CODEC_ID_DOLBY_E = 88080,
+        @AV_CODEC_ID_APTX = 88081,
+        @AV_CODEC_ID_APTX_HD = 88082,
+        @AV_CODEC_ID_SBC = 88083,
         /// <summary>A dummy ID pointing at the start of subtitle codecs.</summary>
         @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
         @AV_CODEC_ID_DVD_SUBTITLE = 94208,
@@ -795,19 +796,25 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_CONTENT_LIGHT_LEVEL = 14,
         /// <summary>The data contains an ICC profile as an opaque octet buffer following the format described by ISO 15076-1 with an optional name defined in the metadata key entry &quot;name&quot;.</summary>
         @AV_FRAME_DATA_ICC_PROFILE = 15,
+        /// <summary>Implementation-specific description of the format of AV_FRAME_QP_TABLE_DATA. The contents of this side data are undocumented and internal; use av_frame_set_qp_table() and av_frame_get_qp_table() to access this in a meaningful way instead.</summary>
+        @AV_FRAME_DATA_QP_TABLE_PROPERTIES = 16,
+        /// <summary>Raw QP table data. Its format is described by AV_FRAME_DATA_QP_TABLE_PROPERTIES. Use av_frame_set_qp_table() and av_frame_get_qp_table() to access this instead.</summary>
+        @AV_FRAME_DATA_QP_TABLE_DATA = 17,
     }
     
     public enum AVHWDeviceType : int
     {
-        @AV_HWDEVICE_TYPE_VDPAU = 0,
-        @AV_HWDEVICE_TYPE_CUDA = 1,
-        @AV_HWDEVICE_TYPE_VAAPI = 2,
-        @AV_HWDEVICE_TYPE_DXVA2 = 3,
-        @AV_HWDEVICE_TYPE_QSV = 4,
-        @AV_HWDEVICE_TYPE_VIDEOTOOLBOX = 5,
-        @AV_HWDEVICE_TYPE_NONE = 6,
+        @AV_HWDEVICE_TYPE_NONE = 0,
+        @AV_HWDEVICE_TYPE_VDPAU = 1,
+        @AV_HWDEVICE_TYPE_CUDA = 2,
+        @AV_HWDEVICE_TYPE_VAAPI = 3,
+        @AV_HWDEVICE_TYPE_DXVA2 = 4,
+        @AV_HWDEVICE_TYPE_QSV = 5,
+        @AV_HWDEVICE_TYPE_VIDEOTOOLBOX = 6,
         @AV_HWDEVICE_TYPE_D3D11VA = 7,
         @AV_HWDEVICE_TYPE_DRM = 8,
+        @AV_HWDEVICE_TYPE_OPENCL = 9,
+        @AV_HWDEVICE_TYPE_MEDIACODEC = 10,
     }
     
     public enum AVHWFrameTransferDirection : int
@@ -905,17 +912,17 @@ namespace FFmpeg.AutoGen
         @AV_OPT_TYPE_BINARY = 7,
         @AV_OPT_TYPE_DICT = 8,
         @AV_OPT_TYPE_UINT64 = 9,
-        @AV_OPT_TYPE_CONST = 128,
+        @AV_OPT_TYPE_CONST = 10,
         /// <summary>offset must point to two consecutive integers</summary>
-        @AV_OPT_TYPE_IMAGE_SIZE = 1397316165,
-        @AV_OPT_TYPE_PIXEL_FMT = 1346784596,
-        @AV_OPT_TYPE_SAMPLE_FMT = 1397116244,
+        @AV_OPT_TYPE_IMAGE_SIZE = 11,
+        @AV_OPT_TYPE_PIXEL_FMT = 12,
+        @AV_OPT_TYPE_SAMPLE_FMT = 13,
         /// <summary>offset must point to AVRational</summary>
-        @AV_OPT_TYPE_VIDEO_RATE = 1448231252,
-        @AV_OPT_TYPE_DURATION = 1146442272,
-        @AV_OPT_TYPE_COLOR = 1129270354,
-        @AV_OPT_TYPE_CHANNEL_LAYOUT = 1128811585,
-        @AV_OPT_TYPE_BOOL = 1112493900,
+        @AV_OPT_TYPE_VIDEO_RATE = 14,
+        @AV_OPT_TYPE_DURATION = 15,
+        @AV_OPT_TYPE_COLOR = 16,
+        @AV_OPT_TYPE_CHANNEL_LAYOUT = 17,
+        @AV_OPT_TYPE_BOOL = 18,
     }
     
     /// <summary>Types and functions for working with AVPacket. @{</summary>
@@ -944,33 +951,37 @@ namespace FFmpeg.AutoGen
         /// <summary>This side data corresponds to the AVCPBProperties struct.</summary>
         @AV_PKT_DATA_CPB_PROPERTIES = 10,
         /// <summary>Recommmends skipping the specified number of samples</summary>
-        @AV_PKT_DATA_SKIP_SAMPLES = 70,
+        @AV_PKT_DATA_SKIP_SAMPLES = 11,
         /// <summary>An AV_PKT_DATA_JP_DUALMONO side data packet indicates that the packet may contain &quot;dual mono&quot; audio specific to Japanese DTV and if it is true, recommends only the selected channel to be used.</summary>
-        @AV_PKT_DATA_JP_DUALMONO = 71,
+        @AV_PKT_DATA_JP_DUALMONO = 12,
         /// <summary>A list of zero terminated key/value strings. There is no end marker for the list, so it is required to rely on the side data size to stop.</summary>
-        @AV_PKT_DATA_STRINGS_METADATA = 72,
+        @AV_PKT_DATA_STRINGS_METADATA = 13,
         /// <summary>Subtitle event position</summary>
-        @AV_PKT_DATA_SUBTITLE_POSITION = 73,
+        @AV_PKT_DATA_SUBTITLE_POSITION = 14,
         /// <summary>Data found in BlockAdditional element of matroska container. There is no end marker for the data, so it is required to rely on the side data size to recognize the end. 8 byte id (as found in BlockAddId) followed by data.</summary>
-        @AV_PKT_DATA_MATROSKA_BLOCKADDITIONAL = 74,
+        @AV_PKT_DATA_MATROSKA_BLOCKADDITIONAL = 15,
         /// <summary>The optional first identifier line of a WebVTT cue.</summary>
-        @AV_PKT_DATA_WEBVTT_IDENTIFIER = 75,
+        @AV_PKT_DATA_WEBVTT_IDENTIFIER = 16,
         /// <summary>The optional settings (rendering instructions) that immediately follow the timestamp specifier of a WebVTT cue.</summary>
-        @AV_PKT_DATA_WEBVTT_SETTINGS = 76,
+        @AV_PKT_DATA_WEBVTT_SETTINGS = 17,
         /// <summary>A list of zero terminated key/value strings. There is no end marker for the list, so it is required to rely on the side data size to stop. This side data includes updated metadata which appeared in the stream.</summary>
-        @AV_PKT_DATA_METADATA_UPDATE = 77,
+        @AV_PKT_DATA_METADATA_UPDATE = 18,
         /// <summary>MPEGTS stream ID, this is required to pass the stream ID information from the demuxer to the corresponding muxer.</summary>
-        @AV_PKT_DATA_MPEGTS_STREAM_ID = 78,
+        @AV_PKT_DATA_MPEGTS_STREAM_ID = 19,
         /// <summary>Mastering display metadata (based on SMPTE-2086:2014). This metadata should be associated with a video stream and contains data in the form of the AVMasteringDisplayMetadata struct.</summary>
-        @AV_PKT_DATA_MASTERING_DISPLAY_METADATA = 79,
+        @AV_PKT_DATA_MASTERING_DISPLAY_METADATA = 20,
         /// <summary>This side data should be associated with a video stream and corresponds to the AVSphericalMapping structure.</summary>
-        @AV_PKT_DATA_SPHERICAL = 80,
+        @AV_PKT_DATA_SPHERICAL = 21,
         /// <summary>Content light level (based on CTA-861.3). This metadata should be associated with a video stream and contains data in the form of the AVContentLightMetadata struct.</summary>
-        @AV_PKT_DATA_CONTENT_LIGHT_LEVEL = 81,
+        @AV_PKT_DATA_CONTENT_LIGHT_LEVEL = 22,
         /// <summary>ATSC A53 Part 4 Closed Captions. This metadata should be associated with a video stream. A53 CC bitstream is stored as uint8_t in AVPacketSideData.data. The number of bytes of CC data is AVPacketSideData.size.</summary>
-        @AV_PKT_DATA_A53_CC = 82,
-        /// <summary>The number of side data elements (in fact a bit more than it). This is not part of the public API/ABI in the sense that it may change when new side data types are added. This must stay the last enum value. If its value becomes huge, some code using it needs to be updated as it assumes it to be smaller than other limits.</summary>
-        @AV_PKT_DATA_NB = 83,
+        @AV_PKT_DATA_A53_CC = 23,
+        /// <summary>This side data is encryption initialization data. The format is not part of ABI, use av_encryption_init_info_* methods to access.</summary>
+        @AV_PKT_DATA_ENCRYPTION_INIT_INFO = 24,
+        /// <summary>This side data contains encryption info for how to decrypt the packet. The format is not part of ABI, use av_encryption_info_* methods to access.</summary>
+        @AV_PKT_DATA_ENCRYPTION_INFO = 25,
+        /// <summary>The number of side data types. This is not part of the public API/ABI in the sense that it may change when new side data types are added. This must stay the last enum value. If its value becomes huge, some code using it needs to be updated as it assumes it to be smaller than other limits.</summary>
+        @AV_PKT_DATA_NB = 26,
     }
     
     /// <summary>@{</summary>
@@ -1037,367 +1048,351 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_YUVJ422P = 13,
         /// <summary>planar YUV 4:4:4, 24bpp, full scale (JPEG), deprecated in favor of AV_PIX_FMT_YUV444P and setting color_range</summary>
         @AV_PIX_FMT_YUVJ444P = 14,
-        /// <summary>XVideo Motion Acceleration via common packet passing</summary>
-        @AV_PIX_FMT_XVMC_MPEG2_MC = 15,
-        @AV_PIX_FMT_XVMC_MPEG2_IDCT = 16,
-        @AV_PIX_FMT_XVMC = 16,
         /// <summary>packed YUV 4:2:2, 16bpp, Cb Y0 Cr Y1</summary>
-        @AV_PIX_FMT_UYVY422 = 17,
+        @AV_PIX_FMT_UYVY422 = 15,
         /// <summary>packed YUV 4:1:1, 12bpp, Cb Y0 Y1 Cr Y2 Y3</summary>
-        @AV_PIX_FMT_UYYVYY411 = 18,
+        @AV_PIX_FMT_UYYVYY411 = 16,
         /// <summary>packed RGB 3:3:2, 8bpp, (msb)2B 3G 3R(lsb)</summary>
-        @AV_PIX_FMT_BGR8 = 19,
+        @AV_PIX_FMT_BGR8 = 17,
         /// <summary>packed RGB 1:2:1 bitstream, 4bpp, (msb)1B 2G 1R(lsb), a byte contains two pixels, the first pixel in the byte is the one composed by the 4 msb bits</summary>
-        @AV_PIX_FMT_BGR4 = 20,
+        @AV_PIX_FMT_BGR4 = 18,
         /// <summary>packed RGB 1:2:1, 8bpp, (msb)1B 2G 1R(lsb)</summary>
-        @AV_PIX_FMT_BGR4_BYTE = 21,
+        @AV_PIX_FMT_BGR4_BYTE = 19,
         /// <summary>packed RGB 3:3:2, 8bpp, (msb)2R 3G 3B(lsb)</summary>
-        @AV_PIX_FMT_RGB8 = 22,
+        @AV_PIX_FMT_RGB8 = 20,
         /// <summary>packed RGB 1:2:1 bitstream, 4bpp, (msb)1R 2G 1B(lsb), a byte contains two pixels, the first pixel in the byte is the one composed by the 4 msb bits</summary>
-        @AV_PIX_FMT_RGB4 = 23,
+        @AV_PIX_FMT_RGB4 = 21,
         /// <summary>packed RGB 1:2:1, 8bpp, (msb)1R 2G 1B(lsb)</summary>
-        @AV_PIX_FMT_RGB4_BYTE = 24,
+        @AV_PIX_FMT_RGB4_BYTE = 22,
         /// <summary>planar YUV 4:2:0, 12bpp, 1 plane for Y and 1 plane for the UV components, which are interleaved (first byte U and the following byte V)</summary>
-        @AV_PIX_FMT_NV12 = 25,
+        @AV_PIX_FMT_NV12 = 23,
         /// <summary>as above, but U and V bytes are swapped</summary>
-        @AV_PIX_FMT_NV21 = 26,
+        @AV_PIX_FMT_NV21 = 24,
         /// <summary>packed ARGB 8:8:8:8, 32bpp, ARGBARGB...</summary>
-        @AV_PIX_FMT_ARGB = 27,
+        @AV_PIX_FMT_ARGB = 25,
         /// <summary>packed RGBA 8:8:8:8, 32bpp, RGBARGBA...</summary>
-        @AV_PIX_FMT_RGBA = 28,
+        @AV_PIX_FMT_RGBA = 26,
         /// <summary>packed ABGR 8:8:8:8, 32bpp, ABGRABGR...</summary>
-        @AV_PIX_FMT_ABGR = 29,
+        @AV_PIX_FMT_ABGR = 27,
         /// <summary>packed BGRA 8:8:8:8, 32bpp, BGRABGRA...</summary>
-        @AV_PIX_FMT_BGRA = 30,
+        @AV_PIX_FMT_BGRA = 28,
         /// <summary>Y , 16bpp, big-endian</summary>
-        @AV_PIX_FMT_GRAY16BE = 31,
+        @AV_PIX_FMT_GRAY16BE = 29,
         /// <summary>Y , 16bpp, little-endian</summary>
-        @AV_PIX_FMT_GRAY16LE = 32,
+        @AV_PIX_FMT_GRAY16LE = 30,
         /// <summary>planar YUV 4:4:0 (1 Cr &amp; Cb sample per 1x2 Y samples)</summary>
-        @AV_PIX_FMT_YUV440P = 33,
+        @AV_PIX_FMT_YUV440P = 31,
         /// <summary>planar YUV 4:4:0 full scale (JPEG), deprecated in favor of AV_PIX_FMT_YUV440P and setting color_range</summary>
-        @AV_PIX_FMT_YUVJ440P = 34,
+        @AV_PIX_FMT_YUVJ440P = 32,
         /// <summary>planar YUV 4:2:0, 20bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples)</summary>
-        @AV_PIX_FMT_YUVA420P = 35,
-        /// <summary>H.264 HW decoding with VDPAU, data[0] contains a vdpau_render_state struct which contains the bitstream of the slices as well as various fields extracted from headers</summary>
-        @AV_PIX_FMT_VDPAU_H264 = 36,
-        /// <summary>MPEG-1 HW decoding with VDPAU, data[0] contains a vdpau_render_state struct which contains the bitstream of the slices as well as various fields extracted from headers</summary>
-        @AV_PIX_FMT_VDPAU_MPEG1 = 37,
-        /// <summary>MPEG-2 HW decoding with VDPAU, data[0] contains a vdpau_render_state struct which contains the bitstream of the slices as well as various fields extracted from headers</summary>
-        @AV_PIX_FMT_VDPAU_MPEG2 = 38,
-        /// <summary>WMV3 HW decoding with VDPAU, data[0] contains a vdpau_render_state struct which contains the bitstream of the slices as well as various fields extracted from headers</summary>
-        @AV_PIX_FMT_VDPAU_WMV3 = 39,
-        /// <summary>VC-1 HW decoding with VDPAU, data[0] contains a vdpau_render_state struct which contains the bitstream of the slices as well as various fields extracted from headers</summary>
-        @AV_PIX_FMT_VDPAU_VC1 = 40,
+        @AV_PIX_FMT_YUVA420P = 33,
         /// <summary>packed RGB 16:16:16, 48bpp, 16R, 16G, 16B, the 2-byte value for each R/G/B component is stored as big-endian</summary>
-        @AV_PIX_FMT_RGB48BE = 41,
+        @AV_PIX_FMT_RGB48BE = 34,
         /// <summary>packed RGB 16:16:16, 48bpp, 16R, 16G, 16B, the 2-byte value for each R/G/B component is stored as little-endian</summary>
-        @AV_PIX_FMT_RGB48LE = 42,
+        @AV_PIX_FMT_RGB48LE = 35,
         /// <summary>packed RGB 5:6:5, 16bpp, (msb) 5R 6G 5B(lsb), big-endian</summary>
-        @AV_PIX_FMT_RGB565BE = 43,
+        @AV_PIX_FMT_RGB565BE = 36,
         /// <summary>packed RGB 5:6:5, 16bpp, (msb) 5R 6G 5B(lsb), little-endian</summary>
-        @AV_PIX_FMT_RGB565LE = 44,
+        @AV_PIX_FMT_RGB565LE = 37,
         /// <summary>packed RGB 5:5:5, 16bpp, (msb)1X 5R 5G 5B(lsb), big-endian , X=unused/undefined</summary>
-        @AV_PIX_FMT_RGB555BE = 45,
+        @AV_PIX_FMT_RGB555BE = 38,
         /// <summary>packed RGB 5:5:5, 16bpp, (msb)1X 5R 5G 5B(lsb), little-endian, X=unused/undefined</summary>
-        @AV_PIX_FMT_RGB555LE = 46,
+        @AV_PIX_FMT_RGB555LE = 39,
         /// <summary>packed BGR 5:6:5, 16bpp, (msb) 5B 6G 5R(lsb), big-endian</summary>
-        @AV_PIX_FMT_BGR565BE = 47,
+        @AV_PIX_FMT_BGR565BE = 40,
         /// <summary>packed BGR 5:6:5, 16bpp, (msb) 5B 6G 5R(lsb), little-endian</summary>
-        @AV_PIX_FMT_BGR565LE = 48,
+        @AV_PIX_FMT_BGR565LE = 41,
         /// <summary>packed BGR 5:5:5, 16bpp, (msb)1X 5B 5G 5R(lsb), big-endian , X=unused/undefined</summary>
-        @AV_PIX_FMT_BGR555BE = 49,
+        @AV_PIX_FMT_BGR555BE = 42,
         /// <summary>packed BGR 5:5:5, 16bpp, (msb)1X 5B 5G 5R(lsb), little-endian, X=unused/undefined</summary>
-        @AV_PIX_FMT_BGR555LE = 50,
+        @AV_PIX_FMT_BGR555LE = 43,
         /// <summary>HW acceleration through VA API at motion compensation entry-point, Picture.data[3] contains a vaapi_render_state struct which contains macroblocks as well as various fields extracted from headers</summary>
-        @AV_PIX_FMT_VAAPI_MOCO = 51,
+        @AV_PIX_FMT_VAAPI_MOCO = 44,
         /// <summary>HW acceleration through VA API at IDCT entry-point, Picture.data[3] contains a vaapi_render_state struct which contains fields extracted from headers</summary>
-        @AV_PIX_FMT_VAAPI_IDCT = 52,
+        @AV_PIX_FMT_VAAPI_IDCT = 45,
         /// <summary>HW decoding through VA API, Picture.data[3] contains a VASurfaceID</summary>
-        @AV_PIX_FMT_VAAPI_VLD = 53,
+        @AV_PIX_FMT_VAAPI_VLD = 46,
         /// <summary>@}</summary>
-        @AV_PIX_FMT_VAAPI = 53,
+        @AV_PIX_FMT_VAAPI = 46,
         /// <summary>planar YUV 4:2:0, 24bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV420P16LE = 54,
+        @AV_PIX_FMT_YUV420P16LE = 47,
         /// <summary>planar YUV 4:2:0, 24bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV420P16BE = 55,
+        @AV_PIX_FMT_YUV420P16BE = 48,
         /// <summary>planar YUV 4:2:2, 32bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV422P16LE = 56,
+        @AV_PIX_FMT_YUV422P16LE = 49,
         /// <summary>planar YUV 4:2:2, 32bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV422P16BE = 57,
+        @AV_PIX_FMT_YUV422P16BE = 50,
         /// <summary>planar YUV 4:4:4, 48bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV444P16LE = 58,
+        @AV_PIX_FMT_YUV444P16LE = 51,
         /// <summary>planar YUV 4:4:4, 48bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV444P16BE = 59,
-        /// <summary>MPEG-4 HW decoding with VDPAU, data[0] contains a vdpau_render_state struct which contains the bitstream of the slices as well as various fields extracted from headers</summary>
-        @AV_PIX_FMT_VDPAU_MPEG4 = 60,
+        @AV_PIX_FMT_YUV444P16BE = 52,
         /// <summary>HW decoding through DXVA2, Picture.data[3] contains a LPDIRECT3DSURFACE9 pointer</summary>
-        @AV_PIX_FMT_DXVA2_VLD = 61,
+        @AV_PIX_FMT_DXVA2_VLD = 53,
         /// <summary>packed RGB 4:4:4, 16bpp, (msb)4X 4R 4G 4B(lsb), little-endian, X=unused/undefined</summary>
-        @AV_PIX_FMT_RGB444LE = 62,
+        @AV_PIX_FMT_RGB444LE = 54,
         /// <summary>packed RGB 4:4:4, 16bpp, (msb)4X 4R 4G 4B(lsb), big-endian, X=unused/undefined</summary>
-        @AV_PIX_FMT_RGB444BE = 63,
+        @AV_PIX_FMT_RGB444BE = 55,
         /// <summary>packed BGR 4:4:4, 16bpp, (msb)4X 4B 4G 4R(lsb), little-endian, X=unused/undefined</summary>
-        @AV_PIX_FMT_BGR444LE = 64,
+        @AV_PIX_FMT_BGR444LE = 56,
         /// <summary>packed BGR 4:4:4, 16bpp, (msb)4X 4B 4G 4R(lsb), big-endian, X=unused/undefined</summary>
-        @AV_PIX_FMT_BGR444BE = 65,
+        @AV_PIX_FMT_BGR444BE = 57,
         /// <summary>8 bits gray, 8 bits alpha</summary>
-        @AV_PIX_FMT_YA8 = 66,
+        @AV_PIX_FMT_YA8 = 58,
         /// <summary>alias for AV_PIX_FMT_YA8</summary>
-        @AV_PIX_FMT_Y400A = 66,
+        @AV_PIX_FMT_Y400A = 58,
         /// <summary>alias for AV_PIX_FMT_YA8</summary>
-        @AV_PIX_FMT_GRAY8A = 66,
+        @AV_PIX_FMT_GRAY8A = 58,
         /// <summary>packed RGB 16:16:16, 48bpp, 16B, 16G, 16R, the 2-byte value for each R/G/B component is stored as big-endian</summary>
-        @AV_PIX_FMT_BGR48BE = 67,
+        @AV_PIX_FMT_BGR48BE = 59,
         /// <summary>packed RGB 16:16:16, 48bpp, 16B, 16G, 16R, the 2-byte value for each R/G/B component is stored as little-endian</summary>
-        @AV_PIX_FMT_BGR48LE = 68,
+        @AV_PIX_FMT_BGR48LE = 60,
         /// <summary>planar YUV 4:2:0, 13.5bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV420P9BE = 69,
+        @AV_PIX_FMT_YUV420P9BE = 61,
         /// <summary>planar YUV 4:2:0, 13.5bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV420P9LE = 70,
+        @AV_PIX_FMT_YUV420P9LE = 62,
         /// <summary>planar YUV 4:2:0, 15bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV420P10BE = 71,
+        @AV_PIX_FMT_YUV420P10BE = 63,
         /// <summary>planar YUV 4:2:0, 15bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV420P10LE = 72,
+        @AV_PIX_FMT_YUV420P10LE = 64,
         /// <summary>planar YUV 4:2:2, 20bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV422P10BE = 73,
+        @AV_PIX_FMT_YUV422P10BE = 65,
         /// <summary>planar YUV 4:2:2, 20bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV422P10LE = 74,
+        @AV_PIX_FMT_YUV422P10LE = 66,
         /// <summary>planar YUV 4:4:4, 27bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV444P9BE = 75,
+        @AV_PIX_FMT_YUV444P9BE = 67,
         /// <summary>planar YUV 4:4:4, 27bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV444P9LE = 76,
+        @AV_PIX_FMT_YUV444P9LE = 68,
         /// <summary>planar YUV 4:4:4, 30bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV444P10BE = 77,
+        @AV_PIX_FMT_YUV444P10BE = 69,
         /// <summary>planar YUV 4:4:4, 30bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV444P10LE = 78,
+        @AV_PIX_FMT_YUV444P10LE = 70,
         /// <summary>planar YUV 4:2:2, 18bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV422P9BE = 79,
+        @AV_PIX_FMT_YUV422P9BE = 71,
         /// <summary>planar YUV 4:2:2, 18bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV422P9LE = 80,
-        /// <summary>hardware decoding through VDA</summary>
-        @AV_PIX_FMT_VDA_VLD = 81,
+        @AV_PIX_FMT_YUV422P9LE = 72,
         /// <summary>planar GBR 4:4:4 24bpp</summary>
-        @AV_PIX_FMT_GBRP = 82,
-        @AV_PIX_FMT_GBR24P = 82,
+        @AV_PIX_FMT_GBRP = 73,
+        @AV_PIX_FMT_GBR24P = 73,
         /// <summary>planar GBR 4:4:4 27bpp, big-endian</summary>
-        @AV_PIX_FMT_GBRP9BE = 83,
+        @AV_PIX_FMT_GBRP9BE = 74,
         /// <summary>planar GBR 4:4:4 27bpp, little-endian</summary>
-        @AV_PIX_FMT_GBRP9LE = 84,
+        @AV_PIX_FMT_GBRP9LE = 75,
         /// <summary>planar GBR 4:4:4 30bpp, big-endian</summary>
-        @AV_PIX_FMT_GBRP10BE = 85,
+        @AV_PIX_FMT_GBRP10BE = 76,
         /// <summary>planar GBR 4:4:4 30bpp, little-endian</summary>
-        @AV_PIX_FMT_GBRP10LE = 86,
+        @AV_PIX_FMT_GBRP10LE = 77,
         /// <summary>planar GBR 4:4:4 48bpp, big-endian</summary>
-        @AV_PIX_FMT_GBRP16BE = 87,
+        @AV_PIX_FMT_GBRP16BE = 78,
         /// <summary>planar GBR 4:4:4 48bpp, little-endian</summary>
-        @AV_PIX_FMT_GBRP16LE = 88,
+        @AV_PIX_FMT_GBRP16LE = 79,
         /// <summary>planar YUV 4:2:2 24bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples)</summary>
-        @AV_PIX_FMT_YUVA422P = 89,
+        @AV_PIX_FMT_YUVA422P = 80,
         /// <summary>planar YUV 4:4:4 32bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples)</summary>
-        @AV_PIX_FMT_YUVA444P = 90,
+        @AV_PIX_FMT_YUVA444P = 81,
         /// <summary>planar YUV 4:2:0 22.5bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples), big-endian</summary>
-        @AV_PIX_FMT_YUVA420P9BE = 91,
+        @AV_PIX_FMT_YUVA420P9BE = 82,
         /// <summary>planar YUV 4:2:0 22.5bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples), little-endian</summary>
-        @AV_PIX_FMT_YUVA420P9LE = 92,
+        @AV_PIX_FMT_YUVA420P9LE = 83,
         /// <summary>planar YUV 4:2:2 27bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples), big-endian</summary>
-        @AV_PIX_FMT_YUVA422P9BE = 93,
+        @AV_PIX_FMT_YUVA422P9BE = 84,
         /// <summary>planar YUV 4:2:2 27bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples), little-endian</summary>
-        @AV_PIX_FMT_YUVA422P9LE = 94,
+        @AV_PIX_FMT_YUVA422P9LE = 85,
         /// <summary>planar YUV 4:4:4 36bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples), big-endian</summary>
-        @AV_PIX_FMT_YUVA444P9BE = 95,
+        @AV_PIX_FMT_YUVA444P9BE = 86,
         /// <summary>planar YUV 4:4:4 36bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples), little-endian</summary>
-        @AV_PIX_FMT_YUVA444P9LE = 96,
+        @AV_PIX_FMT_YUVA444P9LE = 87,
         /// <summary>planar YUV 4:2:0 25bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples, big-endian)</summary>
-        @AV_PIX_FMT_YUVA420P10BE = 97,
+        @AV_PIX_FMT_YUVA420P10BE = 88,
         /// <summary>planar YUV 4:2:0 25bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples, little-endian)</summary>
-        @AV_PIX_FMT_YUVA420P10LE = 98,
+        @AV_PIX_FMT_YUVA420P10LE = 89,
         /// <summary>planar YUV 4:2:2 30bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples, big-endian)</summary>
-        @AV_PIX_FMT_YUVA422P10BE = 99,
+        @AV_PIX_FMT_YUVA422P10BE = 90,
         /// <summary>planar YUV 4:2:2 30bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples, little-endian)</summary>
-        @AV_PIX_FMT_YUVA422P10LE = 100,
+        @AV_PIX_FMT_YUVA422P10LE = 91,
         /// <summary>planar YUV 4:4:4 40bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples, big-endian)</summary>
-        @AV_PIX_FMT_YUVA444P10BE = 101,
+        @AV_PIX_FMT_YUVA444P10BE = 92,
         /// <summary>planar YUV 4:4:4 40bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples, little-endian)</summary>
-        @AV_PIX_FMT_YUVA444P10LE = 102,
+        @AV_PIX_FMT_YUVA444P10LE = 93,
         /// <summary>planar YUV 4:2:0 40bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples, big-endian)</summary>
-        @AV_PIX_FMT_YUVA420P16BE = 103,
+        @AV_PIX_FMT_YUVA420P16BE = 94,
         /// <summary>planar YUV 4:2:0 40bpp, (1 Cr &amp; Cb sample per 2x2 Y &amp; A samples, little-endian)</summary>
-        @AV_PIX_FMT_YUVA420P16LE = 104,
+        @AV_PIX_FMT_YUVA420P16LE = 95,
         /// <summary>planar YUV 4:2:2 48bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples, big-endian)</summary>
-        @AV_PIX_FMT_YUVA422P16BE = 105,
+        @AV_PIX_FMT_YUVA422P16BE = 96,
         /// <summary>planar YUV 4:2:2 48bpp, (1 Cr &amp; Cb sample per 2x1 Y &amp; A samples, little-endian)</summary>
-        @AV_PIX_FMT_YUVA422P16LE = 106,
+        @AV_PIX_FMT_YUVA422P16LE = 97,
         /// <summary>planar YUV 4:4:4 64bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples, big-endian)</summary>
-        @AV_PIX_FMT_YUVA444P16BE = 107,
+        @AV_PIX_FMT_YUVA444P16BE = 98,
         /// <summary>planar YUV 4:4:4 64bpp, (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples, little-endian)</summary>
-        @AV_PIX_FMT_YUVA444P16LE = 108,
+        @AV_PIX_FMT_YUVA444P16LE = 99,
         /// <summary>HW acceleration through VDPAU, Picture.data[3] contains a VdpVideoSurface</summary>
-        @AV_PIX_FMT_VDPAU = 109,
+        @AV_PIX_FMT_VDPAU = 100,
         /// <summary>packed XYZ 4:4:4, 36 bpp, (msb) 12X, 12Y, 12Z (lsb), the 2-byte value for each X/Y/Z is stored as little-endian, the 4 lower bits are set to 0</summary>
-        @AV_PIX_FMT_XYZ12LE = 110,
+        @AV_PIX_FMT_XYZ12LE = 101,
         /// <summary>packed XYZ 4:4:4, 36 bpp, (msb) 12X, 12Y, 12Z (lsb), the 2-byte value for each X/Y/Z is stored as big-endian, the 4 lower bits are set to 0</summary>
-        @AV_PIX_FMT_XYZ12BE = 111,
+        @AV_PIX_FMT_XYZ12BE = 102,
         /// <summary>interleaved chroma YUV 4:2:2, 16bpp, (1 Cr &amp; Cb sample per 2x1 Y samples)</summary>
-        @AV_PIX_FMT_NV16 = 112,
+        @AV_PIX_FMT_NV16 = 103,
         /// <summary>interleaved chroma YUV 4:2:2, 20bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), little-endian</summary>
-        @AV_PIX_FMT_NV20LE = 113,
+        @AV_PIX_FMT_NV20LE = 104,
         /// <summary>interleaved chroma YUV 4:2:2, 20bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), big-endian</summary>
-        @AV_PIX_FMT_NV20BE = 114,
+        @AV_PIX_FMT_NV20BE = 105,
         /// <summary>packed RGBA 16:16:16:16, 64bpp, 16R, 16G, 16B, 16A, the 2-byte value for each R/G/B/A component is stored as big-endian</summary>
-        @AV_PIX_FMT_RGBA64BE = 115,
+        @AV_PIX_FMT_RGBA64BE = 106,
         /// <summary>packed RGBA 16:16:16:16, 64bpp, 16R, 16G, 16B, 16A, the 2-byte value for each R/G/B/A component is stored as little-endian</summary>
-        @AV_PIX_FMT_RGBA64LE = 116,
+        @AV_PIX_FMT_RGBA64LE = 107,
         /// <summary>packed RGBA 16:16:16:16, 64bpp, 16B, 16G, 16R, 16A, the 2-byte value for each R/G/B/A component is stored as big-endian</summary>
-        @AV_PIX_FMT_BGRA64BE = 117,
+        @AV_PIX_FMT_BGRA64BE = 108,
         /// <summary>packed RGBA 16:16:16:16, 64bpp, 16B, 16G, 16R, 16A, the 2-byte value for each R/G/B/A component is stored as little-endian</summary>
-        @AV_PIX_FMT_BGRA64LE = 118,
+        @AV_PIX_FMT_BGRA64LE = 109,
         /// <summary>packed YUV 4:2:2, 16bpp, Y0 Cr Y1 Cb</summary>
-        @AV_PIX_FMT_YVYU422 = 119,
-        /// <summary>HW acceleration through VDA, data[3] contains a CVPixelBufferRef</summary>
-        @AV_PIX_FMT_VDA = 120,
+        @AV_PIX_FMT_YVYU422 = 110,
         /// <summary>16 bits gray, 16 bits alpha (big-endian)</summary>
-        @AV_PIX_FMT_YA16BE = 121,
+        @AV_PIX_FMT_YA16BE = 111,
         /// <summary>16 bits gray, 16 bits alpha (little-endian)</summary>
-        @AV_PIX_FMT_YA16LE = 122,
+        @AV_PIX_FMT_YA16LE = 112,
         /// <summary>planar GBRA 4:4:4:4 32bpp</summary>
-        @AV_PIX_FMT_GBRAP = 123,
+        @AV_PIX_FMT_GBRAP = 113,
         /// <summary>planar GBRA 4:4:4:4 64bpp, big-endian</summary>
-        @AV_PIX_FMT_GBRAP16BE = 124,
+        @AV_PIX_FMT_GBRAP16BE = 114,
         /// <summary>planar GBRA 4:4:4:4 64bpp, little-endian</summary>
-        @AV_PIX_FMT_GBRAP16LE = 125,
+        @AV_PIX_FMT_GBRAP16LE = 115,
         /// <summary>HW acceleration through QSV, data[3] contains a pointer to the mfxFrameSurface1 structure.</summary>
-        @AV_PIX_FMT_QSV = 126,
+        @AV_PIX_FMT_QSV = 116,
         /// <summary>HW acceleration though MMAL, data[3] contains a pointer to the MMAL_BUFFER_HEADER_T structure.</summary>
-        @AV_PIX_FMT_MMAL = 127,
+        @AV_PIX_FMT_MMAL = 117,
         /// <summary>HW decoding through Direct3D11 via old API, Picture.data[3] contains a ID3D11VideoDecoderOutputView pointer</summary>
-        @AV_PIX_FMT_D3D11VA_VLD = 128,
+        @AV_PIX_FMT_D3D11VA_VLD = 118,
         /// <summary>HW acceleration through CUDA. data[i] contain CUdeviceptr pointers exactly as for system memory frames.</summary>
-        @AV_PIX_FMT_CUDA = 129,
+        @AV_PIX_FMT_CUDA = 119,
         /// <summary>packed RGB 8:8:8, 32bpp, XRGBXRGB... X=unused/undefined</summary>
-        @AV_PIX_FMT_0RGB = 295,
+        @AV_PIX_FMT_0RGB = 120,
         /// <summary>packed RGB 8:8:8, 32bpp, RGBXRGBX... X=unused/undefined</summary>
-        @AV_PIX_FMT_RGB0 = 296,
+        @AV_PIX_FMT_RGB0 = 121,
         /// <summary>packed BGR 8:8:8, 32bpp, XBGRXBGR... X=unused/undefined</summary>
-        @AV_PIX_FMT_0BGR = 297,
+        @AV_PIX_FMT_0BGR = 122,
         /// <summary>packed BGR 8:8:8, 32bpp, BGRXBGRX... X=unused/undefined</summary>
-        @AV_PIX_FMT_BGR0 = 298,
+        @AV_PIX_FMT_BGR0 = 123,
         /// <summary>planar YUV 4:2:0,18bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV420P12BE = 299,
+        @AV_PIX_FMT_YUV420P12BE = 124,
         /// <summary>planar YUV 4:2:0,18bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV420P12LE = 300,
+        @AV_PIX_FMT_YUV420P12LE = 125,
         /// <summary>planar YUV 4:2:0,21bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV420P14BE = 301,
+        @AV_PIX_FMT_YUV420P14BE = 126,
         /// <summary>planar YUV 4:2:0,21bpp, (1 Cr &amp; Cb sample per 2x2 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV420P14LE = 302,
+        @AV_PIX_FMT_YUV420P14LE = 127,
         /// <summary>planar YUV 4:2:2,24bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV422P12BE = 303,
+        @AV_PIX_FMT_YUV422P12BE = 128,
         /// <summary>planar YUV 4:2:2,24bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV422P12LE = 304,
+        @AV_PIX_FMT_YUV422P12LE = 129,
         /// <summary>planar YUV 4:2:2,28bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV422P14BE = 305,
+        @AV_PIX_FMT_YUV422P14BE = 130,
         /// <summary>planar YUV 4:2:2,28bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV422P14LE = 306,
+        @AV_PIX_FMT_YUV422P14LE = 131,
         /// <summary>planar YUV 4:4:4,36bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV444P12BE = 307,
+        @AV_PIX_FMT_YUV444P12BE = 132,
         /// <summary>planar YUV 4:4:4,36bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV444P12LE = 308,
+        @AV_PIX_FMT_YUV444P12LE = 133,
         /// <summary>planar YUV 4:4:4,42bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV444P14BE = 309,
+        @AV_PIX_FMT_YUV444P14BE = 134,
         /// <summary>planar YUV 4:4:4,42bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV444P14LE = 310,
+        @AV_PIX_FMT_YUV444P14LE = 135,
         /// <summary>planar GBR 4:4:4 36bpp, big-endian</summary>
-        @AV_PIX_FMT_GBRP12BE = 311,
+        @AV_PIX_FMT_GBRP12BE = 136,
         /// <summary>planar GBR 4:4:4 36bpp, little-endian</summary>
-        @AV_PIX_FMT_GBRP12LE = 312,
+        @AV_PIX_FMT_GBRP12LE = 137,
         /// <summary>planar GBR 4:4:4 42bpp, big-endian</summary>
-        @AV_PIX_FMT_GBRP14BE = 313,
+        @AV_PIX_FMT_GBRP14BE = 138,
         /// <summary>planar GBR 4:4:4 42bpp, little-endian</summary>
-        @AV_PIX_FMT_GBRP14LE = 314,
+        @AV_PIX_FMT_GBRP14LE = 139,
         /// <summary>planar YUV 4:1:1, 12bpp, (1 Cr &amp; Cb sample per 4x1 Y samples) full scale (JPEG), deprecated in favor of AV_PIX_FMT_YUV411P and setting color_range</summary>
-        @AV_PIX_FMT_YUVJ411P = 315,
+        @AV_PIX_FMT_YUVJ411P = 140,
         /// <summary>bayer, BGBG..(odd line), GRGR..(even line), 8-bit samples */</summary>
-        @AV_PIX_FMT_BAYER_BGGR8 = 316,
+        @AV_PIX_FMT_BAYER_BGGR8 = 141,
         /// <summary>bayer, RGRG..(odd line), GBGB..(even line), 8-bit samples */</summary>
-        @AV_PIX_FMT_BAYER_RGGB8 = 317,
+        @AV_PIX_FMT_BAYER_RGGB8 = 142,
         /// <summary>bayer, GBGB..(odd line), RGRG..(even line), 8-bit samples */</summary>
-        @AV_PIX_FMT_BAYER_GBRG8 = 318,
+        @AV_PIX_FMT_BAYER_GBRG8 = 143,
         /// <summary>bayer, GRGR..(odd line), BGBG..(even line), 8-bit samples */</summary>
-        @AV_PIX_FMT_BAYER_GRBG8 = 319,
+        @AV_PIX_FMT_BAYER_GRBG8 = 144,
         /// <summary>bayer, BGBG..(odd line), GRGR..(even line), 16-bit samples, little-endian */</summary>
-        @AV_PIX_FMT_BAYER_BGGR16LE = 320,
+        @AV_PIX_FMT_BAYER_BGGR16LE = 145,
         /// <summary>bayer, BGBG..(odd line), GRGR..(even line), 16-bit samples, big-endian */</summary>
-        @AV_PIX_FMT_BAYER_BGGR16BE = 321,
+        @AV_PIX_FMT_BAYER_BGGR16BE = 146,
         /// <summary>bayer, RGRG..(odd line), GBGB..(even line), 16-bit samples, little-endian */</summary>
-        @AV_PIX_FMT_BAYER_RGGB16LE = 322,
+        @AV_PIX_FMT_BAYER_RGGB16LE = 147,
         /// <summary>bayer, RGRG..(odd line), GBGB..(even line), 16-bit samples, big-endian */</summary>
-        @AV_PIX_FMT_BAYER_RGGB16BE = 323,
+        @AV_PIX_FMT_BAYER_RGGB16BE = 148,
         /// <summary>bayer, GBGB..(odd line), RGRG..(even line), 16-bit samples, little-endian */</summary>
-        @AV_PIX_FMT_BAYER_GBRG16LE = 324,
+        @AV_PIX_FMT_BAYER_GBRG16LE = 149,
         /// <summary>bayer, GBGB..(odd line), RGRG..(even line), 16-bit samples, big-endian */</summary>
-        @AV_PIX_FMT_BAYER_GBRG16BE = 325,
+        @AV_PIX_FMT_BAYER_GBRG16BE = 150,
         /// <summary>bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, little-endian */</summary>
-        @AV_PIX_FMT_BAYER_GRBG16LE = 326,
+        @AV_PIX_FMT_BAYER_GRBG16LE = 151,
         /// <summary>bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, big-endian */</summary>
-        @AV_PIX_FMT_BAYER_GRBG16BE = 327,
+        @AV_PIX_FMT_BAYER_GRBG16BE = 152,
+        /// <summary>XVideo Motion Acceleration via common packet passing</summary>
+        @AV_PIX_FMT_XVMC = 153,
         /// <summary>planar YUV 4:4:0,20bpp, (1 Cr &amp; Cb sample per 1x2 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV440P10LE = 328,
+        @AV_PIX_FMT_YUV440P10LE = 154,
         /// <summary>planar YUV 4:4:0,20bpp, (1 Cr &amp; Cb sample per 1x2 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV440P10BE = 329,
+        @AV_PIX_FMT_YUV440P10BE = 155,
         /// <summary>planar YUV 4:4:0,24bpp, (1 Cr &amp; Cb sample per 1x2 Y samples), little-endian</summary>
-        @AV_PIX_FMT_YUV440P12LE = 330,
+        @AV_PIX_FMT_YUV440P12LE = 156,
         /// <summary>planar YUV 4:4:0,24bpp, (1 Cr &amp; Cb sample per 1x2 Y samples), big-endian</summary>
-        @AV_PIX_FMT_YUV440P12BE = 331,
+        @AV_PIX_FMT_YUV440P12BE = 157,
         /// <summary>packed AYUV 4:4:4,64bpp (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples), little-endian</summary>
-        @AV_PIX_FMT_AYUV64LE = 332,
+        @AV_PIX_FMT_AYUV64LE = 158,
         /// <summary>packed AYUV 4:4:4,64bpp (1 Cr &amp; Cb sample per 1x1 Y &amp; A samples), big-endian</summary>
-        @AV_PIX_FMT_AYUV64BE = 333,
+        @AV_PIX_FMT_AYUV64BE = 159,
         /// <summary>hardware decoding through Videotoolbox</summary>
-        @AV_PIX_FMT_VIDEOTOOLBOX = 334,
+        @AV_PIX_FMT_VIDEOTOOLBOX = 160,
         /// <summary>like NV12, with 10bpp per component, data in the high bits, zeros in the low bits, little-endian</summary>
-        @AV_PIX_FMT_P010LE = 335,
+        @AV_PIX_FMT_P010LE = 161,
         /// <summary>like NV12, with 10bpp per component, data in the high bits, zeros in the low bits, big-endian</summary>
-        @AV_PIX_FMT_P010BE = 336,
+        @AV_PIX_FMT_P010BE = 162,
         /// <summary>planar GBR 4:4:4:4 48bpp, big-endian</summary>
-        @AV_PIX_FMT_GBRAP12BE = 337,
+        @AV_PIX_FMT_GBRAP12BE = 163,
         /// <summary>planar GBR 4:4:4:4 48bpp, little-endian</summary>
-        @AV_PIX_FMT_GBRAP12LE = 338,
+        @AV_PIX_FMT_GBRAP12LE = 164,
         /// <summary>planar GBR 4:4:4:4 40bpp, big-endian</summary>
-        @AV_PIX_FMT_GBRAP10BE = 339,
+        @AV_PIX_FMT_GBRAP10BE = 165,
         /// <summary>planar GBR 4:4:4:4 40bpp, little-endian</summary>
-        @AV_PIX_FMT_GBRAP10LE = 340,
+        @AV_PIX_FMT_GBRAP10LE = 166,
         /// <summary>hardware decoding through MediaCodec</summary>
-        @AV_PIX_FMT_MEDIACODEC = 341,
+        @AV_PIX_FMT_MEDIACODEC = 167,
         /// <summary>Y , 12bpp, big-endian</summary>
-        @AV_PIX_FMT_GRAY12BE = 342,
+        @AV_PIX_FMT_GRAY12BE = 168,
         /// <summary>Y , 12bpp, little-endian</summary>
-        @AV_PIX_FMT_GRAY12LE = 343,
+        @AV_PIX_FMT_GRAY12LE = 169,
         /// <summary>Y , 10bpp, big-endian</summary>
-        @AV_PIX_FMT_GRAY10BE = 344,
+        @AV_PIX_FMT_GRAY10BE = 170,
         /// <summary>Y , 10bpp, little-endian</summary>
-        @AV_PIX_FMT_GRAY10LE = 345,
+        @AV_PIX_FMT_GRAY10LE = 171,
         /// <summary>like NV12, with 16bpp per component, little-endian</summary>
-        @AV_PIX_FMT_P016LE = 346,
+        @AV_PIX_FMT_P016LE = 172,
         /// <summary>like NV12, with 16bpp per component, big-endian</summary>
-        @AV_PIX_FMT_P016BE = 347,
+        @AV_PIX_FMT_P016BE = 173,
         /// <summary>Hardware surfaces for Direct3D11.</summary>
-        @AV_PIX_FMT_D3D11 = 348,
+        @AV_PIX_FMT_D3D11 = 174,
         /// <summary>Y , 9bpp, big-endian</summary>
-        @AV_PIX_FMT_GRAY9BE = 349,
+        @AV_PIX_FMT_GRAY9BE = 175,
         /// <summary>Y , 9bpp, little-endian</summary>
-        @AV_PIX_FMT_GRAY9LE = 350,
+        @AV_PIX_FMT_GRAY9LE = 176,
         /// <summary>IEEE-754 single precision planar GBR 4:4:4, 96bpp, big-endian</summary>
-        @AV_PIX_FMT_GBRPF32BE = 351,
+        @AV_PIX_FMT_GBRPF32BE = 177,
         /// <summary>IEEE-754 single precision planar GBR 4:4:4, 96bpp, little-endian</summary>
-        @AV_PIX_FMT_GBRPF32LE = 352,
+        @AV_PIX_FMT_GBRPF32LE = 178,
         /// <summary>IEEE-754 single precision planar GBRA 4:4:4:4, 128bpp, big-endian</summary>
-        @AV_PIX_FMT_GBRAPF32BE = 353,
+        @AV_PIX_FMT_GBRAPF32BE = 179,
         /// <summary>IEEE-754 single precision planar GBRA 4:4:4:4, 128bpp, little-endian</summary>
-        @AV_PIX_FMT_GBRAPF32LE = 354,
+        @AV_PIX_FMT_GBRAPF32LE = 180,
         /// <summary>DRM-managed buffers exposed through PRIME buffer sharing.</summary>
-        @AV_PIX_FMT_DRM_PRIME = 355,
+        @AV_PIX_FMT_DRM_PRIME = 181,
+        /// <summary>Hardware surfaces for OpenCL.</summary>
+        @AV_PIX_FMT_OPENCL = 182,
         /// <summary>number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions</summary>
-        @AV_PIX_FMT_NB = 356,
+        @AV_PIX_FMT_NB = 183,
     }
     
     /// <summary>Rounding methods.</summary>
@@ -1470,7 +1465,7 @@ namespace FFmpeg.AutoGen
         /// <summary>full parsing and repack of the first frame only, only implemented for H.264 currently</summary>
         @AVSTREAM_PARSE_FULL_ONCE = 4,
         /// <summary>full parsing and repack with timestamp and position generation by parser for raw this assumes that each packet in the file contains no demuxer level headers and just codec level data, otherwise position generation would fail</summary>
-        @AVSTREAM_PARSE_FULL_RAW = 1463898624,
+        @AVSTREAM_PARSE_FULL_RAW = 5,
     }
     
     public enum AVSubtitleType : int
@@ -1500,27 +1495,6 @@ namespace FFmpeg.AutoGen
         @AV_TIMECODE_FLAG_24HOURSMAX = 2,
         /// <summary>negative time values are allowed</summary>
         @AV_TIMECODE_FLAG_ALLOWNEGATIVE = 4,
-    }
-    
-    public enum Motion_Est_ID : int
-    {
-        /// <summary>no search, that is use 0,0 vector whenever one is needed</summary>
-        @ME_ZERO = 1,
-        @ME_FULL = 2,
-        @ME_LOG = 3,
-        @ME_PHODS = 4,
-        /// <summary>enhanced predictive zonal search</summary>
-        @ME_EPZS = 5,
-        /// <summary>reserved for experiments</summary>
-        @ME_X1 = 6,
-        /// <summary>hexagon based search</summary>
-        @ME_HEX = 7,
-        /// <summary>uneven multi-hexagon search</summary>
-        @ME_UMH = 8,
-        /// <summary>transformed exhaustive search algorithm</summary>
-        @ME_TESA = 9,
-        /// <summary>iterative search</summary>
-        @ME_ITER = 50,
     }
     
     /// <summary>Dithering algorithms</summary>
