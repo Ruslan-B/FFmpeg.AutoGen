@@ -34,7 +34,7 @@ namespace FFmpeg.AutoGen.Native
             }
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                var fullName = Path.Combine(path, $"lib{libraryName}.so{version}");
+                var fullName = Path.Combine(path, $"lib{libraryName}.so.{version}");
                 return LoadNativeLibrary(fullName);
             }
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
