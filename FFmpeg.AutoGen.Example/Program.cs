@@ -15,11 +15,7 @@ namespace FFmpeg.AutoGen.Example
             Console.WriteLine("Runnung in {0}-bit mode.", Environment.Is64BitProcess ? "64" : "32");
 
             FFmpegBinariesHelper.RegisterFFmpegBinaries();
-
-            ffmpeg.av_register_all();
-            ffmpeg.avcodec_register_all();
-            ffmpeg.avformat_network_init();
-
+            
             Console.WriteLine($"FFmpeg version info: {ffmpeg.av_version_info()}");
             
             SetupLogging();
