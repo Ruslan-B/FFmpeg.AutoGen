@@ -29,7 +29,7 @@ namespace FFmpeg.AutoGen
                 {
                     if (loadedLibraries.TryGetValue(key, out ptr)) return ptr;
 
-                    ptr = LibraryLoader.LoadNativeLibraryUsingPlatformNamingConvention(RootPath, name, version);
+                    ptr = LibraryLoader.LoadNativeLibrary(RootPath, name, version);
                     if (ptr == IntPtr.Zero) throw new DllNotFoundException($"Unable to load DLL '{name}.{version}': The specified module could not be found.");
                     loadedLibraries.Add(key, ptr);
                 }
