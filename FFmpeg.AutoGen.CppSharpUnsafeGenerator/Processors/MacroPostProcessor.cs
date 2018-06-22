@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
@@ -26,7 +27,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 {
                     return Parser.Parse(x.Expression);
                 }
-                catch (Exception)
+                catch (NotSupportedException)
                 {
                     Trace.TraceError($"Cannot parse macro expression: {x.Expression}");
                     return null;
@@ -132,14 +133,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private string Serialize(object value)
         {
-            if (value is double d) return $"{d}D";
-            if (value is float f) return $"{f}F";
+            if (value is double d) return string.Format(CultureInfo.InvariantCulture, "{0}D", d);
+            if (value is float f) return string.Format(CultureInfo.InvariantCulture, "{0}F", f);
             if (value is char c) return $"\'{c}\'";
             if (value is string s) return $"\"{s}\"";
-            if (value is long l) return $"0x{l:x}L";
-            if (value is ulong ul) return $"0x{ul:x}UL";
-            if (value is int i) return $"0x{i:x}";
-            if (value is uint ui) return $"0x{ui:x}U";
+            if (value is long l) return string.Format(CultureInfo.InvariantCulture, "0x{0:x}L", l);
+            if (value is ulong ul) return string.Format(CultureInfo.InvariantCulture, "0x{0:x}UL", ul);
+            if (value is int i) return string.Format(CultureInfo.InvariantCulture, "0x{0:x}", i);
+            if (value is uint ui) return string.Format(CultureInfo.InvariantCulture, "0x{0:x}U", ui);
             if (value is bool b) return b ? "true" : "false";
             throw new NotSupportedException();
         }
