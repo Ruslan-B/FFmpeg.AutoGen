@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Native
 {
-    internal static class MacNativeMethods
+    public static class MacNativeMethods
     {
         public const int RTLD_NOW = 0x002;
 

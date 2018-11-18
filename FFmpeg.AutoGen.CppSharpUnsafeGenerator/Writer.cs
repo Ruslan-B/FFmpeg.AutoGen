@@ -3,7 +3,6 @@ using System.CodeDom.Compiler;
 using System.Linq;
 using System.Security;
 using System.Text;
-
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
@@ -14,6 +13,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public Writer(IndentedTextWriter writer) => _writer = writer;
 
+        public bool SuppressUnmanagedCodeSecurity { get; set; }
+
         public void WriteMacro(MacroDefinition macro)
         {
             if (macro.IsValid)
@@ -23,9 +24,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 WriteLine($"public {constOrStatic} {macro.TypeName} {macro.Name} = {macro.Expression};");
             }
             else
-            {
                 WriteLine($"// public static {macro.Name} = {macro.Expression};");
-            }
         }
 
         public void WriteEnumeration(EnumerationDefinition enumeration)
@@ -70,7 +69,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             }
         }
 
-        public void WriteFunction(FunctionDefinition function)
+        public void WriteFunction(ExportFunctionDefinition function)
         {
             function.ReturnType.Attributes.ToList().ForEach(WriteLine);
             var parameterNames = GetParameterNames(function.Parameters);
@@ -79,7 +78,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             var functionDelegateName = function.Name + "_delegate";
             var returnCommand = function.ReturnType.Name == "void" ? string.Empty : "return ";
 
-            if (function.SuppressUnmanagedCodeSecurity) WriteLine("[SuppressUnmanagedCodeSecurity]");
+            if (SuppressUnmanagedCodeSecurity) WriteLine("[SuppressUnmanagedCodeSecurity]");
             WriteLine("[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
             WriteLine($"private delegate {function.ReturnType.Name} {functionDelegateName}({parameters});");
             Write($"private static {functionDelegateName} {functionPtrName} = ");
@@ -92,20 +91,32 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
             if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]");
             WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
-            using (BeginBlock())
-            {
-                WriteLine($"{returnCommand}{functionPtrName}({parameterNames});");
-            }
+            using (BeginBlock()) WriteLine($"{returnCommand}{functionPtrName}({parameterNames});");
             WriteLine();
         }
 
-        private void WriteDefaultFunctionDelegateExpression(FunctionDefinition function,
+        public void WriteFunction(InlineFunctionDefinition function)
+        {
+            function.ReturnType.Attributes.ToList().ForEach(WriteLine);
+            var parameters = GetParameters(function.Parameters);
+            
+            WriteSummary(function);
+            function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
+            WriteReturnComment(function.ReturnComment);
+
+            if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]");
+            WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
+            WriteLine(function.Body);
+            WriteLine();
+        }
+
+        private void WriteDefaultFunctionDelegateExpression(ExportFunctionDefinition function,
             string parameterNames, string functionDelegateName, string functionPtrName, string returnCommand)
         {
-            var delegateParameters = GetParameters(function.Parameters, withAttributes: false);
+            var delegateParameters = GetParameters(function.Parameters, false);
 
             WriteLine($"({delegateParameters}) =>");
-            using (BeginBlock(inline: true))
+            using (BeginBlock(true))
             {
                 var getOrLoadLibrary = $"GetOrLoadLibrary(\"{function.LibraryName}\", {function.LibraryVersion})";
                 var getDelegate = $"GetFunctionDelegate<{functionDelegateName}>({getOrLoadLibrary}, \"{function.Name}\")";
@@ -118,18 +129,17 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     WriteNotSupportedFunctionDelegateExpression(function);
                     WriteLine(";");
                 }
+
                 WriteLine($"{returnCommand}{functionPtrName}({parameterNames});");
             }
         }
 
-        private void WriteNotSupportedFunctionDelegateExpression(FunctionDefinition function)
+        private void WriteNotSupportedFunctionDelegateExpression(ExportFunctionDefinition function)
         {
             WriteLine("delegate ");
-            using (BeginBlock(inline: true))
-            {
+            using (BeginBlock(true))
                 WriteLine(
                     $"throw new PlatformNotSupportedException(\"{function.Name} is not supported on this platform.\");");
-            }
         }
 
         public void WriteDelegate(DelegateDefinition @delegate)
@@ -144,7 +154,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteLine($"public unsafe struct {@delegate.Name}");
             using (BeginBlock())
             {
-                WriteLine($"public IntPtr Pointer;");
+                WriteLine("public IntPtr Pointer;");
                 Write($"public static implicit operator {@delegate.Name}({@delegate.FunctionName} func) => ");
                 Write($"new {@delegate.Name} {{ Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) }};");
                 WriteLine();
@@ -170,13 +180,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 _writer.Indent--;
 
                 if (inline)
-                {
                     _writer.Write("}");
-                }
                 else
-                {
                     _writer.WriteLine("}");
-                }
             });
         }
 
@@ -263,7 +269,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         {
             if (!string.IsNullOrWhiteSpace(content)) WriteLine($"/// <returns>{SecurityElement.Escape(content.Trim())}</returns>");
         }
-        
+
         private void Write(string value)
         {
             _writer.Write(value);
@@ -279,4 +285,3 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         }
     }
 }
- 

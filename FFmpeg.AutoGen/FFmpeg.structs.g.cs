@@ -903,7 +903,7 @@ namespace FFmpeg.AutoGen
         public int @flags;
         /// <summary>AV_CODEC_FLAG2_* - encoding: Set by user. - decoding: Set by user.</summary>
         public int @flags2;
-        /// <summary>some codecs need / can use extradata like Huffman tables. MJPEG: Huffman tables rv10: additional flags MPEG-4: global headers (they can be in the bitstream or here) The allocated memory should be AV_INPUT_BUFFER_PADDING_SIZE bytes larger than extradata_size to avoid problems if it is read with the bitstream reader. The bytewise contents of extradata must not depend on the architecture or CPU endianness. - encoding: Set/allocated/freed by libavcodec. - decoding: Set/allocated/freed by user.</summary>
+        /// <summary>some codecs need / can use extradata like Huffman tables. MJPEG: Huffman tables rv10: additional flags MPEG-4: global headers (they can be in the bitstream or here) The allocated memory should be AV_INPUT_BUFFER_PADDING_SIZE bytes larger than extradata_size to avoid problems if it is read with the bitstream reader. The bytewise contents of extradata must not depend on the architecture or CPU endianness. Must be allocated with the av_malloc() family of functions. - encoding: Set/allocated/freed by libavcodec. - decoding: Set/allocated/freed by user.</summary>
         public byte* @extradata;
         public int @extradata_size;
         /// <summary>This is the fundamental unit of time (in seconds) in terms of which frame timestamps are represented. For fixed-fps content, timebase should be 1/framerate and timestamp increments should be identically 1. This often, but not always is the inverse of the frame rate or field rate for video. 1/time_base is not the average frame rate if the frame rate is not constant.</summary>
@@ -1529,6 +1529,7 @@ namespace FFmpeg.AutoGen
         public AVBitStreamFilter_init_func @init;
         public AVBitStreamFilter_filter_func @filter;
         public AVBitStreamFilter_close_func @close;
+        public AVBitStreamFilter_flush_func @flush;
     }
     
     public unsafe struct AVBitStreamFilterContext
@@ -1714,6 +1715,10 @@ namespace FFmpeg.AutoGen
         public uint @index_entries_allocated_size;
         /// <summary>Stream Identifier This is the MPEG-TS stream identifier +1 0 means unknown</summary>
         public int @stream_identifier;
+        /// <summary>Details of the MPEG-TS program which created this stream.</summary>
+        public int @program_num;
+        public int @pmt_version;
+        public int @pmt_stream_idx;
         public long @interleaver_chunk_size;
         public long @interleaver_chunk_duration;
         /// <summary>stream probing state -1 -&gt; probing finished 0 -&gt; no probing requested rest -&gt; perform probing with request_probe being the minimum score to accept. NOT PART OF PUBLIC API</summary>
@@ -1793,6 +1798,7 @@ namespace FFmpeg.AutoGen
         public int @program_num;
         public int @pmt_pid;
         public int @pcr_pid;
+        public int @pmt_version;
         /// <summary>*************************************************************** All fields below this line are not part of the public API. They may not be used outside of libavformat and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
         public long @start_time;
         public long @end_time;
@@ -2011,6 +2017,8 @@ namespace FFmpeg.AutoGen
         public byte* @protocol_blacklist;
         /// <summary>The maximum number of streams. - encoding: unused - decoding: set by user</summary>
         public int @max_streams;
+        /// <summary>Skip duration calcuation in estimate_timings_from_pts. - encoding: unused - decoding: set by user</summary>
+        public int @skip_estimate_duration_from_pts;
     }
     
     /// <summary>@{</summary>
@@ -2415,7 +2423,7 @@ namespace FFmpeg.AutoGen
         public AVRational @frame_rate;
         /// <summary>Video with a hwaccel pixel format only. This should be a reference to an AVHWFramesContext instance describing the input frames.</summary>
         public AVBufferRef* @hw_frames_ctx;
-        /// <summary>Audio only, the audio sampling rate in samples per secon.</summary>
+        /// <summary>Audio only, the audio sampling rate in samples per second.</summary>
         public int @sample_rate;
         /// <summary>Audio only, the audio channel layout</summary>
         public ulong @channel_layout;

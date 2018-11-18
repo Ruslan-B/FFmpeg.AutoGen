@@ -86,7 +86,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             g.WriteArrays(Path.Combine(options.OutputDir, "FFmpeg.arrays.g.cs"));
             g.WriteStructures(Path.Combine(options.OutputDir, "FFmpeg.structs.g.cs"));
             g.WriteIncompleteStructures(Path.Combine(options.OutputDir, "FFmpeg.structs.incomplete.g.cs"));
-            g.WriteFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.g.cs"));
+            g.WriteExportFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.export.g.cs"));
+            g.WriteInlineFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.inline.g.cs"));
         }
     }
 }

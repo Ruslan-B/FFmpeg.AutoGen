@@ -294,6 +294,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_DXV = 189,
         @AV_CODEC_ID_SCREENPRESSO = 190,
         @AV_CODEC_ID_RSCC = 191,
+        @AV_CODEC_ID_AVS2 = 192,
         @AV_CODEC_ID_Y41P = 32768,
         @AV_CODEC_ID_AVRP = 32769,
         @AV_CODEC_ID_012V = 32770,
@@ -330,6 +331,11 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_SVG = 32801,
         @AV_CODEC_ID_GDV = 32802,
         @AV_CODEC_ID_FITS = 32803,
+        @AV_CODEC_ID_IMM4 = 32804,
+        @AV_CODEC_ID_PROSUMER = 32805,
+        @AV_CODEC_ID_MWSC = 32806,
+        @AV_CODEC_ID_WCMV = 32807,
+        @AV_CODEC_ID_RASC = 32808,
         /// <summary>A dummy id pointing at the start of audio codecs</summary>
         @AV_CODEC_ID_FIRST_AUDIO = 65536,
         @AV_CODEC_ID_PCM_S16LE = 65536,
@@ -367,6 +373,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_PCM_S64BE = 67585,
         @AV_CODEC_ID_PCM_F16LE = 67586,
         @AV_CODEC_ID_PCM_F24LE = 67587,
+        @AV_CODEC_ID_PCM_VIDC = 67588,
         @AV_CODEC_ID_ADPCM_IMA_QT = 69632,
         @AV_CODEC_ID_ADPCM_IMA_WAV = 69633,
         @AV_CODEC_ID_ADPCM_IMA_DK3 = 69634,
@@ -508,6 +515,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_APTX = 88081,
         @AV_CODEC_ID_APTX_HD = 88082,
         @AV_CODEC_ID_SBC = 88083,
+        @AV_CODEC_ID_ATRAC9 = 88084,
         /// <summary>A dummy ID pointing at the start of subtitle codecs.</summary>
         @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
         @AV_CODEC_ID_DVD_SUBTITLE = 94208,
@@ -535,6 +543,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_PJS = 96268,
         @AV_CODEC_ID_ASS = 96269,
         @AV_CODEC_ID_HDMV_TEXT_SUBTITLE = 96270,
+        @AV_CODEC_ID_TTML = 96271,
         /// <summary>A dummy ID pointing at the start of various fake codecs.</summary>
         @AV_CODEC_ID_FIRST_UNKNOWN = 98304,
         @AV_CODEC_ID_TTF = 98304,
@@ -800,6 +809,8 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_QP_TABLE_PROPERTIES = 16,
         /// <summary>Raw QP table data. Its format is described by AV_FRAME_DATA_QP_TABLE_PROPERTIES. Use av_frame_set_qp_table() and av_frame_get_qp_table() to access this instead.</summary>
         @AV_FRAME_DATA_QP_TABLE_DATA = 17,
+        /// <summary>Timecode which conforms to SMPTE ST 12-1. The data is an array of 4 uint32_t where the first uint32_t describes how many (1-3) of the other timecodes are used. The timecode format is described in the av_timecode_get_smpte_from_framenum() function in libavutil/timecode.c.</summary>
+        @AV_FRAME_DATA_S12M_TIMECODE = 18,
     }
     
     public enum AVHWDeviceType : int
@@ -980,8 +991,10 @@ namespace FFmpeg.AutoGen
         @AV_PKT_DATA_ENCRYPTION_INIT_INFO = 24,
         /// <summary>This side data contains encryption info for how to decrypt the packet. The format is not part of ABI, use av_encryption_info_* methods to access.</summary>
         @AV_PKT_DATA_ENCRYPTION_INFO = 25,
+        /// <summary>Active Format Description data consisting of a single byte as specified in ETSI TS 101 154 using AVActiveFormatDescription enum.</summary>
+        @AV_PKT_DATA_AFD = 26,
         /// <summary>The number of side data types. This is not part of the public API/ABI in the sense that it may change when new side data types are added. This must stay the last enum value. If its value becomes huge, some code using it needs to be updated as it assumes it to be smaller than other limits.</summary>
-        @AV_PKT_DATA_NB = 26,
+        @AV_PKT_DATA_NB = 27,
     }
     
     /// <summary>@{</summary>
@@ -1391,8 +1404,16 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_DRM_PRIME = 181,
         /// <summary>Hardware surfaces for OpenCL.</summary>
         @AV_PIX_FMT_OPENCL = 182,
+        /// <summary>Y , 14bpp, big-endian</summary>
+        @AV_PIX_FMT_GRAY14BE = 183,
+        /// <summary>Y , 14bpp, little-endian</summary>
+        @AV_PIX_FMT_GRAY14LE = 184,
+        /// <summary>IEEE-754 single precision Y, 32bpp, big-endian</summary>
+        @AV_PIX_FMT_GRAYF32BE = 185,
+        /// <summary>IEEE-754 single precision Y, 32bpp, little-endian</summary>
+        @AV_PIX_FMT_GRAYF32LE = 186,
         /// <summary>number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions</summary>
-        @AV_PIX_FMT_NB = 183,
+        @AV_PIX_FMT_NB = 187,
     }
     
     /// <summary>Rounding methods.</summary>

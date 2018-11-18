@@ -10,36 +10,45 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
     {
         private readonly ASTProcessor _context;
 
-        public FunctionProcessor(ASTProcessor context)
-        {
-            _context = context;
-        }
+        public FunctionProcessor(ASTProcessor context) => _context = context;
 
         public void Process(TranslationUnit translationUnit)
         {
-            foreach (var function in translationUnit.Functions.Where(x => !x.IsInline))
+            foreach (var function in translationUnit.Functions)
             {
                 var functionName = function.Name;
-                FunctionExport export;
-                if (!_context.FunctionExportMap.TryGetValue(functionName, out export))
+
+                void PopulateCommon(FunctionDefinitionBase inline)
+                {
+                    inline.Name = functionName;
+                    inline.ReturnType = GetReturnTypeName(function.ReturnType.Type, functionName);
+                    inline.Content = function.Comment?.BriefText;
+                    inline.ReturnComment = GetReturnComment(function);
+                    inline.Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray();
+                    inline.IsObsolete = IsObsolete(function);
+                    inline.ObsoleteMessage = GetObsoleteMessage(function);
+                }
+
+                if (function.IsInline)
+                {
+                    var inlineDefinition = new InlineFunctionDefinition();
+                    PopulateCommon(inlineDefinition);
+                    inlineDefinition.Body = function.Body;
+                    _context.AddUnit(inlineDefinition);
+                    continue;
+                }
+
+                if (!_context.FunctionExportMap.TryGetValue(functionName, out var export))
                 {
                     Console.WriteLine($"Export not found. Skipping {functionName} function.");
                     continue;
                 }
 
-                var functionDefinition = new FunctionDefinition
-                {
-                    Name = functionName,
-                    ReturnType = GetReturnTypeName(function.ReturnType.Type, functionName),
-                    Content = function.Comment?.BriefText,
-                    ReturnComment = GetReturnComment(function),
-                    LibraryName = export.LibraryName,
-                    LibraryVersion = export.LibraryVersion,
-                    Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray(),
-                    IsObsolete = IsObsolete(function),
-                    ObsoleteMessage = GetObsoleteMessage(function)
-                };
-                _context.AddUnit(functionDefinition);
+                var exportDefinition = new ExportFunctionDefinition();
+                PopulateCommon(exportDefinition);
+                exportDefinition.LibraryName = export.LibraryName;
+                exportDefinition.LibraryVersion = export.LibraryVersion;
+                _context.AddUnit(exportDefinition);
             }
         }
 
@@ -50,7 +59,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 Name = name + "_func",
                 FunctionName = name,
                 ReturnType = GetReturnTypeName(functionType.ReturnType.Type, name),
-                Parameters = functionType.Parameters.Select(GetParameter).ToArray(),
+                Parameters = functionType.Parameters.Select(GetParameter).ToArray()
             };
             _context.AddUnit(@delegate);
 
@@ -81,7 +90,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         private TypeDefinition GetReturnTypeName(Type type, string name)
         {
             if (type is PointerType pointerType &&
-                pointerType.QualifiedPointee.Qualifiers.IsConst && 
+                pointerType.QualifiedPointee.Qualifiers.IsConst &&
                 pointerType.Pointee is BuiltinType builtinType)
             {
                 switch (builtinType.Type)
@@ -95,7 +104,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     case PrimitiveType.Void:
                         return new TypeDefinition {Name = "void*"};
                     default:
-                        return new TypeDefinition {Name = TypeHelper.GetTypeName(type) };
+                        return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
                 }
             }
 
@@ -115,7 +124,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     case PrimitiveType.Void:
                         return new TypeDefinition {Name = "void*"};
                     default:
-                        return new TypeDefinition {Name = TypeHelper.GetTypeName(type) };
+                        return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
                 }
             }
 
@@ -124,9 +133,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 arrayType.SizeType == ArrayType.ArraySize.Incomplete &&
                 arrayType.Type is PointerType arrayPointerType &&
                 !(arrayPointerType.Pointee is BuiltinType || arrayPointerType.Pointee is TypedefType typedefType && typedefType.Declaration.Type is BuiltinType))
-            {
-                return new TypeDefinition { Name = TypeHelper.GetTypeName(arrayPointerType) + "*" };
-            }
+                return new TypeDefinition {Name = TypeHelper.GetTypeName(arrayPointerType) + "*"};
 
             return _context.StructureProcessor.GetTypeDefinition(type, name);
         }
@@ -156,7 +163,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private string GetReturnComment(Function function)
         {
-             var comment = function?.Comment?.FullComment.Blocks
+            var comment = function?.Comment?.FullComment.Blocks
                 .OfType<BlockCommandComment>()
                 .FirstOrDefault(x => x.CommandKind == CommentCommandKind.Return);
             return GetCommentString(comment);
