@@ -365,6 +365,8 @@ namespace FFmpeg.AutoGen
         public const int AV_DISPOSITION_METADATA = 0x40000;
         /// <summary>AV_DISPOSITION_ORIGINAL = 0x0004</summary>
         public const int AV_DISPOSITION_ORIGINAL = 0x4;
+        /// <summary>AV_DISPOSITION_STILL_IMAGE = 0x100000</summary>
+        public const int AV_DISPOSITION_STILL_IMAGE = 0x100000;
         /// <summary>AV_DISPOSITION_TIMED_THUMBNAILS = 0x0800</summary>
         public const int AV_DISPOSITION_TIMED_THUMBNAILS = 0x800;
         /// <summary>AV_DISPOSITION_VISUAL_IMPAIRED = 0x0100</summary>
@@ -453,6 +455,8 @@ namespace FFmpeg.AutoGen
         public const int AV_OPT_FLAG_BSF_PARAM = 0x1 << 0x8;
         /// <summary>AV_OPT_FLAG_DECODING_PARAM = 2</summary>
         public const int AV_OPT_FLAG_DECODING_PARAM = 0x2;
+        /// <summary>AV_OPT_FLAG_DEPRECATED = (1&lt;&lt;17)</summary>
+        public const int AV_OPT_FLAG_DEPRECATED = 0x1 << 0x11;
         /// <summary>AV_OPT_FLAG_ENCODING_PARAM = 1</summary>
         public const int AV_OPT_FLAG_ENCODING_PARAM = 0x1;
         /// <summary>AV_OPT_FLAG_EXPORT = 64</summary>
@@ -524,8 +528,10 @@ namespace FFmpeg.AutoGen
         // public static AV_PIX_FMT_GBRPF32 = AV_PIX_FMT_NE(GBRPF32BE,  GBRPF32LE);
         // public static AV_PIX_FMT_GRAY10 = AV_PIX_FMT_NE(GRAY10BE, GRAY10LE);
         // public static AV_PIX_FMT_GRAY12 = AV_PIX_FMT_NE(GRAY12BE, GRAY12LE);
+        // public static AV_PIX_FMT_GRAY14 = AV_PIX_FMT_NE(GRAY14BE, GRAY14LE);
         // public static AV_PIX_FMT_GRAY16 = AV_PIX_FMT_NE(GRAY16BE, GRAY16LE);
         // public static AV_PIX_FMT_GRAY9 = AV_PIX_FMT_NE(GRAY9BE,  GRAY9LE);
+        // public static AV_PIX_FMT_GRAYF32 = AV_PIX_FMT_NE(GRAYF32BE, GRAYF32LE);
         // public static AV_PIX_FMT_NV20 = AV_PIX_FMT_NE(NV20BE,  NV20LE);
         // public static AV_PIX_FMT_P010 = AV_PIX_FMT_NE(P010BE,  P010LE);
         // public static AV_PIX_FMT_P016 = AV_PIX_FMT_NE(P016BE,  P016LE);
@@ -827,6 +833,8 @@ namespace FFmpeg.AutoGen
         public const bool FF_API_COPY_CONTEXT = LIBAVCODEC_VERSION_MAJOR < 0x3b;
         /// <summary>FF_API_CRYPTO_SIZE_T = (LIBAVUTIL_VERSION_MAJOR &lt; 57)</summary>
         public const bool FF_API_CRYPTO_SIZE_T = LIBAVUTIL_VERSION_MAJOR < 0x39;
+        /// <summary>FF_API_DASH_MIN_SEG_DURATION = (LIBAVFORMAT_VERSION_MAJOR &lt; 59)</summary>
+        public const bool FF_API_DASH_MIN_SEG_DURATION = LIBAVFORMAT_VERSION_MAJOR < 0x3b;
         /// <summary>FF_API_DEBUG_MV = (LIBAVCODEC_VERSION_MAJOR &lt; 58)</summary>
         public const bool FF_API_DEBUG_MV = LIBAVCODEC_VERSION_MAJOR < 0x3a;
         /// <summary>FF_API_ERROR_FRAME = (LIBAVUTIL_VERSION_MAJOR &lt; 57)</summary>
@@ -845,6 +853,8 @@ namespace FFmpeg.AutoGen
         public const bool FF_API_GET_CONTEXT_DEFAULTS = LIBAVCODEC_VERSION_MAJOR < 0x3b;
         /// <summary>FF_API_GETCHROMA = (LIBAVCODEC_VERSION_MAJOR &lt; 59)</summary>
         public const bool FF_API_GETCHROMA = LIBAVCODEC_VERSION_MAJOR < 0x3b;
+        /// <summary>FF_API_HLS_USE_LOCALTIME = (LIBAVFORMAT_VERSION_MAJOR &lt; 59)</summary>
+        public const bool FF_API_HLS_USE_LOCALTIME = LIBAVFORMAT_VERSION_MAJOR < 0x3b;
         /// <summary>FF_API_HLS_WRAP = (LIBAVFORMAT_VERSION_MAJOR &lt; 59)</summary>
         public const bool FF_API_HLS_WRAP = LIBAVFORMAT_VERSION_MAJOR < 0x3b;
         /// <summary>FF_API_HTTP_USER_AGENT = (LIBAVFORMAT_VERSION_MAJOR &lt; 59)</summary>
@@ -855,6 +865,8 @@ namespace FFmpeg.AutoGen
         public const bool FF_API_LAVF_FFSERVER = LIBAVFORMAT_VERSION_MAJOR < 0x3b;
         /// <summary>FF_API_LAVF_KEEPSIDE_FLAG = (LIBAVFORMAT_VERSION_MAJOR &lt; 59)</summary>
         public const bool FF_API_LAVF_KEEPSIDE_FLAG = LIBAVFORMAT_VERSION_MAJOR < 0x3b;
+        /// <summary>FF_API_LAVF_MP4A_LATM = (LIBAVFORMAT_VERSION_MAJOR &lt; 59)</summary>
+        public const bool FF_API_LAVF_MP4A_LATM = LIBAVFORMAT_VERSION_MAJOR < 0x3b;
         /// <summary>FF_API_LAVR_OPTS = LIBAVFILTER_VERSION_MAJOR &lt; 0x8</summary>
         public const bool FF_API_LAVR_OPTS = LIBAVFILTER_VERSION_MAJOR < 0x8;
         /// <summary>FF_API_LOCKMGR = (LIBAVCODEC_VERSION_MAJOR &lt; 59)</summary>
@@ -1332,8 +1344,8 @@ namespace FFmpeg.AutoGen
         public const int LIBAVCODEC_VERSION_MAJOR = 0x3a;
         /// <summary>LIBAVCODEC_VERSION_MICRO = 100</summary>
         public const int LIBAVCODEC_VERSION_MICRO = 0x64;
-        /// <summary>LIBAVCODEC_VERSION_MINOR = 18</summary>
-        public const int LIBAVCODEC_VERSION_MINOR = 0x12;
+        /// <summary>LIBAVCODEC_VERSION_MINOR = 35</summary>
+        public const int LIBAVCODEC_VERSION_MINOR = 0x23;
         /// <summary>LIBAVDEVICE_BUILD = LIBAVDEVICE_VERSION_INT</summary>
         public static int LIBAVDEVICE_BUILD = LIBAVDEVICE_VERSION_INT;
         /// <summary>LIBAVDEVICE_IDENT = &quot;Lavd&quot; AV_STRINGIFY(LIBAVDEVICE_VERSION)</summary>
@@ -1346,8 +1358,8 @@ namespace FFmpeg.AutoGen
         public const int LIBAVDEVICE_VERSION_MAJOR = 0x3a;
         /// <summary>LIBAVDEVICE_VERSION_MICRO = 100</summary>
         public const int LIBAVDEVICE_VERSION_MICRO = 0x64;
-        /// <summary>LIBAVDEVICE_VERSION_MINOR = 3</summary>
-        public const int LIBAVDEVICE_VERSION_MINOR = 0x3;
+        /// <summary>LIBAVDEVICE_VERSION_MINOR = 5</summary>
+        public const int LIBAVDEVICE_VERSION_MINOR = 0x5;
         /// <summary>LIBAVFILTER_BUILD = LIBAVFILTER_VERSION_INT</summary>
         public static int LIBAVFILTER_BUILD = LIBAVFILTER_VERSION_INT;
         /// <summary>LIBAVFILTER_IDENT = &quot;Lavfi&quot;</summary>
@@ -1358,10 +1370,10 @@ namespace FFmpeg.AutoGen
         public static int LIBAVFILTER_VERSION_INT = AV_VERSION_INT(LIBAVFILTER_VERSION_MAJOR, LIBAVFILTER_VERSION_MINOR, LIBAVFILTER_VERSION_MICRO);
         /// <summary>LIBAVFILTER_VERSION_MAJOR = 0x7</summary>
         public const int LIBAVFILTER_VERSION_MAJOR = 0x7;
-        /// <summary>LIBAVFILTER_VERSION_MICRO = 0x64</summary>
-        public const int LIBAVFILTER_VERSION_MICRO = 0x64;
-        /// <summary>LIBAVFILTER_VERSION_MINOR = 0x10</summary>
-        public const int LIBAVFILTER_VERSION_MINOR = 0x10;
+        /// <summary>LIBAVFILTER_VERSION_MICRO = 0x65</summary>
+        public const int LIBAVFILTER_VERSION_MICRO = 0x65;
+        /// <summary>LIBAVFILTER_VERSION_MINOR = 0x28</summary>
+        public const int LIBAVFILTER_VERSION_MINOR = 0x28;
         /// <summary>LIBAVFORMAT_BUILD = LIBAVFORMAT_VERSION_INT</summary>
         public static int LIBAVFORMAT_BUILD = LIBAVFORMAT_VERSION_INT;
         /// <summary>LIBAVFORMAT_IDENT = &quot;Lavf&quot; AV_STRINGIFY(LIBAVFORMAT_VERSION)</summary>
@@ -1374,8 +1386,8 @@ namespace FFmpeg.AutoGen
         public const int LIBAVFORMAT_VERSION_MAJOR = 0x3a;
         /// <summary>LIBAVFORMAT_VERSION_MICRO = 100</summary>
         public const int LIBAVFORMAT_VERSION_MICRO = 0x64;
-        /// <summary>LIBAVFORMAT_VERSION_MINOR = 12</summary>
-        public const int LIBAVFORMAT_VERSION_MINOR = 0xc;
+        /// <summary>LIBAVFORMAT_VERSION_MINOR = 20</summary>
+        public const int LIBAVFORMAT_VERSION_MINOR = 0x14;
         /// <summary>LIBAVUTIL_BUILD = LIBAVUTIL_VERSION_INT</summary>
         public static int LIBAVUTIL_BUILD = LIBAVUTIL_VERSION_INT;
         /// <summary>LIBAVUTIL_IDENT = &quot;Lavu&quot; AV_STRINGIFY(LIBAVUTIL_VERSION)</summary>
@@ -1388,8 +1400,8 @@ namespace FFmpeg.AutoGen
         public const int LIBAVUTIL_VERSION_MAJOR = 0x38;
         /// <summary>LIBAVUTIL_VERSION_MICRO = 100</summary>
         public const int LIBAVUTIL_VERSION_MICRO = 0x64;
-        /// <summary>LIBAVUTIL_VERSION_MINOR = 14</summary>
-        public const int LIBAVUTIL_VERSION_MINOR = 0xe;
+        /// <summary>LIBAVUTIL_VERSION_MINOR = 22</summary>
+        public const int LIBAVUTIL_VERSION_MINOR = 0x16;
         /// <summary>LIBPOSTPROC_BUILD = LIBPOSTPROC_VERSION_INT</summary>
         public static int LIBPOSTPROC_BUILD = LIBPOSTPROC_VERSION_INT;
         /// <summary>LIBPOSTPROC_IDENT = &quot;postproc&quot;</summary>
@@ -1402,8 +1414,8 @@ namespace FFmpeg.AutoGen
         public const int LIBPOSTPROC_VERSION_MAJOR = 0x37;
         /// <summary>LIBPOSTPROC_VERSION_MICRO = 0x64</summary>
         public const int LIBPOSTPROC_VERSION_MICRO = 0x64;
-        /// <summary>LIBPOSTPROC_VERSION_MINOR = 0x1</summary>
-        public const int LIBPOSTPROC_VERSION_MINOR = 0x1;
+        /// <summary>LIBPOSTPROC_VERSION_MINOR = 0x3</summary>
+        public const int LIBPOSTPROC_VERSION_MINOR = 0x3;
         /// <summary>LIBSWRESAMPLE_BUILD = LIBSWRESAMPLE_VERSION_INT</summary>
         public static int LIBSWRESAMPLE_BUILD = LIBSWRESAMPLE_VERSION_INT;
         /// <summary>LIBSWRESAMPLE_IDENT = &quot;SwR&quot;</summary>
@@ -1416,8 +1428,8 @@ namespace FFmpeg.AutoGen
         public const int LIBSWRESAMPLE_VERSION_MAJOR = 0x3;
         /// <summary>LIBSWRESAMPLE_VERSION_MICRO = 0x64</summary>
         public const int LIBSWRESAMPLE_VERSION_MICRO = 0x64;
-        /// <summary>LIBSWRESAMPLE_VERSION_MINOR = 0x1</summary>
-        public const int LIBSWRESAMPLE_VERSION_MINOR = 0x1;
+        /// <summary>LIBSWRESAMPLE_VERSION_MINOR = 0x3</summary>
+        public const int LIBSWRESAMPLE_VERSION_MINOR = 0x3;
         /// <summary>LIBSWSCALE_BUILD = LIBSWSCALE_VERSION_INT</summary>
         public static int LIBSWSCALE_BUILD = LIBSWSCALE_VERSION_INT;
         /// <summary>LIBSWSCALE_IDENT = &quot;SwS&quot;</summary>
@@ -1430,8 +1442,8 @@ namespace FFmpeg.AutoGen
         public const int LIBSWSCALE_VERSION_MAJOR = 0x5;
         /// <summary>LIBSWSCALE_VERSION_MICRO = 0x64</summary>
         public const int LIBSWSCALE_VERSION_MICRO = 0x64;
-        /// <summary>LIBSWSCALE_VERSION_MINOR = 0x1</summary>
-        public const int LIBSWSCALE_VERSION_MINOR = 0x1;
+        /// <summary>LIBSWSCALE_VERSION_MINOR = 0x3</summary>
+        public const int LIBSWSCALE_VERSION_MINOR = 0x3;
         /// <summary>M_E = 2.7182818284590452354</summary>
         public const double M_E = 2.71828182845905D;
         /// <summary>M_LN10 = 2.30258509299404568402</summary>

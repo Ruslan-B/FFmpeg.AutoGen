@@ -79,21 +79,38 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             });
         }
 
-        public void WriteFunctions(string outputFile)
+        public void WriteExportFunctions(string outputFile)
         {
             WriteInternal(outputFile, (units, writer) =>
             {
                 writer.WriteLine($"public unsafe static partial class {ClassName}");
                 using (writer.BeginBlock())
                 {
-                    units.OfType<FunctionDefinition>()
+                    units.OfType<ExportFunctionDefinition>()
                         .OrderBy(x => x.LibraryName)
                         .ThenBy(x => x.Name)
                         .ToList()
                         .ForEach(x =>
                         {
-                            x.SuppressUnmanagedCodeSecurity = SuppressUnmanagedCodeSecurity;
+                            writer.WriteFunction(x);
+                            writer.WriteLine();
+                        });
+                }
+            });
+        }
 
+        public void WriteInlineFunctions(string outputFile)
+        {
+            WriteInternal(outputFile, (units, writer) =>
+            {
+                writer.WriteLine($"public unsafe static partial class {ClassName}");
+                using (writer.BeginBlock())
+                {
+                    units.OfType<InlineFunctionDefinition>()
+                        .OrderBy(x => x.Name)
+                        .ToList()
+                        .ForEach(x =>
+                        {
                             writer.WriteFunction(x);
                             writer.WriteLine();
                         });
@@ -201,7 +218,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             using (var streamWriter = File.CreateText(outputFile))
             using (var textWriter = new IndentedTextWriter(streamWriter))
             {
-                var writer = new Writer(textWriter);
+                var writer = new Writer(textWriter)
+                {
+                    SuppressUnmanagedCodeSecurity = SuppressUnmanagedCodeSecurity
+                };
                 writer.WriteLine("using System;");
                 writer.WriteLine("using System.Runtime.InteropServices;");
                 if (SuppressUnmanagedCodeSecurity) writer.WriteLine("using System.Security;");

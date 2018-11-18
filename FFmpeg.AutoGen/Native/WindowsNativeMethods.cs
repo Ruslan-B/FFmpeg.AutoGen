@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Native
 {
-    internal static class WindowsNativeMethods
+    public static class WindowsNativeMethods
     {
         private const string Kernel32 = "kernel32";
 

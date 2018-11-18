@@ -114,6 +114,27 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_bsf_flush_delegate(AVBSFContext* @ctx);
+        private static av_bsf_flush_delegate av_bsf_flush_fptr = (AVBSFContext* @ctx) =>
+        {
+            av_bsf_flush_fptr = GetFunctionDelegate<av_bsf_flush_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_flush");
+            if (av_bsf_flush_fptr == null)
+            {
+                av_bsf_flush_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_bsf_flush is not supported on this platform.");
+                };
+            }
+            av_bsf_flush_fptr(@ctx);
+        };
+        /// <summary>Reset the internal bitstream filter state / flush internal buffers.</summary>
+        public static void av_bsf_flush(AVBSFContext* @ctx)
+        {
+            av_bsf_flush_fptr(@ctx);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate void av_bsf_free_delegate(AVBSFContext** @ctx);
         private static av_bsf_free_delegate av_bsf_free_fptr = (AVBSFContext** @ctx) =>
         {
@@ -4112,7 +4133,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Same as av_buffersink_get_frame(), but with the ability to specify the number of samples read. This function is less efficient than av_buffersink_get_frame(), because it copies the data around.</summary>
         /// <param name="ctx">pointer to a context of the abuffersink AVFilter.</param>
         /// <param name="frame">pointer to an allocated frame that will be filled with data. The data must be freed using av_frame_unref() / av_frame_free() frame will contain exactly nb_samples audio samples, except at the end of stream, when it can contain less than nb_samples.</param>
-        /// <returns>The return codes have the same meaning as for av_buffersink_get_samples().</returns>
+        /// <returns>The return codes have the same meaning as for av_buffersink_get_frame().</returns>
         public static int av_buffersink_get_samples(AVFilterContext* @ctx, AVFrame* @frame, int @nb_samples)
         {
             return av_buffersink_get_samples_fptr(@ctx, @frame, @nb_samples);
@@ -15021,6 +15042,26 @@ namespace FFmpeg.AutoGen
             }
             av_read_image_line_fptr(@dst, ref @data, @linesize, @desc, @x, @y, @c, @w, @read_pal_component);
         };
+        public static void av_read_image_line(ushort* @dst, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component)
+        {
+            av_read_image_line_fptr(@dst, ref @data, @linesize, @desc, @x, @y, @c, @w, @read_pal_component);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_read_image_line2_delegate(void* @dst, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component, int @dst_element_size);
+        private static av_read_image_line2_delegate av_read_image_line2_fptr = (void* @dst, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component, int @dst_element_size) =>
+        {
+            av_read_image_line2_fptr = GetFunctionDelegate<av_read_image_line2_delegate>(GetOrLoadLibrary("avutil", 56), "av_read_image_line2");
+            if (av_read_image_line2_fptr == null)
+            {
+                av_read_image_line2_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_read_image_line2 is not supported on this platform.");
+                };
+            }
+            av_read_image_line2_fptr(@dst, ref @data, @linesize, @desc, @x, @y, @c, @w, @read_pal_component, @dst_element_size);
+        };
         /// <summary>Read a line from an image, and write the values of the pixel format component c to dst.</summary>
         /// <param name="data">the array containing the pointers to the planes of the image</param>
         /// <param name="linesize">the array containing the linesizes of the image</param>
@@ -15029,9 +15070,10 @@ namespace FFmpeg.AutoGen
         /// <param name="y">the vertical coordinate of the first pixel to read</param>
         /// <param name="w">the width of the line to read, that is the number of values to write to dst</param>
         /// <param name="read_pal_component">if not zero and the format is a paletted format writes the values corresponding to the palette component c in data[1] to dst, rather than the palette indexes in data[0]. The behavior is undefined if the format is not paletted.</param>
-        public static void av_read_image_line(ushort* @dst, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component)
+        /// <param name="dst_element_size">size of elements in dst array (2 or 4 byte)</param>
+        public static void av_read_image_line2(void* @dst, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component, int @dst_element_size)
         {
-            av_read_image_line_fptr(@dst, ref @data, @linesize, @desc, @x, @y, @c, @w, @read_pal_component);
+            av_read_image_line2_fptr(@dst, ref @data, @linesize, @desc, @x, @y, @c, @w, @read_pal_component, @dst_element_size);
         }
         
         
@@ -15875,6 +15917,26 @@ namespace FFmpeg.AutoGen
             }
             av_write_image_line_fptr(@src, ref @data, @linesize, @desc, @x, @y, @c, @w);
         };
+        public static void av_write_image_line(ushort* @src, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w)
+        {
+            av_write_image_line_fptr(@src, ref @data, @linesize, @desc, @x, @y, @c, @w);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_write_image_line2_delegate(void* @src, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @src_element_size);
+        private static av_write_image_line2_delegate av_write_image_line2_fptr = (void* @src, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @src_element_size) =>
+        {
+            av_write_image_line2_fptr = GetFunctionDelegate<av_write_image_line2_delegate>(GetOrLoadLibrary("avutil", 56), "av_write_image_line2");
+            if (av_write_image_line2_fptr == null)
+            {
+                av_write_image_line2_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_write_image_line2 is not supported on this platform.");
+                };
+            }
+            av_write_image_line2_fptr(@src, ref @data, @linesize, @desc, @x, @y, @c, @w, @src_element_size);
+        };
         /// <summary>Write the values from src to the pixel format component c of an image line.</summary>
         /// <param name="src">array containing the values to write</param>
         /// <param name="data">the array containing the pointers to the planes of the image to write into. It is supposed to be zeroed.</param>
@@ -15883,9 +15945,10 @@ namespace FFmpeg.AutoGen
         /// <param name="x">the horizontal coordinate of the first pixel to write</param>
         /// <param name="y">the vertical coordinate of the first pixel to write</param>
         /// <param name="w">the width of the line to write, that is the number of values to write to the image line</param>
-        public static void av_write_image_line(ushort* @src, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w)
+        /// <param name="src_element_size">size of elements in src array (2 or 4 byte)</param>
+        public static void av_write_image_line2(void* @src, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @src_element_size)
         {
-            av_write_image_line_fptr(@src, ref @data, @linesize, @desc, @x, @y, @c, @w);
+            av_write_image_line2_fptr(@src, ref @data, @linesize, @desc, @x, @y, @c, @w, @src_element_size);
         }
         
         

@@ -380,6 +380,14 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate void AVBitStreamFilter_flush (AVBSFContext* @ctx);
+    public unsafe struct AVBitStreamFilter_flush_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVBitStreamFilter_flush_func(AVBitStreamFilter_flush func) => new AVBitStreamFilter_flush_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate int AVInputFormat_read_probe (AVProbeData* @p0);
     public unsafe struct AVInputFormat_read_probe_func
     {
