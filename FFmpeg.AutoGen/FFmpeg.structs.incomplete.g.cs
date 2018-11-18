@@ -23,6 +23,10 @@ namespace FFmpeg.AutoGen
     {
     }
     
+    public unsafe struct AVTreeNode
+    {
+    }
+    
     public unsafe struct AVHWDeviceInternal
     {
     }
