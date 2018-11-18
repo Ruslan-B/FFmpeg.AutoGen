@@ -26,6 +26,27 @@ namespace FFmpeg.AutoGen
         public static implicit operator short[](short_array2 @struct) => @struct.ToArray();
     }
     
+    public unsafe struct void_ptrArray2
+    {
+        public static readonly int Size = 2;
+        void* _0; void* _1;
+        
+        public void* this[uint i]
+        {
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (void** p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (void** p0 = &_0) { *(p0 + i) = value;  } }
+        }
+        public void*[] ToArray()
+        {
+            fixed (void** p0 = &_0) { var a = new void*[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }
+        }
+        public void UpdateFrom(void*[] array)
+        {
+            fixed (void** p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator void*[](void_ptrArray2 @struct) => @struct.ToArray();
+    }
+    
     public unsafe struct byte_ptrArray3
     {
         public static readonly int Size = 3;

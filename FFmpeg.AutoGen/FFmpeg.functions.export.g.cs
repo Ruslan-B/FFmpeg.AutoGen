@@ -15856,6 +15856,120 @@ namespace FFmpeg.AutoGen
         }
         
         
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_tree_destroy_delegate(AVTreeNode* @t);
+        private static av_tree_destroy_delegate av_tree_destroy_fptr = (AVTreeNode* @t) =>
+        {
+            av_tree_destroy_fptr = GetFunctionDelegate<av_tree_destroy_delegate>(GetOrLoadLibrary("avutil", 56), "av_tree_destroy");
+            if (av_tree_destroy_fptr == null)
+            {
+                av_tree_destroy_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_tree_destroy is not supported on this platform.");
+                };
+            }
+            av_tree_destroy_fptr(@t);
+        };
+        public static void av_tree_destroy(AVTreeNode* @t)
+        {
+            av_tree_destroy_fptr(@t);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_tree_enumerate_delegate(AVTreeNode* @t, void* @opaque, av_tree_enumerate_cmp_func @cmp, av_tree_enumerate_enu_func @enu);
+        private static av_tree_enumerate_delegate av_tree_enumerate_fptr = (AVTreeNode* @t, void* @opaque, av_tree_enumerate_cmp_func @cmp, av_tree_enumerate_enu_func @enu) =>
+        {
+            av_tree_enumerate_fptr = GetFunctionDelegate<av_tree_enumerate_delegate>(GetOrLoadLibrary("avutil", 56), "av_tree_enumerate");
+            if (av_tree_enumerate_fptr == null)
+            {
+                av_tree_enumerate_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_tree_enumerate is not supported on this platform.");
+                };
+            }
+            av_tree_enumerate_fptr(@t, @opaque, @cmp, @enu);
+        };
+        /// <summary>Apply enu(opaque, &amp;elem) to all the elements in the tree in a given range.</summary>
+        /// <param name="cmp">a comparison function that returns &lt; 0 for an element below the range, &gt; 0 for an element above the range and == 0 for an element inside the range</param>
+        public static void av_tree_enumerate(AVTreeNode* @t, void* @opaque, av_tree_enumerate_cmp_func @cmp, av_tree_enumerate_enu_func @enu)
+        {
+            av_tree_enumerate_fptr(@t, @opaque, @cmp, @enu);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void* av_tree_find_delegate(AVTreeNode* @root, void* @key, av_tree_find_cmp_func @cmp, ref void_ptrArray2 @next);
+        private static av_tree_find_delegate av_tree_find_fptr = (AVTreeNode* @root, void* @key, av_tree_find_cmp_func @cmp, ref void_ptrArray2 @next) =>
+        {
+            av_tree_find_fptr = GetFunctionDelegate<av_tree_find_delegate>(GetOrLoadLibrary("avutil", 56), "av_tree_find");
+            if (av_tree_find_fptr == null)
+            {
+                av_tree_find_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_tree_find is not supported on this platform.");
+                };
+            }
+            return av_tree_find_fptr(@root, @key, @cmp, ref @next);
+        };
+        /// <summary>Find an element.</summary>
+        /// <param name="root">a pointer to the root node of the tree</param>
+        /// <param name="cmp">compare function used to compare elements in the tree, API identical to that of Standard C&apos;s qsort It is guaranteed that the first and only the first argument to cmp() will be the key parameter to av_tree_find(), thus it could if the user wants, be a different type (like an opaque context).</param>
+        /// <param name="next">If next is not NULL, then next[0] will contain the previous element and next[1] the next element. If either does not exist, then the corresponding entry in next is unchanged.</param>
+        /// <returns>An element with cmp(key, elem) == 0 or NULL if no such element exists in the tree.</returns>
+        public static void* av_tree_find(AVTreeNode* @root, void* @key, av_tree_find_cmp_func @cmp, ref void_ptrArray2 @next)
+        {
+            return av_tree_find_fptr(@root, @key, @cmp, ref @next);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void* av_tree_insert_delegate(AVTreeNode** @rootp, void* @key, av_tree_insert_cmp_func @cmp, AVTreeNode** @next);
+        private static av_tree_insert_delegate av_tree_insert_fptr = (AVTreeNode** @rootp, void* @key, av_tree_insert_cmp_func @cmp, AVTreeNode** @next) =>
+        {
+            av_tree_insert_fptr = GetFunctionDelegate<av_tree_insert_delegate>(GetOrLoadLibrary("avutil", 56), "av_tree_insert");
+            if (av_tree_insert_fptr == null)
+            {
+                av_tree_insert_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_tree_insert is not supported on this platform.");
+                };
+            }
+            return av_tree_insert_fptr(@rootp, @key, @cmp, @next);
+        };
+        /// <summary>Insert or remove an element.</summary>
+        /// <param name="rootp">A pointer to a pointer to the root node of the tree; note that the root node can change during insertions, this is required to keep the tree balanced.</param>
+        /// <param name="key">pointer to the element key to insert in the tree</param>
+        /// <param name="cmp">compare function used to compare elements in the tree, API identical to that of Standard C&apos;s qsort</param>
+        /// <param name="next">Used to allocate and free AVTreeNodes. For insertion the user must set it to an allocated and zeroed object of at least av_tree_node_size bytes size. av_tree_insert() will set it to NULL if it has been consumed. For deleting elements *next is set to NULL by the user and av_tree_insert() will set it to the AVTreeNode which was used for the removed element. This allows the use of flat arrays, which have lower overhead compared to many malloced elements. You might want to define a function like:</param>
+        /// <returns>If no insertion happened, the found element; if an insertion or removal happened, then either key or NULL will be returned. Which one it is depends on the tree state and the implementation. You should make no assumptions that it&apos;s one or the other in the code.</returns>
+        public static void* av_tree_insert(AVTreeNode** @rootp, void* @key, av_tree_insert_cmp_func @cmp, AVTreeNode** @next)
+        {
+            return av_tree_insert_fptr(@rootp, @key, @cmp, @next);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVTreeNode* av_tree_node_alloc_delegate();
+        private static av_tree_node_alloc_delegate av_tree_node_alloc_fptr = () =>
+        {
+            av_tree_node_alloc_fptr = GetFunctionDelegate<av_tree_node_alloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_tree_node_alloc");
+            if (av_tree_node_alloc_fptr == null)
+            {
+                av_tree_node_alloc_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_tree_node_alloc is not supported on this platform.");
+                };
+            }
+            return av_tree_node_alloc_fptr();
+        };
+        /// <summary>Allocate an AVTreeNode.</summary>
+        public static AVTreeNode* av_tree_node_alloc()
+        {
+            return av_tree_node_alloc_fptr();
+        }
+        
+        
         [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate string av_version_info_delegate();

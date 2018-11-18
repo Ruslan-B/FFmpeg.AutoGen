@@ -76,6 +76,38 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int av_tree_find_cmp (void* @key, void* @b);
+    public unsafe struct av_tree_find_cmp_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator av_tree_find_cmp_func(av_tree_find_cmp func) => new av_tree_find_cmp_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int av_tree_insert_cmp (void* @key, void* @b);
+    public unsafe struct av_tree_insert_cmp_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator av_tree_insert_cmp_func(av_tree_insert_cmp func) => new av_tree_insert_cmp_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int av_tree_enumerate_cmp (void* @opaque, void* @elem);
+    public unsafe struct av_tree_enumerate_cmp_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator av_tree_enumerate_cmp_func(av_tree_enumerate_cmp func) => new av_tree_enumerate_cmp_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int av_tree_enumerate_enu (void* @opaque, void* @elem);
+    public unsafe struct av_tree_enumerate_enu_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator av_tree_enumerate_enu_func(av_tree_enumerate_enu func) => new av_tree_enumerate_enu_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void AVHWDeviceContext_free (AVHWDeviceContext* @ctx);
     public unsafe struct AVHWDeviceContext_free_func
     {
