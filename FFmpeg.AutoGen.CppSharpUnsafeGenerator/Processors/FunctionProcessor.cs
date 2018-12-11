@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using CppSharp.AST;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 using Type = CppSharp.AST.Type;
@@ -34,6 +36,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     var inlineDefinition = new InlineFunctionDefinition();
                     PopulateCommon(inlineDefinition);
                     inlineDefinition.Body = function.Body;
+                    inlineDefinition.Sha256 = GetSha256(function.Body);
                     _context.AddUnit(inlineDefinition);
                     continue;
                 }
@@ -172,6 +175,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         private static string GetCommentString(BlockCommandComment comment)
         {
             return comment == null ? null : string.Join(" ", comment.ParagraphComment.Content.OfType<TextComment>().Select(x => x.Text.Trim()));
+        }
+
+        private static string GetSha256(string text)
+        {
+            var bytes = Encoding.UTF8.GetBytes(text);
+            var sha256Managed = new SHA256Managed();
+            var hash = sha256Managed.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
         }
     }
 }
