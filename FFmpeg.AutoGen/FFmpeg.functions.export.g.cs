@@ -12468,6 +12468,69 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate long av_gettime_delegate();
+        private static av_gettime_delegate av_gettime_fptr = () =>
+        {
+            av_gettime_fptr = GetFunctionDelegate<av_gettime_delegate>(GetOrLoadLibrary("avutil", 56), "av_gettime");
+            if (av_gettime_fptr == null)
+            {
+                av_gettime_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_gettime is not supported on this platform.");
+                };
+            }
+            return av_gettime_fptr();
+        };
+        /// <summary>Get the current time in microseconds.</summary>
+        public static long av_gettime()
+        {
+            return av_gettime_fptr();
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate long av_gettime_relative_delegate();
+        private static av_gettime_relative_delegate av_gettime_relative_fptr = () =>
+        {
+            av_gettime_relative_fptr = GetFunctionDelegate<av_gettime_relative_delegate>(GetOrLoadLibrary("avutil", 56), "av_gettime_relative");
+            if (av_gettime_relative_fptr == null)
+            {
+                av_gettime_relative_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_gettime_relative is not supported on this platform.");
+                };
+            }
+            return av_gettime_relative_fptr();
+        };
+        /// <summary>Get the current time in microseconds since some unspecified starting point. On platforms that support it, the time comes from a monotonic clock This property makes this time source ideal for measuring relative time. The returned values may not be monotonic on platforms where a monotonic clock is not available.</summary>
+        public static long av_gettime_relative()
+        {
+            return av_gettime_relative_fptr();
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_gettime_relative_is_monotonic_delegate();
+        private static av_gettime_relative_is_monotonic_delegate av_gettime_relative_is_monotonic_fptr = () =>
+        {
+            av_gettime_relative_is_monotonic_fptr = GetFunctionDelegate<av_gettime_relative_is_monotonic_delegate>(GetOrLoadLibrary("avutil", 56), "av_gettime_relative_is_monotonic");
+            if (av_gettime_relative_is_monotonic_fptr == null)
+            {
+                av_gettime_relative_is_monotonic_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_gettime_relative_is_monotonic is not supported on this platform.");
+                };
+            }
+            return av_gettime_relative_is_monotonic_fptr();
+        };
+        /// <summary>Indicates with a boolean result if the av_gettime_relative() time source is monotonic.</summary>
+        public static int av_gettime_relative_is_monotonic()
+        {
+            return av_gettime_relative_is_monotonic_fptr();
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVBufferRef* av_hwdevice_ctx_alloc_delegate(AVHWDeviceType @type);
         private static av_hwdevice_ctx_alloc_delegate av_hwdevice_ctx_alloc_fptr = (AVHWDeviceType @type) =>
         {
@@ -15967,6 +16030,29 @@ namespace FFmpeg.AutoGen
         public static AVTreeNode* av_tree_node_alloc()
         {
             return av_tree_node_alloc_fptr();
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_usleep_delegate(uint @usec);
+        private static av_usleep_delegate av_usleep_fptr = (uint @usec) =>
+        {
+            av_usleep_fptr = GetFunctionDelegate<av_usleep_delegate>(GetOrLoadLibrary("avutil", 56), "av_usleep");
+            if (av_usleep_fptr == null)
+            {
+                av_usleep_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_usleep is not supported on this platform.");
+                };
+            }
+            return av_usleep_fptr(@usec);
+        };
+        /// <summary>Sleep for a period of time. Although the duration is expressed in microseconds, the actual delay may be rounded to the precision of the system timer.</summary>
+        /// <param name="usec">Number of microseconds to sleep.</param>
+        /// <returns>zero on success or (negative) error code.</returns>
+        public static int av_usleep(uint @usec)
+        {
+            return av_usleep_fptr(@usec);
         }
         
         

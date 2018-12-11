@@ -99,16 +99,19 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         {
             function.ReturnType.Attributes.ToList().ForEach(WriteLine);
             var parameters = GetParameters(function.Parameters);
-            
+
             WriteSummary(function);
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
             WriteReturnComment(function.ReturnComment);
 
             if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]");
             WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
-            WriteLine(function.Body);
+            var lines = function.Body.Split(new [] {'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            lines.ForEach(WriteLine);
+            WriteLine($"// original body hash: {function.Sha256}");
             WriteLine();
         }
+
 
         private void WriteDefaultFunctionDelegateExpression(ExportFunctionDefinition function,
             string parameterNames, string functionDelegateName, string functionPtrName, string returnCommand)
