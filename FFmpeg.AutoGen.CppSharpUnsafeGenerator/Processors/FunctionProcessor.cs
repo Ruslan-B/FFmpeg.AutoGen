@@ -123,7 +123,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 switch (builtinType.Type)
                 {
                     case PrimitiveType.Char:
-                        return new TypeDefinition {Name = "string", Attributes = new[] {"[MarshalAs(UnmanagedType.LPStr)]"}};
+                        return new TypeDefinition {Name = "string", Attributes = new[] { "[MarshalAs((UnmanagedType)48)]" } };
                     case PrimitiveType.Void:
                         return new TypeDefinition {Name = "void*"};
                     default:
