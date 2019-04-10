@@ -36,7 +36,7 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int AVClass_query_ranges (AVOptionRanges** @p0, void* @obj, [MarshalAs(UnmanagedType.LPStr)] string @key, int @flags);
+    public unsafe delegate int AVClass_query_ranges (AVOptionRanges** @p0, void* @obj, [MarshalAs((UnmanagedType)48)] string @key, int @flags);
     public unsafe struct AVClass_query_ranges_func
     {
         public IntPtr Pointer;
@@ -596,7 +596,7 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int AVFormatContext_open_cb (AVFormatContext* @s, AVIOContext** @p, [MarshalAs(UnmanagedType.LPStr)] string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options);
+    public unsafe delegate int AVFormatContext_open_cb (AVFormatContext* @s, AVIOContext** @p, [MarshalAs((UnmanagedType)48)] string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options);
     public unsafe struct AVFormatContext_open_cb_func
     {
         public IntPtr Pointer;
@@ -604,7 +604,7 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int AVFormatContext_io_open (AVFormatContext* @s, AVIOContext** @pb, [MarshalAs(UnmanagedType.LPStr)] string @url, int @flags, AVDictionary** @options);
+    public unsafe delegate int AVFormatContext_io_open (AVFormatContext* @s, AVIOContext** @pb, [MarshalAs((UnmanagedType)48)] string @url, int @flags, AVDictionary** @options);
     public unsafe struct AVFormatContext_io_open_func
     {
         public IntPtr Pointer;
@@ -772,7 +772,7 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int AVFilter_process_command (AVFilterContext* @p0, [MarshalAs(UnmanagedType.LPStr)] string @cmd, [MarshalAs(UnmanagedType.LPStr)] string @arg, byte* @res, int @res_len, int @flags);
+    public unsafe delegate int AVFilter_process_command (AVFilterContext* @p0, [MarshalAs((UnmanagedType)48)] string @cmd, [MarshalAs((UnmanagedType)48)] string @arg, byte* @res, int @res_len, int @flags);
     public unsafe struct AVFilter_process_command_func
     {
         public IntPtr Pointer;
@@ -812,7 +812,7 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void av_log_set_callback_callback (void* @p0, int @p1, [MarshalAs(UnmanagedType.LPStr)] string @p2, byte* @p3);
+    public unsafe delegate void av_log_set_callback_callback (void* @p0, int @p1, [MarshalAs((UnmanagedType)48)] string @p2, byte* @p3);
     public unsafe struct av_log_set_callback_callback_func
     {
         public IntPtr Pointer;
@@ -916,7 +916,7 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int av_format_get_open_cb (AVFormatContext* @s, AVIOContext** @pb, [MarshalAs(UnmanagedType.LPStr)] string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options);
+    public unsafe delegate int av_format_get_open_cb (AVFormatContext* @s, AVIOContext** @pb, [MarshalAs((UnmanagedType)48)] string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options);
     public unsafe struct av_format_get_open_cb_func
     {
         public IntPtr Pointer;
@@ -924,7 +924,7 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int av_format_set_open_cb_callback (AVFormatContext* @s, AVIOContext** @pb, [MarshalAs(UnmanagedType.LPStr)] string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options);
+    public unsafe delegate int av_format_set_open_cb_callback (AVFormatContext* @s, AVIOContext** @pb, [MarshalAs((UnmanagedType)48)] string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options);
     public unsafe struct av_format_set_open_cb_callback_func
     {
         public IntPtr Pointer;
