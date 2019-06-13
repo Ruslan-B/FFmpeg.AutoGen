@@ -39,6 +39,28 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             Process(context);
         }
 
+
+        public void WriteLibraries(string combine)
+        {
+            WriteInternal(combine, (units, writer) =>
+            {
+                writer.WriteLine("using System.Collections.Generic;");
+                writer.WriteLine();
+
+                writer.WriteLine($"public unsafe static partial class {ClassName}");
+                using (writer.BeginBlock())
+                {
+                    writer.WriteLine("public static Dictionary<string, int> LibraryVersionMap =  new Dictionary<string, int>");
+                    using (writer.BeginBlock(true))
+                    {
+                        var libraryVersionMap = Exports.Select(x => new {x.LibraryName, x.LibraryVersion}).Distinct().ToDictionary(x => x.LibraryName, x => x.LibraryVersion);
+                        foreach (var pair in libraryVersionMap) writer.WriteLine($"{{\"{pair.Key}\", {pair.Value}}},");
+                    }
+                    writer.WriteLine(";");
+                }
+            });
+        }
+
         public void WriteEnums(string outputFile)
         {
             WriteInternal(outputFile, (units, writer) =>
@@ -85,7 +107,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             {
                 writer.WriteLine($"public unsafe static partial class {ClassName}");
                 using (writer.BeginBlock())
-                {
                     units.OfType<ExportFunctionDefinition>()
                         .OrderBy(x => x.LibraryName)
                         .ThenBy(x => x.Name)
@@ -95,7 +116,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                             writer.WriteFunction(x);
                             writer.WriteLine();
                         });
-                }
             });
         }
 
@@ -105,7 +125,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             {
                 writer.WriteLine($"public unsafe static partial class {ClassName}");
                 using (writer.BeginBlock())
-                {
                     units.OfType<InlineFunctionDefinition>()
                         .OrderBy(x => x.Name)
                         .ToList()
@@ -114,7 +133,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                             writer.WriteFunction(x);
                             writer.WriteLine();
                         });
-                }
             });
         }
 
@@ -201,6 +219,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     Diagnostics.Error("A file from '{0}' was not found", string.Join(",", files));
                     break;
             }
+
             for (uint i = 0; i < result.DiagnosticsCount; ++i)
             {
                 var diagnostics = result.GetDiagnostics(i);

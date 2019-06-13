@@ -9,7 +9,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_bitstream_filter_close_delegate(AVBitStreamFilterContext* @bsf);
         private static av_bitstream_filter_close_delegate av_bitstream_filter_close_fptr = (AVBitStreamFilterContext* @bsf) =>
         {
-            av_bitstream_filter_close_fptr = GetFunctionDelegate<av_bitstream_filter_close_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bitstream_filter_close");
+            av_bitstream_filter_close_fptr = GetFunctionDelegate<av_bitstream_filter_close_delegate>(GetOrLoadLibrary("avcodec"), "av_bitstream_filter_close");
             if (av_bitstream_filter_close_fptr == null)
             {
                 av_bitstream_filter_close_fptr = delegate 
@@ -30,7 +30,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_bitstream_filter_filter_delegate(AVBitStreamFilterContext* @bsfc, AVCodecContext* @avctx, [MarshalAs((UnmanagedType)48)] string @args, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe);
         private static av_bitstream_filter_filter_delegate av_bitstream_filter_filter_fptr = (AVBitStreamFilterContext* @bsfc, AVCodecContext* @avctx, string @args, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe) =>
         {
-            av_bitstream_filter_filter_fptr = GetFunctionDelegate<av_bitstream_filter_filter_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bitstream_filter_filter");
+            av_bitstream_filter_filter_fptr = GetFunctionDelegate<av_bitstream_filter_filter_delegate>(GetOrLoadLibrary("avcodec"), "av_bitstream_filter_filter");
             if (av_bitstream_filter_filter_fptr == null)
             {
                 av_bitstream_filter_filter_fptr = delegate 
@@ -51,7 +51,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBitStreamFilterContext* av_bitstream_filter_init_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static av_bitstream_filter_init_delegate av_bitstream_filter_init_fptr = (string @name) =>
         {
-            av_bitstream_filter_init_fptr = GetFunctionDelegate<av_bitstream_filter_init_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bitstream_filter_init");
+            av_bitstream_filter_init_fptr = GetFunctionDelegate<av_bitstream_filter_init_delegate>(GetOrLoadLibrary("avcodec"), "av_bitstream_filter_init");
             if (av_bitstream_filter_init_fptr == null)
             {
                 av_bitstream_filter_init_fptr = delegate 
@@ -72,7 +72,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBitStreamFilter* av_bitstream_filter_next_delegate(AVBitStreamFilter* @f);
         private static av_bitstream_filter_next_delegate av_bitstream_filter_next_fptr = (AVBitStreamFilter* @f) =>
         {
-            av_bitstream_filter_next_fptr = GetFunctionDelegate<av_bitstream_filter_next_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bitstream_filter_next");
+            av_bitstream_filter_next_fptr = GetFunctionDelegate<av_bitstream_filter_next_delegate>(GetOrLoadLibrary("avcodec"), "av_bitstream_filter_next");
             if (av_bitstream_filter_next_fptr == null)
             {
                 av_bitstream_filter_next_fptr = delegate 
@@ -93,7 +93,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_bsf_alloc_delegate(AVBitStreamFilter* @filter, AVBSFContext** @ctx);
         private static av_bsf_alloc_delegate av_bsf_alloc_fptr = (AVBitStreamFilter* @filter, AVBSFContext** @ctx) =>
         {
-            av_bsf_alloc_fptr = GetFunctionDelegate<av_bsf_alloc_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_alloc");
+            av_bsf_alloc_fptr = GetFunctionDelegate<av_bsf_alloc_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_alloc");
             if (av_bsf_alloc_fptr == null)
             {
                 av_bsf_alloc_fptr = delegate 
@@ -117,7 +117,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_bsf_flush_delegate(AVBSFContext* @ctx);
         private static av_bsf_flush_delegate av_bsf_flush_fptr = (AVBSFContext* @ctx) =>
         {
-            av_bsf_flush_fptr = GetFunctionDelegate<av_bsf_flush_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_flush");
+            av_bsf_flush_fptr = GetFunctionDelegate<av_bsf_flush_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_flush");
             if (av_bsf_flush_fptr == null)
             {
                 av_bsf_flush_fptr = delegate 
@@ -138,7 +138,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_bsf_free_delegate(AVBSFContext** @ctx);
         private static av_bsf_free_delegate av_bsf_free_fptr = (AVBSFContext** @ctx) =>
         {
-            av_bsf_free_fptr = GetFunctionDelegate<av_bsf_free_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_free");
+            av_bsf_free_fptr = GetFunctionDelegate<av_bsf_free_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_free");
             if (av_bsf_free_fptr == null)
             {
                 av_bsf_free_fptr = delegate 
@@ -159,7 +159,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBitStreamFilter* av_bsf_get_by_name_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static av_bsf_get_by_name_delegate av_bsf_get_by_name_fptr = (string @name) =>
         {
-            av_bsf_get_by_name_fptr = GetFunctionDelegate<av_bsf_get_by_name_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_get_by_name");
+            av_bsf_get_by_name_fptr = GetFunctionDelegate<av_bsf_get_by_name_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_get_by_name");
             if (av_bsf_get_by_name_fptr == null)
             {
                 av_bsf_get_by_name_fptr = delegate 
@@ -181,7 +181,7 @@ namespace FFmpeg.AutoGen
         private delegate AVClass* av_bsf_get_class_delegate();
         private static av_bsf_get_class_delegate av_bsf_get_class_fptr = () =>
         {
-            av_bsf_get_class_fptr = GetFunctionDelegate<av_bsf_get_class_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_get_class");
+            av_bsf_get_class_fptr = GetFunctionDelegate<av_bsf_get_class_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_get_class");
             if (av_bsf_get_class_fptr == null)
             {
                 av_bsf_get_class_fptr = delegate 
@@ -202,7 +202,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_bsf_get_null_filter_delegate(AVBSFContext** @bsf);
         private static av_bsf_get_null_filter_delegate av_bsf_get_null_filter_fptr = (AVBSFContext** @bsf) =>
         {
-            av_bsf_get_null_filter_fptr = GetFunctionDelegate<av_bsf_get_null_filter_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_get_null_filter");
+            av_bsf_get_null_filter_fptr = GetFunctionDelegate<av_bsf_get_null_filter_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_get_null_filter");
             if (av_bsf_get_null_filter_fptr == null)
             {
                 av_bsf_get_null_filter_fptr = delegate 
@@ -224,7 +224,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_bsf_init_delegate(AVBSFContext* @ctx);
         private static av_bsf_init_delegate av_bsf_init_fptr = (AVBSFContext* @ctx) =>
         {
-            av_bsf_init_fptr = GetFunctionDelegate<av_bsf_init_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_init");
+            av_bsf_init_fptr = GetFunctionDelegate<av_bsf_init_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_init");
             if (av_bsf_init_fptr == null)
             {
                 av_bsf_init_fptr = delegate 
@@ -245,7 +245,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBitStreamFilter* av_bsf_iterate_delegate(void** @opaque);
         private static av_bsf_iterate_delegate av_bsf_iterate_fptr = (void** @opaque) =>
         {
-            av_bsf_iterate_fptr = GetFunctionDelegate<av_bsf_iterate_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_iterate");
+            av_bsf_iterate_fptr = GetFunctionDelegate<av_bsf_iterate_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_iterate");
             if (av_bsf_iterate_fptr == null)
             {
                 av_bsf_iterate_fptr = delegate 
@@ -268,7 +268,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBSFList* av_bsf_list_alloc_delegate();
         private static av_bsf_list_alloc_delegate av_bsf_list_alloc_fptr = () =>
         {
-            av_bsf_list_alloc_fptr = GetFunctionDelegate<av_bsf_list_alloc_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_list_alloc");
+            av_bsf_list_alloc_fptr = GetFunctionDelegate<av_bsf_list_alloc_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_list_alloc");
             if (av_bsf_list_alloc_fptr == null)
             {
                 av_bsf_list_alloc_fptr = delegate 
@@ -290,7 +290,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_bsf_list_append_delegate(AVBSFList* @lst, AVBSFContext* @bsf);
         private static av_bsf_list_append_delegate av_bsf_list_append_fptr = (AVBSFList* @lst, AVBSFContext* @bsf) =>
         {
-            av_bsf_list_append_fptr = GetFunctionDelegate<av_bsf_list_append_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_list_append");
+            av_bsf_list_append_fptr = GetFunctionDelegate<av_bsf_list_append_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_list_append");
             if (av_bsf_list_append_fptr == null)
             {
                 av_bsf_list_append_fptr = delegate 
@@ -314,7 +314,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_bsf_list_append2_delegate(AVBSFList* @lst, [MarshalAs((UnmanagedType)48)] string @bsf_name, AVDictionary** @options);
         private static av_bsf_list_append2_delegate av_bsf_list_append2_fptr = (AVBSFList* @lst, string @bsf_name, AVDictionary** @options) =>
         {
-            av_bsf_list_append2_fptr = GetFunctionDelegate<av_bsf_list_append2_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_list_append2");
+            av_bsf_list_append2_fptr = GetFunctionDelegate<av_bsf_list_append2_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_list_append2");
             if (av_bsf_list_append2_fptr == null)
             {
                 av_bsf_list_append2_fptr = delegate 
@@ -339,7 +339,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_bsf_list_finalize_delegate(AVBSFList** @lst, AVBSFContext** @bsf);
         private static av_bsf_list_finalize_delegate av_bsf_list_finalize_fptr = (AVBSFList** @lst, AVBSFContext** @bsf) =>
         {
-            av_bsf_list_finalize_fptr = GetFunctionDelegate<av_bsf_list_finalize_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_list_finalize");
+            av_bsf_list_finalize_fptr = GetFunctionDelegate<av_bsf_list_finalize_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_list_finalize");
             if (av_bsf_list_finalize_fptr == null)
             {
                 av_bsf_list_finalize_fptr = delegate 
@@ -363,7 +363,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_bsf_list_free_delegate(AVBSFList** @lst);
         private static av_bsf_list_free_delegate av_bsf_list_free_fptr = (AVBSFList** @lst) =>
         {
-            av_bsf_list_free_fptr = GetFunctionDelegate<av_bsf_list_free_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_list_free");
+            av_bsf_list_free_fptr = GetFunctionDelegate<av_bsf_list_free_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_list_free");
             if (av_bsf_list_free_fptr == null)
             {
                 av_bsf_list_free_fptr = delegate 
@@ -385,7 +385,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_bsf_list_parse_str_delegate([MarshalAs((UnmanagedType)48)] string @str, AVBSFContext** @bsf);
         private static av_bsf_list_parse_str_delegate av_bsf_list_parse_str_fptr = (string @str, AVBSFContext** @bsf) =>
         {
-            av_bsf_list_parse_str_fptr = GetFunctionDelegate<av_bsf_list_parse_str_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_list_parse_str");
+            av_bsf_list_parse_str_fptr = GetFunctionDelegate<av_bsf_list_parse_str_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_list_parse_str");
             if (av_bsf_list_parse_str_fptr == null)
             {
                 av_bsf_list_parse_str_fptr = delegate 
@@ -409,7 +409,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBitStreamFilter* av_bsf_next_delegate(void** @opaque);
         private static av_bsf_next_delegate av_bsf_next_fptr = (void** @opaque) =>
         {
-            av_bsf_next_fptr = GetFunctionDelegate<av_bsf_next_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_next");
+            av_bsf_next_fptr = GetFunctionDelegate<av_bsf_next_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_next");
             if (av_bsf_next_fptr == null)
             {
                 av_bsf_next_fptr = delegate 
@@ -430,7 +430,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_bsf_receive_packet_delegate(AVBSFContext* @ctx, AVPacket* @pkt);
         private static av_bsf_receive_packet_delegate av_bsf_receive_packet_fptr = (AVBSFContext* @ctx, AVPacket* @pkt) =>
         {
-            av_bsf_receive_packet_fptr = GetFunctionDelegate<av_bsf_receive_packet_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_receive_packet");
+            av_bsf_receive_packet_fptr = GetFunctionDelegate<av_bsf_receive_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_receive_packet");
             if (av_bsf_receive_packet_fptr == null)
             {
                 av_bsf_receive_packet_fptr = delegate 
@@ -453,7 +453,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_bsf_send_packet_delegate(AVBSFContext* @ctx, AVPacket* @pkt);
         private static av_bsf_send_packet_delegate av_bsf_send_packet_fptr = (AVBSFContext* @ctx, AVPacket* @pkt) =>
         {
-            av_bsf_send_packet_fptr = GetFunctionDelegate<av_bsf_send_packet_delegate>(GetOrLoadLibrary("avcodec", 58), "av_bsf_send_packet");
+            av_bsf_send_packet_fptr = GetFunctionDelegate<av_bsf_send_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_send_packet");
             if (av_bsf_send_packet_fptr == null)
             {
                 av_bsf_send_packet_fptr = delegate 
@@ -476,7 +476,7 @@ namespace FFmpeg.AutoGen
         private delegate ushort* av_codec_get_chroma_intra_matrix_delegate(AVCodecContext* @avctx);
         private static av_codec_get_chroma_intra_matrix_delegate av_codec_get_chroma_intra_matrix_fptr = (AVCodecContext* @avctx) =>
         {
-            av_codec_get_chroma_intra_matrix_fptr = GetFunctionDelegate<av_codec_get_chroma_intra_matrix_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_get_chroma_intra_matrix");
+            av_codec_get_chroma_intra_matrix_fptr = GetFunctionDelegate<av_codec_get_chroma_intra_matrix_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_chroma_intra_matrix");
             if (av_codec_get_chroma_intra_matrix_fptr == null)
             {
                 av_codec_get_chroma_intra_matrix_fptr = delegate 
@@ -497,7 +497,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecDescriptor* av_codec_get_codec_descriptor_delegate(AVCodecContext* @avctx);
         private static av_codec_get_codec_descriptor_delegate av_codec_get_codec_descriptor_fptr = (AVCodecContext* @avctx) =>
         {
-            av_codec_get_codec_descriptor_fptr = GetFunctionDelegate<av_codec_get_codec_descriptor_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_get_codec_descriptor");
+            av_codec_get_codec_descriptor_fptr = GetFunctionDelegate<av_codec_get_codec_descriptor_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_codec_descriptor");
             if (av_codec_get_codec_descriptor_fptr == null)
             {
                 av_codec_get_codec_descriptor_fptr = delegate 
@@ -518,7 +518,7 @@ namespace FFmpeg.AutoGen
         private delegate uint av_codec_get_codec_properties_delegate(AVCodecContext* @avctx);
         private static av_codec_get_codec_properties_delegate av_codec_get_codec_properties_fptr = (AVCodecContext* @avctx) =>
         {
-            av_codec_get_codec_properties_fptr = GetFunctionDelegate<av_codec_get_codec_properties_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_get_codec_properties");
+            av_codec_get_codec_properties_fptr = GetFunctionDelegate<av_codec_get_codec_properties_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_codec_properties");
             if (av_codec_get_codec_properties_fptr == null)
             {
                 av_codec_get_codec_properties_fptr = delegate 
@@ -539,7 +539,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_codec_get_lowres_delegate(AVCodecContext* @avctx);
         private static av_codec_get_lowres_delegate av_codec_get_lowres_fptr = (AVCodecContext* @avctx) =>
         {
-            av_codec_get_lowres_fptr = GetFunctionDelegate<av_codec_get_lowres_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_get_lowres");
+            av_codec_get_lowres_fptr = GetFunctionDelegate<av_codec_get_lowres_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_lowres");
             if (av_codec_get_lowres_fptr == null)
             {
                 av_codec_get_lowres_fptr = delegate 
@@ -560,7 +560,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_codec_get_max_lowres_delegate(AVCodec* @codec);
         private static av_codec_get_max_lowres_delegate av_codec_get_max_lowres_fptr = (AVCodec* @codec) =>
         {
-            av_codec_get_max_lowres_fptr = GetFunctionDelegate<av_codec_get_max_lowres_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_get_max_lowres");
+            av_codec_get_max_lowres_fptr = GetFunctionDelegate<av_codec_get_max_lowres_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_max_lowres");
             if (av_codec_get_max_lowres_fptr == null)
             {
                 av_codec_get_max_lowres_fptr = delegate 
@@ -581,7 +581,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_codec_get_pkt_timebase_delegate(AVCodecContext* @avctx);
         private static av_codec_get_pkt_timebase_delegate av_codec_get_pkt_timebase_fptr = (AVCodecContext* @avctx) =>
         {
-            av_codec_get_pkt_timebase_fptr = GetFunctionDelegate<av_codec_get_pkt_timebase_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_get_pkt_timebase");
+            av_codec_get_pkt_timebase_fptr = GetFunctionDelegate<av_codec_get_pkt_timebase_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_pkt_timebase");
             if (av_codec_get_pkt_timebase_fptr == null)
             {
                 av_codec_get_pkt_timebase_fptr = delegate 
@@ -603,7 +603,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_codec_get_seek_preroll_delegate(AVCodecContext* @avctx);
         private static av_codec_get_seek_preroll_delegate av_codec_get_seek_preroll_fptr = (AVCodecContext* @avctx) =>
         {
-            av_codec_get_seek_preroll_fptr = GetFunctionDelegate<av_codec_get_seek_preroll_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_get_seek_preroll");
+            av_codec_get_seek_preroll_fptr = GetFunctionDelegate<av_codec_get_seek_preroll_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_seek_preroll");
             if (av_codec_get_seek_preroll_fptr == null)
             {
                 av_codec_get_seek_preroll_fptr = delegate 
@@ -624,7 +624,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_codec_is_decoder_delegate(AVCodec* @codec);
         private static av_codec_is_decoder_delegate av_codec_is_decoder_fptr = (AVCodec* @codec) =>
         {
-            av_codec_is_decoder_fptr = GetFunctionDelegate<av_codec_is_decoder_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_is_decoder");
+            av_codec_is_decoder_fptr = GetFunctionDelegate<av_codec_is_decoder_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_is_decoder");
             if (av_codec_is_decoder_fptr == null)
             {
                 av_codec_is_decoder_fptr = delegate 
@@ -646,7 +646,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_codec_is_encoder_delegate(AVCodec* @codec);
         private static av_codec_is_encoder_delegate av_codec_is_encoder_fptr = (AVCodec* @codec) =>
         {
-            av_codec_is_encoder_fptr = GetFunctionDelegate<av_codec_is_encoder_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_is_encoder");
+            av_codec_is_encoder_fptr = GetFunctionDelegate<av_codec_is_encoder_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_is_encoder");
             if (av_codec_is_encoder_fptr == null)
             {
                 av_codec_is_encoder_fptr = delegate 
@@ -668,7 +668,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodec* av_codec_iterate_delegate(void** @opaque);
         private static av_codec_iterate_delegate av_codec_iterate_fptr = (void** @opaque) =>
         {
-            av_codec_iterate_fptr = GetFunctionDelegate<av_codec_iterate_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_iterate");
+            av_codec_iterate_fptr = GetFunctionDelegate<av_codec_iterate_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_iterate");
             if (av_codec_iterate_fptr == null)
             {
                 av_codec_iterate_fptr = delegate 
@@ -691,7 +691,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodec* av_codec_next_delegate(AVCodec* @c);
         private static av_codec_next_delegate av_codec_next_fptr = (AVCodec* @c) =>
         {
-            av_codec_next_fptr = GetFunctionDelegate<av_codec_next_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_next");
+            av_codec_next_fptr = GetFunctionDelegate<av_codec_next_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_next");
             if (av_codec_next_fptr == null)
             {
                 av_codec_next_fptr = delegate 
@@ -713,7 +713,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_codec_set_chroma_intra_matrix_delegate(AVCodecContext* @avctx, ushort* @val);
         private static av_codec_set_chroma_intra_matrix_delegate av_codec_set_chroma_intra_matrix_fptr = (AVCodecContext* @avctx, ushort* @val) =>
         {
-            av_codec_set_chroma_intra_matrix_fptr = GetFunctionDelegate<av_codec_set_chroma_intra_matrix_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_set_chroma_intra_matrix");
+            av_codec_set_chroma_intra_matrix_fptr = GetFunctionDelegate<av_codec_set_chroma_intra_matrix_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_set_chroma_intra_matrix");
             if (av_codec_set_chroma_intra_matrix_fptr == null)
             {
                 av_codec_set_chroma_intra_matrix_fptr = delegate 
@@ -734,7 +734,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_codec_set_codec_descriptor_delegate(AVCodecContext* @avctx, AVCodecDescriptor* @desc);
         private static av_codec_set_codec_descriptor_delegate av_codec_set_codec_descriptor_fptr = (AVCodecContext* @avctx, AVCodecDescriptor* @desc) =>
         {
-            av_codec_set_codec_descriptor_fptr = GetFunctionDelegate<av_codec_set_codec_descriptor_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_set_codec_descriptor");
+            av_codec_set_codec_descriptor_fptr = GetFunctionDelegate<av_codec_set_codec_descriptor_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_set_codec_descriptor");
             if (av_codec_set_codec_descriptor_fptr == null)
             {
                 av_codec_set_codec_descriptor_fptr = delegate 
@@ -755,7 +755,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_codec_set_lowres_delegate(AVCodecContext* @avctx, int @val);
         private static av_codec_set_lowres_delegate av_codec_set_lowres_fptr = (AVCodecContext* @avctx, int @val) =>
         {
-            av_codec_set_lowres_fptr = GetFunctionDelegate<av_codec_set_lowres_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_set_lowres");
+            av_codec_set_lowres_fptr = GetFunctionDelegate<av_codec_set_lowres_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_set_lowres");
             if (av_codec_set_lowres_fptr == null)
             {
                 av_codec_set_lowres_fptr = delegate 
@@ -776,7 +776,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_codec_set_pkt_timebase_delegate(AVCodecContext* @avctx, AVRational @val);
         private static av_codec_set_pkt_timebase_delegate av_codec_set_pkt_timebase_fptr = (AVCodecContext* @avctx, AVRational @val) =>
         {
-            av_codec_set_pkt_timebase_fptr = GetFunctionDelegate<av_codec_set_pkt_timebase_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_set_pkt_timebase");
+            av_codec_set_pkt_timebase_fptr = GetFunctionDelegate<av_codec_set_pkt_timebase_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_set_pkt_timebase");
             if (av_codec_set_pkt_timebase_fptr == null)
             {
                 av_codec_set_pkt_timebase_fptr = delegate 
@@ -797,7 +797,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_codec_set_seek_preroll_delegate(AVCodecContext* @avctx, int @val);
         private static av_codec_set_seek_preroll_delegate av_codec_set_seek_preroll_fptr = (AVCodecContext* @avctx, int @val) =>
         {
-            av_codec_set_seek_preroll_fptr = GetFunctionDelegate<av_codec_set_seek_preroll_delegate>(GetOrLoadLibrary("avcodec", 58), "av_codec_set_seek_preroll");
+            av_codec_set_seek_preroll_fptr = GetFunctionDelegate<av_codec_set_seek_preroll_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_set_seek_preroll");
             if (av_codec_set_seek_preroll_fptr == null)
             {
                 av_codec_set_seek_preroll_fptr = delegate 
@@ -818,7 +818,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_copy_packet_delegate(AVPacket* @dst, AVPacket* @src);
         private static av_copy_packet_delegate av_copy_packet_fptr = (AVPacket* @dst, AVPacket* @src) =>
         {
-            av_copy_packet_fptr = GetFunctionDelegate<av_copy_packet_delegate>(GetOrLoadLibrary("avcodec", 58), "av_copy_packet");
+            av_copy_packet_fptr = GetFunctionDelegate<av_copy_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_copy_packet");
             if (av_copy_packet_fptr == null)
             {
                 av_copy_packet_fptr = delegate 
@@ -841,7 +841,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_copy_packet_side_data_delegate(AVPacket* @dst, AVPacket* @src);
         private static av_copy_packet_side_data_delegate av_copy_packet_side_data_fptr = (AVPacket* @dst, AVPacket* @src) =>
         {
-            av_copy_packet_side_data_fptr = GetFunctionDelegate<av_copy_packet_side_data_delegate>(GetOrLoadLibrary("avcodec", 58), "av_copy_packet_side_data");
+            av_copy_packet_side_data_fptr = GetFunctionDelegate<av_copy_packet_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_copy_packet_side_data");
             if (av_copy_packet_side_data_fptr == null)
             {
                 av_copy_packet_side_data_fptr = delegate 
@@ -864,7 +864,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCPBProperties* av_cpb_properties_alloc_delegate(ulong* @size);
         private static av_cpb_properties_alloc_delegate av_cpb_properties_alloc_fptr = (ulong* @size) =>
         {
-            av_cpb_properties_alloc_fptr = GetFunctionDelegate<av_cpb_properties_alloc_delegate>(GetOrLoadLibrary("avcodec", 58), "av_cpb_properties_alloc");
+            av_cpb_properties_alloc_fptr = GetFunctionDelegate<av_cpb_properties_alloc_delegate>(GetOrLoadLibrary("avcodec"), "av_cpb_properties_alloc");
             if (av_cpb_properties_alloc_fptr == null)
             {
                 av_cpb_properties_alloc_fptr = delegate 
@@ -887,7 +887,7 @@ namespace FFmpeg.AutoGen
         private delegate AVD3D11VAContext* av_d3d11va_alloc_context_delegate();
         private static av_d3d11va_alloc_context_delegate av_d3d11va_alloc_context_fptr = () =>
         {
-            av_d3d11va_alloc_context_fptr = GetFunctionDelegate<av_d3d11va_alloc_context_delegate>(GetOrLoadLibrary("avcodec", 58), "av_d3d11va_alloc_context");
+            av_d3d11va_alloc_context_fptr = GetFunctionDelegate<av_d3d11va_alloc_context_delegate>(GetOrLoadLibrary("avcodec"), "av_d3d11va_alloc_context");
             if (av_d3d11va_alloc_context_fptr == null)
             {
                 av_d3d11va_alloc_context_fptr = delegate 
@@ -909,7 +909,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_dup_packet_delegate(AVPacket* @pkt);
         private static av_dup_packet_delegate av_dup_packet_fptr = (AVPacket* @pkt) =>
         {
-            av_dup_packet_fptr = GetFunctionDelegate<av_dup_packet_delegate>(GetOrLoadLibrary("avcodec", 58), "av_dup_packet");
+            av_dup_packet_fptr = GetFunctionDelegate<av_dup_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_dup_packet");
             if (av_dup_packet_fptr == null)
             {
                 av_dup_packet_fptr = delegate 
@@ -930,7 +930,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_fast_padded_malloc_delegate(void* @ptr, uint* @size, ulong @min_size);
         private static av_fast_padded_malloc_delegate av_fast_padded_malloc_fptr = (void* @ptr, uint* @size, ulong @min_size) =>
         {
-            av_fast_padded_malloc_fptr = GetFunctionDelegate<av_fast_padded_malloc_delegate>(GetOrLoadLibrary("avcodec", 58), "av_fast_padded_malloc");
+            av_fast_padded_malloc_fptr = GetFunctionDelegate<av_fast_padded_malloc_delegate>(GetOrLoadLibrary("avcodec"), "av_fast_padded_malloc");
             if (av_fast_padded_malloc_fptr == null)
             {
                 av_fast_padded_malloc_fptr = delegate 
@@ -951,7 +951,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_fast_padded_mallocz_delegate(void* @ptr, uint* @size, ulong @min_size);
         private static av_fast_padded_mallocz_delegate av_fast_padded_mallocz_fptr = (void* @ptr, uint* @size, ulong @min_size) =>
         {
-            av_fast_padded_mallocz_fptr = GetFunctionDelegate<av_fast_padded_mallocz_delegate>(GetOrLoadLibrary("avcodec", 58), "av_fast_padded_mallocz");
+            av_fast_padded_mallocz_fptr = GetFunctionDelegate<av_fast_padded_mallocz_delegate>(GetOrLoadLibrary("avcodec"), "av_fast_padded_mallocz");
             if (av_fast_padded_mallocz_fptr == null)
             {
                 av_fast_padded_mallocz_fptr = delegate 
@@ -972,7 +972,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_free_packet_delegate(AVPacket* @pkt);
         private static av_free_packet_delegate av_free_packet_fptr = (AVPacket* @pkt) =>
         {
-            av_free_packet_fptr = GetFunctionDelegate<av_free_packet_delegate>(GetOrLoadLibrary("avcodec", 58), "av_free_packet");
+            av_free_packet_fptr = GetFunctionDelegate<av_free_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_free_packet");
             if (av_free_packet_fptr == null)
             {
                 av_free_packet_fptr = delegate 
@@ -995,7 +995,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_audio_frame_duration_delegate(AVCodecContext* @avctx, int @frame_bytes);
         private static av_get_audio_frame_duration_delegate av_get_audio_frame_duration_fptr = (AVCodecContext* @avctx, int @frame_bytes) =>
         {
-            av_get_audio_frame_duration_fptr = GetFunctionDelegate<av_get_audio_frame_duration_delegate>(GetOrLoadLibrary("avcodec", 58), "av_get_audio_frame_duration");
+            av_get_audio_frame_duration_fptr = GetFunctionDelegate<av_get_audio_frame_duration_delegate>(GetOrLoadLibrary("avcodec"), "av_get_audio_frame_duration");
             if (av_get_audio_frame_duration_fptr == null)
             {
                 av_get_audio_frame_duration_fptr = delegate 
@@ -1019,7 +1019,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_audio_frame_duration2_delegate(AVCodecParameters* @par, int @frame_bytes);
         private static av_get_audio_frame_duration2_delegate av_get_audio_frame_duration2_fptr = (AVCodecParameters* @par, int @frame_bytes) =>
         {
-            av_get_audio_frame_duration2_fptr = GetFunctionDelegate<av_get_audio_frame_duration2_delegate>(GetOrLoadLibrary("avcodec", 58), "av_get_audio_frame_duration2");
+            av_get_audio_frame_duration2_fptr = GetFunctionDelegate<av_get_audio_frame_duration2_delegate>(GetOrLoadLibrary("avcodec"), "av_get_audio_frame_duration2");
             if (av_get_audio_frame_duration2_fptr == null)
             {
                 av_get_audio_frame_duration2_fptr = delegate 
@@ -1040,7 +1040,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_bits_per_sample_delegate(AVCodecID @codec_id);
         private static av_get_bits_per_sample_delegate av_get_bits_per_sample_fptr = (AVCodecID @codec_id) =>
         {
-            av_get_bits_per_sample_fptr = GetFunctionDelegate<av_get_bits_per_sample_delegate>(GetOrLoadLibrary("avcodec", 58), "av_get_bits_per_sample");
+            av_get_bits_per_sample_fptr = GetFunctionDelegate<av_get_bits_per_sample_delegate>(GetOrLoadLibrary("avcodec"), "av_get_bits_per_sample");
             if (av_get_bits_per_sample_fptr == null)
             {
                 av_get_bits_per_sample_fptr = delegate 
@@ -1063,7 +1063,7 @@ namespace FFmpeg.AutoGen
         private delegate ulong av_get_codec_tag_string_delegate(byte* @buf, ulong @buf_size, uint @codec_tag);
         private static av_get_codec_tag_string_delegate av_get_codec_tag_string_fptr = (byte* @buf, ulong @buf_size, uint @codec_tag) =>
         {
-            av_get_codec_tag_string_fptr = GetFunctionDelegate<av_get_codec_tag_string_delegate>(GetOrLoadLibrary("avcodec", 58), "av_get_codec_tag_string");
+            av_get_codec_tag_string_fptr = GetFunctionDelegate<av_get_codec_tag_string_delegate>(GetOrLoadLibrary("avcodec"), "av_get_codec_tag_string");
             if (av_get_codec_tag_string_fptr == null)
             {
                 av_get_codec_tag_string_fptr = delegate 
@@ -1089,7 +1089,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_exact_bits_per_sample_delegate(AVCodecID @codec_id);
         private static av_get_exact_bits_per_sample_delegate av_get_exact_bits_per_sample_fptr = (AVCodecID @codec_id) =>
         {
-            av_get_exact_bits_per_sample_fptr = GetFunctionDelegate<av_get_exact_bits_per_sample_delegate>(GetOrLoadLibrary("avcodec", 58), "av_get_exact_bits_per_sample");
+            av_get_exact_bits_per_sample_fptr = GetFunctionDelegate<av_get_exact_bits_per_sample_delegate>(GetOrLoadLibrary("avcodec"), "av_get_exact_bits_per_sample");
             if (av_get_exact_bits_per_sample_fptr == null)
             {
                 av_get_exact_bits_per_sample_fptr = delegate 
@@ -1112,7 +1112,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecID av_get_pcm_codec_delegate(AVSampleFormat @fmt, int @be);
         private static av_get_pcm_codec_delegate av_get_pcm_codec_fptr = (AVSampleFormat @fmt, int @be) =>
         {
-            av_get_pcm_codec_fptr = GetFunctionDelegate<av_get_pcm_codec_delegate>(GetOrLoadLibrary("avcodec", 58), "av_get_pcm_codec");
+            av_get_pcm_codec_fptr = GetFunctionDelegate<av_get_pcm_codec_delegate>(GetOrLoadLibrary("avcodec"), "av_get_pcm_codec");
             if (av_get_pcm_codec_fptr == null)
             {
                 av_get_pcm_codec_fptr = delegate 
@@ -1136,7 +1136,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_get_profile_name_delegate(AVCodec* @codec, int @profile);
         private static av_get_profile_name_delegate av_get_profile_name_fptr = (AVCodec* @codec, int @profile) =>
         {
-            av_get_profile_name_fptr = GetFunctionDelegate<av_get_profile_name_delegate>(GetOrLoadLibrary("avcodec", 58), "av_get_profile_name");
+            av_get_profile_name_fptr = GetFunctionDelegate<av_get_profile_name_delegate>(GetOrLoadLibrary("avcodec"), "av_get_profile_name");
             if (av_get_profile_name_fptr == null)
             {
                 av_get_profile_name_fptr = delegate 
@@ -1160,7 +1160,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_grow_packet_delegate(AVPacket* @pkt, int @grow_by);
         private static av_grow_packet_delegate av_grow_packet_fptr = (AVPacket* @pkt, int @grow_by) =>
         {
-            av_grow_packet_fptr = GetFunctionDelegate<av_grow_packet_delegate>(GetOrLoadLibrary("avcodec", 58), "av_grow_packet");
+            av_grow_packet_fptr = GetFunctionDelegate<av_grow_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_grow_packet");
             if (av_grow_packet_fptr == null)
             {
                 av_grow_packet_fptr = delegate 
@@ -1183,7 +1183,7 @@ namespace FFmpeg.AutoGen
         private delegate AVHWAccel* av_hwaccel_next_delegate(AVHWAccel* @hwaccel);
         private static av_hwaccel_next_delegate av_hwaccel_next_fptr = (AVHWAccel* @hwaccel) =>
         {
-            av_hwaccel_next_fptr = GetFunctionDelegate<av_hwaccel_next_delegate>(GetOrLoadLibrary("avcodec", 58), "av_hwaccel_next");
+            av_hwaccel_next_fptr = GetFunctionDelegate<av_hwaccel_next_delegate>(GetOrLoadLibrary("avcodec"), "av_hwaccel_next");
             if (av_hwaccel_next_fptr == null)
             {
                 av_hwaccel_next_fptr = delegate 
@@ -1205,7 +1205,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_init_packet_delegate(AVPacket* @pkt);
         private static av_init_packet_delegate av_init_packet_fptr = (AVPacket* @pkt) =>
         {
-            av_init_packet_fptr = GetFunctionDelegate<av_init_packet_delegate>(GetOrLoadLibrary("avcodec", 58), "av_init_packet");
+            av_init_packet_fptr = GetFunctionDelegate<av_init_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_init_packet");
             if (av_init_packet_fptr == null)
             {
                 av_init_packet_fptr = delegate 
@@ -1227,7 +1227,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_lockmgr_register_delegate(av_lockmgr_register_cb_func @cb);
         private static av_lockmgr_register_delegate av_lockmgr_register_fptr = (av_lockmgr_register_cb_func @cb) =>
         {
-            av_lockmgr_register_fptr = GetFunctionDelegate<av_lockmgr_register_delegate>(GetOrLoadLibrary("avcodec", 58), "av_lockmgr_register");
+            av_lockmgr_register_fptr = GetFunctionDelegate<av_lockmgr_register_delegate>(GetOrLoadLibrary("avcodec"), "av_lockmgr_register");
             if (av_lockmgr_register_fptr == null)
             {
                 av_lockmgr_register_fptr = delegate 
@@ -1250,7 +1250,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_new_packet_delegate(AVPacket* @pkt, int @size);
         private static av_new_packet_delegate av_new_packet_fptr = (AVPacket* @pkt, int @size) =>
         {
-            av_new_packet_fptr = GetFunctionDelegate<av_new_packet_delegate>(GetOrLoadLibrary("avcodec", 58), "av_new_packet");
+            av_new_packet_fptr = GetFunctionDelegate<av_new_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_new_packet");
             if (av_new_packet_fptr == null)
             {
                 av_new_packet_fptr = delegate 
@@ -1274,7 +1274,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_packet_add_side_data_delegate(AVPacket* @pkt, AVPacketSideDataType @type, byte* @data, ulong @size);
         private static av_packet_add_side_data_delegate av_packet_add_side_data_fptr = (AVPacket* @pkt, AVPacketSideDataType @type, byte* @data, ulong @size) =>
         {
-            av_packet_add_side_data_fptr = GetFunctionDelegate<av_packet_add_side_data_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_add_side_data");
+            av_packet_add_side_data_fptr = GetFunctionDelegate<av_packet_add_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_add_side_data");
             if (av_packet_add_side_data_fptr == null)
             {
                 av_packet_add_side_data_fptr = delegate 
@@ -1300,7 +1300,7 @@ namespace FFmpeg.AutoGen
         private delegate AVPacket* av_packet_alloc_delegate();
         private static av_packet_alloc_delegate av_packet_alloc_fptr = () =>
         {
-            av_packet_alloc_fptr = GetFunctionDelegate<av_packet_alloc_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_alloc");
+            av_packet_alloc_fptr = GetFunctionDelegate<av_packet_alloc_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_alloc");
             if (av_packet_alloc_fptr == null)
             {
                 av_packet_alloc_fptr = delegate 
@@ -1322,7 +1322,7 @@ namespace FFmpeg.AutoGen
         private delegate AVPacket* av_packet_clone_delegate(AVPacket* @src);
         private static av_packet_clone_delegate av_packet_clone_fptr = (AVPacket* @src) =>
         {
-            av_packet_clone_fptr = GetFunctionDelegate<av_packet_clone_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_clone");
+            av_packet_clone_fptr = GetFunctionDelegate<av_packet_clone_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_clone");
             if (av_packet_clone_fptr == null)
             {
                 av_packet_clone_fptr = delegate 
@@ -1344,7 +1344,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_packet_copy_props_delegate(AVPacket* @dst, AVPacket* @src);
         private static av_packet_copy_props_delegate av_packet_copy_props_fptr = (AVPacket* @dst, AVPacket* @src) =>
         {
-            av_packet_copy_props_fptr = GetFunctionDelegate<av_packet_copy_props_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_copy_props");
+            av_packet_copy_props_fptr = GetFunctionDelegate<av_packet_copy_props_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_copy_props");
             if (av_packet_copy_props_fptr == null)
             {
                 av_packet_copy_props_fptr = delegate 
@@ -1368,7 +1368,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_packet_free_delegate(AVPacket** @pkt);
         private static av_packet_free_delegate av_packet_free_fptr = (AVPacket** @pkt) =>
         {
-            av_packet_free_fptr = GetFunctionDelegate<av_packet_free_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_free");
+            av_packet_free_fptr = GetFunctionDelegate<av_packet_free_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_free");
             if (av_packet_free_fptr == null)
             {
                 av_packet_free_fptr = delegate 
@@ -1390,7 +1390,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_packet_free_side_data_delegate(AVPacket* @pkt);
         private static av_packet_free_side_data_delegate av_packet_free_side_data_fptr = (AVPacket* @pkt) =>
         {
-            av_packet_free_side_data_fptr = GetFunctionDelegate<av_packet_free_side_data_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_free_side_data");
+            av_packet_free_side_data_fptr = GetFunctionDelegate<av_packet_free_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_free_side_data");
             if (av_packet_free_side_data_fptr == null)
             {
                 av_packet_free_side_data_fptr = delegate 
@@ -1412,7 +1412,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_packet_from_data_delegate(AVPacket* @pkt, byte* @data, int @size);
         private static av_packet_from_data_delegate av_packet_from_data_fptr = (AVPacket* @pkt, byte* @data, int @size) =>
         {
-            av_packet_from_data_fptr = GetFunctionDelegate<av_packet_from_data_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_from_data");
+            av_packet_from_data_fptr = GetFunctionDelegate<av_packet_from_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_from_data");
             if (av_packet_from_data_fptr == null)
             {
                 av_packet_from_data_fptr = delegate 
@@ -1437,7 +1437,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_packet_get_side_data_delegate(AVPacket* @pkt, AVPacketSideDataType @type, int* @size);
         private static av_packet_get_side_data_delegate av_packet_get_side_data_fptr = (AVPacket* @pkt, AVPacketSideDataType @type, int* @size) =>
         {
-            av_packet_get_side_data_fptr = GetFunctionDelegate<av_packet_get_side_data_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_get_side_data");
+            av_packet_get_side_data_fptr = GetFunctionDelegate<av_packet_get_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_get_side_data");
             if (av_packet_get_side_data_fptr == null)
             {
                 av_packet_get_side_data_fptr = delegate 
@@ -1462,7 +1462,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_packet_make_refcounted_delegate(AVPacket* @pkt);
         private static av_packet_make_refcounted_delegate av_packet_make_refcounted_fptr = (AVPacket* @pkt) =>
         {
-            av_packet_make_refcounted_fptr = GetFunctionDelegate<av_packet_make_refcounted_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_make_refcounted");
+            av_packet_make_refcounted_fptr = GetFunctionDelegate<av_packet_make_refcounted_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_make_refcounted");
             if (av_packet_make_refcounted_fptr == null)
             {
                 av_packet_make_refcounted_fptr = delegate 
@@ -1485,7 +1485,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_packet_make_writable_delegate(AVPacket* @pkt);
         private static av_packet_make_writable_delegate av_packet_make_writable_fptr = (AVPacket* @pkt) =>
         {
-            av_packet_make_writable_fptr = GetFunctionDelegate<av_packet_make_writable_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_make_writable");
+            av_packet_make_writable_fptr = GetFunctionDelegate<av_packet_make_writable_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_make_writable");
             if (av_packet_make_writable_fptr == null)
             {
                 av_packet_make_writable_fptr = delegate 
@@ -1508,7 +1508,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_packet_merge_side_data_delegate(AVPacket* @pkt);
         private static av_packet_merge_side_data_delegate av_packet_merge_side_data_fptr = (AVPacket* @pkt) =>
         {
-            av_packet_merge_side_data_fptr = GetFunctionDelegate<av_packet_merge_side_data_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_merge_side_data");
+            av_packet_merge_side_data_fptr = GetFunctionDelegate<av_packet_merge_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_merge_side_data");
             if (av_packet_merge_side_data_fptr == null)
             {
                 av_packet_merge_side_data_fptr = delegate 
@@ -1529,7 +1529,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_packet_move_ref_delegate(AVPacket* @dst, AVPacket* @src);
         private static av_packet_move_ref_delegate av_packet_move_ref_fptr = (AVPacket* @dst, AVPacket* @src) =>
         {
-            av_packet_move_ref_fptr = GetFunctionDelegate<av_packet_move_ref_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_move_ref");
+            av_packet_move_ref_fptr = GetFunctionDelegate<av_packet_move_ref_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_move_ref");
             if (av_packet_move_ref_fptr == null)
             {
                 av_packet_move_ref_fptr = delegate 
@@ -1552,7 +1552,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_packet_new_side_data_delegate(AVPacket* @pkt, AVPacketSideDataType @type, int @size);
         private static av_packet_new_side_data_delegate av_packet_new_side_data_fptr = (AVPacket* @pkt, AVPacketSideDataType @type, int @size) =>
         {
-            av_packet_new_side_data_fptr = GetFunctionDelegate<av_packet_new_side_data_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_new_side_data");
+            av_packet_new_side_data_fptr = GetFunctionDelegate<av_packet_new_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_new_side_data");
             if (av_packet_new_side_data_fptr == null)
             {
                 av_packet_new_side_data_fptr = delegate 
@@ -1577,7 +1577,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_packet_pack_dictionary_delegate(AVDictionary* @dict, int* @size);
         private static av_packet_pack_dictionary_delegate av_packet_pack_dictionary_fptr = (AVDictionary* @dict, int* @size) =>
         {
-            av_packet_pack_dictionary_fptr = GetFunctionDelegate<av_packet_pack_dictionary_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_pack_dictionary");
+            av_packet_pack_dictionary_fptr = GetFunctionDelegate<av_packet_pack_dictionary_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_pack_dictionary");
             if (av_packet_pack_dictionary_fptr == null)
             {
                 av_packet_pack_dictionary_fptr = delegate 
@@ -1601,7 +1601,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_packet_ref_delegate(AVPacket* @dst, AVPacket* @src);
         private static av_packet_ref_delegate av_packet_ref_fptr = (AVPacket* @dst, AVPacket* @src) =>
         {
-            av_packet_ref_fptr = GetFunctionDelegate<av_packet_ref_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_ref");
+            av_packet_ref_fptr = GetFunctionDelegate<av_packet_ref_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_ref");
             if (av_packet_ref_fptr == null)
             {
                 av_packet_ref_fptr = delegate 
@@ -1625,7 +1625,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_packet_rescale_ts_delegate(AVPacket* @pkt, AVRational @tb_src, AVRational @tb_dst);
         private static av_packet_rescale_ts_delegate av_packet_rescale_ts_fptr = (AVPacket* @pkt, AVRational @tb_src, AVRational @tb_dst) =>
         {
-            av_packet_rescale_ts_fptr = GetFunctionDelegate<av_packet_rescale_ts_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_rescale_ts");
+            av_packet_rescale_ts_fptr = GetFunctionDelegate<av_packet_rescale_ts_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_rescale_ts");
             if (av_packet_rescale_ts_fptr == null)
             {
                 av_packet_rescale_ts_fptr = delegate 
@@ -1649,7 +1649,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_packet_shrink_side_data_delegate(AVPacket* @pkt, AVPacketSideDataType @type, int @size);
         private static av_packet_shrink_side_data_delegate av_packet_shrink_side_data_fptr = (AVPacket* @pkt, AVPacketSideDataType @type, int @size) =>
         {
-            av_packet_shrink_side_data_fptr = GetFunctionDelegate<av_packet_shrink_side_data_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_shrink_side_data");
+            av_packet_shrink_side_data_fptr = GetFunctionDelegate<av_packet_shrink_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_shrink_side_data");
             if (av_packet_shrink_side_data_fptr == null)
             {
                 av_packet_shrink_side_data_fptr = delegate 
@@ -1675,7 +1675,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_packet_side_data_name_delegate(AVPacketSideDataType @type);
         private static av_packet_side_data_name_delegate av_packet_side_data_name_fptr = (AVPacketSideDataType @type) =>
         {
-            av_packet_side_data_name_fptr = GetFunctionDelegate<av_packet_side_data_name_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_side_data_name");
+            av_packet_side_data_name_fptr = GetFunctionDelegate<av_packet_side_data_name_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_side_data_name");
             if (av_packet_side_data_name_fptr == null)
             {
                 av_packet_side_data_name_fptr = delegate 
@@ -1695,7 +1695,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_packet_split_side_data_delegate(AVPacket* @pkt);
         private static av_packet_split_side_data_delegate av_packet_split_side_data_fptr = (AVPacket* @pkt) =>
         {
-            av_packet_split_side_data_fptr = GetFunctionDelegate<av_packet_split_side_data_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_split_side_data");
+            av_packet_split_side_data_fptr = GetFunctionDelegate<av_packet_split_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_split_side_data");
             if (av_packet_split_side_data_fptr == null)
             {
                 av_packet_split_side_data_fptr = delegate 
@@ -1716,7 +1716,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_packet_unpack_dictionary_delegate(byte* @data, int @size, AVDictionary** @dict);
         private static av_packet_unpack_dictionary_delegate av_packet_unpack_dictionary_fptr = (byte* @data, int @size, AVDictionary** @dict) =>
         {
-            av_packet_unpack_dictionary_fptr = GetFunctionDelegate<av_packet_unpack_dictionary_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_unpack_dictionary");
+            av_packet_unpack_dictionary_fptr = GetFunctionDelegate<av_packet_unpack_dictionary_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_unpack_dictionary");
             if (av_packet_unpack_dictionary_fptr == null)
             {
                 av_packet_unpack_dictionary_fptr = delegate 
@@ -1741,7 +1741,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_packet_unref_delegate(AVPacket* @pkt);
         private static av_packet_unref_delegate av_packet_unref_fptr = (AVPacket* @pkt) =>
         {
-            av_packet_unref_fptr = GetFunctionDelegate<av_packet_unref_delegate>(GetOrLoadLibrary("avcodec", 58), "av_packet_unref");
+            av_packet_unref_fptr = GetFunctionDelegate<av_packet_unref_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_unref");
             if (av_packet_unref_fptr == null)
             {
                 av_packet_unref_fptr = delegate 
@@ -1763,7 +1763,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_parser_change_delegate(AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe);
         private static av_parser_change_delegate av_parser_change_fptr = (AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe) =>
         {
-            av_parser_change_fptr = GetFunctionDelegate<av_parser_change_delegate>(GetOrLoadLibrary("avcodec", 58), "av_parser_change");
+            av_parser_change_fptr = GetFunctionDelegate<av_parser_change_delegate>(GetOrLoadLibrary("avcodec"), "av_parser_change");
             if (av_parser_change_fptr == null)
             {
                 av_parser_change_fptr = delegate 
@@ -1785,7 +1785,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_parser_close_delegate(AVCodecParserContext* @s);
         private static av_parser_close_delegate av_parser_close_fptr = (AVCodecParserContext* @s) =>
         {
-            av_parser_close_fptr = GetFunctionDelegate<av_parser_close_delegate>(GetOrLoadLibrary("avcodec", 58), "av_parser_close");
+            av_parser_close_fptr = GetFunctionDelegate<av_parser_close_delegate>(GetOrLoadLibrary("avcodec"), "av_parser_close");
             if (av_parser_close_fptr == null)
             {
                 av_parser_close_fptr = delegate 
@@ -1805,7 +1805,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecParserContext* av_parser_init_delegate(int @codec_id);
         private static av_parser_init_delegate av_parser_init_fptr = (int @codec_id) =>
         {
-            av_parser_init_fptr = GetFunctionDelegate<av_parser_init_delegate>(GetOrLoadLibrary("avcodec", 58), "av_parser_init");
+            av_parser_init_fptr = GetFunctionDelegate<av_parser_init_delegate>(GetOrLoadLibrary("avcodec"), "av_parser_init");
             if (av_parser_init_fptr == null)
             {
                 av_parser_init_fptr = delegate 
@@ -1825,7 +1825,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecParser* av_parser_iterate_delegate(void** @opaque);
         private static av_parser_iterate_delegate av_parser_iterate_fptr = (void** @opaque) =>
         {
-            av_parser_iterate_fptr = GetFunctionDelegate<av_parser_iterate_delegate>(GetOrLoadLibrary("avcodec", 58), "av_parser_iterate");
+            av_parser_iterate_fptr = GetFunctionDelegate<av_parser_iterate_delegate>(GetOrLoadLibrary("avcodec"), "av_parser_iterate");
             if (av_parser_iterate_fptr == null)
             {
                 av_parser_iterate_fptr = delegate 
@@ -1848,7 +1848,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecParser* av_parser_next_delegate(AVCodecParser* @c);
         private static av_parser_next_delegate av_parser_next_fptr = (AVCodecParser* @c) =>
         {
-            av_parser_next_fptr = GetFunctionDelegate<av_parser_next_delegate>(GetOrLoadLibrary("avcodec", 58), "av_parser_next");
+            av_parser_next_fptr = GetFunctionDelegate<av_parser_next_delegate>(GetOrLoadLibrary("avcodec"), "av_parser_next");
             if (av_parser_next_fptr == null)
             {
                 av_parser_next_fptr = delegate 
@@ -1869,7 +1869,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_parser_parse2_delegate(AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, long @pts, long @dts, long @pos);
         private static av_parser_parse2_delegate av_parser_parse2_fptr = (AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, long @pts, long @dts, long @pos) =>
         {
-            av_parser_parse2_fptr = GetFunctionDelegate<av_parser_parse2_delegate>(GetOrLoadLibrary("avcodec", 58), "av_parser_parse2");
+            av_parser_parse2_fptr = GetFunctionDelegate<av_parser_parse2_delegate>(GetOrLoadLibrary("avcodec"), "av_parser_parse2");
             if (av_parser_parse2_fptr == null)
             {
                 av_parser_parse2_fptr = delegate 
@@ -1900,7 +1900,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_picture_copy_delegate(AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height);
         private static av_picture_copy_delegate av_picture_copy_fptr = (AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height) =>
         {
-            av_picture_copy_fptr = GetFunctionDelegate<av_picture_copy_delegate>(GetOrLoadLibrary("avcodec", 58), "av_picture_copy");
+            av_picture_copy_fptr = GetFunctionDelegate<av_picture_copy_delegate>(GetOrLoadLibrary("avcodec"), "av_picture_copy");
             if (av_picture_copy_fptr == null)
             {
                 av_picture_copy_fptr = delegate 
@@ -1921,7 +1921,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_picture_crop_delegate(AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @top_band, int @left_band);
         private static av_picture_crop_delegate av_picture_crop_fptr = (AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @top_band, int @left_band) =>
         {
-            av_picture_crop_fptr = GetFunctionDelegate<av_picture_crop_delegate>(GetOrLoadLibrary("avcodec", 58), "av_picture_crop");
+            av_picture_crop_fptr = GetFunctionDelegate<av_picture_crop_delegate>(GetOrLoadLibrary("avcodec"), "av_picture_crop");
             if (av_picture_crop_fptr == null)
             {
                 av_picture_crop_fptr = delegate 
@@ -1942,7 +1942,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_picture_pad_delegate(AVPicture* @dst, AVPicture* @src, int @height, int @width, AVPixelFormat @pix_fmt, int @padtop, int @padbottom, int @padleft, int @padright, int* @color);
         private static av_picture_pad_delegate av_picture_pad_fptr = (AVPicture* @dst, AVPicture* @src, int @height, int @width, AVPixelFormat @pix_fmt, int @padtop, int @padbottom, int @padleft, int @padright, int* @color) =>
         {
-            av_picture_pad_fptr = GetFunctionDelegate<av_picture_pad_delegate>(GetOrLoadLibrary("avcodec", 58), "av_picture_pad");
+            av_picture_pad_fptr = GetFunctionDelegate<av_picture_pad_delegate>(GetOrLoadLibrary("avcodec"), "av_picture_pad");
             if (av_picture_pad_fptr == null)
             {
                 av_picture_pad_fptr = delegate 
@@ -1963,7 +1963,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_register_bitstream_filter_delegate(AVBitStreamFilter* @bsf);
         private static av_register_bitstream_filter_delegate av_register_bitstream_filter_fptr = (AVBitStreamFilter* @bsf) =>
         {
-            av_register_bitstream_filter_fptr = GetFunctionDelegate<av_register_bitstream_filter_delegate>(GetOrLoadLibrary("avcodec", 58), "av_register_bitstream_filter");
+            av_register_bitstream_filter_fptr = GetFunctionDelegate<av_register_bitstream_filter_delegate>(GetOrLoadLibrary("avcodec"), "av_register_bitstream_filter");
             if (av_register_bitstream_filter_fptr == null)
             {
                 av_register_bitstream_filter_fptr = delegate 
@@ -1984,7 +1984,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_register_codec_parser_delegate(AVCodecParser* @parser);
         private static av_register_codec_parser_delegate av_register_codec_parser_fptr = (AVCodecParser* @parser) =>
         {
-            av_register_codec_parser_fptr = GetFunctionDelegate<av_register_codec_parser_delegate>(GetOrLoadLibrary("avcodec", 58), "av_register_codec_parser");
+            av_register_codec_parser_fptr = GetFunctionDelegate<av_register_codec_parser_delegate>(GetOrLoadLibrary("avcodec"), "av_register_codec_parser");
             if (av_register_codec_parser_fptr == null)
             {
                 av_register_codec_parser_fptr = delegate 
@@ -2005,7 +2005,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_register_hwaccel_delegate(AVHWAccel* @hwaccel);
         private static av_register_hwaccel_delegate av_register_hwaccel_fptr = (AVHWAccel* @hwaccel) =>
         {
-            av_register_hwaccel_fptr = GetFunctionDelegate<av_register_hwaccel_delegate>(GetOrLoadLibrary("avcodec", 58), "av_register_hwaccel");
+            av_register_hwaccel_fptr = GetFunctionDelegate<av_register_hwaccel_delegate>(GetOrLoadLibrary("avcodec"), "av_register_hwaccel");
             if (av_register_hwaccel_fptr == null)
             {
                 av_register_hwaccel_fptr = delegate 
@@ -2027,7 +2027,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_shrink_packet_delegate(AVPacket* @pkt, int @size);
         private static av_shrink_packet_delegate av_shrink_packet_fptr = (AVPacket* @pkt, int @size) =>
         {
-            av_shrink_packet_fptr = GetFunctionDelegate<av_shrink_packet_delegate>(GetOrLoadLibrary("avcodec", 58), "av_shrink_packet");
+            av_shrink_packet_fptr = GetFunctionDelegate<av_shrink_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_shrink_packet");
             if (av_shrink_packet_fptr == null)
             {
                 av_shrink_packet_fptr = delegate 
@@ -2050,7 +2050,7 @@ namespace FFmpeg.AutoGen
         private delegate uint av_xiphlacing_delegate(byte* @s, uint @v);
         private static av_xiphlacing_delegate av_xiphlacing_fptr = (byte* @s, uint @v) =>
         {
-            av_xiphlacing_fptr = GetFunctionDelegate<av_xiphlacing_delegate>(GetOrLoadLibrary("avcodec", 58), "av_xiphlacing");
+            av_xiphlacing_fptr = GetFunctionDelegate<av_xiphlacing_delegate>(GetOrLoadLibrary("avcodec"), "av_xiphlacing");
             if (av_xiphlacing_fptr == null)
             {
                 av_xiphlacing_fptr = delegate 
@@ -2074,7 +2074,7 @@ namespace FFmpeg.AutoGen
         private delegate void avcodec_align_dimensions_delegate(AVCodecContext* @s, int* @width, int* @height);
         private static avcodec_align_dimensions_delegate avcodec_align_dimensions_fptr = (AVCodecContext* @s, int* @width, int* @height) =>
         {
-            avcodec_align_dimensions_fptr = GetFunctionDelegate<avcodec_align_dimensions_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_align_dimensions");
+            avcodec_align_dimensions_fptr = GetFunctionDelegate<avcodec_align_dimensions_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_align_dimensions");
             if (avcodec_align_dimensions_fptr == null)
             {
                 avcodec_align_dimensions_fptr = delegate 
@@ -2095,7 +2095,7 @@ namespace FFmpeg.AutoGen
         private delegate void avcodec_align_dimensions2_delegate(AVCodecContext* @s, int* @width, int* @height, ref int_array8 @linesize_align);
         private static avcodec_align_dimensions2_delegate avcodec_align_dimensions2_fptr = (AVCodecContext* @s, int* @width, int* @height, ref int_array8 @linesize_align) =>
         {
-            avcodec_align_dimensions2_fptr = GetFunctionDelegate<avcodec_align_dimensions2_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_align_dimensions2");
+            avcodec_align_dimensions2_fptr = GetFunctionDelegate<avcodec_align_dimensions2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_align_dimensions2");
             if (avcodec_align_dimensions2_fptr == null)
             {
                 avcodec_align_dimensions2_fptr = delegate 
@@ -2116,7 +2116,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecContext* avcodec_alloc_context3_delegate(AVCodec* @codec);
         private static avcodec_alloc_context3_delegate avcodec_alloc_context3_fptr = (AVCodec* @codec) =>
         {
-            avcodec_alloc_context3_fptr = GetFunctionDelegate<avcodec_alloc_context3_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_alloc_context3");
+            avcodec_alloc_context3_fptr = GetFunctionDelegate<avcodec_alloc_context3_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_alloc_context3");
             if (avcodec_alloc_context3_fptr == null)
             {
                 avcodec_alloc_context3_fptr = delegate 
@@ -2139,7 +2139,7 @@ namespace FFmpeg.AutoGen
         private delegate AVChromaLocation avcodec_chroma_pos_to_enum_delegate(int @xpos, int @ypos);
         private static avcodec_chroma_pos_to_enum_delegate avcodec_chroma_pos_to_enum_fptr = (int @xpos, int @ypos) =>
         {
-            avcodec_chroma_pos_to_enum_fptr = GetFunctionDelegate<avcodec_chroma_pos_to_enum_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_chroma_pos_to_enum");
+            avcodec_chroma_pos_to_enum_fptr = GetFunctionDelegate<avcodec_chroma_pos_to_enum_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_chroma_pos_to_enum");
             if (avcodec_chroma_pos_to_enum_fptr == null)
             {
                 avcodec_chroma_pos_to_enum_fptr = delegate 
@@ -2162,7 +2162,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_close_delegate(AVCodecContext* @avctx);
         private static avcodec_close_delegate avcodec_close_fptr = (AVCodecContext* @avctx) =>
         {
-            avcodec_close_fptr = GetFunctionDelegate<avcodec_close_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_close");
+            avcodec_close_fptr = GetFunctionDelegate<avcodec_close_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_close");
             if (avcodec_close_fptr == null)
             {
                 avcodec_close_fptr = delegate 
@@ -2184,7 +2184,7 @@ namespace FFmpeg.AutoGen
         private delegate string avcodec_configuration_delegate();
         private static avcodec_configuration_delegate avcodec_configuration_fptr = () =>
         {
-            avcodec_configuration_fptr = GetFunctionDelegate<avcodec_configuration_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_configuration");
+            avcodec_configuration_fptr = GetFunctionDelegate<avcodec_configuration_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_configuration");
             if (avcodec_configuration_fptr == null)
             {
                 avcodec_configuration_fptr = delegate 
@@ -2205,7 +2205,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_copy_context_delegate(AVCodecContext* @dest, AVCodecContext* @src);
         private static avcodec_copy_context_delegate avcodec_copy_context_fptr = (AVCodecContext* @dest, AVCodecContext* @src) =>
         {
-            avcodec_copy_context_fptr = GetFunctionDelegate<avcodec_copy_context_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_copy_context");
+            avcodec_copy_context_fptr = GetFunctionDelegate<avcodec_copy_context_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_copy_context");
             if (avcodec_copy_context_fptr == null)
             {
                 avcodec_copy_context_fptr = delegate 
@@ -2230,7 +2230,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_decode_audio4_delegate(AVCodecContext* @avctx, AVFrame* @frame, int* @got_frame_ptr, AVPacket* @avpkt);
         private static avcodec_decode_audio4_delegate avcodec_decode_audio4_fptr = (AVCodecContext* @avctx, AVFrame* @frame, int* @got_frame_ptr, AVPacket* @avpkt) =>
         {
-            avcodec_decode_audio4_fptr = GetFunctionDelegate<avcodec_decode_audio4_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_decode_audio4");
+            avcodec_decode_audio4_fptr = GetFunctionDelegate<avcodec_decode_audio4_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_decode_audio4");
             if (avcodec_decode_audio4_fptr == null)
             {
                 avcodec_decode_audio4_fptr = delegate 
@@ -2257,7 +2257,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_decode_subtitle2_delegate(AVCodecContext* @avctx, AVSubtitle* @sub, int* @got_sub_ptr, AVPacket* @avpkt);
         private static avcodec_decode_subtitle2_delegate avcodec_decode_subtitle2_fptr = (AVCodecContext* @avctx, AVSubtitle* @sub, int* @got_sub_ptr, AVPacket* @avpkt) =>
         {
-            avcodec_decode_subtitle2_fptr = GetFunctionDelegate<avcodec_decode_subtitle2_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_decode_subtitle2");
+            avcodec_decode_subtitle2_fptr = GetFunctionDelegate<avcodec_decode_subtitle2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_decode_subtitle2");
             if (avcodec_decode_subtitle2_fptr == null)
             {
                 avcodec_decode_subtitle2_fptr = delegate 
@@ -2282,7 +2282,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_decode_video2_delegate(AVCodecContext* @avctx, AVFrame* @picture, int* @got_picture_ptr, AVPacket* @avpkt);
         private static avcodec_decode_video2_delegate avcodec_decode_video2_fptr = (AVCodecContext* @avctx, AVFrame* @picture, int* @got_picture_ptr, AVPacket* @avpkt) =>
         {
-            avcodec_decode_video2_fptr = GetFunctionDelegate<avcodec_decode_video2_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_decode_video2");
+            avcodec_decode_video2_fptr = GetFunctionDelegate<avcodec_decode_video2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_decode_video2");
             if (avcodec_decode_video2_fptr == null)
             {
                 avcodec_decode_video2_fptr = delegate 
@@ -2309,7 +2309,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_default_execute_delegate(AVCodecContext* @c, avcodec_default_execute_func_func @func, void* @arg, int* @ret, int @count, int @size);
         private static avcodec_default_execute_delegate avcodec_default_execute_fptr = (AVCodecContext* @c, avcodec_default_execute_func_func @func, void* @arg, int* @ret, int @count, int @size) =>
         {
-            avcodec_default_execute_fptr = GetFunctionDelegate<avcodec_default_execute_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_default_execute");
+            avcodec_default_execute_fptr = GetFunctionDelegate<avcodec_default_execute_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_default_execute");
             if (avcodec_default_execute_fptr == null)
             {
                 avcodec_default_execute_fptr = delegate 
@@ -2329,7 +2329,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_default_execute2_delegate(AVCodecContext* @c, avcodec_default_execute2_func_func @func, void* @arg, int* @ret, int @count);
         private static avcodec_default_execute2_delegate avcodec_default_execute2_fptr = (AVCodecContext* @c, avcodec_default_execute2_func_func @func, void* @arg, int* @ret, int @count) =>
         {
-            avcodec_default_execute2_fptr = GetFunctionDelegate<avcodec_default_execute2_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_default_execute2");
+            avcodec_default_execute2_fptr = GetFunctionDelegate<avcodec_default_execute2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_default_execute2");
             if (avcodec_default_execute2_fptr == null)
             {
                 avcodec_default_execute2_fptr = delegate 
@@ -2349,7 +2349,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_default_get_buffer2_delegate(AVCodecContext* @s, AVFrame* @frame, int @flags);
         private static avcodec_default_get_buffer2_delegate avcodec_default_get_buffer2_fptr = (AVCodecContext* @s, AVFrame* @frame, int @flags) =>
         {
-            avcodec_default_get_buffer2_fptr = GetFunctionDelegate<avcodec_default_get_buffer2_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_default_get_buffer2");
+            avcodec_default_get_buffer2_fptr = GetFunctionDelegate<avcodec_default_get_buffer2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_default_get_buffer2");
             if (avcodec_default_get_buffer2_fptr == null)
             {
                 avcodec_default_get_buffer2_fptr = delegate 
@@ -2370,7 +2370,7 @@ namespace FFmpeg.AutoGen
         private delegate AVPixelFormat avcodec_default_get_format_delegate(AVCodecContext* @s, AVPixelFormat* @fmt);
         private static avcodec_default_get_format_delegate avcodec_default_get_format_fptr = (AVCodecContext* @s, AVPixelFormat* @fmt) =>
         {
-            avcodec_default_get_format_fptr = GetFunctionDelegate<avcodec_default_get_format_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_default_get_format");
+            avcodec_default_get_format_fptr = GetFunctionDelegate<avcodec_default_get_format_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_default_get_format");
             if (avcodec_default_get_format_fptr == null)
             {
                 avcodec_default_get_format_fptr = delegate 
@@ -2390,7 +2390,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecDescriptor* avcodec_descriptor_get_delegate(AVCodecID @id);
         private static avcodec_descriptor_get_delegate avcodec_descriptor_get_fptr = (AVCodecID @id) =>
         {
-            avcodec_descriptor_get_fptr = GetFunctionDelegate<avcodec_descriptor_get_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_descriptor_get");
+            avcodec_descriptor_get_fptr = GetFunctionDelegate<avcodec_descriptor_get_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_descriptor_get");
             if (avcodec_descriptor_get_fptr == null)
             {
                 avcodec_descriptor_get_fptr = delegate 
@@ -2412,7 +2412,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecDescriptor* avcodec_descriptor_get_by_name_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static avcodec_descriptor_get_by_name_delegate avcodec_descriptor_get_by_name_fptr = (string @name) =>
         {
-            avcodec_descriptor_get_by_name_fptr = GetFunctionDelegate<avcodec_descriptor_get_by_name_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_descriptor_get_by_name");
+            avcodec_descriptor_get_by_name_fptr = GetFunctionDelegate<avcodec_descriptor_get_by_name_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_descriptor_get_by_name");
             if (avcodec_descriptor_get_by_name_fptr == null)
             {
                 avcodec_descriptor_get_by_name_fptr = delegate 
@@ -2434,7 +2434,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecDescriptor* avcodec_descriptor_next_delegate(AVCodecDescriptor* @prev);
         private static avcodec_descriptor_next_delegate avcodec_descriptor_next_fptr = (AVCodecDescriptor* @prev) =>
         {
-            avcodec_descriptor_next_fptr = GetFunctionDelegate<avcodec_descriptor_next_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_descriptor_next");
+            avcodec_descriptor_next_fptr = GetFunctionDelegate<avcodec_descriptor_next_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_descriptor_next");
             if (avcodec_descriptor_next_fptr == null)
             {
                 avcodec_descriptor_next_fptr = delegate 
@@ -2457,7 +2457,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_encode_audio2_delegate(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr);
         private static avcodec_encode_audio2_delegate avcodec_encode_audio2_fptr = (AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr) =>
         {
-            avcodec_encode_audio2_fptr = GetFunctionDelegate<avcodec_encode_audio2_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_encode_audio2");
+            avcodec_encode_audio2_fptr = GetFunctionDelegate<avcodec_encode_audio2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_encode_audio2");
             if (avcodec_encode_audio2_fptr == null)
             {
                 avcodec_encode_audio2_fptr = delegate 
@@ -2484,7 +2484,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_encode_subtitle_delegate(AVCodecContext* @avctx, byte* @buf, int @buf_size, AVSubtitle* @sub);
         private static avcodec_encode_subtitle_delegate avcodec_encode_subtitle_fptr = (AVCodecContext* @avctx, byte* @buf, int @buf_size, AVSubtitle* @sub) =>
         {
-            avcodec_encode_subtitle_fptr = GetFunctionDelegate<avcodec_encode_subtitle_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_encode_subtitle");
+            avcodec_encode_subtitle_fptr = GetFunctionDelegate<avcodec_encode_subtitle_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_encode_subtitle");
             if (avcodec_encode_subtitle_fptr == null)
             {
                 avcodec_encode_subtitle_fptr = delegate 
@@ -2504,7 +2504,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_encode_video2_delegate(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr);
         private static avcodec_encode_video2_delegate avcodec_encode_video2_fptr = (AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr) =>
         {
-            avcodec_encode_video2_fptr = GetFunctionDelegate<avcodec_encode_video2_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_encode_video2");
+            avcodec_encode_video2_fptr = GetFunctionDelegate<avcodec_encode_video2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_encode_video2");
             if (avcodec_encode_video2_fptr == null)
             {
                 avcodec_encode_video2_fptr = delegate 
@@ -2531,7 +2531,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_enum_to_chroma_pos_delegate(int* @xpos, int* @ypos, AVChromaLocation @pos);
         private static avcodec_enum_to_chroma_pos_delegate avcodec_enum_to_chroma_pos_fptr = (int* @xpos, int* @ypos, AVChromaLocation @pos) =>
         {
-            avcodec_enum_to_chroma_pos_fptr = GetFunctionDelegate<avcodec_enum_to_chroma_pos_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_enum_to_chroma_pos");
+            avcodec_enum_to_chroma_pos_fptr = GetFunctionDelegate<avcodec_enum_to_chroma_pos_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_enum_to_chroma_pos");
             if (avcodec_enum_to_chroma_pos_fptr == null)
             {
                 avcodec_enum_to_chroma_pos_fptr = delegate 
@@ -2554,7 +2554,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_fill_audio_frame_delegate(AVFrame* @frame, int @nb_channels, AVSampleFormat @sample_fmt, byte* @buf, int @buf_size, int @align);
         private static avcodec_fill_audio_frame_delegate avcodec_fill_audio_frame_fptr = (AVFrame* @frame, int @nb_channels, AVSampleFormat @sample_fmt, byte* @buf, int @buf_size, int @align) =>
         {
-            avcodec_fill_audio_frame_fptr = GetFunctionDelegate<avcodec_fill_audio_frame_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_fill_audio_frame");
+            avcodec_fill_audio_frame_fptr = GetFunctionDelegate<avcodec_fill_audio_frame_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_fill_audio_frame");
             if (avcodec_fill_audio_frame_fptr == null)
             {
                 avcodec_fill_audio_frame_fptr = delegate 
@@ -2582,7 +2582,7 @@ namespace FFmpeg.AutoGen
         private delegate AVPixelFormat avcodec_find_best_pix_fmt_of_2_delegate(AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr);
         private static avcodec_find_best_pix_fmt_of_2_delegate avcodec_find_best_pix_fmt_of_2_fptr = (AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr) =>
         {
-            avcodec_find_best_pix_fmt_of_2_fptr = GetFunctionDelegate<avcodec_find_best_pix_fmt_of_2_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_find_best_pix_fmt_of_2");
+            avcodec_find_best_pix_fmt_of_2_fptr = GetFunctionDelegate<avcodec_find_best_pix_fmt_of_2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_find_best_pix_fmt_of_2");
             if (avcodec_find_best_pix_fmt_of_2_fptr == null)
             {
                 avcodec_find_best_pix_fmt_of_2_fptr = delegate 
@@ -2602,7 +2602,7 @@ namespace FFmpeg.AutoGen
         private delegate AVPixelFormat avcodec_find_best_pix_fmt_of_list_delegate(AVPixelFormat* @pix_fmt_list, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr);
         private static avcodec_find_best_pix_fmt_of_list_delegate avcodec_find_best_pix_fmt_of_list_fptr = (AVPixelFormat* @pix_fmt_list, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr) =>
         {
-            avcodec_find_best_pix_fmt_of_list_fptr = GetFunctionDelegate<avcodec_find_best_pix_fmt_of_list_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_find_best_pix_fmt_of_list");
+            avcodec_find_best_pix_fmt_of_list_fptr = GetFunctionDelegate<avcodec_find_best_pix_fmt_of_list_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_find_best_pix_fmt_of_list");
             if (avcodec_find_best_pix_fmt_of_list_fptr == null)
             {
                 avcodec_find_best_pix_fmt_of_list_fptr = delegate 
@@ -2628,7 +2628,7 @@ namespace FFmpeg.AutoGen
         private delegate AVPixelFormat avcodec_find_best_pix_fmt2_delegate(AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr);
         private static avcodec_find_best_pix_fmt2_delegate avcodec_find_best_pix_fmt2_fptr = (AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr) =>
         {
-            avcodec_find_best_pix_fmt2_fptr = GetFunctionDelegate<avcodec_find_best_pix_fmt2_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_find_best_pix_fmt2");
+            avcodec_find_best_pix_fmt2_fptr = GetFunctionDelegate<avcodec_find_best_pix_fmt2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_find_best_pix_fmt2");
             if (avcodec_find_best_pix_fmt2_fptr == null)
             {
                 avcodec_find_best_pix_fmt2_fptr = delegate 
@@ -2649,7 +2649,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodec* avcodec_find_decoder_delegate(AVCodecID @id);
         private static avcodec_find_decoder_delegate avcodec_find_decoder_fptr = (AVCodecID @id) =>
         {
-            avcodec_find_decoder_fptr = GetFunctionDelegate<avcodec_find_decoder_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_find_decoder");
+            avcodec_find_decoder_fptr = GetFunctionDelegate<avcodec_find_decoder_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_find_decoder");
             if (avcodec_find_decoder_fptr == null)
             {
                 avcodec_find_decoder_fptr = delegate 
@@ -2672,7 +2672,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodec* avcodec_find_decoder_by_name_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static avcodec_find_decoder_by_name_delegate avcodec_find_decoder_by_name_fptr = (string @name) =>
         {
-            avcodec_find_decoder_by_name_fptr = GetFunctionDelegate<avcodec_find_decoder_by_name_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_find_decoder_by_name");
+            avcodec_find_decoder_by_name_fptr = GetFunctionDelegate<avcodec_find_decoder_by_name_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_find_decoder_by_name");
             if (avcodec_find_decoder_by_name_fptr == null)
             {
                 avcodec_find_decoder_by_name_fptr = delegate 
@@ -2695,7 +2695,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodec* avcodec_find_encoder_delegate(AVCodecID @id);
         private static avcodec_find_encoder_delegate avcodec_find_encoder_fptr = (AVCodecID @id) =>
         {
-            avcodec_find_encoder_fptr = GetFunctionDelegate<avcodec_find_encoder_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_find_encoder");
+            avcodec_find_encoder_fptr = GetFunctionDelegate<avcodec_find_encoder_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_find_encoder");
             if (avcodec_find_encoder_fptr == null)
             {
                 avcodec_find_encoder_fptr = delegate 
@@ -2718,7 +2718,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodec* avcodec_find_encoder_by_name_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static avcodec_find_encoder_by_name_delegate avcodec_find_encoder_by_name_fptr = (string @name) =>
         {
-            avcodec_find_encoder_by_name_fptr = GetFunctionDelegate<avcodec_find_encoder_by_name_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_find_encoder_by_name");
+            avcodec_find_encoder_by_name_fptr = GetFunctionDelegate<avcodec_find_encoder_by_name_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_find_encoder_by_name");
             if (avcodec_find_encoder_by_name_fptr == null)
             {
                 avcodec_find_encoder_by_name_fptr = delegate 
@@ -2741,7 +2741,7 @@ namespace FFmpeg.AutoGen
         private delegate void avcodec_flush_buffers_delegate(AVCodecContext* @avctx);
         private static avcodec_flush_buffers_delegate avcodec_flush_buffers_fptr = (AVCodecContext* @avctx) =>
         {
-            avcodec_flush_buffers_fptr = GetFunctionDelegate<avcodec_flush_buffers_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_flush_buffers");
+            avcodec_flush_buffers_fptr = GetFunctionDelegate<avcodec_flush_buffers_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_flush_buffers");
             if (avcodec_flush_buffers_fptr == null)
             {
                 avcodec_flush_buffers_fptr = delegate 
@@ -2762,7 +2762,7 @@ namespace FFmpeg.AutoGen
         private delegate void avcodec_free_context_delegate(AVCodecContext** @avctx);
         private static avcodec_free_context_delegate avcodec_free_context_fptr = (AVCodecContext** @avctx) =>
         {
-            avcodec_free_context_fptr = GetFunctionDelegate<avcodec_free_context_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_free_context");
+            avcodec_free_context_fptr = GetFunctionDelegate<avcodec_free_context_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_free_context");
             if (avcodec_free_context_fptr == null)
             {
                 avcodec_free_context_fptr = delegate 
@@ -2783,7 +2783,7 @@ namespace FFmpeg.AutoGen
         private delegate void avcodec_get_chroma_sub_sample_delegate(AVPixelFormat @pix_fmt, int* @h_shift, int* @v_shift);
         private static avcodec_get_chroma_sub_sample_delegate avcodec_get_chroma_sub_sample_fptr = (AVPixelFormat @pix_fmt, int* @h_shift, int* @v_shift) =>
         {
-            avcodec_get_chroma_sub_sample_fptr = GetFunctionDelegate<avcodec_get_chroma_sub_sample_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_get_chroma_sub_sample");
+            avcodec_get_chroma_sub_sample_fptr = GetFunctionDelegate<avcodec_get_chroma_sub_sample_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_chroma_sub_sample");
             if (avcodec_get_chroma_sub_sample_fptr == null)
             {
                 avcodec_get_chroma_sub_sample_fptr = delegate 
@@ -2804,7 +2804,7 @@ namespace FFmpeg.AutoGen
         private delegate AVClass* avcodec_get_class_delegate();
         private static avcodec_get_class_delegate avcodec_get_class_fptr = () =>
         {
-            avcodec_get_class_fptr = GetFunctionDelegate<avcodec_get_class_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_get_class");
+            avcodec_get_class_fptr = GetFunctionDelegate<avcodec_get_class_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_class");
             if (avcodec_get_class_fptr == null)
             {
                 avcodec_get_class_fptr = delegate 
@@ -2825,7 +2825,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_get_context_defaults3_delegate(AVCodecContext* @s, AVCodec* @codec);
         private static avcodec_get_context_defaults3_delegate avcodec_get_context_defaults3_fptr = (AVCodecContext* @s, AVCodec* @codec) =>
         {
-            avcodec_get_context_defaults3_fptr = GetFunctionDelegate<avcodec_get_context_defaults3_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_get_context_defaults3");
+            avcodec_get_context_defaults3_fptr = GetFunctionDelegate<avcodec_get_context_defaults3_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_context_defaults3");
             if (avcodec_get_context_defaults3_fptr == null)
             {
                 avcodec_get_context_defaults3_fptr = delegate 
@@ -2845,7 +2845,7 @@ namespace FFmpeg.AutoGen
         private delegate AVClass* avcodec_get_frame_class_delegate();
         private static avcodec_get_frame_class_delegate avcodec_get_frame_class_fptr = () =>
         {
-            avcodec_get_frame_class_fptr = GetFunctionDelegate<avcodec_get_frame_class_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_get_frame_class");
+            avcodec_get_frame_class_fptr = GetFunctionDelegate<avcodec_get_frame_class_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_frame_class");
             if (avcodec_get_frame_class_fptr == null)
             {
                 avcodec_get_frame_class_fptr = delegate 
@@ -2866,7 +2866,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecHWConfig* avcodec_get_hw_config_delegate(AVCodec* @codec, int @index);
         private static avcodec_get_hw_config_delegate avcodec_get_hw_config_fptr = (AVCodec* @codec, int @index) =>
         {
-            avcodec_get_hw_config_fptr = GetFunctionDelegate<avcodec_get_hw_config_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_get_hw_config");
+            avcodec_get_hw_config_fptr = GetFunctionDelegate<avcodec_get_hw_config_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_hw_config");
             if (avcodec_get_hw_config_fptr == null)
             {
                 avcodec_get_hw_config_fptr = delegate 
@@ -2887,7 +2887,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_get_hw_frames_parameters_delegate(AVCodecContext* @avctx, AVBufferRef* @device_ref, AVPixelFormat @hw_pix_fmt, AVBufferRef** @out_frames_ref);
         private static avcodec_get_hw_frames_parameters_delegate avcodec_get_hw_frames_parameters_fptr = (AVCodecContext* @avctx, AVBufferRef* @device_ref, AVPixelFormat @hw_pix_fmt, AVBufferRef** @out_frames_ref) =>
         {
-            avcodec_get_hw_frames_parameters_fptr = GetFunctionDelegate<avcodec_get_hw_frames_parameters_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_get_hw_frames_parameters");
+            avcodec_get_hw_frames_parameters_fptr = GetFunctionDelegate<avcodec_get_hw_frames_parameters_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_hw_frames_parameters");
             if (avcodec_get_hw_frames_parameters_fptr == null)
             {
                 avcodec_get_hw_frames_parameters_fptr = delegate 
@@ -2914,7 +2914,7 @@ namespace FFmpeg.AutoGen
         private delegate string avcodec_get_name_delegate(AVCodecID @id);
         private static avcodec_get_name_delegate avcodec_get_name_fptr = (AVCodecID @id) =>
         {
-            avcodec_get_name_fptr = GetFunctionDelegate<avcodec_get_name_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_get_name");
+            avcodec_get_name_fptr = GetFunctionDelegate<avcodec_get_name_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_name");
             if (avcodec_get_name_fptr == null)
             {
                 avcodec_get_name_fptr = delegate 
@@ -2936,7 +2936,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_get_pix_fmt_loss_delegate(AVPixelFormat @dst_pix_fmt, AVPixelFormat @src_pix_fmt, int @has_alpha);
         private static avcodec_get_pix_fmt_loss_delegate avcodec_get_pix_fmt_loss_fptr = (AVPixelFormat @dst_pix_fmt, AVPixelFormat @src_pix_fmt, int @has_alpha) =>
         {
-            avcodec_get_pix_fmt_loss_fptr = GetFunctionDelegate<avcodec_get_pix_fmt_loss_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_get_pix_fmt_loss");
+            avcodec_get_pix_fmt_loss_fptr = GetFunctionDelegate<avcodec_get_pix_fmt_loss_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_pix_fmt_loss");
             if (avcodec_get_pix_fmt_loss_fptr == null)
             {
                 avcodec_get_pix_fmt_loss_fptr = delegate 
@@ -2956,7 +2956,7 @@ namespace FFmpeg.AutoGen
         private delegate AVClass* avcodec_get_subtitle_rect_class_delegate();
         private static avcodec_get_subtitle_rect_class_delegate avcodec_get_subtitle_rect_class_fptr = () =>
         {
-            avcodec_get_subtitle_rect_class_fptr = GetFunctionDelegate<avcodec_get_subtitle_rect_class_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_get_subtitle_rect_class");
+            avcodec_get_subtitle_rect_class_fptr = GetFunctionDelegate<avcodec_get_subtitle_rect_class_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_subtitle_rect_class");
             if (avcodec_get_subtitle_rect_class_fptr == null)
             {
                 avcodec_get_subtitle_rect_class_fptr = delegate 
@@ -2977,7 +2977,7 @@ namespace FFmpeg.AutoGen
         private delegate AVMediaType avcodec_get_type_delegate(AVCodecID @codec_id);
         private static avcodec_get_type_delegate avcodec_get_type_fptr = (AVCodecID @codec_id) =>
         {
-            avcodec_get_type_fptr = GetFunctionDelegate<avcodec_get_type_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_get_type");
+            avcodec_get_type_fptr = GetFunctionDelegate<avcodec_get_type_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_type");
             if (avcodec_get_type_fptr == null)
             {
                 avcodec_get_type_fptr = delegate 
@@ -2998,7 +2998,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_is_open_delegate(AVCodecContext* @s);
         private static avcodec_is_open_delegate avcodec_is_open_fptr = (AVCodecContext* @s) =>
         {
-            avcodec_is_open_fptr = GetFunctionDelegate<avcodec_is_open_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_is_open");
+            avcodec_is_open_fptr = GetFunctionDelegate<avcodec_is_open_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_is_open");
             if (avcodec_is_open_fptr == null)
             {
                 avcodec_is_open_fptr = delegate 
@@ -3021,7 +3021,7 @@ namespace FFmpeg.AutoGen
         private delegate string avcodec_license_delegate();
         private static avcodec_license_delegate avcodec_license_fptr = () =>
         {
-            avcodec_license_fptr = GetFunctionDelegate<avcodec_license_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_license");
+            avcodec_license_fptr = GetFunctionDelegate<avcodec_license_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_license");
             if (avcodec_license_fptr == null)
             {
                 avcodec_license_fptr = delegate 
@@ -3042,7 +3042,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_open2_delegate(AVCodecContext* @avctx, AVCodec* @codec, AVDictionary** @options);
         private static avcodec_open2_delegate avcodec_open2_fptr = (AVCodecContext* @avctx, AVCodec* @codec, AVDictionary** @options) =>
         {
-            avcodec_open2_fptr = GetFunctionDelegate<avcodec_open2_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_open2");
+            avcodec_open2_fptr = GetFunctionDelegate<avcodec_open2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_open2");
             if (avcodec_open2_fptr == null)
             {
                 avcodec_open2_fptr = delegate 
@@ -3067,7 +3067,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecParameters* avcodec_parameters_alloc_delegate();
         private static avcodec_parameters_alloc_delegate avcodec_parameters_alloc_fptr = () =>
         {
-            avcodec_parameters_alloc_fptr = GetFunctionDelegate<avcodec_parameters_alloc_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_parameters_alloc");
+            avcodec_parameters_alloc_fptr = GetFunctionDelegate<avcodec_parameters_alloc_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_parameters_alloc");
             if (avcodec_parameters_alloc_fptr == null)
             {
                 avcodec_parameters_alloc_fptr = delegate 
@@ -3088,7 +3088,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_parameters_copy_delegate(AVCodecParameters* @dst, AVCodecParameters* @src);
         private static avcodec_parameters_copy_delegate avcodec_parameters_copy_fptr = (AVCodecParameters* @dst, AVCodecParameters* @src) =>
         {
-            avcodec_parameters_copy_fptr = GetFunctionDelegate<avcodec_parameters_copy_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_parameters_copy");
+            avcodec_parameters_copy_fptr = GetFunctionDelegate<avcodec_parameters_copy_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_parameters_copy");
             if (avcodec_parameters_copy_fptr == null)
             {
                 avcodec_parameters_copy_fptr = delegate 
@@ -3110,7 +3110,7 @@ namespace FFmpeg.AutoGen
         private delegate void avcodec_parameters_free_delegate(AVCodecParameters** @par);
         private static avcodec_parameters_free_delegate avcodec_parameters_free_fptr = (AVCodecParameters** @par) =>
         {
-            avcodec_parameters_free_fptr = GetFunctionDelegate<avcodec_parameters_free_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_parameters_free");
+            avcodec_parameters_free_fptr = GetFunctionDelegate<avcodec_parameters_free_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_parameters_free");
             if (avcodec_parameters_free_fptr == null)
             {
                 avcodec_parameters_free_fptr = delegate 
@@ -3131,7 +3131,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_parameters_from_context_delegate(AVCodecParameters* @par, AVCodecContext* @codec);
         private static avcodec_parameters_from_context_delegate avcodec_parameters_from_context_fptr = (AVCodecParameters* @par, AVCodecContext* @codec) =>
         {
-            avcodec_parameters_from_context_fptr = GetFunctionDelegate<avcodec_parameters_from_context_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_parameters_from_context");
+            avcodec_parameters_from_context_fptr = GetFunctionDelegate<avcodec_parameters_from_context_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_parameters_from_context");
             if (avcodec_parameters_from_context_fptr == null)
             {
                 avcodec_parameters_from_context_fptr = delegate 
@@ -3153,7 +3153,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_parameters_to_context_delegate(AVCodecContext* @codec, AVCodecParameters* @par);
         private static avcodec_parameters_to_context_delegate avcodec_parameters_to_context_fptr = (AVCodecContext* @codec, AVCodecParameters* @par) =>
         {
-            avcodec_parameters_to_context_fptr = GetFunctionDelegate<avcodec_parameters_to_context_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_parameters_to_context");
+            avcodec_parameters_to_context_fptr = GetFunctionDelegate<avcodec_parameters_to_context_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_parameters_to_context");
             if (avcodec_parameters_to_context_fptr == null)
             {
                 avcodec_parameters_to_context_fptr = delegate 
@@ -3175,7 +3175,7 @@ namespace FFmpeg.AutoGen
         private delegate uint avcodec_pix_fmt_to_codec_tag_delegate(AVPixelFormat @pix_fmt);
         private static avcodec_pix_fmt_to_codec_tag_delegate avcodec_pix_fmt_to_codec_tag_fptr = (AVPixelFormat @pix_fmt) =>
         {
-            avcodec_pix_fmt_to_codec_tag_fptr = GetFunctionDelegate<avcodec_pix_fmt_to_codec_tag_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_pix_fmt_to_codec_tag");
+            avcodec_pix_fmt_to_codec_tag_fptr = GetFunctionDelegate<avcodec_pix_fmt_to_codec_tag_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_pix_fmt_to_codec_tag");
             if (avcodec_pix_fmt_to_codec_tag_fptr == null)
             {
                 avcodec_pix_fmt_to_codec_tag_fptr = delegate 
@@ -3197,7 +3197,7 @@ namespace FFmpeg.AutoGen
         private delegate string avcodec_profile_name_delegate(AVCodecID @codec_id, int @profile);
         private static avcodec_profile_name_delegate avcodec_profile_name_fptr = (AVCodecID @codec_id, int @profile) =>
         {
-            avcodec_profile_name_fptr = GetFunctionDelegate<avcodec_profile_name_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_profile_name");
+            avcodec_profile_name_fptr = GetFunctionDelegate<avcodec_profile_name_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_profile_name");
             if (avcodec_profile_name_fptr == null)
             {
                 avcodec_profile_name_fptr = delegate 
@@ -3221,7 +3221,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_receive_frame_delegate(AVCodecContext* @avctx, AVFrame* @frame);
         private static avcodec_receive_frame_delegate avcodec_receive_frame_fptr = (AVCodecContext* @avctx, AVFrame* @frame) =>
         {
-            avcodec_receive_frame_fptr = GetFunctionDelegate<avcodec_receive_frame_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_receive_frame");
+            avcodec_receive_frame_fptr = GetFunctionDelegate<avcodec_receive_frame_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_receive_frame");
             if (avcodec_receive_frame_fptr == null)
             {
                 avcodec_receive_frame_fptr = delegate 
@@ -3245,7 +3245,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_receive_packet_delegate(AVCodecContext* @avctx, AVPacket* @avpkt);
         private static avcodec_receive_packet_delegate avcodec_receive_packet_fptr = (AVCodecContext* @avctx, AVPacket* @avpkt) =>
         {
-            avcodec_receive_packet_fptr = GetFunctionDelegate<avcodec_receive_packet_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_receive_packet");
+            avcodec_receive_packet_fptr = GetFunctionDelegate<avcodec_receive_packet_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_receive_packet");
             if (avcodec_receive_packet_fptr == null)
             {
                 avcodec_receive_packet_fptr = delegate 
@@ -3269,7 +3269,7 @@ namespace FFmpeg.AutoGen
         private delegate void avcodec_register_delegate(AVCodec* @codec);
         private static avcodec_register_delegate avcodec_register_fptr = (AVCodec* @codec) =>
         {
-            avcodec_register_fptr = GetFunctionDelegate<avcodec_register_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_register");
+            avcodec_register_fptr = GetFunctionDelegate<avcodec_register_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_register");
             if (avcodec_register_fptr == null)
             {
                 avcodec_register_fptr = delegate 
@@ -3291,7 +3291,7 @@ namespace FFmpeg.AutoGen
         private delegate void avcodec_register_all_delegate();
         private static avcodec_register_all_delegate avcodec_register_all_fptr = () =>
         {
-            avcodec_register_all_fptr = GetFunctionDelegate<avcodec_register_all_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_register_all");
+            avcodec_register_all_fptr = GetFunctionDelegate<avcodec_register_all_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_register_all");
             if (avcodec_register_all_fptr == null)
             {
                 avcodec_register_all_fptr = delegate 
@@ -3313,7 +3313,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_send_frame_delegate(AVCodecContext* @avctx, AVFrame* @frame);
         private static avcodec_send_frame_delegate avcodec_send_frame_fptr = (AVCodecContext* @avctx, AVFrame* @frame) =>
         {
-            avcodec_send_frame_fptr = GetFunctionDelegate<avcodec_send_frame_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_send_frame");
+            avcodec_send_frame_fptr = GetFunctionDelegate<avcodec_send_frame_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_send_frame");
             if (avcodec_send_frame_fptr == null)
             {
                 avcodec_send_frame_fptr = delegate 
@@ -3337,7 +3337,7 @@ namespace FFmpeg.AutoGen
         private delegate int avcodec_send_packet_delegate(AVCodecContext* @avctx, AVPacket* @avpkt);
         private static avcodec_send_packet_delegate avcodec_send_packet_fptr = (AVCodecContext* @avctx, AVPacket* @avpkt) =>
         {
-            avcodec_send_packet_fptr = GetFunctionDelegate<avcodec_send_packet_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_send_packet");
+            avcodec_send_packet_fptr = GetFunctionDelegate<avcodec_send_packet_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_send_packet");
             if (avcodec_send_packet_fptr == null)
             {
                 avcodec_send_packet_fptr = delegate 
@@ -3361,7 +3361,7 @@ namespace FFmpeg.AutoGen
         private delegate void avcodec_string_delegate(byte* @buf, int @buf_size, AVCodecContext* @enc, int @encode);
         private static avcodec_string_delegate avcodec_string_fptr = (byte* @buf, int @buf_size, AVCodecContext* @enc, int @encode) =>
         {
-            avcodec_string_fptr = GetFunctionDelegate<avcodec_string_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_string");
+            avcodec_string_fptr = GetFunctionDelegate<avcodec_string_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_string");
             if (avcodec_string_fptr == null)
             {
                 avcodec_string_fptr = delegate 
@@ -3381,7 +3381,7 @@ namespace FFmpeg.AutoGen
         private delegate uint avcodec_version_delegate();
         private static avcodec_version_delegate avcodec_version_fptr = () =>
         {
-            avcodec_version_fptr = GetFunctionDelegate<avcodec_version_delegate>(GetOrLoadLibrary("avcodec", 58), "avcodec_version");
+            avcodec_version_fptr = GetFunctionDelegate<avcodec_version_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_version");
             if (avcodec_version_fptr == null)
             {
                 avcodec_version_fptr = delegate 
@@ -3402,7 +3402,7 @@ namespace FFmpeg.AutoGen
         private delegate int avpicture_alloc_delegate(AVPicture* @picture, AVPixelFormat @pix_fmt, int @width, int @height);
         private static avpicture_alloc_delegate avpicture_alloc_fptr = (AVPicture* @picture, AVPixelFormat @pix_fmt, int @width, int @height) =>
         {
-            avpicture_alloc_fptr = GetFunctionDelegate<avpicture_alloc_delegate>(GetOrLoadLibrary("avcodec", 58), "avpicture_alloc");
+            avpicture_alloc_fptr = GetFunctionDelegate<avpicture_alloc_delegate>(GetOrLoadLibrary("avcodec"), "avpicture_alloc");
             if (avpicture_alloc_fptr == null)
             {
                 avpicture_alloc_fptr = delegate 
@@ -3423,7 +3423,7 @@ namespace FFmpeg.AutoGen
         private delegate int avpicture_fill_delegate(AVPicture* @picture, byte* @ptr, AVPixelFormat @pix_fmt, int @width, int @height);
         private static avpicture_fill_delegate avpicture_fill_fptr = (AVPicture* @picture, byte* @ptr, AVPixelFormat @pix_fmt, int @width, int @height) =>
         {
-            avpicture_fill_fptr = GetFunctionDelegate<avpicture_fill_delegate>(GetOrLoadLibrary("avcodec", 58), "avpicture_fill");
+            avpicture_fill_fptr = GetFunctionDelegate<avpicture_fill_delegate>(GetOrLoadLibrary("avcodec"), "avpicture_fill");
             if (avpicture_fill_fptr == null)
             {
                 avpicture_fill_fptr = delegate 
@@ -3444,7 +3444,7 @@ namespace FFmpeg.AutoGen
         private delegate void avpicture_free_delegate(AVPicture* @picture);
         private static avpicture_free_delegate avpicture_free_fptr = (AVPicture* @picture) =>
         {
-            avpicture_free_fptr = GetFunctionDelegate<avpicture_free_delegate>(GetOrLoadLibrary("avcodec", 58), "avpicture_free");
+            avpicture_free_fptr = GetFunctionDelegate<avpicture_free_delegate>(GetOrLoadLibrary("avcodec"), "avpicture_free");
             if (avpicture_free_fptr == null)
             {
                 avpicture_free_fptr = delegate 
@@ -3465,7 +3465,7 @@ namespace FFmpeg.AutoGen
         private delegate int avpicture_get_size_delegate(AVPixelFormat @pix_fmt, int @width, int @height);
         private static avpicture_get_size_delegate avpicture_get_size_fptr = (AVPixelFormat @pix_fmt, int @width, int @height) =>
         {
-            avpicture_get_size_fptr = GetFunctionDelegate<avpicture_get_size_delegate>(GetOrLoadLibrary("avcodec", 58), "avpicture_get_size");
+            avpicture_get_size_fptr = GetFunctionDelegate<avpicture_get_size_delegate>(GetOrLoadLibrary("avcodec"), "avpicture_get_size");
             if (avpicture_get_size_fptr == null)
             {
                 avpicture_get_size_fptr = delegate 
@@ -3486,7 +3486,7 @@ namespace FFmpeg.AutoGen
         private delegate int avpicture_layout_delegate(AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height, byte* @dest, int @dest_size);
         private static avpicture_layout_delegate avpicture_layout_fptr = (AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height, byte* @dest, int @dest_size) =>
         {
-            avpicture_layout_fptr = GetFunctionDelegate<avpicture_layout_delegate>(GetOrLoadLibrary("avcodec", 58), "avpicture_layout");
+            avpicture_layout_fptr = GetFunctionDelegate<avpicture_layout_delegate>(GetOrLoadLibrary("avcodec"), "avpicture_layout");
             if (avpicture_layout_fptr == null)
             {
                 avpicture_layout_fptr = delegate 
@@ -3507,7 +3507,7 @@ namespace FFmpeg.AutoGen
         private delegate void avsubtitle_free_delegate(AVSubtitle* @sub);
         private static avsubtitle_free_delegate avsubtitle_free_fptr = (AVSubtitle* @sub) =>
         {
-            avsubtitle_free_fptr = GetFunctionDelegate<avsubtitle_free_delegate>(GetOrLoadLibrary("avcodec", 58), "avsubtitle_free");
+            avsubtitle_free_fptr = GetFunctionDelegate<avsubtitle_free_delegate>(GetOrLoadLibrary("avcodec"), "avsubtitle_free");
             if (avsubtitle_free_fptr == null)
             {
                 avsubtitle_free_fptr = delegate 
@@ -3529,7 +3529,7 @@ namespace FFmpeg.AutoGen
         private delegate AVInputFormat* av_input_audio_device_next_delegate(AVInputFormat* @d);
         private static av_input_audio_device_next_delegate av_input_audio_device_next_fptr = (AVInputFormat* @d) =>
         {
-            av_input_audio_device_next_fptr = GetFunctionDelegate<av_input_audio_device_next_delegate>(GetOrLoadLibrary("avdevice", 58), "av_input_audio_device_next");
+            av_input_audio_device_next_fptr = GetFunctionDelegate<av_input_audio_device_next_delegate>(GetOrLoadLibrary("avdevice"), "av_input_audio_device_next");
             if (av_input_audio_device_next_fptr == null)
             {
                 av_input_audio_device_next_fptr = delegate 
@@ -3550,7 +3550,7 @@ namespace FFmpeg.AutoGen
         private delegate AVInputFormat* av_input_video_device_next_delegate(AVInputFormat* @d);
         private static av_input_video_device_next_delegate av_input_video_device_next_fptr = (AVInputFormat* @d) =>
         {
-            av_input_video_device_next_fptr = GetFunctionDelegate<av_input_video_device_next_delegate>(GetOrLoadLibrary("avdevice", 58), "av_input_video_device_next");
+            av_input_video_device_next_fptr = GetFunctionDelegate<av_input_video_device_next_delegate>(GetOrLoadLibrary("avdevice"), "av_input_video_device_next");
             if (av_input_video_device_next_fptr == null)
             {
                 av_input_video_device_next_fptr = delegate 
@@ -3571,7 +3571,7 @@ namespace FFmpeg.AutoGen
         private delegate AVOutputFormat* av_output_audio_device_next_delegate(AVOutputFormat* @d);
         private static av_output_audio_device_next_delegate av_output_audio_device_next_fptr = (AVOutputFormat* @d) =>
         {
-            av_output_audio_device_next_fptr = GetFunctionDelegate<av_output_audio_device_next_delegate>(GetOrLoadLibrary("avdevice", 58), "av_output_audio_device_next");
+            av_output_audio_device_next_fptr = GetFunctionDelegate<av_output_audio_device_next_delegate>(GetOrLoadLibrary("avdevice"), "av_output_audio_device_next");
             if (av_output_audio_device_next_fptr == null)
             {
                 av_output_audio_device_next_fptr = delegate 
@@ -3592,7 +3592,7 @@ namespace FFmpeg.AutoGen
         private delegate AVOutputFormat* av_output_video_device_next_delegate(AVOutputFormat* @d);
         private static av_output_video_device_next_delegate av_output_video_device_next_fptr = (AVOutputFormat* @d) =>
         {
-            av_output_video_device_next_fptr = GetFunctionDelegate<av_output_video_device_next_delegate>(GetOrLoadLibrary("avdevice", 58), "av_output_video_device_next");
+            av_output_video_device_next_fptr = GetFunctionDelegate<av_output_video_device_next_delegate>(GetOrLoadLibrary("avdevice"), "av_output_video_device_next");
             if (av_output_video_device_next_fptr == null)
             {
                 av_output_video_device_next_fptr = delegate 
@@ -3613,7 +3613,7 @@ namespace FFmpeg.AutoGen
         private delegate int avdevice_app_to_dev_control_message_delegate(AVFormatContext* @s, AVAppToDevMessageType @type, void* @data, ulong @data_size);
         private static avdevice_app_to_dev_control_message_delegate avdevice_app_to_dev_control_message_fptr = (AVFormatContext* @s, AVAppToDevMessageType @type, void* @data, ulong @data_size) =>
         {
-            avdevice_app_to_dev_control_message_fptr = GetFunctionDelegate<avdevice_app_to_dev_control_message_delegate>(GetOrLoadLibrary("avdevice", 58), "avdevice_app_to_dev_control_message");
+            avdevice_app_to_dev_control_message_fptr = GetFunctionDelegate<avdevice_app_to_dev_control_message_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_app_to_dev_control_message");
             if (avdevice_app_to_dev_control_message_fptr == null)
             {
                 avdevice_app_to_dev_control_message_fptr = delegate 
@@ -3639,7 +3639,7 @@ namespace FFmpeg.AutoGen
         private delegate int avdevice_capabilities_create_delegate(AVDeviceCapabilitiesQuery** @caps, AVFormatContext* @s, AVDictionary** @device_options);
         private static avdevice_capabilities_create_delegate avdevice_capabilities_create_fptr = (AVDeviceCapabilitiesQuery** @caps, AVFormatContext* @s, AVDictionary** @device_options) =>
         {
-            avdevice_capabilities_create_fptr = GetFunctionDelegate<avdevice_capabilities_create_delegate>(GetOrLoadLibrary("avdevice", 58), "avdevice_capabilities_create");
+            avdevice_capabilities_create_fptr = GetFunctionDelegate<avdevice_capabilities_create_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_capabilities_create");
             if (avdevice_capabilities_create_fptr == null)
             {
                 avdevice_capabilities_create_fptr = delegate 
@@ -3664,7 +3664,7 @@ namespace FFmpeg.AutoGen
         private delegate void avdevice_capabilities_free_delegate(AVDeviceCapabilitiesQuery** @caps, AVFormatContext* @s);
         private static avdevice_capabilities_free_delegate avdevice_capabilities_free_fptr = (AVDeviceCapabilitiesQuery** @caps, AVFormatContext* @s) =>
         {
-            avdevice_capabilities_free_fptr = GetFunctionDelegate<avdevice_capabilities_free_delegate>(GetOrLoadLibrary("avdevice", 58), "avdevice_capabilities_free");
+            avdevice_capabilities_free_fptr = GetFunctionDelegate<avdevice_capabilities_free_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_capabilities_free");
             if (avdevice_capabilities_free_fptr == null)
             {
                 avdevice_capabilities_free_fptr = delegate 
@@ -3688,7 +3688,7 @@ namespace FFmpeg.AutoGen
         private delegate string avdevice_configuration_delegate();
         private static avdevice_configuration_delegate avdevice_configuration_fptr = () =>
         {
-            avdevice_configuration_fptr = GetFunctionDelegate<avdevice_configuration_delegate>(GetOrLoadLibrary("avdevice", 58), "avdevice_configuration");
+            avdevice_configuration_fptr = GetFunctionDelegate<avdevice_configuration_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_configuration");
             if (avdevice_configuration_fptr == null)
             {
                 avdevice_configuration_fptr = delegate 
@@ -3709,7 +3709,7 @@ namespace FFmpeg.AutoGen
         private delegate int avdevice_dev_to_app_control_message_delegate(AVFormatContext* @s, AVDevToAppMessageType @type, void* @data, ulong @data_size);
         private static avdevice_dev_to_app_control_message_delegate avdevice_dev_to_app_control_message_fptr = (AVFormatContext* @s, AVDevToAppMessageType @type, void* @data, ulong @data_size) =>
         {
-            avdevice_dev_to_app_control_message_fptr = GetFunctionDelegate<avdevice_dev_to_app_control_message_delegate>(GetOrLoadLibrary("avdevice", 58), "avdevice_dev_to_app_control_message");
+            avdevice_dev_to_app_control_message_fptr = GetFunctionDelegate<avdevice_dev_to_app_control_message_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_dev_to_app_control_message");
             if (avdevice_dev_to_app_control_message_fptr == null)
             {
                 avdevice_dev_to_app_control_message_fptr = delegate 
@@ -3735,7 +3735,7 @@ namespace FFmpeg.AutoGen
         private delegate void avdevice_free_list_devices_delegate(AVDeviceInfoList** @device_list);
         private static avdevice_free_list_devices_delegate avdevice_free_list_devices_fptr = (AVDeviceInfoList** @device_list) =>
         {
-            avdevice_free_list_devices_fptr = GetFunctionDelegate<avdevice_free_list_devices_delegate>(GetOrLoadLibrary("avdevice", 58), "avdevice_free_list_devices");
+            avdevice_free_list_devices_fptr = GetFunctionDelegate<avdevice_free_list_devices_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_free_list_devices");
             if (avdevice_free_list_devices_fptr == null)
             {
                 avdevice_free_list_devices_fptr = delegate 
@@ -3757,7 +3757,7 @@ namespace FFmpeg.AutoGen
         private delegate string avdevice_license_delegate();
         private static avdevice_license_delegate avdevice_license_fptr = () =>
         {
-            avdevice_license_fptr = GetFunctionDelegate<avdevice_license_delegate>(GetOrLoadLibrary("avdevice", 58), "avdevice_license");
+            avdevice_license_fptr = GetFunctionDelegate<avdevice_license_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_license");
             if (avdevice_license_fptr == null)
             {
                 avdevice_license_fptr = delegate 
@@ -3778,7 +3778,7 @@ namespace FFmpeg.AutoGen
         private delegate int avdevice_list_devices_delegate(AVFormatContext* @s, AVDeviceInfoList** @device_list);
         private static avdevice_list_devices_delegate avdevice_list_devices_fptr = (AVFormatContext* @s, AVDeviceInfoList** @device_list) =>
         {
-            avdevice_list_devices_fptr = GetFunctionDelegate<avdevice_list_devices_delegate>(GetOrLoadLibrary("avdevice", 58), "avdevice_list_devices");
+            avdevice_list_devices_fptr = GetFunctionDelegate<avdevice_list_devices_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_list_devices");
             if (avdevice_list_devices_fptr == null)
             {
                 avdevice_list_devices_fptr = delegate 
@@ -3802,7 +3802,7 @@ namespace FFmpeg.AutoGen
         private delegate int avdevice_list_input_sources_delegate(AVInputFormat* @device, [MarshalAs((UnmanagedType)48)] string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list);
         private static avdevice_list_input_sources_delegate avdevice_list_input_sources_fptr = (AVInputFormat* @device, string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list) =>
         {
-            avdevice_list_input_sources_fptr = GetFunctionDelegate<avdevice_list_input_sources_delegate>(GetOrLoadLibrary("avdevice", 58), "avdevice_list_input_sources");
+            avdevice_list_input_sources_fptr = GetFunctionDelegate<avdevice_list_input_sources_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_list_input_sources");
             if (avdevice_list_input_sources_fptr == null)
             {
                 avdevice_list_input_sources_fptr = delegate 
@@ -3828,7 +3828,7 @@ namespace FFmpeg.AutoGen
         private delegate int avdevice_list_output_sinks_delegate(AVOutputFormat* @device, [MarshalAs((UnmanagedType)48)] string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list);
         private static avdevice_list_output_sinks_delegate avdevice_list_output_sinks_fptr = (AVOutputFormat* @device, string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list) =>
         {
-            avdevice_list_output_sinks_fptr = GetFunctionDelegate<avdevice_list_output_sinks_delegate>(GetOrLoadLibrary("avdevice", 58), "avdevice_list_output_sinks");
+            avdevice_list_output_sinks_fptr = GetFunctionDelegate<avdevice_list_output_sinks_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_list_output_sinks");
             if (avdevice_list_output_sinks_fptr == null)
             {
                 avdevice_list_output_sinks_fptr = delegate 
@@ -3848,7 +3848,7 @@ namespace FFmpeg.AutoGen
         private delegate void avdevice_register_all_delegate();
         private static avdevice_register_all_delegate avdevice_register_all_fptr = () =>
         {
-            avdevice_register_all_fptr = GetFunctionDelegate<avdevice_register_all_delegate>(GetOrLoadLibrary("avdevice", 58), "avdevice_register_all");
+            avdevice_register_all_fptr = GetFunctionDelegate<avdevice_register_all_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_register_all");
             if (avdevice_register_all_fptr == null)
             {
                 avdevice_register_all_fptr = delegate 
@@ -3869,7 +3869,7 @@ namespace FFmpeg.AutoGen
         private delegate uint avdevice_version_delegate();
         private static avdevice_version_delegate avdevice_version_fptr = () =>
         {
-            avdevice_version_fptr = GetFunctionDelegate<avdevice_version_delegate>(GetOrLoadLibrary("avdevice", 58), "avdevice_version");
+            avdevice_version_fptr = GetFunctionDelegate<avdevice_version_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_version");
             if (avdevice_version_fptr == null)
             {
                 avdevice_version_fptr = delegate 
@@ -3890,7 +3890,7 @@ namespace FFmpeg.AutoGen
         private delegate AVABufferSinkParams* av_abuffersink_params_alloc_delegate();
         private static av_abuffersink_params_alloc_delegate av_abuffersink_params_alloc_fptr = () =>
         {
-            av_abuffersink_params_alloc_fptr = GetFunctionDelegate<av_abuffersink_params_alloc_delegate>(GetOrLoadLibrary("avfilter", 7), "av_abuffersink_params_alloc");
+            av_abuffersink_params_alloc_fptr = GetFunctionDelegate<av_abuffersink_params_alloc_delegate>(GetOrLoadLibrary("avfilter"), "av_abuffersink_params_alloc");
             if (av_abuffersink_params_alloc_fptr == null)
             {
                 av_abuffersink_params_alloc_fptr = delegate 
@@ -3911,7 +3911,7 @@ namespace FFmpeg.AutoGen
         private delegate ulong av_buffersink_get_channel_layout_delegate(AVFilterContext* @ctx);
         private static av_buffersink_get_channel_layout_delegate av_buffersink_get_channel_layout_fptr = (AVFilterContext* @ctx) =>
         {
-            av_buffersink_get_channel_layout_fptr = GetFunctionDelegate<av_buffersink_get_channel_layout_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_channel_layout");
+            av_buffersink_get_channel_layout_fptr = GetFunctionDelegate<av_buffersink_get_channel_layout_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_channel_layout");
             if (av_buffersink_get_channel_layout_fptr == null)
             {
                 av_buffersink_get_channel_layout_fptr = delegate 
@@ -3931,7 +3931,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersink_get_channels_delegate(AVFilterContext* @ctx);
         private static av_buffersink_get_channels_delegate av_buffersink_get_channels_fptr = (AVFilterContext* @ctx) =>
         {
-            av_buffersink_get_channels_fptr = GetFunctionDelegate<av_buffersink_get_channels_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_channels");
+            av_buffersink_get_channels_fptr = GetFunctionDelegate<av_buffersink_get_channels_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_channels");
             if (av_buffersink_get_channels_fptr == null)
             {
                 av_buffersink_get_channels_fptr = delegate 
@@ -3951,7 +3951,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersink_get_format_delegate(AVFilterContext* @ctx);
         private static av_buffersink_get_format_delegate av_buffersink_get_format_fptr = (AVFilterContext* @ctx) =>
         {
-            av_buffersink_get_format_fptr = GetFunctionDelegate<av_buffersink_get_format_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_format");
+            av_buffersink_get_format_fptr = GetFunctionDelegate<av_buffersink_get_format_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_format");
             if (av_buffersink_get_format_fptr == null)
             {
                 av_buffersink_get_format_fptr = delegate 
@@ -3971,7 +3971,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersink_get_frame_delegate(AVFilterContext* @ctx, AVFrame* @frame);
         private static av_buffersink_get_frame_delegate av_buffersink_get_frame_fptr = (AVFilterContext* @ctx, AVFrame* @frame) =>
         {
-            av_buffersink_get_frame_fptr = GetFunctionDelegate<av_buffersink_get_frame_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_frame");
+            av_buffersink_get_frame_fptr = GetFunctionDelegate<av_buffersink_get_frame_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_frame");
             if (av_buffersink_get_frame_fptr == null)
             {
                 av_buffersink_get_frame_fptr = delegate 
@@ -3995,7 +3995,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersink_get_frame_flags_delegate(AVFilterContext* @ctx, AVFrame* @frame, int @flags);
         private static av_buffersink_get_frame_flags_delegate av_buffersink_get_frame_flags_fptr = (AVFilterContext* @ctx, AVFrame* @frame, int @flags) =>
         {
-            av_buffersink_get_frame_flags_fptr = GetFunctionDelegate<av_buffersink_get_frame_flags_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_frame_flags");
+            av_buffersink_get_frame_flags_fptr = GetFunctionDelegate<av_buffersink_get_frame_flags_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_frame_flags");
             if (av_buffersink_get_frame_flags_fptr == null)
             {
                 av_buffersink_get_frame_flags_fptr = delegate 
@@ -4020,7 +4020,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_buffersink_get_frame_rate_delegate(AVFilterContext* @ctx);
         private static av_buffersink_get_frame_rate_delegate av_buffersink_get_frame_rate_fptr = (AVFilterContext* @ctx) =>
         {
-            av_buffersink_get_frame_rate_fptr = GetFunctionDelegate<av_buffersink_get_frame_rate_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_frame_rate");
+            av_buffersink_get_frame_rate_fptr = GetFunctionDelegate<av_buffersink_get_frame_rate_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_frame_rate");
             if (av_buffersink_get_frame_rate_fptr == null)
             {
                 av_buffersink_get_frame_rate_fptr = delegate 
@@ -4040,7 +4040,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersink_get_h_delegate(AVFilterContext* @ctx);
         private static av_buffersink_get_h_delegate av_buffersink_get_h_fptr = (AVFilterContext* @ctx) =>
         {
-            av_buffersink_get_h_fptr = GetFunctionDelegate<av_buffersink_get_h_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_h");
+            av_buffersink_get_h_fptr = GetFunctionDelegate<av_buffersink_get_h_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_h");
             if (av_buffersink_get_h_fptr == null)
             {
                 av_buffersink_get_h_fptr = delegate 
@@ -4060,7 +4060,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferRef* av_buffersink_get_hw_frames_ctx_delegate(AVFilterContext* @ctx);
         private static av_buffersink_get_hw_frames_ctx_delegate av_buffersink_get_hw_frames_ctx_fptr = (AVFilterContext* @ctx) =>
         {
-            av_buffersink_get_hw_frames_ctx_fptr = GetFunctionDelegate<av_buffersink_get_hw_frames_ctx_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_hw_frames_ctx");
+            av_buffersink_get_hw_frames_ctx_fptr = GetFunctionDelegate<av_buffersink_get_hw_frames_ctx_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_hw_frames_ctx");
             if (av_buffersink_get_hw_frames_ctx_fptr == null)
             {
                 av_buffersink_get_hw_frames_ctx_fptr = delegate 
@@ -4080,7 +4080,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_buffersink_get_sample_aspect_ratio_delegate(AVFilterContext* @ctx);
         private static av_buffersink_get_sample_aspect_ratio_delegate av_buffersink_get_sample_aspect_ratio_fptr = (AVFilterContext* @ctx) =>
         {
-            av_buffersink_get_sample_aspect_ratio_fptr = GetFunctionDelegate<av_buffersink_get_sample_aspect_ratio_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_sample_aspect_ratio");
+            av_buffersink_get_sample_aspect_ratio_fptr = GetFunctionDelegate<av_buffersink_get_sample_aspect_ratio_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_sample_aspect_ratio");
             if (av_buffersink_get_sample_aspect_ratio_fptr == null)
             {
                 av_buffersink_get_sample_aspect_ratio_fptr = delegate 
@@ -4100,7 +4100,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersink_get_sample_rate_delegate(AVFilterContext* @ctx);
         private static av_buffersink_get_sample_rate_delegate av_buffersink_get_sample_rate_fptr = (AVFilterContext* @ctx) =>
         {
-            av_buffersink_get_sample_rate_fptr = GetFunctionDelegate<av_buffersink_get_sample_rate_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_sample_rate");
+            av_buffersink_get_sample_rate_fptr = GetFunctionDelegate<av_buffersink_get_sample_rate_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_sample_rate");
             if (av_buffersink_get_sample_rate_fptr == null)
             {
                 av_buffersink_get_sample_rate_fptr = delegate 
@@ -4120,7 +4120,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersink_get_samples_delegate(AVFilterContext* @ctx, AVFrame* @frame, int @nb_samples);
         private static av_buffersink_get_samples_delegate av_buffersink_get_samples_fptr = (AVFilterContext* @ctx, AVFrame* @frame, int @nb_samples) =>
         {
-            av_buffersink_get_samples_fptr = GetFunctionDelegate<av_buffersink_get_samples_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_samples");
+            av_buffersink_get_samples_fptr = GetFunctionDelegate<av_buffersink_get_samples_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_samples");
             if (av_buffersink_get_samples_fptr == null)
             {
                 av_buffersink_get_samples_fptr = delegate 
@@ -4144,7 +4144,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_buffersink_get_time_base_delegate(AVFilterContext* @ctx);
         private static av_buffersink_get_time_base_delegate av_buffersink_get_time_base_fptr = (AVFilterContext* @ctx) =>
         {
-            av_buffersink_get_time_base_fptr = GetFunctionDelegate<av_buffersink_get_time_base_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_time_base");
+            av_buffersink_get_time_base_fptr = GetFunctionDelegate<av_buffersink_get_time_base_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_time_base");
             if (av_buffersink_get_time_base_fptr == null)
             {
                 av_buffersink_get_time_base_fptr = delegate 
@@ -4164,7 +4164,7 @@ namespace FFmpeg.AutoGen
         private delegate AVMediaType av_buffersink_get_type_delegate(AVFilterContext* @ctx);
         private static av_buffersink_get_type_delegate av_buffersink_get_type_fptr = (AVFilterContext* @ctx) =>
         {
-            av_buffersink_get_type_fptr = GetFunctionDelegate<av_buffersink_get_type_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_type");
+            av_buffersink_get_type_fptr = GetFunctionDelegate<av_buffersink_get_type_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_type");
             if (av_buffersink_get_type_fptr == null)
             {
                 av_buffersink_get_type_fptr = delegate 
@@ -4185,7 +4185,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersink_get_w_delegate(AVFilterContext* @ctx);
         private static av_buffersink_get_w_delegate av_buffersink_get_w_fptr = (AVFilterContext* @ctx) =>
         {
-            av_buffersink_get_w_fptr = GetFunctionDelegate<av_buffersink_get_w_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_get_w");
+            av_buffersink_get_w_fptr = GetFunctionDelegate<av_buffersink_get_w_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_w");
             if (av_buffersink_get_w_fptr == null)
             {
                 av_buffersink_get_w_fptr = delegate 
@@ -4205,7 +4205,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferSinkParams* av_buffersink_params_alloc_delegate();
         private static av_buffersink_params_alloc_delegate av_buffersink_params_alloc_fptr = () =>
         {
-            av_buffersink_params_alloc_fptr = GetFunctionDelegate<av_buffersink_params_alloc_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_params_alloc");
+            av_buffersink_params_alloc_fptr = GetFunctionDelegate<av_buffersink_params_alloc_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_params_alloc");
             if (av_buffersink_params_alloc_fptr == null)
             {
                 av_buffersink_params_alloc_fptr = delegate 
@@ -4226,7 +4226,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_buffersink_set_frame_size_delegate(AVFilterContext* @ctx, uint @frame_size);
         private static av_buffersink_set_frame_size_delegate av_buffersink_set_frame_size_fptr = (AVFilterContext* @ctx, uint @frame_size) =>
         {
-            av_buffersink_set_frame_size_fptr = GetFunctionDelegate<av_buffersink_set_frame_size_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersink_set_frame_size");
+            av_buffersink_set_frame_size_fptr = GetFunctionDelegate<av_buffersink_set_frame_size_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_set_frame_size");
             if (av_buffersink_set_frame_size_fptr == null)
             {
                 av_buffersink_set_frame_size_fptr = delegate 
@@ -4247,7 +4247,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersrc_add_frame_delegate(AVFilterContext* @ctx, AVFrame* @frame);
         private static av_buffersrc_add_frame_delegate av_buffersrc_add_frame_fptr = (AVFilterContext* @ctx, AVFrame* @frame) =>
         {
-            av_buffersrc_add_frame_fptr = GetFunctionDelegate<av_buffersrc_add_frame_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersrc_add_frame");
+            av_buffersrc_add_frame_fptr = GetFunctionDelegate<av_buffersrc_add_frame_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersrc_add_frame");
             if (av_buffersrc_add_frame_fptr == null)
             {
                 av_buffersrc_add_frame_fptr = delegate 
@@ -4271,7 +4271,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersrc_add_frame_flags_delegate(AVFilterContext* @buffer_src, AVFrame* @frame, int @flags);
         private static av_buffersrc_add_frame_flags_delegate av_buffersrc_add_frame_flags_fptr = (AVFilterContext* @buffer_src, AVFrame* @frame, int @flags) =>
         {
-            av_buffersrc_add_frame_flags_fptr = GetFunctionDelegate<av_buffersrc_add_frame_flags_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersrc_add_frame_flags");
+            av_buffersrc_add_frame_flags_fptr = GetFunctionDelegate<av_buffersrc_add_frame_flags_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersrc_add_frame_flags");
             if (av_buffersrc_add_frame_flags_fptr == null)
             {
                 av_buffersrc_add_frame_flags_fptr = delegate 
@@ -4296,7 +4296,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersrc_close_delegate(AVFilterContext* @ctx, long @pts, uint @flags);
         private static av_buffersrc_close_delegate av_buffersrc_close_fptr = (AVFilterContext* @ctx, long @pts, uint @flags) =>
         {
-            av_buffersrc_close_fptr = GetFunctionDelegate<av_buffersrc_close_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersrc_close");
+            av_buffersrc_close_fptr = GetFunctionDelegate<av_buffersrc_close_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersrc_close");
             if (av_buffersrc_close_fptr == null)
             {
                 av_buffersrc_close_fptr = delegate 
@@ -4317,7 +4317,7 @@ namespace FFmpeg.AutoGen
         private delegate uint av_buffersrc_get_nb_failed_requests_delegate(AVFilterContext* @buffer_src);
         private static av_buffersrc_get_nb_failed_requests_delegate av_buffersrc_get_nb_failed_requests_fptr = (AVFilterContext* @buffer_src) =>
         {
-            av_buffersrc_get_nb_failed_requests_fptr = GetFunctionDelegate<av_buffersrc_get_nb_failed_requests_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersrc_get_nb_failed_requests");
+            av_buffersrc_get_nb_failed_requests_fptr = GetFunctionDelegate<av_buffersrc_get_nb_failed_requests_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersrc_get_nb_failed_requests");
             if (av_buffersrc_get_nb_failed_requests_fptr == null)
             {
                 av_buffersrc_get_nb_failed_requests_fptr = delegate 
@@ -4338,7 +4338,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferSrcParameters* av_buffersrc_parameters_alloc_delegate();
         private static av_buffersrc_parameters_alloc_delegate av_buffersrc_parameters_alloc_fptr = () =>
         {
-            av_buffersrc_parameters_alloc_fptr = GetFunctionDelegate<av_buffersrc_parameters_alloc_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersrc_parameters_alloc");
+            av_buffersrc_parameters_alloc_fptr = GetFunctionDelegate<av_buffersrc_parameters_alloc_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersrc_parameters_alloc");
             if (av_buffersrc_parameters_alloc_fptr == null)
             {
                 av_buffersrc_parameters_alloc_fptr = delegate 
@@ -4359,7 +4359,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersrc_parameters_set_delegate(AVFilterContext* @ctx, AVBufferSrcParameters* @param);
         private static av_buffersrc_parameters_set_delegate av_buffersrc_parameters_set_fptr = (AVFilterContext* @ctx, AVBufferSrcParameters* @param) =>
         {
-            av_buffersrc_parameters_set_fptr = GetFunctionDelegate<av_buffersrc_parameters_set_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersrc_parameters_set");
+            av_buffersrc_parameters_set_fptr = GetFunctionDelegate<av_buffersrc_parameters_set_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersrc_parameters_set");
             if (av_buffersrc_parameters_set_fptr == null)
             {
                 av_buffersrc_parameters_set_fptr = delegate 
@@ -4383,7 +4383,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffersrc_write_frame_delegate(AVFilterContext* @ctx, AVFrame* @frame);
         private static av_buffersrc_write_frame_delegate av_buffersrc_write_frame_fptr = (AVFilterContext* @ctx, AVFrame* @frame) =>
         {
-            av_buffersrc_write_frame_fptr = GetFunctionDelegate<av_buffersrc_write_frame_delegate>(GetOrLoadLibrary("avfilter", 7), "av_buffersrc_write_frame");
+            av_buffersrc_write_frame_fptr = GetFunctionDelegate<av_buffersrc_write_frame_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersrc_write_frame");
             if (av_buffersrc_write_frame_fptr == null)
             {
                 av_buffersrc_write_frame_fptr = delegate 
@@ -4407,7 +4407,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFilter* av_filter_iterate_delegate(void** @opaque);
         private static av_filter_iterate_delegate av_filter_iterate_fptr = (void** @opaque) =>
         {
-            av_filter_iterate_fptr = GetFunctionDelegate<av_filter_iterate_delegate>(GetOrLoadLibrary("avfilter", 7), "av_filter_iterate");
+            av_filter_iterate_fptr = GetFunctionDelegate<av_filter_iterate_delegate>(GetOrLoadLibrary("avfilter"), "av_filter_iterate");
             if (av_filter_iterate_fptr == null)
             {
                 av_filter_iterate_fptr = delegate 
@@ -4430,7 +4430,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_config_links_delegate(AVFilterContext* @filter);
         private static avfilter_config_links_delegate avfilter_config_links_fptr = (AVFilterContext* @filter) =>
         {
-            avfilter_config_links_fptr = GetFunctionDelegate<avfilter_config_links_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_config_links");
+            avfilter_config_links_fptr = GetFunctionDelegate<avfilter_config_links_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_config_links");
             if (avfilter_config_links_fptr == null)
             {
                 avfilter_config_links_fptr = delegate 
@@ -4454,7 +4454,7 @@ namespace FFmpeg.AutoGen
         private delegate string avfilter_configuration_delegate();
         private static avfilter_configuration_delegate avfilter_configuration_fptr = () =>
         {
-            avfilter_configuration_fptr = GetFunctionDelegate<avfilter_configuration_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_configuration");
+            avfilter_configuration_fptr = GetFunctionDelegate<avfilter_configuration_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_configuration");
             if (avfilter_configuration_fptr == null)
             {
                 avfilter_configuration_fptr = delegate 
@@ -4475,7 +4475,7 @@ namespace FFmpeg.AutoGen
         private delegate void avfilter_free_delegate(AVFilterContext* @filter);
         private static avfilter_free_delegate avfilter_free_fptr = (AVFilterContext* @filter) =>
         {
-            avfilter_free_fptr = GetFunctionDelegate<avfilter_free_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_free");
+            avfilter_free_fptr = GetFunctionDelegate<avfilter_free_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_free");
             if (avfilter_free_fptr == null)
             {
                 avfilter_free_fptr = delegate 
@@ -4497,7 +4497,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFilter* avfilter_get_by_name_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static avfilter_get_by_name_delegate avfilter_get_by_name_fptr = (string @name) =>
         {
-            avfilter_get_by_name_fptr = GetFunctionDelegate<avfilter_get_by_name_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_get_by_name");
+            avfilter_get_by_name_fptr = GetFunctionDelegate<avfilter_get_by_name_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_get_by_name");
             if (avfilter_get_by_name_fptr == null)
             {
                 avfilter_get_by_name_fptr = delegate 
@@ -4520,7 +4520,7 @@ namespace FFmpeg.AutoGen
         private delegate AVClass* avfilter_get_class_delegate();
         private static avfilter_get_class_delegate avfilter_get_class_fptr = () =>
         {
-            avfilter_get_class_fptr = GetFunctionDelegate<avfilter_get_class_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_get_class");
+            avfilter_get_class_fptr = GetFunctionDelegate<avfilter_get_class_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_get_class");
             if (avfilter_get_class_fptr == null)
             {
                 avfilter_get_class_fptr = delegate 
@@ -4542,7 +4542,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFilterGraph* avfilter_graph_alloc_delegate();
         private static avfilter_graph_alloc_delegate avfilter_graph_alloc_fptr = () =>
         {
-            avfilter_graph_alloc_fptr = GetFunctionDelegate<avfilter_graph_alloc_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_alloc");
+            avfilter_graph_alloc_fptr = GetFunctionDelegate<avfilter_graph_alloc_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_alloc");
             if (avfilter_graph_alloc_fptr == null)
             {
                 avfilter_graph_alloc_fptr = delegate 
@@ -4564,7 +4564,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFilterContext* avfilter_graph_alloc_filter_delegate(AVFilterGraph* @graph, AVFilter* @filter, [MarshalAs((UnmanagedType)48)] string @name);
         private static avfilter_graph_alloc_filter_delegate avfilter_graph_alloc_filter_fptr = (AVFilterGraph* @graph, AVFilter* @filter, string @name) =>
         {
-            avfilter_graph_alloc_filter_fptr = GetFunctionDelegate<avfilter_graph_alloc_filter_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_alloc_filter");
+            avfilter_graph_alloc_filter_fptr = GetFunctionDelegate<avfilter_graph_alloc_filter_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_alloc_filter");
             if (avfilter_graph_alloc_filter_fptr == null)
             {
                 avfilter_graph_alloc_filter_fptr = delegate 
@@ -4589,7 +4589,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_graph_config_delegate(AVFilterGraph* @graphctx, void* @log_ctx);
         private static avfilter_graph_config_delegate avfilter_graph_config_fptr = (AVFilterGraph* @graphctx, void* @log_ctx) =>
         {
-            avfilter_graph_config_fptr = GetFunctionDelegate<avfilter_graph_config_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_config");
+            avfilter_graph_config_fptr = GetFunctionDelegate<avfilter_graph_config_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_config");
             if (avfilter_graph_config_fptr == null)
             {
                 avfilter_graph_config_fptr = delegate 
@@ -4613,7 +4613,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_graph_create_filter_delegate(AVFilterContext** @filt_ctx, AVFilter* @filt, [MarshalAs((UnmanagedType)48)] string @name, [MarshalAs((UnmanagedType)48)] string @args, void* @opaque, AVFilterGraph* @graph_ctx);
         private static avfilter_graph_create_filter_delegate avfilter_graph_create_filter_fptr = (AVFilterContext** @filt_ctx, AVFilter* @filt, string @name, string @args, void* @opaque, AVFilterGraph* @graph_ctx) =>
         {
-            avfilter_graph_create_filter_fptr = GetFunctionDelegate<avfilter_graph_create_filter_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_create_filter");
+            avfilter_graph_create_filter_fptr = GetFunctionDelegate<avfilter_graph_create_filter_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_create_filter");
             if (avfilter_graph_create_filter_fptr == null)
             {
                 avfilter_graph_create_filter_fptr = delegate 
@@ -4637,7 +4637,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* avfilter_graph_dump_delegate(AVFilterGraph* @graph, [MarshalAs((UnmanagedType)48)] string @options);
         private static avfilter_graph_dump_delegate avfilter_graph_dump_fptr = (AVFilterGraph* @graph, string @options) =>
         {
-            avfilter_graph_dump_fptr = GetFunctionDelegate<avfilter_graph_dump_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_dump");
+            avfilter_graph_dump_fptr = GetFunctionDelegate<avfilter_graph_dump_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_dump");
             if (avfilter_graph_dump_fptr == null)
             {
                 avfilter_graph_dump_fptr = delegate 
@@ -4661,7 +4661,7 @@ namespace FFmpeg.AutoGen
         private delegate void avfilter_graph_free_delegate(AVFilterGraph** @graph);
         private static avfilter_graph_free_delegate avfilter_graph_free_fptr = (AVFilterGraph** @graph) =>
         {
-            avfilter_graph_free_fptr = GetFunctionDelegate<avfilter_graph_free_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_free");
+            avfilter_graph_free_fptr = GetFunctionDelegate<avfilter_graph_free_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_free");
             if (avfilter_graph_free_fptr == null)
             {
                 avfilter_graph_free_fptr = delegate 
@@ -4682,7 +4682,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFilterContext* avfilter_graph_get_filter_delegate(AVFilterGraph* @graph, [MarshalAs((UnmanagedType)48)] string @name);
         private static avfilter_graph_get_filter_delegate avfilter_graph_get_filter_fptr = (AVFilterGraph* @graph, string @name) =>
         {
-            avfilter_graph_get_filter_fptr = GetFunctionDelegate<avfilter_graph_get_filter_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_get_filter");
+            avfilter_graph_get_filter_fptr = GetFunctionDelegate<avfilter_graph_get_filter_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_get_filter");
             if (avfilter_graph_get_filter_fptr == null)
             {
                 avfilter_graph_get_filter_fptr = delegate 
@@ -4706,7 +4706,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_graph_parse_delegate(AVFilterGraph* @graph, [MarshalAs((UnmanagedType)48)] string @filters, AVFilterInOut* @inputs, AVFilterInOut* @outputs, void* @log_ctx);
         private static avfilter_graph_parse_delegate avfilter_graph_parse_fptr = (AVFilterGraph* @graph, string @filters, AVFilterInOut* @inputs, AVFilterInOut* @outputs, void* @log_ctx) =>
         {
-            avfilter_graph_parse_fptr = GetFunctionDelegate<avfilter_graph_parse_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_parse");
+            avfilter_graph_parse_fptr = GetFunctionDelegate<avfilter_graph_parse_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_parse");
             if (avfilter_graph_parse_fptr == null)
             {
                 avfilter_graph_parse_fptr = delegate 
@@ -4732,7 +4732,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_graph_parse_ptr_delegate(AVFilterGraph* @graph, [MarshalAs((UnmanagedType)48)] string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs, void* @log_ctx);
         private static avfilter_graph_parse_ptr_delegate avfilter_graph_parse_ptr_fptr = (AVFilterGraph* @graph, string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs, void* @log_ctx) =>
         {
-            avfilter_graph_parse_ptr_fptr = GetFunctionDelegate<avfilter_graph_parse_ptr_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_parse_ptr");
+            avfilter_graph_parse_ptr_fptr = GetFunctionDelegate<avfilter_graph_parse_ptr_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_parse_ptr");
             if (avfilter_graph_parse_ptr_fptr == null)
             {
                 avfilter_graph_parse_ptr_fptr = delegate 
@@ -4758,7 +4758,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_graph_parse2_delegate(AVFilterGraph* @graph, [MarshalAs((UnmanagedType)48)] string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs);
         private static avfilter_graph_parse2_delegate avfilter_graph_parse2_fptr = (AVFilterGraph* @graph, string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs) =>
         {
-            avfilter_graph_parse2_fptr = GetFunctionDelegate<avfilter_graph_parse2_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_parse2");
+            avfilter_graph_parse2_fptr = GetFunctionDelegate<avfilter_graph_parse2_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_parse2");
             if (avfilter_graph_parse2_fptr == null)
             {
                 avfilter_graph_parse2_fptr = delegate 
@@ -4784,7 +4784,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_graph_queue_command_delegate(AVFilterGraph* @graph, [MarshalAs((UnmanagedType)48)] string @target, [MarshalAs((UnmanagedType)48)] string @cmd, [MarshalAs((UnmanagedType)48)] string @arg, int @flags, double @ts);
         private static avfilter_graph_queue_command_delegate avfilter_graph_queue_command_fptr = (AVFilterGraph* @graph, string @target, string @cmd, string @arg, int @flags, double @ts) =>
         {
-            avfilter_graph_queue_command_fptr = GetFunctionDelegate<avfilter_graph_queue_command_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_queue_command");
+            avfilter_graph_queue_command_fptr = GetFunctionDelegate<avfilter_graph_queue_command_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_queue_command");
             if (avfilter_graph_queue_command_fptr == null)
             {
                 avfilter_graph_queue_command_fptr = delegate 
@@ -4810,7 +4810,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_graph_request_oldest_delegate(AVFilterGraph* @graph);
         private static avfilter_graph_request_oldest_delegate avfilter_graph_request_oldest_fptr = (AVFilterGraph* @graph) =>
         {
-            avfilter_graph_request_oldest_fptr = GetFunctionDelegate<avfilter_graph_request_oldest_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_request_oldest");
+            avfilter_graph_request_oldest_fptr = GetFunctionDelegate<avfilter_graph_request_oldest_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_request_oldest");
             if (avfilter_graph_request_oldest_fptr == null)
             {
                 avfilter_graph_request_oldest_fptr = delegate 
@@ -4832,7 +4832,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_graph_send_command_delegate(AVFilterGraph* @graph, [MarshalAs((UnmanagedType)48)] string @target, [MarshalAs((UnmanagedType)48)] string @cmd, [MarshalAs((UnmanagedType)48)] string @arg, byte* @res, int @res_len, int @flags);
         private static avfilter_graph_send_command_delegate avfilter_graph_send_command_fptr = (AVFilterGraph* @graph, string @target, string @cmd, string @arg, byte* @res, int @res_len, int @flags) =>
         {
-            avfilter_graph_send_command_fptr = GetFunctionDelegate<avfilter_graph_send_command_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_send_command");
+            avfilter_graph_send_command_fptr = GetFunctionDelegate<avfilter_graph_send_command_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_send_command");
             if (avfilter_graph_send_command_fptr == null)
             {
                 avfilter_graph_send_command_fptr = delegate 
@@ -4858,7 +4858,7 @@ namespace FFmpeg.AutoGen
         private delegate void avfilter_graph_set_auto_convert_delegate(AVFilterGraph* @graph, uint @flags);
         private static avfilter_graph_set_auto_convert_delegate avfilter_graph_set_auto_convert_fptr = (AVFilterGraph* @graph, uint @flags) =>
         {
-            avfilter_graph_set_auto_convert_fptr = GetFunctionDelegate<avfilter_graph_set_auto_convert_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_graph_set_auto_convert");
+            avfilter_graph_set_auto_convert_fptr = GetFunctionDelegate<avfilter_graph_set_auto_convert_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_set_auto_convert");
             if (avfilter_graph_set_auto_convert_fptr == null)
             {
                 avfilter_graph_set_auto_convert_fptr = delegate 
@@ -4880,7 +4880,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_init_dict_delegate(AVFilterContext* @ctx, AVDictionary** @options);
         private static avfilter_init_dict_delegate avfilter_init_dict_fptr = (AVFilterContext* @ctx, AVDictionary** @options) =>
         {
-            avfilter_init_dict_fptr = GetFunctionDelegate<avfilter_init_dict_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_init_dict");
+            avfilter_init_dict_fptr = GetFunctionDelegate<avfilter_init_dict_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_init_dict");
             if (avfilter_init_dict_fptr == null)
             {
                 avfilter_init_dict_fptr = delegate 
@@ -4904,7 +4904,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_init_str_delegate(AVFilterContext* @ctx, [MarshalAs((UnmanagedType)48)] string @args);
         private static avfilter_init_str_delegate avfilter_init_str_fptr = (AVFilterContext* @ctx, string @args) =>
         {
-            avfilter_init_str_fptr = GetFunctionDelegate<avfilter_init_str_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_init_str");
+            avfilter_init_str_fptr = GetFunctionDelegate<avfilter_init_str_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_init_str");
             if (avfilter_init_str_fptr == null)
             {
                 avfilter_init_str_fptr = delegate 
@@ -4928,7 +4928,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFilterInOut* avfilter_inout_alloc_delegate();
         private static avfilter_inout_alloc_delegate avfilter_inout_alloc_fptr = () =>
         {
-            avfilter_inout_alloc_fptr = GetFunctionDelegate<avfilter_inout_alloc_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_inout_alloc");
+            avfilter_inout_alloc_fptr = GetFunctionDelegate<avfilter_inout_alloc_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_inout_alloc");
             if (avfilter_inout_alloc_fptr == null)
             {
                 avfilter_inout_alloc_fptr = delegate 
@@ -4950,7 +4950,7 @@ namespace FFmpeg.AutoGen
         private delegate void avfilter_inout_free_delegate(AVFilterInOut** @inout);
         private static avfilter_inout_free_delegate avfilter_inout_free_fptr = (AVFilterInOut** @inout) =>
         {
-            avfilter_inout_free_fptr = GetFunctionDelegate<avfilter_inout_free_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_inout_free");
+            avfilter_inout_free_fptr = GetFunctionDelegate<avfilter_inout_free_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_inout_free");
             if (avfilter_inout_free_fptr == null)
             {
                 avfilter_inout_free_fptr = delegate 
@@ -4971,7 +4971,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_insert_filter_delegate(AVFilterLink* @link, AVFilterContext* @filt, uint @filt_srcpad_idx, uint @filt_dstpad_idx);
         private static avfilter_insert_filter_delegate avfilter_insert_filter_fptr = (AVFilterLink* @link, AVFilterContext* @filt, uint @filt_srcpad_idx, uint @filt_dstpad_idx) =>
         {
-            avfilter_insert_filter_fptr = GetFunctionDelegate<avfilter_insert_filter_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_insert_filter");
+            avfilter_insert_filter_fptr = GetFunctionDelegate<avfilter_insert_filter_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_insert_filter");
             if (avfilter_insert_filter_fptr == null)
             {
                 avfilter_insert_filter_fptr = delegate 
@@ -4998,7 +4998,7 @@ namespace FFmpeg.AutoGen
         private delegate string avfilter_license_delegate();
         private static avfilter_license_delegate avfilter_license_fptr = () =>
         {
-            avfilter_license_fptr = GetFunctionDelegate<avfilter_license_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_license");
+            avfilter_license_fptr = GetFunctionDelegate<avfilter_license_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_license");
             if (avfilter_license_fptr == null)
             {
                 avfilter_license_fptr = delegate 
@@ -5019,7 +5019,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_link_delegate(AVFilterContext* @src, uint @srcpad, AVFilterContext* @dst, uint @dstpad);
         private static avfilter_link_delegate avfilter_link_fptr = (AVFilterContext* @src, uint @srcpad, AVFilterContext* @dst, uint @dstpad) =>
         {
-            avfilter_link_fptr = GetFunctionDelegate<avfilter_link_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_link");
+            avfilter_link_fptr = GetFunctionDelegate<avfilter_link_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_link");
             if (avfilter_link_fptr == null)
             {
                 avfilter_link_fptr = delegate 
@@ -5045,7 +5045,7 @@ namespace FFmpeg.AutoGen
         private delegate void avfilter_link_free_delegate(AVFilterLink** @link);
         private static avfilter_link_free_delegate avfilter_link_free_fptr = (AVFilterLink** @link) =>
         {
-            avfilter_link_free_fptr = GetFunctionDelegate<avfilter_link_free_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_link_free");
+            avfilter_link_free_fptr = GetFunctionDelegate<avfilter_link_free_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_link_free");
             if (avfilter_link_free_fptr == null)
             {
                 avfilter_link_free_fptr = delegate 
@@ -5066,7 +5066,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_link_get_channels_delegate(AVFilterLink* @link);
         private static avfilter_link_get_channels_delegate avfilter_link_get_channels_fptr = (AVFilterLink* @link) =>
         {
-            avfilter_link_get_channels_fptr = GetFunctionDelegate<avfilter_link_get_channels_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_link_get_channels");
+            avfilter_link_get_channels_fptr = GetFunctionDelegate<avfilter_link_get_channels_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_link_get_channels");
             if (avfilter_link_get_channels_fptr == null)
             {
                 avfilter_link_get_channels_fptr = delegate 
@@ -5088,7 +5088,7 @@ namespace FFmpeg.AutoGen
         private delegate void avfilter_link_set_closed_delegate(AVFilterLink* @link, int @closed);
         private static avfilter_link_set_closed_delegate avfilter_link_set_closed_fptr = (AVFilterLink* @link, int @closed) =>
         {
-            avfilter_link_set_closed_fptr = GetFunctionDelegate<avfilter_link_set_closed_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_link_set_closed");
+            avfilter_link_set_closed_fptr = GetFunctionDelegate<avfilter_link_set_closed_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_link_set_closed");
             if (avfilter_link_set_closed_fptr == null)
             {
                 avfilter_link_set_closed_fptr = delegate 
@@ -5110,7 +5110,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFilter* avfilter_next_delegate(AVFilter* @prev);
         private static avfilter_next_delegate avfilter_next_fptr = (AVFilter* @prev) =>
         {
-            avfilter_next_fptr = GetFunctionDelegate<avfilter_next_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_next");
+            avfilter_next_fptr = GetFunctionDelegate<avfilter_next_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_next");
             if (avfilter_next_fptr == null)
             {
                 avfilter_next_fptr = delegate 
@@ -5133,7 +5133,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_pad_count_delegate(AVFilterPad* @pads);
         private static avfilter_pad_count_delegate avfilter_pad_count_fptr = (AVFilterPad* @pads) =>
         {
-            avfilter_pad_count_fptr = GetFunctionDelegate<avfilter_pad_count_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_pad_count");
+            avfilter_pad_count_fptr = GetFunctionDelegate<avfilter_pad_count_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_pad_count");
             if (avfilter_pad_count_fptr == null)
             {
                 avfilter_pad_count_fptr = delegate 
@@ -5155,7 +5155,7 @@ namespace FFmpeg.AutoGen
         private delegate string avfilter_pad_get_name_delegate(AVFilterPad* @pads, int @pad_idx);
         private static avfilter_pad_get_name_delegate avfilter_pad_get_name_fptr = (AVFilterPad* @pads, int @pad_idx) =>
         {
-            avfilter_pad_get_name_fptr = GetFunctionDelegate<avfilter_pad_get_name_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_pad_get_name");
+            avfilter_pad_get_name_fptr = GetFunctionDelegate<avfilter_pad_get_name_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_pad_get_name");
             if (avfilter_pad_get_name_fptr == null)
             {
                 avfilter_pad_get_name_fptr = delegate 
@@ -5179,7 +5179,7 @@ namespace FFmpeg.AutoGen
         private delegate AVMediaType avfilter_pad_get_type_delegate(AVFilterPad* @pads, int @pad_idx);
         private static avfilter_pad_get_type_delegate avfilter_pad_get_type_fptr = (AVFilterPad* @pads, int @pad_idx) =>
         {
-            avfilter_pad_get_type_fptr = GetFunctionDelegate<avfilter_pad_get_type_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_pad_get_type");
+            avfilter_pad_get_type_fptr = GetFunctionDelegate<avfilter_pad_get_type_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_pad_get_type");
             if (avfilter_pad_get_type_fptr == null)
             {
                 avfilter_pad_get_type_fptr = delegate 
@@ -5203,7 +5203,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_process_command_delegate(AVFilterContext* @filter, [MarshalAs((UnmanagedType)48)] string @cmd, [MarshalAs((UnmanagedType)48)] string @arg, byte* @res, int @res_len, int @flags);
         private static avfilter_process_command_delegate avfilter_process_command_fptr = (AVFilterContext* @filter, string @cmd, string @arg, byte* @res, int @res_len, int @flags) =>
         {
-            avfilter_process_command_fptr = GetFunctionDelegate<avfilter_process_command_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_process_command");
+            avfilter_process_command_fptr = GetFunctionDelegate<avfilter_process_command_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_process_command");
             if (avfilter_process_command_fptr == null)
             {
                 avfilter_process_command_fptr = delegate 
@@ -5224,7 +5224,7 @@ namespace FFmpeg.AutoGen
         private delegate int avfilter_register_delegate(AVFilter* @filter);
         private static avfilter_register_delegate avfilter_register_fptr = (AVFilter* @filter) =>
         {
-            avfilter_register_fptr = GetFunctionDelegate<avfilter_register_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_register");
+            avfilter_register_fptr = GetFunctionDelegate<avfilter_register_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_register");
             if (avfilter_register_fptr == null)
             {
                 avfilter_register_fptr = delegate 
@@ -5248,7 +5248,7 @@ namespace FFmpeg.AutoGen
         private delegate void avfilter_register_all_delegate();
         private static avfilter_register_all_delegate avfilter_register_all_fptr = () =>
         {
-            avfilter_register_all_fptr = GetFunctionDelegate<avfilter_register_all_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_register_all");
+            avfilter_register_all_fptr = GetFunctionDelegate<avfilter_register_all_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_register_all");
             if (avfilter_register_all_fptr == null)
             {
                 avfilter_register_all_fptr = delegate 
@@ -5270,7 +5270,7 @@ namespace FFmpeg.AutoGen
         private delegate uint avfilter_version_delegate();
         private static avfilter_version_delegate avfilter_version_fptr = () =>
         {
-            avfilter_version_fptr = GetFunctionDelegate<avfilter_version_delegate>(GetOrLoadLibrary("avfilter", 7), "avfilter_version");
+            avfilter_version_fptr = GetFunctionDelegate<avfilter_version_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_version");
             if (avfilter_version_fptr == null)
             {
                 avfilter_version_fptr = delegate 
@@ -5291,7 +5291,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_add_index_entry_delegate(AVStream* @st, long @pos, long @timestamp, int @size, int @distance, int @flags);
         private static av_add_index_entry_delegate av_add_index_entry_fptr = (AVStream* @st, long @pos, long @timestamp, int @size, int @distance, int @flags) =>
         {
-            av_add_index_entry_fptr = GetFunctionDelegate<av_add_index_entry_delegate>(GetOrLoadLibrary("avformat", 58), "av_add_index_entry");
+            av_add_index_entry_fptr = GetFunctionDelegate<av_add_index_entry_delegate>(GetOrLoadLibrary("avformat"), "av_add_index_entry");
             if (av_add_index_entry_fptr == null)
             {
                 av_add_index_entry_fptr = delegate 
@@ -5313,7 +5313,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_append_packet_delegate(AVIOContext* @s, AVPacket* @pkt, int @size);
         private static av_append_packet_delegate av_append_packet_fptr = (AVIOContext* @s, AVPacket* @pkt, int @size) =>
         {
-            av_append_packet_fptr = GetFunctionDelegate<av_append_packet_delegate>(GetOrLoadLibrary("avformat", 58), "av_append_packet");
+            av_append_packet_fptr = GetFunctionDelegate<av_append_packet_delegate>(GetOrLoadLibrary("avformat"), "av_append_packet");
             if (av_append_packet_fptr == null)
             {
                 av_append_packet_fptr = delegate 
@@ -5338,7 +5338,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_apply_bitstream_filters_delegate(AVCodecContext* @codec, AVPacket* @pkt, AVBitStreamFilterContext* @bsfc);
         private static av_apply_bitstream_filters_delegate av_apply_bitstream_filters_fptr = (AVCodecContext* @codec, AVPacket* @pkt, AVBitStreamFilterContext* @bsfc) =>
         {
-            av_apply_bitstream_filters_fptr = GetFunctionDelegate<av_apply_bitstream_filters_delegate>(GetOrLoadLibrary("avformat", 58), "av_apply_bitstream_filters");
+            av_apply_bitstream_filters_fptr = GetFunctionDelegate<av_apply_bitstream_filters_delegate>(GetOrLoadLibrary("avformat"), "av_apply_bitstream_filters");
             if (av_apply_bitstream_filters_fptr == null)
             {
                 av_apply_bitstream_filters_fptr = delegate 
@@ -5364,7 +5364,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecID av_codec_get_id_delegate(AVCodecTag** @tags, uint @tag);
         private static av_codec_get_id_delegate av_codec_get_id_fptr = (AVCodecTag** @tags, uint @tag) =>
         {
-            av_codec_get_id_fptr = GetFunctionDelegate<av_codec_get_id_delegate>(GetOrLoadLibrary("avformat", 58), "av_codec_get_id");
+            av_codec_get_id_fptr = GetFunctionDelegate<av_codec_get_id_delegate>(GetOrLoadLibrary("avformat"), "av_codec_get_id");
             if (av_codec_get_id_fptr == null)
             {
                 av_codec_get_id_fptr = delegate 
@@ -5387,7 +5387,7 @@ namespace FFmpeg.AutoGen
         private delegate uint av_codec_get_tag_delegate(AVCodecTag** @tags, AVCodecID @id);
         private static av_codec_get_tag_delegate av_codec_get_tag_fptr = (AVCodecTag** @tags, AVCodecID @id) =>
         {
-            av_codec_get_tag_fptr = GetFunctionDelegate<av_codec_get_tag_delegate>(GetOrLoadLibrary("avformat", 58), "av_codec_get_tag");
+            av_codec_get_tag_fptr = GetFunctionDelegate<av_codec_get_tag_delegate>(GetOrLoadLibrary("avformat"), "av_codec_get_tag");
             if (av_codec_get_tag_fptr == null)
             {
                 av_codec_get_tag_fptr = delegate 
@@ -5410,7 +5410,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_codec_get_tag2_delegate(AVCodecTag** @tags, AVCodecID @id, uint* @tag);
         private static av_codec_get_tag2_delegate av_codec_get_tag2_fptr = (AVCodecTag** @tags, AVCodecID @id, uint* @tag) =>
         {
-            av_codec_get_tag2_fptr = GetFunctionDelegate<av_codec_get_tag2_delegate>(GetOrLoadLibrary("avformat", 58), "av_codec_get_tag2");
+            av_codec_get_tag2_fptr = GetFunctionDelegate<av_codec_get_tag2_delegate>(GetOrLoadLibrary("avformat"), "av_codec_get_tag2");
             if (av_codec_get_tag2_fptr == null)
             {
                 av_codec_get_tag2_fptr = delegate 
@@ -5435,7 +5435,7 @@ namespace FFmpeg.AutoGen
         private delegate AVInputFormat* av_demuxer_iterate_delegate(void** @opaque);
         private static av_demuxer_iterate_delegate av_demuxer_iterate_fptr = (void** @opaque) =>
         {
-            av_demuxer_iterate_fptr = GetFunctionDelegate<av_demuxer_iterate_delegate>(GetOrLoadLibrary("avformat", 58), "av_demuxer_iterate");
+            av_demuxer_iterate_fptr = GetFunctionDelegate<av_demuxer_iterate_delegate>(GetOrLoadLibrary("avformat"), "av_demuxer_iterate");
             if (av_demuxer_iterate_fptr == null)
             {
                 av_demuxer_iterate_fptr = delegate 
@@ -5458,7 +5458,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_demuxer_open_delegate(AVFormatContext* @ic);
         private static av_demuxer_open_delegate av_demuxer_open_fptr = (AVFormatContext* @ic) =>
         {
-            av_demuxer_open_fptr = GetFunctionDelegate<av_demuxer_open_delegate>(GetOrLoadLibrary("avformat", 58), "av_demuxer_open");
+            av_demuxer_open_fptr = GetFunctionDelegate<av_demuxer_open_delegate>(GetOrLoadLibrary("avformat"), "av_demuxer_open");
             if (av_demuxer_open_fptr == null)
             {
                 av_demuxer_open_fptr = delegate 
@@ -5479,7 +5479,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_dump_format_delegate(AVFormatContext* @ic, int @index, [MarshalAs((UnmanagedType)48)] string @url, int @is_output);
         private static av_dump_format_delegate av_dump_format_fptr = (AVFormatContext* @ic, int @index, string @url, int @is_output) =>
         {
-            av_dump_format_fptr = GetFunctionDelegate<av_dump_format_delegate>(GetOrLoadLibrary("avformat", 58), "av_dump_format");
+            av_dump_format_fptr = GetFunctionDelegate<av_dump_format_delegate>(GetOrLoadLibrary("avformat"), "av_dump_format");
             if (av_dump_format_fptr == null)
             {
                 av_dump_format_fptr = delegate 
@@ -5504,7 +5504,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_filename_number_test_delegate([MarshalAs((UnmanagedType)48)] string @filename);
         private static av_filename_number_test_delegate av_filename_number_test_fptr = (string @filename) =>
         {
-            av_filename_number_test_fptr = GetFunctionDelegate<av_filename_number_test_delegate>(GetOrLoadLibrary("avformat", 58), "av_filename_number_test");
+            av_filename_number_test_fptr = GetFunctionDelegate<av_filename_number_test_delegate>(GetOrLoadLibrary("avformat"), "av_filename_number_test");
             if (av_filename_number_test_fptr == null)
             {
                 av_filename_number_test_fptr = delegate 
@@ -5527,7 +5527,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_find_best_stream_delegate(AVFormatContext* @ic, AVMediaType @type, int @wanted_stream_nb, int @related_stream, AVCodec** @decoder_ret, int @flags);
         private static av_find_best_stream_delegate av_find_best_stream_fptr = (AVFormatContext* @ic, AVMediaType @type, int @wanted_stream_nb, int @related_stream, AVCodec** @decoder_ret, int @flags) =>
         {
-            av_find_best_stream_fptr = GetFunctionDelegate<av_find_best_stream_delegate>(GetOrLoadLibrary("avformat", 58), "av_find_best_stream");
+            av_find_best_stream_fptr = GetFunctionDelegate<av_find_best_stream_delegate>(GetOrLoadLibrary("avformat"), "av_find_best_stream");
             if (av_find_best_stream_fptr == null)
             {
                 av_find_best_stream_fptr = delegate 
@@ -5555,7 +5555,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_find_default_stream_index_delegate(AVFormatContext* @s);
         private static av_find_default_stream_index_delegate av_find_default_stream_index_fptr = (AVFormatContext* @s) =>
         {
-            av_find_default_stream_index_fptr = GetFunctionDelegate<av_find_default_stream_index_delegate>(GetOrLoadLibrary("avformat", 58), "av_find_default_stream_index");
+            av_find_default_stream_index_fptr = GetFunctionDelegate<av_find_default_stream_index_delegate>(GetOrLoadLibrary("avformat"), "av_find_default_stream_index");
             if (av_find_default_stream_index_fptr == null)
             {
                 av_find_default_stream_index_fptr = delegate 
@@ -5575,7 +5575,7 @@ namespace FFmpeg.AutoGen
         private delegate AVInputFormat* av_find_input_format_delegate([MarshalAs((UnmanagedType)48)] string @short_name);
         private static av_find_input_format_delegate av_find_input_format_fptr = (string @short_name) =>
         {
-            av_find_input_format_fptr = GetFunctionDelegate<av_find_input_format_delegate>(GetOrLoadLibrary("avformat", 58), "av_find_input_format");
+            av_find_input_format_fptr = GetFunctionDelegate<av_find_input_format_delegate>(GetOrLoadLibrary("avformat"), "av_find_input_format");
             if (av_find_input_format_fptr == null)
             {
                 av_find_input_format_fptr = delegate 
@@ -5596,7 +5596,7 @@ namespace FFmpeg.AutoGen
         private delegate AVProgram* av_find_program_from_stream_delegate(AVFormatContext* @ic, AVProgram* @last, int @s);
         private static av_find_program_from_stream_delegate av_find_program_from_stream_fptr = (AVFormatContext* @ic, AVProgram* @last, int @s) =>
         {
-            av_find_program_from_stream_fptr = GetFunctionDelegate<av_find_program_from_stream_delegate>(GetOrLoadLibrary("avformat", 58), "av_find_program_from_stream");
+            av_find_program_from_stream_fptr = GetFunctionDelegate<av_find_program_from_stream_delegate>(GetOrLoadLibrary("avformat"), "av_find_program_from_stream");
             if (av_find_program_from_stream_fptr == null)
             {
                 av_find_program_from_stream_fptr = delegate 
@@ -5621,7 +5621,7 @@ namespace FFmpeg.AutoGen
         private delegate AVDurationEstimationMethod av_fmt_ctx_get_duration_estimation_method_delegate(AVFormatContext* @ctx);
         private static av_fmt_ctx_get_duration_estimation_method_delegate av_fmt_ctx_get_duration_estimation_method_fptr = (AVFormatContext* @ctx) =>
         {
-            av_fmt_ctx_get_duration_estimation_method_fptr = GetFunctionDelegate<av_fmt_ctx_get_duration_estimation_method_delegate>(GetOrLoadLibrary("avformat", 58), "av_fmt_ctx_get_duration_estimation_method");
+            av_fmt_ctx_get_duration_estimation_method_fptr = GetFunctionDelegate<av_fmt_ctx_get_duration_estimation_method_delegate>(GetOrLoadLibrary("avformat"), "av_fmt_ctx_get_duration_estimation_method");
             if (av_fmt_ctx_get_duration_estimation_method_fptr == null)
             {
                 av_fmt_ctx_get_duration_estimation_method_fptr = delegate 
@@ -5643,7 +5643,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodec* av_format_get_audio_codec_delegate(AVFormatContext* @s);
         private static av_format_get_audio_codec_delegate av_format_get_audio_codec_fptr = (AVFormatContext* @s) =>
         {
-            av_format_get_audio_codec_fptr = GetFunctionDelegate<av_format_get_audio_codec_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_get_audio_codec");
+            av_format_get_audio_codec_fptr = GetFunctionDelegate<av_format_get_audio_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_audio_codec");
             if (av_format_get_audio_codec_fptr == null)
             {
                 av_format_get_audio_codec_fptr = delegate 
@@ -5664,7 +5664,7 @@ namespace FFmpeg.AutoGen
         private delegate av_format_get_control_message_cb_func av_format_get_control_message_cb_delegate(AVFormatContext* @s);
         private static av_format_get_control_message_cb_delegate av_format_get_control_message_cb_fptr = (AVFormatContext* @s) =>
         {
-            av_format_get_control_message_cb_fptr = GetFunctionDelegate<av_format_get_control_message_cb_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_get_control_message_cb");
+            av_format_get_control_message_cb_fptr = GetFunctionDelegate<av_format_get_control_message_cb_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_control_message_cb");
             if (av_format_get_control_message_cb_fptr == null)
             {
                 av_format_get_control_message_cb_fptr = delegate 
@@ -5685,7 +5685,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodec* av_format_get_data_codec_delegate(AVFormatContext* @s);
         private static av_format_get_data_codec_delegate av_format_get_data_codec_fptr = (AVFormatContext* @s) =>
         {
-            av_format_get_data_codec_fptr = GetFunctionDelegate<av_format_get_data_codec_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_get_data_codec");
+            av_format_get_data_codec_fptr = GetFunctionDelegate<av_format_get_data_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_data_codec");
             if (av_format_get_data_codec_fptr == null)
             {
                 av_format_get_data_codec_fptr = delegate 
@@ -5706,7 +5706,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_format_get_metadata_header_padding_delegate(AVFormatContext* @s);
         private static av_format_get_metadata_header_padding_delegate av_format_get_metadata_header_padding_fptr = (AVFormatContext* @s) =>
         {
-            av_format_get_metadata_header_padding_fptr = GetFunctionDelegate<av_format_get_metadata_header_padding_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_get_metadata_header_padding");
+            av_format_get_metadata_header_padding_fptr = GetFunctionDelegate<av_format_get_metadata_header_padding_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_metadata_header_padding");
             if (av_format_get_metadata_header_padding_fptr == null)
             {
                 av_format_get_metadata_header_padding_fptr = delegate 
@@ -5727,7 +5727,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_format_get_opaque_delegate(AVFormatContext* @s);
         private static av_format_get_opaque_delegate av_format_get_opaque_fptr = (AVFormatContext* @s) =>
         {
-            av_format_get_opaque_fptr = GetFunctionDelegate<av_format_get_opaque_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_get_opaque");
+            av_format_get_opaque_fptr = GetFunctionDelegate<av_format_get_opaque_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_opaque");
             if (av_format_get_opaque_fptr == null)
             {
                 av_format_get_opaque_fptr = delegate 
@@ -5748,7 +5748,7 @@ namespace FFmpeg.AutoGen
         private delegate av_format_get_open_cb_func av_format_get_open_cb_delegate(AVFormatContext* @s);
         private static av_format_get_open_cb_delegate av_format_get_open_cb_fptr = (AVFormatContext* @s) =>
         {
-            av_format_get_open_cb_fptr = GetFunctionDelegate<av_format_get_open_cb_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_get_open_cb");
+            av_format_get_open_cb_fptr = GetFunctionDelegate<av_format_get_open_cb_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_open_cb");
             if (av_format_get_open_cb_fptr == null)
             {
                 av_format_get_open_cb_fptr = delegate 
@@ -5769,7 +5769,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_format_get_probe_score_delegate(AVFormatContext* @s);
         private static av_format_get_probe_score_delegate av_format_get_probe_score_fptr = (AVFormatContext* @s) =>
         {
-            av_format_get_probe_score_fptr = GetFunctionDelegate<av_format_get_probe_score_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_get_probe_score");
+            av_format_get_probe_score_fptr = GetFunctionDelegate<av_format_get_probe_score_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_probe_score");
             if (av_format_get_probe_score_fptr == null)
             {
                 av_format_get_probe_score_fptr = delegate 
@@ -5791,7 +5791,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodec* av_format_get_subtitle_codec_delegate(AVFormatContext* @s);
         private static av_format_get_subtitle_codec_delegate av_format_get_subtitle_codec_fptr = (AVFormatContext* @s) =>
         {
-            av_format_get_subtitle_codec_fptr = GetFunctionDelegate<av_format_get_subtitle_codec_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_get_subtitle_codec");
+            av_format_get_subtitle_codec_fptr = GetFunctionDelegate<av_format_get_subtitle_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_subtitle_codec");
             if (av_format_get_subtitle_codec_fptr == null)
             {
                 av_format_get_subtitle_codec_fptr = delegate 
@@ -5812,7 +5812,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodec* av_format_get_video_codec_delegate(AVFormatContext* @s);
         private static av_format_get_video_codec_delegate av_format_get_video_codec_fptr = (AVFormatContext* @s) =>
         {
-            av_format_get_video_codec_fptr = GetFunctionDelegate<av_format_get_video_codec_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_get_video_codec");
+            av_format_get_video_codec_fptr = GetFunctionDelegate<av_format_get_video_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_video_codec");
             if (av_format_get_video_codec_fptr == null)
             {
                 av_format_get_video_codec_fptr = delegate 
@@ -5833,7 +5833,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_format_inject_global_side_data_delegate(AVFormatContext* @s);
         private static av_format_inject_global_side_data_delegate av_format_inject_global_side_data_fptr = (AVFormatContext* @s) =>
         {
-            av_format_inject_global_side_data_fptr = GetFunctionDelegate<av_format_inject_global_side_data_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_inject_global_side_data");
+            av_format_inject_global_side_data_fptr = GetFunctionDelegate<av_format_inject_global_side_data_delegate>(GetOrLoadLibrary("avformat"), "av_format_inject_global_side_data");
             if (av_format_inject_global_side_data_fptr == null)
             {
                 av_format_inject_global_side_data_fptr = delegate 
@@ -5854,7 +5854,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_format_set_audio_codec_delegate(AVFormatContext* @s, AVCodec* @c);
         private static av_format_set_audio_codec_delegate av_format_set_audio_codec_fptr = (AVFormatContext* @s, AVCodec* @c) =>
         {
-            av_format_set_audio_codec_fptr = GetFunctionDelegate<av_format_set_audio_codec_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_set_audio_codec");
+            av_format_set_audio_codec_fptr = GetFunctionDelegate<av_format_set_audio_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_audio_codec");
             if (av_format_set_audio_codec_fptr == null)
             {
                 av_format_set_audio_codec_fptr = delegate 
@@ -5875,7 +5875,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_format_set_control_message_cb_delegate(AVFormatContext* @s, av_format_set_control_message_cb_callback_func @callback);
         private static av_format_set_control_message_cb_delegate av_format_set_control_message_cb_fptr = (AVFormatContext* @s, av_format_set_control_message_cb_callback_func @callback) =>
         {
-            av_format_set_control_message_cb_fptr = GetFunctionDelegate<av_format_set_control_message_cb_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_set_control_message_cb");
+            av_format_set_control_message_cb_fptr = GetFunctionDelegate<av_format_set_control_message_cb_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_control_message_cb");
             if (av_format_set_control_message_cb_fptr == null)
             {
                 av_format_set_control_message_cb_fptr = delegate 
@@ -5896,7 +5896,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_format_set_data_codec_delegate(AVFormatContext* @s, AVCodec* @c);
         private static av_format_set_data_codec_delegate av_format_set_data_codec_fptr = (AVFormatContext* @s, AVCodec* @c) =>
         {
-            av_format_set_data_codec_fptr = GetFunctionDelegate<av_format_set_data_codec_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_set_data_codec");
+            av_format_set_data_codec_fptr = GetFunctionDelegate<av_format_set_data_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_data_codec");
             if (av_format_set_data_codec_fptr == null)
             {
                 av_format_set_data_codec_fptr = delegate 
@@ -5917,7 +5917,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_format_set_metadata_header_padding_delegate(AVFormatContext* @s, int @c);
         private static av_format_set_metadata_header_padding_delegate av_format_set_metadata_header_padding_fptr = (AVFormatContext* @s, int @c) =>
         {
-            av_format_set_metadata_header_padding_fptr = GetFunctionDelegate<av_format_set_metadata_header_padding_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_set_metadata_header_padding");
+            av_format_set_metadata_header_padding_fptr = GetFunctionDelegate<av_format_set_metadata_header_padding_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_metadata_header_padding");
             if (av_format_set_metadata_header_padding_fptr == null)
             {
                 av_format_set_metadata_header_padding_fptr = delegate 
@@ -5938,7 +5938,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_format_set_opaque_delegate(AVFormatContext* @s, void* @opaque);
         private static av_format_set_opaque_delegate av_format_set_opaque_fptr = (AVFormatContext* @s, void* @opaque) =>
         {
-            av_format_set_opaque_fptr = GetFunctionDelegate<av_format_set_opaque_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_set_opaque");
+            av_format_set_opaque_fptr = GetFunctionDelegate<av_format_set_opaque_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_opaque");
             if (av_format_set_opaque_fptr == null)
             {
                 av_format_set_opaque_fptr = delegate 
@@ -5959,7 +5959,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_format_set_open_cb_delegate(AVFormatContext* @s, av_format_set_open_cb_callback_func @callback);
         private static av_format_set_open_cb_delegate av_format_set_open_cb_fptr = (AVFormatContext* @s, av_format_set_open_cb_callback_func @callback) =>
         {
-            av_format_set_open_cb_fptr = GetFunctionDelegate<av_format_set_open_cb_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_set_open_cb");
+            av_format_set_open_cb_fptr = GetFunctionDelegate<av_format_set_open_cb_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_open_cb");
             if (av_format_set_open_cb_fptr == null)
             {
                 av_format_set_open_cb_fptr = delegate 
@@ -5980,7 +5980,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_format_set_subtitle_codec_delegate(AVFormatContext* @s, AVCodec* @c);
         private static av_format_set_subtitle_codec_delegate av_format_set_subtitle_codec_fptr = (AVFormatContext* @s, AVCodec* @c) =>
         {
-            av_format_set_subtitle_codec_fptr = GetFunctionDelegate<av_format_set_subtitle_codec_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_set_subtitle_codec");
+            av_format_set_subtitle_codec_fptr = GetFunctionDelegate<av_format_set_subtitle_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_subtitle_codec");
             if (av_format_set_subtitle_codec_fptr == null)
             {
                 av_format_set_subtitle_codec_fptr = delegate 
@@ -6001,7 +6001,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_format_set_video_codec_delegate(AVFormatContext* @s, AVCodec* @c);
         private static av_format_set_video_codec_delegate av_format_set_video_codec_fptr = (AVFormatContext* @s, AVCodec* @c) =>
         {
-            av_format_set_video_codec_fptr = GetFunctionDelegate<av_format_set_video_codec_delegate>(GetOrLoadLibrary("avformat", 58), "av_format_set_video_codec");
+            av_format_set_video_codec_fptr = GetFunctionDelegate<av_format_set_video_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_video_codec");
             if (av_format_set_video_codec_fptr == null)
             {
                 av_format_set_video_codec_fptr = delegate 
@@ -6022,7 +6022,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_frame_filename_delegate(byte* @buf, int @buf_size, [MarshalAs((UnmanagedType)48)] string @path, int @number);
         private static av_get_frame_filename_delegate av_get_frame_filename_fptr = (byte* @buf, int @buf_size, string @path, int @number) =>
         {
-            av_get_frame_filename_fptr = GetFunctionDelegate<av_get_frame_filename_delegate>(GetOrLoadLibrary("avformat", 58), "av_get_frame_filename");
+            av_get_frame_filename_fptr = GetFunctionDelegate<av_get_frame_filename_delegate>(GetOrLoadLibrary("avformat"), "av_get_frame_filename");
             if (av_get_frame_filename_fptr == null)
             {
                 av_get_frame_filename_fptr = delegate 
@@ -6042,7 +6042,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_frame_filename2_delegate(byte* @buf, int @buf_size, [MarshalAs((UnmanagedType)48)] string @path, int @number, int @flags);
         private static av_get_frame_filename2_delegate av_get_frame_filename2_fptr = (byte* @buf, int @buf_size, string @path, int @number, int @flags) =>
         {
-            av_get_frame_filename2_fptr = GetFunctionDelegate<av_get_frame_filename2_delegate>(GetOrLoadLibrary("avformat", 58), "av_get_frame_filename2");
+            av_get_frame_filename2_fptr = GetFunctionDelegate<av_get_frame_filename2_delegate>(GetOrLoadLibrary("avformat"), "av_get_frame_filename2");
             if (av_get_frame_filename2_fptr == null)
             {
                 av_get_frame_filename2_fptr = delegate 
@@ -6069,7 +6069,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_output_timestamp_delegate(AVFormatContext* @s, int @stream, long* @dts, long* @wall);
         private static av_get_output_timestamp_delegate av_get_output_timestamp_fptr = (AVFormatContext* @s, int @stream, long* @dts, long* @wall) =>
         {
-            av_get_output_timestamp_fptr = GetFunctionDelegate<av_get_output_timestamp_delegate>(GetOrLoadLibrary("avformat", 58), "av_get_output_timestamp");
+            av_get_output_timestamp_fptr = GetFunctionDelegate<av_get_output_timestamp_delegate>(GetOrLoadLibrary("avformat"), "av_get_output_timestamp");
             if (av_get_output_timestamp_fptr == null)
             {
                 av_get_output_timestamp_fptr = delegate 
@@ -6095,7 +6095,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_packet_delegate(AVIOContext* @s, AVPacket* @pkt, int @size);
         private static av_get_packet_delegate av_get_packet_fptr = (AVIOContext* @s, AVPacket* @pkt, int @size) =>
         {
-            av_get_packet_fptr = GetFunctionDelegate<av_get_packet_delegate>(GetOrLoadLibrary("avformat", 58), "av_get_packet");
+            av_get_packet_fptr = GetFunctionDelegate<av_get_packet_delegate>(GetOrLoadLibrary("avformat"), "av_get_packet");
             if (av_get_packet_fptr == null)
             {
                 av_get_packet_fptr = delegate 
@@ -6120,7 +6120,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecID av_guess_codec_delegate(AVOutputFormat* @fmt, [MarshalAs((UnmanagedType)48)] string @short_name, [MarshalAs((UnmanagedType)48)] string @filename, [MarshalAs((UnmanagedType)48)] string @mime_type, AVMediaType @type);
         private static av_guess_codec_delegate av_guess_codec_fptr = (AVOutputFormat* @fmt, string @short_name, string @filename, string @mime_type, AVMediaType @type) =>
         {
-            av_guess_codec_fptr = GetFunctionDelegate<av_guess_codec_delegate>(GetOrLoadLibrary("avformat", 58), "av_guess_codec");
+            av_guess_codec_fptr = GetFunctionDelegate<av_guess_codec_delegate>(GetOrLoadLibrary("avformat"), "av_guess_codec");
             if (av_guess_codec_fptr == null)
             {
                 av_guess_codec_fptr = delegate 
@@ -6141,7 +6141,7 @@ namespace FFmpeg.AutoGen
         private delegate AVOutputFormat* av_guess_format_delegate([MarshalAs((UnmanagedType)48)] string @short_name, [MarshalAs((UnmanagedType)48)] string @filename, [MarshalAs((UnmanagedType)48)] string @mime_type);
         private static av_guess_format_delegate av_guess_format_fptr = (string @short_name, string @filename, string @mime_type) =>
         {
-            av_guess_format_fptr = GetFunctionDelegate<av_guess_format_delegate>(GetOrLoadLibrary("avformat", 58), "av_guess_format");
+            av_guess_format_fptr = GetFunctionDelegate<av_guess_format_delegate>(GetOrLoadLibrary("avformat"), "av_guess_format");
             if (av_guess_format_fptr == null)
             {
                 av_guess_format_fptr = delegate 
@@ -6165,7 +6165,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_guess_frame_rate_delegate(AVFormatContext* @ctx, AVStream* @stream, AVFrame* @frame);
         private static av_guess_frame_rate_delegate av_guess_frame_rate_fptr = (AVFormatContext* @ctx, AVStream* @stream, AVFrame* @frame) =>
         {
-            av_guess_frame_rate_fptr = GetFunctionDelegate<av_guess_frame_rate_delegate>(GetOrLoadLibrary("avformat", 58), "av_guess_frame_rate");
+            av_guess_frame_rate_fptr = GetFunctionDelegate<av_guess_frame_rate_delegate>(GetOrLoadLibrary("avformat"), "av_guess_frame_rate");
             if (av_guess_frame_rate_fptr == null)
             {
                 av_guess_frame_rate_fptr = delegate 
@@ -6190,7 +6190,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_guess_sample_aspect_ratio_delegate(AVFormatContext* @format, AVStream* @stream, AVFrame* @frame);
         private static av_guess_sample_aspect_ratio_delegate av_guess_sample_aspect_ratio_fptr = (AVFormatContext* @format, AVStream* @stream, AVFrame* @frame) =>
         {
-            av_guess_sample_aspect_ratio_fptr = GetFunctionDelegate<av_guess_sample_aspect_ratio_delegate>(GetOrLoadLibrary("avformat", 58), "av_guess_sample_aspect_ratio");
+            av_guess_sample_aspect_ratio_fptr = GetFunctionDelegate<av_guess_sample_aspect_ratio_delegate>(GetOrLoadLibrary("avformat"), "av_guess_sample_aspect_ratio");
             if (av_guess_sample_aspect_ratio_fptr == null)
             {
                 av_guess_sample_aspect_ratio_fptr = delegate 
@@ -6215,7 +6215,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_hex_dump_delegate(_iobuf* @f, byte* @buf, int @size);
         private static av_hex_dump_delegate av_hex_dump_fptr = (_iobuf* @f, byte* @buf, int @size) =>
         {
-            av_hex_dump_fptr = GetFunctionDelegate<av_hex_dump_delegate>(GetOrLoadLibrary("avformat", 58), "av_hex_dump");
+            av_hex_dump_fptr = GetFunctionDelegate<av_hex_dump_delegate>(GetOrLoadLibrary("avformat"), "av_hex_dump");
             if (av_hex_dump_fptr == null)
             {
                 av_hex_dump_fptr = delegate 
@@ -6239,7 +6239,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_hex_dump_log_delegate(void* @avcl, int @level, byte* @buf, int @size);
         private static av_hex_dump_log_delegate av_hex_dump_log_fptr = (void* @avcl, int @level, byte* @buf, int @size) =>
         {
-            av_hex_dump_log_fptr = GetFunctionDelegate<av_hex_dump_log_delegate>(GetOrLoadLibrary("avformat", 58), "av_hex_dump_log");
+            av_hex_dump_log_fptr = GetFunctionDelegate<av_hex_dump_log_delegate>(GetOrLoadLibrary("avformat"), "av_hex_dump_log");
             if (av_hex_dump_log_fptr == null)
             {
                 av_hex_dump_log_fptr = delegate 
@@ -6264,7 +6264,7 @@ namespace FFmpeg.AutoGen
         private delegate AVInputFormat* av_iformat_next_delegate(AVInputFormat* @f);
         private static av_iformat_next_delegate av_iformat_next_fptr = (AVInputFormat* @f) =>
         {
-            av_iformat_next_fptr = GetFunctionDelegate<av_iformat_next_delegate>(GetOrLoadLibrary("avformat", 58), "av_iformat_next");
+            av_iformat_next_fptr = GetFunctionDelegate<av_iformat_next_delegate>(GetOrLoadLibrary("avformat"), "av_iformat_next");
             if (av_iformat_next_fptr == null)
             {
                 av_iformat_next_fptr = delegate 
@@ -6286,7 +6286,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_index_search_timestamp_delegate(AVStream* @st, long @timestamp, int @flags);
         private static av_index_search_timestamp_delegate av_index_search_timestamp_fptr = (AVStream* @st, long @timestamp, int @flags) =>
         {
-            av_index_search_timestamp_fptr = GetFunctionDelegate<av_index_search_timestamp_delegate>(GetOrLoadLibrary("avformat", 58), "av_index_search_timestamp");
+            av_index_search_timestamp_fptr = GetFunctionDelegate<av_index_search_timestamp_delegate>(GetOrLoadLibrary("avformat"), "av_index_search_timestamp");
             if (av_index_search_timestamp_fptr == null)
             {
                 av_index_search_timestamp_fptr = delegate 
@@ -6311,7 +6311,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_interleaved_write_frame_delegate(AVFormatContext* @s, AVPacket* @pkt);
         private static av_interleaved_write_frame_delegate av_interleaved_write_frame_fptr = (AVFormatContext* @s, AVPacket* @pkt) =>
         {
-            av_interleaved_write_frame_fptr = GetFunctionDelegate<av_interleaved_write_frame_delegate>(GetOrLoadLibrary("avformat", 58), "av_interleaved_write_frame");
+            av_interleaved_write_frame_fptr = GetFunctionDelegate<av_interleaved_write_frame_delegate>(GetOrLoadLibrary("avformat"), "av_interleaved_write_frame");
             if (av_interleaved_write_frame_fptr == null)
             {
                 av_interleaved_write_frame_fptr = delegate 
@@ -6335,7 +6335,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_interleaved_write_uncoded_frame_delegate(AVFormatContext* @s, int @stream_index, AVFrame* @frame);
         private static av_interleaved_write_uncoded_frame_delegate av_interleaved_write_uncoded_frame_fptr = (AVFormatContext* @s, int @stream_index, AVFrame* @frame) =>
         {
-            av_interleaved_write_uncoded_frame_fptr = GetFunctionDelegate<av_interleaved_write_uncoded_frame_delegate>(GetOrLoadLibrary("avformat", 58), "av_interleaved_write_uncoded_frame");
+            av_interleaved_write_uncoded_frame_fptr = GetFunctionDelegate<av_interleaved_write_uncoded_frame_delegate>(GetOrLoadLibrary("avformat"), "av_interleaved_write_uncoded_frame");
             if (av_interleaved_write_uncoded_frame_fptr == null)
             {
                 av_interleaved_write_uncoded_frame_fptr = delegate 
@@ -6357,7 +6357,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_match_ext_delegate([MarshalAs((UnmanagedType)48)] string @filename, [MarshalAs((UnmanagedType)48)] string @extensions);
         private static av_match_ext_delegate av_match_ext_fptr = (string @filename, string @extensions) =>
         {
-            av_match_ext_fptr = GetFunctionDelegate<av_match_ext_delegate>(GetOrLoadLibrary("avformat", 58), "av_match_ext");
+            av_match_ext_fptr = GetFunctionDelegate<av_match_ext_delegate>(GetOrLoadLibrary("avformat"), "av_match_ext");
             if (av_match_ext_fptr == null)
             {
                 av_match_ext_fptr = delegate 
@@ -6380,7 +6380,7 @@ namespace FFmpeg.AutoGen
         private delegate AVOutputFormat* av_muxer_iterate_delegate(void** @opaque);
         private static av_muxer_iterate_delegate av_muxer_iterate_fptr = (void** @opaque) =>
         {
-            av_muxer_iterate_fptr = GetFunctionDelegate<av_muxer_iterate_delegate>(GetOrLoadLibrary("avformat", 58), "av_muxer_iterate");
+            av_muxer_iterate_fptr = GetFunctionDelegate<av_muxer_iterate_delegate>(GetOrLoadLibrary("avformat"), "av_muxer_iterate");
             if (av_muxer_iterate_fptr == null)
             {
                 av_muxer_iterate_fptr = delegate 
@@ -6403,7 +6403,7 @@ namespace FFmpeg.AutoGen
         private delegate AVProgram* av_new_program_delegate(AVFormatContext* @s, int @id);
         private static av_new_program_delegate av_new_program_fptr = (AVFormatContext* @s, int @id) =>
         {
-            av_new_program_fptr = GetFunctionDelegate<av_new_program_delegate>(GetOrLoadLibrary("avformat", 58), "av_new_program");
+            av_new_program_fptr = GetFunctionDelegate<av_new_program_delegate>(GetOrLoadLibrary("avformat"), "av_new_program");
             if (av_new_program_fptr == null)
             {
                 av_new_program_fptr = delegate 
@@ -6423,7 +6423,7 @@ namespace FFmpeg.AutoGen
         private delegate AVOutputFormat* av_oformat_next_delegate(AVOutputFormat* @f);
         private static av_oformat_next_delegate av_oformat_next_fptr = (AVOutputFormat* @f) =>
         {
-            av_oformat_next_fptr = GetFunctionDelegate<av_oformat_next_delegate>(GetOrLoadLibrary("avformat", 58), "av_oformat_next");
+            av_oformat_next_fptr = GetFunctionDelegate<av_oformat_next_delegate>(GetOrLoadLibrary("avformat"), "av_oformat_next");
             if (av_oformat_next_fptr == null)
             {
                 av_oformat_next_fptr = delegate 
@@ -6445,7 +6445,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_pkt_dump_log2_delegate(void* @avcl, int @level, AVPacket* @pkt, int @dump_payload, AVStream* @st);
         private static av_pkt_dump_log2_delegate av_pkt_dump_log2_fptr = (void* @avcl, int @level, AVPacket* @pkt, int @dump_payload, AVStream* @st) =>
         {
-            av_pkt_dump_log2_fptr = GetFunctionDelegate<av_pkt_dump_log2_delegate>(GetOrLoadLibrary("avformat", 58), "av_pkt_dump_log2");
+            av_pkt_dump_log2_fptr = GetFunctionDelegate<av_pkt_dump_log2_delegate>(GetOrLoadLibrary("avformat"), "av_pkt_dump_log2");
             if (av_pkt_dump_log2_fptr == null)
             {
                 av_pkt_dump_log2_fptr = delegate 
@@ -6471,7 +6471,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_pkt_dump2_delegate(_iobuf* @f, AVPacket* @pkt, int @dump_payload, AVStream* @st);
         private static av_pkt_dump2_delegate av_pkt_dump2_fptr = (_iobuf* @f, AVPacket* @pkt, int @dump_payload, AVStream* @st) =>
         {
-            av_pkt_dump2_fptr = GetFunctionDelegate<av_pkt_dump2_delegate>(GetOrLoadLibrary("avformat", 58), "av_pkt_dump2");
+            av_pkt_dump2_fptr = GetFunctionDelegate<av_pkt_dump2_delegate>(GetOrLoadLibrary("avformat"), "av_pkt_dump2");
             if (av_pkt_dump2_fptr == null)
             {
                 av_pkt_dump2_fptr = delegate 
@@ -6496,7 +6496,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_probe_input_buffer_delegate(AVIOContext* @pb, AVInputFormat** @fmt, [MarshalAs((UnmanagedType)48)] string @url, void* @logctx, uint @offset, uint @max_probe_size);
         private static av_probe_input_buffer_delegate av_probe_input_buffer_fptr = (AVIOContext* @pb, AVInputFormat** @fmt, string @url, void* @logctx, uint @offset, uint @max_probe_size) =>
         {
-            av_probe_input_buffer_fptr = GetFunctionDelegate<av_probe_input_buffer_delegate>(GetOrLoadLibrary("avformat", 58), "av_probe_input_buffer");
+            av_probe_input_buffer_fptr = GetFunctionDelegate<av_probe_input_buffer_delegate>(GetOrLoadLibrary("avformat"), "av_probe_input_buffer");
             if (av_probe_input_buffer_fptr == null)
             {
                 av_probe_input_buffer_fptr = delegate 
@@ -6517,7 +6517,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_probe_input_buffer2_delegate(AVIOContext* @pb, AVInputFormat** @fmt, [MarshalAs((UnmanagedType)48)] string @url, void* @logctx, uint @offset, uint @max_probe_size);
         private static av_probe_input_buffer2_delegate av_probe_input_buffer2_fptr = (AVIOContext* @pb, AVInputFormat** @fmt, string @url, void* @logctx, uint @offset, uint @max_probe_size) =>
         {
-            av_probe_input_buffer2_fptr = GetFunctionDelegate<av_probe_input_buffer2_delegate>(GetOrLoadLibrary("avformat", 58), "av_probe_input_buffer2");
+            av_probe_input_buffer2_fptr = GetFunctionDelegate<av_probe_input_buffer2_delegate>(GetOrLoadLibrary("avformat"), "av_probe_input_buffer2");
             if (av_probe_input_buffer2_fptr == null)
             {
                 av_probe_input_buffer2_fptr = delegate 
@@ -6545,7 +6545,7 @@ namespace FFmpeg.AutoGen
         private delegate AVInputFormat* av_probe_input_format_delegate(AVProbeData* @pd, int @is_opened);
         private static av_probe_input_format_delegate av_probe_input_format_fptr = (AVProbeData* @pd, int @is_opened) =>
         {
-            av_probe_input_format_fptr = GetFunctionDelegate<av_probe_input_format_delegate>(GetOrLoadLibrary("avformat", 58), "av_probe_input_format");
+            av_probe_input_format_fptr = GetFunctionDelegate<av_probe_input_format_delegate>(GetOrLoadLibrary("avformat"), "av_probe_input_format");
             if (av_probe_input_format_fptr == null)
             {
                 av_probe_input_format_fptr = delegate 
@@ -6568,7 +6568,7 @@ namespace FFmpeg.AutoGen
         private delegate AVInputFormat* av_probe_input_format2_delegate(AVProbeData* @pd, int @is_opened, int* @score_max);
         private static av_probe_input_format2_delegate av_probe_input_format2_fptr = (AVProbeData* @pd, int @is_opened, int* @score_max) =>
         {
-            av_probe_input_format2_fptr = GetFunctionDelegate<av_probe_input_format2_delegate>(GetOrLoadLibrary("avformat", 58), "av_probe_input_format2");
+            av_probe_input_format2_fptr = GetFunctionDelegate<av_probe_input_format2_delegate>(GetOrLoadLibrary("avformat"), "av_probe_input_format2");
             if (av_probe_input_format2_fptr == null)
             {
                 av_probe_input_format2_fptr = delegate 
@@ -6592,7 +6592,7 @@ namespace FFmpeg.AutoGen
         private delegate AVInputFormat* av_probe_input_format3_delegate(AVProbeData* @pd, int @is_opened, int* @score_ret);
         private static av_probe_input_format3_delegate av_probe_input_format3_fptr = (AVProbeData* @pd, int @is_opened, int* @score_ret) =>
         {
-            av_probe_input_format3_fptr = GetFunctionDelegate<av_probe_input_format3_delegate>(GetOrLoadLibrary("avformat", 58), "av_probe_input_format3");
+            av_probe_input_format3_fptr = GetFunctionDelegate<av_probe_input_format3_delegate>(GetOrLoadLibrary("avformat"), "av_probe_input_format3");
             if (av_probe_input_format3_fptr == null)
             {
                 av_probe_input_format3_fptr = delegate 
@@ -6615,7 +6615,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_program_add_stream_index_delegate(AVFormatContext* @ac, int @progid, uint @idx);
         private static av_program_add_stream_index_delegate av_program_add_stream_index_fptr = (AVFormatContext* @ac, int @progid, uint @idx) =>
         {
-            av_program_add_stream_index_fptr = GetFunctionDelegate<av_program_add_stream_index_delegate>(GetOrLoadLibrary("avformat", 58), "av_program_add_stream_index");
+            av_program_add_stream_index_fptr = GetFunctionDelegate<av_program_add_stream_index_delegate>(GetOrLoadLibrary("avformat"), "av_program_add_stream_index");
             if (av_program_add_stream_index_fptr == null)
             {
                 av_program_add_stream_index_fptr = delegate 
@@ -6635,7 +6635,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_read_frame_delegate(AVFormatContext* @s, AVPacket* @pkt);
         private static av_read_frame_delegate av_read_frame_fptr = (AVFormatContext* @s, AVPacket* @pkt) =>
         {
-            av_read_frame_fptr = GetFunctionDelegate<av_read_frame_delegate>(GetOrLoadLibrary("avformat", 58), "av_read_frame");
+            av_read_frame_fptr = GetFunctionDelegate<av_read_frame_delegate>(GetOrLoadLibrary("avformat"), "av_read_frame");
             if (av_read_frame_fptr == null)
             {
                 av_read_frame_fptr = delegate 
@@ -6657,7 +6657,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_read_pause_delegate(AVFormatContext* @s);
         private static av_read_pause_delegate av_read_pause_fptr = (AVFormatContext* @s) =>
         {
-            av_read_pause_fptr = GetFunctionDelegate<av_read_pause_delegate>(GetOrLoadLibrary("avformat", 58), "av_read_pause");
+            av_read_pause_fptr = GetFunctionDelegate<av_read_pause_delegate>(GetOrLoadLibrary("avformat"), "av_read_pause");
             if (av_read_pause_fptr == null)
             {
                 av_read_pause_fptr = delegate 
@@ -6678,7 +6678,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_read_play_delegate(AVFormatContext* @s);
         private static av_read_play_delegate av_read_play_fptr = (AVFormatContext* @s) =>
         {
-            av_read_play_fptr = GetFunctionDelegate<av_read_play_delegate>(GetOrLoadLibrary("avformat", 58), "av_read_play");
+            av_read_play_fptr = GetFunctionDelegate<av_read_play_delegate>(GetOrLoadLibrary("avformat"), "av_read_play");
             if (av_read_play_fptr == null)
             {
                 av_read_play_fptr = delegate 
@@ -6699,7 +6699,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_register_all_delegate();
         private static av_register_all_delegate av_register_all_fptr = () =>
         {
-            av_register_all_fptr = GetFunctionDelegate<av_register_all_delegate>(GetOrLoadLibrary("avformat", 58), "av_register_all");
+            av_register_all_fptr = GetFunctionDelegate<av_register_all_delegate>(GetOrLoadLibrary("avformat"), "av_register_all");
             if (av_register_all_fptr == null)
             {
                 av_register_all_fptr = delegate 
@@ -6721,7 +6721,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_register_input_format_delegate(AVInputFormat* @format);
         private static av_register_input_format_delegate av_register_input_format_fptr = (AVInputFormat* @format) =>
         {
-            av_register_input_format_fptr = GetFunctionDelegate<av_register_input_format_delegate>(GetOrLoadLibrary("avformat", 58), "av_register_input_format");
+            av_register_input_format_fptr = GetFunctionDelegate<av_register_input_format_delegate>(GetOrLoadLibrary("avformat"), "av_register_input_format");
             if (av_register_input_format_fptr == null)
             {
                 av_register_input_format_fptr = delegate 
@@ -6742,7 +6742,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_register_output_format_delegate(AVOutputFormat* @format);
         private static av_register_output_format_delegate av_register_output_format_fptr = (AVOutputFormat* @format) =>
         {
-            av_register_output_format_fptr = GetFunctionDelegate<av_register_output_format_delegate>(GetOrLoadLibrary("avformat", 58), "av_register_output_format");
+            av_register_output_format_fptr = GetFunctionDelegate<av_register_output_format_delegate>(GetOrLoadLibrary("avformat"), "av_register_output_format");
             if (av_register_output_format_fptr == null)
             {
                 av_register_output_format_fptr = delegate 
@@ -6763,7 +6763,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_sdp_create_delegate(AVFormatContext** @ac, int @n_files, byte* @buf, int @size);
         private static av_sdp_create_delegate av_sdp_create_fptr = (AVFormatContext** @ac, int @n_files, byte* @buf, int @size) =>
         {
-            av_sdp_create_fptr = GetFunctionDelegate<av_sdp_create_delegate>(GetOrLoadLibrary("avformat", 58), "av_sdp_create");
+            av_sdp_create_fptr = GetFunctionDelegate<av_sdp_create_delegate>(GetOrLoadLibrary("avformat"), "av_sdp_create");
             if (av_sdp_create_fptr == null)
             {
                 av_sdp_create_fptr = delegate 
@@ -6789,7 +6789,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_seek_frame_delegate(AVFormatContext* @s, int @stream_index, long @timestamp, int @flags);
         private static av_seek_frame_delegate av_seek_frame_fptr = (AVFormatContext* @s, int @stream_index, long @timestamp, int @flags) =>
         {
-            av_seek_frame_fptr = GetFunctionDelegate<av_seek_frame_delegate>(GetOrLoadLibrary("avformat", 58), "av_seek_frame");
+            av_seek_frame_fptr = GetFunctionDelegate<av_seek_frame_delegate>(GetOrLoadLibrary("avformat"), "av_seek_frame");
             if (av_seek_frame_fptr == null)
             {
                 av_seek_frame_fptr = delegate 
@@ -6815,7 +6815,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_stream_add_side_data_delegate(AVStream* @st, AVPacketSideDataType @type, byte* @data, ulong @size);
         private static av_stream_add_side_data_delegate av_stream_add_side_data_fptr = (AVStream* @st, AVPacketSideDataType @type, byte* @data, ulong @size) =>
         {
-            av_stream_add_side_data_fptr = GetFunctionDelegate<av_stream_add_side_data_delegate>(GetOrLoadLibrary("avformat", 58), "av_stream_add_side_data");
+            av_stream_add_side_data_fptr = GetFunctionDelegate<av_stream_add_side_data_delegate>(GetOrLoadLibrary("avformat"), "av_stream_add_side_data");
             if (av_stream_add_side_data_fptr == null)
             {
                 av_stream_add_side_data_fptr = delegate 
@@ -6841,7 +6841,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_stream_get_codec_timebase_delegate(AVStream* @st);
         private static av_stream_get_codec_timebase_delegate av_stream_get_codec_timebase_fptr = (AVStream* @st) =>
         {
-            av_stream_get_codec_timebase_fptr = GetFunctionDelegate<av_stream_get_codec_timebase_delegate>(GetOrLoadLibrary("avformat", 58), "av_stream_get_codec_timebase");
+            av_stream_get_codec_timebase_fptr = GetFunctionDelegate<av_stream_get_codec_timebase_delegate>(GetOrLoadLibrary("avformat"), "av_stream_get_codec_timebase");
             if (av_stream_get_codec_timebase_fptr == null)
             {
                 av_stream_get_codec_timebase_fptr = delegate 
@@ -6863,7 +6863,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_stream_get_end_pts_delegate(AVStream* @st);
         private static av_stream_get_end_pts_delegate av_stream_get_end_pts_fptr = (AVStream* @st) =>
         {
-            av_stream_get_end_pts_fptr = GetFunctionDelegate<av_stream_get_end_pts_delegate>(GetOrLoadLibrary("avformat", 58), "av_stream_get_end_pts");
+            av_stream_get_end_pts_fptr = GetFunctionDelegate<av_stream_get_end_pts_delegate>(GetOrLoadLibrary("avformat"), "av_stream_get_end_pts");
             if (av_stream_get_end_pts_fptr == null)
             {
                 av_stream_get_end_pts_fptr = delegate 
@@ -6884,7 +6884,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecParserContext* av_stream_get_parser_delegate(AVStream* @s);
         private static av_stream_get_parser_delegate av_stream_get_parser_fptr = (AVStream* @s) =>
         {
-            av_stream_get_parser_fptr = GetFunctionDelegate<av_stream_get_parser_delegate>(GetOrLoadLibrary("avformat", 58), "av_stream_get_parser");
+            av_stream_get_parser_fptr = GetFunctionDelegate<av_stream_get_parser_delegate>(GetOrLoadLibrary("avformat"), "av_stream_get_parser");
             if (av_stream_get_parser_fptr == null)
             {
                 av_stream_get_parser_fptr = delegate 
@@ -6904,7 +6904,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_stream_get_r_frame_rate_delegate(AVStream* @s);
         private static av_stream_get_r_frame_rate_delegate av_stream_get_r_frame_rate_fptr = (AVStream* @s) =>
         {
-            av_stream_get_r_frame_rate_fptr = GetFunctionDelegate<av_stream_get_r_frame_rate_delegate>(GetOrLoadLibrary("avformat", 58), "av_stream_get_r_frame_rate");
+            av_stream_get_r_frame_rate_fptr = GetFunctionDelegate<av_stream_get_r_frame_rate_delegate>(GetOrLoadLibrary("avformat"), "av_stream_get_r_frame_rate");
             if (av_stream_get_r_frame_rate_fptr == null)
             {
                 av_stream_get_r_frame_rate_fptr = delegate 
@@ -6926,7 +6926,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_stream_get_recommended_encoder_configuration_delegate(AVStream* @s);
         private static av_stream_get_recommended_encoder_configuration_delegate av_stream_get_recommended_encoder_configuration_fptr = (AVStream* @s) =>
         {
-            av_stream_get_recommended_encoder_configuration_fptr = GetFunctionDelegate<av_stream_get_recommended_encoder_configuration_delegate>(GetOrLoadLibrary("avformat", 58), "av_stream_get_recommended_encoder_configuration");
+            av_stream_get_recommended_encoder_configuration_fptr = GetFunctionDelegate<av_stream_get_recommended_encoder_configuration_delegate>(GetOrLoadLibrary("avformat"), "av_stream_get_recommended_encoder_configuration");
             if (av_stream_get_recommended_encoder_configuration_fptr == null)
             {
                 av_stream_get_recommended_encoder_configuration_fptr = delegate 
@@ -6947,7 +6947,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_stream_get_side_data_delegate(AVStream* @stream, AVPacketSideDataType @type, int* @size);
         private static av_stream_get_side_data_delegate av_stream_get_side_data_fptr = (AVStream* @stream, AVPacketSideDataType @type, int* @size) =>
         {
-            av_stream_get_side_data_fptr = GetFunctionDelegate<av_stream_get_side_data_delegate>(GetOrLoadLibrary("avformat", 58), "av_stream_get_side_data");
+            av_stream_get_side_data_fptr = GetFunctionDelegate<av_stream_get_side_data_delegate>(GetOrLoadLibrary("avformat"), "av_stream_get_side_data");
             if (av_stream_get_side_data_fptr == null)
             {
                 av_stream_get_side_data_fptr = delegate 
@@ -6972,7 +6972,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_stream_new_side_data_delegate(AVStream* @stream, AVPacketSideDataType @type, int @size);
         private static av_stream_new_side_data_delegate av_stream_new_side_data_fptr = (AVStream* @stream, AVPacketSideDataType @type, int @size) =>
         {
-            av_stream_new_side_data_fptr = GetFunctionDelegate<av_stream_new_side_data_delegate>(GetOrLoadLibrary("avformat", 58), "av_stream_new_side_data");
+            av_stream_new_side_data_fptr = GetFunctionDelegate<av_stream_new_side_data_delegate>(GetOrLoadLibrary("avformat"), "av_stream_new_side_data");
             if (av_stream_new_side_data_fptr == null)
             {
                 av_stream_new_side_data_fptr = delegate 
@@ -6997,7 +6997,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_stream_set_r_frame_rate_delegate(AVStream* @s, AVRational @r);
         private static av_stream_set_r_frame_rate_delegate av_stream_set_r_frame_rate_fptr = (AVStream* @s, AVRational @r) =>
         {
-            av_stream_set_r_frame_rate_fptr = GetFunctionDelegate<av_stream_set_r_frame_rate_delegate>(GetOrLoadLibrary("avformat", 58), "av_stream_set_r_frame_rate");
+            av_stream_set_r_frame_rate_fptr = GetFunctionDelegate<av_stream_set_r_frame_rate_delegate>(GetOrLoadLibrary("avformat"), "av_stream_set_r_frame_rate");
             if (av_stream_set_r_frame_rate_fptr == null)
             {
                 av_stream_set_r_frame_rate_fptr = delegate 
@@ -7018,7 +7018,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_stream_set_recommended_encoder_configuration_delegate(AVStream* @s, byte* @configuration);
         private static av_stream_set_recommended_encoder_configuration_delegate av_stream_set_recommended_encoder_configuration_fptr = (AVStream* @s, byte* @configuration) =>
         {
-            av_stream_set_recommended_encoder_configuration_fptr = GetFunctionDelegate<av_stream_set_recommended_encoder_configuration_delegate>(GetOrLoadLibrary("avformat", 58), "av_stream_set_recommended_encoder_configuration");
+            av_stream_set_recommended_encoder_configuration_fptr = GetFunctionDelegate<av_stream_set_recommended_encoder_configuration_delegate>(GetOrLoadLibrary("avformat"), "av_stream_set_recommended_encoder_configuration");
             if (av_stream_set_recommended_encoder_configuration_fptr == null)
             {
                 av_stream_set_recommended_encoder_configuration_fptr = delegate 
@@ -7039,7 +7039,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_url_split_delegate(byte* @proto, int @proto_size, byte* @authorization, int @authorization_size, byte* @hostname, int @hostname_size, int* @port_ptr, byte* @path, int @path_size, [MarshalAs((UnmanagedType)48)] string @url);
         private static av_url_split_delegate av_url_split_fptr = (byte* @proto, int @proto_size, byte* @authorization, int @authorization_size, byte* @hostname, int @hostname_size, int* @port_ptr, byte* @path, int @path_size, string @url) =>
         {
-            av_url_split_fptr = GetFunctionDelegate<av_url_split_delegate>(GetOrLoadLibrary("avformat", 58), "av_url_split");
+            av_url_split_fptr = GetFunctionDelegate<av_url_split_delegate>(GetOrLoadLibrary("avformat"), "av_url_split");
             if (av_url_split_fptr == null)
             {
                 av_url_split_fptr = delegate 
@@ -7070,7 +7070,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_write_frame_delegate(AVFormatContext* @s, AVPacket* @pkt);
         private static av_write_frame_delegate av_write_frame_fptr = (AVFormatContext* @s, AVPacket* @pkt) =>
         {
-            av_write_frame_fptr = GetFunctionDelegate<av_write_frame_delegate>(GetOrLoadLibrary("avformat", 58), "av_write_frame");
+            av_write_frame_fptr = GetFunctionDelegate<av_write_frame_delegate>(GetOrLoadLibrary("avformat"), "av_write_frame");
             if (av_write_frame_fptr == null)
             {
                 av_write_frame_fptr = delegate 
@@ -7094,7 +7094,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_write_trailer_delegate(AVFormatContext* @s);
         private static av_write_trailer_delegate av_write_trailer_fptr = (AVFormatContext* @s) =>
         {
-            av_write_trailer_fptr = GetFunctionDelegate<av_write_trailer_delegate>(GetOrLoadLibrary("avformat", 58), "av_write_trailer");
+            av_write_trailer_fptr = GetFunctionDelegate<av_write_trailer_delegate>(GetOrLoadLibrary("avformat"), "av_write_trailer");
             if (av_write_trailer_fptr == null)
             {
                 av_write_trailer_fptr = delegate 
@@ -7117,7 +7117,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_write_uncoded_frame_delegate(AVFormatContext* @s, int @stream_index, AVFrame* @frame);
         private static av_write_uncoded_frame_delegate av_write_uncoded_frame_fptr = (AVFormatContext* @s, int @stream_index, AVFrame* @frame) =>
         {
-            av_write_uncoded_frame_fptr = GetFunctionDelegate<av_write_uncoded_frame_delegate>(GetOrLoadLibrary("avformat", 58), "av_write_uncoded_frame");
+            av_write_uncoded_frame_fptr = GetFunctionDelegate<av_write_uncoded_frame_delegate>(GetOrLoadLibrary("avformat"), "av_write_uncoded_frame");
             if (av_write_uncoded_frame_fptr == null)
             {
                 av_write_uncoded_frame_fptr = delegate 
@@ -7138,7 +7138,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_write_uncoded_frame_query_delegate(AVFormatContext* @s, int @stream_index);
         private static av_write_uncoded_frame_query_delegate av_write_uncoded_frame_query_fptr = (AVFormatContext* @s, int @stream_index) =>
         {
-            av_write_uncoded_frame_query_fptr = GetFunctionDelegate<av_write_uncoded_frame_query_delegate>(GetOrLoadLibrary("avformat", 58), "av_write_uncoded_frame_query");
+            av_write_uncoded_frame_query_fptr = GetFunctionDelegate<av_write_uncoded_frame_query_delegate>(GetOrLoadLibrary("avformat"), "av_write_uncoded_frame_query");
             if (av_write_uncoded_frame_query_fptr == null)
             {
                 av_write_uncoded_frame_query_fptr = delegate 
@@ -7160,7 +7160,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFormatContext* avformat_alloc_context_delegate();
         private static avformat_alloc_context_delegate avformat_alloc_context_fptr = () =>
         {
-            avformat_alloc_context_fptr = GetFunctionDelegate<avformat_alloc_context_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_alloc_context");
+            avformat_alloc_context_fptr = GetFunctionDelegate<avformat_alloc_context_delegate>(GetOrLoadLibrary("avformat"), "avformat_alloc_context");
             if (avformat_alloc_context_fptr == null)
             {
                 avformat_alloc_context_fptr = delegate 
@@ -7181,7 +7181,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_alloc_output_context2_delegate(AVFormatContext** @ctx, AVOutputFormat* @oformat, [MarshalAs((UnmanagedType)48)] string @format_name, [MarshalAs((UnmanagedType)48)] string @filename);
         private static avformat_alloc_output_context2_delegate avformat_alloc_output_context2_fptr = (AVFormatContext** @ctx, AVOutputFormat* @oformat, string @format_name, string @filename) =>
         {
-            avformat_alloc_output_context2_fptr = GetFunctionDelegate<avformat_alloc_output_context2_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_alloc_output_context2");
+            avformat_alloc_output_context2_fptr = GetFunctionDelegate<avformat_alloc_output_context2_delegate>(GetOrLoadLibrary("avformat"), "avformat_alloc_output_context2");
             if (avformat_alloc_output_context2_fptr == null)
             {
                 avformat_alloc_output_context2_fptr = delegate 
@@ -7206,7 +7206,7 @@ namespace FFmpeg.AutoGen
         private delegate void avformat_close_input_delegate(AVFormatContext** @s);
         private static avformat_close_input_delegate avformat_close_input_fptr = (AVFormatContext** @s) =>
         {
-            avformat_close_input_fptr = GetFunctionDelegate<avformat_close_input_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_close_input");
+            avformat_close_input_fptr = GetFunctionDelegate<avformat_close_input_delegate>(GetOrLoadLibrary("avformat"), "avformat_close_input");
             if (avformat_close_input_fptr == null)
             {
                 avformat_close_input_fptr = delegate 
@@ -7228,7 +7228,7 @@ namespace FFmpeg.AutoGen
         private delegate string avformat_configuration_delegate();
         private static avformat_configuration_delegate avformat_configuration_fptr = () =>
         {
-            avformat_configuration_fptr = GetFunctionDelegate<avformat_configuration_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_configuration");
+            avformat_configuration_fptr = GetFunctionDelegate<avformat_configuration_delegate>(GetOrLoadLibrary("avformat"), "avformat_configuration");
             if (avformat_configuration_fptr == null)
             {
                 avformat_configuration_fptr = delegate 
@@ -7249,7 +7249,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_find_stream_info_delegate(AVFormatContext* @ic, AVDictionary** @options);
         private static avformat_find_stream_info_delegate avformat_find_stream_info_fptr = (AVFormatContext* @ic, AVDictionary** @options) =>
         {
-            avformat_find_stream_info_fptr = GetFunctionDelegate<avformat_find_stream_info_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_find_stream_info");
+            avformat_find_stream_info_fptr = GetFunctionDelegate<avformat_find_stream_info_delegate>(GetOrLoadLibrary("avformat"), "avformat_find_stream_info");
             if (avformat_find_stream_info_fptr == null)
             {
                 avformat_find_stream_info_fptr = delegate 
@@ -7273,7 +7273,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_flush_delegate(AVFormatContext* @s);
         private static avformat_flush_delegate avformat_flush_fptr = (AVFormatContext* @s) =>
         {
-            avformat_flush_fptr = GetFunctionDelegate<avformat_flush_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_flush");
+            avformat_flush_fptr = GetFunctionDelegate<avformat_flush_delegate>(GetOrLoadLibrary("avformat"), "avformat_flush");
             if (avformat_flush_fptr == null)
             {
                 avformat_flush_fptr = delegate 
@@ -7296,7 +7296,7 @@ namespace FFmpeg.AutoGen
         private delegate void avformat_free_context_delegate(AVFormatContext* @s);
         private static avformat_free_context_delegate avformat_free_context_fptr = (AVFormatContext* @s) =>
         {
-            avformat_free_context_fptr = GetFunctionDelegate<avformat_free_context_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_free_context");
+            avformat_free_context_fptr = GetFunctionDelegate<avformat_free_context_delegate>(GetOrLoadLibrary("avformat"), "avformat_free_context");
             if (avformat_free_context_fptr == null)
             {
                 avformat_free_context_fptr = delegate 
@@ -7318,7 +7318,7 @@ namespace FFmpeg.AutoGen
         private delegate AVClass* avformat_get_class_delegate();
         private static avformat_get_class_delegate avformat_get_class_fptr = () =>
         {
-            avformat_get_class_fptr = GetFunctionDelegate<avformat_get_class_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_get_class");
+            avformat_get_class_fptr = GetFunctionDelegate<avformat_get_class_delegate>(GetOrLoadLibrary("avformat"), "avformat_get_class");
             if (avformat_get_class_fptr == null)
             {
                 avformat_get_class_fptr = delegate 
@@ -7339,7 +7339,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecTag* avformat_get_mov_audio_tags_delegate();
         private static avformat_get_mov_audio_tags_delegate avformat_get_mov_audio_tags_fptr = () =>
         {
-            avformat_get_mov_audio_tags_fptr = GetFunctionDelegate<avformat_get_mov_audio_tags_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_get_mov_audio_tags");
+            avformat_get_mov_audio_tags_fptr = GetFunctionDelegate<avformat_get_mov_audio_tags_delegate>(GetOrLoadLibrary("avformat"), "avformat_get_mov_audio_tags");
             if (avformat_get_mov_audio_tags_fptr == null)
             {
                 avformat_get_mov_audio_tags_fptr = delegate 
@@ -7361,7 +7361,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecTag* avformat_get_mov_video_tags_delegate();
         private static avformat_get_mov_video_tags_delegate avformat_get_mov_video_tags_fptr = () =>
         {
-            avformat_get_mov_video_tags_fptr = GetFunctionDelegate<avformat_get_mov_video_tags_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_get_mov_video_tags");
+            avformat_get_mov_video_tags_fptr = GetFunctionDelegate<avformat_get_mov_video_tags_delegate>(GetOrLoadLibrary("avformat"), "avformat_get_mov_video_tags");
             if (avformat_get_mov_video_tags_fptr == null)
             {
                 avformat_get_mov_video_tags_fptr = delegate 
@@ -7383,7 +7383,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecTag* avformat_get_riff_audio_tags_delegate();
         private static avformat_get_riff_audio_tags_delegate avformat_get_riff_audio_tags_fptr = () =>
         {
-            avformat_get_riff_audio_tags_fptr = GetFunctionDelegate<avformat_get_riff_audio_tags_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_get_riff_audio_tags");
+            avformat_get_riff_audio_tags_fptr = GetFunctionDelegate<avformat_get_riff_audio_tags_delegate>(GetOrLoadLibrary("avformat"), "avformat_get_riff_audio_tags");
             if (avformat_get_riff_audio_tags_fptr == null)
             {
                 avformat_get_riff_audio_tags_fptr = delegate 
@@ -7405,7 +7405,7 @@ namespace FFmpeg.AutoGen
         private delegate AVCodecTag* avformat_get_riff_video_tags_delegate();
         private static avformat_get_riff_video_tags_delegate avformat_get_riff_video_tags_fptr = () =>
         {
-            avformat_get_riff_video_tags_fptr = GetFunctionDelegate<avformat_get_riff_video_tags_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_get_riff_video_tags");
+            avformat_get_riff_video_tags_fptr = GetFunctionDelegate<avformat_get_riff_video_tags_delegate>(GetOrLoadLibrary("avformat"), "avformat_get_riff_video_tags");
             if (avformat_get_riff_video_tags_fptr == null)
             {
                 avformat_get_riff_video_tags_fptr = delegate 
@@ -7427,7 +7427,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_init_output_delegate(AVFormatContext* @s, AVDictionary** @options);
         private static avformat_init_output_delegate avformat_init_output_fptr = (AVFormatContext* @s, AVDictionary** @options) =>
         {
-            avformat_init_output_fptr = GetFunctionDelegate<avformat_init_output_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_init_output");
+            avformat_init_output_fptr = GetFunctionDelegate<avformat_init_output_delegate>(GetOrLoadLibrary("avformat"), "avformat_init_output");
             if (avformat_init_output_fptr == null)
             {
                 avformat_init_output_fptr = delegate 
@@ -7452,7 +7452,7 @@ namespace FFmpeg.AutoGen
         private delegate string avformat_license_delegate();
         private static avformat_license_delegate avformat_license_fptr = () =>
         {
-            avformat_license_fptr = GetFunctionDelegate<avformat_license_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_license");
+            avformat_license_fptr = GetFunctionDelegate<avformat_license_delegate>(GetOrLoadLibrary("avformat"), "avformat_license");
             if (avformat_license_fptr == null)
             {
                 avformat_license_fptr = delegate 
@@ -7473,7 +7473,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_match_stream_specifier_delegate(AVFormatContext* @s, AVStream* @st, [MarshalAs((UnmanagedType)48)] string @spec);
         private static avformat_match_stream_specifier_delegate avformat_match_stream_specifier_fptr = (AVFormatContext* @s, AVStream* @st, string @spec) =>
         {
-            avformat_match_stream_specifier_fptr = GetFunctionDelegate<avformat_match_stream_specifier_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_match_stream_specifier");
+            avformat_match_stream_specifier_fptr = GetFunctionDelegate<avformat_match_stream_specifier_delegate>(GetOrLoadLibrary("avformat"), "avformat_match_stream_specifier");
             if (avformat_match_stream_specifier_fptr == null)
             {
                 avformat_match_stream_specifier_fptr = delegate 
@@ -7495,7 +7495,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_network_deinit_delegate();
         private static avformat_network_deinit_delegate avformat_network_deinit_fptr = () =>
         {
-            avformat_network_deinit_fptr = GetFunctionDelegate<avformat_network_deinit_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_network_deinit");
+            avformat_network_deinit_fptr = GetFunctionDelegate<avformat_network_deinit_delegate>(GetOrLoadLibrary("avformat"), "avformat_network_deinit");
             if (avformat_network_deinit_fptr == null)
             {
                 avformat_network_deinit_fptr = delegate 
@@ -7516,7 +7516,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_network_init_delegate();
         private static avformat_network_init_delegate avformat_network_init_fptr = () =>
         {
-            avformat_network_init_fptr = GetFunctionDelegate<avformat_network_init_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_network_init");
+            avformat_network_init_fptr = GetFunctionDelegate<avformat_network_init_delegate>(GetOrLoadLibrary("avformat"), "avformat_network_init");
             if (avformat_network_init_fptr == null)
             {
                 avformat_network_init_fptr = delegate 
@@ -7537,7 +7537,7 @@ namespace FFmpeg.AutoGen
         private delegate AVStream* avformat_new_stream_delegate(AVFormatContext* @s, AVCodec* @c);
         private static avformat_new_stream_delegate avformat_new_stream_fptr = (AVFormatContext* @s, AVCodec* @c) =>
         {
-            avformat_new_stream_fptr = GetFunctionDelegate<avformat_new_stream_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_new_stream");
+            avformat_new_stream_fptr = GetFunctionDelegate<avformat_new_stream_delegate>(GetOrLoadLibrary("avformat"), "avformat_new_stream");
             if (avformat_new_stream_fptr == null)
             {
                 avformat_new_stream_fptr = delegate 
@@ -7561,7 +7561,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_open_input_delegate(AVFormatContext** @ps, [MarshalAs((UnmanagedType)48)] string @url, AVInputFormat* @fmt, AVDictionary** @options);
         private static avformat_open_input_delegate avformat_open_input_fptr = (AVFormatContext** @ps, string @url, AVInputFormat* @fmt, AVDictionary** @options) =>
         {
-            avformat_open_input_fptr = GetFunctionDelegate<avformat_open_input_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_open_input");
+            avformat_open_input_fptr = GetFunctionDelegate<avformat_open_input_delegate>(GetOrLoadLibrary("avformat"), "avformat_open_input");
             if (avformat_open_input_fptr == null)
             {
                 avformat_open_input_fptr = delegate 
@@ -7587,7 +7587,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_query_codec_delegate(AVOutputFormat* @ofmt, AVCodecID @codec_id, int @std_compliance);
         private static avformat_query_codec_delegate avformat_query_codec_fptr = (AVOutputFormat* @ofmt, AVCodecID @codec_id, int @std_compliance) =>
         {
-            avformat_query_codec_fptr = GetFunctionDelegate<avformat_query_codec_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_query_codec");
+            avformat_query_codec_fptr = GetFunctionDelegate<avformat_query_codec_delegate>(GetOrLoadLibrary("avformat"), "avformat_query_codec");
             if (avformat_query_codec_fptr == null)
             {
                 avformat_query_codec_fptr = delegate 
@@ -7612,7 +7612,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_queue_attached_pictures_delegate(AVFormatContext* @s);
         private static avformat_queue_attached_pictures_delegate avformat_queue_attached_pictures_fptr = (AVFormatContext* @s) =>
         {
-            avformat_queue_attached_pictures_fptr = GetFunctionDelegate<avformat_queue_attached_pictures_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_queue_attached_pictures");
+            avformat_queue_attached_pictures_fptr = GetFunctionDelegate<avformat_queue_attached_pictures_delegate>(GetOrLoadLibrary("avformat"), "avformat_queue_attached_pictures");
             if (avformat_queue_attached_pictures_fptr == null)
             {
                 avformat_queue_attached_pictures_fptr = delegate 
@@ -7632,7 +7632,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_seek_file_delegate(AVFormatContext* @s, int @stream_index, long @min_ts, long @ts, long @max_ts, int @flags);
         private static avformat_seek_file_delegate avformat_seek_file_fptr = (AVFormatContext* @s, int @stream_index, long @min_ts, long @ts, long @max_ts, int @flags) =>
         {
-            avformat_seek_file_fptr = GetFunctionDelegate<avformat_seek_file_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_seek_file");
+            avformat_seek_file_fptr = GetFunctionDelegate<avformat_seek_file_delegate>(GetOrLoadLibrary("avformat"), "avformat_seek_file");
             if (avformat_seek_file_fptr == null)
             {
                 avformat_seek_file_fptr = delegate 
@@ -7660,7 +7660,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_transfer_internal_stream_timing_info_delegate(AVOutputFormat* @ofmt, AVStream* @ost, AVStream* @ist, AVTimebaseSource @copy_tb);
         private static avformat_transfer_internal_stream_timing_info_delegate avformat_transfer_internal_stream_timing_info_fptr = (AVOutputFormat* @ofmt, AVStream* @ost, AVStream* @ist, AVTimebaseSource @copy_tb) =>
         {
-            avformat_transfer_internal_stream_timing_info_fptr = GetFunctionDelegate<avformat_transfer_internal_stream_timing_info_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_transfer_internal_stream_timing_info");
+            avformat_transfer_internal_stream_timing_info_fptr = GetFunctionDelegate<avformat_transfer_internal_stream_timing_info_delegate>(GetOrLoadLibrary("avformat"), "avformat_transfer_internal_stream_timing_info");
             if (avformat_transfer_internal_stream_timing_info_fptr == null)
             {
                 avformat_transfer_internal_stream_timing_info_fptr = delegate 
@@ -7685,7 +7685,7 @@ namespace FFmpeg.AutoGen
         private delegate uint avformat_version_delegate();
         private static avformat_version_delegate avformat_version_fptr = () =>
         {
-            avformat_version_fptr = GetFunctionDelegate<avformat_version_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_version");
+            avformat_version_fptr = GetFunctionDelegate<avformat_version_delegate>(GetOrLoadLibrary("avformat"), "avformat_version");
             if (avformat_version_fptr == null)
             {
                 avformat_version_fptr = delegate 
@@ -7706,7 +7706,7 @@ namespace FFmpeg.AutoGen
         private delegate int avformat_write_header_delegate(AVFormatContext* @s, AVDictionary** @options);
         private static avformat_write_header_delegate avformat_write_header_fptr = (AVFormatContext* @s, AVDictionary** @options) =>
         {
-            avformat_write_header_fptr = GetFunctionDelegate<avformat_write_header_delegate>(GetOrLoadLibrary("avformat", 58), "avformat_write_header");
+            avformat_write_header_fptr = GetFunctionDelegate<avformat_write_header_delegate>(GetOrLoadLibrary("avformat"), "avformat_write_header");
             if (avformat_write_header_fptr == null)
             {
                 avformat_write_header_fptr = delegate 
@@ -7730,7 +7730,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_accept_delegate(AVIOContext* @s, AVIOContext** @c);
         private static avio_accept_delegate avio_accept_fptr = (AVIOContext* @s, AVIOContext** @c) =>
         {
-            avio_accept_fptr = GetFunctionDelegate<avio_accept_delegate>(GetOrLoadLibrary("avformat", 58), "avio_accept");
+            avio_accept_fptr = GetFunctionDelegate<avio_accept_delegate>(GetOrLoadLibrary("avformat"), "avio_accept");
             if (avio_accept_fptr == null)
             {
                 avio_accept_fptr = delegate 
@@ -7754,7 +7754,7 @@ namespace FFmpeg.AutoGen
         private delegate AVIOContext* avio_alloc_context_delegate(byte* @buffer, int @buffer_size, int @write_flag, void* @opaque, avio_alloc_context_read_packet_func @read_packet, avio_alloc_context_write_packet_func @write_packet, avio_alloc_context_seek_func @seek);
         private static avio_alloc_context_delegate avio_alloc_context_fptr = (byte* @buffer, int @buffer_size, int @write_flag, void* @opaque, avio_alloc_context_read_packet_func @read_packet, avio_alloc_context_write_packet_func @write_packet, avio_alloc_context_seek_func @seek) =>
         {
-            avio_alloc_context_fptr = GetFunctionDelegate<avio_alloc_context_delegate>(GetOrLoadLibrary("avformat", 58), "avio_alloc_context");
+            avio_alloc_context_fptr = GetFunctionDelegate<avio_alloc_context_delegate>(GetOrLoadLibrary("avformat"), "avio_alloc_context");
             if (avio_alloc_context_fptr == null)
             {
                 avio_alloc_context_fptr = delegate 
@@ -7783,7 +7783,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_check_delegate([MarshalAs((UnmanagedType)48)] string @url, int @flags);
         private static avio_check_delegate avio_check_fptr = (string @url, int @flags) =>
         {
-            avio_check_fptr = GetFunctionDelegate<avio_check_delegate>(GetOrLoadLibrary("avformat", 58), "avio_check");
+            avio_check_fptr = GetFunctionDelegate<avio_check_delegate>(GetOrLoadLibrary("avformat"), "avio_check");
             if (avio_check_fptr == null)
             {
                 avio_check_fptr = delegate 
@@ -7804,7 +7804,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_close_delegate(AVIOContext* @s);
         private static avio_close_delegate avio_close_fptr = (AVIOContext* @s) =>
         {
-            avio_close_fptr = GetFunctionDelegate<avio_close_delegate>(GetOrLoadLibrary("avformat", 58), "avio_close");
+            avio_close_fptr = GetFunctionDelegate<avio_close_delegate>(GetOrLoadLibrary("avformat"), "avio_close");
             if (avio_close_fptr == null)
             {
                 avio_close_fptr = delegate 
@@ -7826,7 +7826,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_close_dir_delegate(AVIODirContext** @s);
         private static avio_close_dir_delegate avio_close_dir_fptr = (AVIODirContext** @s) =>
         {
-            avio_close_dir_fptr = GetFunctionDelegate<avio_close_dir_delegate>(GetOrLoadLibrary("avformat", 58), "avio_close_dir");
+            avio_close_dir_fptr = GetFunctionDelegate<avio_close_dir_delegate>(GetOrLoadLibrary("avformat"), "avio_close_dir");
             if (avio_close_dir_fptr == null)
             {
                 avio_close_dir_fptr = delegate 
@@ -7849,7 +7849,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_close_dyn_buf_delegate(AVIOContext* @s, byte** @pbuffer);
         private static avio_close_dyn_buf_delegate avio_close_dyn_buf_fptr = (AVIOContext* @s, byte** @pbuffer) =>
         {
-            avio_close_dyn_buf_fptr = GetFunctionDelegate<avio_close_dyn_buf_delegate>(GetOrLoadLibrary("avformat", 58), "avio_close_dyn_buf");
+            avio_close_dyn_buf_fptr = GetFunctionDelegate<avio_close_dyn_buf_delegate>(GetOrLoadLibrary("avformat"), "avio_close_dyn_buf");
             if (avio_close_dyn_buf_fptr == null)
             {
                 avio_close_dyn_buf_fptr = delegate 
@@ -7873,7 +7873,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_closep_delegate(AVIOContext** @s);
         private static avio_closep_delegate avio_closep_fptr = (AVIOContext** @s) =>
         {
-            avio_closep_fptr = GetFunctionDelegate<avio_closep_delegate>(GetOrLoadLibrary("avformat", 58), "avio_closep");
+            avio_closep_fptr = GetFunctionDelegate<avio_closep_delegate>(GetOrLoadLibrary("avformat"), "avio_closep");
             if (avio_closep_fptr == null)
             {
                 avio_closep_fptr = delegate 
@@ -7895,7 +7895,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_context_free_delegate(AVIOContext** @s);
         private static avio_context_free_delegate avio_context_free_fptr = (AVIOContext** @s) =>
         {
-            avio_context_free_fptr = GetFunctionDelegate<avio_context_free_delegate>(GetOrLoadLibrary("avformat", 58), "avio_context_free");
+            avio_context_free_fptr = GetFunctionDelegate<avio_context_free_delegate>(GetOrLoadLibrary("avformat"), "avio_context_free");
             if (avio_context_free_fptr == null)
             {
                 avio_context_free_fptr = delegate 
@@ -7918,7 +7918,7 @@ namespace FFmpeg.AutoGen
         private delegate string avio_enum_protocols_delegate(void** @opaque, int @output);
         private static avio_enum_protocols_delegate avio_enum_protocols_fptr = (void** @opaque, int @output) =>
         {
-            avio_enum_protocols_fptr = GetFunctionDelegate<avio_enum_protocols_delegate>(GetOrLoadLibrary("avformat", 58), "avio_enum_protocols");
+            avio_enum_protocols_fptr = GetFunctionDelegate<avio_enum_protocols_delegate>(GetOrLoadLibrary("avformat"), "avio_enum_protocols");
             if (avio_enum_protocols_fptr == null)
             {
                 avio_enum_protocols_fptr = delegate 
@@ -7942,7 +7942,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_feof_delegate(AVIOContext* @s);
         private static avio_feof_delegate avio_feof_fptr = (AVIOContext* @s) =>
         {
-            avio_feof_fptr = GetFunctionDelegate<avio_feof_delegate>(GetOrLoadLibrary("avformat", 58), "avio_feof");
+            avio_feof_fptr = GetFunctionDelegate<avio_feof_delegate>(GetOrLoadLibrary("avformat"), "avio_feof");
             if (avio_feof_fptr == null)
             {
                 avio_feof_fptr = delegate 
@@ -7965,7 +7965,7 @@ namespace FFmpeg.AutoGen
         private delegate string avio_find_protocol_name_delegate([MarshalAs((UnmanagedType)48)] string @url);
         private static avio_find_protocol_name_delegate avio_find_protocol_name_fptr = (string @url) =>
         {
-            avio_find_protocol_name_fptr = GetFunctionDelegate<avio_find_protocol_name_delegate>(GetOrLoadLibrary("avformat", 58), "avio_find_protocol_name");
+            avio_find_protocol_name_fptr = GetFunctionDelegate<avio_find_protocol_name_delegate>(GetOrLoadLibrary("avformat"), "avio_find_protocol_name");
             if (avio_find_protocol_name_fptr == null)
             {
                 avio_find_protocol_name_fptr = delegate 
@@ -7987,7 +7987,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_flush_delegate(AVIOContext* @s);
         private static avio_flush_delegate avio_flush_fptr = (AVIOContext* @s) =>
         {
-            avio_flush_fptr = GetFunctionDelegate<avio_flush_delegate>(GetOrLoadLibrary("avformat", 58), "avio_flush");
+            avio_flush_fptr = GetFunctionDelegate<avio_flush_delegate>(GetOrLoadLibrary("avformat"), "avio_flush");
             if (avio_flush_fptr == null)
             {
                 avio_flush_fptr = delegate 
@@ -8008,7 +8008,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_free_directory_entry_delegate(AVIODirEntry** @entry);
         private static avio_free_directory_entry_delegate avio_free_directory_entry_fptr = (AVIODirEntry** @entry) =>
         {
-            avio_free_directory_entry_fptr = GetFunctionDelegate<avio_free_directory_entry_delegate>(GetOrLoadLibrary("avformat", 58), "avio_free_directory_entry");
+            avio_free_directory_entry_fptr = GetFunctionDelegate<avio_free_directory_entry_delegate>(GetOrLoadLibrary("avformat"), "avio_free_directory_entry");
             if (avio_free_directory_entry_fptr == null)
             {
                 avio_free_directory_entry_fptr = delegate 
@@ -8030,7 +8030,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_get_dyn_buf_delegate(AVIOContext* @s, byte** @pbuffer);
         private static avio_get_dyn_buf_delegate avio_get_dyn_buf_fptr = (AVIOContext* @s, byte** @pbuffer) =>
         {
-            avio_get_dyn_buf_fptr = GetFunctionDelegate<avio_get_dyn_buf_delegate>(GetOrLoadLibrary("avformat", 58), "avio_get_dyn_buf");
+            avio_get_dyn_buf_fptr = GetFunctionDelegate<avio_get_dyn_buf_delegate>(GetOrLoadLibrary("avformat"), "avio_get_dyn_buf");
             if (avio_get_dyn_buf_fptr == null)
             {
                 avio_get_dyn_buf_fptr = delegate 
@@ -8054,7 +8054,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_get_str_delegate(AVIOContext* @pb, int @maxlen, byte* @buf, int @buflen);
         private static avio_get_str_delegate avio_get_str_fptr = (AVIOContext* @pb, int @maxlen, byte* @buf, int @buflen) =>
         {
-            avio_get_str_fptr = GetFunctionDelegate<avio_get_str_delegate>(GetOrLoadLibrary("avformat", 58), "avio_get_str");
+            avio_get_str_fptr = GetFunctionDelegate<avio_get_str_delegate>(GetOrLoadLibrary("avformat"), "avio_get_str");
             if (avio_get_str_fptr == null)
             {
                 avio_get_str_fptr = delegate 
@@ -8076,7 +8076,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_get_str16be_delegate(AVIOContext* @pb, int @maxlen, byte* @buf, int @buflen);
         private static avio_get_str16be_delegate avio_get_str16be_fptr = (AVIOContext* @pb, int @maxlen, byte* @buf, int @buflen) =>
         {
-            avio_get_str16be_fptr = GetFunctionDelegate<avio_get_str16be_delegate>(GetOrLoadLibrary("avformat", 58), "avio_get_str16be");
+            avio_get_str16be_fptr = GetFunctionDelegate<avio_get_str16be_delegate>(GetOrLoadLibrary("avformat"), "avio_get_str16be");
             if (avio_get_str16be_fptr == null)
             {
                 avio_get_str16be_fptr = delegate 
@@ -8096,7 +8096,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_get_str16le_delegate(AVIOContext* @pb, int @maxlen, byte* @buf, int @buflen);
         private static avio_get_str16le_delegate avio_get_str16le_fptr = (AVIOContext* @pb, int @maxlen, byte* @buf, int @buflen) =>
         {
-            avio_get_str16le_fptr = GetFunctionDelegate<avio_get_str16le_delegate>(GetOrLoadLibrary("avformat", 58), "avio_get_str16le");
+            avio_get_str16le_fptr = GetFunctionDelegate<avio_get_str16le_delegate>(GetOrLoadLibrary("avformat"), "avio_get_str16le");
             if (avio_get_str16le_fptr == null)
             {
                 avio_get_str16le_fptr = delegate 
@@ -8118,7 +8118,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_handshake_delegate(AVIOContext* @c);
         private static avio_handshake_delegate avio_handshake_fptr = (AVIOContext* @c) =>
         {
-            avio_handshake_fptr = GetFunctionDelegate<avio_handshake_delegate>(GetOrLoadLibrary("avformat", 58), "avio_handshake");
+            avio_handshake_fptr = GetFunctionDelegate<avio_handshake_delegate>(GetOrLoadLibrary("avformat"), "avio_handshake");
             if (avio_handshake_fptr == null)
             {
                 avio_handshake_fptr = delegate 
@@ -8141,7 +8141,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_open_delegate(AVIOContext** @s, [MarshalAs((UnmanagedType)48)] string @url, int @flags);
         private static avio_open_delegate avio_open_fptr = (AVIOContext** @s, string @url, int @flags) =>
         {
-            avio_open_fptr = GetFunctionDelegate<avio_open_delegate>(GetOrLoadLibrary("avformat", 58), "avio_open");
+            avio_open_fptr = GetFunctionDelegate<avio_open_delegate>(GetOrLoadLibrary("avformat"), "avio_open");
             if (avio_open_fptr == null)
             {
                 avio_open_fptr = delegate 
@@ -8166,7 +8166,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_open_dir_delegate(AVIODirContext** @s, [MarshalAs((UnmanagedType)48)] string @url, AVDictionary** @options);
         private static avio_open_dir_delegate avio_open_dir_fptr = (AVIODirContext** @s, string @url, AVDictionary** @options) =>
         {
-            avio_open_dir_fptr = GetFunctionDelegate<avio_open_dir_delegate>(GetOrLoadLibrary("avformat", 58), "avio_open_dir");
+            avio_open_dir_fptr = GetFunctionDelegate<avio_open_dir_delegate>(GetOrLoadLibrary("avformat"), "avio_open_dir");
             if (avio_open_dir_fptr == null)
             {
                 avio_open_dir_fptr = delegate 
@@ -8191,7 +8191,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_open_dyn_buf_delegate(AVIOContext** @s);
         private static avio_open_dyn_buf_delegate avio_open_dyn_buf_fptr = (AVIOContext** @s) =>
         {
-            avio_open_dyn_buf_fptr = GetFunctionDelegate<avio_open_dyn_buf_delegate>(GetOrLoadLibrary("avformat", 58), "avio_open_dyn_buf");
+            avio_open_dyn_buf_fptr = GetFunctionDelegate<avio_open_dyn_buf_delegate>(GetOrLoadLibrary("avformat"), "avio_open_dyn_buf");
             if (avio_open_dyn_buf_fptr == null)
             {
                 avio_open_dyn_buf_fptr = delegate 
@@ -8214,7 +8214,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_open2_delegate(AVIOContext** @s, [MarshalAs((UnmanagedType)48)] string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options);
         private static avio_open2_delegate avio_open2_fptr = (AVIOContext** @s, string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options) =>
         {
-            avio_open2_fptr = GetFunctionDelegate<avio_open2_delegate>(GetOrLoadLibrary("avformat", 58), "avio_open2");
+            avio_open2_fptr = GetFunctionDelegate<avio_open2_delegate>(GetOrLoadLibrary("avformat"), "avio_open2");
             if (avio_open2_fptr == null)
             {
                 avio_open2_fptr = delegate 
@@ -8241,7 +8241,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_pause_delegate(AVIOContext* @h, int @pause);
         private static avio_pause_delegate avio_pause_fptr = (AVIOContext* @h, int @pause) =>
         {
-            avio_pause_fptr = GetFunctionDelegate<avio_pause_delegate>(GetOrLoadLibrary("avformat", 58), "avio_pause");
+            avio_pause_fptr = GetFunctionDelegate<avio_pause_delegate>(GetOrLoadLibrary("avformat"), "avio_pause");
             if (avio_pause_fptr == null)
             {
                 avio_pause_fptr = delegate 
@@ -8264,7 +8264,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_printf_delegate(AVIOContext* @s, [MarshalAs((UnmanagedType)48)] string @fmt);
         private static avio_printf_delegate avio_printf_fptr = (AVIOContext* @s, string @fmt) =>
         {
-            avio_printf_fptr = GetFunctionDelegate<avio_printf_delegate>(GetOrLoadLibrary("avformat", 58), "avio_printf");
+            avio_printf_fptr = GetFunctionDelegate<avio_printf_delegate>(GetOrLoadLibrary("avformat"), "avio_printf");
             if (avio_printf_fptr == null)
             {
                 avio_printf_fptr = delegate 
@@ -8284,7 +8284,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_put_str_delegate(AVIOContext* @s, [MarshalAs((UnmanagedType)48)] string @str);
         private static avio_put_str_delegate avio_put_str_fptr = (AVIOContext* @s, string @str) =>
         {
-            avio_put_str_fptr = GetFunctionDelegate<avio_put_str_delegate>(GetOrLoadLibrary("avformat", 58), "avio_put_str");
+            avio_put_str_fptr = GetFunctionDelegate<avio_put_str_delegate>(GetOrLoadLibrary("avformat"), "avio_put_str");
             if (avio_put_str_fptr == null)
             {
                 avio_put_str_fptr = delegate 
@@ -8306,7 +8306,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_put_str16be_delegate(AVIOContext* @s, [MarshalAs((UnmanagedType)48)] string @str);
         private static avio_put_str16be_delegate avio_put_str16be_fptr = (AVIOContext* @s, string @str) =>
         {
-            avio_put_str16be_fptr = GetFunctionDelegate<avio_put_str16be_delegate>(GetOrLoadLibrary("avformat", 58), "avio_put_str16be");
+            avio_put_str16be_fptr = GetFunctionDelegate<avio_put_str16be_delegate>(GetOrLoadLibrary("avformat"), "avio_put_str16be");
             if (avio_put_str16be_fptr == null)
             {
                 avio_put_str16be_fptr = delegate 
@@ -8330,7 +8330,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_put_str16le_delegate(AVIOContext* @s, [MarshalAs((UnmanagedType)48)] string @str);
         private static avio_put_str16le_delegate avio_put_str16le_fptr = (AVIOContext* @s, string @str) =>
         {
-            avio_put_str16le_fptr = GetFunctionDelegate<avio_put_str16le_delegate>(GetOrLoadLibrary("avformat", 58), "avio_put_str16le");
+            avio_put_str16le_fptr = GetFunctionDelegate<avio_put_str16le_delegate>(GetOrLoadLibrary("avformat"), "avio_put_str16le");
             if (avio_put_str16le_fptr == null)
             {
                 avio_put_str16le_fptr = delegate 
@@ -8354,7 +8354,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_r8_delegate(AVIOContext* @s);
         private static avio_r8_delegate avio_r8_fptr = (AVIOContext* @s) =>
         {
-            avio_r8_fptr = GetFunctionDelegate<avio_r8_delegate>(GetOrLoadLibrary("avformat", 58), "avio_r8");
+            avio_r8_fptr = GetFunctionDelegate<avio_r8_delegate>(GetOrLoadLibrary("avformat"), "avio_r8");
             if (avio_r8_fptr == null)
             {
                 avio_r8_fptr = delegate 
@@ -8375,7 +8375,7 @@ namespace FFmpeg.AutoGen
         private delegate uint avio_rb16_delegate(AVIOContext* @s);
         private static avio_rb16_delegate avio_rb16_fptr = (AVIOContext* @s) =>
         {
-            avio_rb16_fptr = GetFunctionDelegate<avio_rb16_delegate>(GetOrLoadLibrary("avformat", 58), "avio_rb16");
+            avio_rb16_fptr = GetFunctionDelegate<avio_rb16_delegate>(GetOrLoadLibrary("avformat"), "avio_rb16");
             if (avio_rb16_fptr == null)
             {
                 avio_rb16_fptr = delegate 
@@ -8395,7 +8395,7 @@ namespace FFmpeg.AutoGen
         private delegate uint avio_rb24_delegate(AVIOContext* @s);
         private static avio_rb24_delegate avio_rb24_fptr = (AVIOContext* @s) =>
         {
-            avio_rb24_fptr = GetFunctionDelegate<avio_rb24_delegate>(GetOrLoadLibrary("avformat", 58), "avio_rb24");
+            avio_rb24_fptr = GetFunctionDelegate<avio_rb24_delegate>(GetOrLoadLibrary("avformat"), "avio_rb24");
             if (avio_rb24_fptr == null)
             {
                 avio_rb24_fptr = delegate 
@@ -8415,7 +8415,7 @@ namespace FFmpeg.AutoGen
         private delegate uint avio_rb32_delegate(AVIOContext* @s);
         private static avio_rb32_delegate avio_rb32_fptr = (AVIOContext* @s) =>
         {
-            avio_rb32_fptr = GetFunctionDelegate<avio_rb32_delegate>(GetOrLoadLibrary("avformat", 58), "avio_rb32");
+            avio_rb32_fptr = GetFunctionDelegate<avio_rb32_delegate>(GetOrLoadLibrary("avformat"), "avio_rb32");
             if (avio_rb32_fptr == null)
             {
                 avio_rb32_fptr = delegate 
@@ -8435,7 +8435,7 @@ namespace FFmpeg.AutoGen
         private delegate ulong avio_rb64_delegate(AVIOContext* @s);
         private static avio_rb64_delegate avio_rb64_fptr = (AVIOContext* @s) =>
         {
-            avio_rb64_fptr = GetFunctionDelegate<avio_rb64_delegate>(GetOrLoadLibrary("avformat", 58), "avio_rb64");
+            avio_rb64_fptr = GetFunctionDelegate<avio_rb64_delegate>(GetOrLoadLibrary("avformat"), "avio_rb64");
             if (avio_rb64_fptr == null)
             {
                 avio_rb64_fptr = delegate 
@@ -8455,7 +8455,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_read_delegate(AVIOContext* @s, byte* @buf, int @size);
         private static avio_read_delegate avio_read_fptr = (AVIOContext* @s, byte* @buf, int @size) =>
         {
-            avio_read_fptr = GetFunctionDelegate<avio_read_delegate>(GetOrLoadLibrary("avformat", 58), "avio_read");
+            avio_read_fptr = GetFunctionDelegate<avio_read_delegate>(GetOrLoadLibrary("avformat"), "avio_read");
             if (avio_read_fptr == null)
             {
                 avio_read_fptr = delegate 
@@ -8477,7 +8477,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_read_dir_delegate(AVIODirContext* @s, AVIODirEntry** @next);
         private static avio_read_dir_delegate avio_read_dir_fptr = (AVIODirContext* @s, AVIODirEntry** @next) =>
         {
-            avio_read_dir_fptr = GetFunctionDelegate<avio_read_dir_delegate>(GetOrLoadLibrary("avformat", 58), "avio_read_dir");
+            avio_read_dir_fptr = GetFunctionDelegate<avio_read_dir_delegate>(GetOrLoadLibrary("avformat"), "avio_read_dir");
             if (avio_read_dir_fptr == null)
             {
                 avio_read_dir_fptr = delegate 
@@ -8501,7 +8501,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_read_partial_delegate(AVIOContext* @s, byte* @buf, int @size);
         private static avio_read_partial_delegate avio_read_partial_fptr = (AVIOContext* @s, byte* @buf, int @size) =>
         {
-            avio_read_partial_fptr = GetFunctionDelegate<avio_read_partial_delegate>(GetOrLoadLibrary("avformat", 58), "avio_read_partial");
+            avio_read_partial_fptr = GetFunctionDelegate<avio_read_partial_delegate>(GetOrLoadLibrary("avformat"), "avio_read_partial");
             if (avio_read_partial_fptr == null)
             {
                 avio_read_partial_fptr = delegate 
@@ -8523,7 +8523,7 @@ namespace FFmpeg.AutoGen
         private delegate int avio_read_to_bprint_delegate(AVIOContext* @h, AVBPrint* @pb, ulong @max_size);
         private static avio_read_to_bprint_delegate avio_read_to_bprint_fptr = (AVIOContext* @h, AVBPrint* @pb, ulong @max_size) =>
         {
-            avio_read_to_bprint_fptr = GetFunctionDelegate<avio_read_to_bprint_delegate>(GetOrLoadLibrary("avformat", 58), "avio_read_to_bprint");
+            avio_read_to_bprint_fptr = GetFunctionDelegate<avio_read_to_bprint_delegate>(GetOrLoadLibrary("avformat"), "avio_read_to_bprint");
             if (avio_read_to_bprint_fptr == null)
             {
                 avio_read_to_bprint_fptr = delegate 
@@ -8545,7 +8545,7 @@ namespace FFmpeg.AutoGen
         private delegate uint avio_rl16_delegate(AVIOContext* @s);
         private static avio_rl16_delegate avio_rl16_fptr = (AVIOContext* @s) =>
         {
-            avio_rl16_fptr = GetFunctionDelegate<avio_rl16_delegate>(GetOrLoadLibrary("avformat", 58), "avio_rl16");
+            avio_rl16_fptr = GetFunctionDelegate<avio_rl16_delegate>(GetOrLoadLibrary("avformat"), "avio_rl16");
             if (avio_rl16_fptr == null)
             {
                 avio_rl16_fptr = delegate 
@@ -8565,7 +8565,7 @@ namespace FFmpeg.AutoGen
         private delegate uint avio_rl24_delegate(AVIOContext* @s);
         private static avio_rl24_delegate avio_rl24_fptr = (AVIOContext* @s) =>
         {
-            avio_rl24_fptr = GetFunctionDelegate<avio_rl24_delegate>(GetOrLoadLibrary("avformat", 58), "avio_rl24");
+            avio_rl24_fptr = GetFunctionDelegate<avio_rl24_delegate>(GetOrLoadLibrary("avformat"), "avio_rl24");
             if (avio_rl24_fptr == null)
             {
                 avio_rl24_fptr = delegate 
@@ -8585,7 +8585,7 @@ namespace FFmpeg.AutoGen
         private delegate uint avio_rl32_delegate(AVIOContext* @s);
         private static avio_rl32_delegate avio_rl32_fptr = (AVIOContext* @s) =>
         {
-            avio_rl32_fptr = GetFunctionDelegate<avio_rl32_delegate>(GetOrLoadLibrary("avformat", 58), "avio_rl32");
+            avio_rl32_fptr = GetFunctionDelegate<avio_rl32_delegate>(GetOrLoadLibrary("avformat"), "avio_rl32");
             if (avio_rl32_fptr == null)
             {
                 avio_rl32_fptr = delegate 
@@ -8605,7 +8605,7 @@ namespace FFmpeg.AutoGen
         private delegate ulong avio_rl64_delegate(AVIOContext* @s);
         private static avio_rl64_delegate avio_rl64_fptr = (AVIOContext* @s) =>
         {
-            avio_rl64_fptr = GetFunctionDelegate<avio_rl64_delegate>(GetOrLoadLibrary("avformat", 58), "avio_rl64");
+            avio_rl64_fptr = GetFunctionDelegate<avio_rl64_delegate>(GetOrLoadLibrary("avformat"), "avio_rl64");
             if (avio_rl64_fptr == null)
             {
                 avio_rl64_fptr = delegate 
@@ -8625,7 +8625,7 @@ namespace FFmpeg.AutoGen
         private delegate long avio_seek_delegate(AVIOContext* @s, long @offset, int @whence);
         private static avio_seek_delegate avio_seek_fptr = (AVIOContext* @s, long @offset, int @whence) =>
         {
-            avio_seek_fptr = GetFunctionDelegate<avio_seek_delegate>(GetOrLoadLibrary("avformat", 58), "avio_seek");
+            avio_seek_fptr = GetFunctionDelegate<avio_seek_delegate>(GetOrLoadLibrary("avformat"), "avio_seek");
             if (avio_seek_fptr == null)
             {
                 avio_seek_fptr = delegate 
@@ -8647,7 +8647,7 @@ namespace FFmpeg.AutoGen
         private delegate long avio_seek_time_delegate(AVIOContext* @h, int @stream_index, long @timestamp, int @flags);
         private static avio_seek_time_delegate avio_seek_time_fptr = (AVIOContext* @h, int @stream_index, long @timestamp, int @flags) =>
         {
-            avio_seek_time_fptr = GetFunctionDelegate<avio_seek_time_delegate>(GetOrLoadLibrary("avformat", 58), "avio_seek_time");
+            avio_seek_time_fptr = GetFunctionDelegate<avio_seek_time_delegate>(GetOrLoadLibrary("avformat"), "avio_seek_time");
             if (avio_seek_time_fptr == null)
             {
                 avio_seek_time_fptr = delegate 
@@ -8673,7 +8673,7 @@ namespace FFmpeg.AutoGen
         private delegate long avio_size_delegate(AVIOContext* @s);
         private static avio_size_delegate avio_size_fptr = (AVIOContext* @s) =>
         {
-            avio_size_fptr = GetFunctionDelegate<avio_size_delegate>(GetOrLoadLibrary("avformat", 58), "avio_size");
+            avio_size_fptr = GetFunctionDelegate<avio_size_delegate>(GetOrLoadLibrary("avformat"), "avio_size");
             if (avio_size_fptr == null)
             {
                 avio_size_fptr = delegate 
@@ -8695,7 +8695,7 @@ namespace FFmpeg.AutoGen
         private delegate long avio_skip_delegate(AVIOContext* @s, long @offset);
         private static avio_skip_delegate avio_skip_fptr = (AVIOContext* @s, long @offset) =>
         {
-            avio_skip_fptr = GetFunctionDelegate<avio_skip_delegate>(GetOrLoadLibrary("avformat", 58), "avio_skip");
+            avio_skip_fptr = GetFunctionDelegate<avio_skip_delegate>(GetOrLoadLibrary("avformat"), "avio_skip");
             if (avio_skip_fptr == null)
             {
                 avio_skip_fptr = delegate 
@@ -8717,7 +8717,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_w8_delegate(AVIOContext* @s, int @b);
         private static avio_w8_delegate avio_w8_fptr = (AVIOContext* @s, int @b) =>
         {
-            avio_w8_fptr = GetFunctionDelegate<avio_w8_delegate>(GetOrLoadLibrary("avformat", 58), "avio_w8");
+            avio_w8_fptr = GetFunctionDelegate<avio_w8_delegate>(GetOrLoadLibrary("avformat"), "avio_w8");
             if (avio_w8_fptr == null)
             {
                 avio_w8_fptr = delegate 
@@ -8737,7 +8737,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_wb16_delegate(AVIOContext* @s, uint @val);
         private static avio_wb16_delegate avio_wb16_fptr = (AVIOContext* @s, uint @val) =>
         {
-            avio_wb16_fptr = GetFunctionDelegate<avio_wb16_delegate>(GetOrLoadLibrary("avformat", 58), "avio_wb16");
+            avio_wb16_fptr = GetFunctionDelegate<avio_wb16_delegate>(GetOrLoadLibrary("avformat"), "avio_wb16");
             if (avio_wb16_fptr == null)
             {
                 avio_wb16_fptr = delegate 
@@ -8757,7 +8757,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_wb24_delegate(AVIOContext* @s, uint @val);
         private static avio_wb24_delegate avio_wb24_fptr = (AVIOContext* @s, uint @val) =>
         {
-            avio_wb24_fptr = GetFunctionDelegate<avio_wb24_delegate>(GetOrLoadLibrary("avformat", 58), "avio_wb24");
+            avio_wb24_fptr = GetFunctionDelegate<avio_wb24_delegate>(GetOrLoadLibrary("avformat"), "avio_wb24");
             if (avio_wb24_fptr == null)
             {
                 avio_wb24_fptr = delegate 
@@ -8777,7 +8777,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_wb32_delegate(AVIOContext* @s, uint @val);
         private static avio_wb32_delegate avio_wb32_fptr = (AVIOContext* @s, uint @val) =>
         {
-            avio_wb32_fptr = GetFunctionDelegate<avio_wb32_delegate>(GetOrLoadLibrary("avformat", 58), "avio_wb32");
+            avio_wb32_fptr = GetFunctionDelegate<avio_wb32_delegate>(GetOrLoadLibrary("avformat"), "avio_wb32");
             if (avio_wb32_fptr == null)
             {
                 avio_wb32_fptr = delegate 
@@ -8797,7 +8797,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_wb64_delegate(AVIOContext* @s, ulong @val);
         private static avio_wb64_delegate avio_wb64_fptr = (AVIOContext* @s, ulong @val) =>
         {
-            avio_wb64_fptr = GetFunctionDelegate<avio_wb64_delegate>(GetOrLoadLibrary("avformat", 58), "avio_wb64");
+            avio_wb64_fptr = GetFunctionDelegate<avio_wb64_delegate>(GetOrLoadLibrary("avformat"), "avio_wb64");
             if (avio_wb64_fptr == null)
             {
                 avio_wb64_fptr = delegate 
@@ -8817,7 +8817,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_wl16_delegate(AVIOContext* @s, uint @val);
         private static avio_wl16_delegate avio_wl16_fptr = (AVIOContext* @s, uint @val) =>
         {
-            avio_wl16_fptr = GetFunctionDelegate<avio_wl16_delegate>(GetOrLoadLibrary("avformat", 58), "avio_wl16");
+            avio_wl16_fptr = GetFunctionDelegate<avio_wl16_delegate>(GetOrLoadLibrary("avformat"), "avio_wl16");
             if (avio_wl16_fptr == null)
             {
                 avio_wl16_fptr = delegate 
@@ -8837,7 +8837,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_wl24_delegate(AVIOContext* @s, uint @val);
         private static avio_wl24_delegate avio_wl24_fptr = (AVIOContext* @s, uint @val) =>
         {
-            avio_wl24_fptr = GetFunctionDelegate<avio_wl24_delegate>(GetOrLoadLibrary("avformat", 58), "avio_wl24");
+            avio_wl24_fptr = GetFunctionDelegate<avio_wl24_delegate>(GetOrLoadLibrary("avformat"), "avio_wl24");
             if (avio_wl24_fptr == null)
             {
                 avio_wl24_fptr = delegate 
@@ -8857,7 +8857,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_wl32_delegate(AVIOContext* @s, uint @val);
         private static avio_wl32_delegate avio_wl32_fptr = (AVIOContext* @s, uint @val) =>
         {
-            avio_wl32_fptr = GetFunctionDelegate<avio_wl32_delegate>(GetOrLoadLibrary("avformat", 58), "avio_wl32");
+            avio_wl32_fptr = GetFunctionDelegate<avio_wl32_delegate>(GetOrLoadLibrary("avformat"), "avio_wl32");
             if (avio_wl32_fptr == null)
             {
                 avio_wl32_fptr = delegate 
@@ -8877,7 +8877,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_wl64_delegate(AVIOContext* @s, ulong @val);
         private static avio_wl64_delegate avio_wl64_fptr = (AVIOContext* @s, ulong @val) =>
         {
-            avio_wl64_fptr = GetFunctionDelegate<avio_wl64_delegate>(GetOrLoadLibrary("avformat", 58), "avio_wl64");
+            avio_wl64_fptr = GetFunctionDelegate<avio_wl64_delegate>(GetOrLoadLibrary("avformat"), "avio_wl64");
             if (avio_wl64_fptr == null)
             {
                 avio_wl64_fptr = delegate 
@@ -8897,7 +8897,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_write_delegate(AVIOContext* @s, byte* @buf, int @size);
         private static avio_write_delegate avio_write_fptr = (AVIOContext* @s, byte* @buf, int @size) =>
         {
-            avio_write_fptr = GetFunctionDelegate<avio_write_delegate>(GetOrLoadLibrary("avformat", 58), "avio_write");
+            avio_write_fptr = GetFunctionDelegate<avio_write_delegate>(GetOrLoadLibrary("avformat"), "avio_write");
             if (avio_write_fptr == null)
             {
                 avio_write_fptr = delegate 
@@ -8917,7 +8917,7 @@ namespace FFmpeg.AutoGen
         private delegate void avio_write_marker_delegate(AVIOContext* @s, long @time, AVIODataMarkerType @type);
         private static avio_write_marker_delegate avio_write_marker_fptr = (AVIOContext* @s, long @time, AVIODataMarkerType @type) =>
         {
-            avio_write_marker_fptr = GetFunctionDelegate<avio_write_marker_delegate>(GetOrLoadLibrary("avformat", 58), "avio_write_marker");
+            avio_write_marker_fptr = GetFunctionDelegate<avio_write_marker_delegate>(GetOrLoadLibrary("avformat"), "avio_write_marker");
             if (avio_write_marker_fptr == null)
             {
                 avio_write_marker_fptr = delegate 
@@ -8940,7 +8940,7 @@ namespace FFmpeg.AutoGen
         private delegate int avpriv_io_delete_delegate([MarshalAs((UnmanagedType)48)] string @url);
         private static avpriv_io_delete_delegate avpriv_io_delete_fptr = (string @url) =>
         {
-            avpriv_io_delete_fptr = GetFunctionDelegate<avpriv_io_delete_delegate>(GetOrLoadLibrary("avformat", 58), "avpriv_io_delete");
+            avpriv_io_delete_fptr = GetFunctionDelegate<avpriv_io_delete_delegate>(GetOrLoadLibrary("avformat"), "avpriv_io_delete");
             if (avpriv_io_delete_fptr == null)
             {
                 avpriv_io_delete_fptr = delegate 
@@ -8963,7 +8963,7 @@ namespace FFmpeg.AutoGen
         private delegate int avpriv_io_move_delegate([MarshalAs((UnmanagedType)48)] string @url_src, [MarshalAs((UnmanagedType)48)] string @url_dst);
         private static avpriv_io_move_delegate avpriv_io_move_fptr = (string @url_src, string @url_dst) =>
         {
-            avpriv_io_move_fptr = GetFunctionDelegate<avpriv_io_move_delegate>(GetOrLoadLibrary("avformat", 58), "avpriv_io_move");
+            avpriv_io_move_fptr = GetFunctionDelegate<avpriv_io_move_delegate>(GetOrLoadLibrary("avformat"), "avpriv_io_move");
             if (avpriv_io_move_fptr == null)
             {
                 avpriv_io_move_fptr = delegate 
@@ -8987,7 +8987,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_add_q_delegate(AVRational @b, AVRational @c);
         private static av_add_q_delegate av_add_q_fptr = (AVRational @b, AVRational @c) =>
         {
-            av_add_q_fptr = GetFunctionDelegate<av_add_q_delegate>(GetOrLoadLibrary("avutil", 56), "av_add_q");
+            av_add_q_fptr = GetFunctionDelegate<av_add_q_delegate>(GetOrLoadLibrary("avutil"), "av_add_q");
             if (av_add_q_fptr == null)
             {
                 av_add_q_fptr = delegate 
@@ -9011,7 +9011,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_add_stable_delegate(AVRational @ts_tb, long @ts, AVRational @inc_tb, long @inc);
         private static av_add_stable_delegate av_add_stable_fptr = (AVRational @ts_tb, long @ts, AVRational @inc_tb, long @inc) =>
         {
-            av_add_stable_fptr = GetFunctionDelegate<av_add_stable_delegate>(GetOrLoadLibrary("avutil", 56), "av_add_stable");
+            av_add_stable_fptr = GetFunctionDelegate<av_add_stable_delegate>(GetOrLoadLibrary("avutil"), "av_add_stable");
             if (av_add_stable_fptr == null)
             {
                 av_add_stable_fptr = delegate 
@@ -9036,7 +9036,7 @@ namespace FFmpeg.AutoGen
         private delegate AVAudioFifo* av_audio_fifo_alloc_delegate(AVSampleFormat @sample_fmt, int @channels, int @nb_samples);
         private static av_audio_fifo_alloc_delegate av_audio_fifo_alloc_fptr = (AVSampleFormat @sample_fmt, int @channels, int @nb_samples) =>
         {
-            av_audio_fifo_alloc_fptr = GetFunctionDelegate<av_audio_fifo_alloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_audio_fifo_alloc");
+            av_audio_fifo_alloc_fptr = GetFunctionDelegate<av_audio_fifo_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_audio_fifo_alloc");
             if (av_audio_fifo_alloc_fptr == null)
             {
                 av_audio_fifo_alloc_fptr = delegate 
@@ -9061,7 +9061,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_audio_fifo_drain_delegate(AVAudioFifo* @af, int @nb_samples);
         private static av_audio_fifo_drain_delegate av_audio_fifo_drain_fptr = (AVAudioFifo* @af, int @nb_samples) =>
         {
-            av_audio_fifo_drain_fptr = GetFunctionDelegate<av_audio_fifo_drain_delegate>(GetOrLoadLibrary("avutil", 56), "av_audio_fifo_drain");
+            av_audio_fifo_drain_fptr = GetFunctionDelegate<av_audio_fifo_drain_delegate>(GetOrLoadLibrary("avutil"), "av_audio_fifo_drain");
             if (av_audio_fifo_drain_fptr == null)
             {
                 av_audio_fifo_drain_fptr = delegate 
@@ -9085,7 +9085,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_audio_fifo_free_delegate(AVAudioFifo* @af);
         private static av_audio_fifo_free_delegate av_audio_fifo_free_fptr = (AVAudioFifo* @af) =>
         {
-            av_audio_fifo_free_fptr = GetFunctionDelegate<av_audio_fifo_free_delegate>(GetOrLoadLibrary("avutil", 56), "av_audio_fifo_free");
+            av_audio_fifo_free_fptr = GetFunctionDelegate<av_audio_fifo_free_delegate>(GetOrLoadLibrary("avutil"), "av_audio_fifo_free");
             if (av_audio_fifo_free_fptr == null)
             {
                 av_audio_fifo_free_fptr = delegate 
@@ -9107,7 +9107,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_audio_fifo_peek_delegate(AVAudioFifo* @af, void** @data, int @nb_samples);
         private static av_audio_fifo_peek_delegate av_audio_fifo_peek_fptr = (AVAudioFifo* @af, void** @data, int @nb_samples) =>
         {
-            av_audio_fifo_peek_fptr = GetFunctionDelegate<av_audio_fifo_peek_delegate>(GetOrLoadLibrary("avutil", 56), "av_audio_fifo_peek");
+            av_audio_fifo_peek_fptr = GetFunctionDelegate<av_audio_fifo_peek_delegate>(GetOrLoadLibrary("avutil"), "av_audio_fifo_peek");
             if (av_audio_fifo_peek_fptr == null)
             {
                 av_audio_fifo_peek_fptr = delegate 
@@ -9132,7 +9132,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_audio_fifo_peek_at_delegate(AVAudioFifo* @af, void** @data, int @nb_samples, int @offset);
         private static av_audio_fifo_peek_at_delegate av_audio_fifo_peek_at_fptr = (AVAudioFifo* @af, void** @data, int @nb_samples, int @offset) =>
         {
-            av_audio_fifo_peek_at_fptr = GetFunctionDelegate<av_audio_fifo_peek_at_delegate>(GetOrLoadLibrary("avutil", 56), "av_audio_fifo_peek_at");
+            av_audio_fifo_peek_at_fptr = GetFunctionDelegate<av_audio_fifo_peek_at_delegate>(GetOrLoadLibrary("avutil"), "av_audio_fifo_peek_at");
             if (av_audio_fifo_peek_at_fptr == null)
             {
                 av_audio_fifo_peek_at_fptr = delegate 
@@ -9158,7 +9158,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_audio_fifo_read_delegate(AVAudioFifo* @af, void** @data, int @nb_samples);
         private static av_audio_fifo_read_delegate av_audio_fifo_read_fptr = (AVAudioFifo* @af, void** @data, int @nb_samples) =>
         {
-            av_audio_fifo_read_fptr = GetFunctionDelegate<av_audio_fifo_read_delegate>(GetOrLoadLibrary("avutil", 56), "av_audio_fifo_read");
+            av_audio_fifo_read_fptr = GetFunctionDelegate<av_audio_fifo_read_delegate>(GetOrLoadLibrary("avutil"), "av_audio_fifo_read");
             if (av_audio_fifo_read_fptr == null)
             {
                 av_audio_fifo_read_fptr = delegate 
@@ -9183,7 +9183,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_audio_fifo_realloc_delegate(AVAudioFifo* @af, int @nb_samples);
         private static av_audio_fifo_realloc_delegate av_audio_fifo_realloc_fptr = (AVAudioFifo* @af, int @nb_samples) =>
         {
-            av_audio_fifo_realloc_fptr = GetFunctionDelegate<av_audio_fifo_realloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_audio_fifo_realloc");
+            av_audio_fifo_realloc_fptr = GetFunctionDelegate<av_audio_fifo_realloc_delegate>(GetOrLoadLibrary("avutil"), "av_audio_fifo_realloc");
             if (av_audio_fifo_realloc_fptr == null)
             {
                 av_audio_fifo_realloc_fptr = delegate 
@@ -9207,7 +9207,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_audio_fifo_reset_delegate(AVAudioFifo* @af);
         private static av_audio_fifo_reset_delegate av_audio_fifo_reset_fptr = (AVAudioFifo* @af) =>
         {
-            av_audio_fifo_reset_fptr = GetFunctionDelegate<av_audio_fifo_reset_delegate>(GetOrLoadLibrary("avutil", 56), "av_audio_fifo_reset");
+            av_audio_fifo_reset_fptr = GetFunctionDelegate<av_audio_fifo_reset_delegate>(GetOrLoadLibrary("avutil"), "av_audio_fifo_reset");
             if (av_audio_fifo_reset_fptr == null)
             {
                 av_audio_fifo_reset_fptr = delegate 
@@ -9229,7 +9229,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_audio_fifo_size_delegate(AVAudioFifo* @af);
         private static av_audio_fifo_size_delegate av_audio_fifo_size_fptr = (AVAudioFifo* @af) =>
         {
-            av_audio_fifo_size_fptr = GetFunctionDelegate<av_audio_fifo_size_delegate>(GetOrLoadLibrary("avutil", 56), "av_audio_fifo_size");
+            av_audio_fifo_size_fptr = GetFunctionDelegate<av_audio_fifo_size_delegate>(GetOrLoadLibrary("avutil"), "av_audio_fifo_size");
             if (av_audio_fifo_size_fptr == null)
             {
                 av_audio_fifo_size_fptr = delegate 
@@ -9252,7 +9252,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_audio_fifo_space_delegate(AVAudioFifo* @af);
         private static av_audio_fifo_space_delegate av_audio_fifo_space_fptr = (AVAudioFifo* @af) =>
         {
-            av_audio_fifo_space_fptr = GetFunctionDelegate<av_audio_fifo_space_delegate>(GetOrLoadLibrary("avutil", 56), "av_audio_fifo_space");
+            av_audio_fifo_space_fptr = GetFunctionDelegate<av_audio_fifo_space_delegate>(GetOrLoadLibrary("avutil"), "av_audio_fifo_space");
             if (av_audio_fifo_space_fptr == null)
             {
                 av_audio_fifo_space_fptr = delegate 
@@ -9275,7 +9275,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_audio_fifo_write_delegate(AVAudioFifo* @af, void** @data, int @nb_samples);
         private static av_audio_fifo_write_delegate av_audio_fifo_write_fptr = (AVAudioFifo* @af, void** @data, int @nb_samples) =>
         {
-            av_audio_fifo_write_fptr = GetFunctionDelegate<av_audio_fifo_write_delegate>(GetOrLoadLibrary("avutil", 56), "av_audio_fifo_write");
+            av_audio_fifo_write_fptr = GetFunctionDelegate<av_audio_fifo_write_delegate>(GetOrLoadLibrary("avutil"), "av_audio_fifo_write");
             if (av_audio_fifo_write_fptr == null)
             {
                 av_audio_fifo_write_fptr = delegate 
@@ -9300,7 +9300,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_bprint_channel_layout_delegate(AVBPrint* @bp, int @nb_channels, ulong @channel_layout);
         private static av_bprint_channel_layout_delegate av_bprint_channel_layout_fptr = (AVBPrint* @bp, int @nb_channels, ulong @channel_layout) =>
         {
-            av_bprint_channel_layout_fptr = GetFunctionDelegate<av_bprint_channel_layout_delegate>(GetOrLoadLibrary("avutil", 56), "av_bprint_channel_layout");
+            av_bprint_channel_layout_fptr = GetFunctionDelegate<av_bprint_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_bprint_channel_layout");
             if (av_bprint_channel_layout_fptr == null)
             {
                 av_bprint_channel_layout_fptr = delegate 
@@ -9321,7 +9321,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferRef* av_buffer_alloc_delegate(int @size);
         private static av_buffer_alloc_delegate av_buffer_alloc_fptr = (int @size) =>
         {
-            av_buffer_alloc_fptr = GetFunctionDelegate<av_buffer_alloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_alloc");
+            av_buffer_alloc_fptr = GetFunctionDelegate<av_buffer_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_alloc");
             if (av_buffer_alloc_fptr == null)
             {
                 av_buffer_alloc_fptr = delegate 
@@ -9343,7 +9343,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferRef* av_buffer_allocz_delegate(int @size);
         private static av_buffer_allocz_delegate av_buffer_allocz_fptr = (int @size) =>
         {
-            av_buffer_allocz_fptr = GetFunctionDelegate<av_buffer_allocz_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_allocz");
+            av_buffer_allocz_fptr = GetFunctionDelegate<av_buffer_allocz_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_allocz");
             if (av_buffer_allocz_fptr == null)
             {
                 av_buffer_allocz_fptr = delegate 
@@ -9364,7 +9364,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferRef* av_buffer_create_delegate(byte* @data, int @size, av_buffer_create_free_func @free, void* @opaque, int @flags);
         private static av_buffer_create_delegate av_buffer_create_fptr = (byte* @data, int @size, av_buffer_create_free_func @free, void* @opaque, int @flags) =>
         {
-            av_buffer_create_fptr = GetFunctionDelegate<av_buffer_create_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_create");
+            av_buffer_create_fptr = GetFunctionDelegate<av_buffer_create_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_create");
             if (av_buffer_create_fptr == null)
             {
                 av_buffer_create_fptr = delegate 
@@ -9391,7 +9391,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_buffer_default_free_delegate(void* @opaque, byte* @data);
         private static av_buffer_default_free_delegate av_buffer_default_free_fptr = (void* @opaque, byte* @data) =>
         {
-            av_buffer_default_free_fptr = GetFunctionDelegate<av_buffer_default_free_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_default_free");
+            av_buffer_default_free_fptr = GetFunctionDelegate<av_buffer_default_free_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_default_free");
             if (av_buffer_default_free_fptr == null)
             {
                 av_buffer_default_free_fptr = delegate 
@@ -9412,7 +9412,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_buffer_get_opaque_delegate(AVBufferRef* @buf);
         private static av_buffer_get_opaque_delegate av_buffer_get_opaque_fptr = (AVBufferRef* @buf) =>
         {
-            av_buffer_get_opaque_fptr = GetFunctionDelegate<av_buffer_get_opaque_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_get_opaque");
+            av_buffer_get_opaque_fptr = GetFunctionDelegate<av_buffer_get_opaque_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_get_opaque");
             if (av_buffer_get_opaque_fptr == null)
             {
                 av_buffer_get_opaque_fptr = delegate 
@@ -9434,7 +9434,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffer_get_ref_count_delegate(AVBufferRef* @buf);
         private static av_buffer_get_ref_count_delegate av_buffer_get_ref_count_fptr = (AVBufferRef* @buf) =>
         {
-            av_buffer_get_ref_count_fptr = GetFunctionDelegate<av_buffer_get_ref_count_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_get_ref_count");
+            av_buffer_get_ref_count_fptr = GetFunctionDelegate<av_buffer_get_ref_count_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_get_ref_count");
             if (av_buffer_get_ref_count_fptr == null)
             {
                 av_buffer_get_ref_count_fptr = delegate 
@@ -9454,7 +9454,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffer_is_writable_delegate(AVBufferRef* @buf);
         private static av_buffer_is_writable_delegate av_buffer_is_writable_fptr = (AVBufferRef* @buf) =>
         {
-            av_buffer_is_writable_fptr = GetFunctionDelegate<av_buffer_is_writable_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_is_writable");
+            av_buffer_is_writable_fptr = GetFunctionDelegate<av_buffer_is_writable_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_is_writable");
             if (av_buffer_is_writable_fptr == null)
             {
                 av_buffer_is_writable_fptr = delegate 
@@ -9476,7 +9476,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffer_make_writable_delegate(AVBufferRef** @buf);
         private static av_buffer_make_writable_delegate av_buffer_make_writable_fptr = (AVBufferRef** @buf) =>
         {
-            av_buffer_make_writable_fptr = GetFunctionDelegate<av_buffer_make_writable_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_make_writable");
+            av_buffer_make_writable_fptr = GetFunctionDelegate<av_buffer_make_writable_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_make_writable");
             if (av_buffer_make_writable_fptr == null)
             {
                 av_buffer_make_writable_fptr = delegate 
@@ -9499,7 +9499,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferRef* av_buffer_pool_get_delegate(AVBufferPool* @pool);
         private static av_buffer_pool_get_delegate av_buffer_pool_get_fptr = (AVBufferPool* @pool) =>
         {
-            av_buffer_pool_get_fptr = GetFunctionDelegate<av_buffer_pool_get_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_pool_get");
+            av_buffer_pool_get_fptr = GetFunctionDelegate<av_buffer_pool_get_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_pool_get");
             if (av_buffer_pool_get_fptr == null)
             {
                 av_buffer_pool_get_fptr = delegate 
@@ -9521,7 +9521,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferPool* av_buffer_pool_init_delegate(int @size, av_buffer_pool_init_alloc_func @alloc);
         private static av_buffer_pool_init_delegate av_buffer_pool_init_fptr = (int @size, av_buffer_pool_init_alloc_func @alloc) =>
         {
-            av_buffer_pool_init_fptr = GetFunctionDelegate<av_buffer_pool_init_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_pool_init");
+            av_buffer_pool_init_fptr = GetFunctionDelegate<av_buffer_pool_init_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_pool_init");
             if (av_buffer_pool_init_fptr == null)
             {
                 av_buffer_pool_init_fptr = delegate 
@@ -9545,7 +9545,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferPool* av_buffer_pool_init2_delegate(int @size, void* @opaque, av_buffer_pool_init2_alloc_func @alloc, av_buffer_pool_init2_pool_free_func @pool_free);
         private static av_buffer_pool_init2_delegate av_buffer_pool_init2_fptr = (int @size, void* @opaque, av_buffer_pool_init2_alloc_func @alloc, av_buffer_pool_init2_pool_free_func @pool_free) =>
         {
-            av_buffer_pool_init2_fptr = GetFunctionDelegate<av_buffer_pool_init2_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_pool_init2");
+            av_buffer_pool_init2_fptr = GetFunctionDelegate<av_buffer_pool_init2_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_pool_init2");
             if (av_buffer_pool_init2_fptr == null)
             {
                 av_buffer_pool_init2_fptr = delegate 
@@ -9571,7 +9571,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_buffer_pool_uninit_delegate(AVBufferPool** @pool);
         private static av_buffer_pool_uninit_delegate av_buffer_pool_uninit_fptr = (AVBufferPool** @pool) =>
         {
-            av_buffer_pool_uninit_fptr = GetFunctionDelegate<av_buffer_pool_uninit_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_pool_uninit");
+            av_buffer_pool_uninit_fptr = GetFunctionDelegate<av_buffer_pool_uninit_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_pool_uninit");
             if (av_buffer_pool_uninit_fptr == null)
             {
                 av_buffer_pool_uninit_fptr = delegate 
@@ -9593,7 +9593,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_buffer_realloc_delegate(AVBufferRef** @buf, int @size);
         private static av_buffer_realloc_delegate av_buffer_realloc_fptr = (AVBufferRef** @buf, int @size) =>
         {
-            av_buffer_realloc_fptr = GetFunctionDelegate<av_buffer_realloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_realloc");
+            av_buffer_realloc_fptr = GetFunctionDelegate<av_buffer_realloc_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_realloc");
             if (av_buffer_realloc_fptr == null)
             {
                 av_buffer_realloc_fptr = delegate 
@@ -9617,7 +9617,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferRef* av_buffer_ref_delegate(AVBufferRef* @buf);
         private static av_buffer_ref_delegate av_buffer_ref_fptr = (AVBufferRef* @buf) =>
         {
-            av_buffer_ref_fptr = GetFunctionDelegate<av_buffer_ref_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_ref");
+            av_buffer_ref_fptr = GetFunctionDelegate<av_buffer_ref_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_ref");
             if (av_buffer_ref_fptr == null)
             {
                 av_buffer_ref_fptr = delegate 
@@ -9639,7 +9639,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_buffer_unref_delegate(AVBufferRef** @buf);
         private static av_buffer_unref_delegate av_buffer_unref_fptr = (AVBufferRef** @buf) =>
         {
-            av_buffer_unref_fptr = GetFunctionDelegate<av_buffer_unref_delegate>(GetOrLoadLibrary("avutil", 56), "av_buffer_unref");
+            av_buffer_unref_fptr = GetFunctionDelegate<av_buffer_unref_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_unref");
             if (av_buffer_unref_fptr == null)
             {
                 av_buffer_unref_fptr = delegate 
@@ -9661,7 +9661,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_calloc_delegate(ulong @nmemb, ulong @size);
         private static av_calloc_delegate av_calloc_fptr = (ulong @nmemb, ulong @size) =>
         {
-            av_calloc_fptr = GetFunctionDelegate<av_calloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_calloc");
+            av_calloc_fptr = GetFunctionDelegate<av_calloc_delegate>(GetOrLoadLibrary("avutil"), "av_calloc");
             if (av_calloc_fptr == null)
             {
                 av_calloc_fptr = delegate 
@@ -9682,7 +9682,7 @@ namespace FFmpeg.AutoGen
         private delegate ulong av_channel_layout_extract_channel_delegate(ulong @channel_layout, int @index);
         private static av_channel_layout_extract_channel_delegate av_channel_layout_extract_channel_fptr = (ulong @channel_layout, int @index) =>
         {
-            av_channel_layout_extract_channel_fptr = GetFunctionDelegate<av_channel_layout_extract_channel_delegate>(GetOrLoadLibrary("avutil", 56), "av_channel_layout_extract_channel");
+            av_channel_layout_extract_channel_fptr = GetFunctionDelegate<av_channel_layout_extract_channel_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_extract_channel");
             if (av_channel_layout_extract_channel_fptr == null)
             {
                 av_channel_layout_extract_channel_fptr = delegate 
@@ -9703,7 +9703,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_chroma_location_from_name_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static av_chroma_location_from_name_delegate av_chroma_location_from_name_fptr = (string @name) =>
         {
-            av_chroma_location_from_name_fptr = GetFunctionDelegate<av_chroma_location_from_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_chroma_location_from_name");
+            av_chroma_location_from_name_fptr = GetFunctionDelegate<av_chroma_location_from_name_delegate>(GetOrLoadLibrary("avutil"), "av_chroma_location_from_name");
             if (av_chroma_location_from_name_fptr == null)
             {
                 av_chroma_location_from_name_fptr = delegate 
@@ -9726,7 +9726,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_chroma_location_name_delegate(AVChromaLocation @location);
         private static av_chroma_location_name_delegate av_chroma_location_name_fptr = (AVChromaLocation @location) =>
         {
-            av_chroma_location_name_fptr = GetFunctionDelegate<av_chroma_location_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_chroma_location_name");
+            av_chroma_location_name_fptr = GetFunctionDelegate<av_chroma_location_name_delegate>(GetOrLoadLibrary("avutil"), "av_chroma_location_name");
             if (av_chroma_location_name_fptr == null)
             {
                 av_chroma_location_name_fptr = delegate 
@@ -9748,7 +9748,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_color_primaries_from_name_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static av_color_primaries_from_name_delegate av_color_primaries_from_name_fptr = (string @name) =>
         {
-            av_color_primaries_from_name_fptr = GetFunctionDelegate<av_color_primaries_from_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_color_primaries_from_name");
+            av_color_primaries_from_name_fptr = GetFunctionDelegate<av_color_primaries_from_name_delegate>(GetOrLoadLibrary("avutil"), "av_color_primaries_from_name");
             if (av_color_primaries_from_name_fptr == null)
             {
                 av_color_primaries_from_name_fptr = delegate 
@@ -9771,7 +9771,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_color_primaries_name_delegate(AVColorPrimaries @primaries);
         private static av_color_primaries_name_delegate av_color_primaries_name_fptr = (AVColorPrimaries @primaries) =>
         {
-            av_color_primaries_name_fptr = GetFunctionDelegate<av_color_primaries_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_color_primaries_name");
+            av_color_primaries_name_fptr = GetFunctionDelegate<av_color_primaries_name_delegate>(GetOrLoadLibrary("avutil"), "av_color_primaries_name");
             if (av_color_primaries_name_fptr == null)
             {
                 av_color_primaries_name_fptr = delegate 
@@ -9793,7 +9793,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_color_range_from_name_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static av_color_range_from_name_delegate av_color_range_from_name_fptr = (string @name) =>
         {
-            av_color_range_from_name_fptr = GetFunctionDelegate<av_color_range_from_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_color_range_from_name");
+            av_color_range_from_name_fptr = GetFunctionDelegate<av_color_range_from_name_delegate>(GetOrLoadLibrary("avutil"), "av_color_range_from_name");
             if (av_color_range_from_name_fptr == null)
             {
                 av_color_range_from_name_fptr = delegate 
@@ -9816,7 +9816,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_color_range_name_delegate(AVColorRange @range);
         private static av_color_range_name_delegate av_color_range_name_fptr = (AVColorRange @range) =>
         {
-            av_color_range_name_fptr = GetFunctionDelegate<av_color_range_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_color_range_name");
+            av_color_range_name_fptr = GetFunctionDelegate<av_color_range_name_delegate>(GetOrLoadLibrary("avutil"), "av_color_range_name");
             if (av_color_range_name_fptr == null)
             {
                 av_color_range_name_fptr = delegate 
@@ -9838,7 +9838,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_color_space_from_name_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static av_color_space_from_name_delegate av_color_space_from_name_fptr = (string @name) =>
         {
-            av_color_space_from_name_fptr = GetFunctionDelegate<av_color_space_from_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_color_space_from_name");
+            av_color_space_from_name_fptr = GetFunctionDelegate<av_color_space_from_name_delegate>(GetOrLoadLibrary("avutil"), "av_color_space_from_name");
             if (av_color_space_from_name_fptr == null)
             {
                 av_color_space_from_name_fptr = delegate 
@@ -9861,7 +9861,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_color_space_name_delegate(AVColorSpace @space);
         private static av_color_space_name_delegate av_color_space_name_fptr = (AVColorSpace @space) =>
         {
-            av_color_space_name_fptr = GetFunctionDelegate<av_color_space_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_color_space_name");
+            av_color_space_name_fptr = GetFunctionDelegate<av_color_space_name_delegate>(GetOrLoadLibrary("avutil"), "av_color_space_name");
             if (av_color_space_name_fptr == null)
             {
                 av_color_space_name_fptr = delegate 
@@ -9883,7 +9883,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_color_transfer_from_name_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static av_color_transfer_from_name_delegate av_color_transfer_from_name_fptr = (string @name) =>
         {
-            av_color_transfer_from_name_fptr = GetFunctionDelegate<av_color_transfer_from_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_color_transfer_from_name");
+            av_color_transfer_from_name_fptr = GetFunctionDelegate<av_color_transfer_from_name_delegate>(GetOrLoadLibrary("avutil"), "av_color_transfer_from_name");
             if (av_color_transfer_from_name_fptr == null)
             {
                 av_color_transfer_from_name_fptr = delegate 
@@ -9906,7 +9906,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_color_transfer_name_delegate(AVColorTransferCharacteristic @transfer);
         private static av_color_transfer_name_delegate av_color_transfer_name_fptr = (AVColorTransferCharacteristic @transfer) =>
         {
-            av_color_transfer_name_fptr = GetFunctionDelegate<av_color_transfer_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_color_transfer_name");
+            av_color_transfer_name_fptr = GetFunctionDelegate<av_color_transfer_name_delegate>(GetOrLoadLibrary("avutil"), "av_color_transfer_name");
             if (av_color_transfer_name_fptr == null)
             {
                 av_color_transfer_name_fptr = delegate 
@@ -9928,7 +9928,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_compare_mod_delegate(ulong @a, ulong @b, ulong @mod);
         private static av_compare_mod_delegate av_compare_mod_fptr = (ulong @a, ulong @b, ulong @mod) =>
         {
-            av_compare_mod_fptr = GetFunctionDelegate<av_compare_mod_delegate>(GetOrLoadLibrary("avutil", 56), "av_compare_mod");
+            av_compare_mod_fptr = GetFunctionDelegate<av_compare_mod_delegate>(GetOrLoadLibrary("avutil"), "av_compare_mod");
             if (av_compare_mod_fptr == null)
             {
                 av_compare_mod_fptr = delegate 
@@ -9951,7 +9951,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_compare_ts_delegate(long @ts_a, AVRational @tb_a, long @ts_b, AVRational @tb_b);
         private static av_compare_ts_delegate av_compare_ts_fptr = (long @ts_a, AVRational @tb_a, long @ts_b, AVRational @tb_b) =>
         {
-            av_compare_ts_fptr = GetFunctionDelegate<av_compare_ts_delegate>(GetOrLoadLibrary("avutil", 56), "av_compare_ts");
+            av_compare_ts_fptr = GetFunctionDelegate<av_compare_ts_delegate>(GetOrLoadLibrary("avutil"), "av_compare_ts");
             if (av_compare_ts_fptr == null)
             {
                 av_compare_ts_fptr = delegate 
@@ -9973,7 +9973,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_cpu_count_delegate();
         private static av_cpu_count_delegate av_cpu_count_fptr = () =>
         {
-            av_cpu_count_fptr = GetFunctionDelegate<av_cpu_count_delegate>(GetOrLoadLibrary("avutil", 56), "av_cpu_count");
+            av_cpu_count_fptr = GetFunctionDelegate<av_cpu_count_delegate>(GetOrLoadLibrary("avutil"), "av_cpu_count");
             if (av_cpu_count_fptr == null)
             {
                 av_cpu_count_fptr = delegate 
@@ -9995,7 +9995,7 @@ namespace FFmpeg.AutoGen
         private delegate ulong av_cpu_max_align_delegate();
         private static av_cpu_max_align_delegate av_cpu_max_align_fptr = () =>
         {
-            av_cpu_max_align_fptr = GetFunctionDelegate<av_cpu_max_align_delegate>(GetOrLoadLibrary("avutil", 56), "av_cpu_max_align");
+            av_cpu_max_align_fptr = GetFunctionDelegate<av_cpu_max_align_delegate>(GetOrLoadLibrary("avutil"), "av_cpu_max_align");
             if (av_cpu_max_align_fptr == null)
             {
                 av_cpu_max_align_fptr = delegate 
@@ -10016,7 +10016,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_d2q_delegate(double @d, int @max);
         private static av_d2q_delegate av_d2q_fptr = (double @d, int @max) =>
         {
-            av_d2q_fptr = GetFunctionDelegate<av_d2q_delegate>(GetOrLoadLibrary("avutil", 56), "av_d2q");
+            av_d2q_fptr = GetFunctionDelegate<av_d2q_delegate>(GetOrLoadLibrary("avutil"), "av_d2q");
             if (av_d2q_fptr == null)
             {
                 av_d2q_fptr = delegate 
@@ -10040,7 +10040,7 @@ namespace FFmpeg.AutoGen
         private delegate AVClassCategory av_default_get_category_delegate(void* @ptr);
         private static av_default_get_category_delegate av_default_get_category_fptr = (void* @ptr) =>
         {
-            av_default_get_category_fptr = GetFunctionDelegate<av_default_get_category_delegate>(GetOrLoadLibrary("avutil", 56), "av_default_get_category");
+            av_default_get_category_fptr = GetFunctionDelegate<av_default_get_category_delegate>(GetOrLoadLibrary("avutil"), "av_default_get_category");
             if (av_default_get_category_fptr == null)
             {
                 av_default_get_category_fptr = delegate 
@@ -10061,7 +10061,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_default_item_name_delegate(void* @ctx);
         private static av_default_item_name_delegate av_default_item_name_fptr = (void* @ctx) =>
         {
-            av_default_item_name_fptr = GetFunctionDelegate<av_default_item_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_default_item_name");
+            av_default_item_name_fptr = GetFunctionDelegate<av_default_item_name_delegate>(GetOrLoadLibrary("avutil"), "av_default_item_name");
             if (av_default_item_name_fptr == null)
             {
                 av_default_item_name_fptr = delegate 
@@ -10084,7 +10084,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_dict_copy_delegate(AVDictionary** @dst, AVDictionary* @src, int @flags);
         private static av_dict_copy_delegate av_dict_copy_fptr = (AVDictionary** @dst, AVDictionary* @src, int @flags) =>
         {
-            av_dict_copy_fptr = GetFunctionDelegate<av_dict_copy_delegate>(GetOrLoadLibrary("avutil", 56), "av_dict_copy");
+            av_dict_copy_fptr = GetFunctionDelegate<av_dict_copy_delegate>(GetOrLoadLibrary("avutil"), "av_dict_copy");
             if (av_dict_copy_fptr == null)
             {
                 av_dict_copy_fptr = delegate 
@@ -10109,7 +10109,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_dict_count_delegate(AVDictionary* @m);
         private static av_dict_count_delegate av_dict_count_fptr = (AVDictionary* @m) =>
         {
-            av_dict_count_fptr = GetFunctionDelegate<av_dict_count_delegate>(GetOrLoadLibrary("avutil", 56), "av_dict_count");
+            av_dict_count_fptr = GetFunctionDelegate<av_dict_count_delegate>(GetOrLoadLibrary("avutil"), "av_dict_count");
             if (av_dict_count_fptr == null)
             {
                 av_dict_count_fptr = delegate 
@@ -10132,7 +10132,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_dict_free_delegate(AVDictionary** @m);
         private static av_dict_free_delegate av_dict_free_fptr = (AVDictionary** @m) =>
         {
-            av_dict_free_fptr = GetFunctionDelegate<av_dict_free_delegate>(GetOrLoadLibrary("avutil", 56), "av_dict_free");
+            av_dict_free_fptr = GetFunctionDelegate<av_dict_free_delegate>(GetOrLoadLibrary("avutil"), "av_dict_free");
             if (av_dict_free_fptr == null)
             {
                 av_dict_free_fptr = delegate 
@@ -10153,7 +10153,7 @@ namespace FFmpeg.AutoGen
         private delegate AVDictionaryEntry* av_dict_get_delegate(AVDictionary* @m, [MarshalAs((UnmanagedType)48)] string @key, AVDictionaryEntry* @prev, int @flags);
         private static av_dict_get_delegate av_dict_get_fptr = (AVDictionary* @m, string @key, AVDictionaryEntry* @prev, int @flags) =>
         {
-            av_dict_get_fptr = GetFunctionDelegate<av_dict_get_delegate>(GetOrLoadLibrary("avutil", 56), "av_dict_get");
+            av_dict_get_fptr = GetFunctionDelegate<av_dict_get_delegate>(GetOrLoadLibrary("avutil"), "av_dict_get");
             if (av_dict_get_fptr == null)
             {
                 av_dict_get_fptr = delegate 
@@ -10178,7 +10178,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_dict_get_string_delegate(AVDictionary* @m, byte** @buffer, byte @key_val_sep, byte @pairs_sep);
         private static av_dict_get_string_delegate av_dict_get_string_fptr = (AVDictionary* @m, byte** @buffer, byte @key_val_sep, byte @pairs_sep) =>
         {
-            av_dict_get_string_fptr = GetFunctionDelegate<av_dict_get_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_dict_get_string");
+            av_dict_get_string_fptr = GetFunctionDelegate<av_dict_get_string_delegate>(GetOrLoadLibrary("avutil"), "av_dict_get_string");
             if (av_dict_get_string_fptr == null)
             {
                 av_dict_get_string_fptr = delegate 
@@ -10204,7 +10204,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_dict_parse_string_delegate(AVDictionary** @pm, [MarshalAs((UnmanagedType)48)] string @str, [MarshalAs((UnmanagedType)48)] string @key_val_sep, [MarshalAs((UnmanagedType)48)] string @pairs_sep, int @flags);
         private static av_dict_parse_string_delegate av_dict_parse_string_fptr = (AVDictionary** @pm, string @str, string @key_val_sep, string @pairs_sep, int @flags) =>
         {
-            av_dict_parse_string_fptr = GetFunctionDelegate<av_dict_parse_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_dict_parse_string");
+            av_dict_parse_string_fptr = GetFunctionDelegate<av_dict_parse_string_delegate>(GetOrLoadLibrary("avutil"), "av_dict_parse_string");
             if (av_dict_parse_string_fptr == null)
             {
                 av_dict_parse_string_fptr = delegate 
@@ -10229,7 +10229,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_dict_set_delegate(AVDictionary** @pm, [MarshalAs((UnmanagedType)48)] string @key, [MarshalAs((UnmanagedType)48)] string @value, int @flags);
         private static av_dict_set_delegate av_dict_set_fptr = (AVDictionary** @pm, string @key, string @value, int @flags) =>
         {
-            av_dict_set_fptr = GetFunctionDelegate<av_dict_set_delegate>(GetOrLoadLibrary("avutil", 56), "av_dict_set");
+            av_dict_set_fptr = GetFunctionDelegate<av_dict_set_delegate>(GetOrLoadLibrary("avutil"), "av_dict_set");
             if (av_dict_set_fptr == null)
             {
                 av_dict_set_fptr = delegate 
@@ -10254,7 +10254,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_dict_set_int_delegate(AVDictionary** @pm, [MarshalAs((UnmanagedType)48)] string @key, long @value, int @flags);
         private static av_dict_set_int_delegate av_dict_set_int_fptr = (AVDictionary** @pm, string @key, long @value, int @flags) =>
         {
-            av_dict_set_int_fptr = GetFunctionDelegate<av_dict_set_int_delegate>(GetOrLoadLibrary("avutil", 56), "av_dict_set_int");
+            av_dict_set_int_fptr = GetFunctionDelegate<av_dict_set_int_delegate>(GetOrLoadLibrary("avutil"), "av_dict_set_int");
             if (av_dict_set_int_fptr == null)
             {
                 av_dict_set_int_fptr = delegate 
@@ -10275,7 +10275,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_div_q_delegate(AVRational @b, AVRational @c);
         private static av_div_q_delegate av_div_q_fptr = (AVRational @b, AVRational @c) =>
         {
-            av_div_q_fptr = GetFunctionDelegate<av_div_q_delegate>(GetOrLoadLibrary("avutil", 56), "av_div_q");
+            av_div_q_fptr = GetFunctionDelegate<av_div_q_delegate>(GetOrLoadLibrary("avutil"), "av_div_q");
             if (av_div_q_fptr == null)
             {
                 av_div_q_fptr = delegate 
@@ -10299,7 +10299,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_dynarray_add_delegate(void* @tab_ptr, int* @nb_ptr, void* @elem);
         private static av_dynarray_add_delegate av_dynarray_add_fptr = (void* @tab_ptr, int* @nb_ptr, void* @elem) =>
         {
-            av_dynarray_add_fptr = GetFunctionDelegate<av_dynarray_add_delegate>(GetOrLoadLibrary("avutil", 56), "av_dynarray_add");
+            av_dynarray_add_fptr = GetFunctionDelegate<av_dynarray_add_delegate>(GetOrLoadLibrary("avutil"), "av_dynarray_add");
             if (av_dynarray_add_fptr == null)
             {
                 av_dynarray_add_fptr = delegate 
@@ -10323,7 +10323,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_dynarray_add_nofree_delegate(void* @tab_ptr, int* @nb_ptr, void* @elem);
         private static av_dynarray_add_nofree_delegate av_dynarray_add_nofree_fptr = (void* @tab_ptr, int* @nb_ptr, void* @elem) =>
         {
-            av_dynarray_add_nofree_fptr = GetFunctionDelegate<av_dynarray_add_nofree_delegate>(GetOrLoadLibrary("avutil", 56), "av_dynarray_add_nofree");
+            av_dynarray_add_nofree_fptr = GetFunctionDelegate<av_dynarray_add_nofree_delegate>(GetOrLoadLibrary("avutil"), "av_dynarray_add_nofree");
             if (av_dynarray_add_nofree_fptr == null)
             {
                 av_dynarray_add_nofree_fptr = delegate 
@@ -10345,7 +10345,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_dynarray2_add_delegate(void** @tab_ptr, int* @nb_ptr, ulong @elem_size, byte* @elem_data);
         private static av_dynarray2_add_delegate av_dynarray2_add_fptr = (void** @tab_ptr, int* @nb_ptr, ulong @elem_size, byte* @elem_data) =>
         {
-            av_dynarray2_add_fptr = GetFunctionDelegate<av_dynarray2_add_delegate>(GetOrLoadLibrary("avutil", 56), "av_dynarray2_add");
+            av_dynarray2_add_fptr = GetFunctionDelegate<av_dynarray2_add_delegate>(GetOrLoadLibrary("avutil"), "av_dynarray2_add");
             if (av_dynarray2_add_fptr == null)
             {
                 av_dynarray2_add_fptr = delegate 
@@ -10371,7 +10371,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_fast_malloc_delegate(void* @ptr, uint* @size, ulong @min_size);
         private static av_fast_malloc_delegate av_fast_malloc_fptr = (void* @ptr, uint* @size, ulong @min_size) =>
         {
-            av_fast_malloc_fptr = GetFunctionDelegate<av_fast_malloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_fast_malloc");
+            av_fast_malloc_fptr = GetFunctionDelegate<av_fast_malloc_delegate>(GetOrLoadLibrary("avutil"), "av_fast_malloc");
             if (av_fast_malloc_fptr == null)
             {
                 av_fast_malloc_fptr = delegate 
@@ -10395,7 +10395,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_fast_mallocz_delegate(void* @ptr, uint* @size, ulong @min_size);
         private static av_fast_mallocz_delegate av_fast_mallocz_fptr = (void* @ptr, uint* @size, ulong @min_size) =>
         {
-            av_fast_mallocz_fptr = GetFunctionDelegate<av_fast_mallocz_delegate>(GetOrLoadLibrary("avutil", 56), "av_fast_mallocz");
+            av_fast_mallocz_fptr = GetFunctionDelegate<av_fast_mallocz_delegate>(GetOrLoadLibrary("avutil"), "av_fast_mallocz");
             if (av_fast_mallocz_fptr == null)
             {
                 av_fast_mallocz_fptr = delegate 
@@ -10419,7 +10419,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_fast_realloc_delegate(void* @ptr, uint* @size, ulong @min_size);
         private static av_fast_realloc_delegate av_fast_realloc_fptr = (void* @ptr, uint* @size, ulong @min_size) =>
         {
-            av_fast_realloc_fptr = GetFunctionDelegate<av_fast_realloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_fast_realloc");
+            av_fast_realloc_fptr = GetFunctionDelegate<av_fast_realloc_delegate>(GetOrLoadLibrary("avutil"), "av_fast_realloc");
             if (av_fast_realloc_fptr == null)
             {
                 av_fast_realloc_fptr = delegate 
@@ -10444,7 +10444,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFifoBuffer* av_fifo_alloc_delegate(uint @size);
         private static av_fifo_alloc_delegate av_fifo_alloc_fptr = (uint @size) =>
         {
-            av_fifo_alloc_fptr = GetFunctionDelegate<av_fifo_alloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_alloc");
+            av_fifo_alloc_fptr = GetFunctionDelegate<av_fifo_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_alloc");
             if (av_fifo_alloc_fptr == null)
             {
                 av_fifo_alloc_fptr = delegate 
@@ -10467,7 +10467,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFifoBuffer* av_fifo_alloc_array_delegate(ulong @nmemb, ulong @size);
         private static av_fifo_alloc_array_delegate av_fifo_alloc_array_fptr = (ulong @nmemb, ulong @size) =>
         {
-            av_fifo_alloc_array_fptr = GetFunctionDelegate<av_fifo_alloc_array_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_alloc_array");
+            av_fifo_alloc_array_fptr = GetFunctionDelegate<av_fifo_alloc_array_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_alloc_array");
             if (av_fifo_alloc_array_fptr == null)
             {
                 av_fifo_alloc_array_fptr = delegate 
@@ -10491,7 +10491,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_fifo_drain_delegate(AVFifoBuffer* @f, int @size);
         private static av_fifo_drain_delegate av_fifo_drain_fptr = (AVFifoBuffer* @f, int @size) =>
         {
-            av_fifo_drain_fptr = GetFunctionDelegate<av_fifo_drain_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_drain");
+            av_fifo_drain_fptr = GetFunctionDelegate<av_fifo_drain_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_drain");
             if (av_fifo_drain_fptr == null)
             {
                 av_fifo_drain_fptr = delegate 
@@ -10514,7 +10514,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_fifo_free_delegate(AVFifoBuffer* @f);
         private static av_fifo_free_delegate av_fifo_free_fptr = (AVFifoBuffer* @f) =>
         {
-            av_fifo_free_fptr = GetFunctionDelegate<av_fifo_free_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_free");
+            av_fifo_free_fptr = GetFunctionDelegate<av_fifo_free_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_free");
             if (av_fifo_free_fptr == null)
             {
                 av_fifo_free_fptr = delegate 
@@ -10536,7 +10536,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_fifo_freep_delegate(AVFifoBuffer** @f);
         private static av_fifo_freep_delegate av_fifo_freep_fptr = (AVFifoBuffer** @f) =>
         {
-            av_fifo_freep_fptr = GetFunctionDelegate<av_fifo_freep_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_freep");
+            av_fifo_freep_fptr = GetFunctionDelegate<av_fifo_freep_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_freep");
             if (av_fifo_freep_fptr == null)
             {
                 av_fifo_freep_fptr = delegate 
@@ -10558,7 +10558,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_fifo_generic_peek_delegate(AVFifoBuffer* @f, void* @dest, int @buf_size, av_fifo_generic_peek_func_func @func);
         private static av_fifo_generic_peek_delegate av_fifo_generic_peek_fptr = (AVFifoBuffer* @f, void* @dest, int @buf_size, av_fifo_generic_peek_func_func @func) =>
         {
-            av_fifo_generic_peek_fptr = GetFunctionDelegate<av_fifo_generic_peek_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_generic_peek");
+            av_fifo_generic_peek_fptr = GetFunctionDelegate<av_fifo_generic_peek_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_generic_peek");
             if (av_fifo_generic_peek_fptr == null)
             {
                 av_fifo_generic_peek_fptr = delegate 
@@ -10583,7 +10583,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_fifo_generic_peek_at_delegate(AVFifoBuffer* @f, void* @dest, int @offset, int @buf_size, av_fifo_generic_peek_at_func_func @func);
         private static av_fifo_generic_peek_at_delegate av_fifo_generic_peek_at_fptr = (AVFifoBuffer* @f, void* @dest, int @offset, int @buf_size, av_fifo_generic_peek_at_func_func @func) =>
         {
-            av_fifo_generic_peek_at_fptr = GetFunctionDelegate<av_fifo_generic_peek_at_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_generic_peek_at");
+            av_fifo_generic_peek_at_fptr = GetFunctionDelegate<av_fifo_generic_peek_at_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_generic_peek_at");
             if (av_fifo_generic_peek_at_fptr == null)
             {
                 av_fifo_generic_peek_at_fptr = delegate 
@@ -10609,7 +10609,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_fifo_generic_read_delegate(AVFifoBuffer* @f, void* @dest, int @buf_size, av_fifo_generic_read_func_func @func);
         private static av_fifo_generic_read_delegate av_fifo_generic_read_fptr = (AVFifoBuffer* @f, void* @dest, int @buf_size, av_fifo_generic_read_func_func @func) =>
         {
-            av_fifo_generic_read_fptr = GetFunctionDelegate<av_fifo_generic_read_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_generic_read");
+            av_fifo_generic_read_fptr = GetFunctionDelegate<av_fifo_generic_read_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_generic_read");
             if (av_fifo_generic_read_fptr == null)
             {
                 av_fifo_generic_read_fptr = delegate 
@@ -10634,7 +10634,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_fifo_generic_write_delegate(AVFifoBuffer* @f, void* @src, int @size, av_fifo_generic_write_func_func @func);
         private static av_fifo_generic_write_delegate av_fifo_generic_write_fptr = (AVFifoBuffer* @f, void* @src, int @size, av_fifo_generic_write_func_func @func) =>
         {
-            av_fifo_generic_write_fptr = GetFunctionDelegate<av_fifo_generic_write_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_generic_write");
+            av_fifo_generic_write_fptr = GetFunctionDelegate<av_fifo_generic_write_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_generic_write");
             if (av_fifo_generic_write_fptr == null)
             {
                 av_fifo_generic_write_fptr = delegate 
@@ -10660,7 +10660,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_fifo_grow_delegate(AVFifoBuffer* @f, uint @additional_space);
         private static av_fifo_grow_delegate av_fifo_grow_fptr = (AVFifoBuffer* @f, uint @additional_space) =>
         {
-            av_fifo_grow_fptr = GetFunctionDelegate<av_fifo_grow_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_grow");
+            av_fifo_grow_fptr = GetFunctionDelegate<av_fifo_grow_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_grow");
             if (av_fifo_grow_fptr == null)
             {
                 av_fifo_grow_fptr = delegate 
@@ -10684,7 +10684,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_fifo_realloc2_delegate(AVFifoBuffer* @f, uint @size);
         private static av_fifo_realloc2_delegate av_fifo_realloc2_fptr = (AVFifoBuffer* @f, uint @size) =>
         {
-            av_fifo_realloc2_fptr = GetFunctionDelegate<av_fifo_realloc2_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_realloc2");
+            av_fifo_realloc2_fptr = GetFunctionDelegate<av_fifo_realloc2_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_realloc2");
             if (av_fifo_realloc2_fptr == null)
             {
                 av_fifo_realloc2_fptr = delegate 
@@ -10708,7 +10708,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_fifo_reset_delegate(AVFifoBuffer* @f);
         private static av_fifo_reset_delegate av_fifo_reset_fptr = (AVFifoBuffer* @f) =>
         {
-            av_fifo_reset_fptr = GetFunctionDelegate<av_fifo_reset_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_reset");
+            av_fifo_reset_fptr = GetFunctionDelegate<av_fifo_reset_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_reset");
             if (av_fifo_reset_fptr == null)
             {
                 av_fifo_reset_fptr = delegate 
@@ -10730,7 +10730,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_fifo_size_delegate(AVFifoBuffer* @f);
         private static av_fifo_size_delegate av_fifo_size_fptr = (AVFifoBuffer* @f) =>
         {
-            av_fifo_size_fptr = GetFunctionDelegate<av_fifo_size_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_size");
+            av_fifo_size_fptr = GetFunctionDelegate<av_fifo_size_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_size");
             if (av_fifo_size_fptr == null)
             {
                 av_fifo_size_fptr = delegate 
@@ -10753,7 +10753,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_fifo_space_delegate(AVFifoBuffer* @f);
         private static av_fifo_space_delegate av_fifo_space_fptr = (AVFifoBuffer* @f) =>
         {
-            av_fifo_space_fptr = GetFunctionDelegate<av_fifo_space_delegate>(GetOrLoadLibrary("avutil", 56), "av_fifo_space");
+            av_fifo_space_fptr = GetFunctionDelegate<av_fifo_space_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_space");
             if (av_fifo_space_fptr == null)
             {
                 av_fifo_space_fptr = delegate 
@@ -10776,7 +10776,7 @@ namespace FFmpeg.AutoGen
         private delegate AVPixelFormat av_find_best_pix_fmt_of_2_delegate(AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr);
         private static av_find_best_pix_fmt_of_2_delegate av_find_best_pix_fmt_of_2_fptr = (AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr) =>
         {
-            av_find_best_pix_fmt_of_2_fptr = GetFunctionDelegate<av_find_best_pix_fmt_of_2_delegate>(GetOrLoadLibrary("avutil", 56), "av_find_best_pix_fmt_of_2");
+            av_find_best_pix_fmt_of_2_fptr = GetFunctionDelegate<av_find_best_pix_fmt_of_2_delegate>(GetOrLoadLibrary("avutil"), "av_find_best_pix_fmt_of_2");
             if (av_find_best_pix_fmt_of_2_fptr == null)
             {
                 av_find_best_pix_fmt_of_2_fptr = delegate 
@@ -10800,7 +10800,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_find_nearest_q_idx_delegate(AVRational @q, AVRational* @q_list);
         private static av_find_nearest_q_idx_delegate av_find_nearest_q_idx_fptr = (AVRational @q, AVRational* @q_list) =>
         {
-            av_find_nearest_q_idx_fptr = GetFunctionDelegate<av_find_nearest_q_idx_delegate>(GetOrLoadLibrary("avutil", 56), "av_find_nearest_q_idx");
+            av_find_nearest_q_idx_fptr = GetFunctionDelegate<av_find_nearest_q_idx_delegate>(GetOrLoadLibrary("avutil"), "av_find_nearest_q_idx");
             if (av_find_nearest_q_idx_fptr == null)
             {
                 av_find_nearest_q_idx_fptr = delegate 
@@ -10824,7 +10824,7 @@ namespace FFmpeg.AutoGen
         private delegate _iobuf* av_fopen_utf8_delegate([MarshalAs((UnmanagedType)48)] string @path, [MarshalAs((UnmanagedType)48)] string @mode);
         private static av_fopen_utf8_delegate av_fopen_utf8_fptr = (string @path, string @mode) =>
         {
-            av_fopen_utf8_fptr = GetFunctionDelegate<av_fopen_utf8_delegate>(GetOrLoadLibrary("avutil", 56), "av_fopen_utf8");
+            av_fopen_utf8_fptr = GetFunctionDelegate<av_fopen_utf8_delegate>(GetOrLoadLibrary("avutil"), "av_fopen_utf8");
             if (av_fopen_utf8_fptr == null)
             {
                 av_fopen_utf8_fptr = delegate 
@@ -10845,7 +10845,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_force_cpu_flags_delegate(int @flags);
         private static av_force_cpu_flags_delegate av_force_cpu_flags_fptr = (int @flags) =>
         {
-            av_force_cpu_flags_fptr = GetFunctionDelegate<av_force_cpu_flags_delegate>(GetOrLoadLibrary("avutil", 56), "av_force_cpu_flags");
+            av_force_cpu_flags_fptr = GetFunctionDelegate<av_force_cpu_flags_delegate>(GetOrLoadLibrary("avutil"), "av_force_cpu_flags");
             if (av_force_cpu_flags_fptr == null)
             {
                 av_force_cpu_flags_fptr = delegate 
@@ -10866,7 +10866,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_fourcc_make_string_delegate(byte* @buf, uint @fourcc);
         private static av_fourcc_make_string_delegate av_fourcc_make_string_fptr = (byte* @buf, uint @fourcc) =>
         {
-            av_fourcc_make_string_fptr = GetFunctionDelegate<av_fourcc_make_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_fourcc_make_string");
+            av_fourcc_make_string_fptr = GetFunctionDelegate<av_fourcc_make_string_delegate>(GetOrLoadLibrary("avutil"), "av_fourcc_make_string");
             if (av_fourcc_make_string_fptr == null)
             {
                 av_fourcc_make_string_fptr = delegate 
@@ -10890,7 +10890,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFrame* av_frame_alloc_delegate();
         private static av_frame_alloc_delegate av_frame_alloc_fptr = () =>
         {
-            av_frame_alloc_fptr = GetFunctionDelegate<av_frame_alloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_alloc");
+            av_frame_alloc_fptr = GetFunctionDelegate<av_frame_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_frame_alloc");
             if (av_frame_alloc_fptr == null)
             {
                 av_frame_alloc_fptr = delegate 
@@ -10912,7 +10912,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_frame_apply_cropping_delegate(AVFrame* @frame, int @flags);
         private static av_frame_apply_cropping_delegate av_frame_apply_cropping_fptr = (AVFrame* @frame, int @flags) =>
         {
-            av_frame_apply_cropping_fptr = GetFunctionDelegate<av_frame_apply_cropping_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_apply_cropping");
+            av_frame_apply_cropping_fptr = GetFunctionDelegate<av_frame_apply_cropping_delegate>(GetOrLoadLibrary("avutil"), "av_frame_apply_cropping");
             if (av_frame_apply_cropping_fptr == null)
             {
                 av_frame_apply_cropping_fptr = delegate 
@@ -10936,7 +10936,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFrame* av_frame_clone_delegate(AVFrame* @src);
         private static av_frame_clone_delegate av_frame_clone_fptr = (AVFrame* @src) =>
         {
-            av_frame_clone_fptr = GetFunctionDelegate<av_frame_clone_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_clone");
+            av_frame_clone_fptr = GetFunctionDelegate<av_frame_clone_delegate>(GetOrLoadLibrary("avutil"), "av_frame_clone");
             if (av_frame_clone_fptr == null)
             {
                 av_frame_clone_fptr = delegate 
@@ -10958,7 +10958,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_frame_copy_delegate(AVFrame* @dst, AVFrame* @src);
         private static av_frame_copy_delegate av_frame_copy_fptr = (AVFrame* @dst, AVFrame* @src) =>
         {
-            av_frame_copy_fptr = GetFunctionDelegate<av_frame_copy_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_copy");
+            av_frame_copy_fptr = GetFunctionDelegate<av_frame_copy_delegate>(GetOrLoadLibrary("avutil"), "av_frame_copy");
             if (av_frame_copy_fptr == null)
             {
                 av_frame_copy_fptr = delegate 
@@ -10980,7 +10980,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_frame_copy_props_delegate(AVFrame* @dst, AVFrame* @src);
         private static av_frame_copy_props_delegate av_frame_copy_props_fptr = (AVFrame* @dst, AVFrame* @src) =>
         {
-            av_frame_copy_props_fptr = GetFunctionDelegate<av_frame_copy_props_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_copy_props");
+            av_frame_copy_props_fptr = GetFunctionDelegate<av_frame_copy_props_delegate>(GetOrLoadLibrary("avutil"), "av_frame_copy_props");
             if (av_frame_copy_props_fptr == null)
             {
                 av_frame_copy_props_fptr = delegate 
@@ -11001,7 +11001,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_free_delegate(AVFrame** @frame);
         private static av_frame_free_delegate av_frame_free_fptr = (AVFrame** @frame) =>
         {
-            av_frame_free_fptr = GetFunctionDelegate<av_frame_free_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_free");
+            av_frame_free_fptr = GetFunctionDelegate<av_frame_free_delegate>(GetOrLoadLibrary("avutil"), "av_frame_free");
             if (av_frame_free_fptr == null)
             {
                 av_frame_free_fptr = delegate 
@@ -11023,7 +11023,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_frame_get_best_effort_timestamp_delegate(AVFrame* @frame);
         private static av_frame_get_best_effort_timestamp_delegate av_frame_get_best_effort_timestamp_fptr = (AVFrame* @frame) =>
         {
-            av_frame_get_best_effort_timestamp_fptr = GetFunctionDelegate<av_frame_get_best_effort_timestamp_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_best_effort_timestamp");
+            av_frame_get_best_effort_timestamp_fptr = GetFunctionDelegate<av_frame_get_best_effort_timestamp_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_best_effort_timestamp");
             if (av_frame_get_best_effort_timestamp_fptr == null)
             {
                 av_frame_get_best_effort_timestamp_fptr = delegate 
@@ -11045,7 +11045,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_frame_get_buffer_delegate(AVFrame* @frame, int @align);
         private static av_frame_get_buffer_delegate av_frame_get_buffer_fptr = (AVFrame* @frame, int @align) =>
         {
-            av_frame_get_buffer_fptr = GetFunctionDelegate<av_frame_get_buffer_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_buffer");
+            av_frame_get_buffer_fptr = GetFunctionDelegate<av_frame_get_buffer_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_buffer");
             if (av_frame_get_buffer_fptr == null)
             {
                 av_frame_get_buffer_fptr = delegate 
@@ -11069,7 +11069,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_frame_get_channel_layout_delegate(AVFrame* @frame);
         private static av_frame_get_channel_layout_delegate av_frame_get_channel_layout_fptr = (AVFrame* @frame) =>
         {
-            av_frame_get_channel_layout_fptr = GetFunctionDelegate<av_frame_get_channel_layout_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_channel_layout");
+            av_frame_get_channel_layout_fptr = GetFunctionDelegate<av_frame_get_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_channel_layout");
             if (av_frame_get_channel_layout_fptr == null)
             {
                 av_frame_get_channel_layout_fptr = delegate 
@@ -11090,7 +11090,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_frame_get_channels_delegate(AVFrame* @frame);
         private static av_frame_get_channels_delegate av_frame_get_channels_fptr = (AVFrame* @frame) =>
         {
-            av_frame_get_channels_fptr = GetFunctionDelegate<av_frame_get_channels_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_channels");
+            av_frame_get_channels_fptr = GetFunctionDelegate<av_frame_get_channels_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_channels");
             if (av_frame_get_channels_fptr == null)
             {
                 av_frame_get_channels_fptr = delegate 
@@ -11111,7 +11111,7 @@ namespace FFmpeg.AutoGen
         private delegate AVColorRange av_frame_get_color_range_delegate(AVFrame* @frame);
         private static av_frame_get_color_range_delegate av_frame_get_color_range_fptr = (AVFrame* @frame) =>
         {
-            av_frame_get_color_range_fptr = GetFunctionDelegate<av_frame_get_color_range_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_color_range");
+            av_frame_get_color_range_fptr = GetFunctionDelegate<av_frame_get_color_range_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_color_range");
             if (av_frame_get_color_range_fptr == null)
             {
                 av_frame_get_color_range_fptr = delegate 
@@ -11132,7 +11132,7 @@ namespace FFmpeg.AutoGen
         private delegate AVColorSpace av_frame_get_colorspace_delegate(AVFrame* @frame);
         private static av_frame_get_colorspace_delegate av_frame_get_colorspace_fptr = (AVFrame* @frame) =>
         {
-            av_frame_get_colorspace_fptr = GetFunctionDelegate<av_frame_get_colorspace_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_colorspace");
+            av_frame_get_colorspace_fptr = GetFunctionDelegate<av_frame_get_colorspace_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_colorspace");
             if (av_frame_get_colorspace_fptr == null)
             {
                 av_frame_get_colorspace_fptr = delegate 
@@ -11153,7 +11153,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_frame_get_decode_error_flags_delegate(AVFrame* @frame);
         private static av_frame_get_decode_error_flags_delegate av_frame_get_decode_error_flags_fptr = (AVFrame* @frame) =>
         {
-            av_frame_get_decode_error_flags_fptr = GetFunctionDelegate<av_frame_get_decode_error_flags_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_decode_error_flags");
+            av_frame_get_decode_error_flags_fptr = GetFunctionDelegate<av_frame_get_decode_error_flags_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_decode_error_flags");
             if (av_frame_get_decode_error_flags_fptr == null)
             {
                 av_frame_get_decode_error_flags_fptr = delegate 
@@ -11174,7 +11174,7 @@ namespace FFmpeg.AutoGen
         private delegate AVDictionary* av_frame_get_metadata_delegate(AVFrame* @frame);
         private static av_frame_get_metadata_delegate av_frame_get_metadata_fptr = (AVFrame* @frame) =>
         {
-            av_frame_get_metadata_fptr = GetFunctionDelegate<av_frame_get_metadata_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_metadata");
+            av_frame_get_metadata_fptr = GetFunctionDelegate<av_frame_get_metadata_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_metadata");
             if (av_frame_get_metadata_fptr == null)
             {
                 av_frame_get_metadata_fptr = delegate 
@@ -11195,7 +11195,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_frame_get_pkt_duration_delegate(AVFrame* @frame);
         private static av_frame_get_pkt_duration_delegate av_frame_get_pkt_duration_fptr = (AVFrame* @frame) =>
         {
-            av_frame_get_pkt_duration_fptr = GetFunctionDelegate<av_frame_get_pkt_duration_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_pkt_duration");
+            av_frame_get_pkt_duration_fptr = GetFunctionDelegate<av_frame_get_pkt_duration_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_pkt_duration");
             if (av_frame_get_pkt_duration_fptr == null)
             {
                 av_frame_get_pkt_duration_fptr = delegate 
@@ -11216,7 +11216,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_frame_get_pkt_pos_delegate(AVFrame* @frame);
         private static av_frame_get_pkt_pos_delegate av_frame_get_pkt_pos_fptr = (AVFrame* @frame) =>
         {
-            av_frame_get_pkt_pos_fptr = GetFunctionDelegate<av_frame_get_pkt_pos_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_pkt_pos");
+            av_frame_get_pkt_pos_fptr = GetFunctionDelegate<av_frame_get_pkt_pos_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_pkt_pos");
             if (av_frame_get_pkt_pos_fptr == null)
             {
                 av_frame_get_pkt_pos_fptr = delegate 
@@ -11237,7 +11237,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_frame_get_pkt_size_delegate(AVFrame* @frame);
         private static av_frame_get_pkt_size_delegate av_frame_get_pkt_size_fptr = (AVFrame* @frame) =>
         {
-            av_frame_get_pkt_size_fptr = GetFunctionDelegate<av_frame_get_pkt_size_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_pkt_size");
+            av_frame_get_pkt_size_fptr = GetFunctionDelegate<av_frame_get_pkt_size_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_pkt_size");
             if (av_frame_get_pkt_size_fptr == null)
             {
                 av_frame_get_pkt_size_fptr = delegate 
@@ -11258,7 +11258,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferRef* av_frame_get_plane_buffer_delegate(AVFrame* @frame, int @plane);
         private static av_frame_get_plane_buffer_delegate av_frame_get_plane_buffer_fptr = (AVFrame* @frame, int @plane) =>
         {
-            av_frame_get_plane_buffer_fptr = GetFunctionDelegate<av_frame_get_plane_buffer_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_plane_buffer");
+            av_frame_get_plane_buffer_fptr = GetFunctionDelegate<av_frame_get_plane_buffer_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_plane_buffer");
             if (av_frame_get_plane_buffer_fptr == null)
             {
                 av_frame_get_plane_buffer_fptr = delegate 
@@ -11281,7 +11281,7 @@ namespace FFmpeg.AutoGen
         private delegate sbyte* av_frame_get_qp_table_delegate(AVFrame* @f, int* @stride, int* @type);
         private static av_frame_get_qp_table_delegate av_frame_get_qp_table_fptr = (AVFrame* @f, int* @stride, int* @type) =>
         {
-            av_frame_get_qp_table_fptr = GetFunctionDelegate<av_frame_get_qp_table_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_qp_table");
+            av_frame_get_qp_table_fptr = GetFunctionDelegate<av_frame_get_qp_table_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_qp_table");
             if (av_frame_get_qp_table_fptr == null)
             {
                 av_frame_get_qp_table_fptr = delegate 
@@ -11302,7 +11302,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_frame_get_sample_rate_delegate(AVFrame* @frame);
         private static av_frame_get_sample_rate_delegate av_frame_get_sample_rate_fptr = (AVFrame* @frame) =>
         {
-            av_frame_get_sample_rate_fptr = GetFunctionDelegate<av_frame_get_sample_rate_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_sample_rate");
+            av_frame_get_sample_rate_fptr = GetFunctionDelegate<av_frame_get_sample_rate_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_sample_rate");
             if (av_frame_get_sample_rate_fptr == null)
             {
                 av_frame_get_sample_rate_fptr = delegate 
@@ -11323,7 +11323,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFrameSideData* av_frame_get_side_data_delegate(AVFrame* @frame, AVFrameSideDataType @type);
         private static av_frame_get_side_data_delegate av_frame_get_side_data_fptr = (AVFrame* @frame, AVFrameSideDataType @type) =>
         {
-            av_frame_get_side_data_fptr = GetFunctionDelegate<av_frame_get_side_data_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_get_side_data");
+            av_frame_get_side_data_fptr = GetFunctionDelegate<av_frame_get_side_data_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_side_data");
             if (av_frame_get_side_data_fptr == null)
             {
                 av_frame_get_side_data_fptr = delegate 
@@ -11345,7 +11345,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_frame_is_writable_delegate(AVFrame* @frame);
         private static av_frame_is_writable_delegate av_frame_is_writable_fptr = (AVFrame* @frame) =>
         {
-            av_frame_is_writable_fptr = GetFunctionDelegate<av_frame_is_writable_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_is_writable");
+            av_frame_is_writable_fptr = GetFunctionDelegate<av_frame_is_writable_delegate>(GetOrLoadLibrary("avutil"), "av_frame_is_writable");
             if (av_frame_is_writable_fptr == null)
             {
                 av_frame_is_writable_fptr = delegate 
@@ -11367,7 +11367,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_frame_make_writable_delegate(AVFrame* @frame);
         private static av_frame_make_writable_delegate av_frame_make_writable_fptr = (AVFrame* @frame) =>
         {
-            av_frame_make_writable_fptr = GetFunctionDelegate<av_frame_make_writable_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_make_writable");
+            av_frame_make_writable_fptr = GetFunctionDelegate<av_frame_make_writable_delegate>(GetOrLoadLibrary("avutil"), "av_frame_make_writable");
             if (av_frame_make_writable_fptr == null)
             {
                 av_frame_make_writable_fptr = delegate 
@@ -11389,7 +11389,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_move_ref_delegate(AVFrame* @dst, AVFrame* @src);
         private static av_frame_move_ref_delegate av_frame_move_ref_fptr = (AVFrame* @dst, AVFrame* @src) =>
         {
-            av_frame_move_ref_fptr = GetFunctionDelegate<av_frame_move_ref_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_move_ref");
+            av_frame_move_ref_fptr = GetFunctionDelegate<av_frame_move_ref_delegate>(GetOrLoadLibrary("avutil"), "av_frame_move_ref");
             if (av_frame_move_ref_fptr == null)
             {
                 av_frame_move_ref_fptr = delegate 
@@ -11410,7 +11410,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFrameSideData* av_frame_new_side_data_delegate(AVFrame* @frame, AVFrameSideDataType @type, int @size);
         private static av_frame_new_side_data_delegate av_frame_new_side_data_fptr = (AVFrame* @frame, AVFrameSideDataType @type, int @size) =>
         {
-            av_frame_new_side_data_fptr = GetFunctionDelegate<av_frame_new_side_data_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_new_side_data");
+            av_frame_new_side_data_fptr = GetFunctionDelegate<av_frame_new_side_data_delegate>(GetOrLoadLibrary("avutil"), "av_frame_new_side_data");
             if (av_frame_new_side_data_fptr == null)
             {
                 av_frame_new_side_data_fptr = delegate 
@@ -11435,7 +11435,7 @@ namespace FFmpeg.AutoGen
         private delegate AVFrameSideData* av_frame_new_side_data_from_buf_delegate(AVFrame* @frame, AVFrameSideDataType @type, AVBufferRef* @buf);
         private static av_frame_new_side_data_from_buf_delegate av_frame_new_side_data_from_buf_fptr = (AVFrame* @frame, AVFrameSideDataType @type, AVBufferRef* @buf) =>
         {
-            av_frame_new_side_data_from_buf_fptr = GetFunctionDelegate<av_frame_new_side_data_from_buf_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_new_side_data_from_buf");
+            av_frame_new_side_data_from_buf_fptr = GetFunctionDelegate<av_frame_new_side_data_from_buf_delegate>(GetOrLoadLibrary("avutil"), "av_frame_new_side_data_from_buf");
             if (av_frame_new_side_data_from_buf_fptr == null)
             {
                 av_frame_new_side_data_from_buf_fptr = delegate 
@@ -11460,7 +11460,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_frame_ref_delegate(AVFrame* @dst, AVFrame* @src);
         private static av_frame_ref_delegate av_frame_ref_fptr = (AVFrame* @dst, AVFrame* @src) =>
         {
-            av_frame_ref_fptr = GetFunctionDelegate<av_frame_ref_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_ref");
+            av_frame_ref_fptr = GetFunctionDelegate<av_frame_ref_delegate>(GetOrLoadLibrary("avutil"), "av_frame_ref");
             if (av_frame_ref_fptr == null)
             {
                 av_frame_ref_fptr = delegate 
@@ -11482,7 +11482,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_remove_side_data_delegate(AVFrame* @frame, AVFrameSideDataType @type);
         private static av_frame_remove_side_data_delegate av_frame_remove_side_data_fptr = (AVFrame* @frame, AVFrameSideDataType @type) =>
         {
-            av_frame_remove_side_data_fptr = GetFunctionDelegate<av_frame_remove_side_data_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_remove_side_data");
+            av_frame_remove_side_data_fptr = GetFunctionDelegate<av_frame_remove_side_data_delegate>(GetOrLoadLibrary("avutil"), "av_frame_remove_side_data");
             if (av_frame_remove_side_data_fptr == null)
             {
                 av_frame_remove_side_data_fptr = delegate 
@@ -11503,7 +11503,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_set_best_effort_timestamp_delegate(AVFrame* @frame, long @val);
         private static av_frame_set_best_effort_timestamp_delegate av_frame_set_best_effort_timestamp_fptr = (AVFrame* @frame, long @val) =>
         {
-            av_frame_set_best_effort_timestamp_fptr = GetFunctionDelegate<av_frame_set_best_effort_timestamp_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_set_best_effort_timestamp");
+            av_frame_set_best_effort_timestamp_fptr = GetFunctionDelegate<av_frame_set_best_effort_timestamp_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_best_effort_timestamp");
             if (av_frame_set_best_effort_timestamp_fptr == null)
             {
                 av_frame_set_best_effort_timestamp_fptr = delegate 
@@ -11524,7 +11524,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_set_channel_layout_delegate(AVFrame* @frame, long @val);
         private static av_frame_set_channel_layout_delegate av_frame_set_channel_layout_fptr = (AVFrame* @frame, long @val) =>
         {
-            av_frame_set_channel_layout_fptr = GetFunctionDelegate<av_frame_set_channel_layout_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_set_channel_layout");
+            av_frame_set_channel_layout_fptr = GetFunctionDelegate<av_frame_set_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_channel_layout");
             if (av_frame_set_channel_layout_fptr == null)
             {
                 av_frame_set_channel_layout_fptr = delegate 
@@ -11545,7 +11545,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_set_channels_delegate(AVFrame* @frame, int @val);
         private static av_frame_set_channels_delegate av_frame_set_channels_fptr = (AVFrame* @frame, int @val) =>
         {
-            av_frame_set_channels_fptr = GetFunctionDelegate<av_frame_set_channels_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_set_channels");
+            av_frame_set_channels_fptr = GetFunctionDelegate<av_frame_set_channels_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_channels");
             if (av_frame_set_channels_fptr == null)
             {
                 av_frame_set_channels_fptr = delegate 
@@ -11566,7 +11566,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_set_color_range_delegate(AVFrame* @frame, AVColorRange @val);
         private static av_frame_set_color_range_delegate av_frame_set_color_range_fptr = (AVFrame* @frame, AVColorRange @val) =>
         {
-            av_frame_set_color_range_fptr = GetFunctionDelegate<av_frame_set_color_range_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_set_color_range");
+            av_frame_set_color_range_fptr = GetFunctionDelegate<av_frame_set_color_range_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_color_range");
             if (av_frame_set_color_range_fptr == null)
             {
                 av_frame_set_color_range_fptr = delegate 
@@ -11587,7 +11587,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_set_colorspace_delegate(AVFrame* @frame, AVColorSpace @val);
         private static av_frame_set_colorspace_delegate av_frame_set_colorspace_fptr = (AVFrame* @frame, AVColorSpace @val) =>
         {
-            av_frame_set_colorspace_fptr = GetFunctionDelegate<av_frame_set_colorspace_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_set_colorspace");
+            av_frame_set_colorspace_fptr = GetFunctionDelegate<av_frame_set_colorspace_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_colorspace");
             if (av_frame_set_colorspace_fptr == null)
             {
                 av_frame_set_colorspace_fptr = delegate 
@@ -11608,7 +11608,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_set_decode_error_flags_delegate(AVFrame* @frame, int @val);
         private static av_frame_set_decode_error_flags_delegate av_frame_set_decode_error_flags_fptr = (AVFrame* @frame, int @val) =>
         {
-            av_frame_set_decode_error_flags_fptr = GetFunctionDelegate<av_frame_set_decode_error_flags_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_set_decode_error_flags");
+            av_frame_set_decode_error_flags_fptr = GetFunctionDelegate<av_frame_set_decode_error_flags_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_decode_error_flags");
             if (av_frame_set_decode_error_flags_fptr == null)
             {
                 av_frame_set_decode_error_flags_fptr = delegate 
@@ -11629,7 +11629,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_set_metadata_delegate(AVFrame* @frame, AVDictionary* @val);
         private static av_frame_set_metadata_delegate av_frame_set_metadata_fptr = (AVFrame* @frame, AVDictionary* @val) =>
         {
-            av_frame_set_metadata_fptr = GetFunctionDelegate<av_frame_set_metadata_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_set_metadata");
+            av_frame_set_metadata_fptr = GetFunctionDelegate<av_frame_set_metadata_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_metadata");
             if (av_frame_set_metadata_fptr == null)
             {
                 av_frame_set_metadata_fptr = delegate 
@@ -11650,7 +11650,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_set_pkt_duration_delegate(AVFrame* @frame, long @val);
         private static av_frame_set_pkt_duration_delegate av_frame_set_pkt_duration_fptr = (AVFrame* @frame, long @val) =>
         {
-            av_frame_set_pkt_duration_fptr = GetFunctionDelegate<av_frame_set_pkt_duration_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_set_pkt_duration");
+            av_frame_set_pkt_duration_fptr = GetFunctionDelegate<av_frame_set_pkt_duration_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_pkt_duration");
             if (av_frame_set_pkt_duration_fptr == null)
             {
                 av_frame_set_pkt_duration_fptr = delegate 
@@ -11671,7 +11671,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_set_pkt_pos_delegate(AVFrame* @frame, long @val);
         private static av_frame_set_pkt_pos_delegate av_frame_set_pkt_pos_fptr = (AVFrame* @frame, long @val) =>
         {
-            av_frame_set_pkt_pos_fptr = GetFunctionDelegate<av_frame_set_pkt_pos_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_set_pkt_pos");
+            av_frame_set_pkt_pos_fptr = GetFunctionDelegate<av_frame_set_pkt_pos_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_pkt_pos");
             if (av_frame_set_pkt_pos_fptr == null)
             {
                 av_frame_set_pkt_pos_fptr = delegate 
@@ -11692,7 +11692,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_set_pkt_size_delegate(AVFrame* @frame, int @val);
         private static av_frame_set_pkt_size_delegate av_frame_set_pkt_size_fptr = (AVFrame* @frame, int @val) =>
         {
-            av_frame_set_pkt_size_fptr = GetFunctionDelegate<av_frame_set_pkt_size_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_set_pkt_size");
+            av_frame_set_pkt_size_fptr = GetFunctionDelegate<av_frame_set_pkt_size_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_pkt_size");
             if (av_frame_set_pkt_size_fptr == null)
             {
                 av_frame_set_pkt_size_fptr = delegate 
@@ -11713,7 +11713,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_frame_set_qp_table_delegate(AVFrame* @f, AVBufferRef* @buf, int @stride, int @type);
         private static av_frame_set_qp_table_delegate av_frame_set_qp_table_fptr = (AVFrame* @f, AVBufferRef* @buf, int @stride, int @type) =>
         {
-            av_frame_set_qp_table_fptr = GetFunctionDelegate<av_frame_set_qp_table_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_set_qp_table");
+            av_frame_set_qp_table_fptr = GetFunctionDelegate<av_frame_set_qp_table_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_qp_table");
             if (av_frame_set_qp_table_fptr == null)
             {
                 av_frame_set_qp_table_fptr = delegate 
@@ -11734,7 +11734,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_set_sample_rate_delegate(AVFrame* @frame, int @val);
         private static av_frame_set_sample_rate_delegate av_frame_set_sample_rate_fptr = (AVFrame* @frame, int @val) =>
         {
-            av_frame_set_sample_rate_fptr = GetFunctionDelegate<av_frame_set_sample_rate_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_set_sample_rate");
+            av_frame_set_sample_rate_fptr = GetFunctionDelegate<av_frame_set_sample_rate_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_sample_rate");
             if (av_frame_set_sample_rate_fptr == null)
             {
                 av_frame_set_sample_rate_fptr = delegate 
@@ -11756,7 +11756,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_frame_side_data_name_delegate(AVFrameSideDataType @type);
         private static av_frame_side_data_name_delegate av_frame_side_data_name_fptr = (AVFrameSideDataType @type) =>
         {
-            av_frame_side_data_name_fptr = GetFunctionDelegate<av_frame_side_data_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_side_data_name");
+            av_frame_side_data_name_fptr = GetFunctionDelegate<av_frame_side_data_name_delegate>(GetOrLoadLibrary("avutil"), "av_frame_side_data_name");
             if (av_frame_side_data_name_fptr == null)
             {
                 av_frame_side_data_name_fptr = delegate 
@@ -11778,7 +11778,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_frame_unref_delegate(AVFrame* @frame);
         private static av_frame_unref_delegate av_frame_unref_fptr = (AVFrame* @frame) =>
         {
-            av_frame_unref_fptr = GetFunctionDelegate<av_frame_unref_delegate>(GetOrLoadLibrary("avutil", 56), "av_frame_unref");
+            av_frame_unref_fptr = GetFunctionDelegate<av_frame_unref_delegate>(GetOrLoadLibrary("avutil"), "av_frame_unref");
             if (av_frame_unref_fptr == null)
             {
                 av_frame_unref_fptr = delegate 
@@ -11799,7 +11799,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_free_delegate(void* @ptr);
         private static av_free_delegate av_free_fptr = (void* @ptr) =>
         {
-            av_free_fptr = GetFunctionDelegate<av_free_delegate>(GetOrLoadLibrary("avutil", 56), "av_free");
+            av_free_fptr = GetFunctionDelegate<av_free_delegate>(GetOrLoadLibrary("avutil"), "av_free");
             if (av_free_fptr == null)
             {
                 av_free_fptr = delegate 
@@ -11821,7 +11821,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_freep_delegate(void* @ptr);
         private static av_freep_delegate av_freep_fptr = (void* @ptr) =>
         {
-            av_freep_fptr = GetFunctionDelegate<av_freep_delegate>(GetOrLoadLibrary("avutil", 56), "av_freep");
+            av_freep_fptr = GetFunctionDelegate<av_freep_delegate>(GetOrLoadLibrary("avutil"), "av_freep");
             if (av_freep_fptr == null)
             {
                 av_freep_fptr = delegate 
@@ -11843,7 +11843,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_gcd_delegate(long @a, long @b);
         private static av_gcd_delegate av_gcd_fptr = (long @a, long @b) =>
         {
-            av_gcd_fptr = GetFunctionDelegate<av_gcd_delegate>(GetOrLoadLibrary("avutil", 56), "av_gcd");
+            av_gcd_fptr = GetFunctionDelegate<av_gcd_delegate>(GetOrLoadLibrary("avutil"), "av_gcd");
             if (av_gcd_fptr == null)
             {
                 av_gcd_fptr = delegate 
@@ -11865,7 +11865,7 @@ namespace FFmpeg.AutoGen
         private delegate AVSampleFormat av_get_alt_sample_fmt_delegate(AVSampleFormat @sample_fmt, int @planar);
         private static av_get_alt_sample_fmt_delegate av_get_alt_sample_fmt_fptr = (AVSampleFormat @sample_fmt, int @planar) =>
         {
-            av_get_alt_sample_fmt_fptr = GetFunctionDelegate<av_get_alt_sample_fmt_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_alt_sample_fmt");
+            av_get_alt_sample_fmt_fptr = GetFunctionDelegate<av_get_alt_sample_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_get_alt_sample_fmt");
             if (av_get_alt_sample_fmt_fptr == null)
             {
                 av_get_alt_sample_fmt_fptr = delegate 
@@ -11886,7 +11886,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_bits_per_pixel_delegate(AVPixFmtDescriptor* @pixdesc);
         private static av_get_bits_per_pixel_delegate av_get_bits_per_pixel_fptr = (AVPixFmtDescriptor* @pixdesc) =>
         {
-            av_get_bits_per_pixel_fptr = GetFunctionDelegate<av_get_bits_per_pixel_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_bits_per_pixel");
+            av_get_bits_per_pixel_fptr = GetFunctionDelegate<av_get_bits_per_pixel_delegate>(GetOrLoadLibrary("avutil"), "av_get_bits_per_pixel");
             if (av_get_bits_per_pixel_fptr == null)
             {
                 av_get_bits_per_pixel_fptr = delegate 
@@ -11907,7 +11907,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_bytes_per_sample_delegate(AVSampleFormat @sample_fmt);
         private static av_get_bytes_per_sample_delegate av_get_bytes_per_sample_fptr = (AVSampleFormat @sample_fmt) =>
         {
-            av_get_bytes_per_sample_fptr = GetFunctionDelegate<av_get_bytes_per_sample_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_bytes_per_sample");
+            av_get_bytes_per_sample_fptr = GetFunctionDelegate<av_get_bytes_per_sample_delegate>(GetOrLoadLibrary("avutil"), "av_get_bytes_per_sample");
             if (av_get_bytes_per_sample_fptr == null)
             {
                 av_get_bytes_per_sample_fptr = delegate 
@@ -11931,7 +11931,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_get_channel_description_delegate(ulong @channel);
         private static av_get_channel_description_delegate av_get_channel_description_fptr = (ulong @channel) =>
         {
-            av_get_channel_description_fptr = GetFunctionDelegate<av_get_channel_description_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_channel_description");
+            av_get_channel_description_fptr = GetFunctionDelegate<av_get_channel_description_delegate>(GetOrLoadLibrary("avutil"), "av_get_channel_description");
             if (av_get_channel_description_fptr == null)
             {
                 av_get_channel_description_fptr = delegate 
@@ -11954,7 +11954,7 @@ namespace FFmpeg.AutoGen
         private delegate ulong av_get_channel_layout_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static av_get_channel_layout_delegate av_get_channel_layout_fptr = (string @name) =>
         {
-            av_get_channel_layout_fptr = GetFunctionDelegate<av_get_channel_layout_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_channel_layout");
+            av_get_channel_layout_fptr = GetFunctionDelegate<av_get_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_get_channel_layout");
             if (av_get_channel_layout_fptr == null)
             {
                 av_get_channel_layout_fptr = delegate 
@@ -11975,7 +11975,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_channel_layout_channel_index_delegate(ulong @channel_layout, ulong @channel);
         private static av_get_channel_layout_channel_index_delegate av_get_channel_layout_channel_index_fptr = (ulong @channel_layout, ulong @channel) =>
         {
-            av_get_channel_layout_channel_index_fptr = GetFunctionDelegate<av_get_channel_layout_channel_index_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_channel_layout_channel_index");
+            av_get_channel_layout_channel_index_fptr = GetFunctionDelegate<av_get_channel_layout_channel_index_delegate>(GetOrLoadLibrary("avutil"), "av_get_channel_layout_channel_index");
             if (av_get_channel_layout_channel_index_fptr == null)
             {
                 av_get_channel_layout_channel_index_fptr = delegate 
@@ -11998,7 +11998,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_channel_layout_nb_channels_delegate(ulong @channel_layout);
         private static av_get_channel_layout_nb_channels_delegate av_get_channel_layout_nb_channels_fptr = (ulong @channel_layout) =>
         {
-            av_get_channel_layout_nb_channels_fptr = GetFunctionDelegate<av_get_channel_layout_nb_channels_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_channel_layout_nb_channels");
+            av_get_channel_layout_nb_channels_fptr = GetFunctionDelegate<av_get_channel_layout_nb_channels_delegate>(GetOrLoadLibrary("avutil"), "av_get_channel_layout_nb_channels");
             if (av_get_channel_layout_nb_channels_fptr == null)
             {
                 av_get_channel_layout_nb_channels_fptr = delegate 
@@ -12019,7 +12019,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_get_channel_layout_string_delegate(byte* @buf, int @buf_size, int @nb_channels, ulong @channel_layout);
         private static av_get_channel_layout_string_delegate av_get_channel_layout_string_fptr = (byte* @buf, int @buf_size, int @nb_channels, ulong @channel_layout) =>
         {
-            av_get_channel_layout_string_fptr = GetFunctionDelegate<av_get_channel_layout_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_channel_layout_string");
+            av_get_channel_layout_string_fptr = GetFunctionDelegate<av_get_channel_layout_string_delegate>(GetOrLoadLibrary("avutil"), "av_get_channel_layout_string");
             if (av_get_channel_layout_string_fptr == null)
             {
                 av_get_channel_layout_string_fptr = delegate 
@@ -12043,7 +12043,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_get_channel_name_delegate(ulong @channel);
         private static av_get_channel_name_delegate av_get_channel_name_fptr = (ulong @channel) =>
         {
-            av_get_channel_name_fptr = GetFunctionDelegate<av_get_channel_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_channel_name");
+            av_get_channel_name_fptr = GetFunctionDelegate<av_get_channel_name_delegate>(GetOrLoadLibrary("avutil"), "av_get_channel_name");
             if (av_get_channel_name_fptr == null)
             {
                 av_get_channel_name_fptr = delegate 
@@ -12066,7 +12066,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_get_colorspace_name_delegate(AVColorSpace @val);
         private static av_get_colorspace_name_delegate av_get_colorspace_name_fptr = (AVColorSpace @val) =>
         {
-            av_get_colorspace_name_fptr = GetFunctionDelegate<av_get_colorspace_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_colorspace_name");
+            av_get_colorspace_name_fptr = GetFunctionDelegate<av_get_colorspace_name_delegate>(GetOrLoadLibrary("avutil"), "av_get_colorspace_name");
             if (av_get_colorspace_name_fptr == null)
             {
                 av_get_colorspace_name_fptr = delegate 
@@ -12088,7 +12088,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_cpu_flags_delegate();
         private static av_get_cpu_flags_delegate av_get_cpu_flags_fptr = () =>
         {
-            av_get_cpu_flags_fptr = GetFunctionDelegate<av_get_cpu_flags_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_cpu_flags");
+            av_get_cpu_flags_fptr = GetFunctionDelegate<av_get_cpu_flags_delegate>(GetOrLoadLibrary("avutil"), "av_get_cpu_flags");
             if (av_get_cpu_flags_fptr == null)
             {
                 av_get_cpu_flags_fptr = delegate 
@@ -12109,7 +12109,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_get_default_channel_layout_delegate(int @nb_channels);
         private static av_get_default_channel_layout_delegate av_get_default_channel_layout_fptr = (int @nb_channels) =>
         {
-            av_get_default_channel_layout_fptr = GetFunctionDelegate<av_get_default_channel_layout_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_default_channel_layout");
+            av_get_default_channel_layout_fptr = GetFunctionDelegate<av_get_default_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_get_default_channel_layout");
             if (av_get_default_channel_layout_fptr == null)
             {
                 av_get_default_channel_layout_fptr = delegate 
@@ -12130,7 +12130,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_extended_channel_layout_delegate([MarshalAs((UnmanagedType)48)] string @name, ulong* @channel_layout, int* @nb_channels);
         private static av_get_extended_channel_layout_delegate av_get_extended_channel_layout_fptr = (string @name, ulong* @channel_layout, int* @nb_channels) =>
         {
-            av_get_extended_channel_layout_fptr = GetFunctionDelegate<av_get_extended_channel_layout_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_extended_channel_layout");
+            av_get_extended_channel_layout_fptr = GetFunctionDelegate<av_get_extended_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_get_extended_channel_layout");
             if (av_get_extended_channel_layout_fptr == null)
             {
                 av_get_extended_channel_layout_fptr = delegate 
@@ -12156,7 +12156,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_get_media_type_string_delegate(AVMediaType @media_type);
         private static av_get_media_type_string_delegate av_get_media_type_string_fptr = (AVMediaType @media_type) =>
         {
-            av_get_media_type_string_fptr = GetFunctionDelegate<av_get_media_type_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_media_type_string");
+            av_get_media_type_string_fptr = GetFunctionDelegate<av_get_media_type_string_delegate>(GetOrLoadLibrary("avutil"), "av_get_media_type_string");
             if (av_get_media_type_string_fptr == null)
             {
                 av_get_media_type_string_fptr = delegate 
@@ -12177,7 +12177,7 @@ namespace FFmpeg.AutoGen
         private delegate AVSampleFormat av_get_packed_sample_fmt_delegate(AVSampleFormat @sample_fmt);
         private static av_get_packed_sample_fmt_delegate av_get_packed_sample_fmt_fptr = (AVSampleFormat @sample_fmt) =>
         {
-            av_get_packed_sample_fmt_fptr = GetFunctionDelegate<av_get_packed_sample_fmt_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_packed_sample_fmt");
+            av_get_packed_sample_fmt_fptr = GetFunctionDelegate<av_get_packed_sample_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_get_packed_sample_fmt");
             if (av_get_packed_sample_fmt_fptr == null)
             {
                 av_get_packed_sample_fmt_fptr = delegate 
@@ -12199,7 +12199,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_padded_bits_per_pixel_delegate(AVPixFmtDescriptor* @pixdesc);
         private static av_get_padded_bits_per_pixel_delegate av_get_padded_bits_per_pixel_fptr = (AVPixFmtDescriptor* @pixdesc) =>
         {
-            av_get_padded_bits_per_pixel_fptr = GetFunctionDelegate<av_get_padded_bits_per_pixel_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_padded_bits_per_pixel");
+            av_get_padded_bits_per_pixel_fptr = GetFunctionDelegate<av_get_padded_bits_per_pixel_delegate>(GetOrLoadLibrary("avutil"), "av_get_padded_bits_per_pixel");
             if (av_get_padded_bits_per_pixel_fptr == null)
             {
                 av_get_padded_bits_per_pixel_fptr = delegate 
@@ -12220,7 +12220,7 @@ namespace FFmpeg.AutoGen
         private delegate byte av_get_picture_type_char_delegate(AVPictureType @pict_type);
         private static av_get_picture_type_char_delegate av_get_picture_type_char_fptr = (AVPictureType @pict_type) =>
         {
-            av_get_picture_type_char_fptr = GetFunctionDelegate<av_get_picture_type_char_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_picture_type_char");
+            av_get_picture_type_char_fptr = GetFunctionDelegate<av_get_picture_type_char_delegate>(GetOrLoadLibrary("avutil"), "av_get_picture_type_char");
             if (av_get_picture_type_char_fptr == null)
             {
                 av_get_picture_type_char_fptr = delegate 
@@ -12243,7 +12243,7 @@ namespace FFmpeg.AutoGen
         private delegate AVPixelFormat av_get_pix_fmt_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static av_get_pix_fmt_delegate av_get_pix_fmt_fptr = (string @name) =>
         {
-            av_get_pix_fmt_fptr = GetFunctionDelegate<av_get_pix_fmt_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_pix_fmt");
+            av_get_pix_fmt_fptr = GetFunctionDelegate<av_get_pix_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_get_pix_fmt");
             if (av_get_pix_fmt_fptr == null)
             {
                 av_get_pix_fmt_fptr = delegate 
@@ -12264,7 +12264,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_pix_fmt_loss_delegate(AVPixelFormat @dst_pix_fmt, AVPixelFormat @src_pix_fmt, int @has_alpha);
         private static av_get_pix_fmt_loss_delegate av_get_pix_fmt_loss_fptr = (AVPixelFormat @dst_pix_fmt, AVPixelFormat @src_pix_fmt, int @has_alpha) =>
         {
-            av_get_pix_fmt_loss_fptr = GetFunctionDelegate<av_get_pix_fmt_loss_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_pix_fmt_loss");
+            av_get_pix_fmt_loss_fptr = GetFunctionDelegate<av_get_pix_fmt_loss_delegate>(GetOrLoadLibrary("avutil"), "av_get_pix_fmt_loss");
             if (av_get_pix_fmt_loss_fptr == null)
             {
                 av_get_pix_fmt_loss_fptr = delegate 
@@ -12290,7 +12290,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_get_pix_fmt_name_delegate(AVPixelFormat @pix_fmt);
         private static av_get_pix_fmt_name_delegate av_get_pix_fmt_name_fptr = (AVPixelFormat @pix_fmt) =>
         {
-            av_get_pix_fmt_name_fptr = GetFunctionDelegate<av_get_pix_fmt_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_pix_fmt_name");
+            av_get_pix_fmt_name_fptr = GetFunctionDelegate<av_get_pix_fmt_name_delegate>(GetOrLoadLibrary("avutil"), "av_get_pix_fmt_name");
             if (av_get_pix_fmt_name_fptr == null)
             {
                 av_get_pix_fmt_name_fptr = delegate 
@@ -12311,7 +12311,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_get_pix_fmt_string_delegate(byte* @buf, int @buf_size, AVPixelFormat @pix_fmt);
         private static av_get_pix_fmt_string_delegate av_get_pix_fmt_string_fptr = (byte* @buf, int @buf_size, AVPixelFormat @pix_fmt) =>
         {
-            av_get_pix_fmt_string_fptr = GetFunctionDelegate<av_get_pix_fmt_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_pix_fmt_string");
+            av_get_pix_fmt_string_fptr = GetFunctionDelegate<av_get_pix_fmt_string_delegate>(GetOrLoadLibrary("avutil"), "av_get_pix_fmt_string");
             if (av_get_pix_fmt_string_fptr == null)
             {
                 av_get_pix_fmt_string_fptr = delegate 
@@ -12335,7 +12335,7 @@ namespace FFmpeg.AutoGen
         private delegate AVSampleFormat av_get_planar_sample_fmt_delegate(AVSampleFormat @sample_fmt);
         private static av_get_planar_sample_fmt_delegate av_get_planar_sample_fmt_fptr = (AVSampleFormat @sample_fmt) =>
         {
-            av_get_planar_sample_fmt_fptr = GetFunctionDelegate<av_get_planar_sample_fmt_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_planar_sample_fmt");
+            av_get_planar_sample_fmt_fptr = GetFunctionDelegate<av_get_planar_sample_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_get_planar_sample_fmt");
             if (av_get_planar_sample_fmt_fptr == null)
             {
                 av_get_planar_sample_fmt_fptr = delegate 
@@ -12357,7 +12357,7 @@ namespace FFmpeg.AutoGen
         private delegate AVSampleFormat av_get_sample_fmt_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static av_get_sample_fmt_delegate av_get_sample_fmt_fptr = (string @name) =>
         {
-            av_get_sample_fmt_fptr = GetFunctionDelegate<av_get_sample_fmt_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_sample_fmt");
+            av_get_sample_fmt_fptr = GetFunctionDelegate<av_get_sample_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_get_sample_fmt");
             if (av_get_sample_fmt_fptr == null)
             {
                 av_get_sample_fmt_fptr = delegate 
@@ -12379,7 +12379,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_get_sample_fmt_name_delegate(AVSampleFormat @sample_fmt);
         private static av_get_sample_fmt_name_delegate av_get_sample_fmt_name_fptr = (AVSampleFormat @sample_fmt) =>
         {
-            av_get_sample_fmt_name_fptr = GetFunctionDelegate<av_get_sample_fmt_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_sample_fmt_name");
+            av_get_sample_fmt_name_fptr = GetFunctionDelegate<av_get_sample_fmt_name_delegate>(GetOrLoadLibrary("avutil"), "av_get_sample_fmt_name");
             if (av_get_sample_fmt_name_fptr == null)
             {
                 av_get_sample_fmt_name_fptr = delegate 
@@ -12400,7 +12400,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_get_sample_fmt_string_delegate(byte* @buf, int @buf_size, AVSampleFormat @sample_fmt);
         private static av_get_sample_fmt_string_delegate av_get_sample_fmt_string_fptr = (byte* @buf, int @buf_size, AVSampleFormat @sample_fmt) =>
         {
-            av_get_sample_fmt_string_fptr = GetFunctionDelegate<av_get_sample_fmt_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_sample_fmt_string");
+            av_get_sample_fmt_string_fptr = GetFunctionDelegate<av_get_sample_fmt_string_delegate>(GetOrLoadLibrary("avutil"), "av_get_sample_fmt_string");
             if (av_get_sample_fmt_string_fptr == null)
             {
                 av_get_sample_fmt_string_fptr = delegate 
@@ -12425,7 +12425,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_get_standard_channel_layout_delegate(uint @index, ulong* @layout, byte** @name);
         private static av_get_standard_channel_layout_delegate av_get_standard_channel_layout_fptr = (uint @index, ulong* @layout, byte** @name) =>
         {
-            av_get_standard_channel_layout_fptr = GetFunctionDelegate<av_get_standard_channel_layout_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_standard_channel_layout");
+            av_get_standard_channel_layout_fptr = GetFunctionDelegate<av_get_standard_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_get_standard_channel_layout");
             if (av_get_standard_channel_layout_fptr == null)
             {
                 av_get_standard_channel_layout_fptr = delegate 
@@ -12450,7 +12450,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_get_time_base_q_delegate();
         private static av_get_time_base_q_delegate av_get_time_base_q_fptr = () =>
         {
-            av_get_time_base_q_fptr = GetFunctionDelegate<av_get_time_base_q_delegate>(GetOrLoadLibrary("avutil", 56), "av_get_time_base_q");
+            av_get_time_base_q_fptr = GetFunctionDelegate<av_get_time_base_q_delegate>(GetOrLoadLibrary("avutil"), "av_get_time_base_q");
             if (av_get_time_base_q_fptr == null)
             {
                 av_get_time_base_q_fptr = delegate 
@@ -12471,7 +12471,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_gettime_delegate();
         private static av_gettime_delegate av_gettime_fptr = () =>
         {
-            av_gettime_fptr = GetFunctionDelegate<av_gettime_delegate>(GetOrLoadLibrary("avutil", 56), "av_gettime");
+            av_gettime_fptr = GetFunctionDelegate<av_gettime_delegate>(GetOrLoadLibrary("avutil"), "av_gettime");
             if (av_gettime_fptr == null)
             {
                 av_gettime_fptr = delegate 
@@ -12492,7 +12492,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_gettime_relative_delegate();
         private static av_gettime_relative_delegate av_gettime_relative_fptr = () =>
         {
-            av_gettime_relative_fptr = GetFunctionDelegate<av_gettime_relative_delegate>(GetOrLoadLibrary("avutil", 56), "av_gettime_relative");
+            av_gettime_relative_fptr = GetFunctionDelegate<av_gettime_relative_delegate>(GetOrLoadLibrary("avutil"), "av_gettime_relative");
             if (av_gettime_relative_fptr == null)
             {
                 av_gettime_relative_fptr = delegate 
@@ -12513,7 +12513,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_gettime_relative_is_monotonic_delegate();
         private static av_gettime_relative_is_monotonic_delegate av_gettime_relative_is_monotonic_fptr = () =>
         {
-            av_gettime_relative_is_monotonic_fptr = GetFunctionDelegate<av_gettime_relative_is_monotonic_delegate>(GetOrLoadLibrary("avutil", 56), "av_gettime_relative_is_monotonic");
+            av_gettime_relative_is_monotonic_fptr = GetFunctionDelegate<av_gettime_relative_is_monotonic_delegate>(GetOrLoadLibrary("avutil"), "av_gettime_relative_is_monotonic");
             if (av_gettime_relative_is_monotonic_fptr == null)
             {
                 av_gettime_relative_is_monotonic_fptr = delegate 
@@ -12534,7 +12534,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferRef* av_hwdevice_ctx_alloc_delegate(AVHWDeviceType @type);
         private static av_hwdevice_ctx_alloc_delegate av_hwdevice_ctx_alloc_fptr = (AVHWDeviceType @type) =>
         {
-            av_hwdevice_ctx_alloc_fptr = GetFunctionDelegate<av_hwdevice_ctx_alloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwdevice_ctx_alloc");
+            av_hwdevice_ctx_alloc_fptr = GetFunctionDelegate<av_hwdevice_ctx_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_hwdevice_ctx_alloc");
             if (av_hwdevice_ctx_alloc_fptr == null)
             {
                 av_hwdevice_ctx_alloc_fptr = delegate 
@@ -12557,7 +12557,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_hwdevice_ctx_create_delegate(AVBufferRef** @device_ctx, AVHWDeviceType @type, [MarshalAs((UnmanagedType)48)] string @device, AVDictionary* @opts, int @flags);
         private static av_hwdevice_ctx_create_delegate av_hwdevice_ctx_create_fptr = (AVBufferRef** @device_ctx, AVHWDeviceType @type, string @device, AVDictionary* @opts, int @flags) =>
         {
-            av_hwdevice_ctx_create_fptr = GetFunctionDelegate<av_hwdevice_ctx_create_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwdevice_ctx_create");
+            av_hwdevice_ctx_create_fptr = GetFunctionDelegate<av_hwdevice_ctx_create_delegate>(GetOrLoadLibrary("avutil"), "av_hwdevice_ctx_create");
             if (av_hwdevice_ctx_create_fptr == null)
             {
                 av_hwdevice_ctx_create_fptr = delegate 
@@ -12584,7 +12584,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_hwdevice_ctx_create_derived_delegate(AVBufferRef** @dst_ctx, AVHWDeviceType @type, AVBufferRef* @src_ctx, int @flags);
         private static av_hwdevice_ctx_create_derived_delegate av_hwdevice_ctx_create_derived_fptr = (AVBufferRef** @dst_ctx, AVHWDeviceType @type, AVBufferRef* @src_ctx, int @flags) =>
         {
-            av_hwdevice_ctx_create_derived_fptr = GetFunctionDelegate<av_hwdevice_ctx_create_derived_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwdevice_ctx_create_derived");
+            av_hwdevice_ctx_create_derived_fptr = GetFunctionDelegate<av_hwdevice_ctx_create_derived_delegate>(GetOrLoadLibrary("avutil"), "av_hwdevice_ctx_create_derived");
             if (av_hwdevice_ctx_create_derived_fptr == null)
             {
                 av_hwdevice_ctx_create_derived_fptr = delegate 
@@ -12610,7 +12610,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_hwdevice_ctx_init_delegate(AVBufferRef* @ref);
         private static av_hwdevice_ctx_init_delegate av_hwdevice_ctx_init_fptr = (AVBufferRef* @ref) =>
         {
-            av_hwdevice_ctx_init_fptr = GetFunctionDelegate<av_hwdevice_ctx_init_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwdevice_ctx_init");
+            av_hwdevice_ctx_init_fptr = GetFunctionDelegate<av_hwdevice_ctx_init_delegate>(GetOrLoadLibrary("avutil"), "av_hwdevice_ctx_init");
             if (av_hwdevice_ctx_init_fptr == null)
             {
                 av_hwdevice_ctx_init_fptr = delegate 
@@ -12633,7 +12633,7 @@ namespace FFmpeg.AutoGen
         private delegate AVHWDeviceType av_hwdevice_find_type_by_name_delegate([MarshalAs((UnmanagedType)48)] string @name);
         private static av_hwdevice_find_type_by_name_delegate av_hwdevice_find_type_by_name_fptr = (string @name) =>
         {
-            av_hwdevice_find_type_by_name_fptr = GetFunctionDelegate<av_hwdevice_find_type_by_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwdevice_find_type_by_name");
+            av_hwdevice_find_type_by_name_fptr = GetFunctionDelegate<av_hwdevice_find_type_by_name_delegate>(GetOrLoadLibrary("avutil"), "av_hwdevice_find_type_by_name");
             if (av_hwdevice_find_type_by_name_fptr == null)
             {
                 av_hwdevice_find_type_by_name_fptr = delegate 
@@ -12656,7 +12656,7 @@ namespace FFmpeg.AutoGen
         private delegate AVHWFramesConstraints* av_hwdevice_get_hwframe_constraints_delegate(AVBufferRef* @ref, void* @hwconfig);
         private static av_hwdevice_get_hwframe_constraints_delegate av_hwdevice_get_hwframe_constraints_fptr = (AVBufferRef* @ref, void* @hwconfig) =>
         {
-            av_hwdevice_get_hwframe_constraints_fptr = GetFunctionDelegate<av_hwdevice_get_hwframe_constraints_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwdevice_get_hwframe_constraints");
+            av_hwdevice_get_hwframe_constraints_fptr = GetFunctionDelegate<av_hwdevice_get_hwframe_constraints_delegate>(GetOrLoadLibrary("avutil"), "av_hwdevice_get_hwframe_constraints");
             if (av_hwdevice_get_hwframe_constraints_fptr == null)
             {
                 av_hwdevice_get_hwframe_constraints_fptr = delegate 
@@ -12681,7 +12681,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_hwdevice_get_type_name_delegate(AVHWDeviceType @type);
         private static av_hwdevice_get_type_name_delegate av_hwdevice_get_type_name_fptr = (AVHWDeviceType @type) =>
         {
-            av_hwdevice_get_type_name_fptr = GetFunctionDelegate<av_hwdevice_get_type_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwdevice_get_type_name");
+            av_hwdevice_get_type_name_fptr = GetFunctionDelegate<av_hwdevice_get_type_name_delegate>(GetOrLoadLibrary("avutil"), "av_hwdevice_get_type_name");
             if (av_hwdevice_get_type_name_fptr == null)
             {
                 av_hwdevice_get_type_name_fptr = delegate 
@@ -12704,7 +12704,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_hwdevice_hwconfig_alloc_delegate(AVBufferRef* @device_ctx);
         private static av_hwdevice_hwconfig_alloc_delegate av_hwdevice_hwconfig_alloc_fptr = (AVBufferRef* @device_ctx) =>
         {
-            av_hwdevice_hwconfig_alloc_fptr = GetFunctionDelegate<av_hwdevice_hwconfig_alloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwdevice_hwconfig_alloc");
+            av_hwdevice_hwconfig_alloc_fptr = GetFunctionDelegate<av_hwdevice_hwconfig_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_hwdevice_hwconfig_alloc");
             if (av_hwdevice_hwconfig_alloc_fptr == null)
             {
                 av_hwdevice_hwconfig_alloc_fptr = delegate 
@@ -12727,7 +12727,7 @@ namespace FFmpeg.AutoGen
         private delegate AVHWDeviceType av_hwdevice_iterate_types_delegate(AVHWDeviceType @prev);
         private static av_hwdevice_iterate_types_delegate av_hwdevice_iterate_types_fptr = (AVHWDeviceType @prev) =>
         {
-            av_hwdevice_iterate_types_fptr = GetFunctionDelegate<av_hwdevice_iterate_types_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwdevice_iterate_types");
+            av_hwdevice_iterate_types_fptr = GetFunctionDelegate<av_hwdevice_iterate_types_delegate>(GetOrLoadLibrary("avutil"), "av_hwdevice_iterate_types");
             if (av_hwdevice_iterate_types_fptr == null)
             {
                 av_hwdevice_iterate_types_fptr = delegate 
@@ -12749,7 +12749,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_hwframe_constraints_free_delegate(AVHWFramesConstraints** @constraints);
         private static av_hwframe_constraints_free_delegate av_hwframe_constraints_free_fptr = (AVHWFramesConstraints** @constraints) =>
         {
-            av_hwframe_constraints_free_fptr = GetFunctionDelegate<av_hwframe_constraints_free_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwframe_constraints_free");
+            av_hwframe_constraints_free_fptr = GetFunctionDelegate<av_hwframe_constraints_free_delegate>(GetOrLoadLibrary("avutil"), "av_hwframe_constraints_free");
             if (av_hwframe_constraints_free_fptr == null)
             {
                 av_hwframe_constraints_free_fptr = delegate 
@@ -12771,7 +12771,7 @@ namespace FFmpeg.AutoGen
         private delegate AVBufferRef* av_hwframe_ctx_alloc_delegate(AVBufferRef* @device_ctx);
         private static av_hwframe_ctx_alloc_delegate av_hwframe_ctx_alloc_fptr = (AVBufferRef* @device_ctx) =>
         {
-            av_hwframe_ctx_alloc_fptr = GetFunctionDelegate<av_hwframe_ctx_alloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwframe_ctx_alloc");
+            av_hwframe_ctx_alloc_fptr = GetFunctionDelegate<av_hwframe_ctx_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_hwframe_ctx_alloc");
             if (av_hwframe_ctx_alloc_fptr == null)
             {
                 av_hwframe_ctx_alloc_fptr = delegate 
@@ -12794,7 +12794,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_hwframe_ctx_create_derived_delegate(AVBufferRef** @derived_frame_ctx, AVPixelFormat @format, AVBufferRef* @derived_device_ctx, AVBufferRef* @source_frame_ctx, int @flags);
         private static av_hwframe_ctx_create_derived_delegate av_hwframe_ctx_create_derived_fptr = (AVBufferRef** @derived_frame_ctx, AVPixelFormat @format, AVBufferRef* @derived_device_ctx, AVBufferRef* @source_frame_ctx, int @flags) =>
         {
-            av_hwframe_ctx_create_derived_fptr = GetFunctionDelegate<av_hwframe_ctx_create_derived_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwframe_ctx_create_derived");
+            av_hwframe_ctx_create_derived_fptr = GetFunctionDelegate<av_hwframe_ctx_create_derived_delegate>(GetOrLoadLibrary("avutil"), "av_hwframe_ctx_create_derived");
             if (av_hwframe_ctx_create_derived_fptr == null)
             {
                 av_hwframe_ctx_create_derived_fptr = delegate 
@@ -12820,7 +12820,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_hwframe_ctx_init_delegate(AVBufferRef* @ref);
         private static av_hwframe_ctx_init_delegate av_hwframe_ctx_init_fptr = (AVBufferRef* @ref) =>
         {
-            av_hwframe_ctx_init_fptr = GetFunctionDelegate<av_hwframe_ctx_init_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwframe_ctx_init");
+            av_hwframe_ctx_init_fptr = GetFunctionDelegate<av_hwframe_ctx_init_delegate>(GetOrLoadLibrary("avutil"), "av_hwframe_ctx_init");
             if (av_hwframe_ctx_init_fptr == null)
             {
                 av_hwframe_ctx_init_fptr = delegate 
@@ -12843,7 +12843,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_hwframe_get_buffer_delegate(AVBufferRef* @hwframe_ctx, AVFrame* @frame, int @flags);
         private static av_hwframe_get_buffer_delegate av_hwframe_get_buffer_fptr = (AVBufferRef* @hwframe_ctx, AVFrame* @frame, int @flags) =>
         {
-            av_hwframe_get_buffer_fptr = GetFunctionDelegate<av_hwframe_get_buffer_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwframe_get_buffer");
+            av_hwframe_get_buffer_fptr = GetFunctionDelegate<av_hwframe_get_buffer_delegate>(GetOrLoadLibrary("avutil"), "av_hwframe_get_buffer");
             if (av_hwframe_get_buffer_fptr == null)
             {
                 av_hwframe_get_buffer_fptr = delegate 
@@ -12868,7 +12868,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_hwframe_map_delegate(AVFrame* @dst, AVFrame* @src, int @flags);
         private static av_hwframe_map_delegate av_hwframe_map_fptr = (AVFrame* @dst, AVFrame* @src, int @flags) =>
         {
-            av_hwframe_map_fptr = GetFunctionDelegate<av_hwframe_map_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwframe_map");
+            av_hwframe_map_fptr = GetFunctionDelegate<av_hwframe_map_delegate>(GetOrLoadLibrary("avutil"), "av_hwframe_map");
             if (av_hwframe_map_fptr == null)
             {
                 av_hwframe_map_fptr = delegate 
@@ -12893,7 +12893,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_hwframe_transfer_data_delegate(AVFrame* @dst, AVFrame* @src, int @flags);
         private static av_hwframe_transfer_data_delegate av_hwframe_transfer_data_fptr = (AVFrame* @dst, AVFrame* @src, int @flags) =>
         {
-            av_hwframe_transfer_data_fptr = GetFunctionDelegate<av_hwframe_transfer_data_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwframe_transfer_data");
+            av_hwframe_transfer_data_fptr = GetFunctionDelegate<av_hwframe_transfer_data_delegate>(GetOrLoadLibrary("avutil"), "av_hwframe_transfer_data");
             if (av_hwframe_transfer_data_fptr == null)
             {
                 av_hwframe_transfer_data_fptr = delegate 
@@ -12918,7 +12918,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_hwframe_transfer_get_formats_delegate(AVBufferRef* @hwframe_ctx, AVHWFrameTransferDirection @dir, AVPixelFormat** @formats, int @flags);
         private static av_hwframe_transfer_get_formats_delegate av_hwframe_transfer_get_formats_fptr = (AVBufferRef* @hwframe_ctx, AVHWFrameTransferDirection @dir, AVPixelFormat** @formats, int @flags) =>
         {
-            av_hwframe_transfer_get_formats_fptr = GetFunctionDelegate<av_hwframe_transfer_get_formats_delegate>(GetOrLoadLibrary("avutil", 56), "av_hwframe_transfer_get_formats");
+            av_hwframe_transfer_get_formats_fptr = GetFunctionDelegate<av_hwframe_transfer_get_formats_delegate>(GetOrLoadLibrary("avutil"), "av_hwframe_transfer_get_formats");
             if (av_hwframe_transfer_get_formats_fptr == null)
             {
                 av_hwframe_transfer_get_formats_fptr = delegate 
@@ -12944,7 +12944,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_image_alloc_delegate(ref byte_ptrArray4 @pointers, ref int_array4 @linesizes, int @w, int @h, AVPixelFormat @pix_fmt, int @align);
         private static av_image_alloc_delegate av_image_alloc_fptr = (ref byte_ptrArray4 @pointers, ref int_array4 @linesizes, int @w, int @h, AVPixelFormat @pix_fmt, int @align) =>
         {
-            av_image_alloc_fptr = GetFunctionDelegate<av_image_alloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_alloc");
+            av_image_alloc_fptr = GetFunctionDelegate<av_image_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_image_alloc");
             if (av_image_alloc_fptr == null)
             {
                 av_image_alloc_fptr = delegate 
@@ -12967,7 +12967,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_image_check_sar_delegate(uint @w, uint @h, AVRational @sar);
         private static av_image_check_sar_delegate av_image_check_sar_fptr = (uint @w, uint @h, AVRational @sar) =>
         {
-            av_image_check_sar_fptr = GetFunctionDelegate<av_image_check_sar_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_check_sar");
+            av_image_check_sar_fptr = GetFunctionDelegate<av_image_check_sar_delegate>(GetOrLoadLibrary("avutil"), "av_image_check_sar");
             if (av_image_check_sar_fptr == null)
             {
                 av_image_check_sar_fptr = delegate 
@@ -12992,7 +12992,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_image_check_size_delegate(uint @w, uint @h, int @log_offset, void* @log_ctx);
         private static av_image_check_size_delegate av_image_check_size_fptr = (uint @w, uint @h, int @log_offset, void* @log_ctx) =>
         {
-            av_image_check_size_fptr = GetFunctionDelegate<av_image_check_size_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_check_size");
+            av_image_check_size_fptr = GetFunctionDelegate<av_image_check_size_delegate>(GetOrLoadLibrary("avutil"), "av_image_check_size");
             if (av_image_check_size_fptr == null)
             {
                 av_image_check_size_fptr = delegate 
@@ -13018,7 +13018,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_image_check_size2_delegate(uint @w, uint @h, long @max_pixels, AVPixelFormat @pix_fmt, int @log_offset, void* @log_ctx);
         private static av_image_check_size2_delegate av_image_check_size2_fptr = (uint @w, uint @h, long @max_pixels, AVPixelFormat @pix_fmt, int @log_offset, void* @log_ctx) =>
         {
-            av_image_check_size2_fptr = GetFunctionDelegate<av_image_check_size2_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_check_size2");
+            av_image_check_size2_fptr = GetFunctionDelegate<av_image_check_size2_delegate>(GetOrLoadLibrary("avutil"), "av_image_check_size2");
             if (av_image_check_size2_fptr == null)
             {
                 av_image_check_size2_fptr = delegate 
@@ -13046,7 +13046,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_image_copy_delegate(ref byte_ptrArray4 @dst_data, ref int_array4 @dst_linesizes, ref byte_ptrArray4 @src_data, int_array4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
         private static av_image_copy_delegate av_image_copy_fptr = (ref byte_ptrArray4 @dst_data, ref int_array4 @dst_linesizes, ref byte_ptrArray4 @src_data, int_array4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height) =>
         {
-            av_image_copy_fptr = GetFunctionDelegate<av_image_copy_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_copy");
+            av_image_copy_fptr = GetFunctionDelegate<av_image_copy_delegate>(GetOrLoadLibrary("avutil"), "av_image_copy");
             if (av_image_copy_fptr == null)
             {
                 av_image_copy_fptr = delegate 
@@ -13069,7 +13069,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_image_copy_plane_delegate(byte* @dst, int @dst_linesize, byte* @src, int @src_linesize, int @bytewidth, int @height);
         private static av_image_copy_plane_delegate av_image_copy_plane_fptr = (byte* @dst, int @dst_linesize, byte* @src, int @src_linesize, int @bytewidth, int @height) =>
         {
-            av_image_copy_plane_fptr = GetFunctionDelegate<av_image_copy_plane_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_copy_plane");
+            av_image_copy_plane_fptr = GetFunctionDelegate<av_image_copy_plane_delegate>(GetOrLoadLibrary("avutil"), "av_image_copy_plane");
             if (av_image_copy_plane_fptr == null)
             {
                 av_image_copy_plane_fptr = delegate 
@@ -13092,7 +13092,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_image_copy_to_buffer_delegate(byte* @dst, int @dst_size, byte_ptrArray4 @src_data, int_array4 @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
         private static av_image_copy_to_buffer_delegate av_image_copy_to_buffer_fptr = (byte* @dst, int @dst_size, byte_ptrArray4 @src_data, int_array4 @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align) =>
         {
-            av_image_copy_to_buffer_fptr = GetFunctionDelegate<av_image_copy_to_buffer_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_copy_to_buffer");
+            av_image_copy_to_buffer_fptr = GetFunctionDelegate<av_image_copy_to_buffer_delegate>(GetOrLoadLibrary("avutil"), "av_image_copy_to_buffer");
             if (av_image_copy_to_buffer_fptr == null)
             {
                 av_image_copy_to_buffer_fptr = delegate 
@@ -13122,7 +13122,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_image_copy_uc_from_delegate(ref byte_ptrArray4 @dst_data, long_array4 @dst_linesizes, ref byte_ptrArray4 @src_data, long_array4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
         private static av_image_copy_uc_from_delegate av_image_copy_uc_from_fptr = (ref byte_ptrArray4 @dst_data, long_array4 @dst_linesizes, ref byte_ptrArray4 @src_data, long_array4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height) =>
         {
-            av_image_copy_uc_from_fptr = GetFunctionDelegate<av_image_copy_uc_from_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_copy_uc_from");
+            av_image_copy_uc_from_fptr = GetFunctionDelegate<av_image_copy_uc_from_delegate>(GetOrLoadLibrary("avutil"), "av_image_copy_uc_from");
             if (av_image_copy_uc_from_fptr == null)
             {
                 av_image_copy_uc_from_fptr = delegate 
@@ -13143,7 +13143,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_image_fill_arrays_delegate(ref byte_ptrArray4 @dst_data, ref int_array4 @dst_linesize, byte* @src, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
         private static av_image_fill_arrays_delegate av_image_fill_arrays_fptr = (ref byte_ptrArray4 @dst_data, ref int_array4 @dst_linesize, byte* @src, AVPixelFormat @pix_fmt, int @width, int @height, int @align) =>
         {
-            av_image_fill_arrays_fptr = GetFunctionDelegate<av_image_fill_arrays_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_fill_arrays");
+            av_image_fill_arrays_fptr = GetFunctionDelegate<av_image_fill_arrays_delegate>(GetOrLoadLibrary("avutil"), "av_image_fill_arrays");
             if (av_image_fill_arrays_fptr == null)
             {
                 av_image_fill_arrays_fptr = delegate 
@@ -13172,7 +13172,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_image_fill_black_delegate(ref byte_ptrArray4 @dst_data, long_array4 @dst_linesize, AVPixelFormat @pix_fmt, AVColorRange @range, int @width, int @height);
         private static av_image_fill_black_delegate av_image_fill_black_fptr = (ref byte_ptrArray4 @dst_data, long_array4 @dst_linesize, AVPixelFormat @pix_fmt, AVColorRange @range, int @width, int @height) =>
         {
-            av_image_fill_black_fptr = GetFunctionDelegate<av_image_fill_black_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_fill_black");
+            av_image_fill_black_fptr = GetFunctionDelegate<av_image_fill_black_delegate>(GetOrLoadLibrary("avutil"), "av_image_fill_black");
             if (av_image_fill_black_fptr == null)
             {
                 av_image_fill_black_fptr = delegate 
@@ -13200,7 +13200,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_image_fill_linesizes_delegate(ref int_array4 @linesizes, AVPixelFormat @pix_fmt, int @width);
         private static av_image_fill_linesizes_delegate av_image_fill_linesizes_fptr = (ref int_array4 @linesizes, AVPixelFormat @pix_fmt, int @width) =>
         {
-            av_image_fill_linesizes_fptr = GetFunctionDelegate<av_image_fill_linesizes_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_fill_linesizes");
+            av_image_fill_linesizes_fptr = GetFunctionDelegate<av_image_fill_linesizes_delegate>(GetOrLoadLibrary("avutil"), "av_image_fill_linesizes");
             if (av_image_fill_linesizes_fptr == null)
             {
                 av_image_fill_linesizes_fptr = delegate 
@@ -13223,7 +13223,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_image_fill_max_pixsteps_delegate(ref int_array4 @max_pixsteps, ref int_array4 @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc);
         private static av_image_fill_max_pixsteps_delegate av_image_fill_max_pixsteps_fptr = (ref int_array4 @max_pixsteps, ref int_array4 @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc) =>
         {
-            av_image_fill_max_pixsteps_fptr = GetFunctionDelegate<av_image_fill_max_pixsteps_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_fill_max_pixsteps");
+            av_image_fill_max_pixsteps_fptr = GetFunctionDelegate<av_image_fill_max_pixsteps_delegate>(GetOrLoadLibrary("avutil"), "av_image_fill_max_pixsteps");
             if (av_image_fill_max_pixsteps_fptr == null)
             {
                 av_image_fill_max_pixsteps_fptr = delegate 
@@ -13246,7 +13246,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_image_fill_pointers_delegate(ref byte_ptrArray4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int_array4 @linesizes);
         private static av_image_fill_pointers_delegate av_image_fill_pointers_fptr = (ref byte_ptrArray4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int_array4 @linesizes) =>
         {
-            av_image_fill_pointers_fptr = GetFunctionDelegate<av_image_fill_pointers_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_fill_pointers");
+            av_image_fill_pointers_fptr = GetFunctionDelegate<av_image_fill_pointers_delegate>(GetOrLoadLibrary("avutil"), "av_image_fill_pointers");
             if (av_image_fill_pointers_fptr == null)
             {
                 av_image_fill_pointers_fptr = delegate 
@@ -13271,7 +13271,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_image_get_buffer_size_delegate(AVPixelFormat @pix_fmt, int @width, int @height, int @align);
         private static av_image_get_buffer_size_delegate av_image_get_buffer_size_fptr = (AVPixelFormat @pix_fmt, int @width, int @height, int @align) =>
         {
-            av_image_get_buffer_size_fptr = GetFunctionDelegate<av_image_get_buffer_size_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_get_buffer_size");
+            av_image_get_buffer_size_fptr = GetFunctionDelegate<av_image_get_buffer_size_delegate>(GetOrLoadLibrary("avutil"), "av_image_get_buffer_size");
             if (av_image_get_buffer_size_fptr == null)
             {
                 av_image_get_buffer_size_fptr = delegate 
@@ -13297,7 +13297,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_image_get_linesize_delegate(AVPixelFormat @pix_fmt, int @width, int @plane);
         private static av_image_get_linesize_delegate av_image_get_linesize_fptr = (AVPixelFormat @pix_fmt, int @width, int @plane) =>
         {
-            av_image_get_linesize_fptr = GetFunctionDelegate<av_image_get_linesize_delegate>(GetOrLoadLibrary("avutil", 56), "av_image_get_linesize");
+            av_image_get_linesize_fptr = GetFunctionDelegate<av_image_get_linesize_delegate>(GetOrLoadLibrary("avutil"), "av_image_get_linesize");
             if (av_image_get_linesize_fptr == null)
             {
                 av_image_get_linesize_fptr = delegate 
@@ -13319,7 +13319,7 @@ namespace FFmpeg.AutoGen
         private delegate uint av_int_list_length_for_size_delegate(uint @elsize, void* @list, ulong @term);
         private static av_int_list_length_for_size_delegate av_int_list_length_for_size_fptr = (uint @elsize, void* @list, ulong @term) =>
         {
-            av_int_list_length_for_size_fptr = GetFunctionDelegate<av_int_list_length_for_size_delegate>(GetOrLoadLibrary("avutil", 56), "av_int_list_length_for_size");
+            av_int_list_length_for_size_fptr = GetFunctionDelegate<av_int_list_length_for_size_delegate>(GetOrLoadLibrary("avutil"), "av_int_list_length_for_size");
             if (av_int_list_length_for_size_fptr == null)
             {
                 av_int_list_length_for_size_fptr = delegate 
@@ -13344,7 +13344,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_log_delegate(void* @avcl, int @level, [MarshalAs((UnmanagedType)48)] string @fmt);
         private static av_log_delegate av_log_fptr = (void* @avcl, int @level, string @fmt) =>
         {
-            av_log_fptr = GetFunctionDelegate<av_log_delegate>(GetOrLoadLibrary("avutil", 56), "av_log");
+            av_log_fptr = GetFunctionDelegate<av_log_delegate>(GetOrLoadLibrary("avutil"), "av_log");
             if (av_log_fptr == null)
             {
                 av_log_fptr = delegate 
@@ -13368,7 +13368,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_log_default_callback_delegate(void* @avcl, int @level, [MarshalAs((UnmanagedType)48)] string @fmt, byte* @vl);
         private static av_log_default_callback_delegate av_log_default_callback_fptr = (void* @avcl, int @level, string @fmt, byte* @vl) =>
         {
-            av_log_default_callback_fptr = GetFunctionDelegate<av_log_default_callback_delegate>(GetOrLoadLibrary("avutil", 56), "av_log_default_callback");
+            av_log_default_callback_fptr = GetFunctionDelegate<av_log_default_callback_delegate>(GetOrLoadLibrary("avutil"), "av_log_default_callback");
             if (av_log_default_callback_fptr == null)
             {
                 av_log_default_callback_fptr = delegate 
@@ -13393,7 +13393,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_log_format_line_delegate(void* @ptr, int @level, [MarshalAs((UnmanagedType)48)] string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix);
         private static av_log_format_line_delegate av_log_format_line_fptr = (void* @ptr, int @level, string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix) =>
         {
-            av_log_format_line_fptr = GetFunctionDelegate<av_log_format_line_delegate>(GetOrLoadLibrary("avutil", 56), "av_log_format_line");
+            av_log_format_line_fptr = GetFunctionDelegate<av_log_format_line_delegate>(GetOrLoadLibrary("avutil"), "av_log_format_line");
             if (av_log_format_line_fptr == null)
             {
                 av_log_format_line_fptr = delegate 
@@ -13417,7 +13417,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_log_format_line2_delegate(void* @ptr, int @level, [MarshalAs((UnmanagedType)48)] string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix);
         private static av_log_format_line2_delegate av_log_format_line2_fptr = (void* @ptr, int @level, string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix) =>
         {
-            av_log_format_line2_fptr = GetFunctionDelegate<av_log_format_line2_delegate>(GetOrLoadLibrary("avutil", 56), "av_log_format_line2");
+            av_log_format_line2_fptr = GetFunctionDelegate<av_log_format_line2_delegate>(GetOrLoadLibrary("avutil"), "av_log_format_line2");
             if (av_log_format_line2_fptr == null)
             {
                 av_log_format_line2_fptr = delegate 
@@ -13442,7 +13442,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_log_get_flags_delegate();
         private static av_log_get_flags_delegate av_log_get_flags_fptr = () =>
         {
-            av_log_get_flags_fptr = GetFunctionDelegate<av_log_get_flags_delegate>(GetOrLoadLibrary("avutil", 56), "av_log_get_flags");
+            av_log_get_flags_fptr = GetFunctionDelegate<av_log_get_flags_delegate>(GetOrLoadLibrary("avutil"), "av_log_get_flags");
             if (av_log_get_flags_fptr == null)
             {
                 av_log_get_flags_fptr = delegate 
@@ -13462,7 +13462,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_log_get_level_delegate();
         private static av_log_get_level_delegate av_log_get_level_fptr = () =>
         {
-            av_log_get_level_fptr = GetFunctionDelegate<av_log_get_level_delegate>(GetOrLoadLibrary("avutil", 56), "av_log_get_level");
+            av_log_get_level_fptr = GetFunctionDelegate<av_log_get_level_delegate>(GetOrLoadLibrary("avutil"), "av_log_get_level");
             if (av_log_get_level_fptr == null)
             {
                 av_log_get_level_fptr = delegate 
@@ -13484,7 +13484,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_log_set_callback_delegate(av_log_set_callback_callback_func @callback);
         private static av_log_set_callback_delegate av_log_set_callback_fptr = (av_log_set_callback_callback_func @callback) =>
         {
-            av_log_set_callback_fptr = GetFunctionDelegate<av_log_set_callback_delegate>(GetOrLoadLibrary("avutil", 56), "av_log_set_callback");
+            av_log_set_callback_fptr = GetFunctionDelegate<av_log_set_callback_delegate>(GetOrLoadLibrary("avutil"), "av_log_set_callback");
             if (av_log_set_callback_fptr == null)
             {
                 av_log_set_callback_fptr = delegate 
@@ -13506,7 +13506,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_log_set_flags_delegate(int @arg);
         private static av_log_set_flags_delegate av_log_set_flags_fptr = (int @arg) =>
         {
-            av_log_set_flags_fptr = GetFunctionDelegate<av_log_set_flags_delegate>(GetOrLoadLibrary("avutil", 56), "av_log_set_flags");
+            av_log_set_flags_fptr = GetFunctionDelegate<av_log_set_flags_delegate>(GetOrLoadLibrary("avutil"), "av_log_set_flags");
             if (av_log_set_flags_fptr == null)
             {
                 av_log_set_flags_fptr = delegate 
@@ -13526,7 +13526,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_log_set_level_delegate(int @level);
         private static av_log_set_level_delegate av_log_set_level_fptr = (int @level) =>
         {
-            av_log_set_level_fptr = GetFunctionDelegate<av_log_set_level_delegate>(GetOrLoadLibrary("avutil", 56), "av_log_set_level");
+            av_log_set_level_fptr = GetFunctionDelegate<av_log_set_level_delegate>(GetOrLoadLibrary("avutil"), "av_log_set_level");
             if (av_log_set_level_fptr == null)
             {
                 av_log_set_level_fptr = delegate 
@@ -13548,7 +13548,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_log2_delegate(uint @v);
         private static av_log2_delegate av_log2_fptr = (uint @v) =>
         {
-            av_log2_fptr = GetFunctionDelegate<av_log2_delegate>(GetOrLoadLibrary("avutil", 56), "av_log2");
+            av_log2_fptr = GetFunctionDelegate<av_log2_delegate>(GetOrLoadLibrary("avutil"), "av_log2");
             if (av_log2_fptr == null)
             {
                 av_log2_fptr = delegate 
@@ -13568,7 +13568,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_log2_16bit_delegate(uint @v);
         private static av_log2_16bit_delegate av_log2_16bit_fptr = (uint @v) =>
         {
-            av_log2_16bit_fptr = GetFunctionDelegate<av_log2_16bit_delegate>(GetOrLoadLibrary("avutil", 56), "av_log2_16bit");
+            av_log2_16bit_fptr = GetFunctionDelegate<av_log2_16bit_delegate>(GetOrLoadLibrary("avutil"), "av_log2_16bit");
             if (av_log2_16bit_fptr == null)
             {
                 av_log2_16bit_fptr = delegate 
@@ -13588,7 +13588,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_malloc_delegate(ulong @size);
         private static av_malloc_delegate av_malloc_fptr = (ulong @size) =>
         {
-            av_malloc_fptr = GetFunctionDelegate<av_malloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_malloc");
+            av_malloc_fptr = GetFunctionDelegate<av_malloc_delegate>(GetOrLoadLibrary("avutil"), "av_malloc");
             if (av_malloc_fptr == null)
             {
                 av_malloc_fptr = delegate 
@@ -13611,7 +13611,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_malloc_array_delegate(ulong @nmemb, ulong @size);
         private static av_malloc_array_delegate av_malloc_array_fptr = (ulong @nmemb, ulong @size) =>
         {
-            av_malloc_array_fptr = GetFunctionDelegate<av_malloc_array_delegate>(GetOrLoadLibrary("avutil", 56), "av_malloc_array");
+            av_malloc_array_fptr = GetFunctionDelegate<av_malloc_array_delegate>(GetOrLoadLibrary("avutil"), "av_malloc_array");
             if (av_malloc_array_fptr == null)
             {
                 av_malloc_array_fptr = delegate 
@@ -13635,7 +13635,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_mallocz_delegate(ulong @size);
         private static av_mallocz_delegate av_mallocz_fptr = (ulong @size) =>
         {
-            av_mallocz_fptr = GetFunctionDelegate<av_mallocz_delegate>(GetOrLoadLibrary("avutil", 56), "av_mallocz");
+            av_mallocz_fptr = GetFunctionDelegate<av_mallocz_delegate>(GetOrLoadLibrary("avutil"), "av_mallocz");
             if (av_mallocz_fptr == null)
             {
                 av_mallocz_fptr = delegate 
@@ -13658,7 +13658,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_mallocz_array_delegate(ulong @nmemb, ulong @size);
         private static av_mallocz_array_delegate av_mallocz_array_fptr = (ulong @nmemb, ulong @size) =>
         {
-            av_mallocz_array_fptr = GetFunctionDelegate<av_mallocz_array_delegate>(GetOrLoadLibrary("avutil", 56), "av_mallocz_array");
+            av_mallocz_array_fptr = GetFunctionDelegate<av_mallocz_array_delegate>(GetOrLoadLibrary("avutil"), "av_mallocz_array");
             if (av_mallocz_array_fptr == null)
             {
                 av_mallocz_array_fptr = delegate 
@@ -13682,7 +13682,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_max_alloc_delegate(ulong @max);
         private static av_max_alloc_delegate av_max_alloc_fptr = (ulong @max) =>
         {
-            av_max_alloc_fptr = GetFunctionDelegate<av_max_alloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_max_alloc");
+            av_max_alloc_fptr = GetFunctionDelegate<av_max_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_max_alloc");
             if (av_max_alloc_fptr == null)
             {
                 av_max_alloc_fptr = delegate 
@@ -13704,7 +13704,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_memcpy_backptr_delegate(byte* @dst, int @back, int @cnt);
         private static av_memcpy_backptr_delegate av_memcpy_backptr_fptr = (byte* @dst, int @back, int @cnt) =>
         {
-            av_memcpy_backptr_fptr = GetFunctionDelegate<av_memcpy_backptr_delegate>(GetOrLoadLibrary("avutil", 56), "av_memcpy_backptr");
+            av_memcpy_backptr_fptr = GetFunctionDelegate<av_memcpy_backptr_delegate>(GetOrLoadLibrary("avutil"), "av_memcpy_backptr");
             if (av_memcpy_backptr_fptr == null)
             {
                 av_memcpy_backptr_fptr = delegate 
@@ -13728,7 +13728,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_memdup_delegate(void* @p, ulong @size);
         private static av_memdup_delegate av_memdup_fptr = (void* @p, ulong @size) =>
         {
-            av_memdup_fptr = GetFunctionDelegate<av_memdup_delegate>(GetOrLoadLibrary("avutil", 56), "av_memdup");
+            av_memdup_fptr = GetFunctionDelegate<av_memdup_delegate>(GetOrLoadLibrary("avutil"), "av_memdup");
             if (av_memdup_fptr == null)
             {
                 av_memdup_fptr = delegate 
@@ -13752,7 +13752,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_mul_q_delegate(AVRational @b, AVRational @c);
         private static av_mul_q_delegate av_mul_q_fptr = (AVRational @b, AVRational @c) =>
         {
-            av_mul_q_fptr = GetFunctionDelegate<av_mul_q_delegate>(GetOrLoadLibrary("avutil", 56), "av_mul_q");
+            av_mul_q_fptr = GetFunctionDelegate<av_mul_q_delegate>(GetOrLoadLibrary("avutil"), "av_mul_q");
             if (av_mul_q_fptr == null)
             {
                 av_mul_q_fptr = delegate 
@@ -13776,7 +13776,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_nearer_q_delegate(AVRational @q, AVRational @q1, AVRational @q2);
         private static av_nearer_q_delegate av_nearer_q_fptr = (AVRational @q, AVRational @q1, AVRational @q2) =>
         {
-            av_nearer_q_fptr = GetFunctionDelegate<av_nearer_q_delegate>(GetOrLoadLibrary("avutil", 56), "av_nearer_q");
+            av_nearer_q_fptr = GetFunctionDelegate<av_nearer_q_delegate>(GetOrLoadLibrary("avutil"), "av_nearer_q");
             if (av_nearer_q_fptr == null)
             {
                 av_nearer_q_fptr = delegate 
@@ -13799,7 +13799,7 @@ namespace FFmpeg.AutoGen
         private delegate AVClass* av_opt_child_class_next_delegate(AVClass* @parent, AVClass* @prev);
         private static av_opt_child_class_next_delegate av_opt_child_class_next_fptr = (AVClass* @parent, AVClass* @prev) =>
         {
-            av_opt_child_class_next_fptr = GetFunctionDelegate<av_opt_child_class_next_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_child_class_next");
+            av_opt_child_class_next_fptr = GetFunctionDelegate<av_opt_child_class_next_delegate>(GetOrLoadLibrary("avutil"), "av_opt_child_class_next");
             if (av_opt_child_class_next_fptr == null)
             {
                 av_opt_child_class_next_fptr = delegate 
@@ -13822,7 +13822,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_opt_child_next_delegate(void* @obj, void* @prev);
         private static av_opt_child_next_delegate av_opt_child_next_fptr = (void* @obj, void* @prev) =>
         {
-            av_opt_child_next_fptr = GetFunctionDelegate<av_opt_child_next_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_child_next");
+            av_opt_child_next_fptr = GetFunctionDelegate<av_opt_child_next_delegate>(GetOrLoadLibrary("avutil"), "av_opt_child_next");
             if (av_opt_child_next_fptr == null)
             {
                 av_opt_child_next_fptr = delegate 
@@ -13845,7 +13845,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_copy_delegate(void* @dest, void* @src);
         private static av_opt_copy_delegate av_opt_copy_fptr = (void* @dest, void* @src) =>
         {
-            av_opt_copy_fptr = GetFunctionDelegate<av_opt_copy_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_copy");
+            av_opt_copy_fptr = GetFunctionDelegate<av_opt_copy_delegate>(GetOrLoadLibrary("avutil"), "av_opt_copy");
             if (av_opt_copy_fptr == null)
             {
                 av_opt_copy_fptr = delegate 
@@ -13869,7 +13869,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_eval_double_delegate(void* @obj, AVOption* @o, [MarshalAs((UnmanagedType)48)] string @val, double* @double_out);
         private static av_opt_eval_double_delegate av_opt_eval_double_fptr = (void* @obj, AVOption* @o, string @val, double* @double_out) =>
         {
-            av_opt_eval_double_fptr = GetFunctionDelegate<av_opt_eval_double_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_eval_double");
+            av_opt_eval_double_fptr = GetFunctionDelegate<av_opt_eval_double_delegate>(GetOrLoadLibrary("avutil"), "av_opt_eval_double");
             if (av_opt_eval_double_fptr == null)
             {
                 av_opt_eval_double_fptr = delegate 
@@ -13889,7 +13889,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_eval_flags_delegate(void* @obj, AVOption* @o, [MarshalAs((UnmanagedType)48)] string @val, int* @flags_out);
         private static av_opt_eval_flags_delegate av_opt_eval_flags_fptr = (void* @obj, AVOption* @o, string @val, int* @flags_out) =>
         {
-            av_opt_eval_flags_fptr = GetFunctionDelegate<av_opt_eval_flags_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_eval_flags");
+            av_opt_eval_flags_fptr = GetFunctionDelegate<av_opt_eval_flags_delegate>(GetOrLoadLibrary("avutil"), "av_opt_eval_flags");
             if (av_opt_eval_flags_fptr == null)
             {
                 av_opt_eval_flags_fptr = delegate 
@@ -13914,7 +13914,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_eval_float_delegate(void* @obj, AVOption* @o, [MarshalAs((UnmanagedType)48)] string @val, float* @float_out);
         private static av_opt_eval_float_delegate av_opt_eval_float_fptr = (void* @obj, AVOption* @o, string @val, float* @float_out) =>
         {
-            av_opt_eval_float_fptr = GetFunctionDelegate<av_opt_eval_float_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_eval_float");
+            av_opt_eval_float_fptr = GetFunctionDelegate<av_opt_eval_float_delegate>(GetOrLoadLibrary("avutil"), "av_opt_eval_float");
             if (av_opt_eval_float_fptr == null)
             {
                 av_opt_eval_float_fptr = delegate 
@@ -13934,7 +13934,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_eval_int_delegate(void* @obj, AVOption* @o, [MarshalAs((UnmanagedType)48)] string @val, int* @int_out);
         private static av_opt_eval_int_delegate av_opt_eval_int_fptr = (void* @obj, AVOption* @o, string @val, int* @int_out) =>
         {
-            av_opt_eval_int_fptr = GetFunctionDelegate<av_opt_eval_int_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_eval_int");
+            av_opt_eval_int_fptr = GetFunctionDelegate<av_opt_eval_int_delegate>(GetOrLoadLibrary("avutil"), "av_opt_eval_int");
             if (av_opt_eval_int_fptr == null)
             {
                 av_opt_eval_int_fptr = delegate 
@@ -13954,7 +13954,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_eval_int64_delegate(void* @obj, AVOption* @o, [MarshalAs((UnmanagedType)48)] string @val, long* @int64_out);
         private static av_opt_eval_int64_delegate av_opt_eval_int64_fptr = (void* @obj, AVOption* @o, string @val, long* @int64_out) =>
         {
-            av_opt_eval_int64_fptr = GetFunctionDelegate<av_opt_eval_int64_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_eval_int64");
+            av_opt_eval_int64_fptr = GetFunctionDelegate<av_opt_eval_int64_delegate>(GetOrLoadLibrary("avutil"), "av_opt_eval_int64");
             if (av_opt_eval_int64_fptr == null)
             {
                 av_opt_eval_int64_fptr = delegate 
@@ -13974,7 +13974,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_eval_q_delegate(void* @obj, AVOption* @o, [MarshalAs((UnmanagedType)48)] string @val, AVRational* @q_out);
         private static av_opt_eval_q_delegate av_opt_eval_q_fptr = (void* @obj, AVOption* @o, string @val, AVRational* @q_out) =>
         {
-            av_opt_eval_q_fptr = GetFunctionDelegate<av_opt_eval_q_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_eval_q");
+            av_opt_eval_q_fptr = GetFunctionDelegate<av_opt_eval_q_delegate>(GetOrLoadLibrary("avutil"), "av_opt_eval_q");
             if (av_opt_eval_q_fptr == null)
             {
                 av_opt_eval_q_fptr = delegate 
@@ -13994,7 +13994,7 @@ namespace FFmpeg.AutoGen
         private delegate AVOption* av_opt_find_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, [MarshalAs((UnmanagedType)48)] string @unit, int @opt_flags, int @search_flags);
         private static av_opt_find_delegate av_opt_find_fptr = (void* @obj, string @name, string @unit, int @opt_flags, int @search_flags) =>
         {
-            av_opt_find_fptr = GetFunctionDelegate<av_opt_find_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_find");
+            av_opt_find_fptr = GetFunctionDelegate<av_opt_find_delegate>(GetOrLoadLibrary("avutil"), "av_opt_find");
             if (av_opt_find_fptr == null)
             {
                 av_opt_find_fptr = delegate 
@@ -14021,7 +14021,7 @@ namespace FFmpeg.AutoGen
         private delegate AVOption* av_opt_find2_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, [MarshalAs((UnmanagedType)48)] string @unit, int @opt_flags, int @search_flags, void** @target_obj);
         private static av_opt_find2_delegate av_opt_find2_fptr = (void* @obj, string @name, string @unit, int @opt_flags, int @search_flags, void** @target_obj) =>
         {
-            av_opt_find2_fptr = GetFunctionDelegate<av_opt_find2_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_find2");
+            av_opt_find2_fptr = GetFunctionDelegate<av_opt_find2_delegate>(GetOrLoadLibrary("avutil"), "av_opt_find2");
             if (av_opt_find2_fptr == null)
             {
                 av_opt_find2_fptr = delegate 
@@ -14049,7 +14049,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_flag_is_set_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @field_name, [MarshalAs((UnmanagedType)48)] string @flag_name);
         private static av_opt_flag_is_set_delegate av_opt_flag_is_set_fptr = (void* @obj, string @field_name, string @flag_name) =>
         {
-            av_opt_flag_is_set_fptr = GetFunctionDelegate<av_opt_flag_is_set_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_flag_is_set");
+            av_opt_flag_is_set_fptr = GetFunctionDelegate<av_opt_flag_is_set_delegate>(GetOrLoadLibrary("avutil"), "av_opt_flag_is_set");
             if (av_opt_flag_is_set_fptr == null)
             {
                 av_opt_flag_is_set_fptr = delegate 
@@ -14073,7 +14073,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_opt_free_delegate(void* @obj);
         private static av_opt_free_delegate av_opt_free_fptr = (void* @obj) =>
         {
-            av_opt_free_fptr = GetFunctionDelegate<av_opt_free_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_free");
+            av_opt_free_fptr = GetFunctionDelegate<av_opt_free_delegate>(GetOrLoadLibrary("avutil"), "av_opt_free");
             if (av_opt_free_fptr == null)
             {
                 av_opt_free_fptr = delegate 
@@ -14094,7 +14094,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_opt_freep_ranges_delegate(AVOptionRanges** @ranges);
         private static av_opt_freep_ranges_delegate av_opt_freep_ranges_fptr = (AVOptionRanges** @ranges) =>
         {
-            av_opt_freep_ranges_fptr = GetFunctionDelegate<av_opt_freep_ranges_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_freep_ranges");
+            av_opt_freep_ranges_fptr = GetFunctionDelegate<av_opt_freep_ranges_delegate>(GetOrLoadLibrary("avutil"), "av_opt_freep_ranges");
             if (av_opt_freep_ranges_fptr == null)
             {
                 av_opt_freep_ranges_fptr = delegate 
@@ -14115,7 +14115,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_get_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, int @search_flags, byte** @out_val);
         private static av_opt_get_delegate av_opt_get_fptr = (void* @obj, string @name, int @search_flags, byte** @out_val) =>
         {
-            av_opt_get_fptr = GetFunctionDelegate<av_opt_get_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_get");
+            av_opt_get_fptr = GetFunctionDelegate<av_opt_get_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get");
             if (av_opt_get_fptr == null)
             {
                 av_opt_get_fptr = delegate 
@@ -14141,7 +14141,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_get_channel_layout_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, int @search_flags, long* @ch_layout);
         private static av_opt_get_channel_layout_delegate av_opt_get_channel_layout_fptr = (void* @obj, string @name, int @search_flags, long* @ch_layout) =>
         {
-            av_opt_get_channel_layout_fptr = GetFunctionDelegate<av_opt_get_channel_layout_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_get_channel_layout");
+            av_opt_get_channel_layout_fptr = GetFunctionDelegate<av_opt_get_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_channel_layout");
             if (av_opt_get_channel_layout_fptr == null)
             {
                 av_opt_get_channel_layout_fptr = delegate 
@@ -14161,7 +14161,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_get_dict_val_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, int @search_flags, AVDictionary** @out_val);
         private static av_opt_get_dict_val_delegate av_opt_get_dict_val_fptr = (void* @obj, string @name, int @search_flags, AVDictionary** @out_val) =>
         {
-            av_opt_get_dict_val_fptr = GetFunctionDelegate<av_opt_get_dict_val_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_get_dict_val");
+            av_opt_get_dict_val_fptr = GetFunctionDelegate<av_opt_get_dict_val_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_dict_val");
             if (av_opt_get_dict_val_fptr == null)
             {
                 av_opt_get_dict_val_fptr = delegate 
@@ -14182,7 +14182,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_get_double_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, int @search_flags, double* @out_val);
         private static av_opt_get_double_delegate av_opt_get_double_fptr = (void* @obj, string @name, int @search_flags, double* @out_val) =>
         {
-            av_opt_get_double_fptr = GetFunctionDelegate<av_opt_get_double_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_get_double");
+            av_opt_get_double_fptr = GetFunctionDelegate<av_opt_get_double_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_double");
             if (av_opt_get_double_fptr == null)
             {
                 av_opt_get_double_fptr = delegate 
@@ -14202,7 +14202,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_get_image_size_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, int @search_flags, int* @w_out, int* @h_out);
         private static av_opt_get_image_size_delegate av_opt_get_image_size_fptr = (void* @obj, string @name, int @search_flags, int* @w_out, int* @h_out) =>
         {
-            av_opt_get_image_size_fptr = GetFunctionDelegate<av_opt_get_image_size_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_get_image_size");
+            av_opt_get_image_size_fptr = GetFunctionDelegate<av_opt_get_image_size_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_image_size");
             if (av_opt_get_image_size_fptr == null)
             {
                 av_opt_get_image_size_fptr = delegate 
@@ -14222,7 +14222,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_get_int_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, int @search_flags, long* @out_val);
         private static av_opt_get_int_delegate av_opt_get_int_fptr = (void* @obj, string @name, int @search_flags, long* @out_val) =>
         {
-            av_opt_get_int_fptr = GetFunctionDelegate<av_opt_get_int_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_get_int");
+            av_opt_get_int_fptr = GetFunctionDelegate<av_opt_get_int_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_int");
             if (av_opt_get_int_fptr == null)
             {
                 av_opt_get_int_fptr = delegate 
@@ -14242,7 +14242,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_get_key_value_delegate(byte** @ropts, [MarshalAs((UnmanagedType)48)] string @key_val_sep, [MarshalAs((UnmanagedType)48)] string @pairs_sep, uint @flags, byte** @rkey, byte** @rval);
         private static av_opt_get_key_value_delegate av_opt_get_key_value_fptr = (byte** @ropts, string @key_val_sep, string @pairs_sep, uint @flags, byte** @rkey, byte** @rval) =>
         {
-            av_opt_get_key_value_fptr = GetFunctionDelegate<av_opt_get_key_value_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_get_key_value");
+            av_opt_get_key_value_fptr = GetFunctionDelegate<av_opt_get_key_value_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_key_value");
             if (av_opt_get_key_value_fptr == null)
             {
                 av_opt_get_key_value_fptr = delegate 
@@ -14270,7 +14270,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_get_pixel_fmt_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, int @search_flags, AVPixelFormat* @out_fmt);
         private static av_opt_get_pixel_fmt_delegate av_opt_get_pixel_fmt_fptr = (void* @obj, string @name, int @search_flags, AVPixelFormat* @out_fmt) =>
         {
-            av_opt_get_pixel_fmt_fptr = GetFunctionDelegate<av_opt_get_pixel_fmt_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_get_pixel_fmt");
+            av_opt_get_pixel_fmt_fptr = GetFunctionDelegate<av_opt_get_pixel_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_pixel_fmt");
             if (av_opt_get_pixel_fmt_fptr == null)
             {
                 av_opt_get_pixel_fmt_fptr = delegate 
@@ -14290,7 +14290,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_get_q_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, int @search_flags, AVRational* @out_val);
         private static av_opt_get_q_delegate av_opt_get_q_fptr = (void* @obj, string @name, int @search_flags, AVRational* @out_val) =>
         {
-            av_opt_get_q_fptr = GetFunctionDelegate<av_opt_get_q_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_get_q");
+            av_opt_get_q_fptr = GetFunctionDelegate<av_opt_get_q_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_q");
             if (av_opt_get_q_fptr == null)
             {
                 av_opt_get_q_fptr = delegate 
@@ -14310,7 +14310,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_get_sample_fmt_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, int @search_flags, AVSampleFormat* @out_fmt);
         private static av_opt_get_sample_fmt_delegate av_opt_get_sample_fmt_fptr = (void* @obj, string @name, int @search_flags, AVSampleFormat* @out_fmt) =>
         {
-            av_opt_get_sample_fmt_fptr = GetFunctionDelegate<av_opt_get_sample_fmt_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_get_sample_fmt");
+            av_opt_get_sample_fmt_fptr = GetFunctionDelegate<av_opt_get_sample_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_sample_fmt");
             if (av_opt_get_sample_fmt_fptr == null)
             {
                 av_opt_get_sample_fmt_fptr = delegate 
@@ -14330,7 +14330,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_get_video_rate_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, int @search_flags, AVRational* @out_val);
         private static av_opt_get_video_rate_delegate av_opt_get_video_rate_fptr = (void* @obj, string @name, int @search_flags, AVRational* @out_val) =>
         {
-            av_opt_get_video_rate_fptr = GetFunctionDelegate<av_opt_get_video_rate_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_get_video_rate");
+            av_opt_get_video_rate_fptr = GetFunctionDelegate<av_opt_get_video_rate_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_video_rate");
             if (av_opt_get_video_rate_fptr == null)
             {
                 av_opt_get_video_rate_fptr = delegate 
@@ -14350,7 +14350,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_is_set_to_default_delegate(void* @obj, AVOption* @o);
         private static av_opt_is_set_to_default_delegate av_opt_is_set_to_default_fptr = (void* @obj, AVOption* @o) =>
         {
-            av_opt_is_set_to_default_fptr = GetFunctionDelegate<av_opt_is_set_to_default_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_is_set_to_default");
+            av_opt_is_set_to_default_fptr = GetFunctionDelegate<av_opt_is_set_to_default_delegate>(GetOrLoadLibrary("avutil"), "av_opt_is_set_to_default");
             if (av_opt_is_set_to_default_fptr == null)
             {
                 av_opt_is_set_to_default_fptr = delegate 
@@ -14374,7 +14374,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_is_set_to_default_by_name_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, int @search_flags);
         private static av_opt_is_set_to_default_by_name_delegate av_opt_is_set_to_default_by_name_fptr = (void* @obj, string @name, int @search_flags) =>
         {
-            av_opt_is_set_to_default_by_name_fptr = GetFunctionDelegate<av_opt_is_set_to_default_by_name_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_is_set_to_default_by_name");
+            av_opt_is_set_to_default_by_name_fptr = GetFunctionDelegate<av_opt_is_set_to_default_by_name_delegate>(GetOrLoadLibrary("avutil"), "av_opt_is_set_to_default_by_name");
             if (av_opt_is_set_to_default_by_name_fptr == null)
             {
                 av_opt_is_set_to_default_by_name_fptr = delegate 
@@ -14399,7 +14399,7 @@ namespace FFmpeg.AutoGen
         private delegate AVOption* av_opt_next_delegate(void* @obj, AVOption* @prev);
         private static av_opt_next_delegate av_opt_next_fptr = (void* @obj, AVOption* @prev) =>
         {
-            av_opt_next_fptr = GetFunctionDelegate<av_opt_next_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_next");
+            av_opt_next_fptr = GetFunctionDelegate<av_opt_next_delegate>(GetOrLoadLibrary("avutil"), "av_opt_next");
             if (av_opt_next_fptr == null)
             {
                 av_opt_next_fptr = delegate 
@@ -14423,7 +14423,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_opt_ptr_delegate(AVClass* @avclass, void* @obj, [MarshalAs((UnmanagedType)48)] string @name);
         private static av_opt_ptr_delegate av_opt_ptr_fptr = (AVClass* @avclass, void* @obj, string @name) =>
         {
-            av_opt_ptr_fptr = GetFunctionDelegate<av_opt_ptr_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_ptr");
+            av_opt_ptr_fptr = GetFunctionDelegate<av_opt_ptr_delegate>(GetOrLoadLibrary("avutil"), "av_opt_ptr");
             if (av_opt_ptr_fptr == null)
             {
                 av_opt_ptr_fptr = delegate 
@@ -14444,7 +14444,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_query_ranges_delegate(AVOptionRanges** @p0, void* @obj, [MarshalAs((UnmanagedType)48)] string @key, int @flags);
         private static av_opt_query_ranges_delegate av_opt_query_ranges_fptr = (AVOptionRanges** @p0, void* @obj, string @key, int @flags) =>
         {
-            av_opt_query_ranges_fptr = GetFunctionDelegate<av_opt_query_ranges_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_query_ranges");
+            av_opt_query_ranges_fptr = GetFunctionDelegate<av_opt_query_ranges_delegate>(GetOrLoadLibrary("avutil"), "av_opt_query_ranges");
             if (av_opt_query_ranges_fptr == null)
             {
                 av_opt_query_ranges_fptr = delegate 
@@ -14467,7 +14467,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_query_ranges_default_delegate(AVOptionRanges** @p0, void* @obj, [MarshalAs((UnmanagedType)48)] string @key, int @flags);
         private static av_opt_query_ranges_default_delegate av_opt_query_ranges_default_fptr = (AVOptionRanges** @p0, void* @obj, string @key, int @flags) =>
         {
-            av_opt_query_ranges_default_fptr = GetFunctionDelegate<av_opt_query_ranges_default_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_query_ranges_default");
+            av_opt_query_ranges_default_fptr = GetFunctionDelegate<av_opt_query_ranges_default_delegate>(GetOrLoadLibrary("avutil"), "av_opt_query_ranges_default");
             if (av_opt_query_ranges_default_fptr == null)
             {
                 av_opt_query_ranges_default_fptr = delegate 
@@ -14490,7 +14490,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_serialize_delegate(void* @obj, int @opt_flags, int @flags, byte** @buffer, byte @key_val_sep, byte @pairs_sep);
         private static av_opt_serialize_delegate av_opt_serialize_fptr = (void* @obj, int @opt_flags, int @flags, byte** @buffer, byte @key_val_sep, byte @pairs_sep) =>
         {
-            av_opt_serialize_fptr = GetFunctionDelegate<av_opt_serialize_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_serialize");
+            av_opt_serialize_fptr = GetFunctionDelegate<av_opt_serialize_delegate>(GetOrLoadLibrary("avutil"), "av_opt_serialize");
             if (av_opt_serialize_fptr == null)
             {
                 av_opt_serialize_fptr = delegate 
@@ -14518,7 +14518,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, [MarshalAs((UnmanagedType)48)] string @val, int @search_flags);
         private static av_opt_set_delegate av_opt_set_fptr = (void* @obj, string @name, string @val, int @search_flags) =>
         {
-            av_opt_set_fptr = GetFunctionDelegate<av_opt_set_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set");
+            av_opt_set_fptr = GetFunctionDelegate<av_opt_set_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set");
             if (av_opt_set_fptr == null)
             {
                 av_opt_set_fptr = delegate 
@@ -14544,7 +14544,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_bin_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, byte* @val, int @size, int @search_flags);
         private static av_opt_set_bin_delegate av_opt_set_bin_fptr = (void* @obj, string @name, byte* @val, int @size, int @search_flags) =>
         {
-            av_opt_set_bin_fptr = GetFunctionDelegate<av_opt_set_bin_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_bin");
+            av_opt_set_bin_fptr = GetFunctionDelegate<av_opt_set_bin_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_bin");
             if (av_opt_set_bin_fptr == null)
             {
                 av_opt_set_bin_fptr = delegate 
@@ -14564,7 +14564,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_channel_layout_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, long @ch_layout, int @search_flags);
         private static av_opt_set_channel_layout_delegate av_opt_set_channel_layout_fptr = (void* @obj, string @name, long @ch_layout, int @search_flags) =>
         {
-            av_opt_set_channel_layout_fptr = GetFunctionDelegate<av_opt_set_channel_layout_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_channel_layout");
+            av_opt_set_channel_layout_fptr = GetFunctionDelegate<av_opt_set_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_channel_layout");
             if (av_opt_set_channel_layout_fptr == null)
             {
                 av_opt_set_channel_layout_fptr = delegate 
@@ -14584,7 +14584,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_opt_set_defaults_delegate(void* @s);
         private static av_opt_set_defaults_delegate av_opt_set_defaults_fptr = (void* @s) =>
         {
-            av_opt_set_defaults_fptr = GetFunctionDelegate<av_opt_set_defaults_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_defaults");
+            av_opt_set_defaults_fptr = GetFunctionDelegate<av_opt_set_defaults_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_defaults");
             if (av_opt_set_defaults_fptr == null)
             {
                 av_opt_set_defaults_fptr = delegate 
@@ -14606,7 +14606,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_opt_set_defaults2_delegate(void* @s, int @mask, int @flags);
         private static av_opt_set_defaults2_delegate av_opt_set_defaults2_fptr = (void* @s, int @mask, int @flags) =>
         {
-            av_opt_set_defaults2_fptr = GetFunctionDelegate<av_opt_set_defaults2_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_defaults2");
+            av_opt_set_defaults2_fptr = GetFunctionDelegate<av_opt_set_defaults2_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_defaults2");
             if (av_opt_set_defaults2_fptr == null)
             {
                 av_opt_set_defaults2_fptr = delegate 
@@ -14630,7 +14630,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_dict_delegate(void* @obj, AVDictionary** @options);
         private static av_opt_set_dict_delegate av_opt_set_dict_fptr = (void* @obj, AVDictionary** @options) =>
         {
-            av_opt_set_dict_fptr = GetFunctionDelegate<av_opt_set_dict_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_dict");
+            av_opt_set_dict_fptr = GetFunctionDelegate<av_opt_set_dict_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_dict");
             if (av_opt_set_dict_fptr == null)
             {
                 av_opt_set_dict_fptr = delegate 
@@ -14654,7 +14654,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_dict_val_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, AVDictionary* @val, int @search_flags);
         private static av_opt_set_dict_val_delegate av_opt_set_dict_val_fptr = (void* @obj, string @name, AVDictionary* @val, int @search_flags) =>
         {
-            av_opt_set_dict_val_fptr = GetFunctionDelegate<av_opt_set_dict_val_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_dict_val");
+            av_opt_set_dict_val_fptr = GetFunctionDelegate<av_opt_set_dict_val_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_dict_val");
             if (av_opt_set_dict_val_fptr == null)
             {
                 av_opt_set_dict_val_fptr = delegate 
@@ -14674,7 +14674,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_dict2_delegate(void* @obj, AVDictionary** @options, int @search_flags);
         private static av_opt_set_dict2_delegate av_opt_set_dict2_fptr = (void* @obj, AVDictionary** @options, int @search_flags) =>
         {
-            av_opt_set_dict2_fptr = GetFunctionDelegate<av_opt_set_dict2_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_dict2");
+            av_opt_set_dict2_fptr = GetFunctionDelegate<av_opt_set_dict2_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_dict2");
             if (av_opt_set_dict2_fptr == null)
             {
                 av_opt_set_dict2_fptr = delegate 
@@ -14699,7 +14699,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_double_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, double @val, int @search_flags);
         private static av_opt_set_double_delegate av_opt_set_double_fptr = (void* @obj, string @name, double @val, int @search_flags) =>
         {
-            av_opt_set_double_fptr = GetFunctionDelegate<av_opt_set_double_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_double");
+            av_opt_set_double_fptr = GetFunctionDelegate<av_opt_set_double_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_double");
             if (av_opt_set_double_fptr == null)
             {
                 av_opt_set_double_fptr = delegate 
@@ -14719,7 +14719,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_from_string_delegate(void* @ctx, [MarshalAs((UnmanagedType)48)] string @opts, byte** @shorthand, [MarshalAs((UnmanagedType)48)] string @key_val_sep, [MarshalAs((UnmanagedType)48)] string @pairs_sep);
         private static av_opt_set_from_string_delegate av_opt_set_from_string_fptr = (void* @ctx, string @opts, byte** @shorthand, string @key_val_sep, string @pairs_sep) =>
         {
-            av_opt_set_from_string_fptr = GetFunctionDelegate<av_opt_set_from_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_from_string");
+            av_opt_set_from_string_fptr = GetFunctionDelegate<av_opt_set_from_string_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_from_string");
             if (av_opt_set_from_string_fptr == null)
             {
                 av_opt_set_from_string_fptr = delegate 
@@ -14746,7 +14746,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_image_size_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, int @w, int @h, int @search_flags);
         private static av_opt_set_image_size_delegate av_opt_set_image_size_fptr = (void* @obj, string @name, int @w, int @h, int @search_flags) =>
         {
-            av_opt_set_image_size_fptr = GetFunctionDelegate<av_opt_set_image_size_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_image_size");
+            av_opt_set_image_size_fptr = GetFunctionDelegate<av_opt_set_image_size_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_image_size");
             if (av_opt_set_image_size_fptr == null)
             {
                 av_opt_set_image_size_fptr = delegate 
@@ -14766,7 +14766,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_int_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, long @val, int @search_flags);
         private static av_opt_set_int_delegate av_opt_set_int_fptr = (void* @obj, string @name, long @val, int @search_flags) =>
         {
-            av_opt_set_int_fptr = GetFunctionDelegate<av_opt_set_int_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_int");
+            av_opt_set_int_fptr = GetFunctionDelegate<av_opt_set_int_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_int");
             if (av_opt_set_int_fptr == null)
             {
                 av_opt_set_int_fptr = delegate 
@@ -14786,7 +14786,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_pixel_fmt_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, AVPixelFormat @fmt, int @search_flags);
         private static av_opt_set_pixel_fmt_delegate av_opt_set_pixel_fmt_fptr = (void* @obj, string @name, AVPixelFormat @fmt, int @search_flags) =>
         {
-            av_opt_set_pixel_fmt_fptr = GetFunctionDelegate<av_opt_set_pixel_fmt_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_pixel_fmt");
+            av_opt_set_pixel_fmt_fptr = GetFunctionDelegate<av_opt_set_pixel_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_pixel_fmt");
             if (av_opt_set_pixel_fmt_fptr == null)
             {
                 av_opt_set_pixel_fmt_fptr = delegate 
@@ -14806,7 +14806,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_q_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, AVRational @val, int @search_flags);
         private static av_opt_set_q_delegate av_opt_set_q_fptr = (void* @obj, string @name, AVRational @val, int @search_flags) =>
         {
-            av_opt_set_q_fptr = GetFunctionDelegate<av_opt_set_q_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_q");
+            av_opt_set_q_fptr = GetFunctionDelegate<av_opt_set_q_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_q");
             if (av_opt_set_q_fptr == null)
             {
                 av_opt_set_q_fptr = delegate 
@@ -14826,7 +14826,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_sample_fmt_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, AVSampleFormat @fmt, int @search_flags);
         private static av_opt_set_sample_fmt_delegate av_opt_set_sample_fmt_fptr = (void* @obj, string @name, AVSampleFormat @fmt, int @search_flags) =>
         {
-            av_opt_set_sample_fmt_fptr = GetFunctionDelegate<av_opt_set_sample_fmt_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_sample_fmt");
+            av_opt_set_sample_fmt_fptr = GetFunctionDelegate<av_opt_set_sample_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_sample_fmt");
             if (av_opt_set_sample_fmt_fptr == null)
             {
                 av_opt_set_sample_fmt_fptr = delegate 
@@ -14846,7 +14846,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_set_video_rate_delegate(void* @obj, [MarshalAs((UnmanagedType)48)] string @name, AVRational @val, int @search_flags);
         private static av_opt_set_video_rate_delegate av_opt_set_video_rate_fptr = (void* @obj, string @name, AVRational @val, int @search_flags) =>
         {
-            av_opt_set_video_rate_fptr = GetFunctionDelegate<av_opt_set_video_rate_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_set_video_rate");
+            av_opt_set_video_rate_fptr = GetFunctionDelegate<av_opt_set_video_rate_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_video_rate");
             if (av_opt_set_video_rate_fptr == null)
             {
                 av_opt_set_video_rate_fptr = delegate 
@@ -14866,7 +14866,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_opt_show2_delegate(void* @obj, void* @av_log_obj, int @req_flags, int @rej_flags);
         private static av_opt_show2_delegate av_opt_show2_fptr = (void* @obj, void* @av_log_obj, int @req_flags, int @rej_flags) =>
         {
-            av_opt_show2_fptr = GetFunctionDelegate<av_opt_show2_delegate>(GetOrLoadLibrary("avutil", 56), "av_opt_show2");
+            av_opt_show2_fptr = GetFunctionDelegate<av_opt_show2_delegate>(GetOrLoadLibrary("avutil"), "av_opt_show2");
             if (av_opt_show2_fptr == null)
             {
                 av_opt_show2_fptr = delegate 
@@ -14890,7 +14890,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_parse_cpu_caps_delegate(uint* @flags, [MarshalAs((UnmanagedType)48)] string @s);
         private static av_parse_cpu_caps_delegate av_parse_cpu_caps_fptr = (uint* @flags, string @s) =>
         {
-            av_parse_cpu_caps_fptr = GetFunctionDelegate<av_parse_cpu_caps_delegate>(GetOrLoadLibrary("avutil", 56), "av_parse_cpu_caps");
+            av_parse_cpu_caps_fptr = GetFunctionDelegate<av_parse_cpu_caps_delegate>(GetOrLoadLibrary("avutil"), "av_parse_cpu_caps");
             if (av_parse_cpu_caps_fptr == null)
             {
                 av_parse_cpu_caps_fptr = delegate 
@@ -14912,7 +14912,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_parse_cpu_flags_delegate([MarshalAs((UnmanagedType)48)] string @s);
         private static av_parse_cpu_flags_delegate av_parse_cpu_flags_fptr = (string @s) =>
         {
-            av_parse_cpu_flags_fptr = GetFunctionDelegate<av_parse_cpu_flags_delegate>(GetOrLoadLibrary("avutil", 56), "av_parse_cpu_flags");
+            av_parse_cpu_flags_fptr = GetFunctionDelegate<av_parse_cpu_flags_delegate>(GetOrLoadLibrary("avutil"), "av_parse_cpu_flags");
             if (av_parse_cpu_flags_fptr == null)
             {
                 av_parse_cpu_flags_fptr = delegate 
@@ -14935,7 +14935,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_pix_fmt_count_planes_delegate(AVPixelFormat @pix_fmt);
         private static av_pix_fmt_count_planes_delegate av_pix_fmt_count_planes_fptr = (AVPixelFormat @pix_fmt) =>
         {
-            av_pix_fmt_count_planes_fptr = GetFunctionDelegate<av_pix_fmt_count_planes_delegate>(GetOrLoadLibrary("avutil", 56), "av_pix_fmt_count_planes");
+            av_pix_fmt_count_planes_fptr = GetFunctionDelegate<av_pix_fmt_count_planes_delegate>(GetOrLoadLibrary("avutil"), "av_pix_fmt_count_planes");
             if (av_pix_fmt_count_planes_fptr == null)
             {
                 av_pix_fmt_count_planes_fptr = delegate 
@@ -14957,7 +14957,7 @@ namespace FFmpeg.AutoGen
         private delegate AVPixFmtDescriptor* av_pix_fmt_desc_get_delegate(AVPixelFormat @pix_fmt);
         private static av_pix_fmt_desc_get_delegate av_pix_fmt_desc_get_fptr = (AVPixelFormat @pix_fmt) =>
         {
-            av_pix_fmt_desc_get_fptr = GetFunctionDelegate<av_pix_fmt_desc_get_delegate>(GetOrLoadLibrary("avutil", 56), "av_pix_fmt_desc_get");
+            av_pix_fmt_desc_get_fptr = GetFunctionDelegate<av_pix_fmt_desc_get_delegate>(GetOrLoadLibrary("avutil"), "av_pix_fmt_desc_get");
             if (av_pix_fmt_desc_get_fptr == null)
             {
                 av_pix_fmt_desc_get_fptr = delegate 
@@ -14979,7 +14979,7 @@ namespace FFmpeg.AutoGen
         private delegate AVPixelFormat av_pix_fmt_desc_get_id_delegate(AVPixFmtDescriptor* @desc);
         private static av_pix_fmt_desc_get_id_delegate av_pix_fmt_desc_get_id_fptr = (AVPixFmtDescriptor* @desc) =>
         {
-            av_pix_fmt_desc_get_id_fptr = GetFunctionDelegate<av_pix_fmt_desc_get_id_delegate>(GetOrLoadLibrary("avutil", 56), "av_pix_fmt_desc_get_id");
+            av_pix_fmt_desc_get_id_fptr = GetFunctionDelegate<av_pix_fmt_desc_get_id_delegate>(GetOrLoadLibrary("avutil"), "av_pix_fmt_desc_get_id");
             if (av_pix_fmt_desc_get_id_fptr == null)
             {
                 av_pix_fmt_desc_get_id_fptr = delegate 
@@ -15001,7 +15001,7 @@ namespace FFmpeg.AutoGen
         private delegate AVPixFmtDescriptor* av_pix_fmt_desc_next_delegate(AVPixFmtDescriptor* @prev);
         private static av_pix_fmt_desc_next_delegate av_pix_fmt_desc_next_fptr = (AVPixFmtDescriptor* @prev) =>
         {
-            av_pix_fmt_desc_next_fptr = GetFunctionDelegate<av_pix_fmt_desc_next_delegate>(GetOrLoadLibrary("avutil", 56), "av_pix_fmt_desc_next");
+            av_pix_fmt_desc_next_fptr = GetFunctionDelegate<av_pix_fmt_desc_next_delegate>(GetOrLoadLibrary("avutil"), "av_pix_fmt_desc_next");
             if (av_pix_fmt_desc_next_fptr == null)
             {
                 av_pix_fmt_desc_next_fptr = delegate 
@@ -15024,7 +15024,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_pix_fmt_get_chroma_sub_sample_delegate(AVPixelFormat @pix_fmt, int* @h_shift, int* @v_shift);
         private static av_pix_fmt_get_chroma_sub_sample_delegate av_pix_fmt_get_chroma_sub_sample_fptr = (AVPixelFormat @pix_fmt, int* @h_shift, int* @v_shift) =>
         {
-            av_pix_fmt_get_chroma_sub_sample_fptr = GetFunctionDelegate<av_pix_fmt_get_chroma_sub_sample_delegate>(GetOrLoadLibrary("avutil", 56), "av_pix_fmt_get_chroma_sub_sample");
+            av_pix_fmt_get_chroma_sub_sample_fptr = GetFunctionDelegate<av_pix_fmt_get_chroma_sub_sample_delegate>(GetOrLoadLibrary("avutil"), "av_pix_fmt_get_chroma_sub_sample");
             if (av_pix_fmt_get_chroma_sub_sample_fptr == null)
             {
                 av_pix_fmt_get_chroma_sub_sample_fptr = delegate 
@@ -15049,7 +15049,7 @@ namespace FFmpeg.AutoGen
         private delegate AVPixelFormat av_pix_fmt_swap_endianness_delegate(AVPixelFormat @pix_fmt);
         private static av_pix_fmt_swap_endianness_delegate av_pix_fmt_swap_endianness_fptr = (AVPixelFormat @pix_fmt) =>
         {
-            av_pix_fmt_swap_endianness_fptr = GetFunctionDelegate<av_pix_fmt_swap_endianness_delegate>(GetOrLoadLibrary("avutil", 56), "av_pix_fmt_swap_endianness");
+            av_pix_fmt_swap_endianness_fptr = GetFunctionDelegate<av_pix_fmt_swap_endianness_delegate>(GetOrLoadLibrary("avutil"), "av_pix_fmt_swap_endianness");
             if (av_pix_fmt_swap_endianness_fptr == null)
             {
                 av_pix_fmt_swap_endianness_fptr = delegate 
@@ -15072,7 +15072,7 @@ namespace FFmpeg.AutoGen
         private delegate uint av_q2intfloat_delegate(AVRational @q);
         private static av_q2intfloat_delegate av_q2intfloat_fptr = (AVRational @q) =>
         {
-            av_q2intfloat_fptr = GetFunctionDelegate<av_q2intfloat_delegate>(GetOrLoadLibrary("avutil", 56), "av_q2intfloat");
+            av_q2intfloat_fptr = GetFunctionDelegate<av_q2intfloat_delegate>(GetOrLoadLibrary("avutil"), "av_q2intfloat");
             if (av_q2intfloat_fptr == null)
             {
                 av_q2intfloat_fptr = delegate 
@@ -15095,7 +15095,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_read_image_line_delegate(ushort* @dst, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component);
         private static av_read_image_line_delegate av_read_image_line_fptr = (ushort* @dst, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component) =>
         {
-            av_read_image_line_fptr = GetFunctionDelegate<av_read_image_line_delegate>(GetOrLoadLibrary("avutil", 56), "av_read_image_line");
+            av_read_image_line_fptr = GetFunctionDelegate<av_read_image_line_delegate>(GetOrLoadLibrary("avutil"), "av_read_image_line");
             if (av_read_image_line_fptr == null)
             {
                 av_read_image_line_fptr = delegate 
@@ -15115,7 +15115,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_read_image_line2_delegate(void* @dst, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component, int @dst_element_size);
         private static av_read_image_line2_delegate av_read_image_line2_fptr = (void* @dst, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component, int @dst_element_size) =>
         {
-            av_read_image_line2_fptr = GetFunctionDelegate<av_read_image_line2_delegate>(GetOrLoadLibrary("avutil", 56), "av_read_image_line2");
+            av_read_image_line2_fptr = GetFunctionDelegate<av_read_image_line2_delegate>(GetOrLoadLibrary("avutil"), "av_read_image_line2");
             if (av_read_image_line2_fptr == null)
             {
                 av_read_image_line2_fptr = delegate 
@@ -15144,7 +15144,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_realloc_delegate(void* @ptr, ulong @size);
         private static av_realloc_delegate av_realloc_fptr = (void* @ptr, ulong @size) =>
         {
-            av_realloc_fptr = GetFunctionDelegate<av_realloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_realloc");
+            av_realloc_fptr = GetFunctionDelegate<av_realloc_delegate>(GetOrLoadLibrary("avutil"), "av_realloc");
             if (av_realloc_fptr == null)
             {
                 av_realloc_fptr = delegate 
@@ -15168,7 +15168,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_realloc_array_delegate(void* @ptr, ulong @nmemb, ulong @size);
         private static av_realloc_array_delegate av_realloc_array_fptr = (void* @ptr, ulong @nmemb, ulong @size) =>
         {
-            av_realloc_array_fptr = GetFunctionDelegate<av_realloc_array_delegate>(GetOrLoadLibrary("avutil", 56), "av_realloc_array");
+            av_realloc_array_fptr = GetFunctionDelegate<av_realloc_array_delegate>(GetOrLoadLibrary("avutil"), "av_realloc_array");
             if (av_realloc_array_fptr == null)
             {
                 av_realloc_array_fptr = delegate 
@@ -15193,7 +15193,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_realloc_f_delegate(void* @ptr, ulong @nelem, ulong @elsize);
         private static av_realloc_f_delegate av_realloc_f_fptr = (void* @ptr, ulong @nelem, ulong @elsize) =>
         {
-            av_realloc_f_fptr = GetFunctionDelegate<av_realloc_f_delegate>(GetOrLoadLibrary("avutil", 56), "av_realloc_f");
+            av_realloc_f_fptr = GetFunctionDelegate<av_realloc_f_delegate>(GetOrLoadLibrary("avutil"), "av_realloc_f");
             if (av_realloc_f_fptr == null)
             {
                 av_realloc_f_fptr = delegate 
@@ -15214,7 +15214,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_reallocp_delegate(void* @ptr, ulong @size);
         private static av_reallocp_delegate av_reallocp_fptr = (void* @ptr, ulong @size) =>
         {
-            av_reallocp_fptr = GetFunctionDelegate<av_reallocp_delegate>(GetOrLoadLibrary("avutil", 56), "av_reallocp");
+            av_reallocp_fptr = GetFunctionDelegate<av_reallocp_delegate>(GetOrLoadLibrary("avutil"), "av_reallocp");
             if (av_reallocp_fptr == null)
             {
                 av_reallocp_fptr = delegate 
@@ -15238,7 +15238,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_reallocp_array_delegate(void* @ptr, ulong @nmemb, ulong @size);
         private static av_reallocp_array_delegate av_reallocp_array_fptr = (void* @ptr, ulong @nmemb, ulong @size) =>
         {
-            av_reallocp_array_fptr = GetFunctionDelegate<av_reallocp_array_delegate>(GetOrLoadLibrary("avutil", 56), "av_reallocp_array");
+            av_reallocp_array_fptr = GetFunctionDelegate<av_reallocp_array_delegate>(GetOrLoadLibrary("avutil"), "av_reallocp_array");
             if (av_reallocp_array_fptr == null)
             {
                 av_reallocp_array_fptr = delegate 
@@ -15263,7 +15263,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_reduce_delegate(int* @dst_num, int* @dst_den, long @num, long @den, long @max);
         private static av_reduce_delegate av_reduce_fptr = (int* @dst_num, int* @dst_den, long @num, long @den, long @max) =>
         {
-            av_reduce_fptr = GetFunctionDelegate<av_reduce_delegate>(GetOrLoadLibrary("avutil", 56), "av_reduce");
+            av_reduce_fptr = GetFunctionDelegate<av_reduce_delegate>(GetOrLoadLibrary("avutil"), "av_reduce");
             if (av_reduce_fptr == null)
             {
                 av_reduce_fptr = delegate 
@@ -15290,7 +15290,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_rescale_delegate(long @a, long @b, long @c);
         private static av_rescale_delegate av_rescale_fptr = (long @a, long @b, long @c) =>
         {
-            av_rescale_fptr = GetFunctionDelegate<av_rescale_delegate>(GetOrLoadLibrary("avutil", 56), "av_rescale");
+            av_rescale_fptr = GetFunctionDelegate<av_rescale_delegate>(GetOrLoadLibrary("avutil"), "av_rescale");
             if (av_rescale_fptr == null)
             {
                 av_rescale_fptr = delegate 
@@ -15311,7 +15311,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_rescale_delta_delegate(AVRational @in_tb, long @in_ts, AVRational @fs_tb, int @duration, long* @last, AVRational @out_tb);
         private static av_rescale_delta_delegate av_rescale_delta_fptr = (AVRational @in_tb, long @in_ts, AVRational @fs_tb, int @duration, long* @last, AVRational @out_tb) =>
         {
-            av_rescale_delta_fptr = GetFunctionDelegate<av_rescale_delta_delegate>(GetOrLoadLibrary("avutil", 56), "av_rescale_delta");
+            av_rescale_delta_fptr = GetFunctionDelegate<av_rescale_delta_delegate>(GetOrLoadLibrary("avutil"), "av_rescale_delta");
             if (av_rescale_delta_fptr == null)
             {
                 av_rescale_delta_fptr = delegate 
@@ -15339,7 +15339,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_rescale_q_delegate(long @a, AVRational @bq, AVRational @cq);
         private static av_rescale_q_delegate av_rescale_q_fptr = (long @a, AVRational @bq, AVRational @cq) =>
         {
-            av_rescale_q_fptr = GetFunctionDelegate<av_rescale_q_delegate>(GetOrLoadLibrary("avutil", 56), "av_rescale_q");
+            av_rescale_q_fptr = GetFunctionDelegate<av_rescale_q_delegate>(GetOrLoadLibrary("avutil"), "av_rescale_q");
             if (av_rescale_q_fptr == null)
             {
                 av_rescale_q_fptr = delegate 
@@ -15360,7 +15360,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_rescale_q_rnd_delegate(long @a, AVRational @bq, AVRational @cq, AVRounding @rnd);
         private static av_rescale_q_rnd_delegate av_rescale_q_rnd_fptr = (long @a, AVRational @bq, AVRational @cq, AVRounding @rnd) =>
         {
-            av_rescale_q_rnd_fptr = GetFunctionDelegate<av_rescale_q_rnd_delegate>(GetOrLoadLibrary("avutil", 56), "av_rescale_q_rnd");
+            av_rescale_q_rnd_fptr = GetFunctionDelegate<av_rescale_q_rnd_delegate>(GetOrLoadLibrary("avutil"), "av_rescale_q_rnd");
             if (av_rescale_q_rnd_fptr == null)
             {
                 av_rescale_q_rnd_fptr = delegate 
@@ -15381,7 +15381,7 @@ namespace FFmpeg.AutoGen
         private delegate long av_rescale_rnd_delegate(long @a, long @b, long @c, AVRounding @rnd);
         private static av_rescale_rnd_delegate av_rescale_rnd_fptr = (long @a, long @b, long @c, AVRounding @rnd) =>
         {
-            av_rescale_rnd_fptr = GetFunctionDelegate<av_rescale_rnd_delegate>(GetOrLoadLibrary("avutil", 56), "av_rescale_rnd");
+            av_rescale_rnd_fptr = GetFunctionDelegate<av_rescale_rnd_delegate>(GetOrLoadLibrary("avutil"), "av_rescale_rnd");
             if (av_rescale_rnd_fptr == null)
             {
                 av_rescale_rnd_fptr = delegate 
@@ -15402,7 +15402,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_sample_fmt_is_planar_delegate(AVSampleFormat @sample_fmt);
         private static av_sample_fmt_is_planar_delegate av_sample_fmt_is_planar_fptr = (AVSampleFormat @sample_fmt) =>
         {
-            av_sample_fmt_is_planar_fptr = GetFunctionDelegate<av_sample_fmt_is_planar_delegate>(GetOrLoadLibrary("avutil", 56), "av_sample_fmt_is_planar");
+            av_sample_fmt_is_planar_fptr = GetFunctionDelegate<av_sample_fmt_is_planar_delegate>(GetOrLoadLibrary("avutil"), "av_sample_fmt_is_planar");
             if (av_sample_fmt_is_planar_fptr == null)
             {
                 av_sample_fmt_is_planar_fptr = delegate 
@@ -15425,7 +15425,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_samples_alloc_delegate(byte** @audio_data, int* @linesize, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align);
         private static av_samples_alloc_delegate av_samples_alloc_fptr = (byte** @audio_data, int* @linesize, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align) =>
         {
-            av_samples_alloc_fptr = GetFunctionDelegate<av_samples_alloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_samples_alloc");
+            av_samples_alloc_fptr = GetFunctionDelegate<av_samples_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_samples_alloc");
             if (av_samples_alloc_fptr == null)
             {
                 av_samples_alloc_fptr = delegate 
@@ -15452,7 +15452,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_samples_alloc_array_and_samples_delegate(byte*** @audio_data, int* @linesize, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align);
         private static av_samples_alloc_array_and_samples_delegate av_samples_alloc_array_and_samples_fptr = (byte*** @audio_data, int* @linesize, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align) =>
         {
-            av_samples_alloc_array_and_samples_fptr = GetFunctionDelegate<av_samples_alloc_array_and_samples_delegate>(GetOrLoadLibrary("avutil", 56), "av_samples_alloc_array_and_samples");
+            av_samples_alloc_array_and_samples_fptr = GetFunctionDelegate<av_samples_alloc_array_and_samples_delegate>(GetOrLoadLibrary("avutil"), "av_samples_alloc_array_and_samples");
             if (av_samples_alloc_array_and_samples_fptr == null)
             {
                 av_samples_alloc_array_and_samples_fptr = delegate 
@@ -15473,7 +15473,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_samples_copy_delegate(byte** @dst, byte** @src, int @dst_offset, int @src_offset, int @nb_samples, int @nb_channels, AVSampleFormat @sample_fmt);
         private static av_samples_copy_delegate av_samples_copy_fptr = (byte** @dst, byte** @src, int @dst_offset, int @src_offset, int @nb_samples, int @nb_channels, AVSampleFormat @sample_fmt) =>
         {
-            av_samples_copy_fptr = GetFunctionDelegate<av_samples_copy_delegate>(GetOrLoadLibrary("avutil", 56), "av_samples_copy");
+            av_samples_copy_fptr = GetFunctionDelegate<av_samples_copy_delegate>(GetOrLoadLibrary("avutil"), "av_samples_copy");
             if (av_samples_copy_fptr == null)
             {
                 av_samples_copy_fptr = delegate 
@@ -15501,7 +15501,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_samples_fill_arrays_delegate(byte** @audio_data, int* @linesize, byte* @buf, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align);
         private static av_samples_fill_arrays_delegate av_samples_fill_arrays_fptr = (byte** @audio_data, int* @linesize, byte* @buf, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align) =>
         {
-            av_samples_fill_arrays_fptr = GetFunctionDelegate<av_samples_fill_arrays_delegate>(GetOrLoadLibrary("avutil", 56), "av_samples_fill_arrays");
+            av_samples_fill_arrays_fptr = GetFunctionDelegate<av_samples_fill_arrays_delegate>(GetOrLoadLibrary("avutil"), "av_samples_fill_arrays");
             if (av_samples_fill_arrays_fptr == null)
             {
                 av_samples_fill_arrays_fptr = delegate 
@@ -15530,7 +15530,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_samples_get_buffer_size_delegate(int* @linesize, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align);
         private static av_samples_get_buffer_size_delegate av_samples_get_buffer_size_fptr = (int* @linesize, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align) =>
         {
-            av_samples_get_buffer_size_fptr = GetFunctionDelegate<av_samples_get_buffer_size_delegate>(GetOrLoadLibrary("avutil", 56), "av_samples_get_buffer_size");
+            av_samples_get_buffer_size_fptr = GetFunctionDelegate<av_samples_get_buffer_size_delegate>(GetOrLoadLibrary("avutil"), "av_samples_get_buffer_size");
             if (av_samples_get_buffer_size_fptr == null)
             {
                 av_samples_get_buffer_size_fptr = delegate 
@@ -15557,7 +15557,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_samples_set_silence_delegate(byte** @audio_data, int @offset, int @nb_samples, int @nb_channels, AVSampleFormat @sample_fmt);
         private static av_samples_set_silence_delegate av_samples_set_silence_fptr = (byte** @audio_data, int @offset, int @nb_samples, int @nb_channels, AVSampleFormat @sample_fmt) =>
         {
-            av_samples_set_silence_fptr = GetFunctionDelegate<av_samples_set_silence_delegate>(GetOrLoadLibrary("avutil", 56), "av_samples_set_silence");
+            av_samples_set_silence_fptr = GetFunctionDelegate<av_samples_set_silence_delegate>(GetOrLoadLibrary("avutil"), "av_samples_set_silence");
             if (av_samples_set_silence_fptr == null)
             {
                 av_samples_set_silence_fptr = delegate 
@@ -15583,7 +15583,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_set_cpu_flags_mask_delegate(int @mask);
         private static av_set_cpu_flags_mask_delegate av_set_cpu_flags_mask_fptr = (int @mask) =>
         {
-            av_set_cpu_flags_mask_fptr = GetFunctionDelegate<av_set_cpu_flags_mask_delegate>(GetOrLoadLibrary("avutil", 56), "av_set_cpu_flags_mask");
+            av_set_cpu_flags_mask_fptr = GetFunctionDelegate<av_set_cpu_flags_mask_delegate>(GetOrLoadLibrary("avutil"), "av_set_cpu_flags_mask");
             if (av_set_cpu_flags_mask_fptr == null)
             {
                 av_set_cpu_flags_mask_fptr = delegate 
@@ -15605,7 +15605,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_set_options_string_delegate(void* @ctx, [MarshalAs((UnmanagedType)48)] string @opts, [MarshalAs((UnmanagedType)48)] string @key_val_sep, [MarshalAs((UnmanagedType)48)] string @pairs_sep);
         private static av_set_options_string_delegate av_set_options_string_fptr = (void* @ctx, string @opts, string @key_val_sep, string @pairs_sep) =>
         {
-            av_set_options_string_fptr = GetFunctionDelegate<av_set_options_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_set_options_string");
+            av_set_options_string_fptr = GetFunctionDelegate<av_set_options_string_delegate>(GetOrLoadLibrary("avutil"), "av_set_options_string");
             if (av_set_options_string_fptr == null)
             {
                 av_set_options_string_fptr = delegate 
@@ -15630,7 +15630,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_strdup_delegate([MarshalAs((UnmanagedType)48)] string @s);
         private static av_strdup_delegate av_strdup_fptr = (string @s) =>
         {
-            av_strdup_fptr = GetFunctionDelegate<av_strdup_delegate>(GetOrLoadLibrary("avutil", 56), "av_strdup");
+            av_strdup_fptr = GetFunctionDelegate<av_strdup_delegate>(GetOrLoadLibrary("avutil"), "av_strdup");
             if (av_strdup_fptr == null)
             {
                 av_strdup_fptr = delegate 
@@ -15653,7 +15653,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_strerror_delegate(int @errnum, byte* @errbuf, ulong @errbuf_size);
         private static av_strerror_delegate av_strerror_fptr = (int @errnum, byte* @errbuf, ulong @errbuf_size) =>
         {
-            av_strerror_fptr = GetFunctionDelegate<av_strerror_delegate>(GetOrLoadLibrary("avutil", 56), "av_strerror");
+            av_strerror_fptr = GetFunctionDelegate<av_strerror_delegate>(GetOrLoadLibrary("avutil"), "av_strerror");
             if (av_strerror_fptr == null)
             {
                 av_strerror_fptr = delegate 
@@ -15678,7 +15678,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_strndup_delegate([MarshalAs((UnmanagedType)48)] string @s, ulong @len);
         private static av_strndup_delegate av_strndup_fptr = (string @s, ulong @len) =>
         {
-            av_strndup_fptr = GetFunctionDelegate<av_strndup_delegate>(GetOrLoadLibrary("avutil", 56), "av_strndup");
+            av_strndup_fptr = GetFunctionDelegate<av_strndup_delegate>(GetOrLoadLibrary("avutil"), "av_strndup");
             if (av_strndup_fptr == null)
             {
                 av_strndup_fptr = delegate 
@@ -15702,7 +15702,7 @@ namespace FFmpeg.AutoGen
         private delegate AVRational av_sub_q_delegate(AVRational @b, AVRational @c);
         private static av_sub_q_delegate av_sub_q_fptr = (AVRational @b, AVRational @c) =>
         {
-            av_sub_q_fptr = GetFunctionDelegate<av_sub_q_delegate>(GetOrLoadLibrary("avutil", 56), "av_sub_q");
+            av_sub_q_fptr = GetFunctionDelegate<av_sub_q_delegate>(GetOrLoadLibrary("avutil"), "av_sub_q");
             if (av_sub_q_fptr == null)
             {
                 av_sub_q_fptr = delegate 
@@ -15726,7 +15726,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_timecode_adjust_ntsc_framenum2_delegate(int @framenum, int @fps);
         private static av_timecode_adjust_ntsc_framenum2_delegate av_timecode_adjust_ntsc_framenum2_fptr = (int @framenum, int @fps) =>
         {
-            av_timecode_adjust_ntsc_framenum2_fptr = GetFunctionDelegate<av_timecode_adjust_ntsc_framenum2_delegate>(GetOrLoadLibrary("avutil", 56), "av_timecode_adjust_ntsc_framenum2");
+            av_timecode_adjust_ntsc_framenum2_fptr = GetFunctionDelegate<av_timecode_adjust_ntsc_framenum2_delegate>(GetOrLoadLibrary("avutil"), "av_timecode_adjust_ntsc_framenum2");
             if (av_timecode_adjust_ntsc_framenum2_fptr == null)
             {
                 av_timecode_adjust_ntsc_framenum2_fptr = delegate 
@@ -15750,7 +15750,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_timecode_check_frame_rate_delegate(AVRational @rate);
         private static av_timecode_check_frame_rate_delegate av_timecode_check_frame_rate_fptr = (AVRational @rate) =>
         {
-            av_timecode_check_frame_rate_fptr = GetFunctionDelegate<av_timecode_check_frame_rate_delegate>(GetOrLoadLibrary("avutil", 56), "av_timecode_check_frame_rate");
+            av_timecode_check_frame_rate_fptr = GetFunctionDelegate<av_timecode_check_frame_rate_delegate>(GetOrLoadLibrary("avutil"), "av_timecode_check_frame_rate");
             if (av_timecode_check_frame_rate_fptr == null)
             {
                 av_timecode_check_frame_rate_fptr = delegate 
@@ -15772,7 +15772,7 @@ namespace FFmpeg.AutoGen
         private delegate uint av_timecode_get_smpte_from_framenum_delegate(AVTimecode* @tc, int @framenum);
         private static av_timecode_get_smpte_from_framenum_delegate av_timecode_get_smpte_from_framenum_fptr = (AVTimecode* @tc, int @framenum) =>
         {
-            av_timecode_get_smpte_from_framenum_fptr = GetFunctionDelegate<av_timecode_get_smpte_from_framenum_delegate>(GetOrLoadLibrary("avutil", 56), "av_timecode_get_smpte_from_framenum");
+            av_timecode_get_smpte_from_framenum_fptr = GetFunctionDelegate<av_timecode_get_smpte_from_framenum_delegate>(GetOrLoadLibrary("avutil"), "av_timecode_get_smpte_from_framenum");
             if (av_timecode_get_smpte_from_framenum_fptr == null)
             {
                 av_timecode_get_smpte_from_framenum_fptr = delegate 
@@ -15796,7 +15796,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_timecode_init_delegate(AVTimecode* @tc, AVRational @rate, int @flags, int @frame_start, void* @log_ctx);
         private static av_timecode_init_delegate av_timecode_init_fptr = (AVTimecode* @tc, AVRational @rate, int @flags, int @frame_start, void* @log_ctx) =>
         {
-            av_timecode_init_fptr = GetFunctionDelegate<av_timecode_init_delegate>(GetOrLoadLibrary("avutil", 56), "av_timecode_init");
+            av_timecode_init_fptr = GetFunctionDelegate<av_timecode_init_delegate>(GetOrLoadLibrary("avutil"), "av_timecode_init");
             if (av_timecode_init_fptr == null)
             {
                 av_timecode_init_fptr = delegate 
@@ -15823,7 +15823,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_timecode_init_from_string_delegate(AVTimecode* @tc, AVRational @rate, [MarshalAs((UnmanagedType)48)] string @str, void* @log_ctx);
         private static av_timecode_init_from_string_delegate av_timecode_init_from_string_fptr = (AVTimecode* @tc, AVRational @rate, string @str, void* @log_ctx) =>
         {
-            av_timecode_init_from_string_fptr = GetFunctionDelegate<av_timecode_init_from_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_timecode_init_from_string");
+            av_timecode_init_from_string_fptr = GetFunctionDelegate<av_timecode_init_from_string_delegate>(GetOrLoadLibrary("avutil"), "av_timecode_init_from_string");
             if (av_timecode_init_from_string_fptr == null)
             {
                 av_timecode_init_from_string_fptr = delegate 
@@ -15849,7 +15849,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_timecode_make_mpeg_tc_string_delegate(byte* @buf, uint @tc25bit);
         private static av_timecode_make_mpeg_tc_string_delegate av_timecode_make_mpeg_tc_string_fptr = (byte* @buf, uint @tc25bit) =>
         {
-            av_timecode_make_mpeg_tc_string_fptr = GetFunctionDelegate<av_timecode_make_mpeg_tc_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_timecode_make_mpeg_tc_string");
+            av_timecode_make_mpeg_tc_string_fptr = GetFunctionDelegate<av_timecode_make_mpeg_tc_string_delegate>(GetOrLoadLibrary("avutil"), "av_timecode_make_mpeg_tc_string");
             if (av_timecode_make_mpeg_tc_string_fptr == null)
             {
                 av_timecode_make_mpeg_tc_string_fptr = delegate 
@@ -15873,7 +15873,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_timecode_make_smpte_tc_string_delegate(byte* @buf, uint @tcsmpte, int @prevent_df);
         private static av_timecode_make_smpte_tc_string_delegate av_timecode_make_smpte_tc_string_fptr = (byte* @buf, uint @tcsmpte, int @prevent_df) =>
         {
-            av_timecode_make_smpte_tc_string_fptr = GetFunctionDelegate<av_timecode_make_smpte_tc_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_timecode_make_smpte_tc_string");
+            av_timecode_make_smpte_tc_string_fptr = GetFunctionDelegate<av_timecode_make_smpte_tc_string_delegate>(GetOrLoadLibrary("avutil"), "av_timecode_make_smpte_tc_string");
             if (av_timecode_make_smpte_tc_string_fptr == null)
             {
                 av_timecode_make_smpte_tc_string_fptr = delegate 
@@ -15898,7 +15898,7 @@ namespace FFmpeg.AutoGen
         private delegate byte* av_timecode_make_string_delegate(AVTimecode* @tc, byte* @buf, int @framenum);
         private static av_timecode_make_string_delegate av_timecode_make_string_fptr = (AVTimecode* @tc, byte* @buf, int @framenum) =>
         {
-            av_timecode_make_string_fptr = GetFunctionDelegate<av_timecode_make_string_delegate>(GetOrLoadLibrary("avutil", 56), "av_timecode_make_string");
+            av_timecode_make_string_fptr = GetFunctionDelegate<av_timecode_make_string_delegate>(GetOrLoadLibrary("avutil"), "av_timecode_make_string");
             if (av_timecode_make_string_fptr == null)
             {
                 av_timecode_make_string_fptr = delegate 
@@ -15923,7 +15923,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_tree_destroy_delegate(AVTreeNode* @t);
         private static av_tree_destroy_delegate av_tree_destroy_fptr = (AVTreeNode* @t) =>
         {
-            av_tree_destroy_fptr = GetFunctionDelegate<av_tree_destroy_delegate>(GetOrLoadLibrary("avutil", 56), "av_tree_destroy");
+            av_tree_destroy_fptr = GetFunctionDelegate<av_tree_destroy_delegate>(GetOrLoadLibrary("avutil"), "av_tree_destroy");
             if (av_tree_destroy_fptr == null)
             {
                 av_tree_destroy_fptr = delegate 
@@ -15943,7 +15943,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_tree_enumerate_delegate(AVTreeNode* @t, void* @opaque, av_tree_enumerate_cmp_func @cmp, av_tree_enumerate_enu_func @enu);
         private static av_tree_enumerate_delegate av_tree_enumerate_fptr = (AVTreeNode* @t, void* @opaque, av_tree_enumerate_cmp_func @cmp, av_tree_enumerate_enu_func @enu) =>
         {
-            av_tree_enumerate_fptr = GetFunctionDelegate<av_tree_enumerate_delegate>(GetOrLoadLibrary("avutil", 56), "av_tree_enumerate");
+            av_tree_enumerate_fptr = GetFunctionDelegate<av_tree_enumerate_delegate>(GetOrLoadLibrary("avutil"), "av_tree_enumerate");
             if (av_tree_enumerate_fptr == null)
             {
                 av_tree_enumerate_fptr = delegate 
@@ -15965,7 +15965,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_tree_find_delegate(AVTreeNode* @root, void* @key, av_tree_find_cmp_func @cmp, ref void_ptrArray2 @next);
         private static av_tree_find_delegate av_tree_find_fptr = (AVTreeNode* @root, void* @key, av_tree_find_cmp_func @cmp, ref void_ptrArray2 @next) =>
         {
-            av_tree_find_fptr = GetFunctionDelegate<av_tree_find_delegate>(GetOrLoadLibrary("avutil", 56), "av_tree_find");
+            av_tree_find_fptr = GetFunctionDelegate<av_tree_find_delegate>(GetOrLoadLibrary("avutil"), "av_tree_find");
             if (av_tree_find_fptr == null)
             {
                 av_tree_find_fptr = delegate 
@@ -15990,7 +15990,7 @@ namespace FFmpeg.AutoGen
         private delegate void* av_tree_insert_delegate(AVTreeNode** @rootp, void* @key, av_tree_insert_cmp_func @cmp, AVTreeNode** @next);
         private static av_tree_insert_delegate av_tree_insert_fptr = (AVTreeNode** @rootp, void* @key, av_tree_insert_cmp_func @cmp, AVTreeNode** @next) =>
         {
-            av_tree_insert_fptr = GetFunctionDelegate<av_tree_insert_delegate>(GetOrLoadLibrary("avutil", 56), "av_tree_insert");
+            av_tree_insert_fptr = GetFunctionDelegate<av_tree_insert_delegate>(GetOrLoadLibrary("avutil"), "av_tree_insert");
             if (av_tree_insert_fptr == null)
             {
                 av_tree_insert_fptr = delegate 
@@ -16016,7 +16016,7 @@ namespace FFmpeg.AutoGen
         private delegate AVTreeNode* av_tree_node_alloc_delegate();
         private static av_tree_node_alloc_delegate av_tree_node_alloc_fptr = () =>
         {
-            av_tree_node_alloc_fptr = GetFunctionDelegate<av_tree_node_alloc_delegate>(GetOrLoadLibrary("avutil", 56), "av_tree_node_alloc");
+            av_tree_node_alloc_fptr = GetFunctionDelegate<av_tree_node_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_tree_node_alloc");
             if (av_tree_node_alloc_fptr == null)
             {
                 av_tree_node_alloc_fptr = delegate 
@@ -16037,7 +16037,7 @@ namespace FFmpeg.AutoGen
         private delegate int av_usleep_delegate(uint @usec);
         private static av_usleep_delegate av_usleep_fptr = (uint @usec) =>
         {
-            av_usleep_fptr = GetFunctionDelegate<av_usleep_delegate>(GetOrLoadLibrary("avutil", 56), "av_usleep");
+            av_usleep_fptr = GetFunctionDelegate<av_usleep_delegate>(GetOrLoadLibrary("avutil"), "av_usleep");
             if (av_usleep_fptr == null)
             {
                 av_usleep_fptr = delegate 
@@ -16061,7 +16061,7 @@ namespace FFmpeg.AutoGen
         private delegate string av_version_info_delegate();
         private static av_version_info_delegate av_version_info_fptr = () =>
         {
-            av_version_info_fptr = GetFunctionDelegate<av_version_info_delegate>(GetOrLoadLibrary("avutil", 56), "av_version_info");
+            av_version_info_fptr = GetFunctionDelegate<av_version_info_delegate>(GetOrLoadLibrary("avutil"), "av_version_info");
             if (av_version_info_fptr == null)
             {
                 av_version_info_fptr = delegate 
@@ -16082,7 +16082,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_vlog_delegate(void* @avcl, int @level, [MarshalAs((UnmanagedType)48)] string @fmt, byte* @vl);
         private static av_vlog_delegate av_vlog_fptr = (void* @avcl, int @level, string @fmt, byte* @vl) =>
         {
-            av_vlog_fptr = GetFunctionDelegate<av_vlog_delegate>(GetOrLoadLibrary("avutil", 56), "av_vlog");
+            av_vlog_fptr = GetFunctionDelegate<av_vlog_delegate>(GetOrLoadLibrary("avutil"), "av_vlog");
             if (av_vlog_fptr == null)
             {
                 av_vlog_fptr = delegate 
@@ -16107,7 +16107,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_write_image_line_delegate(ushort* @src, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w);
         private static av_write_image_line_delegate av_write_image_line_fptr = (ushort* @src, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w) =>
         {
-            av_write_image_line_fptr = GetFunctionDelegate<av_write_image_line_delegate>(GetOrLoadLibrary("avutil", 56), "av_write_image_line");
+            av_write_image_line_fptr = GetFunctionDelegate<av_write_image_line_delegate>(GetOrLoadLibrary("avutil"), "av_write_image_line");
             if (av_write_image_line_fptr == null)
             {
                 av_write_image_line_fptr = delegate 
@@ -16127,7 +16127,7 @@ namespace FFmpeg.AutoGen
         private delegate void av_write_image_line2_delegate(void* @src, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @src_element_size);
         private static av_write_image_line2_delegate av_write_image_line2_fptr = (void* @src, ref byte_ptrArray4 @data, int_array4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @src_element_size) =>
         {
-            av_write_image_line2_fptr = GetFunctionDelegate<av_write_image_line2_delegate>(GetOrLoadLibrary("avutil", 56), "av_write_image_line2");
+            av_write_image_line2_fptr = GetFunctionDelegate<av_write_image_line2_delegate>(GetOrLoadLibrary("avutil"), "av_write_image_line2");
             if (av_write_image_line2_fptr == null)
             {
                 av_write_image_line2_fptr = delegate 
@@ -16157,7 +16157,7 @@ namespace FFmpeg.AutoGen
         private delegate string avutil_configuration_delegate();
         private static avutil_configuration_delegate avutil_configuration_fptr = () =>
         {
-            avutil_configuration_fptr = GetFunctionDelegate<avutil_configuration_delegate>(GetOrLoadLibrary("avutil", 56), "avutil_configuration");
+            avutil_configuration_fptr = GetFunctionDelegate<avutil_configuration_delegate>(GetOrLoadLibrary("avutil"), "avutil_configuration");
             if (avutil_configuration_fptr == null)
             {
                 avutil_configuration_fptr = delegate 
@@ -16179,7 +16179,7 @@ namespace FFmpeg.AutoGen
         private delegate string avutil_license_delegate();
         private static avutil_license_delegate avutil_license_fptr = () =>
         {
-            avutil_license_fptr = GetFunctionDelegate<avutil_license_delegate>(GetOrLoadLibrary("avutil", 56), "avutil_license");
+            avutil_license_fptr = GetFunctionDelegate<avutil_license_delegate>(GetOrLoadLibrary("avutil"), "avutil_license");
             if (avutil_license_fptr == null)
             {
                 avutil_license_fptr = delegate 
@@ -16200,7 +16200,7 @@ namespace FFmpeg.AutoGen
         private delegate uint avutil_version_delegate();
         private static avutil_version_delegate avutil_version_fptr = () =>
         {
-            avutil_version_fptr = GetFunctionDelegate<avutil_version_delegate>(GetOrLoadLibrary("avutil", 56), "avutil_version");
+            avutil_version_fptr = GetFunctionDelegate<avutil_version_delegate>(GetOrLoadLibrary("avutil"), "avutil_version");
             if (avutil_version_fptr == null)
             {
                 avutil_version_fptr = delegate 
@@ -16222,7 +16222,7 @@ namespace FFmpeg.AutoGen
         private delegate string postproc_configuration_delegate();
         private static postproc_configuration_delegate postproc_configuration_fptr = () =>
         {
-            postproc_configuration_fptr = GetFunctionDelegate<postproc_configuration_delegate>(GetOrLoadLibrary("postproc", 55), "postproc_configuration");
+            postproc_configuration_fptr = GetFunctionDelegate<postproc_configuration_delegate>(GetOrLoadLibrary("postproc"), "postproc_configuration");
             if (postproc_configuration_fptr == null)
             {
                 postproc_configuration_fptr = delegate 
@@ -16244,7 +16244,7 @@ namespace FFmpeg.AutoGen
         private delegate string postproc_license_delegate();
         private static postproc_license_delegate postproc_license_fptr = () =>
         {
-            postproc_license_fptr = GetFunctionDelegate<postproc_license_delegate>(GetOrLoadLibrary("postproc", 55), "postproc_license");
+            postproc_license_fptr = GetFunctionDelegate<postproc_license_delegate>(GetOrLoadLibrary("postproc"), "postproc_license");
             if (postproc_license_fptr == null)
             {
                 postproc_license_fptr = delegate 
@@ -16265,7 +16265,7 @@ namespace FFmpeg.AutoGen
         private delegate uint postproc_version_delegate();
         private static postproc_version_delegate postproc_version_fptr = () =>
         {
-            postproc_version_fptr = GetFunctionDelegate<postproc_version_delegate>(GetOrLoadLibrary("postproc", 55), "postproc_version");
+            postproc_version_fptr = GetFunctionDelegate<postproc_version_delegate>(GetOrLoadLibrary("postproc"), "postproc_version");
             if (postproc_version_fptr == null)
             {
                 postproc_version_fptr = delegate 
@@ -16286,7 +16286,7 @@ namespace FFmpeg.AutoGen
         private delegate void pp_free_context_delegate(void* @ppContext);
         private static pp_free_context_delegate pp_free_context_fptr = (void* @ppContext) =>
         {
-            pp_free_context_fptr = GetFunctionDelegate<pp_free_context_delegate>(GetOrLoadLibrary("postproc", 55), "pp_free_context");
+            pp_free_context_fptr = GetFunctionDelegate<pp_free_context_delegate>(GetOrLoadLibrary("postproc"), "pp_free_context");
             if (pp_free_context_fptr == null)
             {
                 pp_free_context_fptr = delegate 
@@ -16306,7 +16306,7 @@ namespace FFmpeg.AutoGen
         private delegate void pp_free_mode_delegate(void* @mode);
         private static pp_free_mode_delegate pp_free_mode_fptr = (void* @mode) =>
         {
-            pp_free_mode_fptr = GetFunctionDelegate<pp_free_mode_delegate>(GetOrLoadLibrary("postproc", 55), "pp_free_mode");
+            pp_free_mode_fptr = GetFunctionDelegate<pp_free_mode_delegate>(GetOrLoadLibrary("postproc"), "pp_free_mode");
             if (pp_free_mode_fptr == null)
             {
                 pp_free_mode_fptr = delegate 
@@ -16326,7 +16326,7 @@ namespace FFmpeg.AutoGen
         private delegate void* pp_get_context_delegate(int @width, int @height, int @flags);
         private static pp_get_context_delegate pp_get_context_fptr = (int @width, int @height, int @flags) =>
         {
-            pp_get_context_fptr = GetFunctionDelegate<pp_get_context_delegate>(GetOrLoadLibrary("postproc", 55), "pp_get_context");
+            pp_get_context_fptr = GetFunctionDelegate<pp_get_context_delegate>(GetOrLoadLibrary("postproc"), "pp_get_context");
             if (pp_get_context_fptr == null)
             {
                 pp_get_context_fptr = delegate 
@@ -16346,7 +16346,7 @@ namespace FFmpeg.AutoGen
         private delegate void* pp_get_mode_by_name_and_quality_delegate([MarshalAs((UnmanagedType)48)] string @name, int @quality);
         private static pp_get_mode_by_name_and_quality_delegate pp_get_mode_by_name_and_quality_fptr = (string @name, int @quality) =>
         {
-            pp_get_mode_by_name_and_quality_fptr = GetFunctionDelegate<pp_get_mode_by_name_and_quality_delegate>(GetOrLoadLibrary("postproc", 55), "pp_get_mode_by_name_and_quality");
+            pp_get_mode_by_name_and_quality_fptr = GetFunctionDelegate<pp_get_mode_by_name_and_quality_delegate>(GetOrLoadLibrary("postproc"), "pp_get_mode_by_name_and_quality");
             if (pp_get_mode_by_name_and_quality_fptr == null)
             {
                 pp_get_mode_by_name_and_quality_fptr = delegate 
@@ -16369,7 +16369,7 @@ namespace FFmpeg.AutoGen
         private delegate void pp_postprocess_delegate(ref byte_ptrArray3 @src, int_array3 @srcStride, ref byte_ptrArray3 @dst, int_array3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
         private static pp_postprocess_delegate pp_postprocess_fptr = (ref byte_ptrArray3 @src, int_array3 @srcStride, ref byte_ptrArray3 @dst, int_array3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type) =>
         {
-            pp_postprocess_fptr = GetFunctionDelegate<pp_postprocess_delegate>(GetOrLoadLibrary("postproc", 55), "pp_postprocess");
+            pp_postprocess_fptr = GetFunctionDelegate<pp_postprocess_delegate>(GetOrLoadLibrary("postproc"), "pp_postprocess");
             if (pp_postprocess_fptr == null)
             {
                 pp_postprocess_fptr = delegate 
@@ -16389,7 +16389,7 @@ namespace FFmpeg.AutoGen
         private delegate SwrContext* swr_alloc_delegate();
         private static swr_alloc_delegate swr_alloc_fptr = () =>
         {
-            swr_alloc_fptr = GetFunctionDelegate<swr_alloc_delegate>(GetOrLoadLibrary("swresample", 3), "swr_alloc");
+            swr_alloc_fptr = GetFunctionDelegate<swr_alloc_delegate>(GetOrLoadLibrary("swresample"), "swr_alloc");
             if (swr_alloc_fptr == null)
             {
                 swr_alloc_fptr = delegate 
@@ -16411,7 +16411,7 @@ namespace FFmpeg.AutoGen
         private delegate SwrContext* swr_alloc_set_opts_delegate(SwrContext* @s, long @out_ch_layout, AVSampleFormat @out_sample_fmt, int @out_sample_rate, long @in_ch_layout, AVSampleFormat @in_sample_fmt, int @in_sample_rate, int @log_offset, void* @log_ctx);
         private static swr_alloc_set_opts_delegate swr_alloc_set_opts_fptr = (SwrContext* @s, long @out_ch_layout, AVSampleFormat @out_sample_fmt, int @out_sample_rate, long @in_ch_layout, AVSampleFormat @in_sample_fmt, int @in_sample_rate, int @log_offset, void* @log_ctx) =>
         {
-            swr_alloc_set_opts_fptr = GetFunctionDelegate<swr_alloc_set_opts_delegate>(GetOrLoadLibrary("swresample", 3), "swr_alloc_set_opts");
+            swr_alloc_set_opts_fptr = GetFunctionDelegate<swr_alloc_set_opts_delegate>(GetOrLoadLibrary("swresample"), "swr_alloc_set_opts");
             if (swr_alloc_set_opts_fptr == null)
             {
                 swr_alloc_set_opts_fptr = delegate 
@@ -16442,7 +16442,7 @@ namespace FFmpeg.AutoGen
         private delegate int swr_build_matrix_delegate(ulong @in_layout, ulong @out_layout, double @center_mix_level, double @surround_mix_level, double @lfe_mix_level, double @rematrix_maxval, double @rematrix_volume, double* @matrix, int @stride, AVMatrixEncoding @matrix_encoding, void* @log_ctx);
         private static swr_build_matrix_delegate swr_build_matrix_fptr = (ulong @in_layout, ulong @out_layout, double @center_mix_level, double @surround_mix_level, double @lfe_mix_level, double @rematrix_maxval, double @rematrix_volume, double* @matrix, int @stride, AVMatrixEncoding @matrix_encoding, void* @log_ctx) =>
         {
-            swr_build_matrix_fptr = GetFunctionDelegate<swr_build_matrix_delegate>(GetOrLoadLibrary("swresample", 3), "swr_build_matrix");
+            swr_build_matrix_fptr = GetFunctionDelegate<swr_build_matrix_delegate>(GetOrLoadLibrary("swresample"), "swr_build_matrix");
             if (swr_build_matrix_fptr == null)
             {
                 swr_build_matrix_fptr = delegate 
@@ -16474,7 +16474,7 @@ namespace FFmpeg.AutoGen
         private delegate void swr_close_delegate(SwrContext* @s);
         private static swr_close_delegate swr_close_fptr = (SwrContext* @s) =>
         {
-            swr_close_fptr = GetFunctionDelegate<swr_close_delegate>(GetOrLoadLibrary("swresample", 3), "swr_close");
+            swr_close_fptr = GetFunctionDelegate<swr_close_delegate>(GetOrLoadLibrary("swresample"), "swr_close");
             if (swr_close_fptr == null)
             {
                 swr_close_fptr = delegate 
@@ -16496,7 +16496,7 @@ namespace FFmpeg.AutoGen
         private delegate int swr_config_frame_delegate(SwrContext* @swr, AVFrame* @out, AVFrame* @in);
         private static swr_config_frame_delegate swr_config_frame_fptr = (SwrContext* @swr, AVFrame* @out, AVFrame* @in) =>
         {
-            swr_config_frame_fptr = GetFunctionDelegate<swr_config_frame_delegate>(GetOrLoadLibrary("swresample", 3), "swr_config_frame");
+            swr_config_frame_fptr = GetFunctionDelegate<swr_config_frame_delegate>(GetOrLoadLibrary("swresample"), "swr_config_frame");
             if (swr_config_frame_fptr == null)
             {
                 swr_config_frame_fptr = delegate 
@@ -16519,7 +16519,7 @@ namespace FFmpeg.AutoGen
         private delegate int swr_convert_delegate(SwrContext* @s, byte** @out, int @out_count, byte** @in, int @in_count);
         private static swr_convert_delegate swr_convert_fptr = (SwrContext* @s, byte** @out, int @out_count, byte** @in, int @in_count) =>
         {
-            swr_convert_fptr = GetFunctionDelegate<swr_convert_delegate>(GetOrLoadLibrary("swresample", 3), "swr_convert");
+            swr_convert_fptr = GetFunctionDelegate<swr_convert_delegate>(GetOrLoadLibrary("swresample"), "swr_convert");
             if (swr_convert_fptr == null)
             {
                 swr_convert_fptr = delegate 
@@ -16546,7 +16546,7 @@ namespace FFmpeg.AutoGen
         private delegate int swr_convert_frame_delegate(SwrContext* @swr, AVFrame* @output, AVFrame* @input);
         private static swr_convert_frame_delegate swr_convert_frame_fptr = (SwrContext* @swr, AVFrame* @output, AVFrame* @input) =>
         {
-            swr_convert_frame_fptr = GetFunctionDelegate<swr_convert_frame_delegate>(GetOrLoadLibrary("swresample", 3), "swr_convert_frame");
+            swr_convert_frame_fptr = GetFunctionDelegate<swr_convert_frame_delegate>(GetOrLoadLibrary("swresample"), "swr_convert_frame");
             if (swr_convert_frame_fptr == null)
             {
                 swr_convert_frame_fptr = delegate 
@@ -16571,7 +16571,7 @@ namespace FFmpeg.AutoGen
         private delegate int swr_drop_output_delegate(SwrContext* @s, int @count);
         private static swr_drop_output_delegate swr_drop_output_fptr = (SwrContext* @s, int @count) =>
         {
-            swr_drop_output_fptr = GetFunctionDelegate<swr_drop_output_delegate>(GetOrLoadLibrary("swresample", 3), "swr_drop_output");
+            swr_drop_output_fptr = GetFunctionDelegate<swr_drop_output_delegate>(GetOrLoadLibrary("swresample"), "swr_drop_output");
             if (swr_drop_output_fptr == null)
             {
                 swr_drop_output_fptr = delegate 
@@ -16595,7 +16595,7 @@ namespace FFmpeg.AutoGen
         private delegate void swr_free_delegate(SwrContext** @s);
         private static swr_free_delegate swr_free_fptr = (SwrContext** @s) =>
         {
-            swr_free_fptr = GetFunctionDelegate<swr_free_delegate>(GetOrLoadLibrary("swresample", 3), "swr_free");
+            swr_free_fptr = GetFunctionDelegate<swr_free_delegate>(GetOrLoadLibrary("swresample"), "swr_free");
             if (swr_free_fptr == null)
             {
                 swr_free_fptr = delegate 
@@ -16617,7 +16617,7 @@ namespace FFmpeg.AutoGen
         private delegate AVClass* swr_get_class_delegate();
         private static swr_get_class_delegate swr_get_class_fptr = () =>
         {
-            swr_get_class_fptr = GetFunctionDelegate<swr_get_class_delegate>(GetOrLoadLibrary("swresample", 3), "swr_get_class");
+            swr_get_class_fptr = GetFunctionDelegate<swr_get_class_delegate>(GetOrLoadLibrary("swresample"), "swr_get_class");
             if (swr_get_class_fptr == null)
             {
                 swr_get_class_fptr = delegate 
@@ -16639,7 +16639,7 @@ namespace FFmpeg.AutoGen
         private delegate long swr_get_delay_delegate(SwrContext* @s, long @base);
         private static swr_get_delay_delegate swr_get_delay_fptr = (SwrContext* @s, long @base) =>
         {
-            swr_get_delay_fptr = GetFunctionDelegate<swr_get_delay_delegate>(GetOrLoadLibrary("swresample", 3), "swr_get_delay");
+            swr_get_delay_fptr = GetFunctionDelegate<swr_get_delay_delegate>(GetOrLoadLibrary("swresample"), "swr_get_delay");
             if (swr_get_delay_fptr == null)
             {
                 swr_get_delay_fptr = delegate 
@@ -16662,7 +16662,7 @@ namespace FFmpeg.AutoGen
         private delegate int swr_get_out_samples_delegate(SwrContext* @s, int @in_samples);
         private static swr_get_out_samples_delegate swr_get_out_samples_fptr = (SwrContext* @s, int @in_samples) =>
         {
-            swr_get_out_samples_fptr = GetFunctionDelegate<swr_get_out_samples_delegate>(GetOrLoadLibrary("swresample", 3), "swr_get_out_samples");
+            swr_get_out_samples_fptr = GetFunctionDelegate<swr_get_out_samples_delegate>(GetOrLoadLibrary("swresample"), "swr_get_out_samples");
             if (swr_get_out_samples_fptr == null)
             {
                 swr_get_out_samples_fptr = delegate 
@@ -16684,7 +16684,7 @@ namespace FFmpeg.AutoGen
         private delegate int swr_init_delegate(SwrContext* @s);
         private static swr_init_delegate swr_init_fptr = (SwrContext* @s) =>
         {
-            swr_init_fptr = GetFunctionDelegate<swr_init_delegate>(GetOrLoadLibrary("swresample", 3), "swr_init");
+            swr_init_fptr = GetFunctionDelegate<swr_init_delegate>(GetOrLoadLibrary("swresample"), "swr_init");
             if (swr_init_fptr == null)
             {
                 swr_init_fptr = delegate 
@@ -16707,7 +16707,7 @@ namespace FFmpeg.AutoGen
         private delegate int swr_inject_silence_delegate(SwrContext* @s, int @count);
         private static swr_inject_silence_delegate swr_inject_silence_fptr = (SwrContext* @s, int @count) =>
         {
-            swr_inject_silence_fptr = GetFunctionDelegate<swr_inject_silence_delegate>(GetOrLoadLibrary("swresample", 3), "swr_inject_silence");
+            swr_inject_silence_fptr = GetFunctionDelegate<swr_inject_silence_delegate>(GetOrLoadLibrary("swresample"), "swr_inject_silence");
             if (swr_inject_silence_fptr == null)
             {
                 swr_inject_silence_fptr = delegate 
@@ -16731,7 +16731,7 @@ namespace FFmpeg.AutoGen
         private delegate int swr_is_initialized_delegate(SwrContext* @s);
         private static swr_is_initialized_delegate swr_is_initialized_fptr = (SwrContext* @s) =>
         {
-            swr_is_initialized_fptr = GetFunctionDelegate<swr_is_initialized_delegate>(GetOrLoadLibrary("swresample", 3), "swr_is_initialized");
+            swr_is_initialized_fptr = GetFunctionDelegate<swr_is_initialized_delegate>(GetOrLoadLibrary("swresample"), "swr_is_initialized");
             if (swr_is_initialized_fptr == null)
             {
                 swr_is_initialized_fptr = delegate 
@@ -16754,7 +16754,7 @@ namespace FFmpeg.AutoGen
         private delegate long swr_next_pts_delegate(SwrContext* @s, long @pts);
         private static swr_next_pts_delegate swr_next_pts_fptr = (SwrContext* @s, long @pts) =>
         {
-            swr_next_pts_fptr = GetFunctionDelegate<swr_next_pts_delegate>(GetOrLoadLibrary("swresample", 3), "swr_next_pts");
+            swr_next_pts_fptr = GetFunctionDelegate<swr_next_pts_delegate>(GetOrLoadLibrary("swresample"), "swr_next_pts");
             if (swr_next_pts_fptr == null)
             {
                 swr_next_pts_fptr = delegate 
@@ -16776,7 +16776,7 @@ namespace FFmpeg.AutoGen
         private delegate int swr_set_channel_mapping_delegate(SwrContext* @s, int* @channel_map);
         private static swr_set_channel_mapping_delegate swr_set_channel_mapping_fptr = (SwrContext* @s, int* @channel_map) =>
         {
-            swr_set_channel_mapping_fptr = GetFunctionDelegate<swr_set_channel_mapping_delegate>(GetOrLoadLibrary("swresample", 3), "swr_set_channel_mapping");
+            swr_set_channel_mapping_fptr = GetFunctionDelegate<swr_set_channel_mapping_delegate>(GetOrLoadLibrary("swresample"), "swr_set_channel_mapping");
             if (swr_set_channel_mapping_fptr == null)
             {
                 swr_set_channel_mapping_fptr = delegate 
@@ -16800,7 +16800,7 @@ namespace FFmpeg.AutoGen
         private delegate int swr_set_compensation_delegate(SwrContext* @s, int @sample_delta, int @compensation_distance);
         private static swr_set_compensation_delegate swr_set_compensation_fptr = (SwrContext* @s, int @sample_delta, int @compensation_distance) =>
         {
-            swr_set_compensation_fptr = GetFunctionDelegate<swr_set_compensation_delegate>(GetOrLoadLibrary("swresample", 3), "swr_set_compensation");
+            swr_set_compensation_fptr = GetFunctionDelegate<swr_set_compensation_delegate>(GetOrLoadLibrary("swresample"), "swr_set_compensation");
             if (swr_set_compensation_fptr == null)
             {
                 swr_set_compensation_fptr = delegate 
@@ -16825,7 +16825,7 @@ namespace FFmpeg.AutoGen
         private delegate int swr_set_matrix_delegate(SwrContext* @s, double* @matrix, int @stride);
         private static swr_set_matrix_delegate swr_set_matrix_fptr = (SwrContext* @s, double* @matrix, int @stride) =>
         {
-            swr_set_matrix_fptr = GetFunctionDelegate<swr_set_matrix_delegate>(GetOrLoadLibrary("swresample", 3), "swr_set_matrix");
+            swr_set_matrix_fptr = GetFunctionDelegate<swr_set_matrix_delegate>(GetOrLoadLibrary("swresample"), "swr_set_matrix");
             if (swr_set_matrix_fptr == null)
             {
                 swr_set_matrix_fptr = delegate 
@@ -16851,7 +16851,7 @@ namespace FFmpeg.AutoGen
         private delegate string swresample_configuration_delegate();
         private static swresample_configuration_delegate swresample_configuration_fptr = () =>
         {
-            swresample_configuration_fptr = GetFunctionDelegate<swresample_configuration_delegate>(GetOrLoadLibrary("swresample", 3), "swresample_configuration");
+            swresample_configuration_fptr = GetFunctionDelegate<swresample_configuration_delegate>(GetOrLoadLibrary("swresample"), "swresample_configuration");
             if (swresample_configuration_fptr == null)
             {
                 swresample_configuration_fptr = delegate 
@@ -16873,7 +16873,7 @@ namespace FFmpeg.AutoGen
         private delegate string swresample_license_delegate();
         private static swresample_license_delegate swresample_license_fptr = () =>
         {
-            swresample_license_fptr = GetFunctionDelegate<swresample_license_delegate>(GetOrLoadLibrary("swresample", 3), "swresample_license");
+            swresample_license_fptr = GetFunctionDelegate<swresample_license_delegate>(GetOrLoadLibrary("swresample"), "swresample_license");
             if (swresample_license_fptr == null)
             {
                 swresample_license_fptr = delegate 
@@ -16894,7 +16894,7 @@ namespace FFmpeg.AutoGen
         private delegate uint swresample_version_delegate();
         private static swresample_version_delegate swresample_version_fptr = () =>
         {
-            swresample_version_fptr = GetFunctionDelegate<swresample_version_delegate>(GetOrLoadLibrary("swresample", 3), "swresample_version");
+            swresample_version_fptr = GetFunctionDelegate<swresample_version_delegate>(GetOrLoadLibrary("swresample"), "swresample_version");
             if (swresample_version_fptr == null)
             {
                 swresample_version_fptr = delegate 
@@ -16915,7 +16915,7 @@ namespace FFmpeg.AutoGen
         private delegate void sws_addVec_delegate(SwsVector* @a, SwsVector* @b);
         private static sws_addVec_delegate sws_addVec_fptr = (SwsVector* @a, SwsVector* @b) =>
         {
-            sws_addVec_fptr = GetFunctionDelegate<sws_addVec_delegate>(GetOrLoadLibrary("swscale", 5), "sws_addVec");
+            sws_addVec_fptr = GetFunctionDelegate<sws_addVec_delegate>(GetOrLoadLibrary("swscale"), "sws_addVec");
             if (sws_addVec_fptr == null)
             {
                 sws_addVec_fptr = delegate 
@@ -16936,7 +16936,7 @@ namespace FFmpeg.AutoGen
         private delegate SwsContext* sws_alloc_context_delegate();
         private static sws_alloc_context_delegate sws_alloc_context_fptr = () =>
         {
-            sws_alloc_context_fptr = GetFunctionDelegate<sws_alloc_context_delegate>(GetOrLoadLibrary("swscale", 5), "sws_alloc_context");
+            sws_alloc_context_fptr = GetFunctionDelegate<sws_alloc_context_delegate>(GetOrLoadLibrary("swscale"), "sws_alloc_context");
             if (sws_alloc_context_fptr == null)
             {
                 sws_alloc_context_fptr = delegate 
@@ -16957,7 +16957,7 @@ namespace FFmpeg.AutoGen
         private delegate SwsVector* sws_allocVec_delegate(int @length);
         private static sws_allocVec_delegate sws_allocVec_fptr = (int @length) =>
         {
-            sws_allocVec_fptr = GetFunctionDelegate<sws_allocVec_delegate>(GetOrLoadLibrary("swscale", 5), "sws_allocVec");
+            sws_allocVec_fptr = GetFunctionDelegate<sws_allocVec_delegate>(GetOrLoadLibrary("swscale"), "sws_allocVec");
             if (sws_allocVec_fptr == null)
             {
                 sws_allocVec_fptr = delegate 
@@ -16978,7 +16978,7 @@ namespace FFmpeg.AutoGen
         private delegate SwsVector* sws_cloneVec_delegate(SwsVector* @a);
         private static sws_cloneVec_delegate sws_cloneVec_fptr = (SwsVector* @a) =>
         {
-            sws_cloneVec_fptr = GetFunctionDelegate<sws_cloneVec_delegate>(GetOrLoadLibrary("swscale", 5), "sws_cloneVec");
+            sws_cloneVec_fptr = GetFunctionDelegate<sws_cloneVec_delegate>(GetOrLoadLibrary("swscale"), "sws_cloneVec");
             if (sws_cloneVec_fptr == null)
             {
                 sws_cloneVec_fptr = delegate 
@@ -16999,7 +16999,7 @@ namespace FFmpeg.AutoGen
         private delegate void sws_convertPalette8ToPacked24_delegate(byte* @src, byte* @dst, int @num_pixels, byte* @palette);
         private static sws_convertPalette8ToPacked24_delegate sws_convertPalette8ToPacked24_fptr = (byte* @src, byte* @dst, int @num_pixels, byte* @palette) =>
         {
-            sws_convertPalette8ToPacked24_fptr = GetFunctionDelegate<sws_convertPalette8ToPacked24_delegate>(GetOrLoadLibrary("swscale", 5), "sws_convertPalette8ToPacked24");
+            sws_convertPalette8ToPacked24_fptr = GetFunctionDelegate<sws_convertPalette8ToPacked24_delegate>(GetOrLoadLibrary("swscale"), "sws_convertPalette8ToPacked24");
             if (sws_convertPalette8ToPacked24_fptr == null)
             {
                 sws_convertPalette8ToPacked24_fptr = delegate 
@@ -17024,7 +17024,7 @@ namespace FFmpeg.AutoGen
         private delegate void sws_convertPalette8ToPacked32_delegate(byte* @src, byte* @dst, int @num_pixels, byte* @palette);
         private static sws_convertPalette8ToPacked32_delegate sws_convertPalette8ToPacked32_fptr = (byte* @src, byte* @dst, int @num_pixels, byte* @palette) =>
         {
-            sws_convertPalette8ToPacked32_fptr = GetFunctionDelegate<sws_convertPalette8ToPacked32_delegate>(GetOrLoadLibrary("swscale", 5), "sws_convertPalette8ToPacked32");
+            sws_convertPalette8ToPacked32_fptr = GetFunctionDelegate<sws_convertPalette8ToPacked32_delegate>(GetOrLoadLibrary("swscale"), "sws_convertPalette8ToPacked32");
             if (sws_convertPalette8ToPacked32_fptr == null)
             {
                 sws_convertPalette8ToPacked32_fptr = delegate 
@@ -17049,7 +17049,7 @@ namespace FFmpeg.AutoGen
         private delegate void sws_convVec_delegate(SwsVector* @a, SwsVector* @b);
         private static sws_convVec_delegate sws_convVec_fptr = (SwsVector* @a, SwsVector* @b) =>
         {
-            sws_convVec_fptr = GetFunctionDelegate<sws_convVec_delegate>(GetOrLoadLibrary("swscale", 5), "sws_convVec");
+            sws_convVec_fptr = GetFunctionDelegate<sws_convVec_delegate>(GetOrLoadLibrary("swscale"), "sws_convVec");
             if (sws_convVec_fptr == null)
             {
                 sws_convVec_fptr = delegate 
@@ -17070,7 +17070,7 @@ namespace FFmpeg.AutoGen
         private delegate void sws_freeContext_delegate(SwsContext* @swsContext);
         private static sws_freeContext_delegate sws_freeContext_fptr = (SwsContext* @swsContext) =>
         {
-            sws_freeContext_fptr = GetFunctionDelegate<sws_freeContext_delegate>(GetOrLoadLibrary("swscale", 5), "sws_freeContext");
+            sws_freeContext_fptr = GetFunctionDelegate<sws_freeContext_delegate>(GetOrLoadLibrary("swscale"), "sws_freeContext");
             if (sws_freeContext_fptr == null)
             {
                 sws_freeContext_fptr = delegate 
@@ -17091,7 +17091,7 @@ namespace FFmpeg.AutoGen
         private delegate void sws_freeFilter_delegate(SwsFilter* @filter);
         private static sws_freeFilter_delegate sws_freeFilter_fptr = (SwsFilter* @filter) =>
         {
-            sws_freeFilter_fptr = GetFunctionDelegate<sws_freeFilter_delegate>(GetOrLoadLibrary("swscale", 5), "sws_freeFilter");
+            sws_freeFilter_fptr = GetFunctionDelegate<sws_freeFilter_delegate>(GetOrLoadLibrary("swscale"), "sws_freeFilter");
             if (sws_freeFilter_fptr == null)
             {
                 sws_freeFilter_fptr = delegate 
@@ -17111,7 +17111,7 @@ namespace FFmpeg.AutoGen
         private delegate void sws_freeVec_delegate(SwsVector* @a);
         private static sws_freeVec_delegate sws_freeVec_fptr = (SwsVector* @a) =>
         {
-            sws_freeVec_fptr = GetFunctionDelegate<sws_freeVec_delegate>(GetOrLoadLibrary("swscale", 5), "sws_freeVec");
+            sws_freeVec_fptr = GetFunctionDelegate<sws_freeVec_delegate>(GetOrLoadLibrary("swscale"), "sws_freeVec");
             if (sws_freeVec_fptr == null)
             {
                 sws_freeVec_fptr = delegate 
@@ -17131,7 +17131,7 @@ namespace FFmpeg.AutoGen
         private delegate AVClass* sws_get_class_delegate();
         private static sws_get_class_delegate sws_get_class_fptr = () =>
         {
-            sws_get_class_fptr = GetFunctionDelegate<sws_get_class_delegate>(GetOrLoadLibrary("swscale", 5), "sws_get_class");
+            sws_get_class_fptr = GetFunctionDelegate<sws_get_class_delegate>(GetOrLoadLibrary("swscale"), "sws_get_class");
             if (sws_get_class_fptr == null)
             {
                 sws_get_class_fptr = delegate 
@@ -17152,7 +17152,7 @@ namespace FFmpeg.AutoGen
         private delegate SwsContext* sws_getCachedContext_delegate(SwsContext* @context, int @srcW, int @srcH, AVPixelFormat @srcFormat, int @dstW, int @dstH, AVPixelFormat @dstFormat, int @flags, SwsFilter* @srcFilter, SwsFilter* @dstFilter, double* @param);
         private static sws_getCachedContext_delegate sws_getCachedContext_fptr = (SwsContext* @context, int @srcW, int @srcH, AVPixelFormat @srcFormat, int @dstW, int @dstH, AVPixelFormat @dstFormat, int @flags, SwsFilter* @srcFilter, SwsFilter* @dstFilter, double* @param) =>
         {
-            sws_getCachedContext_fptr = GetFunctionDelegate<sws_getCachedContext_delegate>(GetOrLoadLibrary("swscale", 5), "sws_getCachedContext");
+            sws_getCachedContext_fptr = GetFunctionDelegate<sws_getCachedContext_delegate>(GetOrLoadLibrary("swscale"), "sws_getCachedContext");
             if (sws_getCachedContext_fptr == null)
             {
                 sws_getCachedContext_fptr = delegate 
@@ -17173,7 +17173,7 @@ namespace FFmpeg.AutoGen
         private delegate int* sws_getCoefficients_delegate(int @colorspace);
         private static sws_getCoefficients_delegate sws_getCoefficients_fptr = (int @colorspace) =>
         {
-            sws_getCoefficients_fptr = GetFunctionDelegate<sws_getCoefficients_delegate>(GetOrLoadLibrary("swscale", 5), "sws_getCoefficients");
+            sws_getCoefficients_fptr = GetFunctionDelegate<sws_getCoefficients_delegate>(GetOrLoadLibrary("swscale"), "sws_getCoefficients");
             if (sws_getCoefficients_fptr == null)
             {
                 sws_getCoefficients_fptr = delegate 
@@ -17195,7 +17195,7 @@ namespace FFmpeg.AutoGen
         private delegate int sws_getColorspaceDetails_delegate(SwsContext* @c, int** @inv_table, int* @srcRange, int** @table, int* @dstRange, int* @brightness, int* @contrast, int* @saturation);
         private static sws_getColorspaceDetails_delegate sws_getColorspaceDetails_fptr = (SwsContext* @c, int** @inv_table, int* @srcRange, int** @table, int* @dstRange, int* @brightness, int* @contrast, int* @saturation) =>
         {
-            sws_getColorspaceDetails_fptr = GetFunctionDelegate<sws_getColorspaceDetails_delegate>(GetOrLoadLibrary("swscale", 5), "sws_getColorspaceDetails");
+            sws_getColorspaceDetails_fptr = GetFunctionDelegate<sws_getColorspaceDetails_delegate>(GetOrLoadLibrary("swscale"), "sws_getColorspaceDetails");
             if (sws_getColorspaceDetails_fptr == null)
             {
                 sws_getColorspaceDetails_fptr = delegate 
@@ -17217,7 +17217,7 @@ namespace FFmpeg.AutoGen
         private delegate SwsVector* sws_getConstVec_delegate(double @c, int @length);
         private static sws_getConstVec_delegate sws_getConstVec_fptr = (double @c, int @length) =>
         {
-            sws_getConstVec_fptr = GetFunctionDelegate<sws_getConstVec_delegate>(GetOrLoadLibrary("swscale", 5), "sws_getConstVec");
+            sws_getConstVec_fptr = GetFunctionDelegate<sws_getConstVec_delegate>(GetOrLoadLibrary("swscale"), "sws_getConstVec");
             if (sws_getConstVec_fptr == null)
             {
                 sws_getConstVec_fptr = delegate 
@@ -17238,7 +17238,7 @@ namespace FFmpeg.AutoGen
         private delegate SwsContext* sws_getContext_delegate(int @srcW, int @srcH, AVPixelFormat @srcFormat, int @dstW, int @dstH, AVPixelFormat @dstFormat, int @flags, SwsFilter* @srcFilter, SwsFilter* @dstFilter, double* @param);
         private static sws_getContext_delegate sws_getContext_fptr = (int @srcW, int @srcH, AVPixelFormat @srcFormat, int @dstW, int @dstH, AVPixelFormat @dstFormat, int @flags, SwsFilter* @srcFilter, SwsFilter* @dstFilter, double* @param) =>
         {
-            sws_getContext_fptr = GetFunctionDelegate<sws_getContext_delegate>(GetOrLoadLibrary("swscale", 5), "sws_getContext");
+            sws_getContext_fptr = GetFunctionDelegate<sws_getContext_delegate>(GetOrLoadLibrary("swscale"), "sws_getContext");
             if (sws_getContext_fptr == null)
             {
                 sws_getContext_fptr = delegate 
@@ -17268,7 +17268,7 @@ namespace FFmpeg.AutoGen
         private delegate SwsFilter* sws_getDefaultFilter_delegate(float @lumaGBlur, float @chromaGBlur, float @lumaSharpen, float @chromaSharpen, float @chromaHShift, float @chromaVShift, int @verbose);
         private static sws_getDefaultFilter_delegate sws_getDefaultFilter_fptr = (float @lumaGBlur, float @chromaGBlur, float @lumaSharpen, float @chromaSharpen, float @chromaHShift, float @chromaVShift, int @verbose) =>
         {
-            sws_getDefaultFilter_fptr = GetFunctionDelegate<sws_getDefaultFilter_delegate>(GetOrLoadLibrary("swscale", 5), "sws_getDefaultFilter");
+            sws_getDefaultFilter_fptr = GetFunctionDelegate<sws_getDefaultFilter_delegate>(GetOrLoadLibrary("swscale"), "sws_getDefaultFilter");
             if (sws_getDefaultFilter_fptr == null)
             {
                 sws_getDefaultFilter_fptr = delegate 
@@ -17288,7 +17288,7 @@ namespace FFmpeg.AutoGen
         private delegate SwsVector* sws_getGaussianVec_delegate(double @variance, double @quality);
         private static sws_getGaussianVec_delegate sws_getGaussianVec_fptr = (double @variance, double @quality) =>
         {
-            sws_getGaussianVec_fptr = GetFunctionDelegate<sws_getGaussianVec_delegate>(GetOrLoadLibrary("swscale", 5), "sws_getGaussianVec");
+            sws_getGaussianVec_fptr = GetFunctionDelegate<sws_getGaussianVec_delegate>(GetOrLoadLibrary("swscale"), "sws_getGaussianVec");
             if (sws_getGaussianVec_fptr == null)
             {
                 sws_getGaussianVec_fptr = delegate 
@@ -17309,7 +17309,7 @@ namespace FFmpeg.AutoGen
         private delegate SwsVector* sws_getIdentityVec_delegate();
         private static sws_getIdentityVec_delegate sws_getIdentityVec_fptr = () =>
         {
-            sws_getIdentityVec_fptr = GetFunctionDelegate<sws_getIdentityVec_delegate>(GetOrLoadLibrary("swscale", 5), "sws_getIdentityVec");
+            sws_getIdentityVec_fptr = GetFunctionDelegate<sws_getIdentityVec_delegate>(GetOrLoadLibrary("swscale"), "sws_getIdentityVec");
             if (sws_getIdentityVec_fptr == null)
             {
                 sws_getIdentityVec_fptr = delegate 
@@ -17330,7 +17330,7 @@ namespace FFmpeg.AutoGen
         private delegate int sws_init_context_delegate(SwsContext* @sws_context, SwsFilter* @srcFilter, SwsFilter* @dstFilter);
         private static sws_init_context_delegate sws_init_context_fptr = (SwsContext* @sws_context, SwsFilter* @srcFilter, SwsFilter* @dstFilter) =>
         {
-            sws_init_context_fptr = GetFunctionDelegate<sws_init_context_delegate>(GetOrLoadLibrary("swscale", 5), "sws_init_context");
+            sws_init_context_fptr = GetFunctionDelegate<sws_init_context_delegate>(GetOrLoadLibrary("swscale"), "sws_init_context");
             if (sws_init_context_fptr == null)
             {
                 sws_init_context_fptr = delegate 
@@ -17352,7 +17352,7 @@ namespace FFmpeg.AutoGen
         private delegate int sws_isSupportedEndiannessConversion_delegate(AVPixelFormat @pix_fmt);
         private static sws_isSupportedEndiannessConversion_delegate sws_isSupportedEndiannessConversion_fptr = (AVPixelFormat @pix_fmt) =>
         {
-            sws_isSupportedEndiannessConversion_fptr = GetFunctionDelegate<sws_isSupportedEndiannessConversion_delegate>(GetOrLoadLibrary("swscale", 5), "sws_isSupportedEndiannessConversion");
+            sws_isSupportedEndiannessConversion_fptr = GetFunctionDelegate<sws_isSupportedEndiannessConversion_delegate>(GetOrLoadLibrary("swscale"), "sws_isSupportedEndiannessConversion");
             if (sws_isSupportedEndiannessConversion_fptr == null)
             {
                 sws_isSupportedEndiannessConversion_fptr = delegate 
@@ -17375,7 +17375,7 @@ namespace FFmpeg.AutoGen
         private delegate int sws_isSupportedInput_delegate(AVPixelFormat @pix_fmt);
         private static sws_isSupportedInput_delegate sws_isSupportedInput_fptr = (AVPixelFormat @pix_fmt) =>
         {
-            sws_isSupportedInput_fptr = GetFunctionDelegate<sws_isSupportedInput_delegate>(GetOrLoadLibrary("swscale", 5), "sws_isSupportedInput");
+            sws_isSupportedInput_fptr = GetFunctionDelegate<sws_isSupportedInput_delegate>(GetOrLoadLibrary("swscale"), "sws_isSupportedInput");
             if (sws_isSupportedInput_fptr == null)
             {
                 sws_isSupportedInput_fptr = delegate 
@@ -17396,7 +17396,7 @@ namespace FFmpeg.AutoGen
         private delegate int sws_isSupportedOutput_delegate(AVPixelFormat @pix_fmt);
         private static sws_isSupportedOutput_delegate sws_isSupportedOutput_fptr = (AVPixelFormat @pix_fmt) =>
         {
-            sws_isSupportedOutput_fptr = GetFunctionDelegate<sws_isSupportedOutput_delegate>(GetOrLoadLibrary("swscale", 5), "sws_isSupportedOutput");
+            sws_isSupportedOutput_fptr = GetFunctionDelegate<sws_isSupportedOutput_delegate>(GetOrLoadLibrary("swscale"), "sws_isSupportedOutput");
             if (sws_isSupportedOutput_fptr == null)
             {
                 sws_isSupportedOutput_fptr = delegate 
@@ -17417,7 +17417,7 @@ namespace FFmpeg.AutoGen
         private delegate void sws_normalizeVec_delegate(SwsVector* @a, double @height);
         private static sws_normalizeVec_delegate sws_normalizeVec_fptr = (SwsVector* @a, double @height) =>
         {
-            sws_normalizeVec_fptr = GetFunctionDelegate<sws_normalizeVec_delegate>(GetOrLoadLibrary("swscale", 5), "sws_normalizeVec");
+            sws_normalizeVec_fptr = GetFunctionDelegate<sws_normalizeVec_delegate>(GetOrLoadLibrary("swscale"), "sws_normalizeVec");
             if (sws_normalizeVec_fptr == null)
             {
                 sws_normalizeVec_fptr = delegate 
@@ -17438,7 +17438,7 @@ namespace FFmpeg.AutoGen
         private delegate void sws_printVec2_delegate(SwsVector* @a, AVClass* @log_ctx, int @log_level);
         private static sws_printVec2_delegate sws_printVec2_fptr = (SwsVector* @a, AVClass* @log_ctx, int @log_level) =>
         {
-            sws_printVec2_fptr = GetFunctionDelegate<sws_printVec2_delegate>(GetOrLoadLibrary("swscale", 5), "sws_printVec2");
+            sws_printVec2_fptr = GetFunctionDelegate<sws_printVec2_delegate>(GetOrLoadLibrary("swscale"), "sws_printVec2");
             if (sws_printVec2_fptr == null)
             {
                 sws_printVec2_fptr = delegate 
@@ -17459,7 +17459,7 @@ namespace FFmpeg.AutoGen
         private delegate int sws_scale_delegate(SwsContext* @c, byte*[] @srcSlice, int[] @srcStride, int @srcSliceY, int @srcSliceH, byte*[] @dst, int[] @dstStride);
         private static sws_scale_delegate sws_scale_fptr = (SwsContext* @c, byte*[] @srcSlice, int[] @srcStride, int @srcSliceY, int @srcSliceH, byte*[] @dst, int[] @dstStride) =>
         {
-            sws_scale_fptr = GetFunctionDelegate<sws_scale_delegate>(GetOrLoadLibrary("swscale", 5), "sws_scale");
+            sws_scale_fptr = GetFunctionDelegate<sws_scale_delegate>(GetOrLoadLibrary("swscale"), "sws_scale");
             if (sws_scale_fptr == null)
             {
                 sws_scale_fptr = delegate 
@@ -17488,7 +17488,7 @@ namespace FFmpeg.AutoGen
         private delegate void sws_scaleVec_delegate(SwsVector* @a, double @scalar);
         private static sws_scaleVec_delegate sws_scaleVec_fptr = (SwsVector* @a, double @scalar) =>
         {
-            sws_scaleVec_fptr = GetFunctionDelegate<sws_scaleVec_delegate>(GetOrLoadLibrary("swscale", 5), "sws_scaleVec");
+            sws_scaleVec_fptr = GetFunctionDelegate<sws_scaleVec_delegate>(GetOrLoadLibrary("swscale"), "sws_scaleVec");
             if (sws_scaleVec_fptr == null)
             {
                 sws_scaleVec_fptr = delegate 
@@ -17509,7 +17509,7 @@ namespace FFmpeg.AutoGen
         private delegate int sws_setColorspaceDetails_delegate(SwsContext* @c, int_array4 @inv_table, int @srcRange, int_array4 @table, int @dstRange, int @brightness, int @contrast, int @saturation);
         private static sws_setColorspaceDetails_delegate sws_setColorspaceDetails_fptr = (SwsContext* @c, int_array4 @inv_table, int @srcRange, int_array4 @table, int @dstRange, int @brightness, int @contrast, int @saturation) =>
         {
-            sws_setColorspaceDetails_fptr = GetFunctionDelegate<sws_setColorspaceDetails_delegate>(GetOrLoadLibrary("swscale", 5), "sws_setColorspaceDetails");
+            sws_setColorspaceDetails_fptr = GetFunctionDelegate<sws_setColorspaceDetails_delegate>(GetOrLoadLibrary("swscale"), "sws_setColorspaceDetails");
             if (sws_setColorspaceDetails_fptr == null)
             {
                 sws_setColorspaceDetails_fptr = delegate 
@@ -17538,7 +17538,7 @@ namespace FFmpeg.AutoGen
         private delegate void sws_shiftVec_delegate(SwsVector* @a, int @shift);
         private static sws_shiftVec_delegate sws_shiftVec_fptr = (SwsVector* @a, int @shift) =>
         {
-            sws_shiftVec_fptr = GetFunctionDelegate<sws_shiftVec_delegate>(GetOrLoadLibrary("swscale", 5), "sws_shiftVec");
+            sws_shiftVec_fptr = GetFunctionDelegate<sws_shiftVec_delegate>(GetOrLoadLibrary("swscale"), "sws_shiftVec");
             if (sws_shiftVec_fptr == null)
             {
                 sws_shiftVec_fptr = delegate 
@@ -17559,7 +17559,7 @@ namespace FFmpeg.AutoGen
         private delegate void sws_subVec_delegate(SwsVector* @a, SwsVector* @b);
         private static sws_subVec_delegate sws_subVec_fptr = (SwsVector* @a, SwsVector* @b) =>
         {
-            sws_subVec_fptr = GetFunctionDelegate<sws_subVec_delegate>(GetOrLoadLibrary("swscale", 5), "sws_subVec");
+            sws_subVec_fptr = GetFunctionDelegate<sws_subVec_delegate>(GetOrLoadLibrary("swscale"), "sws_subVec");
             if (sws_subVec_fptr == null)
             {
                 sws_subVec_fptr = delegate 
@@ -17581,7 +17581,7 @@ namespace FFmpeg.AutoGen
         private delegate string swscale_configuration_delegate();
         private static swscale_configuration_delegate swscale_configuration_fptr = () =>
         {
-            swscale_configuration_fptr = GetFunctionDelegate<swscale_configuration_delegate>(GetOrLoadLibrary("swscale", 5), "swscale_configuration");
+            swscale_configuration_fptr = GetFunctionDelegate<swscale_configuration_delegate>(GetOrLoadLibrary("swscale"), "swscale_configuration");
             if (swscale_configuration_fptr == null)
             {
                 swscale_configuration_fptr = delegate 
@@ -17603,7 +17603,7 @@ namespace FFmpeg.AutoGen
         private delegate string swscale_license_delegate();
         private static swscale_license_delegate swscale_license_fptr = () =>
         {
-            swscale_license_fptr = GetFunctionDelegate<swscale_license_delegate>(GetOrLoadLibrary("swscale", 5), "swscale_license");
+            swscale_license_fptr = GetFunctionDelegate<swscale_license_delegate>(GetOrLoadLibrary("swscale"), "swscale_license");
             if (swscale_license_fptr == null)
             {
                 swscale_license_fptr = delegate 
@@ -17624,7 +17624,7 @@ namespace FFmpeg.AutoGen
         private delegate uint swscale_version_delegate();
         private static swscale_version_delegate swscale_version_fptr = () =>
         {
-            swscale_version_fptr = GetFunctionDelegate<swscale_version_delegate>(GetOrLoadLibrary("swscale", 5), "swscale_version");
+            swscale_version_fptr = GetFunctionDelegate<swscale_version_delegate>(GetOrLoadLibrary("swscale"), "swscale_version");
             if (swscale_version_fptr == null)
             {
                 swscale_version_fptr = delegate 

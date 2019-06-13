@@ -52,7 +52,7 @@ namespace FFmpeg.AutoGen.Example
         private static unsafe void DecodeAllFramesToImages()
         {
             // decode all frames from url, please not it might local resorce, e.g. string url = "../../sample_mpeg4.mp4";
-            var url = "http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4"; // be advised this file holds 1440 frames
+            var url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"; // be advised this file holds 1440 frames
             using (var vsd = new VideoStreamDecoder(url))
             {
                 Console.WriteLine($"codec name: {vsd.CodecName}");
