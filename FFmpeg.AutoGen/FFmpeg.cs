@@ -4,7 +4,7 @@ using FFmpeg.AutoGen.Native;
 
 namespace FFmpeg.AutoGen
 {
-    public delegate IntPtr GetOrLoadLibrary(string libraryName, int version);
+    public delegate IntPtr GetOrLoadLibrary(string libraryName);
 
     public static partial class ffmpeg
     {
@@ -16,22 +16,31 @@ namespace FFmpeg.AutoGen
 
         private static readonly object SyncRoot = new object();
 
+        public static readonly Dictionary<string, List<string>> LibraryDependenciesMap = new Dictionary<string, List<string>>
+        {
+            {"avcodec", new List<string> {"avutil", "swresample"}},
+            {"avdevice", new List<string> {"avcodec", "avfilter", "avformat", "avutil"}},
+            {"avfilter", new List<string> {"avcodec", "avformat", "avutil", "postproc", "swresample", "swscale"}},
+            {"avformat", new List<string> {"avcodec", "avutil"}},
+            {"avutil", new List<string>()},
+            {"postproc", new List<string> {"avutil"}},
+            {"swresample", new List<string> {"avutil"}},
+            {"swscale", new List<string> {"avutil"}}
+        };
+
         static ffmpeg()
         {
             var loadedLibraries = new Dictionary<string, IntPtr>();
 
-            GetOrLoadLibrary = (name, version) =>
+            GetOrLoadLibrary = name =>
             {
-                var key = $"{name}{version}";
-                if (loadedLibraries.TryGetValue(key, out var ptr)) return ptr;
+                if (loadedLibraries.TryGetValue(name, out var ptr)) return ptr;
 
                 lock (SyncRoot)
                 {
-                    if (loadedLibraries.TryGetValue(key, out ptr)) return ptr;
-
-                    ptr = LibraryLoader.LoadNativeLibrary(RootPath, name, version);
-                    if (ptr == IntPtr.Zero) throw new DllNotFoundException($"Unable to load DLL '{name}.{version}': The specified module could not be found.");
-                    loadedLibraries.Add(key, ptr);
+                    if (loadedLibraries.TryGetValue(name, out ptr)) return ptr;
+                    ptr = LoadLibrary(name);
+                    loadedLibraries.Add(name, ptr);
                 }
 
                 return ptr;
@@ -45,6 +54,16 @@ namespace FFmpeg.AutoGen
         public static string RootPath { get; set; } = string.Empty;
 
         public static GetOrLoadLibrary GetOrLoadLibrary { get; set; }
+
+        private static IntPtr LoadLibrary(string libraryName)
+        {
+            var dependencies = LibraryDependenciesMap[libraryName];
+            dependencies.ForEach(x => GetOrLoadLibrary(x));
+            var version = LibraryVersionMap[libraryName];
+            var ptr = LibraryLoader.LoadNativeLibrary(RootPath, libraryName, version);
+            if (ptr == IntPtr.Zero) throw new DllNotFoundException($"Unable to load DLL '{libraryName}.{version}': The specified module could not be found.");
+            return ptr;
+        }
 
         public static T GetFunctionDelegate<T>(IntPtr libraryHandle, string functionName)
             => FunctionLoader.GetFunctionDelegate<T>(libraryHandle, functionName);

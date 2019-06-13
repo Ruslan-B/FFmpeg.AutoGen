@@ -121,7 +121,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteLine($"({delegateParameters}) =>");
             using (BeginBlock(true))
             {
-                var getOrLoadLibrary = $"GetOrLoadLibrary(\"{function.LibraryName}\", {function.LibraryVersion})";
+                var getOrLoadLibrary = $"GetOrLoadLibrary(\"{function.LibraryName}\")";
                 var getDelegate = $"GetFunctionDelegate<{functionDelegateName}>({getOrLoadLibrary}, \"{function.Name}\")";
 
                 WriteLine($"{functionPtrName} = {getDelegate};");

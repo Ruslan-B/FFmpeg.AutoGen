@@ -82,6 +82,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
             g.Parse("libavdevice/avdevice.h");
 
+            g.WriteLibraries(Path.Combine(options.OutputDir, "FFmpeg.libraries.g.cs"));
             g.WriteMacros(Path.Combine(options.OutputDir, "FFmpeg.macros.g.cs"));
             g.WriteEnums(Path.Combine(options.OutputDir, "FFmpeg.enums.g.cs"));
             g.WriteDelegates(Path.Combine(options.OutputDir, "FFmpeg.delegates.g.cs"));
