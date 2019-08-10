@@ -104,6 +104,20 @@ namespace FFmpeg.AutoGen
         public int @size;
     }
     
+    /// <summary>Structure describing a single Region Of Interest.</summary>
+    public unsafe struct AVRegionOfInterest
+    {
+        /// <summary>Must be set to the size of this data structure (that is, sizeof(AVRegionOfInterest)).</summary>
+        public uint @self_size;
+        /// <summary>Distance in pixels from the top edge of the frame to the top and bottom edges and from the left edge of the frame to the left and right edges of the rectangle defining this region of interest.</summary>
+        public int @top;
+        public int @bottom;
+        public int @left;
+        public int @right;
+        /// <summary>Quantisation offset.</summary>
+        public AVRational @qoffset;
+    }
+    
     /// <summary>This structure describes decoded (raw) audio or video data.</summary>
     public unsafe struct AVFrame
     {
@@ -832,11 +846,8 @@ namespace FFmpeg.AutoGen
     /// <summary>This structure describes the bitrate properties of an encoded bitstream. It roughly corresponds to a subset the VBV parameters for MPEG-2 or HRD parameters for H.264/HEVC.</summary>
     public unsafe struct AVCPBProperties
     {
-        /// <summary>Maximum bitrate of the stream, in bits per second. Zero if unknown or unspecified.</summary>
         public int @max_bitrate;
-        /// <summary>Minimum bitrate of the stream, in bits per second. Zero if unknown or unspecified.</summary>
         public int @min_bitrate;
-        /// <summary>Average bitrate of the stream, in bits per second. Zero if unknown or unspecified.</summary>
         public int @avg_bitrate;
         /// <summary>The size of the buffer to which the ratecontrol is applied, in bits. Zero if unknown or unspecified.</summary>
         public int @buffer_size;
@@ -984,9 +995,9 @@ namespace FFmpeg.AutoGen
         public int @slice_flags;
         /// <summary>macroblock decision mode - encoding: Set by user. - decoding: unused</summary>
         public int @mb_decision;
-        /// <summary>custom intra quantization matrix - encoding: Set by user, can be NULL. - decoding: Set by libavcodec.</summary>
+        /// <summary>custom intra quantization matrix Must be allocated with the av_malloc() family of functions, and will be freed in avcodec_free_context(). - encoding: Set/allocated by user, freed by libavcodec. Can be NULL. - decoding: Set/allocated/freed by libavcodec.</summary>
         public ushort* @intra_matrix;
-        /// <summary>custom inter quantization matrix - encoding: Set by user, can be NULL. - decoding: Set by libavcodec.</summary>
+        /// <summary>custom inter quantization matrix Must be allocated with the av_malloc() family of functions, and will be freed in avcodec_free_context(). - encoding: Set/allocated by user, freed by libavcodec. Can be NULL. - decoding: Set/allocated/freed by libavcodec.</summary>
         public ushort* @inter_matrix;
         public int @scenechange_threshold;
         public int @noise_reduction;
@@ -1113,7 +1124,7 @@ namespace FFmpeg.AutoGen
         public int @debug;
         /// <summary>Error recognition; may misdetect some more or less valid parts as errors. - encoding: unused - decoding: Set by user.</summary>
         public int @err_recognition;
-        /// <summary>opaque 64-bit number (generally a PTS) that will be reordered and output in AVFrame.reordered_opaque - encoding: unused - decoding: Set by user.</summary>
+        /// <summary>opaque 64-bit number (generally a PTS) that will be reordered and output in AVFrame.reordered_opaque - encoding: Set by libavcodec to the reordered_opaque of the input frame corresponding to the last returned packet. Only supported by encoders with the AV_CODEC_CAP_ENCODER_REORDERED_OPAQUE capability. - decoding: Set by user.</summary>
         public long @reordered_opaque;
         /// <summary>Hardware accelerator in use - encoding: unused. - decoding: Set by libavcodec</summary>
         public AVHWAccel* @hwaccel;
@@ -1218,6 +1229,8 @@ namespace FFmpeg.AutoGen
         /// <summary>Video decoding only. Certain video codecs support cropping, meaning that only a sub-rectangle of the decoded frame is intended for display. This option controls how cropping is handled by libavcodec.</summary>
         public int @apply_cropping;
         public int @extra_hw_frames;
+        /// <summary>The percentage of damaged samples to discard a frame.</summary>
+        public int @discard_damaged_percentage;
     }
     
     /// <summary>AVCodec.</summary>
@@ -1842,7 +1855,6 @@ namespace FFmpeg.AutoGen
         public AVCodecTag** @codec_tag;
         /// <summary>AVClass for the private context</summary>
         public AVClass* @priv_class;
-        /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavformat and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
         public AVOutputFormat* @next;
         /// <summary>size of private data so that it can be allocated in the wrapper</summary>
         public int @priv_data_size;
@@ -2028,7 +2040,7 @@ namespace FFmpeg.AutoGen
         public byte* @name;
         /// <summary>Descriptive name for the format, meant to be more human-readable than name. You should use the NULL_IF_CONFIG_SMALL() macro to define it.</summary>
         public byte* @long_name;
-        /// <summary>Can use flags: AVFMT_NOFILE, AVFMT_NEEDNUMBER, AVFMT_SHOW_IDS, AVFMT_GENERIC_INDEX, AVFMT_TS_DISCONT, AVFMT_NOBINSEARCH, AVFMT_NOGENSEARCH, AVFMT_NO_BYTE_SEEK, AVFMT_SEEK_TO_PTS.</summary>
+        /// <summary>Can use flags: AVFMT_NOFILE, AVFMT_NEEDNUMBER, AVFMT_SHOW_IDS, AVFMT_NOTIMESTAMPS, AVFMT_GENERIC_INDEX, AVFMT_TS_DISCONT, AVFMT_NOBINSEARCH, AVFMT_NOGENSEARCH, AVFMT_NO_BYTE_SEEK, AVFMT_SEEK_TO_PTS.</summary>
         public int @flags;
         /// <summary>If extensions are defined, then no probe is done. You should usually not use extension format guessing because it is not reliable enough</summary>
         public byte* @extensions;
@@ -2118,7 +2130,7 @@ namespace FFmpeg.AutoGen
         public AVIOContext_seek_func @seek;
         /// <summary>position in the file of the current buffer</summary>
         public long @pos;
-        /// <summary>true if eof reached</summary>
+        /// <summary>true if was unable to read due to error or eof</summary>
         public int @eof_reached;
         /// <summary>true if open for writing</summary>
         public int @write_flag;

@@ -16,11 +16,6 @@ namespace FFmpeg.AutoGen.Example
         private readonly int _uSize;
         private readonly int _ySize;
 
-        static H264VideoStreamEncoder()
-        {
-            ffmpeg.avcodec_register_all();
-        }
-
         public H264VideoStreamEncoder(Stream stream, int fps, Size frameSize)
         {
             _stream = stream;

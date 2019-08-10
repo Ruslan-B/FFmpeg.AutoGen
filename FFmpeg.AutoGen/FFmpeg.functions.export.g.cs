@@ -1423,7 +1423,7 @@ namespace FFmpeg.AutoGen
             return av_packet_from_data_fptr(@pkt, @data, @size);
         };
         /// <summary>Initialize a reference-counted packet from av_malloc()ed data.</summary>
-        /// <param name="pkt">packet to be initialized. This function will set the data, size, buf and destruct fields, all others are left untouched.</param>
+        /// <param name="pkt">packet to be initialized. This function will set the data, size, and buf fields, all others are left untouched.</param>
         /// <param name="data">Data allocated by av_malloc() to be used as packet data. If this function returns successfully, the data is owned by the underlying AVBuffer. The caller may not access the data through other means.</param>
         /// <param name="size">size of data in bytes, without the padding. I.e. the full buffer size is assumed to be size + AV_INPUT_BUFFER_PADDING_SIZE.</param>
         /// <returns>0 on success, a negative AVERROR on error</returns>
@@ -3234,7 +3234,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Return decoded output data from a decoder.</summary>
         /// <param name="avctx">codec context</param>
         /// <param name="frame">This will be set to a reference-counted video or audio frame (depending on the decoder type) allocated by the decoder. Note that the function will always call av_frame_unref(frame) before doing anything else.</param>
-        /// <returns>0:                 success, a frame was returned AVERROR(EAGAIN):   output is not available in this state - user must try to send new input AVERROR_EOF:       the decoder has been fully flushed, and there will be no more output frames AVERROR(EINVAL):   codec not opened, or it is an encoder other negative values: legitimate decoding errors</returns>
+        /// <returns>0:                 success, a frame was returned AVERROR(EAGAIN):   output is not available in this state - user must try to send new input AVERROR_EOF:       the decoder has been fully flushed, and there will be no more output frames AVERROR(EINVAL):   codec not opened, or it is an encoder AVERROR_INPUT_CHANGED:   current decoded frame has changed parameters with respect to first decoded frame. Applicable when flag AV_CODEC_FLAG_DROPCHANGED is set. other negative values: legitimate decoding errors</returns>
         public static int avcodec_receive_frame(AVCodecContext* @avctx, AVFrame* @frame)
         {
             return avcodec_receive_frame_fptr(@avctx, @frame);
@@ -7952,8 +7952,8 @@ namespace FFmpeg.AutoGen
             }
             return avio_feof_fptr(@s);
         };
-        /// <summary>feof() equivalent for AVIOContext.</summary>
-        /// <returns>non zero if and only if end of file</returns>
+        /// <summary>Similar to feof() but also returns nonzero on read errors.</summary>
+        /// <returns>non zero if and only if at end of file or a read error happened when reading.</returns>
         public static int avio_feof(AVIOContext* @s)
         {
             return avio_feof_fptr(@s);
@@ -10383,8 +10383,8 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Allocate a buffer, reusing the given one if large enough.</summary>
         /// <param name="ptr">Pointer to pointer to an already allocated buffer. `*ptr` will be overwritten with pointer to new buffer on success or `NULL` on failure</param>
-        /// <param name="size">Pointer to current size of buffer `*ptr`. `*size` is changed to `min_size` in case of success or 0 in case of failure</param>
-        /// <param name="min_size">New size of buffer `*ptr`</param>
+        /// <param name="size">Pointer to the size of buffer `*ptr`. `*size` is updated to the new allocated size, in particular 0 in case of failure.</param>
+        /// <param name="min_size">Desired minimal size of buffer `*ptr`</param>
         public static void av_fast_malloc(void* @ptr, uint* @size, ulong @min_size)
         {
             av_fast_malloc_fptr(@ptr, @size, @min_size);
@@ -10407,8 +10407,8 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Allocate and clear a buffer, reusing the given one if large enough.</summary>
         /// <param name="ptr">Pointer to pointer to an already allocated buffer. `*ptr` will be overwritten with pointer to new buffer on success or `NULL` on failure</param>
-        /// <param name="size">Pointer to current size of buffer `*ptr`. `*size` is changed to `min_size` in case of success or 0 in case of failure</param>
-        /// <param name="min_size">New size of buffer `*ptr`</param>
+        /// <param name="size">Pointer to the size of buffer `*ptr`. `*size` is updated to the new allocated size, in particular 0 in case of failure.</param>
+        /// <param name="min_size">Desired minimal size of buffer `*ptr`</param>
         public static void av_fast_mallocz(void* @ptr, uint* @size, ulong @min_size)
         {
             av_fast_mallocz_fptr(@ptr, @size, @min_size);
@@ -10431,8 +10431,8 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Reallocate the given buffer if it is not large enough, otherwise do nothing.</summary>
         /// <param name="ptr">Already allocated buffer, or `NULL`</param>
-        /// <param name="size">Pointer to current size of buffer `ptr`. `*size` is changed to `min_size` in case of success or 0 in case of failure</param>
-        /// <param name="min_size">New size of buffer `ptr`</param>
+        /// <param name="size">Pointer to the size of buffer `ptr`. `*size` is updated to the new allocated size, in particular 0 in case of failure.</param>
+        /// <param name="min_size">Desired minimal size of buffer `ptr`</param>
         /// <returns>`ptr` if the buffer is large enough, a pointer to newly reallocated buffer if the buffer was not large enough, or `NULL` in case of error</returns>
         public static void* av_fast_realloc(void* @ptr, uint* @size, ulong @min_size)
         {
