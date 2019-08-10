@@ -3,20 +3,20 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <PackageId>FFmpeg.AutoGen</PackageId>
-    <Version>4.1.0.5</Version>
+    <Version>4.2.0.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Ruslan Balanukhin</Authors>
     <Company>Rational Core</Company>
     <Product>FFmpeg.AutoGen</Product>
     <Description>FFmpeg auto generated unsafe bindings for C#/.NET and Mono.</Description>
     <Copyright>Copyright © Ruslan Balanukhin 2018 All rights reserved.</Copyright>
-    <PackageLicenseUrl>https://github.com/Ruslan-B/FFmpeg.AutoGen/blob/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Ruslan-B/FFmpeg.AutoGen</PackageProjectUrl>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
     <PackageTags>ffmpeg</PackageTags>
     <AssemblyName>FFmpeg.AutoGen</AssemblyName>
     <RootNamespace>FFmpeg.AutoGen</RootNamespace>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -30,5 +30,9 @@
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>..\FFmpeg.AutoGen.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None  Include="..\LICENSE.txt" Link="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt"/>
+  </ItemGroup>
 
 </Project>

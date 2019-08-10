@@ -336,6 +336,11 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_MWSC = 32806,
         @AV_CODEC_ID_WCMV = 32807,
         @AV_CODEC_ID_RASC = 32808,
+        @AV_CODEC_ID_HYMT = 32809,
+        @AV_CODEC_ID_ARBC = 32810,
+        @AV_CODEC_ID_AGM = 32811,
+        @AV_CODEC_ID_LSCR = 32812,
+        @AV_CODEC_ID_VP4 = 32813,
         /// <summary>A dummy id pointing at the start of audio codecs</summary>
         @AV_CODEC_ID_FIRST_AUDIO = 65536,
         @AV_CODEC_ID_PCM_S16LE = 65536,
@@ -415,6 +420,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_ADPCM_AICA = 71687,
         @AV_CODEC_ID_ADPCM_IMA_DAT4 = 71688,
         @AV_CODEC_ID_ADPCM_MTAF = 71689,
+        @AV_CODEC_ID_ADPCM_AGM = 71690,
         @AV_CODEC_ID_AMR_NB = 73728,
         @AV_CODEC_ID_AMR_WB = 73729,
         @AV_CODEC_ID_RA_144 = 77824,
@@ -516,6 +522,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_APTX_HD = 88082,
         @AV_CODEC_ID_SBC = 88083,
         @AV_CODEC_ID_ATRAC9 = 88084,
+        @AV_CODEC_ID_HCOM = 88085,
         /// <summary>A dummy ID pointing at the start of subtitle codecs.</summary>
         @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
         @AV_CODEC_ID_DVD_SUBTITLE = 94208,
@@ -544,6 +551,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_ASS = 96269,
         @AV_CODEC_ID_HDMV_TEXT_SUBTITLE = 96270,
         @AV_CODEC_ID_TTML = 96271,
+        @AV_CODEC_ID_ARIB_CAPTION = 96272,
         /// <summary>A dummy ID pointing at the start of various fake codecs.</summary>
         @AV_CODEC_ID_FIRST_UNKNOWN = 98304,
         @AV_CODEC_ID_TTF = 98304,
@@ -811,6 +819,10 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_QP_TABLE_DATA = 17,
         /// <summary>Timecode which conforms to SMPTE ST 12-1. The data is an array of 4 uint32_t where the first uint32_t describes how many (1-3) of the other timecodes are used. The timecode format is described in the av_timecode_get_smpte_from_framenum() function in libavutil/timecode.c.</summary>
         @AV_FRAME_DATA_S12M_TIMECODE = 18,
+        /// <summary>HDR dynamic metadata associated with a video frame. The payload is an AVDynamicHDRPlus type and contains information for color volume transform - application 4 of SMPTE 2094-40:2016 standard.</summary>
+        @AV_FRAME_DATA_DYNAMIC_HDR_PLUS = 19,
+        /// <summary>Regions Of Interest, the data is an array of AVRegionOfInterest type, the number of array element is implied by AVFrameSideData.size / AVRegionOfInterest.self_size.</summary>
+        @AV_FRAME_DATA_REGIONS_OF_INTEREST = 20,
     }
     
     public enum AVHWDeviceType : int
@@ -977,7 +989,7 @@ namespace FFmpeg.AutoGen
         @AV_PKT_DATA_WEBVTT_SETTINGS = 17,
         /// <summary>A list of zero terminated key/value strings. There is no end marker for the list, so it is required to rely on the side data size to stop. This side data includes updated metadata which appeared in the stream.</summary>
         @AV_PKT_DATA_METADATA_UPDATE = 18,
-        /// <summary>MPEGTS stream ID, this is required to pass the stream ID information from the demuxer to the corresponding muxer.</summary>
+        /// <summary>MPEGTS stream ID as uint8_t, this is required to pass the stream ID information from the demuxer to the corresponding muxer.</summary>
         @AV_PKT_DATA_MPEGTS_STREAM_ID = 19,
         /// <summary>Mastering display metadata (based on SMPTE-2086:2014). This metadata should be associated with a video stream and contains data in the form of the AVMasteringDisplayMetadata struct.</summary>
         @AV_PKT_DATA_MASTERING_DISPLAY_METADATA = 20,
@@ -1412,8 +1424,20 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_GRAYF32BE = 185,
         /// <summary>IEEE-754 single precision Y, 32bpp, little-endian</summary>
         @AV_PIX_FMT_GRAYF32LE = 186,
+        /// <summary>planar YUV 4:2:2,24bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), 12b alpha, big-endian</summary>
+        @AV_PIX_FMT_YUVA422P12BE = 187,
+        /// <summary>planar YUV 4:2:2,24bpp, (1 Cr &amp; Cb sample per 2x1 Y samples), 12b alpha, little-endian</summary>
+        @AV_PIX_FMT_YUVA422P12LE = 188,
+        /// <summary>planar YUV 4:4:4,36bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), 12b alpha, big-endian</summary>
+        @AV_PIX_FMT_YUVA444P12BE = 189,
+        /// <summary>planar YUV 4:4:4,36bpp, (1 Cr &amp; Cb sample per 1x1 Y samples), 12b alpha, little-endian</summary>
+        @AV_PIX_FMT_YUVA444P12LE = 190,
+        /// <summary>planar YUV 4:4:4, 24bpp, 1 plane for Y and 1 plane for the UV components, which are interleaved (first byte U and the following byte V)</summary>
+        @AV_PIX_FMT_NV24 = 191,
+        /// <summary>as above, but U and V bytes are swapped</summary>
+        @AV_PIX_FMT_NV42 = 192,
         /// <summary>number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions</summary>
-        @AV_PIX_FMT_NB = 187,
+        @AV_PIX_FMT_NB = 193,
     }
     
     /// <summary>Rounding methods.</summary>
