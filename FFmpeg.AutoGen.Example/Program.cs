@@ -20,7 +20,7 @@ namespace FFmpeg.AutoGen.Example
             Console.WriteLine($"FFmpeg version info: {ffmpeg.av_version_info()}");
             
             SetupLogging();
-            TryConfigureHWDecoder(out var deviceType);
+            ConfigureHWDecoder(out var deviceType);
 
             Console.WriteLine("Decoding...");
             DecodeAllFramesToImages(deviceType);
