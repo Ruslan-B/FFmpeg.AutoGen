@@ -20,7 +20,7 @@ namespace FFmpeg.AutoGen.Example
             Console.WriteLine($"FFmpeg version info: {ffmpeg.av_version_info()}");
             
             SetupLogging();
-            TryConfigureHWDecoder(out var deviceType);
+            ConfigureHWDecoder(out var deviceType);
 
             Console.WriteLine("Decoding...");
             DecodeAllFramesToImages(deviceType);
@@ -29,12 +29,12 @@ namespace FFmpeg.AutoGen.Example
             EncodeImagesToH264();
         }
 
-        private static void TryConfigureHWDecoder(out AVHWDeviceType HWtype)
+        private static void ConfigureHWDecoder(out AVHWDeviceType HWtype)
         {
             HWtype = AVHWDeviceType.AV_HWDEVICE_TYPE_NONE;
             Console.WriteLine("Use hardware acceleration for decoding?[n]");
             var key = Console.ReadLine();
-            var avalibeHWDecoders = new Dictionary<int, AVHWDeviceType>();
+            var availableHWDecoders = new Dictionary<int, AVHWDeviceType>();
             if (key == "y")
             {
                 Console.WriteLine("Select hardware decoder:");
@@ -43,20 +43,20 @@ namespace FFmpeg.AutoGen.Example
                 while ((type = ffmpeg.av_hwdevice_iterate_types(type)) != AVHWDeviceType.AV_HWDEVICE_TYPE_NONE)
                 {
                     Console.WriteLine($"{++number}. {type}");
-                    avalibeHWDecoders.Add(number, type);
+                    availableHWDecoders.Add(number, type);
                 }
-                if (avalibeHWDecoders.Count == 0)
+                if (availableHWDecoders.Count == 0)
                 {
                     Console.WriteLine("Your system have no hardware decoders.");
                     HWtype = AVHWDeviceType.AV_HWDEVICE_TYPE_NONE;
                     return;
                 }
-                int decoderNumber = avalibeHWDecoders.SingleOrDefault(t => t.Value == AVHWDeviceType.AV_HWDEVICE_TYPE_DXVA2).Key;
+                int decoderNumber = availableHWDecoders.SingleOrDefault(t => t.Value == AVHWDeviceType.AV_HWDEVICE_TYPE_DXVA2).Key;
                 if (decoderNumber == 0)
-                    decoderNumber = avalibeHWDecoders.First().Key;
+                    decoderNumber = availableHWDecoders.First().Key;
                 Console.WriteLine($"Selected [{decoderNumber}]");
                 int.TryParse(Console.ReadLine(),out var inputDecoderNumber);
-                avalibeHWDecoders.TryGetValue(inputDecoderNumber == 0 ? decoderNumber: inputDecoderNumber, out HWtype);
+                availableHWDecoders.TryGetValue(inputDecoderNumber == 0 ? decoderNumber: inputDecoderNumber, out HWtype);
             }
         }
 
