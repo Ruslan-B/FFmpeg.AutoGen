@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -19,12 +20,44 @@ namespace FFmpeg.AutoGen.Example
             Console.WriteLine($"FFmpeg version info: {ffmpeg.av_version_info()}");
             
             SetupLogging();
+            ConfigureHWDecoder(out var deviceType);
 
             Console.WriteLine("Decoding...");
-            DecodeAllFramesToImages();
+            DecodeAllFramesToImages(deviceType);
 
             Console.WriteLine("Encoding...");
             EncodeImagesToH264();
+        }
+
+        private static void ConfigureHWDecoder(out AVHWDeviceType HWtype)
+        {
+            HWtype = AVHWDeviceType.AV_HWDEVICE_TYPE_NONE;
+            Console.WriteLine("Use hardware acceleration for decoding?[n]");
+            var key = Console.ReadLine();
+            var availableHWDecoders = new Dictionary<int, AVHWDeviceType>();
+            if (key == "y")
+            {
+                Console.WriteLine("Select hardware decoder:");
+                var type = AVHWDeviceType.AV_HWDEVICE_TYPE_NONE;
+                var number = 0;
+                while ((type = ffmpeg.av_hwdevice_iterate_types(type)) != AVHWDeviceType.AV_HWDEVICE_TYPE_NONE)
+                {
+                    Console.WriteLine($"{++number}. {type}");
+                    availableHWDecoders.Add(number, type);
+                }
+                if (availableHWDecoders.Count == 0)
+                {
+                    Console.WriteLine("Your system have no hardware decoders.");
+                    HWtype = AVHWDeviceType.AV_HWDEVICE_TYPE_NONE;
+                    return;
+                }
+                int decoderNumber = availableHWDecoders.SingleOrDefault(t => t.Value == AVHWDeviceType.AV_HWDEVICE_TYPE_DXVA2).Key;
+                if (decoderNumber == 0)
+                    decoderNumber = availableHWDecoders.First().Key;
+                Console.WriteLine($"Selected [{decoderNumber}]");
+                int.TryParse(Console.ReadLine(),out var inputDecoderNumber);
+                availableHWDecoders.TryGetValue(inputDecoderNumber == 0 ? decoderNumber: inputDecoderNumber, out HWtype);
+            }
         }
 
         private static unsafe void SetupLogging()
@@ -49,11 +82,11 @@ namespace FFmpeg.AutoGen.Example
             ffmpeg.av_log_set_callback(logCallback);
         }
 
-        private static unsafe void DecodeAllFramesToImages()
+        private static unsafe void DecodeAllFramesToImages(AVHWDeviceType HWDevice)
         {
             // decode all frames from url, please not it might local resorce, e.g. string url = "../../sample_mpeg4.mp4";
             var url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"; // be advised this file holds 1440 frames
-            using (var vsd = new VideoStreamDecoder(url))
+            using (var vsd = new VideoStreamDecoder(url,HWDevice))
             {
                 Console.WriteLine($"codec name: {vsd.CodecName}");
 
@@ -61,7 +94,7 @@ namespace FFmpeg.AutoGen.Example
                 info.ToList().ForEach(x => Console.WriteLine($"{x.Key} = {x.Value}"));
 
                 var sourceSize = vsd.FrameSize;
-                var sourcePixelFormat = vsd.PixelFormat;
+                var sourcePixelFormat = HWDevice == AVHWDeviceType.AV_HWDEVICE_TYPE_NONE ? vsd.PixelFormat : GetHWPixelFormat(HWDevice);
                 var destinationSize = sourceSize;
                 var destinationPixelFormat = AVPixelFormat.AV_PIX_FMT_BGR24;
                 using (var vfc = new VideoFrameConverter(sourceSize, sourcePixelFormat, destinationSize, destinationPixelFormat))
@@ -78,6 +111,37 @@ namespace FFmpeg.AutoGen.Example
                         frameNumber++;
                     }
                 }
+            }
+        }
+
+        private static AVPixelFormat GetHWPixelFormat(AVHWDeviceType hWDevice)
+        {
+            switch (hWDevice)
+            {
+                case AVHWDeviceType.AV_HWDEVICE_TYPE_NONE:
+                    return AVPixelFormat.AV_PIX_FMT_NONE;
+                case AVHWDeviceType.AV_HWDEVICE_TYPE_VDPAU:
+                    return AVPixelFormat.AV_PIX_FMT_VDPAU;
+                case AVHWDeviceType.AV_HWDEVICE_TYPE_CUDA:
+                    return AVPixelFormat.AV_PIX_FMT_CUDA;
+                case AVHWDeviceType.AV_HWDEVICE_TYPE_VAAPI:
+                    return AVPixelFormat.AV_PIX_FMT_VAAPI;
+                case AVHWDeviceType.AV_HWDEVICE_TYPE_DXVA2:
+                    return AVPixelFormat.AV_PIX_FMT_NV12;
+                case AVHWDeviceType.AV_HWDEVICE_TYPE_QSV:
+                    return AVPixelFormat.AV_PIX_FMT_QSV;
+                case AVHWDeviceType.AV_HWDEVICE_TYPE_VIDEOTOOLBOX:
+                    return AVPixelFormat.AV_PIX_FMT_VIDEOTOOLBOX;
+                case AVHWDeviceType.AV_HWDEVICE_TYPE_D3D11VA:
+                    return AVPixelFormat.AV_PIX_FMT_NV12;
+                case AVHWDeviceType.AV_HWDEVICE_TYPE_DRM:
+                    return AVPixelFormat.AV_PIX_FMT_DRM_PRIME;
+                case AVHWDeviceType.AV_HWDEVICE_TYPE_OPENCL:
+                    return AVPixelFormat.AV_PIX_FMT_OPENCL;
+                case AVHWDeviceType.AV_HWDEVICE_TYPE_MEDIACODEC:
+                    return AVPixelFormat.AV_PIX_FMT_MEDIACODEC;
+                default:
+                    return AVPixelFormat.AV_PIX_FMT_NONE;
             }
         }
 
