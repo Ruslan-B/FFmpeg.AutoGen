@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Example
@@ -11,38 +12,27 @@ namespace FFmpeg.AutoGen.Example
         private readonly AVFormatContext* _pFormatContext;
         private readonly int _streamIndex;
         private readonly AVFrame* _pFrame;
+        private readonly AVFrame* _receivedFrame;
         private readonly AVPacket* _pPacket;
 
-        public VideoStreamDecoder(string url)
+        public VideoStreamDecoder(string url, AVHWDeviceType HWDeviceType = AVHWDeviceType.AV_HWDEVICE_TYPE_NONE)
         {
             _pFormatContext = ffmpeg.avformat_alloc_context();
-
+            _receivedFrame = ffmpeg.av_frame_alloc();
             var pFormatContext = _pFormatContext;
             ffmpeg.avformat_open_input(&pFormatContext, url, null, null).ThrowExceptionIfError();
-
             ffmpeg.avformat_find_stream_info(_pFormatContext, null).ThrowExceptionIfError();
-
-            // find the first video stream
-            AVStream* pStream = null;
-            for (var i = 0; i < _pFormatContext->nb_streams; i++)
-                if (_pFormatContext->streams[i]->codec->codec_type == AVMediaType.AVMEDIA_TYPE_VIDEO)
-                {
-                    pStream = _pFormatContext->streams[i];
-                    break;
-                }
-
-            if (pStream == null) throw new InvalidOperationException("Could not found video stream.");
-
-            _streamIndex = pStream->index;
-            _pCodecContext = pStream->codec;
-
-            var codecId = _pCodecContext->codec_id;
-            var pCodec = ffmpeg.avcodec_find_decoder(codecId);
-            if (pCodec == null) throw new InvalidOperationException("Unsupported codec.");
-
-            ffmpeg.avcodec_open2(_pCodecContext, pCodec, null).ThrowExceptionIfError();
-
-            CodecName = ffmpeg.avcodec_get_name(codecId);
+            AVCodec* codec = null;
+            _streamIndex = ffmpeg.av_find_best_stream(_pFormatContext, AVMediaType.AVMEDIA_TYPE_VIDEO, -1, -1, &codec, 0).ThrowExceptionIfError();
+            _pCodecContext = ffmpeg.avcodec_alloc_context3(codec);
+            if (HWDeviceType != AVHWDeviceType.AV_HWDEVICE_TYPE_NONE)
+            {
+                ffmpeg.av_hwdevice_ctx_create(&_pCodecContext->hw_device_ctx, HWDeviceType, null, null, 0).ThrowExceptionIfError();
+            }
+            ffmpeg.avcodec_parameters_to_context(_pCodecContext, _pFormatContext->streams[_streamIndex]->codecpar).ThrowExceptionIfError();
+            ffmpeg.avcodec_open2(_pCodecContext, codec, null).ThrowExceptionIfError();
+            
+            CodecName = ffmpeg.avcodec_get_name(codec->id);
             FrameSize = new Size(_pCodecContext->width, _pCodecContext->height);
             PixelFormat = _pCodecContext->pix_fmt;
 
@@ -70,6 +60,7 @@ namespace FFmpeg.AutoGen.Example
         public bool TryDecodeNextFrame(out AVFrame frame)
         {
             ffmpeg.av_frame_unref(_pFrame);
+            ffmpeg.av_frame_unref(_receivedFrame);
             int error;
             do
             {
@@ -96,9 +87,16 @@ namespace FFmpeg.AutoGen.Example
 
                 error = ffmpeg.avcodec_receive_frame(_pCodecContext, _pFrame);
             } while (error == ffmpeg.AVERROR(ffmpeg.EAGAIN));
-
             error.ThrowExceptionIfError();
-            frame = *_pFrame;
+            if (_pCodecContext->hw_device_ctx != null)
+            {
+                ffmpeg.av_hwframe_transfer_data(_receivedFrame, _pFrame, 0).ThrowExceptionIfError();
+                frame = *_receivedFrame;
+            }
+            else
+            {
+                frame = *_pFrame;
+            }
             return true;
         }
 
