@@ -14,7 +14,6 @@ namespace FFmpeg.AutoGen.Example
         private readonly AVFrame* _pFrame;
         private readonly AVFrame* _receivedFrame;
         private readonly AVPacket* _pPacket;
-        private readonly AVCodecHWConfig* config;
 
         public VideoStreamDecoder(string url, AVHWDeviceType HWDeviceType = AVHWDeviceType.AV_HWDEVICE_TYPE_NONE)
         {
@@ -28,8 +27,6 @@ namespace FFmpeg.AutoGen.Example
             _pCodecContext = ffmpeg.avcodec_alloc_context3(codec);
             if (HWDeviceType != AVHWDeviceType.AV_HWDEVICE_TYPE_NONE)
             {
-                config = ffmpeg.avcodec_get_hw_config(codec, 0);
-                if (config == null) throw new DriveNotFoundException("Cloud not create hw config");
                 ffmpeg.av_hwdevice_ctx_create(&_pCodecContext->hw_device_ctx, HWDeviceType, null, null, 0).ThrowExceptionIfError();
             }
             ffmpeg.avcodec_parameters_to_context(_pCodecContext, _pFormatContext->streams[_streamIndex]->codecpar).ThrowExceptionIfError();
