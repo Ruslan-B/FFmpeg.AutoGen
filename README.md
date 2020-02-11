@@ -1,6 +1,6 @@
 # Important
 **The FFmpeg API is vast and complex and this project exposes it with minimum modifications - support is very limited.
-Please consider to ask *how to* questions on [stackoverflow.com](https://stackoverflow.com/search?tab=newest&q=ffmpeg%20autogen). 
+Please consider to ask *how to* questions on [stackoverflow.com](https://stackoverflow.com/search?tab=newest&q=ffmpeg%20autogen) or in special repository on [github.com](https://github.com/Ruslan-B/FFmpeg.AutoGen.Questions/issues). 
 The community may be able to offer some assistance but you will largely be on your own.
 As another option you can search for a solution in C(lang) as with some effort you can convert it to C#.**
 
