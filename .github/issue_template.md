@@ -1,4 +1,4 @@
-**Note: for support questions, please use [stackoverflow](https://stackoverflow.com/search?tab=newest&q=ffmpeg%20autogen)**. This repository's issues are reserved for feature requests and bug reports.
+**Note: for support questions, please use [stackoverflow](https://stackoverflow.com/search?tab=newest&q=ffmpeg%20autogen) or special repository on [github.com](in special repository [github.com](https://github.com/Ruslan-B/FFmpeg.AutoGen.Questions/issues))**. This repository's issues are reserved for feature requests and bug reports.
 
 * **I'm submitting a ... **
   - [ ] bug report
