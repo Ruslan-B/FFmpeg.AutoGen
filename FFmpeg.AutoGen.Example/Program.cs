@@ -13,7 +13,7 @@ namespace FFmpeg.AutoGen.Example
         private static void Main(string[] args)
         {
             Console.WriteLine("Current directory: " + Environment.CurrentDirectory);
-            Console.WriteLine("Runnung in {0}-bit mode.", Environment.Is64BitProcess ? "64" : "32");
+            Console.WriteLine("Running in {0}-bit mode.", Environment.Is64BitProcess ? "64" : "32");
 
             FFmpegBinariesHelper.RegisterFFmpegBinaries();
             
