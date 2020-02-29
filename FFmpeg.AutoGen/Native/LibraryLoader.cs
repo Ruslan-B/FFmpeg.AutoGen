@@ -25,23 +25,23 @@ namespace FFmpeg.AutoGen.Native
                 throw new PlatformNotSupportedException();
 #endif
             };
-
-            GetNativeLibraryName = (libraryName, version) =>
+            
+            switch (GetPlatformId())
             {
-                switch (GetPlatformId())
-                {
-                    case PlatformID.MacOSX:
-                        return $"lib{libraryName}.{version}.dylib";
-                    case PlatformID.Unix:
-                        return $"lib{libraryName}.so.{version}";
-                    case PlatformID.Win32NT:
-                    case PlatformID.Win32S:
-                    case PlatformID.Win32Windows:
-                        return $"{libraryName}-{version}.dll";
-                    default:
-                        throw new PlatformNotSupportedException();
-                }
-            };
+                case PlatformID.MacOSX:
+                    GetNativeLibraryName = (libraryName, version) => $"lib{libraryName}.{version}.dylib";
+                    break;
+                case PlatformID.Unix:
+                    GetNativeLibraryName = (libraryName, version) => $"lib{libraryName}.so.{version}";
+                    break;
+                case PlatformID.Win32NT:
+                case PlatformID.Win32S:
+                case PlatformID.Win32Windows:
+                    GetNativeLibraryName = (libraryName, version) => $"{libraryName}-{version}.dll";
+                    break;
+                default:
+                    throw new PlatformNotSupportedException();
+            }
         }
 
         public static GetPlatformId GetPlatformId;
