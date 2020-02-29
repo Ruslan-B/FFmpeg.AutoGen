@@ -12,30 +12,30 @@ FFmpeg auto generated unsafe bindings for C#/.NET and Mono.
 
 The basic example of the library usage: video decoding, conversion and frame extraction to jpeg is included in ```FFmpeg.AutoGen.Example``` project.  
 For the more sophisticated operations please refer to offical [ffmpeg Documentation](https://www.ffmpeg.org/documentation.html) expecially API section of it.
+Nuget packages version uses [semantic versioning] (https://semver.org/) and in sync with MAJOR and MINOR version of FFmpeg as PATCH incremets does not changing API.
 
 - on Windows:  
-Native ffmpeg binaries are pre bundled in the repository. 
-The x64 binaries source from [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/).
+Native ffmpeg libraries are pre bundled in this repository, please note the are GPL(!) libraries. 
+The x64 libraries source from [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/).
 Please check to example project it shows how specify path to libraries.  
-In case you need x86 binaries, feel free to use same source.
 
 - on OS X:  
-Install ffmpeg via [MacPorts](http://www.macports.org):
+Install ffmpeg via [Homebrew](https://formulae.brew.sh/formula/ffmpeg):
 ```bash
-sudo port install ffmpeg +universal
+brew install ffmpeg
 ```
-Please make sure that ```FFmpeg.AutoGen.dll``` coupled with ```FFmpeg.AutoGen.config``` and all paths are correct. 
-By default MacPorts keeps compiled libraries in ```/opt/local/lib```.
+Normally you need to set static ```ffmpeg.RootPath = ``` with full path to FFmpeg libraries.
 
 - on Linux:  
-You need to patch ```FFmpeg.AutoGen.config``` with full path to FFmpeg libraries.
+Use your package manager of choice.
+Normally you need to set static ```ffmpeg.RootPath = ``` with full path to FFmpeg libraries.
 
 ## Generation
 
 The bindings generator uses [CppSharp](https://github.com/mono/CppSharp).
 
 Prerequisites:
- - Visual Studio 2017 with C# and C++ desktop development workloads and Windows SDK for desktop.
+ - Visual Studio 2019 with C# and C++ desktop development workloads and Windows SDK for desktop.
 
 Steps to generate:
 - Run ```FFmpeg.AutoGen.CppSharpUnsafeGenerator;```
@@ -43,7 +43,7 @@ Steps to generate:
 
 ## License
 
-Copyright © Ruslan Balanukhin 2018
+Copyright © Ruslan Balanukhin 2019
 All rights reserved.
 
 Distributed under the GNU Lesser General Public License (LGPL) version 3.  
