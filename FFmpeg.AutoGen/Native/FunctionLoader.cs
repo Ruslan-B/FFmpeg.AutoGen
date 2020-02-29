@@ -33,7 +33,7 @@ namespace FFmpeg.AutoGen.Native
                 return default(T);
             }
 
-#if NET45
+#if NET45 || NET40
             return (T)(object)Marshal.GetDelegateForFunctionPointer(ptr, typeof(T));
 #else
             try
@@ -51,7 +51,7 @@ namespace FFmpeg.AutoGen.Native
 
         private static IntPtr GetFunctionPointer(IntPtr nativeLibraryHandle, string functionName)
         {
-#if NET45
+#if NET45 || NET40
                 switch (LibraryLoader.GetPlatformId())
                 {
                 case PlatformID.MacOSX:

@@ -10,6 +10,15 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
     internal class FunctionProcessor
     {
+        private const string MarshalAsUtf8Macros = "\r\n" + 
+                                                  "    #if NET40\r\n" + 
+                                                  "    #elif NET45 || NETSTANDARD2_0\r\n" + 
+                                                  "    [MarshalAs((UnmanagedType)48)]\r\n" + 
+                                                  "    #else\r\n" +
+                                                  "    [MarshalAs(UnmanagedType.LPUTF8Str)]\r\n" + 
+                                                  "    #endif\r\n" +
+                                                  "   ";
+
         private readonly ASTProcessor _context;
 
         public FunctionProcessor(ASTProcessor context) => _context = context;
@@ -123,7 +132,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 switch (builtinType.Type)
                 {
                     case PrimitiveType.Char:
-                        return new TypeDefinition {Name = "string", Attributes = new[] { "[MarshalAs((UnmanagedType)48)]" } };
+                        return new TypeDefinition {Name = "string", Attributes = new[] { MarshalAsUtf8Macros } };
                     case PrimitiveType.Void:
                         return new TypeDefinition {Name = "void*"};
                     default:
