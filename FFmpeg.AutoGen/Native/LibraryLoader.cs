@@ -16,7 +16,7 @@ namespace FFmpeg.AutoGen.Native
         {
             GetPlatformId = () =>
             {
-#if NET45
+#if NET45 || NET40
                 return Environment.OSVersion.Platform;
 #else
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) return PlatformID.Win32NT;
