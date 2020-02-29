@@ -8,25 +8,26 @@ namespace FFmpeg.AutoGen
 
     public static partial class ffmpeg
     {
-        public const int EAGAIN = 11;
+        public static readonly int EAGAIN;
 
-        public const int ENOMEM = 12;
+        public static readonly int ENOMEM = 12;
 
-        public const int EINVAL = 22;
+        public static readonly int EINVAL = 22;
 
         private static readonly object SyncRoot = new object();
 
-        public static readonly Dictionary<string, List<string>> LibraryDependenciesMap = new Dictionary<string, List<string>>
-        {
-            {"avcodec", new List<string> {"avutil", "swresample"}},
-            {"avdevice", new List<string> {"avcodec", "avfilter", "avformat", "avutil"}},
-            {"avfilter", new List<string> {"avcodec", "avformat", "avutil", "postproc", "swresample", "swscale"}},
-            {"avformat", new List<string> {"avcodec", "avutil"}},
-            {"avutil", new List<string>()},
-            {"postproc", new List<string> {"avutil"}},
-            {"swresample", new List<string> {"avutil"}},
-            {"swscale", new List<string> {"avutil"}}
-        };
+        public static readonly Dictionary<string, List<string>> LibraryDependenciesMap =
+            new Dictionary<string, List<string>>
+            {
+                {"avcodec", new List<string> {"avutil", "swresample"}},
+                {"avdevice", new List<string> {"avcodec", "avfilter", "avformat", "avutil"}},
+                {"avfilter", new List<string> {"avcodec", "avformat", "avutil", "postproc", "swresample", "swscale"}},
+                {"avformat", new List<string> {"avcodec", "avutil"}},
+                {"avutil", new List<string>()},
+                {"postproc", new List<string> {"avutil"}},
+                {"swresample", new List<string> {"avutil"}},
+                {"swscale", new List<string> {"avutil"}}
+            };
 
         static ffmpeg()
         {
@@ -45,6 +46,16 @@ namespace FFmpeg.AutoGen
 
                 return ptr;
             };
+
+            switch (LibraryLoader.GetPlatformId())
+            {
+                case PlatformID.MacOSX:
+                    EAGAIN = 35;
+                    break;
+                default:
+                    EAGAIN = 11;
+                    break;
+            }
         }
 
         /// <summary>
@@ -61,7 +72,9 @@ namespace FFmpeg.AutoGen
             dependencies.ForEach(x => GetOrLoadLibrary(x));
             var version = LibraryVersionMap[libraryName];
             var ptr = LibraryLoader.LoadNativeLibrary(RootPath, libraryName, version);
-            if (ptr == IntPtr.Zero) throw new DllNotFoundException($"Unable to load DLL '{libraryName}.{version}': The specified module could not be found.");
+            if (ptr == IntPtr.Zero)
+                throw new DllNotFoundException(
+                    $"Unable to load DLL '{libraryName}.{version}': The specified module could not be found.");
             return ptr;
         }
 
@@ -75,7 +88,8 @@ namespace FFmpeg.AutoGen
             => -Convert.ToInt32(a);
 
         public static int MKTAG<T1, T2, T3, T4>(T1 a, T2 b, T3 c, T4 d)
-            => (int) (Convert.ToUInt32(a) | (Convert.ToUInt32(b) << 8) | (Convert.ToUInt32(c) << 16) | (Convert.ToUInt32(d) << 24));
+            => (int) (Convert.ToUInt32(a) | (Convert.ToUInt32(b) << 8) | (Convert.ToUInt32(c) << 16) |
+                      (Convert.ToUInt32(d) << 24));
 
         public static int FFERRTAG<T1, T2, T3, T4>(T1 a, T2 b, T3 c, T4 d)
             => -MKTAG(a, b, c, d);
