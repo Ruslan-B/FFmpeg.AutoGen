@@ -1,25 +1,24 @@
 ﻿using System;
 using System.IO;
-
 using CommandLine;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     /// <summary>
-    /// Command line options.
+    ///     Command line options.
     /// </summary>
     public class CliOptions
     {
-        [Option('n', "namespace", DefaultValue = "FFmpeg.AutoGen",
+        [Option('n', "namespace", Default = "FFmpeg.AutoGen",
             HelpText = "The namespace that will contain the generated symbols.")]
         public string Namespace { get; set; }
 
-        [Option('c', "class", DefaultValue = "ffmpeg",
+        [Option('c', "class", Default = "ffmpeg",
             HelpText = "The name of the class that contains the FFmpeg unmanaged method calls.")]
         public string ClassName { get; set; }
 
         /// <summary>
-        /// See http://ybeernet.blogspot.ro/2011/03/techniques-of-calling-unmanaged-code.html.
+        ///     See http://ybeernet.blogspot.ro/2011/03/techniques-of-calling-unmanaged-code.html.
         /// </summary>
         [Option('f', "SuppressUnmanagedCodeSecurity",
             HelpText = "Add the [SuppressUnmanagedCodeSecurity] attribute to unmanaged method calls " +
@@ -49,8 +48,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public static CliOptions ParseArgumentsStrict(string[] args)
         {
-            var options = new CliOptions();
-            Parser.Default.ParseArgumentsStrict(args, options);
+            var result = Parser.Default.ParseArguments<CliOptions>(args);
+            var options = result.MapResult(x => x, x => new CliOptions());
             options.Normalize();
             return options;
         }
@@ -63,14 +62,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             if (string.IsNullOrWhiteSpace(FFmpegDir) &&
                 string.IsNullOrWhiteSpace(FFmpegIncludesDir) &&
                 string.IsNullOrWhiteSpace(FFmpegBinDir))
-            {
                 FFmpegDir = Path.Combine(solutionDir, "ffmpeg");
-            }
 
-            if (string.IsNullOrWhiteSpace(OutputDir))
-            {
-                OutputDir = Path.Combine(solutionDir, "FFmpeg.AutoGen/");
-            }
+            if (string.IsNullOrWhiteSpace(OutputDir)) OutputDir = Path.Combine(solutionDir, "FFmpeg.AutoGen/");
 
             // If the FFmpegDir option is specified, it will take precedence
             if (!string.IsNullOrWhiteSpace(FFmpegDir))

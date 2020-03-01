@@ -29,6 +29,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public bool SuppressUnmanagedCodeSecurity { get; set; }
 
+        public InlineFunctionDefinition[] ExistingInlineFunctions { get; set; }
+
         public void Parse(params string[] sourceFiles)
         {
             _hasParsingErrors = false;
@@ -50,12 +52,15 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 writer.WriteLine($"public unsafe static partial class {ClassName}");
                 using (writer.BeginBlock())
                 {
-                    writer.WriteLine("public static Dictionary<string, int> LibraryVersionMap =  new Dictionary<string, int>");
+                    writer.WriteLine(
+                        "public static Dictionary<string, int> LibraryVersionMap =  new Dictionary<string, int>");
                     using (writer.BeginBlock(true))
                     {
-                        var libraryVersionMap = Exports.Select(x => new {x.LibraryName, x.LibraryVersion}).Distinct().ToDictionary(x => x.LibraryName, x => x.LibraryVersion);
+                        var libraryVersionMap = Exports.Select(x => new {x.LibraryName, x.LibraryVersion}).Distinct()
+                            .ToDictionary(x => x.LibraryName, x => x.LibraryVersion);
                         foreach (var pair in libraryVersionMap) writer.WriteLine($"{{\"{pair.Key}\", {pair.Value}}},");
                     }
+
                     writer.WriteLine(";");
                 }
             });
@@ -121,12 +126,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public void WriteInlineFunctions(string outputFile)
         {
+            var existingInlineFunctionMap = ExistingInlineFunctions.ToDictionary(x => x.Name);
             WriteInternal(outputFile, (units, writer) =>
             {
                 writer.WriteLine($"public unsafe static partial class {ClassName}");
                 using (writer.BeginBlock())
                     units.OfType<InlineFunctionDefinition>()
                         .OrderBy(x => x.Name)
+                        .Select(RewriteFunctionBody)
                         .ToList()
                         .ForEach(x =>
                         {
@@ -134,6 +141,15 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                             writer.WriteLine();
                         });
             });
+
+            InlineFunctionDefinition RewriteFunctionBody(InlineFunctionDefinition function)
+            {
+                if (existingInlineFunctionMap.TryGetValue(function.Name, out var existing) &&
+                    function.OriginalBodyHash == existing.OriginalBodyHash)
+                    function.Body = existing.Body;
+
+                return function;
+            }
         }
 
         public void WriteArrays(string outputFile)
@@ -230,7 +246,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             }
         }
 
-        private void Process(ASTContext context) => _astProcessor.Process(context.TranslationUnits.Where(x => !x.IsSystemHeader));
+        private void Process(ASTContext context) =>
+            _astProcessor.Process(context.TranslationUnits.Where(x => !x.IsSystemHeader));
 
         private void WriteInternal(string outputFile, Action<IReadOnlyList<IDefinition>, Writer> execute)
         {

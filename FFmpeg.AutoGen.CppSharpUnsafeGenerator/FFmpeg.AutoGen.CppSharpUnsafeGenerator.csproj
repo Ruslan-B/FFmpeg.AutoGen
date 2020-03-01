@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>FFmpeg.AutoGen.CppSharpUnsafeGenerator</RootNamespace>
     <AssemblyName>FFmpeg.AutoGen.CppSharpUnsafeGenerator</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
@@ -75,8 +75,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
+    <Reference Include="CommandLine, Version=2.7.82.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommandLineParser.2.7.82\lib\net461\CommandLine.dll</HintPath>
     </Reference>
     <Reference Include="CppSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CppSharp.0.10.1\lib\CppSharp.dll</HintPath>
@@ -116,6 +116,7 @@
     <Compile Include="Definitions\TypeDefinition.cs" />
     <Compile Include="Definitions\MacroDefinition.cs" />
     <Compile Include="CliOptions.cs" />
+    <Compile Include="ExistingInlineFunctionsHelper.cs" />
     <Compile Include="Processors\MacroPostProcessor.cs" />
     <Compile Include="Processors\MacroProcessor.cs" />
     <Compile Include="Processors\FunctionProcessor.cs" />

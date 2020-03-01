@@ -106,9 +106,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
             if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]");
             WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
+            
             var lines = function.Body.Split(new [] {'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries).ToList();
-            lines.ForEach(WriteLine);
-            WriteLine($"// original body hash: {function.Sha256}");
+            lines.ForEach(WriteLineWithoutIntent);
+            WriteLine($"// original body hash: {function.OriginalBodyHash}");
             WriteLine();
         }
 
@@ -172,6 +173,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public void WriteLine(string line)
         {
             _writer.WriteLine(line);
+        }
+
+        public void WriteLineWithoutIntent(string line)
+        {
+            _writer.WriteLineNoTabs(line);
         }
 
         public IDisposable BeginBlock(bool inline = false)
