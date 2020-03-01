@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
@@ -10,7 +9,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
     {
         private static void Main(string[] args)
         {
-            CliOptions options = CliOptions.ParseArgumentsStrict(args);
+            var options = CliOptions.ParseArgumentsStrict(args);
 
             if (options.Verbose)
             {
@@ -22,14 +21,16 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 Console.WriteLine("Class name: " + options.ClassName);
             }
 
-            var defines = new[] {"__STDC_CONSTANT_MACROS"};
+            var existingInlineFunctions =
+                ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.OutputDir,
+                    "FFmpeg.functions.inline.g.cs"));
 
-            FunctionExport[] exports = FunctionExportHelper.LoadFunctionExports(options.FFmpegBinDir).ToArray();
+            var exports = FunctionExportHelper.LoadFunctionExports(options.FFmpegBinDir).ToArray();
 
             var astProcessor = new ASTProcessor
             {
                 FunctionExportMap = exports
-                    .GroupBy(x => x.Name).Select(x => x.First())    // Eliminate duplicated names
+                    .GroupBy(x => x.Name).Select(x => x.First()) // Eliminate duplicated names
                     .ToDictionary(x => x.Name)
             };
             astProcessor.IgnoreUnitNames.Add("__NSConstantString_tag");
@@ -40,6 +41,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             astProcessor.WellKnownMaros.Add("AV_VERSION_INT", typeof(int));
             astProcessor.WellKnownMaros.Add("AV_VERSION", typeof(string));
 
+            var defines = new[] {"__STDC_CONSTANT_MACROS"};
+
             var g = new Generator(astProcessor)
             {
                 IncludeDirs = new[] {options.FFmpegIncludesDir},
@@ -47,6 +50,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 Exports = exports,
                 Namespace = options.Namespace,
                 ClassName = options.ClassName,
+                ExistingInlineFunctions = existingInlineFunctions,
                 SuppressUnmanagedCodeSecurity = options.SuppressUnmanagedCodeSecurity
             };
 
@@ -63,7 +67,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             g.Parse("libavutil/hwcontext.h");
             g.Parse("libavutil/hwcontext_dxva2.h");
             g.Parse("libavutil/hwcontext_d3d11va.h");
-            
+
             g.Parse("libswresample/swresample.h");
 
             g.Parse("libpostproc/postprocess.h");

@@ -45,7 +45,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     var inlineDefinition = new InlineFunctionDefinition();
                     PopulateCommon(inlineDefinition);
                     inlineDefinition.Body = function.Body;
-                    inlineDefinition.Sha256 = GetSha256(function.Body);
+                    inlineDefinition.OriginalBodyHash = GetSha256(function.Body);
                     _context.AddUnit(inlineDefinition);
                     continue;
                 }
