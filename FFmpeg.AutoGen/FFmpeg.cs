@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FFmpeg.AutoGen.Native;
 
 namespace FFmpeg.AutoGen
@@ -16,36 +17,24 @@ namespace FFmpeg.AutoGen
 
         private static readonly object SyncRoot = new object();
 
-        public static readonly Dictionary<string, List<string>> LibraryDependenciesMap =
-            new Dictionary<string, List<string>>
+        public static readonly Dictionary<string, string[]> LibraryDependenciesMap =
+            new Dictionary<string, string[]>
             {
-                {"avcodec", new List<string> {"avutil", "swresample"}},
-                {"avdevice", new List<string> {"avcodec", "avfilter", "avformat", "avutil"}},
-                {"avfilter", new List<string> {"avcodec", "avformat", "avutil", "postproc", "swresample", "swscale"}},
-                {"avformat", new List<string> {"avcodec", "avutil"}},
-                {"avutil", new List<string>()},
-                {"postproc", new List<string> {"avutil"}},
-                {"swresample", new List<string> {"avutil"}},
-                {"swscale", new List<string> {"avutil"}}
+                {"avcodec", new[] {"avutil", "swresample"}},
+                {"avdevice", new[] {"avcodec", "avfilter", "avformat", "avutil"}},
+                {"avfilter", new[] {"avcodec", "avformat", "avutil", "postproc", "swresample", "swscale"}},
+                {"avformat", new[] {"avcodec", "avutil"}},
+                {"avutil", new string[0]},
+                {"postproc", new[] {"avutil"}},
+                {"swresample", new[] {"avutil"}},
+                {"swscale", new[] {"avutil"}}
             };
+
+        public static readonly Dictionary<string, IntPtr> LoadedLibraries = new Dictionary<string, IntPtr>();
 
         static ffmpeg()
         {
-            var loadedLibraries = new Dictionary<string, IntPtr>();
-
-            GetOrLoadLibrary = name =>
-            {
-                if (loadedLibraries.TryGetValue(name, out var ptr)) return ptr;
-
-                lock (SyncRoot)
-                {
-                    if (loadedLibraries.TryGetValue(name, out ptr)) return ptr;
-                    ptr = LoadLibrary(name);
-                    loadedLibraries.Add(name, ptr);
-                }
-
-                return ptr;
-            };
+            GetOrLoadLibrary = libraryName => LoadLibrary(libraryName, true);
 
             switch (LibraryLoader.GetPlatformId())
             {
@@ -66,16 +55,31 @@ namespace FFmpeg.AutoGen
 
         public static GetOrLoadLibrary GetOrLoadLibrary { get; set; }
 
-        private static IntPtr LoadLibrary(string libraryName)
+        private static IntPtr LoadLibrary(string libraryName, bool throwException)
         {
-            var dependencies = LibraryDependenciesMap[libraryName];
-            dependencies.ForEach(x => GetOrLoadLibrary(x));
-            var version = LibraryVersionMap[libraryName];
-            var ptr = LibraryLoader.LoadNativeLibrary(RootPath, libraryName, version);
-            if (ptr == IntPtr.Zero)
-                throw new DllNotFoundException(
-                    $"Unable to load DLL '{libraryName}.{version}': The specified module could not be found.");
-            return ptr;
+            if (LoadedLibraries.TryGetValue(libraryName, out var ptr)) return ptr;
+
+            lock (SyncRoot)
+            {
+                if (LoadedLibraries.TryGetValue(libraryName, out ptr)) return ptr;
+
+                var dependencies = LibraryDependenciesMap[libraryName];
+                dependencies.Where(n => !LoadedLibraries.ContainsKey(n) && !n.Equals(libraryName))
+                    .ToList()
+                    .ForEach(n => LoadLibrary(n, false));
+
+                var version = LibraryVersionMap[libraryName];
+                ptr = LibraryLoader.LoadNativeLibrary(RootPath, libraryName, version);
+
+                if (ptr != IntPtr.Zero) LoadedLibraries.Add(libraryName, ptr);
+                else if (throwException)
+                {
+                    throw new DllNotFoundException(
+                        $"Unable to load DLL '{libraryName}.{version}': The specified module could not be found.");
+                }
+
+                return ptr;
+            }
         }
 
         public static T GetFunctionDelegate<T>(IntPtr libraryHandle, string functionName)
