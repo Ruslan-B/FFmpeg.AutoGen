@@ -75,32 +75,26 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommandLine, Version=2.7.82.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommandLineParser.2.7.82\lib\net461\CommandLine.dll</HintPath>
+    <Reference Include="CommandLine, Version=2.8.0.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommandLineParser.2.8.0\lib\net461\CommandLine.dll</HintPath>
     </Reference>
-    <Reference Include="CppSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.10.1\lib\CppSharp.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CppSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\CppSharp.0.10.3\lib\CppSharp.dll</HintPath>
     </Reference>
-    <Reference Include="CppSharp.AST, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.10.1\lib\CppSharp.AST.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CppSharp.AST, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\CppSharp.0.10.3\lib\CppSharp.AST.dll</HintPath>
     </Reference>
-    <Reference Include="CppSharp.Generator, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.10.1\lib\CppSharp.Generator.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CppSharp.Generator, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\CppSharp.0.10.3\lib\CppSharp.Generator.dll</HintPath>
     </Reference>
-    <Reference Include="CppSharp.Parser, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.10.1\lib\CppSharp.Parser.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CppSharp.Parser, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\CppSharp.0.10.3\lib\CppSharp.Parser.dll</HintPath>
     </Reference>
     <Reference Include="CppSharp.Parser.CLI, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\CppSharp.0.10.1\lib\CppSharp.Parser.CLI.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\CppSharp.0.10.3\lib\CppSharp.Parser.CLI.dll</HintPath>
     </Reference>
-    <Reference Include="CppSharp.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CppSharp.0.10.1\lib\CppSharp.Runtime.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CppSharp.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\CppSharp.0.10.3\lib\CppSharp.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="RCore.ClangMacroParser, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RCore.ClangMacroParser.0.0.0.3\lib\net45\RCore.ClangMacroParser.dll</HintPath>
