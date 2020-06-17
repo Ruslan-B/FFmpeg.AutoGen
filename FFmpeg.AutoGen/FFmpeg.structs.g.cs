@@ -42,6 +42,8 @@ namespace FFmpeg.AutoGen
         public AVClass_get_category_func @get_category;
         /// <summary>Callback to return the supported/allowed ranges. available since version (52.12)</summary>
         public AVClass_query_ranges_func @query_ranges;
+        /// <summary>Iterate over the AVClasses corresponding to potential AVOptions-enabled children.</summary>
+        public AVClass_child_class_iterate_func @child_class_iterate;
     }
     
     /// <summary>AVOption</summary>
@@ -798,29 +800,37 @@ namespace FFmpeg.AutoGen
         public SwsVector* @chrV;
     }
     
-    /// <summary>This struct describes the properties of a single codec described by an AVCodecID.</summary>
-    public unsafe struct AVCodecDescriptor
+    /// <summary>Picture data structure.</summary>
+    public unsafe struct AVPicture
     {
-        public AVCodecID @id;
-        public AVMediaType @type;
-        /// <summary>Name of the codec described by this descriptor. It is non-empty and unique for each codec descriptor. It should contain alphanumeric characters and &apos;_&apos; only.</summary>
-        public byte* @name;
-        /// <summary>A more descriptive name for this codec. May be NULL.</summary>
-        public byte* @long_name;
-        /// <summary>Codec properties, a combination of AV_CODEC_PROP_* flags.</summary>
-        public int @props;
-        /// <summary>MIME type(s) associated with the codec. May be NULL; if not, a NULL-terminated array of MIME types. The first item is always non-NULL and is the preferred MIME type.</summary>
-        public byte** @mime_types;
-        /// <summary>If non-NULL, an array of profiles recognized for this codec. Terminated with FF_PROFILE_UNKNOWN.</summary>
-        public AVProfile* @profiles;
+        /// <summary>pointers to the image data planes</summary>
+        public byte_ptrArray8 @data;
+        /// <summary>number of bytes per line</summary>
+        public int_array8 @linesize;
     }
     
-    /// <summary>AVProfile.</summary>
-    public unsafe struct AVProfile
+    public unsafe struct AVSubtitleRect
     {
-        public int @profile;
-        /// <summary>short name for the profile</summary>
-        public byte* @name;
+        /// <summary>top left corner of pict, undefined when pict is not set</summary>
+        public int @x;
+        /// <summary>top left corner of pict, undefined when pict is not set</summary>
+        public int @y;
+        /// <summary>width of pict, undefined when pict is not set</summary>
+        public int @w;
+        /// <summary>height of pict, undefined when pict is not set</summary>
+        public int @h;
+        /// <summary>number of colors in pict, undefined when pict is not set</summary>
+        public int @nb_colors;
+        public AVPicture @pict;
+        /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
+        public byte_ptrArray4 @data;
+        public int_array4 @linesize;
+        public AVSubtitleType @type;
+        /// <summary>0 terminated plain UTF-8 text</summary>
+        public byte* @text;
+        /// <summary>0 terminated ASS/SSA compatible event line. The presentation of this is unaffected by the other values in this struct.</summary>
+        public byte* @ass;
+        public int @flags;
     }
     
     public unsafe struct RcOverride
@@ -829,61 +839,6 @@ namespace FFmpeg.AutoGen
         public int @end_frame;
         public int @qscale;
         public float @quality_factor;
-    }
-    
-    /// <summary>Pan Scan area. This specifies the area which should be displayed. Note there may be multiple such areas for one frame.</summary>
-    public unsafe struct AVPanScan
-    {
-        /// <summary>id - encoding: Set by user. - decoding: Set by libavcodec.</summary>
-        public int @id;
-        /// <summary>width and height in 1/16 pel - encoding: Set by user. - decoding: Set by libavcodec.</summary>
-        public int @width;
-        public int @height;
-        /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
-        public short_arrayOfArray6 @position;
-    }
-    
-    /// <summary>This structure describes the bitrate properties of an encoded bitstream. It roughly corresponds to a subset the VBV parameters for MPEG-2 or HRD parameters for H.264/HEVC.</summary>
-    public unsafe struct AVCPBProperties
-    {
-        public int @max_bitrate;
-        public int @min_bitrate;
-        public int @avg_bitrate;
-        /// <summary>The size of the buffer to which the ratecontrol is applied, in bits. Zero if unknown or unspecified.</summary>
-        public int @buffer_size;
-        /// <summary>The delay between the time the packet this structure is associated with is received and the time when it should be decoded, in periods of a 27MHz clock.</summary>
-        public ulong @vbv_delay;
-    }
-    
-    public unsafe struct AVPacketSideData
-    {
-        public byte* @data;
-        public int @size;
-        public AVPacketSideDataType @type;
-    }
-    
-    /// <summary>This structure stores compressed data. It is typically exported by demuxers and then passed as input to decoders, or received as output from encoders and then passed to muxers.</summary>
-    public unsafe struct AVPacket
-    {
-        /// <summary>A reference to the reference-counted buffer where the packet data is stored. May be NULL, then the packet data is not reference-counted.</summary>
-        public AVBufferRef* @buf;
-        /// <summary>Presentation timestamp in AVStream-&gt;time_base units; the time at which the decompressed packet will be presented to the user. Can be AV_NOPTS_VALUE if it is not stored in the file. pts MUST be larger or equal to dts as presentation cannot happen before decompression, unless one wants to view hex dumps. Some formats misuse the terms dts and pts/cts to mean something different. Such timestamps must be converted to true pts/dts before they are stored in AVPacket.</summary>
-        public long @pts;
-        /// <summary>Decompression timestamp in AVStream-&gt;time_base units; the time at which the packet is decompressed. Can be AV_NOPTS_VALUE if it is not stored in the file.</summary>
-        public long @dts;
-        public byte* @data;
-        public int @size;
-        public int @stream_index;
-        /// <summary>A combination of AV_PKT_FLAG values</summary>
-        public int @flags;
-        /// <summary>Additional packet data that can be provided by the container. Packet can contain several types of side information.</summary>
-        public AVPacketSideData* @side_data;
-        public int @side_data_elems;
-        /// <summary>Duration of this packet in AVStream-&gt;time_base units, 0 if unknown. Equals next_pts - this_pts in presentation order.</summary>
-        public long @duration;
-        /// <summary>byte position in stream, -1 if unknown</summary>
-        public long @pos;
-        public long @convergence_duration;
     }
     
     /// <summary>main external API structure. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. You can use AVOptions (av_opt* / av_set/get*()) to access these fields from user applications. The name string for AVOptions options matches the associated command line parameter name and can be found in libavcodec/options_table.h The AVOption/command line parameter names differ in some cases from the C structure field names for historic reasons or brevity. sizeof(AVCodecContext) must not be used outside libav*.</summary>
@@ -1231,6 +1186,10 @@ namespace FFmpeg.AutoGen
         public int @extra_hw_frames;
         /// <summary>The percentage of damaged samples to discard a frame.</summary>
         public int @discard_damaged_percentage;
+        /// <summary>The number of samples per frame to maximally accept.</summary>
+        public long @max_samples;
+        /// <summary>Bit set of AV_CODEC_EXPORT_DATA_* flags, which affects the kind of metadata exported in frame, packet, or coded stream side data by decoders and encoders.</summary>
+        public int @export_side_data;
     }
     
     /// <summary>AVCodec.</summary>
@@ -1266,8 +1225,6 @@ namespace FFmpeg.AutoGen
         public int @priv_data_size;
         public AVCodec* @next;
         /// <summary>@{</summary>
-        public AVCodec_init_thread_copy_func @init_thread_copy;
-        /// <summary>Copy necessary context variables from a previous thread context to the current one. If not defined, the next thread will start automatically; otherwise, the codec must call ff_thread_finish_setup().</summary>
         public AVCodec_update_thread_context_func @update_thread_context;
         /// <summary>Private codec-specific defaults.</summary>
         public AVCodecDefault* @defaults;
@@ -1292,6 +1249,16 @@ namespace FFmpeg.AutoGen
         public byte* @bsfs;
         /// <summary>Array of pointers to hardware configurations supported by the codec, or NULL if no hardware supported. The array is terminated by a NULL pointer.</summary>
         public AVCodecHWConfigInternal** @hw_configs;
+        /// <summary>List of supported codec_tags, terminated by FF_CODEC_TAGS_END.</summary>
+        public uint* @codec_tags;
+    }
+    
+    /// <summary>AVProfile.</summary>
+    public unsafe struct AVProfile
+    {
+        public int @profile;
+        /// <summary>short name for the profile</summary>
+        public byte* @name;
     }
     
     public unsafe struct AVSubtitle
@@ -1305,37 +1272,35 @@ namespace FFmpeg.AutoGen
         public long @pts;
     }
     
-    public unsafe struct AVSubtitleRect
+    /// <summary>This structure stores compressed data. It is typically exported by demuxers and then passed as input to decoders, or received as output from encoders and then passed to muxers.</summary>
+    public unsafe struct AVPacket
     {
-        /// <summary>top left corner of pict, undefined when pict is not set</summary>
-        public int @x;
-        /// <summary>top left corner of pict, undefined when pict is not set</summary>
-        public int @y;
-        /// <summary>width of pict, undefined when pict is not set</summary>
-        public int @w;
-        /// <summary>height of pict, undefined when pict is not set</summary>
-        public int @h;
-        /// <summary>number of colors in pict, undefined when pict is not set</summary>
-        public int @nb_colors;
-        public AVPicture @pict;
-        /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
-        public byte_ptrArray4 @data;
-        public int_array4 @linesize;
-        public AVSubtitleType @type;
-        /// <summary>0 terminated plain UTF-8 text</summary>
-        public byte* @text;
-        /// <summary>0 terminated ASS/SSA compatible event line. The presentation of this is unaffected by the other values in this struct.</summary>
-        public byte* @ass;
+        /// <summary>A reference to the reference-counted buffer where the packet data is stored. May be NULL, then the packet data is not reference-counted.</summary>
+        public AVBufferRef* @buf;
+        /// <summary>Presentation timestamp in AVStream-&gt;time_base units; the time at which the decompressed packet will be presented to the user. Can be AV_NOPTS_VALUE if it is not stored in the file. pts MUST be larger or equal to dts as presentation cannot happen before decompression, unless one wants to view hex dumps. Some formats misuse the terms dts and pts/cts to mean something different. Such timestamps must be converted to true pts/dts before they are stored in AVPacket.</summary>
+        public long @pts;
+        /// <summary>Decompression timestamp in AVStream-&gt;time_base units; the time at which the packet is decompressed. Can be AV_NOPTS_VALUE if it is not stored in the file.</summary>
+        public long @dts;
+        public byte* @data;
+        public int @size;
+        public int @stream_index;
+        /// <summary>A combination of AV_PKT_FLAG values</summary>
         public int @flags;
+        /// <summary>Additional packet data that can be provided by the container. Packet can contain several types of side information.</summary>
+        public AVPacketSideData* @side_data;
+        public int @side_data_elems;
+        /// <summary>Duration of this packet in AVStream-&gt;time_base units, 0 if unknown. Equals next_pts - this_pts in presentation order.</summary>
+        public long @duration;
+        /// <summary>byte position in stream, -1 if unknown</summary>
+        public long @pos;
+        public long @convergence_duration;
     }
     
-    /// <summary>Picture data structure.</summary>
-    public unsafe struct AVPicture
+    public unsafe struct AVPacketSideData
     {
-        /// <summary>pointers to the image data planes</summary>
-        public byte_ptrArray8 @data;
-        /// <summary>number of bytes per line</summary>
-        public int_array8 @linesize;
+        public byte* @data;
+        public int @size;
+        public AVPacketSideDataType @type;
     }
     
     public unsafe struct AVHWAccel
@@ -1376,71 +1341,53 @@ namespace FFmpeg.AutoGen
         public AVHWAccel_frame_params_func @frame_params;
     }
     
-    public unsafe struct AVCodecHWConfig
+    /// <summary>This struct describes the properties of a single codec described by an AVCodecID.</summary>
+    public unsafe struct AVCodecDescriptor
     {
-        /// <summary>A hardware pixel format which the codec can use.</summary>
-        public AVPixelFormat @pix_fmt;
-        /// <summary>Bit set of AV_CODEC_HW_CONFIG_METHOD_* flags, describing the possible setup methods which can be used with this configuration.</summary>
-        public int @methods;
-        /// <summary>The device type associated with the configuration.</summary>
-        public AVHWDeviceType @device_type;
+        public AVCodecID @id;
+        public AVMediaType @type;
+        /// <summary>Name of the codec described by this descriptor. It is non-empty and unique for each codec descriptor. It should contain alphanumeric characters and &apos;_&apos; only.</summary>
+        public byte* @name;
+        /// <summary>A more descriptive name for this codec. May be NULL.</summary>
+        public byte* @long_name;
+        /// <summary>Codec properties, a combination of AV_CODEC_PROP_* flags.</summary>
+        public int @props;
+        /// <summary>MIME type(s) associated with the codec. May be NULL; if not, a NULL-terminated array of MIME types. The first item is always non-NULL and is the preferred MIME type.</summary>
+        public byte** @mime_types;
+        /// <summary>If non-NULL, an array of profiles recognized for this codec. Terminated with FF_PROFILE_UNKNOWN.</summary>
+        public AVProfile* @profiles;
     }
     
-    /// <summary>This struct describes the properties of an encoded stream.</summary>
-    public unsafe struct AVCodecParameters
+    /// <summary>Pan Scan area. This specifies the area which should be displayed. Note there may be multiple such areas for one frame.</summary>
+    public unsafe struct AVPanScan
     {
-        /// <summary>General type of the encoded data.</summary>
-        public AVMediaType @codec_type;
-        /// <summary>Specific type of the encoded data (the codec used).</summary>
-        public AVCodecID @codec_id;
-        /// <summary>Additional information about the codec (corresponds to the AVI FOURCC).</summary>
-        public uint @codec_tag;
-        /// <summary>Extra binary data needed for initializing the decoder, codec-dependent.</summary>
-        public byte* @extradata;
-        /// <summary>Size of the extradata content in bytes.</summary>
-        public int @extradata_size;
-        /// <summary>- video: the pixel format, the value corresponds to enum AVPixelFormat. - audio: the sample format, the value corresponds to enum AVSampleFormat.</summary>
-        public int @format;
-        /// <summary>The average bitrate of the encoded data (in bits per second).</summary>
-        public long @bit_rate;
-        /// <summary>The number of bits per sample in the codedwords.</summary>
-        public int @bits_per_coded_sample;
-        /// <summary>This is the number of valid bits in each output sample. If the sample format has more bits, the least significant bits are additional padding bits, which are always 0. Use right shifts to reduce the sample to its actual size. For example, audio formats with 24 bit samples will have bits_per_raw_sample set to 24, and format set to AV_SAMPLE_FMT_S32. To get the original sample use &quot;(int32_t)sample &gt;&gt; 8&quot;.&quot;</summary>
-        public int @bits_per_raw_sample;
-        /// <summary>Codec-specific bitstream restrictions that the stream conforms to.</summary>
-        public int @profile;
-        public int @level;
-        /// <summary>Video only. The dimensions of the video frame in pixels.</summary>
+        /// <summary>id - encoding: Set by user. - decoding: Set by libavcodec.</summary>
+        public int @id;
+        /// <summary>width and height in 1/16 pel - encoding: Set by user. - decoding: Set by libavcodec.</summary>
         public int @width;
         public int @height;
-        /// <summary>Video only. The aspect ratio (width / height) which a single pixel should have when displayed.</summary>
-        public AVRational @sample_aspect_ratio;
-        /// <summary>Video only. The order of the fields in interlaced video.</summary>
-        public AVFieldOrder @field_order;
-        /// <summary>Video only. Additional colorspace characteristics.</summary>
-        public AVColorRange @color_range;
-        public AVColorPrimaries @color_primaries;
-        public AVColorTransferCharacteristic @color_trc;
-        public AVColorSpace @color_space;
-        public AVChromaLocation @chroma_location;
-        /// <summary>Video only. Number of delayed frames.</summary>
-        public int @video_delay;
-        /// <summary>Audio only. The channel layout bitmask. May be 0 if the channel layout is unknown or unspecified, otherwise the number of bits set must be equal to the channels field.</summary>
-        public ulong @channel_layout;
-        /// <summary>Audio only. The number of audio channels.</summary>
-        public int @channels;
-        /// <summary>Audio only. The number of audio samples per second.</summary>
-        public int @sample_rate;
-        /// <summary>Audio only. The number of bytes per coded audio frame, required by some formats.</summary>
-        public int @block_align;
-        /// <summary>Audio only. Audio frame size, if known. Required by some formats to be static.</summary>
-        public int @frame_size;
-        /// <summary>Audio only. The amount of padding (in samples) inserted by the encoder at the beginning of the audio. I.e. this number of leading decoded samples must be discarded by the caller to get the original audio without leading padding.</summary>
-        public int @initial_padding;
-        /// <summary>Audio only. The amount of padding (in samples) appended by the encoder to the end of the audio. I.e. this number of decoded samples must be discarded by the caller from the end of the stream to get the original audio without any trailing padding.</summary>
-        public int @trailing_padding;
-        /// <summary>Audio only. Number of samples to skip after a discontinuity.</summary>
-        public int @seek_preroll;
+        /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
+        public short_arrayOfArray6 @position;
+    }
+    
+    /// <summary>This structure describes the bitrate properties of an encoded bitstream. It roughly corresponds to a subset the VBV parameters for MPEG-2 or HRD parameters for H.264/HEVC.</summary>
+    public unsafe struct AVCPBProperties
+    {
+        public int @max_bitrate;
+        public int @min_bitrate;
+        public int @avg_bitrate;
+        /// <summary>The size of the buffer to which the ratecontrol is applied, in bits. Zero if unknown or unspecified.</summary>
+        public int @buffer_size;
+        /// <summary>The delay between the time the packet this structure is associated with is received and the time when it should be decoded, in periods of a 27MHz clock.</summary>
+        public ulong @vbv_delay;
+    }
+    
+    /// <summary>This structure supplies correlation between a packet timestamp and a wall clock production time. The definition follows the Producer Reference Time (&apos;prft&apos;) as defined in ISO/IEC 14496-12</summary>
+    public unsafe struct AVProducerReferenceTime
+    {
+        /// <summary>A UTC timestamp, in microseconds, since Unix epoch (e.g, av_gettime()).</summary>
+        public long @wallclock;
+        public int @flags;
     }
     
     public unsafe struct AVCodecParserContext
@@ -1509,6 +1456,31 @@ namespace FFmpeg.AutoGen
         public AVCodecParser* @next;
     }
     
+    public unsafe struct AVBitStreamFilterContext
+    {
+        public void* @priv_data;
+        public AVBitStreamFilter* @filter;
+        public AVCodecParserContext* @parser;
+        public AVBitStreamFilterContext* @next;
+        /// <summary>Internal default arguments, used if NULL is passed to av_bitstream_filter_filter(). Not for access by library users.</summary>
+        public byte* @args;
+    }
+    
+    public unsafe struct AVBitStreamFilter
+    {
+        public byte* @name;
+        /// <summary>A list of codec ids supported by the filter, terminated by AV_CODEC_ID_NONE. May be NULL, in that case the bitstream filter works with any codec id.</summary>
+        public AVCodecID* @codec_ids;
+        /// <summary>A class for the private data, used to declare bitstream filter private AVOptions. This field is NULL for bitstream filters that do not declare any options.</summary>
+        public AVClass* @priv_class;
+        /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavcodec and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
+        public int @priv_data_size;
+        public AVBitStreamFilter_init_func @init;
+        public AVBitStreamFilter_filter_func @filter;
+        public AVBitStreamFilter_close_func @close;
+        public AVBitStreamFilter_flush_func @flush;
+    }
+    
     /// <summary>The bitstream filter state.</summary>
     public unsafe struct AVBSFContext
     {
@@ -1530,29 +1502,71 @@ namespace FFmpeg.AutoGen
         public AVRational @time_base_out;
     }
     
-    public unsafe struct AVBitStreamFilter
+    /// <summary>This struct describes the properties of an encoded stream.</summary>
+    public unsafe struct AVCodecParameters
     {
-        public byte* @name;
-        /// <summary>A list of codec ids supported by the filter, terminated by AV_CODEC_ID_NONE. May be NULL, in that case the bitstream filter works with any codec id.</summary>
-        public AVCodecID* @codec_ids;
-        /// <summary>A class for the private data, used to declare bitstream filter private AVOptions. This field is NULL for bitstream filters that do not declare any options.</summary>
-        public AVClass* @priv_class;
-        /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavcodec and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
-        public int @priv_data_size;
-        public AVBitStreamFilter_init_func @init;
-        public AVBitStreamFilter_filter_func @filter;
-        public AVBitStreamFilter_close_func @close;
-        public AVBitStreamFilter_flush_func @flush;
+        /// <summary>General type of the encoded data.</summary>
+        public AVMediaType @codec_type;
+        /// <summary>Specific type of the encoded data (the codec used).</summary>
+        public AVCodecID @codec_id;
+        /// <summary>Additional information about the codec (corresponds to the AVI FOURCC).</summary>
+        public uint @codec_tag;
+        /// <summary>Extra binary data needed for initializing the decoder, codec-dependent.</summary>
+        public byte* @extradata;
+        /// <summary>Size of the extradata content in bytes.</summary>
+        public int @extradata_size;
+        /// <summary>- video: the pixel format, the value corresponds to enum AVPixelFormat. - audio: the sample format, the value corresponds to enum AVSampleFormat.</summary>
+        public int @format;
+        /// <summary>The average bitrate of the encoded data (in bits per second).</summary>
+        public long @bit_rate;
+        /// <summary>The number of bits per sample in the codedwords.</summary>
+        public int @bits_per_coded_sample;
+        /// <summary>This is the number of valid bits in each output sample. If the sample format has more bits, the least significant bits are additional padding bits, which are always 0. Use right shifts to reduce the sample to its actual size. For example, audio formats with 24 bit samples will have bits_per_raw_sample set to 24, and format set to AV_SAMPLE_FMT_S32. To get the original sample use &quot;(int32_t)sample &gt;&gt; 8&quot;.&quot;</summary>
+        public int @bits_per_raw_sample;
+        /// <summary>Codec-specific bitstream restrictions that the stream conforms to.</summary>
+        public int @profile;
+        public int @level;
+        /// <summary>Video only. The dimensions of the video frame in pixels.</summary>
+        public int @width;
+        public int @height;
+        /// <summary>Video only. The aspect ratio (width / height) which a single pixel should have when displayed.</summary>
+        public AVRational @sample_aspect_ratio;
+        /// <summary>Video only. The order of the fields in interlaced video.</summary>
+        public AVFieldOrder @field_order;
+        /// <summary>Video only. Additional colorspace characteristics.</summary>
+        public AVColorRange @color_range;
+        public AVColorPrimaries @color_primaries;
+        public AVColorTransferCharacteristic @color_trc;
+        public AVColorSpace @color_space;
+        public AVChromaLocation @chroma_location;
+        /// <summary>Video only. Number of delayed frames.</summary>
+        public int @video_delay;
+        /// <summary>Audio only. The channel layout bitmask. May be 0 if the channel layout is unknown or unspecified, otherwise the number of bits set must be equal to the channels field.</summary>
+        public ulong @channel_layout;
+        /// <summary>Audio only. The number of audio channels.</summary>
+        public int @channels;
+        /// <summary>Audio only. The number of audio samples per second.</summary>
+        public int @sample_rate;
+        /// <summary>Audio only. The number of bytes per coded audio frame, required by some formats.</summary>
+        public int @block_align;
+        /// <summary>Audio only. Audio frame size, if known. Required by some formats to be static.</summary>
+        public int @frame_size;
+        /// <summary>Audio only. The amount of padding (in samples) inserted by the encoder at the beginning of the audio. I.e. this number of leading decoded samples must be discarded by the caller to get the original audio without leading padding.</summary>
+        public int @initial_padding;
+        /// <summary>Audio only. The amount of padding (in samples) appended by the encoder to the end of the audio. I.e. this number of decoded samples must be discarded by the caller from the end of the stream to get the original audio without any trailing padding.</summary>
+        public int @trailing_padding;
+        /// <summary>Audio only. Number of samples to skip after a discontinuity.</summary>
+        public int @seek_preroll;
     }
     
-    public unsafe struct AVBitStreamFilterContext
+    public unsafe struct AVCodecHWConfig
     {
-        public void* @priv_data;
-        public AVBitStreamFilter* @filter;
-        public AVCodecParserContext* @parser;
-        public AVBitStreamFilterContext* @next;
-        /// <summary>Internal default arguments, used if NULL is passed to av_bitstream_filter_filter(). Not for access by library users.</summary>
-        public byte* @args;
+        /// <summary>For decoders, a hardware pixel format which that decoder may be able to decode to if suitable hardware is available.</summary>
+        public AVPixelFormat @pix_fmt;
+        /// <summary>Bit set of AV_CODEC_HW_CONFIG_METHOD_* flags, describing the possible setup methods which can be used with this configuration.</summary>
+        public int @methods;
+        /// <summary>The device type associated with the configuration.</summary>
+        public AVHWDeviceType @device_type;
     }
     
     /// <summary>This structure is used to provides the necessary configurations and data to the Direct3D11 FFmpeg HWAccel implementation.</summary>
@@ -1734,7 +1748,7 @@ namespace FFmpeg.AutoGen
         public int @pmt_stream_idx;
         public long @interleaver_chunk_size;
         public long @interleaver_chunk_duration;
-        /// <summary>stream probing state -1 -&gt; probing finished 0 -&gt; no probing requested rest -&gt; perform probing with request_probe being the minimum score to accept. NOT PART OF PUBLIC API</summary>
+        /// <summary>stream probing state -1 -&gt; probing finished 0 -&gt; no probing requested rest -&gt; perform probing with request_probe being the minimum score to accept.</summary>
         public int @request_probe;
         /// <summary>Indicates that everything up to the next keyframe should be discarded.</summary>
         public int @skip_to_keyframe;
@@ -1748,7 +1762,7 @@ namespace FFmpeg.AutoGen
         public long @last_discard_sample;
         /// <summary>Number of internally decoded frames, used internally in libavformat, do not access its lifetime differs from info which is why it is not in that structure.</summary>
         public int @nb_decoded_frames;
-        /// <summary>Timestamp offset added to timestamps before muxing NOT PART OF PUBLIC API</summary>
+        /// <summary>Timestamp offset added to timestamps before muxing</summary>
         public long @mux_ts_offset;
         /// <summary>Internal data to check for wrapping of the time stamp</summary>
         public long @pts_wrap_reference;
@@ -1862,7 +1876,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Write a packet. If AVFMT_ALLOW_FLUSH is set in flags, pkt can be NULL in order to flush data buffered in the muxer. When flushing, return 0 if there still is more data to flush, or 1 if everything was flushed and there is no more buffered data.</summary>
         public AVOutputFormat_write_packet_func @write_packet;
         public AVOutputFormat_write_trailer_func @write_trailer;
-        /// <summary>Currently only used to set pixel format if not YUV420P.</summary>
+        /// <summary>A format-specific function for interleavement. If unset, packets will be interleaved by dts.</summary>
         public AVOutputFormat_interleave_packet_func @interleave_packet;
         /// <summary>Test if the given codec can be stored in this container.</summary>
         public AVOutputFormat_query_codec_func @query_codec;
@@ -2031,6 +2045,8 @@ namespace FFmpeg.AutoGen
         public int @max_streams;
         /// <summary>Skip duration calcuation in estimate_timings_from_pts. - encoding: unused - decoding: set by user</summary>
         public int @skip_estimate_duration_from_pts;
+        /// <summary>Maximum number of packets that can be probed - encoding: unused - decoding: set by user</summary>
+        public int @max_probe_packets;
     }
     
     /// <summary>@{</summary>

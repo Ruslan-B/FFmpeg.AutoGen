@@ -283,7 +283,7 @@ namespace FFmpeg.AutoGen
         {
             return a & (uint)((1 << (int)p) - 1);
         }
-        // original body hash: NDWtvHdRmQSIuOst/dtMw7ViQjRkaQkAsCZLkUFJ9wE=
+        // original body hash: ncn4Okxr9Nas1g/qCfpRHKtywuNmJuf3UED+o3wjadc=
         
         
         public static int av_parity_c(uint @v)
@@ -338,6 +338,24 @@ namespace FFmpeg.AutoGen
         // original body hash: GAAy4GsS2n+9kJ/8hzuONPUOGIsiOj7PvXnLHUVrimY=
         
         
+        /// <summary>Add two signed 64-bit values with saturation.</summary>
+        /// <param name="a">one value</param>
+        /// <param name="b">another value</param>
+        /// <returns>sum with signed saturation</returns>
+        public static long av_sat_add64_c(long @a, long @b)
+        {
+            try
+            {
+                return @a + @b;
+            }
+            catch (OverflowException)
+            {
+                return ((double)@a +(double)@b) > 0d ? long.MaxValue : long.MinValue;
+            }
+        }
+        // original body hash: qeup76rp1rjakhMYQJWWEYIkpgscUcDfzDIrjyqk5iM=
+        
+        
         /// <summary>Add a doubled value to another value with saturation at both stages.</summary>
         /// <param name="a">first value</param>
         /// <param name="b">value doubled and added to a</param>
@@ -369,6 +387,24 @@ namespace FFmpeg.AutoGen
             return av_clipl_int32_c((long)a - b);
         }
         // original body hash: /tgXI2zbIgliqOwZbpnq7jSiVj0N70RjBFsbkIkWhsM=
+        
+        
+        /// <summary>Subtract two signed 64-bit values with saturation.</summary>
+        /// <param name="a">one value</param>
+        /// <param name="b">another value</param>
+        /// <returns>difference with signed saturation</returns>
+        public static long av_sat_sub64_c(long @a, long @b)
+        {
+            try
+            {
+                return @a - @b;
+            }
+            catch (OverflowException)
+            {
+                return ((double) @a - (double) @b) > 0d ? long.MaxValue : long.MinValue;
+            }
+        }
+        // original body hash: 6YrSxDrYVG1ac1wlCiXKMhTwj7Kx6eym/YtspKusrGk=
         
         
         /// <summary>Multiply two `size_t` values checking for overflow.</summary>
