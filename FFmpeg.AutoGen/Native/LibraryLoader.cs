@@ -1,6 +1,4 @@
-﻿// Copyright 2018 Baker Hughes. All rights reserved. Company proprietary and confidential.
-
-using System;
+﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
