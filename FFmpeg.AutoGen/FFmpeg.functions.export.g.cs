@@ -534,8 +534,8 @@ namespace FFmpeg.AutoGen
             return av_bsf_send_packet_fptr(@ctx, @pkt);
         };
         /// <summary>Submit a packet for filtering.</summary>
-        /// <param name="pkt">the packet to filter. The bitstream filter will take ownership of the packet and reset the contents of pkt. pkt is not touched if an error occurs. This parameter may be NULL, which signals the end of the stream (i.e. no more packets will be sent). That will cause the filter to output any packets it may have buffered internally.</param>
-        /// <returns>0 on success, a negative AVERROR on error.</returns>
+        /// <param name="pkt">the packet to filter. The bitstream filter will take ownership of the packet and reset the contents of pkt. pkt is not touched if an error occurs. If pkt is empty (i.e. NULL, or pkt-&gt;data is NULL and pkt-&gt;side_data_elems zero), it signals the end of the stream (i.e. no more non-empty packets will be sent; sending more empty packets does nothing) and will cause the filter to output any packets it may have buffered internally.</param>
+        /// <returns>0 on success. AVERROR(EAGAIN) if packets need to be retrieved from the filter (using av_bsf_receive_packet()) before new input can be consumed. Another negative AVERROR value if an error occurs.</returns>
         public static int av_bsf_send_packet(AVBSFContext* @ctx, AVPacket* @pkt)
         {
             return av_bsf_send_packet_fptr(@ctx, @pkt);
@@ -1682,9 +1682,9 @@ namespace FFmpeg.AutoGen
             return av_packet_ref_fptr(@dst, @src);
         };
         /// <summary>Setup a new reference to the data described by a given packet</summary>
-        /// <param name="dst">Destination packet</param>
+        /// <param name="dst">Destination packet. Will be completely overwritten.</param>
         /// <param name="src">Source packet</param>
-        /// <returns>0 on success, a negative AVERROR on error.</returns>
+        /// <returns>0 on success, a negative AVERROR on error. On error, dst will be blank (as if returned by av_packet_alloc()).</returns>
         public static int av_packet_ref(AVPacket* @dst, AVPacket* @src)
         {
             return av_packet_ref_fptr(@dst, @src);
@@ -2337,9 +2337,9 @@ namespace FFmpeg.AutoGen
             }
             return avcodec_decode_subtitle2_fptr(@avctx, @sub, @got_sub_ptr, @avpkt);
         };
-        /// <summary>Decode a subtitle message. Return a negative value on error, otherwise return the number of bytes used. If no subtitle could be decompressed, got_sub_ptr is zero. Otherwise, the subtitle is stored in *sub. Note that AV_CODEC_CAP_DR1 is not available for subtitle codecs. This is for simplicity, because the performance difference is expect to be negligible and reusing a get_buffer written for video codecs would probably perform badly due to a potentially very different allocation pattern.</summary>
+        /// <summary>Decode a subtitle message. Return a negative value on error, otherwise return the number of bytes used. If no subtitle could be decompressed, got_sub_ptr is zero. Otherwise, the subtitle is stored in *sub. Note that AV_CODEC_CAP_DR1 is not available for subtitle codecs. This is for simplicity, because the performance difference is expected to be negligible and reusing a get_buffer written for video codecs would probably perform badly due to a potentially very different allocation pattern.</summary>
         /// <param name="avctx">the codec context</param>
-        /// <param name="sub">The Preallocated AVSubtitle in which the decoded subtitle will be stored, must be freed with avsubtitle_free if *got_sub_ptr is set.</param>
+        /// <param name="sub">The preallocated AVSubtitle in which the decoded subtitle will be stored, must be freed with avsubtitle_free if *got_sub_ptr is set.</param>
         /// <param name="got_sub_ptr">Zero if no subtitle could be decompressed, otherwise, it is nonzero.</param>
         /// <param name="avpkt">The input AVPacket containing the input buffer.</param>
         public static int avcodec_decode_subtitle2(AVCodecContext* @avctx, AVSubtitle* @sub, int* @got_sub_ptr, AVPacket* @avpkt)
@@ -2863,7 +2863,7 @@ namespace FFmpeg.AutoGen
             }
             avcodec_flush_buffers_fptr(@avctx);
         };
-        /// <summary>Reset the internal decoder state / flush internal buffers. Should be called e.g. when seeking or when switching to a different stream.</summary>
+        /// <summary>Reset the internal codec state / flush internal buffers. Should be called e.g. when seeking or when switching to a different stream.</summary>
         public static void avcodec_flush_buffers(AVCodecContext* @avctx)
         {
             avcodec_flush_buffers_fptr(@avctx);
@@ -3369,8 +3369,8 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Read encoded data from the encoder.</summary>
         /// <param name="avctx">codec context</param>
-        /// <param name="avpkt">This will be set to a reference-counted packet allocated by the encoder. Note that the function will always call av_frame_unref(frame) before doing anything else.</param>
-        /// <returns>0 on success, otherwise negative error code: AVERROR(EAGAIN):   output is not available in the current state - user must try to send input AVERROR_EOF:       the encoder has been fully flushed, and there will be no more output packets AVERROR(EINVAL):   codec not opened, or it is an encoder other errors: legitimate decoding errors</returns>
+        /// <param name="avpkt">This will be set to a reference-counted packet allocated by the encoder. Note that the function will always call av_packet_unref(avpkt) before doing anything else.</param>
+        /// <returns>0 on success, otherwise negative error code: AVERROR(EAGAIN):   output is not available in the current state - user must try to send input AVERROR_EOF:       the encoder has been fully flushed, and there will be no more output packets AVERROR(EINVAL):   codec not opened, or it is a decoder other errors: legitimate encoding errors</returns>
         public static int avcodec_receive_packet(AVCodecContext* @avctx, AVPacket* @avpkt)
         {
             return avcodec_receive_packet_fptr(@avctx, @avpkt);
@@ -3438,7 +3438,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Supply a raw video or audio frame to the encoder. Use avcodec_receive_packet() to retrieve buffered output packets.</summary>
         /// <param name="avctx">codec context</param>
         /// <param name="frame">AVFrame containing the raw audio or video frame to be encoded. Ownership of the frame remains with the caller, and the encoder will not write to the frame. The encoder may create a reference to the frame data (or copy it if the frame is not reference-counted). It can be NULL, in which case it is considered a flush packet.  This signals the end of the stream. If the encoder still has packets buffered, it will return them after this call. Once flushing mode has been entered, additional flush packets are ignored, and sending frames will return AVERROR_EOF.</param>
-        /// <returns>0 on success, otherwise negative error code: AVERROR(EAGAIN):   input is not accepted in the current state - user must read output with avcodec_receive_packet() (once all output is read, the packet should be resent, and the call will not fail with EAGAIN). AVERROR_EOF:       the encoder has been flushed, and no new frames can be sent to it AVERROR(EINVAL):   codec not opened, refcounted_frames not set, it is a decoder, or requires flush AVERROR(ENOMEM):   failed to add packet to internal queue, or similar other errors: legitimate decoding errors</returns>
+        /// <returns>0 on success, otherwise negative error code: AVERROR(EAGAIN):   input is not accepted in the current state - user must read output with avcodec_receive_packet() (once all output is read, the packet should be resent, and the call will not fail with EAGAIN). AVERROR_EOF:       the encoder has been flushed, and no new frames can be sent to it AVERROR(EINVAL):   codec not opened, refcounted_frames not set, it is a decoder, or requires flush AVERROR(ENOMEM):   failed to add packet to internal queue, or similar other errors: legitimate encoding errors</returns>
         public static int avcodec_send_frame(AVCodecContext* @avctx, AVFrame* @frame)
         {
             return avcodec_send_frame_fptr(@avctx, @frame);
@@ -4041,6 +4041,7 @@ namespace FFmpeg.AutoGen
             return av_abuffersink_params_alloc_fptr();
         };
         /// <summary>Create an AVABufferSinkParams structure.</summary>
+        [Obsolete("")]
         public static AVABufferSinkParams* av_abuffersink_params_alloc()
         {
             return av_abuffersink_params_alloc_fptr();
@@ -4356,6 +4357,7 @@ namespace FFmpeg.AutoGen
             return av_buffersink_params_alloc_fptr();
         };
         /// <summary>Create an AVBufferSinkParams structure.</summary>
+        [Obsolete("")]
         public static AVBufferSinkParams* av_buffersink_params_alloc()
         {
             return av_buffersink_params_alloc_fptr();
@@ -4805,7 +4807,7 @@ namespace FFmpeg.AutoGen
             }
             return avfilter_graph_create_filter_fptr(@filt_ctx, @filt, @name, @args, @opaque, @graph_ctx);
         };
-        /// <summary>Create and add a filter instance into an existing graph. The filter instance is created from the filter filt and inited with the parameters args and opaque.</summary>
+        /// <summary>Create and add a filter instance into an existing graph. The filter instance is created from the filter filt and inited with the parameter args. opaque is currently ignored.</summary>
         /// <param name="name">the instance name to give to the created filter instance</param>
         /// <param name="graph_ctx">the filter graph</param>
         /// <returns>a negative AVERROR error code in case of failure, a non negative value otherwise</returns>
@@ -5531,7 +5533,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Get the name of an AVFilterPad.</summary>
         /// <param name="pads">an array of AVFilterPads</param>
-        /// <param name="pad_idx">index of the pad in the array it; is the caller&apos;s responsibility to ensure the index is valid</param>
+        /// <param name="pad_idx">index of the pad in the array; it is the caller&apos;s responsibility to ensure the index is valid</param>
         /// <returns>name of the pad_idx&apos;th pad in pads</returns>
         public static string avfilter_pad_get_name(AVFilterPad* @pads, int @pad_idx)
         {
@@ -7248,7 +7250,7 @@ namespace FFmpeg.AutoGen
             return av_read_frame_fptr(@s, @pkt);
         };
         /// <summary>Return the next frame of a stream. This function returns what is stored in the file, and does not validate that what is there are valid frames for the decoder. It will split what is stored in the file into frames and return one for each call. It will not omit invalid data between valid frames so as to give the decoder the maximum information possible for decoding.</summary>
-        /// <returns>0 if OK, &lt; 0 on error or end of file</returns>
+        /// <returns>0 if OK, &lt; 0 on error or end of file. On error, pkt will be blank (as if it came from av_packet_alloc()).</returns>
         public static int av_read_frame(AVFormatContext* @s, AVPacket* @pkt)
         {
             return av_read_frame_fptr(@s, @pkt);
@@ -9003,6 +9005,27 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void avio_print_string_array_delegate(AVIOContext* @s, byte*[] @strings);
+        private static avio_print_string_array_delegate avio_print_string_array_fptr = (AVIOContext* @s, byte*[] @strings) =>
+        {
+            avio_print_string_array_fptr = GetFunctionDelegate<avio_print_string_array_delegate>(GetOrLoadLibrary("avformat"), "avio_print_string_array");
+            if (avio_print_string_array_fptr == null)
+            {
+                avio_print_string_array_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("avio_print_string_array is not supported on this platform.");
+                };
+            }
+            avio_print_string_array_fptr(@s, @strings);
+        };
+        /// <summary>Write a NULL terminated array of strings to the context. Usually you don&apos;t need to use this function directly but its macro wrapper, avio_print.</summary>
+        public static void avio_print_string_array(AVIOContext* @s, byte*[] @strings)
+        {
+            avio_print_string_array_fptr(@s, @strings);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int avio_printf_delegate(AVIOContext* @s, 
     #if NET40
     #elif NET45 || NETSTANDARD2_0
@@ -9023,6 +9046,8 @@ namespace FFmpeg.AutoGen
             }
             return avio_printf_fptr(@s, @fmt);
         };
+        /// <summary>Writes a formatted string to the context.</summary>
+        /// <returns>number of bytes written, &lt; 0 on error.</returns>
         public static int avio_printf(AVIOContext* @s, 
     #if NET40
     #elif NET45 || NETSTANDARD2_0
@@ -9033,6 +9058,42 @@ namespace FFmpeg.AutoGen
     string @fmt)
         {
             return avio_printf_fptr(@s, @fmt);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVClass* avio_protocol_get_class_delegate(
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @name);
+        private static avio_protocol_get_class_delegate avio_protocol_get_class_fptr = (string @name) =>
+        {
+            avio_protocol_get_class_fptr = GetFunctionDelegate<avio_protocol_get_class_delegate>(GetOrLoadLibrary("avformat"), "avio_protocol_get_class");
+            if (avio_protocol_get_class_fptr == null)
+            {
+                avio_protocol_get_class_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("avio_protocol_get_class is not supported on this platform.");
+                };
+            }
+            return avio_protocol_get_class_fptr(@name);
+        };
+        /// <summary>Get AVClass by names of available protocols.</summary>
+        /// <returns>A AVClass of input protocol name or NULL</returns>
+        public static AVClass* avio_protocol_get_class(
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @name)
+        {
+            return avio_protocol_get_class_fptr(@name);
         }
         
         
@@ -10336,6 +10397,29 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void* av_buffer_pool_buffer_get_opaque_delegate(AVBufferRef* @ref);
+        private static av_buffer_pool_buffer_get_opaque_delegate av_buffer_pool_buffer_get_opaque_fptr = (AVBufferRef* @ref) =>
+        {
+            av_buffer_pool_buffer_get_opaque_fptr = GetFunctionDelegate<av_buffer_pool_buffer_get_opaque_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_pool_buffer_get_opaque");
+            if (av_buffer_pool_buffer_get_opaque_fptr == null)
+            {
+                av_buffer_pool_buffer_get_opaque_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_buffer_pool_buffer_get_opaque is not supported on this platform.");
+                };
+            }
+            return av_buffer_pool_buffer_get_opaque_fptr(@ref);
+        };
+        /// <summary>Query the original opaque parameter of an allocated buffer in the pool.</summary>
+        /// <param name="ref">a buffer reference to a buffer returned by av_buffer_pool_get.</param>
+        /// <returns>the opaque parameter set by the buffer allocator function of the buffer pool.</returns>
+        public static void* av_buffer_pool_buffer_get_opaque(AVBufferRef* @ref)
+        {
+            return av_buffer_pool_buffer_get_opaque_fptr(@ref);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVBufferRef* av_buffer_pool_get_delegate(AVBufferPool* @pool);
         private static av_buffer_pool_get_delegate av_buffer_pool_get_fptr = (AVBufferPool* @pool) =>
         {
@@ -10398,8 +10482,8 @@ namespace FFmpeg.AutoGen
         /// <summary>Allocate and initialize a buffer pool with a more complex allocator.</summary>
         /// <param name="size">size of each buffer in this pool</param>
         /// <param name="opaque">arbitrary user data used by the allocator</param>
-        /// <param name="alloc">a function that will be used to allocate new buffers when the pool is empty.</param>
-        /// <param name="pool_free">a function that will be called immediately before the pool is freed. I.e. after av_buffer_pool_uninit() is called by the caller and all the frames are returned to the pool and freed. It is intended to uninitialize the user opaque data.</param>
+        /// <param name="alloc">a function that will be used to allocate new buffers when the pool is empty. May be NULL, then the default allocator will be used (av_buffer_alloc()).</param>
+        /// <param name="pool_free">a function that will be called immediately before the pool is freed. I.e. after av_buffer_pool_uninit() is called by the caller and all the frames are returned to the pool and freed. It is intended to uninitialize the user opaque data. May be NULL.</param>
         /// <returns>newly created buffer pool on success, NULL on error.</returns>
         public static AVBufferPool* av_buffer_pool_init2(int @size, void* @opaque, av_buffer_pool_init2_alloc_func @alloc, av_buffer_pool_init2_pool_free_func @pool_free)
         {
@@ -12528,7 +12612,7 @@ namespace FFmpeg.AutoGen
             }
             av_frame_remove_side_data_fptr(@frame, @type);
         };
-        /// <summary>If side data of the supplied type exists in the frame, free it and remove it from the frame.</summary>
+        /// <summary>Remove and free all side data instances of the given type.</summary>
         public static void av_frame_remove_side_data(AVFrame* @frame, AVFrameSideDataType @type)
         {
             av_frame_remove_side_data_fptr(@frame, @type);
@@ -12894,6 +12978,27 @@ namespace FFmpeg.AutoGen
         public static long av_gcd(long @a, long @b)
         {
             return av_gcd_fptr(@a, @b);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVRational av_gcd_q_delegate(AVRational @a, AVRational @b, int @max_den, AVRational @def);
+        private static av_gcd_q_delegate av_gcd_q_fptr = (AVRational @a, AVRational @b, int @max_den, AVRational @def) =>
+        {
+            av_gcd_q_fptr = GetFunctionDelegate<av_gcd_q_delegate>(GetOrLoadLibrary("avutil"), "av_gcd_q");
+            if (av_gcd_q_fptr == null)
+            {
+                av_gcd_q_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_gcd_q is not supported on this platform.");
+                };
+            }
+            return av_gcd_q_fptr(@a, @b, @max_den, @def);
+        };
+        /// <summary>Return the best rational so that a and b are multiple of it. If the resulting denominator is larger than max_den, return def.</summary>
+        public static AVRational av_gcd_q(AVRational @a, AVRational @b, int @max_den, AVRational @def)
+        {
+            return av_gcd_q_fptr(@a, @b, @max_den, @def);
         }
         
         
@@ -13709,6 +13814,33 @@ namespace FFmpeg.AutoGen
         public static int av_hwdevice_ctx_create_derived(AVBufferRef** @dst_ctx, AVHWDeviceType @type, AVBufferRef* @src_ctx, int @flags)
         {
             return av_hwdevice_ctx_create_derived_fptr(@dst_ctx, @type, @src_ctx, @flags);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_hwdevice_ctx_create_derived_opts_delegate(AVBufferRef** @dst_ctx, AVHWDeviceType @type, AVBufferRef* @src_ctx, AVDictionary* @options, int @flags);
+        private static av_hwdevice_ctx_create_derived_opts_delegate av_hwdevice_ctx_create_derived_opts_fptr = (AVBufferRef** @dst_ctx, AVHWDeviceType @type, AVBufferRef* @src_ctx, AVDictionary* @options, int @flags) =>
+        {
+            av_hwdevice_ctx_create_derived_opts_fptr = GetFunctionDelegate<av_hwdevice_ctx_create_derived_opts_delegate>(GetOrLoadLibrary("avutil"), "av_hwdevice_ctx_create_derived_opts");
+            if (av_hwdevice_ctx_create_derived_opts_fptr == null)
+            {
+                av_hwdevice_ctx_create_derived_opts_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_hwdevice_ctx_create_derived_opts is not supported on this platform.");
+                };
+            }
+            return av_hwdevice_ctx_create_derived_opts_fptr(@dst_ctx, @type, @src_ctx, @options, @flags);
+        };
+        /// <summary>Create a new device of the specified type from an existing device.</summary>
+        /// <param name="dst_ctx">On success, a reference to the newly-created AVHWDeviceContext.</param>
+        /// <param name="type">The type of the new device to create.</param>
+        /// <param name="src_ctx">A reference to an existing AVHWDeviceContext which will be used to create the new device.</param>
+        /// <param name="options">Options for the new device to create, same format as in av_hwdevice_ctx_create.</param>
+        /// <param name="flags">Currently unused; should be set to zero.</param>
+        /// <returns>Zero on success, a negative AVERROR code on failure.</returns>
+        public static int av_hwdevice_ctx_create_derived_opts(AVBufferRef** @dst_ctx, AVHWDeviceType @type, AVBufferRef* @src_ctx, AVDictionary* @options, int @flags)
+        {
+            return av_hwdevice_ctx_create_derived_opts_fptr(@dst_ctx, @type, @src_ctx, @options, @flags);
         }
         
         
@@ -14657,6 +14789,46 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_log_once_delegate(void* @avcl, int @initial_level, int @subsequent_level, int* @state, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @fmt);
+        private static av_log_once_delegate av_log_once_fptr = (void* @avcl, int @initial_level, int @subsequent_level, int* @state, string @fmt) =>
+        {
+            av_log_once_fptr = GetFunctionDelegate<av_log_once_delegate>(GetOrLoadLibrary("avutil"), "av_log_once");
+            if (av_log_once_fptr == null)
+            {
+                av_log_once_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_log_once is not supported on this platform.");
+                };
+            }
+            av_log_once_fptr(@avcl, @initial_level, @subsequent_level, @state, @fmt);
+        };
+        /// <summary>Send the specified message to the log once with the initial_level and then with the subsequent_level. By default, all logging messages are sent to stderr. This behavior can be altered by setting a different logging callback function.</summary>
+        /// <param name="avcl">A pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct or NULL if general log.</param>
+        /// <param name="initial_level">importance level of the message expressed using a</param>
+        /// <param name="subsequent_level">importance level of the message expressed using a</param>
+        /// <param name="state">a variable to keep trak of if a message has already been printed this must be initialized to 0 before the first use. The same state must not be accessed by 2 Threads simultaneously.</param>
+        /// <param name="fmt">The format string (printf-compatible) that specifies how subsequent arguments are converted to output.</param>
+        public static void av_log_once(void* @avcl, int @initial_level, int @subsequent_level, int* @state, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @fmt)
+        {
+            av_log_once_fptr(@avcl, @initial_level, @subsequent_level, @state, @fmt);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate void av_log_set_callback_delegate(av_log_set_callback_callback_func @callback);
         private static av_log_set_callback_delegate av_log_set_callback_fptr = (av_log_set_callback_callback_func @callback) =>
         {
@@ -14972,6 +15144,29 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVClass* av_opt_child_class_iterate_delegate(AVClass* @parent, void** @iter);
+        private static av_opt_child_class_iterate_delegate av_opt_child_class_iterate_fptr = (AVClass* @parent, void** @iter) =>
+        {
+            av_opt_child_class_iterate_fptr = GetFunctionDelegate<av_opt_child_class_iterate_delegate>(GetOrLoadLibrary("avutil"), "av_opt_child_class_iterate");
+            if (av_opt_child_class_iterate_fptr == null)
+            {
+                av_opt_child_class_iterate_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_opt_child_class_iterate is not supported on this platform.");
+                };
+            }
+            return av_opt_child_class_iterate_fptr(@parent, @iter);
+        };
+        /// <summary>Iterate over potential AVOptions-enabled children of parent.</summary>
+        /// <param name="iter">a pointer where iteration state is stored.</param>
+        /// <returns>AVClass corresponding to next potential child or NULL</returns>
+        public static AVClass* av_opt_child_class_iterate(AVClass* @parent, void** @iter)
+        {
+            return av_opt_child_class_iterate_fptr(@parent, @iter);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVClass* av_opt_child_class_next_delegate(AVClass* @parent, AVClass* @prev);
         private static av_opt_child_class_next_delegate av_opt_child_class_next_fptr = (AVClass* @parent, AVClass* @prev) =>
         {
@@ -14988,6 +15183,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Iterate over potential AVOptions-enabled children of parent.</summary>
         /// <param name="prev">result of a previous call to this function or NULL</param>
         /// <returns>AVClass corresponding to next potential child or NULL</returns>
+        [Obsolete("use av_opt_child_class_iterate")]
         public static AVClass* av_opt_child_class_next(AVClass* @parent, AVClass* @prev)
         {
             return av_opt_child_class_next_fptr(@parent, @prev);
@@ -16113,7 +16309,7 @@ namespace FFmpeg.AutoGen
         /// <summary>@{ Those functions set the field of obj with the given name to value.</summary>
         /// <param name="obj">A struct whose first element is a pointer to an AVClass.</param>
         /// <param name="name">the name of the field to set</param>
-        /// <param name="val">The value to set. In case of av_opt_set() if the field is not of a string type, then the given string is parsed. SI postfixes and some named scalars are supported. If the field is of a numeric type, it has to be a numeric or named scalar. Behavior with more than one scalar and +- infix operators is undefined. If the field is of a flags type, it has to be a sequence of numeric scalars or named flags separated by &apos;+&apos; or &apos;-&apos;. Prefixing a flag with &apos;+&apos; causes it to be set without affecting the other flags; similarly, &apos;-&apos; unsets a flag.</param>
+        /// <param name="val">The value to set. In case of av_opt_set() if the field is not of a string type, then the given string is parsed. SI postfixes and some named scalars are supported. If the field is of a numeric type, it has to be a numeric or named scalar. Behavior with more than one scalar and +- infix operators is undefined. If the field is of a flags type, it has to be a sequence of numeric scalars or named flags separated by &apos;+&apos; or &apos;-&apos;. Prefixing a flag with &apos;+&apos; causes it to be set without affecting the other flags; similarly, &apos;-&apos; unsets a flag. If the field is of a dictionary type, it has to be a &apos;:&apos; separated list of key=value parameters. Values containing &apos;:&apos; special characters must be escaped.</param>
         /// <param name="search_flags">flags passed to av_opt_find2. I.e. if AV_OPT_SEARCH_CHILDREN is passed here, then the option may be set on a child of obj.</param>
         /// <returns>0 if the value has been set, or an AVERROR code in case of error: AVERROR_OPTION_NOT_FOUND if no matching option exists AVERROR(ERANGE) if the value is out of range AVERROR(EINVAL) if the value is not valid</returns>
         public static int av_opt_set(void* @obj, 

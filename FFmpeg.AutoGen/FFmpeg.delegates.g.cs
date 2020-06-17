@@ -51,6 +51,14 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate AVClass* AVClass_child_class_iterate (void** @iter);
+    public unsafe struct AVClass_child_class_iterate_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVClass_child_class_iterate_func(AVClass_child_class_iterate func) => new AVClass_child_class_iterate_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void av_fifo_generic_peek_at_func (void* @p0, void* @p1, int @p2);
     public unsafe struct av_fifo_generic_peek_at_func_func
     {
@@ -144,14 +152,6 @@ namespace FFmpeg.AutoGen
     {
         public IntPtr Pointer;
         public static implicit operator AVD3D11VADeviceContext_unlock_func(AVD3D11VADeviceContext_unlock func) => new AVD3D11VADeviceContext_unlock_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-    }
-    
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int AVCodec_init_thread_copy (AVCodecContext* @p0);
-    public unsafe struct AVCodec_init_thread_copy_func
-    {
-        public IntPtr Pointer;
-        public static implicit operator AVCodec_init_thread_copy_func(AVCodec_init_thread_copy func) => new AVCodec_init_thread_copy_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

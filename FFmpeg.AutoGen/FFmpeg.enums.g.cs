@@ -341,6 +341,13 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_AGM = 32811,
         @AV_CODEC_ID_LSCR = 32812,
         @AV_CODEC_ID_VP4 = 32813,
+        @AV_CODEC_ID_IMM5 = 32814,
+        @AV_CODEC_ID_MVDV = 32815,
+        @AV_CODEC_ID_MVHA = 32816,
+        @AV_CODEC_ID_CDTOONS = 32817,
+        @AV_CODEC_ID_MV30 = 32818,
+        @AV_CODEC_ID_NOTCHLC = 32819,
+        @AV_CODEC_ID_PFM = 32820,
         /// <summary>A dummy id pointing at the start of audio codecs</summary>
         @AV_CODEC_ID_FIRST_AUDIO = 65536,
         @AV_CODEC_ID_PCM_S16LE = 65536,
@@ -421,6 +428,13 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_ADPCM_IMA_DAT4 = 71688,
         @AV_CODEC_ID_ADPCM_MTAF = 71689,
         @AV_CODEC_ID_ADPCM_AGM = 71690,
+        @AV_CODEC_ID_ADPCM_ARGO = 71691,
+        @AV_CODEC_ID_ADPCM_IMA_SSI = 71692,
+        @AV_CODEC_ID_ADPCM_ZORK = 71693,
+        @AV_CODEC_ID_ADPCM_IMA_APM = 71694,
+        @AV_CODEC_ID_ADPCM_IMA_ALP = 71695,
+        @AV_CODEC_ID_ADPCM_IMA_MTF = 71696,
+        @AV_CODEC_ID_ADPCM_IMA_CUNNING = 71697,
         @AV_CODEC_ID_AMR_NB = 73728,
         @AV_CODEC_ID_AMR_WB = 73729,
         @AV_CODEC_ID_RA_144 = 77824,
@@ -431,6 +445,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_SOL_DPCM = 81923,
         @AV_CODEC_ID_SDX2_DPCM = 83968,
         @AV_CODEC_ID_GREMLIN_DPCM = 83969,
+        @AV_CODEC_ID_DERF_DPCM = 83970,
         @AV_CODEC_ID_MP2 = 86016,
         /// <summary>preferred ID for decoding MPEG audio layer 1, 2 or 3</summary>
         @AV_CODEC_ID_MP3 = 86017,
@@ -523,6 +538,10 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_SBC = 88083,
         @AV_CODEC_ID_ATRAC9 = 88084,
         @AV_CODEC_ID_HCOM = 88085,
+        @AV_CODEC_ID_ACELP_KELVIN = 88086,
+        @AV_CODEC_ID_MPEGH_3D_AUDIO = 88087,
+        @AV_CODEC_ID_SIREN = 88088,
+        @AV_CODEC_ID_HCA = 88089,
         /// <summary>A dummy ID pointing at the start of subtitle codecs.</summary>
         @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
         @AV_CODEC_ID_DVD_SUBTITLE = 94208,
@@ -557,6 +576,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_TTF = 98304,
         /// <summary>Contain timestamp estimated through PCR of program stream.</summary>
         @AV_CODEC_ID_SCTE_35 = 98305,
+        @AV_CODEC_ID_EPG = 98306,
         @AV_CODEC_ID_BINTEXT = 100352,
         @AV_CODEC_ID_XBIN = 100353,
         @AV_CODEC_ID_IDF = 100354,
@@ -604,7 +624,8 @@ namespace FFmpeg.AutoGen
         @AVCOL_PRI_SMPTE431 = 11,
         /// <summary>SMPTE ST 432-1 (2010) / P3 D65 / Display P3</summary>
         @AVCOL_PRI_SMPTE432 = 12,
-        /// <summary>JEDEC P22 phosphors</summary>
+        /// <summary>EBU Tech. 3213-E / JEDEC P22 phosphors</summary>
+        @AVCOL_PRI_EBU3213 = 22,
         @AVCOL_PRI_JEDEC_P22 = 22,
         /// <summary>Not part of ABI</summary>
         @AVCOL_PRI_NB = 23,
@@ -823,6 +844,10 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_DYNAMIC_HDR_PLUS = 19,
         /// <summary>Regions Of Interest, the data is an array of AVRegionOfInterest type, the number of array element is implied by AVFrameSideData.size / AVRegionOfInterest.self_size.</summary>
         @AV_FRAME_DATA_REGIONS_OF_INTEREST = 20,
+        /// <summary>Encoding parameters for a video frame, as described by AVVideoEncParams.</summary>
+        @AV_FRAME_DATA_VIDEO_ENC_PARAMS = 21,
+        /// <summary>User data unregistered metadata associated with a video frame. This is the H.26[45] UDU SEI message, and shouldn&apos;t be used for any other purpose The data is stored as uint8_t in AVFrameSideData.data which is 16 bytes of uuid_iso_iec_11578 followed by AVFrameSideData.size - 16 bytes of user_data_payload_byte.</summary>
+        @AV_FRAME_DATA_SEI_UNREGISTERED = 22,
     }
     
     public enum AVHWDeviceType : int
@@ -838,6 +863,7 @@ namespace FFmpeg.AutoGen
         @AV_HWDEVICE_TYPE_DRM = 8,
         @AV_HWDEVICE_TYPE_OPENCL = 9,
         @AV_HWDEVICE_TYPE_MEDIACODEC = 10,
+        @AV_HWDEVICE_TYPE_VULKAN = 11,
     }
     
     public enum AVHWFrameTransferDirection : int
@@ -1005,8 +1031,14 @@ namespace FFmpeg.AutoGen
         @AV_PKT_DATA_ENCRYPTION_INFO = 25,
         /// <summary>Active Format Description data consisting of a single byte as specified in ETSI TS 101 154 using AVActiveFormatDescription enum.</summary>
         @AV_PKT_DATA_AFD = 26,
+        /// <summary>Producer Reference Time data corresponding to the AVProducerReferenceTime struct, usually exported by some encoders (on demand through the prft flag set in the AVCodecContext export_side_data field).</summary>
+        @AV_PKT_DATA_PRFT = 27,
+        /// <summary>ICC profile data consisting of an opaque octet buffer following the format described by ISO 15076-1.</summary>
+        @AV_PKT_DATA_ICC_PROFILE = 28,
+        /// <summary>DOVI configuration ref: dolby-vision-bitstreams-within-the-iso-base-media-file-format-v2.1.2, section 2.2 dolby-vision-bitstreams-in-mpeg-2-transport-stream-multiplex-v1.2, section 3.3 Tags are stored in struct AVDOVIDecoderConfigurationRecord.</summary>
+        @AV_PKT_DATA_DOVI_CONF = 29,
         /// <summary>The number of side data types. This is not part of the public API/ABI in the sense that it may change when new side data types are added. This must stay the last enum value. If its value becomes huge, some code using it needs to be updated as it assumes it to be smaller than other limits.</summary>
-        @AV_PKT_DATA_NB = 27,
+        @AV_PKT_DATA_NB = 30,
     }
     
     /// <summary>@{</summary>
@@ -1332,29 +1364,29 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_GBRP14LE = 139,
         /// <summary>planar YUV 4:1:1, 12bpp, (1 Cr &amp; Cb sample per 4x1 Y samples) full scale (JPEG), deprecated in favor of AV_PIX_FMT_YUV411P and setting color_range</summary>
         @AV_PIX_FMT_YUVJ411P = 140,
-        /// <summary>bayer, BGBG..(odd line), GRGR..(even line), 8-bit samples */</summary>
+        /// <summary>bayer, BGBG..(odd line), GRGR..(even line), 8-bit samples</summary>
         @AV_PIX_FMT_BAYER_BGGR8 = 141,
-        /// <summary>bayer, RGRG..(odd line), GBGB..(even line), 8-bit samples */</summary>
+        /// <summary>bayer, RGRG..(odd line), GBGB..(even line), 8-bit samples</summary>
         @AV_PIX_FMT_BAYER_RGGB8 = 142,
-        /// <summary>bayer, GBGB..(odd line), RGRG..(even line), 8-bit samples */</summary>
+        /// <summary>bayer, GBGB..(odd line), RGRG..(even line), 8-bit samples</summary>
         @AV_PIX_FMT_BAYER_GBRG8 = 143,
-        /// <summary>bayer, GRGR..(odd line), BGBG..(even line), 8-bit samples */</summary>
+        /// <summary>bayer, GRGR..(odd line), BGBG..(even line), 8-bit samples</summary>
         @AV_PIX_FMT_BAYER_GRBG8 = 144,
-        /// <summary>bayer, BGBG..(odd line), GRGR..(even line), 16-bit samples, little-endian */</summary>
+        /// <summary>bayer, BGBG..(odd line), GRGR..(even line), 16-bit samples, little-endian</summary>
         @AV_PIX_FMT_BAYER_BGGR16LE = 145,
-        /// <summary>bayer, BGBG..(odd line), GRGR..(even line), 16-bit samples, big-endian */</summary>
+        /// <summary>bayer, BGBG..(odd line), GRGR..(even line), 16-bit samples, big-endian</summary>
         @AV_PIX_FMT_BAYER_BGGR16BE = 146,
-        /// <summary>bayer, RGRG..(odd line), GBGB..(even line), 16-bit samples, little-endian */</summary>
+        /// <summary>bayer, RGRG..(odd line), GBGB..(even line), 16-bit samples, little-endian</summary>
         @AV_PIX_FMT_BAYER_RGGB16LE = 147,
-        /// <summary>bayer, RGRG..(odd line), GBGB..(even line), 16-bit samples, big-endian */</summary>
+        /// <summary>bayer, RGRG..(odd line), GBGB..(even line), 16-bit samples, big-endian</summary>
         @AV_PIX_FMT_BAYER_RGGB16BE = 148,
-        /// <summary>bayer, GBGB..(odd line), RGRG..(even line), 16-bit samples, little-endian */</summary>
+        /// <summary>bayer, GBGB..(odd line), RGRG..(even line), 16-bit samples, little-endian</summary>
         @AV_PIX_FMT_BAYER_GBRG16LE = 149,
-        /// <summary>bayer, GBGB..(odd line), RGRG..(even line), 16-bit samples, big-endian */</summary>
+        /// <summary>bayer, GBGB..(odd line), RGRG..(even line), 16-bit samples, big-endian</summary>
         @AV_PIX_FMT_BAYER_GBRG16BE = 150,
-        /// <summary>bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, little-endian */</summary>
+        /// <summary>bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, little-endian</summary>
         @AV_PIX_FMT_BAYER_GRBG16LE = 151,
-        /// <summary>bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, big-endian */</summary>
+        /// <summary>bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, big-endian</summary>
         @AV_PIX_FMT_BAYER_GRBG16BE = 152,
         /// <summary>XVideo Motion Acceleration via common packet passing</summary>
         @AV_PIX_FMT_XVMC = 153,
@@ -1436,8 +1468,18 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_NV24 = 191,
         /// <summary>as above, but U and V bytes are swapped</summary>
         @AV_PIX_FMT_NV42 = 192,
+        /// <summary>Vulkan hardware images.</summary>
+        @AV_PIX_FMT_VULKAN = 193,
+        /// <summary>packed YUV 4:2:2 like YUYV422, 20bpp, data in the high bits, big-endian</summary>
+        @AV_PIX_FMT_Y210BE = 194,
+        /// <summary>packed YUV 4:2:2 like YUYV422, 20bpp, data in the high bits, little-endian</summary>
+        @AV_PIX_FMT_Y210LE = 195,
+        /// <summary>packed RGB 10:10:10, 30bpp, (msb)2X 10R 10G 10B(lsb), little-endian, X=unused/undefined</summary>
+        @AV_PIX_FMT_X2RGB10LE = 196,
+        /// <summary>packed RGB 10:10:10, 30bpp, (msb)2X 10R 10G 10B(lsb), big-endian, X=unused/undefined</summary>
+        @AV_PIX_FMT_X2RGB10BE = 197,
         /// <summary>number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions</summary>
-        @AV_PIX_FMT_NB = 193,
+        @AV_PIX_FMT_NB = 198,
     }
     
     /// <summary>Rounding methods.</summary>
