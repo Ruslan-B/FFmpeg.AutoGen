@@ -43,7 +43,7 @@ Steps to generate:
 
 ## License
 
-Copyright © Ruslan Balanukhin 2019
+Copyright © Ruslan Balanukhin 2020
 All rights reserved.
 
 Distributed under the GNU Lesser General Public License (LGPL) version 3.  
