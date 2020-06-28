@@ -846,8 +846,6 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_REGIONS_OF_INTEREST = 20,
         /// <summary>Encoding parameters for a video frame, as described by AVVideoEncParams.</summary>
         @AV_FRAME_DATA_VIDEO_ENC_PARAMS = 21,
-        /// <summary>User data unregistered metadata associated with a video frame. This is the H.26[45] UDU SEI message, and shouldn&apos;t be used for any other purpose The data is stored as uint8_t in AVFrameSideData.data which is 16 bytes of uuid_iso_iec_11578 followed by AVFrameSideData.size - 16 bytes of user_data_payload_byte.</summary>
-        @AV_FRAME_DATA_SEI_UNREGISTERED = 22,
     }
     
     public enum AVHWDeviceType : int
@@ -1474,12 +1472,8 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_Y210BE = 194,
         /// <summary>packed YUV 4:2:2 like YUYV422, 20bpp, data in the high bits, little-endian</summary>
         @AV_PIX_FMT_Y210LE = 195,
-        /// <summary>packed RGB 10:10:10, 30bpp, (msb)2X 10R 10G 10B(lsb), little-endian, X=unused/undefined</summary>
-        @AV_PIX_FMT_X2RGB10LE = 196,
-        /// <summary>packed RGB 10:10:10, 30bpp, (msb)2X 10R 10G 10B(lsb), big-endian, X=unused/undefined</summary>
-        @AV_PIX_FMT_X2RGB10BE = 197,
         /// <summary>number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions</summary>
-        @AV_PIX_FMT_NB = 198,
+        @AV_PIX_FMT_NB = 196,
     }
     
     /// <summary>Rounding methods.</summary>

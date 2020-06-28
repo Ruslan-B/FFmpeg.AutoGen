@@ -42,8 +42,6 @@ namespace FFmpeg.AutoGen
         public AVClass_get_category_func @get_category;
         /// <summary>Callback to return the supported/allowed ranges. available since version (52.12)</summary>
         public AVClass_query_ranges_func @query_ranges;
-        /// <summary>Iterate over the AVClasses corresponding to potential AVOptions-enabled children.</summary>
-        public AVClass_child_class_iterate_func @child_class_iterate;
     }
     
     /// <summary>AVOption</summary>
