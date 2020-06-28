@@ -51,14 +51,6 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate AVClass* AVClass_child_class_iterate (void** @iter);
-    public unsafe struct AVClass_child_class_iterate_func
-    {
-        public IntPtr Pointer;
-        public static implicit operator AVClass_child_class_iterate_func(AVClass_child_class_iterate func) => new AVClass_child_class_iterate_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-    }
-    
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void av_fifo_generic_peek_at_func (void* @p0, void* @p1, int @p2);
     public unsafe struct av_fifo_generic_peek_at_func_func
     {

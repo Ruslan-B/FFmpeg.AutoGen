@@ -15144,29 +15144,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVClass* av_opt_child_class_iterate_delegate(AVClass* @parent, void** @iter);
-        private static av_opt_child_class_iterate_delegate av_opt_child_class_iterate_fptr = (AVClass* @parent, void** @iter) =>
-        {
-            av_opt_child_class_iterate_fptr = GetFunctionDelegate<av_opt_child_class_iterate_delegate>(GetOrLoadLibrary("avutil"), "av_opt_child_class_iterate");
-            if (av_opt_child_class_iterate_fptr == null)
-            {
-                av_opt_child_class_iterate_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException("av_opt_child_class_iterate is not supported on this platform.");
-                };
-            }
-            return av_opt_child_class_iterate_fptr(@parent, @iter);
-        };
-        /// <summary>Iterate over potential AVOptions-enabled children of parent.</summary>
-        /// <param name="iter">a pointer where iteration state is stored.</param>
-        /// <returns>AVClass corresponding to next potential child or NULL</returns>
-        public static AVClass* av_opt_child_class_iterate(AVClass* @parent, void** @iter)
-        {
-            return av_opt_child_class_iterate_fptr(@parent, @iter);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVClass* av_opt_child_class_next_delegate(AVClass* @parent, AVClass* @prev);
         private static av_opt_child_class_next_delegate av_opt_child_class_next_fptr = (AVClass* @parent, AVClass* @prev) =>
         {
@@ -15183,7 +15160,6 @@ namespace FFmpeg.AutoGen
         /// <summary>Iterate over potential AVOptions-enabled children of parent.</summary>
         /// <param name="prev">result of a previous call to this function or NULL</param>
         /// <returns>AVClass corresponding to next potential child or NULL</returns>
-        [Obsolete("use av_opt_child_class_iterate")]
         public static AVClass* av_opt_child_class_next(AVClass* @parent, AVClass* @prev)
         {
             return av_opt_child_class_next_fptr(@parent, @prev);
