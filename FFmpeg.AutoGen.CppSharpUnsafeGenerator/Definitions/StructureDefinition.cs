@@ -4,5 +4,6 @@
     {
         public StructureField[] Fileds { get; set; } = { };
         public bool IsComplete { get; set; }
+        public bool IsUnion { get; set; }
     }
 }

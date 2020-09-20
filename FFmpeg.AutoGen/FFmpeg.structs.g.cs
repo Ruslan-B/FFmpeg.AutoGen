@@ -243,11 +243,16 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>the default value for scalar options</summary>
+    [StructLayout(LayoutKind.Explicit)]
     public unsafe struct AVOption_default_val
     {
+        [FieldOffset(0)]
         public long @i64;
+        [FieldOffset(0)]
         public double @dbl;
+        [FieldOffset(0)]
         public byte* @str;
+        [FieldOffset(0)]
         public AVRational @q;
     }
     

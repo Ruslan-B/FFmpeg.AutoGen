@@ -54,7 +54,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             var definition = _context.Units.OfType<StructureDefinition>().FirstOrDefault(x => x.Name == name);
             if (definition == null)
             {
-                definition = new StructureDefinition {Name = name};
+                definition = new StructureDefinition {Name = name, IsUnion = @class.IsUnion };
                 _context.AddUnit(definition);
             }
 

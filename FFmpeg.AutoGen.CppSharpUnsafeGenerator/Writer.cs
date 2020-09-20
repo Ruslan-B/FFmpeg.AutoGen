@@ -42,11 +42,19 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public void WriteStructure(StructureDefinition structure)
         {
             WriteSummary(structure);
+            if (structure.IsUnion)
+            {
+                WriteLine("[StructLayout(LayoutKind.Explicit)]");
+            }
             WriteLine($"public unsafe struct {structure.Name}");
             using (BeginBlock())
                 foreach (var item in structure.Fileds)
                 {
                     WriteSummary(item);
+                    if (structure.IsUnion)
+                    {
+                        WriteLine("[FieldOffset(0)]");
+                    }
                     WriteLine($"public {item.FieldType.Name} @{item.Name};");
                 }
         }
