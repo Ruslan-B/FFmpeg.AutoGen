@@ -57,7 +57,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         private void Normalize()
         {
             // Support for the original path setup
-            const string solutionDir = "../../../../";
+            const string solutionDir = "../../../../../";
 
             if (string.IsNullOrWhiteSpace(FFmpegDir) &&
                 string.IsNullOrWhiteSpace(FFmpegIncludesDir) &&

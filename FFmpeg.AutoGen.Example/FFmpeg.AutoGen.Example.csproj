@@ -3,10 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>FFmpeg.AutoGen.Example</AssemblyName>
-    <RootNamespace>FFmpeg.AutoGen.Example</RootNamespace>
-    <PackageId>FFmpeg.AutoGen.Example</PackageId>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

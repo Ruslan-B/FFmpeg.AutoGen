@@ -14,8 +14,6 @@
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
     <PackageTags>ffmpeg</PackageTags>
-    <AssemblyName>FFmpeg.AutoGen</AssemblyName>
-    <RootNamespace>FFmpeg.AutoGen</RootNamespace>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
@@ -32,7 +30,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None  Include="..\LICENSE.txt" Link="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt"/>
+    <None Include="..\LICENSE.txt" Link="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
   </ItemGroup>
 
 </Project>

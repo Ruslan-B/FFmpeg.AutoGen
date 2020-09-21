@@ -7,7 +7,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             var options = CliOptions.ParseArgumentsStrict(args);
 
