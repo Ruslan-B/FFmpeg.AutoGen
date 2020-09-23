@@ -55,6 +55,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     {
                         WriteLine("[FieldOffset(0)]");
                     }
+                    if (item.IsDeprecated)
+                    {
+                        WriteLine($"[Obsolete(\"{item.DeprecatedMessage}\")]");
+                    }
                     WriteLine($"public {item.FieldType.Name} @{item.Name};");
                 }
         }

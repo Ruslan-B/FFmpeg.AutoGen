@@ -83,12 +83,21 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                         continue;
                     }
 
+                    BlockCommandComment deprecatedComment = field.Comment?.FullComment.Blocks
+                        .OfType<BlockCommandComment>()
+                        .FirstOrDefault(x => x.CommandKind == CommentCommandKind.Deprecated);
+                    string deprecatedMessage = deprecatedComment != null 
+                        ? string.Concat(deprecatedComment.ParagraphComment.Content.OfType<TextComment>().Select(x => x.Text.Trim()))
+                        : null;
+
                     var typeName = field.Class.Name + "_" + field.Name;
                     fields.Add(new StructureField
                     {
                         Name = field.Name,
                         FieldType = GetTypeDefinition(field.Type, typeName),
-                        Content = field.Comment?.BriefText
+                        Content = field.Comment?.BriefText,
+                        IsDeprecated = deprecatedComment != null, 
+                        DeprecatedMessage = deprecatedMessage,
                     });
                 }
 
