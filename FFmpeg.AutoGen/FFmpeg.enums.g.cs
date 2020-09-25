@@ -906,6 +906,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Lock operation used by lockmgr</summary>
+    [Obsolete("Deprecated together with av_lockmgr_register().")]
     public enum AVLockOp : int
     {
         /// <summary>Create a mutex</summary>

@@ -12,10 +12,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
     {
         private readonly ASTProcessor _context;
 
-        public StructureProcessor(ASTProcessor context)
-        {
-            _context = context;
-        }
+        public StructureProcessor(ASTProcessor context) => _context = context;
 
         public void Process(TranslationUnit translationUnit)
         {
@@ -28,6 +25,64 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 var className = @class.Name;
                 MakeDefinition(@class, className);
             }
+        }
+
+        private void MakeDefinition(Class @class, string name)
+        {
+            name = string.IsNullOrEmpty(@class.Name) ? name : @class.Name;
+
+            var definition = _context.Units.OfType<StructureDefinition>().FirstOrDefault(x => x.Name == name);
+            if (definition == null)
+            {
+                definition = new StructureDefinition
+                {
+                    Name = name,
+                    IsUnion = @class.IsUnion,
+                    Obsoletion = ObsoletionHelper.CreateObsoletion(@class)
+                };
+                _context.AddUnit(definition);
+            }
+
+            if (@class.IsIncomplete || definition.IsComplete) return;
+
+            definition.IsComplete = true;
+
+            var bitFieldNames = new List<string>();
+            var bitFieldComments = new List<string>();
+            long bitCounter = 0;
+            var fields = new List<StructureField>();
+            foreach (var field in @class.Fields)
+            {
+                if (field.IsBitField)
+                {
+                    bitFieldNames.Add($"{field.Name}{field.BitWidth}");
+                    bitFieldComments.Add(field.Comment?.BriefText ?? string.Empty);
+                    bitCounter += field.BitWidth;
+                    if (bitCounter % 8 == 0)
+                    {
+                        fields.Add(GetBitField(bitFieldNames, bitCounter, bitFieldComments));
+                        bitFieldNames.Clear();
+                        bitFieldComments.Clear();
+                        bitCounter = 0;
+                    }
+
+                    continue;
+                }
+
+                var typeName = field.Class.Name + "_" + field.Name;
+                fields.Add(new StructureField
+                {
+                    Name = field.Name,
+                    FieldType = GetTypeDefinition(field.Type, typeName),
+                    Content = field.Comment?.BriefText,
+                    Obsoletion = ObsoletionHelper.CreateObsoletion(field)
+                });
+            }
+
+            if (bitFieldNames.Any() || bitCounter > 0) throw new InvalidOperationException();
+
+            definition.Fileds = fields.ToArray();
+            definition.Content = @class.Comment?.BriefText;
         }
 
         internal TypeDefinition GetTypeDefinition(Type type, string name = null)
@@ -44,58 +99,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     return GetTypeDefinition(pointerType, name);
                 default:
                     return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
-            }
-        }
-
-        private void MakeDefinition(Class @class, string name)
-        {
-            name = string.IsNullOrEmpty(@class.Name) ? name : @class.Name;
-
-            var definition = _context.Units.OfType<StructureDefinition>().FirstOrDefault(x => x.Name == name);
-            if (definition == null)
-            {
-                definition = new StructureDefinition {Name = name, IsUnion = @class.IsUnion };
-                _context.AddUnit(definition);
-            }
-
-            if (!@class.IsIncomplete && !definition.IsComplete)
-            {
-                definition.IsComplete = true;
-
-                var bitFieldNames = new List<string>();
-                var bitFieldComments = new List<string>();
-                long bitCounter = 0;
-                var fields = new List<StructureField>();
-                foreach (var field in @class.Fields)
-                {
-                    if (field.IsBitField)
-                    {
-                        bitFieldNames.Add($"{field.Name}{field.BitWidth}");
-                        bitFieldComments.Add(field.Comment?.BriefText ?? string.Empty);
-                        bitCounter += field.BitWidth;
-                        if (bitCounter % 8 == 0)
-                        {
-                            fields.Add(GetBitField(bitFieldNames, bitCounter, bitFieldComments));
-                            bitFieldNames.Clear();
-                            bitFieldComments.Clear();
-                            bitCounter = 0;
-                        }
-                        continue;
-                    }
-
-                    var typeName = field.Class.Name + "_" + field.Name;
-                    fields.Add(new StructureField
-                    {
-                        Name = field.Name,
-                        FieldType = GetTypeDefinition(field.Type, typeName),
-                        Content = field.Comment?.BriefText
-                    });
-                }
-
-                if (bitFieldNames.Any() || bitCounter > 0) throw new InvalidOperationException();
-
-                definition.Fileds = fields.ToArray();
-                definition.Content = @class.Comment?.BriefText;
             }
         }
 
@@ -120,6 +123,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 default:
                     throw new NotSupportedException();
             }
+
             return new StructureField
             {
                 Name = fieldName,
@@ -154,12 +158,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 MakeDefinition(@class, typeName);
                 return new TypeDefinition {Name = typeName};
             }
+
             var @enum = declaration as Enumeration;
             if (@enum != null)
             {
                 _context.EnumerationProcessor.MakeDefinition(@enum, typeName);
                 return new TypeDefinition {Name = typeName};
             }
+
             throw new NotSupportedException();
         }
 
@@ -172,8 +178,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             var elementTypeDefinition = GetTypeDefinition(elementType);
 
             var name = elementTypeDefinition.Name + "_array" + fixedSize;
-            if (elementType.IsPointer()) name = TypeHelper.GetTypeName(elementType.GetPointee()) + "_ptrArray" + fixedSize;
-            if (elementType is ArrayType) name = TypeHelper.GetTypeName(((ArrayType) elementType).Type) + "_arrayOfArray" + fixedSize;
+            if (elementType.IsPointer())
+                name = TypeHelper.GetTypeName(elementType.GetPointee()) + "_ptrArray" + fixedSize;
+            if (elementType is ArrayType)
+                name = TypeHelper.GetTypeName(((ArrayType) elementType).Type) + "_arrayOfArray" + fixedSize;
 
             if (!_context.IsKnownUnitName(name))
             {

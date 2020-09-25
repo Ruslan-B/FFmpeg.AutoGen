@@ -30,6 +30,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public void WriteEnumeration(EnumerationDefinition enumeration)
         {
             WriteSummary(enumeration);
+            WriteObsoletion(enumeration);
             WriteLine($"public enum {enumeration.Name} : {enumeration.TypeName}");
             using (BeginBlock())
                 foreach (var item in enumeration.Items)
@@ -42,20 +43,16 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public void WriteStructure(StructureDefinition structure)
         {
             WriteSummary(structure);
-            if (structure.IsUnion)
-            {
-                WriteLine("[StructLayout(LayoutKind.Explicit)]");
-            }
+            WriteObsoletion(structure);
+            if (structure.IsUnion) WriteLine("[StructLayout(LayoutKind.Explicit)]");
             WriteLine($"public unsafe struct {structure.Name}");
             using (BeginBlock())
-                foreach (var item in structure.Fileds)
+                foreach (var field in structure.Fileds)
                 {
-                    WriteSummary(item);
-                    if (structure.IsUnion)
-                    {
-                        WriteLine("[FieldOffset(0)]");
-                    }
-                    WriteLine($"public {item.FieldType.Name} @{item.Name};");
+                    WriteSummary(field);
+                    WriteObsoletion(field);
+                    if (structure.IsUnion) WriteLine("[FieldOffset(0)]");
+                    WriteLine($"public {field.FieldType.Name} @{field.Name};");
                 }
         }
 
@@ -97,7 +94,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
             WriteReturnComment(function.ReturnComment);
 
-            if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]");
+            WriteObsoletion(function);
             WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
             using (BeginBlock()) WriteLine($"{returnCommand}{functionPtrName}({parameterNames});");
             WriteLine();
@@ -112,7 +109,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
             WriteReturnComment(function.ReturnComment);
 
-            if (function.IsObsolete) WriteLine($"[Obsolete(\"{function.ObsoleteMessage}\")]");
+            WriteObsoletion(function);
             WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
             
             var lines = function.Body.Split(new [] {'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -285,6 +282,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         private void WriteReturnComment(string content)
         {
             if (!string.IsNullOrWhiteSpace(content)) WriteLine($"/// <returns>{SecurityElement.Escape(content.Trim())}</returns>");
+        }
+        
+        private void WriteObsoletion(IObsoletionAware obsoletionAware)
+        {
+            var obsoletion = obsoletionAware.Obsoletion;
+            if (obsoletion.IsObsolete) WriteLine($"[Obsolete(\"{obsoletion.Message}\")]");
         }
 
         private void Write(string value)

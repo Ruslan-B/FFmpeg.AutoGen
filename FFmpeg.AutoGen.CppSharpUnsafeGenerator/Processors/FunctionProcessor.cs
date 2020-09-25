@@ -10,14 +10,15 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
     internal class FunctionProcessor
     {
-        private const string MarshalAsUtf8Macros = "\r\n" + 
-                                                  "    #if NET40\r\n" + 
-                                                  "    #elif NET45 || NETSTANDARD2_0\r\n" + 
-                                                  "    [MarshalAs((UnmanagedType)48)]\r\n" + 
-                                                  "    #else\r\n" +
-                                                  "    [MarshalAs(UnmanagedType.LPUTF8Str)]\r\n" + 
-                                                  "    #endif\r\n" +
-                                                  "   ";
+        private const string MarshalAsUtf8Macros =
+            "\r\n" +
+            "    #if NET40\r\n" +
+            "    #elif NET45 || NETSTANDARD2_0\r\n" +
+            "    [MarshalAs((UnmanagedType)48)]\r\n" +
+            "    #else\r\n" +
+            "    [MarshalAs(UnmanagedType.LPUTF8Str)]\r\n" +
+            "    #endif\r\n" +
+            "   ";
 
         private readonly ASTProcessor _context;
 
@@ -36,8 +37,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     inline.Content = function.Comment?.BriefText;
                     inline.ReturnComment = GetReturnComment(function);
                     inline.Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray();
-                    inline.IsObsolete = IsObsolete(function);
-                    inline.ObsoleteMessage = GetObsoleteMessage(function);
+                    inline.Obsoletion = ObsoletionHelper.CreateObsoletion(function);
                 }
 
                 if (function.IsInline)
@@ -111,7 +111,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                         return new TypeDefinition
                         {
                             Name = "string",
-                            Attributes = new[] {"[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"}
+                            Attributes = new[]
+                            {
+                                "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"
+                            }
                         };
                     case PrimitiveType.Void:
                         return new TypeDefinition {Name = "void*"};
@@ -132,7 +135,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 switch (builtinType.Type)
                 {
                     case PrimitiveType.Char:
-                        return new TypeDefinition {Name = "string", Attributes = new[] { MarshalAsUtf8Macros } };
+                        return new TypeDefinition {Name = "string", Attributes = new[] {MarshalAsUtf8Macros}};
                     case PrimitiveType.Void:
                         return new TypeDefinition {Name = "void*"};
                     default:
@@ -144,25 +147,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             if (type is ArrayType arrayType &&
                 arrayType.SizeType == ArrayType.ArraySize.Incomplete &&
                 arrayType.Type is PointerType arrayPointerType &&
-                !(arrayPointerType.Pointee is BuiltinType || arrayPointerType.Pointee is TypedefType typedefType && typedefType.Declaration.Type is BuiltinType))
+                !(arrayPointerType.Pointee is BuiltinType || arrayPointerType.Pointee is TypedefType typedefType &&
+                    typedefType.Declaration.Type is BuiltinType))
                 return new TypeDefinition {Name = TypeHelper.GetTypeName(arrayPointerType) + "*"};
 
             return _context.StructureProcessor.GetTypeDefinition(type, name);
-        }
-
-        private static bool IsObsolete(Function function)
-        {
-            return function.PreprocessedEntities.OfType<MacroExpansion>().Any(x => x.Text == "attribute_deprecated");
-        }
-
-        private static string GetObsoleteMessage(Function function)
-        {
-            var lines = function.Comment?.FullComment?.Blocks
-                .OfType<BlockCommandComment>()
-                .Where(x => x.CommandKind == CommentCommandKind.Deprecated)
-                .SelectMany(x => x.ParagraphComment.Content.OfType<TextComment>().Select(c => c.Text.Trim()));
-            var obsoleteMessage = lines == null ? string.Empty : string.Join(" ", lines);
-            return obsoleteMessage;
         }
 
         private static string GetParamComment(Function function, string parameterName)
@@ -183,7 +172,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private static string GetCommentString(BlockCommandComment comment)
         {
-            return comment == null ? null : string.Join(" ", comment.ParagraphComment.Content.OfType<TextComment>().Select(x => x.Text.Trim()));
+            return comment == null
+                ? null
+                : string.Join(" ", comment.ParagraphComment.Content.OfType<TextComment>().Select(x => x.Text.Trim()));
         }
 
         private static string GetSha256(string text)
