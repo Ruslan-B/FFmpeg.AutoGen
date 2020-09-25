@@ -10,10 +10,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
     {
         private readonly ASTProcessor _context;
 
-        public EnumerationProcessor(ASTProcessor context)
-        {
-            _context = context;
-        }
+        public EnumerationProcessor(ASTProcessor context) => _context = context;
 
         public void Process(TranslationUnit translationUnit)
         {
@@ -29,16 +26,20 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             }
         }
 
-        public EnumerationDefinition MakeDefinition(Enumeration enumeration, string name)
+        public void MakeDefinition(Enumeration enumeration, string name)
         {
             name = string.IsNullOrEmpty(enumeration.Name) ? name : enumeration.Name;
-            var result = new EnumerationDefinition {Name = name};
-            if (_context.IsKnownUnitName(name)) return result;
-            _context.AddUnit(result);
+            if (_context.IsKnownUnitName(name)) return;
 
-            result.TypeName = TypeHelper.GetTypeName(enumeration.Type);
-            result.Content = enumeration.Comment?.BriefText;
-            result.Items = enumeration.Items
+            var definition = new EnumerationDefinition
+            {
+                Name = name,
+                TypeName = TypeHelper.GetTypeName(enumeration.Type),
+                Content = enumeration.Comment?.BriefText,
+                Obsoletion = ObsoletionHelper.CreateObsoletion(enumeration)
+            };
+
+            definition.Items = enumeration.Items
                 .Select(x =>
                     new EnumerationItem
                     {
@@ -47,7 +48,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                         Content = x.Comment?.BriefText
                     })
                 .ToArray();
-            return result;
+
+            _context.AddUnit(definition);
         }
 
         private static object ConvertValue(ulong value, PrimitiveType primitiveType)

@@ -6,4 +6,6 @@
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_USING/@EntryValue">NotRequired</s:String>
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/CONSTRUCTOR_OR_DESTRUCTOR_BODY/@EntryValue">ExpressionBody</s:String>
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/LOCAL_FUNCTION_BODY/@EntryValue">ExpressionBody</s:String>
-	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/METHOD_OR_OPERATOR_BODY/@EntryValue">ExpressionBody</s:String></wpf:ResourceDictionary>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/METHOD_OR_OPERATOR_BODY/@EntryValue">ExpressionBody</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Fmpeg/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Obsoletion/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

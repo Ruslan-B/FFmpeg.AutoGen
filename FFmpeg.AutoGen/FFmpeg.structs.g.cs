@@ -144,6 +144,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Presentation timestamp in time_base units (time when frame should be shown to user).</summary>
         public long @pts;
         /// <summary>PTS copied from the AVPacket that was decoded to produce this frame.</summary>
+        [Obsolete("use the pts field instead")]
         public long @pkt_pts;
         /// <summary>DTS copied from the AVPacket that triggered returning this frame. (if frame threading isn&apos;t used) This is also the Presentation time of this AVFrame calculated from only AVPacket.dts values without pts values.</summary>
         public long @pkt_dts;
@@ -155,6 +156,7 @@ namespace FFmpeg.AutoGen
         public int @quality;
         /// <summary>for some private data of the user</summary>
         public void* @opaque;
+        [Obsolete("unused")]
         public ulong_array8 @error;
         /// <summary>When decoding, this signals how much the picture must be delayed. extra_delay = repeat_pict / (2*fps)</summary>
         public int @repeat_pict;
@@ -804,6 +806,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Picture data structure.</summary>
+    [Obsolete("use AVFrame or imgutils functions instead")]
     public unsafe struct AVPicture
     {
         /// <summary>pointers to the image data planes</summary>
@@ -824,6 +827,7 @@ namespace FFmpeg.AutoGen
         public int @h;
         /// <summary>number of colors in pict, undefined when pict is not set</summary>
         public int @nb_colors;
+        [Obsolete("unused")]
         public AVPicture @pict;
         /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
         public byte_ptrArray4 @data;
@@ -901,11 +905,13 @@ namespace FFmpeg.AutoGen
         public int @max_b_frames;
         /// <summary>qscale factor between IP and B-frames If &gt; 0 then the last P-frame quantizer will be used (q= lastp_q*factor+offset). If &lt; 0 then normal ratecontrol will be done (q= -normal_q*factor+offset). - encoding: Set by user. - decoding: unused</summary>
         public float @b_quant_factor;
+        [Obsolete("use encoder private options instead")]
         public int @b_frame_strategy;
         /// <summary>qscale offset between IP and B-frames - encoding: Set by user. - decoding: unused</summary>
         public float @b_quant_offset;
         /// <summary>Size of the frame reordering buffer in the decoder. For MPEG-2 it is 1 IPB or 0 low delay IP. - encoding: Set by libavcodec. - decoding: Set by libavcodec.</summary>
         public int @has_b_frames;
+        [Obsolete("use encoder private options instead")]
         public int @mpeg_quant;
         /// <summary>qscale factor between P- and I-frames If &gt; 0 then the last P-frame quantizer will be used (q = lastp_q * factor + offset). If &lt; 0 then normal ratecontrol will be done (q= -normal_q*factor+offset). - encoding: Set by user. - decoding: unused</summary>
         public float @i_quant_factor;
@@ -923,6 +929,7 @@ namespace FFmpeg.AutoGen
         public float @dark_masking;
         /// <summary>slice count - encoding: Set by libavcodec. - decoding: Set by user (or 0).</summary>
         public int @slice_count;
+        [Obsolete("use encoder private options instead")]
         public int @prediction_method;
         /// <summary>slice offsets in the frame in bytes - encoding: Set/allocated by libavcodec. - decoding: Set/allocated by user (or NULL).</summary>
         public int* @slice_offset;
@@ -940,6 +947,7 @@ namespace FFmpeg.AutoGen
         public int @dia_size;
         /// <summary>amount of previous MV predictors (2a+1 x 2a+1 square) - encoding: Set by user. - decoding: unused</summary>
         public int @last_predictor_count;
+        [Obsolete("use encoder private options instead")]
         public int @pre_me;
         /// <summary>motion estimation prepass comparison function - encoding: Set by user. - decoding: unused</summary>
         public int @me_pre_cmp;
@@ -957,7 +965,9 @@ namespace FFmpeg.AutoGen
         public ushort* @intra_matrix;
         /// <summary>custom inter quantization matrix Must be allocated with the av_malloc() family of functions, and will be freed in avcodec_free_context(). - encoding: Set/allocated by user, freed by libavcodec. Can be NULL. - decoding: Set/allocated/freed by libavcodec.</summary>
         public ushort* @inter_matrix;
+        [Obsolete("use encoder private options instead")]
         public int @scenechange_threshold;
+        [Obsolete("use encoder private options instead")]
         public int @noise_reduction;
         /// <summary>precision of the intra DC coefficient - 8 - encoding: Set by user. - decoding: Set by libavcodec</summary>
         public int @intra_dc_precision;
@@ -969,17 +979,21 @@ namespace FFmpeg.AutoGen
         public int @mb_lmin;
         /// <summary>maximum MB Lagrange multiplier - encoding: Set by user. - decoding: unused</summary>
         public int @mb_lmax;
+        [Obsolete("use encoder private options instead")]
         public int @me_penalty_compensation;
         /// <summary>- encoding: Set by user. - decoding: unused</summary>
         public int @bidir_refine;
+        [Obsolete("use encoder private options instead")]
         public int @brd_scale;
         /// <summary>minimum GOP size - encoding: Set by user. - decoding: unused</summary>
         public int @keyint_min;
         /// <summary>number of reference frames - encoding: Set by user. - decoding: Set by lavc.</summary>
         public int @refs;
+        [Obsolete("use encoder private options instead")]
         public int @chromaoffset;
         /// <summary>Note: Value depends upon the compare function used for fullpel ME. - encoding: Set by user. - decoding: unused</summary>
         public int @mv0_threshold;
+        [Obsolete("use encoder private options instead")]
         public int @b_sensitivity;
         /// <summary>Chromaticity coordinates of the source primaries. - encoding: Set by user - decoding: Set by libavcodec</summary>
         public AVColorPrimaries @color_primaries;
@@ -1046,18 +1060,29 @@ namespace FFmpeg.AutoGen
         public float @rc_min_vbv_overflow_use;
         /// <summary>Number of bits which should be loaded into the rc buffer before decoding starts. - encoding: Set by user. - decoding: unused</summary>
         public int @rc_initial_buffer_occupancy;
+        [Obsolete("use encoder private options instead")]
         public int @coder_type;
+        [Obsolete("use encoder private options instead")]
         public int @context_model;
+        [Obsolete("use encoder private options instead")]
         public int @frame_skip_threshold;
+        [Obsolete("use encoder private options instead")]
         public int @frame_skip_factor;
+        [Obsolete("use encoder private options instead")]
         public int @frame_skip_exp;
+        [Obsolete("use encoder private options instead")]
         public int @frame_skip_cmp;
         /// <summary>trellis RD quantization - encoding: Set by user. - decoding: unused</summary>
         public int @trellis;
+        [Obsolete("use encoder private options instead")]
         public int @min_prediction_order;
+        [Obsolete("use encoder private options instead")]
         public int @max_prediction_order;
+        [Obsolete("use encoder private options instead")]
         public long @timecode_frame_start;
+        [Obsolete("unused")]
         public AVCodecContext_rtp_callback_func @rtp_callback;
+        [Obsolete("use encoder private options instead")]
         public int @rtp_payload_size;
         public int @mv_bits;
         public int @header_bits;
@@ -1067,6 +1092,7 @@ namespace FFmpeg.AutoGen
         public int @p_count;
         public int @skip_count;
         public int @misc_bits;
+        [Obsolete("this field is unused")]
         public int @frame_bits;
         /// <summary>pass1 encoding statistics output buffer - encoding: Set by libavcodec. - decoding: unused</summary>
         public byte* @stats_out;
@@ -1101,6 +1127,7 @@ namespace FFmpeg.AutoGen
         /// <summary>low resolution decoding, 1-&gt; 1/2 size, 2-&gt;1/4 size - encoding: unused - decoding: Set by user.</summary>
         public int @lowres;
         /// <summary>the picture in the bitstream - encoding: Set by libavcodec. - decoding: unused</summary>
+        [Obsolete("use the quality factor packet side data instead")]
         public AVFrame* @coded_frame;
         /// <summary>thread count is used to decide how many independent tasks should be passed to execute() - encoding: Set by user. - decoding: Set by user.</summary>
         public int @thread_count;
@@ -1130,8 +1157,10 @@ namespace FFmpeg.AutoGen
         public byte* @subtitle_header;
         public int @subtitle_header_size;
         /// <summary>VBV delay coded in the last frame (in periods of a 27 MHz clock). Used for compliant TS muxing. - encoding: Set by libavcodec. - decoding: unused.</summary>
+        [Obsolete("this value is now exported as a part of AV_PKT_DATA_CPB_PROPERTIES packet side data")]
         public ulong @vbv_delay;
         /// <summary>Encoding only and set by default. Allow encoders to output packets that do not contain any encoded data, only side data.</summary>
+        [Obsolete("this field disables the default behaviour and it is kept only for compatibility.")]
         public int @side_data_only_packets;
         /// <summary>Audio only. The number of &quot;priming&quot; samples (padding) inserted by the encoder at the beginning of the audio. I.e. this number of leading decoded samples must be discarded by the caller to get the original audio without leading padding.</summary>
         public int @initial_padding;
@@ -1296,6 +1325,7 @@ namespace FFmpeg.AutoGen
         public long @duration;
         /// <summary>byte position in stream, -1 if unknown</summary>
         public long @pos;
+        [Obsolete("Same as the duration field, but as int64_t. This was required for Matroska subtitles, whose duration values could overflow when the duration field was still an int.")]
         public long @convergence_duration;
     }
     
@@ -1418,6 +1448,7 @@ namespace FFmpeg.AutoGen
         public long_array4 @cur_frame_end;
         /// <summary>Set by parser to 1 for key frames and 0 for non-key frames. It is initialized to -1, so if the parser doesn&apos;t set this flag, old-style fallback using AV_PICTURE_TYPE_I picture type as key frames will be used.</summary>
         public int @key_frame;
+        [Obsolete("unused")]
         public long @convergence_duration;
         /// <summary>Synchronization point for start of timestamp generation.</summary>
         public int @dts_sync_point;
@@ -1688,6 +1719,7 @@ namespace FFmpeg.AutoGen
         public int @index;
         /// <summary>Format-specific stream ID. decoding: set by libavformat encoding: set by the user, replaced by libavformat if left unset</summary>
         public int @id;
+        [Obsolete("use the codecpar struct instead")]
         public AVCodecContext* @codec;
         public void* @priv_data;
         /// <summary>This is the fundamental unit of time (in seconds) in terms of which frame timestamps are represented.</summary>
@@ -1718,6 +1750,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Real base framerate of the stream. This is the lowest framerate with which all timestamps can be represented accurately (it is the least common multiple of all framerates in the stream). Note, this value is just a guess! For example, if the time base is 1/90000 and all frames have either approximately 3600 or 1800 timer ticks, then r_frame_rate will be 50/1.</summary>
         public AVRational @r_frame_rate;
         /// <summary>String containing pairs of key and values describing recommended encoder configuration. Pairs are separated by &apos;,&apos;. Keys are separated from values by &apos;=&apos;.</summary>
+        [Obsolete("unused")]
         public byte* @recommended_encoder_configuration;
         /// <summary>Codec parameters associated with this stream. Allocated and freed by libavformat in avformat_new_stream() and avformat_free_context() respectively.</summary>
         public AVCodecParameters* @codecpar;
@@ -1924,6 +1957,7 @@ namespace FFmpeg.AutoGen
         /// <summary>A list of all streams in the file. New streams are created with avformat_new_stream().</summary>
         public AVStream** @streams;
         /// <summary>input or output filename</summary>
+        [Obsolete("Use url instead.")]
         public byte_array1024 @filename;
         /// <summary>input or output URL. Unlike the old filename field, this field has no length restriction.</summary>
         public byte* @url;
@@ -2035,6 +2069,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Forced Data codec_id. Demuxing: Set by user.</summary>
         public AVCodecID @data_codec_id;
         /// <summary>Called to open further IO contexts when needed for demuxing.</summary>
+        [Obsolete("Use io_open and io_close.")]
         public AVFormatContext_open_cb_func @open_cb;
         /// <summary>&apos;,&apos; separated list of allowed protocols. - encoding: unused - decoding: set by user</summary>
         public byte* @protocol_whitelist;

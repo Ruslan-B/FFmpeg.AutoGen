@@ -1845,6 +1845,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Returns 0 if the output buffer is a subset of the input, 1 if it is allocated and must be freed use AVBitStreamFilter</summary>
         /// <returns>0 if the output buffer is a subset of the input, 1 if it is allocated and must be freed</returns>
+        [Obsolete("use AVBitStreamFilter")]
         public static int av_parser_change(AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe)
         {
             return av_parser_change_fptr(@s, @avctx, @poutbuf, @poutbuf_size, @buf, @buf_size, @keyframe);
@@ -2676,6 +2677,7 @@ namespace FFmpeg.AutoGen
             }
             return avcodec_find_best_pix_fmt_of_2_fptr(@dst_pix_fmt1, @dst_pix_fmt2, @src_pix_fmt, @has_alpha, @loss_ptr);
         };
+        [Obsolete("see av_find_best_pix_fmt_of_2()")]
         public static AVPixelFormat avcodec_find_best_pix_fmt_of_2(AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr)
         {
             return avcodec_find_best_pix_fmt_of_2_fptr(@dst_pix_fmt1, @dst_pix_fmt2, @src_pix_fmt, @has_alpha, @loss_ptr);
@@ -2947,6 +2949,7 @@ namespace FFmpeg.AutoGen
             }
             return avcodec_get_context_defaults3_fptr(@s, @codec);
         };
+        [Obsolete("This function should not be used, as closing and opening a codec context multiple time is not supported. A new codec context should be allocated for each new use.")]
         public static int avcodec_get_context_defaults3(AVCodecContext* @s, AVCodec* @codec)
         {
             return avcodec_get_context_defaults3_fptr(@s, @codec);
@@ -3058,6 +3061,7 @@ namespace FFmpeg.AutoGen
             }
             return avcodec_get_pix_fmt_loss_fptr(@dst_pix_fmt, @src_pix_fmt, @has_alpha);
         };
+        [Obsolete("see av_get_pix_fmt_loss()")]
         public static int avcodec_get_pix_fmt_loss(AVPixelFormat @dst_pix_fmt, AVPixelFormat @src_pix_fmt, int @has_alpha)
         {
             return avcodec_get_pix_fmt_loss_fptr(@dst_pix_fmt, @src_pix_fmt, @has_alpha);
