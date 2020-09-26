@@ -42,6 +42,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public void WriteStructure(StructureDefinition structure)
         {
             WriteSummary(structure);
+            if (!structure.IsComplete)
+            {
+                WriteLine($"/// <remarks>This struct is incomplete.</remarks>");
+            }
             if (structure.IsUnion)
             {
                 WriteLine("[StructLayout(LayoutKind.Explicit)]");
