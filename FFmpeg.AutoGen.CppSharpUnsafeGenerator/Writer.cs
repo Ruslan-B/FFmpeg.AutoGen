@@ -47,7 +47,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             if (structure.IsUnion) WriteLine("[StructLayout(LayoutKind.Explicit)]");
             WriteLine($"public unsafe struct {structure.Name}");
             using (BeginBlock())
-                foreach (var field in structure.Fileds)
+                foreach (var field in structure.Fields)
                 {
                     WriteSummary(field);
                     WriteObsoletion(field);

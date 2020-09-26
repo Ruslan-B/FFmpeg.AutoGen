@@ -81,7 +81,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
             if (bitFieldNames.Any() || bitCounter > 0) throw new InvalidOperationException();
 
-            definition.Fileds = fields.ToArray();
+            definition.Fields = fields.ToArray();
             definition.Content = @class.Comment?.BriefText;
         }
 
