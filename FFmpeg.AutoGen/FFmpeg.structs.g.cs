@@ -204,10 +204,14 @@ namespace FFmpeg.AutoGen
         /// <summary>size of the corresponding packet containing the compressed frame. It is set to a negative value if unknown. - encoding: unused - decoding: set by libavcodec, read by user.</summary>
         public int @pkt_size;
         /// <summary>QP table</summary>
+        [Obsolete]
         public sbyte* @qscale_table;
         /// <summary>QP store stride</summary>
+        [Obsolete]
         public int @qstride;
+        [Obsolete]
         public int @qscale_type;
+        [Obsolete]
         public AVBufferRef* @qp_table_buf;
         /// <summary>For hwaccel-format frames, this should be a reference to the AVHWFramesContext describing the frame.</summary>
         public AVBufferRef* @hw_frames_ctx;
@@ -289,10 +293,13 @@ namespace FFmpeg.AutoGen
         /// <summary>Number of bits in the component.</summary>
         public int @depth;
         /// <summary>deprecated, use step instead</summary>
+        [Obsolete]
         public int @step_minus1;
         /// <summary>deprecated, use depth instead</summary>
+        [Obsolete]
         public int @depth_minus1;
         /// <summary>deprecated, use offset instead</summary>
+        [Obsolete]
         public int @offset_plus1;
     }
     
@@ -809,8 +816,10 @@ namespace FFmpeg.AutoGen
     public unsafe struct AVPicture
     {
         /// <summary>pointers to the image data planes</summary>
+        [Obsolete]
         public byte_ptrArray8 @data;
         /// <summary>number of bytes per line</summary>
+        [Obsolete]
         public int_array8 @linesize;
     }
     
@@ -1033,6 +1042,7 @@ namespace FFmpeg.AutoGen
         /// <summary>This callback is called at the beginning of each frame to get data buffer(s) for it. There may be one contiguous buffer for all the data or there may be a buffer per each data plane or anything in between. What this means is, you may set however many entries in buf[] you feel necessary. Each buffer must be reference-counted using the AVBuffer API (see description of buf[] below).</summary>
         public AVCodecContext_get_buffer2_func @get_buffer2;
         /// <summary>If non-zero, the decoded audio and video frames returned from avcodec_decode_video2() and avcodec_decode_audio4() are reference-counted and are valid indefinitely. The caller must free them with av_frame_unref() when they are not needed anymore. Otherwise, the decoded frames must not be freed by the caller and are only valid until the next decode call.</summary>
+        [Obsolete]
         public int @refcounted_frames;
         /// <summary>amount of qscale change between easy &amp; hard scenes (0.0-1.0)</summary>
         public float @qcompress;
@@ -1083,13 +1093,21 @@ namespace FFmpeg.AutoGen
         public AVCodecContext_rtp_callback_func @rtp_callback;
         [Obsolete("use encoder private options instead")]
         public int @rtp_payload_size;
+        [Obsolete]
         public int @mv_bits;
+        [Obsolete]
         public int @header_bits;
+        [Obsolete]
         public int @i_tex_bits;
+        [Obsolete]
         public int @p_tex_bits;
+        [Obsolete]
         public int @i_count;
+        [Obsolete]
         public int @p_count;
+        [Obsolete]
         public int @skip_count;
+        [Obsolete]
         public int @misc_bits;
         [Obsolete("this field is unused")]
         public int @frame_bits;
@@ -1156,10 +1174,10 @@ namespace FFmpeg.AutoGen
         public byte* @subtitle_header;
         public int @subtitle_header_size;
         /// <summary>VBV delay coded in the last frame (in periods of a 27 MHz clock). Used for compliant TS muxing. - encoding: Set by libavcodec. - decoding: unused.</summary>
-        [Obsolete("this value is now exported as a part ofAV_PKT_DATA_CPB_PROPERTIES packet side data")]
+        [Obsolete("this value is now exported as a part of AV_PKT_DATA_CPB_PROPERTIES packet side data")]
         public ulong @vbv_delay;
         /// <summary>Encoding only and set by default. Allow encoders to output packets that do not contain any encoded data, only side data.</summary>
-        [Obsolete("this field disables the default behaviour andit is kept only for compatibility.")]
+        [Obsolete("this field disables the default behaviour and it is kept only for compatibility.")]
         public int @side_data_only_packets;
         /// <summary>Audio only. The number of &quot;priming&quot; samples (padding) inserted by the encoder at the beginning of the audio. I.e. this number of leading decoded samples must be discarded by the caller to get the original audio without leading padding.</summary>
         public int @initial_padding;
@@ -1324,7 +1342,7 @@ namespace FFmpeg.AutoGen
         public long @duration;
         /// <summary>byte position in stream, -1 if unknown</summary>
         public long @pos;
-        [Obsolete("Same as the duration field, but as int64_t. This was requiredfor Matroska subtitles, whose duration values could overflow when theduration field was still an int.")]
+        [Obsolete("Same as the duration field, but as int64_t. This was required for Matroska subtitles, whose duration values could overflow when the duration field was still an int.")]
         public long @convergence_duration;
     }
     
@@ -2439,6 +2457,7 @@ namespace FFmpeg.AutoGen
         /// <summary>sws options to use for the auto-inserted scale filters</summary>
         public byte* @scale_sws_opts;
         /// <summary>libavresample options to use for the auto-inserted resample filters</summary>
+        [Obsolete]
         public byte* @resample_lavr_opts;
         /// <summary>Type of multithreading allowed for filters in this graph. A combination of AVFILTER_THREAD_* flags.</summary>
         public int @thread_type;
