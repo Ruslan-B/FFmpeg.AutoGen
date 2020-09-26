@@ -22,6 +22,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 if (!typedef.Type.TryGetClass(out @class))
                     continue;
 
+                if (@class.Comment == null && typedef.Comment != null)
+                    @class.Comment = typedef.Comment;
+
                 var className = @class.Name;
                 MakeDefinition(@class, className);
             }
@@ -42,6 +45,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 };
                 _context.AddUnit(definition);
             }
+
+            if (@class.Comment != null)
+                definition.Content = @class.Comment?.BriefText;
 
             if (@class.IsIncomplete || definition.IsComplete) return;
 
@@ -82,7 +88,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             if (bitFieldNames.Any() || bitCounter > 0) throw new InvalidOperationException();
 
             definition.Fields = fields.ToArray();
-            definition.Content = @class.Comment?.BriefText;
         }
 
         internal TypeDefinition GetTypeDefinition(Type type, string name = null)
