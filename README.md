@@ -16,7 +16,7 @@ Nuget packages version uses [semantic versioning](https://semver.org/) and in sy
 
 - on Windows:  
 Native ffmpeg libraries are pre bundled in this repository, please note the are GPL(!) libraries. 
-The x64 libraries source from [Zeranoe FFmpeg](http://ffmpeg.zeranoe.com/builds/).
+The x64 libraries source from [CODEX FFMPEG](https://www.gyan.dev/ffmpeg/builds/).
 Please check to example project it shows how specify path to libraries.  
 
 - on OS X:  

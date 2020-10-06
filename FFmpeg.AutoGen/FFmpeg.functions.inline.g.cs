@@ -10,9 +10,9 @@ namespace FFmpeg.AutoGen
         /// <returns>computed ceiling of log2(x)</returns>
         public static int av_ceil_log2_c(int @x)
         {
-            return av_log2((uint)(x - 1) << 1);
+            return av_log2((uint)(x - 1U) << 1);
         }
-        // original body hash: 8W5ZYK+TE3aLjWfKlgnERrgGxs526MS5Bh/VnUMcszc=
+        // original body hash: Y9QGw919/NB5ltczSPmZu5WZt+BfR1GGQ58ULgOxiNo=
         
         
         /// <summary>Clip a signed integer value into the amin-amax range.</summary>
