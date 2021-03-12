@@ -68,6 +68,7 @@ namespace FFmpeg.AutoGen.Example
                 {
                     do
                     {
+                        ffmpeg.av_packet_unref(_pPacket);
                         error = ffmpeg.av_read_frame(_pFormatContext, _pPacket);
                         if (error == ffmpeg.AVERROR_EOF)
                         {
