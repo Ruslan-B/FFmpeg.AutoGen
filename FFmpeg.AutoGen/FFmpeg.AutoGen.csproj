@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;netstandard2.0;net472;net45;net40</TargetFrameworks>
+    <GeneratePackageOnBuild Condition=" $(Configuration) == 'Release' ">true</GeneratePackageOnBuild>
+    <Description>FFmpeg auto generated unsafe bindings for C#/.NET and Mono.</Description>
+    <Copyright>Copyright © Ruslan Balanukhin 2020 All rights reserved.</Copyright>    
     <PackageId>FFmpeg.AutoGen</PackageId>
     <Version>4.3.1</Version>
     <GeneratePackageOnBuild Condition=" $(Configuration) == 'Release' ">true</GeneratePackageOnBuild>
@@ -24,10 +27,6 @@
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
-    <SignAssembly>true</SignAssembly>
-    <DelaySign>false</DelaySign>
-    <AssemblyOriginatorKeyFile>..\FFmpeg.AutoGen.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -38,10 +37,6 @@
   
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\LICENSE.txt" Link="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
   </ItemGroup>
 
 </Project>

@@ -49,9 +49,10 @@ namespace FFmpeg.AutoGen
 
         /// <summary>
         ///     Gets or sets the root path for loading libraries.
+        ///     Work out of box with companion ffmpeg distribution package like FFmpeg.AutoGen.Redist.windows.x64
         /// </summary>
         /// <value>The root path.</value>
-        public static string RootPath { get; set; } = string.Empty;
+        public static string RootPath { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
 
         public static GetOrLoadLibrary GetOrLoadLibrary { get; set; }
 
@@ -92,7 +93,7 @@ namespace FFmpeg.AutoGen
             => -Convert.ToInt32(a);
 
         public static int MKTAG<T1, T2, T3, T4>(T1 a, T2 b, T3 c, T4 d)
-            => (int) (Convert.ToUInt32(a) | (Convert.ToUInt32(b) << 8) | (Convert.ToUInt32(c) << 16) |
+            => (int)(Convert.ToUInt32(a) | (Convert.ToUInt32(b) << 8) | (Convert.ToUInt32(c) << 16) |
                       (Convert.ToUInt32(d) << 24));
 
         public static int FFERRTAG<T1, T2, T3, T4>(T1 a, T2 b, T3 c, T4 d)
