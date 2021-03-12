@@ -31,7 +31,7 @@ namespace FFmpeg.AutoGen.Example
             }
             ffmpeg.avcodec_parameters_to_context(_pCodecContext, _pFormatContext->streams[_streamIndex]->codecpar).ThrowExceptionIfError();
             ffmpeg.avcodec_open2(_pCodecContext, codec, null).ThrowExceptionIfError();
-            
+
             CodecName = ffmpeg.avcodec_get_name(codec->id);
             FrameSize = new Size(_pCodecContext->width, _pCodecContext->height);
             PixelFormat = _pCodecContext->pix_fmt;
@@ -106,8 +106,8 @@ namespace FFmpeg.AutoGen.Example
             var result = new Dictionary<string, string>();
             while ((tag = ffmpeg.av_dict_get(_pFormatContext->metadata, "", tag, ffmpeg.AV_DICT_IGNORE_SUFFIX)) != null)
             {
-                var key = Marshal.PtrToStringAnsi((IntPtr) tag->key);
-                var value = Marshal.PtrToStringAnsi((IntPtr) tag->value);
+                var key = Marshal.PtrToStringAnsi((IntPtr)tag->key);
+                var value = Marshal.PtrToStringAnsi((IntPtr)tag->value);
                 result.Add(key, value);
             }
 

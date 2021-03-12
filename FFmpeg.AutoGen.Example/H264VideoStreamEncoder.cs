@@ -28,7 +28,7 @@ namespace FFmpeg.AutoGen.Example
             _pCodecContext = ffmpeg.avcodec_alloc_context3(_pCodec);
             _pCodecContext->width = frameSize.Width;
             _pCodecContext->height = frameSize.Height;
-            _pCodecContext->time_base = new AVRational {num = 1, den = fps};
+            _pCodecContext->time_base = new AVRational { num = 1, den = fps };
             _pCodecContext->pix_fmt = AVPixelFormat.AV_PIX_FMT_YUV420P;
             ffmpeg.av_opt_set(_pCodecContext->priv_data, "preset", "veryslow", 0);
 
@@ -51,7 +51,7 @@ namespace FFmpeg.AutoGen.Example
 
         public void Encode(AVFrame frame)
         {
-            if (frame.format != (int) _pCodecContext->pix_fmt) throw new ArgumentException("Invalid pixel format.", nameof(frame));
+            if (frame.format != (int)_pCodecContext->pix_fmt) throw new ArgumentException("Invalid pixel format.", nameof(frame));
             if (frame.width != _frameSize.Width) throw new ArgumentException("Invalid width.", nameof(frame));
             if (frame.height != _frameSize.Height) throw new ArgumentException("Invalid height.", nameof(frame));
             if (frame.linesize[0] < _linesizeY) throw new ArgumentException("Invalid Y linesize.", nameof(frame));

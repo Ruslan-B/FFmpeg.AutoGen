@@ -31,7 +31,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     return type.Declaration.Name;
             }
         }
-        
+
         private static string GetTypeName(PrimitiveType type)
         {
             switch (type)
