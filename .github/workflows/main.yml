@@ -14,14 +14,14 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v2
-      - name: Library Build & Test
-        run: |
-          dotnet build -c Release
-          dotnet test -c Release
       - name: Install FFmpeg - linux
         if: matrix.os == 'linux-latest'
         run: |
           sudo apt-get install ffmpeg -y
+      - name: Library Build & Test
+        run: |
+          dotnet build -c Release
+          dotnet test -c Release
       - name: Build Redist windows x64
         if: matrix.os == 'windows-latest'
         run: |
