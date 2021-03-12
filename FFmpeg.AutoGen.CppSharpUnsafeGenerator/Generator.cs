@@ -213,13 +213,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             {
                 parserOptions.SetupMSVC(VisualStudioVersion.Latest);
             }
-            //else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            //{
-            //    parserOptions.SetupLinux();
-            //}
             else
             {
-                // TODO
                 throw new PlatformNotSupportedException();
             }
 
