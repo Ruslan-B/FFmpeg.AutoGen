@@ -1,7 +1,7 @@
 sudo: false
 language: csharp
 mono: none
-dotnet: 2.0.0
+dotnet: 5.0.200
 script:
   - dotnet restore
   - dotnet build ./FFmpeg.AutoGen.Example/FFmpeg.AutoGen.Example.csproj
