@@ -40,6 +40,5 @@ jobs:
       - name: Codegen Build & Test
         if: matrix.os == 'windows-latest'
         run: |
-          rm FFmpeg.AutoGen/*.g.cs
           dotnet run -c Release -p FFmpeg.AutoGen.CppSharpUnsafeGenerator -- -i FFmpeg -o FFmpeg.AutoGen
           dotnet build FFmpeg.AutoGen
