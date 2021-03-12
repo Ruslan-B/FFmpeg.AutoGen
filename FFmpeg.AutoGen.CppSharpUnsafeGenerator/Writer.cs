@@ -20,11 +20,13 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             if (macro.IsValid)
             {
                 WriteSummary(macro);
-                var constOrStatic = macro.IsConst ? "const" : "static";
+                var constOrStatic = macro.IsConst ? "const" : "static readonly";
                 WriteLine($"public {constOrStatic} {macro.TypeName} {macro.Name} = {macro.Expression};");
             }
             else
+            {
                 WriteLine($"// public static {macro.Name} = {macro.Expression};");
+            }
         }
 
         public void WriteEnumeration(EnumerationDefinition enumeration)
