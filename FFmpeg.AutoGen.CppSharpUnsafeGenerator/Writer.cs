@@ -20,11 +20,13 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             if (macro.IsValid)
             {
                 WriteSummary(macro);
-                var constOrStatic = macro.IsConst ? "const" : "static";
+                var constOrStatic = macro.IsConst ? "const" : "static readonly";
                 WriteLine($"public {constOrStatic} {macro.TypeName} {macro.Name} = {macro.Expression};");
             }
             else
+            {
                 WriteLine($"// public static {macro.Name} = {macro.Expression};");
+            }
         }
 
         public void WriteEnumeration(EnumerationDefinition enumeration)
@@ -112,8 +114,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
             WriteObsoletion(function);
             WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
-            
-            var lines = function.Body.Split(new [] {'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            var lines = function.Body.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             lines.ForEach(WriteLineWithoutIntent);
             WriteLine($"// original body hash: {function.OriginalBodyHash}");
             WriteLine();
@@ -284,7 +286,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         {
             if (!string.IsNullOrWhiteSpace(content)) WriteLine($"/// <returns>{SecurityElement.Escape(content.Trim())}</returns>");
         }
-        
+
         private void WriteObsoletion(IObsoletionAware obsoletionAware)
         {
             var obsoletion = obsoletionAware.Obsoletion;

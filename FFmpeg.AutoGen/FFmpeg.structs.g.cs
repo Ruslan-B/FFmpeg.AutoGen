@@ -180,7 +180,7 @@ namespace FFmpeg.AutoGen
         public int @nb_extended_buf;
         public AVFrameSideData** @side_data;
         public int @nb_side_data;
-        /// <summary>Frame flags, a combination of</summary>
+        /// <summary>Frame flags, a combination of lavu_frame_flags</summary>
         public int @flags;
         /// <summary>MPEG vs JPEG YUV range. - encoding: Set by user - decoding: Set by libavcodec</summary>
         public AVColorRange @color_range;
@@ -1940,7 +1940,7 @@ namespace FFmpeg.AutoGen
     /// <summary>Format I/O context. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. sizeof(AVFormatContext) must not be used outside libav*, use avformat_alloc_context() to create an AVFormatContext.</summary>
     public unsafe struct AVFormatContext
     {
-        /// <summary>A class for logging and Exports (de)muxer private options if they exist.</summary>
+        /// <summary>A class for logging and avoptions. Set by avformat_alloc_context(). Exports (de)muxer private options if they exist.</summary>
         public AVClass* @av_class;
         /// <summary>The input container format.</summary>
         public AVInputFormat* @iformat;
@@ -2338,7 +2338,7 @@ namespace FFmpeg.AutoGen
         public AVFilter_preinit_func @preinit;
         /// <summary>Filter initialization function.</summary>
         public AVFilter_init_func @init;
-        /// <summary>Should be set instead of want to pass a dictionary of AVOptions to nested contexts that are allocated during init.</summary>
+        /// <summary>Should be set instead of AVFilter.init &quot;init&quot; by the filters that want to pass a dictionary of AVOptions to nested contexts that are allocated during init.</summary>
         public AVFilter_init_dict_func @init_dict;
         /// <summary>Filter uninitialization function.</summary>
         public AVFilter_uninit_func @uninit;
@@ -2447,7 +2447,7 @@ namespace FFmpeg.AutoGen
         public int @nb_threads;
         /// <summary>Opaque object for libavfilter internal use.</summary>
         public AVFilterGraphInternal* @internal;
-        /// <summary>Opaque user data. May be set by the caller to an arbitrary value, e.g. to be used from callbacks like Libavfilter will not touch this field in any way.</summary>
+        /// <summary>Opaque user data. May be set by the caller to an arbitrary value, e.g. to be used from callbacks like AVFilterGraph.execute. Libavfilter will not touch this field in any way.</summary>
         public void* @opaque;
         /// <summary>This callback may be set by the caller immediately after allocating the graph and before adding any filters to it, to provide a custom multithreading implementation.</summary>
         public AVFilterGraph_execute_func @execute;

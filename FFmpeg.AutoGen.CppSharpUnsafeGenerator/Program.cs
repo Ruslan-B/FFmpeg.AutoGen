@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
@@ -41,11 +42,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             astProcessor.WellKnownMaros.Add("AV_VERSION_INT", typeof(int));
             astProcessor.WellKnownMaros.Add("AV_VERSION", typeof(string));
 
-            var defines = new[] {"__STDC_CONSTANT_MACROS"};
+            var defines = new[] { "__STDC_CONSTANT_MACROS" };
 
             var g = new Generator(astProcessor)
             {
-                IncludeDirs = new[] {options.FFmpegIncludesDir},
+                IncludeDirs = new[] { options.FFmpegIncludesDir },
                 Defines = defines,
                 Exports = exports,
                 Namespace = options.Namespace,
@@ -95,6 +96,35 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             g.WriteIncompleteStructures(Path.Combine(options.OutputDir, "FFmpeg.structs.incomplete.g.cs"));
             g.WriteExportFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.export.g.cs"));
             g.WriteInlineFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.inline.g.cs"));
+
+            // Run latest dotnet format
+            {
+                using var p = Process.Start(new ProcessStartInfo
+                {
+                    FileName = "dotnet",
+                    Arguments = "tool install --global dotnet-format",
+                    WorkingDirectory = options.OutputDir,
+                });
+                p.WaitForExit();
+            }
+            {
+                using var p = Process.Start(new ProcessStartInfo
+                {
+                    FileName = "dotnet",
+                    Arguments = "tool update --global dotnet-format",
+                    WorkingDirectory = options.OutputDir,
+                });
+                p.WaitForExit();
+            }
+            {
+                using var p = Process.Start(new ProcessStartInfo
+                {
+                    FileName = "dotnet",
+                    Arguments = "format",
+                    WorkingDirectory = options.OutputDir,
+                });
+                p.WaitForExit();
+            }
         }
     }
 }

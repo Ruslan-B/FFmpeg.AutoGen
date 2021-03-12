@@ -57,12 +57,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         private void Normalize()
         {
             // Support for the original path setup
-            const string solutionDir = "../../../../../";
+            string solutionDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../../");
 
             if (string.IsNullOrWhiteSpace(FFmpegDir) &&
                 string.IsNullOrWhiteSpace(FFmpegIncludesDir) &&
                 string.IsNullOrWhiteSpace(FFmpegBinDir))
-                FFmpegDir = Path.Combine(solutionDir, "ffmpeg");
+                FFmpegDir = Path.Combine(solutionDir, "FFmpeg");
 
             if (string.IsNullOrWhiteSpace(OutputDir)) OutputDir = Path.Combine(solutionDir, "FFmpeg.AutoGen/");
 

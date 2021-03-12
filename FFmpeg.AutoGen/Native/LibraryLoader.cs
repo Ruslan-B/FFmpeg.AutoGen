@@ -23,7 +23,7 @@ namespace FFmpeg.AutoGen.Native
                 throw new PlatformNotSupportedException();
 #endif
             };
-            
+
             switch (GetPlatformId())
             {
                 case PlatformID.MacOSX:

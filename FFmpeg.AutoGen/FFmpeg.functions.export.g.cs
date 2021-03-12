@@ -321,7 +321,7 @@ namespace FFmpeg.AutoGen
             return av_bsf_list_alloc_fptr();
         };
         /// <summary>Allocate empty list of bitstream filters. The list must be later freed by av_bsf_list_free() or finalized by av_bsf_list_finalize().</summary>
-        /// <returns>Pointer to</returns>
+        /// <returns>Pointer to on success, NULL in case of failure</returns>
         public static AVBSFList* av_bsf_list_alloc()
         {
             return av_bsf_list_alloc_fptr();
@@ -407,7 +407,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Finalize list of bitstream filters.</summary>
         /// <param name="lst">Filter list structure to be transformed</param>
-        /// <param name="bsf">Pointer to be set to newly created</param>
+        /// <param name="bsf">Pointer to be set to newly created structure representing the chain of bitstream filters</param>
         /// <returns>&gt;=0 on success, negative AVERROR in case of failure</returns>
         public static int av_bsf_list_finalize(AVBSFList** @lst, AVBSFContext** @bsf)
         {
@@ -458,9 +458,9 @@ namespace FFmpeg.AutoGen
             }
             return av_bsf_list_parse_str_fptr(@str, @bsf);
         };
-        /// <summary>Parse string describing list of bitstream filters and create single Resulting allocated by av_bsf_alloc().</summary>
+        /// <summary>Parse string describing list of bitstream filters and create single AVBSFContext describing the whole chain of bitstream filters. Resulting AVBSFContext can be treated as any other AVBSFContext freshly allocated by av_bsf_alloc().</summary>
         /// <param name="str">String describing chain of bitstream filters in format `bsf1[=opt1=val1:opt2=val2][,bsf2]`</param>
-        /// <param name="bsf">Pointer to be set to newly created</param>
+        /// <param name="bsf">Pointer to be set to newly created structure representing the chain of bitstream filters</param>
         /// <returns>&gt;=0 on success, negative AVERROR in case of failure</returns>
         public static int av_bsf_list_parse_str(
     #if NET40
@@ -6875,7 +6875,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Write a packet to an output media file ensuring correct interleaving.</summary>
         /// <param name="s">media file handle</param>
-        /// <param name="pkt">The packet containing the data to be written.  If the packet is reference-counted, this function will take ownership of this reference and unreference it later when it sees fit. The caller must not access the data through this reference after this function returns. If the packet is not reference-counted, libavformat will make a copy.  This parameter can be NULL (at any time, not just at the end), to flush the interleaving queues.  Packet&apos;s</param>
+        /// <param name="pkt">The packet containing the data to be written.  If the packet is reference-counted, this function will take ownership of this reference and unreference it later when it sees fit. The caller must not access the data through this reference after this function returns. If the packet is not reference-counted, libavformat will make a copy.  This parameter can be NULL (at any time, not just at the end), to flush the interleaving queues.  Packet&apos;s &quot;stream_index&quot; field must be set to the index of the corresponding stream in &quot;s-&gt;streams&quot;.  The timestamps ( &quot;pts&quot;, &quot;dts&quot;) must be set to correct values in the stream&apos;s timebase (unless the output format is flagged with the AVFMT_NOTIMESTAMPS flag, then they can be set to AV_NOPTS_VALUE). The dts for subsequent packets in one stream must be strictly increasing (unless the output format is flagged with the AVFMT_TS_NONSTRICT, then they merely have to be nondecreasing).  &quot;duration&quot;) should also be set if known.</param>
         /// <returns>0 on success, a negative AVERROR on error. Libavformat will always take care of freeing the packet, even if this function fails.</returns>
         public static int av_interleaved_write_frame(AVFormatContext* @s, AVPacket* @pkt)
         {
@@ -7704,7 +7704,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Write a packet to an output media file.</summary>
         /// <param name="s">media file handle</param>
-        /// <param name="pkt">The packet containing the data to be written. Note that unlike av_interleaved_write_frame(), this function does not take ownership of the packet passed to it (though some muxers may make an internal reference to the input packet).  This parameter can be NULL (at any time, not just at the end), in order to immediately flush data buffered within the muxer, for muxers that buffer up data internally before writing it to the output.  Packet&apos;s</param>
+        /// <param name="pkt">The packet containing the data to be written. Note that unlike av_interleaved_write_frame(), this function does not take ownership of the packet passed to it (though some muxers may make an internal reference to the input packet).  This parameter can be NULL (at any time, not just at the end), in order to immediately flush data buffered within the muxer, for muxers that buffer up data internally before writing it to the output.  Packet&apos;s &quot;stream_index&quot; field must be set to the index of the corresponding stream in &quot;s-&gt;streams&quot;.  The timestamps ( &quot;pts&quot;, &quot;dts&quot;) must be set to correct values in the stream&apos;s timebase (unless the output format is flagged with the AVFMT_NOTIMESTAMPS flag, then they can be set to AV_NOPTS_VALUE). The dts for subsequent packets passed to this function must be strictly increasing when compared in their respective timebases (unless the output format is flagged with the AVFMT_TS_NONSTRICT, then they merely have to be nondecreasing). &quot;duration&quot;) should also be set if known.</param>
         /// <returns>&lt; 0 on error, = 0 if OK, 1 if flushed and there is no more data to flush</returns>
         public static int av_write_frame(AVFormatContext* @s, AVPacket* @pkt)
         {
@@ -14619,7 +14619,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Send the specified message to the log if the level is less than or equal to the current av_log_level. By default, all logging messages are sent to stderr. This behavior can be altered by setting a different logging callback function.</summary>
         /// <param name="avcl">A pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct or NULL if general log.</param>
-        /// <param name="level">The importance level of the message expressed using a</param>
+        /// <param name="level">The importance level of the message expressed using a &quot;Logging Constant&quot;.</param>
         /// <param name="fmt">The format string (printf-compatible) that specifies how subsequent arguments are converted to output.</param>
         public static void av_log(void* @avcl, int @level, 
     #if NET40
@@ -14657,7 +14657,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Default logging callback</summary>
         /// <param name="avcl">A pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct.</param>
-        /// <param name="level">The importance level of the message expressed using a</param>
+        /// <param name="level">The importance level of the message expressed using a &quot;Logging Constant&quot;.</param>
         /// <param name="fmt">The format string (printf-compatible) that specifies how subsequent arguments are converted to output.</param>
         /// <param name="vl">The arguments referenced by the format string.</param>
         public static void av_log_default_callback(void* @avcl, int @level, 
@@ -14815,8 +14815,8 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Send the specified message to the log once with the initial_level and then with the subsequent_level. By default, all logging messages are sent to stderr. This behavior can be altered by setting a different logging callback function.</summary>
         /// <param name="avcl">A pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct or NULL if general log.</param>
-        /// <param name="initial_level">importance level of the message expressed using a</param>
-        /// <param name="subsequent_level">importance level of the message expressed using a</param>
+        /// <param name="initial_level">importance level of the message expressed using a &quot;Logging Constant&quot; for the first occurance.</param>
+        /// <param name="subsequent_level">importance level of the message expressed using a &quot;Logging Constant&quot; after the first occurance.</param>
         /// <param name="state">a variable to keep trak of if a message has already been printed this must be initialized to 0 before the first use. The same state must not be accessed by 2 Threads simultaneously.</param>
         /// <param name="fmt">The format string (printf-compatible) that specifies how subsequent arguments are converted to output.</param>
         public static void av_log_once(void* @avcl, int @initial_level, int @subsequent_level, int* @state, 
@@ -18167,7 +18167,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Send the specified message to the log if the level is less than or equal to the current av_log_level. By default, all logging messages are sent to stderr. This behavior can be altered by setting a different logging callback function.</summary>
         /// <param name="avcl">A pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct.</param>
-        /// <param name="level">The importance level of the message expressed using a</param>
+        /// <param name="level">The importance level of the message expressed using a &quot;Logging Constant&quot;.</param>
         /// <param name="fmt">The format string (printf-compatible) that specifies how subsequent arguments are converted to output.</param>
         /// <param name="vl">The arguments referenced by the format string.</param>
         public static void av_vlog(void* @avcl, int @level, 
@@ -18998,7 +18998,7 @@ namespace FFmpeg.AutoGen
             }
             return swresample_version_fptr();
         };
-        /// <summary>Return the</summary>
+        /// <summary>Return the LIBSWRESAMPLE_VERSION_INT constant.</summary>
         public static uint swresample_version()
         {
             return swresample_version_fptr();

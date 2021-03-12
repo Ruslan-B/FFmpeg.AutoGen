@@ -3,6 +3,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using CppSharp;
 using CppSharp.AST;
 using CppSharp.Parser;
@@ -56,7 +57,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                         "public static Dictionary<string, int> LibraryVersionMap =  new Dictionary<string, int>");
                     using (writer.BeginBlock(true))
                     {
-                        var libraryVersionMap = Exports.Select(x => new {x.LibraryName, x.LibraryVersion}).Distinct()
+                        var libraryVersionMap = Exports.Select(x => new { x.LibraryName, x.LibraryVersion }).Distinct()
                             .ToDictionary(x => x.LibraryName, x => x.LibraryVersion);
                         foreach (var pair in libraryVersionMap) writer.WriteLine($"{{\"{pair.Key}\", {pair.Value}}},");
                     }
@@ -208,16 +209,21 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 LanguageVersion = LanguageVersion.C99_GNU
             };
 
-            parserOptions.SetupMSVC(VisualStudioVersion.Latest);
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                parserOptions.SetupMSVC(VisualStudioVersion.Latest);
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
 
             foreach (var includeDir in IncludeDirs) parserOptions.AddIncludeDirs(includeDir);
 
             foreach (var define in Defines) parserOptions.AddDefines(define);
-
-            var clangParser = new ClangParser(new CppSharp.Parser.AST.ASTContext());
-            clangParser.SourcesParsed += OnSourceFileParsed;
-            clangParser.ParseSourceFiles(sourceFiles, parserOptions);
-            return ClangParser.ConvertASTContext(clangParser.ASTContext);
+            var result = ClangParser.ParseSourceFiles(sourceFiles, parserOptions);
+            OnSourceFileParsed(sourceFiles, result);
+            return ClangParser.ConvertASTContext(parserOptions.ASTContext);
         }
 
         private void OnSourceFileParsed(IEnumerable<string> files, ParserResult result)

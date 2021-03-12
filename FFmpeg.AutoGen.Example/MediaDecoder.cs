@@ -22,7 +22,7 @@ namespace FFmpeg.AutoGen.Example
             var dstData = new byte_ptrArray4();
             var dstLinesize = new int_array4();
 
-            ffmpeg.av_image_fill_arrays(ref dstData, ref dstLinesize, (byte*) convertedFrameBufferPtr, destinationPixelFormat, destinationSize.Width, destinationSize.Height, 1);
+            ffmpeg.av_image_fill_arrays(ref dstData, ref dstLinesize, (byte*)convertedFrameBufferPtr, destinationPixelFormat, destinationSize.Width, destinationSize.Height, 1);
         }
 
         public void Dispose()
