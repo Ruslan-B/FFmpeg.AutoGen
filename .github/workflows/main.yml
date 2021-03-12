@@ -20,6 +20,10 @@ jobs:
       - name: Build Example
         run: |
           dotnet build -c Release FFmpeg.AutoGen.Example
+      - name: Build Redist windows x64
+        if: matrix.os == 'windows-latest'
+        run: |
+          dotnet build -c Release FFmpeg.AutoGen.Redist.windows.x64
       - uses: actions/upload-artifact@v2
         if: matrix.os == 'windows-latest'
         with:
@@ -29,3 +33,9 @@ jobs:
         if: matrix.os == 'windows-latest'
         with:
           path: FFmpeg.AutoGen/bin/Release/*.snupkg
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v2
+        if: matrix.os == 'windows-latest'
+        with:
+          path: FFmpeg.AutoGen.Redist.windows.x64/bin/Release/*.nupkg
+          if-no-files-found: error
