@@ -76,7 +76,7 @@ namespace FFmpeg.AutoGen
                 else if (throwException)
                 {
                     throw new DllNotFoundException(
-                        $"Unable to load DLL '{libraryName}.{version}': The specified module could not be found.");
+                        $"Unable to load DLL '{libraryName}.{version} under {RootPath}': The specified module could not be found.");
                 }
 
                 return ptr;
