@@ -10,7 +10,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        # os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v2
       - name: Build Library
@@ -19,3 +20,10 @@ jobs:
       - name: Build Example
         run: |
           dotnet build -c Release FFmpeg.AutoGen.Example
+      - uses: actions/upload-artifact@v2
+        with:
+          path: FFmpeg.AutoGen/bin/Release/*.nupkg
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v2
+        with:
+          path: FFmpeg.AutoGen/bin/Release/*.snupkg
