@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.CppSharpUnsa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Redist.windows.x64", "FFmpeg.AutoGen.Redist.windows.x64\FFmpeg.AutoGen.Redist.windows.x64.csproj", "{B5908244-BD07-4BA5-93CA-356B7643D624}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Tests", "FFmpeg.AutoGen.Tests\FFmpeg.AutoGen.Tests.csproj", "{2139D117-7EF4-4CF0-88A2-702CA0C72BB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{B5908244-BD07-4BA5-93CA-356B7643D624}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5908244-BD07-4BA5-93CA-356B7643D624}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5908244-BD07-4BA5-93CA-356B7643D624}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2139D117-7EF4-4CF0-88A2-702CA0C72BB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2139D117-7EF4-4CF0-88A2-702CA0C72BB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2139D117-7EF4-4CF0-88A2-702CA0C72BB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2139D117-7EF4-4CF0-88A2-702CA0C72BB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

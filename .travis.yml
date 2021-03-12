@@ -1,7 +1,9 @@
-sudo: false
+sudo: true
+dist: focal
 language: csharp
 mono: none
 dotnet: 5.0.200
 script:
+  - sudo apt-get install ffmpeg -y
   - dotnet build -c Release
   - dotnet test -c Release
