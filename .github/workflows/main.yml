@@ -19,7 +19,3 @@ jobs:
       - name: Build Example
         run: |
           dotnet build -c Release FFmpeg.AutoGen.Example
-      - name: Build Generator
-        if: matrix.os == 'windows-latest'
-        run: |
-          dotnet build -c Release FFmpeg.AutoGen.CppSharpUnsafeGenerator
