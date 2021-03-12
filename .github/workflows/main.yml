@@ -14,12 +14,10 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v2
-      - name: Build Library
+      - name: Library Build & Test
         run: |
-          dotnet build -c Release FFmpeg.AutoGen
-      - name: Build Example
-        run: |
-          dotnet build -c Release FFmpeg.AutoGen.Example
+          dotnet build -c Release
+          dotnet test -c Release
       - name: Build Redist windows x64
         if: matrix.os == 'windows-latest'
         run: |
@@ -39,3 +37,8 @@ jobs:
         with:
           path: FFmpeg.AutoGen.Redist.windows.x64/bin/Release/*.nupkg
           if-no-files-found: error
+      - name: Codegen Build & Test
+        if: matrix.os == 'windows-latest'
+        run: |
+          dotnet run -c Release -p FFmpeg.AutoGen.CppSharpUnsafeGenerator -- -i FFmpeg
+          dotnet build FFmpeg.AutoGen

@@ -117,9 +117,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                             }
                         };
                     case PrimitiveType.Void:
-                        return new TypeDefinition {Name = "void*"};
+                        return new TypeDefinition { Name = "void*" };
                     default:
-                        return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
+                        return new TypeDefinition { Name = TypeHelper.GetTypeName(type) };
                 }
             }
 
@@ -135,11 +135,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 switch (builtinType.Type)
                 {
                     case PrimitiveType.Char:
-                        return new TypeDefinition {Name = "string", Attributes = new[] {MarshalAsUtf8Macros}};
+                        return new TypeDefinition { Name = "string", Attributes = new[] { MarshalAsUtf8Macros } };
                     case PrimitiveType.Void:
-                        return new TypeDefinition {Name = "void*"};
+                        return new TypeDefinition { Name = "void*" };
                     default:
-                        return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
+                        return new TypeDefinition { Name = TypeHelper.GetTypeName(type) };
                 }
             }
 
@@ -149,7 +149,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 arrayType.Type is PointerType arrayPointerType &&
                 !(arrayPointerType.Pointee is BuiltinType || arrayPointerType.Pointee is TypedefType typedefType &&
                     typedefType.Declaration.Type is BuiltinType))
-                return new TypeDefinition {Name = TypeHelper.GetTypeName(arrayPointerType) + "*"};
+                return new TypeDefinition { Name = TypeHelper.GetTypeName(arrayPointerType) + "*" };
 
             return _context.StructureProcessor.GetTypeDefinition(type, name);
         }

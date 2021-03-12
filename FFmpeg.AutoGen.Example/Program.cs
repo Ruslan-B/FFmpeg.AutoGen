@@ -16,9 +16,9 @@ namespace FFmpeg.AutoGen.Example
             Console.WriteLine("Running in {0}-bit mode.", Environment.Is64BitProcess ? "64" : "32");
 
             FFmpegBinariesHelper.RegisterFFmpegBinaries();
-            
+
             Console.WriteLine($"FFmpeg version info: {ffmpeg.av_version_info()}");
-            
+
             SetupLogging();
             ConfigureHWDecoder(out var deviceType);
 
@@ -55,8 +55,8 @@ namespace FFmpeg.AutoGen.Example
                 if (decoderNumber == 0)
                     decoderNumber = availableHWDecoders.First().Key;
                 Console.WriteLine($"Selected [{decoderNumber}]");
-                int.TryParse(Console.ReadLine(),out var inputDecoderNumber);
-                availableHWDecoders.TryGetValue(inputDecoderNumber == 0 ? decoderNumber: inputDecoderNumber, out HWtype);
+                int.TryParse(Console.ReadLine(), out var inputDecoderNumber);
+                availableHWDecoders.TryGetValue(inputDecoderNumber == 0 ? decoderNumber : inputDecoderNumber, out HWtype);
             }
         }
 
@@ -73,7 +73,7 @@ namespace FFmpeg.AutoGen.Example
                 var lineBuffer = stackalloc byte[lineSize];
                 var printPrefix = 1;
                 ffmpeg.av_log_format_line(p0, level, format, vl, lineBuffer, lineSize, &printPrefix);
-                var line = Marshal.PtrToStringAnsi((IntPtr) lineBuffer);
+                var line = Marshal.PtrToStringAnsi((IntPtr)lineBuffer);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write(line);
                 Console.ResetColor();
@@ -86,7 +86,7 @@ namespace FFmpeg.AutoGen.Example
         {
             // decode all frames from url, please not it might local resorce, e.g. string url = "../../sample_mpeg4.mp4";
             var url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"; // be advised this file holds 1440 frames
-            using (var vsd = new VideoStreamDecoder(url,HWDevice))
+            using (var vsd = new VideoStreamDecoder(url, HWDevice))
             {
                 Console.WriteLine($"codec name: {vsd.CodecName}");
 
@@ -104,9 +104,9 @@ namespace FFmpeg.AutoGen.Example
                     {
                         var convertedFrame = vfc.Convert(frame);
 
-                        using (var bitmap = new Bitmap(convertedFrame.width, convertedFrame.height, convertedFrame.linesize[0], PixelFormat.Format24bppRgb, (IntPtr) convertedFrame.data[0]))
+                        using (var bitmap = new Bitmap(convertedFrame.width, convertedFrame.height, convertedFrame.linesize[0], PixelFormat.Format24bppRgb, (IntPtr)convertedFrame.data[0]))
                             bitmap.Save($"frame.{frameNumber:D8}.jpg", ImageFormat.Jpeg);
-                        
+
                         Console.WriteLine($"frame: {frameNumber}");
                         frameNumber++;
                     }
@@ -172,7 +172,7 @@ namespace FFmpeg.AutoGen.Example
                             {
                                 bitmapData = GetBitmapData(frameBitmap);
                             }
-                    
+
                             fixed (byte* pBitmapData = bitmapData)
                             {
                                 var data = new byte_ptrArray8 { [0] = pBitmapData };

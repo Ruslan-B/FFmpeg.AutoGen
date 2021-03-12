@@ -57,11 +57,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             switch (primitiveType)
             {
                 case PrimitiveType.Int:
-                    return (int) value;
+                    return (int)value;
                 case PrimitiveType.UInt:
-                    return (uint) value;
+                    return (uint)value;
                 case PrimitiveType.Long:
-                    return (long) value;
+                    return (long)value;
                 case PrimitiveType.ULong:
                     return value;
                 default:

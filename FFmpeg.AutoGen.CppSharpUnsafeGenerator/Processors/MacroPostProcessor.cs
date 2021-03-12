@@ -21,18 +21,22 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         public void Process(IReadOnlyList<MacroDefinition> macros)
         {
-            _macroExpressionMap = macros.ToDictionary(x => x.Name, x =>
+            _macroExpressionMap = new Dictionary<string, IExpression>(macros.Count);
+            foreach (var x in macros)
             {
                 try
                 {
-                    return Parser.Parse(x.Expression);
+                    _macroExpressionMap.Add(x.Name, Parser.Parse(x.Expression));
                 }
                 catch (NotSupportedException)
                 {
                     Trace.TraceError($"Cannot parse macro expression: {x.Expression}");
-                    return null;
                 }
-            });
+                catch (Exception e)
+                {
+                    Trace.TraceError($"Cannot parse macro expression: {x.Expression}: {e.Message}");
+                }
+            }
 
             foreach (var macro in macros) Process(macro);
         }
@@ -52,7 +56,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             macro.Content = $"{macro.Name} = {macro.Expression}";
             macro.Expression = Serialize(expression);
             macro.IsConst = IsConst(expression);
-            macro.IsValid = true;
+            macro.IsValid = !typeOrAlias.IsAlias || _astProcessor.TypeAliases.ContainsKey(typeOrAlias.Alias);
         }
 
         private static string CleanUp(string expression)
@@ -95,19 +99,19 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             switch (expression)
             {
                 case BinaryExpression e:
-                {
-                    var left = Rewrite(e.Left);
-                    var right = Rewrite(e.Right);
-                    var leftType = DeduceType(left);
-                    var rightType = DeduceType(right);
-                    if (e.OperationType.IsBitwise() && leftType.Precedence != rightType.Precedence)
                     {
-                        var toType = leftType.Precedence > rightType.Precedence ? rightType : leftType;
-                        if (leftType != toType) left = new CastExpression(toType.ToString(), left);
-                        if (rightType != toType) right = new CastExpression(toType.ToString(), right);
+                        var left = Rewrite(e.Left);
+                        var right = Rewrite(e.Right);
+                        var leftType = DeduceType(left);
+                        var rightType = DeduceType(right);
+                        if (e.OperationType.IsBitwise() && leftType.Precedence != rightType.Precedence)
+                        {
+                            var toType = leftType.Precedence > rightType.Precedence ? rightType : leftType;
+                            if (leftType != toType) left = new CastExpression(toType.ToString(), left);
+                            if (rightType != toType) right = new CastExpression(toType.ToString(), right);
+                        }
+                        return new BinaryExpression(left, e.OperationType, right);
                     }
-                    return new BinaryExpression(left, e.OperationType, right);
-                }
                 case UnaryExpression e: return new UnaryExpression(e.OperationType, Rewrite(e.Operand));
                 case CastExpression e: return new CastExpression(e.TargetType, Rewrite(e.Operand));
                 case CallExpression e: return new CallExpression(e.Name, e.Arguments.Select(Rewrite));

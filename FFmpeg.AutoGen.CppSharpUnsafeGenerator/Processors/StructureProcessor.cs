@@ -103,7 +103,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 case PointerType pointerType:
                     return GetTypeDefinition(pointerType, name);
                 default:
-                    return new TypeDefinition {Name = TypeHelper.GetTypeName(type)};
+                    return new TypeDefinition { Name = TypeHelper.GetTypeName(type) };
             }
         }
 
@@ -132,7 +132,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return new StructureField
             {
                 Name = fieldName,
-                FieldType = new TypeDefinition {Name = fieldType},
+                FieldType = new TypeDefinition { Name = fieldType },
                 Content = string.Join(" ", comments.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()))
             };
         }
@@ -161,14 +161,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             if (@class != null)
             {
                 MakeDefinition(@class, typeName);
-                return new TypeDefinition {Name = typeName};
+                return new TypeDefinition { Name = typeName };
             }
 
             var @enum = declaration as Enumeration;
             if (@enum != null)
             {
                 _context.EnumerationProcessor.MakeDefinition(@enum, typeName);
-                return new TypeDefinition {Name = typeName};
+                return new TypeDefinition { Name = typeName };
             }
 
             throw new NotSupportedException();
@@ -177,7 +177,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private TypeDefinition GetFieldTypeForFixedArray(ArrayType arrayType)
         {
-            var fixedSize = (int) arrayType.Size;
+            var fixedSize = (int)arrayType.Size;
 
             var elementType = arrayType.Type;
             var elementTypeDefinition = GetTypeDefinition(elementType);
@@ -186,7 +186,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             if (elementType.IsPointer())
                 name = TypeHelper.GetTypeName(elementType.GetPointee()) + "_ptrArray" + fixedSize;
             if (elementType is ArrayType)
-                name = TypeHelper.GetTypeName(((ArrayType) elementType).Type) + "_arrayOfArray" + fixedSize;
+                name = TypeHelper.GetTypeName(((ArrayType)elementType).Type) + "_arrayOfArray" + fixedSize;
 
             if (!_context.IsKnownUnitName(name))
             {
@@ -200,7 +200,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 _context.AddUnit(fixedArray);
             }
 
-            return new TypeDefinition {Name = name, ByReference = !arrayType.QualifiedType.Qualifiers.IsConst};
+            return new TypeDefinition { Name = name, ByReference = !arrayType.QualifiedType.Qualifiers.IsConst };
         }
     }
 }
