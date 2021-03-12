@@ -2,19 +2,9 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;netstandard2.0;net472;net45;net40</TargetFrameworks>
-    <PackageId>FFmpeg.AutoGen</PackageId>
-    <Version>4.3.1</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Ruslan Balanukhin</Authors>
-    <Company>Rational Core</Company>
-    <Product>FFmpeg.AutoGen</Product>
+    <GeneratePackageOnBuild Condition=" $(Configuration) == 'Release' ">true</GeneratePackageOnBuild>
     <Description>FFmpeg auto generated unsafe bindings for C#/.NET and Mono.</Description>
-    <Copyright>Copyright © Ruslan Balanukhin 2020 All rights reserved.</Copyright>
-    <PackageProjectUrl>https://github.com/Ruslan-B/FFmpeg.AutoGen</PackageProjectUrl>
-    <AssemblyVersion>$(Version)</AssemblyVersion>
-    <FileVersion>$(Version)</FileVersion>
-    <PackageTags>ffmpeg</PackageTags>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <Copyright>Copyright © Ruslan Balanukhin 2020 All rights reserved.</Copyright>    
   </PropertyGroup>
 
   <PropertyGroup>
@@ -23,14 +13,6 @@
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
-    <SignAssembly>true</SignAssembly>
-    <DelaySign>false</DelaySign>
-    <AssemblyOriginatorKeyFile>..\FFmpeg.AutoGen.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="..\LICENSE.txt" Link="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
-  </ItemGroup>
 
 </Project>

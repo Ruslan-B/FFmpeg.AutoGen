@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net40</TargetFrameworks>
+    <GeneratePackageOnBuild Condition=" $(Configuration) == 'Release' ">true</GeneratePackageOnBuild>
+    <Description>FFmpeg win-x64 redistribution package, use together with FFmpeg.AutoGen package.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="build.props">
+      <PackagePath>build\net40\$(PackageId).props</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="../FFmpeg/bin/x64/*.dll">
+      <PackagePath>runtimes\win-x64\native\%(filename).dll</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+  </ItemGroup>
+
+</Project>
