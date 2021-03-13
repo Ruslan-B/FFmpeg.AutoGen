@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Example
@@ -46,11 +45,11 @@ namespace FFmpeg.AutoGen.Example
 
         public void Dispose()
         {
-            ffmpeg.av_frame_unref(_pFrame);
-            ffmpeg.av_free(_pFrame);
+            var pFrame = _pFrame;
+            ffmpeg.av_frame_free(&pFrame);
 
-            ffmpeg.av_packet_unref(_pPacket);
-            ffmpeg.av_free(_pPacket);
+            var pPacket = _pPacket;
+            ffmpeg.av_packet_free(&pPacket);
 
             ffmpeg.avcodec_close(_pCodecContext);
             var pFormatContext = _pFormatContext;
