@@ -7,6 +7,7 @@
     <Product>FFmpeg.AutoGen</Product>
     <Copyright>Copyright © Ruslan Balanukhin 2020 All rights reserved.</Copyright>
     <PackageProjectUrl>https://github.com/Ruslan-B/FFmpeg.AutoGen</PackageProjectUrl>
+    <RepositoryType>Git</RepositoryType>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
     <PackageTags>ffmpeg</PackageTags>
@@ -27,5 +28,10 @@
 
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LICENSE.txt" Link="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="3.*" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.*" PrivateAssets="all" />
   </ItemGroup>
 </Project>
