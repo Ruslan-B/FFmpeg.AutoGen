@@ -67,6 +67,7 @@ namespace FFmpeg.AutoGen.Example
                 do
                 {
                     ffmpeg.avcodec_send_frame(_pCodecContext, &frame).ThrowExceptionIfError();
+                    ffmpeg.av_packet_unref(pPacket);
                     error = ffmpeg.avcodec_receive_packet(_pCodecContext, pPacket);
                 } while (error == ffmpeg.AVERROR(ffmpeg.EAGAIN));
 
@@ -76,8 +77,7 @@ namespace FFmpeg.AutoGen.Example
             }
             finally
             {
-                ffmpeg.av_packet_unref(pPacket);
-                ffmpeg.av_free(pPacket);
+                ffmpeg.av_packet_free(&pPacket);
             }
         }
     }
