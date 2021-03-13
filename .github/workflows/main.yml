@@ -14,14 +14,16 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v2
-      - name: Library Build & Test
+      - name: Install FFmpeg - linux
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get install ffmpeg -y
+      - name: Build
         run: |
           dotnet build -c Release
-          dotnet test -c Release
-      - name: Build Redist windows x64
-        if: matrix.os == 'windows-latest'
+      - name: Test
         run: |
-          dotnet build -c Release FFmpeg.AutoGen.Redist.windows.x64
+          dotnet test -c Release
       - uses: actions/upload-artifact@v2
         if: matrix.os == 'windows-latest'
         with:
@@ -40,5 +42,5 @@ jobs:
       - name: Codegen Build & Test
         if: matrix.os == 'windows-latest'
         run: |
-          dotnet run -c Release -p FFmpeg.AutoGen.CppSharpUnsafeGenerator -- -i FFmpeg
+          dotnet run -c Release -p FFmpeg.AutoGen.CppSharpUnsafeGenerator -- -i FFmpeg -o FFmpeg.AutoGen
           dotnet build FFmpeg.AutoGen
