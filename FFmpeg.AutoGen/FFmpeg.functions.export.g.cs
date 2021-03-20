@@ -10968,6 +10968,51 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVContentLightMetadata* av_content_light_metadata_alloc_delegate(ulong* @size);
+        private static av_content_light_metadata_alloc_delegate av_content_light_metadata_alloc_fptr = (ulong* @size) =>
+        {
+            av_content_light_metadata_alloc_fptr = GetFunctionDelegate<av_content_light_metadata_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_content_light_metadata_alloc");
+            if (av_content_light_metadata_alloc_fptr == null)
+            {
+                av_content_light_metadata_alloc_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_content_light_metadata_alloc is not supported on this platform.");
+                };
+            }
+            return av_content_light_metadata_alloc_fptr(@size);
+        };
+        /// <summary>Allocate an AVContentLightMetadata structure and set its fields to default values. The resulting struct can be freed using av_freep().</summary>
+        /// <returns>An AVContentLightMetadata filled with default values or NULL on failure.</returns>
+        public static AVContentLightMetadata* av_content_light_metadata_alloc(ulong* @size)
+        {
+            return av_content_light_metadata_alloc_fptr(@size);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVContentLightMetadata* av_content_light_metadata_create_side_data_delegate(AVFrame* @frame);
+        private static av_content_light_metadata_create_side_data_delegate av_content_light_metadata_create_side_data_fptr = (AVFrame* @frame) =>
+        {
+            av_content_light_metadata_create_side_data_fptr = GetFunctionDelegate<av_content_light_metadata_create_side_data_delegate>(GetOrLoadLibrary("avutil"), "av_content_light_metadata_create_side_data");
+            if (av_content_light_metadata_create_side_data_fptr == null)
+            {
+                av_content_light_metadata_create_side_data_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_content_light_metadata_create_side_data is not supported on this platform.");
+                };
+            }
+            return av_content_light_metadata_create_side_data_fptr(@frame);
+        };
+        /// <summary>Allocate a complete AVContentLightMetadata and add it to the frame.</summary>
+        /// <param name="frame">The frame which side data is added to.</param>
+        /// <returns>The AVContentLightMetadata structure to be filled by caller.</returns>
+        public static AVContentLightMetadata* av_content_light_metadata_create_side_data(AVFrame* @frame)
+        {
+            return av_content_light_metadata_create_side_data_fptr(@frame);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int av_cpu_count_delegate();
         private static av_cpu_count_delegate av_cpu_count_fptr = () =>
         {
@@ -11388,6 +11433,51 @@ namespace FFmpeg.AutoGen
         public static AVRational av_div_q(AVRational @b, AVRational @c)
         {
             return av_div_q_fptr(@b, @c);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVDynamicHDRPlus* av_dynamic_hdr_plus_alloc_delegate(ulong* @size);
+        private static av_dynamic_hdr_plus_alloc_delegate av_dynamic_hdr_plus_alloc_fptr = (ulong* @size) =>
+        {
+            av_dynamic_hdr_plus_alloc_fptr = GetFunctionDelegate<av_dynamic_hdr_plus_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_dynamic_hdr_plus_alloc");
+            if (av_dynamic_hdr_plus_alloc_fptr == null)
+            {
+                av_dynamic_hdr_plus_alloc_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_dynamic_hdr_plus_alloc is not supported on this platform.");
+                };
+            }
+            return av_dynamic_hdr_plus_alloc_fptr(@size);
+        };
+        /// <summary>Allocate an AVDynamicHDRPlus structure and set its fields to default values. The resulting struct can be freed using av_freep().</summary>
+        /// <returns>An AVDynamicHDRPlus filled with default values or NULL on failure.</returns>
+        public static AVDynamicHDRPlus* av_dynamic_hdr_plus_alloc(ulong* @size)
+        {
+            return av_dynamic_hdr_plus_alloc_fptr(@size);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVDynamicHDRPlus* av_dynamic_hdr_plus_create_side_data_delegate(AVFrame* @frame);
+        private static av_dynamic_hdr_plus_create_side_data_delegate av_dynamic_hdr_plus_create_side_data_fptr = (AVFrame* @frame) =>
+        {
+            av_dynamic_hdr_plus_create_side_data_fptr = GetFunctionDelegate<av_dynamic_hdr_plus_create_side_data_delegate>(GetOrLoadLibrary("avutil"), "av_dynamic_hdr_plus_create_side_data");
+            if (av_dynamic_hdr_plus_create_side_data_fptr == null)
+            {
+                av_dynamic_hdr_plus_create_side_data_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_dynamic_hdr_plus_create_side_data is not supported on this platform.");
+                };
+            }
+            return av_dynamic_hdr_plus_create_side_data_fptr(@frame);
+        };
+        /// <summary>Allocate a complete AVDynamicHDRPlus and add it to the frame.</summary>
+        /// <param name="frame">The frame which side data is added to.</param>
+        /// <returns>The AVDynamicHDRPlus structure to be filled by caller or NULL on failure.</returns>
+        public static AVDynamicHDRPlus* av_dynamic_hdr_plus_create_side_data(AVFrame* @frame)
+        {
+            return av_dynamic_hdr_plus_create_side_data_fptr(@frame);
         }
         
         
@@ -15027,6 +15117,51 @@ namespace FFmpeg.AutoGen
         public static void* av_mallocz_array(ulong @nmemb, ulong @size)
         {
             return av_mallocz_array_fptr(@nmemb, @size);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVMasteringDisplayMetadata* av_mastering_display_metadata_alloc_delegate();
+        private static av_mastering_display_metadata_alloc_delegate av_mastering_display_metadata_alloc_fptr = () =>
+        {
+            av_mastering_display_metadata_alloc_fptr = GetFunctionDelegate<av_mastering_display_metadata_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_mastering_display_metadata_alloc");
+            if (av_mastering_display_metadata_alloc_fptr == null)
+            {
+                av_mastering_display_metadata_alloc_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_mastering_display_metadata_alloc is not supported on this platform.");
+                };
+            }
+            return av_mastering_display_metadata_alloc_fptr();
+        };
+        /// <summary>Allocate an AVMasteringDisplayMetadata structure and set its fields to default values. The resulting struct can be freed using av_freep().</summary>
+        /// <returns>An AVMasteringDisplayMetadata filled with default values or NULL on failure.</returns>
+        public static AVMasteringDisplayMetadata* av_mastering_display_metadata_alloc()
+        {
+            return av_mastering_display_metadata_alloc_fptr();
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVMasteringDisplayMetadata* av_mastering_display_metadata_create_side_data_delegate(AVFrame* @frame);
+        private static av_mastering_display_metadata_create_side_data_delegate av_mastering_display_metadata_create_side_data_fptr = (AVFrame* @frame) =>
+        {
+            av_mastering_display_metadata_create_side_data_fptr = GetFunctionDelegate<av_mastering_display_metadata_create_side_data_delegate>(GetOrLoadLibrary("avutil"), "av_mastering_display_metadata_create_side_data");
+            if (av_mastering_display_metadata_create_side_data_fptr == null)
+            {
+                av_mastering_display_metadata_create_side_data_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_mastering_display_metadata_create_side_data is not supported on this platform.");
+                };
+            }
+            return av_mastering_display_metadata_create_side_data_fptr(@frame);
+        };
+        /// <summary>Allocate a complete AVMasteringDisplayMetadata and add it to the frame.</summary>
+        /// <param name="frame">The frame which side data is added to.</param>
+        /// <returns>The AVMasteringDisplayMetadata structure to be filled by caller.</returns>
+        public static AVMasteringDisplayMetadata* av_mastering_display_metadata_create_side_data(AVFrame* @frame)
+        {
+            return av_mastering_display_metadata_create_side_data_fptr(@frame);
         }
         
         

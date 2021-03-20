@@ -789,6 +789,123 @@ namespace FFmpeg.AutoGen
         public uint @MiscFlags;
     }
     
+    /// <summary>Represents the percentile at a specific percentage in a distribution.</summary>
+    public unsafe struct AVHDRPlusPercentile
+    {
+        /// <summary>The percentage value corresponding to a specific percentile linearized RGB value in the processing window in the scene. The value shall be in the range of 0 to100, inclusive.</summary>
+        public byte @percentage;
+        /// <summary>The linearized maxRGB value at a specific percentile in the processing window in the scene. The value shall be in the range of 0 to 1, inclusive and in multiples of 0.00001.</summary>
+        public AVRational @percentile;
+    }
+    
+    /// <summary>Color transform parameters at a processing window in a dynamic metadata for SMPTE 2094-40.</summary>
+    public unsafe struct AVHDRPlusColorTransformParams
+    {
+        /// <summary>The relative x coordinate of the top left pixel of the processing window. The value shall be in the range of 0 and 1, inclusive and in multiples of 1/(width of Picture - 1). The value 1 corresponds to the absolute coordinate of width of Picture - 1. The value for first processing window shall be 0.</summary>
+        public AVRational @window_upper_left_corner_x;
+        /// <summary>The relative y coordinate of the top left pixel of the processing window. The value shall be in the range of 0 and 1, inclusive and in multiples of 1/(height of Picture - 1). The value 1 corresponds to the absolute coordinate of height of Picture - 1. The value for first processing window shall be 0.</summary>
+        public AVRational @window_upper_left_corner_y;
+        /// <summary>The relative x coordinate of the bottom right pixel of the processing window. The value shall be in the range of 0 and 1, inclusive and in multiples of 1/(width of Picture - 1). The value 1 corresponds to the absolute coordinate of width of Picture - 1. The value for first processing window shall be 1.</summary>
+        public AVRational @window_lower_right_corner_x;
+        /// <summary>The relative y coordinate of the bottom right pixel of the processing window. The value shall be in the range of 0 and 1, inclusive and in multiples of 1/(height of Picture - 1). The value 1 corresponds to the absolute coordinate of height of Picture - 1. The value for first processing window shall be 1.</summary>
+        public AVRational @window_lower_right_corner_y;
+        /// <summary>The x coordinate of the center position of the concentric internal and external ellipses of the elliptical pixel selector in the processing window. The value shall be in the range of 0 to (width of Picture - 1), inclusive and in multiples of 1 pixel.</summary>
+        public ushort @center_of_ellipse_x;
+        /// <summary>The y coordinate of the center position of the concentric internal and external ellipses of the elliptical pixel selector in the processing window. The value shall be in the range of 0 to (height of Picture - 1), inclusive and in multiples of 1 pixel.</summary>
+        public ushort @center_of_ellipse_y;
+        /// <summary>The clockwise rotation angle in degree of arc with respect to the positive direction of the x-axis of the concentric internal and external ellipses of the elliptical pixel selector in the processing window. The value shall be in the range of 0 to 180, inclusive and in multiples of 1.</summary>
+        public byte @rotation_angle;
+        /// <summary>The semi-major axis value of the internal ellipse of the elliptical pixel selector in amount of pixels in the processing window. The value shall be in the range of 1 to 65535, inclusive and in multiples of 1 pixel.</summary>
+        public ushort @semimajor_axis_internal_ellipse;
+        /// <summary>The semi-major axis value of the external ellipse of the elliptical pixel selector in amount of pixels in the processing window. The value shall not be less than semimajor_axis_internal_ellipse of the current processing window. The value shall be in the range of 1 to 65535, inclusive and in multiples of 1 pixel.</summary>
+        public ushort @semimajor_axis_external_ellipse;
+        /// <summary>The semi-minor axis value of the external ellipse of the elliptical pixel selector in amount of pixels in the processing window. The value shall be in the range of 1 to 65535, inclusive and in multiples of 1 pixel.</summary>
+        public ushort @semiminor_axis_external_ellipse;
+        /// <summary>Overlap process option indicates one of the two methods of combining rendered pixels in the processing window in an image with at least one elliptical pixel selector. For overlapping elliptical pixel selectors in an image, overlap_process_option shall have the same value.</summary>
+        public AVHDRPlusOverlapProcessOption @overlap_process_option;
+        /// <summary>The maximum of the color components of linearized RGB values in the processing window in the scene. The values should be in the range of 0 to 1, inclusive and in multiples of 0.00001. maxscl[ 0 ], maxscl[ 1 ], and maxscl[ 2 ] are corresponding to R, G, B color components respectively.</summary>
+        public AVRational_array3 @maxscl;
+        /// <summary>The average of linearized maxRGB values in the processing window in the scene. The value should be in the range of 0 to 1, inclusive and in multiples of 0.00001.</summary>
+        public AVRational @average_maxrgb;
+        /// <summary>The number of linearized maxRGB values at given percentiles in the processing window in the scene. The maximum value shall be 15.</summary>
+        public byte @num_distribution_maxrgb_percentiles;
+        /// <summary>The linearized maxRGB values at given percentiles in the processing window in the scene.</summary>
+        public AVHDRPlusPercentile_array15 @distribution_maxrgb;
+        /// <summary>The fraction of selected pixels in the image that contains the brightest pixel in the scene. The value shall be in the range of 0 to 1, inclusive and in multiples of 0.001.</summary>
+        public AVRational @fraction_bright_pixels;
+        /// <summary>This flag indicates that the metadata for the tone mapping function in the processing window is present (for value of 1).</summary>
+        public byte @tone_mapping_flag;
+        /// <summary>The x coordinate of the separation point between the linear part and the curved part of the tone mapping function. The value shall be in the range of 0 to 1, excluding 0 and in multiples of 1/4095.</summary>
+        public AVRational @knee_point_x;
+        /// <summary>The y coordinate of the separation point between the linear part and the curved part of the tone mapping function. The value shall be in the range of 0 to 1, excluding 0 and in multiples of 1/4095.</summary>
+        public AVRational @knee_point_y;
+        /// <summary>The number of the intermediate anchor parameters of the tone mapping function in the processing window. The maximum value shall be 15.</summary>
+        public byte @num_bezier_curve_anchors;
+        /// <summary>The intermediate anchor parameters of the tone mapping function in the processing window in the scene. The values should be in the range of 0 to 1, inclusive and in multiples of 1/1023.</summary>
+        public AVRational_array15 @bezier_curve_anchors;
+        /// <summary>This flag shall be equal to 0 in bitstreams conforming to this version of this Specification. Other values are reserved for future use.</summary>
+        public byte @color_saturation_mapping_flag;
+        /// <summary>The color saturation gain in the processing window in the scene. The value shall be in the range of 0 to 63/8, inclusive and in multiples of 1/8. The default value shall be 1.</summary>
+        public AVRational @color_saturation_weight;
+    }
+    
+    /// <summary>This struct represents dynamic metadata for color volume transform - application 4 of SMPTE 2094-40:2016 standard.</summary>
+    public unsafe struct AVDynamicHDRPlus
+    {
+        /// <summary>Country code by Rec. ITU-T T.35 Annex A. The value shall be 0xB5.</summary>
+        public byte @itu_t_t35_country_code;
+        /// <summary>Application version in the application defining document in ST-2094 suite. The value shall be set to 0.</summary>
+        public byte @application_version;
+        /// <summary>The number of processing windows. The value shall be in the range of 1 to 3, inclusive.</summary>
+        public byte @num_windows;
+        /// <summary>The color transform parameters for every processing window.</summary>
+        public AVHDRPlusColorTransformParams_array3 @params;
+        /// <summary>The nominal maximum display luminance of the targeted system display, in units of 0.0001 candelas per square metre. The value shall be in the range of 0 to 10000, inclusive.</summary>
+        public AVRational @targeted_system_display_maximum_luminance;
+        /// <summary>This flag shall be equal to 0 in bit streams conforming to this version of this Specification. The value 1 is reserved for future use.</summary>
+        public byte @targeted_system_display_actual_peak_luminance_flag;
+        /// <summary>The number of rows in the targeted system_display_actual_peak_luminance array. The value shall be in the range of 2 to 25, inclusive.</summary>
+        public byte @num_rows_targeted_system_display_actual_peak_luminance;
+        /// <summary>The number of columns in the targeted_system_display_actual_peak_luminance array. The value shall be in the range of 2 to 25, inclusive.</summary>
+        public byte @num_cols_targeted_system_display_actual_peak_luminance;
+        /// <summary>The normalized actual peak luminance of the targeted system display. The values should be in the range of 0 to 1, inclusive and in multiples of 1/15.</summary>
+        public AVRational_arrayOfArray625 @targeted_system_display_actual_peak_luminance;
+        /// <summary>This flag shall be equal to 0 in bitstreams conforming to this version of this Specification. The value 1 is reserved for future use.</summary>
+        public byte @mastering_display_actual_peak_luminance_flag;
+        /// <summary>The number of rows in the mastering_display_actual_peak_luminance array. The value shall be in the range of 2 to 25, inclusive.</summary>
+        public byte @num_rows_mastering_display_actual_peak_luminance;
+        /// <summary>The number of columns in the mastering_display_actual_peak_luminance array. The value shall be in the range of 2 to 25, inclusive.</summary>
+        public byte @num_cols_mastering_display_actual_peak_luminance;
+        /// <summary>The normalized actual peak luminance of the mastering display used for mastering the image essence. The values should be in the range of 0 to 1, inclusive and in multiples of 1/15.</summary>
+        public AVRational_arrayOfArray625 @mastering_display_actual_peak_luminance;
+    }
+    
+    /// <summary>Mastering display metadata capable of representing the color volume of the display used to master the content (SMPTE 2086:2014).</summary>
+    public unsafe struct AVMasteringDisplayMetadata
+    {
+        /// <summary>CIE 1931 xy chromaticity coords of color primaries (r, g, b order).</summary>
+        public AVRational_arrayOfArray6 @display_primaries;
+        /// <summary>CIE 1931 xy chromaticity coords of white point.</summary>
+        public AVRational_array2 @white_point;
+        /// <summary>Min luminance of mastering display (cd/m^2).</summary>
+        public AVRational @min_luminance;
+        /// <summary>Max luminance of mastering display (cd/m^2).</summary>
+        public AVRational @max_luminance;
+        /// <summary>Flag indicating whether the display primaries (and white point) are set.</summary>
+        public int @has_primaries;
+        /// <summary>Flag indicating whether the luminance (min_ and max_) have been set.</summary>
+        public int @has_luminance;
+    }
+    
+    /// <summary>Content light level needed by to transmit HDR over HDMI (CTA-861.3).</summary>
+    public unsafe struct AVContentLightMetadata
+    {
+        /// <summary>Max content light level (cd/m^2).</summary>
+        public uint @MaxCLL;
+        /// <summary>Max average light level per frame (cd/m^2).</summary>
+        public uint @MaxFALL;
+    }
+    
     public unsafe struct SwsVector
     {
         /// <summary>pointer to the list of coefficients</summary>

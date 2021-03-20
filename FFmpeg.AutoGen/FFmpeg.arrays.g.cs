@@ -5,6 +5,27 @@ namespace FFmpeg.AutoGen
 {
     #pragma warning disable 169
     
+    public unsafe struct AVRational_array2
+    {
+        public static readonly int Size = 2;
+        AVRational _0; AVRational _1;
+        
+        public AVRational this[uint i]
+        {
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVRational* p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVRational* p0 = &_0) { *(p0 + i) = value;  } }
+        }
+        public AVRational[] ToArray()
+        {
+            fixed (AVRational* p0 = &_0) { var a = new AVRational[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }
+        }
+        public void UpdateFrom(AVRational[] array)
+        {
+            fixed (AVRational* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator AVRational[](AVRational_array2 @struct) => @struct.ToArray();
+    }
+    
     public unsafe struct short_array2
     {
         public static readonly int Size = 2;
@@ -45,6 +66,48 @@ namespace FFmpeg.AutoGen
             fixed (void** p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
         }
         public static implicit operator void*[](void_ptrArray2 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct AVHDRPlusColorTransformParams_array3
+    {
+        public static readonly int Size = 3;
+        AVHDRPlusColorTransformParams _0; AVHDRPlusColorTransformParams _1; AVHDRPlusColorTransformParams _2;
+        
+        public AVHDRPlusColorTransformParams this[uint i]
+        {
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVHDRPlusColorTransformParams* p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVHDRPlusColorTransformParams* p0 = &_0) { *(p0 + i) = value;  } }
+        }
+        public AVHDRPlusColorTransformParams[] ToArray()
+        {
+            fixed (AVHDRPlusColorTransformParams* p0 = &_0) { var a = new AVHDRPlusColorTransformParams[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }
+        }
+        public void UpdateFrom(AVHDRPlusColorTransformParams[] array)
+        {
+            fixed (AVHDRPlusColorTransformParams* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator AVHDRPlusColorTransformParams[](AVHDRPlusColorTransformParams_array3 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct AVRational_array3
+    {
+        public static readonly int Size = 3;
+        AVRational _0; AVRational _1; AVRational _2;
+        
+        public AVRational this[uint i]
+        {
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVRational* p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVRational* p0 = &_0) { *(p0 + i) = value;  } }
+        }
+        public AVRational[] ToArray()
+        {
+            fixed (AVRational* p0 = &_0) { var a = new AVRational[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }
+        }
+        public void UpdateFrom(AVRational[] array)
+        {
+            fixed (AVRational* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator AVRational[](AVRational_array3 @struct) => @struct.ToArray();
     }
     
     public unsafe struct byte_ptrArray3
@@ -194,6 +257,27 @@ namespace FFmpeg.AutoGen
         public static implicit operator int[](int_array5 @struct) => @struct.ToArray();
     }
     
+    public unsafe struct AVRational_arrayOfArray6
+    {
+        public static readonly int Size = 6;
+        AVRational_array2 _0; AVRational_array2 _1; AVRational_array2 _2; AVRational_array2 _3; AVRational_array2 _4; AVRational_array2 _5;
+        
+        public AVRational_array2 this[uint i]
+        {
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVRational_array2* p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVRational_array2* p0 = &_0) { *(p0 + i) = value;  } }
+        }
+        public AVRational_array2[] ToArray()
+        {
+            fixed (AVRational_array2* p0 = &_0) { var a = new AVRational_array2[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }
+        }
+        public void UpdateFrom(AVRational_array2[] array)
+        {
+            fixed (AVRational_array2* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator AVRational_array2[](AVRational_arrayOfArray6 @struct) => @struct.ToArray();
+    }
+    
     public unsafe struct short_arrayOfArray6
     {
         public static readonly int Size = 6;
@@ -320,6 +404,48 @@ namespace FFmpeg.AutoGen
         public static implicit operator ulong[](ulong_array8 @struct) => @struct.ToArray();
     }
     
+    public unsafe struct AVHDRPlusPercentile_array15
+    {
+        public static readonly int Size = 15;
+        AVHDRPlusPercentile _0; AVHDRPlusPercentile _1; AVHDRPlusPercentile _2; AVHDRPlusPercentile _3; AVHDRPlusPercentile _4; AVHDRPlusPercentile _5; AVHDRPlusPercentile _6; AVHDRPlusPercentile _7; AVHDRPlusPercentile _8; AVHDRPlusPercentile _9; AVHDRPlusPercentile _10; AVHDRPlusPercentile _11; AVHDRPlusPercentile _12; AVHDRPlusPercentile _13; AVHDRPlusPercentile _14;
+        
+        public AVHDRPlusPercentile this[uint i]
+        {
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVHDRPlusPercentile* p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVHDRPlusPercentile* p0 = &_0) { *(p0 + i) = value;  } }
+        }
+        public AVHDRPlusPercentile[] ToArray()
+        {
+            fixed (AVHDRPlusPercentile* p0 = &_0) { var a = new AVHDRPlusPercentile[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }
+        }
+        public void UpdateFrom(AVHDRPlusPercentile[] array)
+        {
+            fixed (AVHDRPlusPercentile* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator AVHDRPlusPercentile[](AVHDRPlusPercentile_array15 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct AVRational_array15
+    {
+        public static readonly int Size = 15;
+        AVRational _0; AVRational _1; AVRational _2; AVRational _3; AVRational _4; AVRational _5; AVRational _6; AVRational _7; AVRational _8; AVRational _9; AVRational _10; AVRational _11; AVRational _12; AVRational _13; AVRational _14;
+        
+        public AVRational this[uint i]
+        {
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVRational* p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVRational* p0 = &_0) { *(p0 + i) = value;  } }
+        }
+        public AVRational[] ToArray()
+        {
+            fixed (AVRational* p0 = &_0) { var a = new AVRational[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }
+        }
+        public void UpdateFrom(AVRational[] array)
+        {
+            fixed (AVRational* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator AVRational[](AVRational_array15 @struct) => @struct.ToArray();
+    }
+    
     public unsafe struct byte_array17
     {
         public static readonly int Size = 17;
@@ -362,6 +488,27 @@ namespace FFmpeg.AutoGen
         public static implicit operator long[](long_array17 @struct) => @struct.ToArray();
     }
     
+    public unsafe struct AVRational_array25
+    {
+        public static readonly int Size = 25;
+        AVRational _0; AVRational _1; AVRational _2; AVRational _3; AVRational _4; AVRational _5; AVRational _6; AVRational _7; AVRational _8; AVRational _9; AVRational _10; AVRational _11; AVRational _12; AVRational _13; AVRational _14; AVRational _15; AVRational _16; AVRational _17; AVRational _18; AVRational _19; AVRational _20; AVRational _21; AVRational _22; AVRational _23; AVRational _24;
+        
+        public AVRational this[uint i]
+        {
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVRational* p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVRational* p0 = &_0) { *(p0 + i) = value;  } }
+        }
+        public AVRational[] ToArray()
+        {
+            fixed (AVRational* p0 = &_0) { var a = new AVRational[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }
+        }
+        public void UpdateFrom(AVRational[] array)
+        {
+            fixed (AVRational* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator AVRational[](AVRational_array25 @struct) => @struct.ToArray();
+    }
+    
     public unsafe struct double_array399
     {
         public static readonly int Size = 399;
@@ -381,6 +528,27 @@ namespace FFmpeg.AutoGen
             fixed (double_array399* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
         public static implicit operator double[](double_array399 @struct) => @struct.ToArray();
+    }
+    
+    public unsafe struct AVRational_arrayOfArray625
+    {
+        public static readonly int Size = 625;
+        AVRational_array25 _0; AVRational_array25 _1; AVRational_array25 _2; AVRational_array25 _3; AVRational_array25 _4; AVRational_array25 _5; AVRational_array25 _6; AVRational_array25 _7; AVRational_array25 _8; AVRational_array25 _9; AVRational_array25 _10; AVRational_array25 _11; AVRational_array25 _12; AVRational_array25 _13; AVRational_array25 _14; AVRational_array25 _15; AVRational_array25 _16; AVRational_array25 _17; AVRational_array25 _18; AVRational_array25 _19; AVRational_array25 _20; AVRational_array25 _21; AVRational_array25 _22; AVRational_array25 _23; AVRational_array25 _24; AVRational_array25 _25; AVRational_array25 _26; AVRational_array25 _27; AVRational_array25 _28; AVRational_array25 _29; AVRational_array25 _30; AVRational_array25 _31; AVRational_array25 _32; AVRational_array25 _33; AVRational_array25 _34; AVRational_array25 _35; AVRational_array25 _36; AVRational_array25 _37; AVRational_array25 _38; AVRational_array25 _39; AVRational_array25 _40; AVRational_array25 _41; AVRational_array25 _42; AVRational_array25 _43; AVRational_array25 _44; AVRational_array25 _45; AVRational_array25 _46; AVRational_array25 _47; AVRational_array25 _48; AVRational_array25 _49; AVRational_array25 _50; AVRational_array25 _51; AVRational_array25 _52; AVRational_array25 _53; AVRational_array25 _54; AVRational_array25 _55; AVRational_array25 _56; AVRational_array25 _57; AVRational_array25 _58; AVRational_array25 _59; AVRational_array25 _60; AVRational_array25 _61; AVRational_array25 _62; AVRational_array25 _63; AVRational_array25 _64; AVRational_array25 _65; AVRational_array25 _66; AVRational_array25 _67; AVRational_array25 _68; AVRational_array25 _69; AVRational_array25 _70; AVRational_array25 _71; AVRational_array25 _72; AVRational_array25 _73; AVRational_array25 _74; AVRational_array25 _75; AVRational_array25 _76; AVRational_array25 _77; AVRational_array25 _78; AVRational_array25 _79; AVRational_array25 _80; AVRational_array25 _81; AVRational_array25 _82; AVRational_array25 _83; AVRational_array25 _84; AVRational_array25 _85; AVRational_array25 _86; AVRational_array25 _87; AVRational_array25 _88; AVRational_array25 _89; AVRational_array25 _90; AVRational_array25 _91; AVRational_array25 _92; AVRational_array25 _93; AVRational_array25 _94; AVRational_array25 _95; AVRational_array25 _96; AVRational_array25 _97; AVRational_array25 _98; AVRational_array25 _99; AVRational_array25 _100; AVRational_array25 _101; AVRational_array25 _102; AVRational_array25 _103; AVRational_array25 _104; AVRational_array25 _105; AVRational_array25 _106; AVRational_array25 _107; AVRational_array25 _108; AVRational_array25 _109; AVRational_array25 _110; AVRational_array25 _111; AVRational_array25 _112; AVRational_array25 _113; AVRational_array25 _114; AVRational_array25 _115; AVRational_array25 _116; AVRational_array25 _117; AVRational_array25 _118; AVRational_array25 _119; AVRational_array25 _120; AVRational_array25 _121; AVRational_array25 _122; AVRational_array25 _123; AVRational_array25 _124; AVRational_array25 _125; AVRational_array25 _126; AVRational_array25 _127; AVRational_array25 _128; AVRational_array25 _129; AVRational_array25 _130; AVRational_array25 _131; AVRational_array25 _132; AVRational_array25 _133; AVRational_array25 _134; AVRational_array25 _135; AVRational_array25 _136; AVRational_array25 _137; AVRational_array25 _138; AVRational_array25 _139; AVRational_array25 _140; AVRational_array25 _141; AVRational_array25 _142; AVRational_array25 _143; AVRational_array25 _144; AVRational_array25 _145; AVRational_array25 _146; AVRational_array25 _147; AVRational_array25 _148; AVRational_array25 _149; AVRational_array25 _150; AVRational_array25 _151; AVRational_array25 _152; AVRational_array25 _153; AVRational_array25 _154; AVRational_array25 _155; AVRational_array25 _156; AVRational_array25 _157; AVRational_array25 _158; AVRational_array25 _159; AVRational_array25 _160; AVRational_array25 _161; AVRational_array25 _162; AVRational_array25 _163; AVRational_array25 _164; AVRational_array25 _165; AVRational_array25 _166; AVRational_array25 _167; AVRational_array25 _168; AVRational_array25 _169; AVRational_array25 _170; AVRational_array25 _171; AVRational_array25 _172; AVRational_array25 _173; AVRational_array25 _174; AVRational_array25 _175; AVRational_array25 _176; AVRational_array25 _177; AVRational_array25 _178; AVRational_array25 _179; AVRational_array25 _180; AVRational_array25 _181; AVRational_array25 _182; AVRational_array25 _183; AVRational_array25 _184; AVRational_array25 _185; AVRational_array25 _186; AVRational_array25 _187; AVRational_array25 _188; AVRational_array25 _189; AVRational_array25 _190; AVRational_array25 _191; AVRational_array25 _192; AVRational_array25 _193; AVRational_array25 _194; AVRational_array25 _195; AVRational_array25 _196; AVRational_array25 _197; AVRational_array25 _198; AVRational_array25 _199; AVRational_array25 _200; AVRational_array25 _201; AVRational_array25 _202; AVRational_array25 _203; AVRational_array25 _204; AVRational_array25 _205; AVRational_array25 _206; AVRational_array25 _207; AVRational_array25 _208; AVRational_array25 _209; AVRational_array25 _210; AVRational_array25 _211; AVRational_array25 _212; AVRational_array25 _213; AVRational_array25 _214; AVRational_array25 _215; AVRational_array25 _216; AVRational_array25 _217; AVRational_array25 _218; AVRational_array25 _219; AVRational_array25 _220; AVRational_array25 _221; AVRational_array25 _222; AVRational_array25 _223; AVRational_array25 _224; AVRational_array25 _225; AVRational_array25 _226; AVRational_array25 _227; AVRational_array25 _228; AVRational_array25 _229; AVRational_array25 _230; AVRational_array25 _231; AVRational_array25 _232; AVRational_array25 _233; AVRational_array25 _234; AVRational_array25 _235; AVRational_array25 _236; AVRational_array25 _237; AVRational_array25 _238; AVRational_array25 _239; AVRational_array25 _240; AVRational_array25 _241; AVRational_array25 _242; AVRational_array25 _243; AVRational_array25 _244; AVRational_array25 _245; AVRational_array25 _246; AVRational_array25 _247; AVRational_array25 _248; AVRational_array25 _249; AVRational_array25 _250; AVRational_array25 _251; AVRational_array25 _252; AVRational_array25 _253; AVRational_array25 _254; AVRational_array25 _255; AVRational_array25 _256; AVRational_array25 _257; AVRational_array25 _258; AVRational_array25 _259; AVRational_array25 _260; AVRational_array25 _261; AVRational_array25 _262; AVRational_array25 _263; AVRational_array25 _264; AVRational_array25 _265; AVRational_array25 _266; AVRational_array25 _267; AVRational_array25 _268; AVRational_array25 _269; AVRational_array25 _270; AVRational_array25 _271; AVRational_array25 _272; AVRational_array25 _273; AVRational_array25 _274; AVRational_array25 _275; AVRational_array25 _276; AVRational_array25 _277; AVRational_array25 _278; AVRational_array25 _279; AVRational_array25 _280; AVRational_array25 _281; AVRational_array25 _282; AVRational_array25 _283; AVRational_array25 _284; AVRational_array25 _285; AVRational_array25 _286; AVRational_array25 _287; AVRational_array25 _288; AVRational_array25 _289; AVRational_array25 _290; AVRational_array25 _291; AVRational_array25 _292; AVRational_array25 _293; AVRational_array25 _294; AVRational_array25 _295; AVRational_array25 _296; AVRational_array25 _297; AVRational_array25 _298; AVRational_array25 _299; AVRational_array25 _300; AVRational_array25 _301; AVRational_array25 _302; AVRational_array25 _303; AVRational_array25 _304; AVRational_array25 _305; AVRational_array25 _306; AVRational_array25 _307; AVRational_array25 _308; AVRational_array25 _309; AVRational_array25 _310; AVRational_array25 _311; AVRational_array25 _312; AVRational_array25 _313; AVRational_array25 _314; AVRational_array25 _315; AVRational_array25 _316; AVRational_array25 _317; AVRational_array25 _318; AVRational_array25 _319; AVRational_array25 _320; AVRational_array25 _321; AVRational_array25 _322; AVRational_array25 _323; AVRational_array25 _324; AVRational_array25 _325; AVRational_array25 _326; AVRational_array25 _327; AVRational_array25 _328; AVRational_array25 _329; AVRational_array25 _330; AVRational_array25 _331; AVRational_array25 _332; AVRational_array25 _333; AVRational_array25 _334; AVRational_array25 _335; AVRational_array25 _336; AVRational_array25 _337; AVRational_array25 _338; AVRational_array25 _339; AVRational_array25 _340; AVRational_array25 _341; AVRational_array25 _342; AVRational_array25 _343; AVRational_array25 _344; AVRational_array25 _345; AVRational_array25 _346; AVRational_array25 _347; AVRational_array25 _348; AVRational_array25 _349; AVRational_array25 _350; AVRational_array25 _351; AVRational_array25 _352; AVRational_array25 _353; AVRational_array25 _354; AVRational_array25 _355; AVRational_array25 _356; AVRational_array25 _357; AVRational_array25 _358; AVRational_array25 _359; AVRational_array25 _360; AVRational_array25 _361; AVRational_array25 _362; AVRational_array25 _363; AVRational_array25 _364; AVRational_array25 _365; AVRational_array25 _366; AVRational_array25 _367; AVRational_array25 _368; AVRational_array25 _369; AVRational_array25 _370; AVRational_array25 _371; AVRational_array25 _372; AVRational_array25 _373; AVRational_array25 _374; AVRational_array25 _375; AVRational_array25 _376; AVRational_array25 _377; AVRational_array25 _378; AVRational_array25 _379; AVRational_array25 _380; AVRational_array25 _381; AVRational_array25 _382; AVRational_array25 _383; AVRational_array25 _384; AVRational_array25 _385; AVRational_array25 _386; AVRational_array25 _387; AVRational_array25 _388; AVRational_array25 _389; AVRational_array25 _390; AVRational_array25 _391; AVRational_array25 _392; AVRational_array25 _393; AVRational_array25 _394; AVRational_array25 _395; AVRational_array25 _396; AVRational_array25 _397; AVRational_array25 _398; AVRational_array25 _399; AVRational_array25 _400; AVRational_array25 _401; AVRational_array25 _402; AVRational_array25 _403; AVRational_array25 _404; AVRational_array25 _405; AVRational_array25 _406; AVRational_array25 _407; AVRational_array25 _408; AVRational_array25 _409; AVRational_array25 _410; AVRational_array25 _411; AVRational_array25 _412; AVRational_array25 _413; AVRational_array25 _414; AVRational_array25 _415; AVRational_array25 _416; AVRational_array25 _417; AVRational_array25 _418; AVRational_array25 _419; AVRational_array25 _420; AVRational_array25 _421; AVRational_array25 _422; AVRational_array25 _423; AVRational_array25 _424; AVRational_array25 _425; AVRational_array25 _426; AVRational_array25 _427; AVRational_array25 _428; AVRational_array25 _429; AVRational_array25 _430; AVRational_array25 _431; AVRational_array25 _432; AVRational_array25 _433; AVRational_array25 _434; AVRational_array25 _435; AVRational_array25 _436; AVRational_array25 _437; AVRational_array25 _438; AVRational_array25 _439; AVRational_array25 _440; AVRational_array25 _441; AVRational_array25 _442; AVRational_array25 _443; AVRational_array25 _444; AVRational_array25 _445; AVRational_array25 _446; AVRational_array25 _447; AVRational_array25 _448; AVRational_array25 _449; AVRational_array25 _450; AVRational_array25 _451; AVRational_array25 _452; AVRational_array25 _453; AVRational_array25 _454; AVRational_array25 _455; AVRational_array25 _456; AVRational_array25 _457; AVRational_array25 _458; AVRational_array25 _459; AVRational_array25 _460; AVRational_array25 _461; AVRational_array25 _462; AVRational_array25 _463; AVRational_array25 _464; AVRational_array25 _465; AVRational_array25 _466; AVRational_array25 _467; AVRational_array25 _468; AVRational_array25 _469; AVRational_array25 _470; AVRational_array25 _471; AVRational_array25 _472; AVRational_array25 _473; AVRational_array25 _474; AVRational_array25 _475; AVRational_array25 _476; AVRational_array25 _477; AVRational_array25 _478; AVRational_array25 _479; AVRational_array25 _480; AVRational_array25 _481; AVRational_array25 _482; AVRational_array25 _483; AVRational_array25 _484; AVRational_array25 _485; AVRational_array25 _486; AVRational_array25 _487; AVRational_array25 _488; AVRational_array25 _489; AVRational_array25 _490; AVRational_array25 _491; AVRational_array25 _492; AVRational_array25 _493; AVRational_array25 _494; AVRational_array25 _495; AVRational_array25 _496; AVRational_array25 _497; AVRational_array25 _498; AVRational_array25 _499; AVRational_array25 _500; AVRational_array25 _501; AVRational_array25 _502; AVRational_array25 _503; AVRational_array25 _504; AVRational_array25 _505; AVRational_array25 _506; AVRational_array25 _507; AVRational_array25 _508; AVRational_array25 _509; AVRational_array25 _510; AVRational_array25 _511; AVRational_array25 _512; AVRational_array25 _513; AVRational_array25 _514; AVRational_array25 _515; AVRational_array25 _516; AVRational_array25 _517; AVRational_array25 _518; AVRational_array25 _519; AVRational_array25 _520; AVRational_array25 _521; AVRational_array25 _522; AVRational_array25 _523; AVRational_array25 _524; AVRational_array25 _525; AVRational_array25 _526; AVRational_array25 _527; AVRational_array25 _528; AVRational_array25 _529; AVRational_array25 _530; AVRational_array25 _531; AVRational_array25 _532; AVRational_array25 _533; AVRational_array25 _534; AVRational_array25 _535; AVRational_array25 _536; AVRational_array25 _537; AVRational_array25 _538; AVRational_array25 _539; AVRational_array25 _540; AVRational_array25 _541; AVRational_array25 _542; AVRational_array25 _543; AVRational_array25 _544; AVRational_array25 _545; AVRational_array25 _546; AVRational_array25 _547; AVRational_array25 _548; AVRational_array25 _549; AVRational_array25 _550; AVRational_array25 _551; AVRational_array25 _552; AVRational_array25 _553; AVRational_array25 _554; AVRational_array25 _555; AVRational_array25 _556; AVRational_array25 _557; AVRational_array25 _558; AVRational_array25 _559; AVRational_array25 _560; AVRational_array25 _561; AVRational_array25 _562; AVRational_array25 _563; AVRational_array25 _564; AVRational_array25 _565; AVRational_array25 _566; AVRational_array25 _567; AVRational_array25 _568; AVRational_array25 _569; AVRational_array25 _570; AVRational_array25 _571; AVRational_array25 _572; AVRational_array25 _573; AVRational_array25 _574; AVRational_array25 _575; AVRational_array25 _576; AVRational_array25 _577; AVRational_array25 _578; AVRational_array25 _579; AVRational_array25 _580; AVRational_array25 _581; AVRational_array25 _582; AVRational_array25 _583; AVRational_array25 _584; AVRational_array25 _585; AVRational_array25 _586; AVRational_array25 _587; AVRational_array25 _588; AVRational_array25 _589; AVRational_array25 _590; AVRational_array25 _591; AVRational_array25 _592; AVRational_array25 _593; AVRational_array25 _594; AVRational_array25 _595; AVRational_array25 _596; AVRational_array25 _597; AVRational_array25 _598; AVRational_array25 _599; AVRational_array25 _600; AVRational_array25 _601; AVRational_array25 _602; AVRational_array25 _603; AVRational_array25 _604; AVRational_array25 _605; AVRational_array25 _606; AVRational_array25 _607; AVRational_array25 _608; AVRational_array25 _609; AVRational_array25 _610; AVRational_array25 _611; AVRational_array25 _612; AVRational_array25 _613; AVRational_array25 _614; AVRational_array25 _615; AVRational_array25 _616; AVRational_array25 _617; AVRational_array25 _618; AVRational_array25 _619; AVRational_array25 _620; AVRational_array25 _621; AVRational_array25 _622; AVRational_array25 _623; AVRational_array25 _624;
+        
+        public AVRational_array25 this[uint i]
+        {
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVRational_array25* p0 = &_0) { return *(p0 + i); } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (AVRational_array25* p0 = &_0) { *(p0 + i) = value;  } }
+        }
+        public AVRational_array25[] ToArray()
+        {
+            fixed (AVRational_array25* p0 = &_0) { var a = new AVRational_array25[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }
+        }
+        public void UpdateFrom(AVRational_array25[] array)
+        {
+            fixed (AVRational_array25* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public static implicit operator AVRational_array25[](AVRational_arrayOfArray625 @struct) => @struct.ToArray();
     }
     
     public unsafe struct double_arrayOfArray798

@@ -848,6 +848,13 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_VIDEO_ENC_PARAMS = 21,
     }
     
+    /// <summary>Option for overlapping elliptical pixel selectors in an image.</summary>
+    public enum AVHDRPlusOverlapProcessOption : int
+    {
+        @AV_HDR_PLUS_OVERLAP_PROCESS_WEIGHTED_AVERAGING = 0,
+        @AV_HDR_PLUS_OVERLAP_PROCESS_LAYERING = 1,
+    }
+    
     public enum AVHWDeviceType : int
     {
         @AV_HWDEVICE_TYPE_NONE = 0,

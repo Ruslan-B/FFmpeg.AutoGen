@@ -209,15 +209,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 LanguageVersion = LanguageVersion.C99_GNU
             };
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                parserOptions.SetupMSVC(VisualStudioVersion.Latest);
-            }
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
-
+            parserOptions.Setup();
+            
             foreach (var includeDir in IncludeDirs) parserOptions.AddIncludeDirs(includeDir);
 
             foreach (var define in Defines) parserOptions.AddDefines(define);
