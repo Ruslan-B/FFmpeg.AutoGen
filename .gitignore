@@ -12,7 +12,7 @@ TestResults
 *.user
 *.sln.docstates
 /.vs
-
+launchSettings.json
 
 # Build results
 [Dd]ebug/
@@ -105,4 +105,5 @@ UpgradeLog*.XML
 
 *.stackdump
 
+# Local 
 /FFmpeg.AutoGen.Example/frame.*.jpg

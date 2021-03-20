@@ -31,7 +31,7 @@ namespace FFmpeg.AutoGen.Example
             }
             else
             {
-                // TODO
+                throw new NotSupportedException(); // fell free add support for platform of you choose
             }
         }
     }
