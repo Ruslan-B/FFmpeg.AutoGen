@@ -869,7 +869,7 @@ namespace FFmpeg.AutoGen
         /// <summary>The number of columns in the targeted_system_display_actual_peak_luminance array. The value shall be in the range of 2 to 25, inclusive.</summary>
         public byte @num_cols_targeted_system_display_actual_peak_luminance;
         /// <summary>The normalized actual peak luminance of the targeted system display. The values should be in the range of 0 to 1, inclusive and in multiples of 1/15.</summary>
-        public AVRational_arrayOfArray625 @targeted_system_display_actual_peak_luminance;
+        public AVRational_array25x25 @targeted_system_display_actual_peak_luminance;
         /// <summary>This flag shall be equal to 0 in bitstreams conforming to this version of this Specification. The value 1 is reserved for future use.</summary>
         public byte @mastering_display_actual_peak_luminance_flag;
         /// <summary>The number of rows in the mastering_display_actual_peak_luminance array. The value shall be in the range of 2 to 25, inclusive.</summary>
@@ -877,14 +877,14 @@ namespace FFmpeg.AutoGen
         /// <summary>The number of columns in the mastering_display_actual_peak_luminance array. The value shall be in the range of 2 to 25, inclusive.</summary>
         public byte @num_cols_mastering_display_actual_peak_luminance;
         /// <summary>The normalized actual peak luminance of the mastering display used for mastering the image essence. The values should be in the range of 0 to 1, inclusive and in multiples of 1/15.</summary>
-        public AVRational_arrayOfArray625 @mastering_display_actual_peak_luminance;
+        public AVRational_array25x25 @mastering_display_actual_peak_luminance;
     }
     
     /// <summary>Mastering display metadata capable of representing the color volume of the display used to master the content (SMPTE 2086:2014).</summary>
     public unsafe struct AVMasteringDisplayMetadata
     {
         /// <summary>CIE 1931 xy chromaticity coords of color primaries (r, g, b order).</summary>
-        public AVRational_arrayOfArray6 @display_primaries;
+        public AVRational_array3x2 @display_primaries;
         /// <summary>CIE 1931 xy chromaticity coords of white point.</summary>
         public AVRational_array2 @white_point;
         /// <summary>Min luminance of mastering display (cd/m^2).</summary>
@@ -1517,7 +1517,7 @@ namespace FFmpeg.AutoGen
         public int @width;
         public int @height;
         /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
-        public short_arrayOfArray6 @position;
+        public short_array3x2 @position;
     }
     
     /// <summary>This structure describes the bitrate properties of an encoded bitstream. It roughly corresponds to a subset the VBV parameters for MPEG-2 or HRD parameters for H.264/HEVC.</summary>
@@ -1945,7 +1945,7 @@ namespace FFmpeg.AutoGen
         public long @duration_gcd;
         public int @duration_count;
         public long @rfps_duration_sum;
-        public double_arrayOfArray798* @duration_error;
+        public double_array2x399* @duration_error;
         public long @codec_info_duration;
         public long @codec_info_duration_fields;
         public int @frame_delay_evidence;

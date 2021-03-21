@@ -1,6 +1,6 @@
 ﻿namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
 {
-    internal class DelegateDefinition : TypeDefinition, IDefinition, ICanGenerateXmlDoc
+    internal class DelegateDefinition : TypeDefinition, ICanGenerateXmlDoc
     {
         public string FunctionName { get; set; }
         public TypeDefinition ReturnType { get; set; }

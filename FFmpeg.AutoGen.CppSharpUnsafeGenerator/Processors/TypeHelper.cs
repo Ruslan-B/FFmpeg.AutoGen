@@ -10,11 +10,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         {
             switch (type)
             {
-                case PointerType x: return GetTypeName(x.QualifiedPointee.Type) + "*";
+                case PointerType x: return $"{GetTypeName(x.QualifiedPointee.Type)}*";
                 case BuiltinType x: return GetTypeName(x.Type);
                 case TypedefType x: return GetTypeName(x);
                 case TagType x: return x.Declaration.Name;
-                case ArrayType x: return GetTypeName(x.Type) + "[]";
+                case ArrayType x: return $"{GetTypeName(x.Type)}[]";
                 case AttributedType x: return GetTypeName(PrimitiveType.Void);
                 default:
                     throw new NotSupportedException();

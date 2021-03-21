@@ -14566,8 +14566,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_image_fill_max_pixsteps_delegate(ref int_array4 @max_pixsteps, ref int_array4 @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc);
-        private static av_image_fill_max_pixsteps_delegate av_image_fill_max_pixsteps_fptr = (ref int_array4 @max_pixsteps, ref int_array4 @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc) =>
+        private delegate void av_image_fill_max_pixsteps_delegate(int_array4 @max_pixsteps, ref int_array4 @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc);
+        private static av_image_fill_max_pixsteps_delegate av_image_fill_max_pixsteps_fptr = (int_array4 @max_pixsteps, ref int_array4 @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc) =>
         {
             av_image_fill_max_pixsteps_fptr = GetFunctionDelegate<av_image_fill_max_pixsteps_delegate>(GetOrLoadLibrary("avutil"), "av_image_fill_max_pixsteps");
             if (av_image_fill_max_pixsteps_fptr == null)
@@ -14577,20 +14577,20 @@ namespace FFmpeg.AutoGen
                     throw new PlatformNotSupportedException("av_image_fill_max_pixsteps is not supported on this platform.");
                 };
             }
-            av_image_fill_max_pixsteps_fptr(ref @max_pixsteps, ref @max_pixstep_comps, @pixdesc);
+            av_image_fill_max_pixsteps_fptr(@max_pixsteps, ref @max_pixstep_comps, @pixdesc);
         };
         /// <summary>Compute the max pixel step for each plane of an image with a format described by pixdesc.</summary>
         /// <param name="max_pixsteps">an array which is filled with the max pixel step for each plane. Since a plane may contain different pixel components, the computed max_pixsteps[plane] is relative to the component in the plane with the max pixel step.</param>
         /// <param name="max_pixstep_comps">an array which is filled with the component for each plane which has the max pixel step. May be NULL.</param>
-        public static void av_image_fill_max_pixsteps(ref int_array4 @max_pixsteps, ref int_array4 @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc)
+        public static void av_image_fill_max_pixsteps(int_array4 @max_pixsteps, ref int_array4 @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc)
         {
-            av_image_fill_max_pixsteps_fptr(ref @max_pixsteps, ref @max_pixstep_comps, @pixdesc);
+            av_image_fill_max_pixsteps_fptr(@max_pixsteps, ref @max_pixstep_comps, @pixdesc);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_image_fill_pointers_delegate(ref byte_ptrArray4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int_array4 @linesizes);
-        private static av_image_fill_pointers_delegate av_image_fill_pointers_fptr = (ref byte_ptrArray4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int_array4 @linesizes) =>
+        private delegate int av_image_fill_pointers_delegate(byte_ptrArray4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int_array4 @linesizes);
+        private static av_image_fill_pointers_delegate av_image_fill_pointers_fptr = (byte_ptrArray4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int_array4 @linesizes) =>
         {
             av_image_fill_pointers_fptr = GetFunctionDelegate<av_image_fill_pointers_delegate>(GetOrLoadLibrary("avutil"), "av_image_fill_pointers");
             if (av_image_fill_pointers_fptr == null)
@@ -14600,16 +14600,16 @@ namespace FFmpeg.AutoGen
                     throw new PlatformNotSupportedException("av_image_fill_pointers is not supported on this platform.");
                 };
             }
-            return av_image_fill_pointers_fptr(ref @data, @pix_fmt, @height, @ptr, @linesizes);
+            return av_image_fill_pointers_fptr(@data, @pix_fmt, @height, @ptr, @linesizes);
         };
         /// <summary>Fill plane data pointers for an image with pixel format pix_fmt and height height.</summary>
         /// <param name="data">pointers array to be filled with the pointer for each image plane</param>
         /// <param name="ptr">the pointer to a buffer which will contain the image</param>
         /// <param name="linesizes">the array containing the linesize for each plane, should be filled by av_image_fill_linesizes()</param>
         /// <returns>the size in bytes required for the image buffer, a negative error code in case of failure</returns>
-        public static int av_image_fill_pointers(ref byte_ptrArray4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int_array4 @linesizes)
+        public static int av_image_fill_pointers(byte_ptrArray4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int_array4 @linesizes)
         {
-            return av_image_fill_pointers_fptr(ref @data, @pix_fmt, @height, @ptr, @linesizes);
+            return av_image_fill_pointers_fptr(@data, @pix_fmt, @height, @ptr, @linesizes);
         }
         
         
@@ -18163,8 +18163,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void* av_tree_find_delegate(AVTreeNode* @root, void* @key, av_tree_find_cmp_func @cmp, ref void_ptrArray2 @next);
-        private static av_tree_find_delegate av_tree_find_fptr = (AVTreeNode* @root, void* @key, av_tree_find_cmp_func @cmp, ref void_ptrArray2 @next) =>
+        private delegate void* av_tree_find_delegate(AVTreeNode* @root, void* @key, av_tree_find_cmp_func @cmp, void_ptrArray2 @next);
+        private static av_tree_find_delegate av_tree_find_fptr = (AVTreeNode* @root, void* @key, av_tree_find_cmp_func @cmp, void_ptrArray2 @next) =>
         {
             av_tree_find_fptr = GetFunctionDelegate<av_tree_find_delegate>(GetOrLoadLibrary("avutil"), "av_tree_find");
             if (av_tree_find_fptr == null)
@@ -18174,16 +18174,16 @@ namespace FFmpeg.AutoGen
                     throw new PlatformNotSupportedException("av_tree_find is not supported on this platform.");
                 };
             }
-            return av_tree_find_fptr(@root, @key, @cmp, ref @next);
+            return av_tree_find_fptr(@root, @key, @cmp, @next);
         };
         /// <summary>Find an element.</summary>
         /// <param name="root">a pointer to the root node of the tree</param>
         /// <param name="cmp">compare function used to compare elements in the tree, API identical to that of Standard C&apos;s qsort It is guaranteed that the first and only the first argument to cmp() will be the key parameter to av_tree_find(), thus it could if the user wants, be a different type (like an opaque context).</param>
         /// <param name="next">If next is not NULL, then next[0] will contain the previous element and next[1] the next element. If either does not exist, then the corresponding entry in next is unchanged.</param>
         /// <returns>An element with cmp(key, elem) == 0 or NULL if no such element exists in the tree.</returns>
-        public static void* av_tree_find(AVTreeNode* @root, void* @key, av_tree_find_cmp_func @cmp, ref void_ptrArray2 @next)
+        public static void* av_tree_find(AVTreeNode* @root, void* @key, av_tree_find_cmp_func @cmp, void_ptrArray2 @next)
         {
-            return av_tree_find_fptr(@root, @key, @cmp, ref @next);
+            return av_tree_find_fptr(@root, @key, @cmp, @next);
         }
         
         
@@ -18595,8 +18595,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void pp_postprocess_delegate(ref byte_ptrArray3 @src, int_array3 @srcStride, ref byte_ptrArray3 @dst, int_array3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
-        private static pp_postprocess_delegate pp_postprocess_fptr = (ref byte_ptrArray3 @src, int_array3 @srcStride, ref byte_ptrArray3 @dst, int_array3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type) =>
+        private delegate void pp_postprocess_delegate(byte_ptrArray3 @src, int_array3 @srcStride, ref byte_ptrArray3 @dst, int_array3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
+        private static pp_postprocess_delegate pp_postprocess_fptr = (byte_ptrArray3 @src, int_array3 @srcStride, ref byte_ptrArray3 @dst, int_array3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type) =>
         {
             pp_postprocess_fptr = GetFunctionDelegate<pp_postprocess_delegate>(GetOrLoadLibrary("postproc"), "pp_postprocess");
             if (pp_postprocess_fptr == null)
@@ -18606,11 +18606,11 @@ namespace FFmpeg.AutoGen
                     throw new PlatformNotSupportedException("pp_postprocess is not supported on this platform.");
                 };
             }
-            pp_postprocess_fptr(ref @src, @srcStride, ref @dst, @dstStride, @horizontalSize, @verticalSize, @QP_store, @QP_stride, @mode, @ppContext, @pict_type);
+            pp_postprocess_fptr(@src, @srcStride, ref @dst, @dstStride, @horizontalSize, @verticalSize, @QP_store, @QP_stride, @mode, @ppContext, @pict_type);
         };
-        public static void pp_postprocess(ref byte_ptrArray3 @src, int_array3 @srcStride, ref byte_ptrArray3 @dst, int_array3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type)
+        public static void pp_postprocess(byte_ptrArray3 @src, int_array3 @srcStride, ref byte_ptrArray3 @dst, int_array3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type)
         {
-            pp_postprocess_fptr(ref @src, @srcStride, ref @dst, @dstStride, @horizontalSize, @verticalSize, @QP_store, @QP_stride, @mode, @ppContext, @pict_type);
+            pp_postprocess_fptr(@src, @srcStride, ref @dst, @dstStride, @horizontalSize, @verticalSize, @QP_store, @QP_stride, @mode, @ppContext, @pict_type);
         }
         
         

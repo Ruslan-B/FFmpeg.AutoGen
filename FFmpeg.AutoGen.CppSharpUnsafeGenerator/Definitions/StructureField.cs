@@ -4,7 +4,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
     {
         public string Name { get; set; }
         public TypeDefinition FieldType { get; set; }
-        public Obsoletion Obsoletion { get; set; }
         public string Content { get; set; }
+        public Obsoletion Obsoletion { get; set; }
     }
 }
