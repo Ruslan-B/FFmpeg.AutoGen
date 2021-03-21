@@ -239,8 +239,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             {
                 var diagnostics = result.GetDiagnostics(i);
 
-                var message = $"{diagnostics.FileName}({diagnostics.LineNumber},{diagnostics.ColumnNumber}): " +
-                              $"{diagnostics.Level.ToString().ToLower()}: {diagnostics.Message}";
+                var message =
+                    $"{diagnostics.FileName}({diagnostics.LineNumber},{diagnostics.ColumnNumber}): {diagnostics.Level.ToString().ToLower()}: {diagnostics.Message}";
                 Diagnostics.Message(message);
             }
         }

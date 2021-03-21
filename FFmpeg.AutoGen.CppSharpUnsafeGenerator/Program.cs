@@ -14,12 +14,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
             if (options.Verbose)
             {
-                Console.WriteLine("Working dir: " + Environment.CurrentDirectory);
-                Console.WriteLine("Output dir: " + options.OutputDir);
-                Console.WriteLine("FFmpeg headers dir: " + options.FFmpegIncludesDir);
-                Console.WriteLine("FFmpeg bin dir: " + options.FFmpegBinDir);
-                Console.WriteLine("Namespace name: " + options.Namespace);
-                Console.WriteLine("Class name: " + options.ClassName);
+                Console.WriteLine($"Working dir: {Environment.CurrentDirectory}");
+                Console.WriteLine($"Output dir: {options.OutputDir}");
+                Console.WriteLine($"FFmpeg headers dir: {options.FFmpegIncludesDir}");
+                Console.WriteLine($"FFmpeg bin dir: {options.FFmpegBinDir}");
+                Console.WriteLine($"Namespace name: {options.Namespace}");
+                Console.WriteLine($"Class name: {options.ClassName}");
             }
 
             var existingInlineFunctions =

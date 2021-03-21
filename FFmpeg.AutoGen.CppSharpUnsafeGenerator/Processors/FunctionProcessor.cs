@@ -68,7 +68,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         {
             var @delegate = new DelegateDefinition
             {
-                Name = name + "_func",
+                Name = $"{name}_func",
                 FunctionName = name,
                 ReturnType = GetReturnTypeName(functionType.ReturnType.Type, name),
                 Parameters = functionType.Parameters.Select(GetParameter).ToArray()
@@ -94,7 +94,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return new FunctionParameter
             {
                 Name = name,
-                Type = GetParameterType(parameter.Type, function.Name + "_" + name),
+                Type = GetParameterType(parameter.Type, $"{function.Name}_{name}"),
                 Content = GetParamComment(function, parameter.Name)
             };
         }
@@ -149,7 +149,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 arrayType.Type is PointerType arrayPointerType &&
                 !(arrayPointerType.Pointee is BuiltinType || arrayPointerType.Pointee is TypedefType typedefType &&
                     typedefType.Declaration.Type is BuiltinType))
-                return new TypeDefinition { Name = TypeHelper.GetTypeName(arrayPointerType) + "*" };
+                return new TypeDefinition { Name = $"{TypeHelper.GetTypeName(arrayPointerType)}*" };
 
             return _context.StructureProcessor.GetTypeDefinition(type, name);
         }
