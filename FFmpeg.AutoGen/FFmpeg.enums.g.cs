@@ -295,6 +295,10 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_SCREENPRESSO = 190,
         @AV_CODEC_ID_RSCC = 191,
         @AV_CODEC_ID_AVS2 = 192,
+        @AV_CODEC_ID_PGX = 193,
+        @AV_CODEC_ID_AVS3 = 194,
+        @AV_CODEC_ID_MSP2 = 195,
+        @AV_CODEC_ID_VVC = 196,
         @AV_CODEC_ID_Y41P = 32768,
         @AV_CODEC_ID_AVRP = 32769,
         @AV_CODEC_ID_012V = 32770,
@@ -348,6 +352,13 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_MV30 = 32818,
         @AV_CODEC_ID_NOTCHLC = 32819,
         @AV_CODEC_ID_PFM = 32820,
+        @AV_CODEC_ID_MOBICLIP = 32821,
+        @AV_CODEC_ID_PHOTOCD = 32822,
+        @AV_CODEC_ID_IPU = 32823,
+        @AV_CODEC_ID_ARGO = 32824,
+        @AV_CODEC_ID_CRI = 32825,
+        @AV_CODEC_ID_SIMBIOSIS_IMX = 32826,
+        @AV_CODEC_ID_SGA_VIDEO = 32827,
         /// <summary>A dummy id pointing at the start of audio codecs</summary>
         @AV_CODEC_ID_FIRST_AUDIO = 65536,
         @AV_CODEC_ID_PCM_S16LE = 65536,
@@ -386,6 +397,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_PCM_F16LE = 67586,
         @AV_CODEC_ID_PCM_F24LE = 67587,
         @AV_CODEC_ID_PCM_VIDC = 67588,
+        @AV_CODEC_ID_PCM_SGA = 67589,
         @AV_CODEC_ID_ADPCM_IMA_QT = 69632,
         @AV_CODEC_ID_ADPCM_IMA_WAV = 69633,
         @AV_CODEC_ID_ADPCM_IMA_DK3 = 69634,
@@ -435,6 +447,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_ADPCM_IMA_ALP = 71695,
         @AV_CODEC_ID_ADPCM_IMA_MTF = 71696,
         @AV_CODEC_ID_ADPCM_IMA_CUNNING = 71697,
+        @AV_CODEC_ID_ADPCM_IMA_MOFLEX = 71698,
         @AV_CODEC_ID_AMR_NB = 73728,
         @AV_CODEC_ID_AMR_WB = 73729,
         @AV_CODEC_ID_RA_144 = 77824,
@@ -542,6 +555,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_MPEGH_3D_AUDIO = 88087,
         @AV_CODEC_ID_SIREN = 88088,
         @AV_CODEC_ID_HCA = 88089,
+        @AV_CODEC_ID_FASTAUDIO = 88090,
         /// <summary>A dummy ID pointing at the start of subtitle codecs.</summary>
         @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
         @AV_CODEC_ID_DVD_SUBTITLE = 94208,
@@ -631,13 +645,13 @@ namespace FFmpeg.AutoGen
         @AVCOL_PRI_NB = 23,
     }
     
-    /// <summary>MPEG vs JPEG YUV range.</summary>
+    /// <summary>Visual content value range.</summary>
     public enum AVColorRange : int
     {
         @AVCOL_RANGE_UNSPECIFIED = 0,
-        /// <summary>the normal 219*2^(n-8) &quot;MPEG&quot; YUV ranges</summary>
+        /// <summary>Narrow or limited range content.</summary>
         @AVCOL_RANGE_MPEG = 1,
-        /// <summary>the normal 2^n-1 &quot;JPEG&quot; YUV ranges</summary>
+        /// <summary>Full range content.</summary>
         @AVCOL_RANGE_JPEG = 2,
         /// <summary>Not part of ABI</summary>
         @AVCOL_RANGE_NB = 3,
@@ -838,7 +852,7 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_QP_TABLE_PROPERTIES = 16,
         /// <summary>Raw QP table data. Its format is described by AV_FRAME_DATA_QP_TABLE_PROPERTIES. Use av_frame_set_qp_table() and av_frame_get_qp_table() to access this instead.</summary>
         @AV_FRAME_DATA_QP_TABLE_DATA = 17,
-        /// <summary>Timecode which conforms to SMPTE ST 12-1. The data is an array of 4 uint32_t where the first uint32_t describes how many (1-3) of the other timecodes are used. The timecode format is described in the av_timecode_get_smpte_from_framenum() function in libavutil/timecode.c.</summary>
+        /// <summary>Timecode which conforms to SMPTE ST 12-1. The data is an array of 4 uint32_t where the first uint32_t describes how many (1-3) of the other timecodes are used. The timecode format is described in the documentation of av_timecode_get_smpte_from_framenum() function in libavutil/timecode.h.</summary>
         @AV_FRAME_DATA_S12M_TIMECODE = 18,
         /// <summary>HDR dynamic metadata associated with a video frame. The payload is an AVDynamicHDRPlus type and contains information for color volume transform - application 4 of SMPTE 2094-40:2016 standard.</summary>
         @AV_FRAME_DATA_DYNAMIC_HDR_PLUS = 19,
@@ -846,6 +860,10 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_REGIONS_OF_INTEREST = 20,
         /// <summary>Encoding parameters for a video frame, as described by AVVideoEncParams.</summary>
         @AV_FRAME_DATA_VIDEO_ENC_PARAMS = 21,
+        /// <summary>User data unregistered metadata associated with a video frame. This is the H.26[45] UDU SEI message, and shouldn&apos;t be used for any other purpose The data is stored as uint8_t in AVFrameSideData.data which is 16 bytes of uuid_iso_iec_11578 followed by AVFrameSideData.size - 16 bytes of user_data_payload_byte.</summary>
+        @AV_FRAME_DATA_SEI_UNREGISTERED = 22,
+        /// <summary>Film grain parameters for a frame, described by AVFilmGrainParams. Must be present for every frame which should have film grain applied.</summary>
+        @AV_FRAME_DATA_FILM_GRAIN_PARAMS = 23,
     }
     
     /// <summary>Option for overlapping elliptical pixel selectors in an image.</summary>
@@ -1043,8 +1061,10 @@ namespace FFmpeg.AutoGen
         @AV_PKT_DATA_ICC_PROFILE = 28,
         /// <summary>DOVI configuration ref: dolby-vision-bitstreams-within-the-iso-base-media-file-format-v2.1.2, section 2.2 dolby-vision-bitstreams-in-mpeg-2-transport-stream-multiplex-v1.2, section 3.3 Tags are stored in struct AVDOVIDecoderConfigurationRecord.</summary>
         @AV_PKT_DATA_DOVI_CONF = 29,
+        /// <summary>Timecode which conforms to SMPTE ST 12-1:2014. The data is an array of 4 uint32_t where the first uint32_t describes how many (1-3) of the other timecodes are used. The timecode format is described in the documentation of av_timecode_get_smpte_from_framenum() function in libavutil/timecode.h.</summary>
+        @AV_PKT_DATA_S12M_TIMECODE = 30,
         /// <summary>The number of side data types. This is not part of the public API/ABI in the sense that it may change when new side data types are added. This must stay the last enum value. If its value becomes huge, some code using it needs to be updated as it assumes it to be smaller than other limits.</summary>
-        @AV_PKT_DATA_NB = 30,
+        @AV_PKT_DATA_NB = 31,
     }
     
     /// <summary>@{</summary>
@@ -1480,8 +1500,12 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_Y210BE = 194,
         /// <summary>packed YUV 4:2:2 like YUYV422, 20bpp, data in the high bits, little-endian</summary>
         @AV_PIX_FMT_Y210LE = 195,
+        /// <summary>packed RGB 10:10:10, 30bpp, (msb)2X 10R 10G 10B(lsb), little-endian, X=unused/undefined</summary>
+        @AV_PIX_FMT_X2RGB10LE = 196,
+        /// <summary>packed RGB 10:10:10, 30bpp, (msb)2X 10R 10G 10B(lsb), big-endian, X=unused/undefined</summary>
+        @AV_PIX_FMT_X2RGB10BE = 197,
         /// <summary>number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions</summary>
-        @AV_PIX_FMT_NB = 196,
+        @AV_PIX_FMT_NB = 198,
     }
     
     /// <summary>Rounding methods.</summary>

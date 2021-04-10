@@ -26,27 +26,6 @@ namespace FFmpeg.AutoGen
         public static implicit operator AVRational[](AVRational_array2 @struct) => @struct.ToArray();
     }
     
-    public unsafe struct double_array2x399
-    {
-        public static readonly int Size = 2;
-        double_array399 _0; double_array399 _1;
-        
-        public double_array399 this[uint i]
-        {
-            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (double_array399* p0 = &_0) { return *(p0 + i); } }
-            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (double_array399* p0 = &_0) { *(p0 + i) = value;  } }
-        }
-        public double_array399[] ToArray()
-        {
-            fixed (double_array399* p0 = &_0) { var a = new double_array399[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }
-        }
-        public void UpdateFrom(double_array399[] array)
-        {
-            fixed (double_array399* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
-        }
-        public static implicit operator double_array399[](double_array2x399 @struct) => @struct.ToArray();
-    }
-    
     public unsafe struct short_array2
     {
         public static readonly int Size = 2;
@@ -299,6 +278,27 @@ namespace FFmpeg.AutoGen
         public static implicit operator long[](long_array4 @struct) => @struct.ToArray();
     }
     
+    public unsafe struct ulong_array4
+    {
+        public static readonly int Size = 4;
+        fixed ulong _[4];
+        
+        public ulong this[uint i]
+        {
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (ulong_array4* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (ulong_array4* p = &this) { p->_[i] = value; } }
+        }
+        public ulong[] ToArray()
+        {
+            fixed (ulong_array4* p = &this) { var a = new ulong[Size]; for (uint i = 0; i < Size; i++) a[i] = p->_[i]; return a; }
+        }
+        public void UpdateFrom(ulong[] array)
+        {
+            fixed (ulong_array4* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
+        }
+        public static implicit operator ulong[](ulong_array4 @struct) => @struct.ToArray();
+    }
+    
     public unsafe struct int_array5
     {
         public static readonly int Size = 5;
@@ -467,27 +467,6 @@ namespace FFmpeg.AutoGen
         public static implicit operator AVRational[](AVRational_array15 @struct) => @struct.ToArray();
     }
     
-    public unsafe struct byte_array17
-    {
-        public static readonly int Size = 17;
-        fixed byte _[17];
-        
-        public byte this[uint i]
-        {
-            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array17* p = &this) { return p->_[i]; } }
-            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array17* p = &this) { p->_[i] = value; } }
-        }
-        public byte[] ToArray()
-        {
-            fixed (byte_array17* p = &this) { var a = new byte[Size]; for (uint i = 0; i < Size; i++) a[i] = p->_[i]; return a; }
-        }
-        public void UpdateFrom(byte[] array)
-        {
-            fixed (byte_array17* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
-        }
-        public static implicit operator byte[](byte_array17 @struct) => @struct.ToArray();
-    }
-    
     public unsafe struct long_array17
     {
         public static readonly int Size = 17;
@@ -549,27 +528,6 @@ namespace FFmpeg.AutoGen
             fixed (AVRational_array25* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
         }
         public static implicit operator AVRational_array25[](AVRational_array25x25 @struct) => @struct.ToArray();
-    }
-    
-    public unsafe struct double_array399
-    {
-        public static readonly int Size = 399;
-        fixed double _[399];
-        
-        public double this[uint i]
-        {
-            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (double_array399* p = &this) { return p->_[i]; } }
-            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (double_array399* p = &this) { p->_[i] = value; } }
-        }
-        public double[] ToArray()
-        {
-            fixed (double_array399* p = &this) { var a = new double[Size]; for (uint i = 0; i < Size; i++) a[i] = p->_[i]; return a; }
-        }
-        public void UpdateFrom(double[] array)
-        {
-            fixed (double_array399* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
-        }
-        public static implicit operator double[](double_array399 @struct) => @struct.ToArray();
     }
     
     public unsafe struct byte_array1024

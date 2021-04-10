@@ -155,7 +155,7 @@ namespace FFmpeg.AutoGen
             }
             av_bsf_flush_fptr(@ctx);
         };
-        /// <summary>Reset the internal bitstream filter state / flush internal buffers.</summary>
+        /// <summary>Reset the internal bitstream filter state. Should be called e.g. when seeking.</summary>
         public static void av_bsf_flush(AVBSFContext* @ctx)
         {
             av_bsf_flush_fptr(@ctx);
@@ -1287,6 +1287,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Initialize optional fields of a packet with default values.</summary>
         /// <param name="pkt">packet</param>
+        [Obsolete("This function is deprecated. Once it's removed, sizeof(AVPacket) will not be a part of the ABI anymore.")]
         public static void av_init_packet(AVPacket* @pkt)
         {
             av_init_packet_fptr(@pkt);
@@ -1520,7 +1521,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Get side information from packet.</summary>
         /// <param name="pkt">packet</param>
         /// <param name="type">desired side information type</param>
-        /// <param name="size">pointer for side information size to store (optional)</param>
+        /// <param name="size">If supplied, *size will be set to the size of the side data or to zero if the desired side data is not present.</param>
         /// <returns>pointer to data if present or NULL otherwise</returns>
         public static byte* av_packet_get_side_data(AVPacket* @pkt, AVPacketSideDataType @type, int* @size)
         {
@@ -1657,10 +1658,6 @@ namespace FFmpeg.AutoGen
             }
             return av_packet_pack_dictionary_fptr(@dict, @size);
         };
-        /// <summary>Pack a dictionary for use in side_data.</summary>
-        /// <param name="dict">The dictionary to pack.</param>
-        /// <param name="size">pointer to store the size of the returned data</param>
-        /// <returns>pointer to data if successful, NULL otherwise</returns>
         public static byte* av_packet_pack_dictionary(AVDictionary* @dict, int* @size)
         {
             return av_packet_pack_dictionary_fptr(@dict, @size);
@@ -1796,11 +1793,6 @@ namespace FFmpeg.AutoGen
             }
             return av_packet_unpack_dictionary_fptr(@data, @size, @dict);
         };
-        /// <summary>Unpack a dictionary from side_data.</summary>
-        /// <param name="data">data from side_data</param>
-        /// <param name="size">size of the data</param>
-        /// <param name="dict">the metadata storage dictionary</param>
-        /// <returns>0 on success, &lt; 0 on failure</returns>
         public static int av_packet_unpack_dictionary(byte* @data, int @size, AVDictionary** @dict)
         {
             return av_packet_unpack_dictionary_fptr(@data, @size, @dict);
@@ -1843,9 +1835,9 @@ namespace FFmpeg.AutoGen
             }
             return av_parser_change_fptr(@s, @avctx, @poutbuf, @poutbuf_size, @buf, @buf_size, @keyframe);
         };
-        /// <summary>Returns 0 if the output buffer is a subset of the input, 1 if it is allocated and must be freed use AVBitStreamFilter</summary>
+        /// <summary>Returns 0 if the output buffer is a subset of the input, 1 if it is allocated and must be freed Use dump_extradata, remove_extra or extract_extradata bitstream filters instead.</summary>
         /// <returns>0 if the output buffer is a subset of the input, 1 if it is allocated and must be freed</returns>
-        [Obsolete("use AVBitStreamFilter")]
+        [Obsolete("Use dump_extradata, remove_extra or extract_extradata bitstream filters instead.")]
         public static int av_parser_change(AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe)
         {
             return av_parser_change_fptr(@s, @avctx, @poutbuf, @poutbuf_size, @buf, @buf_size, @keyframe);
@@ -2438,6 +2430,27 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int avcodec_default_get_encode_buffer_delegate(AVCodecContext* @s, AVPacket* @pkt, int @flags);
+        private static avcodec_default_get_encode_buffer_delegate avcodec_default_get_encode_buffer_fptr = (AVCodecContext* @s, AVPacket* @pkt, int @flags) =>
+        {
+            avcodec_default_get_encode_buffer_fptr = GetFunctionDelegate<avcodec_default_get_encode_buffer_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_default_get_encode_buffer");
+            if (avcodec_default_get_encode_buffer_fptr == null)
+            {
+                avcodec_default_get_encode_buffer_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("avcodec_default_get_encode_buffer is not supported on this platform.");
+                };
+            }
+            return avcodec_default_get_encode_buffer_fptr(@s, @pkt, @flags);
+        };
+        /// <summary>The default callback for AVCodecContext.get_encode_buffer(). It is made public so it can be called by custom get_encode_buffer() implementations for encoders without AV_CODEC_CAP_DR1 set.</summary>
+        public static int avcodec_default_get_encode_buffer(AVCodecContext* @s, AVPacket* @pkt, int @flags)
+        {
+            return avcodec_default_get_encode_buffer_fptr(@s, @pkt, @flags);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVPixelFormat avcodec_default_get_format_delegate(AVCodecContext* @s, AVPixelFormat* @fmt);
         private static avcodec_default_get_format_delegate avcodec_default_get_format_fptr = (AVCodecContext* @s, AVPixelFormat* @fmt) =>
         {
@@ -2558,7 +2571,7 @@ namespace FFmpeg.AutoGen
         /// <param name="frame">AVFrame containing the raw audio data to be encoded. May be NULL when flushing an encoder that has the AV_CODEC_CAP_DELAY capability set. If AV_CODEC_CAP_VARIABLE_FRAME_SIZE is set, then each frame can have any number of samples. If it is not set, frame-&gt;nb_samples must be equal to avctx-&gt;frame_size for all frames except the last. The final frame may be smaller than avctx-&gt;frame_size.</param>
         /// <param name="got_packet_ptr">This field is set to 1 by libavcodec if the output packet is non-empty, and to 0 if it is empty. If the function returns an error, the packet can be assumed to be invalid, and the value of got_packet_ptr is undefined and should not be used.</param>
         /// <returns>0 on success, negative error code on failure</returns>
-        [Obsolete("use avcodec_send_frame()/avcodec_receive_packet() instead")]
+        [Obsolete("use avcodec_send_frame()/avcodec_receive_packet() instead. If allowed and required, set AVCodecContext.get_encode_buffer to a custom function to pass user supplied output buffers.")]
         public static int avcodec_encode_audio2(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr)
         {
             return avcodec_encode_audio2_fptr(@avctx, @avpkt, @frame, @got_packet_ptr);
@@ -2605,7 +2618,7 @@ namespace FFmpeg.AutoGen
         /// <param name="frame">AVFrame containing the raw video data to be encoded. May be NULL when flushing an encoder that has the AV_CODEC_CAP_DELAY capability set.</param>
         /// <param name="got_packet_ptr">This field is set to 1 by libavcodec if the output packet is non-empty, and to 0 if it is empty. If the function returns an error, the packet can be assumed to be invalid, and the value of got_packet_ptr is undefined and should not be used.</param>
         /// <returns>0 on success, negative error code on failure</returns>
-        [Obsolete("use avcodec_send_frame()/avcodec_receive_packet() instead")]
+        [Obsolete("use avcodec_send_frame()/avcodec_receive_packet() instead. If allowed and required, set AVCodecContext.get_encode_buffer to a custom function to pass user supplied output buffers.")]
         public static int avcodec_encode_video2(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr)
         {
             return avcodec_encode_video2_fptr(@avctx, @avpkt, @frame, @got_packet_ptr);
@@ -2970,7 +2983,7 @@ namespace FFmpeg.AutoGen
             }
             return avcodec_get_frame_class_fptr();
         };
-        /// <summary>Get the AVClass for AVFrame. It can be used in combination with AV_OPT_SEARCH_FAKE_OBJ for examining options.</summary>
+        [Obsolete("This function should not be used.")]
         public static AVClass* avcodec_get_frame_class()
         {
             return avcodec_get_frame_class_fptr();
@@ -3395,8 +3408,7 @@ namespace FFmpeg.AutoGen
             }
             avcodec_register_fptr(@codec);
         };
-        /// <summary>Register the codec codec and initialize libavcodec.</summary>
-        [Obsolete("")]
+        [Obsolete("Calling this function is unnecessary.")]
         public static void avcodec_register(AVCodec* @codec)
         {
             avcodec_register_fptr(@codec);
@@ -3417,8 +3429,7 @@ namespace FFmpeg.AutoGen
             }
             avcodec_register_all_fptr();
         };
-        /// <summary>Register all the codecs, parsers and bitstream filters which were enabled at configuration time. If you do not call this function you can select exactly which formats you want to support, by using the individual registration functions.</summary>
-        [Obsolete("")]
+        [Obsolete("Calling this function is unnecessary.")]
         public static void avcodec_register_all()
         {
             avcodec_register_all_fptr();
@@ -3770,6 +3781,7 @@ namespace FFmpeg.AutoGen
         /// <param name="s">Context of the device.</param>
         /// <param name="device_options">An AVDictionary filled with device-private options. On return this parameter will be destroyed and replaced with a dict containing options that were not found. May be NULL. The same options must be passed later to avformat_write_header() for output devices or avformat_open_input() for input devices, or at any other place that affects device-private options.</param>
         /// <returns>&gt;= 0 on success, negative otherwise.</returns>
+        [Obsolete("")]
         public static int avdevice_capabilities_create(AVDeviceCapabilitiesQuery** @caps, AVFormatContext* @s, AVDictionary** @device_options)
         {
             return avdevice_capabilities_create_fptr(@caps, @s, @device_options);
@@ -3793,6 +3805,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Free resources created by avdevice_capabilities_create()</summary>
         /// <param name="caps">Device capabilities data to be freed.</param>
         /// <param name="s">Context of the device.</param>
+        [Obsolete("")]
         public static void avdevice_capabilities_free(AVDeviceCapabilitiesQuery** @caps, AVFormatContext* @s)
         {
             avdevice_capabilities_free_fptr(@caps, @s);
@@ -5866,7 +5879,7 @@ namespace FFmpeg.AutoGen
             }
             return av_demuxer_open_fptr(@ic);
         };
-        [Obsolete("")]
+        [Obsolete("Use an AVDictionary to pass options to a demuxer.")]
         public static int av_demuxer_open(AVFormatContext* @ic)
         {
             return av_demuxer_open_fptr(@ic);
@@ -7568,7 +7581,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Get side information from stream.</summary>
         /// <param name="stream">stream</param>
         /// <param name="type">desired side information type</param>
-        /// <param name="size">pointer for side information size to store (optional)</param>
+        /// <param name="size">If supplied, *size will be set to the size of the side data or to zero if the desired side data is not present.</param>
         /// <returns>pointer to data if present or NULL otherwise</returns>
         public static byte* av_stream_get_side_data(AVStream* @stream, AVPacketSideDataType @type, int* @size)
         {
@@ -10236,8 +10249,6 @@ namespace FFmpeg.AutoGen
             }
             return av_buffer_alloc_fptr(@size);
         };
-        /// <summary>Allocate an AVBuffer of the given size using av_malloc().</summary>
-        /// <returns>an AVBufferRef of given size or NULL when out of memory</returns>
         public static AVBufferRef* av_buffer_alloc(int @size)
         {
             return av_buffer_alloc_fptr(@size);
@@ -10258,7 +10269,6 @@ namespace FFmpeg.AutoGen
             }
             return av_buffer_allocz_fptr(@size);
         };
-        /// <summary>Same as av_buffer_alloc(), except the returned buffer will be initialized to zero.</summary>
         public static AVBufferRef* av_buffer_allocz(int @size)
         {
             return av_buffer_allocz_fptr(@size);
@@ -10279,13 +10289,6 @@ namespace FFmpeg.AutoGen
             }
             return av_buffer_create_fptr(@data, @size, @free, @opaque, @flags);
         };
-        /// <summary>Create an AVBuffer from an existing array.</summary>
-        /// <param name="data">data array</param>
-        /// <param name="size">size of data in bytes</param>
-        /// <param name="free">a callback for freeing this buffer&apos;s data</param>
-        /// <param name="opaque">parameter to be got for processing or passed to free</param>
-        /// <param name="flags">a combination of AV_BUFFER_FLAG_*</param>
-        /// <returns>an AVBufferRef referring to data on success, NULL on failure.</returns>
         public static AVBufferRef* av_buffer_create(byte* @data, int @size, av_buffer_create_free_func @free, void* @opaque, int @flags)
         {
             return av_buffer_create_fptr(@data, @size, @free, @opaque, @flags);
@@ -10459,10 +10462,6 @@ namespace FFmpeg.AutoGen
             }
             return av_buffer_pool_init_fptr(@size, @alloc);
         };
-        /// <summary>Allocate and initialize a buffer pool.</summary>
-        /// <param name="size">size of each buffer in this pool</param>
-        /// <param name="alloc">a function that will be used to allocate new buffers when the pool is empty. May be NULL, then the default allocator will be used (av_buffer_alloc()).</param>
-        /// <returns>newly created buffer pool on success, NULL on error.</returns>
         public static AVBufferPool* av_buffer_pool_init(int @size, av_buffer_pool_init_alloc_func @alloc)
         {
             return av_buffer_pool_init_fptr(@size, @alloc);
@@ -10483,12 +10482,6 @@ namespace FFmpeg.AutoGen
             }
             return av_buffer_pool_init2_fptr(@size, @opaque, @alloc, @pool_free);
         };
-        /// <summary>Allocate and initialize a buffer pool with a more complex allocator.</summary>
-        /// <param name="size">size of each buffer in this pool</param>
-        /// <param name="opaque">arbitrary user data used by the allocator</param>
-        /// <param name="alloc">a function that will be used to allocate new buffers when the pool is empty. May be NULL, then the default allocator will be used (av_buffer_alloc()).</param>
-        /// <param name="pool_free">a function that will be called immediately before the pool is freed. I.e. after av_buffer_pool_uninit() is called by the caller and all the frames are returned to the pool and freed. It is intended to uninitialize the user opaque data. May be NULL.</param>
-        /// <returns>newly created buffer pool on success, NULL on error.</returns>
         public static AVBufferPool* av_buffer_pool_init2(int @size, void* @opaque, av_buffer_pool_init2_alloc_func @alloc, av_buffer_pool_init2_pool_free_func @pool_free)
         {
             return av_buffer_pool_init2_fptr(@size, @opaque, @alloc, @pool_free);
@@ -10531,10 +10524,6 @@ namespace FFmpeg.AutoGen
             }
             return av_buffer_realloc_fptr(@buf, @size);
         };
-        /// <summary>Reallocate a given buffer.</summary>
-        /// <param name="buf">a buffer reference to reallocate. On success, buf will be unreferenced and a new reference with the required size will be written in its place. On failure buf will be left untouched. *buf may be NULL, then a new buffer is allocated.</param>
-        /// <param name="size">required new buffer size.</param>
-        /// <returns>0 on success, a negative AVERROR on failure.</returns>
         public static int av_buffer_realloc(AVBufferRef** @buf, int @size)
         {
             return av_buffer_realloc_fptr(@buf, @size);
@@ -10560,6 +10549,30 @@ namespace FFmpeg.AutoGen
         public static AVBufferRef* av_buffer_ref(AVBufferRef* @buf)
         {
             return av_buffer_ref_fptr(@buf);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_buffer_replace_delegate(AVBufferRef** @dst, AVBufferRef* @src);
+        private static av_buffer_replace_delegate av_buffer_replace_fptr = (AVBufferRef** @dst, AVBufferRef* @src) =>
+        {
+            av_buffer_replace_fptr = GetFunctionDelegate<av_buffer_replace_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_replace");
+            if (av_buffer_replace_fptr == null)
+            {
+                av_buffer_replace_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_buffer_replace is not supported on this platform.");
+                };
+            }
+            return av_buffer_replace_fptr(@dst, @src);
+        };
+        /// <summary>Ensure dst refers to the same data as src.</summary>
+        /// <param name="dst">Pointer to either a valid buffer reference or NULL. On success, this will point to a buffer reference equivalent to src. On failure, dst will be left untouched.</param>
+        /// <param name="src">A buffer reference to replace dst with. May be NULL, then this function is equivalent to av_buffer_unref(dst).</param>
+        /// <returns>0 on success AVERROR(ENOMEM) on memory allocation failure.</returns>
+        public static int av_buffer_replace(AVBufferRef** @dst, AVBufferRef* @src)
+        {
+            return av_buffer_replace_fptr(@dst, @src);
         }
         
         
@@ -14589,6 +14602,30 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_image_fill_plane_sizes_delegate(ulong_array4 @size, AVPixelFormat @pix_fmt, int @height, long_array4 @linesizes);
+        private static av_image_fill_plane_sizes_delegate av_image_fill_plane_sizes_fptr = (ulong_array4 @size, AVPixelFormat @pix_fmt, int @height, long_array4 @linesizes) =>
+        {
+            av_image_fill_plane_sizes_fptr = GetFunctionDelegate<av_image_fill_plane_sizes_delegate>(GetOrLoadLibrary("avutil"), "av_image_fill_plane_sizes");
+            if (av_image_fill_plane_sizes_fptr == null)
+            {
+                av_image_fill_plane_sizes_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_image_fill_plane_sizes is not supported on this platform.");
+                };
+            }
+            return av_image_fill_plane_sizes_fptr(@size, @pix_fmt, @height, @linesizes);
+        };
+        /// <summary>Fill plane sizes for an image with pixel format pix_fmt and height height.</summary>
+        /// <param name="size">the array to be filled with the size of each image plane</param>
+        /// <param name="linesizes">the array containing the linesize for each plane, should be filled by av_image_fill_linesizes()</param>
+        /// <returns>&gt;= 0 in case of success, a negative error code otherwise</returns>
+        public static int av_image_fill_plane_sizes(ulong_array4 @size, AVPixelFormat @pix_fmt, int @height, long_array4 @linesizes)
+        {
+            return av_image_fill_plane_sizes_fptr(@size, @pix_fmt, @height, @linesizes);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int av_image_fill_pointers_delegate(byte_ptrArray4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int_array4 @linesizes);
         private static av_image_fill_pointers_delegate av_image_fill_pointers_fptr = (byte_ptrArray4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int_array4 @linesizes) =>
         {
@@ -15283,6 +15320,29 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVClass* av_opt_child_class_iterate_delegate(AVClass* @parent, void** @iter);
+        private static av_opt_child_class_iterate_delegate av_opt_child_class_iterate_fptr = (AVClass* @parent, void** @iter) =>
+        {
+            av_opt_child_class_iterate_fptr = GetFunctionDelegate<av_opt_child_class_iterate_delegate>(GetOrLoadLibrary("avutil"), "av_opt_child_class_iterate");
+            if (av_opt_child_class_iterate_fptr == null)
+            {
+                av_opt_child_class_iterate_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_opt_child_class_iterate is not supported on this platform.");
+                };
+            }
+            return av_opt_child_class_iterate_fptr(@parent, @iter);
+        };
+        /// <summary>Iterate over potential AVOptions-enabled children of parent.</summary>
+        /// <param name="iter">a pointer where iteration state is stored.</param>
+        /// <returns>AVClass corresponding to next potential child or NULL</returns>
+        public static AVClass* av_opt_child_class_iterate(AVClass* @parent, void** @iter)
+        {
+            return av_opt_child_class_iterate_fptr(@parent, @iter);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVClass* av_opt_child_class_next_delegate(AVClass* @parent, AVClass* @prev);
         private static av_opt_child_class_next_delegate av_opt_child_class_next_fptr = (AVClass* @parent, AVClass* @prev) =>
         {
@@ -15299,6 +15359,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Iterate over potential AVOptions-enabled children of parent.</summary>
         /// <param name="prev">result of a previous call to this function or NULL</param>
         /// <returns>AVClass corresponding to next potential child or NULL</returns>
+        [Obsolete("use av_opt_child_class_iterate")]
         public static AVClass* av_opt_child_class_next(AVClass* @parent, AVClass* @prev)
         {
             return av_opt_child_class_next_fptr(@parent, @prev);
@@ -17925,7 +17986,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Adjust frame number for NTSC drop frame time code.</summary>
         /// <param name="framenum">frame number to adjust</param>
-        /// <param name="fps">frame per second, 30 or 60</param>
+        /// <param name="fps">frame per second, multiples of 30</param>
         /// <returns>adjusted frame number</returns>
         public static int av_timecode_adjust_ntsc_framenum2(int @framenum, int @fps)
         {
@@ -17952,6 +18013,34 @@ namespace FFmpeg.AutoGen
         public static int av_timecode_check_frame_rate(AVRational @rate)
         {
             return av_timecode_check_frame_rate_fptr(@rate);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate uint av_timecode_get_smpte_delegate(AVRational @rate, int @drop, int @hh, int @mm, int @ss, int @ff);
+        private static av_timecode_get_smpte_delegate av_timecode_get_smpte_fptr = (AVRational @rate, int @drop, int @hh, int @mm, int @ss, int @ff) =>
+        {
+            av_timecode_get_smpte_fptr = GetFunctionDelegate<av_timecode_get_smpte_delegate>(GetOrLoadLibrary("avutil"), "av_timecode_get_smpte");
+            if (av_timecode_get_smpte_fptr == null)
+            {
+                av_timecode_get_smpte_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_timecode_get_smpte is not supported on this platform.");
+                };
+            }
+            return av_timecode_get_smpte_fptr(@rate, @drop, @hh, @mm, @ss, @ff);
+        };
+        /// <summary>Convert sei info to SMPTE 12M binary representation.</summary>
+        /// <param name="rate">frame rate in rational form</param>
+        /// <param name="drop">drop flag</param>
+        /// <param name="hh">hour</param>
+        /// <param name="mm">minute</param>
+        /// <param name="ss">second</param>
+        /// <param name="ff">frame number</param>
+        /// <returns>the SMPTE binary representation</returns>
+        public static uint av_timecode_get_smpte(AVRational @rate, int @drop, int @hh, int @mm, int @ss, int @ff)
+        {
+            return av_timecode_get_smpte_fptr(@rate, @drop, @hh, @mm, @ss, @ff);
         }
         
         
@@ -18003,6 +18092,36 @@ namespace FFmpeg.AutoGen
         public static int av_timecode_init(AVTimecode* @tc, AVRational @rate, int @flags, int @frame_start, void* @log_ctx)
         {
             return av_timecode_init_fptr(@tc, @rate, @flags, @frame_start, @log_ctx);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_timecode_init_from_components_delegate(AVTimecode* @tc, AVRational @rate, int @flags, int @hh, int @mm, int @ss, int @ff, void* @log_ctx);
+        private static av_timecode_init_from_components_delegate av_timecode_init_from_components_fptr = (AVTimecode* @tc, AVRational @rate, int @flags, int @hh, int @mm, int @ss, int @ff, void* @log_ctx) =>
+        {
+            av_timecode_init_from_components_fptr = GetFunctionDelegate<av_timecode_init_from_components_delegate>(GetOrLoadLibrary("avutil"), "av_timecode_init_from_components");
+            if (av_timecode_init_from_components_fptr == null)
+            {
+                av_timecode_init_from_components_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_timecode_init_from_components is not supported on this platform.");
+                };
+            }
+            return av_timecode_init_from_components_fptr(@tc, @rate, @flags, @hh, @mm, @ss, @ff, @log_ctx);
+        };
+        /// <summary>Init a timecode struct from the passed timecode components.</summary>
+        /// <param name="tc">pointer to an allocated AVTimecode</param>
+        /// <param name="rate">frame rate in rational form</param>
+        /// <param name="flags">miscellaneous flags such as drop frame, +24 hours, ... (see AVTimecodeFlag)</param>
+        /// <param name="hh">hours</param>
+        /// <param name="mm">minutes</param>
+        /// <param name="ss">seconds</param>
+        /// <param name="ff">frames</param>
+        /// <param name="log_ctx">a pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct (used for av_log)</param>
+        /// <returns>0 on success, AVERROR otherwise</returns>
+        public static int av_timecode_init_from_components(AVTimecode* @tc, AVRational @rate, int @flags, int @hh, int @mm, int @ss, int @ff, void* @log_ctx)
+        {
+            return av_timecode_init_from_components_fptr(@tc, @rate, @flags, @hh, @mm, @ss, @ff, @log_ctx);
         }
         
         
@@ -18092,6 +18211,33 @@ namespace FFmpeg.AutoGen
         public static byte* av_timecode_make_smpte_tc_string(byte* @buf, uint @tcsmpte, int @prevent_df)
         {
             return av_timecode_make_smpte_tc_string_fptr(@buf, @tcsmpte, @prevent_df);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate byte* av_timecode_make_smpte_tc_string2_delegate(byte* @buf, AVRational @rate, uint @tcsmpte, int @prevent_df, int @skip_field);
+        private static av_timecode_make_smpte_tc_string2_delegate av_timecode_make_smpte_tc_string2_fptr = (byte* @buf, AVRational @rate, uint @tcsmpte, int @prevent_df, int @skip_field) =>
+        {
+            av_timecode_make_smpte_tc_string2_fptr = GetFunctionDelegate<av_timecode_make_smpte_tc_string2_delegate>(GetOrLoadLibrary("avutil"), "av_timecode_make_smpte_tc_string2");
+            if (av_timecode_make_smpte_tc_string2_fptr == null)
+            {
+                av_timecode_make_smpte_tc_string2_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_timecode_make_smpte_tc_string2 is not supported on this platform.");
+                };
+            }
+            return av_timecode_make_smpte_tc_string2_fptr(@buf, @rate, @tcsmpte, @prevent_df, @skip_field);
+        };
+        /// <summary>Get the timecode string from the SMPTE timecode format.</summary>
+        /// <param name="buf">destination buffer, must be at least AV_TIMECODE_STR_SIZE long</param>
+        /// <param name="rate">frame rate of the timecode</param>
+        /// <param name="tcsmpte">the 32-bit SMPTE timecode</param>
+        /// <param name="prevent_df">prevent the use of a drop flag when it is known the DF bit is arbitrary</param>
+        /// <param name="skip_field">prevent the use of a field flag when it is known the field bit is arbitrary (e.g. because it is used as PC flag)</param>
+        /// <returns>the buf parameter</returns>
+        public static byte* av_timecode_make_smpte_tc_string2(byte* @buf, AVRational @rate, uint @tcsmpte, int @prevent_df, int @skip_field)
+        {
+            return av_timecode_make_smpte_tc_string2_fptr(@buf, @rate, @tcsmpte, @prevent_df, @skip_field);
         }
         
         
