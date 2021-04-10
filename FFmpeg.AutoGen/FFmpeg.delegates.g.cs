@@ -51,6 +51,14 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate AVClass* AVClass_child_class_iterate (void** @iter);
+    public unsafe struct AVClass_child_class_iterate_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVClass_child_class_iterate_func(AVClass_child_class_iterate func) => new AVClass_child_class_iterate_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void av_fifo_generic_peek_at_func (void* @p0, void* @p1, int @p2);
     public unsafe struct av_fifo_generic_peek_at_func_func
     {
@@ -187,7 +195,7 @@ namespace FFmpeg.AutoGen
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int AVCodec_decode (AVCodecContext* @p0, void* @outdata, int* @outdata_size, AVPacket* @avpkt);
+    public unsafe delegate int AVCodec_decode (AVCodecContext* @avctx, void* @outdata, int* @got_frame_ptr, AVPacket* @avpkt);
     public unsafe struct AVCodec_decode_func
     {
         public IntPtr Pointer;
@@ -200,14 +208,6 @@ namespace FFmpeg.AutoGen
     {
         public IntPtr Pointer;
         public static implicit operator AVCodec_close_func(AVCodec_close func) => new AVCodec_close_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-    }
-    
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int AVCodec_send_frame (AVCodecContext* @avctx, AVFrame* @frame);
-    public unsafe struct AVCodec_send_frame_func
-    {
-        public IntPtr Pointer;
-        public static implicit operator AVCodec_send_frame_func(AVCodec_send_frame func) => new AVCodec_send_frame_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -352,6 +352,14 @@ namespace FFmpeg.AutoGen
     {
         public IntPtr Pointer;
         public static implicit operator AVCodecContext_execute2_func(AVCodecContext_execute2 func) => new AVCodecContext_execute2_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+    }
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int AVCodecContext_get_encode_buffer (AVCodecContext* @s, AVPacket* @pkt, int @flags);
+    public unsafe struct AVCodecContext_get_encode_buffer_func
+    {
+        public IntPtr Pointer;
+        public static implicit operator AVCodecContext_get_encode_buffer_func(AVCodecContext_get_encode_buffer func) => new AVCodecContext_get_encode_buffer_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
     }
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

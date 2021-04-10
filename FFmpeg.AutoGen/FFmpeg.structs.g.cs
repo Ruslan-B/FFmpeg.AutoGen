@@ -42,6 +42,8 @@ namespace FFmpeg.AutoGen
         public AVClass_get_category_func @get_category;
         /// <summary>Callback to return the supported/allowed ranges. available since version (52.12)</summary>
         public AVClass_query_ranges_func @query_ranges;
+        /// <summary>Iterate over the AVClasses corresponding to potential AVOptions-enabled children.</summary>
+        public AVClass_child_class_iterate_func @child_class_iterate;
     }
     
     /// <summary>AVOption</summary>
@@ -100,7 +102,6 @@ namespace FFmpeg.AutoGen
         public AVBuffer* @buffer;
         /// <summary>The data buffer. It is considered writable if and only if this is the only reference to the buffer, in which case av_buffer_is_writable() returns 1.</summary>
         public byte* @data;
-        /// <summary>Size of data in bytes.</summary>
         public int @size;
     }
     
@@ -1223,7 +1224,7 @@ namespace FFmpeg.AutoGen
         public int @error_concealment;
         /// <summary>debug - encoding: Set by user. - decoding: Set by user.</summary>
         public int @debug;
-        /// <summary>Error recognition; may misdetect some more or less valid parts as errors. - encoding: unused - decoding: Set by user.</summary>
+        /// <summary>Error recognition; may misdetect some more or less valid parts as errors. - encoding: Set by user. - decoding: Set by user.</summary>
         public int @err_recognition;
         /// <summary>opaque 64-bit number (generally a PTS) that will be reordered and output in AVFrame.reordered_opaque - encoding: Set by libavcodec to the reordered_opaque of the input frame corresponding to the last returned packet. Only supported by encoders with the AV_CODEC_CAP_ENCODER_REORDERED_OPAQUE capability. - decoding: Set by user.</summary>
         public long @reordered_opaque;
@@ -1253,6 +1254,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Which multithreading methods are in use by the codec. - encoding: Set by libavcodec. - decoding: Set by libavcodec.</summary>
         public int @active_thread_type;
         /// <summary>Set by the client if its custom get_buffer() callback can be called synchronously from another thread, which allows faster multithreaded decoding. draw_horiz_band() will be called from other threads regardless of this setting. Ignored if the default get_buffer() is used. - encoding: Set by user. - decoding: Set by user.</summary>
+        [Obsolete("the custom get_buffer2() callback should always be thread-safe. Thread-unsafe get_buffer2() implementations will be invalid starting with LIBAVCODEC_VERSION_MAJOR=60; in other words, libavcodec will behave as if this field was always set to 1. Callers that want to be forward compatible with future libavcodec versions should wrap access to this field in #if LIBAVCODEC_VERSION_MAJOR < 60")]
         public int @thread_safe_callbacks;
         /// <summary>The codec may call this to execute several independent things. It will return only after finishing all tasks. The user may replace this with some multithreaded implementation, the default implementation will execute the parts serially.</summary>
         public AVCodecContext_execute_func @execute;
@@ -1305,7 +1307,7 @@ namespace FFmpeg.AutoGen
         public int @skip_alpha;
         /// <summary>Number of samples to skip after a discontinuity - decoding: unused - encoding: set by libavcodec</summary>
         public int @seek_preroll;
-        /// <summary>debug motion vectors - encoding: Set by user. - decoding: Set by user.</summary>
+        [Obsolete("unused")]
         public int @debug_mv;
         /// <summary>custom intra quantization matrix - encoding: Set by user, can be NULL. - decoding: unused.</summary>
         public ushort* @chroma_intra_matrix;
@@ -1339,6 +1341,8 @@ namespace FFmpeg.AutoGen
         public long @max_samples;
         /// <summary>Bit set of AV_CODEC_EXPORT_DATA_* flags, which affects the kind of metadata exported in frame, packet, or coded stream side data by decoders and encoders.</summary>
         public int @export_side_data;
+        /// <summary>This callback is called at the beginning of each packet to get a data buffer for it.</summary>
+        public AVCodecContext_get_encode_buffer_func @get_encode_buffer;
     }
     
     /// <summary>AVCodec.</summary>
@@ -1377,16 +1381,16 @@ namespace FFmpeg.AutoGen
         public AVCodec_update_thread_context_func @update_thread_context;
         /// <summary>Private codec-specific defaults.</summary>
         public AVCodecDefault* @defaults;
-        /// <summary>Initialize codec static data, called from avcodec_register().</summary>
+        /// <summary>Initialize codec static data, called from av_codec_iterate().</summary>
         public AVCodec_init_static_data_func @init_static_data;
         public AVCodec_init_func @init;
         public AVCodec_encode_sub_func @encode_sub;
         /// <summary>Encode data to an AVPacket.</summary>
         public AVCodec_encode2_func @encode2;
+        /// <summary>Decode picture or subtitle data.</summary>
         public AVCodec_decode_func @decode;
         public AVCodec_close_func @close;
-        /// <summary>Encode API with decoupled packet/frame dataflow. The API is the same as the avcodec_ prefixed APIs (avcodec_send_frame() etc.), except that: - never called if the codec is closed or the wrong type, - if AV_CODEC_CAP_DELAY is not set, drain frames are never sent, - only one drain frame is ever passed down,</summary>
-        public AVCodec_send_frame_func @send_frame;
+        /// <summary>Encode API with decoupled frame/packet dataflow. This function is called to get one output packet. It should call ff_encode_get_frame() to obtain input data.</summary>
         public AVCodec_receive_packet_func @receive_packet;
         /// <summary>Decode API with decoupled packet/frame dataflow. This function is called to get one output frame. It should call ff_decode_get_packet() to obtain input data.</summary>
         public AVCodec_receive_frame_func @receive_frame;
@@ -1710,6 +1714,12 @@ namespace FFmpeg.AutoGen
         public int @seek_preroll;
     }
     
+    public unsafe struct AVPacketList
+    {
+        public AVPacket @pkt;
+        public AVPacketList* @next;
+    }
+    
     public unsafe struct AVCodecHWConfig
     {
         /// <summary>For decoders, a hardware pixel format which that decoder may be able to decode to if suitable hardware is available.</summary>
@@ -1862,7 +1872,7 @@ namespace FFmpeg.AutoGen
         public AVPacketSideData* @side_data;
         /// <summary>The number of elements in the AVStream.side_data array.</summary>
         public int @nb_side_data;
-        /// <summary>Flags for the user to detect events happening on the stream. Flags must be cleared by the user once the event has been handled. A combination of AVSTREAM_EVENT_FLAG_*.</summary>
+        /// <summary>Flags indicating events happening on the stream, a combination of AVSTREAM_EVENT_FLAG_*.</summary>
         public int @event_flags;
         /// <summary>Real base framerate of the stream. This is the lowest framerate with which all timestamps can be represented accurately (it is the least common multiple of all framerates in the stream). Note, this value is just a guess! For example, if the time base is 1/90000 and all frames have either approximately 3600 or 1800 timer ticks, then r_frame_rate will be 50/1.</summary>
         public AVRational @r_frame_rate;
@@ -1871,7 +1881,7 @@ namespace FFmpeg.AutoGen
         public byte* @recommended_encoder_configuration;
         /// <summary>Codec parameters associated with this stream. Allocated and freed by libavformat in avformat_new_stream() and avformat_free_context() respectively.</summary>
         public AVCodecParameters* @codecpar;
-        public AVStream_info* @info;
+        public void* @unused;
         /// <summary>number of bits in pts (used for wrapping control)</summary>
         public int @pts_wrap_bits;
         /// <summary>Timestamp corresponding to the last dts sync point.</summary>
@@ -1885,84 +1895,20 @@ namespace FFmpeg.AutoGen
         public int @codec_info_nb_frames;
         public AVStreamParseType @need_parsing;
         public AVCodecParserContext* @parser;
-        /// <summary>last packet in packet_buffer for this stream when muxing.</summary>
-        public AVPacketList* @last_in_packet_buffer;
-        public AVProbeData @probe_data;
-        public long_array17 @pts_buffer;
+        public void* @unused7;
+        public AVProbeData @unused6;
+        public long_array17 @unused5;
         /// <summary>Only used if the format does not support seeking natively.</summary>
         public AVIndexEntry* @index_entries;
         public int @nb_index_entries;
         public uint @index_entries_allocated_size;
         /// <summary>Stream Identifier This is the MPEG-TS stream identifier +1 0 means unknown</summary>
         public int @stream_identifier;
-        /// <summary>Details of the MPEG-TS program which created this stream.</summary>
-        public int @program_num;
-        public int @pmt_version;
-        public int @pmt_stream_idx;
-        public long @interleaver_chunk_size;
-        public long @interleaver_chunk_duration;
-        /// <summary>stream probing state -1 -&gt; probing finished 0 -&gt; no probing requested rest -&gt; perform probing with request_probe being the minimum score to accept.</summary>
-        public int @request_probe;
-        /// <summary>Indicates that everything up to the next keyframe should be discarded.</summary>
-        public int @skip_to_keyframe;
-        /// <summary>Number of samples to skip at the start of the frame decoded from the next packet.</summary>
-        public int @skip_samples;
-        /// <summary>If not 0, the number of samples that should be skipped from the start of the stream (the samples are removed from packets with pts==0, which also assumes negative timestamps do not happen). Intended for use with formats such as mp3 with ad-hoc gapless audio support.</summary>
-        public long @start_skip_samples;
-        /// <summary>If not 0, the first audio sample that should be discarded from the stream. This is broken by design (needs global sample count), but can&apos;t be avoided for broken by design formats such as mp3 with ad-hoc gapless audio support.</summary>
-        public long @first_discard_sample;
-        /// <summary>The sample after last sample that is intended to be discarded after first_discard_sample. Works on frame boundaries only. Used to prevent early EOF if the gapless info is broken (considered concatenated mp3s).</summary>
-        public long @last_discard_sample;
-        /// <summary>Number of internally decoded frames, used internally in libavformat, do not access its lifetime differs from info which is why it is not in that structure.</summary>
-        public int @nb_decoded_frames;
-        /// <summary>Timestamp offset added to timestamps before muxing</summary>
-        public long @mux_ts_offset;
-        /// <summary>Internal data to check for wrapping of the time stamp</summary>
-        public long @pts_wrap_reference;
-        /// <summary>Options for behavior, when a wrap is detected.</summary>
-        public int @pts_wrap_behavior;
-        /// <summary>Internal data to prevent doing update_initial_durations() twice</summary>
-        public int @update_initial_durations_done;
-        /// <summary>Internal data to generate dts from pts</summary>
-        public long_array17 @pts_reorder_error;
-        public byte_array17 @pts_reorder_error_count;
-        /// <summary>Internal data to analyze DTS and detect faulty mpeg streams</summary>
-        public long @last_dts_for_order_check;
-        public byte @dts_ordered;
-        public byte @dts_misordered;
-        /// <summary>Internal data to inject global side data</summary>
-        public int @inject_global_side_data;
-        /// <summary>display aspect ratio (0 if unknown) - encoding: unused - decoding: Set by libavformat to calculate sample_aspect_ratio internally</summary>
-        public AVRational @display_aspect_ratio;
+        public int @unused8;
+        public int @unused9;
+        public int @unused10;
         /// <summary>An opaque field for libavformat internal usage. Must not be accessed in any way by callers.</summary>
         public AVStreamInternal* @internal;
-    }
-    
-    /// <summary>Stream information used internally by avformat_find_stream_info()</summary>
-    public unsafe struct AVStream_info
-    {
-        public long @last_dts;
-        public long @duration_gcd;
-        public int @duration_count;
-        public long @rfps_duration_sum;
-        public double_array2x399* @duration_error;
-        public long @codec_info_duration;
-        public long @codec_info_duration_fields;
-        public int @frame_delay_evidence;
-        /// <summary>0 -&gt; decoder has not been searched for yet. &gt;0 -&gt; decoder found &lt;0 -&gt; decoder with codec_id == -found_decoder has not been found</summary>
-        public int @found_decoder;
-        public long @last_duration;
-        /// <summary>Those are used for average framerate estimation.</summary>
-        public long @fps_first_dts;
-        public int @fps_first_dts_idx;
-        public long @fps_last_dts;
-        public int @fps_last_dts_idx;
-    }
-    
-    public unsafe struct AVPacketList
-    {
-        public AVPacket @pkt;
-        public AVPacketList* @next;
     }
     
     /// <summary>New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. sizeof(AVProgram) must not be used outside libav*.</summary>
@@ -2125,7 +2071,7 @@ namespace FFmpeg.AutoGen
         public long @max_interleave_delta;
         /// <summary>Allow non-standard and experimental extension</summary>
         public int @strict_std_compliance;
-        /// <summary>Flags for the user to detect events happening on the file. Flags must be cleared by the user once the event has been handled. A combination of AVFMT_EVENT_FLAG_*.</summary>
+        /// <summary>Flags indicating events happening on the file, a combination of AVFMT_EVENT_FLAG_*.</summary>
         public int @event_flags;
         /// <summary>Maximum number of packets to read while waiting for the first timestamp. Decoding only.</summary>
         public int @max_ts_probe;
@@ -2220,7 +2166,6 @@ namespace FFmpeg.AutoGen
         public AVClass* @priv_class;
         /// <summary>Comma-separated list of mime types. It is used check for matching mime types while probing.</summary>
         public byte* @mime_type;
-        /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavformat and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
         public AVInputFormat* @next;
         /// <summary>Raw demuxers store their codec ID here.</summary>
         public int @raw_codec_id;
@@ -2502,16 +2447,10 @@ namespace FFmpeg.AutoGen
         public int @format;
         /// <summary>Define the time base used by the PTS of the frames/samples which will pass through this link. During the configuration stage, each filter is supposed to change only the output timebase, while the timebase of the input link is assumed to be an unchangeable property.</summary>
         public AVRational @time_base;
-        /// <summary>*************************************************************** All fields below this line are not part of the public API. They may not be used outside of libavfilter and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
-        public AVFilterFormats* @in_formats;
-        public AVFilterFormats* @out_formats;
-        /// <summary>Lists of channel layouts and sample rates used for automatic negotiation.</summary>
-        public AVFilterFormats* @in_samplerates;
-        public AVFilterFormats* @out_samplerates;
-        public AVFilterChannelLayouts* @in_channel_layouts;
-        public AVFilterChannelLayouts* @out_channel_layouts;
-        /// <summary>Audio only, the destination filter sets this to a non-zero value to request that buffers with the given number of samples should be sent to it. AVFilterPad.needs_fifo must also be set on the corresponding input pad. Last buffer before EOF will be padded with silence.</summary>
-        public int @request_samples;
+        /// <summary>Lists of supported formats / etc. supported by the input filter.</summary>
+        public AVFilterFormatsConfig @incfg;
+        /// <summary>Lists of supported formats / etc. supported by the output filter.</summary>
+        public AVFilterFormatsConfig @outcfg;
         public AVFilterLink_init_state @init_state;
         /// <summary>Graph the filter belongs to.</summary>
         public AVFilterGraph* @graph;
@@ -2533,8 +2472,6 @@ namespace FFmpeg.AutoGen
         public int @max_samples;
         /// <summary>Number of channels.</summary>
         public int @channels;
-        /// <summary>Link processing flags.</summary>
-        public uint @flags;
         /// <summary>Number of past frames sent through the link.</summary>
         public long @frame_count_in;
         /// <summary>Number of past frames sent through the link.</summary>
@@ -2547,6 +2484,17 @@ namespace FFmpeg.AutoGen
         public AVBufferRef* @hw_frames_ctx;
         /// <summary>Internal structure members. The fields below this limit are internal for libavfilter&apos;s use and must in no way be accessed by applications.</summary>
         public byte_array61440 @reserved;
+    }
+    
+    /// <summary>Lists of formats / etc. supported by an end of a link.</summary>
+    public unsafe struct AVFilterFormatsConfig
+    {
+        /// <summary>List of supported formats (pixel or sample).</summary>
+        public AVFilterFormats* @formats;
+        /// <summary>Lists of supported sample rates, only for audio.</summary>
+        public AVFilterFormats* @samplerates;
+        /// <summary>Lists of supported channel layouts, only for audio.</summary>
+        public AVFilterChannelLayouts* @channel_layouts;
     }
     
     public unsafe struct AVFilterGraph
@@ -2612,14 +2560,14 @@ namespace FFmpeg.AutoGen
         public ulong @channel_layout;
     }
     
-    /// <summary>Struct to use for initializing a buffersink context.</summary>
+    /// <summary>Deprecated and unused struct to use for initializing a buffersink context.</summary>
     public unsafe struct AVBufferSinkParams
     {
         /// <summary>list of allowed pixel formats, terminated by AV_PIX_FMT_NONE</summary>
         public AVPixelFormat* @pixel_fmts;
     }
     
-    /// <summary>Struct to use for initializing an abuffersink context.</summary>
+    /// <summary>Deprecated and unused struct to use for initializing an abuffersink context.</summary>
     public unsafe struct AVABufferSinkParams
     {
         /// <summary>list of allowed sample formats, terminated by AV_SAMPLE_FMT_NONE</summary>
