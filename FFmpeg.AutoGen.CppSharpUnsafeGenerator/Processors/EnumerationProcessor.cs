@@ -30,7 +30,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         {
             name = string.IsNullOrEmpty(enumeration.Name) ? name : enumeration.Name;
             if (_context.IsKnownUnitName(name)) return;
-
+            
             var definition = new EnumerationDefinition
             {
                 Name = name,
@@ -56,9 +56,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         {
             return primitiveType switch
             {
-                PrimitiveType.Int => value,
+                PrimitiveType.Int => value > int.MaxValue ? (int) value : value,
                 PrimitiveType.UInt => value,
-                PrimitiveType.Long => value,
+                PrimitiveType.Long => value > long.MaxValue ? (long) value : value,
                 PrimitiveType.ULong => value,
                 _ => throw new NotSupportedException()
             };
