@@ -15,10 +15,10 @@ namespace FFmpeg.AutoGen
 
         public static readonly int EINVAL = 22;
 
-        private static readonly object SyncRoot = new object();
+        private static readonly object SyncRoot = new();
 
         public static readonly Dictionary<string, string[]> LibraryDependenciesMap =
-            new Dictionary<string, string[]>
+            new()
             {
                 {"avcodec", new[] {"avutil", "swresample"}},
                 {"avdevice", new[] {"avcodec", "avfilter", "avformat", "avutil"}},
@@ -30,21 +30,17 @@ namespace FFmpeg.AutoGen
                 {"swscale", new[] {"avutil"}}
             };
 
-        public static readonly Dictionary<string, IntPtr> LoadedLibraries = new Dictionary<string, IntPtr>();
+        public static readonly Dictionary<string, IntPtr> LoadedLibraries = new();
 
         static ffmpeg()
         {
             GetOrLoadLibrary = libraryName => LoadLibrary(libraryName, true);
 
-            switch (LibraryLoader.GetPlatformId())
+            EAGAIN = LibraryLoader.GetPlatformId() switch
             {
-                case PlatformID.MacOSX:
-                    EAGAIN = 35;
-                    break;
-                default:
-                    EAGAIN = 11;
-                    break;
-            }
+                PlatformID.MacOSX => 35,
+                _ => 11
+            };
         }
 
         /// <summary>

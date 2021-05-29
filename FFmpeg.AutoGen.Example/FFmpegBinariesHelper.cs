@@ -12,9 +12,11 @@ namespace FFmpeg.AutoGen.Example
             {
                 var current = Environment.CurrentDirectory;
                 var probe = Path.Combine("FFmpeg", "bin", Environment.Is64BitProcess ? "x64" : "x86");
+
                 while (current != null)
                 {
                     var ffmpegBinaryPath = Path.Combine(current, probe);
+
                     if (Directory.Exists(ffmpegBinaryPath))
                     {
                         Console.WriteLine($"FFmpeg binaries found in: {ffmpegBinaryPath}");
@@ -26,13 +28,9 @@ namespace FFmpeg.AutoGen.Example
                 }
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
                 ffmpeg.RootPath = "/lib/x86_64-linux-gnu/";
-            }
             else
-            {
-                throw new NotSupportedException(); // fell free add support for platform of you choose
-            }
+                throw new NotSupportedException(); // fell free add support for platform of your choose
         }
     }
 }

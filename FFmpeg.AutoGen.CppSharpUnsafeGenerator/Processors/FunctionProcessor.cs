@@ -105,22 +105,25 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 pointerType.QualifiedPointee.Qualifiers.IsConst &&
                 pointerType.Pointee is BuiltinType builtinType)
             {
-                switch (builtinType.Type)
+                return builtinType.Type switch
                 {
-                    case PrimitiveType.Char:
-                        return new TypeDefinition
+                    PrimitiveType.Char => new TypeDefinition
+                    {
+                        Name = "string",
+                        Attributes = new[]
                         {
-                            Name = "string",
-                            Attributes = new[]
-                            {
-                                "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"
-                            }
-                        };
-                    case PrimitiveType.Void:
-                        return new TypeDefinition { Name = "void*" };
-                    default:
-                        return new TypeDefinition { Name = TypeHelper.GetTypeName(type) };
-                }
+                            "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"
+                        }
+                    },
+                    PrimitiveType.Void => new TypeDefinition
+                    {
+                        Name = "void*"
+                    },
+                    _ => new TypeDefinition
+                    {
+                        Name = TypeHelper.GetTypeName(type)
+                    }
+                };
             }
 
             return GetParameterType(type, name);
@@ -132,15 +135,22 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 pointerType.QualifiedPointee.Qualifiers.IsConst &&
                 pointerType.Pointee is BuiltinType builtinType)
             {
-                switch (builtinType.Type)
+                return builtinType.Type switch
                 {
-                    case PrimitiveType.Char:
-                        return new TypeDefinition { Name = "string", Attributes = new[] { MarshalAsUtf8Macros } };
-                    case PrimitiveType.Void:
-                        return new TypeDefinition { Name = "void*" };
-                    default:
-                        return new TypeDefinition { Name = TypeHelper.GetTypeName(type) };
-                }
+                    PrimitiveType.Char => new TypeDefinition
+                    {
+                        Name = "string",
+                        Attributes = new[] { MarshalAsUtf8Macros }
+                    },
+                    PrimitiveType.Void => new TypeDefinition
+                    {
+                        Name = "void*"
+                    },
+                    _ => new TypeDefinition
+                    {
+                        Name = TypeHelper.GetTypeName(type)
+                    }
+                };
             }
 
             // edge case when type is array of pointers to none builtin type (type[]* -> type**)

@@ -13,7 +13,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public Writer(IndentedTextWriter writer) => _writer = writer;
 
-        public bool SuppressUnmanagedCodeSecurity { get; set; }
+        public bool SuppressUnmanagedCodeSecurity { get; init; }
 
         public void WriteMacro(MacroDefinition macro)
         {

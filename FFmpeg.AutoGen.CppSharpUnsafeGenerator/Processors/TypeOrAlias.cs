@@ -46,7 +46,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return Alias;
         }
 
-        public static implicit operator TypeOrAlias(Type type) => new TypeOrAlias(type);
-        public static implicit operator TypeOrAlias(string alias) => new TypeOrAlias(alias);
+        public static implicit operator TypeOrAlias(Type type) => new(type);
+        public static implicit operator TypeOrAlias(string alias) => new(alias);
     }
 }

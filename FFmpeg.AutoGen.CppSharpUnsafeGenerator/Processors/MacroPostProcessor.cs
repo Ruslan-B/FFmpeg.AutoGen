@@ -12,7 +12,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
     internal class MacroPostProcessor
     {
-        private static readonly Regex EolEscapeRegex = new Regex(@"\\\s*[\r\n|\r|\n]\s*", RegexOptions.Compiled | RegexOptions.Multiline);
+        private static readonly Regex EolEscapeRegex =
+            new(@"\\\s*[\r\n|\r|\n]\s*", RegexOptions.Compiled | RegexOptions.Multiline);
 
         private readonly ASTProcessor _astProcessor;
         private Dictionary<string, IExpression> _macroExpressionMap;
@@ -22,8 +23,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         public void Process(IReadOnlyList<MacroDefinition> macros)
         {
             _macroExpressionMap = new Dictionary<string, IExpression>(macros.Count);
+
             foreach (var x in macros)
-            {
                 try
                 {
                     _macroExpressionMap.Add(x.Name, Parser.Parse(x.Expression));
@@ -36,7 +37,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 {
                     Trace.TraceError($"Cannot parse macro expression: {x.Expression}: {e.Message}");
                 }
-            }
 
             foreach (var macro in macros) Process(macro);
         }
@@ -61,23 +61,23 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private static string CleanUp(string expression)
         {
-            var oneline = EolEscapeRegex.Replace(expression, string.Empty);
-            var trimmed = oneline.Trim();
+            var oneLine = EolEscapeRegex.Replace(expression, string.Empty);
+            var trimmed = oneLine.Trim();
             return trimmed;
         }
 
         private TypeOrAlias DeduceType(IExpression expression)
         {
-            switch (expression)
+            return expression switch
             {
-                case BinaryExpression e: return DeduceType(e);
-                case UnaryExpression e: return DeduceType(e.Operand);
-                case CastExpression e: return GetTypeAlias(e.TargetType);
-                case CallExpression e: return GetWellKnownMaroType(e.Name);
-                case VariableExpression e: return DeduceType(e);
-                case ConstantExpression e: return e.Value.GetType();
-                default: throw new NotSupportedException();
-            }
+                BinaryExpression e => DeduceType(e),
+                UnaryExpression e => DeduceType(e.Operand),
+                CastExpression e => GetTypeAlias(e.TargetType),
+                CallExpression e => GetWellKnownMaroType(e.Name),
+                VariableExpression e => DeduceType(e),
+                ConstantExpression e => e.Value.GetType(),
+                _ => throw new NotSupportedException()
+            };
         }
 
         private TypeOrAlias DeduceType(BinaryExpression expression)
@@ -92,26 +92,30 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
 
         private TypeOrAlias DeduceType(VariableExpression expression) =>
-            _macroExpressionMap.TryGetValue(expression.Name, out var nested) && nested != null ? DeduceType(nested) : GetWellKnownMaroType(expression.Name);
+            _macroExpressionMap.TryGetValue(expression.Name, out var nested) && nested != null
+                ? DeduceType(nested)
+                : GetWellKnownMaroType(expression.Name);
 
         private IExpression Rewrite(IExpression expression)
         {
             switch (expression)
             {
                 case BinaryExpression e:
+                {
+                    var left = Rewrite(e.Left);
+                    var right = Rewrite(e.Right);
+                    var leftType = DeduceType(left);
+                    var rightType = DeduceType(right);
+
+                    if (e.OperationType.IsBitwise() && leftType.Precedence != rightType.Precedence)
                     {
-                        var left = Rewrite(e.Left);
-                        var right = Rewrite(e.Right);
-                        var leftType = DeduceType(left);
-                        var rightType = DeduceType(right);
-                        if (e.OperationType.IsBitwise() && leftType.Precedence != rightType.Precedence)
-                        {
-                            var toType = leftType.Precedence > rightType.Precedence ? rightType : leftType;
-                            if (leftType != toType) left = new CastExpression(toType.ToString(), left);
-                            if (rightType != toType) right = new CastExpression(toType.ToString(), right);
-                        }
-                        return new BinaryExpression(left, e.OperationType, right);
+                        var toType = leftType.Precedence > rightType.Precedence ? rightType : leftType;
+                        if (leftType != toType) left = new CastExpression(toType.ToString(), left);
+                        if (rightType != toType) right = new CastExpression(toType.ToString(), right);
                     }
+
+                    return new BinaryExpression(left, e.OperationType, right);
+                }
                 case UnaryExpression e: return new UnaryExpression(e.OperationType, Rewrite(e.Operand));
                 case CastExpression e: return new CastExpression(e.TargetType, Rewrite(e.Operand));
                 case CallExpression e: return new CallExpression(e.Name, e.Arguments.Select(Rewrite));
@@ -123,16 +127,17 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private string Serialize(IExpression expression)
         {
-            switch (expression)
+            return expression switch
             {
-                case BinaryExpression e: return $"{Serialize(e.Left)} {e.OperationType.ToOperationTypeString()} {Serialize(e.Right)}";
-                case UnaryExpression e: return $"{e.OperationType.ToOperationTypeString()}{Serialize(e.Operand)}";
-                case CastExpression e: return $"({GetTypeAlias(e.TargetType)})({Serialize(e.Operand)})";
-                case CallExpression e: return $"{e.Name}({string.Join(", ", e.Arguments.Select(Serialize))})";
-                case VariableExpression e: return e.Name;
-                case ConstantExpression e: return Serialize(e.Value);
-                default: throw new NotSupportedException();
-            }
+                BinaryExpression e =>
+                    $"{Serialize(e.Left)} {e.OperationType.ToOperationTypeString()} {Serialize(e.Right)}",
+                UnaryExpression e => $"{e.OperationType.ToOperationTypeString()}{Serialize(e.Operand)}",
+                CastExpression e => $"({GetTypeAlias(e.TargetType)})({Serialize(e.Operand)})",
+                CallExpression e => $"{e.Name}({string.Join(", ", e.Arguments.Select(Serialize))})",
+                VariableExpression e => e.Name,
+                ConstantExpression e => Serialize(e.Value),
+                _ => throw new NotSupportedException()
+            };
         }
 
         private string Serialize(object value)
@@ -151,18 +156,23 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private bool IsConst(IExpression expression)
         {
-            switch (expression)
+            return expression switch
             {
-                case BinaryExpression e: return IsConst(e.Left) && IsConst(e.Right);
-                case UnaryExpression e: return IsConst(e.Operand);
-                case CastExpression e: return IsConst(e.Operand);
-                case CallExpression e: return false;
-                case VariableExpression e: return _macroExpressionMap.TryGetValue(e.Name, out var nested) && nested != null && IsConst(nested);
-                case ConstantExpression e: return true;
-                default: throw new NotSupportedException();
-            }
+                BinaryExpression e => IsConst(e.Left) && IsConst(e.Right),
+                UnaryExpression e => IsConst(e.Operand),
+                CastExpression e => IsConst(e.Operand),
+                CallExpression e => false,
+                VariableExpression e => _macroExpressionMap.TryGetValue(e.Name, out var nested) && nested != null &&
+                                        IsConst(nested),
+                ConstantExpression e => true,
+                _ => throw new NotSupportedException()
+            };
         }
-        private TypeOrAlias GetWellKnownMaroType(string macroName) => _astProcessor.WellKnownMaros.TryGetValue(macroName, out var alias) ? alias : null;
-        private TypeOrAlias GetTypeAlias(string typeName) => _astProcessor.TypeAliases.TryGetValue(typeName, out var alias) ? alias : typeName;
+
+        private TypeOrAlias GetWellKnownMaroType(string macroName) =>
+            _astProcessor.WellKnownMacros.TryGetValue(macroName, out var alias) ? alias : null;
+
+        private TypeOrAlias GetTypeAlias(string typeName) =>
+            _astProcessor.TypeAliases.TryGetValue(typeName, out var alias) ? alias : typeName;
     }
 }

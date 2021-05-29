@@ -4,6 +4,6 @@
     {
         public StructureField[] Fields { get; set; } = { };
         public bool IsComplete { get; set; }
-        public bool IsUnion { get; set; }
+        public bool IsUnion { get; init; }
     }
 }

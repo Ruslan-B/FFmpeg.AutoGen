@@ -2,11 +2,11 @@ using System.Diagnostics;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
-    [DebuggerDisplay("{Name}, {Library}")]
+    [DebuggerDisplay("{Name}, {LibraryName}")]
     internal class FunctionExport
     {
-        public string Name { get; set; }
-        public string LibraryName { get; set; }
-        public int LibraryVersion { get; set; }
+        public string Name { get; init; }
+        public string LibraryName { get; init; }
+        public int LibraryVersion { get; init; }
     }
 }

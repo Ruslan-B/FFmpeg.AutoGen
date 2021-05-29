@@ -52,19 +52,19 @@ namespace FFmpeg.AutoGen.Native
         private static IntPtr GetFunctionPointer(IntPtr nativeLibraryHandle, string functionName)
         {
 #if NET45 || NET40
-                switch (LibraryLoader.GetPlatformId())
-                {
+            switch (LibraryLoader.GetPlatformId())
+            {
                 case PlatformID.MacOSX:
-                        return MacNativeMethods.dlsym(nativeLibraryHandle, functionName);
+                    return MacNativeMethods.dlsym(nativeLibraryHandle, functionName);
                 case PlatformID.Unix:
-                        return LinuxNativeMethods.dlsym(nativeLibraryHandle, functionName);
+                    return LinuxNativeMethods.dlsym(nativeLibraryHandle, functionName);
                 case PlatformID.Win32NT:
-                    case PlatformID.Win32S:
-                    case PlatformID.Win32Windows:
-                        return WindowsNativeMethods.GetProcAddress(nativeLibraryHandle, functionName);
+                case PlatformID.Win32S:
+                case PlatformID.Win32Windows:
+                    return WindowsNativeMethods.GetProcAddress(nativeLibraryHandle, functionName);
                 default:
-                        throw new PlatformNotSupportedException();
-                }
+                    throw new PlatformNotSupportedException();
+            }
 #else
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 return LinuxNativeMethods.dlsym(nativeLibraryHandle, functionName);

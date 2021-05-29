@@ -94,43 +94,31 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         internal TypeDefinition GetTypeDefinition(Type type, string name = null)
         {
-            switch (type)
+            return type switch
             {
-                case TypedefType declaration:
-                    return GetTypeDefinition(declaration.Declaration.Type, name);
-                case ArrayType { SizeType: ArrayType.ArraySize.Constant } arrayType:
-                    return GetFieldTypeForFixedArray(arrayType);
-                case TagType tagType:
-                    return GetFieldTypeForNestedDeclaration(tagType.Declaration, name);
-                case PointerType pointerType:
-                    return GetTypeDefinition(pointerType, name);
-                default:
-                    return new TypeDefinition { Name = TypeHelper.GetTypeName(type) };
-            }
+                TypedefType declaration => GetTypeDefinition(declaration.Declaration.Type, name),
+                ArrayType { SizeType: ArrayType.ArraySize.Constant } arrayType => GetFieldTypeForFixedArray(arrayType),
+                TagType tagType => GetFieldTypeForNestedDeclaration(tagType.Declaration, name),
+                PointerType pointerType => GetTypeDefinition(pointerType, name),
+                _ => new TypeDefinition
+                {
+                    Name = TypeHelper.GetTypeName(type)
+                }
+            };
         }
 
         private static StructureField GetBitField(IEnumerable<string> names, long bitCounter, List<string> comments)
         {
             var fieldName = string.Join("_", names);
-            string fieldType;
 
-            switch (bitCounter)
+            var fieldType = bitCounter switch
             {
-                case 8:
-                    fieldType = "byte";
-                    break;
-                case 16:
-                    fieldType = "short";
-                    break;
-                case 32:
-                    fieldType = "int";
-                    break;
-                case 64:
-                    fieldType = "long";
-                    break;
-                default:
-                    throw new NotSupportedException();
-            }
+                8 => "byte",
+                16 => "short",
+                32 => "int",
+                64 => "long",
+                _ => throw new NotSupportedException()
+            };
 
             return new StructureField
             {
