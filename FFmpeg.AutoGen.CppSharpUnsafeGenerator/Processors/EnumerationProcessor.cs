@@ -54,19 +54,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
         private static object ConvertValue(ulong value, PrimitiveType primitiveType)
         {
-            switch (primitiveType)
+            return primitiveType switch
             {
-                case PrimitiveType.Int:
-                    return (int)value;
-                case PrimitiveType.UInt:
-                    return (uint)value;
-                case PrimitiveType.Long:
-                    return (long)value;
-                case PrimitiveType.ULong:
-                    return value;
-                default:
-                    throw new NotSupportedException();
-            }
+                PrimitiveType.Int => value,
+                PrimitiveType.UInt => value,
+                PrimitiveType.Long => value,
+                PrimitiveType.ULong => value,
+                _ => throw new NotSupportedException()
+            };
         }
     }
 }

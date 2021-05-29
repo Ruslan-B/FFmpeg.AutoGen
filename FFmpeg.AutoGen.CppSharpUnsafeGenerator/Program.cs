@@ -36,11 +36,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             };
             astProcessor.IgnoreUnitNames.Add("__NSConstantString_tag");
             astProcessor.TypeAliases.Add("int64_t", typeof(long));
-            astProcessor.WellKnownMaros.Add("FFERRTAG", typeof(int));
-            astProcessor.WellKnownMaros.Add("MKTAG", typeof(int));
-            astProcessor.WellKnownMaros.Add("UINT64_C", typeof(ulong));
-            astProcessor.WellKnownMaros.Add("AV_VERSION_INT", typeof(int));
-            astProcessor.WellKnownMaros.Add("AV_VERSION", typeof(string));
+            astProcessor.WellKnownMacros.Add("FFERRTAG", typeof(int));
+            astProcessor.WellKnownMacros.Add("MKTAG", typeof(int));
+            astProcessor.WellKnownMacros.Add("UINT64_C", typeof(ulong));
+            astProcessor.WellKnownMacros.Add("AV_VERSION_INT", typeof(int));
+            astProcessor.WellKnownMacros.Add("AV_VERSION", typeof(string));
 
             var defines = new[] { "__STDC_CONSTANT_MACROS" };
 
@@ -68,6 +68,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             g.Parse("libavutil/hwcontext.h");
             g.Parse("libavutil/hwcontext_dxva2.h");
             g.Parse("libavutil/hwcontext_d3d11va.h");
+            g.Parse("libavutil/hwcontext_qsv.h");
             g.Parse("libavutil/hdr_dynamic_metadata.h");
             g.Parse("libavutil/mastering_display_metadata.h");
             

@@ -2,8 +2,8 @@
 {
     internal class FixedArrayDefinition : TypeDefinition
     {
-        public TypeDefinition ElementType { get; set; }
-        public int Size { get; set; }
-        public bool IsPrimitive { get; set; }
+        public TypeDefinition ElementType { get; init; }
+        public int Size { get; init; }
+        public bool IsPrimitive { get; init; }
     }
 }

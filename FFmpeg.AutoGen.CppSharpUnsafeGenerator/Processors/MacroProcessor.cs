@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using CppSharp.AST;
+﻿using CppSharp.AST;
+using System.Linq;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {
@@ -7,14 +7,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
     {
         private readonly ASTProcessor _context;
 
-        public MacroProcessor(ASTProcessor context)
-        {
-            _context = context;
-        }
+        public MacroProcessor(ASTProcessor context) => _context = context;
 
         public void Process(TranslationUnit translationUnit)
         {
-            foreach (var macro in translationUnit.PreprocessedEntities.OfType<MacroDefinition>().Where(x => !string.IsNullOrWhiteSpace(x.Expression)))
+            foreach (var macro in translationUnit.PreprocessedEntities.OfType<MacroDefinition>()
+                .Where(x => !string.IsNullOrWhiteSpace(x.Expression)))
             {
                 var macroDefinition = new Definitions.MacroDefinition
                 {

@@ -3,7 +3,6 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using CppSharp;
 using CppSharp.AST;
 using CppSharp.Parser;
@@ -21,16 +20,16 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public Generator(ASTProcessor astProcessor) => _astProcessor = astProcessor;
 
-        public string[] Defines { get; set; } = { };
-        public string[] IncludeDirs { get; set; } = { };
-        public FunctionExport[] Exports { get; set; }
+        public string[] Defines { get; init; } = { };
+        public string[] IncludeDirs { get; init; } = { };
+        public FunctionExport[] Exports { get; init; }
 
-        public string Namespace { get; set; }
-        public string ClassName { get; set; }
+        public string Namespace { get; init; }
+        public string ClassName { get; init; }
 
-        public bool SuppressUnmanagedCodeSecurity { get; set; }
+        public bool SuppressUnmanagedCodeSecurity { get; init; }
 
-        public InlineFunctionDefinition[] ExistingInlineFunctions { get; set; }
+        public InlineFunctionDefinition[] ExistingInlineFunctions { get; init; }
 
         public void Parse(params string[] sourceFiles)
         {
@@ -45,103 +44,113 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public void WriteLibraries(string combine)
         {
-            WriteInternal(combine, (units, writer) =>
-            {
-                writer.WriteLine("using System.Collections.Generic;");
-                writer.WriteLine();
-
-                writer.WriteLine($"public unsafe static partial class {ClassName}");
-                using (writer.BeginBlock())
+            WriteInternal(combine,
+                (units, writer) =>
                 {
-                    writer.WriteLine(
-                        "public static Dictionary<string, int> LibraryVersionMap =  new Dictionary<string, int>");
-                    using (writer.BeginBlock(true))
-                    {
-                        var libraryVersionMap = Exports.Select(x => new { x.LibraryName, x.LibraryVersion }).Distinct()
-                            .ToDictionary(x => x.LibraryName, x => x.LibraryVersion);
-                        foreach (var pair in libraryVersionMap) writer.WriteLine($"{{\"{pair.Key}\", {pair.Value}}},");
-                    }
+                    writer.WriteLine("using System.Collections.Generic;");
+                    writer.WriteLine();
 
-                    writer.WriteLine(";");
-                }
-            });
+                    writer.WriteLine($"public unsafe static partial class {ClassName}");
+
+                    using (writer.BeginBlock())
+                    {
+                        writer.WriteLine(
+                            "public static Dictionary<string, int> LibraryVersionMap =  new Dictionary<string, int>");
+
+                        using (writer.BeginBlock(true))
+                        {
+                            var libraryVersionMap = Exports.Select(x => new { x.LibraryName, x.LibraryVersion })
+                                .Distinct()
+                                .ToDictionary(x => x.LibraryName, x => x.LibraryVersion);
+                            foreach (var pair in libraryVersionMap)
+                                writer.WriteLine($"{{\"{pair.Key}\", {pair.Value}}},");
+                        }
+
+                        writer.WriteLine(";");
+                    }
+                });
         }
 
         public void WriteEnums(string outputFile)
         {
-            WriteInternal(outputFile, (units, writer) =>
-            {
-                units.OfType<EnumerationDefinition>()
-                    .OrderBy(x => x.Name)
-                    .ToList()
-                    .ForEach(x =>
-                    {
-                        writer.WriteEnumeration(x);
-                        writer.WriteLine();
-                    });
-            });
+            WriteInternal(outputFile,
+                (units, writer) =>
+                {
+                    units.OfType<EnumerationDefinition>()
+                        .OrderBy(x => x.Name)
+                        .ToList()
+                        .ForEach(x =>
+                        {
+                            writer.WriteEnumeration(x);
+                            writer.WriteLine();
+                        });
+                });
         }
 
         public void WriteDelegates(string outputFile)
         {
-            WriteInternal(outputFile, (units, writer) =>
-            {
-                units.OfType<DelegateDefinition>().ToList().ForEach(x =>
+            WriteInternal(outputFile,
+                (units, writer) =>
                 {
-                    writer.WriteDelegate(x);
-                    writer.WriteLine();
+                    units.OfType<DelegateDefinition>().ToList().ForEach(x =>
+                    {
+                        writer.WriteDelegate(x);
+                        writer.WriteLine();
+                    });
                 });
-            });
         }
 
         public void WriteMacros(string outputFile)
         {
-            WriteInternal(outputFile, (units, writer) =>
-            {
-                writer.WriteLine($"public unsafe static partial class {ClassName}");
-                using (writer.BeginBlock())
-                    units.OfType<MacroDefinition>()
-                        .OrderBy(x => x.Name)
-                        .ToList()
-                        .ForEach(writer.WriteMacro);
-            });
+            WriteInternal(outputFile,
+                (units, writer) =>
+                {
+                    writer.WriteLine($"public unsafe static partial class {ClassName}");
+                    using (writer.BeginBlock())
+                        units.OfType<MacroDefinition>()
+                            .OrderBy(x => x.Name)
+                            .ToList()
+                            .ForEach(writer.WriteMacro);
+                });
         }
 
         public void WriteExportFunctions(string outputFile)
         {
-            WriteInternal(outputFile, (units, writer) =>
-            {
-                writer.WriteLine($"public unsafe static partial class {ClassName}");
-                using (writer.BeginBlock())
-                    units.OfType<ExportFunctionDefinition>()
-                        .OrderBy(x => x.LibraryName)
-                        .ThenBy(x => x.Name)
-                        .ToList()
-                        .ForEach(x =>
-                        {
-                            writer.WriteFunction(x);
-                            writer.WriteLine();
-                        });
-            });
+            WriteInternal(outputFile,
+                (units, writer) =>
+                {
+                    writer.WriteLine($"public unsafe static partial class {ClassName}");
+                    using (writer.BeginBlock())
+                        units.OfType<ExportFunctionDefinition>()
+                            .OrderBy(x => x.LibraryName)
+                            .ThenBy(x => x.Name)
+                            .ToList()
+                            .ForEach(x =>
+                            {
+                                writer.WriteFunction(x);
+                                writer.WriteLine();
+                            });
+                });
         }
 
         public void WriteInlineFunctions(string outputFile)
         {
             var existingInlineFunctionMap = ExistingInlineFunctions.ToDictionary(x => x.Name);
-            WriteInternal(outputFile, (units, writer) =>
-            {
-                writer.WriteLine($"public unsafe static partial class {ClassName}");
-                using (writer.BeginBlock())
-                    units.OfType<InlineFunctionDefinition>()
-                        .OrderBy(x => x.Name)
-                        .Select(RewriteFunctionBody)
-                        .ToList()
-                        .ForEach(x =>
-                        {
-                            writer.WriteFunction(x);
-                            writer.WriteLine();
-                        });
-            });
+            WriteInternal(outputFile,
+                (units, writer) =>
+                {
+                    writer.WriteLine($"public unsafe static partial class {ClassName}");
+                    using (writer.BeginBlock())
+                        units.OfType<InlineFunctionDefinition>()
+                            .OrderBy(x => x.Name)
+                            .Select(RewriteFunctionBody)
+                            .ToList()
+                            .ForEach(x =>
+                            {
+                                writer.WriteFunction(x);
+                                writer.WriteLine();
+                            });
+                });
 
             InlineFunctionDefinition RewriteFunctionBody(InlineFunctionDefinition function)
             {
@@ -155,49 +164,52 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public void WriteArrays(string outputFile)
         {
-            WriteInternal(outputFile, (units, writer) =>
-            {
-                writer.WriteLine("#pragma warning disable 169");
-                writer.WriteLine();
-                units.OfType<FixedArrayDefinition>()
-                    .OrderBy(x => x.Size)
-                    .ThenBy(x => x.Name)
-                    .ToList().ForEach(x =>
-                    {
-                        writer.WriteFixedArray(x);
-                        writer.WriteLine();
-                    });
-            });
+            WriteInternal(outputFile,
+                (units, writer) =>
+                {
+                    writer.WriteLine("#pragma warning disable 169");
+                    writer.WriteLine();
+                    units.OfType<FixedArrayDefinition>()
+                        .OrderBy(x => x.Size)
+                        .ThenBy(x => x.Name)
+                        .ToList().ForEach(x =>
+                        {
+                            writer.WriteFixedArray(x);
+                            writer.WriteLine();
+                        });
+                });
         }
 
         public void WriteStructures(string outputFile)
         {
-            WriteInternal(outputFile, (units, writer) =>
-            {
-                units.OfType<StructureDefinition>()
-                    .Where(x => x.IsComplete)
-                    .ToList()
-                    .ForEach(x =>
-                    {
-                        writer.WriteStructure(x);
-                        writer.WriteLine();
-                    });
-            });
+            WriteInternal(outputFile,
+                (units, writer) =>
+                {
+                    units.OfType<StructureDefinition>()
+                        .Where(x => x.IsComplete)
+                        .ToList()
+                        .ForEach(x =>
+                        {
+                            writer.WriteStructure(x);
+                            writer.WriteLine();
+                        });
+                });
         }
 
         public void WriteIncompleteStructures(string outputFile)
         {
-            WriteInternal(outputFile, (units, writer) =>
-            {
-                units.OfType<StructureDefinition>()
-                    .Where(x => !x.IsComplete)
-                    .ToList()
-                    .ForEach(x =>
-                    {
-                        writer.WriteStructure(x);
-                        writer.WriteLine();
-                    });
-            });
+            WriteInternal(outputFile,
+                (units, writer) =>
+                {
+                    units.OfType<StructureDefinition>()
+                        .Where(x => !x.IsComplete)
+                        .ToList()
+                        .ForEach(x =>
+                        {
+                            writer.WriteStructure(x);
+                            writer.WriteLine();
+                        });
+                });
         }
 
         private ASTContext ParseInternal(string[] sourceFiles)
@@ -210,7 +222,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             };
 
             parserOptions.Setup();
-            
+
             foreach (var includeDir in IncludeDirs) parserOptions.AddIncludeDirs(includeDir);
 
             foreach (var define in Defines) parserOptions.AddDefines(define);
@@ -233,6 +245,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 case ParserResultKind.FileNotFound:
                     Diagnostics.Error("A file from '{0}' was not found", string.Join(",", files));
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             for (uint i = 0; i < result.DiagnosticsCount; ++i)
@@ -250,20 +264,18 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         private void WriteInternal(string outputFile, Action<IReadOnlyList<IDefinition>, Writer> execute)
         {
-            using (var streamWriter = File.CreateText(outputFile))
-            using (var textWriter = new IndentedTextWriter(streamWriter))
+            using var streamWriter = File.CreateText(outputFile);
+            using var textWriter = new IndentedTextWriter(streamWriter);
+            var writer = new Writer(textWriter)
             {
-                var writer = new Writer(textWriter)
-                {
-                    SuppressUnmanagedCodeSecurity = SuppressUnmanagedCodeSecurity
-                };
-                writer.WriteLine("using System;");
-                writer.WriteLine("using System.Runtime.InteropServices;");
-                if (SuppressUnmanagedCodeSecurity) writer.WriteLine("using System.Security;");
-                writer.WriteLine();
-                writer.WriteLine($"namespace {Namespace}");
-                using (writer.BeginBlock()) execute(_astProcessor.Units, writer);
-            }
+                SuppressUnmanagedCodeSecurity = SuppressUnmanagedCodeSecurity
+            };
+            writer.WriteLine("using System;");
+            writer.WriteLine("using System.Runtime.InteropServices;");
+            if (SuppressUnmanagedCodeSecurity) writer.WriteLine("using System.Security;");
+            writer.WriteLine();
+            writer.WriteLine($"namespace {Namespace}");
+            using (writer.BeginBlock()) execute(_astProcessor.Units, writer);
         }
     }
 }

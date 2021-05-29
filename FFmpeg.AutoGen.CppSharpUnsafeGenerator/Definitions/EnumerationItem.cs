@@ -2,8 +2,8 @@
 {
     internal class EnumerationItem : ICanGenerateXmlDoc
     {
-        public string Name { get; set; }
-        public string Value { get; set; }
+        public string Name { get; init; }
+        public string Value { get; init; }
         public string Content { get; set; }
     }
 }

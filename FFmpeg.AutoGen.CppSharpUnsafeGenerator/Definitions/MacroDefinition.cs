@@ -7,6 +7,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
         public bool IsValid { get; set; }
         public bool IsConst { get; set; }
         public string Content { get; set; }
-        public string Name { get; set; }
+        public string Name { get; init; }
     }
 }

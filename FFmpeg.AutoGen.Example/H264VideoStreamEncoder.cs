@@ -51,19 +51,24 @@ namespace FFmpeg.AutoGen.Example
 
         public void Encode(AVFrame frame)
         {
-            if (frame.format != (int)_pCodecContext->pix_fmt) throw new ArgumentException("Invalid pixel format.", nameof(frame));
+            if (frame.format != (int) _pCodecContext->pix_fmt)
+                throw new ArgumentException("Invalid pixel format.", nameof(frame));
             if (frame.width != _frameSize.Width) throw new ArgumentException("Invalid width.", nameof(frame));
             if (frame.height != _frameSize.Height) throw new ArgumentException("Invalid height.", nameof(frame));
             if (frame.linesize[0] < _linesizeY) throw new ArgumentException("Invalid Y linesize.", nameof(frame));
             if (frame.linesize[1] < _linesizeU) throw new ArgumentException("Invalid U linesize.", nameof(frame));
             if (frame.linesize[2] < _linesizeV) throw new ArgumentException("Invalid V linesize.", nameof(frame));
-            if (frame.data[1] - frame.data[0] < _ySize) throw new ArgumentException("Invalid Y data size.", nameof(frame));
-            if (frame.data[2] - frame.data[1] < _uSize) throw new ArgumentException("Invalid U data size.", nameof(frame));
+            if (frame.data[1] - frame.data[0] < _ySize)
+                throw new ArgumentException("Invalid Y data size.", nameof(frame));
+            if (frame.data[2] - frame.data[1] < _uSize)
+                throw new ArgumentException("Invalid U data size.", nameof(frame));
 
             var pPacket = ffmpeg.av_packet_alloc();
+
             try
             {
                 int error;
+
                 do
                 {
                     ffmpeg.avcodec_send_frame(_pCodecContext, &frame).ThrowExceptionIfError();
@@ -73,7 +78,8 @@ namespace FFmpeg.AutoGen.Example
 
                 error.ThrowExceptionIfError();
 
-                using (var packetStream = new UnmanagedMemoryStream(pPacket->data, pPacket->size)) packetStream.CopyTo(_stream);
+                using var packetStream = new UnmanagedMemoryStream(pPacket->data, pPacket->size);
+                packetStream.CopyTo(_stream);
             }
             finally
             {

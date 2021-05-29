@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using CppSharp.AST;
+﻿using CppSharp.AST;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
+using System.Linq;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 {

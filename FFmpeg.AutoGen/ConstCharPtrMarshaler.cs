@@ -19,7 +19,7 @@ namespace FFmpeg.AutoGen
 
         public int GetNativeDataSize() => IntPtr.Size;
 
-        private static readonly ConstCharPtrMarshaler Instance = new ConstCharPtrMarshaler();
+        private static readonly ConstCharPtrMarshaler Instance = new();
 
         public static ICustomMarshaler GetInstance(string cookie) => Instance;
     }

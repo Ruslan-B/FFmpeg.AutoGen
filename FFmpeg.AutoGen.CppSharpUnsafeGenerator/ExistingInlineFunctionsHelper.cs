@@ -9,12 +9,12 @@ using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 {
-    internal class ExistingInlineFunctionsHelper
+    internal static class ExistingInlineFunctionsHelper
     {
-        private static readonly Regex FunctionNameRegex = new Regex(
+        private static readonly Regex FunctionNameRegex = new(
             @"\s+public static .+ (?<name>[\S]+)\(.*?\)", RegexOptions.Compiled | RegexOptions.Multiline);
 
-        private static readonly Regex FunctionHashRegex = new Regex(
+        private static readonly Regex FunctionHashRegex = new(
             @"\s+// original body hash: (?<hash>\S+)", RegexOptions.Compiled | RegexOptions.Multiline);
 
         public static InlineFunctionDefinition[] LoadInlineFunctions(string path)
