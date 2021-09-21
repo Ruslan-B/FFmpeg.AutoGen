@@ -44,6 +44,10 @@ Steps to generate:
 - Run ```FFmpeg.AutoGen.CppSharpUnsafeGenerator;```
 - All files with extension ```*.g.cs```  in ```FFmpeg.AutoGen``` project will be regenerated.
 
+## Speicial Thanks
+<img src="https://account.jetbrains.com/static/images/jetbrains-logo-inv.svg" data-canonical-src="https://account.jetbrains.com/static/images/jetbrains-logo-inv.svg" width="128" height="128" />
+Non-commercial open source license
+
 ## License
 
 Copyright © Ruslan Balanukhin 2020
