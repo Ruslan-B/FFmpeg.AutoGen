@@ -45,7 +45,9 @@ Steps to generate:
 - All files with extension ```*.g.cs```  in ```FFmpeg.AutoGen``` project will be regenerated.
 
 ## Speicial Thanks
+<a href="https://jetbrains.com">
 <img src="https://account.jetbrains.com/static/images/jetbrains-logo-inv.svg" data-canonical-src="https://account.jetbrains.com/static/images/jetbrains-logo-inv.svg" width="128" height="128" />
+ <a/>
 Non-commercial open source license
 
 ## License
