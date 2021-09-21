@@ -11972,6 +11972,66 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_file_map_delegate(
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @filename, byte** @bufptr, ulong* @size, int @log_offset, void* @log_ctx);
+        private static av_file_map_delegate av_file_map_fptr = (string @filename, byte** @bufptr, ulong* @size, int @log_offset, void* @log_ctx) =>
+        {
+            av_file_map_fptr = GetFunctionDelegate<av_file_map_delegate>(GetOrLoadLibrary("avutil"), "av_file_map");
+            if (av_file_map_fptr == null)
+            {
+                av_file_map_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_file_map is not supported on this platform.");
+                };
+            }
+            return av_file_map_fptr(@filename, @bufptr, @size, @log_offset, @log_ctx);
+        };
+        /// <summary>Read the file with name filename, and put its content in a newly allocated buffer or map it with mmap() when available. In case of success set *bufptr to the read or mmapped buffer, and *size to the size in bytes of the buffer in *bufptr. Unlike mmap this function succeeds with zero sized files, in this case *bufptr will be set to NULL and *size will be set to 0. The returned buffer must be released with av_file_unmap().</summary>
+        /// <param name="log_offset">loglevel offset used for logging</param>
+        /// <param name="log_ctx">context used for logging</param>
+        /// <returns>a non negative number in case of success, a negative value corresponding to an AVERROR error code in case of failure</returns>
+        public static int av_file_map(
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @filename, byte** @bufptr, ulong* @size, int @log_offset, void* @log_ctx)
+        {
+            return av_file_map_fptr(@filename, @bufptr, @size, @log_offset, @log_ctx);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_file_unmap_delegate(byte* @bufptr, ulong @size);
+        private static av_file_unmap_delegate av_file_unmap_fptr = (byte* @bufptr, ulong @size) =>
+        {
+            av_file_unmap_fptr = GetFunctionDelegate<av_file_unmap_delegate>(GetOrLoadLibrary("avutil"), "av_file_unmap");
+            if (av_file_unmap_fptr == null)
+            {
+                av_file_unmap_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_file_unmap is not supported on this platform.");
+                };
+            }
+            av_file_unmap_fptr(@bufptr, @size);
+        };
+        /// <summary>Unmap or free the buffer bufptr created by av_file_map().</summary>
+        /// <param name="size">size in bytes of bufptr, must be the same as returned by av_file_map()</param>
+        public static void av_file_unmap(byte* @bufptr, ulong @size)
+        {
+            av_file_unmap_fptr(@bufptr, @size);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVPixelFormat av_find_best_pix_fmt_of_2_delegate(AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr);
         private static av_find_best_pix_fmt_of_2_delegate av_find_best_pix_fmt_of_2_fptr = (AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr) =>
         {
@@ -17967,6 +18027,43 @@ namespace FFmpeg.AutoGen
         public static AVRational av_sub_q(AVRational @b, AVRational @c)
         {
             return av_sub_q_fptr(@b, @c);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_tempfile_delegate(
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @prefix, byte** @filename, int @log_offset, void* @log_ctx);
+        private static av_tempfile_delegate av_tempfile_fptr = (string @prefix, byte** @filename, int @log_offset, void* @log_ctx) =>
+        {
+            av_tempfile_fptr = GetFunctionDelegate<av_tempfile_delegate>(GetOrLoadLibrary("avutil"), "av_tempfile");
+            if (av_tempfile_fptr == null)
+            {
+                av_tempfile_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException("av_tempfile is not supported on this platform.");
+                };
+            }
+            return av_tempfile_fptr(@prefix, @filename, @log_offset, @log_ctx);
+        };
+        /// <summary>Wrapper to work around the lack of mkstemp() on mingw. Also, tries to create file in /tmp first, if possible. *prefix can be a character constant; *filename will be allocated internally.</summary>
+        /// <returns>file descriptor of opened file (or negative value corresponding to an AVERROR code on error) and opened file name in **filename.</returns>
+        [Obsolete("as fd numbers cannot be passed saftely between libs on some platforms")]
+        public static int av_tempfile(
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @prefix, byte** @filename, int @log_offset, void* @log_ctx)
+        {
+            return av_tempfile_fptr(@prefix, @filename, @log_offset, @log_ctx);
         }
         
         

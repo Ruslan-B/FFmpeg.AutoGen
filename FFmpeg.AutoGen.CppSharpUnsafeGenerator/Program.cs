@@ -59,6 +59,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             g.Parse("libavutil/audio_fifo.h");
             g.Parse("libavutil/channel_layout.h");
             g.Parse("libavutil/cpu.h");
+            g.Parse("libavutil/file.h");
             g.Parse("libavutil/frame.h");
             g.Parse("libavutil/opt.h");
             g.Parse("libavutil/imgutils.h");
