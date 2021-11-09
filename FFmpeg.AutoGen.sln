@@ -20,7 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Redist.windo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Tests", "FFmpeg.AutoGen.Tests\FFmpeg.AutoGen.Tests.csproj", "{2139D117-7EF4-4CF0-88A2-702CA0C72BB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen.Examples.Encode", "FFmpeg.AutoGen.Examples.Encode\FFmpeg.AutoGen.Examples.Encode.csproj", "{136668DD-ECE0-4153-B21E-511882F358F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Examples.Encode", "FFmpeg.AutoGen.Examples.Encode\FFmpeg.AutoGen.Examples.Encode.csproj", "{136668DD-ECE0-4153-B21E-511882F358F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen.Examples.ResamplingAudio", "FFmpeg.AutoGen.Examples.ResamplingAudio\FFmpeg.AutoGen.Examples.ResamplingAudio.csproj", "{A192914F-DAA8-400B-B5CA-BA188AEBB42B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,10 @@ Global
 		{136668DD-ECE0-4153-B21E-511882F358F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{136668DD-ECE0-4153-B21E-511882F358F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{136668DD-ECE0-4153-B21E-511882F358F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A192914F-DAA8-400B-B5CA-BA188AEBB42B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A192914F-DAA8-400B-B5CA-BA188AEBB42B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A192914F-DAA8-400B-B5CA-BA188AEBB42B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A192914F-DAA8-400B-B5CA-BA188AEBB42B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
