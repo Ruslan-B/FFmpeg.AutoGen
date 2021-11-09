@@ -15,6 +15,8 @@ namespace FFmpeg.AutoGen
 
         public static readonly int EINVAL = 22;
 
+        public static readonly int EPIPE = 32;
+
         private static readonly object SyncRoot = new();
 
         public static readonly Dictionary<string, string[]> LibraryDependenciesMap =
