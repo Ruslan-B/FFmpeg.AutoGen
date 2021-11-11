@@ -83,19 +83,24 @@ namespace FFmpeg.AutoGen.Native
         /// </remarks>
         public static IntPtr LoadNativeLibrary(string libraryName)
         {
-            switch (GetPlatformId())
+            return GetPlatformId() switch
             {
-                case PlatformID.MacOSX:
-                    return MacNativeMethods.dlopen(libraryName, MacNativeMethods.RTLD_NOW);
-                case PlatformID.Unix:
-                    return LinuxNativeMethods.dlopen(libraryName, LinuxNativeMethods.RTLD_NOW);
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                    return WindowsNativeMethods.LoadLibrary(libraryName);
-                default:
-                    throw new PlatformNotSupportedException();
-            }
+                PlatformID.MacOSX => MacNativeMethods.dlopen(libraryName, MacNativeMethods.RTLD_NOW),
+                PlatformID.Unix => LinuxNativeMethods.dlopen(libraryName, LinuxNativeMethods.RTLD_NOW),
+                PlatformID.Win32NT | PlatformID.Win32S | PlatformID.Win32Windows => WindowsNativeMethods.LoadLibrary(libraryName),
+                _ => throw new PlatformNotSupportedException(),
+            };
+        }
+        
+        public static int UnloadNativeLibrary(IntPtr handle)
+        {
+            return GetPlatformId() switch
+            {
+                PlatformID.MacOSX => MacNativeMethods.dlclose(handle),
+                PlatformID.Unix => LinuxNativeMethods.dlclose(handle),
+                PlatformID.Win32NT | PlatformID.Win32S | PlatformID.Win32Windows => WindowsNativeMethods.UnloadLibrary(handle),
+                _ => throw new PlatformNotSupportedException(),
+            };
         }
     }
 }
