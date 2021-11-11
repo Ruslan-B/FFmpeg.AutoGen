@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Tests
@@ -11,7 +12,12 @@ namespace FFmpeg.AutoGen.Tests
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                ffmpeg.RootPath = "/lib/x86_64-linux-gnu/";
+                ffmpeg.TrySetRootPath(
+                    LibraryFlags.AVCodec,
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "/usr/lib",
+                    "/lib/x86_64-linux-gnu"
+                );
             }
         }
     }
