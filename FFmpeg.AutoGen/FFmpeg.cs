@@ -51,9 +51,60 @@ namespace FFmpeg.AutoGen
         public static string RootPath { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
 
         public static GetOrLoadLibrary GetOrLoadLibrary { get; set; }
-
-        private static IntPtr LoadLibrary(string libraryName, bool throwException)
+        
+        /// <summary>
+        ///     Tries to load the native libraries from the set root path. <br/>
+        ///     You can specify which libraries need to be loaded with LibraryFlags.
+        ///     It will try to load all librares by default. <br/>
+        ///     Ideally, you would want to only call this function once, before doing anything with FFmpeg.
+        ///     If you try to do that later, it might unload all of your already loaded libraries and fail to provide them again.
+        /// </summary>
+        /// <returns>Whether it succeeded in loading all the requested libraries.</returns>
+        public static bool TryLoadLibraries(LibraryFlags libraries = LibraryFlags.All, string path = "")
         {
+            UnloadLibraries();
+            foreach (var libraryName in libraries.ToStrings())
+            {
+                if (LoadLibrary(libraryName, false, path) == null)
+                    return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        ///     Tries to set the RootPath to the first path in which it can find all the required libraries. <br/>
+        ///     Ideally, you would want to only call this function once, before doing anything with FFmpeg.
+        ///     If you try to do that later, it might unload all of your already loaded libraries and fail to provide them again.
+        /// </summary>
+        /// <param name="requiredLibraries">The required libraries. If you don't need all of them, you can specify them here.</param>
+        /// <param name="paths">Every path to try out. It will set the RootPath to th first one that works.</param>
+        /// <returns>Whether it succeeded in setting the RootPath.</returns>
+        public static bool TrySetRootPath(LibraryFlags requiredLibraries = LibraryFlags.All, params string[] paths)
+        {
+            foreach (var path in paths)
+            {
+                if (TryLoadLibraries(requiredLibraries, path))
+                {
+                    RootPath = path;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static void UnloadLibraries()
+        {
+            foreach (var loadedLibrary in LoadedLibraries)
+                LibraryLoader.UnloadNativeLibrary(loadedLibrary.Value);
+            LoadedLibraries.Clear();
+        }
+
+        private static IntPtr LoadLibrary(string libraryName, bool throwException, string path = "")
+        {
+            if (path == "") path = RootPath;
+
             if (LoadedLibraries.TryGetValue(libraryName, out var ptr)) return ptr;
 
             lock (SyncRoot)
@@ -66,13 +117,13 @@ namespace FFmpeg.AutoGen
                     .ForEach(n => LoadLibrary(n, false));
 
                 var version = LibraryVersionMap[libraryName];
-                ptr = LibraryLoader.LoadNativeLibrary(RootPath, libraryName, version);
+                ptr = LibraryLoader.LoadNativeLibrary(path, libraryName, version);
 
                 if (ptr != IntPtr.Zero) LoadedLibraries.Add(libraryName, ptr);
                 else if (throwException)
                 {
                     throw new DllNotFoundException(
-                        $"Unable to load DLL '{libraryName}.{version} under {RootPath}': The specified module could not be found.");
+                        $"Unable to load DLL '{libraryName}.{version} under {path}': The specified module could not be found.");
                 }
 
                 return ptr;
