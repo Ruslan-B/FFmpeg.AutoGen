@@ -14,5 +14,8 @@ namespace FFmpeg.AutoGen.Native
 
         [DllImport(Libdl)]
         public static extern IntPtr dlopen(string fileName, int flag);
+        
+        [DllImport(Libdl)]
+        public static extern int dlclose(IntPtr handle);
     }
 }
