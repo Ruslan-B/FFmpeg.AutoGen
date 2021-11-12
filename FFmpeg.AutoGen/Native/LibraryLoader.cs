@@ -98,7 +98,7 @@ namespace FFmpeg.AutoGen.Native
             {
                 PlatformID.MacOSX => MacNativeMethods.dlclose(handle),
                 PlatformID.Unix => LinuxNativeMethods.dlclose(handle),
-                PlatformID.Win32NT | PlatformID.Win32S | PlatformID.Win32Windows => WindowsNativeMethods.UnloadLibrary(handle),
+                PlatformID.Win32NT | PlatformID.Win32S | PlatformID.Win32Windows => WindowsNativeMethods.FreeLibrary(handle),
                 _ => throw new PlatformNotSupportedException(),
             };
         }

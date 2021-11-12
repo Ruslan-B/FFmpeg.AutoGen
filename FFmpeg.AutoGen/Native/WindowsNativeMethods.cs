@@ -46,6 +46,6 @@ namespace FFmpeg.AutoGen.Native
         public static extern IntPtr LoadLibrary(string dllToLoad);
         
         [DllImport(Kernel32, SetLastError = true)]
-        public static extern int UnloadLibrary(IntPtr handle);
+        public static extern int FreeLibrary(IntPtr handle);
     }
 }
