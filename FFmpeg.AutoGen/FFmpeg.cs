@@ -65,7 +65,7 @@ namespace FFmpeg.AutoGen
             UnloadLibraries();
             foreach (var libraryName in libraries.ToStrings())
             {
-                if (LoadLibrary(libraryName, false, path) == null)
+                if (LoadLibrary(libraryName, false, path) == IntPtr.Zero)
                     return false;
             }
 
