@@ -28,7 +28,12 @@ namespace FFmpeg.AutoGen.Example
                 }
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                ffmpeg.RootPath = "/lib/x86_64-linux-gnu/";
+                ffmpeg.TrySetRootPath(
+                    LibraryFlags.AVCodec,
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "/usr/lib",
+                    "/lib/x86_64-linux-gnu"
+                );
             else
                 throw new NotSupportedException(); // fell free add support for platform of your choose
         }
