@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FFmpeg.AutoGen.Native;
@@ -60,38 +61,62 @@ namespace FFmpeg.AutoGen
         ///     If you try to do that later, it might unload all of your already loaded libraries and fail to provide them again.
         /// </summary>
         /// <returns>Whether it succeeded in loading all the requested libraries.</returns>
-        public static bool TryLoadLibraries(LibraryFlags libraries = LibraryFlags.All, string path = "")
+        public static bool CanLoadLibraries(LibraryFlags libraries = LibraryFlags.All, string path = "")
         {
-            foreach (var libraryName in libraries.ToStrings())
-            {
-                if (LoadLibrary(libraryName, false, path) == IntPtr.Zero)
-                    return false;
-            }
+            var validated = new List<string>();
+            return libraries.ToStrings().All((lib) => canLoadLibrary(lib, path, validated));
+        }
 
-            return true;
+        // Note: recurses in a very similar way to the LoadLibrary() method.
+        private static bool canLoadLibrary(string lib, string path, List<string> validated)
+        {
+            if (validated.Contains(lib))
+                return true;
+
+            var version = LibraryVersionMap[lib];
+            if (!LibraryLoader.CanLoadNativeLibrary(path, lib, version))
+                return false;
+            
+            validated.Add(lib);
+            
+            var dependencies = LibraryDependenciesMap[lib];
+            return dependencies.Except(validated).All((dep) => canLoadLibrary(dep, path, validated));
         }
 
         /// <summary>
-        ///     Tries to set the RootPath to the first path in which it can find all the required libraries. <br/>
+        ///     Tries to set the RootPath to the first path in which it can find all the required libraries.
         ///     Ideally, you would want to only call this function once, before doing anything with FFmpeg.
-        ///     If you try to do that later, it might unload all of your already loaded libraries and fail to provide them again.
         /// </summary>
+        /// <remarks>
+        ///     This function will not load the native libraries but merely check if they exist.
+        /// </remarks>
         /// <param name="requiredLibraries">The required libraries. If you don't need all of them, you can specify them here.</param>
         /// <param name="paths">Every path to try out. It will set the RootPath to th first one that works.</param>
         /// <returns>Whether it succeeded in setting the RootPath.</returns>
-        public static bool TrySetRootPath(LibraryFlags requiredLibraries = LibraryFlags.All, params string[] paths)
+        public static bool TrySetRootPath(IEnumerable<string> paths, LibraryFlags requiredLibraries = LibraryFlags.All)
         {
-            foreach (var path in paths)
+            try
             {
-                if (TryLoadLibraries(requiredLibraries, path))
-                {
-                    RootPath = path;
-                    return true;
-                }
+                RootPath = paths.First((path) => CanLoadLibraries(requiredLibraries, path));
+                return true;
             }
-
-            return false;
+            catch (ArgumentNullException e)
+            {
+                return false;
+            }
         }
+
+        /// <summary>
+        ///     Tries to set the RootPath to the first path in which it can find all the required libraries.
+        ///     Ideally, you would want to only call this function once, before doing anything with FFmpeg.
+        /// </summary>
+        /// <remarks>
+        ///     This function will not load the native libraries but merely check if they exist.
+        /// </remarks>
+        /// <param name="requiredLibraries">The required libraries. If you don't need all of them, you can specify them here.</param>
+        /// <param name="paths">Every path to try out. It will set the RootPath to th first one that works.</param>
+        /// <returns>Whether it succeeded in setting the RootPath.</returns>
+        public static bool TrySetRootPath(LibraryFlags requiredLibraries = LibraryFlags.All, params string[] paths) => TrySetRootPath(requiredLibraries, paths);
 
         private static IntPtr LoadLibrary(string libraryName, bool throwException, string path = "")
         {
