@@ -67,6 +67,21 @@ namespace FFmpeg.AutoGen.Native
             var fullName = Path.Combine(path, nativeLibraryName);
             return LoadNativeLibrary(fullName);
         }
+        
+        /// <summary>
+        ///     Checks if it can load a native library using platform naming conventions.
+        /// </summary>
+        /// <param name="path">Path of the library.</param>
+        /// <param name="libraryName">Name of the library.</param>
+        /// <param name="version">Version of the library.</param>
+        /// <returns>Whether it found the native library in the path.</returns>
+        public static bool CanLoadNativeLibrary(string path, string libraryName, int version)
+        {
+            var nativeLibraryName = GetNativeLibraryName(libraryName, version);
+            var fullName = Path.Combine(path, nativeLibraryName);
+            return File.Exists(fullName);
+
+        }
 
         /// <summary>
         ///     Attempts to load a native library.
