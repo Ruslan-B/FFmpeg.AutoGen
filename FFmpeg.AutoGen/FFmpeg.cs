@@ -70,6 +70,8 @@ namespace FFmpeg.AutoGen
         // Note: recurses in a very similar way to the LoadLibrary() method.
         private static bool canLoadLibrary(string lib, string path, List<string> validated)
         {
+            Console.WriteLine($"Checking if {lib} can be loaded from {path}");
+            Console.WriteLine($"Validated: {validated.ToString()}");
             if (validated.Contains(lib))
                 return true;
 
@@ -116,7 +118,7 @@ namespace FFmpeg.AutoGen
         /// <param name="requiredLibraries">The required libraries. If you don't need all of them, you can specify them here.</param>
         /// <param name="paths">Every path to try out. It will set the RootPath to th first one that works.</param>
         /// <returns>Whether it succeeded in setting the RootPath.</returns>
-        public static bool TrySetRootPath(LibraryFlags requiredLibraries = LibraryFlags.All, params string[] paths) => TrySetRootPath(requiredLibraries, paths);
+        public static bool TrySetRootPath(LibraryFlags requiredLibraries = LibraryFlags.All, params string[] paths) => TrySetRootPath(paths, requiredLibraries);
 
         private static IntPtr LoadLibrary(string libraryName, bool throwException, string path = "")
         {
