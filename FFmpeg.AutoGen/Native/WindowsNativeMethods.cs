@@ -44,8 +44,5 @@ namespace FFmpeg.AutoGen.Native
         /// <seealso href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms684175(v=vs.85).aspx"/>
         [DllImport(Kernel32, SetLastError = true)]
         public static extern IntPtr LoadLibrary(string dllToLoad);
-        
-        [DllImport(Kernel32, SetLastError = true)]
-        public static extern int FreeLibrary(IntPtr handle);
     }
 }

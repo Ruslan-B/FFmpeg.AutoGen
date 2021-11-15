@@ -47,7 +47,7 @@ namespace FFmpeg.AutoGen.Native
         public static GetNativeLibraryName GetNativeLibraryName;
 
         /// <summary>
-        ///     Attempts to load a native library using platform nammig convention.
+        ///     Attempts to load a native library using platform naming conventions.
         /// </summary>
         /// <param name="path">Path of the library.</param>
         /// <param name="libraryName">Name of the library.</param>
@@ -88,17 +88,6 @@ namespace FFmpeg.AutoGen.Native
                 PlatformID.MacOSX => MacNativeMethods.dlopen(libraryName, MacNativeMethods.RTLD_NOW),
                 PlatformID.Unix => LinuxNativeMethods.dlopen(libraryName, LinuxNativeMethods.RTLD_NOW),
                 PlatformID.Win32NT | PlatformID.Win32S | PlatformID.Win32Windows => WindowsNativeMethods.LoadLibrary(libraryName),
-                _ => throw new PlatformNotSupportedException(),
-            };
-        }
-        
-        public static int UnloadNativeLibrary(IntPtr handle)
-        {
-            return GetPlatformId() switch
-            {
-                PlatformID.MacOSX => MacNativeMethods.dlclose(handle),
-                PlatformID.Unix => LinuxNativeMethods.dlclose(handle),
-                PlatformID.Win32NT | PlatformID.Win32S | PlatformID.Win32Windows => WindowsNativeMethods.FreeLibrary(handle),
                 _ => throw new PlatformNotSupportedException(),
             };
         }

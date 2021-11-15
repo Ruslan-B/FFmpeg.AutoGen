@@ -62,7 +62,6 @@ namespace FFmpeg.AutoGen
         /// <returns>Whether it succeeded in loading all the requested libraries.</returns>
         public static bool TryLoadLibraries(LibraryFlags libraries = LibraryFlags.All, string path = "")
         {
-            UnloadLibraries();
             foreach (var libraryName in libraries.ToStrings())
             {
                 if (LoadLibrary(libraryName, false, path) == IntPtr.Zero)
@@ -92,13 +91,6 @@ namespace FFmpeg.AutoGen
             }
 
             return false;
-        }
-
-        private static void UnloadLibraries()
-        {
-            foreach (var loadedLibrary in LoadedLibraries)
-                LibraryLoader.UnloadNativeLibrary(loadedLibrary.Value);
-            LoadedLibraries.Clear();
         }
 
         private static IntPtr LoadLibrary(string libraryName, bool throwException, string path = "")
