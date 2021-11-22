@@ -24,9 +24,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 WriteLine($"public {constOrStatic} {macro.TypeName} {macro.Name} = {macro.Expression};");
             }
             else
-            {
                 WriteLine($"// public static {macro.Name} = {macro.Expression};");
-            }
         }
 
         public void WriteEnumeration(EnumerationDefinition enumeration)
@@ -34,6 +32,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteSummary(enumeration);
             WriteObsoletion(enumeration);
             WriteLine($"public enum {enumeration.Name} : {enumeration.TypeName}");
+
             using (BeginBlock())
                 foreach (var item in enumeration.Items)
                 {
@@ -45,10 +44,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public void WriteStructure(StructureDefinition structure)
         {
             WriteSummary(structure);
-            if (!structure.IsComplete) WriteLine($"/// <remarks>This struct is incomplete.</remarks>");
+            if (!structure.IsComplete) WriteLine("/// <remarks>This struct is incomplete.</remarks>");
             WriteObsoletion(structure);
             if (structure.IsUnion) WriteLine("[StructLayout(LayoutKind.Explicit)]");
             WriteLine($"public unsafe struct {structure.Name}");
+
             using (BeginBlock())
                 foreach (var field in structure.Fields)
                 {
@@ -62,19 +62,17 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public void WriteFixedArray(FixedArrayDefinition array)
         {
             WriteLine($"public unsafe struct {array.Name}");
-            using (BeginBlock())
-            {
-                var prefix = "_";
-                var size = array.Size;
-                var elementType = array.ElementType.Name;
+            using var _ = BeginBlock();
+            var prefix = "_";
+            var size = array.Size;
+            var elementType = array.ElementType.Name;
 
-                WriteLine($"public static readonly int Size = {size};");
+            WriteLine($"public static readonly int Size = {size};");
 
-                if (array.IsPrimitive) WritePrimitiveFixedArray(array.Name, elementType, size, prefix);
-                else WriteComplexFixedArray(elementType, size, prefix);
+            if (array.IsPrimitive) WritePrimitiveFixedArray(array.Name, elementType, size, prefix);
+            else WriteComplexFixedArray(elementType, size, prefix);
 
-                WriteLine($"public static implicit operator {elementType}[]({array.Name} @struct) => @struct.ToArray();");
-            }
+            WriteLine($"public static implicit operator {elementType}[]({array.Name} @struct) => @struct.ToArray();");
         }
 
         public void WriteFunction(ExportFunctionDefinition function)
@@ -128,6 +126,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             var delegateParameters = GetParameters(function.Parameters, false);
 
             WriteLine($"({delegateParameters}) =>");
+
             using (BeginBlock(true))
             {
                 var getOrLoadLibrary = $"GetOrLoadLibrary(\"{function.LibraryName}\")";
@@ -135,6 +134,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
                 WriteLine($"{functionPtrName} = {getDelegate};");
                 WriteLine($"if ({functionPtrName} == null)");
+
                 using (BeginBlock())
                 {
                     Write($"{functionPtrName} = ");
@@ -149,9 +149,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         private void WriteNotSupportedFunctionDelegateExpression(ExportFunctionDefinition function)
         {
             WriteLine("delegate ");
-            using (BeginBlock(true))
-                WriteLine(
-                    $"throw new PlatformNotSupportedException(\"{function.Name} is not supported on this platform.\");");
+            using var _ = BeginBlock(true);
+            WriteLine($"throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, \"{function.Name}\"));");
         }
 
         public void WriteDelegate(DelegateDefinition @delegate)
@@ -164,13 +163,11 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteLine($"public unsafe delegate {@delegate.ReturnType.Name} {@delegate.FunctionName} ({parameters});");
 
             WriteLine($"public unsafe struct {@delegate.Name}");
-            using (BeginBlock())
-            {
-                WriteLine("public IntPtr Pointer;");
-                Write($"public static implicit operator {@delegate.Name}({@delegate.FunctionName} func) => ");
-                Write($"new {@delegate.Name} {{ Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) }};");
-                WriteLine();
-            }
+            using var _ = BeginBlock();
+            WriteLine("public IntPtr Pointer;");
+            Write($"public static implicit operator {@delegate.Name}({@delegate.FunctionName} func) => ");
+            Write($"new {@delegate.Name} {{ Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) }};");
+            WriteLine();
         }
 
         public void WriteLine()
@@ -211,6 +208,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             var @fixed = $"fixed ({arrayName}* p = &this)";
 
             WriteLine($"public {elementType} this[uint i]");
+
             using (BeginBlock())
             {
                 WriteLine($"get {{ if (i >= Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return p->{prefix}[i]; }} }}");
@@ -234,6 +232,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             var @fixed = $"fixed ({elementType}* p0 = &{prefix}0)";
 
             WriteLine($"public {elementType} this[uint i]");
+
             using (BeginBlock())
             {
                 WriteLine($"get {{ if (i >= Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return *(p0 + i); }} }}");
@@ -251,25 +250,27 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         private static string GetParameters(FunctionParameter[] parameters, bool withAttributes = true)
         {
-            return string.Join(", ", parameters.Select(x =>
-            {
-                var sb = new StringBuilder();
-                if (withAttributes && x.Type.Attributes.Any()) sb.Append($"{string.Join("", x.Type.Attributes)} ");
-                if (x.Type.ByReference) sb.Append("ref ");
-                sb.Append($"{x.Type.Name} @{x.Name}");
-                return sb.ToString();
-            }));
+            return string.Join(", ",
+                parameters.Select(x =>
+                {
+                    var sb = new StringBuilder();
+                    if (withAttributes && x.Type.Attributes.Any()) sb.Append($"{string.Join("", x.Type.Attributes)} ");
+                    if (x.Type.ByReference) sb.Append("ref ");
+                    sb.Append($"{x.Type.Name} @{x.Name}");
+                    return sb.ToString();
+                }));
         }
 
         private static string GetParameterNames(FunctionParameter[] parameters)
         {
-            return string.Join(", ", parameters.Select(x =>
-            {
-                var sb = new StringBuilder();
-                if (x.Type.ByReference) sb.Append("ref ");
-                sb.Append($"@{x.Name}");
-                return sb.ToString();
-            }));
+            return string.Join(", ",
+                parameters.Select(x =>
+                {
+                    var sb = new StringBuilder();
+                    if (x.Type.ByReference) sb.Append("ref ");
+                    sb.Append($"@{x.Name}");
+                    return sb.ToString();
+                }));
         }
 
         private void WriteSummary(ICanGenerateXmlDoc value)

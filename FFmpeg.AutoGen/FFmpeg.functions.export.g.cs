@@ -5,6 +5,8 @@ namespace FFmpeg.AutoGen
 {
     public unsafe static partial class ffmpeg
     {
+        private const string PlatformNotSupportedMessageFormat = "{0} is not supported on this platform.";
+        
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate void av_bitstream_filter_close_delegate(AVBitStreamFilterContext* @bsf);
         private static av_bitstream_filter_close_delegate av_bitstream_filter_close_fptr = (AVBitStreamFilterContext* @bsf) =>
@@ -14,7 +16,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bitstream_filter_close_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bitstream_filter_close is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bitstream_filter_close"));
                 };
             }
             av_bitstream_filter_close_fptr(@bsf);
@@ -42,7 +44,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bitstream_filter_filter_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bitstream_filter_filter is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bitstream_filter_filter"));
                 };
             }
             return av_bitstream_filter_filter_fptr(@bsfc, @avctx, @args, @poutbuf, @poutbuf_size, @buf, @buf_size, @keyframe);
@@ -77,7 +79,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bitstream_filter_init_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bitstream_filter_init is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bitstream_filter_init"));
                 };
             }
             return av_bitstream_filter_init_fptr(@name);
@@ -105,7 +107,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bitstream_filter_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bitstream_filter_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bitstream_filter_next"));
                 };
             }
             return av_bitstream_filter_next_fptr(@f);
@@ -126,7 +128,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_alloc"));
                 };
             }
             return av_bsf_alloc_fptr(@filter, @ctx);
@@ -150,7 +152,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_flush_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_flush is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_flush"));
                 };
             }
             av_bsf_flush_fptr(@ctx);
@@ -171,7 +173,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_free"));
                 };
             }
             av_bsf_free_fptr(@ctx);
@@ -199,7 +201,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_get_by_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_get_by_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_get_by_name"));
                 };
             }
             return av_bsf_get_by_name_fptr(@name);
@@ -228,7 +230,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_get_class_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_get_class is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_get_class"));
                 };
             }
             return av_bsf_get_class_fptr();
@@ -249,7 +251,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_get_null_filter_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_get_null_filter is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_get_null_filter"));
                 };
             }
             return av_bsf_get_null_filter_fptr(@bsf);
@@ -271,7 +273,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_init_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_init is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_init"));
                 };
             }
             return av_bsf_init_fptr(@ctx);
@@ -292,7 +294,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_iterate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_iterate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_iterate"));
                 };
             }
             return av_bsf_iterate_fptr(@opaque);
@@ -315,7 +317,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_list_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_list_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_list_alloc"));
                 };
             }
             return av_bsf_list_alloc_fptr();
@@ -337,7 +339,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_list_append_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_list_append is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_list_append"));
                 };
             }
             return av_bsf_list_append_fptr(@lst, @bsf);
@@ -368,7 +370,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_list_append2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_list_append2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_list_append2"));
                 };
             }
             return av_bsf_list_append2_fptr(@lst, @bsf_name, @options);
@@ -400,7 +402,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_list_finalize_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_list_finalize is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_list_finalize"));
                 };
             }
             return av_bsf_list_finalize_fptr(@lst, @bsf);
@@ -424,7 +426,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_list_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_list_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_list_free"));
                 };
             }
             av_bsf_list_free_fptr(@lst);
@@ -453,7 +455,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_list_parse_str_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_list_parse_str is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_list_parse_str"));
                 };
             }
             return av_bsf_list_parse_str_fptr(@str, @bsf);
@@ -484,7 +486,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_next"));
                 };
             }
             return av_bsf_next_fptr(@opaque);
@@ -505,7 +507,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_receive_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_receive_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_receive_packet"));
                 };
             }
             return av_bsf_receive_packet_fptr(@ctx, @pkt);
@@ -528,7 +530,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bsf_send_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bsf_send_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_send_packet"));
                 };
             }
             return av_bsf_send_packet_fptr(@ctx, @pkt);
@@ -551,7 +553,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_get_chroma_intra_matrix_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_get_chroma_intra_matrix is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_chroma_intra_matrix"));
                 };
             }
             return av_codec_get_chroma_intra_matrix_fptr(@avctx);
@@ -572,7 +574,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_get_codec_descriptor_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_get_codec_descriptor is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_codec_descriptor"));
                 };
             }
             return av_codec_get_codec_descriptor_fptr(@avctx);
@@ -593,7 +595,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_get_codec_properties_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_get_codec_properties is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_codec_properties"));
                 };
             }
             return av_codec_get_codec_properties_fptr(@avctx);
@@ -614,7 +616,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_get_lowres_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_get_lowres is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_lowres"));
                 };
             }
             return av_codec_get_lowres_fptr(@avctx);
@@ -635,7 +637,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_get_max_lowres_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_get_max_lowres is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_max_lowres"));
                 };
             }
             return av_codec_get_max_lowres_fptr(@codec);
@@ -656,7 +658,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_get_pkt_timebase_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_get_pkt_timebase is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_pkt_timebase"));
                 };
             }
             return av_codec_get_pkt_timebase_fptr(@avctx);
@@ -678,7 +680,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_get_seek_preroll_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_get_seek_preroll is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_seek_preroll"));
                 };
             }
             return av_codec_get_seek_preroll_fptr(@avctx);
@@ -699,7 +701,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_is_decoder_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_is_decoder is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_is_decoder"));
                 };
             }
             return av_codec_is_decoder_fptr(@codec);
@@ -721,7 +723,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_is_encoder_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_is_encoder is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_is_encoder"));
                 };
             }
             return av_codec_is_encoder_fptr(@codec);
@@ -743,7 +745,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_iterate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_iterate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_iterate"));
                 };
             }
             return av_codec_iterate_fptr(@opaque);
@@ -766,7 +768,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_next"));
                 };
             }
             return av_codec_next_fptr(@c);
@@ -788,7 +790,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_set_chroma_intra_matrix_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_set_chroma_intra_matrix is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_set_chroma_intra_matrix"));
                 };
             }
             av_codec_set_chroma_intra_matrix_fptr(@avctx, @val);
@@ -809,7 +811,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_set_codec_descriptor_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_set_codec_descriptor is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_set_codec_descriptor"));
                 };
             }
             av_codec_set_codec_descriptor_fptr(@avctx, @desc);
@@ -830,7 +832,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_set_lowres_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_set_lowres is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_set_lowres"));
                 };
             }
             av_codec_set_lowres_fptr(@avctx, @val);
@@ -851,7 +853,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_set_pkt_timebase_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_set_pkt_timebase is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_set_pkt_timebase"));
                 };
             }
             av_codec_set_pkt_timebase_fptr(@avctx, @val);
@@ -872,7 +874,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_set_seek_preroll_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_set_seek_preroll is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_set_seek_preroll"));
                 };
             }
             av_codec_set_seek_preroll_fptr(@avctx, @val);
@@ -893,7 +895,7 @@ namespace FFmpeg.AutoGen
             {
                 av_copy_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_copy_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_copy_packet"));
                 };
             }
             return av_copy_packet_fptr(@dst, @src);
@@ -916,7 +918,7 @@ namespace FFmpeg.AutoGen
             {
                 av_copy_packet_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_copy_packet_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_copy_packet_side_data"));
                 };
             }
             return av_copy_packet_side_data_fptr(@dst, @src);
@@ -939,7 +941,7 @@ namespace FFmpeg.AutoGen
             {
                 av_cpb_properties_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_cpb_properties_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_cpb_properties_alloc"));
                 };
             }
             return av_cpb_properties_alloc_fptr(@size);
@@ -962,7 +964,7 @@ namespace FFmpeg.AutoGen
             {
                 av_d3d11va_alloc_context_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_d3d11va_alloc_context is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_d3d11va_alloc_context"));
                 };
             }
             return av_d3d11va_alloc_context_fptr();
@@ -984,7 +986,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dup_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dup_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dup_packet"));
                 };
             }
             return av_dup_packet_fptr(@pkt);
@@ -1005,7 +1007,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fast_padded_malloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fast_padded_malloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fast_padded_malloc"));
                 };
             }
             av_fast_padded_malloc_fptr(@ptr, @size, @min_size);
@@ -1026,7 +1028,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fast_padded_mallocz_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fast_padded_mallocz is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fast_padded_mallocz"));
                 };
             }
             av_fast_padded_mallocz_fptr(@ptr, @size, @min_size);
@@ -1047,7 +1049,7 @@ namespace FFmpeg.AutoGen
             {
                 av_free_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_free_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_free_packet"));
                 };
             }
             av_free_packet_fptr(@pkt);
@@ -1070,7 +1072,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_audio_frame_duration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_audio_frame_duration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_audio_frame_duration"));
                 };
             }
             return av_get_audio_frame_duration_fptr(@avctx, @frame_bytes);
@@ -1094,7 +1096,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_audio_frame_duration2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_audio_frame_duration2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_audio_frame_duration2"));
                 };
             }
             return av_get_audio_frame_duration2_fptr(@par, @frame_bytes);
@@ -1115,7 +1117,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_bits_per_sample_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_bits_per_sample is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_bits_per_sample"));
                 };
             }
             return av_get_bits_per_sample_fptr(@codec_id);
@@ -1138,7 +1140,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_codec_tag_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_codec_tag_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_codec_tag_string"));
                 };
             }
             return av_get_codec_tag_string_fptr(@buf, @buf_size, @codec_tag);
@@ -1164,7 +1166,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_exact_bits_per_sample_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_exact_bits_per_sample is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_exact_bits_per_sample"));
                 };
             }
             return av_get_exact_bits_per_sample_fptr(@codec_id);
@@ -1187,7 +1189,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_pcm_codec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_pcm_codec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_pcm_codec"));
                 };
             }
             return av_get_pcm_codec_fptr(@fmt, @be);
@@ -1211,7 +1213,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_profile_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_profile_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_profile_name"));
                 };
             }
             return av_get_profile_name_fptr(@codec, @profile);
@@ -1235,7 +1237,7 @@ namespace FFmpeg.AutoGen
             {
                 av_grow_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_grow_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_grow_packet"));
                 };
             }
             return av_grow_packet_fptr(@pkt, @grow_by);
@@ -1258,7 +1260,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwaccel_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwaccel_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwaccel_next"));
                 };
             }
             return av_hwaccel_next_fptr(@hwaccel);
@@ -1280,7 +1282,7 @@ namespace FFmpeg.AutoGen
             {
                 av_init_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_init_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_init_packet"));
                 };
             }
             av_init_packet_fptr(@pkt);
@@ -1303,7 +1305,7 @@ namespace FFmpeg.AutoGen
             {
                 av_lockmgr_register_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_lockmgr_register is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_lockmgr_register"));
                 };
             }
             return av_lockmgr_register_fptr(@cb);
@@ -1326,7 +1328,7 @@ namespace FFmpeg.AutoGen
             {
                 av_new_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_new_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_new_packet"));
                 };
             }
             return av_new_packet_fptr(@pkt, @size);
@@ -1350,7 +1352,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_add_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_add_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_add_side_data"));
                 };
             }
             return av_packet_add_side_data_fptr(@pkt, @type, @data, @size);
@@ -1376,7 +1378,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_alloc"));
                 };
             }
             return av_packet_alloc_fptr();
@@ -1398,7 +1400,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_clone_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_clone is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_clone"));
                 };
             }
             return av_packet_clone_fptr(@src);
@@ -1420,7 +1422,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_copy_props_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_copy_props is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_copy_props"));
                 };
             }
             return av_packet_copy_props_fptr(@dst, @src);
@@ -1444,7 +1446,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_free"));
                 };
             }
             av_packet_free_fptr(@pkt);
@@ -1466,7 +1468,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_free_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_free_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_free_side_data"));
                 };
             }
             av_packet_free_side_data_fptr(@pkt);
@@ -1488,7 +1490,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_from_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_from_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_from_data"));
                 };
             }
             return av_packet_from_data_fptr(@pkt, @data, @size);
@@ -1513,7 +1515,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_get_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_get_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_get_side_data"));
                 };
             }
             return av_packet_get_side_data_fptr(@pkt, @type, @size);
@@ -1538,7 +1540,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_make_refcounted_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_make_refcounted is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_make_refcounted"));
                 };
             }
             return av_packet_make_refcounted_fptr(@pkt);
@@ -1561,7 +1563,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_make_writable_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_make_writable is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_make_writable"));
                 };
             }
             return av_packet_make_writable_fptr(@pkt);
@@ -1584,7 +1586,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_merge_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_merge_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_merge_side_data"));
                 };
             }
             return av_packet_merge_side_data_fptr(@pkt);
@@ -1605,7 +1607,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_move_ref_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_move_ref is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_move_ref"));
                 };
             }
             av_packet_move_ref_fptr(@dst, @src);
@@ -1628,7 +1630,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_new_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_new_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_new_side_data"));
                 };
             }
             return av_packet_new_side_data_fptr(@pkt, @type, @size);
@@ -1653,7 +1655,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_pack_dictionary_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_pack_dictionary is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_pack_dictionary"));
                 };
             }
             return av_packet_pack_dictionary_fptr(@dict, @size);
@@ -1673,7 +1675,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_ref_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_ref is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_ref"));
                 };
             }
             return av_packet_ref_fptr(@dst, @src);
@@ -1697,7 +1699,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_rescale_ts_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_rescale_ts is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_rescale_ts"));
                 };
             }
             av_packet_rescale_ts_fptr(@pkt, @tb_src, @tb_dst);
@@ -1721,7 +1723,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_shrink_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_shrink_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_shrink_side_data"));
                 };
             }
             return av_packet_shrink_side_data_fptr(@pkt, @type, @size);
@@ -1747,7 +1749,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_side_data_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_side_data_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_side_data_name"));
                 };
             }
             return av_packet_side_data_name_fptr(@type);
@@ -1767,7 +1769,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_split_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_split_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_split_side_data"));
                 };
             }
             return av_packet_split_side_data_fptr(@pkt);
@@ -1788,7 +1790,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_unpack_dictionary_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_unpack_dictionary is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_unpack_dictionary"));
                 };
             }
             return av_packet_unpack_dictionary_fptr(@data, @size, @dict);
@@ -1808,7 +1810,7 @@ namespace FFmpeg.AutoGen
             {
                 av_packet_unref_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_packet_unref is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_unref"));
                 };
             }
             av_packet_unref_fptr(@pkt);
@@ -1830,7 +1832,7 @@ namespace FFmpeg.AutoGen
             {
                 av_parser_change_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_parser_change is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_parser_change"));
                 };
             }
             return av_parser_change_fptr(@s, @avctx, @poutbuf, @poutbuf_size, @buf, @buf_size, @keyframe);
@@ -1853,7 +1855,7 @@ namespace FFmpeg.AutoGen
             {
                 av_parser_close_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_parser_close is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_parser_close"));
                 };
             }
             av_parser_close_fptr(@s);
@@ -1873,7 +1875,7 @@ namespace FFmpeg.AutoGen
             {
                 av_parser_init_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_parser_init is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_parser_init"));
                 };
             }
             return av_parser_init_fptr(@codec_id);
@@ -1893,7 +1895,7 @@ namespace FFmpeg.AutoGen
             {
                 av_parser_iterate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_parser_iterate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_parser_iterate"));
                 };
             }
             return av_parser_iterate_fptr(@opaque);
@@ -1916,7 +1918,7 @@ namespace FFmpeg.AutoGen
             {
                 av_parser_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_parser_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_parser_next"));
                 };
             }
             return av_parser_next_fptr(@c);
@@ -1937,7 +1939,7 @@ namespace FFmpeg.AutoGen
             {
                 av_parser_parse2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_parser_parse2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_parser_parse2"));
                 };
             }
             return av_parser_parse2_fptr(@s, @avctx, @poutbuf, @poutbuf_size, @buf, @buf_size, @pts, @dts, @pos);
@@ -1968,7 +1970,7 @@ namespace FFmpeg.AutoGen
             {
                 av_picture_copy_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_picture_copy is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_picture_copy"));
                 };
             }
             av_picture_copy_fptr(@dst, @src, @pix_fmt, @width, @height);
@@ -1989,7 +1991,7 @@ namespace FFmpeg.AutoGen
             {
                 av_picture_crop_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_picture_crop is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_picture_crop"));
                 };
             }
             return av_picture_crop_fptr(@dst, @src, @pix_fmt, @top_band, @left_band);
@@ -2010,7 +2012,7 @@ namespace FFmpeg.AutoGen
             {
                 av_picture_pad_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_picture_pad is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_picture_pad"));
                 };
             }
             return av_picture_pad_fptr(@dst, @src, @height, @width, @pix_fmt, @padtop, @padbottom, @padleft, @padright, @color);
@@ -2031,7 +2033,7 @@ namespace FFmpeg.AutoGen
             {
                 av_register_bitstream_filter_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_register_bitstream_filter is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_register_bitstream_filter"));
                 };
             }
             av_register_bitstream_filter_fptr(@bsf);
@@ -2052,7 +2054,7 @@ namespace FFmpeg.AutoGen
             {
                 av_register_codec_parser_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_register_codec_parser is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_register_codec_parser"));
                 };
             }
             av_register_codec_parser_fptr(@parser);
@@ -2073,7 +2075,7 @@ namespace FFmpeg.AutoGen
             {
                 av_register_hwaccel_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_register_hwaccel is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_register_hwaccel"));
                 };
             }
             av_register_hwaccel_fptr(@hwaccel);
@@ -2095,7 +2097,7 @@ namespace FFmpeg.AutoGen
             {
                 av_shrink_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_shrink_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_shrink_packet"));
                 };
             }
             av_shrink_packet_fptr(@pkt, @size);
@@ -2118,7 +2120,7 @@ namespace FFmpeg.AutoGen
             {
                 av_xiphlacing_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_xiphlacing is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_xiphlacing"));
                 };
             }
             return av_xiphlacing_fptr(@s, @v);
@@ -2142,7 +2144,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_align_dimensions_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_align_dimensions is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_align_dimensions"));
                 };
             }
             avcodec_align_dimensions_fptr(@s, @width, @height);
@@ -2163,7 +2165,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_align_dimensions2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_align_dimensions2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_align_dimensions2"));
                 };
             }
             avcodec_align_dimensions2_fptr(@s, @width, @height, ref @linesize_align);
@@ -2184,7 +2186,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_alloc_context3_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_alloc_context3 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_alloc_context3"));
                 };
             }
             return avcodec_alloc_context3_fptr(@codec);
@@ -2207,7 +2209,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_chroma_pos_to_enum_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_chroma_pos_to_enum is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_chroma_pos_to_enum"));
                 };
             }
             return avcodec_chroma_pos_to_enum_fptr(@xpos, @ypos);
@@ -2230,7 +2232,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_close_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_close is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_close"));
                 };
             }
             return avcodec_close_fptr(@avctx);
@@ -2252,7 +2254,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_configuration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_configuration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_configuration"));
                 };
             }
             return avcodec_configuration_fptr();
@@ -2273,7 +2275,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_copy_context_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_copy_context is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_copy_context"));
                 };
             }
             return avcodec_copy_context_fptr(@dest, @src);
@@ -2298,7 +2300,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_decode_audio4_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_decode_audio4 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_decode_audio4"));
                 };
             }
             return avcodec_decode_audio4_fptr(@avctx, @frame, @got_frame_ptr, @avpkt);
@@ -2325,7 +2327,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_decode_subtitle2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_decode_subtitle2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_decode_subtitle2"));
                 };
             }
             return avcodec_decode_subtitle2_fptr(@avctx, @sub, @got_sub_ptr, @avpkt);
@@ -2350,7 +2352,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_decode_video2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_decode_video2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_decode_video2"));
                 };
             }
             return avcodec_decode_video2_fptr(@avctx, @picture, @got_picture_ptr, @avpkt);
@@ -2377,7 +2379,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_default_execute_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_default_execute is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_default_execute"));
                 };
             }
             return avcodec_default_execute_fptr(@c, @func, @arg, @ret, @count, @size);
@@ -2397,7 +2399,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_default_execute2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_default_execute2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_default_execute2"));
                 };
             }
             return avcodec_default_execute2_fptr(@c, @func, @arg, @ret, @count);
@@ -2417,7 +2419,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_default_get_buffer2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_default_get_buffer2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_default_get_buffer2"));
                 };
             }
             return avcodec_default_get_buffer2_fptr(@s, @frame, @flags);
@@ -2438,7 +2440,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_default_get_encode_buffer_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_default_get_encode_buffer is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_default_get_encode_buffer"));
                 };
             }
             return avcodec_default_get_encode_buffer_fptr(@s, @pkt, @flags);
@@ -2459,7 +2461,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_default_get_format_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_default_get_format is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_default_get_format"));
                 };
             }
             return avcodec_default_get_format_fptr(@s, @fmt);
@@ -2479,7 +2481,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_descriptor_get_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_descriptor_get is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_descriptor_get"));
                 };
             }
             return avcodec_descriptor_get_fptr(@id);
@@ -2508,7 +2510,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_descriptor_get_by_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_descriptor_get_by_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_descriptor_get_by_name"));
                 };
             }
             return avcodec_descriptor_get_by_name_fptr(@name);
@@ -2537,7 +2539,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_descriptor_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_descriptor_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_descriptor_next"));
                 };
             }
             return avcodec_descriptor_next_fptr(@prev);
@@ -2560,7 +2562,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_encode_audio2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_encode_audio2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_encode_audio2"));
                 };
             }
             return avcodec_encode_audio2_fptr(@avctx, @avpkt, @frame, @got_packet_ptr);
@@ -2587,7 +2589,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_encode_subtitle_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_encode_subtitle is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_encode_subtitle"));
                 };
             }
             return avcodec_encode_subtitle_fptr(@avctx, @buf, @buf_size, @sub);
@@ -2607,7 +2609,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_encode_video2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_encode_video2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_encode_video2"));
                 };
             }
             return avcodec_encode_video2_fptr(@avctx, @avpkt, @frame, @got_packet_ptr);
@@ -2634,7 +2636,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_enum_to_chroma_pos_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_enum_to_chroma_pos is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_enum_to_chroma_pos"));
                 };
             }
             return avcodec_enum_to_chroma_pos_fptr(@xpos, @ypos, @pos);
@@ -2657,7 +2659,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_fill_audio_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_fill_audio_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_fill_audio_frame"));
                 };
             }
             return avcodec_fill_audio_frame_fptr(@frame, @nb_channels, @sample_fmt, @buf, @buf_size, @align);
@@ -2685,7 +2687,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_find_best_pix_fmt_of_2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_find_best_pix_fmt_of_2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_find_best_pix_fmt_of_2"));
                 };
             }
             return avcodec_find_best_pix_fmt_of_2_fptr(@dst_pix_fmt1, @dst_pix_fmt2, @src_pix_fmt, @has_alpha, @loss_ptr);
@@ -2706,7 +2708,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_find_best_pix_fmt_of_list_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_find_best_pix_fmt_of_list is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_find_best_pix_fmt_of_list"));
                 };
             }
             return avcodec_find_best_pix_fmt_of_list_fptr(@pix_fmt_list, @src_pix_fmt, @has_alpha, @loss_ptr);
@@ -2732,7 +2734,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_find_best_pix_fmt2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_find_best_pix_fmt2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_find_best_pix_fmt2"));
                 };
             }
             return avcodec_find_best_pix_fmt2_fptr(@dst_pix_fmt1, @dst_pix_fmt2, @src_pix_fmt, @has_alpha, @loss_ptr);
@@ -2753,7 +2755,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_find_decoder_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_find_decoder is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_find_decoder"));
                 };
             }
             return avcodec_find_decoder_fptr(@id);
@@ -2783,7 +2785,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_find_decoder_by_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_find_decoder_by_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_find_decoder_by_name"));
                 };
             }
             return avcodec_find_decoder_by_name_fptr(@name);
@@ -2813,7 +2815,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_find_encoder_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_find_encoder is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_find_encoder"));
                 };
             }
             return avcodec_find_encoder_fptr(@id);
@@ -2843,7 +2845,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_find_encoder_by_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_find_encoder_by_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_find_encoder_by_name"));
                 };
             }
             return avcodec_find_encoder_by_name_fptr(@name);
@@ -2873,7 +2875,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_flush_buffers_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_flush_buffers is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_flush_buffers"));
                 };
             }
             avcodec_flush_buffers_fptr(@avctx);
@@ -2894,7 +2896,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_free_context_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_free_context is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_free_context"));
                 };
             }
             avcodec_free_context_fptr(@avctx);
@@ -2915,7 +2917,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_get_chroma_sub_sample_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_get_chroma_sub_sample is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_chroma_sub_sample"));
                 };
             }
             avcodec_get_chroma_sub_sample_fptr(@pix_fmt, @h_shift, @v_shift);
@@ -2936,7 +2938,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_get_class_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_get_class is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_class"));
                 };
             }
             return avcodec_get_class_fptr();
@@ -2957,7 +2959,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_get_context_defaults3_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_get_context_defaults3 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_context_defaults3"));
                 };
             }
             return avcodec_get_context_defaults3_fptr(@s, @codec);
@@ -2978,7 +2980,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_get_frame_class_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_get_frame_class is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_frame_class"));
                 };
             }
             return avcodec_get_frame_class_fptr();
@@ -2999,7 +3001,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_get_hw_config_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_get_hw_config is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_hw_config"));
                 };
             }
             return avcodec_get_hw_config_fptr(@codec, @index);
@@ -3020,7 +3022,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_get_hw_frames_parameters_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_get_hw_frames_parameters is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_hw_frames_parameters"));
                 };
             }
             return avcodec_get_hw_frames_parameters_fptr(@avctx, @device_ref, @hw_pix_fmt, @out_frames_ref);
@@ -3047,7 +3049,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_get_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_get_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_name"));
                 };
             }
             return avcodec_get_name_fptr(@id);
@@ -3069,7 +3071,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_get_pix_fmt_loss_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_get_pix_fmt_loss is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_pix_fmt_loss"));
                 };
             }
             return avcodec_get_pix_fmt_loss_fptr(@dst_pix_fmt, @src_pix_fmt, @has_alpha);
@@ -3090,7 +3092,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_get_subtitle_rect_class_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_get_subtitle_rect_class is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_subtitle_rect_class"));
                 };
             }
             return avcodec_get_subtitle_rect_class_fptr();
@@ -3111,7 +3113,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_get_type_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_get_type is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_type"));
                 };
             }
             return avcodec_get_type_fptr(@codec_id);
@@ -3132,7 +3134,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_is_open_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_is_open is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_is_open"));
                 };
             }
             return avcodec_is_open_fptr(@s);
@@ -3155,7 +3157,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_license_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_license is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_license"));
                 };
             }
             return avcodec_license_fptr();
@@ -3176,7 +3178,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_open2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_open2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_open2"));
                 };
             }
             return avcodec_open2_fptr(@avctx, @codec, @options);
@@ -3201,7 +3203,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_parameters_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_parameters_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_parameters_alloc"));
                 };
             }
             return avcodec_parameters_alloc_fptr();
@@ -3222,7 +3224,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_parameters_copy_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_parameters_copy is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_parameters_copy"));
                 };
             }
             return avcodec_parameters_copy_fptr(@dst, @src);
@@ -3244,7 +3246,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_parameters_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_parameters_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_parameters_free"));
                 };
             }
             avcodec_parameters_free_fptr(@par);
@@ -3265,7 +3267,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_parameters_from_context_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_parameters_from_context is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_parameters_from_context"));
                 };
             }
             return avcodec_parameters_from_context_fptr(@par, @codec);
@@ -3287,7 +3289,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_parameters_to_context_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_parameters_to_context is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_parameters_to_context"));
                 };
             }
             return avcodec_parameters_to_context_fptr(@codec, @par);
@@ -3309,7 +3311,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_pix_fmt_to_codec_tag_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_pix_fmt_to_codec_tag is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_pix_fmt_to_codec_tag"));
                 };
             }
             return avcodec_pix_fmt_to_codec_tag_fptr(@pix_fmt);
@@ -3331,7 +3333,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_profile_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_profile_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_profile_name"));
                 };
             }
             return avcodec_profile_name_fptr(@codec_id, @profile);
@@ -3355,7 +3357,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_receive_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_receive_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_receive_frame"));
                 };
             }
             return avcodec_receive_frame_fptr(@avctx, @frame);
@@ -3379,7 +3381,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_receive_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_receive_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_receive_packet"));
                 };
             }
             return avcodec_receive_packet_fptr(@avctx, @avpkt);
@@ -3403,7 +3405,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_register_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_register is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_register"));
                 };
             }
             avcodec_register_fptr(@codec);
@@ -3424,7 +3426,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_register_all_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_register_all is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_register_all"));
                 };
             }
             avcodec_register_all_fptr();
@@ -3445,7 +3447,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_send_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_send_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_send_frame"));
                 };
             }
             return avcodec_send_frame_fptr(@avctx, @frame);
@@ -3469,7 +3471,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_send_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_send_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_send_packet"));
                 };
             }
             return avcodec_send_packet_fptr(@avctx, @avpkt);
@@ -3493,7 +3495,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_string"));
                 };
             }
             avcodec_string_fptr(@buf, @buf_size, @enc, @encode);
@@ -3513,7 +3515,7 @@ namespace FFmpeg.AutoGen
             {
                 avcodec_version_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avcodec_version is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_version"));
                 };
             }
             return avcodec_version_fptr();
@@ -3534,7 +3536,7 @@ namespace FFmpeg.AutoGen
             {
                 avpicture_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avpicture_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpicture_alloc"));
                 };
             }
             return avpicture_alloc_fptr(@picture, @pix_fmt, @width, @height);
@@ -3555,7 +3557,7 @@ namespace FFmpeg.AutoGen
             {
                 avpicture_fill_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avpicture_fill is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpicture_fill"));
                 };
             }
             return avpicture_fill_fptr(@picture, @ptr, @pix_fmt, @width, @height);
@@ -3576,7 +3578,7 @@ namespace FFmpeg.AutoGen
             {
                 avpicture_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avpicture_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpicture_free"));
                 };
             }
             avpicture_free_fptr(@picture);
@@ -3597,7 +3599,7 @@ namespace FFmpeg.AutoGen
             {
                 avpicture_get_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avpicture_get_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpicture_get_size"));
                 };
             }
             return avpicture_get_size_fptr(@pix_fmt, @width, @height);
@@ -3618,7 +3620,7 @@ namespace FFmpeg.AutoGen
             {
                 avpicture_layout_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avpicture_layout is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpicture_layout"));
                 };
             }
             return avpicture_layout_fptr(@src, @pix_fmt, @width, @height, @dest, @dest_size);
@@ -3639,7 +3641,7 @@ namespace FFmpeg.AutoGen
             {
                 avsubtitle_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avsubtitle_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avsubtitle_free"));
                 };
             }
             avsubtitle_free_fptr(@sub);
@@ -3661,7 +3663,7 @@ namespace FFmpeg.AutoGen
             {
                 av_input_audio_device_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_input_audio_device_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_input_audio_device_next"));
                 };
             }
             return av_input_audio_device_next_fptr(@d);
@@ -3682,7 +3684,7 @@ namespace FFmpeg.AutoGen
             {
                 av_input_video_device_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_input_video_device_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_input_video_device_next"));
                 };
             }
             return av_input_video_device_next_fptr(@d);
@@ -3703,7 +3705,7 @@ namespace FFmpeg.AutoGen
             {
                 av_output_audio_device_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_output_audio_device_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_output_audio_device_next"));
                 };
             }
             return av_output_audio_device_next_fptr(@d);
@@ -3724,7 +3726,7 @@ namespace FFmpeg.AutoGen
             {
                 av_output_video_device_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_output_video_device_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_output_video_device_next"));
                 };
             }
             return av_output_video_device_next_fptr(@d);
@@ -3745,7 +3747,7 @@ namespace FFmpeg.AutoGen
             {
                 avdevice_app_to_dev_control_message_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avdevice_app_to_dev_control_message is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avdevice_app_to_dev_control_message"));
                 };
             }
             return avdevice_app_to_dev_control_message_fptr(@s, @type, @data, @data_size);
@@ -3771,7 +3773,7 @@ namespace FFmpeg.AutoGen
             {
                 avdevice_capabilities_create_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avdevice_capabilities_create is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avdevice_capabilities_create"));
                 };
             }
             return avdevice_capabilities_create_fptr(@caps, @s, @device_options);
@@ -3797,7 +3799,7 @@ namespace FFmpeg.AutoGen
             {
                 avdevice_capabilities_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avdevice_capabilities_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avdevice_capabilities_free"));
                 };
             }
             avdevice_capabilities_free_fptr(@caps, @s);
@@ -3822,7 +3824,7 @@ namespace FFmpeg.AutoGen
             {
                 avdevice_configuration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avdevice_configuration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avdevice_configuration"));
                 };
             }
             return avdevice_configuration_fptr();
@@ -3843,7 +3845,7 @@ namespace FFmpeg.AutoGen
             {
                 avdevice_dev_to_app_control_message_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avdevice_dev_to_app_control_message is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avdevice_dev_to_app_control_message"));
                 };
             }
             return avdevice_dev_to_app_control_message_fptr(@s, @type, @data, @data_size);
@@ -3869,7 +3871,7 @@ namespace FFmpeg.AutoGen
             {
                 avdevice_free_list_devices_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avdevice_free_list_devices is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avdevice_free_list_devices"));
                 };
             }
             avdevice_free_list_devices_fptr(@device_list);
@@ -3891,7 +3893,7 @@ namespace FFmpeg.AutoGen
             {
                 avdevice_license_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avdevice_license is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avdevice_license"));
                 };
             }
             return avdevice_license_fptr();
@@ -3912,7 +3914,7 @@ namespace FFmpeg.AutoGen
             {
                 avdevice_list_devices_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avdevice_list_devices is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avdevice_list_devices"));
                 };
             }
             return avdevice_list_devices_fptr(@s, @device_list);
@@ -3943,7 +3945,7 @@ namespace FFmpeg.AutoGen
             {
                 avdevice_list_input_sources_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avdevice_list_input_sources is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avdevice_list_input_sources"));
                 };
             }
             return avdevice_list_input_sources_fptr(@device, @device_name, @device_options, @device_list);
@@ -3983,7 +3985,7 @@ namespace FFmpeg.AutoGen
             {
                 avdevice_list_output_sinks_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avdevice_list_output_sinks is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avdevice_list_output_sinks"));
                 };
             }
             return avdevice_list_output_sinks_fptr(@device, @device_name, @device_options, @device_list);
@@ -4010,7 +4012,7 @@ namespace FFmpeg.AutoGen
             {
                 avdevice_register_all_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avdevice_register_all is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avdevice_register_all"));
                 };
             }
             avdevice_register_all_fptr();
@@ -4031,7 +4033,7 @@ namespace FFmpeg.AutoGen
             {
                 avdevice_version_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avdevice_version is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avdevice_version"));
                 };
             }
             return avdevice_version_fptr();
@@ -4052,7 +4054,7 @@ namespace FFmpeg.AutoGen
             {
                 av_abuffersink_params_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_abuffersink_params_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_abuffersink_params_alloc"));
                 };
             }
             return av_abuffersink_params_alloc_fptr();
@@ -4074,7 +4076,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_channel_layout_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_channel_layout is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_channel_layout"));
                 };
             }
             return av_buffersink_get_channel_layout_fptr(@ctx);
@@ -4094,7 +4096,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_channels_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_channels is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_channels"));
                 };
             }
             return av_buffersink_get_channels_fptr(@ctx);
@@ -4114,7 +4116,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_format_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_format is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_format"));
                 };
             }
             return av_buffersink_get_format_fptr(@ctx);
@@ -4134,7 +4136,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_frame"));
                 };
             }
             return av_buffersink_get_frame_fptr(@ctx, @frame);
@@ -4158,7 +4160,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_frame_flags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_frame_flags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_frame_flags"));
                 };
             }
             return av_buffersink_get_frame_flags_fptr(@ctx, @frame, @flags);
@@ -4183,7 +4185,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_frame_rate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_frame_rate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_frame_rate"));
                 };
             }
             return av_buffersink_get_frame_rate_fptr(@ctx);
@@ -4203,7 +4205,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_h_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_h is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_h"));
                 };
             }
             return av_buffersink_get_h_fptr(@ctx);
@@ -4223,7 +4225,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_hw_frames_ctx_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_hw_frames_ctx is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_hw_frames_ctx"));
                 };
             }
             return av_buffersink_get_hw_frames_ctx_fptr(@ctx);
@@ -4243,7 +4245,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_sample_aspect_ratio_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_sample_aspect_ratio is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_sample_aspect_ratio"));
                 };
             }
             return av_buffersink_get_sample_aspect_ratio_fptr(@ctx);
@@ -4263,7 +4265,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_sample_rate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_sample_rate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_sample_rate"));
                 };
             }
             return av_buffersink_get_sample_rate_fptr(@ctx);
@@ -4283,7 +4285,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_samples_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_samples is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_samples"));
                 };
             }
             return av_buffersink_get_samples_fptr(@ctx, @frame, @nb_samples);
@@ -4307,7 +4309,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_time_base_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_time_base is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_time_base"));
                 };
             }
             return av_buffersink_get_time_base_fptr(@ctx);
@@ -4327,7 +4329,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_type_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_type is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_type"));
                 };
             }
             return av_buffersink_get_type_fptr(@ctx);
@@ -4348,7 +4350,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_get_w_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_get_w is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_w"));
                 };
             }
             return av_buffersink_get_w_fptr(@ctx);
@@ -4368,7 +4370,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_params_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_params_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_params_alloc"));
                 };
             }
             return av_buffersink_params_alloc_fptr();
@@ -4390,7 +4392,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersink_set_frame_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersink_set_frame_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_set_frame_size"));
                 };
             }
             av_buffersink_set_frame_size_fptr(@ctx, @frame_size);
@@ -4411,7 +4413,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersrc_add_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersrc_add_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersrc_add_frame"));
                 };
             }
             return av_buffersrc_add_frame_fptr(@ctx, @frame);
@@ -4435,7 +4437,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersrc_add_frame_flags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersrc_add_frame_flags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersrc_add_frame_flags"));
                 };
             }
             return av_buffersrc_add_frame_flags_fptr(@buffer_src, @frame, @flags);
@@ -4460,7 +4462,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersrc_close_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersrc_close is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersrc_close"));
                 };
             }
             return av_buffersrc_close_fptr(@ctx, @pts, @flags);
@@ -4481,7 +4483,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersrc_get_nb_failed_requests_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersrc_get_nb_failed_requests is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersrc_get_nb_failed_requests"));
                 };
             }
             return av_buffersrc_get_nb_failed_requests_fptr(@buffer_src);
@@ -4502,7 +4504,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersrc_parameters_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersrc_parameters_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersrc_parameters_alloc"));
                 };
             }
             return av_buffersrc_parameters_alloc_fptr();
@@ -4523,7 +4525,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersrc_parameters_set_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersrc_parameters_set is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersrc_parameters_set"));
                 };
             }
             return av_buffersrc_parameters_set_fptr(@ctx, @param);
@@ -4547,7 +4549,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffersrc_write_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffersrc_write_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersrc_write_frame"));
                 };
             }
             return av_buffersrc_write_frame_fptr(@ctx, @frame);
@@ -4571,7 +4573,7 @@ namespace FFmpeg.AutoGen
             {
                 av_filter_iterate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_filter_iterate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_filter_iterate"));
                 };
             }
             return av_filter_iterate_fptr(@opaque);
@@ -4594,7 +4596,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_config_links_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_config_links is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_config_links"));
                 };
             }
             return avfilter_config_links_fptr(@filter);
@@ -4618,7 +4620,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_configuration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_configuration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_configuration"));
                 };
             }
             return avfilter_configuration_fptr();
@@ -4639,7 +4641,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_free"));
                 };
             }
             avfilter_free_fptr(@filter);
@@ -4668,7 +4670,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_get_by_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_get_by_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_get_by_name"));
                 };
             }
             return avfilter_get_by_name_fptr(@name);
@@ -4698,7 +4700,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_get_class_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_get_class is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_get_class"));
                 };
             }
             return avfilter_get_class_fptr();
@@ -4720,7 +4722,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_alloc"));
                 };
             }
             return avfilter_graph_alloc_fptr();
@@ -4749,7 +4751,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_alloc_filter_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_alloc_filter is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_alloc_filter"));
                 };
             }
             return avfilter_graph_alloc_filter_fptr(@graph, @filter, @name);
@@ -4781,7 +4783,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_config_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_config is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_config"));
                 };
             }
             return avfilter_graph_config_fptr(@graphctx, @log_ctx);
@@ -4819,7 +4821,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_create_filter_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_create_filter is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_create_filter"));
                 };
             }
             return avfilter_graph_create_filter_fptr(@filt_ctx, @filt, @name, @args, @opaque, @graph_ctx);
@@ -4864,7 +4866,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_dump_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_dump is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_dump"));
                 };
             }
             return avfilter_graph_dump_fptr(@graph, @options);
@@ -4895,7 +4897,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_free"));
                 };
             }
             avfilter_graph_free_fptr(@graph);
@@ -4923,7 +4925,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_get_filter_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_get_filter is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_get_filter"));
                 };
             }
             return avfilter_graph_get_filter_fptr(@graph, @name);
@@ -4961,7 +4963,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_parse_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_parse is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_parse"));
                 };
             }
             return avfilter_graph_parse_fptr(@graph, @filters, @inputs, @outputs, @log_ctx);
@@ -5001,7 +5003,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_parse_ptr_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_parse_ptr is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_parse_ptr"));
                 };
             }
             return avfilter_graph_parse_ptr_fptr(@graph, @filters, @inputs, @outputs, @log_ctx);
@@ -5041,7 +5043,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_parse2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_parse2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_parse2"));
                 };
             }
             return avfilter_graph_parse2_fptr(@graph, @filters, @inputs, @outputs);
@@ -5095,7 +5097,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_queue_command_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_queue_command is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_queue_command"));
                 };
             }
             return avfilter_graph_queue_command_fptr(@graph, @target, @cmd, @arg, @flags, @ts);
@@ -5142,7 +5144,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_request_oldest_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_request_oldest is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_request_oldest"));
                 };
             }
             return avfilter_graph_request_oldest_fptr(@graph);
@@ -5185,7 +5187,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_send_command_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_send_command is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_send_command"));
                 };
             }
             return avfilter_graph_send_command_fptr(@graph, @target, @cmd, @arg, @res, @res_len, @flags);
@@ -5232,7 +5234,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_graph_set_auto_convert_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_graph_set_auto_convert is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_graph_set_auto_convert"));
                 };
             }
             avfilter_graph_set_auto_convert_fptr(@graph, @flags);
@@ -5254,7 +5256,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_init_dict_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_init_dict is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_init_dict"));
                 };
             }
             return avfilter_init_dict_fptr(@ctx, @options);
@@ -5285,7 +5287,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_init_str_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_init_str is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_init_str"));
                 };
             }
             return avfilter_init_str_fptr(@ctx, @args);
@@ -5316,7 +5318,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_inout_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_inout_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_inout_alloc"));
                 };
             }
             return avfilter_inout_alloc_fptr();
@@ -5338,7 +5340,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_inout_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_inout_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_inout_free"));
                 };
             }
             avfilter_inout_free_fptr(@inout);
@@ -5359,7 +5361,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_insert_filter_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_insert_filter is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_insert_filter"));
                 };
             }
             return avfilter_insert_filter_fptr(@link, @filt, @filt_srcpad_idx, @filt_dstpad_idx);
@@ -5386,7 +5388,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_license_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_license is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_license"));
                 };
             }
             return avfilter_license_fptr();
@@ -5407,7 +5409,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_link_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_link is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_link"));
                 };
             }
             return avfilter_link_fptr(@src, @srcpad, @dst, @dstpad);
@@ -5433,7 +5435,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_link_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_link_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_link_free"));
                 };
             }
             avfilter_link_free_fptr(@link);
@@ -5454,7 +5456,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_link_get_channels_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_link_get_channels is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_link_get_channels"));
                 };
             }
             return avfilter_link_get_channels_fptr(@link);
@@ -5476,7 +5478,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_link_set_closed_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_link_set_closed is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_link_set_closed"));
                 };
             }
             avfilter_link_set_closed_fptr(@link, @closed);
@@ -5498,7 +5500,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_next"));
                 };
             }
             return avfilter_next_fptr(@prev);
@@ -5521,7 +5523,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_pad_count_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_pad_count is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_pad_count"));
                 };
             }
             return avfilter_pad_count_fptr(@pads);
@@ -5543,7 +5545,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_pad_get_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_pad_get_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_pad_get_name"));
                 };
             }
             return avfilter_pad_get_name_fptr(@pads, @pad_idx);
@@ -5567,7 +5569,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_pad_get_type_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_pad_get_type is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_pad_get_type"));
                 };
             }
             return avfilter_pad_get_type_fptr(@pads, @pad_idx);
@@ -5605,7 +5607,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_process_command_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_process_command is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_process_command"));
                 };
             }
             return avfilter_process_command_fptr(@filter, @cmd, @arg, @res, @res_len, @flags);
@@ -5640,7 +5642,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_register_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_register is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_register"));
                 };
             }
             return avfilter_register_fptr(@filter);
@@ -5664,7 +5666,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_register_all_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_register_all is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_register_all"));
                 };
             }
             avfilter_register_all_fptr();
@@ -5686,7 +5688,7 @@ namespace FFmpeg.AutoGen
             {
                 avfilter_version_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avfilter_version is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_version"));
                 };
             }
             return avfilter_version_fptr();
@@ -5707,7 +5709,7 @@ namespace FFmpeg.AutoGen
             {
                 av_add_index_entry_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_add_index_entry is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_add_index_entry"));
                 };
             }
             return av_add_index_entry_fptr(@st, @pos, @timestamp, @size, @distance, @flags);
@@ -5729,7 +5731,7 @@ namespace FFmpeg.AutoGen
             {
                 av_append_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_append_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_append_packet"));
                 };
             }
             return av_append_packet_fptr(@s, @pkt, @size);
@@ -5754,7 +5756,7 @@ namespace FFmpeg.AutoGen
             {
                 av_apply_bitstream_filters_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_apply_bitstream_filters is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_apply_bitstream_filters"));
                 };
             }
             return av_apply_bitstream_filters_fptr(@codec, @pkt, @bsfc);
@@ -5780,7 +5782,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_get_id_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_get_id is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_id"));
                 };
             }
             return av_codec_get_id_fptr(@tags, @tag);
@@ -5803,7 +5805,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_get_tag_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_get_tag is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_tag"));
                 };
             }
             return av_codec_get_tag_fptr(@tags, @id);
@@ -5826,7 +5828,7 @@ namespace FFmpeg.AutoGen
             {
                 av_codec_get_tag2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_codec_get_tag2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_tag2"));
                 };
             }
             return av_codec_get_tag2_fptr(@tags, @id, @tag);
@@ -5851,7 +5853,7 @@ namespace FFmpeg.AutoGen
             {
                 av_demuxer_iterate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_demuxer_iterate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_demuxer_iterate"));
                 };
             }
             return av_demuxer_iterate_fptr(@opaque);
@@ -5874,7 +5876,7 @@ namespace FFmpeg.AutoGen
             {
                 av_demuxer_open_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_demuxer_open is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_demuxer_open"));
                 };
             }
             return av_demuxer_open_fptr(@ic);
@@ -5902,7 +5904,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dump_format_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dump_format is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dump_format"));
                 };
             }
             av_dump_format_fptr(@ic, @index, @url, @is_output);
@@ -5941,7 +5943,7 @@ namespace FFmpeg.AutoGen
             {
                 av_filename_number_test_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_filename_number_test is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_filename_number_test"));
                 };
             }
             return av_filename_number_test_fptr(@filename);
@@ -5971,7 +5973,7 @@ namespace FFmpeg.AutoGen
             {
                 av_find_best_stream_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_find_best_stream is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_find_best_stream"));
                 };
             }
             return av_find_best_stream_fptr(@ic, @type, @wanted_stream_nb, @related_stream, @decoder_ret, @flags);
@@ -5999,7 +6001,7 @@ namespace FFmpeg.AutoGen
             {
                 av_find_default_stream_index_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_find_default_stream_index is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_find_default_stream_index"));
                 };
             }
             return av_find_default_stream_index_fptr(@s);
@@ -6026,7 +6028,7 @@ namespace FFmpeg.AutoGen
             {
                 av_find_input_format_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_find_input_format is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_find_input_format"));
                 };
             }
             return av_find_input_format_fptr(@short_name);
@@ -6054,7 +6056,7 @@ namespace FFmpeg.AutoGen
             {
                 av_find_program_from_stream_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_find_program_from_stream is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_find_program_from_stream"));
                 };
             }
             return av_find_program_from_stream_fptr(@ic, @last, @s);
@@ -6079,7 +6081,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fmt_ctx_get_duration_estimation_method_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fmt_ctx_get_duration_estimation_method is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fmt_ctx_get_duration_estimation_method"));
                 };
             }
             return av_fmt_ctx_get_duration_estimation_method_fptr(@ctx);
@@ -6101,7 +6103,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_get_audio_codec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_get_audio_codec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_audio_codec"));
                 };
             }
             return av_format_get_audio_codec_fptr(@s);
@@ -6122,7 +6124,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_get_control_message_cb_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_get_control_message_cb is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_control_message_cb"));
                 };
             }
             return av_format_get_control_message_cb_fptr(@s);
@@ -6143,7 +6145,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_get_data_codec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_get_data_codec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_data_codec"));
                 };
             }
             return av_format_get_data_codec_fptr(@s);
@@ -6164,7 +6166,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_get_metadata_header_padding_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_get_metadata_header_padding is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_metadata_header_padding"));
                 };
             }
             return av_format_get_metadata_header_padding_fptr(@s);
@@ -6185,7 +6187,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_get_opaque_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_get_opaque is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_opaque"));
                 };
             }
             return av_format_get_opaque_fptr(@s);
@@ -6206,7 +6208,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_get_open_cb_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_get_open_cb is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_open_cb"));
                 };
             }
             return av_format_get_open_cb_fptr(@s);
@@ -6227,7 +6229,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_get_probe_score_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_get_probe_score is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_probe_score"));
                 };
             }
             return av_format_get_probe_score_fptr(@s);
@@ -6249,7 +6251,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_get_subtitle_codec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_get_subtitle_codec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_subtitle_codec"));
                 };
             }
             return av_format_get_subtitle_codec_fptr(@s);
@@ -6270,7 +6272,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_get_video_codec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_get_video_codec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_video_codec"));
                 };
             }
             return av_format_get_video_codec_fptr(@s);
@@ -6291,7 +6293,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_inject_global_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_inject_global_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_inject_global_side_data"));
                 };
             }
             av_format_inject_global_side_data_fptr(@s);
@@ -6312,7 +6314,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_set_audio_codec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_set_audio_codec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_audio_codec"));
                 };
             }
             av_format_set_audio_codec_fptr(@s, @c);
@@ -6333,7 +6335,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_set_control_message_cb_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_set_control_message_cb is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_control_message_cb"));
                 };
             }
             av_format_set_control_message_cb_fptr(@s, @callback);
@@ -6354,7 +6356,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_set_data_codec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_set_data_codec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_data_codec"));
                 };
             }
             av_format_set_data_codec_fptr(@s, @c);
@@ -6375,7 +6377,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_set_metadata_header_padding_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_set_metadata_header_padding is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_metadata_header_padding"));
                 };
             }
             av_format_set_metadata_header_padding_fptr(@s, @c);
@@ -6396,7 +6398,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_set_opaque_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_set_opaque is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_opaque"));
                 };
             }
             av_format_set_opaque_fptr(@s, @opaque);
@@ -6417,7 +6419,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_set_open_cb_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_set_open_cb is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_open_cb"));
                 };
             }
             av_format_set_open_cb_fptr(@s, @callback);
@@ -6438,7 +6440,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_set_subtitle_codec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_set_subtitle_codec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_subtitle_codec"));
                 };
             }
             av_format_set_subtitle_codec_fptr(@s, @c);
@@ -6459,7 +6461,7 @@ namespace FFmpeg.AutoGen
             {
                 av_format_set_video_codec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_format_set_video_codec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_video_codec"));
                 };
             }
             av_format_set_video_codec_fptr(@s, @c);
@@ -6487,7 +6489,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_frame_filename_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_frame_filename is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_frame_filename"));
                 };
             }
             return av_get_frame_filename_fptr(@buf, @buf_size, @path, @number);
@@ -6521,7 +6523,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_frame_filename2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_frame_filename2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_frame_filename2"));
                 };
             }
             return av_get_frame_filename2_fptr(@buf, @buf_size, @path, @number, @flags);
@@ -6555,7 +6557,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_output_timestamp_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_output_timestamp is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_output_timestamp"));
                 };
             }
             return av_get_output_timestamp_fptr(@s, @stream, @dts, @wall);
@@ -6581,7 +6583,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_packet_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_packet is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_packet"));
                 };
             }
             return av_get_packet_fptr(@s, @pkt, @size);
@@ -6627,7 +6629,7 @@ namespace FFmpeg.AutoGen
             {
                 av_guess_codec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_guess_codec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_guess_codec"));
                 };
             }
             return av_guess_codec_fptr(@fmt, @short_name, @filename, @mime_type, @type);
@@ -6690,7 +6692,7 @@ namespace FFmpeg.AutoGen
             {
                 av_guess_format_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_guess_format is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_guess_format"));
                 };
             }
             return av_guess_format_fptr(@short_name, @filename, @mime_type);
@@ -6735,7 +6737,7 @@ namespace FFmpeg.AutoGen
             {
                 av_guess_frame_rate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_guess_frame_rate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_guess_frame_rate"));
                 };
             }
             return av_guess_frame_rate_fptr(@ctx, @stream, @frame);
@@ -6760,7 +6762,7 @@ namespace FFmpeg.AutoGen
             {
                 av_guess_sample_aspect_ratio_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_guess_sample_aspect_ratio is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_guess_sample_aspect_ratio"));
                 };
             }
             return av_guess_sample_aspect_ratio_fptr(@format, @stream, @frame);
@@ -6785,7 +6787,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hex_dump_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hex_dump is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hex_dump"));
                 };
             }
             av_hex_dump_fptr(@f, @buf, @size);
@@ -6809,7 +6811,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hex_dump_log_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hex_dump_log is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hex_dump_log"));
                 };
             }
             av_hex_dump_log_fptr(@avcl, @level, @buf, @size);
@@ -6834,7 +6836,7 @@ namespace FFmpeg.AutoGen
             {
                 av_iformat_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_iformat_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_iformat_next"));
                 };
             }
             return av_iformat_next_fptr(@f);
@@ -6856,7 +6858,7 @@ namespace FFmpeg.AutoGen
             {
                 av_index_search_timestamp_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_index_search_timestamp is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_index_search_timestamp"));
                 };
             }
             return av_index_search_timestamp_fptr(@st, @timestamp, @flags);
@@ -6881,7 +6883,7 @@ namespace FFmpeg.AutoGen
             {
                 av_interleaved_write_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_interleaved_write_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_interleaved_write_frame"));
                 };
             }
             return av_interleaved_write_frame_fptr(@s, @pkt);
@@ -6905,7 +6907,7 @@ namespace FFmpeg.AutoGen
             {
                 av_interleaved_write_uncoded_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_interleaved_write_uncoded_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_interleaved_write_uncoded_frame"));
                 };
             }
             return av_interleaved_write_uncoded_frame_fptr(@s, @stream_index, @frame);
@@ -6941,7 +6943,7 @@ namespace FFmpeg.AutoGen
             {
                 av_match_ext_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_match_ext is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_match_ext"));
                 };
             }
             return av_match_ext_fptr(@filename, @extensions);
@@ -6978,7 +6980,7 @@ namespace FFmpeg.AutoGen
             {
                 av_muxer_iterate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_muxer_iterate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_muxer_iterate"));
                 };
             }
             return av_muxer_iterate_fptr(@opaque);
@@ -7001,7 +7003,7 @@ namespace FFmpeg.AutoGen
             {
                 av_new_program_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_new_program is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_new_program"));
                 };
             }
             return av_new_program_fptr(@s, @id);
@@ -7021,7 +7023,7 @@ namespace FFmpeg.AutoGen
             {
                 av_oformat_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_oformat_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_oformat_next"));
                 };
             }
             return av_oformat_next_fptr(@f);
@@ -7043,7 +7045,7 @@ namespace FFmpeg.AutoGen
             {
                 av_pkt_dump_log2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_pkt_dump_log2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_pkt_dump_log2"));
                 };
             }
             av_pkt_dump_log2_fptr(@avcl, @level, @pkt, @dump_payload, @st);
@@ -7069,7 +7071,7 @@ namespace FFmpeg.AutoGen
             {
                 av_pkt_dump2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_pkt_dump2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_pkt_dump2"));
                 };
             }
             av_pkt_dump2_fptr(@f, @pkt, @dump_payload, @st);
@@ -7101,7 +7103,7 @@ namespace FFmpeg.AutoGen
             {
                 av_probe_input_buffer_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_probe_input_buffer is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_probe_input_buffer"));
                 };
             }
             return av_probe_input_buffer_fptr(@pb, @fmt, @url, @logctx, @offset, @max_probe_size);
@@ -7136,7 +7138,7 @@ namespace FFmpeg.AutoGen
             {
                 av_probe_input_buffer2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_probe_input_buffer2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_probe_input_buffer2"));
                 };
             }
             return av_probe_input_buffer2_fptr(@pb, @fmt, @url, @logctx, @offset, @max_probe_size);
@@ -7171,7 +7173,7 @@ namespace FFmpeg.AutoGen
             {
                 av_probe_input_format_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_probe_input_format is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_probe_input_format"));
                 };
             }
             return av_probe_input_format_fptr(@pd, @is_opened);
@@ -7194,7 +7196,7 @@ namespace FFmpeg.AutoGen
             {
                 av_probe_input_format2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_probe_input_format2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_probe_input_format2"));
                 };
             }
             return av_probe_input_format2_fptr(@pd, @is_opened, @score_max);
@@ -7218,7 +7220,7 @@ namespace FFmpeg.AutoGen
             {
                 av_probe_input_format3_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_probe_input_format3 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_probe_input_format3"));
                 };
             }
             return av_probe_input_format3_fptr(@pd, @is_opened, @score_ret);
@@ -7241,7 +7243,7 @@ namespace FFmpeg.AutoGen
             {
                 av_program_add_stream_index_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_program_add_stream_index is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_program_add_stream_index"));
                 };
             }
             av_program_add_stream_index_fptr(@ac, @progid, @idx);
@@ -7261,7 +7263,7 @@ namespace FFmpeg.AutoGen
             {
                 av_read_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_read_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_read_frame"));
                 };
             }
             return av_read_frame_fptr(@s, @pkt);
@@ -7283,7 +7285,7 @@ namespace FFmpeg.AutoGen
             {
                 av_read_pause_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_read_pause is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_read_pause"));
                 };
             }
             return av_read_pause_fptr(@s);
@@ -7304,7 +7306,7 @@ namespace FFmpeg.AutoGen
             {
                 av_read_play_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_read_play is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_read_play"));
                 };
             }
             return av_read_play_fptr(@s);
@@ -7325,7 +7327,7 @@ namespace FFmpeg.AutoGen
             {
                 av_register_all_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_register_all is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_register_all"));
                 };
             }
             av_register_all_fptr();
@@ -7347,7 +7349,7 @@ namespace FFmpeg.AutoGen
             {
                 av_register_input_format_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_register_input_format is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_register_input_format"));
                 };
             }
             av_register_input_format_fptr(@format);
@@ -7368,7 +7370,7 @@ namespace FFmpeg.AutoGen
             {
                 av_register_output_format_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_register_output_format is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_register_output_format"));
                 };
             }
             av_register_output_format_fptr(@format);
@@ -7389,7 +7391,7 @@ namespace FFmpeg.AutoGen
             {
                 av_sdp_create_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_sdp_create is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_sdp_create"));
                 };
             }
             return av_sdp_create_fptr(@ac, @n_files, @buf, @size);
@@ -7415,7 +7417,7 @@ namespace FFmpeg.AutoGen
             {
                 av_seek_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_seek_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_seek_frame"));
                 };
             }
             return av_seek_frame_fptr(@s, @stream_index, @timestamp, @flags);
@@ -7441,7 +7443,7 @@ namespace FFmpeg.AutoGen
             {
                 av_stream_add_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_stream_add_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_add_side_data"));
                 };
             }
             return av_stream_add_side_data_fptr(@st, @type, @data, @size);
@@ -7467,7 +7469,7 @@ namespace FFmpeg.AutoGen
             {
                 av_stream_get_codec_timebase_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_stream_get_codec_timebase is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_get_codec_timebase"));
                 };
             }
             return av_stream_get_codec_timebase_fptr(@st);
@@ -7489,7 +7491,7 @@ namespace FFmpeg.AutoGen
             {
                 av_stream_get_end_pts_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_stream_get_end_pts is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_get_end_pts"));
                 };
             }
             return av_stream_get_end_pts_fptr(@st);
@@ -7510,7 +7512,7 @@ namespace FFmpeg.AutoGen
             {
                 av_stream_get_parser_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_stream_get_parser is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_get_parser"));
                 };
             }
             return av_stream_get_parser_fptr(@s);
@@ -7530,7 +7532,7 @@ namespace FFmpeg.AutoGen
             {
                 av_stream_get_r_frame_rate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_stream_get_r_frame_rate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_get_r_frame_rate"));
                 };
             }
             return av_stream_get_r_frame_rate_fptr(@s);
@@ -7552,7 +7554,7 @@ namespace FFmpeg.AutoGen
             {
                 av_stream_get_recommended_encoder_configuration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_stream_get_recommended_encoder_configuration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_get_recommended_encoder_configuration"));
                 };
             }
             return av_stream_get_recommended_encoder_configuration_fptr(@s);
@@ -7573,7 +7575,7 @@ namespace FFmpeg.AutoGen
             {
                 av_stream_get_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_stream_get_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_get_side_data"));
                 };
             }
             return av_stream_get_side_data_fptr(@stream, @type, @size);
@@ -7598,7 +7600,7 @@ namespace FFmpeg.AutoGen
             {
                 av_stream_new_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_stream_new_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_new_side_data"));
                 };
             }
             return av_stream_new_side_data_fptr(@stream, @type, @size);
@@ -7623,7 +7625,7 @@ namespace FFmpeg.AutoGen
             {
                 av_stream_set_r_frame_rate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_stream_set_r_frame_rate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_set_r_frame_rate"));
                 };
             }
             av_stream_set_r_frame_rate_fptr(@s, @r);
@@ -7644,7 +7646,7 @@ namespace FFmpeg.AutoGen
             {
                 av_stream_set_recommended_encoder_configuration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_stream_set_recommended_encoder_configuration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_set_recommended_encoder_configuration"));
                 };
             }
             av_stream_set_recommended_encoder_configuration_fptr(@s, @configuration);
@@ -7672,7 +7674,7 @@ namespace FFmpeg.AutoGen
             {
                 av_url_split_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_url_split is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_url_split"));
                 };
             }
             av_url_split_fptr(@proto, @proto_size, @authorization, @authorization_size, @hostname, @hostname_size, @port_ptr, @path, @path_size, @url);
@@ -7710,7 +7712,7 @@ namespace FFmpeg.AutoGen
             {
                 av_write_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_write_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_write_frame"));
                 };
             }
             return av_write_frame_fptr(@s, @pkt);
@@ -7734,7 +7736,7 @@ namespace FFmpeg.AutoGen
             {
                 av_write_trailer_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_write_trailer is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_write_trailer"));
                 };
             }
             return av_write_trailer_fptr(@s);
@@ -7757,7 +7759,7 @@ namespace FFmpeg.AutoGen
             {
                 av_write_uncoded_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_write_uncoded_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_write_uncoded_frame"));
                 };
             }
             return av_write_uncoded_frame_fptr(@s, @stream_index, @frame);
@@ -7778,7 +7780,7 @@ namespace FFmpeg.AutoGen
             {
                 av_write_uncoded_frame_query_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_write_uncoded_frame_query is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_write_uncoded_frame_query"));
                 };
             }
             return av_write_uncoded_frame_query_fptr(@s, @stream_index);
@@ -7800,7 +7802,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_alloc_context_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_alloc_context is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_alloc_context"));
                 };
             }
             return avformat_alloc_context_fptr();
@@ -7835,7 +7837,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_alloc_output_context2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_alloc_output_context2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_alloc_output_context2"));
                 };
             }
             return avformat_alloc_output_context2_fptr(@ctx, @oformat, @format_name, @filename);
@@ -7874,7 +7876,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_close_input_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_close_input is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_close_input"));
                 };
             }
             avformat_close_input_fptr(@s);
@@ -7896,7 +7898,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_configuration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_configuration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_configuration"));
                 };
             }
             return avformat_configuration_fptr();
@@ -7917,7 +7919,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_find_stream_info_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_find_stream_info is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_find_stream_info"));
                 };
             }
             return avformat_find_stream_info_fptr(@ic, @options);
@@ -7941,7 +7943,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_flush_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_flush is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_flush"));
                 };
             }
             return avformat_flush_fptr(@s);
@@ -7964,7 +7966,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_free_context_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_free_context is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_free_context"));
                 };
             }
             avformat_free_context_fptr(@s);
@@ -7986,7 +7988,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_get_class_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_get_class is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_get_class"));
                 };
             }
             return avformat_get_class_fptr();
@@ -8007,7 +8009,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_get_mov_audio_tags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_get_mov_audio_tags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_get_mov_audio_tags"));
                 };
             }
             return avformat_get_mov_audio_tags_fptr();
@@ -8029,7 +8031,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_get_mov_video_tags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_get_mov_video_tags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_get_mov_video_tags"));
                 };
             }
             return avformat_get_mov_video_tags_fptr();
@@ -8051,7 +8053,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_get_riff_audio_tags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_get_riff_audio_tags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_get_riff_audio_tags"));
                 };
             }
             return avformat_get_riff_audio_tags_fptr();
@@ -8073,7 +8075,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_get_riff_video_tags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_get_riff_video_tags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_get_riff_video_tags"));
                 };
             }
             return avformat_get_riff_video_tags_fptr();
@@ -8095,7 +8097,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_init_output_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_init_output is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_init_output"));
                 };
             }
             return avformat_init_output_fptr(@s, @options);
@@ -8120,7 +8122,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_license_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_license is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_license"));
                 };
             }
             return avformat_license_fptr();
@@ -8148,7 +8150,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_match_stream_specifier_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_match_stream_specifier is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_match_stream_specifier"));
                 };
             }
             return avformat_match_stream_specifier_fptr(@s, @st, @spec);
@@ -8177,7 +8179,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_network_deinit_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_network_deinit is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_network_deinit"));
                 };
             }
             return avformat_network_deinit_fptr();
@@ -8198,7 +8200,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_network_init_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_network_init is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_network_init"));
                 };
             }
             return avformat_network_init_fptr();
@@ -8219,7 +8221,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_new_stream_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_new_stream is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_new_stream"));
                 };
             }
             return avformat_new_stream_fptr(@s, @c);
@@ -8250,7 +8252,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_open_input_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_open_input is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_open_input"));
                 };
             }
             return avformat_open_input_fptr(@ps, @url, @fmt, @options);
@@ -8283,7 +8285,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_query_codec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_query_codec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_query_codec"));
                 };
             }
             return avformat_query_codec_fptr(@ofmt, @codec_id, @std_compliance);
@@ -8308,7 +8310,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_queue_attached_pictures_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_queue_attached_pictures is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_queue_attached_pictures"));
                 };
             }
             return avformat_queue_attached_pictures_fptr(@s);
@@ -8328,7 +8330,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_seek_file_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_seek_file is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_seek_file"));
                 };
             }
             return avformat_seek_file_fptr(@s, @stream_index, @min_ts, @ts, @max_ts, @flags);
@@ -8356,7 +8358,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_transfer_internal_stream_timing_info_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_transfer_internal_stream_timing_info is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_transfer_internal_stream_timing_info"));
                 };
             }
             return avformat_transfer_internal_stream_timing_info_fptr(@ofmt, @ost, @ist, @copy_tb);
@@ -8381,7 +8383,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_version_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_version is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_version"));
                 };
             }
             return avformat_version_fptr();
@@ -8402,7 +8404,7 @@ namespace FFmpeg.AutoGen
             {
                 avformat_write_header_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avformat_write_header is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_write_header"));
                 };
             }
             return avformat_write_header_fptr(@s, @options);
@@ -8426,7 +8428,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_accept_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_accept is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_accept"));
                 };
             }
             return avio_accept_fptr(@s, @c);
@@ -8450,7 +8452,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_alloc_context_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_alloc_context is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_alloc_context"));
                 };
             }
             return avio_alloc_context_fptr(@buffer, @buffer_size, @write_flag, @opaque, @read_packet, @write_packet, @seek);
@@ -8486,7 +8488,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_check_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_check is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_check"));
                 };
             }
             return avio_check_fptr(@url, @flags);
@@ -8514,7 +8516,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_close_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_close is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_close"));
                 };
             }
             return avio_close_fptr(@s);
@@ -8536,7 +8538,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_close_dir_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_close_dir is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_close_dir"));
                 };
             }
             return avio_close_dir_fptr(@s);
@@ -8559,7 +8561,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_close_dyn_buf_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_close_dyn_buf is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_close_dyn_buf"));
                 };
             }
             return avio_close_dyn_buf_fptr(@s, @pbuffer);
@@ -8583,7 +8585,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_closep_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_closep is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_closep"));
                 };
             }
             return avio_closep_fptr(@s);
@@ -8605,7 +8607,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_context_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_context_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_context_free"));
                 };
             }
             avio_context_free_fptr(@s);
@@ -8628,7 +8630,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_enum_protocols_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_enum_protocols is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_enum_protocols"));
                 };
             }
             return avio_enum_protocols_fptr(@opaque, @output);
@@ -8652,7 +8654,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_feof_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_feof is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_feof"));
                 };
             }
             return avio_feof_fptr(@s);
@@ -8682,7 +8684,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_find_protocol_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_find_protocol_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_find_protocol_name"));
                 };
             }
             return avio_find_protocol_name_fptr(@url);
@@ -8711,7 +8713,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_flush_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_flush is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_flush"));
                 };
             }
             avio_flush_fptr(@s);
@@ -8732,7 +8734,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_free_directory_entry_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_free_directory_entry is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_free_directory_entry"));
                 };
             }
             avio_free_directory_entry_fptr(@entry);
@@ -8754,7 +8756,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_get_dyn_buf_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_get_dyn_buf is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_get_dyn_buf"));
                 };
             }
             return avio_get_dyn_buf_fptr(@s, @pbuffer);
@@ -8778,7 +8780,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_get_str_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_get_str is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_get_str"));
                 };
             }
             return avio_get_str_fptr(@pb, @maxlen, @buf, @buflen);
@@ -8800,7 +8802,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_get_str16be_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_get_str16be is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_get_str16be"));
                 };
             }
             return avio_get_str16be_fptr(@pb, @maxlen, @buf, @buflen);
@@ -8820,7 +8822,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_get_str16le_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_get_str16le is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_get_str16le"));
                 };
             }
             return avio_get_str16le_fptr(@pb, @maxlen, @buf, @buflen);
@@ -8842,7 +8844,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_handshake_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_handshake is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_handshake"));
                 };
             }
             return avio_handshake_fptr(@c);
@@ -8872,7 +8874,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_open_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_open is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_open"));
                 };
             }
             return avio_open_fptr(@s, @url, @flags);
@@ -8911,7 +8913,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_open_dir_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_open_dir is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_open_dir"));
                 };
             }
             return avio_open_dir_fptr(@s, @url, @options);
@@ -8943,7 +8945,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_open_dyn_buf_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_open_dyn_buf is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_open_dyn_buf"));
                 };
             }
             return avio_open_dyn_buf_fptr(@s);
@@ -8973,7 +8975,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_open2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_open2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_open2"));
                 };
             }
             return avio_open2_fptr(@s, @url, @flags, @int_cb, @options);
@@ -9007,7 +9009,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_pause_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_pause is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_pause"));
                 };
             }
             return avio_pause_fptr(@h, @pause);
@@ -9030,7 +9032,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_print_string_array_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_print_string_array is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_print_string_array"));
                 };
             }
             avio_print_string_array_fptr(@s, @strings);
@@ -9058,7 +9060,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_printf_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_printf is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_printf"));
                 };
             }
             return avio_printf_fptr(@s, @fmt);
@@ -9094,7 +9096,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_protocol_get_class_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_protocol_get_class is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_protocol_get_class"));
                 };
             }
             return avio_protocol_get_class_fptr(@name);
@@ -9130,7 +9132,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_put_str_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_put_str is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_put_str"));
                 };
             }
             return avio_put_str_fptr(@s, @str);
@@ -9166,7 +9168,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_put_str16be_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_put_str16be is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_put_str16be"));
                 };
             }
             return avio_put_str16be_fptr(@s, @str);
@@ -9204,7 +9206,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_put_str16le_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_put_str16le is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_put_str16le"));
                 };
             }
             return avio_put_str16le_fptr(@s, @str);
@@ -9235,7 +9237,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_r8_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_r8 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_r8"));
                 };
             }
             return avio_r8_fptr(@s);
@@ -9256,7 +9258,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_rb16_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_rb16 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_rb16"));
                 };
             }
             return avio_rb16_fptr(@s);
@@ -9276,7 +9278,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_rb24_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_rb24 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_rb24"));
                 };
             }
             return avio_rb24_fptr(@s);
@@ -9296,7 +9298,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_rb32_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_rb32 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_rb32"));
                 };
             }
             return avio_rb32_fptr(@s);
@@ -9316,7 +9318,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_rb64_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_rb64 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_rb64"));
                 };
             }
             return avio_rb64_fptr(@s);
@@ -9336,7 +9338,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_read_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_read is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_read"));
                 };
             }
             return avio_read_fptr(@s, @buf, @size);
@@ -9358,7 +9360,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_read_dir_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_read_dir is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_read_dir"));
                 };
             }
             return avio_read_dir_fptr(@s, @next);
@@ -9382,7 +9384,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_read_partial_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_read_partial is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_read_partial"));
                 };
             }
             return avio_read_partial_fptr(@s, @buf, @size);
@@ -9404,7 +9406,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_read_to_bprint_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_read_to_bprint is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_read_to_bprint"));
                 };
             }
             return avio_read_to_bprint_fptr(@h, @pb, @max_size);
@@ -9426,7 +9428,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_rl16_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_rl16 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_rl16"));
                 };
             }
             return avio_rl16_fptr(@s);
@@ -9446,7 +9448,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_rl24_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_rl24 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_rl24"));
                 };
             }
             return avio_rl24_fptr(@s);
@@ -9466,7 +9468,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_rl32_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_rl32 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_rl32"));
                 };
             }
             return avio_rl32_fptr(@s);
@@ -9486,7 +9488,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_rl64_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_rl64 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_rl64"));
                 };
             }
             return avio_rl64_fptr(@s);
@@ -9506,7 +9508,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_seek_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_seek is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_seek"));
                 };
             }
             return avio_seek_fptr(@s, @offset, @whence);
@@ -9528,7 +9530,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_seek_time_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_seek_time is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_seek_time"));
                 };
             }
             return avio_seek_time_fptr(@h, @stream_index, @timestamp, @flags);
@@ -9554,7 +9556,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_size"));
                 };
             }
             return avio_size_fptr(@s);
@@ -9576,7 +9578,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_skip_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_skip is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_skip"));
                 };
             }
             return avio_skip_fptr(@s, @offset);
@@ -9598,7 +9600,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_w8_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_w8 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_w8"));
                 };
             }
             avio_w8_fptr(@s, @b);
@@ -9618,7 +9620,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_wb16_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_wb16 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_wb16"));
                 };
             }
             avio_wb16_fptr(@s, @val);
@@ -9638,7 +9640,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_wb24_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_wb24 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_wb24"));
                 };
             }
             avio_wb24_fptr(@s, @val);
@@ -9658,7 +9660,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_wb32_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_wb32 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_wb32"));
                 };
             }
             avio_wb32_fptr(@s, @val);
@@ -9678,7 +9680,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_wb64_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_wb64 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_wb64"));
                 };
             }
             avio_wb64_fptr(@s, @val);
@@ -9698,7 +9700,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_wl16_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_wl16 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_wl16"));
                 };
             }
             avio_wl16_fptr(@s, @val);
@@ -9718,7 +9720,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_wl24_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_wl24 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_wl24"));
                 };
             }
             avio_wl24_fptr(@s, @val);
@@ -9738,7 +9740,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_wl32_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_wl32 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_wl32"));
                 };
             }
             avio_wl32_fptr(@s, @val);
@@ -9758,7 +9760,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_wl64_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_wl64 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_wl64"));
                 };
             }
             avio_wl64_fptr(@s, @val);
@@ -9778,7 +9780,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_write_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_write is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_write"));
                 };
             }
             avio_write_fptr(@s, @buf, @size);
@@ -9798,7 +9800,7 @@ namespace FFmpeg.AutoGen
             {
                 avio_write_marker_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avio_write_marker is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_write_marker"));
                 };
             }
             avio_write_marker_fptr(@s, @time, @type);
@@ -9828,7 +9830,7 @@ namespace FFmpeg.AutoGen
             {
                 avpriv_io_delete_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avpriv_io_delete is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpriv_io_delete"));
                 };
             }
             return avpriv_io_delete_fptr(@url);
@@ -9872,7 +9874,7 @@ namespace FFmpeg.AutoGen
             {
                 avpriv_io_move_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avpriv_io_move is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpriv_io_move"));
                 };
             }
             return avpriv_io_move_fptr(@url_src, @url_dst);
@@ -9910,7 +9912,7 @@ namespace FFmpeg.AutoGen
             {
                 av_add_q_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_add_q is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_add_q"));
                 };
             }
             return av_add_q_fptr(@b, @c);
@@ -9934,7 +9936,7 @@ namespace FFmpeg.AutoGen
             {
                 av_add_stable_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_add_stable is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_add_stable"));
                 };
             }
             return av_add_stable_fptr(@ts_tb, @ts, @inc_tb, @inc);
@@ -9959,7 +9961,7 @@ namespace FFmpeg.AutoGen
             {
                 av_audio_fifo_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_audio_fifo_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_audio_fifo_alloc"));
                 };
             }
             return av_audio_fifo_alloc_fptr(@sample_fmt, @channels, @nb_samples);
@@ -9984,7 +9986,7 @@ namespace FFmpeg.AutoGen
             {
                 av_audio_fifo_drain_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_audio_fifo_drain is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_audio_fifo_drain"));
                 };
             }
             return av_audio_fifo_drain_fptr(@af, @nb_samples);
@@ -10008,7 +10010,7 @@ namespace FFmpeg.AutoGen
             {
                 av_audio_fifo_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_audio_fifo_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_audio_fifo_free"));
                 };
             }
             av_audio_fifo_free_fptr(@af);
@@ -10030,7 +10032,7 @@ namespace FFmpeg.AutoGen
             {
                 av_audio_fifo_peek_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_audio_fifo_peek is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_audio_fifo_peek"));
                 };
             }
             return av_audio_fifo_peek_fptr(@af, @data, @nb_samples);
@@ -10055,7 +10057,7 @@ namespace FFmpeg.AutoGen
             {
                 av_audio_fifo_peek_at_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_audio_fifo_peek_at is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_audio_fifo_peek_at"));
                 };
             }
             return av_audio_fifo_peek_at_fptr(@af, @data, @nb_samples, @offset);
@@ -10081,7 +10083,7 @@ namespace FFmpeg.AutoGen
             {
                 av_audio_fifo_read_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_audio_fifo_read is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_audio_fifo_read"));
                 };
             }
             return av_audio_fifo_read_fptr(@af, @data, @nb_samples);
@@ -10106,7 +10108,7 @@ namespace FFmpeg.AutoGen
             {
                 av_audio_fifo_realloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_audio_fifo_realloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_audio_fifo_realloc"));
                 };
             }
             return av_audio_fifo_realloc_fptr(@af, @nb_samples);
@@ -10130,7 +10132,7 @@ namespace FFmpeg.AutoGen
             {
                 av_audio_fifo_reset_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_audio_fifo_reset is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_audio_fifo_reset"));
                 };
             }
             av_audio_fifo_reset_fptr(@af);
@@ -10152,7 +10154,7 @@ namespace FFmpeg.AutoGen
             {
                 av_audio_fifo_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_audio_fifo_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_audio_fifo_size"));
                 };
             }
             return av_audio_fifo_size_fptr(@af);
@@ -10175,7 +10177,7 @@ namespace FFmpeg.AutoGen
             {
                 av_audio_fifo_space_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_audio_fifo_space is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_audio_fifo_space"));
                 };
             }
             return av_audio_fifo_space_fptr(@af);
@@ -10198,7 +10200,7 @@ namespace FFmpeg.AutoGen
             {
                 av_audio_fifo_write_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_audio_fifo_write is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_audio_fifo_write"));
                 };
             }
             return av_audio_fifo_write_fptr(@af, @data, @nb_samples);
@@ -10223,7 +10225,7 @@ namespace FFmpeg.AutoGen
             {
                 av_bprint_channel_layout_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_bprint_channel_layout is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bprint_channel_layout"));
                 };
             }
             av_bprint_channel_layout_fptr(@bp, @nb_channels, @channel_layout);
@@ -10244,7 +10246,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_alloc"));
                 };
             }
             return av_buffer_alloc_fptr(@size);
@@ -10264,7 +10266,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_allocz_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_allocz is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_allocz"));
                 };
             }
             return av_buffer_allocz_fptr(@size);
@@ -10284,7 +10286,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_create_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_create is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_create"));
                 };
             }
             return av_buffer_create_fptr(@data, @size, @free, @opaque, @flags);
@@ -10304,7 +10306,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_default_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_default_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_default_free"));
                 };
             }
             av_buffer_default_free_fptr(@opaque, @data);
@@ -10325,7 +10327,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_get_opaque_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_get_opaque is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_get_opaque"));
                 };
             }
             return av_buffer_get_opaque_fptr(@buf);
@@ -10347,7 +10349,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_get_ref_count_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_get_ref_count is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_get_ref_count"));
                 };
             }
             return av_buffer_get_ref_count_fptr(@buf);
@@ -10367,7 +10369,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_is_writable_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_is_writable is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_is_writable"));
                 };
             }
             return av_buffer_is_writable_fptr(@buf);
@@ -10389,7 +10391,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_make_writable_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_make_writable is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_make_writable"));
                 };
             }
             return av_buffer_make_writable_fptr(@buf);
@@ -10412,7 +10414,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_pool_buffer_get_opaque_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_pool_buffer_get_opaque is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_pool_buffer_get_opaque"));
                 };
             }
             return av_buffer_pool_buffer_get_opaque_fptr(@ref);
@@ -10435,7 +10437,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_pool_get_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_pool_get is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_pool_get"));
                 };
             }
             return av_buffer_pool_get_fptr(@pool);
@@ -10457,7 +10459,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_pool_init_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_pool_init is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_pool_init"));
                 };
             }
             return av_buffer_pool_init_fptr(@size, @alloc);
@@ -10477,7 +10479,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_pool_init2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_pool_init2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_pool_init2"));
                 };
             }
             return av_buffer_pool_init2_fptr(@size, @opaque, @alloc, @pool_free);
@@ -10497,7 +10499,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_pool_uninit_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_pool_uninit is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_pool_uninit"));
                 };
             }
             av_buffer_pool_uninit_fptr(@pool);
@@ -10519,7 +10521,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_realloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_realloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_realloc"));
                 };
             }
             return av_buffer_realloc_fptr(@buf, @size);
@@ -10539,7 +10541,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_ref_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_ref is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_ref"));
                 };
             }
             return av_buffer_ref_fptr(@buf);
@@ -10561,7 +10563,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_replace_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_replace is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_replace"));
                 };
             }
             return av_buffer_replace_fptr(@dst, @src);
@@ -10585,7 +10587,7 @@ namespace FFmpeg.AutoGen
             {
                 av_buffer_unref_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_buffer_unref is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffer_unref"));
                 };
             }
             av_buffer_unref_fptr(@buf);
@@ -10607,7 +10609,7 @@ namespace FFmpeg.AutoGen
             {
                 av_calloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_calloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_calloc"));
                 };
             }
             return av_calloc_fptr(@nmemb, @size);
@@ -10628,7 +10630,7 @@ namespace FFmpeg.AutoGen
             {
                 av_channel_layout_extract_channel_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_channel_layout_extract_channel is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_extract_channel"));
                 };
             }
             return av_channel_layout_extract_channel_fptr(@channel_layout, @index);
@@ -10656,7 +10658,7 @@ namespace FFmpeg.AutoGen
             {
                 av_chroma_location_from_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_chroma_location_from_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_chroma_location_from_name"));
                 };
             }
             return av_chroma_location_from_name_fptr(@name);
@@ -10686,7 +10688,7 @@ namespace FFmpeg.AutoGen
             {
                 av_chroma_location_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_chroma_location_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_chroma_location_name"));
                 };
             }
             return av_chroma_location_name_fptr(@location);
@@ -10715,7 +10717,7 @@ namespace FFmpeg.AutoGen
             {
                 av_color_primaries_from_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_color_primaries_from_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_color_primaries_from_name"));
                 };
             }
             return av_color_primaries_from_name_fptr(@name);
@@ -10745,7 +10747,7 @@ namespace FFmpeg.AutoGen
             {
                 av_color_primaries_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_color_primaries_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_color_primaries_name"));
                 };
             }
             return av_color_primaries_name_fptr(@primaries);
@@ -10774,7 +10776,7 @@ namespace FFmpeg.AutoGen
             {
                 av_color_range_from_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_color_range_from_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_color_range_from_name"));
                 };
             }
             return av_color_range_from_name_fptr(@name);
@@ -10804,7 +10806,7 @@ namespace FFmpeg.AutoGen
             {
                 av_color_range_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_color_range_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_color_range_name"));
                 };
             }
             return av_color_range_name_fptr(@range);
@@ -10833,7 +10835,7 @@ namespace FFmpeg.AutoGen
             {
                 av_color_space_from_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_color_space_from_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_color_space_from_name"));
                 };
             }
             return av_color_space_from_name_fptr(@name);
@@ -10863,7 +10865,7 @@ namespace FFmpeg.AutoGen
             {
                 av_color_space_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_color_space_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_color_space_name"));
                 };
             }
             return av_color_space_name_fptr(@space);
@@ -10892,7 +10894,7 @@ namespace FFmpeg.AutoGen
             {
                 av_color_transfer_from_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_color_transfer_from_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_color_transfer_from_name"));
                 };
             }
             return av_color_transfer_from_name_fptr(@name);
@@ -10922,7 +10924,7 @@ namespace FFmpeg.AutoGen
             {
                 av_color_transfer_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_color_transfer_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_color_transfer_name"));
                 };
             }
             return av_color_transfer_name_fptr(@transfer);
@@ -10944,7 +10946,7 @@ namespace FFmpeg.AutoGen
             {
                 av_compare_mod_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_compare_mod is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_compare_mod"));
                 };
             }
             return av_compare_mod_fptr(@a, @b, @mod);
@@ -10967,7 +10969,7 @@ namespace FFmpeg.AutoGen
             {
                 av_compare_ts_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_compare_ts is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_compare_ts"));
                 };
             }
             return av_compare_ts_fptr(@ts_a, @tb_a, @ts_b, @tb_b);
@@ -10989,7 +10991,7 @@ namespace FFmpeg.AutoGen
             {
                 av_content_light_metadata_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_content_light_metadata_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_content_light_metadata_alloc"));
                 };
             }
             return av_content_light_metadata_alloc_fptr(@size);
@@ -11011,7 +11013,7 @@ namespace FFmpeg.AutoGen
             {
                 av_content_light_metadata_create_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_content_light_metadata_create_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_content_light_metadata_create_side_data"));
                 };
             }
             return av_content_light_metadata_create_side_data_fptr(@frame);
@@ -11034,7 +11036,7 @@ namespace FFmpeg.AutoGen
             {
                 av_cpu_count_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_cpu_count is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_cpu_count"));
                 };
             }
             return av_cpu_count_fptr();
@@ -11056,7 +11058,7 @@ namespace FFmpeg.AutoGen
             {
                 av_cpu_max_align_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_cpu_max_align is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_cpu_max_align"));
                 };
             }
             return av_cpu_max_align_fptr();
@@ -11077,7 +11079,7 @@ namespace FFmpeg.AutoGen
             {
                 av_d2q_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_d2q is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_d2q"));
                 };
             }
             return av_d2q_fptr(@d, @max);
@@ -11101,7 +11103,7 @@ namespace FFmpeg.AutoGen
             {
                 av_default_get_category_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_default_get_category is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_default_get_category"));
                 };
             }
             return av_default_get_category_fptr(@ptr);
@@ -11122,7 +11124,7 @@ namespace FFmpeg.AutoGen
             {
                 av_default_item_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_default_item_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_default_item_name"));
                 };
             }
             return av_default_item_name_fptr(@ctx);
@@ -11145,7 +11147,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dict_copy_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dict_copy is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dict_copy"));
                 };
             }
             return av_dict_copy_fptr(@dst, @src, @flags);
@@ -11170,7 +11172,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dict_count_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dict_count is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dict_count"));
                 };
             }
             return av_dict_count_fptr(@m);
@@ -11193,7 +11195,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dict_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dict_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dict_free"));
                 };
             }
             av_dict_free_fptr(@m);
@@ -11221,7 +11223,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dict_get_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dict_get is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dict_get"));
                 };
             }
             return av_dict_get_fptr(@m, @key, @prev, @flags);
@@ -11253,7 +11255,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dict_get_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dict_get_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dict_get_string"));
                 };
             }
             return av_dict_get_string_fptr(@m, @buffer, @key_val_sep, @pairs_sep);
@@ -11300,7 +11302,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dict_parse_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dict_parse_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dict_parse_string"));
                 };
             }
             return av_dict_parse_string_fptr(@pm, @str, @key_val_sep, @pairs_sep, @flags);
@@ -11360,7 +11362,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dict_set_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dict_set is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dict_set"));
                 };
             }
             return av_dict_set_fptr(@pm, @key, @value, @flags);
@@ -11406,7 +11408,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dict_set_int_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dict_set_int is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dict_set_int"));
                 };
             }
             return av_dict_set_int_fptr(@pm, @key, @value, @flags);
@@ -11434,7 +11436,7 @@ namespace FFmpeg.AutoGen
             {
                 av_div_q_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_div_q is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_div_q"));
                 };
             }
             return av_div_q_fptr(@b, @c);
@@ -11458,7 +11460,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dynamic_hdr_plus_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dynamic_hdr_plus_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dynamic_hdr_plus_alloc"));
                 };
             }
             return av_dynamic_hdr_plus_alloc_fptr(@size);
@@ -11480,7 +11482,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dynamic_hdr_plus_create_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dynamic_hdr_plus_create_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dynamic_hdr_plus_create_side_data"));
                 };
             }
             return av_dynamic_hdr_plus_create_side_data_fptr(@frame);
@@ -11503,7 +11505,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dynarray_add_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dynarray_add is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dynarray_add"));
                 };
             }
             av_dynarray_add_fptr(@tab_ptr, @nb_ptr, @elem);
@@ -11527,7 +11529,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dynarray_add_nofree_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dynarray_add_nofree is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dynarray_add_nofree"));
                 };
             }
             return av_dynarray_add_nofree_fptr(@tab_ptr, @nb_ptr, @elem);
@@ -11549,7 +11551,7 @@ namespace FFmpeg.AutoGen
             {
                 av_dynarray2_add_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_dynarray2_add is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dynarray2_add"));
                 };
             }
             return av_dynarray2_add_fptr(@tab_ptr, @nb_ptr, @elem_size, @elem_data);
@@ -11575,7 +11577,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fast_malloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fast_malloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fast_malloc"));
                 };
             }
             av_fast_malloc_fptr(@ptr, @size, @min_size);
@@ -11599,7 +11601,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fast_mallocz_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fast_mallocz is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fast_mallocz"));
                 };
             }
             av_fast_mallocz_fptr(@ptr, @size, @min_size);
@@ -11623,7 +11625,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fast_realloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fast_realloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fast_realloc"));
                 };
             }
             return av_fast_realloc_fptr(@ptr, @size, @min_size);
@@ -11648,7 +11650,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_alloc"));
                 };
             }
             return av_fifo_alloc_fptr(@size);
@@ -11671,7 +11673,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_alloc_array_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_alloc_array is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_alloc_array"));
                 };
             }
             return av_fifo_alloc_array_fptr(@nmemb, @size);
@@ -11695,7 +11697,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_drain_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_drain is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_drain"));
                 };
             }
             av_fifo_drain_fptr(@f, @size);
@@ -11718,7 +11720,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_free"));
                 };
             }
             av_fifo_free_fptr(@f);
@@ -11740,7 +11742,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_freep_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_freep is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_freep"));
                 };
             }
             av_fifo_freep_fptr(@f);
@@ -11762,7 +11764,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_generic_peek_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_generic_peek is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_generic_peek"));
                 };
             }
             return av_fifo_generic_peek_fptr(@f, @dest, @buf_size, @func);
@@ -11787,7 +11789,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_generic_peek_at_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_generic_peek_at is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_generic_peek_at"));
                 };
             }
             return av_fifo_generic_peek_at_fptr(@f, @dest, @offset, @buf_size, @func);
@@ -11813,7 +11815,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_generic_read_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_generic_read is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_generic_read"));
                 };
             }
             return av_fifo_generic_read_fptr(@f, @dest, @buf_size, @func);
@@ -11838,7 +11840,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_generic_write_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_generic_write is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_generic_write"));
                 };
             }
             return av_fifo_generic_write_fptr(@f, @src, @size, @func);
@@ -11864,7 +11866,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_grow_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_grow is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_grow"));
                 };
             }
             return av_fifo_grow_fptr(@f, @additional_space);
@@ -11888,7 +11890,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_realloc2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_realloc2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_realloc2"));
                 };
             }
             return av_fifo_realloc2_fptr(@f, @size);
@@ -11912,7 +11914,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_reset_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_reset is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_reset"));
                 };
             }
             av_fifo_reset_fptr(@f);
@@ -11934,7 +11936,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_size"));
                 };
             }
             return av_fifo_size_fptr(@f);
@@ -11957,7 +11959,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fifo_space_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fifo_space is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_space"));
                 };
             }
             return av_fifo_space_fptr(@f);
@@ -11987,7 +11989,7 @@ namespace FFmpeg.AutoGen
             {
                 av_file_map_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_file_map is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_file_map"));
                 };
             }
             return av_file_map_fptr(@filename, @bufptr, @size, @log_offset, @log_ctx);
@@ -12018,7 +12020,7 @@ namespace FFmpeg.AutoGen
             {
                 av_file_unmap_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_file_unmap is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_file_unmap"));
                 };
             }
             av_file_unmap_fptr(@bufptr, @size);
@@ -12040,7 +12042,7 @@ namespace FFmpeg.AutoGen
             {
                 av_find_best_pix_fmt_of_2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_find_best_pix_fmt_of_2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_find_best_pix_fmt_of_2"));
                 };
             }
             return av_find_best_pix_fmt_of_2_fptr(@dst_pix_fmt1, @dst_pix_fmt2, @src_pix_fmt, @has_alpha, @loss_ptr);
@@ -12064,7 +12066,7 @@ namespace FFmpeg.AutoGen
             {
                 av_find_nearest_q_idx_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_find_nearest_q_idx is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_find_nearest_q_idx"));
                 };
             }
             return av_find_nearest_q_idx_fptr(@q, @q_list);
@@ -12102,7 +12104,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fopen_utf8_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fopen_utf8 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fopen_utf8"));
                 };
             }
             return av_fopen_utf8_fptr(@path, @mode);
@@ -12137,7 +12139,7 @@ namespace FFmpeg.AutoGen
             {
                 av_force_cpu_flags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_force_cpu_flags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_force_cpu_flags"));
                 };
             }
             av_force_cpu_flags_fptr(@flags);
@@ -12158,7 +12160,7 @@ namespace FFmpeg.AutoGen
             {
                 av_fourcc_make_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_fourcc_make_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fourcc_make_string"));
                 };
             }
             return av_fourcc_make_string_fptr(@buf, @fourcc);
@@ -12182,7 +12184,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_alloc"));
                 };
             }
             return av_frame_alloc_fptr();
@@ -12204,7 +12206,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_apply_cropping_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_apply_cropping is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_apply_cropping"));
                 };
             }
             return av_frame_apply_cropping_fptr(@frame, @flags);
@@ -12228,7 +12230,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_clone_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_clone is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_clone"));
                 };
             }
             return av_frame_clone_fptr(@src);
@@ -12250,7 +12252,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_copy_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_copy is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_copy"));
                 };
             }
             return av_frame_copy_fptr(@dst, @src);
@@ -12272,7 +12274,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_copy_props_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_copy_props is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_copy_props"));
                 };
             }
             return av_frame_copy_props_fptr(@dst, @src);
@@ -12293,7 +12295,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_free"));
                 };
             }
             av_frame_free_fptr(@frame);
@@ -12315,7 +12317,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_best_effort_timestamp_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_best_effort_timestamp is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_best_effort_timestamp"));
                 };
             }
             return av_frame_get_best_effort_timestamp_fptr(@frame);
@@ -12337,7 +12339,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_buffer_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_buffer is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_buffer"));
                 };
             }
             return av_frame_get_buffer_fptr(@frame, @align);
@@ -12361,7 +12363,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_channel_layout_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_channel_layout is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_channel_layout"));
                 };
             }
             return av_frame_get_channel_layout_fptr(@frame);
@@ -12382,7 +12384,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_channels_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_channels is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_channels"));
                 };
             }
             return av_frame_get_channels_fptr(@frame);
@@ -12403,7 +12405,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_color_range_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_color_range is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_color_range"));
                 };
             }
             return av_frame_get_color_range_fptr(@frame);
@@ -12424,7 +12426,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_colorspace_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_colorspace is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_colorspace"));
                 };
             }
             return av_frame_get_colorspace_fptr(@frame);
@@ -12445,7 +12447,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_decode_error_flags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_decode_error_flags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_decode_error_flags"));
                 };
             }
             return av_frame_get_decode_error_flags_fptr(@frame);
@@ -12466,7 +12468,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_metadata_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_metadata is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_metadata"));
                 };
             }
             return av_frame_get_metadata_fptr(@frame);
@@ -12487,7 +12489,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_pkt_duration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_pkt_duration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_pkt_duration"));
                 };
             }
             return av_frame_get_pkt_duration_fptr(@frame);
@@ -12508,7 +12510,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_pkt_pos_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_pkt_pos is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_pkt_pos"));
                 };
             }
             return av_frame_get_pkt_pos_fptr(@frame);
@@ -12529,7 +12531,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_pkt_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_pkt_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_pkt_size"));
                 };
             }
             return av_frame_get_pkt_size_fptr(@frame);
@@ -12550,7 +12552,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_plane_buffer_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_plane_buffer is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_plane_buffer"));
                 };
             }
             return av_frame_get_plane_buffer_fptr(@frame, @plane);
@@ -12573,7 +12575,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_qp_table_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_qp_table is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_qp_table"));
                 };
             }
             return av_frame_get_qp_table_fptr(@f, @stride, @type);
@@ -12594,7 +12596,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_sample_rate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_sample_rate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_sample_rate"));
                 };
             }
             return av_frame_get_sample_rate_fptr(@frame);
@@ -12615,7 +12617,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_get_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_get_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_side_data"));
                 };
             }
             return av_frame_get_side_data_fptr(@frame, @type);
@@ -12637,7 +12639,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_is_writable_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_is_writable is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_is_writable"));
                 };
             }
             return av_frame_is_writable_fptr(@frame);
@@ -12659,7 +12661,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_make_writable_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_make_writable is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_make_writable"));
                 };
             }
             return av_frame_make_writable_fptr(@frame);
@@ -12681,7 +12683,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_move_ref_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_move_ref is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_move_ref"));
                 };
             }
             av_frame_move_ref_fptr(@dst, @src);
@@ -12702,7 +12704,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_new_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_new_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_new_side_data"));
                 };
             }
             return av_frame_new_side_data_fptr(@frame, @type, @size);
@@ -12727,7 +12729,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_new_side_data_from_buf_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_new_side_data_from_buf is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_new_side_data_from_buf"));
                 };
             }
             return av_frame_new_side_data_from_buf_fptr(@frame, @type, @buf);
@@ -12752,7 +12754,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_ref_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_ref is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_ref"));
                 };
             }
             return av_frame_ref_fptr(@dst, @src);
@@ -12774,7 +12776,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_remove_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_remove_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_remove_side_data"));
                 };
             }
             av_frame_remove_side_data_fptr(@frame, @type);
@@ -12795,7 +12797,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_set_best_effort_timestamp_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_set_best_effort_timestamp is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_best_effort_timestamp"));
                 };
             }
             av_frame_set_best_effort_timestamp_fptr(@frame, @val);
@@ -12816,7 +12818,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_set_channel_layout_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_set_channel_layout is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_channel_layout"));
                 };
             }
             av_frame_set_channel_layout_fptr(@frame, @val);
@@ -12837,7 +12839,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_set_channels_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_set_channels is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_channels"));
                 };
             }
             av_frame_set_channels_fptr(@frame, @val);
@@ -12858,7 +12860,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_set_color_range_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_set_color_range is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_color_range"));
                 };
             }
             av_frame_set_color_range_fptr(@frame, @val);
@@ -12879,7 +12881,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_set_colorspace_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_set_colorspace is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_colorspace"));
                 };
             }
             av_frame_set_colorspace_fptr(@frame, @val);
@@ -12900,7 +12902,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_set_decode_error_flags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_set_decode_error_flags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_decode_error_flags"));
                 };
             }
             av_frame_set_decode_error_flags_fptr(@frame, @val);
@@ -12921,7 +12923,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_set_metadata_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_set_metadata is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_metadata"));
                 };
             }
             av_frame_set_metadata_fptr(@frame, @val);
@@ -12942,7 +12944,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_set_pkt_duration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_set_pkt_duration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_pkt_duration"));
                 };
             }
             av_frame_set_pkt_duration_fptr(@frame, @val);
@@ -12963,7 +12965,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_set_pkt_pos_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_set_pkt_pos is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_pkt_pos"));
                 };
             }
             av_frame_set_pkt_pos_fptr(@frame, @val);
@@ -12984,7 +12986,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_set_pkt_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_set_pkt_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_pkt_size"));
                 };
             }
             av_frame_set_pkt_size_fptr(@frame, @val);
@@ -13005,7 +13007,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_set_qp_table_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_set_qp_table is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_qp_table"));
                 };
             }
             return av_frame_set_qp_table_fptr(@f, @buf, @stride, @type);
@@ -13026,7 +13028,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_set_sample_rate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_set_sample_rate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_sample_rate"));
                 };
             }
             av_frame_set_sample_rate_fptr(@frame, @val);
@@ -13048,7 +13050,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_side_data_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_side_data_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_side_data_name"));
                 };
             }
             return av_frame_side_data_name_fptr(@type);
@@ -13070,7 +13072,7 @@ namespace FFmpeg.AutoGen
             {
                 av_frame_unref_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_frame_unref is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_unref"));
                 };
             }
             av_frame_unref_fptr(@frame);
@@ -13091,7 +13093,7 @@ namespace FFmpeg.AutoGen
             {
                 av_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_free"));
                 };
             }
             av_free_fptr(@ptr);
@@ -13113,7 +13115,7 @@ namespace FFmpeg.AutoGen
             {
                 av_freep_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_freep is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_freep"));
                 };
             }
             av_freep_fptr(@ptr);
@@ -13135,7 +13137,7 @@ namespace FFmpeg.AutoGen
             {
                 av_gcd_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_gcd is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_gcd"));
                 };
             }
             return av_gcd_fptr(@a, @b);
@@ -13157,7 +13159,7 @@ namespace FFmpeg.AutoGen
             {
                 av_gcd_q_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_gcd_q is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_gcd_q"));
                 };
             }
             return av_gcd_q_fptr(@a, @b, @max_den, @def);
@@ -13178,7 +13180,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_alt_sample_fmt_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_alt_sample_fmt is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_alt_sample_fmt"));
                 };
             }
             return av_get_alt_sample_fmt_fptr(@sample_fmt, @planar);
@@ -13199,7 +13201,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_bits_per_pixel_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_bits_per_pixel is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_bits_per_pixel"));
                 };
             }
             return av_get_bits_per_pixel_fptr(@pixdesc);
@@ -13220,7 +13222,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_bytes_per_sample_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_bytes_per_sample is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_bytes_per_sample"));
                 };
             }
             return av_get_bytes_per_sample_fptr(@sample_fmt);
@@ -13244,7 +13246,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_channel_description_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_channel_description is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_channel_description"));
                 };
             }
             return av_get_channel_description_fptr(@channel);
@@ -13274,7 +13276,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_channel_layout_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_channel_layout is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_channel_layout"));
                 };
             }
             return av_get_channel_layout_fptr(@name);
@@ -13302,7 +13304,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_channel_layout_channel_index_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_channel_layout_channel_index is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_channel_layout_channel_index"));
                 };
             }
             return av_get_channel_layout_channel_index_fptr(@channel_layout, @channel);
@@ -13325,7 +13327,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_channel_layout_nb_channels_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_channel_layout_nb_channels is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_channel_layout_nb_channels"));
                 };
             }
             return av_get_channel_layout_nb_channels_fptr(@channel_layout);
@@ -13346,7 +13348,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_channel_layout_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_channel_layout_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_channel_layout_string"));
                 };
             }
             av_get_channel_layout_string_fptr(@buf, @buf_size, @nb_channels, @channel_layout);
@@ -13370,7 +13372,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_channel_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_channel_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_channel_name"));
                 };
             }
             return av_get_channel_name_fptr(@channel);
@@ -13393,7 +13395,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_colorspace_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_colorspace_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_colorspace_name"));
                 };
             }
             return av_get_colorspace_name_fptr(@val);
@@ -13415,7 +13417,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_cpu_flags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_cpu_flags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_cpu_flags"));
                 };
             }
             return av_get_cpu_flags_fptr();
@@ -13436,7 +13438,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_default_channel_layout_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_default_channel_layout is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_default_channel_layout"));
                 };
             }
             return av_get_default_channel_layout_fptr(@nb_channels);
@@ -13464,7 +13466,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_extended_channel_layout_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_extended_channel_layout is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_extended_channel_layout"));
                 };
             }
             return av_get_extended_channel_layout_fptr(@name, @channel_layout, @nb_channels);
@@ -13497,7 +13499,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_media_type_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_media_type_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_media_type_string"));
                 };
             }
             return av_get_media_type_string_fptr(@media_type);
@@ -13518,7 +13520,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_packed_sample_fmt_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_packed_sample_fmt is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_packed_sample_fmt"));
                 };
             }
             return av_get_packed_sample_fmt_fptr(@sample_fmt);
@@ -13540,7 +13542,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_padded_bits_per_pixel_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_padded_bits_per_pixel is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_padded_bits_per_pixel"));
                 };
             }
             return av_get_padded_bits_per_pixel_fptr(@pixdesc);
@@ -13561,7 +13563,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_picture_type_char_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_picture_type_char is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_picture_type_char"));
                 };
             }
             return av_get_picture_type_char_fptr(@pict_type);
@@ -13591,7 +13593,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_pix_fmt_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_pix_fmt is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_pix_fmt"));
                 };
             }
             return av_get_pix_fmt_fptr(@name);
@@ -13619,7 +13621,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_pix_fmt_loss_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_pix_fmt_loss is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_pix_fmt_loss"));
                 };
             }
             return av_get_pix_fmt_loss_fptr(@dst_pix_fmt, @src_pix_fmt, @has_alpha);
@@ -13645,7 +13647,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_pix_fmt_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_pix_fmt_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_pix_fmt_name"));
                 };
             }
             return av_get_pix_fmt_name_fptr(@pix_fmt);
@@ -13666,7 +13668,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_pix_fmt_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_pix_fmt_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_pix_fmt_string"));
                 };
             }
             return av_get_pix_fmt_string_fptr(@buf, @buf_size, @pix_fmt);
@@ -13690,7 +13692,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_planar_sample_fmt_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_planar_sample_fmt is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_planar_sample_fmt"));
                 };
             }
             return av_get_planar_sample_fmt_fptr(@sample_fmt);
@@ -13719,7 +13721,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_sample_fmt_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_sample_fmt is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_sample_fmt"));
                 };
             }
             return av_get_sample_fmt_fptr(@name);
@@ -13748,7 +13750,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_sample_fmt_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_sample_fmt_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_sample_fmt_name"));
                 };
             }
             return av_get_sample_fmt_name_fptr(@sample_fmt);
@@ -13769,7 +13771,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_sample_fmt_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_sample_fmt_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_sample_fmt_string"));
                 };
             }
             return av_get_sample_fmt_string_fptr(@buf, @buf_size, @sample_fmt);
@@ -13794,7 +13796,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_standard_channel_layout_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_standard_channel_layout is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_standard_channel_layout"));
                 };
             }
             return av_get_standard_channel_layout_fptr(@index, @layout, @name);
@@ -13819,7 +13821,7 @@ namespace FFmpeg.AutoGen
             {
                 av_get_time_base_q_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_get_time_base_q is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_time_base_q"));
                 };
             }
             return av_get_time_base_q_fptr();
@@ -13840,7 +13842,7 @@ namespace FFmpeg.AutoGen
             {
                 av_gettime_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_gettime is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_gettime"));
                 };
             }
             return av_gettime_fptr();
@@ -13861,7 +13863,7 @@ namespace FFmpeg.AutoGen
             {
                 av_gettime_relative_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_gettime_relative is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_gettime_relative"));
                 };
             }
             return av_gettime_relative_fptr();
@@ -13882,7 +13884,7 @@ namespace FFmpeg.AutoGen
             {
                 av_gettime_relative_is_monotonic_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_gettime_relative_is_monotonic is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_gettime_relative_is_monotonic"));
                 };
             }
             return av_gettime_relative_is_monotonic_fptr();
@@ -13903,7 +13905,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwdevice_ctx_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwdevice_ctx_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwdevice_ctx_alloc"));
                 };
             }
             return av_hwdevice_ctx_alloc_fptr(@type);
@@ -13933,7 +13935,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwdevice_ctx_create_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwdevice_ctx_create is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwdevice_ctx_create"));
                 };
             }
             return av_hwdevice_ctx_create_fptr(@device_ctx, @type, @device, @opts, @flags);
@@ -13967,7 +13969,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwdevice_ctx_create_derived_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwdevice_ctx_create_derived is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwdevice_ctx_create_derived"));
                 };
             }
             return av_hwdevice_ctx_create_derived_fptr(@dst_ctx, @type, @src_ctx, @flags);
@@ -13993,7 +13995,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwdevice_ctx_create_derived_opts_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwdevice_ctx_create_derived_opts is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwdevice_ctx_create_derived_opts"));
                 };
             }
             return av_hwdevice_ctx_create_derived_opts_fptr(@dst_ctx, @type, @src_ctx, @options, @flags);
@@ -14020,7 +14022,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwdevice_ctx_init_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwdevice_ctx_init is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwdevice_ctx_init"));
                 };
             }
             return av_hwdevice_ctx_init_fptr(@ref);
@@ -14050,7 +14052,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwdevice_find_type_by_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwdevice_find_type_by_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwdevice_find_type_by_name"));
                 };
             }
             return av_hwdevice_find_type_by_name_fptr(@name);
@@ -14080,7 +14082,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwdevice_get_hwframe_constraints_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwdevice_get_hwframe_constraints is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwdevice_get_hwframe_constraints"));
                 };
             }
             return av_hwdevice_get_hwframe_constraints_fptr(@ref, @hwconfig);
@@ -14105,7 +14107,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwdevice_get_type_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwdevice_get_type_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwdevice_get_type_name"));
                 };
             }
             return av_hwdevice_get_type_name_fptr(@type);
@@ -14128,7 +14130,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwdevice_hwconfig_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwdevice_hwconfig_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwdevice_hwconfig_alloc"));
                 };
             }
             return av_hwdevice_hwconfig_alloc_fptr(@device_ctx);
@@ -14151,7 +14153,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwdevice_iterate_types_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwdevice_iterate_types is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwdevice_iterate_types"));
                 };
             }
             return av_hwdevice_iterate_types_fptr(@prev);
@@ -14173,7 +14175,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwframe_constraints_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwframe_constraints_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwframe_constraints_free"));
                 };
             }
             av_hwframe_constraints_free_fptr(@constraints);
@@ -14195,7 +14197,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwframe_ctx_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwframe_ctx_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwframe_ctx_alloc"));
                 };
             }
             return av_hwframe_ctx_alloc_fptr(@device_ctx);
@@ -14218,7 +14220,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwframe_ctx_create_derived_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwframe_ctx_create_derived is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwframe_ctx_create_derived"));
                 };
             }
             return av_hwframe_ctx_create_derived_fptr(@derived_frame_ctx, @format, @derived_device_ctx, @source_frame_ctx, @flags);
@@ -14244,7 +14246,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwframe_ctx_init_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwframe_ctx_init is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwframe_ctx_init"));
                 };
             }
             return av_hwframe_ctx_init_fptr(@ref);
@@ -14267,7 +14269,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwframe_get_buffer_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwframe_get_buffer is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwframe_get_buffer"));
                 };
             }
             return av_hwframe_get_buffer_fptr(@hwframe_ctx, @frame, @flags);
@@ -14292,7 +14294,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwframe_map_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwframe_map is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwframe_map"));
                 };
             }
             return av_hwframe_map_fptr(@dst, @src, @flags);
@@ -14317,7 +14319,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwframe_transfer_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwframe_transfer_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwframe_transfer_data"));
                 };
             }
             return av_hwframe_transfer_data_fptr(@dst, @src, @flags);
@@ -14342,7 +14344,7 @@ namespace FFmpeg.AutoGen
             {
                 av_hwframe_transfer_get_formats_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_hwframe_transfer_get_formats is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwframe_transfer_get_formats"));
                 };
             }
             return av_hwframe_transfer_get_formats_fptr(@hwframe_ctx, @dir, @formats, @flags);
@@ -14368,7 +14370,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_alloc"));
                 };
             }
             return av_image_alloc_fptr(ref @pointers, ref @linesizes, @w, @h, @pix_fmt, @align);
@@ -14391,7 +14393,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_check_sar_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_check_sar is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_check_sar"));
                 };
             }
             return av_image_check_sar_fptr(@w, @h, @sar);
@@ -14416,7 +14418,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_check_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_check_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_check_size"));
                 };
             }
             return av_image_check_size_fptr(@w, @h, @log_offset, @log_ctx);
@@ -14442,7 +14444,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_check_size2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_check_size2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_check_size2"));
                 };
             }
             return av_image_check_size2_fptr(@w, @h, @max_pixels, @pix_fmt, @log_offset, @log_ctx);
@@ -14470,7 +14472,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_copy_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_copy is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_copy"));
                 };
             }
             av_image_copy_fptr(ref @dst_data, ref @dst_linesizes, ref @src_data, @src_linesizes, @pix_fmt, @width, @height);
@@ -14493,7 +14495,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_copy_plane_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_copy_plane is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_copy_plane"));
                 };
             }
             av_image_copy_plane_fptr(@dst, @dst_linesize, @src, @src_linesize, @bytewidth, @height);
@@ -14516,7 +14518,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_copy_to_buffer_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_copy_to_buffer is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_copy_to_buffer"));
                 };
             }
             return av_image_copy_to_buffer_fptr(@dst, @dst_size, @src_data, @src_linesize, @pix_fmt, @width, @height, @align);
@@ -14546,7 +14548,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_copy_uc_from_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_copy_uc_from is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_copy_uc_from"));
                 };
             }
             av_image_copy_uc_from_fptr(ref @dst_data, @dst_linesizes, ref @src_data, @src_linesizes, @pix_fmt, @width, @height);
@@ -14567,7 +14569,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_fill_arrays_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_fill_arrays is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_fill_arrays"));
                 };
             }
             return av_image_fill_arrays_fptr(ref @dst_data, ref @dst_linesize, @src, @pix_fmt, @width, @height, @align);
@@ -14596,7 +14598,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_fill_black_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_fill_black is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_fill_black"));
                 };
             }
             return av_image_fill_black_fptr(ref @dst_data, @dst_linesize, @pix_fmt, @range, @width, @height);
@@ -14624,7 +14626,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_fill_linesizes_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_fill_linesizes is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_fill_linesizes"));
                 };
             }
             return av_image_fill_linesizes_fptr(ref @linesizes, @pix_fmt, @width);
@@ -14647,7 +14649,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_fill_max_pixsteps_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_fill_max_pixsteps is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_fill_max_pixsteps"));
                 };
             }
             av_image_fill_max_pixsteps_fptr(@max_pixsteps, ref @max_pixstep_comps, @pixdesc);
@@ -14670,7 +14672,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_fill_plane_sizes_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_fill_plane_sizes is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_fill_plane_sizes"));
                 };
             }
             return av_image_fill_plane_sizes_fptr(@size, @pix_fmt, @height, @linesizes);
@@ -14694,7 +14696,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_fill_pointers_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_fill_pointers is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_fill_pointers"));
                 };
             }
             return av_image_fill_pointers_fptr(@data, @pix_fmt, @height, @ptr, @linesizes);
@@ -14719,7 +14721,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_get_buffer_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_get_buffer_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_get_buffer_size"));
                 };
             }
             return av_image_get_buffer_size_fptr(@pix_fmt, @width, @height, @align);
@@ -14745,7 +14747,7 @@ namespace FFmpeg.AutoGen
             {
                 av_image_get_linesize_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_image_get_linesize is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_get_linesize"));
                 };
             }
             return av_image_get_linesize_fptr(@pix_fmt, @width, @plane);
@@ -14767,7 +14769,7 @@ namespace FFmpeg.AutoGen
             {
                 av_int_list_length_for_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_int_list_length_for_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_int_list_length_for_size"));
                 };
             }
             return av_int_list_length_for_size_fptr(@elsize, @list, @term);
@@ -14799,7 +14801,7 @@ namespace FFmpeg.AutoGen
             {
                 av_log_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_log is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_log"));
                 };
             }
             av_log_fptr(@avcl, @level, @fmt);
@@ -14837,7 +14839,7 @@ namespace FFmpeg.AutoGen
             {
                 av_log_default_callback_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_log_default_callback is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_log_default_callback"));
                 };
             }
             av_log_default_callback_fptr(@avcl, @level, @fmt, @vl);
@@ -14876,7 +14878,7 @@ namespace FFmpeg.AutoGen
             {
                 av_log_format_line_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_log_format_line is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_log_format_line"));
                 };
             }
             av_log_format_line_fptr(@ptr, @level, @fmt, @vl, @line, @line_size, @print_prefix);
@@ -14914,7 +14916,7 @@ namespace FFmpeg.AutoGen
             {
                 av_log_format_line2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_log_format_line2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_log_format_line2"));
                 };
             }
             return av_log_format_line2_fptr(@ptr, @level, @fmt, @vl, @line, @line_size, @print_prefix);
@@ -14946,7 +14948,7 @@ namespace FFmpeg.AutoGen
             {
                 av_log_get_flags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_log_get_flags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_log_get_flags"));
                 };
             }
             return av_log_get_flags_fptr();
@@ -14966,7 +14968,7 @@ namespace FFmpeg.AutoGen
             {
                 av_log_get_level_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_log_get_level is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_log_get_level"));
                 };
             }
             return av_log_get_level_fptr();
@@ -14995,7 +14997,7 @@ namespace FFmpeg.AutoGen
             {
                 av_log_once_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_log_once is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_log_once"));
                 };
             }
             av_log_once_fptr(@avcl, @initial_level, @subsequent_level, @state, @fmt);
@@ -15028,7 +15030,7 @@ namespace FFmpeg.AutoGen
             {
                 av_log_set_callback_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_log_set_callback is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_log_set_callback"));
                 };
             }
             av_log_set_callback_fptr(@callback);
@@ -15050,7 +15052,7 @@ namespace FFmpeg.AutoGen
             {
                 av_log_set_flags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_log_set_flags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_log_set_flags"));
                 };
             }
             av_log_set_flags_fptr(@arg);
@@ -15070,7 +15072,7 @@ namespace FFmpeg.AutoGen
             {
                 av_log_set_level_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_log_set_level is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_log_set_level"));
                 };
             }
             av_log_set_level_fptr(@level);
@@ -15092,7 +15094,7 @@ namespace FFmpeg.AutoGen
             {
                 av_log2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_log2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_log2"));
                 };
             }
             return av_log2_fptr(@v);
@@ -15112,7 +15114,7 @@ namespace FFmpeg.AutoGen
             {
                 av_log2_16bit_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_log2_16bit is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_log2_16bit"));
                 };
             }
             return av_log2_16bit_fptr(@v);
@@ -15132,7 +15134,7 @@ namespace FFmpeg.AutoGen
             {
                 av_malloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_malloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_malloc"));
                 };
             }
             return av_malloc_fptr(@size);
@@ -15155,7 +15157,7 @@ namespace FFmpeg.AutoGen
             {
                 av_malloc_array_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_malloc_array is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_malloc_array"));
                 };
             }
             return av_malloc_array_fptr(@nmemb, @size);
@@ -15179,7 +15181,7 @@ namespace FFmpeg.AutoGen
             {
                 av_mallocz_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_mallocz is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_mallocz"));
                 };
             }
             return av_mallocz_fptr(@size);
@@ -15202,7 +15204,7 @@ namespace FFmpeg.AutoGen
             {
                 av_mallocz_array_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_mallocz_array is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_mallocz_array"));
                 };
             }
             return av_mallocz_array_fptr(@nmemb, @size);
@@ -15226,7 +15228,7 @@ namespace FFmpeg.AutoGen
             {
                 av_mastering_display_metadata_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_mastering_display_metadata_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_mastering_display_metadata_alloc"));
                 };
             }
             return av_mastering_display_metadata_alloc_fptr();
@@ -15248,7 +15250,7 @@ namespace FFmpeg.AutoGen
             {
                 av_mastering_display_metadata_create_side_data_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_mastering_display_metadata_create_side_data is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_mastering_display_metadata_create_side_data"));
                 };
             }
             return av_mastering_display_metadata_create_side_data_fptr(@frame);
@@ -15271,7 +15273,7 @@ namespace FFmpeg.AutoGen
             {
                 av_max_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_max_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_max_alloc"));
                 };
             }
             av_max_alloc_fptr(@max);
@@ -15293,7 +15295,7 @@ namespace FFmpeg.AutoGen
             {
                 av_memcpy_backptr_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_memcpy_backptr is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_memcpy_backptr"));
                 };
             }
             av_memcpy_backptr_fptr(@dst, @back, @cnt);
@@ -15317,7 +15319,7 @@ namespace FFmpeg.AutoGen
             {
                 av_memdup_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_memdup is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_memdup"));
                 };
             }
             return av_memdup_fptr(@p, @size);
@@ -15341,7 +15343,7 @@ namespace FFmpeg.AutoGen
             {
                 av_mul_q_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_mul_q is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_mul_q"));
                 };
             }
             return av_mul_q_fptr(@b, @c);
@@ -15365,7 +15367,7 @@ namespace FFmpeg.AutoGen
             {
                 av_nearer_q_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_nearer_q is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_nearer_q"));
                 };
             }
             return av_nearer_q_fptr(@q, @q1, @q2);
@@ -15388,7 +15390,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_child_class_iterate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_child_class_iterate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_child_class_iterate"));
                 };
             }
             return av_opt_child_class_iterate_fptr(@parent, @iter);
@@ -15411,7 +15413,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_child_class_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_child_class_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_child_class_next"));
                 };
             }
             return av_opt_child_class_next_fptr(@parent, @prev);
@@ -15435,7 +15437,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_child_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_child_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_child_next"));
                 };
             }
             return av_opt_child_next_fptr(@obj, @prev);
@@ -15458,7 +15460,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_copy_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_copy is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_copy"));
                 };
             }
             return av_opt_copy_fptr(@dest, @src);
@@ -15489,7 +15491,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_eval_double_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_eval_double is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_eval_double"));
                 };
             }
             return av_opt_eval_double_fptr(@obj, @o, @val, @double_out);
@@ -15523,7 +15525,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_eval_flags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_eval_flags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_eval_flags"));
                 };
             }
             return av_opt_eval_flags_fptr(@obj, @o, @val, @flags_out);
@@ -15562,7 +15564,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_eval_float_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_eval_float is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_eval_float"));
                 };
             }
             return av_opt_eval_float_fptr(@obj, @o, @val, @float_out);
@@ -15596,7 +15598,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_eval_int_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_eval_int is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_eval_int"));
                 };
             }
             return av_opt_eval_int_fptr(@obj, @o, @val, @int_out);
@@ -15630,7 +15632,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_eval_int64_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_eval_int64 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_eval_int64"));
                 };
             }
             return av_opt_eval_int64_fptr(@obj, @o, @val, @int64_out);
@@ -15664,7 +15666,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_eval_q_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_eval_q is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_eval_q"));
                 };
             }
             return av_opt_eval_q_fptr(@obj, @o, @val, @q_out);
@@ -15705,7 +15707,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_find_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_find is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_find"));
                 };
             }
             return av_opt_find_fptr(@obj, @name, @unit, @opt_flags, @search_flags);
@@ -15760,7 +15762,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_find2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_find2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_find2"));
                 };
             }
             return av_opt_find2_fptr(@obj, @name, @unit, @opt_flags, @search_flags, @target_obj);
@@ -15816,7 +15818,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_flag_is_set_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_flag_is_set is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_flag_is_set"));
                 };
             }
             return av_opt_flag_is_set_fptr(@obj, @field_name, @flag_name);
@@ -15854,7 +15856,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_free"));
                 };
             }
             av_opt_free_fptr(@obj);
@@ -15875,7 +15877,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_freep_ranges_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_freep_ranges is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_freep_ranges"));
                 };
             }
             av_opt_freep_ranges_fptr(@ranges);
@@ -15903,7 +15905,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_get_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_get is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_get"));
                 };
             }
             return av_opt_get_fptr(@obj, @name, @search_flags, @out_val);
@@ -15943,7 +15945,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_get_channel_layout_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_get_channel_layout is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_get_channel_layout"));
                 };
             }
             return av_opt_get_channel_layout_fptr(@obj, @name, @search_flags, @ch_layout);
@@ -15977,7 +15979,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_get_dict_val_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_get_dict_val is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_get_dict_val"));
                 };
             }
             return av_opt_get_dict_val_fptr(@obj, @name, @search_flags, @out_val);
@@ -16012,7 +16014,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_get_double_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_get_double is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_get_double"));
                 };
             }
             return av_opt_get_double_fptr(@obj, @name, @search_flags, @out_val);
@@ -16046,7 +16048,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_get_image_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_get_image_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_get_image_size"));
                 };
             }
             return av_opt_get_image_size_fptr(@obj, @name, @search_flags, @w_out, @h_out);
@@ -16080,7 +16082,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_get_int_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_get_int is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_get_int"));
                 };
             }
             return av_opt_get_int_fptr(@obj, @name, @search_flags, @out_val);
@@ -16121,7 +16123,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_get_key_value_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_get_key_value is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_get_key_value"));
                 };
             }
             return av_opt_get_key_value_fptr(@ropts, @key_val_sep, @pairs_sep, @flags, @rkey, @rval);
@@ -16170,7 +16172,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_get_pixel_fmt_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_get_pixel_fmt is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_get_pixel_fmt"));
                 };
             }
             return av_opt_get_pixel_fmt_fptr(@obj, @name, @search_flags, @out_fmt);
@@ -16204,7 +16206,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_get_q_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_get_q is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_get_q"));
                 };
             }
             return av_opt_get_q_fptr(@obj, @name, @search_flags, @out_val);
@@ -16238,7 +16240,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_get_sample_fmt_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_get_sample_fmt is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_get_sample_fmt"));
                 };
             }
             return av_opt_get_sample_fmt_fptr(@obj, @name, @search_flags, @out_fmt);
@@ -16272,7 +16274,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_get_video_rate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_get_video_rate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_get_video_rate"));
                 };
             }
             return av_opt_get_video_rate_fptr(@obj, @name, @search_flags, @out_val);
@@ -16299,7 +16301,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_is_set_to_default_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_is_set_to_default is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_is_set_to_default"));
                 };
             }
             return av_opt_is_set_to_default_fptr(@obj, @o);
@@ -16330,7 +16332,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_is_set_to_default_by_name_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_is_set_to_default_by_name is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_is_set_to_default_by_name"));
                 };
             }
             return av_opt_is_set_to_default_by_name_fptr(@obj, @name, @search_flags);
@@ -16362,7 +16364,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_next"));
                 };
             }
             return av_opt_next_fptr(@obj, @prev);
@@ -16393,7 +16395,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_ptr_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_ptr is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_ptr"));
                 };
             }
             return av_opt_ptr_fptr(@avclass, @obj, @name);
@@ -16428,7 +16430,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_query_ranges_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_query_ranges is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_query_ranges"));
                 };
             }
             return av_opt_query_ranges_fptr(@p0, @obj, @key, @flags);
@@ -16465,7 +16467,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_query_ranges_default_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_query_ranges_default is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_query_ranges_default"));
                 };
             }
             return av_opt_query_ranges_default_fptr(@p0, @obj, @key, @flags);
@@ -16495,7 +16497,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_serialize_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_serialize is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_serialize"));
                 };
             }
             return av_opt_serialize_fptr(@obj, @opt_flags, @flags, @buffer, @key_val_sep, @pairs_sep);
@@ -16537,7 +16539,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set"));
                 };
             }
             return av_opt_set_fptr(@obj, @name, @val, @search_flags);
@@ -16584,7 +16586,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_bin_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_bin is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_bin"));
                 };
             }
             return av_opt_set_bin_fptr(@obj, @name, @val, @size, @search_flags);
@@ -16618,7 +16620,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_channel_layout_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_channel_layout is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_channel_layout"));
                 };
             }
             return av_opt_set_channel_layout_fptr(@obj, @name, @ch_layout, @search_flags);
@@ -16645,7 +16647,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_defaults_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_defaults is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_defaults"));
                 };
             }
             av_opt_set_defaults_fptr(@s);
@@ -16667,7 +16669,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_defaults2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_defaults2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_defaults2"));
                 };
             }
             av_opt_set_defaults2_fptr(@s, @mask, @flags);
@@ -16691,7 +16693,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_dict_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_dict is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_dict"));
                 };
             }
             return av_opt_set_dict_fptr(@obj, @options);
@@ -16722,7 +16724,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_dict_val_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_dict_val is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_dict_val"));
                 };
             }
             return av_opt_set_dict_val_fptr(@obj, @name, @val, @search_flags);
@@ -16749,7 +16751,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_dict2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_dict2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_dict2"));
                 };
             }
             return av_opt_set_dict2_fptr(@obj, @options, @search_flags);
@@ -16781,7 +16783,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_double_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_double is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_double"));
                 };
             }
             return av_opt_set_double_fptr(@obj, @name, @val, @search_flags);
@@ -16829,7 +16831,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_from_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_from_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_from_string"));
                 };
             }
             return av_opt_set_from_string_fptr(@ctx, @opts, @shorthand, @key_val_sep, @pairs_sep);
@@ -16884,7 +16886,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_image_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_image_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_image_size"));
                 };
             }
             return av_opt_set_image_size_fptr(@obj, @name, @w, @h, @search_flags);
@@ -16918,7 +16920,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_int_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_int is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_int"));
                 };
             }
             return av_opt_set_int_fptr(@obj, @name, @val, @search_flags);
@@ -16952,7 +16954,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_pixel_fmt_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_pixel_fmt is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_pixel_fmt"));
                 };
             }
             return av_opt_set_pixel_fmt_fptr(@obj, @name, @fmt, @search_flags);
@@ -16986,7 +16988,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_q_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_q is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_q"));
                 };
             }
             return av_opt_set_q_fptr(@obj, @name, @val, @search_flags);
@@ -17020,7 +17022,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_sample_fmt_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_sample_fmt is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_sample_fmt"));
                 };
             }
             return av_opt_set_sample_fmt_fptr(@obj, @name, @fmt, @search_flags);
@@ -17054,7 +17056,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_set_video_rate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_set_video_rate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_video_rate"));
                 };
             }
             return av_opt_set_video_rate_fptr(@obj, @name, @val, @search_flags);
@@ -17081,7 +17083,7 @@ namespace FFmpeg.AutoGen
             {
                 av_opt_show2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_opt_show2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_show2"));
                 };
             }
             return av_opt_show2_fptr(@obj, @av_log_obj, @req_flags, @rej_flags);
@@ -17112,7 +17114,7 @@ namespace FFmpeg.AutoGen
             {
                 av_parse_cpu_caps_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_parse_cpu_caps is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_parse_cpu_caps"));
                 };
             }
             return av_parse_cpu_caps_fptr(@flags, @s);
@@ -17148,7 +17150,7 @@ namespace FFmpeg.AutoGen
             {
                 av_parse_cpu_flags_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_parse_cpu_flags is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_parse_cpu_flags"));
                 };
             }
             return av_parse_cpu_flags_fptr(@s);
@@ -17178,7 +17180,7 @@ namespace FFmpeg.AutoGen
             {
                 av_pix_fmt_count_planes_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_pix_fmt_count_planes is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_pix_fmt_count_planes"));
                 };
             }
             return av_pix_fmt_count_planes_fptr(@pix_fmt);
@@ -17200,7 +17202,7 @@ namespace FFmpeg.AutoGen
             {
                 av_pix_fmt_desc_get_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_pix_fmt_desc_get is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_pix_fmt_desc_get"));
                 };
             }
             return av_pix_fmt_desc_get_fptr(@pix_fmt);
@@ -17222,7 +17224,7 @@ namespace FFmpeg.AutoGen
             {
                 av_pix_fmt_desc_get_id_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_pix_fmt_desc_get_id is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_pix_fmt_desc_get_id"));
                 };
             }
             return av_pix_fmt_desc_get_id_fptr(@desc);
@@ -17244,7 +17246,7 @@ namespace FFmpeg.AutoGen
             {
                 av_pix_fmt_desc_next_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_pix_fmt_desc_next is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_pix_fmt_desc_next"));
                 };
             }
             return av_pix_fmt_desc_next_fptr(@prev);
@@ -17267,7 +17269,7 @@ namespace FFmpeg.AutoGen
             {
                 av_pix_fmt_get_chroma_sub_sample_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_pix_fmt_get_chroma_sub_sample is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_pix_fmt_get_chroma_sub_sample"));
                 };
             }
             return av_pix_fmt_get_chroma_sub_sample_fptr(@pix_fmt, @h_shift, @v_shift);
@@ -17292,7 +17294,7 @@ namespace FFmpeg.AutoGen
             {
                 av_pix_fmt_swap_endianness_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_pix_fmt_swap_endianness is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_pix_fmt_swap_endianness"));
                 };
             }
             return av_pix_fmt_swap_endianness_fptr(@pix_fmt);
@@ -17315,7 +17317,7 @@ namespace FFmpeg.AutoGen
             {
                 av_q2intfloat_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_q2intfloat is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_q2intfloat"));
                 };
             }
             return av_q2intfloat_fptr(@q);
@@ -17338,7 +17340,7 @@ namespace FFmpeg.AutoGen
             {
                 av_read_image_line_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_read_image_line is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_read_image_line"));
                 };
             }
             av_read_image_line_fptr(@dst, ref @data, @linesize, @desc, @x, @y, @c, @w, @read_pal_component);
@@ -17358,7 +17360,7 @@ namespace FFmpeg.AutoGen
             {
                 av_read_image_line2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_read_image_line2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_read_image_line2"));
                 };
             }
             av_read_image_line2_fptr(@dst, ref @data, @linesize, @desc, @x, @y, @c, @w, @read_pal_component, @dst_element_size);
@@ -17387,7 +17389,7 @@ namespace FFmpeg.AutoGen
             {
                 av_realloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_realloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_realloc"));
                 };
             }
             return av_realloc_fptr(@ptr, @size);
@@ -17411,7 +17413,7 @@ namespace FFmpeg.AutoGen
             {
                 av_realloc_array_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_realloc_array is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_realloc_array"));
                 };
             }
             return av_realloc_array_fptr(@ptr, @nmemb, @size);
@@ -17436,7 +17438,7 @@ namespace FFmpeg.AutoGen
             {
                 av_realloc_f_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_realloc_f is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_realloc_f"));
                 };
             }
             return av_realloc_f_fptr(@ptr, @nelem, @elsize);
@@ -17457,7 +17459,7 @@ namespace FFmpeg.AutoGen
             {
                 av_reallocp_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_reallocp is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_reallocp"));
                 };
             }
             return av_reallocp_fptr(@ptr, @size);
@@ -17481,7 +17483,7 @@ namespace FFmpeg.AutoGen
             {
                 av_reallocp_array_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_reallocp_array is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_reallocp_array"));
                 };
             }
             return av_reallocp_array_fptr(@ptr, @nmemb, @size);
@@ -17506,7 +17508,7 @@ namespace FFmpeg.AutoGen
             {
                 av_reduce_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_reduce is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_reduce"));
                 };
             }
             return av_reduce_fptr(@dst_num, @dst_den, @num, @den, @max);
@@ -17533,7 +17535,7 @@ namespace FFmpeg.AutoGen
             {
                 av_rescale_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_rescale is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_rescale"));
                 };
             }
             return av_rescale_fptr(@a, @b, @c);
@@ -17554,7 +17556,7 @@ namespace FFmpeg.AutoGen
             {
                 av_rescale_delta_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_rescale_delta is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_rescale_delta"));
                 };
             }
             return av_rescale_delta_fptr(@in_tb, @in_ts, @fs_tb, @duration, @last, @out_tb);
@@ -17582,7 +17584,7 @@ namespace FFmpeg.AutoGen
             {
                 av_rescale_q_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_rescale_q is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_rescale_q"));
                 };
             }
             return av_rescale_q_fptr(@a, @bq, @cq);
@@ -17603,7 +17605,7 @@ namespace FFmpeg.AutoGen
             {
                 av_rescale_q_rnd_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_rescale_q_rnd is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_rescale_q_rnd"));
                 };
             }
             return av_rescale_q_rnd_fptr(@a, @bq, @cq, @rnd);
@@ -17624,7 +17626,7 @@ namespace FFmpeg.AutoGen
             {
                 av_rescale_rnd_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_rescale_rnd is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_rescale_rnd"));
                 };
             }
             return av_rescale_rnd_fptr(@a, @b, @c, @rnd);
@@ -17645,7 +17647,7 @@ namespace FFmpeg.AutoGen
             {
                 av_sample_fmt_is_planar_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_sample_fmt_is_planar is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_sample_fmt_is_planar"));
                 };
             }
             return av_sample_fmt_is_planar_fptr(@sample_fmt);
@@ -17668,7 +17670,7 @@ namespace FFmpeg.AutoGen
             {
                 av_samples_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_samples_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_samples_alloc"));
                 };
             }
             return av_samples_alloc_fptr(@audio_data, @linesize, @nb_channels, @nb_samples, @sample_fmt, @align);
@@ -17695,7 +17697,7 @@ namespace FFmpeg.AutoGen
             {
                 av_samples_alloc_array_and_samples_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_samples_alloc_array_and_samples is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_samples_alloc_array_and_samples"));
                 };
             }
             return av_samples_alloc_array_and_samples_fptr(@audio_data, @linesize, @nb_channels, @nb_samples, @sample_fmt, @align);
@@ -17716,7 +17718,7 @@ namespace FFmpeg.AutoGen
             {
                 av_samples_copy_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_samples_copy is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_samples_copy"));
                 };
             }
             return av_samples_copy_fptr(@dst, @src, @dst_offset, @src_offset, @nb_samples, @nb_channels, @sample_fmt);
@@ -17744,7 +17746,7 @@ namespace FFmpeg.AutoGen
             {
                 av_samples_fill_arrays_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_samples_fill_arrays is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_samples_fill_arrays"));
                 };
             }
             return av_samples_fill_arrays_fptr(@audio_data, @linesize, @buf, @nb_channels, @nb_samples, @sample_fmt, @align);
@@ -17773,7 +17775,7 @@ namespace FFmpeg.AutoGen
             {
                 av_samples_get_buffer_size_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_samples_get_buffer_size is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_samples_get_buffer_size"));
                 };
             }
             return av_samples_get_buffer_size_fptr(@linesize, @nb_channels, @nb_samples, @sample_fmt, @align);
@@ -17800,7 +17802,7 @@ namespace FFmpeg.AutoGen
             {
                 av_samples_set_silence_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_samples_set_silence is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_samples_set_silence"));
                 };
             }
             return av_samples_set_silence_fptr(@audio_data, @offset, @nb_samples, @nb_channels, @sample_fmt);
@@ -17826,7 +17828,7 @@ namespace FFmpeg.AutoGen
             {
                 av_set_cpu_flags_mask_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_set_cpu_flags_mask is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_set_cpu_flags_mask"));
                 };
             }
             av_set_cpu_flags_mask_fptr(@mask);
@@ -17869,7 +17871,7 @@ namespace FFmpeg.AutoGen
             {
                 av_set_options_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_set_options_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_set_options_string"));
                 };
             }
             return av_set_options_string_fptr(@ctx, @opts, @key_val_sep, @pairs_sep);
@@ -17922,7 +17924,7 @@ namespace FFmpeg.AutoGen
             {
                 av_strdup_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_strdup is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_strdup"));
                 };
             }
             return av_strdup_fptr(@s);
@@ -17952,7 +17954,7 @@ namespace FFmpeg.AutoGen
             {
                 av_strerror_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_strerror is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_strerror"));
                 };
             }
             return av_strerror_fptr(@errnum, @errbuf, @errbuf_size);
@@ -17984,7 +17986,7 @@ namespace FFmpeg.AutoGen
             {
                 av_strndup_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_strndup is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_strndup"));
                 };
             }
             return av_strndup_fptr(@s, @len);
@@ -18015,7 +18017,7 @@ namespace FFmpeg.AutoGen
             {
                 av_sub_q_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_sub_q is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_sub_q"));
                 };
             }
             return av_sub_q_fptr(@b, @c);
@@ -18046,7 +18048,7 @@ namespace FFmpeg.AutoGen
             {
                 av_tempfile_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_tempfile is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_tempfile"));
                 };
             }
             return av_tempfile_fptr(@prefix, @filename, @log_offset, @log_ctx);
@@ -18076,7 +18078,7 @@ namespace FFmpeg.AutoGen
             {
                 av_timecode_adjust_ntsc_framenum2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_timecode_adjust_ntsc_framenum2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_timecode_adjust_ntsc_framenum2"));
                 };
             }
             return av_timecode_adjust_ntsc_framenum2_fptr(@framenum, @fps);
@@ -18100,7 +18102,7 @@ namespace FFmpeg.AutoGen
             {
                 av_timecode_check_frame_rate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_timecode_check_frame_rate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_timecode_check_frame_rate"));
                 };
             }
             return av_timecode_check_frame_rate_fptr(@rate);
@@ -18122,7 +18124,7 @@ namespace FFmpeg.AutoGen
             {
                 av_timecode_get_smpte_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_timecode_get_smpte is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_timecode_get_smpte"));
                 };
             }
             return av_timecode_get_smpte_fptr(@rate, @drop, @hh, @mm, @ss, @ff);
@@ -18150,7 +18152,7 @@ namespace FFmpeg.AutoGen
             {
                 av_timecode_get_smpte_from_framenum_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_timecode_get_smpte_from_framenum is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_timecode_get_smpte_from_framenum"));
                 };
             }
             return av_timecode_get_smpte_from_framenum_fptr(@tc, @framenum);
@@ -18174,7 +18176,7 @@ namespace FFmpeg.AutoGen
             {
                 av_timecode_init_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_timecode_init is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_timecode_init"));
                 };
             }
             return av_timecode_init_fptr(@tc, @rate, @flags, @frame_start, @log_ctx);
@@ -18201,7 +18203,7 @@ namespace FFmpeg.AutoGen
             {
                 av_timecode_init_from_components_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_timecode_init_from_components is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_timecode_init_from_components"));
                 };
             }
             return av_timecode_init_from_components_fptr(@tc, @rate, @flags, @hh, @mm, @ss, @ff, @log_ctx);
@@ -18238,7 +18240,7 @@ namespace FFmpeg.AutoGen
             {
                 av_timecode_init_from_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_timecode_init_from_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_timecode_init_from_string"));
                 };
             }
             return av_timecode_init_from_string_fptr(@tc, @rate, @str, @log_ctx);
@@ -18271,7 +18273,7 @@ namespace FFmpeg.AutoGen
             {
                 av_timecode_make_mpeg_tc_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_timecode_make_mpeg_tc_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_timecode_make_mpeg_tc_string"));
                 };
             }
             return av_timecode_make_mpeg_tc_string_fptr(@buf, @tc25bit);
@@ -18295,7 +18297,7 @@ namespace FFmpeg.AutoGen
             {
                 av_timecode_make_smpte_tc_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_timecode_make_smpte_tc_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_timecode_make_smpte_tc_string"));
                 };
             }
             return av_timecode_make_smpte_tc_string_fptr(@buf, @tcsmpte, @prevent_df);
@@ -18320,7 +18322,7 @@ namespace FFmpeg.AutoGen
             {
                 av_timecode_make_smpte_tc_string2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_timecode_make_smpte_tc_string2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_timecode_make_smpte_tc_string2"));
                 };
             }
             return av_timecode_make_smpte_tc_string2_fptr(@buf, @rate, @tcsmpte, @prevent_df, @skip_field);
@@ -18347,7 +18349,7 @@ namespace FFmpeg.AutoGen
             {
                 av_timecode_make_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_timecode_make_string is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_timecode_make_string"));
                 };
             }
             return av_timecode_make_string_fptr(@tc, @buf, @framenum);
@@ -18372,7 +18374,7 @@ namespace FFmpeg.AutoGen
             {
                 av_tree_destroy_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_tree_destroy is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_tree_destroy"));
                 };
             }
             av_tree_destroy_fptr(@t);
@@ -18392,7 +18394,7 @@ namespace FFmpeg.AutoGen
             {
                 av_tree_enumerate_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_tree_enumerate is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_tree_enumerate"));
                 };
             }
             av_tree_enumerate_fptr(@t, @opaque, @cmp, @enu);
@@ -18414,7 +18416,7 @@ namespace FFmpeg.AutoGen
             {
                 av_tree_find_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_tree_find is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_tree_find"));
                 };
             }
             return av_tree_find_fptr(@root, @key, @cmp, @next);
@@ -18439,7 +18441,7 @@ namespace FFmpeg.AutoGen
             {
                 av_tree_insert_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_tree_insert is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_tree_insert"));
                 };
             }
             return av_tree_insert_fptr(@rootp, @key, @cmp, @next);
@@ -18465,7 +18467,7 @@ namespace FFmpeg.AutoGen
             {
                 av_tree_node_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_tree_node_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_tree_node_alloc"));
                 };
             }
             return av_tree_node_alloc_fptr();
@@ -18486,7 +18488,7 @@ namespace FFmpeg.AutoGen
             {
                 av_usleep_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_usleep is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_usleep"));
                 };
             }
             return av_usleep_fptr(@usec);
@@ -18510,7 +18512,7 @@ namespace FFmpeg.AutoGen
             {
                 av_version_info_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_version_info is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_version_info"));
                 };
             }
             return av_version_info_fptr();
@@ -18538,7 +18540,7 @@ namespace FFmpeg.AutoGen
             {
                 av_vlog_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_vlog is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_vlog"));
                 };
             }
             av_vlog_fptr(@avcl, @level, @fmt, @vl);
@@ -18570,7 +18572,7 @@ namespace FFmpeg.AutoGen
             {
                 av_write_image_line_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_write_image_line is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_write_image_line"));
                 };
             }
             av_write_image_line_fptr(@src, ref @data, @linesize, @desc, @x, @y, @c, @w);
@@ -18590,7 +18592,7 @@ namespace FFmpeg.AutoGen
             {
                 av_write_image_line2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("av_write_image_line2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_write_image_line2"));
                 };
             }
             av_write_image_line2_fptr(@src, ref @data, @linesize, @desc, @x, @y, @c, @w, @src_element_size);
@@ -18620,7 +18622,7 @@ namespace FFmpeg.AutoGen
             {
                 avutil_configuration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avutil_configuration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avutil_configuration"));
                 };
             }
             return avutil_configuration_fptr();
@@ -18642,7 +18644,7 @@ namespace FFmpeg.AutoGen
             {
                 avutil_license_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avutil_license is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avutil_license"));
                 };
             }
             return avutil_license_fptr();
@@ -18663,7 +18665,7 @@ namespace FFmpeg.AutoGen
             {
                 avutil_version_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("avutil_version is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avutil_version"));
                 };
             }
             return avutil_version_fptr();
@@ -18685,7 +18687,7 @@ namespace FFmpeg.AutoGen
             {
                 postproc_configuration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("postproc_configuration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "postproc_configuration"));
                 };
             }
             return postproc_configuration_fptr();
@@ -18707,7 +18709,7 @@ namespace FFmpeg.AutoGen
             {
                 postproc_license_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("postproc_license is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "postproc_license"));
                 };
             }
             return postproc_license_fptr();
@@ -18728,7 +18730,7 @@ namespace FFmpeg.AutoGen
             {
                 postproc_version_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("postproc_version is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "postproc_version"));
                 };
             }
             return postproc_version_fptr();
@@ -18749,7 +18751,7 @@ namespace FFmpeg.AutoGen
             {
                 pp_free_context_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("pp_free_context is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "pp_free_context"));
                 };
             }
             pp_free_context_fptr(@ppContext);
@@ -18769,7 +18771,7 @@ namespace FFmpeg.AutoGen
             {
                 pp_free_mode_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("pp_free_mode is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "pp_free_mode"));
                 };
             }
             pp_free_mode_fptr(@mode);
@@ -18789,7 +18791,7 @@ namespace FFmpeg.AutoGen
             {
                 pp_get_context_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("pp_get_context is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "pp_get_context"));
                 };
             }
             return pp_get_context_fptr(@width, @height, @flags);
@@ -18816,7 +18818,7 @@ namespace FFmpeg.AutoGen
             {
                 pp_get_mode_by_name_and_quality_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("pp_get_mode_by_name_and_quality is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "pp_get_mode_by_name_and_quality"));
                 };
             }
             return pp_get_mode_by_name_and_quality_fptr(@name, @quality);
@@ -18846,7 +18848,7 @@ namespace FFmpeg.AutoGen
             {
                 pp_postprocess_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("pp_postprocess is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "pp_postprocess"));
                 };
             }
             pp_postprocess_fptr(@src, @srcStride, ref @dst, @dstStride, @horizontalSize, @verticalSize, @QP_store, @QP_stride, @mode, @ppContext, @pict_type);
@@ -18866,7 +18868,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_alloc_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_alloc is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_alloc"));
                 };
             }
             return swr_alloc_fptr();
@@ -18888,7 +18890,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_alloc_set_opts_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_alloc_set_opts is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_alloc_set_opts"));
                 };
             }
             return swr_alloc_set_opts_fptr(@s, @out_ch_layout, @out_sample_fmt, @out_sample_rate, @in_ch_layout, @in_sample_fmt, @in_sample_rate, @log_offset, @log_ctx);
@@ -18919,7 +18921,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_build_matrix_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_build_matrix is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_build_matrix"));
                 };
             }
             return swr_build_matrix_fptr(@in_layout, @out_layout, @center_mix_level, @surround_mix_level, @lfe_mix_level, @rematrix_maxval, @rematrix_volume, @matrix, @stride, @matrix_encoding, @log_ctx);
@@ -18951,7 +18953,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_close_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_close is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_close"));
                 };
             }
             swr_close_fptr(@s);
@@ -18973,7 +18975,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_config_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_config_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_config_frame"));
                 };
             }
             return swr_config_frame_fptr(@swr, @out, @in);
@@ -18996,7 +18998,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_convert_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_convert is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_convert"));
                 };
             }
             return swr_convert_fptr(@s, @out, @out_count, @in, @in_count);
@@ -19023,7 +19025,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_convert_frame_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_convert_frame is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_convert_frame"));
                 };
             }
             return swr_convert_frame_fptr(@swr, @output, @input);
@@ -19048,7 +19050,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_drop_output_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_drop_output is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_drop_output"));
                 };
             }
             return swr_drop_output_fptr(@s, @count);
@@ -19072,7 +19074,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_free_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_free is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_free"));
                 };
             }
             swr_free_fptr(@s);
@@ -19094,7 +19096,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_get_class_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_get_class is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_get_class"));
                 };
             }
             return swr_get_class_fptr();
@@ -19116,7 +19118,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_get_delay_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_get_delay is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_get_delay"));
                 };
             }
             return swr_get_delay_fptr(@s, @base);
@@ -19139,7 +19141,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_get_out_samples_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_get_out_samples is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_get_out_samples"));
                 };
             }
             return swr_get_out_samples_fptr(@s, @in_samples);
@@ -19161,7 +19163,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_init_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_init is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_init"));
                 };
             }
             return swr_init_fptr(@s);
@@ -19184,7 +19186,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_inject_silence_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_inject_silence is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_inject_silence"));
                 };
             }
             return swr_inject_silence_fptr(@s, @count);
@@ -19208,7 +19210,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_is_initialized_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_is_initialized is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_is_initialized"));
                 };
             }
             return swr_is_initialized_fptr(@s);
@@ -19231,7 +19233,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_next_pts_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_next_pts is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_next_pts"));
                 };
             }
             return swr_next_pts_fptr(@s, @pts);
@@ -19253,7 +19255,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_set_channel_mapping_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_set_channel_mapping is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_set_channel_mapping"));
                 };
             }
             return swr_set_channel_mapping_fptr(@s, @channel_map);
@@ -19277,7 +19279,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_set_compensation_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_set_compensation is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_set_compensation"));
                 };
             }
             return swr_set_compensation_fptr(@s, @sample_delta, @compensation_distance);
@@ -19302,7 +19304,7 @@ namespace FFmpeg.AutoGen
             {
                 swr_set_matrix_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swr_set_matrix is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_set_matrix"));
                 };
             }
             return swr_set_matrix_fptr(@s, @matrix, @stride);
@@ -19328,7 +19330,7 @@ namespace FFmpeg.AutoGen
             {
                 swresample_configuration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swresample_configuration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swresample_configuration"));
                 };
             }
             return swresample_configuration_fptr();
@@ -19350,7 +19352,7 @@ namespace FFmpeg.AutoGen
             {
                 swresample_license_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swresample_license is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swresample_license"));
                 };
             }
             return swresample_license_fptr();
@@ -19371,7 +19373,7 @@ namespace FFmpeg.AutoGen
             {
                 swresample_version_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swresample_version is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swresample_version"));
                 };
             }
             return swresample_version_fptr();
@@ -19392,7 +19394,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_addVec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_addVec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_addVec"));
                 };
             }
             sws_addVec_fptr(@a, @b);
@@ -19413,7 +19415,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_alloc_context_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_alloc_context is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_alloc_context"));
                 };
             }
             return sws_alloc_context_fptr();
@@ -19434,7 +19436,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_allocVec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_allocVec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_allocVec"));
                 };
             }
             return sws_allocVec_fptr(@length);
@@ -19455,7 +19457,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_cloneVec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_cloneVec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_cloneVec"));
                 };
             }
             return sws_cloneVec_fptr(@a);
@@ -19476,7 +19478,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_convertPalette8ToPacked24_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_convertPalette8ToPacked24 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_convertPalette8ToPacked24"));
                 };
             }
             sws_convertPalette8ToPacked24_fptr(@src, @dst, @num_pixels, @palette);
@@ -19501,7 +19503,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_convertPalette8ToPacked32_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_convertPalette8ToPacked32 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_convertPalette8ToPacked32"));
                 };
             }
             sws_convertPalette8ToPacked32_fptr(@src, @dst, @num_pixels, @palette);
@@ -19526,7 +19528,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_convVec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_convVec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_convVec"));
                 };
             }
             sws_convVec_fptr(@a, @b);
@@ -19547,7 +19549,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_freeContext_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_freeContext is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_freeContext"));
                 };
             }
             sws_freeContext_fptr(@swsContext);
@@ -19568,7 +19570,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_freeFilter_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_freeFilter is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_freeFilter"));
                 };
             }
             sws_freeFilter_fptr(@filter);
@@ -19588,7 +19590,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_freeVec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_freeVec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_freeVec"));
                 };
             }
             sws_freeVec_fptr(@a);
@@ -19608,7 +19610,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_get_class_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_get_class is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_get_class"));
                 };
             }
             return sws_get_class_fptr();
@@ -19629,7 +19631,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_getCachedContext_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_getCachedContext is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_getCachedContext"));
                 };
             }
             return sws_getCachedContext_fptr(@context, @srcW, @srcH, @srcFormat, @dstW, @dstH, @dstFormat, @flags, @srcFilter, @dstFilter, @param);
@@ -19650,7 +19652,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_getCoefficients_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_getCoefficients is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_getCoefficients"));
                 };
             }
             return sws_getCoefficients_fptr(@colorspace);
@@ -19672,7 +19674,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_getColorspaceDetails_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_getColorspaceDetails is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_getColorspaceDetails"));
                 };
             }
             return sws_getColorspaceDetails_fptr(@c, @inv_table, @srcRange, @table, @dstRange, @brightness, @contrast, @saturation);
@@ -19694,7 +19696,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_getConstVec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_getConstVec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_getConstVec"));
                 };
             }
             return sws_getConstVec_fptr(@c, @length);
@@ -19715,7 +19717,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_getContext_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_getContext is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_getContext"));
                 };
             }
             return sws_getContext_fptr(@srcW, @srcH, @srcFormat, @dstW, @dstH, @dstFormat, @flags, @srcFilter, @dstFilter, @param);
@@ -19745,7 +19747,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_getDefaultFilter_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_getDefaultFilter is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_getDefaultFilter"));
                 };
             }
             return sws_getDefaultFilter_fptr(@lumaGBlur, @chromaGBlur, @lumaSharpen, @chromaSharpen, @chromaHShift, @chromaVShift, @verbose);
@@ -19765,7 +19767,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_getGaussianVec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_getGaussianVec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_getGaussianVec"));
                 };
             }
             return sws_getGaussianVec_fptr(@variance, @quality);
@@ -19786,7 +19788,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_getIdentityVec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_getIdentityVec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_getIdentityVec"));
                 };
             }
             return sws_getIdentityVec_fptr();
@@ -19807,7 +19809,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_init_context_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_init_context is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_init_context"));
                 };
             }
             return sws_init_context_fptr(@sws_context, @srcFilter, @dstFilter);
@@ -19829,7 +19831,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_isSupportedEndiannessConversion_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_isSupportedEndiannessConversion is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_isSupportedEndiannessConversion"));
                 };
             }
             return sws_isSupportedEndiannessConversion_fptr(@pix_fmt);
@@ -19852,7 +19854,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_isSupportedInput_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_isSupportedInput is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_isSupportedInput"));
                 };
             }
             return sws_isSupportedInput_fptr(@pix_fmt);
@@ -19873,7 +19875,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_isSupportedOutput_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_isSupportedOutput is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_isSupportedOutput"));
                 };
             }
             return sws_isSupportedOutput_fptr(@pix_fmt);
@@ -19894,7 +19896,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_normalizeVec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_normalizeVec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_normalizeVec"));
                 };
             }
             sws_normalizeVec_fptr(@a, @height);
@@ -19915,7 +19917,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_printVec2_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_printVec2 is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_printVec2"));
                 };
             }
             sws_printVec2_fptr(@a, @log_ctx, @log_level);
@@ -19936,7 +19938,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_scale_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_scale is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_scale"));
                 };
             }
             return sws_scale_fptr(@c, @srcSlice, @srcStride, @srcSliceY, @srcSliceH, @dst, @dstStride);
@@ -19965,7 +19967,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_scaleVec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_scaleVec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_scaleVec"));
                 };
             }
             sws_scaleVec_fptr(@a, @scalar);
@@ -19986,7 +19988,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_setColorspaceDetails_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_setColorspaceDetails is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_setColorspaceDetails"));
                 };
             }
             return sws_setColorspaceDetails_fptr(@c, @inv_table, @srcRange, @table, @dstRange, @brightness, @contrast, @saturation);
@@ -20015,7 +20017,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_shiftVec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_shiftVec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_shiftVec"));
                 };
             }
             sws_shiftVec_fptr(@a, @shift);
@@ -20036,7 +20038,7 @@ namespace FFmpeg.AutoGen
             {
                 sws_subVec_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("sws_subVec is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_subVec"));
                 };
             }
             sws_subVec_fptr(@a, @b);
@@ -20058,7 +20060,7 @@ namespace FFmpeg.AutoGen
             {
                 swscale_configuration_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swscale_configuration is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swscale_configuration"));
                 };
             }
             return swscale_configuration_fptr();
@@ -20080,7 +20082,7 @@ namespace FFmpeg.AutoGen
             {
                 swscale_license_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swscale_license is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swscale_license"));
                 };
             }
             return swscale_license_fptr();
@@ -20101,7 +20103,7 @@ namespace FFmpeg.AutoGen
             {
                 swscale_version_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException("swscale_version is not supported on this platform.");
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swscale_version"));
                 };
             }
             return swscale_version_fptr();
