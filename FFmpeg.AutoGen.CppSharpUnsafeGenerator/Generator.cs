@@ -120,16 +120,18 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 (units, writer) =>
                 {
                     writer.WriteLine($"public unsafe static partial class {ClassName}");
-                    using (writer.BeginBlock())
-                        units.OfType<ExportFunctionDefinition>()
-                            .OrderBy(x => x.LibraryName)
-                            .ThenBy(x => x.Name)
-                            .ToList()
-                            .ForEach(x =>
-                            {
-                                writer.WriteFunction(x);
-                                writer.WriteLine();
-                            });
+                    using var _ = writer.BeginBlock();
+                    writer.WriteLine("private const string PlatformNotSupportedMessageFormat = \"{0} is not supported on this platform.\";");
+                    writer.WriteLine();
+                    units.OfType<ExportFunctionDefinition>()
+                        .OrderBy(x => x.LibraryName)
+                        .ThenBy(x => x.Name)
+                        .ToList()
+                        .ForEach(x =>
+                        {
+                            writer.WriteFunction(x);
+                            writer.WriteLine();
+                        });
                 });
         }
 
