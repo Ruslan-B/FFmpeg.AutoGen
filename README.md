@@ -54,7 +54,7 @@ Non-commercial open source license
 
 ## License
 
-Copyright © Ruslan Balanukhin 2020
+Copyright © Ruslan Balanukhin 2021
 All rights reserved.
 
 Distributed under the GNU Lesser General Public License (LGPL) version 3.  
