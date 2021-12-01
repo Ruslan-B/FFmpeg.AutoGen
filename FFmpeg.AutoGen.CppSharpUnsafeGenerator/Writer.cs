@@ -77,28 +77,16 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public void WriteFunction(ExportFunctionDefinition function)
         {
-            function.ReturnType.Attributes.ToList().ForEach(WriteLine);
-            var parameterNames = GetParameterNames(function.Parameters);
-            var parameters = GetParameters(function.Parameters);
-            var functionPtrName = function.Name + "_fptr";
-            var functionDelegateName = function.Name + "_delegate";
-            var returnCommand = function.ReturnType.Name == "void" ? string.Empty : "return ";
-
-            if (SuppressUnmanagedCodeSecurity) WriteLine("[SuppressUnmanagedCodeSecurity]");
-            WriteLine("[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
-            WriteLine($"private delegate {function.ReturnType.Name} {functionDelegateName}({parameters});");
-            Write($"private static {functionDelegateName} {functionPtrName} = ");
-            WriteDefaultFunctionDelegateExpression(function, parameterNames, functionDelegateName, functionPtrName, returnCommand);
-            WriteLine(";");
-
             WriteSummary(function);
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
-            WriteReturnComment(function.ReturnComment);
-
             WriteObsoletion(function);
-            WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters})");
-            using (BeginBlock()) WriteLine($"{returnCommand}{functionPtrName}({parameterNames});");
-            WriteLine();
+            if(SuppressUnmanagedCodeSecurity)
+                WriteLine("[SuppressUnmanagedCodeSecurity]");
+
+            WriteLine($"[DllImport(\"{function.LibraryName}-{function.LibraryVersion}\", EntryPoint = \"{function.Name}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
+            function.ReturnType.Attributes.ToList().ForEach(WriteLine);
+            var parameters = GetParameters(function.Parameters);
+            WriteLine($"public static extern {function.ReturnType.Name} {function.Name}({parameters});");
         }
 
         public void WriteFunction(InlineFunctionDefinition function)
