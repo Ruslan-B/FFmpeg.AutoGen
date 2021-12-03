@@ -169,7 +169,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteInternal(outputFile,
                 (units, writer) =>
                 {
-                    writer.WriteLine("#pragma warning disable 169");
                     writer.WriteLine();
                     units.OfType<FixedArrayDefinition>()
                         .OrderBy(x => x.Size)
@@ -276,6 +275,9 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             writer.WriteLine("using System.Runtime.InteropServices;");
             if (SuppressUnmanagedCodeSecurity) writer.WriteLine("using System.Security;");
             writer.WriteLine();
+            writer.WriteLine("#pragma warning disable 169");
+            writer.WriteLine("#pragma warning disable CS0649");
+            writer.WriteLine("#pragma warning disable CS0108");
             writer.WriteLine($"namespace {Namespace}");
             using (writer.BeginBlock()) execute(_astProcessor.Units, writer);
         }
