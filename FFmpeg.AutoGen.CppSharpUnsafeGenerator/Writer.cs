@@ -210,6 +210,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteLine($"public void UpdateFrom({elementType}[] array)");
             using (BeginBlock())
                 WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ p->{prefix}[i++] = value; if (i >= Size) return; }} }}");
+
+            WriteLine($"public static implicit operator {elementType}*({arrayName} @struct) => ({elementType}*)@struct._;");
         }
 
         private void WriteComplexFixedArray(string elementType, int size, string prefix)
