@@ -236,6 +236,19 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteLine($"public void UpdateFrom({elementType}[] array)");
             using (BeginBlock())
                 WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ *(p0 + i++) = value; if (i >= Size) return; }} }}");
+
+            if(elementType == "void*")
+            {
+                WriteLine($"public unsafe Span<IntPtr> GetPinnableReference()");
+                using (BeginBlock())
+                    WriteLine($"fixed (void** p = &_0) return new Span<IntPtr>(p, Size); ");
+            }
+            if(elementType == "byte*")
+            {
+                WriteLine($"public unsafe Span<IntPtr> GetPinnableReference()");
+                using (BeginBlock())
+                    WriteLine($"fixed (byte** p = &_0) return new Span<IntPtr>(p, Size); ");
+            }
         }
 
         private static string GetParameters(FunctionParameter[] parameters, bool withAttributes = true)
