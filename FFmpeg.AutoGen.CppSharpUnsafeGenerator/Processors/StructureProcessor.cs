@@ -97,7 +97,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return type switch
             {
                 TypedefType declaration => GetTypeDefinition(declaration.Declaration.Type, name),
-                ArrayType { SizeType: ArrayType.ArraySize.Constant } arrayType => GetFieldTypeForFixedArray(arrayType),
+                // ArrayType { SizeType: ArrayType.ArraySize.Constant } arrayType => GetFieldTypeForFixedArray(arrayType),
                 TagType tagType => GetFieldTypeForNestedDeclaration(tagType.Declaration, name),
                 PointerType pointerType => GetTypeDefinition(pointerType, name),
                 _ => new TypeDefinition

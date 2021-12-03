@@ -44,30 +44,33 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         {
             if (IgnoreUnitNames.Contains(definition.Name)) return;
 
-            var existing = _units.Where(x => x.Name == definition.Name).ToList();
-
-            // don't allow adding if existing definition with same name
-            if (existing.Any())
+            switch (definition)
             {
-                switch (definition)
+                // for
+                case FunctionDefinitionBase df:
                 {
-                    // we allow functions with different arguments (overloads)
-                    case FunctionDefinitionBase fdbA when !existing.Any(v => v is FunctionDefinitionBase fdbB &&
-                                                                             fdbA.Parameters.SequenceEqual(fdbB.Parameters)):
-                        break;
-                    // for other cases we remove the existing/previous definition and use the new one
-                    default:
-                    {
-                        foreach (var d in existing)
-                        {
-                            _units.Remove(d);
-                        }
+                    // check for existing functions with same parameters
+                    // we care about the parameters, as we want to allow functions with same name but different parameters (overloads)
+                    var existing = _units.Where(v => v is FunctionDefinitionBase vf
+                                                     && v.Name == definition.Name
+                                                     && vf.Parameters.SequenceEqual(df.Parameters)).ToList();
 
-                        break;
+                    foreach (var d in existing)
+                    {
+                        _units.Remove(d);
                     }
+
+                    break;
+                }
+                default:
+                {
+                    // don't allow adding if existing definition with same name
+                    var existing = _units.FirstOrDefault(x => x.Name == definition.Name);
+                    if (existing != null)
+                        _units.Remove(existing);
+                    break;
                 }
             }
-
             _units.Add(definition);
         }
 
