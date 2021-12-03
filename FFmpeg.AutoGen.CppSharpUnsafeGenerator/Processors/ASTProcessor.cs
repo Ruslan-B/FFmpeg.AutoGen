@@ -51,11 +51,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 {
                     // check for existing functions with same parameters
                     // we care about the parameters, as we want to allow functions with same name but different parameters (overloads)
-                    var existing = _units.Where(v => v is FunctionDefinitionBase vf
-                                                     && v.Name == definition.Name
-                                                     && vf.Parameters.SequenceEqual(df.Parameters)).ToList();
+                    var existingWithSameName = _units.OfType<FunctionDefinitionBase>().Where(x => x.Name == definition.Name);
+                    var existingWithSameParameters = existingWithSameName.Where(v => v.Parameters.SequenceEqual(df.Parameters)).ToList();
 
-                    foreach (var d in existing)
+                    foreach (var d in existingWithSameParameters)
                     {
                         _units.Remove(d);
                     }

@@ -32,11 +32,15 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
 
                 // add a duplicate/overload that uses ref-style arguments for double indirection
                 if (function.Parameters.Any(v => IsTypeDoubleIndirection(v.Type)))
-                    ProcessFunction(function, true);
+                    ProcessFunction(function, true, false);
+
+                // add a duplicate/overload that uses ptr-style arguments for fixed arrays
+                if (function.Parameters.Any(v => IsTypeFixedArray(v.Type)))
+                    ProcessFunction(function, false, false);
             }
         }
 
-        private void ProcessFunction(Function function, bool useByRefForDoubleIndirection = false)
+        private void ProcessFunction(Function function, bool useByRefForDoubleIndirection = false, bool useWrapperForFixedArray = true)
         {
             var functionName = function.Name;
 
@@ -46,7 +50,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                 inline.ReturnType = GetReturnTypeName(function.ReturnType.Type, functionName);
                 inline.Content = function.Comment?.BriefText;
                 inline.ReturnComment = GetReturnComment(function);
-                inline.Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i, useByRefForDoubleIndirection)).ToArray();
+                inline.Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i, useByRefForDoubleIndirection, useWrapperForFixedArray)).ToArray();
                 inline.Obsoletion = ObsoletionHelper.CreateObsoletion(function);
             }
 
@@ -97,13 +101,13 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             };
         }
 
-        private FunctionParameter GetParameter(Function function, Parameter parameter, int position, bool useByRefForDoubleIndirection)
+        private FunctionParameter GetParameter(Function function, Parameter parameter, int position, bool useByRefForDoubleIndirection, bool useWrapperForFixedArray = true)
         {
             var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
             return new FunctionParameter
             {
                 Name = name,
-                Type = GetParameterType(parameter.Type, $"{function.Name}_{name}", useByRefForDoubleIndirection),
+                Type = GetParameterType(parameter.Type, $"{function.Name}_{name}", useByRefForDoubleIndirection, useWrapperForFixedArray),
                 Content = GetParamComment(function, parameter.Name)
             };
         }
@@ -138,7 +142,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return GetParameterType(type, name);
         }
 
-        private TypeDefinition GetParameterType(Type type, string name, bool useByRefForDoubleIndirection = false)
+        private TypeDefinition GetParameterType(Type type, string name, bool useByRefForDoubleIndirection = false, bool useWrapperForFixedArray = true)
         {
             // if argument is double indirection (void** ptr), rewrite to use "ref void* ptr"
             if (useByRefForDoubleIndirection && type is PointerType { Pointee: PointerType t })
@@ -173,19 +177,21 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             }
 
             // edge case when type is array of pointers to none builtin type (type[]* -> type**)
-            if (type is ArrayType arrayType &&
+            if (useWrapperForFixedArray && type is ArrayType arrayType &&
                 arrayType.SizeType == ArrayType.ArraySize.Incomplete &&
                 arrayType.Type is PointerType arrayPointerType &&
                 !(arrayPointerType.Pointee is BuiltinType || arrayPointerType.Pointee is TypedefType typedefType &&
                     typedefType.Declaration.Type is BuiltinType))
                 return new TypeDefinition { Name = $"{TypeHelper.GetTypeName(arrayPointerType)}*" };
 
-
-
-            return _context.StructureProcessor.GetTypeDefinition(type, name);
+            return _context.StructureProcessor.GetTypeDefinition(type, name, useWrapperForFixedArray);
         }
 
         private static bool IsTypeDoubleIndirection(Type type) => type is PointerType { Pointee: PointerType };
+
+        private static bool IsTypeFixedArray(Type type) =>
+            type is ArrayType { SizeType: ArrayType.ArraySize.Constant } or
+                ArrayType { SizeType: ArrayType.ArraySize.Incomplete };
 
         private static string GetParamComment(Function function, string parameterName)
         {

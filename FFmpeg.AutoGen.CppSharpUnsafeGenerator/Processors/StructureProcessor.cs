@@ -92,12 +92,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             definition.Fields = fields.ToArray();
         }
 
-        internal TypeDefinition GetTypeDefinition(Type type, string name = null)
+        internal TypeDefinition GetTypeDefinition(Type type, string name = null, bool useWrapperForFixedArray = true)
         {
             return type switch
             {
                 TypedefType declaration => GetTypeDefinition(declaration.Declaration.Type, name),
-                // ArrayType { SizeType: ArrayType.ArraySize.Constant } arrayType => GetFieldTypeForFixedArray(arrayType),
+                ArrayType { SizeType: ArrayType.ArraySize.Constant } arrayType => useWrapperForFixedArray
+                    ? GetFieldTypeForFixedArray(arrayType)
+                    : new TypeDefinition() { Name = TypeHelper.GetTypeName(new PointerType(arrayType.QualifiedType)) },
                 TagType tagType => GetFieldTypeForNestedDeclaration(tagType.Declaration, name),
                 PointerType pointerType => GetTypeDefinition(pointerType, name),
                 _ => new TypeDefinition
