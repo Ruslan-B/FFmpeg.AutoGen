@@ -39,13 +39,24 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         {
             return _units.Any(x => x.Name == name);
         }
-        
+
         public void AddUnit(IDefinition definition)
         {
             if (IgnoreUnitNames.Contains(definition.Name)) return;
+
             var existing = _units.FirstOrDefault(x => x.Name == definition.Name);
+
+            // don't allow adding if existing definition with same name
             if (existing != null)
-                _units.Remove(existing);
+            {
+                // we allow functions with different arguments (overloads)
+                if (definition is not FunctionDefinitionBase fdbA || _units.Any(v => v.Name == definition.Name && v is FunctionDefinitionBase fdbB &&
+                                                                                     fdbA.Parameters.SequenceEqual(fdbB.Parameters)))
+                {
+                    _units.Remove(existing);
+                }
+            }
+
             _units.Add(definition);
         }
 
