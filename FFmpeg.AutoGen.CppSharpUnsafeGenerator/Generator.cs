@@ -20,8 +20,8 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public Generator(ASTProcessor astProcessor) => _astProcessor = astProcessor;
 
-        public string[] Defines { get; init; } = { };
-        public string[] IncludeDirs { get; init; } = { };
+        public string[] Defines { get; init; } = Array.Empty<string>();
+        public string[] IncludeDirs { get; init; } = Array.Empty<string>();
         public FunctionExport[] Exports { get; init; }
 
         public string Namespace { get; init; }
