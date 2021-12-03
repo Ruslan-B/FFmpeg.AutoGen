@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
@@ -11,12 +12,29 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public static IEnumerable<FunctionExport> LoadFunctionExports(string path)
         {
             var libraries = Directory.EnumerateFiles(path, "*.dll");
+
             foreach (var libraryPath in libraries)
             {
                 var libraryFullName = Path.GetFileNameWithoutExtension(libraryPath);
                 var libraryNameParts = libraryFullName.Split('-');
-                var libraryName = libraryNameParts[0];
-                var libraryVersion = int.Parse(libraryNameParts[1]);
+                string libraryName = null;
+                int libraryVersion = 0;
+
+                switch (libraryNameParts.Length)
+                {
+                    // if 3 parts, the library is suffixed (see ffmpeg configure)
+                    case 3:
+                        libraryName = $"{libraryNameParts[0]}-{libraryNameParts[1]}";
+                        libraryVersion = int.Parse(libraryNameParts[2]);
+                        break;
+                    // no suffix (normal naming pattern)
+                    case 2:
+                        libraryName = libraryNameParts[0];
+                        libraryVersion = int.Parse(libraryNameParts[1]);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(libraryNameParts.Length));
+                }
 
                 var exports = GetExports(libraryPath);
                 foreach (var export in exports) yield return new FunctionExport { LibraryName = libraryName, LibraryVersion = libraryVersion, Name = export };
