@@ -216,7 +216,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         private void WriteComplexFixedArray(string elementType, int size, string prefix)
         {
-            WriteLine(string.Join(" ", Enumerable.Range(0, size).Select(i => $"{elementType} {prefix}{i};")));
+            WriteLine(string.Join(" ", Enumerable.Range(0, size).Select(i => $"public {elementType} {prefix}{i};")));
             WriteLine();
 
             var @fixed = $"fixed ({elementType}* p0 = &{prefix}0)";
