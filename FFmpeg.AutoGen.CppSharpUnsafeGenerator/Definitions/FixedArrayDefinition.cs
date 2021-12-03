@@ -1,6 +1,6 @@
 ﻿namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
 {
-    internal class FixedArrayDefinition : TypeDefinition
+    internal record FixedArrayDefinition : TypeDefinition
     {
         public TypeDefinition ElementType { get; init; }
         public int Size { get; init; }

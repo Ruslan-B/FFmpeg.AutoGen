@@ -1,6 +1,6 @@
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
 {
-    internal class FunctionDefinitionBase : IDefinition, ICanGenerateXmlDoc, IObsoletionAware
+    internal record FunctionDefinitionBase : IDefinition, ICanGenerateXmlDoc, IObsoletionAware
     {
         public TypeDefinition ReturnType { get; set; }
         public FunctionParameter[] Parameters { get; set; }
