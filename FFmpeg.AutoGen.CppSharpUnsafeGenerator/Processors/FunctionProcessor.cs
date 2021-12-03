@@ -28,40 +28,49 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
         {
             foreach (var function in translationUnit.Functions)
             {
-                var functionName = function.Name;
+                ProcessFunction(function);
 
-                void PopulateCommon(FunctionDefinitionBase inline)
-                {
-                    inline.Name = functionName;
-                    inline.ReturnType = GetReturnTypeName(function.ReturnType.Type, functionName);
-                    inline.Content = function.Comment?.BriefText;
-                    inline.ReturnComment = GetReturnComment(function);
-                    inline.Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray();
-                    inline.Obsoletion = ObsoletionHelper.CreateObsoletion(function);
-                }
-
-                if (function.IsInline)
-                {
-                    var inlineDefinition = new InlineFunctionDefinition();
-                    PopulateCommon(inlineDefinition);
-                    inlineDefinition.Body = function.Body;
-                    inlineDefinition.OriginalBodyHash = GetSha256(function.Body);
-                    _context.AddUnit(inlineDefinition);
-                    continue;
-                }
-
-                if (!_context.FunctionExportMap.TryGetValue(functionName, out var export))
-                {
-                    Console.WriteLine($"Export not found. Skipping {functionName} function.");
-                    continue;
-                }
-
-                var exportDefinition = new ExportFunctionDefinition();
-                PopulateCommon(exportDefinition);
-                exportDefinition.LibraryName = export.LibraryName;
-                exportDefinition.LibraryVersion = export.LibraryVersion;
-                _context.AddUnit(exportDefinition);
+                // add a duplicate/overload that uses ref-style arguments for double indirection
+                if (function.Parameters.Any(v => IsTypeDoubleIndirection(v.Type)))
+                    ProcessFunction(function, true);
             }
+        }
+
+        private void ProcessFunction(Function function, bool useByRefForDoubleIndirection = false)
+        {
+            var functionName = function.Name;
+
+            void PopulateCommon(FunctionDefinitionBase inline)
+            {
+                inline.Name = functionName;
+                inline.ReturnType = GetReturnTypeName(function.ReturnType.Type, functionName);
+                inline.Content = function.Comment?.BriefText;
+                inline.ReturnComment = GetReturnComment(function);
+                inline.Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i, useByRefForDoubleIndirection)).ToArray();
+                inline.Obsoletion = ObsoletionHelper.CreateObsoletion(function);
+            }
+
+            if (function.IsInline)
+            {
+                var inlineDefinition = new InlineFunctionDefinition();
+                PopulateCommon(inlineDefinition);
+                inlineDefinition.Body = function.Body;
+                inlineDefinition.OriginalBodyHash = GetSha256(function.Body);
+                _context.AddUnit(inlineDefinition);
+                return;
+            }
+
+            if (!_context.FunctionExportMap.TryGetValue(functionName, out var export))
+            {
+                Console.WriteLine($"Export not found. Skipping {functionName} function.");
+                return;
+            }
+
+            var exportDefinition = new ExportFunctionDefinition();
+            PopulateCommon(exportDefinition);
+            exportDefinition.LibraryName = export.LibraryName;
+            exportDefinition.LibraryVersion = export.LibraryVersion;
+            _context.AddUnit(exportDefinition);
         }
 
         internal TypeDefinition GetDelegateType(FunctionType functionType, string name)
@@ -88,13 +97,13 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             };
         }
 
-        private FunctionParameter GetParameter(Function function, Parameter parameter, int position)
+        private FunctionParameter GetParameter(Function function, Parameter parameter, int position, bool useByRefForDoubleIndirection)
         {
             var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
             return new FunctionParameter
             {
                 Name = name,
-                Type = GetParameterType(parameter.Type, $"{function.Name}_{name}"),
+                Type = GetParameterType(parameter.Type, $"{function.Name}_{name}", useByRefForDoubleIndirection),
                 Content = GetParamComment(function, parameter.Name)
             };
         }
@@ -129,8 +138,18 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
             return GetParameterType(type, name);
         }
 
-        private TypeDefinition GetParameterType(Type type, string name)
+        private TypeDefinition GetParameterType(Type type, string name, bool useByRefForDoubleIndirection = false)
         {
+            // if argument is double indirection (void** ptr), rewrite to use "ref void* ptr"
+            if (useByRefForDoubleIndirection && type is PointerType { Pointee: PointerType t })
+            {
+                return new TypeDefinition
+                {
+                    Name = TypeHelper.GetTypeName(t),
+                    ByReference = true,
+                };
+            }
+
             if (type is PointerType pointerType &&
                 pointerType.QualifiedPointee.Qualifiers.IsConst &&
                 pointerType.Pointee is BuiltinType builtinType)
@@ -161,8 +180,12 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
                     typedefType.Declaration.Type is BuiltinType))
                 return new TypeDefinition { Name = $"{TypeHelper.GetTypeName(arrayPointerType)}*" };
 
+
+
             return _context.StructureProcessor.GetTypeDefinition(type, name);
         }
+
+        private static bool IsTypeDoubleIndirection(Type type) => type is PointerType { Pointee: PointerType };
 
         private static string GetParamComment(Function function, string parameterName)
         {
