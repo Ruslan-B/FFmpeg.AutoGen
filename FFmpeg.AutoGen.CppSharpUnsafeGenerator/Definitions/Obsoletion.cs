@@ -1,8 +1,7 @@
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
+
+public struct Obsoletion
 {
-    public struct Obsoletion
-    {
-        public bool IsObsolete { get; init; }
-        public string Message { get; init; }
-    }
+    public bool IsObsolete { get; init; }
+    public string Message { get; init; }
 }

@@ -1,9 +1,8 @@
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
+
+internal class TypeDefinition : IDefinition
 {
-    internal class TypeDefinition : IDefinition
-    {
-        public string[] Attributes { get; init; } = { };
-        public bool ByReference { get; init; }
-        public string Name { get; init; }
-    }
+    public string[] Attributes { get; init; } = { };
+    public bool ByReference { get; init; }
+    public string Name { get; init; }
 }

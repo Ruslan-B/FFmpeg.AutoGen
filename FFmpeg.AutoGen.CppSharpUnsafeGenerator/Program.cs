@@ -4,130 +4,133 @@ using System.IO;
 using System.Linq;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator;
+
+internal class Program
 {
-    internal class Program
+    internal static void Main(string[] args)
     {
-        internal static void Main(string[] args)
+        var options = CliOptions.ParseArgumentsStrict(args);
+
+        if (options.Verbose)
         {
-            var options = CliOptions.ParseArgumentsStrict(args);
+            Console.WriteLine($"Working dir: {Environment.CurrentDirectory}");
+            Console.WriteLine($"Output dir: {options.OutputDir}");
+            Console.WriteLine($"FFmpeg headers dir: {options.FFmpegIncludesDir}");
+            Console.WriteLine($"FFmpeg bin dir: {options.FFmpegBinDir}");
+            Console.WriteLine($"Namespace name: {options.Namespace}");
+            Console.WriteLine($"Class name: {options.ClassName}");
+        }
 
-            if (options.Verbose)
+        var existingInlineFunctions =
+            ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.OutputDir,
+                "FFmpeg.functions.inline.g.cs"));
+
+        var exports = FunctionExportHelper.LoadFunctionExports(options.FFmpegBinDir).ToArray();
+
+        var astProcessor = new ASTProcessor
+        {
+            FunctionExportMap = exports
+                .GroupBy(x => x.Name).Select(x => x.First()) // Eliminate duplicated names
+                .ToDictionary(x => x.Name)
+        };
+        astProcessor.IgnoreUnitNames.Add("__NSConstantString_tag");
+        astProcessor.TypeAliases.Add("int64_t", typeof(long));
+        astProcessor.WellKnownMacros.Add("FFERRTAG", typeof(int));
+        astProcessor.WellKnownMacros.Add("MKTAG", typeof(int));
+        astProcessor.WellKnownMacros.Add("UINT64_C", typeof(ulong));
+        astProcessor.WellKnownMacros.Add("AV_VERSION_INT", typeof(int));
+        astProcessor.WellKnownMacros.Add("AV_VERSION", typeof(string));
+
+        var defines = new[] { "__STDC_CONSTANT_MACROS" };
+
+        var g = new Generator(astProcessor)
+        {
+            IncludeDirs = new[]
             {
-                Console.WriteLine($"Working dir: {Environment.CurrentDirectory}");
-                Console.WriteLine($"Output dir: {options.OutputDir}");
-                Console.WriteLine($"FFmpeg headers dir: {options.FFmpegIncludesDir}");
-                Console.WriteLine($"FFmpeg bin dir: {options.FFmpegBinDir}");
-                Console.WriteLine($"Namespace name: {options.Namespace}");
-                Console.WriteLine($"Class name: {options.ClassName}");
-            }
+                $@"{Environment.GetEnvironmentVariable("ProgramFiles(x86)")}Windows Kits\10\Include\10.0.19041.0\ucrt",
+                options.FFmpegIncludesDir
+            },
+            Defines = defines,
+            Exports = exports,
+            Namespace = options.Namespace,
+            ClassName = options.ClassName,
+            ExistingInlineFunctions = existingInlineFunctions,
+            SuppressUnmanagedCodeSecurity = options.SuppressUnmanagedCodeSecurity
+        };
 
-            var existingInlineFunctions =
-                ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.OutputDir,
-                    "FFmpeg.functions.inline.g.cs"));
+        g.Parse("libavutil/avutil.h");
+        g.Parse("libavutil/audio_fifo.h");
+        g.Parse("libavutil/channel_layout.h");
+        g.Parse("libavutil/cpu.h");
+        g.Parse("libavutil/file.h");
+        g.Parse("libavutil/frame.h");
+        g.Parse("libavutil/opt.h");
+        g.Parse("libavutil/imgutils.h");
+        g.Parse("libavutil/time.h");
+        g.Parse("libavutil/timecode.h");
+        g.Parse("libavutil/tree.h");
+        g.Parse("libavutil/hwcontext.h");
+        g.Parse("libavutil/hwcontext_dxva2.h");
+        g.Parse("libavutil/hwcontext_d3d11va.h");
+        g.Parse("libavutil/hdr_dynamic_metadata.h");
+        g.Parse("libavutil/mastering_display_metadata.h");
 
-            var exports = FunctionExportHelper.LoadFunctionExports(options.FFmpegBinDir).ToArray();
+        g.Parse("libswresample/swresample.h");
 
-            var astProcessor = new ASTProcessor
+        g.Parse("libpostproc/postprocess.h");
+
+        g.Parse("libswscale/swscale.h");
+
+        g.Parse("libavcodec/avcodec.h");
+        g.Parse("libavcodec/dxva2.h");
+        g.Parse("libavcodec/d3d11va.h");
+
+        g.Parse("libavformat/avformat.h");
+
+        g.Parse("libavfilter/avfilter.h");
+        g.Parse("libavfilter/buffersrc.h");
+        g.Parse("libavfilter/buffersink.h");
+
+        g.Parse("libavdevice/avdevice.h");
+
+        g.WriteLibraries(Path.Combine(options.OutputDir, "FFmpeg.libraries.g.cs"));
+        g.WriteMacros(Path.Combine(options.OutputDir, "FFmpeg.macros.g.cs"));
+        g.WriteEnums(Path.Combine(options.OutputDir, "FFmpeg.enums.g.cs"));
+        g.WriteDelegates(Path.Combine(options.OutputDir, "FFmpeg.delegates.g.cs"));
+        g.WriteArrays(Path.Combine(options.OutputDir, "FFmpeg.arrays.g.cs"));
+        g.WriteStructures(Path.Combine(options.OutputDir, "FFmpeg.structs.g.cs"));
+        g.WriteIncompleteStructures(Path.Combine(options.OutputDir, "FFmpeg.structs.incomplete.g.cs"));
+        g.WriteExportFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.export.g.cs"));
+        g.WriteInlineFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.inline.g.cs"));
+
+        // Run latest dotnet format
+        {
+            using var p = Process.Start(new ProcessStartInfo
             {
-                FunctionExportMap = exports
-                    .GroupBy(x => x.Name).Select(x => x.First()) // Eliminate duplicated names
-                    .ToDictionary(x => x.Name)
-            };
-            astProcessor.IgnoreUnitNames.Add("__NSConstantString_tag");
-            astProcessor.TypeAliases.Add("int64_t", typeof(long));
-            astProcessor.WellKnownMacros.Add("FFERRTAG", typeof(int));
-            astProcessor.WellKnownMacros.Add("MKTAG", typeof(int));
-            astProcessor.WellKnownMacros.Add("UINT64_C", typeof(ulong));
-            astProcessor.WellKnownMacros.Add("AV_VERSION_INT", typeof(int));
-            astProcessor.WellKnownMacros.Add("AV_VERSION", typeof(string));
-
-            var defines = new[] { "__STDC_CONSTANT_MACROS" };
-
-            var g = new Generator(astProcessor)
+                FileName = "dotnet",
+                Arguments = "tool install --global dotnet-format",
+                WorkingDirectory = options.OutputDir
+            });
+            p.WaitForExit();
+        }
+        {
+            using var p = Process.Start(new ProcessStartInfo
             {
-                IncludeDirs = new[] { options.FFmpegIncludesDir },
-                Defines = defines,
-                Exports = exports,
-                Namespace = options.Namespace,
-                ClassName = options.ClassName,
-                ExistingInlineFunctions = existingInlineFunctions,
-                SuppressUnmanagedCodeSecurity = options.SuppressUnmanagedCodeSecurity
-            };
-
-            g.Parse("libavutil/avutil.h");
-            g.Parse("libavutil/audio_fifo.h");
-            g.Parse("libavutil/channel_layout.h");
-            g.Parse("libavutil/cpu.h");
-            g.Parse("libavutil/file.h");
-            g.Parse("libavutil/frame.h");
-            g.Parse("libavutil/opt.h");
-            g.Parse("libavutil/imgutils.h");
-            g.Parse("libavutil/time.h");
-            g.Parse("libavutil/timecode.h");
-            g.Parse("libavutil/tree.h");
-            g.Parse("libavutil/hwcontext.h");
-            g.Parse("libavutil/hwcontext_dxva2.h");
-            g.Parse("libavutil/hwcontext_d3d11va.h");
-            g.Parse("libavutil/hdr_dynamic_metadata.h");
-            g.Parse("libavutil/mastering_display_metadata.h");
-            
-            g.Parse("libswresample/swresample.h");
-
-            g.Parse("libpostproc/postprocess.h");
-
-            g.Parse("libswscale/swscale.h");
-
-            g.Parse("libavcodec/avcodec.h");
-            g.Parse("libavcodec/dxva2.h");
-            g.Parse("libavcodec/d3d11va.h");
-
-            g.Parse("libavformat/avformat.h");
-
-            g.Parse("libavfilter/avfilter.h");
-            g.Parse("libavfilter/buffersrc.h");
-            g.Parse("libavfilter/buffersink.h");
-
-            g.Parse("libavdevice/avdevice.h");
-
-            g.WriteLibraries(Path.Combine(options.OutputDir, "FFmpeg.libraries.g.cs"));
-            g.WriteMacros(Path.Combine(options.OutputDir, "FFmpeg.macros.g.cs"));
-            g.WriteEnums(Path.Combine(options.OutputDir, "FFmpeg.enums.g.cs"));
-            g.WriteDelegates(Path.Combine(options.OutputDir, "FFmpeg.delegates.g.cs"));
-            g.WriteArrays(Path.Combine(options.OutputDir, "FFmpeg.arrays.g.cs"));
-            g.WriteStructures(Path.Combine(options.OutputDir, "FFmpeg.structs.g.cs"));
-            g.WriteIncompleteStructures(Path.Combine(options.OutputDir, "FFmpeg.structs.incomplete.g.cs"));
-            g.WriteExportFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.export.g.cs"));
-            g.WriteInlineFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.inline.g.cs"));
-
-            // Run latest dotnet format
+                FileName = "dotnet",
+                Arguments = "tool update --global dotnet-format",
+                WorkingDirectory = options.OutputDir
+            });
+            p.WaitForExit();
+        }
+        {
+            using var p = Process.Start(new ProcessStartInfo
             {
-                using var p = Process.Start(new ProcessStartInfo
-                {
-                    FileName = "dotnet",
-                    Arguments = "tool install --global dotnet-format",
-                    WorkingDirectory = options.OutputDir,
-                });
-                p.WaitForExit();
-            }
-            {
-                using var p = Process.Start(new ProcessStartInfo
-                {
-                    FileName = "dotnet",
-                    Arguments = "tool update --global dotnet-format",
-                    WorkingDirectory = options.OutputDir,
-                });
-                p.WaitForExit();
-            }
-            {
-                using var p = Process.Start(new ProcessStartInfo
-                {
-                    FileName = "dotnet",
-                    Arguments = "format",
-                    WorkingDirectory = options.OutputDir,
-                });
-                p.WaitForExit();
-            }
+                FileName = "dotnet",
+                Arguments = "format",
+                WorkingDirectory = options.OutputDir
+            });
+            p.WaitForExit();
         }
     }
 }

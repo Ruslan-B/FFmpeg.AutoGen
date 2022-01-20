@@ -1,7 +1,6 @@
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
+
+internal interface ICanGenerateXmlDoc
 {
-    internal interface ICanGenerateXmlDoc
-    {
-        string Content { get; }
-    }
+    string Content { get; }
 }

@@ -2,118 +2,130 @@
 using System.IO;
 using CommandLine;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator;
+
+/// <summary>
+///     Command line options.
+/// </summary>
+public class CliOptions
 {
+    [Option('n',
+        "namespace",
+        Default = "FFmpeg.AutoGen",
+        HelpText = "The namespace that will contain the generated symbols.")]
+    public string Namespace { get; set; }
+
+    [Option('c',
+        "class",
+        Default = "ffmpeg",
+        HelpText = "The name of the class that contains the FFmpeg unmanaged method calls.")]
+    public string ClassName { get; set; }
+
     /// <summary>
-    ///     Command line options.
+    ///     See http://ybeernet.blogspot.ro/2011/03/techniques-of-calling-unmanaged-code.html.
     /// </summary>
-    public class CliOptions
+    [Option('f',
+        "SuppressUnmanagedCodeSecurity",
+        HelpText = "Add the [SuppressUnmanagedCodeSecurity] attribute to unmanaged method calls " +
+                   "(faster invocation).")]
+    public bool SuppressUnmanagedCodeSecurity { get; set; }
+
+    [Option('i',
+        "input",
+        Required = false,
+        HelpText = "The path to the directory that contains the FFmpeg header and binary files " +
+                   "(must have the default structure).")]
+    public string FFmpegDir { get; set; }
+
+    [Option('h',
+        "headers",
+        Required = false,
+        HelpText = "The path to the directory that contains the FFmpeg header files.")]
+    public string FFmpegIncludesDir { get; set; }
+
+    [Option('b',
+        "bin",
+        Required = false,
+        HelpText = "The path to the directory that contains the FFmpeg binaries.")]
+    public string FFmpegBinDir { get; set; }
+
+    [Option('o',
+        "output",
+        Required = false,
+        HelpText = "The path to the directory where to output the generated files.")]
+    public string OutputDir { get; set; }
+
+    [Option('v',
+        HelpText = "Print details during execution.")]
+    public bool Verbose { get; set; }
+
+    public static CliOptions ParseArgumentsStrict(string[] args)
     {
-        [Option('n', "namespace", Default = "FFmpeg.AutoGen",
-            HelpText = "The namespace that will contain the generated symbols.")]
-        public string Namespace { get; set; }
+        var result = Parser.Default.ParseArguments<CliOptions>(args);
+        var options = result.MapResult(x => x, x => new CliOptions());
+        options.Normalize();
+        return options;
+    }
 
-        [Option('c', "class", Default = "ffmpeg",
-            HelpText = "The name of the class that contains the FFmpeg unmanaged method calls.")]
-        public string ClassName { get; set; }
+    private void Normalize()
+    {
+        // Support for the original path setup
+        var solutionDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../");
 
-        /// <summary>
-        ///     See http://ybeernet.blogspot.ro/2011/03/techniques-of-calling-unmanaged-code.html.
-        /// </summary>
-        [Option('f', "SuppressUnmanagedCodeSecurity",
-            HelpText = "Add the [SuppressUnmanagedCodeSecurity] attribute to unmanaged method calls " +
-                       "(faster invocation).")]
-        public bool SuppressUnmanagedCodeSecurity { get; set; }
+        if (string.IsNullOrWhiteSpace(FFmpegDir) &&
+            string.IsNullOrWhiteSpace(FFmpegIncludesDir) &&
+            string.IsNullOrWhiteSpace(FFmpegBinDir))
+            FFmpegDir = Path.Combine(solutionDir, "FFmpeg");
 
-        [Option('i', "input", Required = false,
-            HelpText = "The path to the directory that contains the FFmpeg header and binary files " +
-                       "(must have the default structure).")]
-        public string FFmpegDir { get; set; }
+        if (string.IsNullOrWhiteSpace(OutputDir)) OutputDir = Path.Combine(solutionDir, "FFmpeg.AutoGen/");
 
-        [Option('h', "headers", Required = false,
-            HelpText = "The path to the directory that contains the FFmpeg header files.")]
-        public string FFmpegIncludesDir { get; set; }
-
-        [Option('b', "bin", Required = false,
-            HelpText = "The path to the directory that contains the FFmpeg binaries.")]
-        public string FFmpegBinDir { get; set; }
-
-        [Option('o', "output", Required = false,
-            HelpText = "The path to the directory where to output the generated files.")]
-        public string OutputDir { get; set; }
-
-        [Option('v',
-            HelpText = "Print details during execution.")]
-        public bool Verbose { get; set; }
-
-        public static CliOptions ParseArgumentsStrict(string[] args)
+        // If the FFmpegDir option is specified, it will take precedence
+        if (!string.IsNullOrWhiteSpace(FFmpegDir))
         {
-            var result = Parser.Default.ParseArguments<CliOptions>(args);
-            var options = result.MapResult(x => x, x => new CliOptions());
-            options.Normalize();
-            return options;
+            FFmpegIncludesDir = Path.Combine(FFmpegDir, "include");
+            FFmpegBinDir = Path.Combine(FFmpegDir, "bin/x64");
+            FFmpegDir = null;
         }
 
-        private void Normalize()
+        // Fail if required options are not specified
+        if (string.IsNullOrWhiteSpace(FFmpegBinDir))
         {
-            // Support for the original path setup
-            string solutionDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../");
-
-            if (string.IsNullOrWhiteSpace(FFmpegDir) &&
-                string.IsNullOrWhiteSpace(FFmpegIncludesDir) &&
-                string.IsNullOrWhiteSpace(FFmpegBinDir))
-                FFmpegDir = Path.Combine(solutionDir, "FFmpeg");
-
-            if (string.IsNullOrWhiteSpace(OutputDir)) OutputDir = Path.Combine(solutionDir, "FFmpeg.AutoGen/");
-
-            // If the FFmpegDir option is specified, it will take precedence
-            if (!string.IsNullOrWhiteSpace(FFmpegDir))
-            {
-                FFmpegIncludesDir = Path.Combine(FFmpegDir, "include");
-                FFmpegBinDir = Path.Combine(FFmpegDir, "bin/x64");
-                FFmpegDir = null;
-            }
-
-            // Fail if required options are not specified
-            if (string.IsNullOrWhiteSpace(FFmpegBinDir))
-            {
-                Console.WriteLine("The path to the directory that contains " +
-                                  "the FFmpeg binaries is missing (specify it using -b or --bin).");
-                Environment.Exit(1);
-            }
-
-            if (string.IsNullOrWhiteSpace(FFmpegIncludesDir))
-            {
-                Console.WriteLine("The path to the directory that contains " +
-                                  "the FFmpeg headers is missing (specify it using -h or --headers).");
-                Environment.Exit(1);
-            }
-
-            // Check paths exist
-            if (!Directory.Exists(FFmpegBinDir))
-            {
-                Console.WriteLine("The path to the directory that contains " +
-                                  "the FFmpeg binaries does not exist.");
-                Environment.Exit(1);
-            }
-
-            if (!Directory.Exists(FFmpegIncludesDir))
-            {
-                Console.WriteLine("The path to the directory that contains " +
-                                  "the FFmpeg headers does not exist.");
-                Environment.Exit(1);
-            }
-
-            if (!Directory.Exists(OutputDir))
-            {
-                Console.WriteLine("The output directory does not exist.");
-                Environment.Exit(1);
-            }
-
-            // Resolve paths
-            FFmpegIncludesDir = Path.GetFullPath(FFmpegIncludesDir);
-            FFmpegBinDir = Path.GetFullPath(FFmpegBinDir);
-            OutputDir = Path.GetFullPath(OutputDir);
+            Console.WriteLine("The path to the directory that contains " +
+                              "the FFmpeg binaries is missing (specify it using -b or --bin).");
+            Environment.Exit(1);
         }
+
+        if (string.IsNullOrWhiteSpace(FFmpegIncludesDir))
+        {
+            Console.WriteLine("The path to the directory that contains " +
+                              "the FFmpeg headers is missing (specify it using -h or --headers).");
+            Environment.Exit(1);
+        }
+
+        // Check paths exist
+        if (!Directory.Exists(FFmpegBinDir))
+        {
+            Console.WriteLine("The path to the directory that contains " +
+                              "the FFmpeg binaries does not exist.");
+            Environment.Exit(1);
+        }
+
+        if (!Directory.Exists(FFmpegIncludesDir))
+        {
+            Console.WriteLine("The path to the directory that contains " +
+                              "the FFmpeg headers does not exist.");
+            Environment.Exit(1);
+        }
+
+        if (!Directory.Exists(OutputDir))
+        {
+            Console.WriteLine("The output directory does not exist.");
+            Environment.Exit(1);
+        }
+
+        // Resolve paths
+        FFmpegIncludesDir = Path.GetFullPath(FFmpegIncludesDir);
+        FFmpegBinDir = Path.GetFullPath(FFmpegBinDir);
+        OutputDir = Path.GetFullPath(OutputDir);
     }
 }
