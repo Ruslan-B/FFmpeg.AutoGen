@@ -6,193 +6,192 @@ using CppSharp.AST;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 using Type = CppSharp.AST.Type;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
+
+internal class FunctionProcessor
 {
-    internal class FunctionProcessor
+    private const string MarshalAsUtf8Macros =
+        "\r\n" +
+        "    #if NET40\r\n" +
+        "    #elif NET45 || NETSTANDARD2_0\r\n" +
+        "    [MarshalAs((UnmanagedType)48)]\r\n" +
+        "    #else\r\n" +
+        "    [MarshalAs(UnmanagedType.LPUTF8Str)]\r\n" +
+        "    #endif\r\n" +
+        "   ";
+
+    private readonly ASTProcessor _context;
+
+    public FunctionProcessor(ASTProcessor context) => _context = context;
+
+    public void Process(TranslationUnit translationUnit)
     {
-        private const string MarshalAsUtf8Macros =
-            "\r\n" +
-            "    #if NET40\r\n" +
-            "    #elif NET45 || NETSTANDARD2_0\r\n" +
-            "    [MarshalAs((UnmanagedType)48)]\r\n" +
-            "    #else\r\n" +
-            "    [MarshalAs(UnmanagedType.LPUTF8Str)]\r\n" +
-            "    #endif\r\n" +
-            "   ";
-
-        private readonly ASTProcessor _context;
-
-        public FunctionProcessor(ASTProcessor context) => _context = context;
-
-        public void Process(TranslationUnit translationUnit)
+        foreach (var function in translationUnit.Functions)
         {
-            foreach (var function in translationUnit.Functions)
+            var functionName = function.Name;
+
+            void PopulateCommon(FunctionDefinitionBase inline)
             {
-                var functionName = function.Name;
-
-                void PopulateCommon(FunctionDefinitionBase inline)
-                {
-                    inline.Name = functionName;
-                    inline.ReturnType = GetReturnTypeName(function.ReturnType.Type, functionName);
-                    inline.Content = function.Comment?.BriefText;
-                    inline.ReturnComment = GetReturnComment(function);
-                    inline.Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray();
-                    inline.Obsoletion = ObsoletionHelper.CreateObsoletion(function);
-                }
-
-                if (function.IsInline)
-                {
-                    var inlineDefinition = new InlineFunctionDefinition();
-                    PopulateCommon(inlineDefinition);
-                    inlineDefinition.Body = function.Body;
-                    inlineDefinition.OriginalBodyHash = GetSha256(function.Body);
-                    _context.AddUnit(inlineDefinition);
-                    continue;
-                }
-
-                if (!_context.FunctionExportMap.TryGetValue(functionName, out var export))
-                {
-                    Console.WriteLine($"Export not found. Skipping {functionName} function.");
-                    continue;
-                }
-
-                var exportDefinition = new ExportFunctionDefinition();
-                PopulateCommon(exportDefinition);
-                exportDefinition.LibraryName = export.LibraryName;
-                exportDefinition.LibraryVersion = export.LibraryVersion;
-                _context.AddUnit(exportDefinition);
+                inline.Name = functionName;
+                inline.ReturnType = GetReturnTypeName(function.ReturnType.Type, functionName);
+                inline.Content = function.Comment?.BriefText;
+                inline.ReturnComment = GetReturnComment(function);
+                inline.Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray();
+                inline.Obsoletion = ObsoletionHelper.CreateObsoletion(function);
             }
-        }
 
-        internal TypeDefinition GetDelegateType(FunctionType functionType, string name)
-        {
-            var @delegate = new DelegateDefinition
+            if (function.IsInline)
             {
-                Name = $"{name}_func",
-                FunctionName = name,
-                ReturnType = GetReturnTypeName(functionType.ReturnType.Type, name),
-                Parameters = functionType.Parameters.Select(GetParameter).ToArray()
-            };
-            _context.AddUnit(@delegate);
+                var inlineDefinition = new InlineFunctionDefinition();
+                PopulateCommon(inlineDefinition);
+                inlineDefinition.Body = function.Body;
+                inlineDefinition.OriginalBodyHash = GetSha256(function.Body);
+                _context.AddUnit(inlineDefinition);
+                continue;
+            }
 
-            return @delegate;
-        }
-
-        private FunctionParameter GetParameter(Parameter parameter, int position)
-        {
-            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
-            return new FunctionParameter
+            if (!_context.FunctionExportMap.TryGetValue(functionName, out var export))
             {
-                Name = name,
-                Type = GetParameterType(parameter.Type, name)
-            };
-        }
+                Console.WriteLine($"Export not found. Skipping {functionName} function.");
+                continue;
+            }
 
-        private FunctionParameter GetParameter(Function function, Parameter parameter, int position)
-        {
-            var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
-            return new FunctionParameter
-            {
-                Name = name,
-                Type = GetParameterType(parameter.Type, $"{function.Name}_{name}"),
-                Content = GetParamComment(function, parameter.Name)
-            };
+            var exportDefinition = new ExportFunctionDefinition();
+            PopulateCommon(exportDefinition);
+            exportDefinition.LibraryName = export.LibraryName;
+            exportDefinition.LibraryVersion = export.LibraryVersion;
+            _context.AddUnit(exportDefinition);
         }
+    }
 
-        private TypeDefinition GetReturnTypeName(Type type, string name)
+    internal TypeDefinition GetDelegateType(FunctionType functionType, string name)
+    {
+        var @delegate = new DelegateDefinition
         {
-            if (type is PointerType pointerType &&
-                pointerType.QualifiedPointee.Qualifiers.IsConst &&
-                pointerType.Pointee is BuiltinType builtinType)
+            Name = $"{name}_func",
+            FunctionName = name,
+            ReturnType = GetReturnTypeName(functionType.ReturnType.Type, name),
+            Parameters = functionType.Parameters.Select(GetParameter).ToArray()
+        };
+        _context.AddUnit(@delegate);
+
+        return @delegate;
+    }
+
+    private FunctionParameter GetParameter(Parameter parameter, int position)
+    {
+        var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
+        return new FunctionParameter
+        {
+            Name = name,
+            Type = GetParameterType(parameter.Type, name)
+        };
+    }
+
+    private FunctionParameter GetParameter(Function function, Parameter parameter, int position)
+    {
+        var name = string.IsNullOrEmpty(parameter.Name) ? $"p{position}" : parameter.Name;
+        return new FunctionParameter
+        {
+            Name = name,
+            Type = GetParameterType(parameter.Type, $"{function.Name}_{name}"),
+            Content = GetParamComment(function, parameter.Name)
+        };
+    }
+
+    private TypeDefinition GetReturnTypeName(Type type, string name)
+    {
+        if (type is PointerType pointerType &&
+            pointerType.QualifiedPointee.Qualifiers.IsConst &&
+            pointerType.Pointee is BuiltinType builtinType)
+        {
+            return builtinType.Type switch
             {
-                return builtinType.Type switch
+                PrimitiveType.Char => new TypeDefinition
                 {
-                    PrimitiveType.Char => new TypeDefinition
+                    Name = "string",
+                    Attributes = new[]
                     {
-                        Name = "string",
-                        Attributes = new[]
-                        {
-                            "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"
-                        }
-                    },
-                    PrimitiveType.Void => new TypeDefinition
-                    {
-                        Name = "void*"
-                    },
-                    _ => new TypeDefinition
-                    {
-                        Name = TypeHelper.GetTypeName(type)
+                        "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]"
                     }
-                };
-            }
-
-            return GetParameterType(type, name);
-        }
-
-        private TypeDefinition GetParameterType(Type type, string name)
-        {
-            if (type is PointerType pointerType &&
-                pointerType.QualifiedPointee.Qualifiers.IsConst &&
-                pointerType.Pointee is BuiltinType builtinType)
-            {
-                return builtinType.Type switch
+                },
+                PrimitiveType.Void => new TypeDefinition
                 {
-                    PrimitiveType.Char => new TypeDefinition
-                    {
-                        Name = "string",
-                        Attributes = new[] { MarshalAsUtf8Macros }
-                    },
-                    PrimitiveType.Void => new TypeDefinition
-                    {
-                        Name = "void*"
-                    },
-                    _ => new TypeDefinition
-                    {
-                        Name = TypeHelper.GetTypeName(type)
-                    }
-                };
-            }
-
-            // edge case when type is array of pointers to none builtin type (type[]* -> type**)
-            if (type is ArrayType arrayType &&
-                arrayType.SizeType == ArrayType.ArraySize.Incomplete &&
-                arrayType.Type is PointerType arrayPointerType &&
-                !(arrayPointerType.Pointee is BuiltinType || arrayPointerType.Pointee is TypedefType typedefType &&
-                    typedefType.Declaration.Type is BuiltinType))
-                return new TypeDefinition { Name = $"{TypeHelper.GetTypeName(arrayPointerType)}*" };
-
-            return _context.StructureProcessor.GetTypeDefinition(type, name);
+                    Name = "void*"
+                },
+                _ => new TypeDefinition
+                {
+                    Name = TypeHelper.GetTypeName(type)
+                }
+            };
         }
 
-        private static string GetParamComment(Function function, string parameterName)
+        return GetParameterType(type, name);
+    }
+
+    private TypeDefinition GetParameterType(Type type, string name)
+    {
+        if (type is PointerType pointerType &&
+            pointerType.QualifiedPointee.Qualifiers.IsConst &&
+            pointerType.Pointee is BuiltinType builtinType)
         {
-            var comment = function?.Comment?.FullComment.Blocks
-                .OfType<ParamCommandComment>()
-                .FirstOrDefault(x => x.Arguments.Count == 1 && x.Arguments[0].Text == parameterName);
-            return GetCommentString(comment);
+            return builtinType.Type switch
+            {
+                PrimitiveType.Char => new TypeDefinition
+                {
+                    Name = "string",
+                    Attributes = new[] { MarshalAsUtf8Macros }
+                },
+                PrimitiveType.Void => new TypeDefinition
+                {
+                    Name = "void*"
+                },
+                _ => new TypeDefinition
+                {
+                    Name = TypeHelper.GetTypeName(type)
+                }
+            };
         }
 
-        private string GetReturnComment(Function function)
-        {
-            var comment = function?.Comment?.FullComment.Blocks
-                .OfType<BlockCommandComment>()
-                .FirstOrDefault(x => x.CommandKind == CommentCommandKind.Return);
-            return GetCommentString(comment);
-        }
+        // edge case when type is array of pointers to none builtin type (type[]* -> type**)
+        if (type is ArrayType arrayType &&
+            arrayType.SizeType == ArrayType.ArraySize.Incomplete &&
+            arrayType.Type is PointerType arrayPointerType &&
+            !(arrayPointerType.Pointee is BuiltinType || arrayPointerType.Pointee is TypedefType typedefType &&
+                typedefType.Declaration.Type is BuiltinType))
+            return new TypeDefinition { Name = $"{TypeHelper.GetTypeName(arrayPointerType)}*" };
 
-        private static string GetCommentString(BlockCommandComment comment)
-        {
-            return comment == null
-                ? null
-                : string.Join(" ", comment.ParagraphComment.Content.OfType<TextComment>().Select(x => x.Text.Trim()));
-        }
+        return _context.StructureProcessor.GetTypeDefinition(type, name);
+    }
 
-        private static string GetSha256(string text)
-        {
-            var bytes = Encoding.UTF8.GetBytes(text);
-            var sha256Managed = new SHA256Managed();
-            var hash = sha256Managed.ComputeHash(bytes);
-            return Convert.ToBase64String(hash);
-        }
+    private static string GetParamComment(Function function, string parameterName)
+    {
+        var comment = function?.Comment?.FullComment.Blocks
+            .OfType<ParamCommandComment>()
+            .FirstOrDefault(x => x.Arguments.Count == 1 && x.Arguments[0].Text == parameterName);
+        return GetCommentString(comment);
+    }
+
+    private string GetReturnComment(Function function)
+    {
+        var comment = function?.Comment?.FullComment.Blocks
+            .OfType<BlockCommandComment>()
+            .FirstOrDefault(x => x.CommandKind == CommentCommandKind.Return);
+        return GetCommentString(comment);
+    }
+
+    private static string GetCommentString(BlockCommandComment comment)
+    {
+        return comment == null
+            ? null
+            : string.Join(" ", comment.ParagraphComment.Content.OfType<TextComment>().Select(x => x.Text.Trim()));
+    }
+
+    private static string GetSha256(string text)
+    {
+        var bytes = Encoding.UTF8.GetBytes(text);
+        var sha256Managed = new SHA256Managed();
+        var hash = sha256Managed.ComputeHash(bytes);
+        return Convert.ToBase64String(hash);
     }
 }

@@ -1,7 +1,6 @@
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
+
+internal interface IObsoletionAware
 {
-    internal interface IObsoletionAware
-    {
-        Obsoletion Obsoletion { get; }
-    }
+    Obsoletion Obsoletion { get; }
 }

@@ -1,7 +1,6 @@
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
+
+internal class EnumerationDefinition : NamedDefinition, IDefinition
 {
-    internal class EnumerationDefinition : NamedDefinition, IDefinition
-    {
-        public EnumerationItem[] Items { get; set; }
-    }
+    public EnumerationItem[] Items { get; set; }
 }

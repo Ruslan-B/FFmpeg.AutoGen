@@ -1,9 +1,8 @@
-﻿namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions
+﻿namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
+
+internal class FixedArrayDefinition : TypeDefinition
 {
-    internal class FixedArrayDefinition : TypeDefinition
-    {
-        public TypeDefinition ElementType { get; init; }
-        public int Size { get; init; }
-        public bool IsPrimitive { get; init; }
-    }
+    public TypeDefinition ElementType { get; init; }
+    public int Size { get; init; }
+    public bool IsPrimitive { get; init; }
 }

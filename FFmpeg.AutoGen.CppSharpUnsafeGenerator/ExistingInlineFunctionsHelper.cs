@@ -7,48 +7,49 @@ using System.IO;
 using System.Text.RegularExpressions;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator;
+
+internal static class ExistingInlineFunctionsHelper
 {
-    internal static class ExistingInlineFunctionsHelper
+    private static readonly Regex FunctionNameRegex = new(
+        @"\s+public static .+ (?<name>[\S]+)\(.*?\)",
+        RegexOptions.Compiled | RegexOptions.Multiline);
+
+    private static readonly Regex FunctionHashRegex = new(
+        @"\s+// original body hash: (?<hash>\S+)",
+        RegexOptions.Compiled | RegexOptions.Multiline);
+
+    public static InlineFunctionDefinition[] LoadInlineFunctions(string path)
     {
-        private static readonly Regex FunctionNameRegex = new(
-            @"\s+public static .+ (?<name>[\S]+)\(.*?\)", RegexOptions.Compiled | RegexOptions.Multiline);
+        if (!File.Exists(path)) return Array.Empty<InlineFunctionDefinition>();
 
-        private static readonly Regex FunctionHashRegex = new(
-            @"\s+// original body hash: (?<hash>\S+)", RegexOptions.Compiled | RegexOptions.Multiline);
+        var text = File.ReadAllText(path);
+        var functions = new List<InlineFunctionDefinition>();
 
-        public static InlineFunctionDefinition[] LoadInlineFunctions(string path)
+        var nameMatches = FunctionNameRegex.Matches(text);
+        var hashMatches = FunctionHashRegex.Matches(text);
+
+        Debug.Assert(nameMatches.Count == hashMatches.Count);
+
+        for (var i = 0; i < nameMatches.Count; i++)
         {
-            if (!File.Exists(path)) return Array.Empty<InlineFunctionDefinition>();
+            var nameMatch = nameMatches[i];
+            var hashMatch = hashMatches[i];
 
-            var text = File.ReadAllText(path);
-            var functions = new List<InlineFunctionDefinition>();
+            var name = nameMatch.Groups["name"].Value;
+            var hash = hashMatch.Groups["hash"].Value;
+            var bodyIndex = nameMatch.Index + nameMatch.Length;
+            var body = text.Substring(bodyIndex, hashMatch.Index - bodyIndex);
 
-            var nameMatches = FunctionNameRegex.Matches(text);
-            var hashMatches = FunctionHashRegex.Matches(text);
-
-            Debug.Assert(nameMatches.Count == hashMatches.Count);
-
-            for (var i = 0; i < nameMatches.Count; i++)
+            var function = new InlineFunctionDefinition
             {
-                var nameMatch = nameMatches[i];
-                var hashMatch = hashMatches[i];
-
-                var name = nameMatch.Groups["name"].Value;
-                var hash = hashMatch.Groups["hash"].Value;
-                var bodyIndex = nameMatch.Index + nameMatch.Length;
-                var body = text.Substring(bodyIndex, hashMatch.Index - bodyIndex);
-
-                var function = new InlineFunctionDefinition
-                {
-                    Name = name,
-                    Body = body,
-                    OriginalBodyHash = hash
-                };
-                functions.Add(function);
-            }
-
-            return functions.ToArray();
+                Name = name,
+                Body = body,
+                OriginalBodyHash = hash
+            };
+            functions.Add(function);
         }
+
+        return functions.ToArray();
     }
 }
