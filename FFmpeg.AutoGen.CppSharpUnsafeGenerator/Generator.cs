@@ -45,7 +45,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         public void WriteLibraries(string combine)
         {
             WriteInternal(combine,
-                (units, writer) =>
+                (_, writer) =>
                 {
                     writer.WriteLine("using System.Collections.Generic;");
                     writer.WriteLine();
@@ -55,7 +55,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     using (writer.BeginBlock())
                     {
                         writer.WriteLine(
-                            "public static Dictionary<string, int> LibraryVersionMap =  new Dictionary<string, int>");
+                            "public static Dictionary<string, int> LibraryVersionMap = new Dictionary<string, int>");
 
                         using (writer.BeginBlock(true))
                         {
@@ -222,8 +222,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 ASTContext = new CppSharp.Parser.AST.ASTContext(),
                 LanguageVersion = LanguageVersion.C99_GNU
             };
-
+            
             parserOptions.Setup();
+
+            parserOptions.AddIncludeDirs(@"C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt");
 
             foreach (var includeDir in IncludeDirs) parserOptions.AddIncludeDirs(includeDir);
 
