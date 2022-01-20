@@ -28,6 +28,6 @@
 
 * **Please tell us about your environment:**
 
-- version: 3.4
+- version: 
 
 * **Other information** (e.g. detailed explanation, stacktraces, related issues, suggestions how to fix, links for us to have context, eg. stackoverflow, gitter, etc)

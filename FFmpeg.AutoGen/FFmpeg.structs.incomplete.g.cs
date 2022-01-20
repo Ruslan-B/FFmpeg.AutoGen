@@ -78,28 +78,6 @@ namespace FFmpeg.AutoGen
     {
     }
     
-    /// <summary>@{</summary>
-    /// <remarks>This struct is incomplete.</remarks>
-    public unsafe struct AVBSFInternal
-    {
-    }
-    
-    /// <summary>Structure for chain/list of bitstream filters. Empty list can be allocated by av_bsf_list_alloc().</summary>
-    /// <remarks>This struct is incomplete.</remarks>
-    public unsafe struct AVBSFList
-    {
-    }
-    
-    /// <remarks>This struct is incomplete.</remarks>
-    public unsafe struct AVStreamInternal
-    {
-    }
-    
-    /// <remarks>This struct is incomplete.</remarks>
-    public unsafe struct AVFormatInternal
-    {
-    }
-    
     /// <summary>**********************************************</summary>
     /// <remarks>This struct is incomplete.</remarks>
     public unsafe struct AVCodecTag

@@ -46,7 +46,6 @@ namespace FFmpeg.AutoGen.Example
         {
             ffmpeg.avcodec_close(_pCodecContext);
             ffmpeg.av_free(_pCodecContext);
-            ffmpeg.av_free(_pCodec);
         }
 
         public void Encode(AVFrame frame)

@@ -8,691 +8,6 @@ namespace FFmpeg.AutoGen
         private const string PlatformNotSupportedMessageFormat = "{0} is not supported on this platform.";
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_bitstream_filter_close_delegate(AVBitStreamFilterContext* @bsf);
-        private static av_bitstream_filter_close_delegate av_bitstream_filter_close_fptr = (AVBitStreamFilterContext* @bsf) =>
-        {
-            av_bitstream_filter_close_fptr = GetFunctionDelegate<av_bitstream_filter_close_delegate>(GetOrLoadLibrary("avcodec"), "av_bitstream_filter_close");
-            if (av_bitstream_filter_close_fptr == null)
-            {
-                av_bitstream_filter_close_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bitstream_filter_close"));
-                };
-            }
-            av_bitstream_filter_close_fptr(@bsf);
-        };
-        [Obsolete("the old bitstream filtering API (using AVBitStreamFilterContext) is deprecated. Use av_bsf_free() from the new bitstream filtering API (using AVBSFContext).")]
-        public static void av_bitstream_filter_close(AVBitStreamFilterContext* @bsf)
-        {
-            av_bitstream_filter_close_fptr(@bsf);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_bitstream_filter_filter_delegate(AVBitStreamFilterContext* @bsfc, AVCodecContext* @avctx, 
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @args, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe);
-        private static av_bitstream_filter_filter_delegate av_bitstream_filter_filter_fptr = (AVBitStreamFilterContext* @bsfc, AVCodecContext* @avctx, string @args, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe) =>
-        {
-            av_bitstream_filter_filter_fptr = GetFunctionDelegate<av_bitstream_filter_filter_delegate>(GetOrLoadLibrary("avcodec"), "av_bitstream_filter_filter");
-            if (av_bitstream_filter_filter_fptr == null)
-            {
-                av_bitstream_filter_filter_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bitstream_filter_filter"));
-                };
-            }
-            return av_bitstream_filter_filter_fptr(@bsfc, @avctx, @args, @poutbuf, @poutbuf_size, @buf, @buf_size, @keyframe);
-        };
-        [Obsolete("the old bitstream filtering API (using AVBitStreamFilterContext) is deprecated. Use av_bsf_send_packet() and av_bsf_receive_packet() from the new bitstream filtering API (using AVBSFContext).")]
-        public static int av_bitstream_filter_filter(AVBitStreamFilterContext* @bsfc, AVCodecContext* @avctx, 
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @args, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe)
-        {
-            return av_bitstream_filter_filter_fptr(@bsfc, @avctx, @args, @poutbuf, @poutbuf_size, @buf, @buf_size, @keyframe);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVBitStreamFilterContext* av_bitstream_filter_init_delegate(
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @name);
-        private static av_bitstream_filter_init_delegate av_bitstream_filter_init_fptr = (string @name) =>
-        {
-            av_bitstream_filter_init_fptr = GetFunctionDelegate<av_bitstream_filter_init_delegate>(GetOrLoadLibrary("avcodec"), "av_bitstream_filter_init");
-            if (av_bitstream_filter_init_fptr == null)
-            {
-                av_bitstream_filter_init_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bitstream_filter_init"));
-                };
-            }
-            return av_bitstream_filter_init_fptr(@name);
-        };
-        [Obsolete("the old bitstream filtering API (using AVBitStreamFilterContext) is deprecated. Use av_bsf_get_by_name(), av_bsf_alloc(), and av_bsf_init() from the new bitstream filtering API (using AVBSFContext).")]
-        public static AVBitStreamFilterContext* av_bitstream_filter_init(
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @name)
-        {
-            return av_bitstream_filter_init_fptr(@name);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVBitStreamFilter* av_bitstream_filter_next_delegate(AVBitStreamFilter* @f);
-        private static av_bitstream_filter_next_delegate av_bitstream_filter_next_fptr = (AVBitStreamFilter* @f) =>
-        {
-            av_bitstream_filter_next_fptr = GetFunctionDelegate<av_bitstream_filter_next_delegate>(GetOrLoadLibrary("avcodec"), "av_bitstream_filter_next");
-            if (av_bitstream_filter_next_fptr == null)
-            {
-                av_bitstream_filter_next_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bitstream_filter_next"));
-                };
-            }
-            return av_bitstream_filter_next_fptr(@f);
-        };
-        [Obsolete("the old bitstream filtering API (using AVBitStreamFilterContext) is deprecated. Use av_bsf_iterate() from the new bitstream filtering API (using AVBSFContext).")]
-        public static AVBitStreamFilter* av_bitstream_filter_next(AVBitStreamFilter* @f)
-        {
-            return av_bitstream_filter_next_fptr(@f);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_bsf_alloc_delegate(AVBitStreamFilter* @filter, AVBSFContext** @ctx);
-        private static av_bsf_alloc_delegate av_bsf_alloc_fptr = (AVBitStreamFilter* @filter, AVBSFContext** @ctx) =>
-        {
-            av_bsf_alloc_fptr = GetFunctionDelegate<av_bsf_alloc_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_alloc");
-            if (av_bsf_alloc_fptr == null)
-            {
-                av_bsf_alloc_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_alloc"));
-                };
-            }
-            return av_bsf_alloc_fptr(@filter, @ctx);
-        };
-        /// <summary>Allocate a context for a given bitstream filter. The caller must fill in the context parameters as described in the documentation and then call av_bsf_init() before sending any data to the filter.</summary>
-        /// <param name="filter">the filter for which to allocate an instance.</param>
-        /// <param name="ctx">a pointer into which the pointer to the newly-allocated context will be written. It must be freed with av_bsf_free() after the filtering is done.</param>
-        /// <returns>0 on success, a negative AVERROR code on failure</returns>
-        public static int av_bsf_alloc(AVBitStreamFilter* @filter, AVBSFContext** @ctx)
-        {
-            return av_bsf_alloc_fptr(@filter, @ctx);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_bsf_flush_delegate(AVBSFContext* @ctx);
-        private static av_bsf_flush_delegate av_bsf_flush_fptr = (AVBSFContext* @ctx) =>
-        {
-            av_bsf_flush_fptr = GetFunctionDelegate<av_bsf_flush_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_flush");
-            if (av_bsf_flush_fptr == null)
-            {
-                av_bsf_flush_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_flush"));
-                };
-            }
-            av_bsf_flush_fptr(@ctx);
-        };
-        /// <summary>Reset the internal bitstream filter state. Should be called e.g. when seeking.</summary>
-        public static void av_bsf_flush(AVBSFContext* @ctx)
-        {
-            av_bsf_flush_fptr(@ctx);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_bsf_free_delegate(AVBSFContext** @ctx);
-        private static av_bsf_free_delegate av_bsf_free_fptr = (AVBSFContext** @ctx) =>
-        {
-            av_bsf_free_fptr = GetFunctionDelegate<av_bsf_free_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_free");
-            if (av_bsf_free_fptr == null)
-            {
-                av_bsf_free_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_free"));
-                };
-            }
-            av_bsf_free_fptr(@ctx);
-        };
-        /// <summary>Free a bitstream filter context and everything associated with it; write NULL into the supplied pointer.</summary>
-        public static void av_bsf_free(AVBSFContext** @ctx)
-        {
-            av_bsf_free_fptr(@ctx);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVBitStreamFilter* av_bsf_get_by_name_delegate(
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @name);
-        private static av_bsf_get_by_name_delegate av_bsf_get_by_name_fptr = (string @name) =>
-        {
-            av_bsf_get_by_name_fptr = GetFunctionDelegate<av_bsf_get_by_name_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_get_by_name");
-            if (av_bsf_get_by_name_fptr == null)
-            {
-                av_bsf_get_by_name_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_get_by_name"));
-                };
-            }
-            return av_bsf_get_by_name_fptr(@name);
-        };
-        /// <summary>Returns a bitstream filter with the specified name or NULL if no such bitstream filter exists.</summary>
-        /// <returns>a bitstream filter with the specified name or NULL if no such bitstream filter exists.</returns>
-        public static AVBitStreamFilter* av_bsf_get_by_name(
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @name)
-        {
-            return av_bsf_get_by_name_fptr(@name);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVClass* av_bsf_get_class_delegate();
-        private static av_bsf_get_class_delegate av_bsf_get_class_fptr = () =>
-        {
-            av_bsf_get_class_fptr = GetFunctionDelegate<av_bsf_get_class_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_get_class");
-            if (av_bsf_get_class_fptr == null)
-            {
-                av_bsf_get_class_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_get_class"));
-                };
-            }
-            return av_bsf_get_class_fptr();
-        };
-        /// <summary>Get the AVClass for AVBSFContext. It can be used in combination with AV_OPT_SEARCH_FAKE_OBJ for examining options.</summary>
-        public static AVClass* av_bsf_get_class()
-        {
-            return av_bsf_get_class_fptr();
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_bsf_get_null_filter_delegate(AVBSFContext** @bsf);
-        private static av_bsf_get_null_filter_delegate av_bsf_get_null_filter_fptr = (AVBSFContext** @bsf) =>
-        {
-            av_bsf_get_null_filter_fptr = GetFunctionDelegate<av_bsf_get_null_filter_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_get_null_filter");
-            if (av_bsf_get_null_filter_fptr == null)
-            {
-                av_bsf_get_null_filter_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_get_null_filter"));
-                };
-            }
-            return av_bsf_get_null_filter_fptr(@bsf);
-        };
-        /// <summary>Get null/pass-through bitstream filter.</summary>
-        /// <param name="bsf">Pointer to be set to new instance of pass-through bitstream filter</param>
-        public static int av_bsf_get_null_filter(AVBSFContext** @bsf)
-        {
-            return av_bsf_get_null_filter_fptr(@bsf);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_bsf_init_delegate(AVBSFContext* @ctx);
-        private static av_bsf_init_delegate av_bsf_init_fptr = (AVBSFContext* @ctx) =>
-        {
-            av_bsf_init_fptr = GetFunctionDelegate<av_bsf_init_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_init");
-            if (av_bsf_init_fptr == null)
-            {
-                av_bsf_init_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_init"));
-                };
-            }
-            return av_bsf_init_fptr(@ctx);
-        };
-        /// <summary>Prepare the filter for use, after all the parameters and options have been set.</summary>
-        public static int av_bsf_init(AVBSFContext* @ctx)
-        {
-            return av_bsf_init_fptr(@ctx);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVBitStreamFilter* av_bsf_iterate_delegate(void** @opaque);
-        private static av_bsf_iterate_delegate av_bsf_iterate_fptr = (void** @opaque) =>
-        {
-            av_bsf_iterate_fptr = GetFunctionDelegate<av_bsf_iterate_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_iterate");
-            if (av_bsf_iterate_fptr == null)
-            {
-                av_bsf_iterate_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_iterate"));
-                };
-            }
-            return av_bsf_iterate_fptr(@opaque);
-        };
-        /// <summary>Iterate over all registered bitstream filters.</summary>
-        /// <param name="opaque">a pointer where libavcodec will store the iteration state. Must point to NULL to start the iteration.</param>
-        /// <returns>the next registered bitstream filter or NULL when the iteration is finished</returns>
-        public static AVBitStreamFilter* av_bsf_iterate(void** @opaque)
-        {
-            return av_bsf_iterate_fptr(@opaque);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVBSFList* av_bsf_list_alloc_delegate();
-        private static av_bsf_list_alloc_delegate av_bsf_list_alloc_fptr = () =>
-        {
-            av_bsf_list_alloc_fptr = GetFunctionDelegate<av_bsf_list_alloc_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_list_alloc");
-            if (av_bsf_list_alloc_fptr == null)
-            {
-                av_bsf_list_alloc_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_list_alloc"));
-                };
-            }
-            return av_bsf_list_alloc_fptr();
-        };
-        /// <summary>Allocate empty list of bitstream filters. The list must be later freed by av_bsf_list_free() or finalized by av_bsf_list_finalize().</summary>
-        /// <returns>Pointer to on success, NULL in case of failure</returns>
-        public static AVBSFList* av_bsf_list_alloc()
-        {
-            return av_bsf_list_alloc_fptr();
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_bsf_list_append_delegate(AVBSFList* @lst, AVBSFContext* @bsf);
-        private static av_bsf_list_append_delegate av_bsf_list_append_fptr = (AVBSFList* @lst, AVBSFContext* @bsf) =>
-        {
-            av_bsf_list_append_fptr = GetFunctionDelegate<av_bsf_list_append_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_list_append");
-            if (av_bsf_list_append_fptr == null)
-            {
-                av_bsf_list_append_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_list_append"));
-                };
-            }
-            return av_bsf_list_append_fptr(@lst, @bsf);
-        };
-        /// <summary>Append bitstream filter to the list of bitstream filters.</summary>
-        /// <param name="lst">List to append to</param>
-        /// <param name="bsf">Filter context to be appended</param>
-        /// <returns>&gt;=0 on success, negative AVERROR in case of failure</returns>
-        public static int av_bsf_list_append(AVBSFList* @lst, AVBSFContext* @bsf)
-        {
-            return av_bsf_list_append_fptr(@lst, @bsf);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_bsf_list_append2_delegate(AVBSFList* @lst, 
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @bsf_name, AVDictionary** @options);
-        private static av_bsf_list_append2_delegate av_bsf_list_append2_fptr = (AVBSFList* @lst, string @bsf_name, AVDictionary** @options) =>
-        {
-            av_bsf_list_append2_fptr = GetFunctionDelegate<av_bsf_list_append2_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_list_append2");
-            if (av_bsf_list_append2_fptr == null)
-            {
-                av_bsf_list_append2_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_list_append2"));
-                };
-            }
-            return av_bsf_list_append2_fptr(@lst, @bsf_name, @options);
-        };
-        /// <summary>Construct new bitstream filter context given it&apos;s name and options and append it to the list of bitstream filters.</summary>
-        /// <param name="lst">List to append to</param>
-        /// <param name="bsf_name">Name of the bitstream filter</param>
-        /// <param name="options">Options for the bitstream filter, can be set to NULL</param>
-        /// <returns>&gt;=0 on success, negative AVERROR in case of failure</returns>
-        public static int av_bsf_list_append2(AVBSFList* @lst, 
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @bsf_name, AVDictionary** @options)
-        {
-            return av_bsf_list_append2_fptr(@lst, @bsf_name, @options);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_bsf_list_finalize_delegate(AVBSFList** @lst, AVBSFContext** @bsf);
-        private static av_bsf_list_finalize_delegate av_bsf_list_finalize_fptr = (AVBSFList** @lst, AVBSFContext** @bsf) =>
-        {
-            av_bsf_list_finalize_fptr = GetFunctionDelegate<av_bsf_list_finalize_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_list_finalize");
-            if (av_bsf_list_finalize_fptr == null)
-            {
-                av_bsf_list_finalize_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_list_finalize"));
-                };
-            }
-            return av_bsf_list_finalize_fptr(@lst, @bsf);
-        };
-        /// <summary>Finalize list of bitstream filters.</summary>
-        /// <param name="lst">Filter list structure to be transformed</param>
-        /// <param name="bsf">Pointer to be set to newly created structure representing the chain of bitstream filters</param>
-        /// <returns>&gt;=0 on success, negative AVERROR in case of failure</returns>
-        public static int av_bsf_list_finalize(AVBSFList** @lst, AVBSFContext** @bsf)
-        {
-            return av_bsf_list_finalize_fptr(@lst, @bsf);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_bsf_list_free_delegate(AVBSFList** @lst);
-        private static av_bsf_list_free_delegate av_bsf_list_free_fptr = (AVBSFList** @lst) =>
-        {
-            av_bsf_list_free_fptr = GetFunctionDelegate<av_bsf_list_free_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_list_free");
-            if (av_bsf_list_free_fptr == null)
-            {
-                av_bsf_list_free_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_list_free"));
-                };
-            }
-            av_bsf_list_free_fptr(@lst);
-        };
-        /// <summary>Free list of bitstream filters.</summary>
-        /// <param name="lst">Pointer to pointer returned by av_bsf_list_alloc()</param>
-        public static void av_bsf_list_free(AVBSFList** @lst)
-        {
-            av_bsf_list_free_fptr(@lst);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_bsf_list_parse_str_delegate(
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @str, AVBSFContext** @bsf);
-        private static av_bsf_list_parse_str_delegate av_bsf_list_parse_str_fptr = (string @str, AVBSFContext** @bsf) =>
-        {
-            av_bsf_list_parse_str_fptr = GetFunctionDelegate<av_bsf_list_parse_str_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_list_parse_str");
-            if (av_bsf_list_parse_str_fptr == null)
-            {
-                av_bsf_list_parse_str_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_list_parse_str"));
-                };
-            }
-            return av_bsf_list_parse_str_fptr(@str, @bsf);
-        };
-        /// <summary>Parse string describing list of bitstream filters and create single AVBSFContext describing the whole chain of bitstream filters. Resulting AVBSFContext can be treated as any other AVBSFContext freshly allocated by av_bsf_alloc().</summary>
-        /// <param name="str">String describing chain of bitstream filters in format `bsf1[=opt1=val1:opt2=val2][,bsf2]`</param>
-        /// <param name="bsf">Pointer to be set to newly created structure representing the chain of bitstream filters</param>
-        /// <returns>&gt;=0 on success, negative AVERROR in case of failure</returns>
-        public static int av_bsf_list_parse_str(
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @str, AVBSFContext** @bsf)
-        {
-            return av_bsf_list_parse_str_fptr(@str, @bsf);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVBitStreamFilter* av_bsf_next_delegate(void** @opaque);
-        private static av_bsf_next_delegate av_bsf_next_fptr = (void** @opaque) =>
-        {
-            av_bsf_next_fptr = GetFunctionDelegate<av_bsf_next_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_next");
-            if (av_bsf_next_fptr == null)
-            {
-                av_bsf_next_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_next"));
-                };
-            }
-            return av_bsf_next_fptr(@opaque);
-        };
-        [Obsolete("")]
-        public static AVBitStreamFilter* av_bsf_next(void** @opaque)
-        {
-            return av_bsf_next_fptr(@opaque);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_bsf_receive_packet_delegate(AVBSFContext* @ctx, AVPacket* @pkt);
-        private static av_bsf_receive_packet_delegate av_bsf_receive_packet_fptr = (AVBSFContext* @ctx, AVPacket* @pkt) =>
-        {
-            av_bsf_receive_packet_fptr = GetFunctionDelegate<av_bsf_receive_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_receive_packet");
-            if (av_bsf_receive_packet_fptr == null)
-            {
-                av_bsf_receive_packet_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_receive_packet"));
-                };
-            }
-            return av_bsf_receive_packet_fptr(@ctx, @pkt);
-        };
-        /// <summary>Retrieve a filtered packet.</summary>
-        /// <param name="pkt">this struct will be filled with the contents of the filtered packet. It is owned by the caller and must be freed using av_packet_unref() when it is no longer needed. This parameter should be &quot;clean&quot; (i.e. freshly allocated with av_packet_alloc() or unreffed with av_packet_unref()) when this function is called. If this function returns successfully, the contents of pkt will be completely overwritten by the returned data. On failure, pkt is not touched.</param>
-        /// <returns>0 on success. AVERROR(EAGAIN) if more packets need to be sent to the filter (using av_bsf_send_packet()) to get more output. AVERROR_EOF if there will be no further output from the filter. Another negative AVERROR value if an error occurs.</returns>
-        public static int av_bsf_receive_packet(AVBSFContext* @ctx, AVPacket* @pkt)
-        {
-            return av_bsf_receive_packet_fptr(@ctx, @pkt);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_bsf_send_packet_delegate(AVBSFContext* @ctx, AVPacket* @pkt);
-        private static av_bsf_send_packet_delegate av_bsf_send_packet_fptr = (AVBSFContext* @ctx, AVPacket* @pkt) =>
-        {
-            av_bsf_send_packet_fptr = GetFunctionDelegate<av_bsf_send_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_bsf_send_packet");
-            if (av_bsf_send_packet_fptr == null)
-            {
-                av_bsf_send_packet_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_bsf_send_packet"));
-                };
-            }
-            return av_bsf_send_packet_fptr(@ctx, @pkt);
-        };
-        /// <summary>Submit a packet for filtering.</summary>
-        /// <param name="pkt">the packet to filter. The bitstream filter will take ownership of the packet and reset the contents of pkt. pkt is not touched if an error occurs. If pkt is empty (i.e. NULL, or pkt-&gt;data is NULL and pkt-&gt;side_data_elems zero), it signals the end of the stream (i.e. no more non-empty packets will be sent; sending more empty packets does nothing) and will cause the filter to output any packets it may have buffered internally.</param>
-        /// <returns>0 on success. AVERROR(EAGAIN) if packets need to be retrieved from the filter (using av_bsf_receive_packet()) before new input can be consumed. Another negative AVERROR value if an error occurs.</returns>
-        public static int av_bsf_send_packet(AVBSFContext* @ctx, AVPacket* @pkt)
-        {
-            return av_bsf_send_packet_fptr(@ctx, @pkt);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate ushort* av_codec_get_chroma_intra_matrix_delegate(AVCodecContext* @avctx);
-        private static av_codec_get_chroma_intra_matrix_delegate av_codec_get_chroma_intra_matrix_fptr = (AVCodecContext* @avctx) =>
-        {
-            av_codec_get_chroma_intra_matrix_fptr = GetFunctionDelegate<av_codec_get_chroma_intra_matrix_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_chroma_intra_matrix");
-            if (av_codec_get_chroma_intra_matrix_fptr == null)
-            {
-                av_codec_get_chroma_intra_matrix_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_chroma_intra_matrix"));
-                };
-            }
-            return av_codec_get_chroma_intra_matrix_fptr(@avctx);
-        };
-        [Obsolete("")]
-        public static ushort* av_codec_get_chroma_intra_matrix(AVCodecContext* @avctx)
-        {
-            return av_codec_get_chroma_intra_matrix_fptr(@avctx);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVCodecDescriptor* av_codec_get_codec_descriptor_delegate(AVCodecContext* @avctx);
-        private static av_codec_get_codec_descriptor_delegate av_codec_get_codec_descriptor_fptr = (AVCodecContext* @avctx) =>
-        {
-            av_codec_get_codec_descriptor_fptr = GetFunctionDelegate<av_codec_get_codec_descriptor_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_codec_descriptor");
-            if (av_codec_get_codec_descriptor_fptr == null)
-            {
-                av_codec_get_codec_descriptor_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_codec_descriptor"));
-                };
-            }
-            return av_codec_get_codec_descriptor_fptr(@avctx);
-        };
-        [Obsolete("")]
-        public static AVCodecDescriptor* av_codec_get_codec_descriptor(AVCodecContext* @avctx)
-        {
-            return av_codec_get_codec_descriptor_fptr(@avctx);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate uint av_codec_get_codec_properties_delegate(AVCodecContext* @avctx);
-        private static av_codec_get_codec_properties_delegate av_codec_get_codec_properties_fptr = (AVCodecContext* @avctx) =>
-        {
-            av_codec_get_codec_properties_fptr = GetFunctionDelegate<av_codec_get_codec_properties_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_codec_properties");
-            if (av_codec_get_codec_properties_fptr == null)
-            {
-                av_codec_get_codec_properties_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_codec_properties"));
-                };
-            }
-            return av_codec_get_codec_properties_fptr(@avctx);
-        };
-        [Obsolete("")]
-        public static uint av_codec_get_codec_properties(AVCodecContext* @avctx)
-        {
-            return av_codec_get_codec_properties_fptr(@avctx);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_codec_get_lowres_delegate(AVCodecContext* @avctx);
-        private static av_codec_get_lowres_delegate av_codec_get_lowres_fptr = (AVCodecContext* @avctx) =>
-        {
-            av_codec_get_lowres_fptr = GetFunctionDelegate<av_codec_get_lowres_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_lowres");
-            if (av_codec_get_lowres_fptr == null)
-            {
-                av_codec_get_lowres_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_lowres"));
-                };
-            }
-            return av_codec_get_lowres_fptr(@avctx);
-        };
-        [Obsolete("")]
-        public static int av_codec_get_lowres(AVCodecContext* @avctx)
-        {
-            return av_codec_get_lowres_fptr(@avctx);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_codec_get_max_lowres_delegate(AVCodec* @codec);
-        private static av_codec_get_max_lowres_delegate av_codec_get_max_lowres_fptr = (AVCodec* @codec) =>
-        {
-            av_codec_get_max_lowres_fptr = GetFunctionDelegate<av_codec_get_max_lowres_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_max_lowres");
-            if (av_codec_get_max_lowres_fptr == null)
-            {
-                av_codec_get_max_lowres_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_max_lowres"));
-                };
-            }
-            return av_codec_get_max_lowres_fptr(@codec);
-        };
-        [Obsolete("")]
-        public static int av_codec_get_max_lowres(AVCodec* @codec)
-        {
-            return av_codec_get_max_lowres_fptr(@codec);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVRational av_codec_get_pkt_timebase_delegate(AVCodecContext* @avctx);
-        private static av_codec_get_pkt_timebase_delegate av_codec_get_pkt_timebase_fptr = (AVCodecContext* @avctx) =>
-        {
-            av_codec_get_pkt_timebase_fptr = GetFunctionDelegate<av_codec_get_pkt_timebase_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_pkt_timebase");
-            if (av_codec_get_pkt_timebase_fptr == null)
-            {
-                av_codec_get_pkt_timebase_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_pkt_timebase"));
-                };
-            }
-            return av_codec_get_pkt_timebase_fptr(@avctx);
-        };
-        /// <summary>Accessors for some AVCodecContext fields. These used to be provided for ABI compatibility, and do not need to be used anymore.</summary>
-        [Obsolete("")]
-        public static AVRational av_codec_get_pkt_timebase(AVCodecContext* @avctx)
-        {
-            return av_codec_get_pkt_timebase_fptr(@avctx);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_codec_get_seek_preroll_delegate(AVCodecContext* @avctx);
-        private static av_codec_get_seek_preroll_delegate av_codec_get_seek_preroll_fptr = (AVCodecContext* @avctx) =>
-        {
-            av_codec_get_seek_preroll_fptr = GetFunctionDelegate<av_codec_get_seek_preroll_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_get_seek_preroll");
-            if (av_codec_get_seek_preroll_fptr == null)
-            {
-                av_codec_get_seek_preroll_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_get_seek_preroll"));
-                };
-            }
-            return av_codec_get_seek_preroll_fptr(@avctx);
-        };
-        [Obsolete("")]
-        public static int av_codec_get_seek_preroll(AVCodecContext* @avctx)
-        {
-            return av_codec_get_seek_preroll_fptr(@avctx);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int av_codec_is_decoder_delegate(AVCodec* @codec);
         private static av_codec_is_decoder_delegate av_codec_is_decoder_fptr = (AVCodec* @codec) =>
         {
@@ -760,179 +75,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVCodec* av_codec_next_delegate(AVCodec* @c);
-        private static av_codec_next_delegate av_codec_next_fptr = (AVCodec* @c) =>
-        {
-            av_codec_next_fptr = GetFunctionDelegate<av_codec_next_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_next");
-            if (av_codec_next_fptr == null)
-            {
-                av_codec_next_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_next"));
-                };
-            }
-            return av_codec_next_fptr(@c);
-        };
-        /// <summary>If c is NULL, returns the first registered codec, if c is non-NULL, returns the next registered codec after c, or NULL if c is the last one.</summary>
-        [Obsolete("")]
-        public static AVCodec* av_codec_next(AVCodec* @c)
-        {
-            return av_codec_next_fptr(@c);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_codec_set_chroma_intra_matrix_delegate(AVCodecContext* @avctx, ushort* @val);
-        private static av_codec_set_chroma_intra_matrix_delegate av_codec_set_chroma_intra_matrix_fptr = (AVCodecContext* @avctx, ushort* @val) =>
-        {
-            av_codec_set_chroma_intra_matrix_fptr = GetFunctionDelegate<av_codec_set_chroma_intra_matrix_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_set_chroma_intra_matrix");
-            if (av_codec_set_chroma_intra_matrix_fptr == null)
-            {
-                av_codec_set_chroma_intra_matrix_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_set_chroma_intra_matrix"));
-                };
-            }
-            av_codec_set_chroma_intra_matrix_fptr(@avctx, @val);
-        };
-        [Obsolete("")]
-        public static void av_codec_set_chroma_intra_matrix(AVCodecContext* @avctx, ushort* @val)
-        {
-            av_codec_set_chroma_intra_matrix_fptr(@avctx, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_codec_set_codec_descriptor_delegate(AVCodecContext* @avctx, AVCodecDescriptor* @desc);
-        private static av_codec_set_codec_descriptor_delegate av_codec_set_codec_descriptor_fptr = (AVCodecContext* @avctx, AVCodecDescriptor* @desc) =>
-        {
-            av_codec_set_codec_descriptor_fptr = GetFunctionDelegate<av_codec_set_codec_descriptor_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_set_codec_descriptor");
-            if (av_codec_set_codec_descriptor_fptr == null)
-            {
-                av_codec_set_codec_descriptor_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_set_codec_descriptor"));
-                };
-            }
-            av_codec_set_codec_descriptor_fptr(@avctx, @desc);
-        };
-        [Obsolete("")]
-        public static void av_codec_set_codec_descriptor(AVCodecContext* @avctx, AVCodecDescriptor* @desc)
-        {
-            av_codec_set_codec_descriptor_fptr(@avctx, @desc);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_codec_set_lowres_delegate(AVCodecContext* @avctx, int @val);
-        private static av_codec_set_lowres_delegate av_codec_set_lowres_fptr = (AVCodecContext* @avctx, int @val) =>
-        {
-            av_codec_set_lowres_fptr = GetFunctionDelegate<av_codec_set_lowres_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_set_lowres");
-            if (av_codec_set_lowres_fptr == null)
-            {
-                av_codec_set_lowres_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_set_lowres"));
-                };
-            }
-            av_codec_set_lowres_fptr(@avctx, @val);
-        };
-        [Obsolete("")]
-        public static void av_codec_set_lowres(AVCodecContext* @avctx, int @val)
-        {
-            av_codec_set_lowres_fptr(@avctx, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_codec_set_pkt_timebase_delegate(AVCodecContext* @avctx, AVRational @val);
-        private static av_codec_set_pkt_timebase_delegate av_codec_set_pkt_timebase_fptr = (AVCodecContext* @avctx, AVRational @val) =>
-        {
-            av_codec_set_pkt_timebase_fptr = GetFunctionDelegate<av_codec_set_pkt_timebase_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_set_pkt_timebase");
-            if (av_codec_set_pkt_timebase_fptr == null)
-            {
-                av_codec_set_pkt_timebase_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_set_pkt_timebase"));
-                };
-            }
-            av_codec_set_pkt_timebase_fptr(@avctx, @val);
-        };
-        [Obsolete("")]
-        public static void av_codec_set_pkt_timebase(AVCodecContext* @avctx, AVRational @val)
-        {
-            av_codec_set_pkt_timebase_fptr(@avctx, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_codec_set_seek_preroll_delegate(AVCodecContext* @avctx, int @val);
-        private static av_codec_set_seek_preroll_delegate av_codec_set_seek_preroll_fptr = (AVCodecContext* @avctx, int @val) =>
-        {
-            av_codec_set_seek_preroll_fptr = GetFunctionDelegate<av_codec_set_seek_preroll_delegate>(GetOrLoadLibrary("avcodec"), "av_codec_set_seek_preroll");
-            if (av_codec_set_seek_preroll_fptr == null)
-            {
-                av_codec_set_seek_preroll_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_codec_set_seek_preroll"));
-                };
-            }
-            av_codec_set_seek_preroll_fptr(@avctx, @val);
-        };
-        [Obsolete("")]
-        public static void av_codec_set_seek_preroll(AVCodecContext* @avctx, int @val)
-        {
-            av_codec_set_seek_preroll_fptr(@avctx, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_copy_packet_delegate(AVPacket* @dst, AVPacket* @src);
-        private static av_copy_packet_delegate av_copy_packet_fptr = (AVPacket* @dst, AVPacket* @src) =>
-        {
-            av_copy_packet_fptr = GetFunctionDelegate<av_copy_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_copy_packet");
-            if (av_copy_packet_fptr == null)
-            {
-                av_copy_packet_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_copy_packet"));
-                };
-            }
-            return av_copy_packet_fptr(@dst, @src);
-        };
-        /// <summary>Copy packet, including contents</summary>
-        /// <returns>0 on success, negative AVERROR on fail</returns>
-        [Obsolete("Use av_packet_ref")]
-        public static int av_copy_packet(AVPacket* @dst, AVPacket* @src)
-        {
-            return av_copy_packet_fptr(@dst, @src);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_copy_packet_side_data_delegate(AVPacket* @dst, AVPacket* @src);
-        private static av_copy_packet_side_data_delegate av_copy_packet_side_data_fptr = (AVPacket* @dst, AVPacket* @src) =>
-        {
-            av_copy_packet_side_data_fptr = GetFunctionDelegate<av_copy_packet_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_copy_packet_side_data");
-            if (av_copy_packet_side_data_fptr == null)
-            {
-                av_copy_packet_side_data_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_copy_packet_side_data"));
-                };
-            }
-            return av_copy_packet_side_data_fptr(@dst, @src);
-        };
-        /// <summary>Copy packet side data</summary>
-        /// <returns>0 on success, negative AVERROR on fail</returns>
-        [Obsolete("Use av_packet_copy_props")]
-        public static int av_copy_packet_side_data(AVPacket* @dst, AVPacket* @src)
-        {
-            return av_copy_packet_side_data_fptr(@dst, @src);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVCPBProperties* av_cpb_properties_alloc_delegate(ulong* @size);
         private static av_cpb_properties_alloc_delegate av_cpb_properties_alloc_fptr = (ulong* @size) =>
         {
@@ -978,27 +120,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_dup_packet_delegate(AVPacket* @pkt);
-        private static av_dup_packet_delegate av_dup_packet_fptr = (AVPacket* @pkt) =>
-        {
-            av_dup_packet_fptr = GetFunctionDelegate<av_dup_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_dup_packet");
-            if (av_dup_packet_fptr == null)
-            {
-                av_dup_packet_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_dup_packet"));
-                };
-            }
-            return av_dup_packet_fptr(@pkt);
-        };
-        [Obsolete("Use av_packet_ref or av_packet_make_refcounted")]
-        public static int av_dup_packet(AVPacket* @pkt)
-        {
-            return av_dup_packet_fptr(@pkt);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate void av_fast_padded_malloc_delegate(void* @ptr, uint* @size, ulong @min_size);
         private static av_fast_padded_malloc_delegate av_fast_padded_malloc_fptr = (void* @ptr, uint* @size, ulong @min_size) =>
         {
@@ -1037,29 +158,6 @@ namespace FFmpeg.AutoGen
         public static void av_fast_padded_mallocz(void* @ptr, uint* @size, ulong @min_size)
         {
             av_fast_padded_mallocz_fptr(@ptr, @size, @min_size);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_free_packet_delegate(AVPacket* @pkt);
-        private static av_free_packet_delegate av_free_packet_fptr = (AVPacket* @pkt) =>
-        {
-            av_free_packet_fptr = GetFunctionDelegate<av_free_packet_delegate>(GetOrLoadLibrary("avcodec"), "av_free_packet");
-            if (av_free_packet_fptr == null)
-            {
-                av_free_packet_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_free_packet"));
-                };
-            }
-            av_free_packet_fptr(@pkt);
-        };
-        /// <summary>Free a packet.</summary>
-        /// <param name="pkt">packet to free</param>
-        [Obsolete("Use av_packet_unref")]
-        public static void av_free_packet(AVPacket* @pkt)
-        {
-            av_free_packet_fptr(@pkt);
         }
         
         
@@ -1128,32 +226,6 @@ namespace FFmpeg.AutoGen
         public static int av_get_bits_per_sample(AVCodecID @codec_id)
         {
             return av_get_bits_per_sample_fptr(@codec_id);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate ulong av_get_codec_tag_string_delegate(byte* @buf, ulong @buf_size, uint @codec_tag);
-        private static av_get_codec_tag_string_delegate av_get_codec_tag_string_fptr = (byte* @buf, ulong @buf_size, uint @codec_tag) =>
-        {
-            av_get_codec_tag_string_fptr = GetFunctionDelegate<av_get_codec_tag_string_delegate>(GetOrLoadLibrary("avcodec"), "av_get_codec_tag_string");
-            if (av_get_codec_tag_string_fptr == null)
-            {
-                av_get_codec_tag_string_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_get_codec_tag_string"));
-                };
-            }
-            return av_get_codec_tag_string_fptr(@buf, @buf_size, @codec_tag);
-        };
-        /// <summary>Put a string representing the codec tag codec_tag in buf.</summary>
-        /// <param name="buf">buffer to place codec tag in</param>
-        /// <param name="buf_size">size in bytes of buf</param>
-        /// <param name="codec_tag">codec tag to assign</param>
-        /// <returns>the length of the string that would have been generated if enough space had been available, excluding the trailing null</returns>
-        [Obsolete("see av_fourcc_make_string() and av_fourcc2str().")]
-        public static ulong av_get_codec_tag_string(byte* @buf, ulong @buf_size, uint @codec_tag)
-        {
-            return av_get_codec_tag_string_fptr(@buf, @buf_size, @codec_tag);
         }
         
         
@@ -1252,28 +324,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVHWAccel* av_hwaccel_next_delegate(AVHWAccel* @hwaccel);
-        private static av_hwaccel_next_delegate av_hwaccel_next_fptr = (AVHWAccel* @hwaccel) =>
-        {
-            av_hwaccel_next_fptr = GetFunctionDelegate<av_hwaccel_next_delegate>(GetOrLoadLibrary("avcodec"), "av_hwaccel_next");
-            if (av_hwaccel_next_fptr == null)
-            {
-                av_hwaccel_next_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_hwaccel_next"));
-                };
-            }
-            return av_hwaccel_next_fptr(@hwaccel);
-        };
-        /// <summary>If hwaccel is NULL, returns the first registered hardware accelerator, if hwaccel is non-NULL, returns the next registered hardware accelerator after hwaccel, or NULL if hwaccel is the last one.</summary>
-        [Obsolete("AVHWaccel structures contain no user-serviceable parts, so this function should not be used.")]
-        public static AVHWAccel* av_hwaccel_next(AVHWAccel* @hwaccel)
-        {
-            return av_hwaccel_next_fptr(@hwaccel);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate void av_init_packet_delegate(AVPacket* @pkt);
         private static av_init_packet_delegate av_init_packet_fptr = (AVPacket* @pkt) =>
         {
@@ -1293,29 +343,6 @@ namespace FFmpeg.AutoGen
         public static void av_init_packet(AVPacket* @pkt)
         {
             av_init_packet_fptr(@pkt);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_lockmgr_register_delegate(av_lockmgr_register_cb_func @cb);
-        private static av_lockmgr_register_delegate av_lockmgr_register_fptr = (av_lockmgr_register_cb_func @cb) =>
-        {
-            av_lockmgr_register_fptr = GetFunctionDelegate<av_lockmgr_register_delegate>(GetOrLoadLibrary("avcodec"), "av_lockmgr_register");
-            if (av_lockmgr_register_fptr == null)
-            {
-                av_lockmgr_register_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_lockmgr_register"));
-                };
-            }
-            return av_lockmgr_register_fptr(@cb);
-        };
-        /// <summary>Register a user provided lock manager supporting the operations specified by AVLockOp. The &quot;mutex&quot; argument to the function points to a (void *) where the lockmgr should store/get a pointer to a user allocated mutex. It is NULL upon AV_LOCK_CREATE and equal to the value left by the last call for all other ops. If the lock manager is unable to perform the op then it should leave the mutex in the same state as when it was called and return a non-zero value. However, when called with AV_LOCK_DESTROY the mutex will always be assumed to have been successfully destroyed. If av_lockmgr_register succeeds it will return a non-negative value, if it fails it will return a negative value and destroy all mutex and unregister all callbacks. av_lockmgr_register is not thread-safe, it must be called from a single thread before any calls which make use of locking are used.</summary>
-        /// <param name="cb">User defined callback. av_lockmgr_register invokes calls to this callback and the previously registered callback. The callback will be used to create more than one mutex each of which must be backed by its own underlying locking mechanism (i.e. do not use a single static object to implement your lock manager). If cb is set to NULL the lockmgr will be unregistered.</param>
-        [Obsolete("This function does nothing, and always returns 0. Be sure to build with thread support to get basic thread safety.")]
-        public static int av_lockmgr_register(av_lockmgr_register_cb_func @cb)
-        {
-            return av_lockmgr_register_fptr(@cb);
         }
         
         
@@ -1507,8 +534,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate byte* av_packet_get_side_data_delegate(AVPacket* @pkt, AVPacketSideDataType @type, int* @size);
-        private static av_packet_get_side_data_delegate av_packet_get_side_data_fptr = (AVPacket* @pkt, AVPacketSideDataType @type, int* @size) =>
+        private delegate byte* av_packet_get_side_data_delegate(AVPacket* @pkt, AVPacketSideDataType @type, ulong* @size);
+        private static av_packet_get_side_data_delegate av_packet_get_side_data_fptr = (AVPacket* @pkt, AVPacketSideDataType @type, ulong* @size) =>
         {
             av_packet_get_side_data_fptr = GetFunctionDelegate<av_packet_get_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_get_side_data");
             if (av_packet_get_side_data_fptr == null)
@@ -1525,7 +552,7 @@ namespace FFmpeg.AutoGen
         /// <param name="type">desired side information type</param>
         /// <param name="size">If supplied, *size will be set to the size of the side data or to zero if the desired side data is not present.</param>
         /// <returns>pointer to data if present or NULL otherwise</returns>
-        public static byte* av_packet_get_side_data(AVPacket* @pkt, AVPacketSideDataType @type, int* @size)
+        public static byte* av_packet_get_side_data(AVPacket* @pkt, AVPacketSideDataType @type, ulong* @size)
         {
             return av_packet_get_side_data_fptr(@pkt, @type, @size);
         }
@@ -1578,27 +605,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_packet_merge_side_data_delegate(AVPacket* @pkt);
-        private static av_packet_merge_side_data_delegate av_packet_merge_side_data_fptr = (AVPacket* @pkt) =>
-        {
-            av_packet_merge_side_data_fptr = GetFunctionDelegate<av_packet_merge_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_merge_side_data");
-            if (av_packet_merge_side_data_fptr == null)
-            {
-                av_packet_merge_side_data_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_merge_side_data"));
-                };
-            }
-            return av_packet_merge_side_data_fptr(@pkt);
-        };
-        [Obsolete("")]
-        public static int av_packet_merge_side_data(AVPacket* @pkt)
-        {
-            return av_packet_merge_side_data_fptr(@pkt);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate void av_packet_move_ref_delegate(AVPacket* @dst, AVPacket* @src);
         private static av_packet_move_ref_delegate av_packet_move_ref_fptr = (AVPacket* @dst, AVPacket* @src) =>
         {
@@ -1622,8 +628,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate byte* av_packet_new_side_data_delegate(AVPacket* @pkt, AVPacketSideDataType @type, int @size);
-        private static av_packet_new_side_data_delegate av_packet_new_side_data_fptr = (AVPacket* @pkt, AVPacketSideDataType @type, int @size) =>
+        private delegate byte* av_packet_new_side_data_delegate(AVPacket* @pkt, AVPacketSideDataType @type, ulong @size);
+        private static av_packet_new_side_data_delegate av_packet_new_side_data_fptr = (AVPacket* @pkt, AVPacketSideDataType @type, ulong @size) =>
         {
             av_packet_new_side_data_fptr = GetFunctionDelegate<av_packet_new_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_new_side_data");
             if (av_packet_new_side_data_fptr == null)
@@ -1640,15 +646,15 @@ namespace FFmpeg.AutoGen
         /// <param name="type">side information type</param>
         /// <param name="size">side information size</param>
         /// <returns>pointer to fresh allocated data or NULL otherwise</returns>
-        public static byte* av_packet_new_side_data(AVPacket* @pkt, AVPacketSideDataType @type, int @size)
+        public static byte* av_packet_new_side_data(AVPacket* @pkt, AVPacketSideDataType @type, ulong @size)
         {
             return av_packet_new_side_data_fptr(@pkt, @type, @size);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate byte* av_packet_pack_dictionary_delegate(AVDictionary* @dict, int* @size);
-        private static av_packet_pack_dictionary_delegate av_packet_pack_dictionary_fptr = (AVDictionary* @dict, int* @size) =>
+        private delegate byte* av_packet_pack_dictionary_delegate(AVDictionary* @dict, ulong* @size);
+        private static av_packet_pack_dictionary_delegate av_packet_pack_dictionary_fptr = (AVDictionary* @dict, ulong* @size) =>
         {
             av_packet_pack_dictionary_fptr = GetFunctionDelegate<av_packet_pack_dictionary_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_pack_dictionary");
             if (av_packet_pack_dictionary_fptr == null)
@@ -1660,7 +666,11 @@ namespace FFmpeg.AutoGen
             }
             return av_packet_pack_dictionary_fptr(@dict, @size);
         };
-        public static byte* av_packet_pack_dictionary(AVDictionary* @dict, int* @size)
+        /// <summary>Pack a dictionary for use in side_data.</summary>
+        /// <param name="dict">The dictionary to pack.</param>
+        /// <param name="size">pointer to store the size of the returned data</param>
+        /// <returns>pointer to data if successful, NULL otherwise</returns>
+        public static byte* av_packet_pack_dictionary(AVDictionary* @dict, ulong* @size)
         {
             return av_packet_pack_dictionary_fptr(@dict, @size);
         }
@@ -1715,8 +725,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_packet_shrink_side_data_delegate(AVPacket* @pkt, AVPacketSideDataType @type, int @size);
-        private static av_packet_shrink_side_data_delegate av_packet_shrink_side_data_fptr = (AVPacket* @pkt, AVPacketSideDataType @type, int @size) =>
+        private delegate int av_packet_shrink_side_data_delegate(AVPacket* @pkt, AVPacketSideDataType @type, ulong @size);
+        private static av_packet_shrink_side_data_delegate av_packet_shrink_side_data_fptr = (AVPacket* @pkt, AVPacketSideDataType @type, ulong @size) =>
         {
             av_packet_shrink_side_data_fptr = GetFunctionDelegate<av_packet_shrink_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_shrink_side_data");
             if (av_packet_shrink_side_data_fptr == null)
@@ -1733,7 +743,7 @@ namespace FFmpeg.AutoGen
         /// <param name="type">side information type</param>
         /// <param name="size">new side information size</param>
         /// <returns>0 on success, &lt; 0 on failure</returns>
-        public static int av_packet_shrink_side_data(AVPacket* @pkt, AVPacketSideDataType @type, int @size)
+        public static int av_packet_shrink_side_data(AVPacket* @pkt, AVPacketSideDataType @type, ulong @size)
         {
             return av_packet_shrink_side_data_fptr(@pkt, @type, @size);
         }
@@ -1761,29 +771,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_packet_split_side_data_delegate(AVPacket* @pkt);
-        private static av_packet_split_side_data_delegate av_packet_split_side_data_fptr = (AVPacket* @pkt) =>
-        {
-            av_packet_split_side_data_fptr = GetFunctionDelegate<av_packet_split_side_data_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_split_side_data");
-            if (av_packet_split_side_data_fptr == null)
-            {
-                av_packet_split_side_data_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_packet_split_side_data"));
-                };
-            }
-            return av_packet_split_side_data_fptr(@pkt);
-        };
-        [Obsolete("")]
-        public static int av_packet_split_side_data(AVPacket* @pkt)
-        {
-            return av_packet_split_side_data_fptr(@pkt);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_packet_unpack_dictionary_delegate(byte* @data, int @size, AVDictionary** @dict);
-        private static av_packet_unpack_dictionary_delegate av_packet_unpack_dictionary_fptr = (byte* @data, int @size, AVDictionary** @dict) =>
+        private delegate int av_packet_unpack_dictionary_delegate(byte* @data, ulong @size, AVDictionary** @dict);
+        private static av_packet_unpack_dictionary_delegate av_packet_unpack_dictionary_fptr = (byte* @data, ulong @size, AVDictionary** @dict) =>
         {
             av_packet_unpack_dictionary_fptr = GetFunctionDelegate<av_packet_unpack_dictionary_delegate>(GetOrLoadLibrary("avcodec"), "av_packet_unpack_dictionary");
             if (av_packet_unpack_dictionary_fptr == null)
@@ -1795,7 +784,12 @@ namespace FFmpeg.AutoGen
             }
             return av_packet_unpack_dictionary_fptr(@data, @size, @dict);
         };
-        public static int av_packet_unpack_dictionary(byte* @data, int @size, AVDictionary** @dict)
+        /// <summary>Unpack a dictionary from side_data.</summary>
+        /// <param name="data">data from side_data</param>
+        /// <param name="size">size of the data</param>
+        /// <param name="dict">the metadata storage dictionary</param>
+        /// <returns>0 on success, &lt; 0 on failure</returns>
+        public static int av_packet_unpack_dictionary(byte* @data, ulong @size, AVDictionary** @dict)
         {
             return av_packet_unpack_dictionary_fptr(@data, @size, @dict);
         }
@@ -1820,29 +814,6 @@ namespace FFmpeg.AutoGen
         public static void av_packet_unref(AVPacket* @pkt)
         {
             av_packet_unref_fptr(@pkt);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_parser_change_delegate(AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe);
-        private static av_parser_change_delegate av_parser_change_fptr = (AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe) =>
-        {
-            av_parser_change_fptr = GetFunctionDelegate<av_parser_change_delegate>(GetOrLoadLibrary("avcodec"), "av_parser_change");
-            if (av_parser_change_fptr == null)
-            {
-                av_parser_change_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_parser_change"));
-                };
-            }
-            return av_parser_change_fptr(@s, @avctx, @poutbuf, @poutbuf_size, @buf, @buf_size, @keyframe);
-        };
-        /// <summary>Returns 0 if the output buffer is a subset of the input, 1 if it is allocated and must be freed Use dump_extradata, remove_extra or extract_extradata bitstream filters instead.</summary>
-        /// <returns>0 if the output buffer is a subset of the input, 1 if it is allocated and must be freed</returns>
-        [Obsolete("Use dump_extradata, remove_extra or extract_extradata bitstream filters instead.")]
-        public static int av_parser_change(AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, int @keyframe)
-        {
-            return av_parser_change_fptr(@s, @avctx, @poutbuf, @poutbuf_size, @buf, @buf_size, @keyframe);
         }
         
         
@@ -1910,27 +881,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVCodecParser* av_parser_next_delegate(AVCodecParser* @c);
-        private static av_parser_next_delegate av_parser_next_fptr = (AVCodecParser* @c) =>
-        {
-            av_parser_next_fptr = GetFunctionDelegate<av_parser_next_delegate>(GetOrLoadLibrary("avcodec"), "av_parser_next");
-            if (av_parser_next_fptr == null)
-            {
-                av_parser_next_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_parser_next"));
-                };
-            }
-            return av_parser_next_fptr(@c);
-        };
-        [Obsolete("")]
-        public static AVCodecParser* av_parser_next(AVCodecParser* @c)
-        {
-            return av_parser_next_fptr(@c);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int av_parser_parse2_delegate(AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, long @pts, long @dts, long @pos);
         private static av_parser_parse2_delegate av_parser_parse2_fptr = (AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, long @pts, long @dts, long @pos) =>
         {
@@ -1958,133 +908,6 @@ namespace FFmpeg.AutoGen
         public static int av_parser_parse2(AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size, long @pts, long @dts, long @pos)
         {
             return av_parser_parse2_fptr(@s, @avctx, @poutbuf, @poutbuf_size, @buf, @buf_size, @pts, @dts, @pos);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_picture_copy_delegate(AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height);
-        private static av_picture_copy_delegate av_picture_copy_fptr = (AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height) =>
-        {
-            av_picture_copy_fptr = GetFunctionDelegate<av_picture_copy_delegate>(GetOrLoadLibrary("avcodec"), "av_picture_copy");
-            if (av_picture_copy_fptr == null)
-            {
-                av_picture_copy_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_picture_copy"));
-                };
-            }
-            av_picture_copy_fptr(@dst, @src, @pix_fmt, @width, @height);
-        };
-        [Obsolete("av_image_copy() instead.")]
-        public static void av_picture_copy(AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height)
-        {
-            av_picture_copy_fptr(@dst, @src, @pix_fmt, @width, @height);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_picture_crop_delegate(AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @top_band, int @left_band);
-        private static av_picture_crop_delegate av_picture_crop_fptr = (AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @top_band, int @left_band) =>
-        {
-            av_picture_crop_fptr = GetFunctionDelegate<av_picture_crop_delegate>(GetOrLoadLibrary("avcodec"), "av_picture_crop");
-            if (av_picture_crop_fptr == null)
-            {
-                av_picture_crop_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_picture_crop"));
-                };
-            }
-            return av_picture_crop_fptr(@dst, @src, @pix_fmt, @top_band, @left_band);
-        };
-        [Obsolete("unused")]
-        public static int av_picture_crop(AVPicture* @dst, AVPicture* @src, AVPixelFormat @pix_fmt, int @top_band, int @left_band)
-        {
-            return av_picture_crop_fptr(@dst, @src, @pix_fmt, @top_band, @left_band);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_picture_pad_delegate(AVPicture* @dst, AVPicture* @src, int @height, int @width, AVPixelFormat @pix_fmt, int @padtop, int @padbottom, int @padleft, int @padright, int* @color);
-        private static av_picture_pad_delegate av_picture_pad_fptr = (AVPicture* @dst, AVPicture* @src, int @height, int @width, AVPixelFormat @pix_fmt, int @padtop, int @padbottom, int @padleft, int @padright, int* @color) =>
-        {
-            av_picture_pad_fptr = GetFunctionDelegate<av_picture_pad_delegate>(GetOrLoadLibrary("avcodec"), "av_picture_pad");
-            if (av_picture_pad_fptr == null)
-            {
-                av_picture_pad_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_picture_pad"));
-                };
-            }
-            return av_picture_pad_fptr(@dst, @src, @height, @width, @pix_fmt, @padtop, @padbottom, @padleft, @padright, @color);
-        };
-        [Obsolete("unused")]
-        public static int av_picture_pad(AVPicture* @dst, AVPicture* @src, int @height, int @width, AVPixelFormat @pix_fmt, int @padtop, int @padbottom, int @padleft, int @padright, int* @color)
-        {
-            return av_picture_pad_fptr(@dst, @src, @height, @width, @pix_fmt, @padtop, @padbottom, @padleft, @padright, @color);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_register_bitstream_filter_delegate(AVBitStreamFilter* @bsf);
-        private static av_register_bitstream_filter_delegate av_register_bitstream_filter_fptr = (AVBitStreamFilter* @bsf) =>
-        {
-            av_register_bitstream_filter_fptr = GetFunctionDelegate<av_register_bitstream_filter_delegate>(GetOrLoadLibrary("avcodec"), "av_register_bitstream_filter");
-            if (av_register_bitstream_filter_fptr == null)
-            {
-                av_register_bitstream_filter_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_register_bitstream_filter"));
-                };
-            }
-            av_register_bitstream_filter_fptr(@bsf);
-        };
-        [Obsolete("the old bitstream filtering API (using AVBitStreamFilterContext) is deprecated. Use the new bitstream filtering API (using AVBSFContext).")]
-        public static void av_register_bitstream_filter(AVBitStreamFilter* @bsf)
-        {
-            av_register_bitstream_filter_fptr(@bsf);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_register_codec_parser_delegate(AVCodecParser* @parser);
-        private static av_register_codec_parser_delegate av_register_codec_parser_fptr = (AVCodecParser* @parser) =>
-        {
-            av_register_codec_parser_fptr = GetFunctionDelegate<av_register_codec_parser_delegate>(GetOrLoadLibrary("avcodec"), "av_register_codec_parser");
-            if (av_register_codec_parser_fptr == null)
-            {
-                av_register_codec_parser_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_register_codec_parser"));
-                };
-            }
-            av_register_codec_parser_fptr(@parser);
-        };
-        [Obsolete("")]
-        public static void av_register_codec_parser(AVCodecParser* @parser)
-        {
-            av_register_codec_parser_fptr(@parser);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_register_hwaccel_delegate(AVHWAccel* @hwaccel);
-        private static av_register_hwaccel_delegate av_register_hwaccel_fptr = (AVHWAccel* @hwaccel) =>
-        {
-            av_register_hwaccel_fptr = GetFunctionDelegate<av_register_hwaccel_delegate>(GetOrLoadLibrary("avcodec"), "av_register_hwaccel");
-            if (av_register_hwaccel_fptr == null)
-            {
-                av_register_hwaccel_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_register_hwaccel"));
-                };
-            }
-            av_register_hwaccel_fptr(@hwaccel);
-        };
-        /// <summary>Register the hardware accelerator hwaccel.</summary>
-        [Obsolete("This function doesn't do anything.")]
-        public static void av_register_hwaccel(AVHWAccel* @hwaccel)
-        {
-            av_register_hwaccel_fptr(@hwaccel);
         }
         
         
@@ -2267,58 +1090,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avcodec_copy_context_delegate(AVCodecContext* @dest, AVCodecContext* @src);
-        private static avcodec_copy_context_delegate avcodec_copy_context_fptr = (AVCodecContext* @dest, AVCodecContext* @src) =>
-        {
-            avcodec_copy_context_fptr = GetFunctionDelegate<avcodec_copy_context_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_copy_context");
-            if (avcodec_copy_context_fptr == null)
-            {
-                avcodec_copy_context_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_copy_context"));
-                };
-            }
-            return avcodec_copy_context_fptr(@dest, @src);
-        };
-        /// <summary>Copy the settings of the source AVCodecContext into the destination AVCodecContext. The resulting destination codec context will be unopened, i.e. you are required to call avcodec_open2() before you can use this AVCodecContext to decode/encode video/audio data.</summary>
-        /// <param name="dest">target codec context, should be initialized with avcodec_alloc_context3(NULL), but otherwise uninitialized</param>
-        /// <param name="src">source codec context</param>
-        /// <returns>AVERROR() on error (e.g. memory allocation error), 0 on success</returns>
-        [Obsolete("The semantics of this function are ill-defined and it should not be used. If you need to transfer the stream parameters from one codec context to another, use an intermediate AVCodecParameters instance and the avcodec_parameters_from_context() / avcodec_parameters_to_context() functions.")]
-        public static int avcodec_copy_context(AVCodecContext* @dest, AVCodecContext* @src)
-        {
-            return avcodec_copy_context_fptr(@dest, @src);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avcodec_decode_audio4_delegate(AVCodecContext* @avctx, AVFrame* @frame, int* @got_frame_ptr, AVPacket* @avpkt);
-        private static avcodec_decode_audio4_delegate avcodec_decode_audio4_fptr = (AVCodecContext* @avctx, AVFrame* @frame, int* @got_frame_ptr, AVPacket* @avpkt) =>
-        {
-            avcodec_decode_audio4_fptr = GetFunctionDelegate<avcodec_decode_audio4_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_decode_audio4");
-            if (avcodec_decode_audio4_fptr == null)
-            {
-                avcodec_decode_audio4_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_decode_audio4"));
-                };
-            }
-            return avcodec_decode_audio4_fptr(@avctx, @frame, @got_frame_ptr, @avpkt);
-        };
-        /// <summary>Decode the audio frame of size avpkt-&gt;size from avpkt-&gt;data into frame.</summary>
-        /// <param name="avctx">the codec context</param>
-        /// <param name="frame">The AVFrame in which to store decoded audio samples. The decoder will allocate a buffer for the decoded frame by calling the AVCodecContext.get_buffer2() callback. When AVCodecContext.refcounted_frames is set to 1, the frame is reference counted and the returned reference belongs to the caller. The caller must release the frame using av_frame_unref() when the frame is no longer needed. The caller may safely write to the frame if av_frame_is_writable() returns 1. When AVCodecContext.refcounted_frames is set to 0, the returned reference belongs to the decoder and is valid only until the next call to this function or until closing or flushing the decoder. The caller may not write to it.</param>
-        /// <param name="got_frame_ptr">Zero if no frame could be decoded, otherwise it is non-zero. Note that this field being set to zero does not mean that an error has occurred. For decoders with AV_CODEC_CAP_DELAY set, no given decode call is guaranteed to produce a frame.</param>
-        /// <param name="avpkt">The input AVPacket containing the input buffer. At least avpkt-&gt;data and avpkt-&gt;size should be set. Some decoders might also require additional fields to be set.</param>
-        /// <returns>A negative error code is returned if an error occurred during decoding, otherwise the number of bytes consumed from the input AVPacket is returned.</returns>
-        [Obsolete("Use avcodec_send_packet() and avcodec_receive_frame().")]
-        public static int avcodec_decode_audio4(AVCodecContext* @avctx, AVFrame* @frame, int* @got_frame_ptr, AVPacket* @avpkt)
-        {
-            return avcodec_decode_audio4_fptr(@avctx, @frame, @got_frame_ptr, @avpkt);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int avcodec_decode_subtitle2_delegate(AVCodecContext* @avctx, AVSubtitle* @sub, int* @got_sub_ptr, AVPacket* @avpkt);
         private static avcodec_decode_subtitle2_delegate avcodec_decode_subtitle2_fptr = (AVCodecContext* @avctx, AVSubtitle* @sub, int* @got_sub_ptr, AVPacket* @avpkt) =>
         {
@@ -2340,33 +1111,6 @@ namespace FFmpeg.AutoGen
         public static int avcodec_decode_subtitle2(AVCodecContext* @avctx, AVSubtitle* @sub, int* @got_sub_ptr, AVPacket* @avpkt)
         {
             return avcodec_decode_subtitle2_fptr(@avctx, @sub, @got_sub_ptr, @avpkt);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avcodec_decode_video2_delegate(AVCodecContext* @avctx, AVFrame* @picture, int* @got_picture_ptr, AVPacket* @avpkt);
-        private static avcodec_decode_video2_delegate avcodec_decode_video2_fptr = (AVCodecContext* @avctx, AVFrame* @picture, int* @got_picture_ptr, AVPacket* @avpkt) =>
-        {
-            avcodec_decode_video2_fptr = GetFunctionDelegate<avcodec_decode_video2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_decode_video2");
-            if (avcodec_decode_video2_fptr == null)
-            {
-                avcodec_decode_video2_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_decode_video2"));
-                };
-            }
-            return avcodec_decode_video2_fptr(@avctx, @picture, @got_picture_ptr, @avpkt);
-        };
-        /// <summary>Decode the video frame of size avpkt-&gt;size from avpkt-&gt;data into picture. Some decoders may support multiple frames in a single AVPacket, such decoders would then just decode the first frame.</summary>
-        /// <param name="avctx">the codec context</param>
-        /// <param name="picture">The AVFrame in which the decoded video frame will be stored. Use av_frame_alloc() to get an AVFrame. The codec will allocate memory for the actual bitmap by calling the AVCodecContext.get_buffer2() callback. When AVCodecContext.refcounted_frames is set to 1, the frame is reference counted and the returned reference belongs to the caller. The caller must release the frame using av_frame_unref() when the frame is no longer needed. The caller may safely write to the frame if av_frame_is_writable() returns 1. When AVCodecContext.refcounted_frames is set to 0, the returned reference belongs to the decoder and is valid only until the next call to this function or until closing or flushing the decoder. The caller may not write to it.</param>
-        /// <param name="got_picture_ptr">Zero if no frame could be decompressed, otherwise, it is nonzero.</param>
-        /// <param name="avpkt">The input AVPacket containing the input buffer. You can create such packet with av_init_packet() and by then setting data and size, some decoders might in addition need other fields like flags &amp;AV _PKT_FLAG_KEY. All decoders are designed to use the least fields possible.</param>
-        /// <returns>On error a negative value is returned, otherwise the number of bytes used or zero if no frame could be decompressed.</returns>
-        [Obsolete("Use avcodec_send_packet() and avcodec_receive_frame().")]
-        public static int avcodec_decode_video2(AVCodecContext* @avctx, AVFrame* @picture, int* @got_picture_ptr, AVPacket* @avpkt)
-        {
-            return avcodec_decode_video2_fptr(@avctx, @picture, @got_picture_ptr, @avpkt);
         }
         
         
@@ -2554,33 +1298,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avcodec_encode_audio2_delegate(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr);
-        private static avcodec_encode_audio2_delegate avcodec_encode_audio2_fptr = (AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr) =>
-        {
-            avcodec_encode_audio2_fptr = GetFunctionDelegate<avcodec_encode_audio2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_encode_audio2");
-            if (avcodec_encode_audio2_fptr == null)
-            {
-                avcodec_encode_audio2_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_encode_audio2"));
-                };
-            }
-            return avcodec_encode_audio2_fptr(@avctx, @avpkt, @frame, @got_packet_ptr);
-        };
-        /// <summary>Encode a frame of audio.</summary>
-        /// <param name="avctx">codec context</param>
-        /// <param name="avpkt">output AVPacket. The user can supply an output buffer by setting avpkt-&gt;data and avpkt-&gt;size prior to calling the function, but if the size of the user-provided data is not large enough, encoding will fail. If avpkt-&gt;data and avpkt-&gt;size are set, avpkt-&gt;destruct must also be set. All other AVPacket fields will be reset by the encoder using av_init_packet(). If avpkt-&gt;data is NULL, the encoder will allocate it. The encoder will set avpkt-&gt;size to the size of the output packet.</param>
-        /// <param name="frame">AVFrame containing the raw audio data to be encoded. May be NULL when flushing an encoder that has the AV_CODEC_CAP_DELAY capability set. If AV_CODEC_CAP_VARIABLE_FRAME_SIZE is set, then each frame can have any number of samples. If it is not set, frame-&gt;nb_samples must be equal to avctx-&gt;frame_size for all frames except the last. The final frame may be smaller than avctx-&gt;frame_size.</param>
-        /// <param name="got_packet_ptr">This field is set to 1 by libavcodec if the output packet is non-empty, and to 0 if it is empty. If the function returns an error, the packet can be assumed to be invalid, and the value of got_packet_ptr is undefined and should not be used.</param>
-        /// <returns>0 on success, negative error code on failure</returns>
-        [Obsolete("use avcodec_send_frame()/avcodec_receive_packet() instead. If allowed and required, set AVCodecContext.get_encode_buffer to a custom function to pass user supplied output buffers.")]
-        public static int avcodec_encode_audio2(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr)
-        {
-            return avcodec_encode_audio2_fptr(@avctx, @avpkt, @frame, @got_packet_ptr);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int avcodec_encode_subtitle_delegate(AVCodecContext* @avctx, byte* @buf, int @buf_size, AVSubtitle* @sub);
         private static avcodec_encode_subtitle_delegate avcodec_encode_subtitle_fptr = (AVCodecContext* @avctx, byte* @buf, int @buf_size, AVSubtitle* @sub) =>
         {
@@ -2594,36 +1311,10 @@ namespace FFmpeg.AutoGen
             }
             return avcodec_encode_subtitle_fptr(@avctx, @buf, @buf_size, @sub);
         };
+        /// <summary>@{</summary>
         public static int avcodec_encode_subtitle(AVCodecContext* @avctx, byte* @buf, int @buf_size, AVSubtitle* @sub)
         {
             return avcodec_encode_subtitle_fptr(@avctx, @buf, @buf_size, @sub);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avcodec_encode_video2_delegate(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr);
-        private static avcodec_encode_video2_delegate avcodec_encode_video2_fptr = (AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr) =>
-        {
-            avcodec_encode_video2_fptr = GetFunctionDelegate<avcodec_encode_video2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_encode_video2");
-            if (avcodec_encode_video2_fptr == null)
-            {
-                avcodec_encode_video2_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_encode_video2"));
-                };
-            }
-            return avcodec_encode_video2_fptr(@avctx, @avpkt, @frame, @got_packet_ptr);
-        };
-        /// <summary>Encode a frame of video.</summary>
-        /// <param name="avctx">codec context</param>
-        /// <param name="avpkt">output AVPacket. The user can supply an output buffer by setting avpkt-&gt;data and avpkt-&gt;size prior to calling the function, but if the size of the user-provided data is not large enough, encoding will fail. All other AVPacket fields will be reset by the encoder using av_init_packet(). If avpkt-&gt;data is NULL, the encoder will allocate it. The encoder will set avpkt-&gt;size to the size of the output packet. The returned data (if any) belongs to the caller, he is responsible for freeing it.</param>
-        /// <param name="frame">AVFrame containing the raw video data to be encoded. May be NULL when flushing an encoder that has the AV_CODEC_CAP_DELAY capability set.</param>
-        /// <param name="got_packet_ptr">This field is set to 1 by libavcodec if the output packet is non-empty, and to 0 if it is empty. If the function returns an error, the packet can be assumed to be invalid, and the value of got_packet_ptr is undefined and should not be used.</param>
-        /// <returns>0 on success, negative error code on failure</returns>
-        [Obsolete("use avcodec_send_frame()/avcodec_receive_packet() instead. If allowed and required, set AVCodecContext.get_encode_buffer to a custom function to pass user supplied output buffers.")]
-        public static int avcodec_encode_video2(AVCodecContext* @avctx, AVPacket* @avpkt, AVFrame* @frame, int* @got_packet_ptr)
-        {
-            return avcodec_encode_video2_fptr(@avctx, @avpkt, @frame, @got_packet_ptr);
         }
         
         
@@ -2679,27 +1370,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVPixelFormat avcodec_find_best_pix_fmt_of_2_delegate(AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr);
-        private static avcodec_find_best_pix_fmt_of_2_delegate avcodec_find_best_pix_fmt_of_2_fptr = (AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr) =>
-        {
-            avcodec_find_best_pix_fmt_of_2_fptr = GetFunctionDelegate<avcodec_find_best_pix_fmt_of_2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_find_best_pix_fmt_of_2");
-            if (avcodec_find_best_pix_fmt_of_2_fptr == null)
-            {
-                avcodec_find_best_pix_fmt_of_2_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_find_best_pix_fmt_of_2"));
-                };
-            }
-            return avcodec_find_best_pix_fmt_of_2_fptr(@dst_pix_fmt1, @dst_pix_fmt2, @src_pix_fmt, @has_alpha, @loss_ptr);
-        };
-        [Obsolete("see av_find_best_pix_fmt_of_2()")]
-        public static AVPixelFormat avcodec_find_best_pix_fmt_of_2(AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr)
-        {
-            return avcodec_find_best_pix_fmt_of_2_fptr(@dst_pix_fmt1, @dst_pix_fmt2, @src_pix_fmt, @has_alpha, @loss_ptr);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVPixelFormat avcodec_find_best_pix_fmt_of_list_delegate(AVPixelFormat* @pix_fmt_list, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr);
         private static avcodec_find_best_pix_fmt_of_list_delegate avcodec_find_best_pix_fmt_of_list_fptr = (AVPixelFormat* @pix_fmt_list, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr) =>
         {
@@ -2722,27 +1392,6 @@ namespace FFmpeg.AutoGen
         public static AVPixelFormat avcodec_find_best_pix_fmt_of_list(AVPixelFormat* @pix_fmt_list, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr)
         {
             return avcodec_find_best_pix_fmt_of_list_fptr(@pix_fmt_list, @src_pix_fmt, @has_alpha, @loss_ptr);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVPixelFormat avcodec_find_best_pix_fmt2_delegate(AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr);
-        private static avcodec_find_best_pix_fmt2_delegate avcodec_find_best_pix_fmt2_fptr = (AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr) =>
-        {
-            avcodec_find_best_pix_fmt2_fptr = GetFunctionDelegate<avcodec_find_best_pix_fmt2_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_find_best_pix_fmt2");
-            if (avcodec_find_best_pix_fmt2_fptr == null)
-            {
-                avcodec_find_best_pix_fmt2_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_find_best_pix_fmt2"));
-                };
-            }
-            return avcodec_find_best_pix_fmt2_fptr(@dst_pix_fmt1, @dst_pix_fmt2, @src_pix_fmt, @has_alpha, @loss_ptr);
-        };
-        [Obsolete("")]
-        public static AVPixelFormat avcodec_find_best_pix_fmt2(AVPixelFormat @dst_pix_fmt1, AVPixelFormat @dst_pix_fmt2, AVPixelFormat @src_pix_fmt, int @has_alpha, int* @loss_ptr)
-        {
-            return avcodec_find_best_pix_fmt2_fptr(@dst_pix_fmt1, @dst_pix_fmt2, @src_pix_fmt, @has_alpha, @loss_ptr);
         }
         
         
@@ -2909,27 +1558,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void avcodec_get_chroma_sub_sample_delegate(AVPixelFormat @pix_fmt, int* @h_shift, int* @v_shift);
-        private static avcodec_get_chroma_sub_sample_delegate avcodec_get_chroma_sub_sample_fptr = (AVPixelFormat @pix_fmt, int* @h_shift, int* @v_shift) =>
-        {
-            avcodec_get_chroma_sub_sample_fptr = GetFunctionDelegate<avcodec_get_chroma_sub_sample_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_chroma_sub_sample");
-            if (avcodec_get_chroma_sub_sample_fptr == null)
-            {
-                avcodec_get_chroma_sub_sample_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_chroma_sub_sample"));
-                };
-            }
-            avcodec_get_chroma_sub_sample_fptr(@pix_fmt, @h_shift, @v_shift);
-        };
-        [Obsolete("Use av_pix_fmt_get_chroma_sub_sample")]
-        public static void avcodec_get_chroma_sub_sample(AVPixelFormat @pix_fmt, int* @h_shift, int* @v_shift)
-        {
-            avcodec_get_chroma_sub_sample_fptr(@pix_fmt, @h_shift, @v_shift);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVClass* avcodec_get_class_delegate();
         private static avcodec_get_class_delegate avcodec_get_class_fptr = () =>
         {
@@ -2947,27 +1575,6 @@ namespace FFmpeg.AutoGen
         public static AVClass* avcodec_get_class()
         {
             return avcodec_get_class_fptr();
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avcodec_get_context_defaults3_delegate(AVCodecContext* @s, AVCodec* @codec);
-        private static avcodec_get_context_defaults3_delegate avcodec_get_context_defaults3_fptr = (AVCodecContext* @s, AVCodec* @codec) =>
-        {
-            avcodec_get_context_defaults3_fptr = GetFunctionDelegate<avcodec_get_context_defaults3_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_context_defaults3");
-            if (avcodec_get_context_defaults3_fptr == null)
-            {
-                avcodec_get_context_defaults3_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_context_defaults3"));
-                };
-            }
-            return avcodec_get_context_defaults3_fptr(@s, @codec);
-        };
-        [Obsolete("This function should not be used, as closing and opening a codec context multiple time is not supported. A new codec context should be allocated for each new use.")]
-        public static int avcodec_get_context_defaults3(AVCodecContext* @s, AVCodec* @codec)
-        {
-            return avcodec_get_context_defaults3_fptr(@s, @codec);
         }
         
         
@@ -3059,27 +1666,6 @@ namespace FFmpeg.AutoGen
         public static string avcodec_get_name(AVCodecID @id)
         {
             return avcodec_get_name_fptr(@id);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avcodec_get_pix_fmt_loss_delegate(AVPixelFormat @dst_pix_fmt, AVPixelFormat @src_pix_fmt, int @has_alpha);
-        private static avcodec_get_pix_fmt_loss_delegate avcodec_get_pix_fmt_loss_fptr = (AVPixelFormat @dst_pix_fmt, AVPixelFormat @src_pix_fmt, int @has_alpha) =>
-        {
-            avcodec_get_pix_fmt_loss_fptr = GetFunctionDelegate<avcodec_get_pix_fmt_loss_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_get_pix_fmt_loss");
-            if (avcodec_get_pix_fmt_loss_fptr == null)
-            {
-                avcodec_get_pix_fmt_loss_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_get_pix_fmt_loss"));
-                };
-            }
-            return avcodec_get_pix_fmt_loss_fptr(@dst_pix_fmt, @src_pix_fmt, @has_alpha);
-        };
-        [Obsolete("see av_get_pix_fmt_loss()")]
-        public static int avcodec_get_pix_fmt_loss(AVPixelFormat @dst_pix_fmt, AVPixelFormat @src_pix_fmt, int @has_alpha)
-        {
-            return avcodec_get_pix_fmt_loss_fptr(@dst_pix_fmt, @src_pix_fmt, @has_alpha);
         }
         
         
@@ -3397,48 +1983,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void avcodec_register_delegate(AVCodec* @codec);
-        private static avcodec_register_delegate avcodec_register_fptr = (AVCodec* @codec) =>
-        {
-            avcodec_register_fptr = GetFunctionDelegate<avcodec_register_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_register");
-            if (avcodec_register_fptr == null)
-            {
-                avcodec_register_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_register"));
-                };
-            }
-            avcodec_register_fptr(@codec);
-        };
-        [Obsolete("Calling this function is unnecessary.")]
-        public static void avcodec_register(AVCodec* @codec)
-        {
-            avcodec_register_fptr(@codec);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void avcodec_register_all_delegate();
-        private static avcodec_register_all_delegate avcodec_register_all_fptr = () =>
-        {
-            avcodec_register_all_fptr = GetFunctionDelegate<avcodec_register_all_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_register_all");
-            if (avcodec_register_all_fptr == null)
-            {
-                avcodec_register_all_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avcodec_register_all"));
-                };
-            }
-            avcodec_register_all_fptr();
-        };
-        [Obsolete("Calling this function is unnecessary.")]
-        public static void avcodec_register_all()
-        {
-            avcodec_register_all_fptr();
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int avcodec_send_frame_delegate(AVCodecContext* @avctx, AVFrame* @frame);
         private static avcodec_send_frame_delegate avcodec_send_frame_fptr = (AVCodecContext* @avctx, AVFrame* @frame) =>
         {
@@ -3455,7 +1999,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Supply a raw video or audio frame to the encoder. Use avcodec_receive_packet() to retrieve buffered output packets.</summary>
         /// <param name="avctx">codec context</param>
         /// <param name="frame">AVFrame containing the raw audio or video frame to be encoded. Ownership of the frame remains with the caller, and the encoder will not write to the frame. The encoder may create a reference to the frame data (or copy it if the frame is not reference-counted). It can be NULL, in which case it is considered a flush packet.  This signals the end of the stream. If the encoder still has packets buffered, it will return them after this call. Once flushing mode has been entered, additional flush packets are ignored, and sending frames will return AVERROR_EOF.</param>
-        /// <returns>0 on success, otherwise negative error code: AVERROR(EAGAIN):   input is not accepted in the current state - user must read output with avcodec_receive_packet() (once all output is read, the packet should be resent, and the call will not fail with EAGAIN). AVERROR_EOF:       the encoder has been flushed, and no new frames can be sent to it AVERROR(EINVAL):   codec not opened, refcounted_frames not set, it is a decoder, or requires flush AVERROR(ENOMEM):   failed to add packet to internal queue, or similar other errors: legitimate encoding errors</returns>
+        /// <returns>0 on success, otherwise negative error code: AVERROR(EAGAIN):   input is not accepted in the current state - user must read output with avcodec_receive_packet() (once all output is read, the packet should be resent, and the call will not fail with EAGAIN). AVERROR_EOF:       the encoder has been flushed, and no new frames can be sent to it AVERROR(EINVAL):   codec not opened, it is a decoder, or requires flush AVERROR(ENOMEM):   failed to add packet to internal queue, or similar other errors: legitimate encoding errors</returns>
         public static int avcodec_send_frame(AVCodecContext* @avctx, AVFrame* @frame)
         {
             return avcodec_send_frame_fptr(@avctx, @frame);
@@ -3500,6 +2044,7 @@ namespace FFmpeg.AutoGen
             }
             avcodec_string_fptr(@buf, @buf_size, @enc, @encode);
         };
+        /// <summary>@}</summary>
         public static void avcodec_string(byte* @buf, int @buf_size, AVCodecContext* @enc, int @encode)
         {
             avcodec_string_fptr(@buf, @buf_size, @enc, @encode);
@@ -3524,111 +2069,6 @@ namespace FFmpeg.AutoGen
         public static uint avcodec_version()
         {
             return avcodec_version_fptr();
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avpicture_alloc_delegate(AVPicture* @picture, AVPixelFormat @pix_fmt, int @width, int @height);
-        private static avpicture_alloc_delegate avpicture_alloc_fptr = (AVPicture* @picture, AVPixelFormat @pix_fmt, int @width, int @height) =>
-        {
-            avpicture_alloc_fptr = GetFunctionDelegate<avpicture_alloc_delegate>(GetOrLoadLibrary("avcodec"), "avpicture_alloc");
-            if (avpicture_alloc_fptr == null)
-            {
-                avpicture_alloc_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpicture_alloc"));
-                };
-            }
-            return avpicture_alloc_fptr(@picture, @pix_fmt, @width, @height);
-        };
-        [Obsolete("unused")]
-        public static int avpicture_alloc(AVPicture* @picture, AVPixelFormat @pix_fmt, int @width, int @height)
-        {
-            return avpicture_alloc_fptr(@picture, @pix_fmt, @width, @height);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avpicture_fill_delegate(AVPicture* @picture, byte* @ptr, AVPixelFormat @pix_fmt, int @width, int @height);
-        private static avpicture_fill_delegate avpicture_fill_fptr = (AVPicture* @picture, byte* @ptr, AVPixelFormat @pix_fmt, int @width, int @height) =>
-        {
-            avpicture_fill_fptr = GetFunctionDelegate<avpicture_fill_delegate>(GetOrLoadLibrary("avcodec"), "avpicture_fill");
-            if (avpicture_fill_fptr == null)
-            {
-                avpicture_fill_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpicture_fill"));
-                };
-            }
-            return avpicture_fill_fptr(@picture, @ptr, @pix_fmt, @width, @height);
-        };
-        [Obsolete("use av_image_fill_arrays() instead.")]
-        public static int avpicture_fill(AVPicture* @picture, byte* @ptr, AVPixelFormat @pix_fmt, int @width, int @height)
-        {
-            return avpicture_fill_fptr(@picture, @ptr, @pix_fmt, @width, @height);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void avpicture_free_delegate(AVPicture* @picture);
-        private static avpicture_free_delegate avpicture_free_fptr = (AVPicture* @picture) =>
-        {
-            avpicture_free_fptr = GetFunctionDelegate<avpicture_free_delegate>(GetOrLoadLibrary("avcodec"), "avpicture_free");
-            if (avpicture_free_fptr == null)
-            {
-                avpicture_free_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpicture_free"));
-                };
-            }
-            avpicture_free_fptr(@picture);
-        };
-        [Obsolete("unused")]
-        public static void avpicture_free(AVPicture* @picture)
-        {
-            avpicture_free_fptr(@picture);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avpicture_get_size_delegate(AVPixelFormat @pix_fmt, int @width, int @height);
-        private static avpicture_get_size_delegate avpicture_get_size_fptr = (AVPixelFormat @pix_fmt, int @width, int @height) =>
-        {
-            avpicture_get_size_fptr = GetFunctionDelegate<avpicture_get_size_delegate>(GetOrLoadLibrary("avcodec"), "avpicture_get_size");
-            if (avpicture_get_size_fptr == null)
-            {
-                avpicture_get_size_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpicture_get_size"));
-                };
-            }
-            return avpicture_get_size_fptr(@pix_fmt, @width, @height);
-        };
-        [Obsolete("use av_image_get_buffer_size() instead.")]
-        public static int avpicture_get_size(AVPixelFormat @pix_fmt, int @width, int @height)
-        {
-            return avpicture_get_size_fptr(@pix_fmt, @width, @height);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avpicture_layout_delegate(AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height, byte* @dest, int @dest_size);
-        private static avpicture_layout_delegate avpicture_layout_fptr = (AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height, byte* @dest, int @dest_size) =>
-        {
-            avpicture_layout_fptr = GetFunctionDelegate<avpicture_layout_delegate>(GetOrLoadLibrary("avcodec"), "avpicture_layout");
-            if (avpicture_layout_fptr == null)
-            {
-                avpicture_layout_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpicture_layout"));
-                };
-            }
-            return avpicture_layout_fptr(@src, @pix_fmt, @width, @height, @dest, @dest_size);
-        };
-        [Obsolete("use av_image_copy_to_buffer() instead.")]
-        public static int avpicture_layout(AVPicture* @src, AVPixelFormat @pix_fmt, int @width, int @height, byte* @dest, int @dest_size)
-        {
-            return avpicture_layout_fptr(@src, @pix_fmt, @width, @height, @dest, @dest_size);
         }
         
         
@@ -4633,6 +3073,27 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate uint avfilter_filter_pad_count_delegate(AVFilter* @filter, int @is_output);
+        private static avfilter_filter_pad_count_delegate avfilter_filter_pad_count_fptr = (AVFilter* @filter, int @is_output) =>
+        {
+            avfilter_filter_pad_count_fptr = GetFunctionDelegate<avfilter_filter_pad_count_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_filter_pad_count");
+            if (avfilter_filter_pad_count_fptr == null)
+            {
+                avfilter_filter_pad_count_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_filter_pad_count"));
+                };
+            }
+            return avfilter_filter_pad_count_fptr(@filter, @is_output);
+        };
+        /// <summary>Get the number of elements in an AVFilter&apos;s inputs or outputs array.</summary>
+        public static uint avfilter_filter_pad_count(AVFilter* @filter, int @is_output)
+        {
+            return avfilter_filter_pad_count_fptr(@filter, @is_output);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate void avfilter_free_delegate(AVFilterContext* @filter);
         private static avfilter_free_delegate avfilter_free_fptr = (AVFilterContext* @filter) =>
         {
@@ -5448,73 +3909,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avfilter_link_get_channels_delegate(AVFilterLink* @link);
-        private static avfilter_link_get_channels_delegate avfilter_link_get_channels_fptr = (AVFilterLink* @link) =>
-        {
-            avfilter_link_get_channels_fptr = GetFunctionDelegate<avfilter_link_get_channels_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_link_get_channels");
-            if (avfilter_link_get_channels_fptr == null)
-            {
-                avfilter_link_get_channels_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_link_get_channels"));
-                };
-            }
-            return avfilter_link_get_channels_fptr(@link);
-        };
-        /// <summary>Get the number of channels of a link.</summary>
-        [Obsolete("Use av_buffersink_get_channels()")]
-        public static int avfilter_link_get_channels(AVFilterLink* @link)
-        {
-            return avfilter_link_get_channels_fptr(@link);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void avfilter_link_set_closed_delegate(AVFilterLink* @link, int @closed);
-        private static avfilter_link_set_closed_delegate avfilter_link_set_closed_fptr = (AVFilterLink* @link, int @closed) =>
-        {
-            avfilter_link_set_closed_fptr = GetFunctionDelegate<avfilter_link_set_closed_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_link_set_closed");
-            if (avfilter_link_set_closed_fptr == null)
-            {
-                avfilter_link_set_closed_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_link_set_closed"));
-                };
-            }
-            avfilter_link_set_closed_fptr(@link, @closed);
-        };
-        /// <summary>Set the closed field of a link.</summary>
-        [Obsolete("applications are not supposed to mess with links, they should close the sinks.")]
-        public static void avfilter_link_set_closed(AVFilterLink* @link, int @closed)
-        {
-            avfilter_link_set_closed_fptr(@link, @closed);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVFilter* avfilter_next_delegate(AVFilter* @prev);
-        private static avfilter_next_delegate avfilter_next_fptr = (AVFilter* @prev) =>
-        {
-            avfilter_next_fptr = GetFunctionDelegate<avfilter_next_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_next");
-            if (avfilter_next_fptr == null)
-            {
-                avfilter_next_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_next"));
-                };
-            }
-            return avfilter_next_fptr(@prev);
-        };
-        /// <summary>Iterate over all registered filters.</summary>
-        /// <returns>If prev is non-NULL, next registered filter after prev or NULL if prev is the last filter. If prev is NULL, return the first registered filter.</returns>
-        [Obsolete("")]
-        public static AVFilter* avfilter_next(AVFilter* @prev)
-        {
-            return avfilter_next_fptr(@prev);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int avfilter_pad_count_delegate(AVFilterPad* @pads);
         private static avfilter_pad_count_delegate avfilter_pad_count_fptr = (AVFilterPad* @pads) =>
         {
@@ -5528,7 +3922,8 @@ namespace FFmpeg.AutoGen
             }
             return avfilter_pad_count_fptr(@pads);
         };
-        /// <summary>Get the number of elements in a NULL-terminated array of AVFilterPads (e.g. AVFilter.inputs/outputs).</summary>
+        /// <summary>Get the number of elements in an AVFilter&apos;s inputs or outputs array.</summary>
+        [Obsolete("Use avfilter_filter_pad_count() instead.")]
         public static int avfilter_pad_count(AVFilterPad* @pads)
         {
             return avfilter_pad_count_fptr(@pads);
@@ -5634,52 +4029,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avfilter_register_delegate(AVFilter* @filter);
-        private static avfilter_register_delegate avfilter_register_fptr = (AVFilter* @filter) =>
-        {
-            avfilter_register_fptr = GetFunctionDelegate<avfilter_register_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_register");
-            if (avfilter_register_fptr == null)
-            {
-                avfilter_register_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_register"));
-                };
-            }
-            return avfilter_register_fptr(@filter);
-        };
-        /// <summary>Register a filter. This is only needed if you plan to use avfilter_get_by_name later to lookup the AVFilter structure by name. A filter can still by instantiated with avfilter_graph_alloc_filter even if it is not registered.</summary>
-        /// <param name="filter">the filter to register</param>
-        /// <returns>0 if the registration was successful, a negative value otherwise</returns>
-        [Obsolete("")]
-        public static int avfilter_register(AVFilter* @filter)
-        {
-            return avfilter_register_fptr(@filter);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void avfilter_register_all_delegate();
-        private static avfilter_register_all_delegate avfilter_register_all_fptr = () =>
-        {
-            avfilter_register_all_fptr = GetFunctionDelegate<avfilter_register_all_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_register_all");
-            if (avfilter_register_all_fptr == null)
-            {
-                avfilter_register_all_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avfilter_register_all"));
-                };
-            }
-            avfilter_register_all_fptr();
-        };
-        /// <summary>Initialize the filter system. Register all builtin filters.</summary>
-        [Obsolete("")]
-        public static void avfilter_register_all()
-        {
-            avfilter_register_all_fptr();
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate uint avfilter_version_delegate();
         private static avfilter_version_delegate avfilter_version_fptr = () =>
         {
@@ -5744,32 +4093,6 @@ namespace FFmpeg.AutoGen
         public static int av_append_packet(AVIOContext* @s, AVPacket* @pkt, int @size)
         {
             return av_append_packet_fptr(@s, @pkt, @size);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_apply_bitstream_filters_delegate(AVCodecContext* @codec, AVPacket* @pkt, AVBitStreamFilterContext* @bsfc);
-        private static av_apply_bitstream_filters_delegate av_apply_bitstream_filters_fptr = (AVCodecContext* @codec, AVPacket* @pkt, AVBitStreamFilterContext* @bsfc) =>
-        {
-            av_apply_bitstream_filters_fptr = GetFunctionDelegate<av_apply_bitstream_filters_delegate>(GetOrLoadLibrary("avformat"), "av_apply_bitstream_filters");
-            if (av_apply_bitstream_filters_fptr == null)
-            {
-                av_apply_bitstream_filters_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_apply_bitstream_filters"));
-                };
-            }
-            return av_apply_bitstream_filters_fptr(@codec, @pkt, @bsfc);
-        };
-        /// <summary>Apply a list of bitstream filters to a packet.</summary>
-        /// <param name="codec">AVCodecContext, usually from an AVStream</param>
-        /// <param name="pkt">the packet to apply filters to. If, on success, the returned packet has size == 0 and side_data_elems == 0, it indicates that the packet should be dropped</param>
-        /// <param name="bsfc">a NULL-terminated list of filters to apply</param>
-        /// <returns>&gt;=0 on success; AVERROR code on failure</returns>
-        [Obsolete("")]
-        public static int av_apply_bitstream_filters(AVCodecContext* @codec, AVPacket* @pkt, AVBitStreamFilterContext* @bsfc)
-        {
-            return av_apply_bitstream_filters_fptr(@codec, @pkt, @bsfc);
         }
         
         
@@ -5868,23 +4191,62 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_demuxer_open_delegate(AVFormatContext* @ic);
-        private static av_demuxer_open_delegate av_demuxer_open_fptr = (AVFormatContext* @ic) =>
+        private delegate int av_disposition_from_string_delegate(
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @disp);
+        private static av_disposition_from_string_delegate av_disposition_from_string_fptr = (string @disp) =>
         {
-            av_demuxer_open_fptr = GetFunctionDelegate<av_demuxer_open_delegate>(GetOrLoadLibrary("avformat"), "av_demuxer_open");
-            if (av_demuxer_open_fptr == null)
+            av_disposition_from_string_fptr = GetFunctionDelegate<av_disposition_from_string_delegate>(GetOrLoadLibrary("avformat"), "av_disposition_from_string");
+            if (av_disposition_from_string_fptr == null)
             {
-                av_demuxer_open_fptr = delegate 
+                av_disposition_from_string_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_demuxer_open"));
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_disposition_from_string"));
                 };
             }
-            return av_demuxer_open_fptr(@ic);
+            return av_disposition_from_string_fptr(@disp);
         };
-        [Obsolete("Use an AVDictionary to pass options to a demuxer.")]
-        public static int av_demuxer_open(AVFormatContext* @ic)
+        /// <summary>Returns The AV_DISPOSITION_* flag corresponding to disp or a negative error code if disp does not correspond to a known stream disposition.</summary>
+        /// <returns>The AV_DISPOSITION_* flag corresponding to disp or a negative error code if disp does not correspond to a known stream disposition.</returns>
+        public static int av_disposition_from_string(
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @disp)
         {
-            return av_demuxer_open_fptr(@ic);
+            return av_disposition_from_string_fptr(@disp);
+        }
+        
+        
+        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate string av_disposition_to_string_delegate(int @disposition);
+        private static av_disposition_to_string_delegate av_disposition_to_string_fptr = (int @disposition) =>
+        {
+            av_disposition_to_string_fptr = GetFunctionDelegate<av_disposition_to_string_delegate>(GetOrLoadLibrary("avformat"), "av_disposition_to_string");
+            if (av_disposition_to_string_fptr == null)
+            {
+                av_disposition_to_string_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_disposition_to_string"));
+                };
+            }
+            return av_disposition_to_string_fptr(@disposition);
+        };
+        /// <summary>Returns The string description corresponding to the lowest set bit in disposition. NULL when the lowest set bit does not correspond to a known disposition or when disposition is 0.</summary>
+        /// <param name="disposition">a combination of AV_DISPOSITION_* values</param>
+        /// <returns>The string description corresponding to the lowest set bit in disposition. NULL when the lowest set bit does not correspond to a known disposition or when disposition is 0.</returns>
+        public static string av_disposition_to_string(int @disposition)
+        {
+            return av_disposition_to_string_fptr(@disposition);
         }
         
         
@@ -6095,196 +4457,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVCodec* av_format_get_audio_codec_delegate(AVFormatContext* @s);
-        private static av_format_get_audio_codec_delegate av_format_get_audio_codec_fptr = (AVFormatContext* @s) =>
-        {
-            av_format_get_audio_codec_fptr = GetFunctionDelegate<av_format_get_audio_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_audio_codec");
-            if (av_format_get_audio_codec_fptr == null)
-            {
-                av_format_get_audio_codec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_audio_codec"));
-                };
-            }
-            return av_format_get_audio_codec_fptr(@s);
-        };
-        [Obsolete("")]
-        public static AVCodec* av_format_get_audio_codec(AVFormatContext* @s)
-        {
-            return av_format_get_audio_codec_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate av_format_get_control_message_cb_func av_format_get_control_message_cb_delegate(AVFormatContext* @s);
-        private static av_format_get_control_message_cb_delegate av_format_get_control_message_cb_fptr = (AVFormatContext* @s) =>
-        {
-            av_format_get_control_message_cb_fptr = GetFunctionDelegate<av_format_get_control_message_cb_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_control_message_cb");
-            if (av_format_get_control_message_cb_fptr == null)
-            {
-                av_format_get_control_message_cb_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_control_message_cb"));
-                };
-            }
-            return av_format_get_control_message_cb_fptr(@s);
-        };
-        [Obsolete("")]
-        public static av_format_get_control_message_cb_func av_format_get_control_message_cb(AVFormatContext* @s)
-        {
-            return av_format_get_control_message_cb_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVCodec* av_format_get_data_codec_delegate(AVFormatContext* @s);
-        private static av_format_get_data_codec_delegate av_format_get_data_codec_fptr = (AVFormatContext* @s) =>
-        {
-            av_format_get_data_codec_fptr = GetFunctionDelegate<av_format_get_data_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_data_codec");
-            if (av_format_get_data_codec_fptr == null)
-            {
-                av_format_get_data_codec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_data_codec"));
-                };
-            }
-            return av_format_get_data_codec_fptr(@s);
-        };
-        [Obsolete("")]
-        public static AVCodec* av_format_get_data_codec(AVFormatContext* @s)
-        {
-            return av_format_get_data_codec_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_format_get_metadata_header_padding_delegate(AVFormatContext* @s);
-        private static av_format_get_metadata_header_padding_delegate av_format_get_metadata_header_padding_fptr = (AVFormatContext* @s) =>
-        {
-            av_format_get_metadata_header_padding_fptr = GetFunctionDelegate<av_format_get_metadata_header_padding_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_metadata_header_padding");
-            if (av_format_get_metadata_header_padding_fptr == null)
-            {
-                av_format_get_metadata_header_padding_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_metadata_header_padding"));
-                };
-            }
-            return av_format_get_metadata_header_padding_fptr(@s);
-        };
-        [Obsolete("")]
-        public static int av_format_get_metadata_header_padding(AVFormatContext* @s)
-        {
-            return av_format_get_metadata_header_padding_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void* av_format_get_opaque_delegate(AVFormatContext* @s);
-        private static av_format_get_opaque_delegate av_format_get_opaque_fptr = (AVFormatContext* @s) =>
-        {
-            av_format_get_opaque_fptr = GetFunctionDelegate<av_format_get_opaque_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_opaque");
-            if (av_format_get_opaque_fptr == null)
-            {
-                av_format_get_opaque_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_opaque"));
-                };
-            }
-            return av_format_get_opaque_fptr(@s);
-        };
-        [Obsolete("")]
-        public static void* av_format_get_opaque(AVFormatContext* @s)
-        {
-            return av_format_get_opaque_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate av_format_get_open_cb_func av_format_get_open_cb_delegate(AVFormatContext* @s);
-        private static av_format_get_open_cb_delegate av_format_get_open_cb_fptr = (AVFormatContext* @s) =>
-        {
-            av_format_get_open_cb_fptr = GetFunctionDelegate<av_format_get_open_cb_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_open_cb");
-            if (av_format_get_open_cb_fptr == null)
-            {
-                av_format_get_open_cb_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_open_cb"));
-                };
-            }
-            return av_format_get_open_cb_fptr(@s);
-        };
-        [Obsolete("")]
-        public static av_format_get_open_cb_func av_format_get_open_cb(AVFormatContext* @s)
-        {
-            return av_format_get_open_cb_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_format_get_probe_score_delegate(AVFormatContext* @s);
-        private static av_format_get_probe_score_delegate av_format_get_probe_score_fptr = (AVFormatContext* @s) =>
-        {
-            av_format_get_probe_score_fptr = GetFunctionDelegate<av_format_get_probe_score_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_probe_score");
-            if (av_format_get_probe_score_fptr == null)
-            {
-                av_format_get_probe_score_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_probe_score"));
-                };
-            }
-            return av_format_get_probe_score_fptr(@s);
-        };
-        /// <summary>Accessors for some AVFormatContext fields. These used to be provided for ABI compatibility, and do not need to be used anymore.</summary>
-        [Obsolete("")]
-        public static int av_format_get_probe_score(AVFormatContext* @s)
-        {
-            return av_format_get_probe_score_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVCodec* av_format_get_subtitle_codec_delegate(AVFormatContext* @s);
-        private static av_format_get_subtitle_codec_delegate av_format_get_subtitle_codec_fptr = (AVFormatContext* @s) =>
-        {
-            av_format_get_subtitle_codec_fptr = GetFunctionDelegate<av_format_get_subtitle_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_subtitle_codec");
-            if (av_format_get_subtitle_codec_fptr == null)
-            {
-                av_format_get_subtitle_codec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_subtitle_codec"));
-                };
-            }
-            return av_format_get_subtitle_codec_fptr(@s);
-        };
-        [Obsolete("")]
-        public static AVCodec* av_format_get_subtitle_codec(AVFormatContext* @s)
-        {
-            return av_format_get_subtitle_codec_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVCodec* av_format_get_video_codec_delegate(AVFormatContext* @s);
-        private static av_format_get_video_codec_delegate av_format_get_video_codec_fptr = (AVFormatContext* @s) =>
-        {
-            av_format_get_video_codec_fptr = GetFunctionDelegate<av_format_get_video_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_get_video_codec");
-            if (av_format_get_video_codec_fptr == null)
-            {
-                av_format_get_video_codec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_get_video_codec"));
-                };
-            }
-            return av_format_get_video_codec_fptr(@s);
-        };
-        [Obsolete("")]
-        public static AVCodec* av_format_get_video_codec(AVFormatContext* @s)
-        {
-            return av_format_get_video_codec_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate void av_format_inject_global_side_data_delegate(AVFormatContext* @s);
         private static av_format_inject_global_side_data_delegate av_format_inject_global_side_data_fptr = (AVFormatContext* @s) =>
         {
@@ -6302,174 +4474,6 @@ namespace FFmpeg.AutoGen
         public static void av_format_inject_global_side_data(AVFormatContext* @s)
         {
             av_format_inject_global_side_data_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_format_set_audio_codec_delegate(AVFormatContext* @s, AVCodec* @c);
-        private static av_format_set_audio_codec_delegate av_format_set_audio_codec_fptr = (AVFormatContext* @s, AVCodec* @c) =>
-        {
-            av_format_set_audio_codec_fptr = GetFunctionDelegate<av_format_set_audio_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_audio_codec");
-            if (av_format_set_audio_codec_fptr == null)
-            {
-                av_format_set_audio_codec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_audio_codec"));
-                };
-            }
-            av_format_set_audio_codec_fptr(@s, @c);
-        };
-        [Obsolete("")]
-        public static void av_format_set_audio_codec(AVFormatContext* @s, AVCodec* @c)
-        {
-            av_format_set_audio_codec_fptr(@s, @c);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_format_set_control_message_cb_delegate(AVFormatContext* @s, av_format_set_control_message_cb_callback_func @callback);
-        private static av_format_set_control_message_cb_delegate av_format_set_control_message_cb_fptr = (AVFormatContext* @s, av_format_set_control_message_cb_callback_func @callback) =>
-        {
-            av_format_set_control_message_cb_fptr = GetFunctionDelegate<av_format_set_control_message_cb_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_control_message_cb");
-            if (av_format_set_control_message_cb_fptr == null)
-            {
-                av_format_set_control_message_cb_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_control_message_cb"));
-                };
-            }
-            av_format_set_control_message_cb_fptr(@s, @callback);
-        };
-        [Obsolete("")]
-        public static void av_format_set_control_message_cb(AVFormatContext* @s, av_format_set_control_message_cb_callback_func @callback)
-        {
-            av_format_set_control_message_cb_fptr(@s, @callback);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_format_set_data_codec_delegate(AVFormatContext* @s, AVCodec* @c);
-        private static av_format_set_data_codec_delegate av_format_set_data_codec_fptr = (AVFormatContext* @s, AVCodec* @c) =>
-        {
-            av_format_set_data_codec_fptr = GetFunctionDelegate<av_format_set_data_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_data_codec");
-            if (av_format_set_data_codec_fptr == null)
-            {
-                av_format_set_data_codec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_data_codec"));
-                };
-            }
-            av_format_set_data_codec_fptr(@s, @c);
-        };
-        [Obsolete("")]
-        public static void av_format_set_data_codec(AVFormatContext* @s, AVCodec* @c)
-        {
-            av_format_set_data_codec_fptr(@s, @c);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_format_set_metadata_header_padding_delegate(AVFormatContext* @s, int @c);
-        private static av_format_set_metadata_header_padding_delegate av_format_set_metadata_header_padding_fptr = (AVFormatContext* @s, int @c) =>
-        {
-            av_format_set_metadata_header_padding_fptr = GetFunctionDelegate<av_format_set_metadata_header_padding_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_metadata_header_padding");
-            if (av_format_set_metadata_header_padding_fptr == null)
-            {
-                av_format_set_metadata_header_padding_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_metadata_header_padding"));
-                };
-            }
-            av_format_set_metadata_header_padding_fptr(@s, @c);
-        };
-        [Obsolete("")]
-        public static void av_format_set_metadata_header_padding(AVFormatContext* @s, int @c)
-        {
-            av_format_set_metadata_header_padding_fptr(@s, @c);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_format_set_opaque_delegate(AVFormatContext* @s, void* @opaque);
-        private static av_format_set_opaque_delegate av_format_set_opaque_fptr = (AVFormatContext* @s, void* @opaque) =>
-        {
-            av_format_set_opaque_fptr = GetFunctionDelegate<av_format_set_opaque_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_opaque");
-            if (av_format_set_opaque_fptr == null)
-            {
-                av_format_set_opaque_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_opaque"));
-                };
-            }
-            av_format_set_opaque_fptr(@s, @opaque);
-        };
-        [Obsolete("")]
-        public static void av_format_set_opaque(AVFormatContext* @s, void* @opaque)
-        {
-            av_format_set_opaque_fptr(@s, @opaque);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_format_set_open_cb_delegate(AVFormatContext* @s, av_format_set_open_cb_callback_func @callback);
-        private static av_format_set_open_cb_delegate av_format_set_open_cb_fptr = (AVFormatContext* @s, av_format_set_open_cb_callback_func @callback) =>
-        {
-            av_format_set_open_cb_fptr = GetFunctionDelegate<av_format_set_open_cb_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_open_cb");
-            if (av_format_set_open_cb_fptr == null)
-            {
-                av_format_set_open_cb_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_open_cb"));
-                };
-            }
-            av_format_set_open_cb_fptr(@s, @callback);
-        };
-        [Obsolete("")]
-        public static void av_format_set_open_cb(AVFormatContext* @s, av_format_set_open_cb_callback_func @callback)
-        {
-            av_format_set_open_cb_fptr(@s, @callback);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_format_set_subtitle_codec_delegate(AVFormatContext* @s, AVCodec* @c);
-        private static av_format_set_subtitle_codec_delegate av_format_set_subtitle_codec_fptr = (AVFormatContext* @s, AVCodec* @c) =>
-        {
-            av_format_set_subtitle_codec_fptr = GetFunctionDelegate<av_format_set_subtitle_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_subtitle_codec");
-            if (av_format_set_subtitle_codec_fptr == null)
-            {
-                av_format_set_subtitle_codec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_subtitle_codec"));
-                };
-            }
-            av_format_set_subtitle_codec_fptr(@s, @c);
-        };
-        [Obsolete("")]
-        public static void av_format_set_subtitle_codec(AVFormatContext* @s, AVCodec* @c)
-        {
-            av_format_set_subtitle_codec_fptr(@s, @c);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_format_set_video_codec_delegate(AVFormatContext* @s, AVCodec* @c);
-        private static av_format_set_video_codec_delegate av_format_set_video_codec_fptr = (AVFormatContext* @s, AVCodec* @c) =>
-        {
-            av_format_set_video_codec_fptr = GetFunctionDelegate<av_format_set_video_codec_delegate>(GetOrLoadLibrary("avformat"), "av_format_set_video_codec");
-            if (av_format_set_video_codec_fptr == null)
-            {
-                av_format_set_video_codec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_format_set_video_codec"));
-                };
-            }
-            av_format_set_video_codec_fptr(@s, @c);
-        };
-        [Obsolete("")]
-        public static void av_format_set_video_codec(AVFormatContext* @s, AVCodec* @c)
-        {
-            av_format_set_video_codec_fptr(@s, @c);
         }
         
         
@@ -6828,28 +4832,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVInputFormat* av_iformat_next_delegate(AVInputFormat* @f);
-        private static av_iformat_next_delegate av_iformat_next_fptr = (AVInputFormat* @f) =>
-        {
-            av_iformat_next_fptr = GetFunctionDelegate<av_iformat_next_delegate>(GetOrLoadLibrary("avformat"), "av_iformat_next");
-            if (av_iformat_next_fptr == null)
-            {
-                av_iformat_next_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_iformat_next"));
-                };
-            }
-            return av_iformat_next_fptr(@f);
-        };
-        /// <summary>If f is NULL, returns the first registered input format, if f is non-NULL, returns the next registered input format after f or NULL if f is the last one.</summary>
-        [Obsolete("")]
-        public static AVInputFormat* av_iformat_next(AVInputFormat* @f)
-        {
-            return av_iformat_next_fptr(@f);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int av_index_search_timestamp_delegate(AVStream* @st, long @timestamp, int @flags);
         private static av_index_search_timestamp_delegate av_index_search_timestamp_fptr = (AVStream* @st, long @timestamp, int @flags) =>
         {
@@ -6890,8 +4872,8 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Write a packet to an output media file ensuring correct interleaving.</summary>
         /// <param name="s">media file handle</param>
-        /// <param name="pkt">The packet containing the data to be written.  If the packet is reference-counted, this function will take ownership of this reference and unreference it later when it sees fit. The caller must not access the data through this reference after this function returns. If the packet is not reference-counted, libavformat will make a copy.  This parameter can be NULL (at any time, not just at the end), to flush the interleaving queues.  Packet&apos;s &quot;stream_index&quot; field must be set to the index of the corresponding stream in &quot;s-&gt;streams&quot;.  The timestamps ( &quot;pts&quot;, &quot;dts&quot;) must be set to correct values in the stream&apos;s timebase (unless the output format is flagged with the AVFMT_NOTIMESTAMPS flag, then they can be set to AV_NOPTS_VALUE). The dts for subsequent packets in one stream must be strictly increasing (unless the output format is flagged with the AVFMT_TS_NONSTRICT, then they merely have to be nondecreasing).  &quot;duration&quot;) should also be set if known.</param>
-        /// <returns>0 on success, a negative AVERROR on error. Libavformat will always take care of freeing the packet, even if this function fails.</returns>
+        /// <param name="pkt">The packet containing the data to be written.  If the packet is reference-counted, this function will take ownership of this reference and unreference it later when it sees fit. If the packet is not reference-counted, libavformat will make a copy. The returned packet will be blank (as if returned from av_packet_alloc()), even on error.  This parameter can be NULL (at any time, not just at the end), to flush the interleaving queues.  Packet&apos;s &quot;stream_index&quot; field must be set to the index of the corresponding stream in &quot;s-&gt;streams&quot;.  The timestamps ( &quot;pts&quot;, &quot;dts&quot;) must be set to correct values in the stream&apos;s timebase (unless the output format is flagged with the AVFMT_NOTIMESTAMPS flag, then they can be set to AV_NOPTS_VALUE). The dts for subsequent packets in one stream must be strictly increasing (unless the output format is flagged with the AVFMT_TS_NONSTRICT, then they merely have to be nondecreasing).  &quot;duration&quot; should also be set if known.</param>
+        /// <returns>0 on success, a negative AVERROR on error.</returns>
         public static int av_interleaved_write_frame(AVFormatContext* @s, AVPacket* @pkt)
         {
             return av_interleaved_write_frame_fptr(@s, @pkt);
@@ -7011,28 +4993,6 @@ namespace FFmpeg.AutoGen
         public static AVProgram* av_new_program(AVFormatContext* @s, int @id)
         {
             return av_new_program_fptr(@s, @id);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVOutputFormat* av_oformat_next_delegate(AVOutputFormat* @f);
-        private static av_oformat_next_delegate av_oformat_next_fptr = (AVOutputFormat* @f) =>
-        {
-            av_oformat_next_fptr = GetFunctionDelegate<av_oformat_next_delegate>(GetOrLoadLibrary("avformat"), "av_oformat_next");
-            if (av_oformat_next_fptr == null)
-            {
-                av_oformat_next_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_oformat_next"));
-                };
-            }
-            return av_oformat_next_fptr(@f);
-        };
-        /// <summary>If f is NULL, returns the first registered output format, if f is non-NULL, returns the next registered output format after f or NULL if f is the last one.</summary>
-        [Obsolete("")]
-        public static AVOutputFormat* av_oformat_next(AVOutputFormat* @f)
-        {
-            return av_oformat_next_fptr(@f);
         }
         
         
@@ -7319,70 +5279,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_register_all_delegate();
-        private static av_register_all_delegate av_register_all_fptr = () =>
-        {
-            av_register_all_fptr = GetFunctionDelegate<av_register_all_delegate>(GetOrLoadLibrary("avformat"), "av_register_all");
-            if (av_register_all_fptr == null)
-            {
-                av_register_all_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_register_all"));
-                };
-            }
-            av_register_all_fptr();
-        };
-        /// <summary>Initialize libavformat and register all the muxers, demuxers and protocols. If you do not call this function, then you can select exactly which formats you want to support.</summary>
-        [Obsolete("")]
-        public static void av_register_all()
-        {
-            av_register_all_fptr();
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_register_input_format_delegate(AVInputFormat* @format);
-        private static av_register_input_format_delegate av_register_input_format_fptr = (AVInputFormat* @format) =>
-        {
-            av_register_input_format_fptr = GetFunctionDelegate<av_register_input_format_delegate>(GetOrLoadLibrary("avformat"), "av_register_input_format");
-            if (av_register_input_format_fptr == null)
-            {
-                av_register_input_format_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_register_input_format"));
-                };
-            }
-            av_register_input_format_fptr(@format);
-        };
-        [Obsolete("")]
-        public static void av_register_input_format(AVInputFormat* @format)
-        {
-            av_register_input_format_fptr(@format);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_register_output_format_delegate(AVOutputFormat* @format);
-        private static av_register_output_format_delegate av_register_output_format_fptr = (AVOutputFormat* @format) =>
-        {
-            av_register_output_format_fptr = GetFunctionDelegate<av_register_output_format_delegate>(GetOrLoadLibrary("avformat"), "av_register_output_format");
-            if (av_register_output_format_fptr == null)
-            {
-                av_register_output_format_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_register_output_format"));
-                };
-            }
-            av_register_output_format_fptr(@format);
-        };
-        [Obsolete("")]
-        public static void av_register_output_format(AVOutputFormat* @format)
-        {
-            av_register_output_format_fptr(@format);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int av_sdp_create_delegate(AVFormatContext** @ac, int @n_files, byte* @buf, int @size);
         private static av_sdp_create_delegate av_sdp_create_fptr = (AVFormatContext** @ac, int @n_files, byte* @buf, int @size) =>
         {
@@ -7461,6 +5357,27 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVClass* av_stream_get_class_delegate();
+        private static av_stream_get_class_delegate av_stream_get_class_fptr = () =>
+        {
+            av_stream_get_class_fptr = GetFunctionDelegate<av_stream_get_class_delegate>(GetOrLoadLibrary("avformat"), "av_stream_get_class");
+            if (av_stream_get_class_fptr == null)
+            {
+                av_stream_get_class_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_get_class"));
+                };
+            }
+            return av_stream_get_class_fptr();
+        };
+        /// <summary>Get the AVClass for AVStream. It can be used in combination with AV_OPT_SEARCH_FAKE_OBJ for examining options.</summary>
+        public static AVClass* av_stream_get_class()
+        {
+            return av_stream_get_class_fptr();
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVRational av_stream_get_codec_timebase_delegate(AVStream* @st);
         private static av_stream_get_codec_timebase_delegate av_stream_get_codec_timebase_fptr = (AVStream* @st) =>
         {
@@ -7524,51 +5441,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVRational av_stream_get_r_frame_rate_delegate(AVStream* @s);
-        private static av_stream_get_r_frame_rate_delegate av_stream_get_r_frame_rate_fptr = (AVStream* @s) =>
-        {
-            av_stream_get_r_frame_rate_fptr = GetFunctionDelegate<av_stream_get_r_frame_rate_delegate>(GetOrLoadLibrary("avformat"), "av_stream_get_r_frame_rate");
-            if (av_stream_get_r_frame_rate_fptr == null)
-            {
-                av_stream_get_r_frame_rate_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_get_r_frame_rate"));
-                };
-            }
-            return av_stream_get_r_frame_rate_fptr(@s);
-        };
-        /// <summary>Accessors for some AVStream fields. These used to be provided for ABI compatibility, and do not need to be used anymore.</summary>
-        [Obsolete("")]
-        public static AVRational av_stream_get_r_frame_rate(AVStream* @s)
-        {
-            return av_stream_get_r_frame_rate_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate byte* av_stream_get_recommended_encoder_configuration_delegate(AVStream* @s);
-        private static av_stream_get_recommended_encoder_configuration_delegate av_stream_get_recommended_encoder_configuration_fptr = (AVStream* @s) =>
-        {
-            av_stream_get_recommended_encoder_configuration_fptr = GetFunctionDelegate<av_stream_get_recommended_encoder_configuration_delegate>(GetOrLoadLibrary("avformat"), "av_stream_get_recommended_encoder_configuration");
-            if (av_stream_get_recommended_encoder_configuration_fptr == null)
-            {
-                av_stream_get_recommended_encoder_configuration_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_get_recommended_encoder_configuration"));
-                };
-            }
-            return av_stream_get_recommended_encoder_configuration_fptr(@s);
-        };
-        [Obsolete("")]
-        public static byte* av_stream_get_recommended_encoder_configuration(AVStream* @s)
-        {
-            return av_stream_get_recommended_encoder_configuration_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate byte* av_stream_get_side_data_delegate(AVStream* @stream, AVPacketSideDataType @type, int* @size);
-        private static av_stream_get_side_data_delegate av_stream_get_side_data_fptr = (AVStream* @stream, AVPacketSideDataType @type, int* @size) =>
+        private delegate byte* av_stream_get_side_data_delegate(AVStream* @stream, AVPacketSideDataType @type, ulong* @size);
+        private static av_stream_get_side_data_delegate av_stream_get_side_data_fptr = (AVStream* @stream, AVPacketSideDataType @type, ulong* @size) =>
         {
             av_stream_get_side_data_fptr = GetFunctionDelegate<av_stream_get_side_data_delegate>(GetOrLoadLibrary("avformat"), "av_stream_get_side_data");
             if (av_stream_get_side_data_fptr == null)
@@ -7585,15 +5459,15 @@ namespace FFmpeg.AutoGen
         /// <param name="type">desired side information type</param>
         /// <param name="size">If supplied, *size will be set to the size of the side data or to zero if the desired side data is not present.</param>
         /// <returns>pointer to data if present or NULL otherwise</returns>
-        public static byte* av_stream_get_side_data(AVStream* @stream, AVPacketSideDataType @type, int* @size)
+        public static byte* av_stream_get_side_data(AVStream* @stream, AVPacketSideDataType @type, ulong* @size)
         {
             return av_stream_get_side_data_fptr(@stream, @type, @size);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate byte* av_stream_new_side_data_delegate(AVStream* @stream, AVPacketSideDataType @type, int @size);
-        private static av_stream_new_side_data_delegate av_stream_new_side_data_fptr = (AVStream* @stream, AVPacketSideDataType @type, int @size) =>
+        private delegate byte* av_stream_new_side_data_delegate(AVStream* @stream, AVPacketSideDataType @type, ulong @size);
+        private static av_stream_new_side_data_delegate av_stream_new_side_data_fptr = (AVStream* @stream, AVPacketSideDataType @type, ulong @size) =>
         {
             av_stream_new_side_data_fptr = GetFunctionDelegate<av_stream_new_side_data_delegate>(GetOrLoadLibrary("avformat"), "av_stream_new_side_data");
             if (av_stream_new_side_data_fptr == null)
@@ -7610,51 +5484,9 @@ namespace FFmpeg.AutoGen
         /// <param name="type">desired side information type</param>
         /// <param name="size">side information size</param>
         /// <returns>pointer to fresh allocated data or NULL otherwise</returns>
-        public static byte* av_stream_new_side_data(AVStream* @stream, AVPacketSideDataType @type, int @size)
+        public static byte* av_stream_new_side_data(AVStream* @stream, AVPacketSideDataType @type, ulong @size)
         {
             return av_stream_new_side_data_fptr(@stream, @type, @size);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_stream_set_r_frame_rate_delegate(AVStream* @s, AVRational @r);
-        private static av_stream_set_r_frame_rate_delegate av_stream_set_r_frame_rate_fptr = (AVStream* @s, AVRational @r) =>
-        {
-            av_stream_set_r_frame_rate_fptr = GetFunctionDelegate<av_stream_set_r_frame_rate_delegate>(GetOrLoadLibrary("avformat"), "av_stream_set_r_frame_rate");
-            if (av_stream_set_r_frame_rate_fptr == null)
-            {
-                av_stream_set_r_frame_rate_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_set_r_frame_rate"));
-                };
-            }
-            av_stream_set_r_frame_rate_fptr(@s, @r);
-        };
-        [Obsolete("")]
-        public static void av_stream_set_r_frame_rate(AVStream* @s, AVRational @r)
-        {
-            av_stream_set_r_frame_rate_fptr(@s, @r);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_stream_set_recommended_encoder_configuration_delegate(AVStream* @s, byte* @configuration);
-        private static av_stream_set_recommended_encoder_configuration_delegate av_stream_set_recommended_encoder_configuration_fptr = (AVStream* @s, byte* @configuration) =>
-        {
-            av_stream_set_recommended_encoder_configuration_fptr = GetFunctionDelegate<av_stream_set_recommended_encoder_configuration_delegate>(GetOrLoadLibrary("avformat"), "av_stream_set_recommended_encoder_configuration");
-            if (av_stream_set_recommended_encoder_configuration_fptr == null)
-            {
-                av_stream_set_recommended_encoder_configuration_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_stream_set_recommended_encoder_configuration"));
-                };
-            }
-            av_stream_set_recommended_encoder_configuration_fptr(@s, @configuration);
-        };
-        [Obsolete("")]
-        public static void av_stream_set_recommended_encoder_configuration(AVStream* @s, byte* @configuration)
-        {
-            av_stream_set_recommended_encoder_configuration_fptr(@s, @configuration);
         }
         
         
@@ -8089,6 +5921,77 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int avformat_index_get_entries_count_delegate(AVStream* @st);
+        private static avformat_index_get_entries_count_delegate avformat_index_get_entries_count_fptr = (AVStream* @st) =>
+        {
+            avformat_index_get_entries_count_fptr = GetFunctionDelegate<avformat_index_get_entries_count_delegate>(GetOrLoadLibrary("avformat"), "avformat_index_get_entries_count");
+            if (avformat_index_get_entries_count_fptr == null)
+            {
+                avformat_index_get_entries_count_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_index_get_entries_count"));
+                };
+            }
+            return avformat_index_get_entries_count_fptr(@st);
+        };
+        /// <summary>Get the index entry count for the given AVStream.</summary>
+        /// <param name="st">stream</param>
+        /// <returns>the number of index entries in the stream</returns>
+        public static int avformat_index_get_entries_count(AVStream* @st)
+        {
+            return avformat_index_get_entries_count_fptr(@st);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVIndexEntry* avformat_index_get_entry_delegate(AVStream* @st, int @idx);
+        private static avformat_index_get_entry_delegate avformat_index_get_entry_fptr = (AVStream* @st, int @idx) =>
+        {
+            avformat_index_get_entry_fptr = GetFunctionDelegate<avformat_index_get_entry_delegate>(GetOrLoadLibrary("avformat"), "avformat_index_get_entry");
+            if (avformat_index_get_entry_fptr == null)
+            {
+                avformat_index_get_entry_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_index_get_entry"));
+                };
+            }
+            return avformat_index_get_entry_fptr(@st, @idx);
+        };
+        /// <summary>Get the AVIndexEntry corresponding to the given index.</summary>
+        /// <param name="st">Stream containing the requested AVIndexEntry.</param>
+        /// <param name="idx">The desired index.</param>
+        /// <returns>A pointer to the requested AVIndexEntry if it exists, NULL otherwise.</returns>
+        public static AVIndexEntry* avformat_index_get_entry(AVStream* @st, int @idx)
+        {
+            return avformat_index_get_entry_fptr(@st, @idx);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVIndexEntry* avformat_index_get_entry_from_timestamp_delegate(AVStream* @st, long @wanted_timestamp, int @flags);
+        private static avformat_index_get_entry_from_timestamp_delegate avformat_index_get_entry_from_timestamp_fptr = (AVStream* @st, long @wanted_timestamp, int @flags) =>
+        {
+            avformat_index_get_entry_from_timestamp_fptr = GetFunctionDelegate<avformat_index_get_entry_from_timestamp_delegate>(GetOrLoadLibrary("avformat"), "avformat_index_get_entry_from_timestamp");
+            if (avformat_index_get_entry_from_timestamp_fptr == null)
+            {
+                avformat_index_get_entry_from_timestamp_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avformat_index_get_entry_from_timestamp"));
+                };
+            }
+            return avformat_index_get_entry_from_timestamp_fptr(@st, @wanted_timestamp, @flags);
+        };
+        /// <summary>Get the AVIndexEntry corresponding to the given timestamp.</summary>
+        /// <param name="st">Stream containing the requested AVIndexEntry.</param>
+        /// <param name="flags">If AVSEEK_FLAG_BACKWARD then the returned entry will correspond to the timestamp which is &lt; = the requested one, if backward is 0, then it will be &gt;= if AVSEEK_FLAG_ANY seek to any frame, only keyframes otherwise.</param>
+        /// <returns>A pointer to the requested AVIndexEntry if it exists, NULL otherwise.</returns>
+        public static AVIndexEntry* avformat_index_get_entry_from_timestamp(AVStream* @st, long @wanted_timestamp, int @flags)
+        {
+            return avformat_index_get_entry_from_timestamp_fptr(@st, @wanted_timestamp, @flags);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int avformat_init_output_delegate(AVFormatContext* @s, AVDictionary** @options);
         private static avformat_init_output_delegate avformat_init_output_fptr = (AVFormatContext* @s, AVDictionary** @options) =>
         {
@@ -8228,7 +6131,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Add a new stream to a media file.</summary>
         /// <param name="s">media file handle</param>
-        /// <param name="c">If non-NULL, the AVCodecContext corresponding to the new stream will be initialized to use this codec. This is needed for e.g. codec-specific defaults to be set, so codec should be provided if it is known.</param>
+        /// <param name="c">unused, does nothing</param>
         /// <returns>newly created stream or NULL on error.</returns>
         public static AVStream* avformat_new_stream(AVFormatContext* @s, AVCodec* @c)
         {
@@ -9815,95 +7718,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avpriv_io_delete_delegate(
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @url);
-        private static avpriv_io_delete_delegate avpriv_io_delete_fptr = (string @url) =>
-        {
-            avpriv_io_delete_fptr = GetFunctionDelegate<avpriv_io_delete_delegate>(GetOrLoadLibrary("avformat"), "avpriv_io_delete");
-            if (avpriv_io_delete_fptr == null)
-            {
-                avpriv_io_delete_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpriv_io_delete"));
-                };
-            }
-            return avpriv_io_delete_fptr(@url);
-        };
-        /// <summary>Delete a resource.</summary>
-        /// <param name="url">resource to be deleted.</param>
-        /// <returns>&gt;=0 on success or negative on error.</returns>
-        public static int avpriv_io_delete(
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @url)
-        {
-            return avpriv_io_delete_fptr(@url);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avpriv_io_move_delegate(
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @url_src, 
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @url_dst);
-        private static avpriv_io_move_delegate avpriv_io_move_fptr = (string @url_src, string @url_dst) =>
-        {
-            avpriv_io_move_fptr = GetFunctionDelegate<avpriv_io_move_delegate>(GetOrLoadLibrary("avformat"), "avpriv_io_move");
-            if (avpriv_io_move_fptr == null)
-            {
-                avpriv_io_move_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avpriv_io_move"));
-                };
-            }
-            return avpriv_io_move_fptr(@url_src, @url_dst);
-        };
-        /// <summary>Move or rename a resource.</summary>
-        /// <param name="url_src">url to resource to be moved</param>
-        /// <param name="url_dst">new url to resource if the operation succeeded</param>
-        /// <returns>&gt;=0 on success or negative on error.</returns>
-        public static int avpriv_io_move(
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @url_src, 
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @url_dst)
-        {
-            return avpriv_io_move_fptr(@url_src, @url_dst);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVRational av_add_q_delegate(AVRational @b, AVRational @c);
         private static av_add_q_delegate av_add_q_fptr = (AVRational @b, AVRational @c) =>
         {
@@ -10238,8 +8052,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVBufferRef* av_buffer_alloc_delegate(int @size);
-        private static av_buffer_alloc_delegate av_buffer_alloc_fptr = (int @size) =>
+        private delegate AVBufferRef* av_buffer_alloc_delegate(ulong @size);
+        private static av_buffer_alloc_delegate av_buffer_alloc_fptr = (ulong @size) =>
         {
             av_buffer_alloc_fptr = GetFunctionDelegate<av_buffer_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_alloc");
             if (av_buffer_alloc_fptr == null)
@@ -10251,15 +8065,17 @@ namespace FFmpeg.AutoGen
             }
             return av_buffer_alloc_fptr(@size);
         };
-        public static AVBufferRef* av_buffer_alloc(int @size)
+        /// <summary>Allocate an AVBuffer of the given size using av_malloc().</summary>
+        /// <returns>an AVBufferRef of given size or NULL when out of memory</returns>
+        public static AVBufferRef* av_buffer_alloc(ulong @size)
         {
             return av_buffer_alloc_fptr(@size);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVBufferRef* av_buffer_allocz_delegate(int @size);
-        private static av_buffer_allocz_delegate av_buffer_allocz_fptr = (int @size) =>
+        private delegate AVBufferRef* av_buffer_allocz_delegate(ulong @size);
+        private static av_buffer_allocz_delegate av_buffer_allocz_fptr = (ulong @size) =>
         {
             av_buffer_allocz_fptr = GetFunctionDelegate<av_buffer_allocz_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_allocz");
             if (av_buffer_allocz_fptr == null)
@@ -10271,15 +8087,16 @@ namespace FFmpeg.AutoGen
             }
             return av_buffer_allocz_fptr(@size);
         };
-        public static AVBufferRef* av_buffer_allocz(int @size)
+        /// <summary>Same as av_buffer_alloc(), except the returned buffer will be initialized to zero.</summary>
+        public static AVBufferRef* av_buffer_allocz(ulong @size)
         {
             return av_buffer_allocz_fptr(@size);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVBufferRef* av_buffer_create_delegate(byte* @data, int @size, av_buffer_create_free_func @free, void* @opaque, int @flags);
-        private static av_buffer_create_delegate av_buffer_create_fptr = (byte* @data, int @size, av_buffer_create_free_func @free, void* @opaque, int @flags) =>
+        private delegate AVBufferRef* av_buffer_create_delegate(byte* @data, ulong @size, av_buffer_create_free_func @free, void* @opaque, int @flags);
+        private static av_buffer_create_delegate av_buffer_create_fptr = (byte* @data, ulong @size, av_buffer_create_free_func @free, void* @opaque, int @flags) =>
         {
             av_buffer_create_fptr = GetFunctionDelegate<av_buffer_create_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_create");
             if (av_buffer_create_fptr == null)
@@ -10291,7 +8108,14 @@ namespace FFmpeg.AutoGen
             }
             return av_buffer_create_fptr(@data, @size, @free, @opaque, @flags);
         };
-        public static AVBufferRef* av_buffer_create(byte* @data, int @size, av_buffer_create_free_func @free, void* @opaque, int @flags)
+        /// <summary>Create an AVBuffer from an existing array.</summary>
+        /// <param name="data">data array</param>
+        /// <param name="size">size of data in bytes</param>
+        /// <param name="free">a callback for freeing this buffer&apos;s data</param>
+        /// <param name="opaque">parameter to be got for processing or passed to free</param>
+        /// <param name="flags">a combination of AV_BUFFER_FLAG_*</param>
+        /// <returns>an AVBufferRef referring to data on success, NULL on failure.</returns>
+        public static AVBufferRef* av_buffer_create(byte* @data, ulong @size, av_buffer_create_free_func @free, void* @opaque, int @flags)
         {
             return av_buffer_create_fptr(@data, @size, @free, @opaque, @flags);
         }
@@ -10451,8 +8275,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVBufferPool* av_buffer_pool_init_delegate(int @size, av_buffer_pool_init_alloc_func @alloc);
-        private static av_buffer_pool_init_delegate av_buffer_pool_init_fptr = (int @size, av_buffer_pool_init_alloc_func @alloc) =>
+        private delegate AVBufferPool* av_buffer_pool_init_delegate(ulong @size, av_buffer_pool_init_alloc_func @alloc);
+        private static av_buffer_pool_init_delegate av_buffer_pool_init_fptr = (ulong @size, av_buffer_pool_init_alloc_func @alloc) =>
         {
             av_buffer_pool_init_fptr = GetFunctionDelegate<av_buffer_pool_init_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_pool_init");
             if (av_buffer_pool_init_fptr == null)
@@ -10464,15 +8288,19 @@ namespace FFmpeg.AutoGen
             }
             return av_buffer_pool_init_fptr(@size, @alloc);
         };
-        public static AVBufferPool* av_buffer_pool_init(int @size, av_buffer_pool_init_alloc_func @alloc)
+        /// <summary>Allocate and initialize a buffer pool.</summary>
+        /// <param name="size">size of each buffer in this pool</param>
+        /// <param name="alloc">a function that will be used to allocate new buffers when the pool is empty. May be NULL, then the default allocator will be used (av_buffer_alloc()).</param>
+        /// <returns>newly created buffer pool on success, NULL on error.</returns>
+        public static AVBufferPool* av_buffer_pool_init(ulong @size, av_buffer_pool_init_alloc_func @alloc)
         {
             return av_buffer_pool_init_fptr(@size, @alloc);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVBufferPool* av_buffer_pool_init2_delegate(int @size, void* @opaque, av_buffer_pool_init2_alloc_func @alloc, av_buffer_pool_init2_pool_free_func @pool_free);
-        private static av_buffer_pool_init2_delegate av_buffer_pool_init2_fptr = (int @size, void* @opaque, av_buffer_pool_init2_alloc_func @alloc, av_buffer_pool_init2_pool_free_func @pool_free) =>
+        private delegate AVBufferPool* av_buffer_pool_init2_delegate(ulong @size, void* @opaque, av_buffer_pool_init2_alloc_func @alloc, av_buffer_pool_init2_pool_free_func @pool_free);
+        private static av_buffer_pool_init2_delegate av_buffer_pool_init2_fptr = (ulong @size, void* @opaque, av_buffer_pool_init2_alloc_func @alloc, av_buffer_pool_init2_pool_free_func @pool_free) =>
         {
             av_buffer_pool_init2_fptr = GetFunctionDelegate<av_buffer_pool_init2_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_pool_init2");
             if (av_buffer_pool_init2_fptr == null)
@@ -10484,7 +8312,13 @@ namespace FFmpeg.AutoGen
             }
             return av_buffer_pool_init2_fptr(@size, @opaque, @alloc, @pool_free);
         };
-        public static AVBufferPool* av_buffer_pool_init2(int @size, void* @opaque, av_buffer_pool_init2_alloc_func @alloc, av_buffer_pool_init2_pool_free_func @pool_free)
+        /// <summary>Allocate and initialize a buffer pool with a more complex allocator.</summary>
+        /// <param name="size">size of each buffer in this pool</param>
+        /// <param name="opaque">arbitrary user data used by the allocator</param>
+        /// <param name="alloc">a function that will be used to allocate new buffers when the pool is empty. May be NULL, then the default allocator will be used (av_buffer_alloc()).</param>
+        /// <param name="pool_free">a function that will be called immediately before the pool is freed. I.e. after av_buffer_pool_uninit() is called by the caller and all the frames are returned to the pool and freed. It is intended to uninitialize the user opaque data. May be NULL.</param>
+        /// <returns>newly created buffer pool on success, NULL on error.</returns>
+        public static AVBufferPool* av_buffer_pool_init2(ulong @size, void* @opaque, av_buffer_pool_init2_alloc_func @alloc, av_buffer_pool_init2_pool_free_func @pool_free)
         {
             return av_buffer_pool_init2_fptr(@size, @opaque, @alloc, @pool_free);
         }
@@ -10513,8 +8347,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_buffer_realloc_delegate(AVBufferRef** @buf, int @size);
-        private static av_buffer_realloc_delegate av_buffer_realloc_fptr = (AVBufferRef** @buf, int @size) =>
+        private delegate int av_buffer_realloc_delegate(AVBufferRef** @buf, ulong @size);
+        private static av_buffer_realloc_delegate av_buffer_realloc_fptr = (AVBufferRef** @buf, ulong @size) =>
         {
             av_buffer_realloc_fptr = GetFunctionDelegate<av_buffer_realloc_delegate>(GetOrLoadLibrary("avutil"), "av_buffer_realloc");
             if (av_buffer_realloc_fptr == null)
@@ -10526,7 +8360,11 @@ namespace FFmpeg.AutoGen
             }
             return av_buffer_realloc_fptr(@buf, @size);
         };
-        public static int av_buffer_realloc(AVBufferRef** @buf, int @size)
+        /// <summary>Reallocate a given buffer.</summary>
+        /// <param name="buf">a buffer reference to reallocate. On success, buf will be unreferenced and a new reference with the required size will be written in its place. On failure buf will be left untouched. *buf may be NULL, then a new buffer is allocated.</param>
+        /// <param name="size">required new buffer size.</param>
+        /// <returns>0 on success, a negative AVERROR on failure.</returns>
+        public static int av_buffer_realloc(AVBufferRef** @buf, ulong @size)
         {
             return av_buffer_realloc_fptr(@buf, @size);
         }
@@ -10614,7 +8452,10 @@ namespace FFmpeg.AutoGen
             }
             return av_calloc_fptr(@nmemb, @size);
         };
-        /// <summary>Non-inlined equivalent of av_mallocz_array().</summary>
+        /// <summary>Allocate a memory block for an array with av_mallocz().</summary>
+        /// <param name="nmemb">Number of elements</param>
+        /// <param name="size">Size of the single element</param>
+        /// <returns>Pointer to the allocated block, or `NULL` if the block cannot be allocated</returns>
         public static void* av_calloc(ulong @nmemb, ulong @size)
         {
             return av_calloc_fptr(@nmemb, @size);
@@ -11046,6 +8887,27 @@ namespace FFmpeg.AutoGen
         public static int av_cpu_count()
         {
             return av_cpu_count_fptr();
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_cpu_force_count_delegate(int @count);
+        private static av_cpu_force_count_delegate av_cpu_force_count_fptr = (int @count) =>
+        {
+            av_cpu_force_count_fptr = GetFunctionDelegate<av_cpu_force_count_delegate>(GetOrLoadLibrary("avutil"), "av_cpu_force_count");
+            if (av_cpu_force_count_fptr == null)
+            {
+                av_cpu_force_count_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_cpu_force_count"));
+                };
+            }
+            av_cpu_force_count_fptr(@count);
+        };
+        /// <summary>Overrides cpu count detection and forces the specified count. Count &lt; 1 disables forcing of specific count.</summary>
+        public static void av_cpu_force_count(int @count)
+        {
+            av_cpu_force_count_fptr(@count);
         }
         
         
@@ -12309,28 +10171,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate long av_frame_get_best_effort_timestamp_delegate(AVFrame* @frame);
-        private static av_frame_get_best_effort_timestamp_delegate av_frame_get_best_effort_timestamp_fptr = (AVFrame* @frame) =>
-        {
-            av_frame_get_best_effort_timestamp_fptr = GetFunctionDelegate<av_frame_get_best_effort_timestamp_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_best_effort_timestamp");
-            if (av_frame_get_best_effort_timestamp_fptr == null)
-            {
-                av_frame_get_best_effort_timestamp_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_best_effort_timestamp"));
-                };
-            }
-            return av_frame_get_best_effort_timestamp_fptr(@frame);
-        };
-        /// <summary>Accessors for some AVFrame fields. These used to be provided for ABI compatibility, and do not need to be used anymore.</summary>
-        [Obsolete("")]
-        public static long av_frame_get_best_effort_timestamp(AVFrame* @frame)
-        {
-            return av_frame_get_best_effort_timestamp_fptr(@frame);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int av_frame_get_buffer_delegate(AVFrame* @frame, int @align);
         private static av_frame_get_buffer_delegate av_frame_get_buffer_fptr = (AVFrame* @frame, int @align) =>
         {
@@ -12355,195 +10195,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate long av_frame_get_channel_layout_delegate(AVFrame* @frame);
-        private static av_frame_get_channel_layout_delegate av_frame_get_channel_layout_fptr = (AVFrame* @frame) =>
-        {
-            av_frame_get_channel_layout_fptr = GetFunctionDelegate<av_frame_get_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_channel_layout");
-            if (av_frame_get_channel_layout_fptr == null)
-            {
-                av_frame_get_channel_layout_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_channel_layout"));
-                };
-            }
-            return av_frame_get_channel_layout_fptr(@frame);
-        };
-        [Obsolete("")]
-        public static long av_frame_get_channel_layout(AVFrame* @frame)
-        {
-            return av_frame_get_channel_layout_fptr(@frame);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_frame_get_channels_delegate(AVFrame* @frame);
-        private static av_frame_get_channels_delegate av_frame_get_channels_fptr = (AVFrame* @frame) =>
-        {
-            av_frame_get_channels_fptr = GetFunctionDelegate<av_frame_get_channels_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_channels");
-            if (av_frame_get_channels_fptr == null)
-            {
-                av_frame_get_channels_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_channels"));
-                };
-            }
-            return av_frame_get_channels_fptr(@frame);
-        };
-        [Obsolete("")]
-        public static int av_frame_get_channels(AVFrame* @frame)
-        {
-            return av_frame_get_channels_fptr(@frame);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVColorRange av_frame_get_color_range_delegate(AVFrame* @frame);
-        private static av_frame_get_color_range_delegate av_frame_get_color_range_fptr = (AVFrame* @frame) =>
-        {
-            av_frame_get_color_range_fptr = GetFunctionDelegate<av_frame_get_color_range_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_color_range");
-            if (av_frame_get_color_range_fptr == null)
-            {
-                av_frame_get_color_range_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_color_range"));
-                };
-            }
-            return av_frame_get_color_range_fptr(@frame);
-        };
-        [Obsolete("")]
-        public static AVColorRange av_frame_get_color_range(AVFrame* @frame)
-        {
-            return av_frame_get_color_range_fptr(@frame);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVColorSpace av_frame_get_colorspace_delegate(AVFrame* @frame);
-        private static av_frame_get_colorspace_delegate av_frame_get_colorspace_fptr = (AVFrame* @frame) =>
-        {
-            av_frame_get_colorspace_fptr = GetFunctionDelegate<av_frame_get_colorspace_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_colorspace");
-            if (av_frame_get_colorspace_fptr == null)
-            {
-                av_frame_get_colorspace_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_colorspace"));
-                };
-            }
-            return av_frame_get_colorspace_fptr(@frame);
-        };
-        [Obsolete("")]
-        public static AVColorSpace av_frame_get_colorspace(AVFrame* @frame)
-        {
-            return av_frame_get_colorspace_fptr(@frame);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_frame_get_decode_error_flags_delegate(AVFrame* @frame);
-        private static av_frame_get_decode_error_flags_delegate av_frame_get_decode_error_flags_fptr = (AVFrame* @frame) =>
-        {
-            av_frame_get_decode_error_flags_fptr = GetFunctionDelegate<av_frame_get_decode_error_flags_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_decode_error_flags");
-            if (av_frame_get_decode_error_flags_fptr == null)
-            {
-                av_frame_get_decode_error_flags_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_decode_error_flags"));
-                };
-            }
-            return av_frame_get_decode_error_flags_fptr(@frame);
-        };
-        [Obsolete("")]
-        public static int av_frame_get_decode_error_flags(AVFrame* @frame)
-        {
-            return av_frame_get_decode_error_flags_fptr(@frame);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVDictionary* av_frame_get_metadata_delegate(AVFrame* @frame);
-        private static av_frame_get_metadata_delegate av_frame_get_metadata_fptr = (AVFrame* @frame) =>
-        {
-            av_frame_get_metadata_fptr = GetFunctionDelegate<av_frame_get_metadata_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_metadata");
-            if (av_frame_get_metadata_fptr == null)
-            {
-                av_frame_get_metadata_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_metadata"));
-                };
-            }
-            return av_frame_get_metadata_fptr(@frame);
-        };
-        [Obsolete("")]
-        public static AVDictionary* av_frame_get_metadata(AVFrame* @frame)
-        {
-            return av_frame_get_metadata_fptr(@frame);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate long av_frame_get_pkt_duration_delegate(AVFrame* @frame);
-        private static av_frame_get_pkt_duration_delegate av_frame_get_pkt_duration_fptr = (AVFrame* @frame) =>
-        {
-            av_frame_get_pkt_duration_fptr = GetFunctionDelegate<av_frame_get_pkt_duration_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_pkt_duration");
-            if (av_frame_get_pkt_duration_fptr == null)
-            {
-                av_frame_get_pkt_duration_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_pkt_duration"));
-                };
-            }
-            return av_frame_get_pkt_duration_fptr(@frame);
-        };
-        [Obsolete("")]
-        public static long av_frame_get_pkt_duration(AVFrame* @frame)
-        {
-            return av_frame_get_pkt_duration_fptr(@frame);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate long av_frame_get_pkt_pos_delegate(AVFrame* @frame);
-        private static av_frame_get_pkt_pos_delegate av_frame_get_pkt_pos_fptr = (AVFrame* @frame) =>
-        {
-            av_frame_get_pkt_pos_fptr = GetFunctionDelegate<av_frame_get_pkt_pos_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_pkt_pos");
-            if (av_frame_get_pkt_pos_fptr == null)
-            {
-                av_frame_get_pkt_pos_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_pkt_pos"));
-                };
-            }
-            return av_frame_get_pkt_pos_fptr(@frame);
-        };
-        [Obsolete("")]
-        public static long av_frame_get_pkt_pos(AVFrame* @frame)
-        {
-            return av_frame_get_pkt_pos_fptr(@frame);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_frame_get_pkt_size_delegate(AVFrame* @frame);
-        private static av_frame_get_pkt_size_delegate av_frame_get_pkt_size_fptr = (AVFrame* @frame) =>
-        {
-            av_frame_get_pkt_size_fptr = GetFunctionDelegate<av_frame_get_pkt_size_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_pkt_size");
-            if (av_frame_get_pkt_size_fptr == null)
-            {
-                av_frame_get_pkt_size_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_pkt_size"));
-                };
-            }
-            return av_frame_get_pkt_size_fptr(@frame);
-        };
-        [Obsolete("")]
-        public static int av_frame_get_pkt_size(AVFrame* @frame)
-        {
-            return av_frame_get_pkt_size_fptr(@frame);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate AVBufferRef* av_frame_get_plane_buffer_delegate(AVFrame* @frame, int @plane);
         private static av_frame_get_plane_buffer_delegate av_frame_get_plane_buffer_fptr = (AVFrame* @frame, int @plane) =>
         {
@@ -12563,48 +10214,6 @@ namespace FFmpeg.AutoGen
         public static AVBufferRef* av_frame_get_plane_buffer(AVFrame* @frame, int @plane)
         {
             return av_frame_get_plane_buffer_fptr(@frame, @plane);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate sbyte* av_frame_get_qp_table_delegate(AVFrame* @f, int* @stride, int* @type);
-        private static av_frame_get_qp_table_delegate av_frame_get_qp_table_fptr = (AVFrame* @f, int* @stride, int* @type) =>
-        {
-            av_frame_get_qp_table_fptr = GetFunctionDelegate<av_frame_get_qp_table_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_qp_table");
-            if (av_frame_get_qp_table_fptr == null)
-            {
-                av_frame_get_qp_table_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_qp_table"));
-                };
-            }
-            return av_frame_get_qp_table_fptr(@f, @stride, @type);
-        };
-        [Obsolete("")]
-        public static sbyte* av_frame_get_qp_table(AVFrame* @f, int* @stride, int* @type)
-        {
-            return av_frame_get_qp_table_fptr(@f, @stride, @type);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_frame_get_sample_rate_delegate(AVFrame* @frame);
-        private static av_frame_get_sample_rate_delegate av_frame_get_sample_rate_fptr = (AVFrame* @frame) =>
-        {
-            av_frame_get_sample_rate_fptr = GetFunctionDelegate<av_frame_get_sample_rate_delegate>(GetOrLoadLibrary("avutil"), "av_frame_get_sample_rate");
-            if (av_frame_get_sample_rate_fptr == null)
-            {
-                av_frame_get_sample_rate_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_get_sample_rate"));
-                };
-            }
-            return av_frame_get_sample_rate_fptr(@frame);
-        };
-        [Obsolete("")]
-        public static int av_frame_get_sample_rate(AVFrame* @frame)
-        {
-            return av_frame_get_sample_rate_fptr(@frame);
         }
         
         
@@ -12696,8 +10305,8 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVFrameSideData* av_frame_new_side_data_delegate(AVFrame* @frame, AVFrameSideDataType @type, int @size);
-        private static av_frame_new_side_data_delegate av_frame_new_side_data_fptr = (AVFrame* @frame, AVFrameSideDataType @type, int @size) =>
+        private delegate AVFrameSideData* av_frame_new_side_data_delegate(AVFrame* @frame, AVFrameSideDataType @type, ulong @size);
+        private static av_frame_new_side_data_delegate av_frame_new_side_data_fptr = (AVFrame* @frame, AVFrameSideDataType @type, ulong @size) =>
         {
             av_frame_new_side_data_fptr = GetFunctionDelegate<av_frame_new_side_data_delegate>(GetOrLoadLibrary("avutil"), "av_frame_new_side_data");
             if (av_frame_new_side_data_fptr == null)
@@ -12714,7 +10323,7 @@ namespace FFmpeg.AutoGen
         /// <param name="type">type of the added side data</param>
         /// <param name="size">size of the side data</param>
         /// <returns>newly added side data on success, NULL on error</returns>
-        public static AVFrameSideData* av_frame_new_side_data(AVFrame* @frame, AVFrameSideDataType @type, int @size)
+        public static AVFrameSideData* av_frame_new_side_data(AVFrame* @frame, AVFrameSideDataType @type, ulong @size)
         {
             return av_frame_new_side_data_fptr(@frame, @type, @size);
         }
@@ -12785,258 +10394,6 @@ namespace FFmpeg.AutoGen
         public static void av_frame_remove_side_data(AVFrame* @frame, AVFrameSideDataType @type)
         {
             av_frame_remove_side_data_fptr(@frame, @type);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_frame_set_best_effort_timestamp_delegate(AVFrame* @frame, long @val);
-        private static av_frame_set_best_effort_timestamp_delegate av_frame_set_best_effort_timestamp_fptr = (AVFrame* @frame, long @val) =>
-        {
-            av_frame_set_best_effort_timestamp_fptr = GetFunctionDelegate<av_frame_set_best_effort_timestamp_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_best_effort_timestamp");
-            if (av_frame_set_best_effort_timestamp_fptr == null)
-            {
-                av_frame_set_best_effort_timestamp_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_best_effort_timestamp"));
-                };
-            }
-            av_frame_set_best_effort_timestamp_fptr(@frame, @val);
-        };
-        [Obsolete("")]
-        public static void av_frame_set_best_effort_timestamp(AVFrame* @frame, long @val)
-        {
-            av_frame_set_best_effort_timestamp_fptr(@frame, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_frame_set_channel_layout_delegate(AVFrame* @frame, long @val);
-        private static av_frame_set_channel_layout_delegate av_frame_set_channel_layout_fptr = (AVFrame* @frame, long @val) =>
-        {
-            av_frame_set_channel_layout_fptr = GetFunctionDelegate<av_frame_set_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_channel_layout");
-            if (av_frame_set_channel_layout_fptr == null)
-            {
-                av_frame_set_channel_layout_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_channel_layout"));
-                };
-            }
-            av_frame_set_channel_layout_fptr(@frame, @val);
-        };
-        [Obsolete("")]
-        public static void av_frame_set_channel_layout(AVFrame* @frame, long @val)
-        {
-            av_frame_set_channel_layout_fptr(@frame, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_frame_set_channels_delegate(AVFrame* @frame, int @val);
-        private static av_frame_set_channels_delegate av_frame_set_channels_fptr = (AVFrame* @frame, int @val) =>
-        {
-            av_frame_set_channels_fptr = GetFunctionDelegate<av_frame_set_channels_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_channels");
-            if (av_frame_set_channels_fptr == null)
-            {
-                av_frame_set_channels_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_channels"));
-                };
-            }
-            av_frame_set_channels_fptr(@frame, @val);
-        };
-        [Obsolete("")]
-        public static void av_frame_set_channels(AVFrame* @frame, int @val)
-        {
-            av_frame_set_channels_fptr(@frame, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_frame_set_color_range_delegate(AVFrame* @frame, AVColorRange @val);
-        private static av_frame_set_color_range_delegate av_frame_set_color_range_fptr = (AVFrame* @frame, AVColorRange @val) =>
-        {
-            av_frame_set_color_range_fptr = GetFunctionDelegate<av_frame_set_color_range_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_color_range");
-            if (av_frame_set_color_range_fptr == null)
-            {
-                av_frame_set_color_range_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_color_range"));
-                };
-            }
-            av_frame_set_color_range_fptr(@frame, @val);
-        };
-        [Obsolete("")]
-        public static void av_frame_set_color_range(AVFrame* @frame, AVColorRange @val)
-        {
-            av_frame_set_color_range_fptr(@frame, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_frame_set_colorspace_delegate(AVFrame* @frame, AVColorSpace @val);
-        private static av_frame_set_colorspace_delegate av_frame_set_colorspace_fptr = (AVFrame* @frame, AVColorSpace @val) =>
-        {
-            av_frame_set_colorspace_fptr = GetFunctionDelegate<av_frame_set_colorspace_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_colorspace");
-            if (av_frame_set_colorspace_fptr == null)
-            {
-                av_frame_set_colorspace_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_colorspace"));
-                };
-            }
-            av_frame_set_colorspace_fptr(@frame, @val);
-        };
-        [Obsolete("")]
-        public static void av_frame_set_colorspace(AVFrame* @frame, AVColorSpace @val)
-        {
-            av_frame_set_colorspace_fptr(@frame, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_frame_set_decode_error_flags_delegate(AVFrame* @frame, int @val);
-        private static av_frame_set_decode_error_flags_delegate av_frame_set_decode_error_flags_fptr = (AVFrame* @frame, int @val) =>
-        {
-            av_frame_set_decode_error_flags_fptr = GetFunctionDelegate<av_frame_set_decode_error_flags_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_decode_error_flags");
-            if (av_frame_set_decode_error_flags_fptr == null)
-            {
-                av_frame_set_decode_error_flags_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_decode_error_flags"));
-                };
-            }
-            av_frame_set_decode_error_flags_fptr(@frame, @val);
-        };
-        [Obsolete("")]
-        public static void av_frame_set_decode_error_flags(AVFrame* @frame, int @val)
-        {
-            av_frame_set_decode_error_flags_fptr(@frame, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_frame_set_metadata_delegate(AVFrame* @frame, AVDictionary* @val);
-        private static av_frame_set_metadata_delegate av_frame_set_metadata_fptr = (AVFrame* @frame, AVDictionary* @val) =>
-        {
-            av_frame_set_metadata_fptr = GetFunctionDelegate<av_frame_set_metadata_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_metadata");
-            if (av_frame_set_metadata_fptr == null)
-            {
-                av_frame_set_metadata_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_metadata"));
-                };
-            }
-            av_frame_set_metadata_fptr(@frame, @val);
-        };
-        [Obsolete("")]
-        public static void av_frame_set_metadata(AVFrame* @frame, AVDictionary* @val)
-        {
-            av_frame_set_metadata_fptr(@frame, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_frame_set_pkt_duration_delegate(AVFrame* @frame, long @val);
-        private static av_frame_set_pkt_duration_delegate av_frame_set_pkt_duration_fptr = (AVFrame* @frame, long @val) =>
-        {
-            av_frame_set_pkt_duration_fptr = GetFunctionDelegate<av_frame_set_pkt_duration_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_pkt_duration");
-            if (av_frame_set_pkt_duration_fptr == null)
-            {
-                av_frame_set_pkt_duration_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_pkt_duration"));
-                };
-            }
-            av_frame_set_pkt_duration_fptr(@frame, @val);
-        };
-        [Obsolete("")]
-        public static void av_frame_set_pkt_duration(AVFrame* @frame, long @val)
-        {
-            av_frame_set_pkt_duration_fptr(@frame, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_frame_set_pkt_pos_delegate(AVFrame* @frame, long @val);
-        private static av_frame_set_pkt_pos_delegate av_frame_set_pkt_pos_fptr = (AVFrame* @frame, long @val) =>
-        {
-            av_frame_set_pkt_pos_fptr = GetFunctionDelegate<av_frame_set_pkt_pos_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_pkt_pos");
-            if (av_frame_set_pkt_pos_fptr == null)
-            {
-                av_frame_set_pkt_pos_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_pkt_pos"));
-                };
-            }
-            av_frame_set_pkt_pos_fptr(@frame, @val);
-        };
-        [Obsolete("")]
-        public static void av_frame_set_pkt_pos(AVFrame* @frame, long @val)
-        {
-            av_frame_set_pkt_pos_fptr(@frame, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_frame_set_pkt_size_delegate(AVFrame* @frame, int @val);
-        private static av_frame_set_pkt_size_delegate av_frame_set_pkt_size_fptr = (AVFrame* @frame, int @val) =>
-        {
-            av_frame_set_pkt_size_fptr = GetFunctionDelegate<av_frame_set_pkt_size_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_pkt_size");
-            if (av_frame_set_pkt_size_fptr == null)
-            {
-                av_frame_set_pkt_size_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_pkt_size"));
-                };
-            }
-            av_frame_set_pkt_size_fptr(@frame, @val);
-        };
-        [Obsolete("")]
-        public static void av_frame_set_pkt_size(AVFrame* @frame, int @val)
-        {
-            av_frame_set_pkt_size_fptr(@frame, @val);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_frame_set_qp_table_delegate(AVFrame* @f, AVBufferRef* @buf, int @stride, int @type);
-        private static av_frame_set_qp_table_delegate av_frame_set_qp_table_fptr = (AVFrame* @f, AVBufferRef* @buf, int @stride, int @type) =>
-        {
-            av_frame_set_qp_table_fptr = GetFunctionDelegate<av_frame_set_qp_table_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_qp_table");
-            if (av_frame_set_qp_table_fptr == null)
-            {
-                av_frame_set_qp_table_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_qp_table"));
-                };
-            }
-            return av_frame_set_qp_table_fptr(@f, @buf, @stride, @type);
-        };
-        [Obsolete("")]
-        public static int av_frame_set_qp_table(AVFrame* @f, AVBufferRef* @buf, int @stride, int @type)
-        {
-            return av_frame_set_qp_table_fptr(@f, @buf, @stride, @type);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_frame_set_sample_rate_delegate(AVFrame* @frame, int @val);
-        private static av_frame_set_sample_rate_delegate av_frame_set_sample_rate_fptr = (AVFrame* @frame, int @val) =>
-        {
-            av_frame_set_sample_rate_fptr = GetFunctionDelegate<av_frame_set_sample_rate_delegate>(GetOrLoadLibrary("avutil"), "av_frame_set_sample_rate");
-            if (av_frame_set_sample_rate_fptr == null)
-            {
-                av_frame_set_sample_rate_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_frame_set_sample_rate"));
-                };
-            }
-            av_frame_set_sample_rate_fptr(@frame, @val);
-        };
-        [Obsolete("")]
-        public static void av_frame_set_sample_rate(AVFrame* @frame, int @val)
-        {
-            av_frame_set_sample_rate_fptr(@frame, @val);
         }
         
         
@@ -13402,6 +10759,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Get the name of a colorspace.</summary>
         /// <returns>a static string identifying the colorspace; can be NULL.</returns>
+        [Obsolete("use av_color_space_name()")]
         public static string av_get_colorspace_name(AVColorSpace @val)
         {
             return av_get_colorspace_name_fptr(@val);
@@ -14510,6 +11868,27 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_image_copy_plane_uc_from_delegate(byte* @dst, long @dst_linesize, byte* @src, long @src_linesize, long @bytewidth, int @height);
+        private static av_image_copy_plane_uc_from_delegate av_image_copy_plane_uc_from_fptr = (byte* @dst, long @dst_linesize, byte* @src, long @src_linesize, long @bytewidth, int @height) =>
+        {
+            av_image_copy_plane_uc_from_fptr = GetFunctionDelegate<av_image_copy_plane_uc_from_delegate>(GetOrLoadLibrary("avutil"), "av_image_copy_plane_uc_from");
+            if (av_image_copy_plane_uc_from_fptr == null)
+            {
+                av_image_copy_plane_uc_from_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_image_copy_plane_uc_from"));
+                };
+            }
+            av_image_copy_plane_uc_from_fptr(@dst, @dst_linesize, @src, @src_linesize, @bytewidth, @height);
+        };
+        /// <summary>Copy image data located in uncacheable (e.g. GPU mapped) memory. Where available, this function will use special functionality for reading from such memory, which may result in greatly improved performance compared to plain av_image_copy_plane().</summary>
+        public static void av_image_copy_plane_uc_from(byte* @dst, long @dst_linesize, byte* @src, long @src_linesize, long @bytewidth, int @height)
+        {
+            av_image_copy_plane_uc_from_fptr(@dst, @dst_linesize, @src, @src_linesize, @bytewidth, @height);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int av_image_copy_to_buffer_delegate(byte* @dst, int @dst_size, byte_ptrArray4 @src_data, int_array4 @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
         private static av_image_copy_to_buffer_delegate av_image_copy_to_buffer_fptr = (byte* @dst, int @dst_size, byte_ptrArray4 @src_data, int_array4 @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align) =>
         {
@@ -15209,10 +12588,7 @@ namespace FFmpeg.AutoGen
             }
             return av_mallocz_array_fptr(@nmemb, @size);
         };
-        /// <summary>Allocate a memory block for an array with av_mallocz().</summary>
-        /// <param name="nmemb">Number of elements</param>
-        /// <param name="size">Size of the single element</param>
-        /// <returns>Pointer to the allocated block, or `NULL` if the block cannot be allocated</returns>
+        [Obsolete("use av_calloc()")]
         public static void* av_mallocz_array(ulong @nmemb, ulong @size)
         {
             return av_mallocz_array_fptr(@nmemb, @size);
@@ -15401,30 +12777,6 @@ namespace FFmpeg.AutoGen
         public static AVClass* av_opt_child_class_iterate(AVClass* @parent, void** @iter)
         {
             return av_opt_child_class_iterate_fptr(@parent, @iter);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVClass* av_opt_child_class_next_delegate(AVClass* @parent, AVClass* @prev);
-        private static av_opt_child_class_next_delegate av_opt_child_class_next_fptr = (AVClass* @parent, AVClass* @prev) =>
-        {
-            av_opt_child_class_next_fptr = GetFunctionDelegate<av_opt_child_class_next_delegate>(GetOrLoadLibrary("avutil"), "av_opt_child_class_next");
-            if (av_opt_child_class_next_fptr == null)
-            {
-                av_opt_child_class_next_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_child_class_next"));
-                };
-            }
-            return av_opt_child_class_next_fptr(@parent, @prev);
-        };
-        /// <summary>Iterate over potential AVOptions-enabled children of parent.</summary>
-        /// <param name="prev">result of a previous call to this function or NULL</param>
-        /// <returns>AVClass corresponding to next potential child or NULL</returns>
-        [Obsolete("use av_opt_child_class_iterate")]
-        public static AVClass* av_opt_child_class_next(AVClass* @parent, AVClass* @prev)
-        {
-            return av_opt_child_class_next_fptr(@parent, @prev);
         }
         
         
@@ -17135,43 +14487,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_parse_cpu_flags_delegate(
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @s);
-        private static av_parse_cpu_flags_delegate av_parse_cpu_flags_fptr = (string @s) =>
-        {
-            av_parse_cpu_flags_fptr = GetFunctionDelegate<av_parse_cpu_flags_delegate>(GetOrLoadLibrary("avutil"), "av_parse_cpu_flags");
-            if (av_parse_cpu_flags_fptr == null)
-            {
-                av_parse_cpu_flags_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_parse_cpu_flags"));
-                };
-            }
-            return av_parse_cpu_flags_fptr(@s);
-        };
-        /// <summary>Parse CPU flags from a string.</summary>
-        /// <returns>a combination of AV_CPU_* flags, negative on error.</returns>
-        [Obsolete("")]
-        public static int av_parse_cpu_flags(
-    #if NET40
-    #elif NET45 || NETSTANDARD2_0
-    [MarshalAs((UnmanagedType)48)]
-    #else
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #endif
-    string @s)
-        {
-            return av_parse_cpu_flags_fptr(@s);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int av_pix_fmt_count_planes_delegate(AVPixelFormat @pix_fmt);
         private static av_pix_fmt_count_planes_delegate av_pix_fmt_count_planes_fptr = (AVPixelFormat @pix_fmt) =>
         {
@@ -17759,7 +15074,7 @@ namespace FFmpeg.AutoGen
         /// <param name="nb_samples">the number of samples in a single channel</param>
         /// <param name="sample_fmt">the sample format</param>
         /// <param name="align">buffer size alignment (0 = default, 1 = no alignment)</param>
-        /// <returns>&gt;=0 on success or a negative error code on failure</returns>
+        /// <returns>minimum size in bytes required for the buffer on success, or a negative error code on failure</returns>
         public static int av_samples_fill_arrays(byte** @audio_data, int* @linesize, byte* @buf, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align)
         {
             return av_samples_fill_arrays_fptr(@audio_data, @linesize, @buf, @nb_channels, @nb_samples, @sample_fmt, @align);
@@ -17816,28 +15131,6 @@ namespace FFmpeg.AutoGen
         public static int av_samples_set_silence(byte** @audio_data, int @offset, int @nb_samples, int @nb_channels, AVSampleFormat @sample_fmt)
         {
             return av_samples_set_silence_fptr(@audio_data, @offset, @nb_samples, @nb_channels, @sample_fmt);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_set_cpu_flags_mask_delegate(int @mask);
-        private static av_set_cpu_flags_mask_delegate av_set_cpu_flags_mask_fptr = (int @mask) =>
-        {
-            av_set_cpu_flags_mask_fptr = GetFunctionDelegate<av_set_cpu_flags_mask_delegate>(GetOrLoadLibrary("avutil"), "av_set_cpu_flags_mask");
-            if (av_set_cpu_flags_mask_fptr == null)
-            {
-                av_set_cpu_flags_mask_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_set_cpu_flags_mask"));
-                };
-            }
-            av_set_cpu_flags_mask_fptr(@mask);
-        };
-        /// <summary>Set a mask on flags returned by av_get_cpu_flags(). This function is mainly useful for testing. Please use av_force_cpu_flags() and av_get_cpu_flags() instead which are more flexible</summary>
-        [Obsolete("")]
-        public static void av_set_cpu_flags_mask(int @mask)
-        {
-            av_set_cpu_flags_mask_fptr(@mask);
         }
         
         
@@ -17905,6 +15198,29 @@ namespace FFmpeg.AutoGen
     string @pairs_sep)
         {
             return av_set_options_string_fptr(@ctx, @opts, @key_val_sep, @pairs_sep);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_size_mult_delegate(ulong @a, ulong @b, ulong* @r);
+        private static av_size_mult_delegate av_size_mult_fptr = (ulong @a, ulong @b, ulong* @r) =>
+        {
+            av_size_mult_fptr = GetFunctionDelegate<av_size_mult_delegate>(GetOrLoadLibrary("avutil"), "av_size_mult");
+            if (av_size_mult_fptr == null)
+            {
+                av_size_mult_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_size_mult"));
+                };
+            }
+            return av_size_mult_fptr(@a, @b, @r);
+        };
+        /// <summary>Multiply two `size_t` values checking for overflow.</summary>
+        /// <param name="r">Pointer to the result of the operation</param>
+        /// <returns>0 on success, AVERROR(EINVAL) on overflow</returns>
+        public static int av_size_mult(ulong @a, ulong @b, ulong* @r)
+        {
+            return av_size_mult_fptr(@a, @b, @r);
         }
         
         
@@ -19386,27 +16702,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void sws_addVec_delegate(SwsVector* @a, SwsVector* @b);
-        private static sws_addVec_delegate sws_addVec_fptr = (SwsVector* @a, SwsVector* @b) =>
-        {
-            sws_addVec_fptr = GetFunctionDelegate<sws_addVec_delegate>(GetOrLoadLibrary("swscale"), "sws_addVec");
-            if (sws_addVec_fptr == null)
-            {
-                sws_addVec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_addVec"));
-                };
-            }
-            sws_addVec_fptr(@a, @b);
-        };
-        [Obsolete("")]
-        public static void sws_addVec(SwsVector* @a, SwsVector* @b)
-        {
-            sws_addVec_fptr(@a, @b);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate SwsContext* sws_alloc_context_delegate();
         private static sws_alloc_context_delegate sws_alloc_context_fptr = () =>
         {
@@ -19445,27 +16740,6 @@ namespace FFmpeg.AutoGen
         public static SwsVector* sws_allocVec(int @length)
         {
             return sws_allocVec_fptr(@length);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate SwsVector* sws_cloneVec_delegate(SwsVector* @a);
-        private static sws_cloneVec_delegate sws_cloneVec_fptr = (SwsVector* @a) =>
-        {
-            sws_cloneVec_fptr = GetFunctionDelegate<sws_cloneVec_delegate>(GetOrLoadLibrary("swscale"), "sws_cloneVec");
-            if (sws_cloneVec_fptr == null)
-            {
-                sws_cloneVec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_cloneVec"));
-                };
-            }
-            return sws_cloneVec_fptr(@a);
-        };
-        [Obsolete("")]
-        public static SwsVector* sws_cloneVec(SwsVector* @a)
-        {
-            return sws_cloneVec_fptr(@a);
         }
         
         
@@ -19520,23 +16794,47 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void sws_convVec_delegate(SwsVector* @a, SwsVector* @b);
-        private static sws_convVec_delegate sws_convVec_fptr = (SwsVector* @a, SwsVector* @b) =>
+        private delegate void sws_frame_end_delegate(SwsContext* @c);
+        private static sws_frame_end_delegate sws_frame_end_fptr = (SwsContext* @c) =>
         {
-            sws_convVec_fptr = GetFunctionDelegate<sws_convVec_delegate>(GetOrLoadLibrary("swscale"), "sws_convVec");
-            if (sws_convVec_fptr == null)
+            sws_frame_end_fptr = GetFunctionDelegate<sws_frame_end_delegate>(GetOrLoadLibrary("swscale"), "sws_frame_end");
+            if (sws_frame_end_fptr == null)
             {
-                sws_convVec_fptr = delegate 
+                sws_frame_end_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_convVec"));
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_frame_end"));
                 };
             }
-            sws_convVec_fptr(@a, @b);
+            sws_frame_end_fptr(@c);
         };
-        [Obsolete("")]
-        public static void sws_convVec(SwsVector* @a, SwsVector* @b)
+        /// <summary>Finish the scaling process for a pair of source/destination frames previously submitted with sws_frame_start(). Must be called after all sws_send_slice() and sws_receive_slice() calls are done, before any new sws_frame_start() calls.</summary>
+        public static void sws_frame_end(SwsContext* @c)
         {
-            sws_convVec_fptr(@a, @b);
+            sws_frame_end_fptr(@c);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int sws_frame_start_delegate(SwsContext* @c, AVFrame* @dst, AVFrame* @src);
+        private static sws_frame_start_delegate sws_frame_start_fptr = (SwsContext* @c, AVFrame* @dst, AVFrame* @src) =>
+        {
+            sws_frame_start_fptr = GetFunctionDelegate<sws_frame_start_delegate>(GetOrLoadLibrary("swscale"), "sws_frame_start");
+            if (sws_frame_start_fptr == null)
+            {
+                sws_frame_start_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_frame_start"));
+                };
+            }
+            return sws_frame_start_fptr(@c, @dst, @src);
+        };
+        /// <summary>Initialize the scaling process for a given pair of source/destination frames. Must be called before any calls to sws_send_slice() and sws_receive_slice().</summary>
+        /// <param name="dst">The destination frame.</param>
+        /// <param name="src">The source frame. The data buffers must be allocated, but the frame data does not have to be ready at this point. Data availability is then signalled by sws_send_slice().</param>
+        /// <returns>0 on success, a negative AVERROR code on failure</returns>
+        public static int sws_frame_start(SwsContext* @c, AVFrame* @dst, AVFrame* @src)
+        {
+            return sws_frame_start_fptr(@c, @dst, @src);
         }
         
         
@@ -19679,32 +16977,11 @@ namespace FFmpeg.AutoGen
             }
             return sws_getColorspaceDetails_fptr(@c, @inv_table, @srcRange, @table, @dstRange, @brightness, @contrast, @saturation);
         };
-        /// <summary>Returns -1 if not supported</summary>
-        /// <returns>-1 if not supported</returns>
+        /// <summary>#if LIBSWSCALE_VERSION_MAJOR &gt; 6</summary>
+        /// <returns>negative error code on error, non negative otherwise #else</returns>
         public static int sws_getColorspaceDetails(SwsContext* @c, int** @inv_table, int* @srcRange, int** @table, int* @dstRange, int* @brightness, int* @contrast, int* @saturation)
         {
             return sws_getColorspaceDetails_fptr(@c, @inv_table, @srcRange, @table, @dstRange, @brightness, @contrast, @saturation);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate SwsVector* sws_getConstVec_delegate(double @c, int @length);
-        private static sws_getConstVec_delegate sws_getConstVec_fptr = (double @c, int @length) =>
-        {
-            sws_getConstVec_fptr = GetFunctionDelegate<sws_getConstVec_delegate>(GetOrLoadLibrary("swscale"), "sws_getConstVec");
-            if (sws_getConstVec_fptr == null)
-            {
-                sws_getConstVec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_getConstVec"));
-                };
-            }
-            return sws_getConstVec_fptr(@c, @length);
-        };
-        [Obsolete("")]
-        public static SwsVector* sws_getConstVec(double @c, int @length)
-        {
-            return sws_getConstVec_fptr(@c, @length);
         }
         
         
@@ -19776,27 +17053,6 @@ namespace FFmpeg.AutoGen
         public static SwsVector* sws_getGaussianVec(double @variance, double @quality)
         {
             return sws_getGaussianVec_fptr(@variance, @quality);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate SwsVector* sws_getIdentityVec_delegate();
-        private static sws_getIdentityVec_delegate sws_getIdentityVec_fptr = () =>
-        {
-            sws_getIdentityVec_fptr = GetFunctionDelegate<sws_getIdentityVec_delegate>(GetOrLoadLibrary("swscale"), "sws_getIdentityVec");
-            if (sws_getIdentityVec_fptr == null)
-            {
-                sws_getIdentityVec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_getIdentityVec"));
-                };
-            }
-            return sws_getIdentityVec_fptr();
-        };
-        [Obsolete("")]
-        public static SwsVector* sws_getIdentityVec()
-        {
-            return sws_getIdentityVec_fptr();
         }
         
         
@@ -19909,23 +17165,48 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void sws_printVec2_delegate(SwsVector* @a, AVClass* @log_ctx, int @log_level);
-        private static sws_printVec2_delegate sws_printVec2_fptr = (SwsVector* @a, AVClass* @log_ctx, int @log_level) =>
+        private delegate int sws_receive_slice_delegate(SwsContext* @c, uint @slice_start, uint @slice_height);
+        private static sws_receive_slice_delegate sws_receive_slice_fptr = (SwsContext* @c, uint @slice_start, uint @slice_height) =>
         {
-            sws_printVec2_fptr = GetFunctionDelegate<sws_printVec2_delegate>(GetOrLoadLibrary("swscale"), "sws_printVec2");
-            if (sws_printVec2_fptr == null)
+            sws_receive_slice_fptr = GetFunctionDelegate<sws_receive_slice_delegate>(GetOrLoadLibrary("swscale"), "sws_receive_slice");
+            if (sws_receive_slice_fptr == null)
             {
-                sws_printVec2_fptr = delegate 
+                sws_receive_slice_fptr = delegate 
                 {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_printVec2"));
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_receive_slice"));
                 };
             }
-            sws_printVec2_fptr(@a, @log_ctx, @log_level);
+            return sws_receive_slice_fptr(@c, @slice_start, @slice_height);
         };
-        [Obsolete("")]
-        public static void sws_printVec2(SwsVector* @a, AVClass* @log_ctx, int @log_level)
+        /// <summary>Request a horizontal slice of the output data to be written into the frame previously provided to sws_frame_start().</summary>
+        /// <param name="slice_start">first row of the slice; must be a multiple of sws_receive_slice_alignment()</param>
+        /// <param name="slice_height">number of rows in the slice; must be a multiple of sws_receive_slice_alignment(), except for the last slice (i.e. when slice_start+slice_height is equal to output frame height)</param>
+        /// <returns>a non-negative number if the data was successfully written into the output AVERROR(EAGAIN) if more input data needs to be provided before the output can be produced another negative AVERROR code on other kinds of scaling failure</returns>
+        public static int sws_receive_slice(SwsContext* @c, uint @slice_start, uint @slice_height)
         {
-            sws_printVec2_fptr(@a, @log_ctx, @log_level);
+            return sws_receive_slice_fptr(@c, @slice_start, @slice_height);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate uint sws_receive_slice_alignment_delegate(SwsContext* @c);
+        private static sws_receive_slice_alignment_delegate sws_receive_slice_alignment_fptr = (SwsContext* @c) =>
+        {
+            sws_receive_slice_alignment_fptr = GetFunctionDelegate<sws_receive_slice_alignment_delegate>(GetOrLoadLibrary("swscale"), "sws_receive_slice_alignment");
+            if (sws_receive_slice_alignment_fptr == null)
+            {
+                sws_receive_slice_alignment_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_receive_slice_alignment"));
+                };
+            }
+            return sws_receive_slice_alignment_fptr(@c);
+        };
+        /// <summary>Returns alignment required for output slices requested with sws_receive_slice(). Slice offsets and sizes passed to sws_receive_slice() must be multiples of the value returned from this function.</summary>
+        /// <returns>alignment required for output slices requested with sws_receive_slice(). Slice offsets and sizes passed to sws_receive_slice() must be multiples of the value returned from this function.</returns>
+        public static uint sws_receive_slice_alignment(SwsContext* @c)
+        {
+            return sws_receive_slice_alignment_fptr(@c);
         }
         
         
@@ -19959,6 +17240,30 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int sws_scale_frame_delegate(SwsContext* @c, AVFrame* @dst, AVFrame* @src);
+        private static sws_scale_frame_delegate sws_scale_frame_fptr = (SwsContext* @c, AVFrame* @dst, AVFrame* @src) =>
+        {
+            sws_scale_frame_fptr = GetFunctionDelegate<sws_scale_frame_delegate>(GetOrLoadLibrary("swscale"), "sws_scale_frame");
+            if (sws_scale_frame_fptr == null)
+            {
+                sws_scale_frame_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_scale_frame"));
+                };
+            }
+            return sws_scale_frame_fptr(@c, @dst, @src);
+        };
+        /// <summary>Scale source data from src and write the output to dst.</summary>
+        /// <param name="dst">The destination frame. See documentation for sws_frame_start() for more details.</param>
+        /// <param name="src">The source frame.</param>
+        /// <returns>0 on success, a negative AVERROR code on failure</returns>
+        public static int sws_scale_frame(SwsContext* @c, AVFrame* @dst, AVFrame* @src)
+        {
+            return sws_scale_frame_fptr(@c, @dst, @src);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate void sws_scaleVec_delegate(SwsVector* @a, double @scalar);
         private static sws_scaleVec_delegate sws_scaleVec_fptr = (SwsVector* @a, double @scalar) =>
         {
@@ -19980,6 +17285,30 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int sws_send_slice_delegate(SwsContext* @c, uint @slice_start, uint @slice_height);
+        private static sws_send_slice_delegate sws_send_slice_fptr = (SwsContext* @c, uint @slice_start, uint @slice_height) =>
+        {
+            sws_send_slice_fptr = GetFunctionDelegate<sws_send_slice_delegate>(GetOrLoadLibrary("swscale"), "sws_send_slice");
+            if (sws_send_slice_fptr == null)
+            {
+                sws_send_slice_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_send_slice"));
+                };
+            }
+            return sws_send_slice_fptr(@c, @slice_start, @slice_height);
+        };
+        /// <summary>Indicate that a horizontal slice of input data is available in the source frame previously provided to sws_frame_start(). The slices may be provided in any order, but may not overlap. For vertically subsampled pixel formats, the slices must be aligned according to subsampling.</summary>
+        /// <param name="slice_start">first row of the slice</param>
+        /// <param name="slice_height">number of rows in the slice</param>
+        /// <returns>a non-negative number on success, a negative AVERROR code on failure.</returns>
+        public static int sws_send_slice(SwsContext* @c, uint @slice_start, uint @slice_height)
+        {
+            return sws_send_slice_fptr(@c, @slice_start, @slice_height);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int sws_setColorspaceDetails_delegate(SwsContext* @c, int_array4 @inv_table, int @srcRange, int_array4 @table, int @dstRange, int @brightness, int @contrast, int @saturation);
         private static sws_setColorspaceDetails_delegate sws_setColorspaceDetails_fptr = (SwsContext* @c, int_array4 @inv_table, int @srcRange, int_array4 @table, int @dstRange, int @brightness, int @contrast, int @saturation) =>
         {
@@ -19993,60 +17322,18 @@ namespace FFmpeg.AutoGen
             }
             return sws_setColorspaceDetails_fptr(@c, @inv_table, @srcRange, @table, @dstRange, @brightness, @contrast, @saturation);
         };
-        /// <summary>Returns -1 if not supported</summary>
+        /// <summary>Returns negative error code on error, non negative otherwise #else Returns -1 if not supported #endif</summary>
         /// <param name="inv_table">the yuv2rgb coefficients describing the input yuv space, normally ff_yuv2rgb_coeffs[x]</param>
         /// <param name="srcRange">flag indicating the while-black range of the input (1=jpeg / 0=mpeg)</param>
         /// <param name="table">the yuv2rgb coefficients describing the output yuv space, normally ff_yuv2rgb_coeffs[x]</param>
         /// <param name="dstRange">flag indicating the while-black range of the output (1=jpeg / 0=mpeg)</param>
         /// <param name="brightness">16.16 fixed point brightness correction</param>
         /// <param name="contrast">16.16 fixed point contrast correction</param>
-        /// <param name="saturation">16.16 fixed point saturation correction</param>
-        /// <returns>-1 if not supported</returns>
+        /// <param name="saturation">16.16 fixed point saturation correction #if LIBSWSCALE_VERSION_MAJOR &gt; 6</param>
+        /// <returns>negative error code on error, non negative otherwise #else</returns>
         public static int sws_setColorspaceDetails(SwsContext* @c, int_array4 @inv_table, int @srcRange, int_array4 @table, int @dstRange, int @brightness, int @contrast, int @saturation)
         {
             return sws_setColorspaceDetails_fptr(@c, @inv_table, @srcRange, @table, @dstRange, @brightness, @contrast, @saturation);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void sws_shiftVec_delegate(SwsVector* @a, int @shift);
-        private static sws_shiftVec_delegate sws_shiftVec_fptr = (SwsVector* @a, int @shift) =>
-        {
-            sws_shiftVec_fptr = GetFunctionDelegate<sws_shiftVec_delegate>(GetOrLoadLibrary("swscale"), "sws_shiftVec");
-            if (sws_shiftVec_fptr == null)
-            {
-                sws_shiftVec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_shiftVec"));
-                };
-            }
-            sws_shiftVec_fptr(@a, @shift);
-        };
-        [Obsolete("")]
-        public static void sws_shiftVec(SwsVector* @a, int @shift)
-        {
-            sws_shiftVec_fptr(@a, @shift);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void sws_subVec_delegate(SwsVector* @a, SwsVector* @b);
-        private static sws_subVec_delegate sws_subVec_fptr = (SwsVector* @a, SwsVector* @b) =>
-        {
-            sws_subVec_fptr = GetFunctionDelegate<sws_subVec_delegate>(GetOrLoadLibrary("swscale"), "sws_subVec");
-            if (sws_subVec_fptr == null)
-            {
-                sws_subVec_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "sws_subVec"));
-                };
-            }
-            sws_subVec_fptr(@a, @b);
-        };
-        [Obsolete("")]
-        public static void sws_subVec(SwsVector* @a, SwsVector* @b)
-        {
-            sws_subVec_fptr(@a, @b);
         }
         
         

@@ -129,38 +129,28 @@ namespace FFmpeg.AutoGen
         // original body hash: FGSX8EvLhMgYqP9+0z1+Clej4HxjpENDPDX7uAYLx6k=
         
         
-        /// <summary>Clip a double value into the amin-amax range.</summary>
+        /// <summary>Clip a double value into the amin-amax range. If a is nan or -inf amin will be returned. If a is +inf amax will be returned.</summary>
         /// <param name="a">value to clip</param>
         /// <param name="amin">minimum value of the clip range</param>
         /// <param name="amax">maximum value of the clip range</param>
         /// <returns>clipped value</returns>
         public static double av_clipd_c(double @a, double @amin, double @amax)
-        {
-            if (a < amin)
-                return amin;
-            else if (a > amax)
-                return amax;
-            else
-                return a;
-        }
-        // original body hash: FGSX8EvLhMgYqP9+0z1+Clej4HxjpENDPDX7uAYLx6k=
+{
+    return ((((a) > (amin) ? (a) : (amin))) > (amax) ? (amax) : (((a) > (amin) ? (a) : (amin))));
+}
+        // original body hash: 3g76qefPWCYqXraY2vYdxoH58/EKn5EeR9v7cGEBM6Y=
         
         
-        /// <summary>Clip a float value into the amin-amax range.</summary>
+        /// <summary>Clip a float value into the amin-amax range. If a is nan or -inf amin will be returned. If a is +inf amax will be returned.</summary>
         /// <param name="a">value to clip</param>
         /// <param name="amin">minimum value of the clip range</param>
         /// <param name="amax">maximum value of the clip range</param>
         /// <returns>clipped value</returns>
         public static float av_clipf_c(float @a, float @amin, float @amax)
-        {
-            if (a < amin)
-                return amin;
-            else if (a > amax)
-                return amax;
-            else
-                return a;
-        }
-        // original body hash: FGSX8EvLhMgYqP9+0z1+Clej4HxjpENDPDX7uAYLx6k=
+{
+    return ((((a) > (amin) ? (a) : (amin))) > (amax) ? (amax) : (((a) > (amin) ? (a) : (amin))));
+}
+        // original body hash: 3g76qefPWCYqXraY2vYdxoH58/EKn5EeR9v7cGEBM6Y=
         
         
         /// <summary>Clip a signed 64-bit integer value into the -2147483648,2147483647 range.</summary>
@@ -405,20 +395,6 @@ namespace FFmpeg.AutoGen
             }
         }
         // original body hash: 6YrSxDrYVG1ac1wlCiXKMhTwj7Kx6eym/YtspKusrGk=
-        
-        
-        /// <summary>Multiply two `size_t` values checking for overflow.</summary>
-        /// <param name="r">Pointer to the result of the operation</param>
-        /// <returns>0 on success, AVERROR(EINVAL) on overflow</returns>
-        public static int av_size_mult(ulong @a, ulong @b, ulong* @r)
-        {
-            var t = (a * b);
-            if ((a | b) >= (ulong)(1 << (sizeof(IntPtr) * 4)) && a != 0 && t / a != b)
-                return (-(22));
-            *r = t;
-            return 0;
-        }
-        // original body hash: 9hUy1Krnq44y4GGrDSgtMhTc6EJfjHhsQkXtuDtHmZg=
         
         
         /// <summary>Return x default pointer in case p is NULL.</summary>
