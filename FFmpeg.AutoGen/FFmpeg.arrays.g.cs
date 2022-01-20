@@ -299,25 +299,25 @@ namespace FFmpeg.AutoGen
         public static implicit operator ulong[](ulong_array4 @struct) => @struct.ToArray();
     }
     
-    public unsafe struct int_array5
+    public unsafe struct int_array7
     {
-        public static readonly int Size = 5;
-        fixed int _[5];
+        public static readonly int Size = 7;
+        fixed int _[7];
         
         public int this[uint i]
         {
-            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (int_array5* p = &this) { return p->_[i]; } }
-            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (int_array5* p = &this) { p->_[i] = value; } }
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (int_array7* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (int_array7* p = &this) { p->_[i] = value; } }
         }
         public int[] ToArray()
         {
-            fixed (int_array5* p = &this) { var a = new int[Size]; for (uint i = 0; i < Size; i++) a[i] = p->_[i]; return a; }
+            fixed (int_array7* p = &this) { var a = new int[Size]; for (uint i = 0; i < Size; i++) a[i] = p->_[i]; return a; }
         }
         public void UpdateFrom(int[] array)
         {
-            fixed (int_array5* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
+            fixed (int_array7* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
-        public static implicit operator int[](int_array5 @struct) => @struct.ToArray();
+        public static implicit operator int[](int_array7 @struct) => @struct.ToArray();
     }
     
     public unsafe struct AVBufferRef_ptrArray8
@@ -467,27 +467,6 @@ namespace FFmpeg.AutoGen
         public static implicit operator AVRational[](AVRational_array15 @struct) => @struct.ToArray();
     }
     
-    public unsafe struct long_array17
-    {
-        public static readonly int Size = 17;
-        fixed long _[17];
-        
-        public long this[uint i]
-        {
-            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (long_array17* p = &this) { return p->_[i]; } }
-            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (long_array17* p = &this) { p->_[i] = value; } }
-        }
-        public long[] ToArray()
-        {
-            fixed (long_array17* p = &this) { var a = new long[Size]; for (uint i = 0; i < Size; i++) a[i] = p->_[i]; return a; }
-        }
-        public void UpdateFrom(long[] array)
-        {
-            fixed (long_array17* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
-        }
-        public static implicit operator long[](long_array17 @struct) => @struct.ToArray();
-    }
-    
     public unsafe struct AVRational_array25
     {
         public static readonly int Size = 25;
@@ -528,27 +507,6 @@ namespace FFmpeg.AutoGen
             fixed (AVRational_array25* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
         }
         public static implicit operator AVRational_array25[](AVRational_array25x25 @struct) => @struct.ToArray();
-    }
-    
-    public unsafe struct byte_array1024
-    {
-        public static readonly int Size = 1024;
-        fixed byte _[1024];
-        
-        public byte this[uint i]
-        {
-            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array1024* p = &this) { return p->_[i]; } }
-            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array1024* p = &this) { p->_[i] = value; } }
-        }
-        public byte[] ToArray()
-        {
-            fixed (byte_array1024* p = &this) { var a = new byte[Size]; for (uint i = 0; i < Size; i++) a[i] = p->_[i]; return a; }
-        }
-        public void UpdateFrom(byte[] array)
-        {
-            fixed (byte_array1024* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
-        }
-        public static implicit operator byte[](byte_array1024 @struct) => @struct.ToArray();
     }
     
     public unsafe struct byte_array61440
