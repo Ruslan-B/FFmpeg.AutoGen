@@ -1,4 +1,7 @@
-# Important
+# Important Please do support Ukraine!
+Cut Russia from Github due to massive invasion of Ukraine #12042
+(https://github.com/github/feedback/discussions/12042)
+
 **The FFmpeg API is vast and complex and this project exposes it with minimum modifications - support is very limited.
 Please consider to ask *how to* questions on [stackoverflow.com](https://stackoverflow.com/search?tab=newest&q=ffmpeg%20autogen) or in special repository on [github.com](https://github.com/Ruslan-B/FFmpeg.AutoGen.Questions/issues). 
 The community may be able to offer some assistance but you will largely be on your own.
