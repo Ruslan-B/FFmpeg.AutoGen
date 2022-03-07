@@ -1,6 +1,7 @@
 # Important Please do support Ukraine!
-https://github.blog/2022-03-02-our-response-to-the-war-in-ukraine/
-https://razomforukraine.org/
+
+[GitHub response to the war in Ukraine](https://github.blog/2022-03-02-our-response-to-the-war-in-ukraine/)<br/>
+GitHub as a company is also donating $100,000 to [Razom](https://razomforukraine.org/) and matching an additional $200,000 of donations from employees to help support relief efforts in the region.
 
 **The FFmpeg API is vast and complex and this project exposes it with minimum modifications - support is very limited.
 Please consider to ask *how to* questions on [stackoverflow.com](https://stackoverflow.com/search?tab=newest&q=ffmpeg%20autogen) or in special repository on [github.com](https://github.com/Ruslan-B/FFmpeg.AutoGen.Questions/issues). 
