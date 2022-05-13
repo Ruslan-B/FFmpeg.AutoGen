@@ -31,7 +31,7 @@ namespace FFmpeg.AutoGen.Example
 
         private static void ConfigureHWDecoder(out AVHWDeviceType HWtype)
         {
-            HWtype = AVHWDeviceType.AV_HWDEVICE_TYPE_NONE;
+            HWtype = AVHWDeviceType.None;
             Console.WriteLine("Use hardware acceleration for decoding?[n]");
             var key = Console.ReadLine();
             var availableHWDecoders = new Dictionary<int, AVHWDeviceType>();
@@ -39,10 +39,10 @@ namespace FFmpeg.AutoGen.Example
             if (key == "y")
             {
                 Console.WriteLine("Select hardware decoder:");
-                var type = AVHWDeviceType.AV_HWDEVICE_TYPE_NONE;
+                var type = AVHWDeviceType.None;
                 var number = 0;
 
-                while ((type = ffmpeg.av_hwdevice_iterate_types(type)) != AVHWDeviceType.AV_HWDEVICE_TYPE_NONE)
+                while ((type = ffmpeg.av_hwdevice_iterate_types(type)) != AVHWDeviceType.None)
                 {
                     Console.WriteLine($"{++number}. {type}");
                     availableHWDecoders.Add(number, type);
@@ -51,12 +51,12 @@ namespace FFmpeg.AutoGen.Example
                 if (availableHWDecoders.Count == 0)
                 {
                     Console.WriteLine("Your system have no hardware decoders.");
-                    HWtype = AVHWDeviceType.AV_HWDEVICE_TYPE_NONE;
+                    HWtype = AVHWDeviceType.None;
                     return;
                 }
 
                 var decoderNumber = availableHWDecoders
-                    .SingleOrDefault(t => t.Value == AVHWDeviceType.AV_HWDEVICE_TYPE_DXVA2).Key;
+                    .SingleOrDefault(t => t.Value == AVHWDeviceType.Dxva2).Key;
                 if (decoderNumber == 0)
                     decoderNumber = availableHWDecoders.First().Key;
                 Console.WriteLine($"Selected [{decoderNumber}]");
@@ -100,11 +100,11 @@ namespace FFmpeg.AutoGen.Example
             info.ToList().ForEach(x => Console.WriteLine($"{x.Key} = {x.Value}"));
 
             var sourceSize = vsd.FrameSize;
-            var sourcePixelFormat = HWDevice == AVHWDeviceType.AV_HWDEVICE_TYPE_NONE
+            var sourcePixelFormat = HWDevice == AVHWDeviceType.None
                 ? vsd.PixelFormat
                 : GetHWPixelFormat(HWDevice);
             var destinationSize = sourceSize;
-            var destinationPixelFormat = AVPixelFormat.AV_PIX_FMT_BGR24;
+            var destinationPixelFormat = AVPixelFormat.Bgr24;
             using var vfc =
                 new VideoFrameConverter(sourceSize, sourcePixelFormat, destinationSize, destinationPixelFormat);
 
@@ -130,18 +130,18 @@ namespace FFmpeg.AutoGen.Example
         {
             return hWDevice switch
             {
-                AVHWDeviceType.AV_HWDEVICE_TYPE_NONE => AVPixelFormat.AV_PIX_FMT_NONE,
-                AVHWDeviceType.AV_HWDEVICE_TYPE_VDPAU => AVPixelFormat.AV_PIX_FMT_VDPAU,
-                AVHWDeviceType.AV_HWDEVICE_TYPE_CUDA => AVPixelFormat.AV_PIX_FMT_CUDA,
-                AVHWDeviceType.AV_HWDEVICE_TYPE_VAAPI => AVPixelFormat.AV_PIX_FMT_VAAPI,
-                AVHWDeviceType.AV_HWDEVICE_TYPE_DXVA2 => AVPixelFormat.AV_PIX_FMT_NV12,
-                AVHWDeviceType.AV_HWDEVICE_TYPE_QSV => AVPixelFormat.AV_PIX_FMT_QSV,
-                AVHWDeviceType.AV_HWDEVICE_TYPE_VIDEOTOOLBOX => AVPixelFormat.AV_PIX_FMT_VIDEOTOOLBOX,
-                AVHWDeviceType.AV_HWDEVICE_TYPE_D3D11VA => AVPixelFormat.AV_PIX_FMT_NV12,
-                AVHWDeviceType.AV_HWDEVICE_TYPE_DRM => AVPixelFormat.AV_PIX_FMT_DRM_PRIME,
-                AVHWDeviceType.AV_HWDEVICE_TYPE_OPENCL => AVPixelFormat.AV_PIX_FMT_OPENCL,
-                AVHWDeviceType.AV_HWDEVICE_TYPE_MEDIACODEC => AVPixelFormat.AV_PIX_FMT_MEDIACODEC,
-                _ => AVPixelFormat.AV_PIX_FMT_NONE
+                AVHWDeviceType.None => AVPixelFormat.None,
+                AVHWDeviceType.Vdpau => AVPixelFormat.Vdpau,
+                AVHWDeviceType.Cuda => AVPixelFormat.Cuda,
+                AVHWDeviceType.Vaapi => AVPixelFormat.Vaapi,
+                AVHWDeviceType.Dxva2 => AVPixelFormat.Nv12,
+                AVHWDeviceType.Qsv => AVPixelFormat.Qsv,
+                AVHWDeviceType.Videotoolbox => AVPixelFormat.Videotoolbox,
+                AVHWDeviceType.D3d11va => AVPixelFormat.Nv12,
+                AVHWDeviceType.Drm => AVPixelFormat.DrmPrime,
+                AVHWDeviceType.Opencl => AVPixelFormat.Opencl,
+                AVHWDeviceType.Mediacodec => AVPixelFormat.Mediacodec,
+                _ => AVPixelFormat.None
             };
         }
 
@@ -153,9 +153,9 @@ namespace FFmpeg.AutoGen.Example
             var outputFileName = "out.h264";
             var fps = 25;
             var sourceSize = fistFrameImage.Size;
-            var sourcePixelFormat = AVPixelFormat.AV_PIX_FMT_BGR24;
+            var sourcePixelFormat = AVPixelFormat.Bgr24;
             var destinationSize = sourceSize;
-            var destinationPixelFormat = AVPixelFormat.AV_PIX_FMT_YUV420P;
+            var destinationPixelFormat = AVPixelFormat.Yuv420p;
             using var vfc =
                 new VideoFrameConverter(sourceSize, sourcePixelFormat, destinationSize, destinationPixelFormat);
 

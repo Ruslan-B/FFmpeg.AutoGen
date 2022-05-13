@@ -14,7 +14,7 @@ namespace FFmpeg.AutoGen.Example
         private readonly AVFrame* _receivedFrame;
         private readonly int _streamIndex;
 
-        public VideoStreamDecoder(string url, AVHWDeviceType HWDeviceType = AVHWDeviceType.AV_HWDEVICE_TYPE_NONE)
+        public VideoStreamDecoder(string url, AVHWDeviceType HWDeviceType = AVHWDeviceType.None)
         {
             _pFormatContext = ffmpeg.avformat_alloc_context();
             _receivedFrame = ffmpeg.av_frame_alloc();
@@ -23,10 +23,10 @@ namespace FFmpeg.AutoGen.Example
             ffmpeg.avformat_find_stream_info(_pFormatContext, null).ThrowExceptionIfError();
             AVCodec* codec = null;
             _streamIndex = ffmpeg
-                .av_find_best_stream(_pFormatContext, AVMediaType.AVMEDIA_TYPE_VIDEO, -1, -1, &codec, 0)
+                .av_find_best_stream(_pFormatContext, AVMediaType.Video, -1, -1, &codec, 0)
                 .ThrowExceptionIfError();
             _pCodecContext = ffmpeg.avcodec_alloc_context3(codec);
-            if (HWDeviceType != AVHWDeviceType.AV_HWDEVICE_TYPE_NONE)
+            if (HWDeviceType != AVHWDeviceType.None)
                 ffmpeg.av_hwdevice_ctx_create(&_pCodecContext->hw_device_ctx, HWDeviceType, null, null, 0)
                     .ThrowExceptionIfError();
             ffmpeg.avcodec_parameters_to_context(_pCodecContext, _pFormatContext->streams[_streamIndex]->codecpar)

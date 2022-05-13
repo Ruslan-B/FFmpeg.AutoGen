@@ -23,7 +23,7 @@ namespace FFmpeg.AutoGen.Examples.Encode
             var filename = args[0];
 
             /* find the MP2 encoder */
-            AVCodec* codec = ffmpeg.avcodec_find_encoder(AVCodecID.AV_CODEC_ID_MP2);
+            AVCodec* codec = ffmpeg.avcodec_find_encoder(AVCodecID.Mp2);
             if (codec == null)
             {
                 Console.Error.WriteLine("Codec not found");
@@ -41,7 +41,7 @@ namespace FFmpeg.AutoGen.Examples.Encode
             c->bit_rate = 64000;
 
             /* check that the encoder supports s16 pcm input */
-            c->sample_fmt = AVSampleFormat.AV_SAMPLE_FMT_S16;
+            c->sample_fmt = AVSampleFormat.S16;
             if (!check_sample_fmt(codec, c->sample_fmt))
             {
                 string sampleFormat = ffmpeg.av_get_sample_fmt_name(c->sample_fmt);
@@ -159,7 +159,7 @@ namespace FFmpeg.AutoGen.Examples.Encode
         {
             AVSampleFormat *p = codec->sample_fmts;
 
-            while (*p != AVSampleFormat.AV_SAMPLE_FMT_NONE) {
+            while (*p != AVSampleFormat.None) {
                 if (*p == sample_fmt)
                     return true;
                 p++;

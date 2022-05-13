@@ -14,8 +14,8 @@ namespace FFmpeg.AutoGen.Examples.ResamplingAudio
             byte** sourceData = null;
             byte** destinationData = null;
             int sourceSamplesCount = 1024;
-            AVSampleFormat sourceSampleFormat = AVSampleFormat.AV_SAMPLE_FMT_DBL;
-            AVSampleFormat destinationSampleFormat = AVSampleFormat.AV_SAMPLE_FMT_S16;
+            AVSampleFormat sourceSampleFormat = AVSampleFormat.Dbl;
+            AVSampleFormat destinationSampleFormat = AVSampleFormat.S16;
             int ret;
 
             if (args.Length != 1)
@@ -72,7 +72,7 @@ namespace FFmpeg.AutoGen.Examples.ResamplingAudio
              * ensuring that the output buffer will contain at least all the
              * converted input samples */
             int destinationSampleCount =
-                (int)ffmpeg.av_rescale_rnd(sourceSamplesCount, destinationSampleRate, sourceSampleRate, AVRounding.AV_ROUND_UP);
+                (int)ffmpeg.av_rescale_rnd(sourceSamplesCount, destinationSampleRate, sourceSampleRate, AVRounding.Up);
             int maxDestinationSampleCount = destinationSampleCount;
 
             /* Buffer is going to be directly written to a rawaudio file, no alignment */
@@ -94,7 +94,7 @@ namespace FFmpeg.AutoGen.Examples.ResamplingAudio
 
                 /* Compute destination number of samples */
                 destinationSampleCount = (int)ffmpeg.av_rescale_rnd(ffmpeg.swr_get_delay(resampleContext, sourceSampleRate) +
-                                                sourceSamplesCount, destinationSampleRate, sourceSampleRate, AVRounding.AV_ROUND_UP);
+                                                sourceSamplesCount, destinationSampleRate, sourceSampleRate, AVRounding.Up);
                 if (destinationSampleCount > maxDestinationSampleCount)
                 {
                     ffmpeg.av_freep(&destinationData[0]);
@@ -157,11 +157,11 @@ namespace FFmpeg.AutoGen.Examples.ResamplingAudio
         static int getFormatFromSampleFormat(out string fmt, AVSampleFormat sample_fmt)
         {            
             var sample_fmt_entries = new[]{
-                new sample_fmt_entry{ sample_fmt = AVSampleFormat.AV_SAMPLE_FMT_U8,  fmt_be = "u8",    fmt_le = "u8"    },
-                new sample_fmt_entry{ sample_fmt = AVSampleFormat.AV_SAMPLE_FMT_S16, fmt_be = "s16be", fmt_le = "s16le" },
-                new sample_fmt_entry{ sample_fmt = AVSampleFormat.AV_SAMPLE_FMT_S32, fmt_be = "s32be", fmt_le = "s32le" },
-                new sample_fmt_entry{ sample_fmt = AVSampleFormat.AV_SAMPLE_FMT_FLT, fmt_be = "f32be", fmt_le = "f32le" },
-                new sample_fmt_entry{ sample_fmt = AVSampleFormat.AV_SAMPLE_FMT_DBL, fmt_be = "f64be", fmt_le = "f64le" },
+                new sample_fmt_entry{ sample_fmt = AVSampleFormat.U8,  fmt_be = "u8",    fmt_le = "u8"    },
+                new sample_fmt_entry{ sample_fmt = AVSampleFormat.S16, fmt_be = "s16be", fmt_le = "s16le" },
+                new sample_fmt_entry{ sample_fmt = AVSampleFormat.S32, fmt_be = "s32be", fmt_le = "s32le" },
+                new sample_fmt_entry{ sample_fmt = AVSampleFormat.Flt, fmt_be = "f32be", fmt_le = "f32le" },
+                new sample_fmt_entry{ sample_fmt = AVSampleFormat.Dbl, fmt_be = "f64be", fmt_le = "f64le" },
             };
             fmt = null;
             for (var i = 0; i < sample_fmt_entries.Length; i++)
