@@ -51,12 +51,12 @@ namespace FFmpeg.AutoGen.Example
             var dstLinesize = new int_array4();
 
             ffmpeg.sws_scale(_pConvertContext,
-                sourceFrame.data,
-                sourceFrame.linesize,
+                sourceFrame.data.ToArray(),
+                sourceFrame.linesize.ToArray(),
                 0,
                 sourceFrame.height,
-                dstData,
-                dstLinesize);
+                dstData.ToArray(),
+                dstLinesize.ToArray());
 
             return new AVFrame();
         }

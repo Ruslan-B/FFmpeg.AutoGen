@@ -67,12 +67,10 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             var size = array.Size;
             var elementType = array.ElementType.Name;
 
-            WriteLine($"public static readonly int Size = {size};");
+            WriteLine($"public const int Size = {size};");
 
             if (array.IsPrimitive) WritePrimitiveFixedArray(array.Name, elementType, size, prefix);
             else WriteComplexFixedArray(elementType, size, prefix);
-
-            WriteLine($"public static implicit operator {elementType}[]({array.Name} @struct) => @struct.ToArray();");
         }
 
         public void WriteFunction(ExportFunctionDefinition function)
@@ -80,7 +78,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteSummary(function);
             function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
             WriteObsoletion(function);
-            if(SuppressUnmanagedCodeSecurity)
+            if (SuppressUnmanagedCodeSecurity)
                 WriteLine("[SuppressUnmanagedCodeSecurity]");
 
             WriteLine($"[DllImport(\"{function.LibraryName}-{function.LibraryVersion}\", EntryPoint = \"{function.Name}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
@@ -190,64 +188,172 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         private void WritePrimitiveFixedArray(string arrayName, string elementType, int size, string prefix)
         {
-            WriteLine($"fixed {elementType} {prefix}[{size}];");
+            WriteLine($"public fixed {elementType} {prefix}[{size}];");
             WriteLine();
 
-            var @fixed = $"fixed ({arrayName}* p = &this)";
-
+            // indexer
             WriteLine($"public {elementType} this[uint i]");
-
             using (BeginBlock())
             {
-                WriteLine($"get {{ if (i >= Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return p->{prefix}[i]; }} }}");
-                WriteLine($"set {{ if (i >= Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ p->{prefix}[i] = value; }} }}");
+                string outOfRange = $"throw new ArgumentOutOfRangeException($\"i({{i}}) should < {{Size}}\")";
+
+                WriteLine($"get => i switch");
+                using (BeginBlock(inline: true))
+                {
+                    WriteLine($"< Size => {prefix}[i],");
+                    WriteLine($"_ => {outOfRange},");
+                }
+                WriteLine(";");
+
+                WriteLine($"set => {prefix}[i] = i switch");
+                using (BeginBlock(inline: true))
+                {
+                    WriteLine("< Size => value,");
+                    WriteLine($"_ => {outOfRange},");
+                }
+                WriteLine(";");
             }
+            WriteLine();
 
-            WriteLine($"public {elementType}[] ToArray()");
-            using (BeginBlock())
-                WriteLine($"{@fixed} {{ var a = new {elementType}[Size]; for (uint i = 0; i < Size; i++) a[i] = p->{prefix}[i]; return a; }}");
+            // ToArray
+            if (size <= 64)
+            {
+                string seq = string.Join(", ", Enumerable.Range(0, size).Select(i => $"{prefix}[{i}]"));
+                WriteLine($"public {elementType}[] ToArray() => new [] {{ {seq} }};");
+                WriteLine();
+            }
+            else
+            {
+                var @fixed = $"fixed ({arrayName}* p = &this)";
+                WriteLine($"public {elementType}[] ToArray()");
+                using (BeginBlock())
+                {
+                    WriteLine(@fixed);
+                    using (BeginBlock())
+                    {
+                        WriteLine($"var a = new {elementType}[Size];");
+                        WriteLine($"for (uint i = 0; i < Size; i++)");
+                        using (BeginBlock())
+                        {
+                            WriteLine($"a[i] = p->{prefix}[i];");
+                        }
+                        WriteLine("return a;");
+                    }
 
+                }
+            }
+            WriteLine();
+
+            // UpdateFrom
             WriteLine($"public void UpdateFrom({elementType}[] array)");
             using (BeginBlock())
-                WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ p->{prefix}[i++] = value; if (i >= Size) return; }} }}");
+            {
+                WriteLine("if (array.Length != Size)");
+                using (BeginBlock())
+                {
+                    WriteLine($"throw new ArgumentOutOfRangeException($\"array size({{array.Length}}) should == {{Size}}\");");
+                }
+                WriteLine();
 
-            WriteLine($"public static implicit operator {elementType}*({arrayName} @struct) => ({elementType}*)@struct._;");
+                WriteLine($"fixed ({elementType}* p = array)");
+                using (BeginBlock())
+                {
+                    if (size <= 64)
+                    {
+                        for (int i = 0; i < size; ++i)
+                        {
+                            WriteLine($"{prefix}[{i}] = p[{i}];");
+                        }
+                    }
+                    else
+                    {
+                        WriteLine($"for (int i = 0; i < Size; ++i)");
+                        using (BeginBlock())
+                        {
+                            WriteLine($"{prefix}[i] = p[i];");
+                        }
+                    }
+                }
+            }
         }
 
         private void WriteComplexFixedArray(string elementType, int size, string prefix)
         {
-            WriteLine(string.Join(" ", Enumerable.Range(0, size).Select(i => $"public {elementType} {prefix}{i};")));
+            string seq = string.Join(", ", Enumerable.Range(0, size).Select(i => prefix + i));
+            WriteLine($"public {elementType} {seq};");
             WriteLine();
 
-            var @fixed = $"fixed ({elementType}* p0 = &{prefix}0)";
-
+            // indexer
             WriteLine($"public {elementType} this[uint i]");
-
             using (BeginBlock())
             {
-                WriteLine($"get {{ if (i >= Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ return *(p0 + i); }} }}");
-                WriteLine($"set {{ if (i >= Size) throw new ArgumentOutOfRangeException(); {@fixed} {{ *(p0 + i) = value;  }} }}");
+                var @fixed = $"fixed ({elementType}* p0 = &{prefix}0)";
+
+                WriteLine($"get");
+                using (BeginBlock())
+                {
+                    WriteLine($"if (i >= Size) throw new ArgumentOutOfRangeException($\"i({{i}}) should < {{Size}}\");");
+                    WriteLine(@fixed);
+                    using (BeginBlock())
+                    {
+                        WriteLine(@"return *(p0 + i);");
+                    }
+                }
+                WriteLine($"set");
+                using (BeginBlock())
+                {
+                    WriteLine($"if (i >= Size) throw new ArgumentOutOfRangeException($\"i({{i}}) should < {{Size}}\");");
+                    WriteLine(@fixed);
+                    using (BeginBlock())
+                    {
+                        WriteLine(@"*(p0 + i) = value;");
+                    }
+                }
             }
+            WriteLine();
 
-            WriteLine($"public {elementType}[] ToArray()");
-            using (BeginBlock())
-                WriteLine($"{@fixed} {{ var a = new {elementType}[Size]; for (uint i = 0; i < Size; i++) a[i] = *(p0 + i); return a; }}");
+            // ToArray
+            WriteLine($"public {elementType}[] ToArray() => new [] {{ {seq} }};");
+            WriteLine();
 
+            // UpdateFrom
             WriteLine($"public void UpdateFrom({elementType}[] array)");
             using (BeginBlock())
-                WriteLine($"{@fixed} {{ uint i = 0; foreach(var value in array) {{ *(p0 + i++) = value; if (i >= Size) return; }} }}");
-
-            if(elementType == "void*")
             {
+                WriteLine("if (array.Length != Size)");
+                using (BeginBlock())
+                {
+                    WriteLine($"throw new ArgumentOutOfRangeException($\"array size({{array.Length}}) should == {{Size}}\");");
+                }
+                WriteLine();
+
+                WriteLine($"fixed ({elementType}* p = array)");
+                using (BeginBlock())
+                {
+                    for (int i = 0; i < size; ++i)
+                    {
+                        WriteLine($"{prefix}{i} = p[{i}];");
+                    }
+                }
+            }
+
+            if (elementType == "void*")
+            {
+                WriteLine();
+                WriteLineWithoutIntent("#if NET45_OR_GREATER");
                 WriteLine($"public unsafe Span<IntPtr> GetPinnableReference()");
                 using (BeginBlock())
                     WriteLine($"fixed (void** p = &_0) return new Span<IntPtr>(p, Size); ");
+                WriteLineWithoutIntent("#endif");
             }
-            if(elementType == "byte*")
+            if (elementType == "byte*")
             {
+                WriteLine();
+                WriteLineWithoutIntent("#if NET45_OR_GREATER");
                 WriteLine($"public unsafe Span<IntPtr> GetPinnableReference()");
                 using (BeginBlock())
                     WriteLine($"fixed (byte** p = &_0) return new Span<IntPtr>(p, Size); ");
+                WriteLineWithoutIntent("#endif");
             }
         }
 

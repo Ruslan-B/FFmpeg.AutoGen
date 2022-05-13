@@ -23,5 +23,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
   </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472' or '$(TargetFramework)' == 'net45'">
+    <PackageReference Include="System.Memory">
+      <Version>4.5.4</Version>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>

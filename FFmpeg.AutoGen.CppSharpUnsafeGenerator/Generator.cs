@@ -217,7 +217,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
         {
             var parserOptions = new ParserOptions
             {
-                Verbose = true,
+                Verbose = false,
                 ASTContext = new CppSharp.Parser.AST.ASTContext(),
                 LanguageVersion = LanguageVersion.C99_GNU
             };

@@ -56,17 +56,17 @@ namespace FFmpeg.AutoGen.Example
         public AVFrame Convert(AVFrame sourceFrame)
         {
             ffmpeg.sws_scale(_pConvertContext,
-                sourceFrame.data,
-                sourceFrame.linesize,
+                sourceFrame.data.ToArray(),
+                sourceFrame.linesize.ToArray(),
                 0,
                 sourceFrame.height,
-                _dstData,
-                _dstLinesize);
+                _dstData.ToArray(),
+                _dstLinesize.ToArray());
 
             var data = new byte_ptrArray8();
-            data.UpdateFrom(_dstData);
+            data.UpdateFrom(_dstData.ToArray());
             var linesize = new int_array8();
-            linesize.UpdateFrom(_dstLinesize);
+            linesize.UpdateFrom(_dstLinesize.ToArray());
 
             return new AVFrame
             {
