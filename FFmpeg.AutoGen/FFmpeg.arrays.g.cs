@@ -1,14 +1,16 @@
 using System;
 using System.Runtime.InteropServices;
 
+#pragma warning disable 169
+#pragma warning disable CS0649
+#pragma warning disable CS0108
 namespace FFmpeg.AutoGen
 {
-    #pragma warning disable 169
     
     public unsafe struct AVRational_array2
     {
         public static readonly int Size = 2;
-        AVRational _0; AVRational _1;
+        public AVRational _0; public AVRational _1;
         
         public AVRational this[uint i]
         {
@@ -44,13 +46,14 @@ namespace FFmpeg.AutoGen
         {
             fixed (short_array2* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
+        public static implicit operator short*(short_array2 @struct) => (short*)@struct._;
         public static implicit operator short[](short_array2 @struct) => @struct.ToArray();
     }
     
     public unsafe struct void_ptrArray2
     {
         public static readonly int Size = 2;
-        void* _0; void* _1;
+        public void* _0; public void* _1;
         
         public void* this[uint i]
         {
@@ -65,13 +68,17 @@ namespace FFmpeg.AutoGen
         {
             fixed (void** p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
         }
+        public unsafe Span<IntPtr> GetPinnableReference()
+        {
+            fixed (void** p = &_0) return new Span<IntPtr>(p, Size); 
+        }
         public static implicit operator void*[](void_ptrArray2 @struct) => @struct.ToArray();
     }
     
     public unsafe struct AVHDRPlusColorTransformParams_array3
     {
         public static readonly int Size = 3;
-        AVHDRPlusColorTransformParams _0; AVHDRPlusColorTransformParams _1; AVHDRPlusColorTransformParams _2;
+        public AVHDRPlusColorTransformParams _0; public AVHDRPlusColorTransformParams _1; public AVHDRPlusColorTransformParams _2;
         
         public AVHDRPlusColorTransformParams this[uint i]
         {
@@ -92,7 +99,7 @@ namespace FFmpeg.AutoGen
     public unsafe struct AVRational_array3
     {
         public static readonly int Size = 3;
-        AVRational _0; AVRational _1; AVRational _2;
+        public AVRational _0; public AVRational _1; public AVRational _2;
         
         public AVRational this[uint i]
         {
@@ -113,7 +120,7 @@ namespace FFmpeg.AutoGen
     public unsafe struct AVRational_array3x2
     {
         public static readonly int Size = 3;
-        AVRational_array2 _0; AVRational_array2 _1; AVRational_array2 _2;
+        public AVRational_array2 _0; public AVRational_array2 _1; public AVRational_array2 _2;
         
         public AVRational_array2 this[uint i]
         {
@@ -134,7 +141,7 @@ namespace FFmpeg.AutoGen
     public unsafe struct byte_ptrArray3
     {
         public static readonly int Size = 3;
-        byte* _0; byte* _1; byte* _2;
+        public byte* _0; public byte* _1; public byte* _2;
         
         public byte* this[uint i]
         {
@@ -148,6 +155,10 @@ namespace FFmpeg.AutoGen
         public void UpdateFrom(byte*[] array)
         {
             fixed (byte** p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public unsafe Span<IntPtr> GetPinnableReference()
+        {
+            fixed (byte** p = &_0) return new Span<IntPtr>(p, Size); 
         }
         public static implicit operator byte*[](byte_ptrArray3 @struct) => @struct.ToArray();
     }
@@ -170,13 +181,14 @@ namespace FFmpeg.AutoGen
         {
             fixed (int_array3* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
+        public static implicit operator int*(int_array3 @struct) => (int*)@struct._;
         public static implicit operator int[](int_array3 @struct) => @struct.ToArray();
     }
     
     public unsafe struct short_array3x2
     {
         public static readonly int Size = 3;
-        short_array2 _0; short_array2 _1; short_array2 _2;
+        public short_array2 _0; public short_array2 _1; public short_array2 _2;
         
         public short_array2 this[uint i]
         {
@@ -197,7 +209,7 @@ namespace FFmpeg.AutoGen
     public unsafe struct AVComponentDescriptor_array4
     {
         public static readonly int Size = 4;
-        AVComponentDescriptor _0; AVComponentDescriptor _1; AVComponentDescriptor _2; AVComponentDescriptor _3;
+        public AVComponentDescriptor _0; public AVComponentDescriptor _1; public AVComponentDescriptor _2; public AVComponentDescriptor _3;
         
         public AVComponentDescriptor this[uint i]
         {
@@ -218,7 +230,7 @@ namespace FFmpeg.AutoGen
     public unsafe struct byte_ptrArray4
     {
         public static readonly int Size = 4;
-        byte* _0; byte* _1; byte* _2; byte* _3;
+        public byte* _0; public byte* _1; public byte* _2; public byte* _3;
         
         public byte* this[uint i]
         {
@@ -232,6 +244,10 @@ namespace FFmpeg.AutoGen
         public void UpdateFrom(byte*[] array)
         {
             fixed (byte** p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public unsafe Span<IntPtr> GetPinnableReference()
+        {
+            fixed (byte** p = &_0) return new Span<IntPtr>(p, Size); 
         }
         public static implicit operator byte*[](byte_ptrArray4 @struct) => @struct.ToArray();
     }
@@ -254,6 +270,7 @@ namespace FFmpeg.AutoGen
         {
             fixed (int_array4* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
+        public static implicit operator int*(int_array4 @struct) => (int*)@struct._;
         public static implicit operator int[](int_array4 @struct) => @struct.ToArray();
     }
     
@@ -275,6 +292,7 @@ namespace FFmpeg.AutoGen
         {
             fixed (long_array4* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
+        public static implicit operator long*(long_array4 @struct) => (long*)@struct._;
         public static implicit operator long[](long_array4 @struct) => @struct.ToArray();
     }
     
@@ -296,6 +314,7 @@ namespace FFmpeg.AutoGen
         {
             fixed (ulong_array4* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
+        public static implicit operator ulong*(ulong_array4 @struct) => (ulong*)@struct._;
         public static implicit operator ulong[](ulong_array4 @struct) => @struct.ToArray();
     }
     
@@ -317,13 +336,14 @@ namespace FFmpeg.AutoGen
         {
             fixed (int_array5* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
+        public static implicit operator int*(int_array5 @struct) => (int*)@struct._;
         public static implicit operator int[](int_array5 @struct) => @struct.ToArray();
     }
     
     public unsafe struct AVBufferRef_ptrArray8
     {
         public static readonly int Size = 8;
-        AVBufferRef* _0; AVBufferRef* _1; AVBufferRef* _2; AVBufferRef* _3; AVBufferRef* _4; AVBufferRef* _5; AVBufferRef* _6; AVBufferRef* _7;
+        public AVBufferRef* _0; public AVBufferRef* _1; public AVBufferRef* _2; public AVBufferRef* _3; public AVBufferRef* _4; public AVBufferRef* _5; public AVBufferRef* _6; public AVBufferRef* _7;
         
         public AVBufferRef* this[uint i]
         {
@@ -359,13 +379,14 @@ namespace FFmpeg.AutoGen
         {
             fixed (byte_array8* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
+        public static implicit operator byte*(byte_array8 @struct) => (byte*)@struct._;
         public static implicit operator byte[](byte_array8 @struct) => @struct.ToArray();
     }
     
     public unsafe struct byte_ptrArray8
     {
         public static readonly int Size = 8;
-        byte* _0; byte* _1; byte* _2; byte* _3; byte* _4; byte* _5; byte* _6; byte* _7;
+        public byte* _0; public byte* _1; public byte* _2; public byte* _3; public byte* _4; public byte* _5; public byte* _6; public byte* _7;
         
         public byte* this[uint i]
         {
@@ -379,6 +400,10 @@ namespace FFmpeg.AutoGen
         public void UpdateFrom(byte*[] array)
         {
             fixed (byte** p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= Size) return; } }
+        }
+        public unsafe Span<IntPtr> GetPinnableReference()
+        {
+            fixed (byte** p = &_0) return new Span<IntPtr>(p, Size); 
         }
         public static implicit operator byte*[](byte_ptrArray8 @struct) => @struct.ToArray();
     }
@@ -401,6 +426,7 @@ namespace FFmpeg.AutoGen
         {
             fixed (int_array8* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
+        public static implicit operator int*(int_array8 @struct) => (int*)@struct._;
         public static implicit operator int[](int_array8 @struct) => @struct.ToArray();
     }
     
@@ -422,13 +448,14 @@ namespace FFmpeg.AutoGen
         {
             fixed (ulong_array8* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
+        public static implicit operator ulong*(ulong_array8 @struct) => (ulong*)@struct._;
         public static implicit operator ulong[](ulong_array8 @struct) => @struct.ToArray();
     }
     
     public unsafe struct AVHDRPlusPercentile_array15
     {
         public static readonly int Size = 15;
-        AVHDRPlusPercentile _0; AVHDRPlusPercentile _1; AVHDRPlusPercentile _2; AVHDRPlusPercentile _3; AVHDRPlusPercentile _4; AVHDRPlusPercentile _5; AVHDRPlusPercentile _6; AVHDRPlusPercentile _7; AVHDRPlusPercentile _8; AVHDRPlusPercentile _9; AVHDRPlusPercentile _10; AVHDRPlusPercentile _11; AVHDRPlusPercentile _12; AVHDRPlusPercentile _13; AVHDRPlusPercentile _14;
+        public AVHDRPlusPercentile _0; public AVHDRPlusPercentile _1; public AVHDRPlusPercentile _2; public AVHDRPlusPercentile _3; public AVHDRPlusPercentile _4; public AVHDRPlusPercentile _5; public AVHDRPlusPercentile _6; public AVHDRPlusPercentile _7; public AVHDRPlusPercentile _8; public AVHDRPlusPercentile _9; public AVHDRPlusPercentile _10; public AVHDRPlusPercentile _11; public AVHDRPlusPercentile _12; public AVHDRPlusPercentile _13; public AVHDRPlusPercentile _14;
         
         public AVHDRPlusPercentile this[uint i]
         {
@@ -449,7 +476,7 @@ namespace FFmpeg.AutoGen
     public unsafe struct AVRational_array15
     {
         public static readonly int Size = 15;
-        AVRational _0; AVRational _1; AVRational _2; AVRational _3; AVRational _4; AVRational _5; AVRational _6; AVRational _7; AVRational _8; AVRational _9; AVRational _10; AVRational _11; AVRational _12; AVRational _13; AVRational _14;
+        public AVRational _0; public AVRational _1; public AVRational _2; public AVRational _3; public AVRational _4; public AVRational _5; public AVRational _6; public AVRational _7; public AVRational _8; public AVRational _9; public AVRational _10; public AVRational _11; public AVRational _12; public AVRational _13; public AVRational _14;
         
         public AVRational this[uint i]
         {
@@ -485,13 +512,14 @@ namespace FFmpeg.AutoGen
         {
             fixed (long_array17* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
+        public static implicit operator long*(long_array17 @struct) => (long*)@struct._;
         public static implicit operator long[](long_array17 @struct) => @struct.ToArray();
     }
     
     public unsafe struct AVRational_array25
     {
         public static readonly int Size = 25;
-        AVRational _0; AVRational _1; AVRational _2; AVRational _3; AVRational _4; AVRational _5; AVRational _6; AVRational _7; AVRational _8; AVRational _9; AVRational _10; AVRational _11; AVRational _12; AVRational _13; AVRational _14; AVRational _15; AVRational _16; AVRational _17; AVRational _18; AVRational _19; AVRational _20; AVRational _21; AVRational _22; AVRational _23; AVRational _24;
+        public AVRational _0; public AVRational _1; public AVRational _2; public AVRational _3; public AVRational _4; public AVRational _5; public AVRational _6; public AVRational _7; public AVRational _8; public AVRational _9; public AVRational _10; public AVRational _11; public AVRational _12; public AVRational _13; public AVRational _14; public AVRational _15; public AVRational _16; public AVRational _17; public AVRational _18; public AVRational _19; public AVRational _20; public AVRational _21; public AVRational _22; public AVRational _23; public AVRational _24;
         
         public AVRational this[uint i]
         {
@@ -512,7 +540,7 @@ namespace FFmpeg.AutoGen
     public unsafe struct AVRational_array25x25
     {
         public static readonly int Size = 25;
-        AVRational_array25 _0; AVRational_array25 _1; AVRational_array25 _2; AVRational_array25 _3; AVRational_array25 _4; AVRational_array25 _5; AVRational_array25 _6; AVRational_array25 _7; AVRational_array25 _8; AVRational_array25 _9; AVRational_array25 _10; AVRational_array25 _11; AVRational_array25 _12; AVRational_array25 _13; AVRational_array25 _14; AVRational_array25 _15; AVRational_array25 _16; AVRational_array25 _17; AVRational_array25 _18; AVRational_array25 _19; AVRational_array25 _20; AVRational_array25 _21; AVRational_array25 _22; AVRational_array25 _23; AVRational_array25 _24;
+        public AVRational_array25 _0; public AVRational_array25 _1; public AVRational_array25 _2; public AVRational_array25 _3; public AVRational_array25 _4; public AVRational_array25 _5; public AVRational_array25 _6; public AVRational_array25 _7; public AVRational_array25 _8; public AVRational_array25 _9; public AVRational_array25 _10; public AVRational_array25 _11; public AVRational_array25 _12; public AVRational_array25 _13; public AVRational_array25 _14; public AVRational_array25 _15; public AVRational_array25 _16; public AVRational_array25 _17; public AVRational_array25 _18; public AVRational_array25 _19; public AVRational_array25 _20; public AVRational_array25 _21; public AVRational_array25 _22; public AVRational_array25 _23; public AVRational_array25 _24;
         
         public AVRational_array25 this[uint i]
         {
@@ -548,6 +576,7 @@ namespace FFmpeg.AutoGen
         {
             fixed (byte_array1024* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
+        public static implicit operator byte*(byte_array1024 @struct) => (byte*)@struct._;
         public static implicit operator byte[](byte_array1024 @struct) => @struct.ToArray();
     }
     
@@ -569,6 +598,7 @@ namespace FFmpeg.AutoGen
         {
             fixed (byte_array61440* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
         }
+        public static implicit operator byte*(byte_array61440 @struct) => (byte*)@struct._;
         public static implicit operator byte[](byte_array61440 @struct) => @struct.ToArray();
     }
     
