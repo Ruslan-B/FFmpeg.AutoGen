@@ -14657,7 +14657,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Compute the max pixel step for each plane of an image with a format described by pixdesc.</summary>
         /// <param name="max_pixsteps">an array which is filled with the max pixel step for each plane. Since a plane may contain different pixel components, the computed max_pixsteps[plane] is relative to the component in the plane with the max pixel step.</param>
         /// <param name="max_pixstep_comps">an array which is filled with the component for each plane which has the max pixel step. May be NULL.</param>
-        public static void av_image_fill_max_pixsteps(int_array4 @max_pixsteps, ref int_array4 @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc)
+        public static void av_image_fill_max_pixsteps(ref int_array4 @max_pixsteps, ref int_array4 @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc)
         {
             av_image_fill_max_pixsteps_fptr(@max_pixsteps, ref @max_pixstep_comps, @pixdesc);
         }
