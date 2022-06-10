@@ -50,7 +50,7 @@ namespace FFmpeg.AutoGen
         ///     Work out of box with companion ffmpeg distribution package like FFmpeg.AutoGen.Redist.windows.x64
         /// </summary>
         /// <value>The root path.</value>
-        public static string RootPath { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
+        public static string RootPath { get; set; } = "";
 
         public static GetOrLoadLibrary GetOrLoadLibrary { get; set; }
 
