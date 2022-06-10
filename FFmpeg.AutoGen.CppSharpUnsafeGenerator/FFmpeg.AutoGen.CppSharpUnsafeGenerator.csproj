@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5</TargetFramework>
+    <TargetFramework>net6</TargetFramework>
     <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

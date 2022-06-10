@@ -102,6 +102,21 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
 
         public void WriteMacros(string outputFile)
         {
+            MacroEnumDef[] knownConstEnums = new MacroEnumDef[]
+            {
+                new ("AV_CODEC_FLAG_", "AVCodecFlags"), 
+                new ("AV_CODEC_FLAG2_", "AVCodecFlags2"), 
+                new ("AV_PKG_FLAG_", "AVPacketFlags"), 
+                new ("SLICE_FLAG_", "CodecSliceFlags"), 
+                new ("AV_CH_", "AVChannels"),
+                new ("AV_CODEC_CAP_", "AVCodecCompabilities"), 
+                new ("FF_MB_DECISION_", "FFMacroblockDecisions"), 
+                new ("FF_CMP_", "FFComparisons"), 
+                new ("PARSER_FLAG_", "ParserFlags"), 
+                new ("AVIO_FLAG_", "AvioFlags"), 
+            };
+            Dictionary<string, MacroEnumDef> knownConstEnumMapping = knownConstEnums.ToDictionary(k => k.Prefix, v => v);
+
             WriteInternal(outputFile,
                 (units, writer) =>
                 {
@@ -109,8 +124,29 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     using (writer.BeginBlock())
                         units.OfType<MacroDefinition>()
                             .OrderBy(x => x.Name)
-                            .ToList()
-                            .ForEach(writer.WriteMacro);
+                            .GroupBy(x => knownConstEnumMapping.Keys.FirstOrDefault(known => x.Name.StartsWith(known)) switch
+                            {
+                                null => null,
+                                string prefix => prefix,
+                            })
+                            .ForEach((IGrouping<string, MacroDefinition> group, ElementInfo i) =>
+                            {
+                                if (group.Key == null)
+                                {
+                                    foreach (MacroDefinition macro in group)
+                                    {
+                                        writer.WriteMacro(macro);
+                                    }
+                                }
+                                else
+                                {
+                                    writer.WriteMacroEnum(group, knownConstEnumMapping[group.Key]);
+                                    if (!i.IsLast)
+                                    {
+                                        writer.WriteLine();
+                                    }
+                                }
+                            });
                 });
         }
 
@@ -282,4 +318,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             using (writer.BeginBlock()) execute(_astProcessor.Units, writer);
         }
     }
+
+    public record MacroEnumDef(string Prefix, string EnumName);
 }

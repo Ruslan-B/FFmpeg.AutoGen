@@ -28,7 +28,72 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 WriteLine($"// public static {macro.Name} = {macro.Expression};");
         }
 
-        private HashSet<string> _csharpKeywords = ("abstract,as,base,bool,break,byte,case," +
+        public void WriteMacroEnum(IGrouping<string, MacroDefinition> group, MacroEnumDef enumDef)
+        {
+            List<MacroDefinition> macros = group.ToList();
+            HashSet<string> allTypes = macros
+                .Select(x => x.TypeName)
+                .Distinct()
+                .ToHashSet();
+            string typeExpr = DetectBestTypeForEnum(allTypes) switch
+            {
+                "int" => "", 
+                var x => $" : {x}", 
+            };
+
+            Dictionary<string, string> macroShortcutMapping = macros
+                .OrderByDescending(k => k.Name.Length)
+                .ToDictionary(k => k.Name, v => EnumNameTransform(v.Name[enumDef.Prefix.Length..]));
+
+            WriteLine($"/// <summary>Macro enum, prefix: {enumDef.Prefix}</summary>");
+            WriteLine($"[Flags]");
+            WriteLine($"public enum {enumDef.EnumName}{typeExpr}");
+            using (BeginBlock())
+            {
+                group.ForEach((macro, i) =>
+                {
+                    WriteSummary(macro);
+                    string key = macroShortcutMapping[macro.Name];
+                    WriteLine($"{key} = {ExpressionTransform(macro.Expression, macroShortcutMapping)},");
+                    if (!i.IsLast)
+                    {
+                        WriteLine();
+                    }
+                });
+            }
+
+            
+            static string ExpressionTransform(string expression, Dictionary<string, string> mapping)
+            {
+                foreach (KeyValuePair<string, string> kv in mapping)
+                {
+                    expression = expression.Replace(kv.Key, kv.Value);
+                }
+                return expression;
+            }
+
+            static string DetectBestTypeForEnum(HashSet<string> allTypes)
+            {
+                string[] priorities = new[]
+                {
+                    "ulong", 
+                    "long", 
+                    "uint", 
+                    "int", 
+                    "ushort", 
+                    "short", 
+                };
+
+                foreach (string prior in priorities)
+                {
+                    if (allTypes.Contains(prior))
+                        return prior;
+                }
+                return "int";
+            }
+        }
+
+        private static readonly HashSet<string> _csharpKeywords = ("abstract,as,base,bool,break,byte,case," +
                     "catch,char,checked,class,const,continue,decimal,default,delegate,do," +
                     "double,else,enum,event,explicit,extern,false,finally,fixed,float,for," +
                     "foreach,goto,if,implicit,in,int,interface,internal,is,lock,long,namespace," +
@@ -36,7 +101,6 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     "readonly,ref,return,sbyte,sealed,short,sizeof,stackalloc,static,string," +
                     "struct,switch,this,throw,true,try,typeof,uint,ulong,unchecked,unsafe," +
                     "ushort,using,virtual,void,volatile,while").Split(',').ToHashSet();
-        private bool IsCSharpKeyword(string key) => _csharpKeywords.Contains(key);
 
         public void WriteEnumeration(EnumerationDefinition enumeration)
         {
@@ -51,17 +115,27 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                 foreach (var item in enumeration.Items)
                 {
                     WriteSummary(item);
-                    string key = string.Concat(item.Name.Substring(commonPrefix.Length)
+                    string key = EnumNameTransform(item.Name.Substring(commonPrefix.Length));
+                    WriteLine($"{key} = {item.Value},");
+                }
+            }
+        }
+
+        private static string EnumNameTransform(string name)
+        {
+            return string.Concat(name
                         .Split('_')
                         .Select(x => x switch
                         {
-                            var _ when char.IsDigit(x[0]) => $"_{x}", 
-                            _ => char.ToUpper(x[0]) + x[1..].ToLower(), 
-                        }));
-                    string prefix = IsCSharpKeyword(key) ? "@" : "";
-                    WriteLine($"{prefix}{key} = {item.Value},");
-                }
-            }
+                            var _ when char.IsDigit(x[0]) => $"_{x}",
+                            _ => char.ToUpper(x[0]) + x[1..].ToLower(),
+                        })) switch
+            {
+                var x when IsCSharpKeyword(x) => $"@{x}",
+                var x => x,
+            };
+
+            static bool IsCSharpKeyword(string key) => _csharpKeywords.Contains(key);
         }
 
         public static string CommonPrefixOf(IEnumerable<string> strings)

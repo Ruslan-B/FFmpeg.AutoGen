@@ -192,7 +192,7 @@ namespace FFmpeg.AutoGen.Examples.Encode
             int best_nb_channels = 0;
 
             if (codec->channel_layouts == null)
-                return ffmpeg.AV_CH_LAYOUT_STEREO;
+                return (ulong)ffmpeg.AVChannels.LayoutStereo;
 
             p = codec->channel_layouts;
             while (*p != 0) {

@@ -23,126 +23,6 @@ namespace FFmpeg.AutoGen
         // public static av_builtin_constant_p = __builtin_constant_p;
         // public static av_ceil_log2 = av_ceil_log2_c;
         // public static AV_CEIL_RSHIFT = (a,b) (!av_builtin_constant_p(b) ? -((-(a)) >> (b)) : ((a) + (1<<(b)) - 1) >> (b));
-        /// <summary>AV_CH_BACK_CENTER = 0x00000100</summary>
-        public const int AV_CH_BACK_CENTER = 0x100;
-        /// <summary>AV_CH_BACK_LEFT = 0x00000010</summary>
-        public const int AV_CH_BACK_LEFT = 0x10;
-        /// <summary>AV_CH_BACK_RIGHT = 0x00000020</summary>
-        public const int AV_CH_BACK_RIGHT = 0x20;
-        /// <summary>AV_CH_BOTTOM_FRONT_CENTER = 0x0000004000000000ULL</summary>
-        public const ulong AV_CH_BOTTOM_FRONT_CENTER = 0x4000000000UL;
-        /// <summary>AV_CH_BOTTOM_FRONT_LEFT = 0x0000008000000000ULL</summary>
-        public const ulong AV_CH_BOTTOM_FRONT_LEFT = 0x8000000000UL;
-        /// <summary>AV_CH_BOTTOM_FRONT_RIGHT = 0x0000010000000000ULL</summary>
-        public const ulong AV_CH_BOTTOM_FRONT_RIGHT = 0x10000000000UL;
-        /// <summary>AV_CH_FRONT_CENTER = 0x00000004</summary>
-        public const int AV_CH_FRONT_CENTER = 0x4;
-        /// <summary>AV_CH_FRONT_LEFT = 0x00000001</summary>
-        public const int AV_CH_FRONT_LEFT = 0x1;
-        /// <summary>AV_CH_FRONT_LEFT_OF_CENTER = 0x00000040</summary>
-        public const int AV_CH_FRONT_LEFT_OF_CENTER = 0x40;
-        /// <summary>AV_CH_FRONT_RIGHT = 0x00000002</summary>
-        public const int AV_CH_FRONT_RIGHT = 0x2;
-        /// <summary>AV_CH_FRONT_RIGHT_OF_CENTER = 0x00000080</summary>
-        public const int AV_CH_FRONT_RIGHT_OF_CENTER = 0x80;
-        /// <summary>AV_CH_LAYOUT_2_1 = (AV_CH_LAYOUT_STEREO|AV_CH_BACK_CENTER)</summary>
-        public const int AV_CH_LAYOUT_2_1 = AV_CH_LAYOUT_STEREO | AV_CH_BACK_CENTER;
-        /// <summary>AV_CH_LAYOUT_2_2 = (AV_CH_LAYOUT_STEREO|AV_CH_SIDE_LEFT|AV_CH_SIDE_RIGHT)</summary>
-        public const int AV_CH_LAYOUT_2_2 = AV_CH_LAYOUT_STEREO | AV_CH_SIDE_LEFT | AV_CH_SIDE_RIGHT;
-        /// <summary>AV_CH_LAYOUT_22POINT2 = (AV_CH_LAYOUT_5POINT1_BACK|AV_CH_FRONT_LEFT_OF_CENTER|AV_CH_FRONT_RIGHT_OF_CENTER|AV_CH_BACK_CENTER|AV_CH_LOW_FREQUENCY_2|AV_CH_SIDE_LEFT|AV_CH_SIDE_RIGHT|AV_CH_TOP_FRONT_LEFT|AV_CH_TOP_FRONT_RIGHT|AV_CH_TOP_FRONT_CENTER|AV_CH_TOP_CENTER|AV_CH_TOP_BACK_LEFT|AV_CH_TOP_BACK_RIGHT|AV_CH_TOP_SIDE_LEFT|AV_CH_TOP_SIDE_RIGHT|AV_CH_TOP_BACK_CENTER|AV_CH_BOTTOM_FRONT_CENTER|AV_CH_BOTTOM_FRONT_LEFT|AV_CH_BOTTOM_FRONT_RIGHT)</summary>
-        public const ulong AV_CH_LAYOUT_22POINT2 = (ulong)(AV_CH_LAYOUT_5POINT1_BACK | AV_CH_FRONT_LEFT_OF_CENTER | AV_CH_FRONT_RIGHT_OF_CENTER | AV_CH_BACK_CENTER) | AV_CH_LOW_FREQUENCY_2 | (ulong)(AV_CH_SIDE_LEFT) | (ulong)(AV_CH_SIDE_RIGHT) | (ulong)(AV_CH_TOP_FRONT_LEFT) | (ulong)(AV_CH_TOP_FRONT_RIGHT) | (ulong)(AV_CH_TOP_FRONT_CENTER) | (ulong)(AV_CH_TOP_CENTER) | (ulong)(AV_CH_TOP_BACK_LEFT) | (ulong)(AV_CH_TOP_BACK_RIGHT) | (ulong)(AV_CH_TOP_SIDE_LEFT) | (ulong)(AV_CH_TOP_SIDE_RIGHT) | (ulong)(AV_CH_TOP_BACK_CENTER) | (ulong)(AV_CH_BOTTOM_FRONT_CENTER) | (ulong)(AV_CH_BOTTOM_FRONT_LEFT) | (ulong)(AV_CH_BOTTOM_FRONT_RIGHT);
-        /// <summary>AV_CH_LAYOUT_2POINT1 = (AV_CH_LAYOUT_STEREO|AV_CH_LOW_FREQUENCY)</summary>
-        public const int AV_CH_LAYOUT_2POINT1 = AV_CH_LAYOUT_STEREO | AV_CH_LOW_FREQUENCY;
-        /// <summary>AV_CH_LAYOUT_3POINT1 = (AV_CH_LAYOUT_SURROUND|AV_CH_LOW_FREQUENCY)</summary>
-        public const int AV_CH_LAYOUT_3POINT1 = AV_CH_LAYOUT_SURROUND | AV_CH_LOW_FREQUENCY;
-        /// <summary>AV_CH_LAYOUT_4POINT0 = (AV_CH_LAYOUT_SURROUND|AV_CH_BACK_CENTER)</summary>
-        public const int AV_CH_LAYOUT_4POINT0 = AV_CH_LAYOUT_SURROUND | AV_CH_BACK_CENTER;
-        /// <summary>AV_CH_LAYOUT_4POINT1 = (AV_CH_LAYOUT_4POINT0|AV_CH_LOW_FREQUENCY)</summary>
-        public const int AV_CH_LAYOUT_4POINT1 = AV_CH_LAYOUT_4POINT0 | AV_CH_LOW_FREQUENCY;
-        /// <summary>AV_CH_LAYOUT_5POINT0 = (AV_CH_LAYOUT_SURROUND|AV_CH_SIDE_LEFT|AV_CH_SIDE_RIGHT)</summary>
-        public const int AV_CH_LAYOUT_5POINT0 = AV_CH_LAYOUT_SURROUND | AV_CH_SIDE_LEFT | AV_CH_SIDE_RIGHT;
-        /// <summary>AV_CH_LAYOUT_5POINT0_BACK = (AV_CH_LAYOUT_SURROUND|AV_CH_BACK_LEFT|AV_CH_BACK_RIGHT)</summary>
-        public const int AV_CH_LAYOUT_5POINT0_BACK = AV_CH_LAYOUT_SURROUND | AV_CH_BACK_LEFT | AV_CH_BACK_RIGHT;
-        /// <summary>AV_CH_LAYOUT_5POINT1 = (AV_CH_LAYOUT_5POINT0|AV_CH_LOW_FREQUENCY)</summary>
-        public const int AV_CH_LAYOUT_5POINT1 = AV_CH_LAYOUT_5POINT0 | AV_CH_LOW_FREQUENCY;
-        /// <summary>AV_CH_LAYOUT_5POINT1_BACK = (AV_CH_LAYOUT_5POINT0_BACK|AV_CH_LOW_FREQUENCY)</summary>
-        public const int AV_CH_LAYOUT_5POINT1_BACK = AV_CH_LAYOUT_5POINT0_BACK | AV_CH_LOW_FREQUENCY;
-        /// <summary>AV_CH_LAYOUT_6POINT0 = (AV_CH_LAYOUT_5POINT0|AV_CH_BACK_CENTER)</summary>
-        public const int AV_CH_LAYOUT_6POINT0 = AV_CH_LAYOUT_5POINT0 | AV_CH_BACK_CENTER;
-        /// <summary>AV_CH_LAYOUT_6POINT0_FRONT = (AV_CH_LAYOUT_2_2|AV_CH_FRONT_LEFT_OF_CENTER|AV_CH_FRONT_RIGHT_OF_CENTER)</summary>
-        public const int AV_CH_LAYOUT_6POINT0_FRONT = AV_CH_LAYOUT_2_2 | AV_CH_FRONT_LEFT_OF_CENTER | AV_CH_FRONT_RIGHT_OF_CENTER;
-        /// <summary>AV_CH_LAYOUT_6POINT1 = (AV_CH_LAYOUT_5POINT1|AV_CH_BACK_CENTER)</summary>
-        public const int AV_CH_LAYOUT_6POINT1 = AV_CH_LAYOUT_5POINT1 | AV_CH_BACK_CENTER;
-        /// <summary>AV_CH_LAYOUT_6POINT1_BACK = (AV_CH_LAYOUT_5POINT1_BACK|AV_CH_BACK_CENTER)</summary>
-        public const int AV_CH_LAYOUT_6POINT1_BACK = AV_CH_LAYOUT_5POINT1_BACK | AV_CH_BACK_CENTER;
-        /// <summary>AV_CH_LAYOUT_6POINT1_FRONT = (AV_CH_LAYOUT_6POINT0_FRONT|AV_CH_LOW_FREQUENCY)</summary>
-        public const int AV_CH_LAYOUT_6POINT1_FRONT = AV_CH_LAYOUT_6POINT0_FRONT | AV_CH_LOW_FREQUENCY;
-        /// <summary>AV_CH_LAYOUT_7POINT0 = (AV_CH_LAYOUT_5POINT0|AV_CH_BACK_LEFT|AV_CH_BACK_RIGHT)</summary>
-        public const int AV_CH_LAYOUT_7POINT0 = AV_CH_LAYOUT_5POINT0 | AV_CH_BACK_LEFT | AV_CH_BACK_RIGHT;
-        /// <summary>AV_CH_LAYOUT_7POINT0_FRONT = (AV_CH_LAYOUT_5POINT0|AV_CH_FRONT_LEFT_OF_CENTER|AV_CH_FRONT_RIGHT_OF_CENTER)</summary>
-        public const int AV_CH_LAYOUT_7POINT0_FRONT = AV_CH_LAYOUT_5POINT0 | AV_CH_FRONT_LEFT_OF_CENTER | AV_CH_FRONT_RIGHT_OF_CENTER;
-        /// <summary>AV_CH_LAYOUT_7POINT1 = (AV_CH_LAYOUT_5POINT1|AV_CH_BACK_LEFT|AV_CH_BACK_RIGHT)</summary>
-        public const int AV_CH_LAYOUT_7POINT1 = AV_CH_LAYOUT_5POINT1 | AV_CH_BACK_LEFT | AV_CH_BACK_RIGHT;
-        /// <summary>AV_CH_LAYOUT_7POINT1_WIDE = (AV_CH_LAYOUT_5POINT1|AV_CH_FRONT_LEFT_OF_CENTER|AV_CH_FRONT_RIGHT_OF_CENTER)</summary>
-        public const int AV_CH_LAYOUT_7POINT1_WIDE = AV_CH_LAYOUT_5POINT1 | AV_CH_FRONT_LEFT_OF_CENTER | AV_CH_FRONT_RIGHT_OF_CENTER;
-        /// <summary>AV_CH_LAYOUT_7POINT1_WIDE_BACK = (AV_CH_LAYOUT_5POINT1_BACK|AV_CH_FRONT_LEFT_OF_CENTER|AV_CH_FRONT_RIGHT_OF_CENTER)</summary>
-        public const int AV_CH_LAYOUT_7POINT1_WIDE_BACK = AV_CH_LAYOUT_5POINT1_BACK | AV_CH_FRONT_LEFT_OF_CENTER | AV_CH_FRONT_RIGHT_OF_CENTER;
-        /// <summary>AV_CH_LAYOUT_HEXADECAGONAL = (AV_CH_LAYOUT_OCTAGONAL|AV_CH_WIDE_LEFT|AV_CH_WIDE_RIGHT|AV_CH_TOP_BACK_LEFT|AV_CH_TOP_BACK_RIGHT|AV_CH_TOP_BACK_CENTER|AV_CH_TOP_FRONT_CENTER|AV_CH_TOP_FRONT_LEFT|AV_CH_TOP_FRONT_RIGHT)</summary>
-        public const ulong AV_CH_LAYOUT_HEXADECAGONAL = (ulong)(AV_CH_LAYOUT_OCTAGONAL) | AV_CH_WIDE_LEFT | (ulong)(AV_CH_WIDE_RIGHT) | (ulong)(AV_CH_TOP_BACK_LEFT) | (ulong)(AV_CH_TOP_BACK_RIGHT) | (ulong)(AV_CH_TOP_BACK_CENTER) | (ulong)(AV_CH_TOP_FRONT_CENTER) | (ulong)(AV_CH_TOP_FRONT_LEFT) | (ulong)(AV_CH_TOP_FRONT_RIGHT);
-        /// <summary>AV_CH_LAYOUT_HEXAGONAL = (AV_CH_LAYOUT_5POINT0_BACK|AV_CH_BACK_CENTER)</summary>
-        public const int AV_CH_LAYOUT_HEXAGONAL = AV_CH_LAYOUT_5POINT0_BACK | AV_CH_BACK_CENTER;
-        /// <summary>AV_CH_LAYOUT_MONO = (AV_CH_FRONT_CENTER)</summary>
-        public const int AV_CH_LAYOUT_MONO = AV_CH_FRONT_CENTER;
-        /// <summary>AV_CH_LAYOUT_NATIVE = 0x8000000000000000ULL</summary>
-        public const ulong AV_CH_LAYOUT_NATIVE = 0x8000000000000000UL;
-        /// <summary>AV_CH_LAYOUT_OCTAGONAL = (AV_CH_LAYOUT_5POINT0|AV_CH_BACK_LEFT|AV_CH_BACK_CENTER|AV_CH_BACK_RIGHT)</summary>
-        public const int AV_CH_LAYOUT_OCTAGONAL = AV_CH_LAYOUT_5POINT0 | AV_CH_BACK_LEFT | AV_CH_BACK_CENTER | AV_CH_BACK_RIGHT;
-        /// <summary>AV_CH_LAYOUT_QUAD = (AV_CH_LAYOUT_STEREO|AV_CH_BACK_LEFT|AV_CH_BACK_RIGHT)</summary>
-        public const int AV_CH_LAYOUT_QUAD = AV_CH_LAYOUT_STEREO | AV_CH_BACK_LEFT | AV_CH_BACK_RIGHT;
-        /// <summary>AV_CH_LAYOUT_STEREO = (AV_CH_FRONT_LEFT|AV_CH_FRONT_RIGHT)</summary>
-        public const int AV_CH_LAYOUT_STEREO = AV_CH_FRONT_LEFT | AV_CH_FRONT_RIGHT;
-        /// <summary>AV_CH_LAYOUT_STEREO_DOWNMIX = (AV_CH_STEREO_LEFT|AV_CH_STEREO_RIGHT)</summary>
-        public const int AV_CH_LAYOUT_STEREO_DOWNMIX = AV_CH_STEREO_LEFT | AV_CH_STEREO_RIGHT;
-        /// <summary>AV_CH_LAYOUT_SURROUND = (AV_CH_LAYOUT_STEREO|AV_CH_FRONT_CENTER)</summary>
-        public const int AV_CH_LAYOUT_SURROUND = AV_CH_LAYOUT_STEREO | AV_CH_FRONT_CENTER;
-        /// <summary>AV_CH_LOW_FREQUENCY = 0x00000008</summary>
-        public const int AV_CH_LOW_FREQUENCY = 0x8;
-        /// <summary>AV_CH_LOW_FREQUENCY_2 = 0x0000000800000000ULL</summary>
-        public const ulong AV_CH_LOW_FREQUENCY_2 = 0x800000000UL;
-        /// <summary>AV_CH_SIDE_LEFT = 0x00000200</summary>
-        public const int AV_CH_SIDE_LEFT = 0x200;
-        /// <summary>AV_CH_SIDE_RIGHT = 0x00000400</summary>
-        public const int AV_CH_SIDE_RIGHT = 0x400;
-        /// <summary>AV_CH_STEREO_LEFT = 0x20000000</summary>
-        public const int AV_CH_STEREO_LEFT = 0x20000000;
-        /// <summary>AV_CH_STEREO_RIGHT = 0x40000000</summary>
-        public const int AV_CH_STEREO_RIGHT = 0x40000000;
-        /// <summary>AV_CH_SURROUND_DIRECT_LEFT = 0x0000000200000000ULL</summary>
-        public const ulong AV_CH_SURROUND_DIRECT_LEFT = 0x200000000UL;
-        /// <summary>AV_CH_SURROUND_DIRECT_RIGHT = 0x0000000400000000ULL</summary>
-        public const ulong AV_CH_SURROUND_DIRECT_RIGHT = 0x400000000UL;
-        /// <summary>AV_CH_TOP_BACK_CENTER = 0x00010000</summary>
-        public const int AV_CH_TOP_BACK_CENTER = 0x10000;
-        /// <summary>AV_CH_TOP_BACK_LEFT = 0x00008000</summary>
-        public const int AV_CH_TOP_BACK_LEFT = 0x8000;
-        /// <summary>AV_CH_TOP_BACK_RIGHT = 0x00020000</summary>
-        public const int AV_CH_TOP_BACK_RIGHT = 0x20000;
-        /// <summary>AV_CH_TOP_CENTER = 0x00000800</summary>
-        public const int AV_CH_TOP_CENTER = 0x800;
-        /// <summary>AV_CH_TOP_FRONT_CENTER = 0x00002000</summary>
-        public const int AV_CH_TOP_FRONT_CENTER = 0x2000;
-        /// <summary>AV_CH_TOP_FRONT_LEFT = 0x00001000</summary>
-        public const int AV_CH_TOP_FRONT_LEFT = 0x1000;
-        /// <summary>AV_CH_TOP_FRONT_RIGHT = 0x00004000</summary>
-        public const int AV_CH_TOP_FRONT_RIGHT = 0x4000;
-        /// <summary>AV_CH_TOP_SIDE_LEFT = 0x0000001000000000ULL</summary>
-        public const ulong AV_CH_TOP_SIDE_LEFT = 0x1000000000UL;
-        /// <summary>AV_CH_TOP_SIDE_RIGHT = 0x0000002000000000ULL</summary>
-        public const ulong AV_CH_TOP_SIDE_RIGHT = 0x2000000000UL;
-        /// <summary>AV_CH_WIDE_LEFT = 0x0000000080000000ULL</summary>
-        public const ulong AV_CH_WIDE_LEFT = 0x80000000UL;
-        /// <summary>AV_CH_WIDE_RIGHT = 0x0000000100000000ULL</summary>
-        public const ulong AV_CH_WIDE_RIGHT = 0x100000000UL;
         // public static av_clip = av_clip_c;
         // public static av_clip_int16 = av_clip_int16_c;
         // public static av_clip_int8 = av_clip_int8_c;
@@ -154,48 +34,6 @@ namespace FFmpeg.AutoGen
         // public static av_clipd = av_clipd_c;
         // public static av_clipf = av_clipf_c;
         // public static av_clipl_int32 = av_clipl_int32_c;
-        /// <summary>AV_CODEC_CAP_AUTO_THREADS = AV_CODEC_CAP_OTHER_THREADS</summary>
-        public const int AV_CODEC_CAP_AUTO_THREADS = AV_CODEC_CAP_OTHER_THREADS;
-        /// <summary>AV_CODEC_CAP_AVOID_PROBING = (1 &lt;&lt; 17)</summary>
-        public const int AV_CODEC_CAP_AVOID_PROBING = 0x1 << 0x11;
-        /// <summary>AV_CODEC_CAP_CHANNEL_CONF = (1 &lt;&lt; 10)</summary>
-        public const int AV_CODEC_CAP_CHANNEL_CONF = 0x1 << 0xa;
-        /// <summary>AV_CODEC_CAP_DELAY = (1 &lt;&lt;  5)</summary>
-        public const int AV_CODEC_CAP_DELAY = 0x1 << 0x5;
-        /// <summary>AV_CODEC_CAP_DR1 = (1 &lt;&lt;  1)</summary>
-        public const int AV_CODEC_CAP_DR1 = 0x1 << 0x1;
-        /// <summary>AV_CODEC_CAP_DRAW_HORIZ_BAND = (1 &lt;&lt;  0)</summary>
-        public const int AV_CODEC_CAP_DRAW_HORIZ_BAND = 0x1 << 0x0;
-        /// <summary>AV_CODEC_CAP_ENCODER_FLUSH = (1 &lt;&lt; 21)</summary>
-        public const int AV_CODEC_CAP_ENCODER_FLUSH = 0x1 << 0x15;
-        /// <summary>AV_CODEC_CAP_ENCODER_REORDERED_OPAQUE = (1 &lt;&lt; 20)</summary>
-        public const int AV_CODEC_CAP_ENCODER_REORDERED_OPAQUE = 0x1 << 0x14;
-        /// <summary>AV_CODEC_CAP_EXPERIMENTAL = (1 &lt;&lt;  9)</summary>
-        public const int AV_CODEC_CAP_EXPERIMENTAL = 0x1 << 0x9;
-        /// <summary>AV_CODEC_CAP_FRAME_THREADS = (1 &lt;&lt; 12)</summary>
-        public const int AV_CODEC_CAP_FRAME_THREADS = 0x1 << 0xc;
-        /// <summary>AV_CODEC_CAP_HARDWARE = (1 &lt;&lt; 18)</summary>
-        public const int AV_CODEC_CAP_HARDWARE = 0x1 << 0x12;
-        /// <summary>AV_CODEC_CAP_HYBRID = (1 &lt;&lt; 19)</summary>
-        public const int AV_CODEC_CAP_HYBRID = 0x1 << 0x13;
-        /// <summary>AV_CODEC_CAP_INTRA_ONLY = 0x40000000</summary>
-        public const int AV_CODEC_CAP_INTRA_ONLY = 0x40000000;
-        /// <summary>AV_CODEC_CAP_LOSSLESS = 0x80000000</summary>
-        public const uint AV_CODEC_CAP_LOSSLESS = 0x80000000U;
-        /// <summary>AV_CODEC_CAP_OTHER_THREADS = (1 &lt;&lt; 15)</summary>
-        public const int AV_CODEC_CAP_OTHER_THREADS = 0x1 << 0xf;
-        /// <summary>AV_CODEC_CAP_PARAM_CHANGE = (1 &lt;&lt; 14)</summary>
-        public const int AV_CODEC_CAP_PARAM_CHANGE = 0x1 << 0xe;
-        /// <summary>AV_CODEC_CAP_SLICE_THREADS = (1 &lt;&lt; 13)</summary>
-        public const int AV_CODEC_CAP_SLICE_THREADS = 0x1 << 0xd;
-        /// <summary>AV_CODEC_CAP_SMALL_LAST_FRAME = (1 &lt;&lt;  6)</summary>
-        public const int AV_CODEC_CAP_SMALL_LAST_FRAME = 0x1 << 0x6;
-        /// <summary>AV_CODEC_CAP_SUBFRAMES = (1 &lt;&lt;  8)</summary>
-        public const int AV_CODEC_CAP_SUBFRAMES = 0x1 << 0x8;
-        /// <summary>AV_CODEC_CAP_TRUNCATED = (1 &lt;&lt;  3)</summary>
-        public const int AV_CODEC_CAP_TRUNCATED = 0x1 << 0x3;
-        /// <summary>AV_CODEC_CAP_VARIABLE_FRAME_SIZE = (1 &lt;&lt; 16)</summary>
-        public const int AV_CODEC_CAP_VARIABLE_FRAME_SIZE = 0x1 << 0x10;
         /// <summary>AV_CODEC_EXPORT_DATA_FILM_GRAIN = (1 &lt;&lt; 3)</summary>
         public const int AV_CODEC_EXPORT_DATA_FILM_GRAIN = 0x1 << 0x3;
         /// <summary>AV_CODEC_EXPORT_DATA_MVS = (1 &lt;&lt; 0)</summary>
@@ -204,64 +42,6 @@ namespace FFmpeg.AutoGen
         public const int AV_CODEC_EXPORT_DATA_PRFT = 0x1 << 0x1;
         /// <summary>AV_CODEC_EXPORT_DATA_VIDEO_ENC_PARAMS = (1 &lt;&lt; 2)</summary>
         public const int AV_CODEC_EXPORT_DATA_VIDEO_ENC_PARAMS = 0x1 << 0x2;
-        /// <summary>AV_CODEC_FLAG_4MV = (1 &lt;&lt;  2)</summary>
-        public const int AV_CODEC_FLAG_4MV = 0x1 << 0x2;
-        /// <summary>AV_CODEC_FLAG_AC_PRED = (1 &lt;&lt; 24)</summary>
-        public const int AV_CODEC_FLAG_AC_PRED = 0x1 << 0x18;
-        /// <summary>AV_CODEC_FLAG_BITEXACT = (1 &lt;&lt; 23)</summary>
-        public const int AV_CODEC_FLAG_BITEXACT = 0x1 << 0x17;
-        /// <summary>AV_CODEC_FLAG_CLOSED_GOP = (1U &lt;&lt; 31)</summary>
-        public const uint AV_CODEC_FLAG_CLOSED_GOP = 0x1U << 0x1f;
-        /// <summary>AV_CODEC_FLAG_DROPCHANGED = (1 &lt;&lt;  5)</summary>
-        public const int AV_CODEC_FLAG_DROPCHANGED = 0x1 << 0x5;
-        /// <summary>AV_CODEC_FLAG_GLOBAL_HEADER = (1 &lt;&lt; 22)</summary>
-        public const int AV_CODEC_FLAG_GLOBAL_HEADER = 0x1 << 0x16;
-        /// <summary>AV_CODEC_FLAG_GRAY = (1 &lt;&lt; 13)</summary>
-        public const int AV_CODEC_FLAG_GRAY = 0x1 << 0xd;
-        /// <summary>AV_CODEC_FLAG_INTERLACED_DCT = (1 &lt;&lt; 18)</summary>
-        public const int AV_CODEC_FLAG_INTERLACED_DCT = 0x1 << 0x12;
-        /// <summary>AV_CODEC_FLAG_INTERLACED_ME = (1 &lt;&lt; 29)</summary>
-        public const int AV_CODEC_FLAG_INTERLACED_ME = 0x1 << 0x1d;
-        /// <summary>AV_CODEC_FLAG_LOOP_FILTER = (1 &lt;&lt; 11)</summary>
-        public const int AV_CODEC_FLAG_LOOP_FILTER = 0x1 << 0xb;
-        /// <summary>AV_CODEC_FLAG_LOW_DELAY = (1 &lt;&lt; 19)</summary>
-        public const int AV_CODEC_FLAG_LOW_DELAY = 0x1 << 0x13;
-        /// <summary>AV_CODEC_FLAG_OUTPUT_CORRUPT = (1 &lt;&lt;  3)</summary>
-        public const int AV_CODEC_FLAG_OUTPUT_CORRUPT = 0x1 << 0x3;
-        /// <summary>AV_CODEC_FLAG_PASS1 = (1 &lt;&lt;  9)</summary>
-        public const int AV_CODEC_FLAG_PASS1 = 0x1 << 0x9;
-        /// <summary>AV_CODEC_FLAG_PASS2 = (1 &lt;&lt; 10)</summary>
-        public const int AV_CODEC_FLAG_PASS2 = 0x1 << 0xa;
-        /// <summary>AV_CODEC_FLAG_PSNR = (1 &lt;&lt; 15)</summary>
-        public const int AV_CODEC_FLAG_PSNR = 0x1 << 0xf;
-        /// <summary>AV_CODEC_FLAG_QPEL = (1 &lt;&lt;  4)</summary>
-        public const int AV_CODEC_FLAG_QPEL = 0x1 << 0x4;
-        /// <summary>AV_CODEC_FLAG_QSCALE = (1 &lt;&lt;  1)</summary>
-        public const int AV_CODEC_FLAG_QSCALE = 0x1 << 0x1;
-        /// <summary>AV_CODEC_FLAG_TRUNCATED = (1 &lt;&lt; 16)</summary>
-        public const int AV_CODEC_FLAG_TRUNCATED = 0x1 << 0x10;
-        /// <summary>AV_CODEC_FLAG_UNALIGNED = (1 &lt;&lt;  0)</summary>
-        public const int AV_CODEC_FLAG_UNALIGNED = 0x1 << 0x0;
-        /// <summary>AV_CODEC_FLAG2_CHUNKS = (1 &lt;&lt; 15)</summary>
-        public const int AV_CODEC_FLAG2_CHUNKS = 0x1 << 0xf;
-        /// <summary>AV_CODEC_FLAG2_DROP_FRAME_TIMECODE = (1 &lt;&lt; 13)</summary>
-        public const int AV_CODEC_FLAG2_DROP_FRAME_TIMECODE = 0x1 << 0xd;
-        /// <summary>AV_CODEC_FLAG2_EXPORT_MVS = (1 &lt;&lt; 28)</summary>
-        public const int AV_CODEC_FLAG2_EXPORT_MVS = 0x1 << 0x1c;
-        /// <summary>AV_CODEC_FLAG2_FAST = (1 &lt;&lt;  0)</summary>
-        public const int AV_CODEC_FLAG2_FAST = 0x1 << 0x0;
-        /// <summary>AV_CODEC_FLAG2_IGNORE_CROP = (1 &lt;&lt; 16)</summary>
-        public const int AV_CODEC_FLAG2_IGNORE_CROP = 0x1 << 0x10;
-        /// <summary>AV_CODEC_FLAG2_LOCAL_HEADER = (1 &lt;&lt;  3)</summary>
-        public const int AV_CODEC_FLAG2_LOCAL_HEADER = 0x1 << 0x3;
-        /// <summary>AV_CODEC_FLAG2_NO_OUTPUT = (1 &lt;&lt;  2)</summary>
-        public const int AV_CODEC_FLAG2_NO_OUTPUT = 0x1 << 0x2;
-        /// <summary>AV_CODEC_FLAG2_RO_FLUSH_NOOP = (1 &lt;&lt; 30)</summary>
-        public const int AV_CODEC_FLAG2_RO_FLUSH_NOOP = 0x1 << 0x1e;
-        /// <summary>AV_CODEC_FLAG2_SHOW_ALL = (1 &lt;&lt; 22)</summary>
-        public const int AV_CODEC_FLAG2_SHOW_ALL = 0x1 << 0x16;
-        /// <summary>AV_CODEC_FLAG2_SKIP_MANUAL = (1 &lt;&lt; 29)</summary>
-        public const int AV_CODEC_FLAG2_SKIP_MANUAL = 0x1 << 0x1d;
         // public static AV_CODEC_ID_H265 = AV_CODEC_ID_HEVC;
         // public static AV_CODEC_ID_H266 = AV_CODEC_ID_VVC;
         // public static AV_CODEC_ID_IFF_BYTERUN1 = AV_CODEC_ID_IFF_ILBM;
@@ -840,16 +620,6 @@ namespace FFmpeg.AutoGen
         public const int AVINDEX_DISCARD_FRAME = 0x2;
         /// <summary>AVINDEX_KEYFRAME = 0x0001</summary>
         public const int AVINDEX_KEYFRAME = 0x1;
-        /// <summary>AVIO_FLAG_DIRECT = 0x8000</summary>
-        public const int AVIO_FLAG_DIRECT = 0x8000;
-        /// <summary>AVIO_FLAG_NONBLOCK = 8</summary>
-        public const int AVIO_FLAG_NONBLOCK = 0x8;
-        /// <summary>AVIO_FLAG_READ = 1</summary>
-        public const int AVIO_FLAG_READ = 0x1;
-        /// <summary>AVIO_FLAG_READ_WRITE = (AVIO_FLAG_READ|AVIO_FLAG_WRITE)</summary>
-        public const int AVIO_FLAG_READ_WRITE = AVIO_FLAG_READ | AVIO_FLAG_WRITE;
-        /// <summary>AVIO_FLAG_WRITE = 2</summary>
-        public const int AVIO_FLAG_WRITE = 0x2;
         // public static avio_print = (s, ...) avio_print_string_array(s, (const char*[]){__VA_ARGS__, NULL});
         /// <summary>AVIO_SEEKABLE_NORMAL = (1 &lt;&lt; 0)</summary>
         public const int AVIO_SEEKABLE_NORMAL = 0x1 << 0x0;
@@ -1085,40 +855,6 @@ namespace FFmpeg.AutoGen
         /// <summary>FF_BUG_XVID_ILACE = 4</summary>
         public const int FF_BUG_XVID_ILACE = 0x4;
         // public static FF_CEIL_RSHIFT = AV_CEIL_RSHIFT;
-        /// <summary>FF_CMP_BIT = 5</summary>
-        public const int FF_CMP_BIT = 0x5;
-        /// <summary>FF_CMP_CHROMA = 256</summary>
-        public const int FF_CMP_CHROMA = 0x100;
-        /// <summary>FF_CMP_DCT = 3</summary>
-        public const int FF_CMP_DCT = 0x3;
-        /// <summary>FF_CMP_DCT264 = 14</summary>
-        public const int FF_CMP_DCT264 = 0xe;
-        /// <summary>FF_CMP_DCTMAX = 13</summary>
-        public const int FF_CMP_DCTMAX = 0xd;
-        /// <summary>FF_CMP_MEDIAN_SAD = 15</summary>
-        public const int FF_CMP_MEDIAN_SAD = 0xf;
-        /// <summary>FF_CMP_NSSE = 10</summary>
-        public const int FF_CMP_NSSE = 0xa;
-        /// <summary>FF_CMP_PSNR = 4</summary>
-        public const int FF_CMP_PSNR = 0x4;
-        /// <summary>FF_CMP_RD = 6</summary>
-        public const int FF_CMP_RD = 0x6;
-        /// <summary>FF_CMP_SAD = 0</summary>
-        public const int FF_CMP_SAD = 0x0;
-        /// <summary>FF_CMP_SATD = 2</summary>
-        public const int FF_CMP_SATD = 0x2;
-        /// <summary>FF_CMP_SSE = 1</summary>
-        public const int FF_CMP_SSE = 0x1;
-        /// <summary>FF_CMP_VSAD = 8</summary>
-        public const int FF_CMP_VSAD = 0x8;
-        /// <summary>FF_CMP_VSSE = 9</summary>
-        public const int FF_CMP_VSSE = 0x9;
-        /// <summary>FF_CMP_W53 = 11</summary>
-        public const int FF_CMP_W53 = 0xb;
-        /// <summary>FF_CMP_W97 = 12</summary>
-        public const int FF_CMP_W97 = 0xc;
-        /// <summary>FF_CMP_ZERO = 7</summary>
-        public const int FF_CMP_ZERO = 0x7;
         /// <summary>FF_CODEC_PROPERTY_CLOSED_CAPTIONS = 0x00000002</summary>
         public const int FF_CODEC_PROPERTY_CLOSED_CAPTIONS = 0x2;
         /// <summary>FF_CODEC_PROPERTY_LOSSLESS = 0x00000001</summary>
@@ -1259,12 +995,6 @@ namespace FFmpeg.AutoGen
         public const int FF_LOSS_DEPTH = 0x2;
         /// <summary>FF_LOSS_RESOLUTION = 0x1</summary>
         public const int FF_LOSS_RESOLUTION = 0x1;
-        /// <summary>FF_MB_DECISION_BITS = 1</summary>
-        public const int FF_MB_DECISION_BITS = 0x1;
-        /// <summary>FF_MB_DECISION_RD = 2</summary>
-        public const int FF_MB_DECISION_RD = 0x2;
-        /// <summary>FF_MB_DECISION_SIMPLE = 0</summary>
-        public const int FF_MB_DECISION_SIMPLE = 0x0;
         /// <summary>FF_PRED_LEFT = 0</summary>
         public const int FF_PRED_LEFT = 0x0;
         /// <summary>FF_PRED_MEDIAN = 2</summary>
@@ -1642,14 +1372,6 @@ namespace FFmpeg.AutoGen
         public const double M_SQRT2 = 1.4142135623730951D;
         // public static MKBETAG = (a,b,c,d) ((d) | ((c) << 8) | ((b) << 16) | ((unsigned)(a) << 24));
         // public static MKTAG = (a,b,c,d) ((a) | ((b) << 8) | ((c) << 16) | ((unsigned)(d) << 24));
-        /// <summary>PARSER_FLAG_COMPLETE_FRAMES = 0x0001</summary>
-        public const int PARSER_FLAG_COMPLETE_FRAMES = 0x1;
-        /// <summary>PARSER_FLAG_FETCHED_OFFSET = 0x0004</summary>
-        public const int PARSER_FLAG_FETCHED_OFFSET = 0x4;
-        /// <summary>PARSER_FLAG_ONCE = 0x0002</summary>
-        public const int PARSER_FLAG_ONCE = 0x2;
-        /// <summary>PARSER_FLAG_USE_CODEC_TS = 0x1000</summary>
-        public const int PARSER_FLAG_USE_CODEC_TS = 0x1000;
         /// <summary>PP_CPU_CAPS_3DNOW = 0x40000000</summary>
         public const int PP_CPU_CAPS_3DNOW = 0x40000000;
         /// <summary>PP_CPU_CAPS_ALTIVEC = 0x10000000</summary>
@@ -1680,12 +1402,6 @@ namespace FFmpeg.AutoGen
         // public static PUT_UTF8 = (val, tmp, PUT_BYTE){int bytes, shift;uint32_t in = val;if (in < 0x80) {tmp = in;PUT_BYTE} else {bytes = (av_log2(in) + 4) / 5;shift = (bytes - 1) * 6;tmp = (256 - (256 >> bytes)) | (in >> shift);PUT_BYTEwhile (shift >= 6) {shift -= 6;tmp = 0x80 | ((in >> shift) & 0x3f);PUT_BYTE}}};
         // public static ROUNDED_DIV = (a,b) (((a)>=0 ? (a) + ((b)>>1) : (a) - ((b)>>1))/(b));
         // public static RSHIFT = (a,b) ((a) > 0 ? ((a) + ((1<<(b))>>1))>>(b) : ((a) + ((1<<(b))>>1)-1)>>(b));
-        /// <summary>SLICE_FLAG_ALLOW_FIELD = 0x0002</summary>
-        public const int SLICE_FLAG_ALLOW_FIELD = 0x2;
-        /// <summary>SLICE_FLAG_ALLOW_PLANE = 0x0004</summary>
-        public const int SLICE_FLAG_ALLOW_PLANE = 0x4;
-        /// <summary>SLICE_FLAG_CODED_ORDER = 0x0001</summary>
-        public const int SLICE_FLAG_CODED_ORDER = 0x1;
         /// <summary>SWR_FLAG_RESAMPLE = 0x1</summary>
         public const int SWR_FLAG_RESAMPLE = 0x1;
         /// <summary>SWS_ACCURATE_RND = 0x40000</summary>
@@ -1748,5 +1464,475 @@ namespace FFmpeg.AutoGen
         public const int SWS_SRC_V_CHR_DROP_SHIFT = 0x10;
         /// <summary>SWS_X = 0x8</summary>
         public const int SWS_X = 0x8;
+        /// <summary>Macro enum, prefix: AV_CH_</summary>
+        [Flags]
+        public enum AVChannels : ulong
+        {
+            /// <summary>AV_CH_BACK_CENTER = 0x00000100</summary>
+            BackCenter = 0x100,
+            
+            /// <summary>AV_CH_BACK_LEFT = 0x00000010</summary>
+            BackLeft = 0x10,
+            
+            /// <summary>AV_CH_BACK_RIGHT = 0x00000020</summary>
+            BackRight = 0x20,
+            
+            /// <summary>AV_CH_BOTTOM_FRONT_CENTER = 0x0000004000000000ULL</summary>
+            BottomFrontCenter = 0x4000000000UL,
+            
+            /// <summary>AV_CH_BOTTOM_FRONT_LEFT = 0x0000008000000000ULL</summary>
+            BottomFrontLeft = 0x8000000000UL,
+            
+            /// <summary>AV_CH_BOTTOM_FRONT_RIGHT = 0x0000010000000000ULL</summary>
+            BottomFrontRight = 0x10000000000UL,
+            
+            /// <summary>AV_CH_FRONT_CENTER = 0x00000004</summary>
+            FrontCenter = 0x4,
+            
+            /// <summary>AV_CH_FRONT_LEFT = 0x00000001</summary>
+            FrontLeft = 0x1,
+            
+            /// <summary>AV_CH_FRONT_LEFT_OF_CENTER = 0x00000040</summary>
+            FrontLeftOfCenter = 0x40,
+            
+            /// <summary>AV_CH_FRONT_RIGHT = 0x00000002</summary>
+            FrontRight = 0x2,
+            
+            /// <summary>AV_CH_FRONT_RIGHT_OF_CENTER = 0x00000080</summary>
+            FrontRightOfCenter = 0x80,
+            
+            /// <summary>AV_CH_LAYOUT_2_1 = (AV_CH_LAYOUT_STEREO|AV_CH_BACK_CENTER)</summary>
+            Layout_2_1 = LayoutStereo | BackCenter,
+            
+            /// <summary>AV_CH_LAYOUT_2_2 = (AV_CH_LAYOUT_STEREO|AV_CH_SIDE_LEFT|AV_CH_SIDE_RIGHT)</summary>
+            Layout_2_2 = LayoutStereo | SideLeft | SideRight,
+            
+            /// <summary>AV_CH_LAYOUT_22POINT2 = (AV_CH_LAYOUT_5POINT1_BACK|AV_CH_FRONT_LEFT_OF_CENTER|AV_CH_FRONT_RIGHT_OF_CENTER|AV_CH_BACK_CENTER|AV_CH_LOW_FREQUENCY_2|AV_CH_SIDE_LEFT|AV_CH_SIDE_RIGHT|AV_CH_TOP_FRONT_LEFT|AV_CH_TOP_FRONT_RIGHT|AV_CH_TOP_FRONT_CENTER|AV_CH_TOP_CENTER|AV_CH_TOP_BACK_LEFT|AV_CH_TOP_BACK_RIGHT|AV_CH_TOP_SIDE_LEFT|AV_CH_TOP_SIDE_RIGHT|AV_CH_TOP_BACK_CENTER|AV_CH_BOTTOM_FRONT_CENTER|AV_CH_BOTTOM_FRONT_LEFT|AV_CH_BOTTOM_FRONT_RIGHT)</summary>
+            Layout_22POINT2 = (ulong)(Layout_5POINT1Back | FrontLeftOfCenter | FrontRightOfCenter | BackCenter) | LowFrequency_2 | (ulong)(SideLeft) | (ulong)(SideRight) | (ulong)(TopFrontLeft) | (ulong)(TopFrontRight) | (ulong)(TopFrontCenter) | (ulong)(TopCenter) | (ulong)(TopBackLeft) | (ulong)(TopBackRight) | (ulong)(TopSideLeft) | (ulong)(TopSideRight) | (ulong)(TopBackCenter) | (ulong)(BottomFrontCenter) | (ulong)(BottomFrontLeft) | (ulong)(BottomFrontRight),
+            
+            /// <summary>AV_CH_LAYOUT_2POINT1 = (AV_CH_LAYOUT_STEREO|AV_CH_LOW_FREQUENCY)</summary>
+            Layout_2POINT1 = LayoutStereo | LowFrequency,
+            
+            /// <summary>AV_CH_LAYOUT_3POINT1 = (AV_CH_LAYOUT_SURROUND|AV_CH_LOW_FREQUENCY)</summary>
+            Layout_3POINT1 = LayoutSurround | LowFrequency,
+            
+            /// <summary>AV_CH_LAYOUT_4POINT0 = (AV_CH_LAYOUT_SURROUND|AV_CH_BACK_CENTER)</summary>
+            Layout_4POINT0 = LayoutSurround | BackCenter,
+            
+            /// <summary>AV_CH_LAYOUT_4POINT1 = (AV_CH_LAYOUT_4POINT0|AV_CH_LOW_FREQUENCY)</summary>
+            Layout_4POINT1 = Layout_4POINT0 | LowFrequency,
+            
+            /// <summary>AV_CH_LAYOUT_5POINT0 = (AV_CH_LAYOUT_SURROUND|AV_CH_SIDE_LEFT|AV_CH_SIDE_RIGHT)</summary>
+            Layout_5POINT0 = LayoutSurround | SideLeft | SideRight,
+            
+            /// <summary>AV_CH_LAYOUT_5POINT0_BACK = (AV_CH_LAYOUT_SURROUND|AV_CH_BACK_LEFT|AV_CH_BACK_RIGHT)</summary>
+            Layout_5POINT0Back = LayoutSurround | BackLeft | BackRight,
+            
+            /// <summary>AV_CH_LAYOUT_5POINT1 = (AV_CH_LAYOUT_5POINT0|AV_CH_LOW_FREQUENCY)</summary>
+            Layout_5POINT1 = Layout_5POINT0 | LowFrequency,
+            
+            /// <summary>AV_CH_LAYOUT_5POINT1_BACK = (AV_CH_LAYOUT_5POINT0_BACK|AV_CH_LOW_FREQUENCY)</summary>
+            Layout_5POINT1Back = Layout_5POINT0Back | LowFrequency,
+            
+            /// <summary>AV_CH_LAYOUT_6POINT0 = (AV_CH_LAYOUT_5POINT0|AV_CH_BACK_CENTER)</summary>
+            Layout_6POINT0 = Layout_5POINT0 | BackCenter,
+            
+            /// <summary>AV_CH_LAYOUT_6POINT0_FRONT = (AV_CH_LAYOUT_2_2|AV_CH_FRONT_LEFT_OF_CENTER|AV_CH_FRONT_RIGHT_OF_CENTER)</summary>
+            Layout_6POINT0Front = Layout_2_2 | FrontLeftOfCenter | FrontRightOfCenter,
+            
+            /// <summary>AV_CH_LAYOUT_6POINT1 = (AV_CH_LAYOUT_5POINT1|AV_CH_BACK_CENTER)</summary>
+            Layout_6POINT1 = Layout_5POINT1 | BackCenter,
+            
+            /// <summary>AV_CH_LAYOUT_6POINT1_BACK = (AV_CH_LAYOUT_5POINT1_BACK|AV_CH_BACK_CENTER)</summary>
+            Layout_6POINT1Back = Layout_5POINT1Back | BackCenter,
+            
+            /// <summary>AV_CH_LAYOUT_6POINT1_FRONT = (AV_CH_LAYOUT_6POINT0_FRONT|AV_CH_LOW_FREQUENCY)</summary>
+            Layout_6POINT1Front = Layout_6POINT0Front | LowFrequency,
+            
+            /// <summary>AV_CH_LAYOUT_7POINT0 = (AV_CH_LAYOUT_5POINT0|AV_CH_BACK_LEFT|AV_CH_BACK_RIGHT)</summary>
+            Layout_7POINT0 = Layout_5POINT0 | BackLeft | BackRight,
+            
+            /// <summary>AV_CH_LAYOUT_7POINT0_FRONT = (AV_CH_LAYOUT_5POINT0|AV_CH_FRONT_LEFT_OF_CENTER|AV_CH_FRONT_RIGHT_OF_CENTER)</summary>
+            Layout_7POINT0Front = Layout_5POINT0 | FrontLeftOfCenter | FrontRightOfCenter,
+            
+            /// <summary>AV_CH_LAYOUT_7POINT1 = (AV_CH_LAYOUT_5POINT1|AV_CH_BACK_LEFT|AV_CH_BACK_RIGHT)</summary>
+            Layout_7POINT1 = Layout_5POINT1 | BackLeft | BackRight,
+            
+            /// <summary>AV_CH_LAYOUT_7POINT1_WIDE = (AV_CH_LAYOUT_5POINT1|AV_CH_FRONT_LEFT_OF_CENTER|AV_CH_FRONT_RIGHT_OF_CENTER)</summary>
+            Layout_7POINT1Wide = Layout_5POINT1 | FrontLeftOfCenter | FrontRightOfCenter,
+            
+            /// <summary>AV_CH_LAYOUT_7POINT1_WIDE_BACK = (AV_CH_LAYOUT_5POINT1_BACK|AV_CH_FRONT_LEFT_OF_CENTER|AV_CH_FRONT_RIGHT_OF_CENTER)</summary>
+            Layout_7POINT1WideBack = Layout_5POINT1Back | FrontLeftOfCenter | FrontRightOfCenter,
+            
+            /// <summary>AV_CH_LAYOUT_HEXADECAGONAL = (AV_CH_LAYOUT_OCTAGONAL|AV_CH_WIDE_LEFT|AV_CH_WIDE_RIGHT|AV_CH_TOP_BACK_LEFT|AV_CH_TOP_BACK_RIGHT|AV_CH_TOP_BACK_CENTER|AV_CH_TOP_FRONT_CENTER|AV_CH_TOP_FRONT_LEFT|AV_CH_TOP_FRONT_RIGHT)</summary>
+            LayoutHexadecagonal = (ulong)(LayoutOctagonal) | WideLeft | (ulong)(WideRight) | (ulong)(TopBackLeft) | (ulong)(TopBackRight) | (ulong)(TopBackCenter) | (ulong)(TopFrontCenter) | (ulong)(TopFrontLeft) | (ulong)(TopFrontRight),
+            
+            /// <summary>AV_CH_LAYOUT_HEXAGONAL = (AV_CH_LAYOUT_5POINT0_BACK|AV_CH_BACK_CENTER)</summary>
+            LayoutHexagonal = Layout_5POINT0Back | BackCenter,
+            
+            /// <summary>AV_CH_LAYOUT_MONO = (AV_CH_FRONT_CENTER)</summary>
+            LayoutMono = FrontCenter,
+            
+            /// <summary>AV_CH_LAYOUT_NATIVE = 0x8000000000000000ULL</summary>
+            LayoutNative = 0x8000000000000000UL,
+            
+            /// <summary>AV_CH_LAYOUT_OCTAGONAL = (AV_CH_LAYOUT_5POINT0|AV_CH_BACK_LEFT|AV_CH_BACK_CENTER|AV_CH_BACK_RIGHT)</summary>
+            LayoutOctagonal = Layout_5POINT0 | BackLeft | BackCenter | BackRight,
+            
+            /// <summary>AV_CH_LAYOUT_QUAD = (AV_CH_LAYOUT_STEREO|AV_CH_BACK_LEFT|AV_CH_BACK_RIGHT)</summary>
+            LayoutQuad = LayoutStereo | BackLeft | BackRight,
+            
+            /// <summary>AV_CH_LAYOUT_STEREO = (AV_CH_FRONT_LEFT|AV_CH_FRONT_RIGHT)</summary>
+            LayoutStereo = FrontLeft | FrontRight,
+            
+            /// <summary>AV_CH_LAYOUT_STEREO_DOWNMIX = (AV_CH_STEREO_LEFT|AV_CH_STEREO_RIGHT)</summary>
+            LayoutStereoDownmix = StereoLeft | StereoRight,
+            
+            /// <summary>AV_CH_LAYOUT_SURROUND = (AV_CH_LAYOUT_STEREO|AV_CH_FRONT_CENTER)</summary>
+            LayoutSurround = LayoutStereo | FrontCenter,
+            
+            /// <summary>AV_CH_LOW_FREQUENCY = 0x00000008</summary>
+            LowFrequency = 0x8,
+            
+            /// <summary>AV_CH_LOW_FREQUENCY_2 = 0x0000000800000000ULL</summary>
+            LowFrequency_2 = 0x800000000UL,
+            
+            /// <summary>AV_CH_SIDE_LEFT = 0x00000200</summary>
+            SideLeft = 0x200,
+            
+            /// <summary>AV_CH_SIDE_RIGHT = 0x00000400</summary>
+            SideRight = 0x400,
+            
+            /// <summary>AV_CH_STEREO_LEFT = 0x20000000</summary>
+            StereoLeft = 0x20000000,
+            
+            /// <summary>AV_CH_STEREO_RIGHT = 0x40000000</summary>
+            StereoRight = 0x40000000,
+            
+            /// <summary>AV_CH_SURROUND_DIRECT_LEFT = 0x0000000200000000ULL</summary>
+            SurroundDirectLeft = 0x200000000UL,
+            
+            /// <summary>AV_CH_SURROUND_DIRECT_RIGHT = 0x0000000400000000ULL</summary>
+            SurroundDirectRight = 0x400000000UL,
+            
+            /// <summary>AV_CH_TOP_BACK_CENTER = 0x00010000</summary>
+            TopBackCenter = 0x10000,
+            
+            /// <summary>AV_CH_TOP_BACK_LEFT = 0x00008000</summary>
+            TopBackLeft = 0x8000,
+            
+            /// <summary>AV_CH_TOP_BACK_RIGHT = 0x00020000</summary>
+            TopBackRight = 0x20000,
+            
+            /// <summary>AV_CH_TOP_CENTER = 0x00000800</summary>
+            TopCenter = 0x800,
+            
+            /// <summary>AV_CH_TOP_FRONT_CENTER = 0x00002000</summary>
+            TopFrontCenter = 0x2000,
+            
+            /// <summary>AV_CH_TOP_FRONT_LEFT = 0x00001000</summary>
+            TopFrontLeft = 0x1000,
+            
+            /// <summary>AV_CH_TOP_FRONT_RIGHT = 0x00004000</summary>
+            TopFrontRight = 0x4000,
+            
+            /// <summary>AV_CH_TOP_SIDE_LEFT = 0x0000001000000000ULL</summary>
+            TopSideLeft = 0x1000000000UL,
+            
+            /// <summary>AV_CH_TOP_SIDE_RIGHT = 0x0000002000000000ULL</summary>
+            TopSideRight = 0x2000000000UL,
+            
+            /// <summary>AV_CH_WIDE_LEFT = 0x0000000080000000ULL</summary>
+            WideLeft = 0x80000000UL,
+            
+            /// <summary>AV_CH_WIDE_RIGHT = 0x0000000100000000ULL</summary>
+            WideRight = 0x100000000UL,
+        }
+        
+        /// <summary>Macro enum, prefix: AV_CODEC_CAP_</summary>
+        [Flags]
+        public enum AVCodecCompabilities : uint
+        {
+            /// <summary>AV_CODEC_CAP_AUTO_THREADS = AV_CODEC_CAP_OTHER_THREADS</summary>
+            AutoThreads = OtherThreads,
+            
+            /// <summary>AV_CODEC_CAP_AVOID_PROBING = (1 &lt;&lt; 17)</summary>
+            AvoidProbing = 0x1 << 0x11,
+            
+            /// <summary>AV_CODEC_CAP_CHANNEL_CONF = (1 &lt;&lt; 10)</summary>
+            ChannelConf = 0x1 << 0xa,
+            
+            /// <summary>AV_CODEC_CAP_DELAY = (1 &lt;&lt;  5)</summary>
+            Delay = 0x1 << 0x5,
+            
+            /// <summary>AV_CODEC_CAP_DR1 = (1 &lt;&lt;  1)</summary>
+            Dr1 = 0x1 << 0x1,
+            
+            /// <summary>AV_CODEC_CAP_DRAW_HORIZ_BAND = (1 &lt;&lt;  0)</summary>
+            DrawHorizBand = 0x1 << 0x0,
+            
+            /// <summary>AV_CODEC_CAP_ENCODER_FLUSH = (1 &lt;&lt; 21)</summary>
+            EncoderFlush = 0x1 << 0x15,
+            
+            /// <summary>AV_CODEC_CAP_ENCODER_REORDERED_OPAQUE = (1 &lt;&lt; 20)</summary>
+            EncoderReorderedOpaque = 0x1 << 0x14,
+            
+            /// <summary>AV_CODEC_CAP_EXPERIMENTAL = (1 &lt;&lt;  9)</summary>
+            Experimental = 0x1 << 0x9,
+            
+            /// <summary>AV_CODEC_CAP_FRAME_THREADS = (1 &lt;&lt; 12)</summary>
+            FrameThreads = 0x1 << 0xc,
+            
+            /// <summary>AV_CODEC_CAP_HARDWARE = (1 &lt;&lt; 18)</summary>
+            Hardware = 0x1 << 0x12,
+            
+            /// <summary>AV_CODEC_CAP_HYBRID = (1 &lt;&lt; 19)</summary>
+            Hybrid = 0x1 << 0x13,
+            
+            /// <summary>AV_CODEC_CAP_INTRA_ONLY = 0x40000000</summary>
+            IntraOnly = 0x40000000,
+            
+            /// <summary>AV_CODEC_CAP_LOSSLESS = 0x80000000</summary>
+            Lossless = 0x80000000U,
+            
+            /// <summary>AV_CODEC_CAP_OTHER_THREADS = (1 &lt;&lt; 15)</summary>
+            OtherThreads = 0x1 << 0xf,
+            
+            /// <summary>AV_CODEC_CAP_PARAM_CHANGE = (1 &lt;&lt; 14)</summary>
+            ParamChange = 0x1 << 0xe,
+            
+            /// <summary>AV_CODEC_CAP_SLICE_THREADS = (1 &lt;&lt; 13)</summary>
+            SliceThreads = 0x1 << 0xd,
+            
+            /// <summary>AV_CODEC_CAP_SMALL_LAST_FRAME = (1 &lt;&lt;  6)</summary>
+            SmallLastFrame = 0x1 << 0x6,
+            
+            /// <summary>AV_CODEC_CAP_SUBFRAMES = (1 &lt;&lt;  8)</summary>
+            Subframes = 0x1 << 0x8,
+            
+            /// <summary>AV_CODEC_CAP_TRUNCATED = (1 &lt;&lt;  3)</summary>
+            Truncated = 0x1 << 0x3,
+            
+            /// <summary>AV_CODEC_CAP_VARIABLE_FRAME_SIZE = (1 &lt;&lt; 16)</summary>
+            VariableFrameSize = 0x1 << 0x10,
+        }
+        
+        /// <summary>Macro enum, prefix: AV_CODEC_FLAG_</summary>
+        [Flags]
+        public enum AVCodecFlags : uint
+        {
+            /// <summary>AV_CODEC_FLAG_4MV = (1 &lt;&lt;  2)</summary>
+            _4MV = 0x1 << 0x2,
+            
+            /// <summary>AV_CODEC_FLAG_AC_PRED = (1 &lt;&lt; 24)</summary>
+            AcPred = 0x1 << 0x18,
+            
+            /// <summary>AV_CODEC_FLAG_BITEXACT = (1 &lt;&lt; 23)</summary>
+            Bitexact = 0x1 << 0x17,
+            
+            /// <summary>AV_CODEC_FLAG_CLOSED_GOP = (1U &lt;&lt; 31)</summary>
+            ClosedGop = 0x1U << 0x1f,
+            
+            /// <summary>AV_CODEC_FLAG_DROPCHANGED = (1 &lt;&lt;  5)</summary>
+            Dropchanged = 0x1 << 0x5,
+            
+            /// <summary>AV_CODEC_FLAG_GLOBAL_HEADER = (1 &lt;&lt; 22)</summary>
+            GlobalHeader = 0x1 << 0x16,
+            
+            /// <summary>AV_CODEC_FLAG_GRAY = (1 &lt;&lt; 13)</summary>
+            Gray = 0x1 << 0xd,
+            
+            /// <summary>AV_CODEC_FLAG_INTERLACED_DCT = (1 &lt;&lt; 18)</summary>
+            InterlacedDct = 0x1 << 0x12,
+            
+            /// <summary>AV_CODEC_FLAG_INTERLACED_ME = (1 &lt;&lt; 29)</summary>
+            InterlacedMe = 0x1 << 0x1d,
+            
+            /// <summary>AV_CODEC_FLAG_LOOP_FILTER = (1 &lt;&lt; 11)</summary>
+            LoopFilter = 0x1 << 0xb,
+            
+            /// <summary>AV_CODEC_FLAG_LOW_DELAY = (1 &lt;&lt; 19)</summary>
+            LowDelay = 0x1 << 0x13,
+            
+            /// <summary>AV_CODEC_FLAG_OUTPUT_CORRUPT = (1 &lt;&lt;  3)</summary>
+            OutputCorrupt = 0x1 << 0x3,
+            
+            /// <summary>AV_CODEC_FLAG_PASS1 = (1 &lt;&lt;  9)</summary>
+            Pass1 = 0x1 << 0x9,
+            
+            /// <summary>AV_CODEC_FLAG_PASS2 = (1 &lt;&lt; 10)</summary>
+            Pass2 = 0x1 << 0xa,
+            
+            /// <summary>AV_CODEC_FLAG_PSNR = (1 &lt;&lt; 15)</summary>
+            Psnr = 0x1 << 0xf,
+            
+            /// <summary>AV_CODEC_FLAG_QPEL = (1 &lt;&lt;  4)</summary>
+            Qpel = 0x1 << 0x4,
+            
+            /// <summary>AV_CODEC_FLAG_QSCALE = (1 &lt;&lt;  1)</summary>
+            Qscale = 0x1 << 0x1,
+            
+            /// <summary>AV_CODEC_FLAG_TRUNCATED = (1 &lt;&lt; 16)</summary>
+            Truncated = 0x1 << 0x10,
+            
+            /// <summary>AV_CODEC_FLAG_UNALIGNED = (1 &lt;&lt;  0)</summary>
+            Unaligned = 0x1 << 0x0,
+        }
+        
+        /// <summary>Macro enum, prefix: AV_CODEC_FLAG2_</summary>
+        [Flags]
+        public enum AVCodecFlags2
+        {
+            /// <summary>AV_CODEC_FLAG2_CHUNKS = (1 &lt;&lt; 15)</summary>
+            Chunks = 0x1 << 0xf,
+            
+            /// <summary>AV_CODEC_FLAG2_DROP_FRAME_TIMECODE = (1 &lt;&lt; 13)</summary>
+            DropFrameTimecode = 0x1 << 0xd,
+            
+            /// <summary>AV_CODEC_FLAG2_EXPORT_MVS = (1 &lt;&lt; 28)</summary>
+            ExportMvs = 0x1 << 0x1c,
+            
+            /// <summary>AV_CODEC_FLAG2_FAST = (1 &lt;&lt;  0)</summary>
+            Fast = 0x1 << 0x0,
+            
+            /// <summary>AV_CODEC_FLAG2_IGNORE_CROP = (1 &lt;&lt; 16)</summary>
+            IgnoreCrop = 0x1 << 0x10,
+            
+            /// <summary>AV_CODEC_FLAG2_LOCAL_HEADER = (1 &lt;&lt;  3)</summary>
+            LocalHeader = 0x1 << 0x3,
+            
+            /// <summary>AV_CODEC_FLAG2_NO_OUTPUT = (1 &lt;&lt;  2)</summary>
+            NoOutput = 0x1 << 0x2,
+            
+            /// <summary>AV_CODEC_FLAG2_RO_FLUSH_NOOP = (1 &lt;&lt; 30)</summary>
+            RoFlushNoop = 0x1 << 0x1e,
+            
+            /// <summary>AV_CODEC_FLAG2_SHOW_ALL = (1 &lt;&lt; 22)</summary>
+            ShowAll = 0x1 << 0x16,
+            
+            /// <summary>AV_CODEC_FLAG2_SKIP_MANUAL = (1 &lt;&lt; 29)</summary>
+            SkipManual = 0x1 << 0x1d,
+        }
+        
+        /// <summary>Macro enum, prefix: AVIO_FLAG_</summary>
+        [Flags]
+        public enum AvioFlags
+        {
+            /// <summary>AVIO_FLAG_DIRECT = 0x8000</summary>
+            Direct = 0x8000,
+            
+            /// <summary>AVIO_FLAG_NONBLOCK = 8</summary>
+            Nonblock = 0x8,
+            
+            /// <summary>AVIO_FLAG_READ = 1</summary>
+            Read = 0x1,
+            
+            /// <summary>AVIO_FLAG_READ_WRITE = (AVIO_FLAG_READ|AVIO_FLAG_WRITE)</summary>
+            ReadWrite = Read | Write,
+            
+            /// <summary>AVIO_FLAG_WRITE = 2</summary>
+            Write = 0x2,
+        }
+        
+        /// <summary>Macro enum, prefix: FF_CMP_</summary>
+        [Flags]
+        public enum FFComparisons
+        {
+            /// <summary>FF_CMP_BIT = 5</summary>
+            Bit = 0x5,
+            
+            /// <summary>FF_CMP_CHROMA = 256</summary>
+            Chroma = 0x100,
+            
+            /// <summary>FF_CMP_DCT = 3</summary>
+            Dct = 0x3,
+            
+            /// <summary>FF_CMP_DCT264 = 14</summary>
+            Dct264 = 0xe,
+            
+            /// <summary>FF_CMP_DCTMAX = 13</summary>
+            Dctmax = 0xd,
+            
+            /// <summary>FF_CMP_MEDIAN_SAD = 15</summary>
+            MedianSad = 0xf,
+            
+            /// <summary>FF_CMP_NSSE = 10</summary>
+            Nsse = 0xa,
+            
+            /// <summary>FF_CMP_PSNR = 4</summary>
+            Psnr = 0x4,
+            
+            /// <summary>FF_CMP_RD = 6</summary>
+            Rd = 0x6,
+            
+            /// <summary>FF_CMP_SAD = 0</summary>
+            Sad = 0x0,
+            
+            /// <summary>FF_CMP_SATD = 2</summary>
+            Satd = 0x2,
+            
+            /// <summary>FF_CMP_SSE = 1</summary>
+            Sse = 0x1,
+            
+            /// <summary>FF_CMP_VSAD = 8</summary>
+            Vsad = 0x8,
+            
+            /// <summary>FF_CMP_VSSE = 9</summary>
+            Vsse = 0x9,
+            
+            /// <summary>FF_CMP_W53 = 11</summary>
+            W53 = 0xb,
+            
+            /// <summary>FF_CMP_W97 = 12</summary>
+            W97 = 0xc,
+            
+            /// <summary>FF_CMP_ZERO = 7</summary>
+            Zero = 0x7,
+        }
+        
+        /// <summary>Macro enum, prefix: FF_MB_DECISION_</summary>
+        [Flags]
+        public enum FFMacroblockDecisions
+        {
+            /// <summary>FF_MB_DECISION_BITS = 1</summary>
+            Bits = 0x1,
+            
+            /// <summary>FF_MB_DECISION_RD = 2</summary>
+            Rd = 0x2,
+            
+            /// <summary>FF_MB_DECISION_SIMPLE = 0</summary>
+            Simple = 0x0,
+        }
+        
+        /// <summary>Macro enum, prefix: PARSER_FLAG_</summary>
+        [Flags]
+        public enum ParserFlags
+        {
+            /// <summary>PARSER_FLAG_COMPLETE_FRAMES = 0x0001</summary>
+            CompleteFrames = 0x1,
+            
+            /// <summary>PARSER_FLAG_FETCHED_OFFSET = 0x0004</summary>
+            FetchedOffset = 0x4,
+            
+            /// <summary>PARSER_FLAG_ONCE = 0x0002</summary>
+            Once = 0x2,
+            
+            /// <summary>PARSER_FLAG_USE_CODEC_TS = 0x1000</summary>
+            UseCodecTs = 0x1000,
+        }
+        
+        /// <summary>Macro enum, prefix: SLICE_FLAG_</summary>
+        [Flags]
+        public enum CodecSliceFlags
+        {
+            /// <summary>SLICE_FLAG_ALLOW_FIELD = 0x0002</summary>
+            AllowField = 0x2,
+            
+            /// <summary>SLICE_FLAG_ALLOW_PLANE = 0x0004</summary>
+            AllowPlane = 0x4,
+            
+            /// <summary>SLICE_FLAG_CODED_ORDER = 0x0001</summary>
+            CodedOrder = 0x1,
+        }
     }
 }

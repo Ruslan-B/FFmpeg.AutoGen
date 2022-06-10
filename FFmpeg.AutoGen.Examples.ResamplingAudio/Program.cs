@@ -7,8 +7,8 @@ namespace FFmpeg.AutoGen.Examples.ResamplingAudio
     {
         static int Main(string[] args)
         {
-            int sourceChannelLayout = ffmpeg.AV_CH_LAYOUT_STEREO;
-            int destinationChannelLayout = ffmpeg.AV_CH_LAYOUT_SURROUND;
+            int sourceChannelLayout = (int)ffmpeg.AVChannels.LayoutStereo;
+            int destinationChannelLayout = (int)ffmpeg.AVChannels.LayoutSurround;
             int sourceSampleRate = 48000;
             int destinationSampleRate = 44100;
             byte** sourceData = null;
