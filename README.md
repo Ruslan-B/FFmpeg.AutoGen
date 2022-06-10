@@ -1,13 +1,12 @@
 # Important
 **The FFmpeg API is vast and complex and this project exposes it with minimum modifications - support is very limited.
-Please consider to ask *how to* questions on [stackoverflow.com](https://stackoverflow.com/search?tab=newest&q=ffmpeg%20autogen) or in special repository on [github.com](https://github.com/Ruslan-B/FFmpeg.AutoGen.Questions/issues). 
+Please consider to ask *how to* questions on [stackoverflow.com](https://stackoverflow.com/search?tab=newest&q=ffmpeg%20autogen) or in special repository on [github.com](https://github.com/sdcb/FFmpeg.AutoGen.Questions/issues). 
 The community may be able to offer some assistance but you will largely be on your own.
 As another option you can search for a solution in C(lang) as with some effort you can convert it to C#.**
 
 ## FFmpeg.AutoGen 
-[![main](https://github.com/Ruslan-B/FFmpeg.AutoGen/actions/workflows/main.yml/badge.svg)](https://github.com/Ruslan-B/FFmpeg.AutoGen/actions/workflows/main.yml)
-[![travis](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.svg)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
-[![nuget](https://img.shields.io/nuget/v/FFmpeg.AutoGen.svg)](https://www.nuget.org/packages/FFmpeg.AutoGen/)
+[![main](https://github.com/sdcb/FFmpeg.AutoGen/actions/workflows/main.yml/badge.svg)](https://github.com/sdcb/FFmpeg.AutoGen/actions/workflows/main.yml)
+[![nuget](https://img.shields.io/nuget/v/Sdcb.FFmpeg.AutoGen.svg)](https://www.nuget.org/packages/Sdcb.FFmpeg.AutoGen/)
 
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.
 
@@ -44,17 +43,10 @@ Steps to generate:
 - Run ```FFmpeg.AutoGen.CppSharpUnsafeGenerator;```
 - All files with extension ```*.g.cs```  in ```FFmpeg.AutoGen``` project will be regenerated.
 
-## Speicial Thanks
-<a href="https://jetbrains.com">
-<img src="https://account.jetbrains.com/static/images/jetbrains-logo-inv.svg" data-canonical-src="https://account.jetbrains.com/static/images/jetbrains-logo-inv.svg" width="128" height="128" />
- <br/>
-Non-commercial open source license
- <a/>
-
 
 ## License
 
-Copyright © Ruslan Balanukhin 2021
+Copyright © Sdcb, Ruslan Balanukhin 2022
 All rights reserved.
 
 Distributed under the GNU Lesser General Public License (LGPL) version 3.  

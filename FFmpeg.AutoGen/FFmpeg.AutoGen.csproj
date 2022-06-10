@@ -18,6 +18,11 @@
     <!-- Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Authors>sdcb,Ruslan Balanukhin</Authors>
+    <Company>sdcb,Rational Core</Company>
+    <Copyright>Copyright © sdcb, Ruslan Balanukhin 2022 All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/sdcb/FFmpeg.AutoGen</PackageProjectUrl>
+    <AssemblyName>Sdcb.FFmpeg.AutoGen</AssemblyName>
   </PropertyGroup>
   
   <ItemGroup>
