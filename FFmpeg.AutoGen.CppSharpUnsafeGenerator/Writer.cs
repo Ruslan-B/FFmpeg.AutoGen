@@ -191,7 +191,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
             WriteLine($"public const int Size = {size};");
 
             if (array.IsPrimitive) WritePrimitiveFixedArray(array.Name, elementType, size, prefix);
-            else WriteComplexFixedArray(elementType, size, prefix);
+            else WriteComplexFixedArray(array.Name, elementType, size, prefix);
         }
 
         public void WriteFunction(ExportFunctionDefinition function)
@@ -396,9 +396,26 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     }
                 }
             }
+
+            // ToArray4
+            if (size == 8 && (elementType == "int" || elementType == "ulong"))
+            {
+                WriteLine();
+                string arr4Name = arrayName.Replace("8", "4");
+                WriteLine($"public static explicit operator {arr4Name}({arrayName} arr)");
+                using (BeginBlock())
+                {
+                    WriteLine($"{arr4Name} ret = new();");
+                    for (int i = 0; i < 4; ++i)
+                    {
+                        WriteLine($"ret.{prefix}[{i}] = arr.{prefix}[{i}];");
+                    }
+                    WriteLine($"return ret;");
+                }
+            }
         }
 
-        private void WriteComplexFixedArray(string elementType, int size, string prefix)
+        private void WriteComplexFixedArray(string arrayName, string elementType, int size, string prefix)
         {
             string seq = string.Join(", ", Enumerable.Range(0, size).Select(i => prefix + i));
             WriteLine($"public {elementType} {seq};");
@@ -455,6 +472,23 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator
                     {
                         WriteLine($"{prefix}{i} = p[{i}];");
                     }
+                }
+            }
+
+            // ToArray4
+            if (size == 8 && elementType == "byte*")
+            {
+                WriteLine();
+                string arr4Name = arrayName.Replace("8", "4");
+                WriteLine($"public static explicit operator {arr4Name}({arrayName} arr)");
+                using (BeginBlock())
+                {
+                    WriteLine($"{arr4Name} ret = new();");
+                    for (int i = 0; i < 4; ++i)
+                    {
+                        WriteLine($"ret.{prefix}{i} = arr.{prefix}{i};");
+                    }
+                    WriteLine($"return ret;");
                 }
             }
 

@@ -785,6 +785,16 @@ namespace FFmpeg.AutoGen
             }
         }
         
+        public static explicit operator byte_ptrArray4(byte_ptrArray8 arr)
+        {
+            byte_ptrArray4 ret = new();
+            ret._0 = arr._0;
+            ret._1 = arr._1;
+            ret._2 = arr._2;
+            ret._3 = arr._3;
+            return ret;
+        }
+        
 #if NET45_OR_GREATER
         public unsafe Span<IntPtr> GetPinnableReference()
         {
@@ -834,6 +844,16 @@ namespace FFmpeg.AutoGen
                 _[7] = p[7];
             }
         }
+        
+        public static explicit operator int_array4(int_array8 arr)
+        {
+            int_array4 ret = new();
+            ret._[0] = arr._[0];
+            ret._[1] = arr._[1];
+            ret._[2] = arr._[2];
+            ret._[3] = arr._[3];
+            return ret;
+        }
     }
     
     public unsafe struct ulong_array8
@@ -876,6 +896,16 @@ namespace FFmpeg.AutoGen
                 _[6] = p[6];
                 _[7] = p[7];
             }
+        }
+        
+        public static explicit operator ulong_array4(ulong_array8 arr)
+        {
+            ulong_array4 ret = new();
+            ret._[0] = arr._[0];
+            ret._[1] = arr._[1];
+            ret._[2] = arr._[2];
+            ret._[3] = arr._[3];
+            return ret;
         }
     }
     
