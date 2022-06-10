@@ -14,7 +14,6 @@ namespace FFmpeg.AutoGen
             {"avfilter", 8},
             {"avformat", 59},
             {"avutil", 57},
-            {"postproc", 56},
             {"swresample", 4},
             {"swscale", 6},
         };

@@ -1466,20 +1466,6 @@ namespace FFmpeg.AutoGen
         public const int LIBAVUTIL_VERSION_MICRO = 0x64;
         /// <summary>LIBAVUTIL_VERSION_MINOR = 17</summary>
         public const int LIBAVUTIL_VERSION_MINOR = 0x11;
-        /// <summary>LIBPOSTPROC_BUILD = LIBPOSTPROC_VERSION_INT</summary>
-        public static readonly int LIBPOSTPROC_BUILD = LIBPOSTPROC_VERSION_INT;
-        /// <summary>LIBPOSTPROC_IDENT = &quot;postproc&quot;</summary>
-        public const string LIBPOSTPROC_IDENT = "postproc";
-        /// <summary>LIBPOSTPROC_VERSION = AV_VERSION(LIBPOSTPROC_VERSION_MAJOR, LIBPOSTPROC_VERSION_MINOR, LIBPOSTPROC_VERSION_MICRO)</summary>
-        public static readonly string LIBPOSTPROC_VERSION = AV_VERSION(LIBPOSTPROC_VERSION_MAJOR, LIBPOSTPROC_VERSION_MINOR, LIBPOSTPROC_VERSION_MICRO);
-        /// <summary>LIBPOSTPROC_VERSION_INT = AV_VERSION_INT(LIBPOSTPROC_VERSION_MAJOR, LIBPOSTPROC_VERSION_MINOR, LIBPOSTPROC_VERSION_MICRO)</summary>
-        public static readonly int LIBPOSTPROC_VERSION_INT = AV_VERSION_INT(LIBPOSTPROC_VERSION_MAJOR, LIBPOSTPROC_VERSION_MINOR, LIBPOSTPROC_VERSION_MICRO);
-        /// <summary>LIBPOSTPROC_VERSION_MAJOR = 0x38</summary>
-        public const int LIBPOSTPROC_VERSION_MAJOR = 0x38;
-        /// <summary>LIBPOSTPROC_VERSION_MICRO = 0x64</summary>
-        public const int LIBPOSTPROC_VERSION_MICRO = 0x64;
-        /// <summary>LIBPOSTPROC_VERSION_MINOR = 0x3</summary>
-        public const int LIBPOSTPROC_VERSION_MINOR = 0x3;
         /// <summary>LIBSWRESAMPLE_BUILD = LIBSWRESAMPLE_VERSION_INT</summary>
         public static readonly int LIBSWRESAMPLE_BUILD = LIBSWRESAMPLE_VERSION_INT;
         /// <summary>LIBSWRESAMPLE_IDENT = &quot;SwR&quot;</summary>
@@ -1536,32 +1522,6 @@ namespace FFmpeg.AutoGen
         public const int PARSER_FLAG_ONCE = 0x2;
         /// <summary>PARSER_FLAG_USE_CODEC_TS = 0x1000</summary>
         public const int PARSER_FLAG_USE_CODEC_TS = 0x1000;
-        /// <summary>PP_CPU_CAPS_3DNOW = 0x40000000</summary>
-        public const int PP_CPU_CAPS_3DNOW = 0x40000000;
-        /// <summary>PP_CPU_CAPS_ALTIVEC = 0x10000000</summary>
-        public const int PP_CPU_CAPS_ALTIVEC = 0x10000000;
-        /// <summary>PP_CPU_CAPS_AUTO = 0x80000</summary>
-        public const int PP_CPU_CAPS_AUTO = 0x80000;
-        /// <summary>PP_CPU_CAPS_MMX = 0x80000000U</summary>
-        public const uint PP_CPU_CAPS_MMX = 0x80000000U;
-        /// <summary>PP_CPU_CAPS_MMX2 = 0x20000000</summary>
-        public const int PP_CPU_CAPS_MMX2 = 0x20000000;
-        /// <summary>PP_FORMAT = 0x8</summary>
-        public const int PP_FORMAT = 0x8;
-        /// <summary>PP_FORMAT_411 = 0x2 | PP_FORMAT</summary>
-        public const int PP_FORMAT_411 = 0x2 | PP_FORMAT;
-        /// <summary>PP_FORMAT_420 = 0x11 | PP_FORMAT</summary>
-        public const int PP_FORMAT_420 = 0x11 | PP_FORMAT;
-        /// <summary>PP_FORMAT_422 = 0x1 | PP_FORMAT</summary>
-        public const int PP_FORMAT_422 = 0x1 | PP_FORMAT;
-        /// <summary>PP_FORMAT_440 = 0x10 | PP_FORMAT</summary>
-        public const int PP_FORMAT_440 = 0x10 | PP_FORMAT;
-        /// <summary>PP_FORMAT_444 = 0x0 | PP_FORMAT</summary>
-        public const int PP_FORMAT_444 = 0x0 | PP_FORMAT;
-        /// <summary>PP_PICT_TYPE_QP2 = 0x10</summary>
-        public const int PP_PICT_TYPE_QP2 = 0x10;
-        /// <summary>PP_QUALITY_MAX = 0x6</summary>
-        public const int PP_QUALITY_MAX = 0x6;
         // public static PUT_UTF16 = (val, tmp, PUT_16BIT){uint32_t in = val;if (in < 0x10000) {tmp = in;PUT_16BIT} else {tmp = 0xD800 | ((in - 0x10000) >> 10);PUT_16BITtmp = 0xDC00 | ((in - 0x10000) & 0x3FF);PUT_16BIT}};
         // public static PUT_UTF8 = (val, tmp, PUT_BYTE){int bytes, shift;uint32_t in = val;if (in < 0x80) {tmp = in;PUT_BYTE} else {bytes = (av_log2(in) + 4) / 5;shift = (bytes - 1) * 6;tmp = (256 - (256 >> bytes)) | (in >> shift);PUT_BYTEwhile (shift >= 6) {shift -= 6;tmp = 0x80 | ((in >> shift) & 0x3f);PUT_BYTE}}};
         // public static ROUNDED_DIV = (a,b) (((a)>=0 ? (a) + ((b)>>1) : (a) - ((b)>>1))/(b));

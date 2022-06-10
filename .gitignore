@@ -107,3 +107,4 @@ UpgradeLog*.XML
 
 # Local 
 /FFmpeg.AutoGen.Example/frame.*.jpg
+/video-test*

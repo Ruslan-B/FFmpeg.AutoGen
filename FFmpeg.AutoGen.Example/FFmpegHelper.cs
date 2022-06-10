@@ -9,14 +9,20 @@ namespace FFmpeg.AutoGen.Example
         {
             var bufferSize = 1024;
             var buffer = stackalloc byte[bufferSize];
-            ffmpeg.av_strerror(error, buffer, (ulong) bufferSize);
-            var message = Marshal.PtrToStringAnsi((IntPtr) buffer);
+            ffmpeg.av_strerror(error, buffer, (ulong)bufferSize);
+            var message = Marshal.PtrToStringAnsi((IntPtr)buffer);
             return message;
         }
 
-        public static int ThrowExceptionIfError(this int error)
+        public static int ThrowExceptionIfError(this int error, string message = null)
         {
-            if (error < 0) throw new ApplicationException(av_strerror(error));
+            if (error < 0)
+            {
+                if (string.IsNullOrWhiteSpace(message))
+                    throw new ApplicationException(av_strerror(error));
+                else
+                    throw new ApplicationException(av_strerror(error) + ": " + message);
+            }
             return error;
         }
     }

@@ -40,7 +40,7 @@ namespace FFmpeg.AutoGen.Example
 
             ffmpeg.av_image_fill_arrays(ref _dstData,
                 ref _dstLinesize,
-                (byte*) _convertedFrameBufferPtr,
+                (byte*)_convertedFrameBufferPtr,
                 destinationPixelFormat,
                 destinationSize.Width,
                 destinationSize.Height,
@@ -55,7 +55,8 @@ namespace FFmpeg.AutoGen.Example
 
         public AVFrame Convert(AVFrame sourceFrame)
         {
-            ffmpeg.sws_scale(_pConvertContext,
+            ffmpeg.sws_scale(
+                _pConvertContext,
                 sourceFrame.data,
                 sourceFrame.linesize,
                 0,

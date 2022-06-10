@@ -19,14 +19,68 @@ namespace FFmpeg.AutoGen.Example
 
             Console.WriteLine($"FFmpeg version info: {ffmpeg.av_version_info()}");
 
+            Console.WriteLine("SetupLogging...");
             SetupLogging();
+
+            Console.WriteLine("ConfigureHWDecoder...");
             ConfigureHWDecoder(out var deviceType);
 
-            Console.WriteLine("Decoding...");
+            Console.WriteLine("DecodeAllFramesToImages...");
             DecodeAllFramesToImages(deviceType);
 
-            Console.WriteLine("Encoding...");
+            //Console.WriteLine("IterateCodecs...");
+            //IterateCodecs();
+
+            Console.WriteLine("EncodeImagesToH264...");
             EncodeImagesToH264();
+        }
+
+        private unsafe static void IterateCodecs()
+        {
+            void* opaque = null;
+            AVCodec* codec = null;
+            while ((codec = ffmpeg.av_codec_iterate(&opaque)) != null)
+            {
+                if (codec->type == AVMediaType.AVMEDIA_TYPE_VIDEO &&
+                    codec->encode2.Pointer != IntPtr.Zero &&
+                    codec->pix_fmts != null)
+                {
+                    var id = Enum.GetName(codec->id);
+                    var name = Marshal.PtrToStringAnsi((IntPtr)codec->name);
+                    var long_name = Marshal.PtrToStringAnsi((IntPtr)codec->long_name);
+
+                    Console.WriteLine(id);
+                    Console.WriteLine($"\t{name}");
+                    Console.WriteLine($"\t{long_name}");
+
+                    int i = 0;
+                    AVPixelFormat pix_fmt;
+                    while ((pix_fmt = codec->pix_fmts[i++]) != AVPixelFormat.AV_PIX_FMT_NONE)
+                        Console.WriteLine($"\t\t{Enum.GetName(pix_fmt)}");
+
+                    var supported_framerates = codec->supported_framerates;
+                    LogRationals(supported_framerates, nameof(supported_framerates));
+                }
+            }
+        }
+
+        private static unsafe void LogRationals(AVRational* rationals, string name)
+        {
+            if (rationals != null)
+            {
+                Console.Write($"\t\t{name}");
+                int i = 0;
+                AVRational rational = rationals[i++];
+                while (!(rational.num == 0 && rational.den == 0))
+                {
+                    Console.WriteLine($"\t\t\t[{rational.num} \\ {rational.den}]");
+                    rational = rationals[i++];
+                }
+            }
+            else
+            {
+                Console.WriteLine($"\t\tNo {name}");
+            }
         }
 
         private static void ConfigureHWDecoder(out AVHWDeviceType HWtype)
@@ -79,7 +133,7 @@ namespace FFmpeg.AutoGen.Example
                 var lineBuffer = stackalloc byte[lineSize];
                 var printPrefix = 1;
                 ffmpeg.av_log_format_line(p0, level, format, vl, lineBuffer, lineSize, &printPrefix);
-                var line = Marshal.PtrToStringAnsi((IntPtr) lineBuffer);
+                var line = Marshal.PtrToStringAnsi((IntPtr)lineBuffer);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write(line);
                 Console.ResetColor();
@@ -110,6 +164,9 @@ namespace FFmpeg.AutoGen.Example
 
             var frameNumber = 0;
 
+            if (!Directory.Exists("./images"))
+                Directory.CreateDirectory("./images");
+
             while (vsd.TryDecodeNextFrame(out var frame))
             {
                 var convertedFrame = vfc.Convert(frame);
@@ -118,8 +175,8 @@ namespace FFmpeg.AutoGen.Example
                     convertedFrame.height,
                     convertedFrame.linesize[0],
                     PixelFormat.Format24bppRgb,
-                    (IntPtr) convertedFrame.data[0]))
-                    bitmap.Save($"frame.{frameNumber:D8}.jpg", ImageFormat.Jpeg);
+                    (IntPtr)convertedFrame.data[0]))
+                    bitmap.Save($"./images/frame.{frameNumber:D8}.jpg", ImageFormat.Jpeg);
 
                 Console.WriteLine($"frame: {frameNumber}");
                 frameNumber++;
@@ -147,11 +204,11 @@ namespace FFmpeg.AutoGen.Example
 
         private static unsafe void EncodeImagesToH264()
         {
-            var frameFiles = Directory.GetFiles(".", "frame.*.jpg").OrderBy(x => x).ToArray();
+            var frameFiles = Directory.GetFiles("./images", "frame.*.jpg").OrderBy(x => x).ToArray();
             var fistFrameImage = Image.FromFile(frameFiles.First());
 
-            var outputFileName = "out.h264";
-            var fps = 25;
+            var outputFileName = "out.mp4";
+            var fps = 24;
             var sourceSize = fistFrameImage.Size;
             var sourcePixelFormat = AVPixelFormat.AV_PIX_FMT_BGR24;
             var destinationSize = sourceSize;
@@ -159,12 +216,9 @@ namespace FFmpeg.AutoGen.Example
             using var vfc =
                 new VideoFrameConverter(sourceSize, sourcePixelFormat, destinationSize, destinationPixelFormat);
 
-            using var fs = File.Open(outputFileName, FileMode.Create);
-
-            using var vse = new H264VideoStreamEncoder(fs, fps, destinationSize);
+            using var vse = new H264VideoStreamEncoder(outputFileName, fps, destinationSize);
 
             var frameNumber = 0;
-
             foreach (var frameFile in frameFiles)
             {
                 byte[] bitmapData;
@@ -184,11 +238,12 @@ namespace FFmpeg.AutoGen.Example
                         height = sourceSize.Height
                     };
                     var convertedFrame = vfc.Convert(frame);
-                    convertedFrame.pts = frameNumber * fps;
-                    vse.Encode(convertedFrame);
+                    convertedFrame.pts = frameNumber;
+                    convertedFrame.pkt_duration = 1;
+                    vse.Encode(&convertedFrame);
                 }
 
-                Console.WriteLine($"frame: {frameNumber}");
+                //Console.WriteLine($"frame: {frameNumber}");
                 frameNumber++;
             }
         }
