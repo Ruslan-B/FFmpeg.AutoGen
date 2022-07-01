@@ -191,6 +191,8 @@ namespace FFmpeg.AutoGen.Example
                 Console.WriteLine($"frame: {frameNumber}");
                 frameNumber++;
             }
+
+            vse.Drain();
         }
 
         private static byte[] GetBitmapData(Bitmap frameBitmap)
