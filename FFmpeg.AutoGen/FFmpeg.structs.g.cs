@@ -74,14 +74,36 @@ namespace FFmpeg.AutoGen
         public int @nb_components;
     }
     
-    public unsafe struct AVFifoBuffer
+    /// <summary>An AVChannelCustom defines a single channel within a custom order layout</summary>
+    public unsafe struct AVChannelCustom
     {
-        public byte* @buffer;
-        public byte* @rptr;
-        public byte* @wptr;
-        public byte* @end;
-        public uint @rndx;
-        public uint @wndx;
+        public AVChannel @id;
+        public byte_array16 @name;
+        public void* @opaque;
+    }
+    
+    /// <summary>An AVChannelLayout holds information about the channel layout of audio data.</summary>
+    public unsafe struct AVChannelLayout
+    {
+        /// <summary>Channel order used in this layout. This is a mandatory field.</summary>
+        public AVChannelOrder @order;
+        /// <summary>Number of channels in this layout. Mandatory field.</summary>
+        public int @nb_channels;
+        public AVChannelLayout_u @u;
+        /// <summary>For some private data of the user.</summary>
+        public void* @opaque;
+    }
+    
+    /// <summary>Details about which channels are present in this layout. For AV_CHANNEL_ORDER_UNSPEC, this field is undefined and must not be used.</summary>
+    [StructLayout(LayoutKind.Explicit)]
+    public unsafe struct AVChannelLayout_u
+    {
+        /// <summary>This member must be used for AV_CHANNEL_ORDER_NATIVE, and may be used for AV_CHANNEL_ORDER_AMBISONIC to signal non-diegetic channels. It is a bitmask, where the position of each set bit means that the AVChannel with the corresponding value is present.</summary>
+        [FieldOffset(0)]
+        public ulong @mask;
+        /// <summary>This member must be used when the channel order is AV_CHANNEL_ORDER_CUSTOM. It is a nb_channels-sized array, with each element signalling the presence of the AVChannel with the corresponding value in map[i].id.</summary>
+        [FieldOffset(0)]
+        public AVChannelCustom* @map;
     }
     
     /// <summary>Structure to hold side data for an AVFrame.</summary>
@@ -168,6 +190,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Sample rate of the audio data.</summary>
         public int @sample_rate;
         /// <summary>Channel layout of the audio data.</summary>
+        [Obsolete("use ch_layout instead")]
         public ulong @channel_layout;
         /// <summary>AVBuffer references backing the data for this frame. All the pointers in data and extended_data must point inside one of the buffers in buf or extended_buf. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j &lt; i.</summary>
         public AVBufferRef_ptrArray8 @buf;
@@ -197,6 +220,7 @@ namespace FFmpeg.AutoGen
         /// <summary>decode error flags of the frame, set to a combination of FF_DECODE_ERROR_xxx flags if the decoder produced a frame, but there were errors during the decoding. - encoding: unused - decoding: set by libavcodec, read by user.</summary>
         public int @decode_error_flags;
         /// <summary>number of audio channels, only used for audio. - encoding: unused - decoding: Read by user.</summary>
+        [Obsolete("use ch_layout instead")]
         public int @channels;
         /// <summary>size of the corresponding packet containing the compressed frame. It is set to a negative value if unknown. - encoding: unused - decoding: set by libavcodec, read by user.</summary>
         public int @pkt_size;
@@ -211,6 +235,8 @@ namespace FFmpeg.AutoGen
         public ulong @crop_right;
         /// <summary>AVBufferRef for internal use by a single libav* library. Must not be used to transfer data between libraries. Has to be NULL when ownership of the frame leaves the respective library.</summary>
         public AVBufferRef* @private_ref;
+        /// <summary>Channel layout of the audio data.</summary>
+        public AVChannelLayout @ch_layout;
     }
     
     public unsafe struct AVDictionaryEntry
@@ -909,29 +935,6 @@ namespace FFmpeg.AutoGen
         public SwsVector* @chrV;
     }
     
-    public unsafe struct AVSubtitleRect
-    {
-        /// <summary>top left corner of pict, undefined when pict is not set</summary>
-        public int @x;
-        /// <summary>top left corner of pict, undefined when pict is not set</summary>
-        public int @y;
-        /// <summary>width of pict, undefined when pict is not set</summary>
-        public int @w;
-        /// <summary>height of pict, undefined when pict is not set</summary>
-        public int @h;
-        /// <summary>number of colors in pict, undefined when pict is not set</summary>
-        public int @nb_colors;
-        /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
-        public byte_ptrArray4 @data;
-        public int_array4 @linesize;
-        public AVSubtitleType @type;
-        /// <summary>0 terminated plain UTF-8 text</summary>
-        public byte* @text;
-        /// <summary>0 terminated ASS/SSA compatible event line. The presentation of this is unaffected by the other values in this struct.</summary>
-        public byte* @ass;
-        public int @flags;
-    }
-    
     public unsafe struct RcOverride
     {
         public int @start_frame;
@@ -1084,6 +1087,7 @@ namespace FFmpeg.AutoGen
         /// <summary>samples per second</summary>
         public int @sample_rate;
         /// <summary>number of audio channels</summary>
+        [Obsolete("use ch_layout.nb_channels")]
         public int @channels;
         /// <summary>sample format</summary>
         public AVSampleFormat @sample_fmt;
@@ -1096,8 +1100,10 @@ namespace FFmpeg.AutoGen
         /// <summary>Audio cutoff bandwidth (0 means &quot;automatic&quot;) - encoding: Set by user. - decoding: unused</summary>
         public int @cutoff;
         /// <summary>Audio channel layout. - encoding: set by user. - decoding: set by user, may be overwritten by libavcodec.</summary>
+        [Obsolete("use ch_layout")]
         public ulong @channel_layout;
         /// <summary>Request decoder to use this channel layout if it can (0 for default) - encoding: unused - decoding: Set by user.</summary>
+        [Obsolete("use \"downmix\" codec private option")]
         public ulong @request_channel_layout;
         /// <summary>Type of service that the audio stream conveys. - encoding: Set by user. - decoding: Set by libavcodec.</summary>
         public AVAudioServiceType @audio_service_type;
@@ -1175,7 +1181,7 @@ namespace FFmpeg.AutoGen
         public int @thread_safe_callbacks;
         /// <summary>The codec may call this to execute several independent things. It will return only after finishing all tasks. The user may replace this with some multithreaded implementation, the default implementation will execute the parts serially.</summary>
         public AVCodecContext_execute_func @execute;
-        /// <summary>The codec may call this to execute several independent things. It will return only after finishing all tasks. The user may replace this with some multithreaded implementation, the default implementation will execute the parts serially. Also see avcodec_thread_init and e.g. the --enable-pthread configure option.</summary>
+        /// <summary>The codec may call this to execute several independent things. It will return only after finishing all tasks. The user may replace this with some multithreaded implementation, the default implementation will execute the parts serially.</summary>
         public AVCodecContext_execute2_func @execute2;
         /// <summary>noise vs. sse weight for the nsse comparison function - encoding: Set by user. - decoding: unused</summary>
         public int @nsse_weight;
@@ -1254,6 +1260,8 @@ namespace FFmpeg.AutoGen
         public int @export_side_data;
         /// <summary>This callback is called at the beginning of each packet to get a data buffer for it.</summary>
         public AVCodecContext_get_encode_buffer_func @get_encode_buffer;
+        /// <summary>Audio channel layout. - encoding: must be set by the caller, to one of AVCodec.ch_layouts. - decoding: may be set by the caller if known e.g. from the container. The decoder can then override during decoding as needed.</summary>
+        public AVChannelLayout @ch_layout;
     }
     
     /// <summary>AVCodec.</summary>
@@ -1285,36 +1293,8 @@ namespace FFmpeg.AutoGen
         public AVProfile* @profiles;
         /// <summary>Group name of the codec implementation. This is a short symbolic name of the wrapper backing this codec. A wrapper uses some kind of external implementation for the codec, such as an external library, or a codec implementation provided by the OS or the hardware. If this field is NULL, this is a builtin, libavcodec native codec. If non-NULL, this will be the suffix in AVCodec.name in most cases (usually AVCodec.name will be of the form &quot;&lt;codec_name&gt;_&lt;wrapper_name&gt;&quot;).</summary>
         public byte* @wrapper_name;
-        /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavcodec and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
-        public int @caps_internal;
-        public int @priv_data_size;
-        /// <summary>@{</summary>
-        public AVCodec_update_thread_context_func @update_thread_context;
-        /// <summary>Copy variables back to the user-facing context</summary>
-        public AVCodec_update_thread_context_for_user_func @update_thread_context_for_user;
-        /// <summary>Private codec-specific defaults.</summary>
-        public AVCodecDefault* @defaults;
-        /// <summary>Initialize codec static data, called from av_codec_iterate().</summary>
-        public AVCodec_init_static_data_func @init_static_data;
-        public AVCodec_init_func @init;
-        public AVCodec_encode_sub_func @encode_sub;
-        /// <summary>Encode data to an AVPacket.</summary>
-        public AVCodec_encode2_func @encode2;
-        /// <summary>Decode picture or subtitle data.</summary>
-        public AVCodec_decode_func @decode;
-        public AVCodec_close_func @close;
-        /// <summary>Encode API with decoupled frame/packet dataflow. This function is called to get one output packet. It should call ff_encode_get_frame() to obtain input data.</summary>
-        public AVCodec_receive_packet_func @receive_packet;
-        /// <summary>Decode API with decoupled packet/frame dataflow. This function is called to get one output frame. It should call ff_decode_get_packet() to obtain input data.</summary>
-        public AVCodec_receive_frame_func @receive_frame;
-        /// <summary>Flush buffers. Will be called when seeking</summary>
-        public AVCodec_flush_func @flush;
-        /// <summary>Decoding only, a comma-separated list of bitstream filters to apply to packets before decoding.</summary>
-        public byte* @bsfs;
-        /// <summary>Array of pointers to hardware configurations supported by the codec, or NULL if no hardware supported. The array is terminated by a NULL pointer.</summary>
-        public AVCodecHWConfigInternal** @hw_configs;
-        /// <summary>List of supported codec_tags, terminated by FF_CODEC_TAGS_END.</summary>
-        public uint* @codec_tags;
+        /// <summary>Array of supported channel layouts, terminated with a zeroed layout.</summary>
+        public AVChannelLayout* @ch_layouts;
     }
     
     /// <summary>AVProfile.</summary>
@@ -1325,15 +1305,64 @@ namespace FFmpeg.AutoGen
         public byte* @name;
     }
     
-    public unsafe struct AVSubtitle
+    public unsafe struct AVHWAccel
     {
-        public ushort @format;
-        public uint @start_display_time;
-        public uint @end_display_time;
-        public uint @num_rects;
-        public AVSubtitleRect** @rects;
-        /// <summary>Same as packet pts, in AV_TIME_BASE</summary>
-        public long @pts;
+        /// <summary>Name of the hardware accelerated codec. The name is globally unique among encoders and among decoders (but an encoder and a decoder can share the same name).</summary>
+        public byte* @name;
+        /// <summary>Type of codec implemented by the hardware accelerator.</summary>
+        public AVMediaType @type;
+        /// <summary>Codec implemented by the hardware accelerator.</summary>
+        public AVCodecID @id;
+        /// <summary>Supported pixel format.</summary>
+        public AVPixelFormat @pix_fmt;
+        /// <summary>Hardware accelerated codec capabilities. see AV_HWACCEL_CODEC_CAP_*</summary>
+        public int @capabilities;
+        /// <summary>Allocate a custom buffer</summary>
+        public AVHWAccel_alloc_frame_func @alloc_frame;
+        /// <summary>Called at the beginning of each frame or field picture.</summary>
+        public AVHWAccel_start_frame_func @start_frame;
+        /// <summary>Callback for parameter data (SPS/PPS/VPS etc).</summary>
+        public AVHWAccel_decode_params_func @decode_params;
+        /// <summary>Callback for each slice.</summary>
+        public AVHWAccel_decode_slice_func @decode_slice;
+        /// <summary>Called at the end of each frame or field picture.</summary>
+        public AVHWAccel_end_frame_func @end_frame;
+        /// <summary>Size of per-frame hardware accelerator private data.</summary>
+        public int @frame_priv_data_size;
+        /// <summary>Initialize the hwaccel private data.</summary>
+        public AVHWAccel_init_func @init;
+        /// <summary>Uninitialize the hwaccel private data.</summary>
+        public AVHWAccel_uninit_func @uninit;
+        /// <summary>Size of the private data to allocate in AVCodecInternal.hwaccel_priv_data.</summary>
+        public int @priv_data_size;
+        /// <summary>Internal hwaccel capabilities.</summary>
+        public int @caps_internal;
+        /// <summary>Fill the given hw_frames context with current codec parameters. Called from get_format. Refer to avcodec_get_hw_frames_parameters() for details.</summary>
+        public AVHWAccel_frame_params_func @frame_params;
+    }
+    
+    /// <summary>This struct describes the properties of a single codec described by an AVCodecID.</summary>
+    public unsafe struct AVCodecDescriptor
+    {
+        public AVCodecID @id;
+        public AVMediaType @type;
+        /// <summary>Name of the codec described by this descriptor. It is non-empty and unique for each codec descriptor. It should contain alphanumeric characters and &apos;_&apos; only.</summary>
+        public byte* @name;
+        /// <summary>A more descriptive name for this codec. May be NULL.</summary>
+        public byte* @long_name;
+        /// <summary>Codec properties, a combination of AV_CODEC_PROP_* flags.</summary>
+        public int @props;
+        /// <summary>MIME type(s) associated with the codec. May be NULL; if not, a NULL-terminated array of MIME types. The first item is always non-NULL and is the preferred MIME type.</summary>
+        public byte** @mime_types;
+        /// <summary>If non-NULL, an array of profiles recognized for this codec. Terminated with FF_PROFILE_UNKNOWN.</summary>
+        public AVProfile* @profiles;
+    }
+    
+    public unsafe struct AVPacketSideData
+    {
+        public byte* @data;
+        public ulong @size;
+        public AVPacketSideDataType @type;
     }
     
     /// <summary>This structure stores compressed data. It is typically exported by demuxers and then passed as input to decoders, or received as output from encoders and then passed to muxers.</summary>
@@ -1365,66 +1394,38 @@ namespace FFmpeg.AutoGen
         public AVRational @time_base;
     }
     
-    public unsafe struct AVPacketSideData
+    public unsafe struct AVSubtitleRect
     {
-        public byte* @data;
-        public ulong @size;
-        public AVPacketSideDataType @type;
+        /// <summary>top left corner of pict, undefined when pict is not set</summary>
+        public int @x;
+        /// <summary>top left corner of pict, undefined when pict is not set</summary>
+        public int @y;
+        /// <summary>width of pict, undefined when pict is not set</summary>
+        public int @w;
+        /// <summary>height of pict, undefined when pict is not set</summary>
+        public int @h;
+        /// <summary>number of colors in pict, undefined when pict is not set</summary>
+        public int @nb_colors;
+        /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
+        public byte_ptrArray4 @data;
+        public int_array4 @linesize;
+        public AVSubtitleType @type;
+        /// <summary>0 terminated plain UTF-8 text</summary>
+        public byte* @text;
+        /// <summary>0 terminated ASS/SSA compatible event line. The presentation of this is unaffected by the other values in this struct.</summary>
+        public byte* @ass;
+        public int @flags;
     }
     
-    public unsafe struct AVHWAccel
+    public unsafe struct AVSubtitle
     {
-        /// <summary>Name of the hardware accelerated codec. The name is globally unique among encoders and among decoders (but an encoder and a decoder can share the same name).</summary>
-        public byte* @name;
-        /// <summary>Type of codec implemented by the hardware accelerator.</summary>
-        public AVMediaType @type;
-        /// <summary>Codec implemented by the hardware accelerator.</summary>
-        public AVCodecID @id;
-        /// <summary>Supported pixel format.</summary>
-        public AVPixelFormat @pix_fmt;
-        /// <summary>Hardware accelerated codec capabilities. see AV_HWACCEL_CODEC_CAP_*</summary>
-        public int @capabilities;
-        /// <summary>Allocate a custom buffer</summary>
-        public AVHWAccel_alloc_frame_func @alloc_frame;
-        /// <summary>Called at the beginning of each frame or field picture.</summary>
-        public AVHWAccel_start_frame_func @start_frame;
-        /// <summary>Callback for parameter data (SPS/PPS/VPS etc).</summary>
-        public AVHWAccel_decode_params_func @decode_params;
-        /// <summary>Callback for each slice.</summary>
-        public AVHWAccel_decode_slice_func @decode_slice;
-        /// <summary>Called at the end of each frame or field picture.</summary>
-        public AVHWAccel_end_frame_func @end_frame;
-        /// <summary>Size of per-frame hardware accelerator private data.</summary>
-        public int @frame_priv_data_size;
-        /// <summary>Called for every Macroblock in a slice.</summary>
-        public AVHWAccel_decode_mb_func @decode_mb;
-        /// <summary>Initialize the hwaccel private data.</summary>
-        public AVHWAccel_init_func @init;
-        /// <summary>Uninitialize the hwaccel private data.</summary>
-        public AVHWAccel_uninit_func @uninit;
-        /// <summary>Size of the private data to allocate in AVCodecInternal.hwaccel_priv_data.</summary>
-        public int @priv_data_size;
-        /// <summary>Internal hwaccel capabilities.</summary>
-        public int @caps_internal;
-        /// <summary>Fill the given hw_frames context with current codec parameters. Called from get_format. Refer to avcodec_get_hw_frames_parameters() for details.</summary>
-        public AVHWAccel_frame_params_func @frame_params;
-    }
-    
-    /// <summary>This struct describes the properties of a single codec described by an AVCodecID.</summary>
-    public unsafe struct AVCodecDescriptor
-    {
-        public AVCodecID @id;
-        public AVMediaType @type;
-        /// <summary>Name of the codec described by this descriptor. It is non-empty and unique for each codec descriptor. It should contain alphanumeric characters and &apos;_&apos; only.</summary>
-        public byte* @name;
-        /// <summary>A more descriptive name for this codec. May be NULL.</summary>
-        public byte* @long_name;
-        /// <summary>Codec properties, a combination of AV_CODEC_PROP_* flags.</summary>
-        public int @props;
-        /// <summary>MIME type(s) associated with the codec. May be NULL; if not, a NULL-terminated array of MIME types. The first item is always non-NULL and is the preferred MIME type.</summary>
-        public byte** @mime_types;
-        /// <summary>If non-NULL, an array of profiles recognized for this codec. Terminated with FF_PROFILE_UNKNOWN.</summary>
-        public AVProfile* @profiles;
+        public ushort @format;
+        public uint @start_display_time;
+        public uint @end_display_time;
+        public uint @num_rects;
+        public AVSubtitleRect** @rects;
+        /// <summary>Same as packet pts, in AV_TIME_BASE</summary>
+        public long @pts;
     }
     
     public unsafe struct AVCodecParserContext
@@ -1531,8 +1532,10 @@ namespace FFmpeg.AutoGen
         /// <summary>Video only. Number of delayed frames.</summary>
         public int @video_delay;
         /// <summary>Audio only. The channel layout bitmask. May be 0 if the channel layout is unknown or unspecified, otherwise the number of bits set must be equal to the channels field.</summary>
+        [Obsolete("use ch_layout")]
         public ulong @channel_layout;
         /// <summary>Audio only. The number of audio channels.</summary>
+        [Obsolete("use ch_layout.nb_channels")]
         public int @channels;
         /// <summary>Audio only. The number of audio samples per second.</summary>
         public int @sample_rate;
@@ -1546,6 +1549,8 @@ namespace FFmpeg.AutoGen
         public int @trailing_padding;
         /// <summary>Audio only. Number of samples to skip after a discontinuity.</summary>
         public int @seek_preroll;
+        /// <summary>Audio only. The channel layout and number of channels.</summary>
+        public AVChannelLayout @ch_layout;
     }
     
     public unsafe struct AVCodecHWConfig
@@ -1896,7 +1901,7 @@ namespace FFmpeg.AutoGen
         public int @event_flags;
         /// <summary>Maximum number of packets to read while waiting for the first timestamp. Decoding only.</summary>
         public int @max_ts_probe;
-        /// <summary>Avoid negative timestamps during muxing. Any value of the AVFMT_AVOID_NEG_TS_* constants. Note, this only works when using av_interleaved_write_frame. (interleave_packet_per_dts is in use) - muxing: Set by user - demuxing: unused</summary>
+        /// <summary>Avoid negative timestamps during muxing. Any value of the AVFMT_AVOID_NEG_TS_* constants. Note, this works better when using av_interleaved_write_frame(). - muxing: Set by user - demuxing: unused</summary>
         public int @avoid_negative_ts;
         /// <summary>Transport stream id. This will be moved into demuxer private options. Thus no API/ABI compatibility</summary>
         public int @ts_id;
@@ -2258,6 +2263,7 @@ namespace FFmpeg.AutoGen
         /// <summary>agreed upon sample aspect ratio</summary>
         public AVRational @sample_aspect_ratio;
         /// <summary>channel layout of current buffer (see libavutil/channel_layout.h)</summary>
+        [Obsolete("use ch_layout")]
         public ulong @channel_layout;
         /// <summary>samples per second</summary>
         public int @sample_rate;
@@ -2265,6 +2271,8 @@ namespace FFmpeg.AutoGen
         public int @format;
         /// <summary>Define the time base used by the PTS of the frames/samples which will pass through this link. During the configuration stage, each filter is supposed to change only the output timebase, while the timebase of the input link is assumed to be an unchangeable property.</summary>
         public AVRational @time_base;
+        /// <summary>channel layout of current buffer (see libavutil/channel_layout.h)</summary>
+        public AVChannelLayout @ch_layout;
         /// <summary>Lists of supported formats / etc. supported by the input filter.</summary>
         public AVFilterFormatsConfig @incfg;
         /// <summary>Lists of supported formats / etc. supported by the output filter.</summary>
@@ -2284,8 +2292,6 @@ namespace FFmpeg.AutoGen
         public int @min_samples;
         /// <summary>Maximum number of samples to filter at once. If filter_frame() is called with more samples, it will split them.</summary>
         public int @max_samples;
-        /// <summary>Number of channels.</summary>
-        public int @channels;
         /// <summary>Number of past frames sent through the link.</summary>
         public long @frame_count_in;
         /// <summary>Number of past frames sent through the link.</summary>
@@ -2373,7 +2379,10 @@ namespace FFmpeg.AutoGen
         /// <summary>Audio only, the audio sampling rate in samples per second.</summary>
         public int @sample_rate;
         /// <summary>Audio only, the audio channel layout</summary>
+        [Obsolete("use ch_layout")]
         public ulong @channel_layout;
+        /// <summary>Audio only, the audio channel layout</summary>
+        public AVChannelLayout @ch_layout;
     }
     
     /// <summary>Deprecated and unused struct to use for initializing a buffersink context.</summary>

@@ -193,21 +193,6 @@ namespace FFmpeg.AutoGen
         // original body hash: 2HuHK8WLchm3u+cK6H4QWhflx2JqfewtaSpj2Cwfi8M=
         
         
-        /// <summary>Return a pointer to the data stored in a FIFO buffer at a certain offset. The FIFO buffer is not modified.</summary>
-        /// <param name="f">AVFifoBuffer to peek at, f must be non-NULL</param>
-        /// <param name="offs">an offset in bytes, its absolute value must be less than the used buffer size or the returned pointer will point outside to the buffer data. The used buffer size can be checked with av_fifo_size().</param>
-        public static byte* av_fifo_peek2(AVFifoBuffer* @f, int @offs)
-        {
-            var ptr = f->rptr + offs;
-            if (ptr >= f->end)
-                ptr = f->buffer + (ptr - f->end);
-            else if (ptr < f->buffer)
-                ptr = f->end - (f->buffer - ptr);
-            return ptr;
-        }
-        // original body hash: a/0nqgUaumzMZOnAhLMJPnR6ow/FVA/2BhUjoRgtNUc=
-        
-        
         /// <summary>Reinterpret a float as a 32-bit integer.</summary>
         public static uint av_float2int(float @f)
         {

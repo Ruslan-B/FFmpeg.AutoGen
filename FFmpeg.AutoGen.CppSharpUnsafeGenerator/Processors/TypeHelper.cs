@@ -59,7 +59,7 @@ internal static class TypeHelper
             PrimitiveType.Int128 => throw new NotSupportedException(),
             PrimitiveType.UInt128 => throw new NotSupportedException(),
             PrimitiveType.Half => throw new NotSupportedException(),
-            PrimitiveType.LongDouble => throw new NotSupportedException(),
+            PrimitiveType.LongDouble => "LongDouble",
             PrimitiveType.Float128 => throw new NotSupportedException(),
             PrimitiveType.String => throw new NotSupportedException(),
             _ => throw new ArgumentOutOfRangeException(nameof(type))

@@ -16,6 +16,7 @@ internal class ASTProcessor
         IgnoreUnitNames = new HashSet<string>();
         TypeAliases = new Dictionary<string, TypeOrAlias>();
         WellKnownMacros = new Dictionary<string, TypeOrAlias>();
+        WellKnownEnumItems = new Dictionary<string, string>();
         FunctionProcessor = new FunctionProcessor(this);
         StructureProcessor = new StructureProcessor(this);
         EnumerationProcessor = new EnumerationProcessor(this);
@@ -26,6 +27,7 @@ internal class ASTProcessor
     public HashSet<string> IgnoreUnitNames { get; }
     public Dictionary<string, TypeOrAlias> TypeAliases { get; }
     public Dictionary<string, TypeOrAlias> WellKnownMacros { get; }
+    public Dictionary<string, string> WellKnownEnumItems { get; }
     public MacroProcessor MacroProcessor { get; }
     public EnumerationProcessor EnumerationProcessor { get; }
     public StructureProcessor StructureProcessor { get; }
@@ -59,7 +61,30 @@ internal class ASTProcessor
             FunctionProcessor.Process(translationUnit);
         }
 
+        var enums = _units.OfType<EnumerationDefinition>().ToArray();
+
+        // add all enums as known macros  
+        foreach (var @enum in enums)
+        foreach (var item in @enum.Items)
+        {
+            var key = @enum.Name + "." + item.Name;
+            if (!WellKnownMacros.ContainsKey(key)) WellKnownMacros.Add(key, new TypeOrAlias(typeof(int)));
+            if (!WellKnownEnumItems.ContainsKey(item.Name)) WellKnownEnumItems.Add(item.Name, item.Value);
+        }
+
         var macros = Units.OfType<MacroDefinition>().ToArray();
         MacroPostProcessor.Process(macros);
     }
+
+    internal TypeOrAlias GetWellKnownMacroType(string macroName)
+    {
+        if (WellKnownMacros.TryGetValue(macroName, out var alias))
+            return alias;
+        if (WellKnownEnumItems.TryGetValue(macroName, out _))
+            return new TypeOrAlias(typeof(int));
+        return new TypeOrAlias(macroName);
+    }
+
+    internal TypeOrAlias GetTypeAlias(string typeName) =>
+        TypeAliases.TryGetValue(typeName, out var alias) ? alias : typeName;
 }

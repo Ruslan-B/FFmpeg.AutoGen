@@ -467,6 +467,27 @@ namespace FFmpeg.AutoGen
         public static implicit operator AVRational[](AVRational_array15 @struct) => @struct.ToArray();
     }
     
+    public unsafe struct byte_array16
+    {
+        public static readonly int Size = 16;
+        fixed byte _[16];
+        
+        public byte this[uint i]
+        {
+            get { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array16* p = &this) { return p->_[i]; } }
+            set { if (i >= Size) throw new ArgumentOutOfRangeException(); fixed (byte_array16* p = &this) { p->_[i] = value; } }
+        }
+        public byte[] ToArray()
+        {
+            fixed (byte_array16* p = &this) { var a = new byte[Size]; for (uint i = 0; i < Size; i++) a[i] = p->_[i]; return a; }
+        }
+        public void UpdateFrom(byte[] array)
+        {
+            fixed (byte_array16* p = &this) { uint i = 0; foreach(var value in array) { p->_[i++] = value; if (i >= Size) return; } }
+        }
+        public static implicit operator byte[](byte_array16 @struct) => @struct.ToArray();
+    }
+    
     public unsafe struct AVRational_array25
     {
         public static readonly int Size = 25;

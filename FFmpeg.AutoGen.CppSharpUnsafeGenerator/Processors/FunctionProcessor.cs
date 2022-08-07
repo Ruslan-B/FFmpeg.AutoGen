@@ -190,8 +190,8 @@ internal class FunctionProcessor
     private static string GetSha256(string text)
     {
         var bytes = Encoding.UTF8.GetBytes(text);
-        var sha256Managed = new SHA256Managed();
-        var hash = sha256Managed.ComputeHash(bytes);
+        var sha256 = SHA256.Create();
+        var hash = sha256.ComputeHash(bytes);
         return Convert.ToBase64String(hash);
     }
 }

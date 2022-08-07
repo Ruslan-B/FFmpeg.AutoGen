@@ -58,6 +58,74 @@ namespace FFmpeg.AutoGen
         @AV_AUDIO_SERVICE_TYPE_NB = 9,
     }
     
+    /// <summary>@{</summary>
+    public enum AVChannel : int
+    {
+        @AV_CHAN_NONE = -1,
+        @AV_CHAN_FRONT_LEFT = 0,
+        @AV_CHAN_FRONT_RIGHT = 1,
+        @AV_CHAN_FRONT_CENTER = 2,
+        @AV_CHAN_LOW_FREQUENCY = 3,
+        @AV_CHAN_BACK_LEFT = 4,
+        @AV_CHAN_BACK_RIGHT = 5,
+        @AV_CHAN_FRONT_LEFT_OF_CENTER = 6,
+        @AV_CHAN_FRONT_RIGHT_OF_CENTER = 7,
+        @AV_CHAN_BACK_CENTER = 8,
+        @AV_CHAN_SIDE_LEFT = 9,
+        @AV_CHAN_SIDE_RIGHT = 10,
+        @AV_CHAN_TOP_CENTER = 11,
+        @AV_CHAN_TOP_FRONT_LEFT = 12,
+        @AV_CHAN_TOP_FRONT_CENTER = 13,
+        @AV_CHAN_TOP_FRONT_RIGHT = 14,
+        @AV_CHAN_TOP_BACK_LEFT = 15,
+        @AV_CHAN_TOP_BACK_CENTER = 16,
+        @AV_CHAN_TOP_BACK_RIGHT = 17,
+        /// <summary>Stereo downmix.</summary>
+        @AV_CHAN_STEREO_LEFT = 29,
+        /// <summary>See above.</summary>
+        @AV_CHAN_STEREO_RIGHT = 30,
+        /// <summary>See above.</summary>
+        @AV_CHAN_WIDE_LEFT = 31,
+        /// <summary>See above.</summary>
+        @AV_CHAN_WIDE_RIGHT = 32,
+        /// <summary>See above.</summary>
+        @AV_CHAN_SURROUND_DIRECT_LEFT = 33,
+        /// <summary>See above.</summary>
+        @AV_CHAN_SURROUND_DIRECT_RIGHT = 34,
+        /// <summary>See above.</summary>
+        @AV_CHAN_LOW_FREQUENCY_2 = 35,
+        /// <summary>See above.</summary>
+        @AV_CHAN_TOP_SIDE_LEFT = 36,
+        /// <summary>See above.</summary>
+        @AV_CHAN_TOP_SIDE_RIGHT = 37,
+        /// <summary>See above.</summary>
+        @AV_CHAN_BOTTOM_FRONT_CENTER = 38,
+        /// <summary>See above.</summary>
+        @AV_CHAN_BOTTOM_FRONT_LEFT = 39,
+        /// <summary>See above.</summary>
+        @AV_CHAN_BOTTOM_FRONT_RIGHT = 40,
+        /// <summary>Channel is empty can be safely skipped.</summary>
+        @AV_CHAN_UNUSED = 512,
+        /// <summary>Channel contains data, but its position is unknown.</summary>
+        @AV_CHAN_UNKNOWN = 768,
+        /// <summary>Range of channels between AV_CHAN_AMBISONIC_BASE and AV_CHAN_AMBISONIC_END represent Ambisonic components using the ACN system.</summary>
+        @AV_CHAN_AMBISONIC_BASE = 1024,
+        /// <summary>Range of channels between AV_CHAN_AMBISONIC_BASE and AV_CHAN_AMBISONIC_END represent Ambisonic components using the ACN system.</summary>
+        @AV_CHAN_AMBISONIC_END = 2047,
+    }
+    
+    public enum AVChannelOrder : int
+    {
+        /// <summary>Only the channel count is specified, without any further information about the channel order.</summary>
+        @AV_CHANNEL_ORDER_UNSPEC = 0,
+        /// <summary>The native channel order, i.e. the channels are in the same order in which they are defined in the AVChannel enum. This supports up to 63 different channels.</summary>
+        @AV_CHANNEL_ORDER_NATIVE = 1,
+        /// <summary>The channel order does not correspond to any other predefined order and is stored as an explicit map. For example, this could be used to support layouts with 64 or more channels, or with empty/skipped (AV_CHAN_SILENCE) channels at arbitrary positions.</summary>
+        @AV_CHANNEL_ORDER_CUSTOM = 2,
+        /// <summary>The audio is represented as the decomposition of the sound field into spherical harmonics. Each channel corresponds to a single expansion component. Channels are ordered according to ACN (Ambisonic Channel Number).</summary>
+        @AV_CHANNEL_ORDER_AMBISONIC = 3,
+    }
+    
     /// <summary>Location of chroma samples.</summary>
     public enum AVChromaLocation : int
     {
@@ -360,6 +428,10 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_SIMBIOSIS_IMX = 255,
         @AV_CODEC_ID_SGA_VIDEO = 256,
         @AV_CODEC_ID_GEM = 257,
+        @AV_CODEC_ID_VBN = 258,
+        @AV_CODEC_ID_JPEGXL = 259,
+        @AV_CODEC_ID_QOI = 260,
+        @AV_CODEC_ID_PHM = 261,
         /// <summary>A dummy id pointing at the start of audio codecs</summary>
         @AV_CODEC_ID_FIRST_AUDIO = 65536,
         @AV_CODEC_ID_PCM_S16LE = 65536,
@@ -559,6 +631,7 @@ namespace FFmpeg.AutoGen
         @AV_CODEC_ID_HCA = 86109,
         @AV_CODEC_ID_FASTAUDIO = 86110,
         @AV_CODEC_ID_MSNSIREN = 86111,
+        @AV_CODEC_ID_DFPWM = 86112,
         /// <summary>A dummy ID pointing at the start of subtitle codecs.</summary>
         @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
         @AV_CODEC_ID_DVD_SUBTITLE = 94208,
@@ -870,6 +943,8 @@ namespace FFmpeg.AutoGen
         @AV_FRAME_DATA_DOVI_RPU_BUFFER = 23,
         /// <summary>Parsed Dolby Vision metadata, suitable for passing to a software implementation. The payload is the AVDOVIMetadata struct defined in libavutil/dovi_meta.h.</summary>
         @AV_FRAME_DATA_DOVI_METADATA = 24,
+        /// <summary>HDR Vivid dynamic metadata associated with a video frame. The payload is an AVDynamicHDRVivid type and contains information for color volume transform - CUVA 005.1-2021.</summary>
+        @AV_FRAME_DATA_DYNAMIC_HDR_VIVID = 25,
     }
     
     /// <summary>Option for overlapping elliptical pixel selectors in an image.</summary>
@@ -988,6 +1063,7 @@ namespace FFmpeg.AutoGen
         @AV_OPT_TYPE_COLOR = 16,
         @AV_OPT_TYPE_CHANNEL_LAYOUT = 17,
         @AV_OPT_TYPE_BOOL = 18,
+        @AV_OPT_TYPE_CHLAYOUT = 19,
     }
     
     /// <summary>Types and functions for working with AVPacket. @{</summary>
@@ -1506,7 +1582,7 @@ namespace FFmpeg.AutoGen
         @AV_PIX_FMT_P410LE = 201,
         /// <summary>interleaved chroma YUV 4:2:2, 32bpp, big-endian</summary>
         @AV_PIX_FMT_P216BE = 202,
-        /// <summary>interleaved chroma YUV 4:2:2, 32bpp, liddle-endian</summary>
+        /// <summary>interleaved chroma YUV 4:2:2, 32bpp, little-endian</summary>
         @AV_PIX_FMT_P216LE = 203,
         /// <summary>interleaved chroma YUV 4:4:4, 48bpp, big-endian</summary>
         @AV_PIX_FMT_P416BE = 204,

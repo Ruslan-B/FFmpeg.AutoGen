@@ -2508,6 +2508,26 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_buffersink_get_ch_layout_delegate(AVFilterContext* @ctx, AVChannelLayout* @ch_layout);
+        private static av_buffersink_get_ch_layout_delegate av_buffersink_get_ch_layout_fptr = (AVFilterContext* @ctx, AVChannelLayout* @ch_layout) =>
+        {
+            av_buffersink_get_ch_layout_fptr = GetFunctionDelegate<av_buffersink_get_ch_layout_delegate>(GetOrLoadLibrary("avfilter"), "av_buffersink_get_ch_layout");
+            if (av_buffersink_get_ch_layout_fptr == null)
+            {
+                av_buffersink_get_ch_layout_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_buffersink_get_ch_layout"));
+                };
+            }
+            return av_buffersink_get_ch_layout_fptr(@ctx, @ch_layout);
+        };
+        public static int av_buffersink_get_ch_layout(AVFilterContext* @ctx, AVChannelLayout* @ch_layout)
+        {
+            return av_buffersink_get_ch_layout_fptr(@ctx, @ch_layout);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate ulong av_buffersink_get_channel_layout_delegate(AVFilterContext* @ctx);
         private static av_buffersink_get_channel_layout_delegate av_buffersink_get_channel_layout_fptr = (AVFilterContext* @ctx) =>
         {
@@ -2521,6 +2541,7 @@ namespace FFmpeg.AutoGen
             }
             return av_buffersink_get_channel_layout_fptr(@ctx);
         };
+        [Obsolete("")]
         public static ulong av_buffersink_get_channel_layout(AVFilterContext* @ctx)
         {
             return av_buffersink_get_channel_layout_fptr(@ctx);
@@ -7495,6 +7516,42 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int avio_vprintf_delegate(AVIOContext* @s, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @fmt, byte* @ap);
+        private static avio_vprintf_delegate avio_vprintf_fptr = (AVIOContext* @s, string @fmt, byte* @ap) =>
+        {
+            avio_vprintf_fptr = GetFunctionDelegate<avio_vprintf_delegate>(GetOrLoadLibrary("avformat"), "avio_vprintf");
+            if (avio_vprintf_fptr == null)
+            {
+                avio_vprintf_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "avio_vprintf"));
+                };
+            }
+            return avio_vprintf_fptr(@s, @fmt, @ap);
+        };
+        /// <summary>Writes a formatted string to the context taking a va_list.</summary>
+        /// <returns>number of bytes written, &lt; 0 on error.</returns>
+        public static int avio_vprintf(AVIOContext* @s, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @fmt, byte* @ap)
+        {
+            return avio_vprintf_fptr(@s, @fmt, @ap);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate void avio_w8_delegate(AVIOContext* @s, int @b);
         private static avio_w8_delegate avio_w8_fptr = (AVIOContext* @s, int @b) =>
         {
@@ -8045,6 +8102,7 @@ namespace FFmpeg.AutoGen
             av_bprint_channel_layout_fptr(@bp, @nb_channels, @channel_layout);
         };
         /// <summary>Append a description of a channel layout to a bprint buffer.</summary>
+        [Obsolete("use av_channel_layout_describe()")]
         public static void av_bprint_channel_layout(AVBPrint* @bp, int @nb_channels, ulong @channel_layout)
         {
             av_bprint_channel_layout_fptr(@bp, @nb_channels, @channel_layout);
@@ -8463,6 +8521,287 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_channel_description_delegate(byte* @buf, ulong @buf_size, AVChannel @channel);
+        private static av_channel_description_delegate av_channel_description_fptr = (byte* @buf, ulong @buf_size, AVChannel @channel) =>
+        {
+            av_channel_description_fptr = GetFunctionDelegate<av_channel_description_delegate>(GetOrLoadLibrary("avutil"), "av_channel_description");
+            if (av_channel_description_fptr == null)
+            {
+                av_channel_description_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_description"));
+                };
+            }
+            return av_channel_description_fptr(@buf, @buf_size, @channel);
+        };
+        /// <summary>Get a human readable string describing a given channel.</summary>
+        /// <param name="buf">pre-allocated buffer where to put the generated string</param>
+        /// <param name="buf_size">size in bytes of the buffer.</param>
+        /// <returns>amount of bytes needed to hold the output string, or a negative AVERROR on failure. If the returned value is bigger than buf_size, then the string was truncated.</returns>
+        public static int av_channel_description(byte* @buf, ulong @buf_size, AVChannel @channel)
+        {
+            return av_channel_description_fptr(@buf, @buf_size, @channel);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_channel_description_bprint_delegate(AVBPrint* @bp, AVChannel @channel_id);
+        private static av_channel_description_bprint_delegate av_channel_description_bprint_fptr = (AVBPrint* @bp, AVChannel @channel_id) =>
+        {
+            av_channel_description_bprint_fptr = GetFunctionDelegate<av_channel_description_bprint_delegate>(GetOrLoadLibrary("avutil"), "av_channel_description_bprint");
+            if (av_channel_description_bprint_fptr == null)
+            {
+                av_channel_description_bprint_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_description_bprint"));
+                };
+            }
+            av_channel_description_bprint_fptr(@bp, @channel_id);
+        };
+        /// <summary>bprint variant of av_channel_description().</summary>
+        public static void av_channel_description_bprint(AVBPrint* @bp, AVChannel @channel_id)
+        {
+            av_channel_description_bprint_fptr(@bp, @channel_id);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVChannel av_channel_from_string_delegate(
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @name);
+        private static av_channel_from_string_delegate av_channel_from_string_fptr = (string @name) =>
+        {
+            av_channel_from_string_fptr = GetFunctionDelegate<av_channel_from_string_delegate>(GetOrLoadLibrary("avutil"), "av_channel_from_string");
+            if (av_channel_from_string_fptr == null)
+            {
+                av_channel_from_string_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_from_string"));
+                };
+            }
+            return av_channel_from_string_fptr(@name);
+        };
+        /// <summary>This is the inverse function of av_channel_name().</summary>
+        /// <returns>the channel with the given name AV_CHAN_NONE when name does not identify a known channel</returns>
+        public static AVChannel av_channel_from_string(
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @name)
+        {
+            return av_channel_from_string_fptr(@name);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVChannel av_channel_layout_channel_from_index_delegate(AVChannelLayout* @channel_layout, uint @idx);
+        private static av_channel_layout_channel_from_index_delegate av_channel_layout_channel_from_index_fptr = (AVChannelLayout* @channel_layout, uint @idx) =>
+        {
+            av_channel_layout_channel_from_index_fptr = GetFunctionDelegate<av_channel_layout_channel_from_index_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_channel_from_index");
+            if (av_channel_layout_channel_from_index_fptr == null)
+            {
+                av_channel_layout_channel_from_index_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_channel_from_index"));
+                };
+            }
+            return av_channel_layout_channel_from_index_fptr(@channel_layout, @idx);
+        };
+        /// <summary>Get the channel with the given index in a channel layout.</summary>
+        /// <param name="channel_layout">input channel layout</param>
+        /// <returns>channel with the index idx in channel_layout on success or AV_CHAN_NONE on failure (if idx is not valid or the channel order is unspecified)</returns>
+        public static AVChannel av_channel_layout_channel_from_index(AVChannelLayout* @channel_layout, uint @idx)
+        {
+            return av_channel_layout_channel_from_index_fptr(@channel_layout, @idx);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVChannel av_channel_layout_channel_from_string_delegate(AVChannelLayout* @channel_layout, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @name);
+        private static av_channel_layout_channel_from_string_delegate av_channel_layout_channel_from_string_fptr = (AVChannelLayout* @channel_layout, string @name) =>
+        {
+            av_channel_layout_channel_from_string_fptr = GetFunctionDelegate<av_channel_layout_channel_from_string_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_channel_from_string");
+            if (av_channel_layout_channel_from_string_fptr == null)
+            {
+                av_channel_layout_channel_from_string_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_channel_from_string"));
+                };
+            }
+            return av_channel_layout_channel_from_string_fptr(@channel_layout, @name);
+        };
+        /// <summary>Get a channel described by the given string.</summary>
+        /// <param name="channel_layout">input channel layout</param>
+        /// <returns>a channel described by the given string in channel_layout on success or AV_CHAN_NONE on failure (if the string is not valid or the channel order is unspecified)</returns>
+        public static AVChannel av_channel_layout_channel_from_string(AVChannelLayout* @channel_layout, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @name)
+        {
+            return av_channel_layout_channel_from_string_fptr(@channel_layout, @name);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_channel_layout_check_delegate(AVChannelLayout* @channel_layout);
+        private static av_channel_layout_check_delegate av_channel_layout_check_fptr = (AVChannelLayout* @channel_layout) =>
+        {
+            av_channel_layout_check_fptr = GetFunctionDelegate<av_channel_layout_check_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_check");
+            if (av_channel_layout_check_fptr == null)
+            {
+                av_channel_layout_check_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_check"));
+                };
+            }
+            return av_channel_layout_check_fptr(@channel_layout);
+        };
+        /// <summary>Check whether a channel layout is valid, i.e. can possibly describe audio data.</summary>
+        /// <param name="channel_layout">input channel layout</param>
+        /// <returns>1 if channel_layout is valid, 0 otherwise.</returns>
+        public static int av_channel_layout_check(AVChannelLayout* @channel_layout)
+        {
+            return av_channel_layout_check_fptr(@channel_layout);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_channel_layout_compare_delegate(AVChannelLayout* @chl, AVChannelLayout* @chl1);
+        private static av_channel_layout_compare_delegate av_channel_layout_compare_fptr = (AVChannelLayout* @chl, AVChannelLayout* @chl1) =>
+        {
+            av_channel_layout_compare_fptr = GetFunctionDelegate<av_channel_layout_compare_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_compare");
+            if (av_channel_layout_compare_fptr == null)
+            {
+                av_channel_layout_compare_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_compare"));
+                };
+            }
+            return av_channel_layout_compare_fptr(@chl, @chl1);
+        };
+        /// <summary>Check whether two channel layouts are semantically the same, i.e. the same channels are present on the same positions in both.</summary>
+        /// <param name="chl">input channel layout</param>
+        /// <param name="chl1">input channel layout</param>
+        /// <returns>0 if chl and chl1 are equal, 1 if they are not equal. A negative AVERROR code if one or both are invalid.</returns>
+        public static int av_channel_layout_compare(AVChannelLayout* @chl, AVChannelLayout* @chl1)
+        {
+            return av_channel_layout_compare_fptr(@chl, @chl1);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_channel_layout_copy_delegate(AVChannelLayout* @dst, AVChannelLayout* @src);
+        private static av_channel_layout_copy_delegate av_channel_layout_copy_fptr = (AVChannelLayout* @dst, AVChannelLayout* @src) =>
+        {
+            av_channel_layout_copy_fptr = GetFunctionDelegate<av_channel_layout_copy_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_copy");
+            if (av_channel_layout_copy_fptr == null)
+            {
+                av_channel_layout_copy_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_copy"));
+                };
+            }
+            return av_channel_layout_copy_fptr(@dst, @src);
+        };
+        /// <summary>Make a copy of a channel layout. This differs from just assigning src to dst in that it allocates and copies the map for AV_CHANNEL_ORDER_CUSTOM.</summary>
+        /// <param name="dst">destination channel layout</param>
+        /// <param name="src">source channel layout</param>
+        /// <returns>0 on success, a negative AVERROR on error.</returns>
+        public static int av_channel_layout_copy(AVChannelLayout* @dst, AVChannelLayout* @src)
+        {
+            return av_channel_layout_copy_fptr(@dst, @src);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_channel_layout_default_delegate(AVChannelLayout* @ch_layout, int @nb_channels);
+        private static av_channel_layout_default_delegate av_channel_layout_default_fptr = (AVChannelLayout* @ch_layout, int @nb_channels) =>
+        {
+            av_channel_layout_default_fptr = GetFunctionDelegate<av_channel_layout_default_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_default");
+            if (av_channel_layout_default_fptr == null)
+            {
+                av_channel_layout_default_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_default"));
+                };
+            }
+            av_channel_layout_default_fptr(@ch_layout, @nb_channels);
+        };
+        /// <summary>Get the default channel layout for a given number of channels.</summary>
+        /// <param name="nb_channels">number of channels</param>
+        public static void av_channel_layout_default(AVChannelLayout* @ch_layout, int @nb_channels)
+        {
+            av_channel_layout_default_fptr(@ch_layout, @nb_channels);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_channel_layout_describe_delegate(AVChannelLayout* @channel_layout, byte* @buf, ulong @buf_size);
+        private static av_channel_layout_describe_delegate av_channel_layout_describe_fptr = (AVChannelLayout* @channel_layout, byte* @buf, ulong @buf_size) =>
+        {
+            av_channel_layout_describe_fptr = GetFunctionDelegate<av_channel_layout_describe_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_describe");
+            if (av_channel_layout_describe_fptr == null)
+            {
+                av_channel_layout_describe_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_describe"));
+                };
+            }
+            return av_channel_layout_describe_fptr(@channel_layout, @buf, @buf_size);
+        };
+        /// <summary>Get a human-readable string describing the channel layout properties. The string will be in the same format that is accepted by av_channel_layout_from_string(), allowing to rebuild the same channel layout, except for opaque pointers.</summary>
+        /// <param name="channel_layout">channel layout to be described</param>
+        /// <param name="buf">pre-allocated buffer where to put the generated string</param>
+        /// <param name="buf_size">size in bytes of the buffer.</param>
+        /// <returns>amount of bytes needed to hold the output string, or a negative AVERROR on failure. If the returned value is bigger than buf_size, then the string was truncated.</returns>
+        public static int av_channel_layout_describe(AVChannelLayout* @channel_layout, byte* @buf, ulong @buf_size)
+        {
+            return av_channel_layout_describe_fptr(@channel_layout, @buf, @buf_size);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_channel_layout_describe_bprint_delegate(AVChannelLayout* @channel_layout, AVBPrint* @bp);
+        private static av_channel_layout_describe_bprint_delegate av_channel_layout_describe_bprint_fptr = (AVChannelLayout* @channel_layout, AVBPrint* @bp) =>
+        {
+            av_channel_layout_describe_bprint_fptr = GetFunctionDelegate<av_channel_layout_describe_bprint_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_describe_bprint");
+            if (av_channel_layout_describe_bprint_fptr == null)
+            {
+                av_channel_layout_describe_bprint_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_describe_bprint"));
+                };
+            }
+            return av_channel_layout_describe_bprint_fptr(@channel_layout, @bp);
+        };
+        /// <summary>bprint variant of av_channel_layout_describe().</summary>
+        /// <returns>0 on success, or a negative AVERROR value on failure.</returns>
+        public static int av_channel_layout_describe_bprint(AVChannelLayout* @channel_layout, AVBPrint* @bp)
+        {
+            return av_channel_layout_describe_bprint_fptr(@channel_layout, @bp);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate ulong av_channel_layout_extract_channel_delegate(ulong @channel_layout, int @index);
         private static av_channel_layout_extract_channel_delegate av_channel_layout_extract_channel_fptr = (ulong @channel_layout, int @index) =>
         {
@@ -8477,9 +8816,246 @@ namespace FFmpeg.AutoGen
             return av_channel_layout_extract_channel_fptr(@channel_layout, @index);
         };
         /// <summary>Get the channel with the given index in channel_layout.</summary>
+        [Obsolete("use av_channel_layout_channel_from_index()")]
         public static ulong av_channel_layout_extract_channel(ulong @channel_layout, int @index)
         {
             return av_channel_layout_extract_channel_fptr(@channel_layout, @index);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_channel_layout_from_mask_delegate(AVChannelLayout* @channel_layout, ulong @mask);
+        private static av_channel_layout_from_mask_delegate av_channel_layout_from_mask_fptr = (AVChannelLayout* @channel_layout, ulong @mask) =>
+        {
+            av_channel_layout_from_mask_fptr = GetFunctionDelegate<av_channel_layout_from_mask_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_from_mask");
+            if (av_channel_layout_from_mask_fptr == null)
+            {
+                av_channel_layout_from_mask_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_from_mask"));
+                };
+            }
+            return av_channel_layout_from_mask_fptr(@channel_layout, @mask);
+        };
+        /// <summary>Initialize a native channel layout from a bitmask indicating which channels are present.</summary>
+        /// <param name="channel_layout">the layout structure to be initialized</param>
+        /// <param name="mask">bitmask describing the channel layout</param>
+        /// <returns>0 on success AVERROR(EINVAL) for invalid mask values</returns>
+        public static int av_channel_layout_from_mask(AVChannelLayout* @channel_layout, ulong @mask)
+        {
+            return av_channel_layout_from_mask_fptr(@channel_layout, @mask);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_channel_layout_from_string_delegate(AVChannelLayout* @channel_layout, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @str);
+        private static av_channel_layout_from_string_delegate av_channel_layout_from_string_fptr = (AVChannelLayout* @channel_layout, string @str) =>
+        {
+            av_channel_layout_from_string_fptr = GetFunctionDelegate<av_channel_layout_from_string_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_from_string");
+            if (av_channel_layout_from_string_fptr == null)
+            {
+                av_channel_layout_from_string_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_from_string"));
+                };
+            }
+            return av_channel_layout_from_string_fptr(@channel_layout, @str);
+        };
+        /// <summary>Initialize a channel layout from a given string description. The input string can be represented by: - the formal channel layout name (returned by av_channel_layout_describe()) - single or multiple channel names (returned by av_channel_name(), eg. &quot;FL&quot;, or concatenated with &quot;+&quot;, each optionally containing a custom name after a &quot;&quot;, eg. &quot;FL+FR+LFE&quot;) - a decimal or hexadecimal value of a native channel layout (eg. &quot;4&quot; or &quot;0x4&quot;) - the number of channels with default layout (eg. &quot;4c&quot;) - the number of unordered channels (eg. &quot;4C&quot; or &quot;4 channels&quot;) - the ambisonic order followed by optional non-diegetic channels (eg. &quot;ambisonic 2+stereo&quot;)</summary>
+        /// <param name="channel_layout">input channel layout</param>
+        /// <param name="str">string describing the channel layout</param>
+        /// <returns>0 channel layout was detected, AVERROR_INVALIDATATA otherwise</returns>
+        public static int av_channel_layout_from_string(AVChannelLayout* @channel_layout, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @str)
+        {
+            return av_channel_layout_from_string_fptr(@channel_layout, @str);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_channel_layout_index_from_channel_delegate(AVChannelLayout* @channel_layout, AVChannel @channel);
+        private static av_channel_layout_index_from_channel_delegate av_channel_layout_index_from_channel_fptr = (AVChannelLayout* @channel_layout, AVChannel @channel) =>
+        {
+            av_channel_layout_index_from_channel_fptr = GetFunctionDelegate<av_channel_layout_index_from_channel_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_index_from_channel");
+            if (av_channel_layout_index_from_channel_fptr == null)
+            {
+                av_channel_layout_index_from_channel_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_index_from_channel"));
+                };
+            }
+            return av_channel_layout_index_from_channel_fptr(@channel_layout, @channel);
+        };
+        /// <summary>Get the index of a given channel in a channel layout. In case multiple channels are found, only the first match will be returned.</summary>
+        /// <param name="channel_layout">input channel layout</param>
+        /// <returns>index of channel in channel_layout on success or a negative number if channel is not present in channel_layout.</returns>
+        public static int av_channel_layout_index_from_channel(AVChannelLayout* @channel_layout, AVChannel @channel)
+        {
+            return av_channel_layout_index_from_channel_fptr(@channel_layout, @channel);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_channel_layout_index_from_string_delegate(AVChannelLayout* @channel_layout, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @name);
+        private static av_channel_layout_index_from_string_delegate av_channel_layout_index_from_string_fptr = (AVChannelLayout* @channel_layout, string @name) =>
+        {
+            av_channel_layout_index_from_string_fptr = GetFunctionDelegate<av_channel_layout_index_from_string_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_index_from_string");
+            if (av_channel_layout_index_from_string_fptr == null)
+            {
+                av_channel_layout_index_from_string_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_index_from_string"));
+                };
+            }
+            return av_channel_layout_index_from_string_fptr(@channel_layout, @name);
+        };
+        /// <summary>Get the index in a channel layout of a channel described by the given string. In case multiple channels are found, only the first match will be returned.</summary>
+        /// <param name="channel_layout">input channel layout</param>
+        /// <returns>a channel index described by the given string, or a negative AVERROR value.</returns>
+        public static int av_channel_layout_index_from_string(AVChannelLayout* @channel_layout, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @name)
+        {
+            return av_channel_layout_index_from_string_fptr(@channel_layout, @name);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate AVChannelLayout* av_channel_layout_standard_delegate(void** @opaque);
+        private static av_channel_layout_standard_delegate av_channel_layout_standard_fptr = (void** @opaque) =>
+        {
+            av_channel_layout_standard_fptr = GetFunctionDelegate<av_channel_layout_standard_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_standard");
+            if (av_channel_layout_standard_fptr == null)
+            {
+                av_channel_layout_standard_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_standard"));
+                };
+            }
+            return av_channel_layout_standard_fptr(@opaque);
+        };
+        /// <summary>Iterate over all standard channel layouts.</summary>
+        /// <param name="opaque">a pointer where libavutil will store the iteration state. Must point to NULL to start the iteration.</param>
+        /// <returns>the standard channel layout or NULL when the iteration is finished</returns>
+        public static AVChannelLayout* av_channel_layout_standard(void** @opaque)
+        {
+            return av_channel_layout_standard_fptr(@opaque);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate ulong av_channel_layout_subset_delegate(AVChannelLayout* @channel_layout, ulong @mask);
+        private static av_channel_layout_subset_delegate av_channel_layout_subset_fptr = (AVChannelLayout* @channel_layout, ulong @mask) =>
+        {
+            av_channel_layout_subset_fptr = GetFunctionDelegate<av_channel_layout_subset_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_subset");
+            if (av_channel_layout_subset_fptr == null)
+            {
+                av_channel_layout_subset_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_subset"));
+                };
+            }
+            return av_channel_layout_subset_fptr(@channel_layout, @mask);
+        };
+        /// <summary>Find out what channels from a given set are present in a channel layout, without regard for their positions.</summary>
+        /// <param name="channel_layout">input channel layout</param>
+        /// <param name="mask">a combination of AV_CH_* representing a set of channels</param>
+        /// <returns>a bitfield representing all the channels from mask that are present in channel_layout</returns>
+        public static ulong av_channel_layout_subset(AVChannelLayout* @channel_layout, ulong @mask)
+        {
+            return av_channel_layout_subset_fptr(@channel_layout, @mask);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_channel_layout_uninit_delegate(AVChannelLayout* @channel_layout);
+        private static av_channel_layout_uninit_delegate av_channel_layout_uninit_fptr = (AVChannelLayout* @channel_layout) =>
+        {
+            av_channel_layout_uninit_fptr = GetFunctionDelegate<av_channel_layout_uninit_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_uninit");
+            if (av_channel_layout_uninit_fptr == null)
+            {
+                av_channel_layout_uninit_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_layout_uninit"));
+                };
+            }
+            av_channel_layout_uninit_fptr(@channel_layout);
+        };
+        /// <summary>Free any allocated data in the channel layout and reset the channel count to 0.</summary>
+        /// <param name="channel_layout">the layout structure to be uninitialized</param>
+        public static void av_channel_layout_uninit(AVChannelLayout* @channel_layout)
+        {
+            av_channel_layout_uninit_fptr(@channel_layout);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_channel_name_delegate(byte* @buf, ulong @buf_size, AVChannel @channel);
+        private static av_channel_name_delegate av_channel_name_fptr = (byte* @buf, ulong @buf_size, AVChannel @channel) =>
+        {
+            av_channel_name_fptr = GetFunctionDelegate<av_channel_name_delegate>(GetOrLoadLibrary("avutil"), "av_channel_name");
+            if (av_channel_name_fptr == null)
+            {
+                av_channel_name_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_name"));
+                };
+            }
+            return av_channel_name_fptr(@buf, @buf_size, @channel);
+        };
+        /// <summary>Get a human readable string in an abbreviated form describing a given channel. This is the inverse function of av_channel_from_string().</summary>
+        /// <param name="buf">pre-allocated buffer where to put the generated string</param>
+        /// <param name="buf_size">size in bytes of the buffer.</param>
+        /// <returns>amount of bytes needed to hold the output string, or a negative AVERROR on failure. If the returned value is bigger than buf_size, then the string was truncated.</returns>
+        public static int av_channel_name(byte* @buf, ulong @buf_size, AVChannel @channel)
+        {
+            return av_channel_name_fptr(@buf, @buf_size, @channel);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate void av_channel_name_bprint_delegate(AVBPrint* @bp, AVChannel @channel_id);
+        private static av_channel_name_bprint_delegate av_channel_name_bprint_fptr = (AVBPrint* @bp, AVChannel @channel_id) =>
+        {
+            av_channel_name_bprint_fptr = GetFunctionDelegate<av_channel_name_bprint_delegate>(GetOrLoadLibrary("avutil"), "av_channel_name_bprint");
+            if (av_channel_name_bprint_fptr == null)
+            {
+                av_channel_name_bprint_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_channel_name_bprint"));
+                };
+            }
+            av_channel_name_bprint_fptr(@bp, @channel_id);
+        };
+        /// <summary>bprint variant of av_channel_name().</summary>
+        public static void av_channel_name_bprint(AVBPrint* @bp, AVChannel @channel_id)
+        {
+            av_channel_name_bprint_fptr(@bp, @channel_id);
         }
         
         
@@ -9504,338 +10080,6 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVFifoBuffer* av_fifo_alloc_delegate(uint @size);
-        private static av_fifo_alloc_delegate av_fifo_alloc_fptr = (uint @size) =>
-        {
-            av_fifo_alloc_fptr = GetFunctionDelegate<av_fifo_alloc_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_alloc");
-            if (av_fifo_alloc_fptr == null)
-            {
-                av_fifo_alloc_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_alloc"));
-                };
-            }
-            return av_fifo_alloc_fptr(@size);
-        };
-        /// <summary>Initialize an AVFifoBuffer.</summary>
-        /// <param name="size">of FIFO</param>
-        /// <returns>AVFifoBuffer or NULL in case of memory allocation failure</returns>
-        public static AVFifoBuffer* av_fifo_alloc(uint @size)
-        {
-            return av_fifo_alloc_fptr(@size);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVFifoBuffer* av_fifo_alloc_array_delegate(ulong @nmemb, ulong @size);
-        private static av_fifo_alloc_array_delegate av_fifo_alloc_array_fptr = (ulong @nmemb, ulong @size) =>
-        {
-            av_fifo_alloc_array_fptr = GetFunctionDelegate<av_fifo_alloc_array_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_alloc_array");
-            if (av_fifo_alloc_array_fptr == null)
-            {
-                av_fifo_alloc_array_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_alloc_array"));
-                };
-            }
-            return av_fifo_alloc_array_fptr(@nmemb, @size);
-        };
-        /// <summary>Initialize an AVFifoBuffer.</summary>
-        /// <param name="nmemb">number of elements</param>
-        /// <param name="size">size of the single element</param>
-        /// <returns>AVFifoBuffer or NULL in case of memory allocation failure</returns>
-        public static AVFifoBuffer* av_fifo_alloc_array(ulong @nmemb, ulong @size)
-        {
-            return av_fifo_alloc_array_fptr(@nmemb, @size);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_fifo_drain_delegate(AVFifoBuffer* @f, int @size);
-        private static av_fifo_drain_delegate av_fifo_drain_fptr = (AVFifoBuffer* @f, int @size) =>
-        {
-            av_fifo_drain_fptr = GetFunctionDelegate<av_fifo_drain_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_drain");
-            if (av_fifo_drain_fptr == null)
-            {
-                av_fifo_drain_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_drain"));
-                };
-            }
-            av_fifo_drain_fptr(@f, @size);
-        };
-        /// <summary>Read and discard the specified amount of data from an AVFifoBuffer.</summary>
-        /// <param name="f">AVFifoBuffer to read from</param>
-        /// <param name="size">amount of data to read in bytes</param>
-        public static void av_fifo_drain(AVFifoBuffer* @f, int @size)
-        {
-            av_fifo_drain_fptr(@f, @size);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_fifo_free_delegate(AVFifoBuffer* @f);
-        private static av_fifo_free_delegate av_fifo_free_fptr = (AVFifoBuffer* @f) =>
-        {
-            av_fifo_free_fptr = GetFunctionDelegate<av_fifo_free_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_free");
-            if (av_fifo_free_fptr == null)
-            {
-                av_fifo_free_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_free"));
-                };
-            }
-            av_fifo_free_fptr(@f);
-        };
-        /// <summary>Free an AVFifoBuffer.</summary>
-        /// <param name="f">AVFifoBuffer to free</param>
-        public static void av_fifo_free(AVFifoBuffer* @f)
-        {
-            av_fifo_free_fptr(@f);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_fifo_freep_delegate(AVFifoBuffer** @f);
-        private static av_fifo_freep_delegate av_fifo_freep_fptr = (AVFifoBuffer** @f) =>
-        {
-            av_fifo_freep_fptr = GetFunctionDelegate<av_fifo_freep_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_freep");
-            if (av_fifo_freep_fptr == null)
-            {
-                av_fifo_freep_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_freep"));
-                };
-            }
-            av_fifo_freep_fptr(@f);
-        };
-        /// <summary>Free an AVFifoBuffer and reset pointer to NULL.</summary>
-        /// <param name="f">AVFifoBuffer to free</param>
-        public static void av_fifo_freep(AVFifoBuffer** @f)
-        {
-            av_fifo_freep_fptr(@f);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_fifo_generic_peek_delegate(AVFifoBuffer* @f, void* @dest, int @buf_size, av_fifo_generic_peek_func_func @func);
-        private static av_fifo_generic_peek_delegate av_fifo_generic_peek_fptr = (AVFifoBuffer* @f, void* @dest, int @buf_size, av_fifo_generic_peek_func_func @func) =>
-        {
-            av_fifo_generic_peek_fptr = GetFunctionDelegate<av_fifo_generic_peek_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_generic_peek");
-            if (av_fifo_generic_peek_fptr == null)
-            {
-                av_fifo_generic_peek_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_generic_peek"));
-                };
-            }
-            return av_fifo_generic_peek_fptr(@f, @dest, @buf_size, @func);
-        };
-        /// <summary>Feed data from an AVFifoBuffer to a user-supplied callback. Similar as av_fifo_gereric_read but without discarding data.</summary>
-        /// <param name="f">AVFifoBuffer to read from</param>
-        /// <param name="dest">data destination</param>
-        /// <param name="buf_size">number of bytes to read</param>
-        /// <param name="func">generic read function</param>
-        public static int av_fifo_generic_peek(AVFifoBuffer* @f, void* @dest, int @buf_size, av_fifo_generic_peek_func_func @func)
-        {
-            return av_fifo_generic_peek_fptr(@f, @dest, @buf_size, @func);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_fifo_generic_peek_at_delegate(AVFifoBuffer* @f, void* @dest, int @offset, int @buf_size, av_fifo_generic_peek_at_func_func @func);
-        private static av_fifo_generic_peek_at_delegate av_fifo_generic_peek_at_fptr = (AVFifoBuffer* @f, void* @dest, int @offset, int @buf_size, av_fifo_generic_peek_at_func_func @func) =>
-        {
-            av_fifo_generic_peek_at_fptr = GetFunctionDelegate<av_fifo_generic_peek_at_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_generic_peek_at");
-            if (av_fifo_generic_peek_at_fptr == null)
-            {
-                av_fifo_generic_peek_at_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_generic_peek_at"));
-                };
-            }
-            return av_fifo_generic_peek_at_fptr(@f, @dest, @offset, @buf_size, @func);
-        };
-        /// <summary>Feed data at specific position from an AVFifoBuffer to a user-supplied callback. Similar as av_fifo_gereric_read but without discarding data.</summary>
-        /// <param name="f">AVFifoBuffer to read from</param>
-        /// <param name="dest">data destination</param>
-        /// <param name="offset">offset from current read position</param>
-        /// <param name="buf_size">number of bytes to read</param>
-        /// <param name="func">generic read function</param>
-        public static int av_fifo_generic_peek_at(AVFifoBuffer* @f, void* @dest, int @offset, int @buf_size, av_fifo_generic_peek_at_func_func @func)
-        {
-            return av_fifo_generic_peek_at_fptr(@f, @dest, @offset, @buf_size, @func);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_fifo_generic_read_delegate(AVFifoBuffer* @f, void* @dest, int @buf_size, av_fifo_generic_read_func_func @func);
-        private static av_fifo_generic_read_delegate av_fifo_generic_read_fptr = (AVFifoBuffer* @f, void* @dest, int @buf_size, av_fifo_generic_read_func_func @func) =>
-        {
-            av_fifo_generic_read_fptr = GetFunctionDelegate<av_fifo_generic_read_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_generic_read");
-            if (av_fifo_generic_read_fptr == null)
-            {
-                av_fifo_generic_read_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_generic_read"));
-                };
-            }
-            return av_fifo_generic_read_fptr(@f, @dest, @buf_size, @func);
-        };
-        /// <summary>Feed data from an AVFifoBuffer to a user-supplied callback.</summary>
-        /// <param name="f">AVFifoBuffer to read from</param>
-        /// <param name="dest">data destination</param>
-        /// <param name="buf_size">number of bytes to read</param>
-        /// <param name="func">generic read function</param>
-        public static int av_fifo_generic_read(AVFifoBuffer* @f, void* @dest, int @buf_size, av_fifo_generic_read_func_func @func)
-        {
-            return av_fifo_generic_read_fptr(@f, @dest, @buf_size, @func);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_fifo_generic_write_delegate(AVFifoBuffer* @f, void* @src, int @size, av_fifo_generic_write_func_func @func);
-        private static av_fifo_generic_write_delegate av_fifo_generic_write_fptr = (AVFifoBuffer* @f, void* @src, int @size, av_fifo_generic_write_func_func @func) =>
-        {
-            av_fifo_generic_write_fptr = GetFunctionDelegate<av_fifo_generic_write_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_generic_write");
-            if (av_fifo_generic_write_fptr == null)
-            {
-                av_fifo_generic_write_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_generic_write"));
-                };
-            }
-            return av_fifo_generic_write_fptr(@f, @src, @size, @func);
-        };
-        /// <summary>Feed data from a user-supplied callback to an AVFifoBuffer.</summary>
-        /// <param name="f">AVFifoBuffer to write to</param>
-        /// <param name="src">data source; non-const since it may be used as a modifiable context by the function defined in func</param>
-        /// <param name="size">number of bytes to write</param>
-        /// <param name="func">generic write function; the first parameter is src, the second is dest_buf, the third is dest_buf_size. func must return the number of bytes written to dest_buf, or &lt; = 0 to indicate no more data available to write. If func is NULL, src is interpreted as a simple byte array for source data.</param>
-        /// <returns>the number of bytes written to the FIFO</returns>
-        public static int av_fifo_generic_write(AVFifoBuffer* @f, void* @src, int @size, av_fifo_generic_write_func_func @func)
-        {
-            return av_fifo_generic_write_fptr(@f, @src, @size, @func);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_fifo_grow_delegate(AVFifoBuffer* @f, uint @additional_space);
-        private static av_fifo_grow_delegate av_fifo_grow_fptr = (AVFifoBuffer* @f, uint @additional_space) =>
-        {
-            av_fifo_grow_fptr = GetFunctionDelegate<av_fifo_grow_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_grow");
-            if (av_fifo_grow_fptr == null)
-            {
-                av_fifo_grow_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_grow"));
-                };
-            }
-            return av_fifo_grow_fptr(@f, @additional_space);
-        };
-        /// <summary>Enlarge an AVFifoBuffer. In case of reallocation failure, the old FIFO is kept unchanged. The new fifo size may be larger than the requested size.</summary>
-        /// <param name="f">AVFifoBuffer to resize</param>
-        /// <param name="additional_space">the amount of space in bytes to allocate in addition to av_fifo_size()</param>
-        /// <returns>&lt; 0 for failure, &gt;=0 otherwise</returns>
-        public static int av_fifo_grow(AVFifoBuffer* @f, uint @additional_space)
-        {
-            return av_fifo_grow_fptr(@f, @additional_space);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_fifo_realloc2_delegate(AVFifoBuffer* @f, uint @size);
-        private static av_fifo_realloc2_delegate av_fifo_realloc2_fptr = (AVFifoBuffer* @f, uint @size) =>
-        {
-            av_fifo_realloc2_fptr = GetFunctionDelegate<av_fifo_realloc2_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_realloc2");
-            if (av_fifo_realloc2_fptr == null)
-            {
-                av_fifo_realloc2_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_realloc2"));
-                };
-            }
-            return av_fifo_realloc2_fptr(@f, @size);
-        };
-        /// <summary>Resize an AVFifoBuffer. In case of reallocation failure, the old FIFO is kept unchanged.</summary>
-        /// <param name="f">AVFifoBuffer to resize</param>
-        /// <param name="size">new AVFifoBuffer size in bytes</param>
-        /// <returns>&lt; 0 for failure, &gt;=0 otherwise</returns>
-        public static int av_fifo_realloc2(AVFifoBuffer* @f, uint @size)
-        {
-            return av_fifo_realloc2_fptr(@f, @size);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_fifo_reset_delegate(AVFifoBuffer* @f);
-        private static av_fifo_reset_delegate av_fifo_reset_fptr = (AVFifoBuffer* @f) =>
-        {
-            av_fifo_reset_fptr = GetFunctionDelegate<av_fifo_reset_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_reset");
-            if (av_fifo_reset_fptr == null)
-            {
-                av_fifo_reset_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_reset"));
-                };
-            }
-            av_fifo_reset_fptr(@f);
-        };
-        /// <summary>Reset the AVFifoBuffer to the state right after av_fifo_alloc, in particular it is emptied.</summary>
-        /// <param name="f">AVFifoBuffer to reset</param>
-        public static void av_fifo_reset(AVFifoBuffer* @f)
-        {
-            av_fifo_reset_fptr(@f);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_fifo_size_delegate(AVFifoBuffer* @f);
-        private static av_fifo_size_delegate av_fifo_size_fptr = (AVFifoBuffer* @f) =>
-        {
-            av_fifo_size_fptr = GetFunctionDelegate<av_fifo_size_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_size");
-            if (av_fifo_size_fptr == null)
-            {
-                av_fifo_size_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_size"));
-                };
-            }
-            return av_fifo_size_fptr(@f);
-        };
-        /// <summary>Return the amount of data in bytes in the AVFifoBuffer, that is the amount of data you can read from it.</summary>
-        /// <param name="f">AVFifoBuffer to read from</param>
-        /// <returns>size</returns>
-        public static int av_fifo_size(AVFifoBuffer* @f)
-        {
-            return av_fifo_size_fptr(@f);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_fifo_space_delegate(AVFifoBuffer* @f);
-        private static av_fifo_space_delegate av_fifo_space_fptr = (AVFifoBuffer* @f) =>
-        {
-            av_fifo_space_fptr = GetFunctionDelegate<av_fifo_space_delegate>(GetOrLoadLibrary("avutil"), "av_fifo_space");
-            if (av_fifo_space_fptr == null)
-            {
-                av_fifo_space_fptr = delegate 
-                {
-                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_fifo_space"));
-                };
-            }
-            return av_fifo_space_fptr(@f);
-        };
-        /// <summary>Return the amount of space in bytes in the AVFifoBuffer, that is the amount of data you can write into it.</summary>
-        /// <param name="f">AVFifoBuffer to write into</param>
-        /// <returns>size</returns>
-        public static int av_fifo_space(AVFifoBuffer* @f)
-        {
-            return av_fifo_space_fptr(@f);
-        }
-        
-        
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         private delegate int av_file_map_delegate(
     #if NET40
     #elif NET45 || NETSTANDARD2_0
@@ -9972,6 +10216,7 @@ namespace FFmpeg.AutoGen
             return av_fopen_utf8_fptr(@path, @mode);
         };
         /// <summary>Open a file using a UTF-8 filename. The API of this function matches POSIX fopen(), errors are returned through errno.</summary>
+        [Obsolete("Avoid using it, as on Windows, the FILE* allocated by this function may be allocated with a different CRT than the caller who uses the FILE*. No replacement provided in public API.")]
         public static _iobuf* av_fopen_utf8(
     #if NET40
     #elif NET45 || NETSTANDARD2_0
@@ -10611,6 +10856,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Get the description of a given channel.</summary>
         /// <param name="channel">a channel layout with a single channel</param>
         /// <returns>channel description on success, NULL on error</returns>
+        [Obsolete("use av_channel_description()")]
         public static string av_get_channel_description(ulong @channel)
         {
             return av_get_channel_description_fptr(@channel);
@@ -10639,6 +10885,7 @@ namespace FFmpeg.AutoGen
             return av_get_channel_layout_fptr(@name);
         };
         /// <summary>Return a channel layout id that matches name, or 0 if no match is found.</summary>
+        [Obsolete("use av_channel_layout_from_string()")]
         public static ulong av_get_channel_layout(
     #if NET40
     #elif NET45 || NETSTANDARD2_0
@@ -10669,6 +10916,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Get the index of a channel in channel_layout.</summary>
         /// <param name="channel">a channel layout describing exactly one channel which must be present in channel_layout.</param>
         /// <returns>index of channel in channel_layout on success, a negative AVERROR on error.</returns>
+        [Obsolete("use av_channel_layout_index_from_channel()")]
         public static int av_get_channel_layout_channel_index(ulong @channel_layout, ulong @channel)
         {
             return av_get_channel_layout_channel_index_fptr(@channel_layout, @channel);
@@ -10690,6 +10938,7 @@ namespace FFmpeg.AutoGen
             return av_get_channel_layout_nb_channels_fptr(@channel_layout);
         };
         /// <summary>Return the number of channels in the channel layout.</summary>
+        [Obsolete("use AVChannelLayout.nb_channels")]
         public static int av_get_channel_layout_nb_channels(ulong @channel_layout)
         {
             return av_get_channel_layout_nb_channels_fptr(@channel_layout);
@@ -10713,6 +10962,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Return a description of a channel layout. If nb_channels is &lt;= 0, it is guessed from the channel_layout.</summary>
         /// <param name="buf">put here the string containing the channel layout</param>
         /// <param name="buf_size">size in bytes of the buffer</param>
+        [Obsolete("use av_channel_layout_describe()")]
         public static void av_get_channel_layout_string(byte* @buf, int @buf_size, int @nb_channels, ulong @channel_layout)
         {
             av_get_channel_layout_string_fptr(@buf, @buf_size, @nb_channels, @channel_layout);
@@ -10736,6 +10986,7 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Get the name of a given channel.</summary>
         /// <returns>channel name on success, NULL on error.</returns>
+        [Obsolete("use av_channel_name()")]
         public static string av_get_channel_name(ulong @channel)
         {
             return av_get_channel_name_fptr(@channel);
@@ -10802,6 +11053,7 @@ namespace FFmpeg.AutoGen
             return av_get_default_channel_layout_fptr(@nb_channels);
         };
         /// <summary>Return default channel layout for a given number of channels.</summary>
+        [Obsolete("use av_channel_layout_default()")]
         public static long av_get_default_channel_layout(int @nb_channels)
         {
             return av_get_default_channel_layout_fptr(@nb_channels);
@@ -10834,6 +11086,7 @@ namespace FFmpeg.AutoGen
         /// <param name="channel_layout">parsed channel layout (0 if unknown)</param>
         /// <param name="nb_channels">number of channels</param>
         /// <returns>0 on success, AVERROR(EINVAL) if the parsing fails.</returns>
+        [Obsolete("use av_channel_layout_from_string()")]
         public static int av_get_extended_channel_layout(
     #if NET40
     #elif NET45 || NETSTANDARD2_0
@@ -11164,6 +11417,7 @@ namespace FFmpeg.AutoGen
         /// <param name="layout">channel layout mask</param>
         /// <param name="name">name of the layout</param>
         /// <returns>0  if the layout exists,  &lt; 0 if index is beyond the limits</returns>
+        [Obsolete("use av_channel_layout_standard()")]
         public static int av_get_standard_channel_layout(uint @index, ulong* @layout, byte** @name)
         {
             return av_get_standard_channel_layout_fptr(@index, @layout, @name);
@@ -13302,6 +13556,7 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_get_channel_layout_fptr(@obj, @name, @search_flags, @ch_layout);
         };
+        [Obsolete("")]
         public static int av_opt_get_channel_layout(void* @obj, 
     #if NET40
     #elif NET45 || NETSTANDARD2_0
@@ -13312,6 +13567,40 @@ namespace FFmpeg.AutoGen
     string @name, int @search_flags, long* @ch_layout)
         {
             return av_opt_get_channel_layout_fptr(@obj, @name, @search_flags, @ch_layout);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_opt_get_chlayout_delegate(void* @obj, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @name, int @search_flags, AVChannelLayout* @layout);
+        private static av_opt_get_chlayout_delegate av_opt_get_chlayout_fptr = (void* @obj, string @name, int @search_flags, AVChannelLayout* @layout) =>
+        {
+            av_opt_get_chlayout_fptr = GetFunctionDelegate<av_opt_get_chlayout_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_chlayout");
+            if (av_opt_get_chlayout_fptr == null)
+            {
+                av_opt_get_chlayout_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_get_chlayout"));
+                };
+            }
+            return av_opt_get_chlayout_fptr(@obj, @name, @search_flags, @layout);
+        };
+        public static int av_opt_get_chlayout(void* @obj, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @name, int @search_flags, AVChannelLayout* @layout)
+        {
+            return av_opt_get_chlayout_fptr(@obj, @name, @search_flags, @layout);
         }
         
         
@@ -13977,6 +14266,7 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_set_channel_layout_fptr(@obj, @name, @ch_layout, @search_flags);
         };
+        [Obsolete("")]
         public static int av_opt_set_channel_layout(void* @obj, 
     #if NET40
     #elif NET45 || NETSTANDARD2_0
@@ -13987,6 +14277,40 @@ namespace FFmpeg.AutoGen
     string @name, long @ch_layout, int @search_flags)
         {
             return av_opt_set_channel_layout_fptr(@obj, @name, @ch_layout, @search_flags);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int av_opt_set_chlayout_delegate(void* @obj, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @name, AVChannelLayout* @layout, int @search_flags);
+        private static av_opt_set_chlayout_delegate av_opt_set_chlayout_fptr = (void* @obj, string @name, AVChannelLayout* @layout, int @search_flags) =>
+        {
+            av_opt_set_chlayout_fptr = GetFunctionDelegate<av_opt_set_chlayout_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_chlayout");
+            if (av_opt_set_chlayout_fptr == null)
+            {
+                av_opt_set_chlayout_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "av_opt_set_chlayout"));
+                };
+            }
+            return av_opt_set_chlayout_fptr(@obj, @name, @layout, @search_flags);
+        };
+        public static int av_opt_set_chlayout(void* @obj, 
+    #if NET40
+    #elif NET45 || NETSTANDARD2_0
+    [MarshalAs((UnmanagedType)48)]
+    #else
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #endif
+    string @name, AVChannelLayout* @layout, int @search_flags)
+        {
+            return av_opt_set_chlayout_fptr(@obj, @name, @layout, @search_flags);
         }
         
         
@@ -14712,7 +15036,7 @@ namespace FFmpeg.AutoGen
         /// <summary>Allocate, reallocate, or free a block of memory.</summary>
         /// <param name="ptr">Pointer to a memory block already allocated with av_realloc() or `NULL`</param>
         /// <param name="size">Size in bytes of the memory block to be allocated or reallocated</param>
-        /// <returns>Pointer to a newly-reallocated block or `NULL` if the block cannot be reallocated or the function is used to free the memory block</returns>
+        /// <returns>Pointer to a newly-reallocated block or `NULL` if the block cannot be reallocated</returns>
         public static void* av_realloc(void* @ptr, ulong @size)
         {
             return av_realloc_fptr(@ptr, @size);
@@ -14737,7 +15061,7 @@ namespace FFmpeg.AutoGen
         /// <param name="ptr">Pointer to a memory block already allocated with av_realloc() or `NULL`</param>
         /// <param name="nmemb">Number of elements in the array</param>
         /// <param name="size">Size of the single element of the array</param>
-        /// <returns>Pointer to a newly-reallocated block or NULL if the block cannot be reallocated or the function is used to free the memory block</returns>
+        /// <returns>Pointer to a newly-reallocated block or NULL if the block cannot be reallocated</returns>
         public static void* av_realloc_array(void* @ptr, ulong @nmemb, ulong @size)
         {
             return av_realloc_array_fptr(@ptr, @nmemb, @size);
@@ -14803,7 +15127,7 @@ namespace FFmpeg.AutoGen
             }
             return av_reallocp_array_fptr(@ptr, @nmemb, @size);
         };
-        /// <summary>Allocate, reallocate, or free an array through a pointer to a pointer.</summary>
+        /// <summary>Allocate, reallocate an array through a pointer to a pointer.</summary>
         /// <param name="ptr">Pointer to a pointer to a memory block already allocated with av_realloc(), or a pointer to `NULL`. The pointer is updated on success, or freed on failure.</param>
         /// <param name="nmemb">Number of elements</param>
         /// <param name="size">Size of the single element</param>
@@ -16222,9 +16546,41 @@ namespace FFmpeg.AutoGen
         /// <param name="log_offset">logging level offset</param>
         /// <param name="log_ctx">parent logging context, can be NULL</param>
         /// <returns>NULL on error, allocated context otherwise</returns>
+        [Obsolete("use ")]
         public static SwrContext* swr_alloc_set_opts(SwrContext* @s, long @out_ch_layout, AVSampleFormat @out_sample_fmt, int @out_sample_rate, long @in_ch_layout, AVSampleFormat @in_sample_fmt, int @in_sample_rate, int @log_offset, void* @log_ctx)
         {
             return swr_alloc_set_opts_fptr(@s, @out_ch_layout, @out_sample_fmt, @out_sample_rate, @in_ch_layout, @in_sample_fmt, @in_sample_rate, @log_offset, @log_ctx);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int swr_alloc_set_opts2_delegate(SwrContext** @ps, AVChannelLayout* @out_ch_layout, AVSampleFormat @out_sample_fmt, int @out_sample_rate, AVChannelLayout* @in_ch_layout, AVSampleFormat @in_sample_fmt, int @in_sample_rate, int @log_offset, void* @log_ctx);
+        private static swr_alloc_set_opts2_delegate swr_alloc_set_opts2_fptr = (SwrContext** @ps, AVChannelLayout* @out_ch_layout, AVSampleFormat @out_sample_fmt, int @out_sample_rate, AVChannelLayout* @in_ch_layout, AVSampleFormat @in_sample_fmt, int @in_sample_rate, int @log_offset, void* @log_ctx) =>
+        {
+            swr_alloc_set_opts2_fptr = GetFunctionDelegate<swr_alloc_set_opts2_delegate>(GetOrLoadLibrary("swresample"), "swr_alloc_set_opts2");
+            if (swr_alloc_set_opts2_fptr == null)
+            {
+                swr_alloc_set_opts2_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_alloc_set_opts2"));
+                };
+            }
+            return swr_alloc_set_opts2_fptr(@ps, @out_ch_layout, @out_sample_fmt, @out_sample_rate, @in_ch_layout, @in_sample_fmt, @in_sample_rate, @log_offset, @log_ctx);
+        };
+        /// <summary>Allocate SwrContext if needed and set/reset common parameters.</summary>
+        /// <param name="ps">Pointer to an existing Swr context if available, or to NULL if not. On success, *ps will be set to the allocated context.</param>
+        /// <param name="out_ch_layout">output channel layout (e.g. AV_CHANNEL_LAYOUT_*)</param>
+        /// <param name="out_sample_fmt">output sample format (AV_SAMPLE_FMT_*).</param>
+        /// <param name="out_sample_rate">output sample rate (frequency in Hz)</param>
+        /// <param name="in_ch_layout">input channel layout (e.g. AV_CHANNEL_LAYOUT_*)</param>
+        /// <param name="in_sample_fmt">input sample format (AV_SAMPLE_FMT_*).</param>
+        /// <param name="in_sample_rate">input sample rate (frequency in Hz)</param>
+        /// <param name="log_offset">logging level offset</param>
+        /// <param name="log_ctx">parent logging context, can be NULL</param>
+        /// <returns>0 on success, a negative AVERROR code on error. On error, the Swr context is freed and *ps set to NULL.</returns>
+        public static int swr_alloc_set_opts2(SwrContext** @ps, AVChannelLayout* @out_ch_layout, AVSampleFormat @out_sample_fmt, int @out_sample_rate, AVChannelLayout* @in_ch_layout, AVSampleFormat @in_sample_fmt, int @in_sample_rate, int @log_offset, void* @log_ctx)
+        {
+            return swr_alloc_set_opts2_fptr(@ps, @out_ch_layout, @out_sample_fmt, @out_sample_rate, @in_ch_layout, @in_sample_fmt, @in_sample_rate, @log_offset, @log_ctx);
         }
         
         
@@ -16254,9 +16610,40 @@ namespace FFmpeg.AutoGen
         /// <param name="matrix_encoding">matrixed stereo downmix mode (e.g. dplii)</param>
         /// <param name="log_ctx">parent logging context, can be NULL</param>
         /// <returns>0 on success, negative AVERROR code on failure</returns>
+        [Obsolete("use ")]
         public static int swr_build_matrix(ulong @in_layout, ulong @out_layout, double @center_mix_level, double @surround_mix_level, double @lfe_mix_level, double @rematrix_maxval, double @rematrix_volume, double* @matrix, int @stride, AVMatrixEncoding @matrix_encoding, void* @log_ctx)
         {
             return swr_build_matrix_fptr(@in_layout, @out_layout, @center_mix_level, @surround_mix_level, @lfe_mix_level, @rematrix_maxval, @rematrix_volume, @matrix, @stride, @matrix_encoding, @log_ctx);
+        }
+        
+        
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        private delegate int swr_build_matrix2_delegate(AVChannelLayout* @in_layout, AVChannelLayout* @out_layout, double @center_mix_level, double @surround_mix_level, double @lfe_mix_level, double @maxval, double @rematrix_volume, double* @matrix, long @stride, AVMatrixEncoding @matrix_encoding, void* @log_context);
+        private static swr_build_matrix2_delegate swr_build_matrix2_fptr = (AVChannelLayout* @in_layout, AVChannelLayout* @out_layout, double @center_mix_level, double @surround_mix_level, double @lfe_mix_level, double @maxval, double @rematrix_volume, double* @matrix, long @stride, AVMatrixEncoding @matrix_encoding, void* @log_context) =>
+        {
+            swr_build_matrix2_fptr = GetFunctionDelegate<swr_build_matrix2_delegate>(GetOrLoadLibrary("swresample"), "swr_build_matrix2");
+            if (swr_build_matrix2_fptr == null)
+            {
+                swr_build_matrix2_fptr = delegate 
+                {
+                    throw new PlatformNotSupportedException(string.Format(PlatformNotSupportedMessageFormat, "swr_build_matrix2"));
+                };
+            }
+            return swr_build_matrix2_fptr(@in_layout, @out_layout, @center_mix_level, @surround_mix_level, @lfe_mix_level, @maxval, @rematrix_volume, @matrix, @stride, @matrix_encoding, @log_context);
+        };
+        /// <summary>Generate a channel mixing matrix.</summary>
+        /// <param name="in_layout">input channel layout</param>
+        /// <param name="out_layout">output channel layout</param>
+        /// <param name="center_mix_level">mix level for the center channel</param>
+        /// <param name="surround_mix_level">mix level for the surround channel(s)</param>
+        /// <param name="lfe_mix_level">mix level for the low-frequency effects channel</param>
+        /// <param name="matrix">mixing coefficients; matrix[i + stride * o] is the weight of input channel i in output channel o.</param>
+        /// <param name="stride">distance between adjacent input channels in the matrix array</param>
+        /// <param name="matrix_encoding">matrixed stereo downmix mode (e.g. dplii)</param>
+        /// <returns>0 on success, negative AVERROR code on failure</returns>
+        public static int swr_build_matrix2(AVChannelLayout* @in_layout, AVChannelLayout* @out_layout, double @center_mix_level, double @surround_mix_level, double @lfe_mix_level, double @maxval, double @rematrix_volume, double* @matrix, long @stride, AVMatrixEncoding @matrix_encoding, void* @log_context)
+        {
+            return swr_build_matrix2_fptr(@in_layout, @out_layout, @center_mix_level, @surround_mix_level, @lfe_mix_level, @maxval, @rematrix_volume, @matrix, @stride, @matrix_encoding, @log_context);
         }
         
         

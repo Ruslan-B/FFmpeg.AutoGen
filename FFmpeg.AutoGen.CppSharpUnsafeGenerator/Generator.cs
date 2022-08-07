@@ -54,7 +54,7 @@ internal class Generator
 
                 using (writer.BeginBlock())
                 {
-                    writer.WriteLine(                        "public static Dictionary<string, int> LibraryVersionMap = new Dictionary<string, int>");
+                    writer.WriteLine("public static Dictionary<string, int> LibraryVersionMap = new Dictionary<string, int>");
 
                     using (writer.BeginBlock(true))
                     {
@@ -222,7 +222,7 @@ internal class Generator
             LanguageVersion = LanguageVersion.C99_GNU
         };
 
-        parserOptions.Setup();
+        parserOptions.SetupMSVC(VisualStudioVersion.VS2019);
         
         foreach (var includeDir in IncludeDirs) parserOptions.AddIncludeDirs(includeDir);
 

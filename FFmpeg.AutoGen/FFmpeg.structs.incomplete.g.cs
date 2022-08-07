@@ -59,22 +59,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <remarks>This struct is incomplete.</remarks>
-    public unsafe struct AVCodecDefault
-    {
-    }
-    
-    /// <remarks>This struct is incomplete.</remarks>
-    public unsafe struct AVCodecHWConfigInternal
-    {
-    }
-    
-    /// <remarks>This struct is incomplete.</remarks>
     public unsafe struct AVCodecInternal
-    {
-    }
-    
-    /// <remarks>This struct is incomplete.</remarks>
-    public unsafe struct MpegEncContext
     {
     }
     
