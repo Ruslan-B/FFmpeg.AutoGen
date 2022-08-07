@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using FFmpeg.AutoGen.ClangMacroParser;
+using FFmpeg.AutoGen.ClangMacroParser.Expressions;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
-using RCore.ClangMacroParser;
-using RCore.ClangMacroParser.Expressions;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
 
@@ -24,18 +24,18 @@ internal class MacroPostProcessor
     {
         _macroExpressionMap = new Dictionary<string, IExpression>(macros.Count);
 
-        foreach (var x in macros)
+        foreach (var macro in macros)
             try
             {
-                _macroExpressionMap.Add(x.Name, Parser.Parse(x.Expression));
+                _macroExpressionMap.Add(macro.Name, Parser.Parse(macro.Expression));
             }
             catch (NotSupportedException)
             {
-                Trace.TraceError($"Cannot parse macro expression: {x.Expression}");
+                Trace.TraceError($"Cannot parse macro expression: {macro.Expression}");
             }
             catch (Exception e)
             {
-                Trace.TraceError($"Cannot parse macro expression: {x.Expression}: {e.Message}");
+                Trace.TraceError($"Cannot parse macro expression: {macro.Expression}: {e.Message}");
             }
 
         foreach (var macro in macros) Process(macro);
@@ -46,14 +46,14 @@ internal class MacroPostProcessor
         macro.Expression = CleanUp(macro.Expression);
 
         if (!_macroExpressionMap.TryGetValue(macro.Name, out var expression) || expression == null) return;
-
+        
         var typeOrAlias = DeduceType(expression);
         if (typeOrAlias == null) return;
 
         expression = Rewrite(expression);
 
         macro.TypeName = typeOrAlias.ToString();
-        macro.Content = $"{macro.Name} = {macro.Expression}";
+        macro.Content = $"{macro.Name} = {CleanUp(macro.Expression)}";
         macro.Expression = Serialize(expression);
         macro.IsConst = IsConst(expression);
         macro.IsValid = !typeOrAlias.IsAlias || _astProcessor.TypeAliases.ContainsKey(typeOrAlias.Alias);
@@ -72,8 +72,8 @@ internal class MacroPostProcessor
         {
             BinaryExpression e => DeduceType(e),
             UnaryExpression e => DeduceType(e.Operand),
-            CastExpression e => GetTypeAlias(e.TargetType),
-            CallExpression e => GetWellKnownMaroType(e.Name),
+            CastExpression e => _astProcessor.GetTypeAlias(e.TargetType),
+            CallExpression e => _astProcessor.GetWellKnownMacroType(e.Name),
             VariableExpression e => DeduceType(e),
             ConstantExpression e => e.Value.GetType(),
             _ => throw new NotSupportedException()
@@ -94,7 +94,7 @@ internal class MacroPostProcessor
     private TypeOrAlias DeduceType(VariableExpression expression) =>
         _macroExpressionMap.TryGetValue(expression.Name, out var nested) && nested != null
             ? DeduceType(nested)
-            : GetWellKnownMaroType(expression.Name);
+            : _astProcessor.GetWellKnownMacroType(expression.Name);
 
     private IExpression Rewrite(IExpression expression)
     {
@@ -119,11 +119,16 @@ internal class MacroPostProcessor
             case UnaryExpression e: return new UnaryExpression(e.OperationType, Rewrite(e.Operand));
             case CastExpression e: return new CastExpression(e.TargetType, Rewrite(e.Operand));
             case CallExpression e: return new CallExpression(e.Name, e.Arguments.Select(Rewrite));
-            case VariableExpression e: return e;
+            case VariableExpression e: return Rewrite(e);
             case ConstantExpression e: return e;
             default: return expression;
         }
     }
+
+    private IExpression Rewrite(VariableExpression expression) =>
+        _astProcessor.WellKnownEnumItems.TryGetValue(expression.Name, out var fullName)
+            ? new VariableExpression(fullName)
+            : expression;
 
     private string Serialize(IExpression expression)
     {
@@ -132,7 +137,7 @@ internal class MacroPostProcessor
             BinaryExpression e =>
                 $"{Serialize(e.Left)} {e.OperationType.ToOperationTypeString()} {Serialize(e.Right)}",
             UnaryExpression e => $"{e.OperationType.ToOperationTypeString()}{Serialize(e.Operand)}",
-            CastExpression e => $"({GetTypeAlias(e.TargetType)})({Serialize(e.Operand)})",
+            CastExpression e => $"({_astProcessor.GetTypeAlias(e.TargetType)})({Serialize(e.Operand)})",
             CallExpression e => $"{e.Name}({string.Join(", ", e.Arguments.Select(Serialize))})",
             VariableExpression e => e.Name,
             ConstantExpression e => Serialize(e.Value),
@@ -168,10 +173,4 @@ internal class MacroPostProcessor
             _ => throw new NotSupportedException()
         };
     }
-
-    private TypeOrAlias GetWellKnownMaroType(string macroName) =>
-        _astProcessor.WellKnownMacros.TryGetValue(macroName, out var alias) ? alias : null;
-
-    private TypeOrAlias GetTypeAlias(string typeName) =>
-        _astProcessor.TypeAliases.TryGetValue(typeName, out var alias) ? alias : typeName;
 }

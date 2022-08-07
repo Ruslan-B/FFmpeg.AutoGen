@@ -291,14 +291,15 @@ internal class Writer
     private void WriteObsoletion(IObsoletionAware obsoletionAware)
     {
         var obsoletion = obsoletionAware.Obsoletion;
-        if (obsoletion.IsObsolete) WriteLine($"[Obsolete(\"{obsoletion.Message}\")]");
+        if (obsoletion.IsObsolete) WriteLine($"[Obsolete(\"{EscapeQuotes(obsoletion.Message)}\")]");
     }
 
     private void Write(string value)
     {
         _writer.Write(value);
     }
-
+    private static string EscapeQuotes(string s) => s.Replace("\"", "\\\"");
+    
     private class End : IDisposable
     {
         private readonly Action _action;
