@@ -47,7 +47,7 @@ internal class Writer
         if (!structure.IsComplete) WriteLine("/// <remarks>This struct is incomplete.</remarks>");
         WriteObsoletion(structure);
         if (structure.IsUnion) WriteLine("[StructLayout(LayoutKind.Explicit)]");
-        WriteLine($"public unsafe struct {structure.Name}");
+        WriteLine($"public unsafe partial struct {structure.Name}");
 
         using (BeginBlock())
             foreach (var field in structure.Fields)
