@@ -75,16 +75,4 @@ internal class ASTProcessor
         var macros = Units.OfType<MacroDefinition>().ToArray();
         MacroPostProcessor.Process(macros);
     }
-
-    internal TypeOrAlias GetWellKnownMacroType(string macroName)
-    {
-        if (WellKnownMacros.TryGetValue(macroName, out var alias))
-            return alias;
-        if (WellKnownEnumItems.TryGetValue(macroName, out _))
-            return new TypeOrAlias(typeof(int));
-        return new TypeOrAlias(macroName);
-    }
-
-    internal TypeOrAlias GetTypeAlias(string typeName) =>
-        TypeAliases.TryGetValue(typeName, out var alias) ? alias : typeName;
 }
