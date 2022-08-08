@@ -3,13 +3,13 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen
 {
-    public unsafe struct _iobuf
+    public unsafe partial struct _iobuf
     {
         public void* @_Placeholder;
     }
     
     /// <summary>Rational number (pair of numerator and denominator).</summary>
-    public unsafe struct AVRational
+    public unsafe partial struct AVRational
     {
         /// <summary>Numerator</summary>
         public int @num;
@@ -18,7 +18,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Describe the class of an AVClass context structure. That is an arbitrary struct of which the first field is a pointer to an AVClass struct (e.g. AVCodecContext, AVFormatContext etc.).</summary>
-    public unsafe struct AVClass
+    public unsafe partial struct AVClass
     {
         /// <summary>The name of the class; usually it is the same name as the context structure type to which the AVClass is associated.</summary>
         public byte* @class_name;
@@ -45,7 +45,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>AVOption</summary>
-    public unsafe struct AVOption
+    public unsafe partial struct AVOption
     {
         public byte* @name;
         /// <summary>short English help text</summary>
@@ -64,7 +64,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>List of AVOptionRange structs.</summary>
-    public unsafe struct AVOptionRanges
+    public unsafe partial struct AVOptionRanges
     {
         /// <summary>Array of option ranges.</summary>
         public AVOptionRange** @range;
@@ -75,7 +75,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>An AVChannelCustom defines a single channel within a custom order layout</summary>
-    public unsafe struct AVChannelCustom
+    public unsafe partial struct AVChannelCustom
     {
         public AVChannel @id;
         public byte_array16 @name;
@@ -83,7 +83,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>An AVChannelLayout holds information about the channel layout of audio data.</summary>
-    public unsafe struct AVChannelLayout
+    public unsafe partial struct AVChannelLayout
     {
         /// <summary>Channel order used in this layout. This is a mandatory field.</summary>
         public AVChannelOrder @order;
@@ -96,7 +96,7 @@ namespace FFmpeg.AutoGen
     
     /// <summary>Details about which channels are present in this layout. For AV_CHANNEL_ORDER_UNSPEC, this field is undefined and must not be used.</summary>
     [StructLayout(LayoutKind.Explicit)]
-    public unsafe struct AVChannelLayout_u
+    public unsafe partial struct AVChannelLayout_u
     {
         /// <summary>This member must be used for AV_CHANNEL_ORDER_NATIVE, and may be used for AV_CHANNEL_ORDER_AMBISONIC to signal non-diegetic channels. It is a bitmask, where the position of each set bit means that the AVChannel with the corresponding value is present.</summary>
         [FieldOffset(0)]
@@ -107,7 +107,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Structure to hold side data for an AVFrame.</summary>
-    public unsafe struct AVFrameSideData
+    public unsafe partial struct AVFrameSideData
     {
         public AVFrameSideDataType @type;
         public byte* @data;
@@ -117,7 +117,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>A reference to a data buffer.</summary>
-    public unsafe struct AVBufferRef
+    public unsafe partial struct AVBufferRef
     {
         public AVBuffer* @buffer;
         /// <summary>The data buffer. It is considered writable if and only if this is the only reference to the buffer, in which case av_buffer_is_writable() returns 1.</summary>
@@ -127,7 +127,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Structure describing a single Region Of Interest.</summary>
-    public unsafe struct AVRegionOfInterest
+    public unsafe partial struct AVRegionOfInterest
     {
         /// <summary>Must be set to the size of this data structure (that is, sizeof(AVRegionOfInterest)).</summary>
         public uint @self_size;
@@ -141,7 +141,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This structure describes decoded (raw) audio or video data.</summary>
-    public unsafe struct AVFrame
+    public unsafe partial struct AVFrame
     {
         /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte. For video, it could even point to the end of the image data.</summary>
         public byte_ptrArray8 @data;
@@ -239,14 +239,14 @@ namespace FFmpeg.AutoGen
         public AVChannelLayout @ch_layout;
     }
     
-    public unsafe struct AVDictionaryEntry
+    public unsafe partial struct AVDictionaryEntry
     {
         public byte* @key;
         public byte* @value;
     }
     
     /// <summary>A single allowed range of values, or a single allowed value.</summary>
-    public unsafe struct AVOptionRange
+    public unsafe partial struct AVOptionRange
     {
         public byte* @str;
         /// <summary>Value range. For string ranges this represents the min/max length. For dimensions this represents the min/max pixel count or width/height in multi-component case.</summary>
@@ -263,7 +263,7 @@ namespace FFmpeg.AutoGen
     
     /// <summary>the default value for scalar options</summary>
     [StructLayout(LayoutKind.Explicit)]
-    public unsafe struct AVOption_default_val
+    public unsafe partial struct AVOption_default_val
     {
         [FieldOffset(0)]
         public long @i64;
@@ -276,7 +276,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Descriptor that unambiguously describes how the bits of a pixel are stored in the up to 4 data planes of an image. It also stores the subsampling factors and number of components.</summary>
-    public unsafe struct AVPixFmtDescriptor
+    public unsafe partial struct AVPixFmtDescriptor
     {
         public byte* @name;
         /// <summary>The number of components each pixel has, (1-4)</summary>
@@ -293,7 +293,7 @@ namespace FFmpeg.AutoGen
         public byte* @alias;
     }
     
-    public unsafe struct AVComponentDescriptor
+    public unsafe partial struct AVComponentDescriptor
     {
         /// <summary>Which of the 4 planes contains the component.</summary>
         public int @plane;
@@ -307,7 +307,7 @@ namespace FFmpeg.AutoGen
         public int @depth;
     }
     
-    public unsafe struct AVTimecode
+    public unsafe partial struct AVTimecode
     {
         /// <summary>timecode frame start (first base frame number)</summary>
         public int @start;
@@ -320,7 +320,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This struct aggregates all the (hardware/vendor-specific) &quot;high-level&quot; state, i.e. state that is not tied to a concrete processing configuration. E.g., in an API that supports hardware-accelerated encoding and decoding, this struct will (if possible) wrap the state that is common to both encoding and decoding and from which specific instances of encoders or decoders can be derived.</summary>
-    public unsafe struct AVHWDeviceContext
+    public unsafe partial struct AVHWDeviceContext
     {
         /// <summary>A class for logging. Set by av_hwdevice_ctx_alloc().</summary>
         public AVClass* @av_class;
@@ -337,7 +337,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This struct describes a set or pool of &quot;hardware&quot; frames (i.e. those with data not located in normal system memory). All the frames in the pool are assumed to be allocated in the same way and interchangeable.</summary>
-    public unsafe struct AVHWFramesContext
+    public unsafe partial struct AVHWFramesContext
     {
         /// <summary>A class for logging.</summary>
         public AVClass* @av_class;
@@ -368,7 +368,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This struct describes the constraints on hardware frames attached to a given device with a hardware-specific configuration. This is returned by av_hwdevice_get_hwframe_constraints() and must be freed by av_hwframe_constraints_free() after use.</summary>
-    public unsafe struct AVHWFramesConstraints
+    public unsafe partial struct AVHWFramesConstraints
     {
         /// <summary>A list of possible values for format in the hw_frames_ctx, terminated by AV_PIX_FMT_NONE. This member will always be filled.</summary>
         public AVPixelFormat* @valid_hw_formats;
@@ -383,17 +383,17 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This struct is allocated as AVHWDeviceContext.hwctx</summary>
-    public unsafe struct AVDXVA2DeviceContext
+    public unsafe partial struct AVDXVA2DeviceContext
     {
         public IDirect3DDeviceManager9* @devmgr;
     }
     
-    public unsafe struct IDirect3DDeviceManager9
+    public unsafe partial struct IDirect3DDeviceManager9
     {
         public IDirect3DDeviceManager9Vtbl* @lpVtbl;
     }
     
-    public unsafe struct IDirect3DDeviceManager9Vtbl
+    public unsafe partial struct IDirect3DDeviceManager9Vtbl
     {
         public void* @QueryInterface;
         public void* @AddRef;
@@ -408,7 +408,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This struct is allocated as AVHWFramesContext.hwctx</summary>
-    public unsafe struct AVDXVA2FramesContext
+    public unsafe partial struct AVDXVA2FramesContext
     {
         /// <summary>The surface type (e.g. DXVA2_VideoProcessorRenderTarget or DXVA2_VideoDecoderRenderTarget). Must be set by the caller.</summary>
         public ulong @surface_type;
@@ -419,12 +419,12 @@ namespace FFmpeg.AutoGen
         public IDirectXVideoDecoder* @decoder_to_release;
     }
     
-    public unsafe struct IDirect3DSurface9
+    public unsafe partial struct IDirect3DSurface9
     {
         public IDirect3DSurface9Vtbl* @lpVtbl;
     }
     
-    public unsafe struct IDirect3DSurface9Vtbl
+    public unsafe partial struct IDirect3DSurface9Vtbl
     {
         public void* @QueryInterface;
         public void* @AddRef;
@@ -445,12 +445,12 @@ namespace FFmpeg.AutoGen
         public void* @ReleaseDC;
     }
     
-    public unsafe struct IDirectXVideoDecoder
+    public unsafe partial struct IDirectXVideoDecoder
     {
         public IDirectXVideoDecoderVtbl* @lpVtbl;
     }
     
-    public unsafe struct IDirectXVideoDecoderVtbl
+    public unsafe partial struct IDirectXVideoDecoderVtbl
     {
         public void* @QueryInterface;
         public void* @AddRef;
@@ -465,7 +465,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This struct is allocated as AVHWDeviceContext.hwctx</summary>
-    public unsafe struct AVD3D11VADeviceContext
+    public unsafe partial struct AVD3D11VADeviceContext
     {
         /// <summary>Device used for texture creation and access. This can also be used to set the libavcodec decoding device.</summary>
         public ID3D11Device* @device;
@@ -481,12 +481,12 @@ namespace FFmpeg.AutoGen
         public void* @lock_ctx;
     }
     
-    public unsafe struct ID3D11Device
+    public unsafe partial struct ID3D11Device
     {
         public ID3D11DeviceVtbl* @lpVtbl;
     }
     
-    public unsafe struct ID3D11DeviceVtbl
+    public unsafe partial struct ID3D11DeviceVtbl
     {
         public void* @QueryInterface;
         public void* @AddRef;
@@ -533,12 +533,12 @@ namespace FFmpeg.AutoGen
         public void* @GetExceptionMode;
     }
     
-    public unsafe struct ID3D11DeviceContext
+    public unsafe partial struct ID3D11DeviceContext
     {
         public ID3D11DeviceContextVtbl* @lpVtbl;
     }
     
-    public unsafe struct ID3D11DeviceContextVtbl
+    public unsafe partial struct ID3D11DeviceContextVtbl
     {
         public void* @QueryInterface;
         public void* @AddRef;
@@ -657,12 +657,12 @@ namespace FFmpeg.AutoGen
         public void* @FinishCommandList;
     }
     
-    public unsafe struct ID3D11VideoDevice
+    public unsafe partial struct ID3D11VideoDevice
     {
         public ID3D11VideoDeviceVtbl* @lpVtbl;
     }
     
-    public unsafe struct ID3D11VideoDeviceVtbl
+    public unsafe partial struct ID3D11VideoDeviceVtbl
     {
         public void* @QueryInterface;
         public void* @AddRef;
@@ -686,12 +686,12 @@ namespace FFmpeg.AutoGen
         public void* @SetPrivateDataInterface;
     }
     
-    public unsafe struct ID3D11VideoContext
+    public unsafe partial struct ID3D11VideoContext
     {
         public ID3D11VideoContextVtbl* @lpVtbl;
     }
     
-    public unsafe struct ID3D11VideoContextVtbl
+    public unsafe partial struct ID3D11VideoContextVtbl
     {
         public void* @QueryInterface;
         public void* @AddRef;
@@ -761,7 +761,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>D3D11 frame descriptor for pool allocation.</summary>
-    public unsafe struct AVD3D11FrameDescriptor
+    public unsafe partial struct AVD3D11FrameDescriptor
     {
         /// <summary>The texture in which the frame is located. The reference count is managed by the AVBufferRef, and destroying the reference will release the interface.</summary>
         public ID3D11Texture2D* @texture;
@@ -769,12 +769,12 @@ namespace FFmpeg.AutoGen
         public long @index;
     }
     
-    public unsafe struct ID3D11Texture2D
+    public unsafe partial struct ID3D11Texture2D
     {
         public ID3D11Texture2DVtbl* @lpVtbl;
     }
     
-    public unsafe struct ID3D11Texture2DVtbl
+    public unsafe partial struct ID3D11Texture2DVtbl
     {
         public void* @QueryInterface;
         public void* @AddRef;
@@ -790,7 +790,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This struct is allocated as AVHWFramesContext.hwctx</summary>
-    public unsafe struct AVD3D11VAFramesContext
+    public unsafe partial struct AVD3D11VAFramesContext
     {
         /// <summary>The canonical texture used for pool allocation. If this is set to NULL on init, the hwframes implementation will allocate and set an array texture if initial_pool_size &gt; 0.</summary>
         public ID3D11Texture2D* @texture;
@@ -803,7 +803,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Represents the percentile at a specific percentage in a distribution.</summary>
-    public unsafe struct AVHDRPlusPercentile
+    public unsafe partial struct AVHDRPlusPercentile
     {
         /// <summary>The percentage value corresponding to a specific percentile linearized RGB value in the processing window in the scene. The value shall be in the range of 0 to100, inclusive.</summary>
         public byte @percentage;
@@ -812,7 +812,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Color transform parameters at a processing window in a dynamic metadata for SMPTE 2094-40.</summary>
-    public unsafe struct AVHDRPlusColorTransformParams
+    public unsafe partial struct AVHDRPlusColorTransformParams
     {
         /// <summary>The relative x coordinate of the top left pixel of the processing window. The value shall be in the range of 0 and 1, inclusive and in multiples of 1/(width of Picture - 1). The value 1 corresponds to the absolute coordinate of width of Picture - 1. The value for first processing window shall be 0.</summary>
         public AVRational @window_upper_left_corner_x;
@@ -863,7 +863,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This struct represents dynamic metadata for color volume transform - application 4 of SMPTE 2094-40:2016 standard.</summary>
-    public unsafe struct AVDynamicHDRPlus
+    public unsafe partial struct AVDynamicHDRPlus
     {
         /// <summary>Country code by Rec. ITU-T T.35 Annex A. The value shall be 0xB5.</summary>
         public byte @itu_t_t35_country_code;
@@ -894,7 +894,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Mastering display metadata capable of representing the color volume of the display used to master the content (SMPTE 2086:2014).</summary>
-    public unsafe struct AVMasteringDisplayMetadata
+    public unsafe partial struct AVMasteringDisplayMetadata
     {
         /// <summary>CIE 1931 xy chromaticity coords of color primaries (r, g, b order).</summary>
         public AVRational_array3x2 @display_primaries;
@@ -911,7 +911,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Content light level needed by to transmit HDR over HDMI (CTA-861.3).</summary>
-    public unsafe struct AVContentLightMetadata
+    public unsafe partial struct AVContentLightMetadata
     {
         /// <summary>Max content light level (cd/m^2).</summary>
         public uint @MaxCLL;
@@ -919,7 +919,7 @@ namespace FFmpeg.AutoGen
         public uint @MaxFALL;
     }
     
-    public unsafe struct SwsVector
+    public unsafe partial struct SwsVector
     {
         /// <summary>pointer to the list of coefficients</summary>
         public double* @coeff;
@@ -927,7 +927,7 @@ namespace FFmpeg.AutoGen
         public int @length;
     }
     
-    public unsafe struct SwsFilter
+    public unsafe partial struct SwsFilter
     {
         public SwsVector* @lumH;
         public SwsVector* @lumV;
@@ -935,7 +935,7 @@ namespace FFmpeg.AutoGen
         public SwsVector* @chrV;
     }
     
-    public unsafe struct RcOverride
+    public unsafe partial struct RcOverride
     {
         public int @start_frame;
         public int @end_frame;
@@ -944,7 +944,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>main external API structure. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. You can use AVOptions (av_opt* / av_set/get*()) to access these fields from user applications. The name string for AVOptions options matches the associated command line parameter name and can be found in libavcodec/options_table.h The AVOption/command line parameter names differ in some cases from the C structure field names for historic reasons or brevity. sizeof(AVCodecContext) must not be used outside libav*.</summary>
-    public unsafe struct AVCodecContext
+    public unsafe partial struct AVCodecContext
     {
         /// <summary>information on struct for av_log - set by avcodec_alloc_context3</summary>
         public AVClass* @av_class;
@@ -1265,7 +1265,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>AVCodec.</summary>
-    public unsafe struct AVCodec
+    public unsafe partial struct AVCodec
     {
         /// <summary>Name of the codec implementation. The name is globally unique among encoders and among decoders (but an encoder and a decoder can share the same name). This is the primary way to find a codec from the user perspective.</summary>
         public byte* @name;
@@ -1298,14 +1298,14 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>AVProfile.</summary>
-    public unsafe struct AVProfile
+    public unsafe partial struct AVProfile
     {
         public int @profile;
         /// <summary>short name for the profile</summary>
         public byte* @name;
     }
     
-    public unsafe struct AVHWAccel
+    public unsafe partial struct AVHWAccel
     {
         /// <summary>Name of the hardware accelerated codec. The name is globally unique among encoders and among decoders (but an encoder and a decoder can share the same name).</summary>
         public byte* @name;
@@ -1342,7 +1342,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This struct describes the properties of a single codec described by an AVCodecID.</summary>
-    public unsafe struct AVCodecDescriptor
+    public unsafe partial struct AVCodecDescriptor
     {
         public AVCodecID @id;
         public AVMediaType @type;
@@ -1358,7 +1358,7 @@ namespace FFmpeg.AutoGen
         public AVProfile* @profiles;
     }
     
-    public unsafe struct AVPacketSideData
+    public unsafe partial struct AVPacketSideData
     {
         public byte* @data;
         public ulong @size;
@@ -1366,7 +1366,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This structure stores compressed data. It is typically exported by demuxers and then passed as input to decoders, or received as output from encoders and then passed to muxers.</summary>
-    public unsafe struct AVPacket
+    public unsafe partial struct AVPacket
     {
         /// <summary>A reference to the reference-counted buffer where the packet data is stored. May be NULL, then the packet data is not reference-counted.</summary>
         public AVBufferRef* @buf;
@@ -1394,7 +1394,7 @@ namespace FFmpeg.AutoGen
         public AVRational @time_base;
     }
     
-    public unsafe struct AVSubtitleRect
+    public unsafe partial struct AVSubtitleRect
     {
         /// <summary>top left corner of pict, undefined when pict is not set</summary>
         public int @x;
@@ -1417,7 +1417,7 @@ namespace FFmpeg.AutoGen
         public int @flags;
     }
     
-    public unsafe struct AVSubtitle
+    public unsafe partial struct AVSubtitle
     {
         public ushort @format;
         public uint @start_display_time;
@@ -1428,7 +1428,7 @@ namespace FFmpeg.AutoGen
         public long @pts;
     }
     
-    public unsafe struct AVCodecParserContext
+    public unsafe partial struct AVCodecParserContext
     {
         public void* @priv_data;
         public AVCodecParser* @parser;
@@ -1482,7 +1482,7 @@ namespace FFmpeg.AutoGen
         public int @format;
     }
     
-    public unsafe struct AVCodecParser
+    public unsafe partial struct AVCodecParser
     {
         public int_array7 @codec_ids;
         public int @priv_data_size;
@@ -1493,7 +1493,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This struct describes the properties of an encoded stream.</summary>
-    public unsafe struct AVCodecParameters
+    public unsafe partial struct AVCodecParameters
     {
         /// <summary>General type of the encoded data.</summary>
         public AVMediaType @codec_type;
@@ -1553,7 +1553,7 @@ namespace FFmpeg.AutoGen
         public AVChannelLayout @ch_layout;
     }
     
-    public unsafe struct AVCodecHWConfig
+    public unsafe partial struct AVCodecHWConfig
     {
         /// <summary>For decoders, a hardware pixel format which that decoder may be able to decode to if suitable hardware is available.</summary>
         public AVPixelFormat @pix_fmt;
@@ -1564,7 +1564,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Pan Scan area. This specifies the area which should be displayed. Note there may be multiple such areas for one frame.</summary>
-    public unsafe struct AVPanScan
+    public unsafe partial struct AVPanScan
     {
         /// <summary>id - encoding: Set by user. - decoding: Set by libavcodec.</summary>
         public int @id;
@@ -1576,7 +1576,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This structure describes the bitrate properties of an encoded bitstream. It roughly corresponds to a subset the VBV parameters for MPEG-2 or HRD parameters for H.264/HEVC.</summary>
-    public unsafe struct AVCPBProperties
+    public unsafe partial struct AVCPBProperties
     {
         /// <summary>Maximum bitrate of the stream, in bits per second. Zero if unknown or unspecified.</summary>
         public long @max_bitrate;
@@ -1591,21 +1591,21 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This structure supplies correlation between a packet timestamp and a wall clock production time. The definition follows the Producer Reference Time (&apos;prft&apos;) as defined in ISO/IEC 14496-12</summary>
-    public unsafe struct AVProducerReferenceTime
+    public unsafe partial struct AVProducerReferenceTime
     {
         /// <summary>A UTC timestamp, in microseconds, since Unix epoch (e.g, av_gettime()).</summary>
         public long @wallclock;
         public int @flags;
     }
     
-    public unsafe struct AVPacketList
+    public unsafe partial struct AVPacketList
     {
         public AVPacket @pkt;
         public AVPacketList* @next;
     }
     
     /// <summary>This structure is used to provides the necessary configurations and data to the Direct3D11 FFmpeg HWAccel implementation.</summary>
-    public unsafe struct AVD3D11VAContext
+    public unsafe partial struct AVD3D11VAContext
     {
         /// <summary>D3D11 decoder object</summary>
         public ID3D11VideoDecoder* @decoder;
@@ -1625,12 +1625,12 @@ namespace FFmpeg.AutoGen
         public void* @context_mutex;
     }
     
-    public unsafe struct ID3D11VideoDecoder
+    public unsafe partial struct ID3D11VideoDecoder
     {
         public ID3D11VideoDecoderVtbl* @lpVtbl;
     }
     
-    public unsafe struct ID3D11VideoDecoderVtbl
+    public unsafe partial struct ID3D11VideoDecoderVtbl
     {
         public void* @QueryInterface;
         public void* @AddRef;
@@ -1643,7 +1643,7 @@ namespace FFmpeg.AutoGen
         public void* @GetDriverHandle;
     }
     
-    public unsafe struct D3D11_VIDEO_DECODER_CONFIG
+    public unsafe partial struct D3D11_VIDEO_DECODER_CONFIG
     {
         public _GUID @guidConfigBitstreamEncryption;
         public _GUID @guidConfigMBcontrolEncryption;
@@ -1664,7 +1664,7 @@ namespace FFmpeg.AutoGen
         public ushort @ConfigDecoderSpecific;
     }
     
-    public unsafe struct _GUID
+    public unsafe partial struct _GUID
     {
         public ulong @Data1;
         public ushort @Data2;
@@ -1672,12 +1672,12 @@ namespace FFmpeg.AutoGen
         public byte_array8 @Data4;
     }
     
-    public unsafe struct ID3D11VideoDecoderOutputView
+    public unsafe partial struct ID3D11VideoDecoderOutputView
     {
         public ID3D11VideoDecoderOutputViewVtbl* @lpVtbl;
     }
     
-    public unsafe struct ID3D11VideoDecoderOutputViewVtbl
+    public unsafe partial struct ID3D11VideoDecoderOutputViewVtbl
     {
         public void* @QueryInterface;
         public void* @AddRef;
@@ -1691,7 +1691,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This structure contains the data a format has to probe a file.</summary>
-    public unsafe struct AVProbeData
+    public unsafe partial struct AVProbeData
     {
         public byte* @filename;
         /// <summary>Buffer must have AVPROBE_PADDING_SIZE of extra allocated bytes filled with zero.</summary>
@@ -1703,7 +1703,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Stream structure. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. sizeof(AVStream) must not be used outside libav*.</summary>
-    public unsafe struct AVStream
+    public unsafe partial struct AVStream
     {
         /// <summary>stream index in AVFormatContext</summary>
         public int @index;
@@ -1744,7 +1744,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. sizeof(AVProgram) must not be used outside libav*.</summary>
-    public unsafe struct AVProgram
+    public unsafe partial struct AVProgram
     {
         public int @id;
         public int @flags;
@@ -1766,7 +1766,7 @@ namespace FFmpeg.AutoGen
         public int @pts_wrap_behavior;
     }
     
-    public unsafe struct AVChapter
+    public unsafe partial struct AVChapter
     {
         /// <summary>unique ID to identify the chapter</summary>
         public long @id;
@@ -1780,7 +1780,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>@{</summary>
-    public unsafe struct AVOutputFormat
+    public unsafe partial struct AVOutputFormat
     {
         public byte* @name;
         /// <summary>Descriptive name for the format, meant to be more human-readable than name. You should use the NULL_IF_CONFIG_SMALL() macro to define it.</summary>
@@ -1830,7 +1830,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Format I/O context. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. sizeof(AVFormatContext) must not be used outside libav*, use avformat_alloc_context() to create an AVFormatContext.</summary>
-    public unsafe struct AVFormatContext
+    public unsafe partial struct AVFormatContext
     {
         /// <summary>A class for logging and avoptions. Set by avformat_alloc_context(). Exports (de)muxer private options if they exist.</summary>
         public AVClass* @av_class;
@@ -1974,7 +1974,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>@{</summary>
-    public unsafe struct AVInputFormat
+    public unsafe partial struct AVInputFormat
     {
         /// <summary>A comma separated list of short names for the format. New names may be appended with a minor bump.</summary>
         public byte* @name;
@@ -2018,7 +2018,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>List of devices.</summary>
-    public unsafe struct AVDeviceInfoList
+    public unsafe partial struct AVDeviceInfoList
     {
         /// <summary>list of autodetected devices</summary>
         public AVDeviceInfo** @devices;
@@ -2029,7 +2029,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Bytestream IO Context. New public fields can be added with minor version bumps. Removal, reordering and changes to existing public fields require a major version bump. sizeof(AVIOContext) must not be used outside libav*.</summary>
-    public unsafe struct AVIOContext
+    public unsafe partial struct AVIOContext
     {
         /// <summary>A class for private options.</summary>
         public AVClass* @av_class;
@@ -2087,13 +2087,13 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Callback for checking whether to abort blocking functions. AVERROR_EXIT is returned in this case by the interrupted function. During blocking operations, callback is called with opaque as parameter. If the callback returns 1, the blocking operation will be aborted.</summary>
-    public unsafe struct AVIOInterruptCB
+    public unsafe partial struct AVIOInterruptCB
     {
         public AVIOInterruptCB_callback_func @callback;
         public void* @opaque;
     }
     
-    public unsafe struct AVIndexEntry
+    public unsafe partial struct AVIndexEntry
     {
         public long @pos;
         /// <summary>Timestamp in AVStream.time_base units, preferably the time from which on correctly decoded frames are available when seeking to this entry. That means preferable PTS on keyframe based formats. But demuxers can choose to store a different timestamp, if it is more convenient for the implementation or nothing better is known</summary>
@@ -2105,7 +2105,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Describes single entry of the directory.</summary>
-    public unsafe struct AVIODirEntry
+    public unsafe partial struct AVIODirEntry
     {
         /// <summary>Filename</summary>
         public byte* @name;
@@ -2129,13 +2129,13 @@ namespace FFmpeg.AutoGen
         public long @filemode;
     }
     
-    public unsafe struct AVIODirContext
+    public unsafe partial struct AVIODirContext
     {
         public URLContext* @url_context;
     }
     
     /// <summary>An instance of a filter</summary>
-    public unsafe struct AVFilterContext
+    public unsafe partial struct AVFilterContext
     {
         /// <summary>needed for av_log() and filters common options</summary>
         public AVClass* @av_class;
@@ -2183,7 +2183,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Filter definition. This defines the pads a filter contains, and all the callback functions used to interact with the filter.</summary>
-    public unsafe struct AVFilter
+    public unsafe partial struct AVFilter
     {
         /// <summary>Filter name. Must be non-NULL and unique among filters.</summary>
         public byte* @name;
@@ -2224,7 +2224,7 @@ namespace FFmpeg.AutoGen
     
     /// <summary>The state of the following union is determined by formats_state. See the documentation of enum FilterFormatsState in internal.h.</summary>
     [StructLayout(LayoutKind.Explicit)]
-    public unsafe struct AVFilter_formats
+    public unsafe partial struct AVFilter_formats
     {
         /// <summary>Query formats supported by the filter on its inputs and outputs.</summary>
         [FieldOffset(0)]
@@ -2244,7 +2244,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>A link between two filters. This contains pointers to the source and destination filters between which this link exists, and the indexes of the pads involved. In addition, this link also contains the parameters which have been negotiated and agreed upon between the filter, such as image dimensions, format, etc.</summary>
-    public unsafe struct AVFilterLink
+    public unsafe partial struct AVFilterLink
     {
         /// <summary>source filter</summary>
         public AVFilterContext* @src;
@@ -2311,7 +2311,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Lists of formats / etc. supported by an end of a link.</summary>
-    public unsafe struct AVFilterFormatsConfig
+    public unsafe partial struct AVFilterFormatsConfig
     {
         /// <summary>List of supported formats (pixel or sample).</summary>
         public AVFilterFormats* @formats;
@@ -2321,7 +2321,7 @@ namespace FFmpeg.AutoGen
         public AVFilterChannelLayouts* @channel_layouts;
     }
     
-    public unsafe struct AVFilterGraph
+    public unsafe partial struct AVFilterGraph
     {
         public AVClass* @av_class;
         public AVFilterContext** @filters;
@@ -2347,7 +2347,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>A linked-list of the inputs/outputs of the filter chain.</summary>
-    public unsafe struct AVFilterInOut
+    public unsafe partial struct AVFilterInOut
     {
         /// <summary>unique name for this input/output in the list</summary>
         public byte* @name;
@@ -2360,7 +2360,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>This structure contains the parameters describing the frames that will be passed to this filter.</summary>
-    public unsafe struct AVBufferSrcParameters
+    public unsafe partial struct AVBufferSrcParameters
     {
         /// <summary>video: the pixel format, value corresponds to enum AVPixelFormat audio: the sample format, value corresponds to enum AVSampleFormat</summary>
         public int @format;
@@ -2386,14 +2386,14 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Deprecated and unused struct to use for initializing a buffersink context.</summary>
-    public unsafe struct AVBufferSinkParams
+    public unsafe partial struct AVBufferSinkParams
     {
         /// <summary>list of allowed pixel formats, terminated by AV_PIX_FMT_NONE</summary>
         public AVPixelFormat* @pixel_fmts;
     }
     
     /// <summary>Deprecated and unused struct to use for initializing an abuffersink context.</summary>
-    public unsafe struct AVABufferSinkParams
+    public unsafe partial struct AVABufferSinkParams
     {
         /// <summary>list of allowed sample formats, terminated by AV_SAMPLE_FMT_NONE</summary>
         public AVSampleFormat* @sample_fmts;
@@ -2408,7 +2408,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Structure describes basic parameters of the device.</summary>
-    public unsafe struct AVDeviceInfo
+    public unsafe partial struct AVDeviceInfo
     {
         /// <summary>device name, format depends on device</summary>
         public byte* @device_name;
@@ -2420,7 +2420,7 @@ namespace FFmpeg.AutoGen
         public int @nb_media_types;
     }
     
-    public unsafe struct AVDeviceRect
+    public unsafe partial struct AVDeviceRect
     {
         /// <summary>x coordinate of top left corner</summary>
         public int @x;
@@ -2433,7 +2433,7 @@ namespace FFmpeg.AutoGen
     }
     
     /// <summary>Structure describes device capabilities.</summary>
-    public unsafe struct AVDeviceCapabilitiesQuery
+    public unsafe partial struct AVDeviceCapabilitiesQuery
     {
         public AVClass* @av_class;
         public AVFormatContext* @device_context;
