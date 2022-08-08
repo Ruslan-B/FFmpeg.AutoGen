@@ -10,14 +10,14 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
 
 internal class FunctionProcessor
 {
-    private const string MarshalAsUtf8Macros =
-        "\r\n" +
-        "    #if NETSTANDARD2_1_OR_GREATER\r\n" +
-        "    [MarshalAs(UnmanagedType.LPUTF8Str)]\r\n" +
-        "    #else\r\n" +
-        "    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]\r\n" +
-        "    #endif\r\n" +
-        "   ";
+    private const string MarshalAsUTF8Macros =
+        "        \r\n" +
+        "        #if NETSTANDARD2_1_OR_GREATER\r\n" +
+        "        [MarshalAs(UnmanagedType.LPUTF8Str)]\r\n" +
+        "        #else\r\n" +
+        "        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]\r\n" +
+        "        #endif\r\n" +
+        "       ";
 
     private readonly ASTProcessor _context;
 
@@ -139,7 +139,7 @@ internal class FunctionProcessor
                 PrimitiveType.Char => new TypeDefinition
                 {
                     Name = "string",
-                    Attributes = new[] { MarshalAsUtf8Macros }
+                    Attributes = new[] { MarshalAsUTF8Macros }
                 },
                 PrimitiveType.Void => new TypeDefinition
                 {
