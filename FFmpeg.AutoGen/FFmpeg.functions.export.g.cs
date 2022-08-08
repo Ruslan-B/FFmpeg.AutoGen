@@ -1239,13 +1239,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVCodecDescriptor* avcodec_descriptor_get_by_name_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate AVCodecDescriptor* avcodec_descriptor_get_by_name_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static avcodec_descriptor_get_by_name_delegate avcodec_descriptor_get_by_name_fptr = (string @name) =>
         {
             avcodec_descriptor_get_by_name_fptr = GetFunctionDelegate<avcodec_descriptor_get_by_name_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_descriptor_get_by_name");
@@ -1260,13 +1260,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Returns codec descriptor with the given name or NULL if no such descriptor exists.</summary>
         /// <returns>codec descriptor with the given name or NULL if no such descriptor exists.</returns>
-        public static AVCodecDescriptor* avcodec_descriptor_get_by_name(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static AVCodecDescriptor* avcodec_descriptor_get_by_name(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return avcodec_descriptor_get_by_name_fptr(@name);
         }
@@ -1417,13 +1417,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVCodec* avcodec_find_decoder_by_name_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate AVCodec* avcodec_find_decoder_by_name_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static avcodec_find_decoder_by_name_delegate avcodec_find_decoder_by_name_fptr = (string @name) =>
         {
             avcodec_find_decoder_by_name_fptr = GetFunctionDelegate<avcodec_find_decoder_by_name_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_find_decoder_by_name");
@@ -1439,13 +1439,13 @@ namespace FFmpeg.AutoGen
         /// <summary>Find a registered decoder with the specified name.</summary>
         /// <param name="name">name of the requested decoder</param>
         /// <returns>A decoder if one was found, NULL otherwise.</returns>
-        public static AVCodec* avcodec_find_decoder_by_name(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static AVCodec* avcodec_find_decoder_by_name(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return avcodec_find_decoder_by_name_fptr(@name);
         }
@@ -1475,13 +1475,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVCodec* avcodec_find_encoder_by_name_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate AVCodec* avcodec_find_encoder_by_name_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static avcodec_find_encoder_by_name_delegate avcodec_find_encoder_by_name_fptr = (string @name) =>
         {
             avcodec_find_encoder_by_name_fptr = GetFunctionDelegate<avcodec_find_encoder_by_name_delegate>(GetOrLoadLibrary("avcodec"), "avcodec_find_encoder_by_name");
@@ -1497,13 +1497,13 @@ namespace FFmpeg.AutoGen
         /// <summary>Find a registered encoder with the specified name.</summary>
         /// <param name="name">name of the requested encoder</param>
         /// <returns>An encoder if one was found, NULL otherwise.</returns>
-        public static AVCodec* avcodec_find_encoder_by_name(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static AVCodec* avcodec_find_encoder_by_name(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return avcodec_find_encoder_by_name_fptr(@name);
         }
@@ -2364,13 +2364,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avdevice_list_input_sources_delegate(AVInputFormat* @device, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list);
+        private delegate int avdevice_list_input_sources_delegate(AVInputFormat* @device,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list);
         private static avdevice_list_input_sources_delegate avdevice_list_input_sources_fptr = (AVInputFormat* @device, string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list) =>
         {
             avdevice_list_input_sources_fptr = GetFunctionDelegate<avdevice_list_input_sources_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_list_input_sources");
@@ -2389,26 +2389,26 @@ namespace FFmpeg.AutoGen
         /// <param name="device_options">An AVDictionary filled with device-private options. May be NULL. The same options must be passed later to avformat_write_header() for output devices or avformat_open_input() for input devices, or at any other place that affects device-private options.</param>
         /// <param name="device_list">list of autodetected devices</param>
         /// <returns>count of autodetected devices, negative on error.</returns>
-        public static int avdevice_list_input_sources(AVInputFormat* @device, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list)
+        public static int avdevice_list_input_sources(AVInputFormat* @device,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list)
         {
             return avdevice_list_input_sources_fptr(@device, @device_name, @device_options, @device_list);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avdevice_list_output_sinks_delegate(AVOutputFormat* @device, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list);
+        private delegate int avdevice_list_output_sinks_delegate(AVOutputFormat* @device,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list);
         private static avdevice_list_output_sinks_delegate avdevice_list_output_sinks_fptr = (AVOutputFormat* @device, string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list) =>
         {
             avdevice_list_output_sinks_fptr = GetFunctionDelegate<avdevice_list_output_sinks_delegate>(GetOrLoadLibrary("avdevice"), "avdevice_list_output_sinks");
@@ -2421,13 +2421,13 @@ namespace FFmpeg.AutoGen
             }
             return avdevice_list_output_sinks_fptr(@device, @device_name, @device_options, @device_list);
         };
-        public static int avdevice_list_output_sinks(AVOutputFormat* @device, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list)
+        public static int avdevice_list_output_sinks(AVOutputFormat* @device,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @device_name, AVDictionary* @device_options, AVDeviceInfoList** @device_list)
         {
             return avdevice_list_output_sinks_fptr(@device, @device_name, @device_options, @device_list);
         }
@@ -3127,13 +3127,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVFilter* avfilter_get_by_name_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate AVFilter* avfilter_get_by_name_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static avfilter_get_by_name_delegate avfilter_get_by_name_fptr = (string @name) =>
         {
             avfilter_get_by_name_fptr = GetFunctionDelegate<avfilter_get_by_name_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_get_by_name");
@@ -3149,13 +3149,13 @@ namespace FFmpeg.AutoGen
         /// <summary>Get a filter definition matching the given name.</summary>
         /// <param name="name">the filter name to find</param>
         /// <returns>the filter definition, if any matching one is registered. NULL if none found.</returns>
-        public static AVFilter* avfilter_get_by_name(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static AVFilter* avfilter_get_by_name(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return avfilter_get_by_name_fptr(@name);
         }
@@ -3206,13 +3206,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVFilterContext* avfilter_graph_alloc_filter_delegate(AVFilterGraph* @graph, AVFilter* @filter, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate AVFilterContext* avfilter_graph_alloc_filter_delegate(AVFilterGraph* @graph, AVFilter* @filter,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static avfilter_graph_alloc_filter_delegate avfilter_graph_alloc_filter_fptr = (AVFilterGraph* @graph, AVFilter* @filter, string @name) =>
         {
             avfilter_graph_alloc_filter_fptr = GetFunctionDelegate<avfilter_graph_alloc_filter_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_alloc_filter");
@@ -3230,13 +3230,13 @@ namespace FFmpeg.AutoGen
         /// <param name="filter">the filter to create an instance of</param>
         /// <param name="name">Name to give to the new instance (will be copied to AVFilterContext.name). This may be used by the caller to identify different filters, libavfilter itself assigns no semantics to this parameter. May be NULL.</param>
         /// <returns>the context of the newly created filter instance (note that it is also retrievable directly through AVFilterGraph.filters or with avfilter_graph_get_filter()) on success or NULL on failure.</returns>
-        public static AVFilterContext* avfilter_graph_alloc_filter(AVFilterGraph* @graph, AVFilter* @filter, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static AVFilterContext* avfilter_graph_alloc_filter(AVFilterGraph* @graph, AVFilter* @filter,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return avfilter_graph_alloc_filter_fptr(@graph, @filter, @name);
         }
@@ -3267,19 +3267,19 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avfilter_graph_create_filter_delegate(AVFilterContext** @filt_ctx, AVFilter* @filt, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @args, void* @opaque, AVFilterGraph* @graph_ctx);
+        private delegate int avfilter_graph_create_filter_delegate(AVFilterContext** @filt_ctx, AVFilter* @filt,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @args, void* @opaque, AVFilterGraph* @graph_ctx);
         private static avfilter_graph_create_filter_delegate avfilter_graph_create_filter_fptr = (AVFilterContext** @filt_ctx, AVFilter* @filt, string @name, string @args, void* @opaque, AVFilterGraph* @graph_ctx) =>
         {
             avfilter_graph_create_filter_fptr = GetFunctionDelegate<avfilter_graph_create_filter_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_create_filter");
@@ -3296,32 +3296,32 @@ namespace FFmpeg.AutoGen
         /// <param name="name">the instance name to give to the created filter instance</param>
         /// <param name="graph_ctx">the filter graph</param>
         /// <returns>a negative AVERROR error code in case of failure, a non negative value otherwise</returns>
-        public static int avfilter_graph_create_filter(AVFilterContext** @filt_ctx, AVFilter* @filt, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @args, void* @opaque, AVFilterGraph* @graph_ctx)
+        public static int avfilter_graph_create_filter(AVFilterContext** @filt_ctx, AVFilter* @filt,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @args, void* @opaque, AVFilterGraph* @graph_ctx)
         {
             return avfilter_graph_create_filter_fptr(@filt_ctx, @filt, @name, @args, @opaque, @graph_ctx);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate byte* avfilter_graph_dump_delegate(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @options);
+        private delegate byte* avfilter_graph_dump_delegate(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @options);
         private static avfilter_graph_dump_delegate avfilter_graph_dump_fptr = (AVFilterGraph* @graph, string @options) =>
         {
             avfilter_graph_dump_fptr = GetFunctionDelegate<avfilter_graph_dump_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_dump");
@@ -3338,13 +3338,13 @@ namespace FFmpeg.AutoGen
         /// <param name="graph">the graph to dump</param>
         /// <param name="options">formatting options; currently ignored</param>
         /// <returns>a string, or NULL in case of memory allocation failure; the string must be freed using av_free</returns>
-        public static byte* avfilter_graph_dump(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @options)
+        public static byte* avfilter_graph_dump(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @options)
         {
             return avfilter_graph_dump_fptr(@graph, @options);
         }
@@ -3372,13 +3372,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVFilterContext* avfilter_graph_get_filter_delegate(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate AVFilterContext* avfilter_graph_get_filter_delegate(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static avfilter_graph_get_filter_delegate avfilter_graph_get_filter_fptr = (AVFilterGraph* @graph, string @name) =>
         {
             avfilter_graph_get_filter_fptr = GetFunctionDelegate<avfilter_graph_get_filter_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_get_filter");
@@ -3395,26 +3395,26 @@ namespace FFmpeg.AutoGen
         /// <param name="graph">filter graph to search through.</param>
         /// <param name="name">filter instance name (should be unique in the graph).</param>
         /// <returns>the pointer to the found filter instance or NULL if it cannot be found.</returns>
-        public static AVFilterContext* avfilter_graph_get_filter(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static AVFilterContext* avfilter_graph_get_filter(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return avfilter_graph_get_filter_fptr(@graph, @name);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avfilter_graph_parse_delegate(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filters, AVFilterInOut* @inputs, AVFilterInOut* @outputs, void* @log_ctx);
+        private delegate int avfilter_graph_parse_delegate(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filters, AVFilterInOut* @inputs, AVFilterInOut* @outputs, void* @log_ctx);
         private static avfilter_graph_parse_delegate avfilter_graph_parse_fptr = (AVFilterGraph* @graph, string @filters, AVFilterInOut* @inputs, AVFilterInOut* @outputs, void* @log_ctx) =>
         {
             avfilter_graph_parse_fptr = GetFunctionDelegate<avfilter_graph_parse_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_parse");
@@ -3433,26 +3433,26 @@ namespace FFmpeg.AutoGen
         /// <param name="inputs">linked list to the inputs of the graph</param>
         /// <param name="outputs">linked list to the outputs of the graph</param>
         /// <returns>zero on success, a negative AVERROR code on error</returns>
-        public static int avfilter_graph_parse(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filters, AVFilterInOut* @inputs, AVFilterInOut* @outputs, void* @log_ctx)
+        public static int avfilter_graph_parse(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filters, AVFilterInOut* @inputs, AVFilterInOut* @outputs, void* @log_ctx)
         {
             return avfilter_graph_parse_fptr(@graph, @filters, @inputs, @outputs, @log_ctx);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avfilter_graph_parse_ptr_delegate(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs, void* @log_ctx);
+        private delegate int avfilter_graph_parse_ptr_delegate(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs, void* @log_ctx);
         private static avfilter_graph_parse_ptr_delegate avfilter_graph_parse_ptr_fptr = (AVFilterGraph* @graph, string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs, void* @log_ctx) =>
         {
             avfilter_graph_parse_ptr_fptr = GetFunctionDelegate<avfilter_graph_parse_ptr_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_parse_ptr");
@@ -3471,26 +3471,26 @@ namespace FFmpeg.AutoGen
         /// <param name="inputs">pointer to a linked list to the inputs of the graph, may be NULL. If non-NULL, *inputs is updated to contain the list of open inputs after the parsing, should be freed with avfilter_inout_free().</param>
         /// <param name="outputs">pointer to a linked list to the outputs of the graph, may be NULL. If non-NULL, *outputs is updated to contain the list of open outputs after the parsing, should be freed with avfilter_inout_free().</param>
         /// <returns>non negative on success, a negative AVERROR code on error</returns>
-        public static int avfilter_graph_parse_ptr(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs, void* @log_ctx)
+        public static int avfilter_graph_parse_ptr(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs, void* @log_ctx)
         {
             return avfilter_graph_parse_ptr_fptr(@graph, @filters, @inputs, @outputs, @log_ctx);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avfilter_graph_parse2_delegate(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs);
+        private delegate int avfilter_graph_parse2_delegate(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs);
         private static avfilter_graph_parse2_delegate avfilter_graph_parse2_fptr = (AVFilterGraph* @graph, string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs) =>
         {
             avfilter_graph_parse2_fptr = GetFunctionDelegate<avfilter_graph_parse2_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_parse2");
@@ -3509,38 +3509,38 @@ namespace FFmpeg.AutoGen
         /// <param name="inputs">a linked list of all free (unlinked) inputs of the parsed graph will be returned here. It is to be freed by the caller using avfilter_inout_free().</param>
         /// <param name="outputs">a linked list of all free (unlinked) outputs of the parsed graph will be returned here. It is to be freed by the caller using avfilter_inout_free().</param>
         /// <returns>zero on success, a negative AVERROR code on error</returns>
-        public static int avfilter_graph_parse2(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs)
+        public static int avfilter_graph_parse2(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filters, AVFilterInOut** @inputs, AVFilterInOut** @outputs)
         {
             return avfilter_graph_parse2_fptr(@graph, @filters, @inputs, @outputs);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avfilter_graph_queue_command_delegate(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @target, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @cmd, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @arg, int @flags, double @ts);
+        private delegate int avfilter_graph_queue_command_delegate(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @target,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @cmd,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @arg, int @flags, double @ts);
         private static avfilter_graph_queue_command_delegate avfilter_graph_queue_command_fptr = (AVFilterGraph* @graph, string @target, string @cmd, string @arg, int @flags, double @ts) =>
         {
             avfilter_graph_queue_command_fptr = GetFunctionDelegate<avfilter_graph_queue_command_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_queue_command");
@@ -3559,25 +3559,25 @@ namespace FFmpeg.AutoGen
         /// <param name="cmd">the command to sent, for handling simplicity all commands must be alphanumeric only</param>
         /// <param name="arg">the argument for the command</param>
         /// <param name="ts">time at which the command should be sent to the filter</param>
-        public static int avfilter_graph_queue_command(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @target, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @cmd, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @arg, int @flags, double @ts)
+        public static int avfilter_graph_queue_command(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @target,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @cmd,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @arg, int @flags, double @ts)
         {
             return avfilter_graph_queue_command_fptr(@graph, @target, @cmd, @arg, @flags, @ts);
         }
@@ -3606,25 +3606,25 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avfilter_graph_send_command_delegate(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @target, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @cmd, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @arg, byte* @res, int @res_len, int @flags);
+        private delegate int avfilter_graph_send_command_delegate(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @target,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @cmd,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @arg, byte* @res, int @res_len, int @flags);
         private static avfilter_graph_send_command_delegate avfilter_graph_send_command_fptr = (AVFilterGraph* @graph, string @target, string @cmd, string @arg, byte* @res, int @res_len, int @flags) =>
         {
             avfilter_graph_send_command_fptr = GetFunctionDelegate<avfilter_graph_send_command_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_graph_send_command");
@@ -3643,25 +3643,25 @@ namespace FFmpeg.AutoGen
         /// <param name="cmd">the command to send, for handling simplicity all commands must be alphanumeric only</param>
         /// <param name="arg">the argument for the command</param>
         /// <param name="res">a buffer with size res_size where the filter(s) can return a response.</param>
-        public static int avfilter_graph_send_command(AVFilterGraph* @graph, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @target, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @cmd, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @arg, byte* @res, int @res_len, int @flags)
+        public static int avfilter_graph_send_command(AVFilterGraph* @graph,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @target,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @cmd,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @arg, byte* @res, int @res_len, int @flags)
         {
             return avfilter_graph_send_command_fptr(@graph, @target, @cmd, @arg, @res, @res_len, @flags);
         }
@@ -3714,13 +3714,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avfilter_init_str_delegate(AVFilterContext* @ctx, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @args);
+        private delegate int avfilter_init_str_delegate(AVFilterContext* @ctx,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @args);
         private static avfilter_init_str_delegate avfilter_init_str_fptr = (AVFilterContext* @ctx, string @args) =>
         {
             avfilter_init_str_fptr = GetFunctionDelegate<avfilter_init_str_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_init_str");
@@ -3737,13 +3737,13 @@ namespace FFmpeg.AutoGen
         /// <param name="ctx">uninitialized filter context to initialize</param>
         /// <param name="args">Options to initialize the filter with. This must be a &apos;:&apos;-separated list of options in the &apos;key=value&apos; form. May be NULL if the options have been set directly using the AVOptions API or there are no options that need to be set.</param>
         /// <returns>0 on success, a negative AVERROR on failure</returns>
-        public static int avfilter_init_str(AVFilterContext* @ctx, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @args)
+        public static int avfilter_init_str(AVFilterContext* @ctx,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @args)
         {
             return avfilter_init_str_fptr(@ctx, @args);
         }
@@ -3959,19 +3959,19 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avfilter_process_command_delegate(AVFilterContext* @filter, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @cmd, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @arg, byte* @res, int @res_len, int @flags);
+        private delegate int avfilter_process_command_delegate(AVFilterContext* @filter,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @cmd,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @arg, byte* @res, int @res_len, int @flags);
         private static avfilter_process_command_delegate avfilter_process_command_fptr = (AVFilterContext* @filter, string @cmd, string @arg, byte* @res, int @res_len, int @flags) =>
         {
             avfilter_process_command_fptr = GetFunctionDelegate<avfilter_process_command_delegate>(GetOrLoadLibrary("avfilter"), "avfilter_process_command");
@@ -3985,19 +3985,19 @@ namespace FFmpeg.AutoGen
             return avfilter_process_command_fptr(@filter, @cmd, @arg, @res, @res_len, @flags);
         };
         /// <summary>Make the filter instance process a command. It is recommended to use avfilter_graph_send_command().</summary>
-        public static int avfilter_process_command(AVFilterContext* @filter, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @cmd, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @arg, byte* @res, int @res_len, int @flags)
+        public static int avfilter_process_command(AVFilterContext* @filter,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @cmd,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @arg, byte* @res, int @res_len, int @flags)
         {
             return avfilter_process_command_fptr(@filter, @cmd, @arg, @res, @res_len, @flags);
         }
@@ -4166,13 +4166,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_disposition_from_string_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @disp);
+        private delegate int av_disposition_from_string_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @disp);
         private static av_disposition_from_string_delegate av_disposition_from_string_fptr = (string @disp) =>
         {
             av_disposition_from_string_fptr = GetFunctionDelegate<av_disposition_from_string_delegate>(GetOrLoadLibrary("avformat"), "av_disposition_from_string");
@@ -4187,13 +4187,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Returns The AV_DISPOSITION_* flag corresponding to disp or a negative error code if disp does not correspond to a known stream disposition.</summary>
         /// <returns>The AV_DISPOSITION_* flag corresponding to disp or a negative error code if disp does not correspond to a known stream disposition.</returns>
-        public static int av_disposition_from_string(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @disp)
+        public static int av_disposition_from_string(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @disp)
         {
             return av_disposition_from_string_fptr(@disp);
         }
@@ -4224,13 +4224,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_dump_format_delegate(AVFormatContext* @ic, int @index, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, int @is_output);
+        private delegate void av_dump_format_delegate(AVFormatContext* @ic, int @index,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, int @is_output);
         private static av_dump_format_delegate av_dump_format_fptr = (AVFormatContext* @ic, int @index, string @url, int @is_output) =>
         {
             av_dump_format_fptr = GetFunctionDelegate<av_dump_format_delegate>(GetOrLoadLibrary("avformat"), "av_dump_format");
@@ -4248,26 +4248,26 @@ namespace FFmpeg.AutoGen
         /// <param name="index">index of the stream to dump information about</param>
         /// <param name="url">the URL to print, such as source or destination file</param>
         /// <param name="is_output">Select whether the specified context is an input(0) or output(1)</param>
-        public static void av_dump_format(AVFormatContext* @ic, int @index, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, int @is_output)
+        public static void av_dump_format(AVFormatContext* @ic, int @index,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, int @is_output)
         {
             av_dump_format_fptr(@ic, @index, @url, @is_output);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_filename_number_test_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filename);
+        private delegate int av_filename_number_test_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filename);
         private static av_filename_number_test_delegate av_filename_number_test_fptr = (string @filename) =>
         {
             av_filename_number_test_fptr = GetFunctionDelegate<av_filename_number_test_delegate>(GetOrLoadLibrary("avformat"), "av_filename_number_test");
@@ -4283,13 +4283,13 @@ namespace FFmpeg.AutoGen
         /// <summary>Check whether filename actually is a numbered sequence generator.</summary>
         /// <param name="filename">possible numbered sequence string</param>
         /// <returns>1 if a valid numbered sequence string, 0 otherwise</returns>
-        public static int av_filename_number_test(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filename)
+        public static int av_filename_number_test(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filename)
         {
             return av_filename_number_test_fptr(@filename);
         }
@@ -4344,13 +4344,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVInputFormat* av_find_input_format_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @short_name);
+        private delegate AVInputFormat* av_find_input_format_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @short_name);
         private static av_find_input_format_delegate av_find_input_format_fptr = (string @short_name) =>
         {
             av_find_input_format_fptr = GetFunctionDelegate<av_find_input_format_delegate>(GetOrLoadLibrary("avformat"), "av_find_input_format");
@@ -4364,13 +4364,13 @@ namespace FFmpeg.AutoGen
             return av_find_input_format_fptr(@short_name);
         };
         /// <summary>Find AVInputFormat based on the short name of the input format.</summary>
-        public static AVInputFormat* av_find_input_format(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @short_name)
+        public static AVInputFormat* av_find_input_format(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @short_name)
         {
             return av_find_input_format_fptr(@short_name);
         }
@@ -4445,13 +4445,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_get_frame_filename_delegate(byte* @buf, int @buf_size, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @path, int @number);
+        private delegate int av_get_frame_filename_delegate(byte* @buf, int @buf_size,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @path, int @number);
         private static av_get_frame_filename_delegate av_get_frame_filename_fptr = (byte* @buf, int @buf_size, string @path, int @number) =>
         {
             av_get_frame_filename_fptr = GetFunctionDelegate<av_get_frame_filename_delegate>(GetOrLoadLibrary("avformat"), "av_get_frame_filename");
@@ -4464,26 +4464,26 @@ namespace FFmpeg.AutoGen
             }
             return av_get_frame_filename_fptr(@buf, @buf_size, @path, @number);
         };
-        public static int av_get_frame_filename(byte* @buf, int @buf_size, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @path, int @number)
+        public static int av_get_frame_filename(byte* @buf, int @buf_size,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @path, int @number)
         {
             return av_get_frame_filename_fptr(@buf, @buf_size, @path, @number);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_get_frame_filename2_delegate(byte* @buf, int @buf_size, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @path, int @number, int @flags);
+        private delegate int av_get_frame_filename2_delegate(byte* @buf, int @buf_size,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @path, int @number, int @flags);
         private static av_get_frame_filename2_delegate av_get_frame_filename2_fptr = (byte* @buf, int @buf_size, string @path, int @number, int @flags) =>
         {
             av_get_frame_filename2_fptr = GetFunctionDelegate<av_get_frame_filename2_delegate>(GetOrLoadLibrary("avformat"), "av_get_frame_filename2");
@@ -4503,13 +4503,13 @@ namespace FFmpeg.AutoGen
         /// <param name="number">frame number</param>
         /// <param name="flags">AV_FRAME_FILENAME_FLAGS_*</param>
         /// <returns>0 if OK, -1 on format error</returns>
-        public static int av_get_frame_filename2(byte* @buf, int @buf_size, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @path, int @number, int @flags)
+        public static int av_get_frame_filename2(byte* @buf, int @buf_size,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @path, int @number, int @flags)
         {
             return av_get_frame_filename2_fptr(@buf, @buf_size, @path, @number, @flags);
         }
@@ -4567,25 +4567,25 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVCodecID av_guess_codec_delegate(AVOutputFormat* @fmt, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @short_name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filename, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @mime_type, AVMediaType @type);
+        private delegate AVCodecID av_guess_codec_delegate(AVOutputFormat* @fmt,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @short_name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filename,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @mime_type, AVMediaType @type);
         private static av_guess_codec_delegate av_guess_codec_fptr = (AVOutputFormat* @fmt, string @short_name, string @filename, string @mime_type, AVMediaType @type) =>
         {
             av_guess_codec_fptr = GetFunctionDelegate<av_guess_codec_delegate>(GetOrLoadLibrary("avformat"), "av_guess_codec");
@@ -4599,50 +4599,50 @@ namespace FFmpeg.AutoGen
             return av_guess_codec_fptr(@fmt, @short_name, @filename, @mime_type, @type);
         };
         /// <summary>Guess the codec ID based upon muxer and filename.</summary>
-        public static AVCodecID av_guess_codec(AVOutputFormat* @fmt, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @short_name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filename, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @mime_type, AVMediaType @type)
+        public static AVCodecID av_guess_codec(AVOutputFormat* @fmt,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @short_name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filename,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @mime_type, AVMediaType @type)
         {
             return av_guess_codec_fptr(@fmt, @short_name, @filename, @mime_type, @type);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVOutputFormat* av_guess_format_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @short_name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filename, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @mime_type);
+        private delegate AVOutputFormat* av_guess_format_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @short_name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filename,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @mime_type);
         private static av_guess_format_delegate av_guess_format_fptr = (string @short_name, string @filename, string @mime_type) =>
         {
             av_guess_format_fptr = GetFunctionDelegate<av_guess_format_delegate>(GetOrLoadLibrary("avformat"), "av_guess_format");
@@ -4659,25 +4659,25 @@ namespace FFmpeg.AutoGen
         /// <param name="short_name">if non-NULL checks if short_name matches with the names of the registered formats</param>
         /// <param name="filename">if non-NULL checks if filename terminates with the extensions of the registered formats</param>
         /// <param name="mime_type">if non-NULL checks if mime_type matches with the MIME type of the registered formats</param>
-        public static AVOutputFormat* av_guess_format(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @short_name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filename, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @mime_type)
+        public static AVOutputFormat* av_guess_format(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @short_name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filename,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @mime_type)
         {
             return av_guess_format_fptr(@short_name, @filename, @mime_type);
         }
@@ -4854,19 +4854,19 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_match_ext_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filename, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @extensions);
+        private delegate int av_match_ext_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filename,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @extensions);
         private static av_match_ext_delegate av_match_ext_fptr = (string @filename, string @extensions) =>
         {
             av_match_ext_fptr = GetFunctionDelegate<av_match_ext_delegate>(GetOrLoadLibrary("avformat"), "av_match_ext");
@@ -4882,19 +4882,19 @@ namespace FFmpeg.AutoGen
         /// <summary>Return a positive value if the given filename has one of the given extensions, 0 otherwise.</summary>
         /// <param name="filename">file name to check against the given extensions</param>
         /// <param name="extensions">a comma-separated list of filename extensions</param>
-        public static int av_match_ext(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filename, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @extensions)
+        public static int av_match_ext(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filename,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @extensions)
         {
             return av_match_ext_fptr(@filename, @extensions);
         }
@@ -4995,13 +4995,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_probe_input_buffer_delegate(AVIOContext* @pb, AVInputFormat** @fmt, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, void* @logctx, uint @offset, uint @max_probe_size);
+        private delegate int av_probe_input_buffer_delegate(AVIOContext* @pb, AVInputFormat** @fmt,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, void* @logctx, uint @offset, uint @max_probe_size);
         private static av_probe_input_buffer_delegate av_probe_input_buffer_fptr = (AVIOContext* @pb, AVInputFormat** @fmt, string @url, void* @logctx, uint @offset, uint @max_probe_size) =>
         {
             av_probe_input_buffer_fptr = GetFunctionDelegate<av_probe_input_buffer_delegate>(GetOrLoadLibrary("avformat"), "av_probe_input_buffer");
@@ -5015,26 +5015,26 @@ namespace FFmpeg.AutoGen
             return av_probe_input_buffer_fptr(@pb, @fmt, @url, @logctx, @offset, @max_probe_size);
         };
         /// <summary>Like av_probe_input_buffer2() but returns 0 on success</summary>
-        public static int av_probe_input_buffer(AVIOContext* @pb, AVInputFormat** @fmt, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, void* @logctx, uint @offset, uint @max_probe_size)
+        public static int av_probe_input_buffer(AVIOContext* @pb, AVInputFormat** @fmt,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, void* @logctx, uint @offset, uint @max_probe_size)
         {
             return av_probe_input_buffer_fptr(@pb, @fmt, @url, @logctx, @offset, @max_probe_size);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_probe_input_buffer2_delegate(AVIOContext* @pb, AVInputFormat** @fmt, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, void* @logctx, uint @offset, uint @max_probe_size);
+        private delegate int av_probe_input_buffer2_delegate(AVIOContext* @pb, AVInputFormat** @fmt,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, void* @logctx, uint @offset, uint @max_probe_size);
         private static av_probe_input_buffer2_delegate av_probe_input_buffer2_fptr = (AVIOContext* @pb, AVInputFormat** @fmt, string @url, void* @logctx, uint @offset, uint @max_probe_size) =>
         {
             av_probe_input_buffer2_fptr = GetFunctionDelegate<av_probe_input_buffer2_delegate>(GetOrLoadLibrary("avformat"), "av_probe_input_buffer2");
@@ -5055,13 +5055,13 @@ namespace FFmpeg.AutoGen
         /// <param name="offset">the offset within the bytestream to probe from</param>
         /// <param name="max_probe_size">the maximum probe buffer size (zero for default)</param>
         /// <returns>the score in case of success, a negative value corresponding to an the maximal score is AVPROBE_SCORE_MAX AVERROR code otherwise</returns>
-        public static int av_probe_input_buffer2(AVIOContext* @pb, AVInputFormat** @fmt, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, void* @logctx, uint @offset, uint @max_probe_size)
+        public static int av_probe_input_buffer2(AVIOContext* @pb, AVInputFormat** @fmt,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, void* @logctx, uint @offset, uint @max_probe_size)
         {
             return av_probe_input_buffer2_fptr(@pb, @fmt, @url, @logctx, @offset, @max_probe_size);
         }
@@ -5434,13 +5434,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_url_split_delegate(byte* @proto, int @proto_size, byte* @authorization, int @authorization_size, byte* @hostname, int @hostname_size, int* @port_ptr, byte* @path, int @path_size, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url);
+        private delegate void av_url_split_delegate(byte* @proto, int @proto_size, byte* @authorization, int @authorization_size, byte* @hostname, int @hostname_size, int* @port_ptr, byte* @path, int @path_size,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url);
         private static av_url_split_delegate av_url_split_fptr = (byte* @proto, int @proto_size, byte* @authorization, int @authorization_size, byte* @hostname, int @hostname_size, int* @port_ptr, byte* @path, int @path_size, string @url) =>
         {
             av_url_split_fptr = GetFunctionDelegate<av_url_split_delegate>(GetOrLoadLibrary("avformat"), "av_url_split");
@@ -5464,13 +5464,13 @@ namespace FFmpeg.AutoGen
         /// <param name="path">the buffer for the path</param>
         /// <param name="path_size">the size of the path buffer</param>
         /// <param name="url">the URL to split</param>
-        public static void av_url_split(byte* @proto, int @proto_size, byte* @authorization, int @authorization_size, byte* @hostname, int @hostname_size, int* @port_ptr, byte* @path, int @path_size, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url)
+        public static void av_url_split(byte* @proto, int @proto_size, byte* @authorization, int @authorization_size, byte* @hostname, int @hostname_size, int* @port_ptr, byte* @path, int @path_size,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url)
         {
             av_url_split_fptr(@proto, @proto_size, @authorization, @authorization_size, @hostname, @hostname_size, @port_ptr, @path, @path_size, @url);
         }
@@ -5588,19 +5588,19 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avformat_alloc_output_context2_delegate(AVFormatContext** @ctx, AVOutputFormat* @oformat, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @format_name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filename);
+        private delegate int avformat_alloc_output_context2_delegate(AVFormatContext** @ctx, AVOutputFormat* @oformat,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @format_name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filename);
         private static avformat_alloc_output_context2_delegate avformat_alloc_output_context2_fptr = (AVFormatContext** @ctx, AVOutputFormat* @oformat, string @format_name, string @filename) =>
         {
             avformat_alloc_output_context2_fptr = GetFunctionDelegate<avformat_alloc_output_context2_delegate>(GetOrLoadLibrary("avformat"), "avformat_alloc_output_context2");
@@ -5618,19 +5618,19 @@ namespace FFmpeg.AutoGen
         /// <param name="format_name">the name of output format to use for allocating the context, if NULL filename is used instead</param>
         /// <param name="filename">the name of the filename to use for allocating the context, may be NULL</param>
         /// <returns>&gt;= 0 in case of success, a negative AVERROR code in case of failure</returns>
-        public static int avformat_alloc_output_context2(AVFormatContext** @ctx, AVOutputFormat* @oformat, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @format_name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filename)
+        public static int avformat_alloc_output_context2(AVFormatContext** @ctx, AVOutputFormat* @oformat,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @format_name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filename)
         {
             return avformat_alloc_output_context2_fptr(@ctx, @oformat, @format_name, @filename);
         }
@@ -5975,13 +5975,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avformat_match_stream_specifier_delegate(AVFormatContext* @s, AVStream* @st, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @spec);
+        private delegate int avformat_match_stream_specifier_delegate(AVFormatContext* @s, AVStream* @st,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @spec);
         private static avformat_match_stream_specifier_delegate avformat_match_stream_specifier_fptr = (AVFormatContext* @s, AVStream* @st, string @spec) =>
         {
             avformat_match_stream_specifier_fptr = GetFunctionDelegate<avformat_match_stream_specifier_delegate>(GetOrLoadLibrary("avformat"), "avformat_match_stream_specifier");
@@ -5996,13 +5996,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Check if the stream st contained in s is matched by the stream specifier spec.</summary>
         /// <returns>&gt;0 if st is matched by spec; 0  if st is not matched by spec; AVERROR code if spec is invalid</returns>
-        public static int avformat_match_stream_specifier(AVFormatContext* @s, AVStream* @st, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @spec)
+        public static int avformat_match_stream_specifier(AVFormatContext* @s, AVStream* @st,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @spec)
         {
             return avformat_match_stream_specifier_fptr(@s, @st, @spec);
         }
@@ -6075,13 +6075,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avformat_open_input_delegate(AVFormatContext** @ps, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, AVInputFormat* @fmt, AVDictionary** @options);
+        private delegate int avformat_open_input_delegate(AVFormatContext** @ps,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, AVInputFormat* @fmt, AVDictionary** @options);
         private static avformat_open_input_delegate avformat_open_input_fptr = (AVFormatContext** @ps, string @url, AVInputFormat* @fmt, AVDictionary** @options) =>
         {
             avformat_open_input_fptr = GetFunctionDelegate<avformat_open_input_delegate>(GetOrLoadLibrary("avformat"), "avformat_open_input");
@@ -6100,13 +6100,13 @@ namespace FFmpeg.AutoGen
         /// <param name="fmt">If non-NULL, this parameter forces a specific input format. Otherwise the format is autodetected.</param>
         /// <param name="options">A dictionary filled with AVFormatContext and demuxer-private options. On return this parameter will be destroyed and replaced with a dict containing options that were not found. May be NULL.</param>
         /// <returns>0 on success, a negative AVERROR on failure.</returns>
-        public static int avformat_open_input(AVFormatContext** @ps, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, AVInputFormat* @fmt, AVDictionary** @options)
+        public static int avformat_open_input(AVFormatContext** @ps,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, AVInputFormat* @fmt, AVDictionary** @options)
         {
             return avformat_open_input_fptr(@ps, @url, @fmt, @options);
         }
@@ -6309,13 +6309,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avio_check_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, int @flags);
+        private delegate int avio_check_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, int @flags);
         private static avio_check_delegate avio_check_fptr = (string @url, int @flags) =>
         {
             avio_check_fptr = GetFunctionDelegate<avio_check_delegate>(GetOrLoadLibrary("avformat"), "avio_check");
@@ -6329,13 +6329,13 @@ namespace FFmpeg.AutoGen
             return avio_check_fptr(@url, @flags);
         };
         /// <summary>Return AVIO_FLAG_* access flags corresponding to the access permissions of the resource in url, or a negative value corresponding to an AVERROR code in case of failure. The returned access flags are masked by the value in flags.</summary>
-        public static int avio_check(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, int @flags)
+        public static int avio_check(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, int @flags)
         {
             return avio_check_fptr(@url, @flags);
         }
@@ -6503,13 +6503,13 @@ namespace FFmpeg.AutoGen
         
         [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate string avio_find_protocol_name_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url);
+        private delegate string avio_find_protocol_name_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url);
         private static avio_find_protocol_name_delegate avio_find_protocol_name_fptr = (string @url) =>
         {
             avio_find_protocol_name_fptr = GetFunctionDelegate<avio_find_protocol_name_delegate>(GetOrLoadLibrary("avformat"), "avio_find_protocol_name");
@@ -6524,13 +6524,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Return the name of the protocol that will handle the passed URL.</summary>
         /// <returns>Name of the protocol or NULL.</returns>
-        public static string avio_find_protocol_name(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url)
+        public static string avio_find_protocol_name(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url)
         {
             return avio_find_protocol_name_fptr(@url);
         }
@@ -6691,13 +6691,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avio_open_delegate(AVIOContext** @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, int @flags);
+        private delegate int avio_open_delegate(AVIOContext** @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, int @flags);
         private static avio_open_delegate avio_open_fptr = (AVIOContext** @s, string @url, int @flags) =>
         {
             avio_open_fptr = GetFunctionDelegate<avio_open_delegate>(GetOrLoadLibrary("avformat"), "avio_open");
@@ -6715,26 +6715,26 @@ namespace FFmpeg.AutoGen
         /// <param name="url">resource to access</param>
         /// <param name="flags">flags which control how the resource indicated by url is to be opened</param>
         /// <returns>&gt;= 0 in case of success, a negative value corresponding to an AVERROR code in case of failure</returns>
-        public static int avio_open(AVIOContext** @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, int @flags)
+        public static int avio_open(AVIOContext** @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, int @flags)
         {
             return avio_open_fptr(@s, @url, @flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avio_open_dir_delegate(AVIODirContext** @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, AVDictionary** @options);
+        private delegate int avio_open_dir_delegate(AVIODirContext** @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, AVDictionary** @options);
         private static avio_open_dir_delegate avio_open_dir_fptr = (AVIODirContext** @s, string @url, AVDictionary** @options) =>
         {
             avio_open_dir_fptr = GetFunctionDelegate<avio_open_dir_delegate>(GetOrLoadLibrary("avformat"), "avio_open_dir");
@@ -6752,13 +6752,13 @@ namespace FFmpeg.AutoGen
         /// <param name="url">directory to be listed.</param>
         /// <param name="options">A dictionary filled with protocol-private options. On return this parameter will be destroyed and replaced with a dictionary containing options that were not found. May be NULL.</param>
         /// <returns>&gt;=0 on success or negative on error.</returns>
-        public static int avio_open_dir(AVIODirContext** @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, AVDictionary** @options)
+        public static int avio_open_dir(AVIODirContext** @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, AVDictionary** @options)
         {
             return avio_open_dir_fptr(@s, @url, @options);
         }
@@ -6788,13 +6788,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avio_open2_delegate(AVIOContext** @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options);
+        private delegate int avio_open2_delegate(AVIOContext** @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options);
         private static avio_open2_delegate avio_open2_fptr = (AVIOContext** @s, string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options) =>
         {
             avio_open2_fptr = GetFunctionDelegate<avio_open2_delegate>(GetOrLoadLibrary("avformat"), "avio_open2");
@@ -6814,13 +6814,13 @@ namespace FFmpeg.AutoGen
         /// <param name="int_cb">an interrupt callback to be used at the protocols level</param>
         /// <param name="options">A dictionary filled with protocol-private options. On return this parameter will be destroyed and replaced with a dict containing options that were not found. May be NULL.</param>
         /// <returns>&gt;= 0 in case of success, a negative value corresponding to an AVERROR code in case of failure</returns>
-        public static int avio_open2(AVIOContext** @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options)
+        public static int avio_open2(AVIOContext** @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @url, int @flags, AVIOInterruptCB* @int_cb, AVDictionary** @options)
         {
             return avio_open2_fptr(@s, @url, @flags, @int_cb, @options);
         }
@@ -6871,13 +6871,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avio_printf_delegate(AVIOContext* @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt);
+        private delegate int avio_printf_delegate(AVIOContext* @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt);
         private static avio_printf_delegate avio_printf_fptr = (AVIOContext* @s, string @fmt) =>
         {
             avio_printf_fptr = GetFunctionDelegate<avio_printf_delegate>(GetOrLoadLibrary("avformat"), "avio_printf");
@@ -6892,26 +6892,26 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Writes a formatted string to the context.</summary>
         /// <returns>number of bytes written, &lt; 0 on error.</returns>
-        public static int avio_printf(AVIOContext* @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt)
+        public static int avio_printf(AVIOContext* @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt)
         {
             return avio_printf_fptr(@s, @fmt);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVClass* avio_protocol_get_class_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate AVClass* avio_protocol_get_class_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static avio_protocol_get_class_delegate avio_protocol_get_class_fptr = (string @name) =>
         {
             avio_protocol_get_class_fptr = GetFunctionDelegate<avio_protocol_get_class_delegate>(GetOrLoadLibrary("avformat"), "avio_protocol_get_class");
@@ -6926,26 +6926,26 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Get AVClass by names of available protocols.</summary>
         /// <returns>A AVClass of input protocol name or NULL</returns>
-        public static AVClass* avio_protocol_get_class(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static AVClass* avio_protocol_get_class(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return avio_protocol_get_class_fptr(@name);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avio_put_str_delegate(AVIOContext* @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @str);
+        private delegate int avio_put_str_delegate(AVIOContext* @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @str);
         private static avio_put_str_delegate avio_put_str_fptr = (AVIOContext* @s, string @str) =>
         {
             avio_put_str_fptr = GetFunctionDelegate<avio_put_str_delegate>(GetOrLoadLibrary("avformat"), "avio_put_str");
@@ -6960,26 +6960,26 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Write a NULL-terminated string.</summary>
         /// <returns>number of bytes written.</returns>
-        public static int avio_put_str(AVIOContext* @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @str)
+        public static int avio_put_str(AVIOContext* @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @str)
         {
             return avio_put_str_fptr(@s, @str);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avio_put_str16be_delegate(AVIOContext* @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @str);
+        private delegate int avio_put_str16be_delegate(AVIOContext* @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @str);
         private static avio_put_str16be_delegate avio_put_str16be_fptr = (AVIOContext* @s, string @str) =>
         {
             avio_put_str16be_fptr = GetFunctionDelegate<avio_put_str16be_delegate>(GetOrLoadLibrary("avformat"), "avio_put_str16be");
@@ -6996,26 +6996,26 @@ namespace FFmpeg.AutoGen
         /// <param name="s">the AVIOContext</param>
         /// <param name="str">NULL-terminated UTF-8 string</param>
         /// <returns>number of bytes written.</returns>
-        public static int avio_put_str16be(AVIOContext* @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @str)
+        public static int avio_put_str16be(AVIOContext* @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @str)
         {
             return avio_put_str16be_fptr(@s, @str);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avio_put_str16le_delegate(AVIOContext* @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @str);
+        private delegate int avio_put_str16le_delegate(AVIOContext* @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @str);
         private static avio_put_str16le_delegate avio_put_str16le_fptr = (AVIOContext* @s, string @str) =>
         {
             avio_put_str16le_fptr = GetFunctionDelegate<avio_put_str16le_delegate>(GetOrLoadLibrary("avformat"), "avio_put_str16le");
@@ -7032,13 +7032,13 @@ namespace FFmpeg.AutoGen
         /// <param name="s">the AVIOContext</param>
         /// <param name="str">NULL-terminated UTF-8 string</param>
         /// <returns>number of bytes written.</returns>
-        public static int avio_put_str16le(AVIOContext* @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @str)
+        public static int avio_put_str16le(AVIOContext* @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @str)
         {
             return avio_put_str16le_fptr(@s, @str);
         }
@@ -7408,13 +7408,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int avio_vprintf_delegate(AVIOContext* @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt, byte* @ap);
+        private delegate int avio_vprintf_delegate(AVIOContext* @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt, byte* @ap);
         private static avio_vprintf_delegate avio_vprintf_fptr = (AVIOContext* @s, string @fmt, byte* @ap) =>
         {
             avio_vprintf_fptr = GetFunctionDelegate<avio_vprintf_delegate>(GetOrLoadLibrary("avformat"), "avio_vprintf");
@@ -7429,13 +7429,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Writes a formatted string to the context taking a va_list.</summary>
         /// <returns>number of bytes written, &lt; 0 on error.</returns>
-        public static int avio_vprintf(AVIOContext* @s, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt, byte* @ap)
+        public static int avio_vprintf(AVIOContext* @s,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt, byte* @ap)
         {
             return avio_vprintf_fptr(@s, @fmt, @ap);
         }
@@ -8456,13 +8456,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVChannel av_channel_from_string_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate AVChannel av_channel_from_string_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_channel_from_string_delegate av_channel_from_string_fptr = (string @name) =>
         {
             av_channel_from_string_fptr = GetFunctionDelegate<av_channel_from_string_delegate>(GetOrLoadLibrary("avutil"), "av_channel_from_string");
@@ -8477,13 +8477,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>This is the inverse function of av_channel_name().</summary>
         /// <returns>the channel with the given name AV_CHAN_NONE when name does not identify a known channel</returns>
-        public static AVChannel av_channel_from_string(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static AVChannel av_channel_from_string(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_channel_from_string_fptr(@name);
         }
@@ -8513,13 +8513,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVChannel av_channel_layout_channel_from_string_delegate(AVChannelLayout* @channel_layout, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate AVChannel av_channel_layout_channel_from_string_delegate(AVChannelLayout* @channel_layout,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_channel_layout_channel_from_string_delegate av_channel_layout_channel_from_string_fptr = (AVChannelLayout* @channel_layout, string @name) =>
         {
             av_channel_layout_channel_from_string_fptr = GetFunctionDelegate<av_channel_layout_channel_from_string_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_channel_from_string");
@@ -8535,13 +8535,13 @@ namespace FFmpeg.AutoGen
         /// <summary>Get a channel described by the given string.</summary>
         /// <param name="channel_layout">input channel layout</param>
         /// <returns>a channel described by the given string in channel_layout on success or AV_CHAN_NONE on failure (if the string is not valid or the channel order is unspecified)</returns>
-        public static AVChannel av_channel_layout_channel_from_string(AVChannelLayout* @channel_layout, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static AVChannel av_channel_layout_channel_from_string(AVChannelLayout* @channel_layout,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_channel_layout_channel_from_string_fptr(@channel_layout, @name);
         }
@@ -8734,13 +8734,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_channel_layout_from_string_delegate(AVChannelLayout* @channel_layout, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @str);
+        private delegate int av_channel_layout_from_string_delegate(AVChannelLayout* @channel_layout,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @str);
         private static av_channel_layout_from_string_delegate av_channel_layout_from_string_fptr = (AVChannelLayout* @channel_layout, string @str) =>
         {
             av_channel_layout_from_string_fptr = GetFunctionDelegate<av_channel_layout_from_string_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_from_string");
@@ -8757,13 +8757,13 @@ namespace FFmpeg.AutoGen
         /// <param name="channel_layout">input channel layout</param>
         /// <param name="str">string describing the channel layout</param>
         /// <returns>0 channel layout was detected, AVERROR_INVALIDATATA otherwise</returns>
-        public static int av_channel_layout_from_string(AVChannelLayout* @channel_layout, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @str)
+        public static int av_channel_layout_from_string(AVChannelLayout* @channel_layout,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @str)
         {
             return av_channel_layout_from_string_fptr(@channel_layout, @str);
         }
@@ -8793,13 +8793,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_channel_layout_index_from_string_delegate(AVChannelLayout* @channel_layout, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate int av_channel_layout_index_from_string_delegate(AVChannelLayout* @channel_layout,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_channel_layout_index_from_string_delegate av_channel_layout_index_from_string_fptr = (AVChannelLayout* @channel_layout, string @name) =>
         {
             av_channel_layout_index_from_string_fptr = GetFunctionDelegate<av_channel_layout_index_from_string_delegate>(GetOrLoadLibrary("avutil"), "av_channel_layout_index_from_string");
@@ -8815,13 +8815,13 @@ namespace FFmpeg.AutoGen
         /// <summary>Get the index in a channel layout of a channel described by the given string. In case multiple channels are found, only the first match will be returned.</summary>
         /// <param name="channel_layout">input channel layout</param>
         /// <returns>a channel index described by the given string, or a negative AVERROR value.</returns>
-        public static int av_channel_layout_index_from_string(AVChannelLayout* @channel_layout, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static int av_channel_layout_index_from_string(AVChannelLayout* @channel_layout,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_channel_layout_index_from_string_fptr(@channel_layout, @name);
         }
@@ -8942,13 +8942,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_chroma_location_from_name_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate int av_chroma_location_from_name_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_chroma_location_from_name_delegate av_chroma_location_from_name_fptr = (string @name) =>
         {
             av_chroma_location_from_name_fptr = GetFunctionDelegate<av_chroma_location_from_name_delegate>(GetOrLoadLibrary("avutil"), "av_chroma_location_from_name");
@@ -8963,13 +8963,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Returns the AVChromaLocation value for name or an AVError if not found.</summary>
         /// <returns>the AVChromaLocation value for name or an AVError if not found.</returns>
-        public static int av_chroma_location_from_name(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static int av_chroma_location_from_name(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_chroma_location_from_name_fptr(@name);
         }
@@ -8999,13 +8999,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_color_primaries_from_name_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate int av_color_primaries_from_name_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_color_primaries_from_name_delegate av_color_primaries_from_name_fptr = (string @name) =>
         {
             av_color_primaries_from_name_fptr = GetFunctionDelegate<av_color_primaries_from_name_delegate>(GetOrLoadLibrary("avutil"), "av_color_primaries_from_name");
@@ -9020,13 +9020,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Returns the AVColorPrimaries value for name or an AVError if not found.</summary>
         /// <returns>the AVColorPrimaries value for name or an AVError if not found.</returns>
-        public static int av_color_primaries_from_name(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static int av_color_primaries_from_name(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_color_primaries_from_name_fptr(@name);
         }
@@ -9056,13 +9056,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_color_range_from_name_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate int av_color_range_from_name_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_color_range_from_name_delegate av_color_range_from_name_fptr = (string @name) =>
         {
             av_color_range_from_name_fptr = GetFunctionDelegate<av_color_range_from_name_delegate>(GetOrLoadLibrary("avutil"), "av_color_range_from_name");
@@ -9077,13 +9077,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Returns the AVColorRange value for name or an AVError if not found.</summary>
         /// <returns>the AVColorRange value for name or an AVError if not found.</returns>
-        public static int av_color_range_from_name(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static int av_color_range_from_name(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_color_range_from_name_fptr(@name);
         }
@@ -9113,13 +9113,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_color_space_from_name_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate int av_color_space_from_name_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_color_space_from_name_delegate av_color_space_from_name_fptr = (string @name) =>
         {
             av_color_space_from_name_fptr = GetFunctionDelegate<av_color_space_from_name_delegate>(GetOrLoadLibrary("avutil"), "av_color_space_from_name");
@@ -9134,13 +9134,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Returns the AVColorSpace value for name or an AVError if not found.</summary>
         /// <returns>the AVColorSpace value for name or an AVError if not found.</returns>
-        public static int av_color_space_from_name(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static int av_color_space_from_name(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_color_space_from_name_fptr(@name);
         }
@@ -9170,13 +9170,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_color_transfer_from_name_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate int av_color_transfer_from_name_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_color_transfer_from_name_delegate av_color_transfer_from_name_fptr = (string @name) =>
         {
             av_color_transfer_from_name_fptr = GetFunctionDelegate<av_color_transfer_from_name_delegate>(GetOrLoadLibrary("avutil"), "av_color_transfer_from_name");
@@ -9191,13 +9191,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Returns the AVColorTransferCharacteristic value for name or an AVError if not found.</summary>
         /// <returns>the AVColorTransferCharacteristic value for name or an AVError if not found.</returns>
-        public static int av_color_transfer_from_name(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static int av_color_transfer_from_name(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_color_transfer_from_name_fptr(@name);
         }
@@ -9518,13 +9518,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVDictionaryEntry* av_dict_get_delegate(AVDictionary* @m, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key, AVDictionaryEntry* @prev, int @flags);
+        private delegate AVDictionaryEntry* av_dict_get_delegate(AVDictionary* @m,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key, AVDictionaryEntry* @prev, int @flags);
         private static av_dict_get_delegate av_dict_get_fptr = (AVDictionary* @m, string @key, AVDictionaryEntry* @prev, int @flags) =>
         {
             av_dict_get_fptr = GetFunctionDelegate<av_dict_get_delegate>(GetOrLoadLibrary("avutil"), "av_dict_get");
@@ -9542,13 +9542,13 @@ namespace FFmpeg.AutoGen
         /// <param name="prev">Set to the previous matching element to find the next. If set to NULL the first matching element is returned.</param>
         /// <param name="flags">a collection of AV_DICT_* flags controlling how the entry is retrieved</param>
         /// <returns>found entry or NULL in case no matching entry was found in the dictionary</returns>
-        public static AVDictionaryEntry* av_dict_get(AVDictionary* @m, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key, AVDictionaryEntry* @prev, int @flags)
+        public static AVDictionaryEntry* av_dict_get(AVDictionary* @m,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key, AVDictionaryEntry* @prev, int @flags)
         {
             return av_dict_get_fptr(@m, @key, @prev, @flags);
         }
@@ -9581,25 +9581,25 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_dict_parse_string_delegate(AVDictionary** @pm, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @str, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key_val_sep, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @pairs_sep, int @flags);
+        private delegate int av_dict_parse_string_delegate(AVDictionary** @pm,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @str,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key_val_sep,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @pairs_sep, int @flags);
         private static av_dict_parse_string_delegate av_dict_parse_string_fptr = (AVDictionary** @pm, string @str, string @key_val_sep, string @pairs_sep, int @flags) =>
         {
             av_dict_parse_string_fptr = GetFunctionDelegate<av_dict_parse_string_delegate>(GetOrLoadLibrary("avutil"), "av_dict_parse_string");
@@ -9617,44 +9617,44 @@ namespace FFmpeg.AutoGen
         /// <param name="pairs_sep">a 0-terminated list of characters used to separate two pairs from each other</param>
         /// <param name="flags">flags to use when adding to dictionary. AV_DICT_DONT_STRDUP_KEY and AV_DICT_DONT_STRDUP_VAL are ignored since the key/value tokens will always be duplicated.</param>
         /// <returns>0 on success, negative AVERROR code on failure</returns>
-        public static int av_dict_parse_string(AVDictionary** @pm, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @str, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key_val_sep, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @pairs_sep, int @flags)
+        public static int av_dict_parse_string(AVDictionary** @pm,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @str,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key_val_sep,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @pairs_sep, int @flags)
         {
             return av_dict_parse_string_fptr(@pm, @str, @key_val_sep, @pairs_sep, @flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_dict_set_delegate(AVDictionary** @pm, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @value, int @flags);
+        private delegate int av_dict_set_delegate(AVDictionary** @pm,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @value, int @flags);
         private static av_dict_set_delegate av_dict_set_fptr = (AVDictionary** @pm, string @key, string @value, int @flags) =>
         {
             av_dict_set_fptr = GetFunctionDelegate<av_dict_set_delegate>(GetOrLoadLibrary("avutil"), "av_dict_set");
@@ -9672,32 +9672,32 @@ namespace FFmpeg.AutoGen
         /// <param name="key">entry key to add to *pm (will either be av_strduped or added as a new key depending on flags)</param>
         /// <param name="value">entry value to add to *pm (will be av_strduped or added as a new key depending on flags). Passing a NULL value will cause an existing entry to be deleted.</param>
         /// <returns>&gt;= 0 on success otherwise an error code &lt; 0</returns>
-        public static int av_dict_set(AVDictionary** @pm, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @value, int @flags)
+        public static int av_dict_set(AVDictionary** @pm,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @value, int @flags)
         {
             return av_dict_set_fptr(@pm, @key, @value, @flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_dict_set_int_delegate(AVDictionary** @pm, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key, long @value, int @flags);
+        private delegate int av_dict_set_int_delegate(AVDictionary** @pm,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key, long @value, int @flags);
         private static av_dict_set_int_delegate av_dict_set_int_fptr = (AVDictionary** @pm, string @key, long @value, int @flags) =>
         {
             av_dict_set_int_fptr = GetFunctionDelegate<av_dict_set_int_delegate>(GetOrLoadLibrary("avutil"), "av_dict_set_int");
@@ -9711,13 +9711,13 @@ namespace FFmpeg.AutoGen
             return av_dict_set_int_fptr(@pm, @key, @value, @flags);
         };
         /// <summary>Convenience wrapper for av_dict_set that converts the value to a string and stores it.</summary>
-        public static int av_dict_set_int(AVDictionary** @pm, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key, long @value, int @flags)
+        public static int av_dict_set_int(AVDictionary** @pm,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key, long @value, int @flags)
         {
             return av_dict_set_int_fptr(@pm, @key, @value, @flags);
         }
@@ -9938,13 +9938,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_file_map_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filename, byte** @bufptr, ulong* @size, int @log_offset, void* @log_ctx);
+        private delegate int av_file_map_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filename, byte** @bufptr, ulong* @size, int @log_offset, void* @log_ctx);
         private static av_file_map_delegate av_file_map_fptr = (string @filename, byte** @bufptr, ulong* @size, int @log_offset, void* @log_ctx) =>
         {
             av_file_map_fptr = GetFunctionDelegate<av_file_map_delegate>(GetOrLoadLibrary("avutil"), "av_file_map");
@@ -9961,13 +9961,13 @@ namespace FFmpeg.AutoGen
         /// <param name="log_offset">loglevel offset used for logging</param>
         /// <param name="log_ctx">context used for logging</param>
         /// <returns>a non negative number in case of success, a negative value corresponding to an AVERROR error code in case of failure</returns>
-        public static int av_file_map(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @filename, byte** @bufptr, ulong* @size, int @log_offset, void* @log_ctx)
+        public static int av_file_map(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @filename, byte** @bufptr, ulong* @size, int @log_offset, void* @log_ctx)
         {
             return av_file_map_fptr(@filename, @bufptr, @size, @log_offset, @log_ctx);
         }
@@ -10044,19 +10044,19 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate _iobuf* av_fopen_utf8_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @path, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @mode);
+        private delegate _iobuf* av_fopen_utf8_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @path,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @mode);
         private static av_fopen_utf8_delegate av_fopen_utf8_fptr = (string @path, string @mode) =>
         {
             av_fopen_utf8_fptr = GetFunctionDelegate<av_fopen_utf8_delegate>(GetOrLoadLibrary("avutil"), "av_fopen_utf8");
@@ -10071,19 +10071,19 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Open a file using a UTF-8 filename. The API of this function matches POSIX fopen(), errors are returned through errno.</summary>
         [Obsolete("Avoid using it, as on Windows, the FILE* allocated by this function may be allocated with a different CRT than the caller who uses the FILE*. No replacement provided in public API.")]
-        public static _iobuf* av_fopen_utf8(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @path, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @mode)
+        public static _iobuf* av_fopen_utf8(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @path,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @mode)
         {
             return av_fopen_utf8_fptr(@path, @mode);
         }
@@ -10716,13 +10716,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate ulong av_get_channel_layout_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate ulong av_get_channel_layout_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_get_channel_layout_delegate av_get_channel_layout_fptr = (string @name) =>
         {
             av_get_channel_layout_fptr = GetFunctionDelegate<av_get_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_get_channel_layout");
@@ -10737,13 +10737,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Return a channel layout id that matches name, or 0 if no match is found.</summary>
         [Obsolete("use av_channel_layout_from_string()")]
-        public static ulong av_get_channel_layout(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static ulong av_get_channel_layout(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_get_channel_layout_fptr(@name);
         }
@@ -10911,13 +10911,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_get_extended_channel_layout_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, ulong* @channel_layout, int* @nb_channels);
+        private delegate int av_get_extended_channel_layout_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, ulong* @channel_layout, int* @nb_channels);
         private static av_get_extended_channel_layout_delegate av_get_extended_channel_layout_fptr = (string @name, ulong* @channel_layout, int* @nb_channels) =>
         {
             av_get_extended_channel_layout_fptr = GetFunctionDelegate<av_get_extended_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_get_extended_channel_layout");
@@ -10936,13 +10936,13 @@ namespace FFmpeg.AutoGen
         /// <param name="nb_channels">number of channels</param>
         /// <returns>0 on success, AVERROR(EINVAL) if the parsing fails.</returns>
         [Obsolete("use av_channel_layout_from_string()")]
-        public static int av_get_extended_channel_layout(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, ulong* @channel_layout, int* @nb_channels)
+        public static int av_get_extended_channel_layout(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, ulong* @channel_layout, int* @nb_channels)
         {
             return av_get_extended_channel_layout_fptr(@name, @channel_layout, @nb_channels);
         }
@@ -11037,13 +11037,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVPixelFormat av_get_pix_fmt_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate AVPixelFormat av_get_pix_fmt_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_get_pix_fmt_delegate av_get_pix_fmt_fptr = (string @name) =>
         {
             av_get_pix_fmt_fptr = GetFunctionDelegate<av_get_pix_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_get_pix_fmt");
@@ -11057,13 +11057,13 @@ namespace FFmpeg.AutoGen
             return av_get_pix_fmt_fptr(@name);
         };
         /// <summary>Return the pixel format corresponding to name.</summary>
-        public static AVPixelFormat av_get_pix_fmt(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static AVPixelFormat av_get_pix_fmt(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_get_pix_fmt_fptr(@name);
         }
@@ -11163,13 +11163,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVSampleFormat av_get_sample_fmt_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate AVSampleFormat av_get_sample_fmt_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_get_sample_fmt_delegate av_get_sample_fmt_fptr = (string @name) =>
         {
             av_get_sample_fmt_fptr = GetFunctionDelegate<av_get_sample_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_get_sample_fmt");
@@ -11183,13 +11183,13 @@ namespace FFmpeg.AutoGen
             return av_get_sample_fmt_fptr(@name);
         };
         /// <summary>Return a sample format corresponding to name, or AV_SAMPLE_FMT_NONE on error.</summary>
-        public static AVSampleFormat av_get_sample_fmt(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static AVSampleFormat av_get_sample_fmt(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_get_sample_fmt_fptr(@name);
         }
@@ -11376,13 +11376,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_hwdevice_ctx_create_delegate(AVBufferRef** @device_ctx, AVHWDeviceType @type, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @device, AVDictionary* @opts, int @flags);
+        private delegate int av_hwdevice_ctx_create_delegate(AVBufferRef** @device_ctx, AVHWDeviceType @type,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @device, AVDictionary* @opts, int @flags);
         private static av_hwdevice_ctx_create_delegate av_hwdevice_ctx_create_fptr = (AVBufferRef** @device_ctx, AVHWDeviceType @type, string @device, AVDictionary* @opts, int @flags) =>
         {
             av_hwdevice_ctx_create_fptr = GetFunctionDelegate<av_hwdevice_ctx_create_delegate>(GetOrLoadLibrary("avutil"), "av_hwdevice_ctx_create");
@@ -11402,13 +11402,13 @@ namespace FFmpeg.AutoGen
         /// <param name="opts">A dictionary of additional (type-specific) options to use in opening the device. The dictionary remains owned by the caller.</param>
         /// <param name="flags">currently unused</param>
         /// <returns>0 on success, a negative AVERROR code on failure.</returns>
-        public static int av_hwdevice_ctx_create(AVBufferRef** @device_ctx, AVHWDeviceType @type, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @device, AVDictionary* @opts, int @flags)
+        public static int av_hwdevice_ctx_create(AVBufferRef** @device_ctx, AVHWDeviceType @type,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @device, AVDictionary* @opts, int @flags)
         {
             return av_hwdevice_ctx_create_fptr(@device_ctx, @type, @device, @opts, @flags);
         }
@@ -11491,13 +11491,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVHWDeviceType av_hwdevice_find_type_by_name_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate AVHWDeviceType av_hwdevice_find_type_by_name_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_hwdevice_find_type_by_name_delegate av_hwdevice_find_type_by_name_fptr = (string @name) =>
         {
             av_hwdevice_find_type_by_name_fptr = GetFunctionDelegate<av_hwdevice_find_type_by_name_delegate>(GetOrLoadLibrary("avutil"), "av_hwdevice_find_type_by_name");
@@ -11513,13 +11513,13 @@ namespace FFmpeg.AutoGen
         /// <summary>Look up an AVHWDeviceType by name.</summary>
         /// <param name="name">String name of the device type (case-insensitive).</param>
         /// <returns>The type from enum AVHWDeviceType, or AV_HWDEVICE_TYPE_NONE if not found.</returns>
-        public static AVHWDeviceType av_hwdevice_find_type_by_name(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static AVHWDeviceType av_hwdevice_find_type_by_name(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_hwdevice_find_type_by_name_fptr(@name);
         }
@@ -12259,13 +12259,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_log_delegate(void* @avcl, int @level, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt);
+        private delegate void av_log_delegate(void* @avcl, int @level,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt);
         private static av_log_delegate av_log_fptr = (void* @avcl, int @level, string @fmt) =>
         {
             av_log_fptr = GetFunctionDelegate<av_log_delegate>(GetOrLoadLibrary("avutil"), "av_log");
@@ -12282,26 +12282,26 @@ namespace FFmpeg.AutoGen
         /// <param name="avcl">A pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct or NULL if general log.</param>
         /// <param name="level">The importance level of the message expressed using a &quot;Logging Constant&quot;.</param>
         /// <param name="fmt">The format string (printf-compatible) that specifies how subsequent arguments are converted to output.</param>
-        public static void av_log(void* @avcl, int @level, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt)
+        public static void av_log(void* @avcl, int @level,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt)
         {
             av_log_fptr(@avcl, @level, @fmt);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_log_default_callback_delegate(void* @avcl, int @level, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt, byte* @vl);
+        private delegate void av_log_default_callback_delegate(void* @avcl, int @level,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt, byte* @vl);
         private static av_log_default_callback_delegate av_log_default_callback_fptr = (void* @avcl, int @level, string @fmt, byte* @vl) =>
         {
             av_log_default_callback_fptr = GetFunctionDelegate<av_log_default_callback_delegate>(GetOrLoadLibrary("avutil"), "av_log_default_callback");
@@ -12319,26 +12319,26 @@ namespace FFmpeg.AutoGen
         /// <param name="level">The importance level of the message expressed using a &quot;Logging Constant&quot;.</param>
         /// <param name="fmt">The format string (printf-compatible) that specifies how subsequent arguments are converted to output.</param>
         /// <param name="vl">The arguments referenced by the format string.</param>
-        public static void av_log_default_callback(void* @avcl, int @level, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt, byte* @vl)
+        public static void av_log_default_callback(void* @avcl, int @level,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt, byte* @vl)
         {
             av_log_default_callback_fptr(@avcl, @level, @fmt, @vl);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_log_format_line_delegate(void* @ptr, int @level, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix);
+        private delegate void av_log_format_line_delegate(void* @ptr, int @level,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix);
         private static av_log_format_line_delegate av_log_format_line_fptr = (void* @ptr, int @level, string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix) =>
         {
             av_log_format_line_fptr = GetFunctionDelegate<av_log_format_line_delegate>(GetOrLoadLibrary("avutil"), "av_log_format_line");
@@ -12355,26 +12355,26 @@ namespace FFmpeg.AutoGen
         /// <param name="line">buffer to receive the formatted line</param>
         /// <param name="line_size">size of the buffer</param>
         /// <param name="print_prefix">used to store whether the prefix must be printed; must point to a persistent integer initially set to 1</param>
-        public static void av_log_format_line(void* @ptr, int @level, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix)
+        public static void av_log_format_line(void* @ptr, int @level,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix)
         {
             av_log_format_line_fptr(@ptr, @level, @fmt, @vl, @line, @line_size, @print_prefix);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_log_format_line2_delegate(void* @ptr, int @level, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix);
+        private delegate int av_log_format_line2_delegate(void* @ptr, int @level,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix);
         private static av_log_format_line2_delegate av_log_format_line2_fptr = (void* @ptr, int @level, string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix) =>
         {
             av_log_format_line2_fptr = GetFunctionDelegate<av_log_format_line2_delegate>(GetOrLoadLibrary("avutil"), "av_log_format_line2");
@@ -12392,13 +12392,13 @@ namespace FFmpeg.AutoGen
         /// <param name="line_size">size of the buffer; at most line_size-1 characters will be written to the buffer, plus one null terminator</param>
         /// <param name="print_prefix">used to store whether the prefix must be printed; must point to a persistent integer initially set to 1</param>
         /// <returns>Returns a negative value if an error occurred, otherwise returns the number of characters that would have been written for a sufficiently large buffer, not including the terminating null character. If the return value is not less than line_size, it means that the log message was truncated to fit the buffer.</returns>
-        public static int av_log_format_line2(void* @ptr, int @level, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix)
+        public static int av_log_format_line2(void* @ptr, int @level,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt, byte* @vl, byte* @line, int @line_size, int* @print_prefix)
         {
             return av_log_format_line2_fptr(@ptr, @level, @fmt, @vl, @line, @line_size, @print_prefix);
         }
@@ -12447,13 +12447,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_log_once_delegate(void* @avcl, int @initial_level, int @subsequent_level, int* @state, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt);
+        private delegate void av_log_once_delegate(void* @avcl, int @initial_level, int @subsequent_level, int* @state,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt);
         private static av_log_once_delegate av_log_once_fptr = (void* @avcl, int @initial_level, int @subsequent_level, int* @state, string @fmt) =>
         {
             av_log_once_fptr = GetFunctionDelegate<av_log_once_delegate>(GetOrLoadLibrary("avutil"), "av_log_once");
@@ -12472,13 +12472,13 @@ namespace FFmpeg.AutoGen
         /// <param name="subsequent_level">importance level of the message expressed using a &quot;Logging Constant&quot; after the first occurance.</param>
         /// <param name="state">a variable to keep trak of if a message has already been printed this must be initialized to 0 before the first use. The same state must not be accessed by 2 Threads simultaneously.</param>
         /// <param name="fmt">The format string (printf-compatible) that specifies how subsequent arguments are converted to output.</param>
-        public static void av_log_once(void* @avcl, int @initial_level, int @subsequent_level, int* @state, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt)
+        public static void av_log_once(void* @avcl, int @initial_level, int @subsequent_level, int* @state,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt)
         {
             av_log_once_fptr(@avcl, @initial_level, @subsequent_level, @state, @fmt);
         }
@@ -12912,13 +12912,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_eval_double_delegate(void* @obj, AVOption* @o, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, double* @double_out);
+        private delegate int av_opt_eval_double_delegate(void* @obj, AVOption* @o,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, double* @double_out);
         private static av_opt_eval_double_delegate av_opt_eval_double_fptr = (void* @obj, AVOption* @o, string @val, double* @double_out) =>
         {
             av_opt_eval_double_fptr = GetFunctionDelegate<av_opt_eval_double_delegate>(GetOrLoadLibrary("avutil"), "av_opt_eval_double");
@@ -12931,26 +12931,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_eval_double_fptr(@obj, @o, @val, @double_out);
         };
-        public static int av_opt_eval_double(void* @obj, AVOption* @o, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, double* @double_out)
+        public static int av_opt_eval_double(void* @obj, AVOption* @o,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, double* @double_out)
         {
             return av_opt_eval_double_fptr(@obj, @o, @val, @double_out);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_eval_flags_delegate(void* @obj, AVOption* @o, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, int* @flags_out);
+        private delegate int av_opt_eval_flags_delegate(void* @obj, AVOption* @o,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, int* @flags_out);
         private static av_opt_eval_flags_delegate av_opt_eval_flags_fptr = (void* @obj, AVOption* @o, string @val, int* @flags_out) =>
         {
             av_opt_eval_flags_fptr = GetFunctionDelegate<av_opt_eval_flags_delegate>(GetOrLoadLibrary("avutil"), "av_opt_eval_flags");
@@ -12968,26 +12968,26 @@ namespace FFmpeg.AutoGen
         /// <param name="o">an option for which the string is to be evaluated.</param>
         /// <param name="val">string to be evaluated.</param>
         /// <returns>0 on success, a negative number on failure.</returns>
-        public static int av_opt_eval_flags(void* @obj, AVOption* @o, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, int* @flags_out)
+        public static int av_opt_eval_flags(void* @obj, AVOption* @o,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, int* @flags_out)
         {
             return av_opt_eval_flags_fptr(@obj, @o, @val, @flags_out);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_eval_float_delegate(void* @obj, AVOption* @o, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, float* @float_out);
+        private delegate int av_opt_eval_float_delegate(void* @obj, AVOption* @o,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, float* @float_out);
         private static av_opt_eval_float_delegate av_opt_eval_float_fptr = (void* @obj, AVOption* @o, string @val, float* @float_out) =>
         {
             av_opt_eval_float_fptr = GetFunctionDelegate<av_opt_eval_float_delegate>(GetOrLoadLibrary("avutil"), "av_opt_eval_float");
@@ -13000,26 +13000,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_eval_float_fptr(@obj, @o, @val, @float_out);
         };
-        public static int av_opt_eval_float(void* @obj, AVOption* @o, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, float* @float_out)
+        public static int av_opt_eval_float(void* @obj, AVOption* @o,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, float* @float_out)
         {
             return av_opt_eval_float_fptr(@obj, @o, @val, @float_out);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_eval_int_delegate(void* @obj, AVOption* @o, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, int* @int_out);
+        private delegate int av_opt_eval_int_delegate(void* @obj, AVOption* @o,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, int* @int_out);
         private static av_opt_eval_int_delegate av_opt_eval_int_fptr = (void* @obj, AVOption* @o, string @val, int* @int_out) =>
         {
             av_opt_eval_int_fptr = GetFunctionDelegate<av_opt_eval_int_delegate>(GetOrLoadLibrary("avutil"), "av_opt_eval_int");
@@ -13032,26 +13032,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_eval_int_fptr(@obj, @o, @val, @int_out);
         };
-        public static int av_opt_eval_int(void* @obj, AVOption* @o, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, int* @int_out)
+        public static int av_opt_eval_int(void* @obj, AVOption* @o,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, int* @int_out)
         {
             return av_opt_eval_int_fptr(@obj, @o, @val, @int_out);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_eval_int64_delegate(void* @obj, AVOption* @o, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, long* @int64_out);
+        private delegate int av_opt_eval_int64_delegate(void* @obj, AVOption* @o,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, long* @int64_out);
         private static av_opt_eval_int64_delegate av_opt_eval_int64_fptr = (void* @obj, AVOption* @o, string @val, long* @int64_out) =>
         {
             av_opt_eval_int64_fptr = GetFunctionDelegate<av_opt_eval_int64_delegate>(GetOrLoadLibrary("avutil"), "av_opt_eval_int64");
@@ -13064,26 +13064,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_eval_int64_fptr(@obj, @o, @val, @int64_out);
         };
-        public static int av_opt_eval_int64(void* @obj, AVOption* @o, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, long* @int64_out)
+        public static int av_opt_eval_int64(void* @obj, AVOption* @o,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, long* @int64_out)
         {
             return av_opt_eval_int64_fptr(@obj, @o, @val, @int64_out);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_eval_q_delegate(void* @obj, AVOption* @o, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, AVRational* @q_out);
+        private delegate int av_opt_eval_q_delegate(void* @obj, AVOption* @o,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, AVRational* @q_out);
         private static av_opt_eval_q_delegate av_opt_eval_q_fptr = (void* @obj, AVOption* @o, string @val, AVRational* @q_out) =>
         {
             av_opt_eval_q_fptr = GetFunctionDelegate<av_opt_eval_q_delegate>(GetOrLoadLibrary("avutil"), "av_opt_eval_q");
@@ -13096,32 +13096,32 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_eval_q_fptr(@obj, @o, @val, @q_out);
         };
-        public static int av_opt_eval_q(void* @obj, AVOption* @o, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, AVRational* @q_out)
+        public static int av_opt_eval_q(void* @obj, AVOption* @o,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, AVRational* @q_out)
         {
             return av_opt_eval_q_fptr(@obj, @o, @val, @q_out);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVOption* av_opt_find_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @unit, int @opt_flags, int @search_flags);
+        private delegate AVOption* av_opt_find_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @unit, int @opt_flags, int @search_flags);
         private static av_opt_find_delegate av_opt_find_fptr = (void* @obj, string @name, string @unit, int @opt_flags, int @search_flags) =>
         {
             av_opt_find_fptr = GetFunctionDelegate<av_opt_find_delegate>(GetOrLoadLibrary("avutil"), "av_opt_find");
@@ -13141,38 +13141,38 @@ namespace FFmpeg.AutoGen
         /// <param name="opt_flags">Find only options with all the specified flags set (AV_OPT_FLAG).</param>
         /// <param name="search_flags">A combination of AV_OPT_SEARCH_*.</param>
         /// <returns>A pointer to the option found, or NULL if no option was found.</returns>
-        public static AVOption* av_opt_find(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @unit, int @opt_flags, int @search_flags)
+        public static AVOption* av_opt_find(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @unit, int @opt_flags, int @search_flags)
         {
             return av_opt_find_fptr(@obj, @name, @unit, @opt_flags, @search_flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate AVOption* av_opt_find2_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @unit, int @opt_flags, int @search_flags, void** @target_obj);
+        private delegate AVOption* av_opt_find2_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @unit, int @opt_flags, int @search_flags, void** @target_obj);
         private static av_opt_find2_delegate av_opt_find2_fptr = (void* @obj, string @name, string @unit, int @opt_flags, int @search_flags, void** @target_obj) =>
         {
             av_opt_find2_fptr = GetFunctionDelegate<av_opt_find2_delegate>(GetOrLoadLibrary("avutil"), "av_opt_find2");
@@ -13193,38 +13193,38 @@ namespace FFmpeg.AutoGen
         /// <param name="search_flags">A combination of AV_OPT_SEARCH_*.</param>
         /// <param name="target_obj">if non-NULL, an object to which the option belongs will be written here. It may be different from obj if AV_OPT_SEARCH_CHILDREN is present in search_flags. This parameter is ignored if search_flags contain AV_OPT_SEARCH_FAKE_OBJ.</param>
         /// <returns>A pointer to the option found, or NULL if no option was found.</returns>
-        public static AVOption* av_opt_find2(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @unit, int @opt_flags, int @search_flags, void** @target_obj)
+        public static AVOption* av_opt_find2(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @unit, int @opt_flags, int @search_flags, void** @target_obj)
         {
             return av_opt_find2_fptr(@obj, @name, @unit, @opt_flags, @search_flags, @target_obj);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_flag_is_set_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @field_name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @flag_name);
+        private delegate int av_opt_flag_is_set_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @field_name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @flag_name);
         private static av_opt_flag_is_set_delegate av_opt_flag_is_set_fptr = (void* @obj, string @field_name, string @flag_name) =>
         {
             av_opt_flag_is_set_fptr = GetFunctionDelegate<av_opt_flag_is_set_delegate>(GetOrLoadLibrary("avutil"), "av_opt_flag_is_set");
@@ -13241,19 +13241,19 @@ namespace FFmpeg.AutoGen
         /// <param name="field_name">the name of the flag field option</param>
         /// <param name="flag_name">the name of the flag to check</param>
         /// <returns>non-zero if the flag is set, zero if the flag isn&apos;t set, isn&apos;t of the right type, or the flags field doesn&apos;t exist.</returns>
-        public static int av_opt_flag_is_set(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @field_name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @flag_name)
+        public static int av_opt_flag_is_set(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @field_name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @flag_name)
         {
             return av_opt_flag_is_set_fptr(@obj, @field_name, @flag_name);
         }
@@ -13302,13 +13302,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_get_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, byte** @out_val);
+        private delegate int av_opt_get_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, byte** @out_val);
         private static av_opt_get_delegate av_opt_get_fptr = (void* @obj, string @name, int @search_flags, byte** @out_val) =>
         {
             av_opt_get_fptr = GetFunctionDelegate<av_opt_get_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get");
@@ -13327,26 +13327,26 @@ namespace FFmpeg.AutoGen
         /// <param name="search_flags">flags passed to av_opt_find2. I.e. if AV_OPT_SEARCH_CHILDREN is passed here, then the option may be found in a child of obj.</param>
         /// <param name="out_val">value of the option will be written here</param>
         /// <returns>&gt;=0 on success, a negative error code otherwise</returns>
-        public static int av_opt_get(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, byte** @out_val)
+        public static int av_opt_get(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, byte** @out_val)
         {
             return av_opt_get_fptr(@obj, @name, @search_flags, @out_val);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_get_channel_layout_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, long* @ch_layout);
+        private delegate int av_opt_get_channel_layout_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, long* @ch_layout);
         private static av_opt_get_channel_layout_delegate av_opt_get_channel_layout_fptr = (void* @obj, string @name, int @search_flags, long* @ch_layout) =>
         {
             av_opt_get_channel_layout_fptr = GetFunctionDelegate<av_opt_get_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_channel_layout");
@@ -13360,26 +13360,26 @@ namespace FFmpeg.AutoGen
             return av_opt_get_channel_layout_fptr(@obj, @name, @search_flags, @ch_layout);
         };
         [Obsolete("")]
-        public static int av_opt_get_channel_layout(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, long* @ch_layout)
+        public static int av_opt_get_channel_layout(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, long* @ch_layout)
         {
             return av_opt_get_channel_layout_fptr(@obj, @name, @search_flags, @ch_layout);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_get_chlayout_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, AVChannelLayout* @layout);
+        private delegate int av_opt_get_chlayout_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, AVChannelLayout* @layout);
         private static av_opt_get_chlayout_delegate av_opt_get_chlayout_fptr = (void* @obj, string @name, int @search_flags, AVChannelLayout* @layout) =>
         {
             av_opt_get_chlayout_fptr = GetFunctionDelegate<av_opt_get_chlayout_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_chlayout");
@@ -13392,26 +13392,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_get_chlayout_fptr(@obj, @name, @search_flags, @layout);
         };
-        public static int av_opt_get_chlayout(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, AVChannelLayout* @layout)
+        public static int av_opt_get_chlayout(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, AVChannelLayout* @layout)
         {
             return av_opt_get_chlayout_fptr(@obj, @name, @search_flags, @layout);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_get_dict_val_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, AVDictionary** @out_val);
+        private delegate int av_opt_get_dict_val_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, AVDictionary** @out_val);
         private static av_opt_get_dict_val_delegate av_opt_get_dict_val_fptr = (void* @obj, string @name, int @search_flags, AVDictionary** @out_val) =>
         {
             av_opt_get_dict_val_fptr = GetFunctionDelegate<av_opt_get_dict_val_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_dict_val");
@@ -13425,26 +13425,26 @@ namespace FFmpeg.AutoGen
             return av_opt_get_dict_val_fptr(@obj, @name, @search_flags, @out_val);
         };
         /// <param name="out_val">The returned dictionary is a copy of the actual value and must be freed with av_dict_free() by the caller</param>
-        public static int av_opt_get_dict_val(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, AVDictionary** @out_val)
+        public static int av_opt_get_dict_val(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, AVDictionary** @out_val)
         {
             return av_opt_get_dict_val_fptr(@obj, @name, @search_flags, @out_val);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_get_double_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, double* @out_val);
+        private delegate int av_opt_get_double_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, double* @out_val);
         private static av_opt_get_double_delegate av_opt_get_double_fptr = (void* @obj, string @name, int @search_flags, double* @out_val) =>
         {
             av_opt_get_double_fptr = GetFunctionDelegate<av_opt_get_double_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_double");
@@ -13457,26 +13457,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_get_double_fptr(@obj, @name, @search_flags, @out_val);
         };
-        public static int av_opt_get_double(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, double* @out_val)
+        public static int av_opt_get_double(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, double* @out_val)
         {
             return av_opt_get_double_fptr(@obj, @name, @search_flags, @out_val);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_get_image_size_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, int* @w_out, int* @h_out);
+        private delegate int av_opt_get_image_size_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, int* @w_out, int* @h_out);
         private static av_opt_get_image_size_delegate av_opt_get_image_size_fptr = (void* @obj, string @name, int @search_flags, int* @w_out, int* @h_out) =>
         {
             av_opt_get_image_size_fptr = GetFunctionDelegate<av_opt_get_image_size_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_image_size");
@@ -13489,26 +13489,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_get_image_size_fptr(@obj, @name, @search_flags, @w_out, @h_out);
         };
-        public static int av_opt_get_image_size(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, int* @w_out, int* @h_out)
+        public static int av_opt_get_image_size(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, int* @w_out, int* @h_out)
         {
             return av_opt_get_image_size_fptr(@obj, @name, @search_flags, @w_out, @h_out);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_get_int_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, long* @out_val);
+        private delegate int av_opt_get_int_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, long* @out_val);
         private static av_opt_get_int_delegate av_opt_get_int_fptr = (void* @obj, string @name, int @search_flags, long* @out_val) =>
         {
             av_opt_get_int_fptr = GetFunctionDelegate<av_opt_get_int_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_int");
@@ -13521,32 +13521,32 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_get_int_fptr(@obj, @name, @search_flags, @out_val);
         };
-        public static int av_opt_get_int(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, long* @out_val)
+        public static int av_opt_get_int(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, long* @out_val)
         {
             return av_opt_get_int_fptr(@obj, @name, @search_flags, @out_val);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_get_key_value_delegate(byte** @ropts, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key_val_sep, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @pairs_sep, uint @flags, byte** @rkey, byte** @rval);
+        private delegate int av_opt_get_key_value_delegate(byte** @ropts,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key_val_sep,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @pairs_sep, uint @flags, byte** @rkey, byte** @rval);
         private static av_opt_get_key_value_delegate av_opt_get_key_value_fptr = (byte** @ropts, string @key_val_sep, string @pairs_sep, uint @flags, byte** @rkey, byte** @rval) =>
         {
             av_opt_get_key_value_fptr = GetFunctionDelegate<av_opt_get_key_value_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_key_value");
@@ -13567,32 +13567,32 @@ namespace FFmpeg.AutoGen
         /// <param name="rkey">parsed key; must be freed using av_free()</param>
         /// <param name="rval">parsed value; must be freed using av_free()</param>
         /// <returns>&gt;=0 for success, or a negative value corresponding to an AVERROR code in case of error; in particular: AVERROR(EINVAL) if no key is present</returns>
-        public static int av_opt_get_key_value(byte** @ropts, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key_val_sep, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @pairs_sep, uint @flags, byte** @rkey, byte** @rval)
+        public static int av_opt_get_key_value(byte** @ropts,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key_val_sep,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @pairs_sep, uint @flags, byte** @rkey, byte** @rval)
         {
             return av_opt_get_key_value_fptr(@ropts, @key_val_sep, @pairs_sep, @flags, @rkey, @rval);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_get_pixel_fmt_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, AVPixelFormat* @out_fmt);
+        private delegate int av_opt_get_pixel_fmt_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, AVPixelFormat* @out_fmt);
         private static av_opt_get_pixel_fmt_delegate av_opt_get_pixel_fmt_fptr = (void* @obj, string @name, int @search_flags, AVPixelFormat* @out_fmt) =>
         {
             av_opt_get_pixel_fmt_fptr = GetFunctionDelegate<av_opt_get_pixel_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_pixel_fmt");
@@ -13605,26 +13605,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_get_pixel_fmt_fptr(@obj, @name, @search_flags, @out_fmt);
         };
-        public static int av_opt_get_pixel_fmt(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, AVPixelFormat* @out_fmt)
+        public static int av_opt_get_pixel_fmt(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, AVPixelFormat* @out_fmt)
         {
             return av_opt_get_pixel_fmt_fptr(@obj, @name, @search_flags, @out_fmt);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_get_q_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, AVRational* @out_val);
+        private delegate int av_opt_get_q_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, AVRational* @out_val);
         private static av_opt_get_q_delegate av_opt_get_q_fptr = (void* @obj, string @name, int @search_flags, AVRational* @out_val) =>
         {
             av_opt_get_q_fptr = GetFunctionDelegate<av_opt_get_q_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_q");
@@ -13637,26 +13637,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_get_q_fptr(@obj, @name, @search_flags, @out_val);
         };
-        public static int av_opt_get_q(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, AVRational* @out_val)
+        public static int av_opt_get_q(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, AVRational* @out_val)
         {
             return av_opt_get_q_fptr(@obj, @name, @search_flags, @out_val);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_get_sample_fmt_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, AVSampleFormat* @out_fmt);
+        private delegate int av_opt_get_sample_fmt_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, AVSampleFormat* @out_fmt);
         private static av_opt_get_sample_fmt_delegate av_opt_get_sample_fmt_fptr = (void* @obj, string @name, int @search_flags, AVSampleFormat* @out_fmt) =>
         {
             av_opt_get_sample_fmt_fptr = GetFunctionDelegate<av_opt_get_sample_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_sample_fmt");
@@ -13669,26 +13669,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_get_sample_fmt_fptr(@obj, @name, @search_flags, @out_fmt);
         };
-        public static int av_opt_get_sample_fmt(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, AVSampleFormat* @out_fmt)
+        public static int av_opt_get_sample_fmt(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, AVSampleFormat* @out_fmt)
         {
             return av_opt_get_sample_fmt_fptr(@obj, @name, @search_flags, @out_fmt);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_get_video_rate_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, AVRational* @out_val);
+        private delegate int av_opt_get_video_rate_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, AVRational* @out_val);
         private static av_opt_get_video_rate_delegate av_opt_get_video_rate_fptr = (void* @obj, string @name, int @search_flags, AVRational* @out_val) =>
         {
             av_opt_get_video_rate_fptr = GetFunctionDelegate<av_opt_get_video_rate_delegate>(GetOrLoadLibrary("avutil"), "av_opt_get_video_rate");
@@ -13701,13 +13701,13 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_get_video_rate_fptr(@obj, @name, @search_flags, @out_val);
         };
-        public static int av_opt_get_video_rate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, AVRational* @out_val)
+        public static int av_opt_get_video_rate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags, AVRational* @out_val)
         {
             return av_opt_get_video_rate_fptr(@obj, @name, @search_flags, @out_val);
         }
@@ -13738,13 +13738,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_is_set_to_default_by_name_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags);
+        private delegate int av_opt_is_set_to_default_by_name_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags);
         private static av_opt_is_set_to_default_by_name_delegate av_opt_is_set_to_default_by_name_fptr = (void* @obj, string @name, int @search_flags) =>
         {
             av_opt_is_set_to_default_by_name_fptr = GetFunctionDelegate<av_opt_is_set_to_default_by_name_delegate>(GetOrLoadLibrary("avutil"), "av_opt_is_set_to_default_by_name");
@@ -13762,13 +13762,13 @@ namespace FFmpeg.AutoGen
         /// <param name="name">option name</param>
         /// <param name="search_flags">combination of AV_OPT_SEARCH_*</param>
         /// <returns>&gt;0 when option is set to its default, 0 when option is not set its default,  &lt; 0 on error</returns>
-        public static int av_opt_is_set_to_default_by_name(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags)
+        public static int av_opt_is_set_to_default_by_name(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @search_flags)
         {
             return av_opt_is_set_to_default_by_name_fptr(@obj, @name, @search_flags);
         }
@@ -13799,13 +13799,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void* av_opt_ptr_delegate(AVClass* @avclass, void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
+        private delegate void* av_opt_ptr_delegate(AVClass* @avclass, void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name);
         private static av_opt_ptr_delegate av_opt_ptr_fptr = (AVClass* @avclass, void* @obj, string @name) =>
         {
             av_opt_ptr_fptr = GetFunctionDelegate<av_opt_ptr_delegate>(GetOrLoadLibrary("avutil"), "av_opt_ptr");
@@ -13819,26 +13819,26 @@ namespace FFmpeg.AutoGen
             return av_opt_ptr_fptr(@avclass, @obj, @name);
         };
         /// <summary>@}</summary>
-        public static void* av_opt_ptr(AVClass* @avclass, void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name)
+        public static void* av_opt_ptr(AVClass* @avclass, void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name)
         {
             return av_opt_ptr_fptr(@avclass, @obj, @name);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_query_ranges_delegate(AVOptionRanges** @p0, void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key, int @flags);
+        private delegate int av_opt_query_ranges_delegate(AVOptionRanges** @p0, void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key, int @flags);
         private static av_opt_query_ranges_delegate av_opt_query_ranges_fptr = (AVOptionRanges** @p0, void* @obj, string @key, int @flags) =>
         {
             av_opt_query_ranges_fptr = GetFunctionDelegate<av_opt_query_ranges_delegate>(GetOrLoadLibrary("avutil"), "av_opt_query_ranges");
@@ -13854,26 +13854,26 @@ namespace FFmpeg.AutoGen
         /// <summary>Get a list of allowed ranges for the given option.</summary>
         /// <param name="flags">is a bitmask of flags, undefined flags should not be set and should be ignored AV_OPT_SEARCH_FAKE_OBJ indicates that the obj is a double pointer to a AVClass instead of a full instance AV_OPT_MULTI_COMPONENT_RANGE indicates that function may return more than one component,</param>
         /// <returns>number of compontents returned on success, a negative errro code otherwise</returns>
-        public static int av_opt_query_ranges(AVOptionRanges** @p0, void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key, int @flags)
+        public static int av_opt_query_ranges(AVOptionRanges** @p0, void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key, int @flags)
         {
             return av_opt_query_ranges_fptr(@p0, @obj, @key, @flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_query_ranges_default_delegate(AVOptionRanges** @p0, void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key, int @flags);
+        private delegate int av_opt_query_ranges_default_delegate(AVOptionRanges** @p0, void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key, int @flags);
         private static av_opt_query_ranges_default_delegate av_opt_query_ranges_default_fptr = (AVOptionRanges** @p0, void* @obj, string @key, int @flags) =>
         {
             av_opt_query_ranges_default_fptr = GetFunctionDelegate<av_opt_query_ranges_default_delegate>(GetOrLoadLibrary("avutil"), "av_opt_query_ranges_default");
@@ -13889,13 +13889,13 @@ namespace FFmpeg.AutoGen
         /// <summary>Get a default list of allowed ranges for the given option.</summary>
         /// <param name="flags">is a bitmask of flags, undefined flags should not be set and should be ignored AV_OPT_SEARCH_FAKE_OBJ indicates that the obj is a double pointer to a AVClass instead of a full instance AV_OPT_MULTI_COMPONENT_RANGE indicates that function may return more than one component,</param>
         /// <returns>number of compontents returned on success, a negative errro code otherwise</returns>
-        public static int av_opt_query_ranges_default(AVOptionRanges** @p0, void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key, int @flags)
+        public static int av_opt_query_ranges_default(AVOptionRanges** @p0, void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key, int @flags)
         {
             return av_opt_query_ranges_default_fptr(@p0, @obj, @key, @flags);
         }
@@ -13930,19 +13930,19 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, int @search_flags);
+        private delegate int av_opt_set_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, int @search_flags);
         private static av_opt_set_delegate av_opt_set_fptr = (void* @obj, string @name, string @val, int @search_flags) =>
         {
             av_opt_set_fptr = GetFunctionDelegate<av_opt_set_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set");
@@ -13961,32 +13961,32 @@ namespace FFmpeg.AutoGen
         /// <param name="val">The value to set. In case of av_opt_set() if the field is not of a string type, then the given string is parsed. SI postfixes and some named scalars are supported. If the field is of a numeric type, it has to be a numeric or named scalar. Behavior with more than one scalar and +- infix operators is undefined. If the field is of a flags type, it has to be a sequence of numeric scalars or named flags separated by &apos;+&apos; or &apos;-&apos;. Prefixing a flag with &apos;+&apos; causes it to be set without affecting the other flags; similarly, &apos;-&apos; unsets a flag. If the field is of a dictionary type, it has to be a &apos;:&apos; separated list of key=value parameters. Values containing &apos;:&apos; special characters must be escaped.</param>
         /// <param name="search_flags">flags passed to av_opt_find2. I.e. if AV_OPT_SEARCH_CHILDREN is passed here, then the option may be set on a child of obj.</param>
         /// <returns>0 if the value has been set, or an AVERROR code in case of error: AVERROR_OPTION_NOT_FOUND if no matching option exists AVERROR(ERANGE) if the value is out of range AVERROR(EINVAL) if the value is not valid</returns>
-        public static int av_opt_set(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @val, int @search_flags)
+        public static int av_opt_set(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @val, int @search_flags)
         {
             return av_opt_set_fptr(@obj, @name, @val, @search_flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_bin_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, byte* @val, int @size, int @search_flags);
+        private delegate int av_opt_set_bin_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, byte* @val, int @size, int @search_flags);
         private static av_opt_set_bin_delegate av_opt_set_bin_fptr = (void* @obj, string @name, byte* @val, int @size, int @search_flags) =>
         {
             av_opt_set_bin_fptr = GetFunctionDelegate<av_opt_set_bin_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_bin");
@@ -13999,26 +13999,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_set_bin_fptr(@obj, @name, @val, @size, @search_flags);
         };
-        public static int av_opt_set_bin(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, byte* @val, int @size, int @search_flags)
+        public static int av_opt_set_bin(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, byte* @val, int @size, int @search_flags)
         {
             return av_opt_set_bin_fptr(@obj, @name, @val, @size, @search_flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_channel_layout_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, long @ch_layout, int @search_flags);
+        private delegate int av_opt_set_channel_layout_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, long @ch_layout, int @search_flags);
         private static av_opt_set_channel_layout_delegate av_opt_set_channel_layout_fptr = (void* @obj, string @name, long @ch_layout, int @search_flags) =>
         {
             av_opt_set_channel_layout_fptr = GetFunctionDelegate<av_opt_set_channel_layout_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_channel_layout");
@@ -14032,26 +14032,26 @@ namespace FFmpeg.AutoGen
             return av_opt_set_channel_layout_fptr(@obj, @name, @ch_layout, @search_flags);
         };
         [Obsolete("")]
-        public static int av_opt_set_channel_layout(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, long @ch_layout, int @search_flags)
+        public static int av_opt_set_channel_layout(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, long @ch_layout, int @search_flags)
         {
             return av_opt_set_channel_layout_fptr(@obj, @name, @ch_layout, @search_flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_chlayout_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, AVChannelLayout* @layout, int @search_flags);
+        private delegate int av_opt_set_chlayout_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, AVChannelLayout* @layout, int @search_flags);
         private static av_opt_set_chlayout_delegate av_opt_set_chlayout_fptr = (void* @obj, string @name, AVChannelLayout* @layout, int @search_flags) =>
         {
             av_opt_set_chlayout_fptr = GetFunctionDelegate<av_opt_set_chlayout_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_chlayout");
@@ -14064,13 +14064,13 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_set_chlayout_fptr(@obj, @name, @layout, @search_flags);
         };
-        public static int av_opt_set_chlayout(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, AVChannelLayout* @layout, int @search_flags)
+        public static int av_opt_set_chlayout(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, AVChannelLayout* @layout, int @search_flags)
         {
             return av_opt_set_chlayout_fptr(@obj, @name, @layout, @search_flags);
         }
@@ -14147,13 +14147,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_dict_val_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, AVDictionary* @val, int @search_flags);
+        private delegate int av_opt_set_dict_val_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, AVDictionary* @val, int @search_flags);
         private static av_opt_set_dict_val_delegate av_opt_set_dict_val_fptr = (void* @obj, string @name, AVDictionary* @val, int @search_flags) =>
         {
             av_opt_set_dict_val_fptr = GetFunctionDelegate<av_opt_set_dict_val_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_dict_val");
@@ -14166,13 +14166,13 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_set_dict_val_fptr(@obj, @name, @val, @search_flags);
         };
-        public static int av_opt_set_dict_val(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, AVDictionary* @val, int @search_flags)
+        public static int av_opt_set_dict_val(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, AVDictionary* @val, int @search_flags)
         {
             return av_opt_set_dict_val_fptr(@obj, @name, @val, @search_flags);
         }
@@ -14204,13 +14204,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_double_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, double @val, int @search_flags);
+        private delegate int av_opt_set_double_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, double @val, int @search_flags);
         private static av_opt_set_double_delegate av_opt_set_double_fptr = (void* @obj, string @name, double @val, int @search_flags) =>
         {
             av_opt_set_double_fptr = GetFunctionDelegate<av_opt_set_double_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_double");
@@ -14223,38 +14223,38 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_set_double_fptr(@obj, @name, @val, @search_flags);
         };
-        public static int av_opt_set_double(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, double @val, int @search_flags)
+        public static int av_opt_set_double(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, double @val, int @search_flags)
         {
             return av_opt_set_double_fptr(@obj, @name, @val, @search_flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_from_string_delegate(void* @ctx, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @opts, byte** @shorthand, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key_val_sep, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @pairs_sep);
+        private delegate int av_opt_set_from_string_delegate(void* @ctx,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @opts, byte** @shorthand,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key_val_sep,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @pairs_sep);
         private static av_opt_set_from_string_delegate av_opt_set_from_string_fptr = (void* @ctx, string @opts, byte** @shorthand, string @key_val_sep, string @pairs_sep) =>
         {
             av_opt_set_from_string_fptr = GetFunctionDelegate<av_opt_set_from_string_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_from_string");
@@ -14274,38 +14274,38 @@ namespace FFmpeg.AutoGen
         /// <param name="key_val_sep">a 0-terminated list of characters used to separate key from value, for example &apos;=&apos;</param>
         /// <param name="pairs_sep">a 0-terminated list of characters used to separate two pairs from each other, for example &apos;:&apos; or &apos;,&apos;</param>
         /// <returns>the number of successfully set key=value pairs, or a negative value corresponding to an AVERROR code in case of error: AVERROR(EINVAL) if opts cannot be parsed, the error code issued by av_set_string3() if a key/value pair cannot be set</returns>
-        public static int av_opt_set_from_string(void* @ctx, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @opts, byte** @shorthand, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key_val_sep, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @pairs_sep)
+        public static int av_opt_set_from_string(void* @ctx,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @opts, byte** @shorthand,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key_val_sep,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @pairs_sep)
         {
             return av_opt_set_from_string_fptr(@ctx, @opts, @shorthand, @key_val_sep, @pairs_sep);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_image_size_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @w, int @h, int @search_flags);
+        private delegate int av_opt_set_image_size_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @w, int @h, int @search_flags);
         private static av_opt_set_image_size_delegate av_opt_set_image_size_fptr = (void* @obj, string @name, int @w, int @h, int @search_flags) =>
         {
             av_opt_set_image_size_fptr = GetFunctionDelegate<av_opt_set_image_size_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_image_size");
@@ -14318,26 +14318,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_set_image_size_fptr(@obj, @name, @w, @h, @search_flags);
         };
-        public static int av_opt_set_image_size(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @w, int @h, int @search_flags)
+        public static int av_opt_set_image_size(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @w, int @h, int @search_flags)
         {
             return av_opt_set_image_size_fptr(@obj, @name, @w, @h, @search_flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_int_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, long @val, int @search_flags);
+        private delegate int av_opt_set_int_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, long @val, int @search_flags);
         private static av_opt_set_int_delegate av_opt_set_int_fptr = (void* @obj, string @name, long @val, int @search_flags) =>
         {
             av_opt_set_int_fptr = GetFunctionDelegate<av_opt_set_int_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_int");
@@ -14350,26 +14350,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_set_int_fptr(@obj, @name, @val, @search_flags);
         };
-        public static int av_opt_set_int(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, long @val, int @search_flags)
+        public static int av_opt_set_int(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, long @val, int @search_flags)
         {
             return av_opt_set_int_fptr(@obj, @name, @val, @search_flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_pixel_fmt_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, AVPixelFormat @fmt, int @search_flags);
+        private delegate int av_opt_set_pixel_fmt_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, AVPixelFormat @fmt, int @search_flags);
         private static av_opt_set_pixel_fmt_delegate av_opt_set_pixel_fmt_fptr = (void* @obj, string @name, AVPixelFormat @fmt, int @search_flags) =>
         {
             av_opt_set_pixel_fmt_fptr = GetFunctionDelegate<av_opt_set_pixel_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_pixel_fmt");
@@ -14382,26 +14382,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_set_pixel_fmt_fptr(@obj, @name, @fmt, @search_flags);
         };
-        public static int av_opt_set_pixel_fmt(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, AVPixelFormat @fmt, int @search_flags)
+        public static int av_opt_set_pixel_fmt(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, AVPixelFormat @fmt, int @search_flags)
         {
             return av_opt_set_pixel_fmt_fptr(@obj, @name, @fmt, @search_flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_q_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, AVRational @val, int @search_flags);
+        private delegate int av_opt_set_q_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, AVRational @val, int @search_flags);
         private static av_opt_set_q_delegate av_opt_set_q_fptr = (void* @obj, string @name, AVRational @val, int @search_flags) =>
         {
             av_opt_set_q_fptr = GetFunctionDelegate<av_opt_set_q_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_q");
@@ -14414,26 +14414,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_set_q_fptr(@obj, @name, @val, @search_flags);
         };
-        public static int av_opt_set_q(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, AVRational @val, int @search_flags)
+        public static int av_opt_set_q(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, AVRational @val, int @search_flags)
         {
             return av_opt_set_q_fptr(@obj, @name, @val, @search_flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_sample_fmt_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, AVSampleFormat @fmt, int @search_flags);
+        private delegate int av_opt_set_sample_fmt_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, AVSampleFormat @fmt, int @search_flags);
         private static av_opt_set_sample_fmt_delegate av_opt_set_sample_fmt_fptr = (void* @obj, string @name, AVSampleFormat @fmt, int @search_flags) =>
         {
             av_opt_set_sample_fmt_fptr = GetFunctionDelegate<av_opt_set_sample_fmt_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_sample_fmt");
@@ -14446,26 +14446,26 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_set_sample_fmt_fptr(@obj, @name, @fmt, @search_flags);
         };
-        public static int av_opt_set_sample_fmt(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, AVSampleFormat @fmt, int @search_flags)
+        public static int av_opt_set_sample_fmt(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, AVSampleFormat @fmt, int @search_flags)
         {
             return av_opt_set_sample_fmt_fptr(@obj, @name, @fmt, @search_flags);
         }
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_opt_set_video_rate_delegate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, AVRational @val, int @search_flags);
+        private delegate int av_opt_set_video_rate_delegate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, AVRational @val, int @search_flags);
         private static av_opt_set_video_rate_delegate av_opt_set_video_rate_fptr = (void* @obj, string @name, AVRational @val, int @search_flags) =>
         {
             av_opt_set_video_rate_fptr = GetFunctionDelegate<av_opt_set_video_rate_delegate>(GetOrLoadLibrary("avutil"), "av_opt_set_video_rate");
@@ -14478,13 +14478,13 @@ namespace FFmpeg.AutoGen
             }
             return av_opt_set_video_rate_fptr(@obj, @name, @val, @search_flags);
         };
-        public static int av_opt_set_video_rate(void* @obj, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, AVRational @val, int @search_flags)
+        public static int av_opt_set_video_rate(void* @obj,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, AVRational @val, int @search_flags)
         {
             return av_opt_set_video_rate_fptr(@obj, @name, @val, @search_flags);
         }
@@ -14515,13 +14515,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_parse_cpu_caps_delegate(uint* @flags, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @s);
+        private delegate int av_parse_cpu_caps_delegate(uint* @flags,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @s);
         private static av_parse_cpu_caps_delegate av_parse_cpu_caps_fptr = (uint* @flags, string @s) =>
         {
             av_parse_cpu_caps_fptr = GetFunctionDelegate<av_parse_cpu_caps_delegate>(GetOrLoadLibrary("avutil"), "av_parse_cpu_caps");
@@ -14536,13 +14536,13 @@ namespace FFmpeg.AutoGen
         };
         /// <summary>Parse CPU caps from a string and update the given AV_CPU_* flags based on that.</summary>
         /// <returns>negative on error.</returns>
-        public static int av_parse_cpu_caps(uint* @flags, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @s)
+        public static int av_parse_cpu_caps(uint* @flags,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @s)
         {
             return av_parse_cpu_caps_fptr(@flags, @s);
         }
@@ -15197,25 +15197,25 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_set_options_string_delegate(void* @ctx, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @opts, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key_val_sep, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @pairs_sep);
+        private delegate int av_set_options_string_delegate(void* @ctx,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @opts,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key_val_sep,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @pairs_sep);
         private static av_set_options_string_delegate av_set_options_string_fptr = (void* @ctx, string @opts, string @key_val_sep, string @pairs_sep) =>
         {
             av_set_options_string_fptr = GetFunctionDelegate<av_set_options_string_delegate>(GetOrLoadLibrary("avutil"), "av_set_options_string");
@@ -15233,25 +15233,25 @@ namespace FFmpeg.AutoGen
         /// <param name="key_val_sep">a 0-terminated list of characters used to separate key from value</param>
         /// <param name="pairs_sep">a 0-terminated list of characters used to separate two pairs from each other</param>
         /// <returns>the number of successfully set key/value pairs, or a negative value corresponding to an AVERROR code in case of error: AVERROR(EINVAL) if opts cannot be parsed, the error code issued by av_opt_set() if a key/value pair cannot be set</returns>
-        public static int av_set_options_string(void* @ctx, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @opts, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @key_val_sep, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @pairs_sep)
+        public static int av_set_options_string(void* @ctx,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @opts,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @key_val_sep,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @pairs_sep)
         {
             return av_set_options_string_fptr(@ctx, @opts, @key_val_sep, @pairs_sep);
         }
@@ -15281,13 +15281,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate byte* av_strdup_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @s);
+        private delegate byte* av_strdup_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @s);
         private static av_strdup_delegate av_strdup_fptr = (string @s) =>
         {
             av_strdup_fptr = GetFunctionDelegate<av_strdup_delegate>(GetOrLoadLibrary("avutil"), "av_strdup");
@@ -15303,13 +15303,13 @@ namespace FFmpeg.AutoGen
         /// <summary>Duplicate a string.</summary>
         /// <param name="s">String to be duplicated</param>
         /// <returns>Pointer to a newly-allocated string containing a copy of `s` or `NULL` if the string cannot be allocated</returns>
-        public static byte* av_strdup(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @s)
+        public static byte* av_strdup(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @s)
         {
             return av_strdup_fptr(@s);
         }
@@ -15341,13 +15341,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate byte* av_strndup_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @s, ulong @len);
+        private delegate byte* av_strndup_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @s, ulong @len);
         private static av_strndup_delegate av_strndup_fptr = (string @s, ulong @len) =>
         {
             av_strndup_fptr = GetFunctionDelegate<av_strndup_delegate>(GetOrLoadLibrary("avutil"), "av_strndup");
@@ -15364,13 +15364,13 @@ namespace FFmpeg.AutoGen
         /// <param name="s">String to be duplicated</param>
         /// <param name="len">Maximum length of the resulting string (not counting the terminating byte)</param>
         /// <returns>Pointer to a newly-allocated string containing a substring of `s` or `NULL` if the string cannot be allocated</returns>
-        public static byte* av_strndup(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @s, ulong @len)
+        public static byte* av_strndup(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @s, ulong @len)
         {
             return av_strndup_fptr(@s, @len);
         }
@@ -15401,13 +15401,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_tempfile_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @prefix, byte** @filename, int @log_offset, void* @log_ctx);
+        private delegate int av_tempfile_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @prefix, byte** @filename, int @log_offset, void* @log_ctx);
         private static av_tempfile_delegate av_tempfile_fptr = (string @prefix, byte** @filename, int @log_offset, void* @log_ctx) =>
         {
             av_tempfile_fptr = GetFunctionDelegate<av_tempfile_delegate>(GetOrLoadLibrary("avutil"), "av_tempfile");
@@ -15423,13 +15423,13 @@ namespace FFmpeg.AutoGen
         /// <summary>Wrapper to work around the lack of mkstemp() on mingw. Also, tries to create file in /tmp first, if possible. *prefix can be a character constant; *filename will be allocated internally.</summary>
         /// <returns>file descriptor of opened file (or negative value corresponding to an AVERROR code on error) and opened file name in **filename.</returns>
         [Obsolete("as fd numbers cannot be passed saftely between libs on some platforms")]
-        public static int av_tempfile(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @prefix, byte** @filename, int @log_offset, void* @log_ctx)
+        public static int av_tempfile(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @prefix, byte** @filename, int @log_offset, void* @log_ctx)
         {
             return av_tempfile_fptr(@prefix, @filename, @log_offset, @log_ctx);
         }
@@ -15591,13 +15591,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate int av_timecode_init_from_string_delegate(AVTimecode* @tc, AVRational @rate, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @str, void* @log_ctx);
+        private delegate int av_timecode_init_from_string_delegate(AVTimecode* @tc, AVRational @rate,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @str, void* @log_ctx);
         private static av_timecode_init_from_string_delegate av_timecode_init_from_string_fptr = (AVTimecode* @tc, AVRational @rate, string @str, void* @log_ctx) =>
         {
             av_timecode_init_from_string_fptr = GetFunctionDelegate<av_timecode_init_from_string_delegate>(GetOrLoadLibrary("avutil"), "av_timecode_init_from_string");
@@ -15616,13 +15616,13 @@ namespace FFmpeg.AutoGen
         /// <param name="str">timecode string which will determine the frame start</param>
         /// <param name="log_ctx">a pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct (used for av_log).</param>
         /// <returns>0 on success, AVERROR otherwise</returns>
-        public static int av_timecode_init_from_string(AVTimecode* @tc, AVRational @rate, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @str, void* @log_ctx)
+        public static int av_timecode_init_from_string(AVTimecode* @tc, AVRational @rate,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @str, void* @log_ctx)
         {
             return av_timecode_init_from_string_fptr(@tc, @rate, @str, @log_ctx);
         }
@@ -15889,13 +15889,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void av_vlog_delegate(void* @avcl, int @level, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt, byte* @vl);
+        private delegate void av_vlog_delegate(void* @avcl, int @level,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt, byte* @vl);
         private static av_vlog_delegate av_vlog_fptr = (void* @avcl, int @level, string @fmt, byte* @vl) =>
         {
             av_vlog_fptr = GetFunctionDelegate<av_vlog_delegate>(GetOrLoadLibrary("avutil"), "av_vlog");
@@ -15913,13 +15913,13 @@ namespace FFmpeg.AutoGen
         /// <param name="level">The importance level of the message expressed using a &quot;Logging Constant&quot;.</param>
         /// <param name="fmt">The format string (printf-compatible) that specifies how subsequent arguments are converted to output.</param>
         /// <param name="vl">The arguments referenced by the format string.</param>
-        public static void av_vlog(void* @avcl, int @level, 
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @fmt, byte* @vl)
+        public static void av_vlog(void* @avcl, int @level,         
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @fmt, byte* @vl)
         {
             av_vlog_fptr(@avcl, @level, @fmt, @vl);
         }
@@ -16165,13 +16165,13 @@ namespace FFmpeg.AutoGen
         
         
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-        private delegate void* pp_get_mode_by_name_and_quality_delegate(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @quality);
+        private delegate void* pp_get_mode_by_name_and_quality_delegate(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @quality);
         private static pp_get_mode_by_name_and_quality_delegate pp_get_mode_by_name_and_quality_fptr = (string @name, int @quality) =>
         {
             pp_get_mode_by_name_and_quality_fptr = GetFunctionDelegate<pp_get_mode_by_name_and_quality_delegate>(GetOrLoadLibrary("postproc"), "pp_get_mode_by_name_and_quality");
@@ -16187,13 +16187,13 @@ namespace FFmpeg.AutoGen
         /// <summary>Return a pp_mode or NULL if an error occurred.</summary>
         /// <param name="name">the string after &quot;-pp&quot; on the command line</param>
         /// <param name="quality">a number from 0 to PP_QUALITY_MAX</param>
-        public static void* pp_get_mode_by_name_and_quality(
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @quality)
+        public static void* pp_get_mode_by_name_and_quality(        
+        #if NETSTANDARD2_1_OR_GREATER
+        [MarshalAs(UnmanagedType.LPUTF8Str)]
+        #else
+        [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+        #endif
+        string @name, int @quality)
         {
             return pp_get_mode_by_name_and_quality_fptr(@name, @quality);
         }
