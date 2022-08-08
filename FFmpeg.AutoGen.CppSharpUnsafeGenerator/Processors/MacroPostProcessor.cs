@@ -72,8 +72,8 @@ internal class MacroPostProcessor
         {
             BinaryExpression e => DeduceType(e),
             UnaryExpression e => DeduceType(e.Operand),
-            CastExpression e => _astProcessor.GetTypeAlias(e.TargetType),
-            CallExpression e => _astProcessor.GetWellKnownMacroType(e.Name),
+            CastExpression e => GetTypeAlias(e.TargetType),
+            CallExpression e => GetWellKnownMacroType(e.Name),
             VariableExpression e => DeduceType(e),
             ConstantExpression e => e.Value.GetType(),
             _ => throw new NotSupportedException()
@@ -94,7 +94,7 @@ internal class MacroPostProcessor
     private TypeOrAlias DeduceType(VariableExpression expression) =>
         _macroExpressionMap.TryGetValue(expression.Name, out var nested) && nested != null
             ? DeduceType(nested)
-            : _astProcessor.GetWellKnownMacroType(expression.Name);
+            : GetWellKnownMacroType(expression.Name);
 
     private IExpression Rewrite(IExpression expression)
     {
@@ -137,13 +137,26 @@ internal class MacroPostProcessor
             BinaryExpression e =>
                 $"{Serialize(e.Left)} {e.OperationType.ToOperationTypeString()} {Serialize(e.Right)}",
             UnaryExpression e => $"{e.OperationType.ToOperationTypeString()}{Serialize(e.Operand)}",
-            CastExpression e => $"({_astProcessor.GetTypeAlias(e.TargetType)})({Serialize(e.Operand)})",
+            CastExpression e => $"({GetTypeAlias(e.TargetType)})({Serialize(e.Operand)})",
             CallExpression e => $"{e.Name}({string.Join(", ", e.Arguments.Select(Serialize))})",
             VariableExpression e => e.Name,
             ConstantExpression e => Serialize(e.Value),
             _ => throw new NotSupportedException()
         };
     }
+
+
+    internal TypeOrAlias GetWellKnownMacroType(string macroName)
+    {
+        if (_astProcessor.WellKnownMacros.TryGetValue(macroName, out var alias))
+            return alias;
+        if (_astProcessor.WellKnownEnumItems.TryGetValue(macroName, out _))
+            return new TypeOrAlias(typeof(int));
+        return new TypeOrAlias(macroName);
+    }
+
+    internal TypeOrAlias GetTypeAlias(string typeName) =>
+        _astProcessor.TypeAliases.TryGetValue(typeName, out var alias) ? alias : typeName;
 
     private string Serialize(object value)
     {
@@ -166,10 +179,10 @@ internal class MacroPostProcessor
             BinaryExpression e => IsConst(e.Left) && IsConst(e.Right),
             UnaryExpression e => IsConst(e.Operand),
             CastExpression e => IsConst(e.Operand),
-            CallExpression e => false,
+            CallExpression _ => false,
             VariableExpression e => _macroExpressionMap.TryGetValue(e.Name, out var nested) && nested != null &&
                                     IsConst(nested),
-            ConstantExpression e => true,
+            ConstantExpression _ => true,
             _ => throw new NotSupportedException()
         };
     }
