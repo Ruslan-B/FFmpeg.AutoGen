@@ -1,6 +1,4 @@
-﻿// Copyright 2017 Baker Hughes. All rights reserved. Company proprietary and confidential.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,38 +15,9 @@ namespace FFmpeg.AutoGen.ClangMacroParser.Tokenization
 
         private static readonly HashSet<string> Keywords = new()
         {
-            "auto",
-            "break",
-            "case",
-            "char",
-            "const",
-            "continue",
-            "default",
-            "do",
-            "double",
-            "else",
-            "enum",
-            "extern",
-            "float",
-            "for",
-            "goto",
-            "if",
-            "int",
-            "long",
-            "register",
-            "return",
-            "short",
-            "signed",
-            "sizeof",
-            "static",
-            "struct",
-            "switch",
-            "typedef",
-            "union",
-            "unsigned",
-            "void",
-            "volatile",
-            "while"
+            "auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum", "extern", "float",
+            "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static", "struct", "switch",
+            "typedef", "union", "unsigned", "void", "volatile", "while"
         };
 
         public static IEnumerable<Token> Tokenize(string expression)

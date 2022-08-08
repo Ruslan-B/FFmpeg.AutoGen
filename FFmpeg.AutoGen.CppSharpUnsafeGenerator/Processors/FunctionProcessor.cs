@@ -12,11 +12,10 @@ internal class FunctionProcessor
 {
     private const string MarshalAsUtf8Macros =
         "\r\n" +
-        "    #if NET40\r\n" +
-        "    #elif NET45 || NETSTANDARD2_0\r\n" +
-        "    [MarshalAs((UnmanagedType)48)]\r\n" +
-        "    #else\r\n" +
+        "    #if NETSTANDARD2_1_OR_GREATER\r\n" +
         "    [MarshalAs(UnmanagedType.LPUTF8Str)]\r\n" +
+        "    #else\r\n" +
+        "    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]\r\n" +
         "    #endif\r\n" +
         "   ";
 
