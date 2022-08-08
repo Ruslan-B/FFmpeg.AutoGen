@@ -2,7 +2,7 @@ sudo: true
 dist: focal
 language: csharp
 mono: none
-dotnet: 5.0.200
+dotnet: 6.0.7
 script:
   - sudo apt-get install ffmpeg -y
   - dotnet build -c Release
