@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
@@ -23,8 +22,7 @@ internal class Program
         }
 
         var existingInlineFunctions =
-            ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.OutputDir,
-                "FFmpeg.functions.inline.g.cs"));
+            ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.inline.g.cs"));
 
         var exports = FunctionExportHelper.LoadFunctionExports(options.FFmpegBinDir).ToArray();
 
@@ -59,6 +57,20 @@ internal class Program
             SuppressUnmanagedCodeSecurity = options.SuppressUnmanagedCodeSecurity
         };
 
+        Parse(g);
+
+        WriteFFmpegAutoGen(g, options.OutputDir);
+        
+        var solutionDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../"));
+
+        WriteAbstractions(g, Path.Combine(solutionDir, "FFmpeg.AutoGen.Abstractions/"));
+
+        WriteStaticallyLinkedBindings(g, Path.Combine(solutionDir, "FFmpeg.AutoGen.Bindings.StaticallyLinked/"));
+        WriteDynamicallyLinkedBindings(g, Path.Combine(solutionDir, "FFmpeg.AutoGen.Bindings.DynamicallyLinked/"));
+    }
+    private static void Parse(Generator g)
+    {
+        // libavutil
         g.Parse("libavutil/avutil.h");
         g.Parse("libavutil/audio_fifo.h");
         g.Parse("libavutil/channel_layout.h");
@@ -76,32 +88,64 @@ internal class Program
         g.Parse("libavutil/hdr_dynamic_metadata.h");
         g.Parse("libavutil/mastering_display_metadata.h");
 
+        // libswresample
         g.Parse("libswresample/swresample.h");
 
+        // libpostproc
         g.Parse("libpostproc/postprocess.h");
 
+        // libswscale
         g.Parse("libswscale/swscale.h");
 
+        // libavcodec
         g.Parse("libavcodec/avcodec.h");
         g.Parse("libavcodec/dxva2.h");
         g.Parse("libavcodec/d3d11va.h");
 
+        // libavformat
         g.Parse("libavformat/avformat.h");
 
+        // libavfilter
         g.Parse("libavfilter/avfilter.h");
         g.Parse("libavfilter/buffersrc.h");
         g.Parse("libavfilter/buffersink.h");
 
+        // libavdevice
         g.Parse("libavdevice/avdevice.h");
-
-        g.WriteLibraries(Path.Combine(options.OutputDir, "FFmpeg.libraries.g.cs"));
-        g.WriteMacros(Path.Combine(options.OutputDir, "FFmpeg.macros.g.cs"));
-        g.WriteEnums(Path.Combine(options.OutputDir, "FFmpeg.enums.g.cs"));
-        g.WriteDelegates(Path.Combine(options.OutputDir, "FFmpeg.delegates.g.cs"));
-        g.WriteArrays(Path.Combine(options.OutputDir, "FFmpeg.arrays.g.cs"));
-        g.WriteStructures(Path.Combine(options.OutputDir, "FFmpeg.structs.g.cs"));
-        g.WriteIncompleteStructures(Path.Combine(options.OutputDir, "FFmpeg.structs.incomplete.g.cs"));
-        g.WriteExportFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.export.g.cs"));
-        g.WriteInlineFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.inline.g.cs"));
+    }
+    
+    private static void WriteFFmpegAutoGen(Generator g, string outputDir)
+    {
+        g.WriteLibraries(Path.Combine(outputDir, "FFmpeg.libraries.g.cs"));
+        g.WriteMacros(Path.Combine(outputDir, "FFmpeg.macros.g.cs"));
+        g.WriteEnums(Path.Combine(outputDir, "FFmpeg.enums.g.cs"));
+        g.WriteDelegates(Path.Combine(outputDir, "FFmpeg.delegates.g.cs"));
+        g.WriteFixedArrays(Path.Combine(outputDir, "FFmpeg.arrays.g.cs"));
+        g.WriteStructures(Path.Combine(outputDir, "FFmpeg.structs.g.cs"));
+        g.WriteIncompleteStructures(Path.Combine(outputDir, "FFmpeg.structs.incomplete.g.cs"));
+        g.WriteExportFunctions(Path.Combine(outputDir, "FFmpeg.functions.export.g.cs"));
+        g.WriteInlineFunctions(Path.Combine(outputDir, "FFmpeg.functions.inline.g.cs"));
+    }
+    private static void WriteAbstractions(Generator g, string outputDir)
+    {
+        g.WriteMacros(Path.Combine(outputDir, "FFmpeg.macros.g.cs"));
+        g.WriteEnums(Path.Combine(outputDir, "FFmpeg.enums.g.cs"));
+        g.WriteDelegates(Path.Combine(outputDir, "FFmpeg.delegates.g.cs"));
+        g.WriteFixedArrays(Path.Combine(outputDir, "FFmpeg.arrays.g.cs"));
+        g.WriteStructures(Path.Combine(outputDir, "FFmpeg.structs.g.cs"));
+        g.WriteIncompleteStructures(Path.Combine(outputDir, "FFmpeg.structs.incomplete.g.cs"));
+        g.WriteFacadeFunctions(Path.Combine(outputDir, "FFmpeg.functions.g.cs"));
+        g.WriteFacadeDelegates(Path.Combine(outputDir, "FFmpeg.functions.delegates.g.cs"));
+        g.WriteInlineFunctions(Path.Combine(outputDir, "FFmpeg.functions.inline.g.cs"));
+    }
+    
+    private static void WriteStaticallyLinkedBindings(Generator g, string outputDir)
+    {
+        g.WriteWriteStaticallyLinkedFunctions(Path.Combine(outputDir, "StaticallyLinkedBindings.g.cs"));
+    } 
+    
+    private static void WriteDynamicallyLinkedBindings(Generator g, string outputDir)
+    {
+        g.WriteWriteDynamicallyLinkedFunctions(Path.Combine(outputDir, "DynamicallyLinkedBindings.g.cs"));
     }
 }

@@ -24,6 +24,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.ClangMacroPa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.ClangMacroParser.Test", "FFmpeg.AutoGen.ClangMacroParser.Test\FFmpeg.AutoGen.ClangMacroParser.Test.csproj", "{07F3A6D4-5599-4D77-9197-A666E8FC8EEC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bindings", "Bindings", "{F969EEDD-27A8-434B-A438-39C48BBAEFE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen.Abstractions", "FFmpeg.AutoGen.Abstractions\FFmpeg.AutoGen.Abstractions.csproj", "{1294EC3A-9667-40A2-8189-C9EC12ECFDD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen.Bindings.StaticallyLinked", "FFmpeg.AutoGen.Bindings.StaticallyLinked\FFmpeg.AutoGen.Bindings.StaticallyLinked.csproj", "{ED2E790B-9233-40BC-BA66-E3291AAA9878}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen.Bindings.DynamicallyLinked", "FFmpeg.AutoGen.Bindings.DynamicallyLinked\FFmpeg.AutoGen.Bindings.DynamicallyLinked.csproj", "{C272CD0A-E13B-4E80-8CA2-2BEC8396D8D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen.Bindings.DynamicallyLoaded", "FFmpeg.AutoGen.Bindings.DynamicallyLoaded\FFmpeg.AutoGen.Bindings.DynamicallyLoaded.csproj", "{028113A5-39CE-40A2-9118-56E99F30B4F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,9 +68,30 @@ Global
 		{07F3A6D4-5599-4D77-9197-A666E8FC8EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07F3A6D4-5599-4D77-9197-A666E8FC8EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07F3A6D4-5599-4D77-9197-A666E8FC8EEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1294EC3A-9667-40A2-8189-C9EC12ECFDD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1294EC3A-9667-40A2-8189-C9EC12ECFDD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1294EC3A-9667-40A2-8189-C9EC12ECFDD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1294EC3A-9667-40A2-8189-C9EC12ECFDD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED2E790B-9233-40BC-BA66-E3291AAA9878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED2E790B-9233-40BC-BA66-E3291AAA9878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED2E790B-9233-40BC-BA66-E3291AAA9878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED2E790B-9233-40BC-BA66-E3291AAA9878}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C272CD0A-E13B-4E80-8CA2-2BEC8396D8D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C272CD0A-E13B-4E80-8CA2-2BEC8396D8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C272CD0A-E13B-4E80-8CA2-2BEC8396D8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C272CD0A-E13B-4E80-8CA2-2BEC8396D8D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{028113A5-39CE-40A2-9118-56E99F30B4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{028113A5-39CE-40A2-9118-56E99F30B4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{028113A5-39CE-40A2-9118-56E99F30B4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{028113A5-39CE-40A2-9118-56E99F30B4F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED2E790B-9233-40BC-BA66-E3291AAA9878} = {F969EEDD-27A8-434B-A438-39C48BBAEFE6}
+		{C272CD0A-E13B-4E80-8CA2-2BEC8396D8D0} = {F969EEDD-27A8-434B-A438-39C48BBAEFE6}
+		{028113A5-39CE-40A2-9118-56E99F30B4F8} = {F969EEDD-27A8-434B-A438-39C48BBAEFE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4BAFD2E8-8AAC-4483-B5FA-6E4C136A59F5}

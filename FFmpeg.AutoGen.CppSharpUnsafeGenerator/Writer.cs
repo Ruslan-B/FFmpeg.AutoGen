@@ -101,7 +101,36 @@ internal class Writer
         WriteLine();
     }
 
-    public void WriteFunction(InlineFunctionDefinition function)
+    public void WriteStaticallyLinkedFunction(ExportFunctionDefinition function)
+    {
+        WriteSummary(function);
+        function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
+        WriteReturnComment(function.ReturnComment);
+
+        WriteObsoletion(function);
+        if (SuppressUnmanagedCodeSecurity) WriteLine("[SuppressUnmanagedCodeSecurity]");
+        function.ReturnType.Attributes.ToList().ForEach(WriteLine); 
+        WriteLine($"[DllImport(\"__Internal\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
+
+        var parameters = GetParameters(function.Parameters);
+        WriteLine($"public static extern {function.ReturnType.Name} {function.Name}({parameters});");
+    }
+
+    public void WriteDynamicallyLinkedFunction(ExportFunctionDefinition function)
+    {
+        WriteSummary(function);
+        function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
+        WriteReturnComment(function.ReturnComment);
+
+        WriteObsoletion(function);
+        if (SuppressUnmanagedCodeSecurity) WriteLine("[SuppressUnmanagedCodeSecurity]");
+        function.ReturnType.Attributes.ToList().ForEach(WriteLine); 
+        WriteLine($"[DllImport(\"{function.LibraryName}-{function.LibraryVersion}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
+        var parameters = GetParameters(function.Parameters);
+        WriteLine($"public static extern {function.ReturnType.Name} {function.Name}({parameters});");
+    }
+
+    public void WriteInlineFunction(InlineFunctionDefinition function)
     {
         function.ReturnType.Attributes.ToList().ForEach(WriteLine);
         var parameters = GetParameters(function.Parameters);
@@ -119,6 +148,27 @@ internal class Writer
         WriteLine();
     }
 
+    public void WriteFacadeFunction(ExportFunctionDefinition function)
+    {
+        var parameterNames = GetParameterNames(function.Parameters);
+        var parameters = GetParameters(function.Parameters, withAttributes: false);
+
+        WriteSummary(function);
+        function.Parameters.ToList().ForEach(x => WriteParam(x, x.Name));
+        WriteReturnComment(function.ReturnComment);
+
+        WriteObsoletion(function);
+        WriteLine($"public static {function.ReturnType.Name} {function.Name}({parameters}) => delegates.{function.Name}({parameterNames});");
+        WriteLine();
+    }
+
+    public void WriteFacadeDelegate(ExportFunctionDefinition function)
+    {
+        var parameters = GetParameters(function.Parameters, withAttributes: false);
+        var functionDelegateName = $"{function.Name}_delegate";
+        WriteLine($"public delegate {function.ReturnType.Name} {functionDelegateName}({parameters});");
+        WriteLine($"public static {functionDelegateName} {function.Name};"); // todo => throw new NotSupportedException();");
+    }
 
     private void WriteDefaultFunctionDelegateExpression(ExportFunctionDefinition function,
         string parameterNames, string functionDelegateName, string functionPtrName, string returnCommand)
@@ -254,7 +304,7 @@ internal class Writer
             parameters.Select(x =>
             {
                 var sb = new StringBuilder();
-                if (withAttributes && x.Type.Attributes.Any()) sb.Append($"{string.Join("", x.Type.Attributes)} ");
+                if (withAttributes && x.Type.Attributes.Length > 0) sb.Append($"{string.Join("", x.Type.Attributes)} ");
                 if (x.Type.ByReference) sb.Append("ref ");
                 sb.Append($"{x.Type.Name} @{x.Name}");
                 return sb.ToString();

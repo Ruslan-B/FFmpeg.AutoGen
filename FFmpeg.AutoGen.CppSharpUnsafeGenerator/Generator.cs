@@ -134,6 +134,95 @@ internal class Generator
             });
     }
 
+    public void WriteWriteStaticallyLinkedFunctions(string outputFile)
+    {
+        WriteInternal(outputFile,
+            (units, writer) =>
+            {
+                writer.WriteLine($"public unsafe static partial class DynamicallyLinkedBindings");
+                using var _ = writer.BeginBlock();
+                writer.WriteLine();
+                var functions = units.OfType<ExportFunctionDefinition>()
+                    .OrderBy(x => x.LibraryName)
+                    .ThenBy(x => x.Name)
+                    .ToList();
+                functions.ForEach(f =>
+                {
+                    writer.WriteStaticallyLinkedFunction(f);
+                    writer.WriteLine();
+                });
+
+                writer.WriteLine($"public unsafe static void Initialize()");
+                using var __ = writer.BeginBlock();
+                functions.ForEach(f => writer.WriteLine($"delegates.{f.Name} = {f.Name};"));
+            });
+    }  
+    
+    public void WriteWriteDynamicallyLinkedFunctions(string outputFile)
+    {
+        WriteInternal(outputFile,
+            (units, writer) =>
+            {
+                writer.WriteLine($"public unsafe static partial class StaticallyLinkedBindings");
+                using var _ = writer.BeginBlock();
+                writer.WriteLine();
+                var functions = units.OfType<ExportFunctionDefinition>()
+                    .OrderBy(x => x.LibraryName)
+                    .ThenBy(x => x.Name)
+                    .ToList();
+                functions.ForEach(f =>
+                {
+                    writer.WriteDynamicallyLinkedFunction(f);
+                    writer.WriteLine();
+                });
+
+                writer.WriteLine($"public unsafe static void Initialize()");
+                using var __ = writer.BeginBlock();
+                functions.ForEach(f => writer.WriteLine($"delegates.{f.Name} = {f.Name};"));
+            });
+    }
+
+    public void WriteFacadeFunctions(string outputFile)
+    {
+        WriteInternal2(outputFile,
+            (units, writer) =>
+            {
+                writer.WriteLine($"public unsafe static partial class {ClassName}");
+                using var _ = writer.BeginBlock();
+                units.OfType<ExportFunctionDefinition>()
+                    .OrderBy(x => x.LibraryName)
+                    .ThenBy(x => x.Name)
+                    .ToList()
+                    .ForEach(x =>
+                    {
+                        writer.WriteFacadeFunction(x);
+                        writer.WriteLine();
+                    });
+            });
+    }
+
+
+    public void WriteFacadeDelegates(string outputFile)
+    {
+        WriteInternal2(outputFile,
+            (units, writer) =>
+            {
+                writer.WriteLine($"public unsafe static partial class delegates");
+                using var _ = writer.BeginBlock();
+                units.OfType<ExportFunctionDefinition>()
+                    .OrderBy(x => x.LibraryName)
+                    .ThenBy(x => x.Name)
+                    .ToList()
+                    .ForEach(x =>
+                    {
+                        writer.WriteFacadeDelegate(x);
+                        writer.WriteLine();
+                    });
+            });
+    }
+
+
+
     public void WriteInlineFunctions(string outputFile)
     {
         var existingInlineFunctionMap = ExistingInlineFunctions.ToDictionary(x => x.Name);
@@ -148,7 +237,7 @@ internal class Generator
                         .ToList()
                         .ForEach(x =>
                         {
-                            writer.WriteFunction(x);
+                            writer.WriteInlineFunction(x);
                             writer.WriteLine();
                         });
             });
@@ -163,7 +252,7 @@ internal class Generator
         }
     }
 
-    public void WriteArrays(string outputFile)
+    public void WriteFixedArrays(string outputFile)
     {
         WriteInternal(outputFile,
             (units, writer) =>
@@ -275,7 +364,23 @@ internal class Generator
         writer.WriteLine("using System.Runtime.InteropServices;");
         if (SuppressUnmanagedCodeSecurity) writer.WriteLine("using System.Security;");
         writer.WriteLine();
-        writer.WriteLine($"namespace {Namespace}");
-        using (writer.BeginBlock()) execute(_astProcessor.Units, writer);
+        writer.WriteLine($"namespace {Namespace};");
+        writer.WriteLine();
+        execute(_astProcessor.Units, writer);
+    }
+    
+    private void WriteInternal2(string outputFile, Action<IReadOnlyList<IDefinition>, Writer> execute)
+    {
+        using var streamWriter = File.CreateText(outputFile);
+        using var textWriter = new IndentedTextWriter(streamWriter);
+        var writer = new Writer(textWriter)
+        {
+            SuppressUnmanagedCodeSecurity = false
+        };
+        writer.WriteLine("using System;");
+        writer.WriteLine();
+        writer.WriteLine($"namespace {Namespace};");
+        writer.WriteLine();
+        execute(_astProcessor.Units, writer);
     }
 }
