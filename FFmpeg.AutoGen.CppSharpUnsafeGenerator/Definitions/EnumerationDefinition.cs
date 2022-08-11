@@ -1,6 +1,8 @@
+using System;
+
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
-internal class EnumerationDefinition : NamedDefinition, IDefinition
+internal record EnumerationDefinition : NamedDefinition, IDefinition
 {
-    public EnumerationItem[] Items { get; set; }
+    public EnumerationItem[] Items { get; init; } = Array.Empty<EnumerationItem>();
 }

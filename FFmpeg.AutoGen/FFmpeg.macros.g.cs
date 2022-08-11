@@ -1,9 +1,6 @@
-using System;
-using System.Runtime.InteropServices;
-
 namespace FFmpeg.AutoGen;
 
-public unsafe static partial class ffmpeg
+public static unsafe partial class ffmpeg
 {
     /// <summary>_WIN32_WINNT = 0x602</summary>
     public const int _WIN32_WINNT = 0x602;

@@ -1,6 +1,5 @@
 ﻿// Copyright 2020 Craytive Technologies BV. All rights reserved. Company proprietary and confidential.
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -19,12 +18,11 @@ internal static class ExistingInlineFunctionsHelper
         @"\s+// original body hash: (?<hash>\S+)",
         RegexOptions.Compiled | RegexOptions.Multiline);
 
-    public static InlineFunctionDefinition[] LoadInlineFunctions(string path)
+    public static IEnumerable<InlineFunctionDefinition> LoadInlineFunctions(string path)
     {
-        if (!File.Exists(path)) return Array.Empty<InlineFunctionDefinition>();
+        if (!File.Exists(path)) yield break;
 
         var text = File.ReadAllText(path);
-        var functions = new List<InlineFunctionDefinition>();
 
         var nameMatches = FunctionNameRegex.Matches(text);
         var hashMatches = FunctionHashRegex.Matches(text);
@@ -47,9 +45,7 @@ internal static class ExistingInlineFunctionsHelper
                 Body = body,
                 OriginalBodyHash = hash
             };
-            functions.Add(function);
+            yield return function;
         }
-
-        return functions.ToArray();
     }
 }

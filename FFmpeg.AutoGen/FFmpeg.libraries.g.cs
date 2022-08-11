@@ -1,11 +1,8 @@
-using System;
-using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 namespace FFmpeg.AutoGen;
 
-using System.Collections.Generic;
-
-public unsafe static partial class ffmpeg
+public static unsafe partial class ffmpeg
 {
     public static Dictionary<string, int> LibraryVersionMap = new Dictionary<string, int>
     {

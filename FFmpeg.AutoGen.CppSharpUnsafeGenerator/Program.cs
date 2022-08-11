@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processors;
+using CppSharp.AST;
+using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
+using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Procesing;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator;
 
@@ -13,139 +16,179 @@ internal class Program
 
         if (options.Verbose)
         {
-            Console.WriteLine($"Working dir: {Environment.CurrentDirectory}");
-            Console.WriteLine($"Output dir: {options.OutputDir}");
-            Console.WriteLine($"FFmpeg headers dir: {options.FFmpegIncludesDir}");
-            Console.WriteLine($"FFmpeg bin dir: {options.FFmpegBinDir}");
+            Console.WriteLine($"Working path: {Environment.CurrentDirectory}");
+            Console.WriteLine($"Solution path: {options.SolutionDir}");
+            Console.WriteLine($"FFmpeg headers path: {options.FFmpegIncludesDir}");
+            Console.WriteLine($"FFmpeg binaries path: {options.FFmpegBinDir}");
             Console.WriteLine($"Namespace name: {options.Namespace}");
-            Console.WriteLine($"Class name: {options.ClassName}");
+            Console.WriteLine($"Type name: {options.TypeName}");
         }
 
-        var existingInlineFunctions =
-            ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.OutputDir, "FFmpeg.functions.inline.g.cs"));
+        // parse headers
+        var astContexts = Parse(options.FFmpegIncludesDir).ToList();
 
-        var exports = FunctionExportHelper.LoadFunctionExports(options.FFmpegBinDir).ToArray();
-
-        var astProcessor = new ASTProcessor
+        // process
+        var processingContext = new ProcessingContext
         {
-            FunctionExportMap = exports
-                .GroupBy(x => x.Name).Select(x => x.First()) // Eliminate duplicated names
+            IgnoreUnitNames = new HashSet<string> { "__NSConstantString_tag" },
+            TypeAliases = { { "int64_t", typeof(long) } },
+            WellKnownMacros =
+            {
+                { "FFERRTAG", typeof(int) }, { "MKTAG", typeof(int) }, { "UINT64_C", typeof(ulong) },
+                { "AV_VERSION_INT", typeof(int) }, { "AV_VERSION", typeof(string) },
+                { "_DHUGE_EXP", typeof(int) }, { "_DMAX", typeof(long) }, { "_FMAX", typeof(long) }, { "_LMAX", typeof(long) }
+            },
+            FunctionExportMap = FunctionExportHelper.LoadFunctionExports(options.FFmpegBinDir)
+                .GroupBy(x => x.Name)
+                .Select(x => x.First()) // Eliminate duplicated names
                 .ToDictionary(x => x.Name)
         };
-        astProcessor.IgnoreUnitNames.Add("__NSConstantString_tag");
-        astProcessor.TypeAliases.Add("int64_t", typeof(long));
-        astProcessor.WellKnownMacros.Add("FFERRTAG", typeof(int));
-        astProcessor.WellKnownMacros.Add("MKTAG", typeof(int));
-        astProcessor.WellKnownMacros.Add("UINT64_C", typeof(ulong));
-        astProcessor.WellKnownMacros.Add("AV_VERSION_INT", typeof(int));
-        astProcessor.WellKnownMacros.Add("AV_VERSION", typeof(string));
-        astProcessor.WellKnownMacros.Add("_DHUGE_EXP", typeof(int));
-        astProcessor.WellKnownMacros.Add("_DMAX", typeof(long));
-        astProcessor.WellKnownMacros.Add("_FMAX", typeof(long));
-        astProcessor.WellKnownMacros.Add("_LMAX", typeof(long));
+        var processor = new ASTProcessor(processingContext);
+        astContexts.ForEach(processor.Process);
 
-        var defines = new[] { "__STDC_CONSTANT_MACROS" };
-
-        var g = new Generator(astProcessor)
+        // generate files
+        var generationContext = new GenerationContext
         {
-            IncludeDirs = new[] { options.FFmpegIncludesDir },
-            Defines = defines,
-            Exports = exports,
             Namespace = options.Namespace,
-            ClassName = options.ClassName,
-            ExistingInlineFunctions = existingInlineFunctions,
-            SuppressUnmanagedCodeSecurity = options.SuppressUnmanagedCodeSecurity
+            TypeName = options.TypeName,
+            SuppressUnmanagedCodeSecurity = options.SuppressUnmanagedCodeSecurity,
+            LibraryVersionMap = processingContext.FunctionExportMap.Values
+                .Select(x => new { x.LibraryName, x.LibraryVersion })
+                .Distinct()
+                .ToDictionary(x => x.LibraryName, x => x.LibraryVersion),
+            Definitions = processingContext.Definitions.ToArray(),
+            ExistingInlineFunctionMap = ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.SolutionDir, "FFmpeg.AutoGen\\FFmpeg.functions.inline.g.cs"))
+                .ToDictionary(f => f.Name),
+            SolutionDir = options.SolutionDir
         };
 
-        Parse(g);
-
-        WriteFFmpegAutoGen(g, options.OutputDir);
-        
-        var solutionDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../"));
-
-        WriteAbstractions(g, Path.Combine(solutionDir, "FFmpeg.AutoGen.Abstractions/"));
-
-        WriteStaticallyLinkedBindings(g, Path.Combine(solutionDir, "FFmpeg.AutoGen.Bindings.StaticallyLinked/"));
-        WriteDynamicallyLinkedBindings(g, Path.Combine(solutionDir, "FFmpeg.AutoGen.Bindings.DynamicallyLinked/"));
+        GenerateFFmpegAutoGen(generationContext);
+        GenerateAbstractions(generationContext);
+        GenerateStaticallyLinkedBindings(generationContext);
+        GenerateDynamicallyLinkedBindings(generationContext);
+        GenerateDynamicallyLoadedBindings(generationContext);
     }
-    private static void Parse(Generator g)
+
+    private static IEnumerable<ASTContext> Parse(string includesDir)
     {
+        var p = new Parser
+        {
+            IncludeDirs = new[] { includesDir },
+            Defines = new[] { "__STDC_CONSTANT_MACROS" }
+        };
+
         // libavutil
-        g.Parse("libavutil/avutil.h");
-        g.Parse("libavutil/audio_fifo.h");
-        g.Parse("libavutil/channel_layout.h");
-        g.Parse("libavutil/cpu.h");
-        g.Parse("libavutil/file.h");
-        g.Parse("libavutil/frame.h");
-        g.Parse("libavutil/opt.h");
-        g.Parse("libavutil/imgutils.h");
-        g.Parse("libavutil/time.h");
-        g.Parse("libavutil/timecode.h");
-        g.Parse("libavutil/tree.h");
-        g.Parse("libavutil/hwcontext.h");
-        g.Parse("libavutil/hwcontext_dxva2.h");
-        g.Parse("libavutil/hwcontext_d3d11va.h");
-        g.Parse("libavutil/hdr_dynamic_metadata.h");
-        g.Parse("libavutil/mastering_display_metadata.h");
+        yield return p.Parse("libavutil/avutil.h");
+        yield return p.Parse("libavutil/audio_fifo.h");
+        yield return p.Parse("libavutil/channel_layout.h");
+        yield return p.Parse("libavutil/cpu.h");
+        yield return p.Parse("libavutil/file.h");
+        yield return p.Parse("libavutil/frame.h");
+        yield return p.Parse("libavutil/opt.h");
+        yield return p.Parse("libavutil/imgutils.h");
+        yield return p.Parse("libavutil/time.h");
+        yield return p.Parse("libavutil/timecode.h");
+        yield return p.Parse("libavutil/tree.h");
+        yield return p.Parse("libavutil/hwcontext.h");
+        yield return p.Parse("libavutil/hwcontext_dxva2.h");
+        yield return p.Parse("libavutil/hwcontext_d3d11va.h");
+        yield return p.Parse("libavutil/hdr_dynamic_metadata.h");
+        yield return p.Parse("libavutil/mastering_display_metadata.h");
 
         // libswresample
-        g.Parse("libswresample/swresample.h");
+        yield return p.Parse("libswresample/swresample.h");
 
         // libpostproc
-        g.Parse("libpostproc/postprocess.h");
+        yield return p.Parse("libpostproc/postprocess.h");
 
         // libswscale
-        g.Parse("libswscale/swscale.h");
+        yield return p.Parse("libswscale/swscale.h");
 
         // libavcodec
-        g.Parse("libavcodec/avcodec.h");
-        g.Parse("libavcodec/dxva2.h");
-        g.Parse("libavcodec/d3d11va.h");
+        yield return p.Parse("libavcodec/avcodec.h");
+        yield return p.Parse("libavcodec/dxva2.h");
+        yield return p.Parse("libavcodec/d3d11va.h");
 
         // libavformat
-        g.Parse("libavformat/avformat.h");
+        yield return p.Parse("libavformat/avformat.h");
 
         // libavfilter
-        g.Parse("libavfilter/avfilter.h");
-        g.Parse("libavfilter/buffersrc.h");
-        g.Parse("libavfilter/buffersink.h");
+        yield return p.Parse("libavfilter/avfilter.h");
+        yield return p.Parse("libavfilter/buffersrc.h");
+        yield return p.Parse("libavfilter/buffersink.h");
 
         // libavdevice
-        g.Parse("libavdevice/avdevice.h");
+        yield return p.Parse("libavdevice/avdevice.h");
     }
-    
-    private static void WriteFFmpegAutoGen(Generator g, string outputDir)
+
+    private static void GenerateFFmpegAutoGen(GenerationContext baseContext)
     {
-        g.WriteLibraries(Path.Combine(outputDir, "FFmpeg.libraries.g.cs"));
-        g.WriteMacros(Path.Combine(outputDir, "FFmpeg.macros.g.cs"));
-        g.WriteEnums(Path.Combine(outputDir, "FFmpeg.enums.g.cs"));
-        g.WriteDelegates(Path.Combine(outputDir, "FFmpeg.delegates.g.cs"));
-        g.WriteFixedArrays(Path.Combine(outputDir, "FFmpeg.arrays.g.cs"));
-        g.WriteStructures(Path.Combine(outputDir, "FFmpeg.structs.g.cs"));
-        g.WriteIncompleteStructures(Path.Combine(outputDir, "FFmpeg.structs.incomplete.g.cs"));
-        g.WriteExportFunctions(Path.Combine(outputDir, "FFmpeg.functions.export.g.cs"));
-        g.WriteInlineFunctions(Path.Combine(outputDir, "FFmpeg.functions.inline.g.cs"));
+        var context = baseContext with
+        {
+            IsLegacyGenerationOn = true,
+            OutputDir = Path.Combine(baseContext.SolutionDir, "FFmpeg.AutoGen")
+        };
+
+        LibrariesGenerator.Generate($"{context.TypeName}.libraries.g.cs", context);
+        MacrosGenerator.Generate($"{context.TypeName}.macros.g.cs", context);
+        EnumsGenerator.Generate("Enums.g.cs", context);
+        DelegatesGenerator.Generate("Delegates.g.cs", context);
+        FixedArraysGenerator.Generate("Arrays.g.cs", context);
+        StructuresGenerator.Generate("Structs.g.cs", context);
+        FunctionsGenerator.GenerateFacade($"{context.TypeName}.functions.facade.g.cs", context);
+        InlineFunctionsGenerator.Generate($"{context.TypeName}.functions.inline.g.cs", context);
+        FunctionsGenerator.GenerateVectors("vectors.g.cs", context with { TypeName = "vectors" });
+        FunctionsGenerator.GenerateDynamicallyLoaded("DynamicallyLoadedBindings.g.cs", context with { TypeName = "DynamicallyLoadedBindings" });
     }
-    private static void WriteAbstractions(Generator g, string outputDir)
+
+    private static void GenerateAbstractions(GenerationContext baseContext)
     {
-        g.WriteMacros(Path.Combine(outputDir, "FFmpeg.macros.g.cs"));
-        g.WriteEnums(Path.Combine(outputDir, "FFmpeg.enums.g.cs"));
-        g.WriteDelegates(Path.Combine(outputDir, "FFmpeg.delegates.g.cs"));
-        g.WriteFixedArrays(Path.Combine(outputDir, "FFmpeg.arrays.g.cs"));
-        g.WriteStructures(Path.Combine(outputDir, "FFmpeg.structs.g.cs"));
-        g.WriteIncompleteStructures(Path.Combine(outputDir, "FFmpeg.structs.incomplete.g.cs"));
-        g.WriteFacadeFunctions(Path.Combine(outputDir, "FFmpeg.functions.g.cs"));
-        g.WriteFacadeDelegates(Path.Combine(outputDir, "FFmpeg.functions.delegates.g.cs"));
-        g.WriteInlineFunctions(Path.Combine(outputDir, "FFmpeg.functions.inline.g.cs"));
+        var context = baseContext with
+        {
+            Namespace = $"{baseContext.Namespace}.Abstractions",
+            OutputDir = Path.Combine(baseContext.SolutionDir, "FFmpeg.AutoGen.Abstractions")
+        };
+
+        MacrosGenerator.Generate($"{context.TypeName}.macros.g.cs", context);
+        EnumsGenerator.Generate("Enums.g.cs", context);
+        DelegatesGenerator.Generate("Delegates.g.cs", context);
+        FixedArraysGenerator.Generate("Arrays.g.cs", context);
+        StructuresGenerator.Generate("Structs.g.cs", context);
+        FunctionsGenerator.GenerateFacade($"{context.TypeName}.functions.facade.g.cs", context);
+        FunctionsGenerator.GenerateVectors("vectors.g.cs", context with { TypeName = "vectors" });
+        InlineFunctionsGenerator.Generate($"{context.TypeName}.functions.inline.g.cs", context);
     }
-    
-    private static void WriteStaticallyLinkedBindings(Generator g, string outputDir)
+
+    private static void GenerateStaticallyLinkedBindings(GenerationContext baseContext)
     {
-        g.WriteWriteStaticallyLinkedFunctions(Path.Combine(outputDir, "StaticallyLinkedBindings.g.cs"));
-    } 
-    
-    private static void WriteDynamicallyLinkedBindings(Generator g, string outputDir)
+        var context = baseContext with
+        {
+            Namespace = $"{baseContext.Namespace}.Bindings.StaticallyLinked", TypeName = "StaticallyLinkedBindings",
+            OutputDir = Path.Combine(baseContext.SolutionDir, "FFmpeg.AutoGen.Bindings.StaticallyLinked")
+        };
+        FunctionsGenerator.GenerateStaticallyLinked("StaticallyLinkedBindings.g.cs", context);
+    }
+
+    private static void GenerateDynamicallyLinkedBindings(GenerationContext baseContext)
     {
-        g.WriteWriteDynamicallyLinkedFunctions(Path.Combine(outputDir, "DynamicallyLinkedBindings.g.cs"));
+        var context = baseContext with
+        {
+            Namespace = $"{baseContext.Namespace}.Bindings.DynamicallyLinked", TypeName = "DynamicallyLinkedBindings",
+            OutputDir = Path.Combine(baseContext.SolutionDir, "FFmpeg.AutoGen.Bindings.DynamicallyLinked")
+        };
+
+        FunctionsGenerator.GenerateDynamicallyLinked("DynamicallyLinkedBindings.g.cs", context);
+    }
+
+    private static void GenerateDynamicallyLoadedBindings(GenerationContext baseContext)
+    {
+        var context = baseContext with
+        {
+            Namespace = $"{baseContext.Namespace}.Bindings.DynamicallyLoaded", TypeName = "DynamicallyLoadedBindings",
+            OutputDir = Path.Combine(baseContext.SolutionDir, "FFmpeg.AutoGen.Bindings.DynamicallyLoaded")
+        };
+
+        LibrariesGenerator.Generate("DynamicallyLoadedBindings.libraries.g.cs", context);
+        FunctionsGenerator.GenerateDynamicallyLoaded("DynamicallyLoadedBindings.g.cs", context);
     }
 }

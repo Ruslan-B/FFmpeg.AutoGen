@@ -1,9 +1,11 @@
+using System;
+
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
-internal class FunctionDefinitionBase : IDefinition, ICanGenerateXmlDoc, IObsoletionAware
+internal record FunctionDefinitionBase : IDefinition, ICanGenerateXmlDoc, IObsoletionAware
 {
     public TypeDefinition ReturnType { get; set; }
-    public FunctionParameter[] Parameters { get; set; }
+    public FunctionParameter[] Parameters { get; set; } = Array.Empty<FunctionParameter>();
     public string ReturnComment { get; set; }
     public string Content { get; set; }
     public string Name { get; set; }
