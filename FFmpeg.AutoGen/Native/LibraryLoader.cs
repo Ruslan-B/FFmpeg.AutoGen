@@ -16,6 +16,18 @@ namespace FFmpeg.AutoGen.Native
             {
 #if NET45 || NET40
                 return Environment.OSVersion.Platform;
+#elif NET
+                if (OperatingSystem.IsWindows())
+                    return PlatformID.Win32NT;
+                if (OperatingSystem.IsMacCatalyst()
+                    || OperatingSystem.IsMacOS()
+                    || OperatingSystem.IsIOS()
+                    || OperatingSystem.IsTvOS()
+                    || OperatingSystem.IsWatchOS())
+                    return PlatformID.MacOSX; // all share similar .dylib calling style. But only static libs on iOS store apps!
+                if (OperatingSystem.IsAndroid() || OperatingSystem.IsFreeBSD() || OperatingSystem.IsLinux())
+                    return PlatformID.Unix;
+                return null;
 #else
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) return PlatformID.Win32NT;
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) return PlatformID.Unix;
