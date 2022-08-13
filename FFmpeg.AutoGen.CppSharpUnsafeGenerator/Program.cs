@@ -28,17 +28,24 @@ internal class Program
         var astContexts = Parse(options.FFmpegIncludesDir).ToList();
 
         // process
+        var functionExports = FunctionExportHelper.LoadFunctionExports(options.FFmpegBinDir).ToArray();
         var processingContext = new ProcessingContext
         {
             IgnoreUnitNames = new HashSet<string> { "__NSConstantString_tag" },
             TypeAliases = { { "int64_t", typeof(long) } },
             WellKnownMacros =
             {
-                { "FFERRTAG", typeof(int) }, { "MKTAG", typeof(int) }, { "UINT64_C", typeof(ulong) },
-                { "AV_VERSION_INT", typeof(int) }, { "AV_VERSION", typeof(string) },
-                { "_DHUGE_EXP", typeof(int) }, { "_DMAX", typeof(long) }, { "_FMAX", typeof(long) }, { "_LMAX", typeof(long) }
+                { "FFERRTAG", typeof(int) }, 
+                { "MKTAG", typeof(int) },
+                { "UINT64_C", typeof(ulong) },
+                { "AV_VERSION_INT", typeof(int) },
+                { "AV_VERSION", typeof(string) },
+                { "_DHUGE_EXP", typeof(int) }, 
+                { "_DMAX", typeof(long) }, 
+                { "_FMAX", typeof(long) }, 
+                { "_LMAX", typeof(long) }
             },
-            FunctionExportMap = FunctionExportHelper.LoadFunctionExports(options.FFmpegBinDir)
+            FunctionExportMap = functionExports
                 .GroupBy(x => x.Name)
                 .Select(x => x.First()) // Eliminate duplicated names
                 .ToDictionary(x => x.Name)
@@ -47,22 +54,22 @@ internal class Program
         astContexts.ForEach(processor.Process);
 
         // generate files
+        var inlineFunctions = ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.SolutionDir, "FFmpeg.AutoGen\\FFmpeg.functions.inline.g.cs"));
         var generationContext = new GenerationContext
         {
             Namespace = options.Namespace,
             TypeName = options.TypeName,
             SuppressUnmanagedCodeSecurity = options.SuppressUnmanagedCodeSecurity,
-            LibraryVersionMap = processingContext.FunctionExportMap.Values
+            LibraryVersionMap = functionExports
                 .Select(x => new { x.LibraryName, x.LibraryVersion })
                 .Distinct()
                 .ToDictionary(x => x.LibraryName, x => x.LibraryVersion),
             Definitions = processingContext.Definitions.ToArray(),
-            ExistingInlineFunctionMap = ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.SolutionDir, "FFmpeg.AutoGen\\FFmpeg.functions.inline.g.cs"))
-                .ToDictionary(f => f.Name),
+            ExistingInlineFunctionMap = inlineFunctions.ToDictionary(f => f.Name),
             SolutionDir = options.SolutionDir
         };
 
-        GenerateFFmpegAutoGen(generationContext);
+        GenerateLegacyFFmpegAutoGen(generationContext);
         GenerateAbstractions(generationContext);
         GenerateStaticallyLinkedBindings(generationContext);
         GenerateDynamicallyLinkedBindings(generationContext);
@@ -121,7 +128,7 @@ internal class Program
         yield return p.Parse("libavdevice/avdevice.h");
     }
 
-    private static void GenerateFFmpegAutoGen(GenerationContext baseContext)
+    private static void GenerateLegacyFFmpegAutoGen(GenerationContext baseContext)
     {
         var context = baseContext with
         {

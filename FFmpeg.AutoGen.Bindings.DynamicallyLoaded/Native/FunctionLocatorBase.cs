@@ -27,37 +27,39 @@ public abstract class FunctionLocatorBase : IFunctionLocator
 
     public T GetFunctionDelegate<T>(string libraryName, string functionName, bool throwOnError = true)
     {
-        var nativeLibraryHandle = LoadLibrary(libraryName, throwOnError);
-        var ptr = GetFunctionPointer(nativeLibraryHandle, functionName);
-
-        if (ptr == IntPtr.Zero)
+        lock (_syncRoot)
         {
-            if (throwOnError) throw new EntryPointNotFoundException($"Could not find the entrypoint for {functionName}.");
-            return default;
-        }
+            var nativeLibraryHandle = GetOrLoadLibrary(libraryName, throwOnError);
+            var ptr = GetFunctionPointer(nativeLibraryHandle, functionName);
+
+            if (ptr == IntPtr.Zero)
+            {
+                if (throwOnError) throw new EntryPointNotFoundException($"Could not find the entrypoint for {functionName}.");
+                return default;
+            }
 
 #if NETSTANDARD2_0_OR_GREATER
-        try
-        {
-            return Marshal.GetDelegateForFunctionPointer<T>(ptr);
-        }
-        catch (MarshalDirectiveException)
-        {
-            if (throwOnError)
-                throw;
-            return default;
-        }
+            try
+            {
+                return Marshal.GetDelegateForFunctionPointer<T>(ptr);
+            }
+            catch (MarshalDirectiveException)
+            {
+                if (throwOnError)
+                    throw;
+                return default;
+            }
 #else
         return (T)(object)Marshal.GetDelegateForFunctionPointer(ptr, typeof(T));
 #endif
+        }
     }
 
     protected abstract string GetNativeLibraryName(string libraryName, int version);
     protected abstract IntPtr LoadNativeLibrary(string libraryName);
-
     protected abstract IntPtr GetFunctionPointer(IntPtr nativeLibraryHandle, string functionName);
 
-    private IntPtr LoadLibrary(string libraryName, bool throwOnError)
+    private IntPtr GetOrLoadLibrary(string libraryName, bool throwOnError)
     {
         if (_loadedLibraries.TryGetValue(libraryName, out var ptr)) return ptr;
 
@@ -68,19 +70,18 @@ public abstract class FunctionLocatorBase : IFunctionLocator
             var dependencies = LibraryDependenciesMap[libraryName];
             dependencies.Where(n => !_loadedLibraries.ContainsKey(n) && !n.Equals(libraryName))
                 .ToList()
-                .ForEach(n => LoadLibrary(n, false));
+                .ForEach(n => GetOrLoadLibrary(n, false));
 
             var version = DynamicallyLoadedBindings.LibraryVersionMap[libraryName];
             var nativeLibraryName = GetNativeLibraryName(libraryName, version);
 
-            ptr = LoadNativeLibrary(Path.Combine(DynamicallyLoadedBindings.LibrariesPath, nativeLibraryName));
+            var libraryPath = Path.Combine(DynamicallyLoadedBindings.LibrariesPath, nativeLibraryName);
+            ptr = LoadNativeLibrary(libraryPath);
 
             if (ptr != IntPtr.Zero) _loadedLibraries.Add(libraryName, ptr);
             else if (throwOnError)
-            {
                 throw new DllNotFoundException(
                     $"Unable to load DLL '{libraryName}.{version} under {DynamicallyLoadedBindings.LibrariesPath}': The specified module could not be found.");
-            }
 
             return ptr;
         }
