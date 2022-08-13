@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Native
 {
-    public delegate PlatformID GetPlatformId();
+    public delegate PlatformID? GetPlatformId();
 
     public delegate string GetNativeLibraryName(string libraryName, int version);
 
@@ -20,7 +20,7 @@ namespace FFmpeg.AutoGen.Native
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) return PlatformID.Win32NT;
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) return PlatformID.Unix;
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) return PlatformID.MacOSX;
-                throw new PlatformNotSupportedException();
+                return null;
 #endif
             };
 
