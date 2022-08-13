@@ -3,8 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen;
 
-internal class ConstCharPtrMarshaler : ICustomMarshaler
+public class ConstCharPtrMarshaler : ICustomMarshaler
 {
+    private static readonly ConstCharPtrMarshaler Instance = new();
     public object MarshalNativeToManaged(IntPtr pNativeData) => Marshal.PtrToStringAnsi(pNativeData);
 
     public IntPtr MarshalManagedToNative(object managedObj) => IntPtr.Zero;
@@ -18,8 +19,6 @@ internal class ConstCharPtrMarshaler : ICustomMarshaler
     }
 
     public int GetNativeDataSize() => IntPtr.Size;
-
-    private static readonly ConstCharPtrMarshaler Instance = new();
 
     public static ICustomMarshaler GetInstance(string cookie) => Instance;
 }

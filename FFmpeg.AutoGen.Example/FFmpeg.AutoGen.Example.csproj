@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FFmpeg.AutoGen.Bindings.DynamicallyLoaded\FFmpeg.AutoGen.Bindings.DynamicallyLoaded.csproj" />
+    <ProjectReference Include="..\FFmpeg.AutoGen.Bindings.DynamicallyLinked\FFmpeg.AutoGen.Bindings.DynamicallyLinked.csproj" />
   </ItemGroup>
 
   <ItemGroup>

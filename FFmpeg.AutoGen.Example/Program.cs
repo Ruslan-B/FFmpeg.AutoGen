@@ -6,7 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using FFmpeg.AutoGen.Abstractions;
-using FFmpeg.AutoGen.Bindings.DynamicallyLoaded;
+using FFmpeg.AutoGen.Bindings.DynamicallyLinked;
+//using FFmpeg.AutoGen.Bindings.DynamicallyLoaded;
 
 namespace FFmpeg.AutoGen.Example;
 
@@ -19,7 +20,8 @@ internal class Program
 
         FFmpegBinariesHelper.RegisterFFmpegBinaries();
 
-        DynamicallyLoadedBindings.Initialize();
+        DynamicallyLinkedBindings.Initialize();
+        //DynamicallyLoadedBindings.Initialize();
 
         Console.WriteLine($"FFmpeg version info: {ffmpeg.av_version_info()}");
 
