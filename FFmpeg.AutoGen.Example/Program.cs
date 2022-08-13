@@ -26,6 +26,8 @@ internal class Program
         SetupLogging();
         ConfigureHWDecoder(out var deviceType);
 
+        Directory.CreateDirectory("frames");
+        
         Console.WriteLine("Decoding...");
         DecodeAllFramesToImages(deviceType);
 
@@ -72,7 +74,7 @@ internal class Program
 
     private static unsafe void SetupLogging()
     {
-        ffmpeg.av_log_set_level(ffmpeg.AV_LOG_TRACE);
+        ffmpeg.av_log_set_level(ffmpeg.AV_LOG_VERBOSE);
 
         // do not convert to local function
         av_log_set_callback_callback logCallback = (p0, level, format, vl) =>
@@ -96,8 +98,7 @@ internal class Program
     {
         // decode all frames from url, please not it might local resorce, e.g. string url = "../../sample_mpeg4.mp4";
         
-        //var url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"; // be advised this file holds 1440 frames
-        var url = "big_buck_bunny.mp4"; // be advised this file holds 1440 frames
+        var url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"; // be advised this file holds 1440 frames
         using var vsd = new VideoStreamDecoder(url, HWDevice);
 
         Console.WriteLine($"codec name: {vsd.CodecName}");
@@ -112,8 +113,6 @@ internal class Program
         var destinationSize = sourceSize;
         var destinationPixelFormat = AVPixelFormat.AV_PIX_FMT_BGR24;
         using var vfc = new VideoFrameConverter(sourceSize, sourcePixelFormat, destinationSize, destinationPixelFormat);
-
-        Directory.CreateDirectory("frames");
 
         var frameNumber = 0;
 
@@ -157,7 +156,7 @@ internal class Program
         var frameFiles = Directory.GetFiles("./frames", "frame.*.jpg").OrderBy(x => x).ToArray();
         var fistFrameImage = Image.FromFile(frameFiles.First());
 
-        var outputFileName = "out.h264";
+        var outputFileName = "frames/out.h264";
         var fps = 25;
         var sourceSize = fistFrameImage.Size;
         var sourcePixelFormat = AVPixelFormat.AV_PIX_FMT_BGR24;

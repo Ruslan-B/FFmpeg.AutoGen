@@ -7,7 +7,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
 internal sealed class FunctionsGenerator : GeneratorBase<ExportFunctionDefinition>
 {
     private const string SuppressUnmanagedCodeSecurityAttribute = "[SuppressUnmanagedCodeSecurity]";
-    private const string UnmanagedFunctionPointerAttribute = "[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]";
+    private const string UnmanagedFunctionPointerAttribute = "[UnmanagedFunctionPointer(CallingConvention.Cdecl)]";
     public FunctionsGenerator(string fileName, GenerationContext context) : base(fileName, context) => IsTypeGenerationOn = true;
 
     public bool IsFacadeGenerationOn { get; set; }
@@ -125,7 +125,7 @@ internal sealed class FunctionsGenerator : GeneratorBase<ExportFunctionDefinitio
         this.WriteObsoletion(function);
         if (Context.SuppressUnmanagedCodeSecurity) WriteLine(SuppressUnmanagedCodeSecurityAttribute);
 
-        WriteLine($"[DllImport(\"{libraryName}\", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]");
+        WriteLine($"[DllImport(\"{libraryName}\", CallingConvention = CallingConvention.Cdecl)]");
         function.ReturnType.Attributes.ToList().ForEach(WriteLine);
 
         var parameters = ParametersHelper.GetParameters(function.Parameters, Context.IsLegacyGenerationOn);
