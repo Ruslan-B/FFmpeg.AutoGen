@@ -72,7 +72,7 @@ internal class Program
 
     private static unsafe void SetupLogging()
     {
-        ffmpeg.av_log_set_level(ffmpeg.AV_LOG_VERBOSE);
+        ffmpeg.av_log_set_level(ffmpeg.AV_LOG_TRACE);
 
         // do not convert to local function
         av_log_set_callback_callback logCallback = (p0, level, format, vl) =>
@@ -95,7 +95,9 @@ internal class Program
     private static unsafe void DecodeAllFramesToImages(AVHWDeviceType HWDevice)
     {
         // decode all frames from url, please not it might local resorce, e.g. string url = "../../sample_mpeg4.mp4";
-        var url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"; // be advised this file holds 1440 frames
+        
+        //var url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"; // be advised this file holds 1440 frames
+        var url = "big_buck_bunny.mp4"; // be advised this file holds 1440 frames
         using var vsd = new VideoStreamDecoder(url, HWDevice);
 
         Console.WriteLine($"codec name: {vsd.CodecName}");
@@ -111,6 +113,8 @@ internal class Program
         var destinationPixelFormat = AVPixelFormat.AV_PIX_FMT_BGR24;
         using var vfc = new VideoFrameConverter(sourceSize, sourcePixelFormat, destinationSize, destinationPixelFormat);
 
+        Directory.CreateDirectory("frames");
+
         var frameNumber = 0;
 
         while (vsd.TryDecodeNextFrame(out var frame))
@@ -122,7 +126,7 @@ internal class Program
                        convertedFrame.linesize[0],
                        PixelFormat.Format24bppRgb,
                        (IntPtr)convertedFrame.data[0]))
-                bitmap.Save($"frame.{frameNumber:D8}.jpg", ImageFormat.Jpeg);
+                bitmap.Save($"frames/frame.{frameNumber:D8}.jpg", ImageFormat.Jpeg);
 
             Console.WriteLine($"frame: {frameNumber}");
             frameNumber++;
@@ -150,7 +154,7 @@ internal class Program
 
     private static unsafe void EncodeImagesToH264()
     {
-        var frameFiles = Directory.GetFiles(".", "frame.*.jpg").OrderBy(x => x).ToArray();
+        var frameFiles = Directory.GetFiles("./frames", "frame.*.jpg").OrderBy(x => x).ToArray();
         var fistFrameImage = Image.FromFile(frameFiles.First());
 
         var outputFileName = "out.h264";

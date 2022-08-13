@@ -12,7 +12,6 @@ public class WindowsFunctionLocator : FunctionLocatorBase
     protected override IntPtr LoadNativeLibrary(string libraryName) => LoadLibrary(libraryName);
     protected override IntPtr GetFunctionPointer(IntPtr nativeLibraryHandle, string functionName) => GetProcAddress(nativeLibraryHandle, functionName);
 
-
     [DllImport(Kernel32, CharSet = CharSet.Ansi, BestFitMapping = false)]
     public static extern IntPtr GetProcAddress(IntPtr hModule, string lpProcName);
 

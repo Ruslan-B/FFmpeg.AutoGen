@@ -144,10 +144,7 @@ internal sealed class FunctionsGenerator : GeneratorBase<ExportFunctionDefinitio
         {
             var functionDelegateName = GetFunctionDelegateName(function);
             var getDelegate = $"FunctionLoader.GetFunctionDelegate<vectors.{functionDelegateName}>(\"{function.LibraryName}\", \"{function.Name}\", ThrowErrorIfFunctionNotFound)";
-
-            WriteLine($"{functionFieldName} = {getDelegate};");
-            WriteLine($"if ({functionFieldName} == null) {functionFieldName} = delegate {{ throw new NotSupportedException(); }};");
-
+            WriteLine($"{functionFieldName} = {getDelegate} ?? delegate {{ throw new NotSupportedException(); }};");
             var returnCommand = function.ReturnType.Name == "void" ? string.Empty : "return ";
             var parameterNames = ParametersHelper.GetParameterNames(function.Parameters);
             WriteLine($"{returnCommand}{functionFieldName}({parameterNames});");
