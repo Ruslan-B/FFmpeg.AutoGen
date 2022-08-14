@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace FFmpeg.AutoGen.Bindings.DynamicallyLoaded.Native;
+namespace FFmpeg.AutoGen.Bindings.DynamicallyLoaded;
 
 public abstract class FunctionLocatorBase : IFunctionLocator
 {

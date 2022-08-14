@@ -4,7 +4,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
 
 internal sealed class EnumsGenerator : GeneratorBase<EnumerationDefinition>
 {
-    public EnumsGenerator(string fileName, GenerationContext context) : base(fileName, context)
+    public EnumsGenerator(string path, GenerationContext context) : base(path, context)
     {
     }
 

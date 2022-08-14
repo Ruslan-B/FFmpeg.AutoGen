@@ -6,7 +6,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
 
 internal sealed class DelegatesGenerator : GeneratorBase<DelegateDefinition>
 {
-    public DelegatesGenerator(string fileName, GenerationContext context) : base(fileName, context)
+    public DelegatesGenerator(string path, GenerationContext context) : base(path, context)
     {
     }
 

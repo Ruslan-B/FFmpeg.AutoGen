@@ -8,7 +8,7 @@ internal sealed class FunctionsGenerator : GeneratorBase<ExportFunctionDefinitio
 {
     private const string SuppressUnmanagedCodeSecurityAttribute = "[SuppressUnmanagedCodeSecurity]";
     private const string UnmanagedFunctionPointerAttribute = "[UnmanagedFunctionPointer(CallingConvention.Cdecl)]";
-    public FunctionsGenerator(string fileName, GenerationContext context) : base(fileName, context) => IsTypeGenerationOn = true;
+    public FunctionsGenerator(string path, GenerationContext context) : base(path, context) => IsTypeGenerationOn = true;
 
     public bool IsFacadeGenerationOn { get; set; }
     public bool IsVectorsGenerationOn { get; set; }

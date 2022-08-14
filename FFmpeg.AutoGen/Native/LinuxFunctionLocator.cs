@@ -13,7 +13,7 @@ public class LinuxFunctionLocator : FunctionLocatorBase
 
     protected override IntPtr LoadNativeLibrary(string libraryName) => dlopen(libraryName, RTLD_NOW);
 
-    protected override IntPtr GetFunctionPointer(IntPtr nativeLibraryHandle, string functionName) => dlsym(nativeLibraryHandle, functionName);
+    protected override IntPtr FindFunctionPointer(IntPtr nativeLibraryHandle, string functionName) => dlsym(nativeLibraryHandle, functionName);
 
 
     [DllImport(Libdl)]

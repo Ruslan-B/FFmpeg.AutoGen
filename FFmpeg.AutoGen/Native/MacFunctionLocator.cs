@@ -11,7 +11,7 @@ public class MacFunctionLocator : FunctionLocatorBase
 
     protected override string GetNativeLibraryName(string libraryName, int version) => $"lib{libraryName}.{version}.dylib";
     protected override IntPtr LoadNativeLibrary(string libraryName) => dlopen(libraryName, RTLD_NOW);
-    protected override IntPtr GetFunctionPointer(IntPtr nativeLibraryHandle, string functionName) => dlsym(nativeLibraryHandle, functionName);
+    protected override IntPtr FindFunctionPointer(IntPtr nativeLibraryHandle, string functionName) => dlsym(nativeLibraryHandle, functionName);
 
 
     [DllImport(Libdl)]

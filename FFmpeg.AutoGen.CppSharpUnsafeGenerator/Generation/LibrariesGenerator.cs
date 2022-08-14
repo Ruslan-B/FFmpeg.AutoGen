@@ -5,7 +5,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
 
 internal sealed class LibrariesGenerator : GeneratorBase
 {
-    private LibrariesGenerator(string fileName, GenerationContext context) : base(fileName, context) => IsTypeGenerationOn = true;
+    private LibrariesGenerator(string path, GenerationContext context) : base(path, context) => IsTypeGenerationOn = true;
 
     public static void Generate(string path, GenerationContext options)
     {

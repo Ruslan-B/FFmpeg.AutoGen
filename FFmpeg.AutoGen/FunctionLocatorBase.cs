@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace FFmpeg.AutoGen.Native;
+namespace FFmpeg.AutoGen;
 
 public abstract class FunctionLocatorBase : IFunctionLocator
 {
@@ -15,7 +15,7 @@ public abstract class FunctionLocatorBase : IFunctionLocator
             { "avdevice", new[] { "avcodec", "avfilter", "avformat", "avutil" } },
             { "avfilter", new[] { "avcodec", "avformat", "avutil", "postproc", "swresample", "swscale" } },
             { "avformat", new[] { "avcodec", "avutil" } },
-            { "avutil", new string[0] },
+            { "avutil", new string[] { } },
             { "postproc", new[] { "avutil" } },
             { "swresample", new[] { "avutil" } },
             { "swscale", new[] { "avutil" } }
@@ -27,10 +27,15 @@ public abstract class FunctionLocatorBase : IFunctionLocator
 
     public T GetFunctionDelegate<T>(string libraryName, string functionName, bool throwOnError = true)
     {
-        var nativeLibraryHandle = LoadLibrary(libraryName, throwOnError);
-        var ptr = GetFunctionPointer(nativeLibraryHandle, functionName);
+        var nativeLibraryHandle = GetOrLoadLibrary(libraryName, throwOnError);
+        return GetFunctionDelegate<T>(nativeLibraryHandle, functionName, throwOnError);
+    }
 
-        if (ptr == IntPtr.Zero)
+    public T GetFunctionDelegate<T>(IntPtr nativeLibraryHandle, string functionName, bool throwOnError)
+    {
+        var functionPointer = FindFunctionPointer(nativeLibraryHandle, functionName);
+
+        if (functionPointer == IntPtr.Zero)
         {
             if (throwOnError) throw new EntryPointNotFoundException($"Could not find the entrypoint for {functionName}.");
             return default;
@@ -39,7 +44,7 @@ public abstract class FunctionLocatorBase : IFunctionLocator
 #if NETSTANDARD2_0_OR_GREATER
         try
         {
-            return Marshal.GetDelegateForFunctionPointer<T>(ptr);
+            return Marshal.GetDelegateForFunctionPointer<T>(functionPointer);
         }
         catch (MarshalDirectiveException)
         {
@@ -48,16 +53,11 @@ public abstract class FunctionLocatorBase : IFunctionLocator
             return default;
         }
 #else
-        return (T)(object)Marshal.GetDelegateForFunctionPointer(ptr, typeof(T));
+        return (T)(object)Marshal.GetDelegateForFunctionPointer(functionPointer, typeof(T));
 #endif
     }
 
-    protected abstract string GetNativeLibraryName(string libraryName, int version);
-    protected abstract IntPtr LoadNativeLibrary(string libraryName);
-
-    protected abstract IntPtr GetFunctionPointer(IntPtr nativeLibraryHandle, string functionName);
-
-    private IntPtr LoadLibrary(string libraryName, bool throwOnError)
+    public IntPtr GetOrLoadLibrary(string libraryName, bool throwOnError)
     {
         if (_loadedLibraries.TryGetValue(libraryName, out var ptr)) return ptr;
 
@@ -68,7 +68,7 @@ public abstract class FunctionLocatorBase : IFunctionLocator
             var dependencies = LibraryDependenciesMap[libraryName];
             dependencies.Where(n => !_loadedLibraries.ContainsKey(n) && !n.Equals(libraryName))
                 .ToList()
-                .ForEach(n => LoadLibrary(n, false));
+                .ForEach(n => GetOrLoadLibrary(n, false));
 
             var version = ffmpeg.LibraryVersionMap[libraryName];
             var nativeLibraryName = GetNativeLibraryName(Path.Combine(ffmpeg.RootPath, libraryName), version);
@@ -85,4 +85,8 @@ public abstract class FunctionLocatorBase : IFunctionLocator
             return ptr;
         }
     }
+
+    protected abstract string GetNativeLibraryName(string libraryName, int version);
+    protected abstract IntPtr LoadNativeLibrary(string libraryName);
+    protected abstract IntPtr FindFunctionPointer(IntPtr nativeLibraryHandle, string functionName);
 }

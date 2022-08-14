@@ -7,7 +7,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
 
 internal sealed class InlineFunctionsGenerator : GeneratorBase<InlineFunctionDefinition>
 {
-    public InlineFunctionsGenerator(string fileName, GenerationContext context) : base(fileName, context) => IsTypeGenerationOn = true;
+    public InlineFunctionsGenerator(string path, GenerationContext context) : base(path, context) => IsTypeGenerationOn = true;
 
     public static void Generate(string path, GenerationContext context)
     {

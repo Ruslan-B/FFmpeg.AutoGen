@@ -9,7 +9,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
 
 internal abstract class GeneratorBase<TDefinition> : GeneratorBase where TDefinition : IDefinition
 {
-    protected GeneratorBase(string fileName, GenerationContext context) : base(fileName, context)
+    protected GeneratorBase(string path, GenerationContext context) : base(path, context)
     {
     }
 
@@ -27,10 +27,13 @@ internal abstract class GeneratorBase : IDisposable
     private readonly IndentedTextWriter _indentedTextWriter;
     private readonly StreamWriter _streamWriter;
 
-    protected GeneratorBase(string fileName, GenerationContext context)
+    protected GeneratorBase(string path, GenerationContext context)
     {
         Context = context;
-        _streamWriter = File.CreateText(Path.Combine(Context.OutputDir, fileName));
+        var fullPath = Path.Combine(Context.OutputDir, path);
+        var outputDir = Path.GetDirectoryName(fullPath);
+        if (!Directory.Exists(outputDir)) Directory.CreateDirectory(outputDir);
+        _streamWriter = File.CreateText(fullPath);
         _indentedTextWriter = new IndentedTextWriter(_streamWriter);
     }
 

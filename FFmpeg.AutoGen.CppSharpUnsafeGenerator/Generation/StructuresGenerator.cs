@@ -6,7 +6,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
 
 internal sealed class StructuresGenerator : GeneratorBase<StructureDefinition>
 {
-    public StructuresGenerator(string fileName, GenerationContext context) : base(fileName, context)
+    public StructuresGenerator(string path, GenerationContext context) : base(path, context)
     {
     }
 

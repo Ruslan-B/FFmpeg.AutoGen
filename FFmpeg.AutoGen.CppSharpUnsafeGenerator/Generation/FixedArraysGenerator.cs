@@ -6,7 +6,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
 
 internal sealed class FixedArraysGenerator : GeneratorBase<FixedArrayDefinition>
 {
-    public FixedArraysGenerator(string fileName, GenerationContext context) : base(fileName, context)
+    public FixedArraysGenerator(string path, GenerationContext context) : base(path, context)
     {
     }
 

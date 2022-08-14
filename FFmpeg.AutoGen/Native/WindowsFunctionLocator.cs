@@ -10,7 +10,7 @@ public class WindowsFunctionLocator : FunctionLocatorBase
     protected override string GetNativeLibraryName(string libraryName, int version) => $"{libraryName}-{version}.dll";
 
     protected override IntPtr LoadNativeLibrary(string libraryName) => LoadLibrary(libraryName);
-    protected override IntPtr GetFunctionPointer(IntPtr nativeLibraryHandle, string functionName) => GetProcAddress(nativeLibraryHandle, functionName);
+    protected override IntPtr FindFunctionPointer(IntPtr nativeLibraryHandle, string functionName) => GetProcAddress(nativeLibraryHandle, functionName);
 
 
     [DllImport(Kernel32, CharSet = CharSet.Ansi, BestFitMapping = false)]

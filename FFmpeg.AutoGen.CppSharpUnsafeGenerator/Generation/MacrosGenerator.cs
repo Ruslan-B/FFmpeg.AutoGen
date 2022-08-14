@@ -4,7 +4,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
 
 internal sealed class MacrosGenerator : GeneratorBase<MacroDefinition>
 {
-    public MacrosGenerator(string fileName, GenerationContext context) : base(fileName, context) => IsTypeGenerationOn = true;
+    public MacrosGenerator(string path, GenerationContext context) : base(path, context) => IsTypeGenerationOn = true;
 
     public static void Generate(string path, GenerationContext context)
     {

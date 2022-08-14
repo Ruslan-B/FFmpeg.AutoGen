@@ -54,7 +54,7 @@ internal class Program
         astContexts.ForEach(processor.Process);
 
         // generate files
-        var inlineFunctions = ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.SolutionDir, "FFmpeg.AutoGen\\FFmpeg.functions.inline.g.cs"));
+        var inlineFunctions = ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.SolutionDir, "FFmpeg.AutoGen/generated/FFmpeg.functions.inline.g.cs"));
         var generationContext = new GenerationContext
         {
             Namespace = options.Namespace,
@@ -133,7 +133,7 @@ internal class Program
         var context = baseContext with
         {
             IsLegacyGenerationOn = true,
-            OutputDir = Path.Combine(baseContext.SolutionDir, "FFmpeg.AutoGen")
+            OutputDir = Path.Combine(baseContext.SolutionDir, @"FFmpeg.AutoGen\generated")
         };
 
         LibrariesGenerator.Generate($"{context.TypeName}.libraries.g.cs", context);
@@ -153,7 +153,7 @@ internal class Program
         var context = baseContext with
         {
             Namespace = $"{baseContext.Namespace}.Abstractions",
-            OutputDir = Path.Combine(baseContext.SolutionDir, "FFmpeg.AutoGen.Abstractions")
+            OutputDir = Path.Combine(baseContext.SolutionDir, @"FFmpeg.AutoGen.Abstractions\generated")
         };
 
         MacrosGenerator.Generate($"{context.TypeName}.macros.g.cs", context);
@@ -171,7 +171,7 @@ internal class Program
         var context = baseContext with
         {
             Namespace = $"{baseContext.Namespace}.Bindings.StaticallyLinked", TypeName = "StaticallyLinkedBindings",
-            OutputDir = Path.Combine(baseContext.SolutionDir, "FFmpeg.AutoGen.Bindings.StaticallyLinked")
+            OutputDir = Path.Combine(baseContext.SolutionDir, @"FFmpeg.AutoGen.Bindings.StaticallyLinked\generated")
         };
         FunctionsGenerator.GenerateStaticallyLinked("StaticallyLinkedBindings.g.cs", context);
     }
@@ -181,7 +181,7 @@ internal class Program
         var context = baseContext with
         {
             Namespace = $"{baseContext.Namespace}.Bindings.DynamicallyLinked", TypeName = "DynamicallyLinkedBindings",
-            OutputDir = Path.Combine(baseContext.SolutionDir, "FFmpeg.AutoGen.Bindings.DynamicallyLinked")
+            OutputDir = Path.Combine(baseContext.SolutionDir, @"FFmpeg.AutoGen.Bindings.DynamicallyLinked\generated")
         };
 
         FunctionsGenerator.GenerateDynamicallyLinked("DynamicallyLinkedBindings.g.cs", context);
@@ -192,7 +192,7 @@ internal class Program
         var context = baseContext with
         {
             Namespace = $"{baseContext.Namespace}.Bindings.DynamicallyLoaded", TypeName = "DynamicallyLoadedBindings",
-            OutputDir = Path.Combine(baseContext.SolutionDir, "FFmpeg.AutoGen.Bindings.DynamicallyLoaded")
+            OutputDir = Path.Combine(baseContext.SolutionDir, @"FFmpeg.AutoGen.Bindings.DynamicallyLoaded\generated")
         };
 
         LibrariesGenerator.Generate("DynamicallyLoadedBindings.libraries.g.cs", context);
