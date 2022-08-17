@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using FFmpeg.AutoGen.Native;
 
 namespace FFmpeg.AutoGen
@@ -38,11 +39,23 @@ namespace FFmpeg.AutoGen
         {
             GetOrLoadLibrary = libraryName => LoadLibrary(libraryName, true);
 
+#if NET
+            //BSD has #define EAGAIN 35 in errno.h, other OS have EAGAIN 11. Apple is based on BSD 
+            bool bsdStyleErrno =
+                OperatingSystem.IsFreeBSD()
+                || OperatingSystem.IsMacCatalyst()
+                || OperatingSystem.IsMacOS()
+                || OperatingSystem.IsIOS()
+                || OperatingSystem.IsTvOS()
+                || OperatingSystem.IsWatchOS();
+            EAGAIN = bsdStyleErrno ? 35 : 11;
+#else
             EAGAIN = LibraryLoader.GetPlatformId() switch
             {
                 PlatformID.MacOSX => 35,
                 _ => 11
             };
+#endif
         }
 
         /// <summary>
