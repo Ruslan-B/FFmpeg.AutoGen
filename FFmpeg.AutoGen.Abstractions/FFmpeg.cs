@@ -15,9 +15,16 @@ public static partial class ffmpeg
     
     static ffmpeg()
     {
+#if NET
+
+#elif NETSTANDARD2_0_OR_GREATER
         EAGAIN = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? 35 : 11;
+#else
+        EAGAIN = Environment.OSVersion.Platform == PlatformID.MacOSX ? 35 : 11;
+#endif
+
     }
-    
+
     public static ulong UINT64_C<T>(T a)
         => Convert.ToUInt64(a);
 

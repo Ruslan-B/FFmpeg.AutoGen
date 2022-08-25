@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen;
 
-public abstract class FunctionLocatorBase : IFunctionLocator
+public abstract class FunctionResolverBase : IFunctionResolver
 {
     public static readonly Dictionary<string, string[]> LibraryDependenciesMap =
         new()

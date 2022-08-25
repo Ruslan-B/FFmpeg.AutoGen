@@ -14,7 +14,7 @@ public static partial class ffmpeg
     
     static ffmpeg()
     {
-        EAGAIN = FunctionLoaderFactory.GetPlatformId() switch
+        EAGAIN = FunctionResolverFactory.GetPlatformId() switch
         {
             PlatformID.MacOSX => 35,
             _ => 11

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen;
 
-public static class FunctionLoaderFactory
+public static class FunctionResolverFactory
 {
     public static PlatformID GetPlatformId()
     {
@@ -19,16 +19,16 @@ public static class FunctionLoaderFactory
 #endif
     }
 
-    public static IFunctionLocator Create()
+    public static IFunctionResolver Create()
     {
         switch (GetPlatformId())
         {
             case PlatformID.MacOSX:
-                return new MacFunctionLocator();
+                return new MacFunctionResolver();
             case PlatformID.Unix:
-                return new LinuxFunctionLocator();
+                return new LinuxFunctionResolver();
             case PlatformID.Win32NT:
-                return new WindowsFunctionLocator();
+                return new WindowsFunctionResolver();
             default:
                 throw new PlatformNotSupportedException();
         }

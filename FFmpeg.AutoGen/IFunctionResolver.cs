@@ -5,7 +5,7 @@ namespace FFmpeg.AutoGen;
 /// <summary>
 ///     Supports loading functions from native libraries. Provides a more flexible alternative to P/Invoke.
 /// </summary>
-public interface IFunctionLocator
+public interface IFunctionResolver
 {
     /// <summary>
     ///     Get a pointer to the native library

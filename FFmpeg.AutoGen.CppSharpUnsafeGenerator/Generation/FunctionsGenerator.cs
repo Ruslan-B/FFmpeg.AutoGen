@@ -65,7 +65,7 @@ internal sealed class FunctionsGenerator : GeneratorBase<ExportFunctionDefinitio
         if (IsDynamicallyLoadedGenerationOn)
         {
             WriteLine("public static bool ThrowErrorIfFunctionNotFound;");
-            WriteLine("public static IFunctionLocator FunctionLoader;");
+            WriteLine("public static IFunctionResolver FunctionResolver;");
             WriteLine();
         }
 
@@ -78,7 +78,7 @@ internal sealed class FunctionsGenerator : GeneratorBase<ExportFunctionDefinitio
             using (BeginBlock())
                 if (IsDynamicallyLoadedGenerationOn)
                 {
-                    WriteLine("FunctionLoader = FunctionLoaderFactory.Create();");
+                    WriteLine("if (FunctionResolver == null) FunctionResolver = FunctionResolverFactory.Create();");
                     WriteLine();
                     functions.ToList().ForEach(GenerateDynamicallyLoaded);
                 }
@@ -143,7 +143,7 @@ internal sealed class FunctionsGenerator : GeneratorBase<ExportFunctionDefinitio
         using (BeginBlock(true))
         {
             var functionDelegateName = GetFunctionDelegateName(function);
-            var getDelegate = $"FunctionLoader.GetFunctionDelegate<vectors.{functionDelegateName}>(\"{function.LibraryName}\", \"{function.Name}\", ThrowErrorIfFunctionNotFound)";
+            var getDelegate = $"FunctionResolver.GetFunctionDelegate<vectors.{functionDelegateName}>(\"{function.LibraryName}\", \"{function.Name}\", ThrowErrorIfFunctionNotFound)";
             WriteLine($"{functionFieldName} = {getDelegate} ?? delegate {{ throw new NotSupportedException(); }};");
             var returnCommand = function.ReturnType.Name == "void" ? string.Empty : "return ";
             var parameterNames = ParametersHelper.GetParameterNames(function.Parameters);

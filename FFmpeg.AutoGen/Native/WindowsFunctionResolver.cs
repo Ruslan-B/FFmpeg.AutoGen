@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Native;
 
-public class WindowsFunctionLocator : FunctionLocatorBase
+public class WindowsFunctionResolver : FunctionResolverBase
 {
     private const string Kernel32 = "kernel32";
 
