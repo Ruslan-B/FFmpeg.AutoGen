@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Bindings.DynamicallyLoaded.Native;
 
-public class MacFunctionLocator : FunctionLocatorBase
+public class MacFunctionResolver : FunctionResolverBase
 {
     private const string Libdl = "libdl";
 

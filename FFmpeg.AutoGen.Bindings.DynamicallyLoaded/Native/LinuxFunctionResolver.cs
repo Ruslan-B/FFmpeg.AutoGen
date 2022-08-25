@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace FFmpeg.AutoGen.Bindings.DynamicallyLoaded.Native;
 
-public class LinuxFunctionLocator : FunctionLocatorBase
+public class LinuxFunctionResolver : FunctionResolverBase
 {
     private const string Libdl = "libdl.so.2";
 
