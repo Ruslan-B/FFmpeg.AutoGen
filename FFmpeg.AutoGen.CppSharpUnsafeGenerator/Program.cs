@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using CppSharp.AST;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
-using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Procesing;
+using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processing;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator;
 

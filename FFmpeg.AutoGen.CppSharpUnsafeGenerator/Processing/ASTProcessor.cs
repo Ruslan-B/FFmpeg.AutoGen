@@ -3,7 +3,7 @@ using CppSharp.AST;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 using MacroDefinition = FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions.MacroDefinition;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Procesing;
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processing;
 
 internal sealed class ASTProcessor
 {

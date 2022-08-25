@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Procesing;
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processing;
 
 internal record TypeOrAlias
 {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Procesing;
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processing;
 
 internal sealed record ProcessingContext
 {
@@ -17,8 +17,10 @@ internal sealed record ProcessingContext
     {
         if (IgnoreUnitNames.Contains(definition.Name)) return;
         var existing = Definitions.FirstOrDefault(x => x.Name == definition.Name);
+
         if (existing != null)
             Definitions.Remove(existing);
+
         Definitions.Add(definition);
     }
 }

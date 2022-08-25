@@ -2,7 +2,7 @@
 using CppSharp.AST;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Procesing;
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processing;
 
 internal static class ObsoletionHelper
 {

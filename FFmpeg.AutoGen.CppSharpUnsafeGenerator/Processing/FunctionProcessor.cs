@@ -6,7 +6,7 @@ using CppSharp.AST;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 using Type = CppSharp.AST.Type;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Procesing;
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processing;
 
 internal class FunctionProcessor
 {

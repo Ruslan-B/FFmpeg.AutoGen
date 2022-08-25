@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using FFmpeg.AutoGen.ClangMacroParser.Expressions;
 using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
-namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Procesing;
+namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processing;
 
 internal class MacroPostProcessor
 {
