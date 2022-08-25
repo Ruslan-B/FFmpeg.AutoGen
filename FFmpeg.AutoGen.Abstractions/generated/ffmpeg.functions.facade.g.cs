@@ -103,6 +103,80 @@ public static unsafe partial class ffmpeg
     [Obsolete("use av_channel_layout_describe()")]
     public static void av_bprint_channel_layout(AVBPrint* @bp, int @nb_channels, ulong @channel_layout) => vectors.av_bprint_channel_layout(@bp, @nb_channels, @channel_layout);
     
+    /// <summary>Allocate a context for a given bitstream filter. The caller must fill in the context parameters as described in the documentation and then call av_bsf_init() before sending any data to the filter.</summary>
+    /// <param name="filter">the filter for which to allocate an instance.</param>
+    /// <param name="ctx">a pointer into which the pointer to the newly-allocated context will be written. It must be freed with av_bsf_free() after the filtering is done.</param>
+    /// <returns>0 on success, a negative AVERROR code on failure</returns>
+    public static int av_bsf_alloc(AVBitStreamFilter* @filter, AVBSFContext** @ctx) => vectors.av_bsf_alloc(@filter, @ctx);
+    
+    /// <summary>Reset the internal bitstream filter state. Should be called e.g. when seeking.</summary>
+    public static void av_bsf_flush(AVBSFContext* @ctx) => vectors.av_bsf_flush(@ctx);
+    
+    /// <summary>Free a bitstream filter context and everything associated with it; write NULL into the supplied pointer.</summary>
+    public static void av_bsf_free(AVBSFContext** @ctx) => vectors.av_bsf_free(@ctx);
+    
+    /// <summary>Returns a bitstream filter with the specified name or NULL if no such bitstream filter exists.</summary>
+    /// <returns>a bitstream filter with the specified name or NULL if no such bitstream filter exists.</returns>
+    public static AVBitStreamFilter* av_bsf_get_by_name(string @name) => vectors.av_bsf_get_by_name(@name);
+    
+    /// <summary>Get the AVClass for AVBSFContext. It can be used in combination with AV_OPT_SEARCH_FAKE_OBJ for examining options.</summary>
+    public static AVClass* av_bsf_get_class() => vectors.av_bsf_get_class();
+    
+    /// <summary>Get null/pass-through bitstream filter.</summary>
+    /// <param name="bsf">Pointer to be set to new instance of pass-through bitstream filter</param>
+    public static int av_bsf_get_null_filter(AVBSFContext** @bsf) => vectors.av_bsf_get_null_filter(@bsf);
+    
+    /// <summary>Prepare the filter for use, after all the parameters and options have been set.</summary>
+    public static int av_bsf_init(AVBSFContext* @ctx) => vectors.av_bsf_init(@ctx);
+    
+    /// <summary>Iterate over all registered bitstream filters.</summary>
+    /// <param name="opaque">a pointer where libavcodec will store the iteration state. Must point to NULL to start the iteration.</param>
+    /// <returns>the next registered bitstream filter or NULL when the iteration is finished</returns>
+    public static AVBitStreamFilter* av_bsf_iterate(void** @opaque) => vectors.av_bsf_iterate(@opaque);
+    
+    /// <summary>Allocate empty list of bitstream filters. The list must be later freed by av_bsf_list_free() or finalized by av_bsf_list_finalize().</summary>
+    /// <returns>Pointer to on success, NULL in case of failure</returns>
+    public static AVBSFList* av_bsf_list_alloc() => vectors.av_bsf_list_alloc();
+    
+    /// <summary>Append bitstream filter to the list of bitstream filters.</summary>
+    /// <param name="lst">List to append to</param>
+    /// <param name="bsf">Filter context to be appended</param>
+    /// <returns>&gt;=0 on success, negative AVERROR in case of failure</returns>
+    public static int av_bsf_list_append(AVBSFList* @lst, AVBSFContext* @bsf) => vectors.av_bsf_list_append(@lst, @bsf);
+    
+    /// <summary>Construct new bitstream filter context given it&apos;s name and options and append it to the list of bitstream filters.</summary>
+    /// <param name="lst">List to append to</param>
+    /// <param name="bsf_name">Name of the bitstream filter</param>
+    /// <param name="options">Options for the bitstream filter, can be set to NULL</param>
+    /// <returns>&gt;=0 on success, negative AVERROR in case of failure</returns>
+    public static int av_bsf_list_append2(AVBSFList* @lst, string @bsf_name, AVDictionary** @options) => vectors.av_bsf_list_append2(@lst, @bsf_name, @options);
+    
+    /// <summary>Finalize list of bitstream filters.</summary>
+    /// <param name="lst">Filter list structure to be transformed</param>
+    /// <param name="bsf">Pointer to be set to newly created structure representing the chain of bitstream filters</param>
+    /// <returns>&gt;=0 on success, negative AVERROR in case of failure</returns>
+    public static int av_bsf_list_finalize(AVBSFList** @lst, AVBSFContext** @bsf) => vectors.av_bsf_list_finalize(@lst, @bsf);
+    
+    /// <summary>Free list of bitstream filters.</summary>
+    /// <param name="lst">Pointer to pointer returned by av_bsf_list_alloc()</param>
+    public static void av_bsf_list_free(AVBSFList** @lst) => vectors.av_bsf_list_free(@lst);
+    
+    /// <summary>Parse string describing list of bitstream filters and create single AVBSFContext describing the whole chain of bitstream filters. Resulting AVBSFContext can be treated as any other AVBSFContext freshly allocated by av_bsf_alloc().</summary>
+    /// <param name="str">String describing chain of bitstream filters in format `bsf1[=opt1=val1:opt2=val2][,bsf2]`</param>
+    /// <param name="bsf">Pointer to be set to newly created structure representing the chain of bitstream filters</param>
+    /// <returns>&gt;=0 on success, negative AVERROR in case of failure</returns>
+    public static int av_bsf_list_parse_str(string @str, AVBSFContext** @bsf) => vectors.av_bsf_list_parse_str(@str, @bsf);
+    
+    /// <summary>Retrieve a filtered packet.</summary>
+    /// <param name="pkt">this struct will be filled with the contents of the filtered packet. It is owned by the caller and must be freed using av_packet_unref() when it is no longer needed. This parameter should be &quot;clean&quot; (i.e. freshly allocated with av_packet_alloc() or unreffed with av_packet_unref()) when this function is called. If this function returns successfully, the contents of pkt will be completely overwritten by the returned data. On failure, pkt is not touched.</param>
+    /// <returns>- 0 on success. - AVERROR(EAGAIN) if more packets need to be sent to the filter (using av_bsf_send_packet()) to get more output. - AVERROR_EOF if there will be no further output from the filter. - Another negative AVERROR value if an error occurs.</returns>
+    public static int av_bsf_receive_packet(AVBSFContext* @ctx, AVPacket* @pkt) => vectors.av_bsf_receive_packet(@ctx, @pkt);
+    
+    /// <summary>Submit a packet for filtering.</summary>
+    /// <param name="pkt">the packet to filter. The bitstream filter will take ownership of the packet and reset the contents of pkt. pkt is not touched if an error occurs. If pkt is empty (i.e. NULL, or pkt-&gt;data is NULL and pkt-&gt;side_data_elems zero), it signals the end of the stream (i.e. no more non-empty packets will be sent; sending more empty packets does nothing) and will cause the filter to output any packets it may have buffered internally.</param>
+    /// <returns>- 0 on success. - AVERROR(EAGAIN) if packets need to be retrieved from the filter (using av_bsf_receive_packet()) before new input can be consumed. - Another negative AVERROR value if an error occurs.</returns>
+    public static int av_bsf_send_packet(AVBSFContext* @ctx, AVPacket* @pkt) => vectors.av_bsf_send_packet(@ctx, @pkt);
+    
     /// <summary>Allocate an AVBuffer of the given size using av_malloc().</summary>
     /// <returns>an AVBufferRef of given size or NULL when out of memory</returns>
     public static AVBufferRef* av_buffer_alloc(ulong @size) => vectors.av_buffer_alloc(@size);

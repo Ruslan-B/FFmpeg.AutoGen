@@ -74,6 +74,88 @@ public static unsafe partial class vectors
     public static av_bprint_channel_layout_delegate av_bprint_channel_layout;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_bsf_alloc_delegate(AVBitStreamFilter* @filter, AVBSFContext** @ctx);
+    public static av_bsf_alloc_delegate av_bsf_alloc;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_bsf_flush_delegate(AVBSFContext* @ctx);
+    public static av_bsf_flush_delegate av_bsf_flush;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_bsf_free_delegate(AVBSFContext** @ctx);
+    public static av_bsf_free_delegate av_bsf_free;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVBitStreamFilter* av_bsf_get_by_name_delegate(    
+    #if NETSTANDARD2_1_OR_GREATER
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @name);
+    public static av_bsf_get_by_name_delegate av_bsf_get_by_name;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVClass* av_bsf_get_class_delegate();
+    public static av_bsf_get_class_delegate av_bsf_get_class;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_bsf_get_null_filter_delegate(AVBSFContext** @bsf);
+    public static av_bsf_get_null_filter_delegate av_bsf_get_null_filter;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_bsf_init_delegate(AVBSFContext* @ctx);
+    public static av_bsf_init_delegate av_bsf_init;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVBitStreamFilter* av_bsf_iterate_delegate(void** @opaque);
+    public static av_bsf_iterate_delegate av_bsf_iterate;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVBSFList* av_bsf_list_alloc_delegate();
+    public static av_bsf_list_alloc_delegate av_bsf_list_alloc;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_bsf_list_append_delegate(AVBSFList* @lst, AVBSFContext* @bsf);
+    public static av_bsf_list_append_delegate av_bsf_list_append;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_bsf_list_append2_delegate(AVBSFList* @lst,     
+    #if NETSTANDARD2_1_OR_GREATER
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @bsf_name, AVDictionary** @options);
+    public static av_bsf_list_append2_delegate av_bsf_list_append2;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_bsf_list_finalize_delegate(AVBSFList** @lst, AVBSFContext** @bsf);
+    public static av_bsf_list_finalize_delegate av_bsf_list_finalize;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_bsf_list_free_delegate(AVBSFList** @lst);
+    public static av_bsf_list_free_delegate av_bsf_list_free;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_bsf_list_parse_str_delegate(    
+    #if NETSTANDARD2_1_OR_GREATER
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @str, AVBSFContext** @bsf);
+    public static av_bsf_list_parse_str_delegate av_bsf_list_parse_str;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_bsf_receive_packet_delegate(AVBSFContext* @ctx, AVPacket* @pkt);
+    public static av_bsf_receive_packet_delegate av_bsf_receive_packet;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_bsf_send_packet_delegate(AVBSFContext* @ctx, AVPacket* @pkt);
+    public static av_bsf_send_packet_delegate av_bsf_send_packet;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVBufferRef* av_buffer_alloc_delegate(ulong @size);
     public static av_buffer_alloc_delegate av_buffer_alloc;
     

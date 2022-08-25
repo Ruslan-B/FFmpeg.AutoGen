@@ -13,7 +13,10 @@ public static partial class ffmpeg
 
     public static readonly int EPIPE = 32;
     
-    static ffmpeg() => EAGAIN = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? 35 : 11;
+    static ffmpeg()
+    {
+        EAGAIN = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? 35 : 11;
+    }
     
     public static ulong UINT64_C<T>(T a)
         => Convert.ToUInt64(a);

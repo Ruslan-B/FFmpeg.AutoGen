@@ -31,6 +31,34 @@ public unsafe partial struct AVABufferSinkParams
     public int* @sample_rates;
 }
 
+public unsafe partial struct AVBitStreamFilter
+{
+    public byte* @name;
+    /// <summary>A list of codec ids supported by the filter, terminated by AV_CODEC_ID_NONE. May be NULL, in that case the bitstream filter works with any codec id.</summary>
+    public AVCodecID* @codec_ids;
+    /// <summary>A class for the private data, used to declare bitstream filter private AVOptions. This field is NULL for bitstream filters that do not declare any options.</summary>
+    public AVClass* @priv_class;
+}
+
+/// <summary>The bitstream filter state.</summary>
+public unsafe partial struct AVBSFContext
+{
+    /// <summary>A class for logging and AVOptions</summary>
+    public AVClass* @av_class;
+    /// <summary>The bitstream filter this context is an instance of.</summary>
+    public AVBitStreamFilter* @filter;
+    /// <summary>Opaque filter-specific private data. If filter-&gt;priv_class is non-NULL, this is an AVOptions-enabled struct.</summary>
+    public void* @priv_data;
+    /// <summary>Parameters of the input stream. This field is allocated in av_bsf_alloc(), it needs to be filled by the caller before av_bsf_init().</summary>
+    public AVCodecParameters* @par_in;
+    /// <summary>Parameters of the output stream. This field is allocated in av_bsf_alloc(), it is set by the filter in av_bsf_init().</summary>
+    public AVCodecParameters* @par_out;
+    /// <summary>The timebase used for the timestamps of the input packets. Set by the caller before av_bsf_init().</summary>
+    public AVRational @time_base_in;
+    /// <summary>The timebase used for the timestamps of the output packets. Set by the filter in av_bsf_init().</summary>
+    public AVRational @time_base_out;
+}
+
 /// <summary>A reference to a data buffer.</summary>
 public unsafe partial struct AVBufferRef
 {
@@ -2458,6 +2486,12 @@ public unsafe partial struct AVAudioFifo
 
 /// <remarks>This struct is incomplete.</remarks>
 public unsafe partial struct AVBPrint
+{
+}
+
+/// <summary>Structure for chain/list of bitstream filters. Empty list can be allocated by av_bsf_list_alloc().</summary>
+/// <remarks>This struct is incomplete.</remarks>
+public unsafe partial struct AVBSFList
 {
 }
 

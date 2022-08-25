@@ -114,6 +114,102 @@ public static unsafe partial class DynamicallyLoadedBindings
             vectors.av_bprint_channel_layout(@bp, @nb_channels, @channel_layout);
         };
         
+        vectors.av_bsf_alloc = (AVBitStreamFilter* @filter, AVBSFContext** @ctx) =>
+        {
+            vectors.av_bsf_alloc = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_alloc_delegate>("avcodec", "av_bsf_alloc", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_alloc(@filter, @ctx);
+        };
+        
+        vectors.av_bsf_flush = (AVBSFContext* @ctx) =>
+        {
+            vectors.av_bsf_flush = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_flush_delegate>("avcodec", "av_bsf_flush", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            vectors.av_bsf_flush(@ctx);
+        };
+        
+        vectors.av_bsf_free = (AVBSFContext** @ctx) =>
+        {
+            vectors.av_bsf_free = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_free_delegate>("avcodec", "av_bsf_free", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            vectors.av_bsf_free(@ctx);
+        };
+        
+        vectors.av_bsf_get_by_name = (string @name) =>
+        {
+            vectors.av_bsf_get_by_name = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_get_by_name_delegate>("avcodec", "av_bsf_get_by_name", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_get_by_name(@name);
+        };
+        
+        vectors.av_bsf_get_class = () =>
+        {
+            vectors.av_bsf_get_class = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_get_class_delegate>("avcodec", "av_bsf_get_class", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_get_class();
+        };
+        
+        vectors.av_bsf_get_null_filter = (AVBSFContext** @bsf) =>
+        {
+            vectors.av_bsf_get_null_filter = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_get_null_filter_delegate>("avcodec", "av_bsf_get_null_filter", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_get_null_filter(@bsf);
+        };
+        
+        vectors.av_bsf_init = (AVBSFContext* @ctx) =>
+        {
+            vectors.av_bsf_init = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_init_delegate>("avcodec", "av_bsf_init", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_init(@ctx);
+        };
+        
+        vectors.av_bsf_iterate = (void** @opaque) =>
+        {
+            vectors.av_bsf_iterate = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_iterate_delegate>("avcodec", "av_bsf_iterate", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_iterate(@opaque);
+        };
+        
+        vectors.av_bsf_list_alloc = () =>
+        {
+            vectors.av_bsf_list_alloc = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_list_alloc_delegate>("avcodec", "av_bsf_list_alloc", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_list_alloc();
+        };
+        
+        vectors.av_bsf_list_append = (AVBSFList* @lst, AVBSFContext* @bsf) =>
+        {
+            vectors.av_bsf_list_append = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_list_append_delegate>("avcodec", "av_bsf_list_append", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_list_append(@lst, @bsf);
+        };
+        
+        vectors.av_bsf_list_append2 = (AVBSFList* @lst, string @bsf_name, AVDictionary** @options) =>
+        {
+            vectors.av_bsf_list_append2 = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_list_append2_delegate>("avcodec", "av_bsf_list_append2", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_list_append2(@lst, @bsf_name, @options);
+        };
+        
+        vectors.av_bsf_list_finalize = (AVBSFList** @lst, AVBSFContext** @bsf) =>
+        {
+            vectors.av_bsf_list_finalize = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_list_finalize_delegate>("avcodec", "av_bsf_list_finalize", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_list_finalize(@lst, @bsf);
+        };
+        
+        vectors.av_bsf_list_free = (AVBSFList** @lst) =>
+        {
+            vectors.av_bsf_list_free = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_list_free_delegate>("avcodec", "av_bsf_list_free", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            vectors.av_bsf_list_free(@lst);
+        };
+        
+        vectors.av_bsf_list_parse_str = (string @str, AVBSFContext** @bsf) =>
+        {
+            vectors.av_bsf_list_parse_str = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_list_parse_str_delegate>("avcodec", "av_bsf_list_parse_str", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_list_parse_str(@str, @bsf);
+        };
+        
+        vectors.av_bsf_receive_packet = (AVBSFContext* @ctx, AVPacket* @pkt) =>
+        {
+            vectors.av_bsf_receive_packet = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_receive_packet_delegate>("avcodec", "av_bsf_receive_packet", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_receive_packet(@ctx, @pkt);
+        };
+        
+        vectors.av_bsf_send_packet = (AVBSFContext* @ctx, AVPacket* @pkt) =>
+        {
+            vectors.av_bsf_send_packet = FunctionLoader.GetFunctionDelegate<vectors.av_bsf_send_packet_delegate>("avcodec", "av_bsf_send_packet", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_bsf_send_packet(@ctx, @pkt);
+        };
+        
         vectors.av_buffer_alloc = (ulong @size) =>
         {
             vectors.av_buffer_alloc = FunctionLoader.GetFunctionDelegate<vectors.av_buffer_alloc_delegate>("avutil", "av_buffer_alloc", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
