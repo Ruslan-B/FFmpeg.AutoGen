@@ -19,10 +19,9 @@
 #ifndef AVUTIL_FILE_H
 #define AVUTIL_FILE_H
 
-#include <stddef.h>
 #include <stdint.h>
 
-#include "attributes.h"
+#include "avutil.h"
 
 /**
  * @file

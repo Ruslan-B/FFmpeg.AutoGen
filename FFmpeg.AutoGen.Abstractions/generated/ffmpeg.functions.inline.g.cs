@@ -119,27 +119,37 @@ public static unsafe partial class ffmpeg
     }
     // original body hash: FGSX8EvLhMgYqP9+0z1+Clej4HxjpENDPDX7uAYLx6k=
     
-    /// <summary>Clip a double value into the amin-amax range. If a is nan or -inf amin will be returned. If a is +inf amax will be returned.</summary>
+    /// <summary>Clip a double value into the amin-amax range.</summary>
     /// <param name="a">value to clip</param>
     /// <param name="amin">minimum value of the clip range</param>
     /// <param name="amax">maximum value of the clip range</param>
     /// <returns>clipped value</returns>
     public static double av_clipd_c(double @a, double @amin, double @amax)
-    {
-        return ((((a) > (amin) ? (a) : (amin))) > (amax) ? (amax) : (((a) > (amin) ? (a) : (amin))));
-    }
-    // original body hash: 3g76qefPWCYqXraY2vYdxoH58/EKn5EeR9v7cGEBM6Y=
+{
+    if (a < amin)
+        return amin;
+    else if (a > amax)
+        return amax;
+    else
+        return a;
+}
+    // original body hash: FGSX8EvLhMgYqP9+0z1+Clej4HxjpENDPDX7uAYLx6k=
     
-    /// <summary>Clip a float value into the amin-amax range. If a is nan or -inf amin will be returned. If a is +inf amax will be returned.</summary>
+    /// <summary>Clip a float value into the amin-amax range.</summary>
     /// <param name="a">value to clip</param>
     /// <param name="amin">minimum value of the clip range</param>
     /// <param name="amax">maximum value of the clip range</param>
     /// <returns>clipped value</returns>
     public static float av_clipf_c(float @a, float @amin, float @amax)
-    {
-        return ((((a) > (amin) ? (a) : (amin))) > (amax) ? (amax) : (((a) > (amin) ? (a) : (amin))));
-    }
-    // original body hash: 3g76qefPWCYqXraY2vYdxoH58/EKn5EeR9v7cGEBM6Y=
+{
+    if (a < amin)
+        return amin;
+    else if (a > amax)
+        return amax;
+    else
+        return a;
+}
+    // original body hash: FGSX8EvLhMgYqP9+0z1+Clej4HxjpENDPDX7uAYLx6k=
     
     /// <summary>Clip a signed 64-bit integer value into the -2147483648,2147483647 range.</summary>
     /// <param name="a">value to clip</param>
@@ -177,6 +187,20 @@ public static unsafe partial class ffmpeg
         return (ulong)@f;
     }
     // original body hash: 2HuHK8WLchm3u+cK6H4QWhflx2JqfewtaSpj2Cwfi8M=
+    
+    /// <summary>Return a pointer to the data stored in a FIFO buffer at a certain offset. The FIFO buffer is not modified.</summary>
+    /// <param name="f">AVFifoBuffer to peek at, f must be non-NULL</param>
+    /// <param name="offs">an offset in bytes, its absolute value must be less than the used buffer size or the returned pointer will point outside to the buffer data. The used buffer size can be checked with av_fifo_size().</param>
+    public static byte* av_fifo_peek2(AVFifoBuffer* @f, int @offs)
+    {
+        var ptr = f->rptr + offs;
+        if (ptr >= f->end)
+            ptr = f->buffer + (ptr - f->end);
+        else if (ptr < f->buffer)
+            ptr = f->end - (f->buffer - ptr);
+        return ptr;
+    }
+    // original body hash: a/0nqgUaumzMZOnAhLMJPnR6ow/FVA/2BhUjoRgtNUc=
     
     /// <summary>Reinterpret a float as a 32-bit integer.</summary>
     public static uint av_float2int(float @f)
@@ -349,6 +373,19 @@ public static unsafe partial class ffmpeg
         }
     }
     // original body hash: 6YrSxDrYVG1ac1wlCiXKMhTwj7Kx6eym/YtspKusrGk=
+    
+    /// <summary>Multiply two `size_t` values checking for overflow.</summary>
+    /// <param name="r">Pointer to the result of the operation</param>
+    /// <returns>0 on success, AVERROR(EINVAL) on overflow</returns>
+    public static int av_size_mult(ulong @a, ulong @b, ulong* @r)
+    {
+        var t = (a * b);
+        if ((a | b) >= (ulong)(1 << (sizeof(IntPtr) * 4)) && a != 0 && t / a != b)
+            return (-(22));
+        *r = t;
+        return 0;
+    }
+    // original body hash: 9hUy1Krnq44y4GGrDSgtMhTc6EJfjHhsQkXtuDtHmZg=
     
     /// <summary>Return x default pointer in case p is NULL.</summary>
     public static void* av_x_if_null(void* @p, void* @x)

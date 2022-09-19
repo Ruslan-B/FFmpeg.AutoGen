@@ -25,7 +25,6 @@
 #ifndef AVUTIL_BUFFER_H
 #define AVUTIL_BUFFER_H
 
-#include <stddef.h>
 #include <stdint.h>
 
 /**
@@ -91,7 +90,7 @@ typedef struct AVBufferRef {
     /**
      * Size of data in bytes.
      */
-    size_t   size;
+    int      size;
 } AVBufferRef;
 
 /**
@@ -99,13 +98,13 @@ typedef struct AVBufferRef {
  *
  * @return an AVBufferRef of given size or NULL when out of memory
  */
-AVBufferRef *av_buffer_alloc(size_t size);
+AVBufferRef *av_buffer_alloc(int size);
 
 /**
  * Same as av_buffer_alloc(), except the returned buffer will be initialized
  * to zero.
  */
-AVBufferRef *av_buffer_allocz(size_t size);
+AVBufferRef *av_buffer_allocz(int size);
 
 /**
  * Always treat the buffer as read-only, even when it has only one
@@ -128,7 +127,7 @@ AVBufferRef *av_buffer_allocz(size_t size);
  *
  * @return an AVBufferRef referring to data on success, NULL on failure.
  */
-AVBufferRef *av_buffer_create(uint8_t *data, size_t size,
+AVBufferRef *av_buffer_create(uint8_t *data, int size,
                               void (*free)(void *opaque, uint8_t *data),
                               void *opaque, int flags);
 
@@ -145,7 +144,7 @@ void av_buffer_default_free(void *opaque, uint8_t *data);
  * @return a new AVBufferRef referring to the same AVBuffer as buf or NULL on
  * failure.
  */
-AVBufferRef *av_buffer_ref(const AVBufferRef *buf);
+AVBufferRef *av_buffer_ref(AVBufferRef *buf);
 
 /**
  * Free a given reference and automatically free the buffer if there are no more
@@ -196,23 +195,7 @@ int av_buffer_make_writable(AVBufferRef **buf);
  * reference to it (i.e. the one passed to this function). In all other cases
  * a new buffer is allocated and the data is copied.
  */
-int av_buffer_realloc(AVBufferRef **buf, size_t size);
-
-/**
- * Ensure dst refers to the same data as src.
- *
- * When *dst is already equivalent to src, do nothing. Otherwise unreference dst
- * and replace it with a new reference to src.
- *
- * @param dst Pointer to either a valid buffer reference or NULL. On success,
- *            this will point to a buffer reference equivalent to src. On
- *            failure, dst will be left untouched.
- * @param src A buffer reference to replace dst with. May be NULL, then this
- *            function is equivalent to av_buffer_unref(dst).
- * @return 0 on success
- *         AVERROR(ENOMEM) on memory allocation failure.
- */
-int av_buffer_replace(AVBufferRef **dst, const AVBufferRef *src);
+int av_buffer_realloc(AVBufferRef **buf, int size);
 
 /**
  * @}
@@ -263,7 +246,7 @@ typedef struct AVBufferPool AVBufferPool;
  * (av_buffer_alloc()).
  * @return newly created buffer pool on success, NULL on error.
  */
-AVBufferPool *av_buffer_pool_init(size_t size, AVBufferRef* (*alloc)(size_t size));
+AVBufferPool *av_buffer_pool_init(int size, AVBufferRef* (*alloc)(int size));
 
 /**
  * Allocate and initialize a buffer pool with a more complex allocator.
@@ -280,8 +263,8 @@ AVBufferPool *av_buffer_pool_init(size_t size, AVBufferRef* (*alloc)(size_t size
  *                  data. May be NULL.
  * @return newly created buffer pool on success, NULL on error.
  */
-AVBufferPool *av_buffer_pool_init2(size_t size, void *opaque,
-                                   AVBufferRef* (*alloc)(void *opaque, size_t size),
+AVBufferPool *av_buffer_pool_init2(int size, void *opaque,
+                                   AVBufferRef* (*alloc)(void *opaque, int size),
                                    void (*pool_free)(void *opaque));
 
 /**
@@ -313,7 +296,7 @@ AVBufferRef *av_buffer_pool_get(AVBufferPool *pool);
  * therefore you have to use this function to access the original opaque
  * parameter of an allocated buffer.
  */
-void *av_buffer_pool_buffer_get_opaque(const AVBufferRef *ref);
+void *av_buffer_pool_buffer_get_opaque(AVBufferRef *ref);
 
 /**
  * @}

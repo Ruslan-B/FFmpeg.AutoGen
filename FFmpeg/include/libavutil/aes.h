@@ -24,6 +24,7 @@
 #include <stdint.h>
 
 #include "attributes.h"
+#include "version.h"
 
 /**
  * @defgroup lavu_aes AES

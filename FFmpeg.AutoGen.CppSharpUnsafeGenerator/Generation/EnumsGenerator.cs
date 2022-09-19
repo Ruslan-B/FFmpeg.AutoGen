@@ -1,4 +1,5 @@
-﻿using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
+﻿using System.Collections.Generic;
+using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
 
@@ -12,6 +13,11 @@ internal sealed class EnumsGenerator : GeneratorBase<EnumerationDefinition>
     {
         using var g = new EnumsGenerator(path, context);
         g.Generate();
+    }
+
+    public override IEnumerable<string> Usings()
+    {
+        yield return "System";
     }
 
     protected override void GenerateDefinition(EnumerationDefinition @enum)

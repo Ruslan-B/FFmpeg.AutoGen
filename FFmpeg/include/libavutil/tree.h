@@ -28,6 +28,7 @@
 #define AVUTIL_TREE_H
 
 #include "attributes.h"
+#include "version.h"
 
 /**
  * @addtogroup lavu_tree AVTree

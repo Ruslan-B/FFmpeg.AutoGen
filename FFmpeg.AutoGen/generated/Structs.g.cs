@@ -16,7 +16,7 @@ public unsafe partial struct _iobuf
     public void* @_Placeholder;
 }
 
-/// <summary>Deprecated and unused struct to use for initializing an abuffersink context.</summary>
+/// <summary>Struct to use for initializing an abuffersink context.</summary>
 public unsafe partial struct AVABufferSinkParams
 {
     /// <summary>list of allowed sample formats, terminated by AV_SAMPLE_FMT_NONE</summary>
@@ -38,6 +38,22 @@ public unsafe partial struct AVBitStreamFilter
     public AVCodecID* @codec_ids;
     /// <summary>A class for the private data, used to declare bitstream filter private AVOptions. This field is NULL for bitstream filters that do not declare any options.</summary>
     public AVClass* @priv_class;
+    /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavcodec and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
+    public int @priv_data_size;
+    public AVBitStreamFilter_init_func @init;
+    public AVBitStreamFilter_filter_func @filter;
+    public AVBitStreamFilter_close_func @close;
+    public AVBitStreamFilter_flush_func @flush;
+}
+
+public unsafe partial struct AVBitStreamFilterContext
+{
+    public void* @priv_data;
+    public AVBitStreamFilter* @filter;
+    public AVCodecParserContext* @parser;
+    public AVBitStreamFilterContext* @next;
+    /// <summary>Internal default arguments, used if NULL is passed to av_bitstream_filter_filter(). Not for access by library users.</summary>
+    public byte* @args;
 }
 
 /// <summary>The bitstream filter state.</summary>
@@ -47,6 +63,8 @@ public unsafe partial struct AVBSFContext
     public AVClass* @av_class;
     /// <summary>The bitstream filter this context is an instance of.</summary>
     public AVBitStreamFilter* @filter;
+    /// <summary>Opaque libavcodec internal data. Must not be touched by the caller in any way.</summary>
+    public AVBSFInternal* @internal;
     /// <summary>Opaque filter-specific private data. If filter-&gt;priv_class is non-NULL, this is an AVOptions-enabled struct.</summary>
     public void* @priv_data;
     /// <summary>Parameters of the input stream. This field is allocated in av_bsf_alloc(), it needs to be filled by the caller before av_bsf_init().</summary>
@@ -66,10 +84,10 @@ public unsafe partial struct AVBufferRef
     /// <summary>The data buffer. It is considered writable if and only if this is the only reference to the buffer, in which case av_buffer_is_writable() returns 1.</summary>
     public byte* @data;
     /// <summary>Size of data in bytes.</summary>
-    public ulong @size;
+    public int @size;
 }
 
-/// <summary>Deprecated and unused struct to use for initializing a buffersink context.</summary>
+/// <summary>Struct to use for initializing a buffersink context.</summary>
 public unsafe partial struct AVBufferSinkParams
 {
     /// <summary>list of allowed pixel formats, terminated by AV_PIX_FMT_NONE</summary>
@@ -96,48 +114,13 @@ public unsafe partial struct AVBufferSrcParameters
     /// <summary>Audio only, the audio sampling rate in samples per second.</summary>
     public int @sample_rate;
     /// <summary>Audio only, the audio channel layout</summary>
-    [Obsolete("use ch_layout")]
     public ulong @channel_layout;
-    /// <summary>Audio only, the audio channel layout</summary>
-    public AVChannelLayout @ch_layout;
-}
-
-/// <summary>An AVChannelCustom defines a single channel within a custom order layout</summary>
-public unsafe partial struct AVChannelCustom
-{
-    public AVChannel @id;
-    public byte_array16 @name;
-    public void* @opaque;
-}
-
-/// <summary>An AVChannelLayout holds information about the channel layout of audio data.</summary>
-public unsafe partial struct AVChannelLayout
-{
-    /// <summary>Channel order used in this layout. This is a mandatory field.</summary>
-    public AVChannelOrder @order;
-    /// <summary>Number of channels in this layout. Mandatory field.</summary>
-    public int @nb_channels;
-    public AVChannelLayout_u @u;
-    /// <summary>For some private data of the user.</summary>
-    public void* @opaque;
-}
-
-/// <summary>Details about which channels are present in this layout. For AV_CHANNEL_ORDER_UNSPEC, this field is undefined and must not be used.</summary>
-[StructLayout(LayoutKind.Explicit)]
-public unsafe partial struct AVChannelLayout_u
-{
-    /// <summary>This member must be used for AV_CHANNEL_ORDER_NATIVE, and may be used for AV_CHANNEL_ORDER_AMBISONIC to signal non-diegetic channels. It is a bitmask, where the position of each set bit means that the AVChannel with the corresponding value is present.</summary>
-    [FieldOffset(0)]
-    public ulong @mask;
-    /// <summary>This member must be used when the channel order is AV_CHANNEL_ORDER_CUSTOM. It is a nb_channels-sized array, with each element signalling the presence of the AVChannel with the corresponding value in map[i].id.</summary>
-    [FieldOffset(0)]
-    public AVChannelCustom* @map;
 }
 
 public unsafe partial struct AVChapter
 {
     /// <summary>unique ID to identify the chapter</summary>
-    public long @id;
+    public int @id;
     /// <summary>time base in which the start/end timestamps are specified</summary>
     public AVRational @time_base;
     /// <summary>chapter start/end time in time_base units</summary>
@@ -162,16 +145,16 @@ public unsafe partial struct AVClass
     public int @log_level_offset_offset;
     /// <summary>Offset in the structure where a pointer to the parent context for logging is stored. For example a decoder could pass its AVCodecContext to eval as such a parent context, which an av_log() implementation could then leverage to display the parent context. The offset can be NULL.</summary>
     public int @parent_log_context_offset;
+    /// <summary>Return next AVOptions-enabled child or NULL</summary>
+    public AVClass_child_next_func @child_next;
+    /// <summary>Return an AVClass corresponding to the next potential AVOptions-enabled child.</summary>
+    public AVClass_child_class_next_func @child_class_next;
     /// <summary>Category used for visualization (like color) This is only set if the category is equal for all objects using this class. available since version (51 &lt;&lt; 16 | 56 &lt;&lt; 8 | 100)</summary>
     public AVClassCategory @category;
     /// <summary>Callback to return the category. available since version (51 &lt;&lt; 16 | 59 &lt;&lt; 8 | 100)</summary>
     public AVClass_get_category_func @get_category;
     /// <summary>Callback to return the supported/allowed ranges. available since version (52.12)</summary>
     public AVClass_query_ranges_func @query_ranges;
-    /// <summary>Return next AVOptions-enabled child or NULL</summary>
-    public AVClass_child_next_func @child_next;
-    /// <summary>Iterate over the AVClasses corresponding to potential AVOptions-enabled children.</summary>
-    public AVClass_child_class_iterate_func @child_class_iterate;
 }
 
 /// <summary>AVCodec.</summary>
@@ -185,8 +168,6 @@ public unsafe partial struct AVCodec
     public AVCodecID @id;
     /// <summary>Codec capabilities. see AV_CODEC_CAP_*</summary>
     public int @capabilities;
-    /// <summary>maximum value for lowres supported by the decoder</summary>
-    public byte @max_lowres;
     /// <summary>array of supported framerates, or NULL if any, array is terminated by {0,0}</summary>
     public AVRational* @supported_framerates;
     /// <summary>array of supported pixel formats, or NULL if unknown, array is terminated by -1</summary>
@@ -197,14 +178,44 @@ public unsafe partial struct AVCodec
     public AVSampleFormat* @sample_fmts;
     /// <summary>array of support channel layouts, or NULL if unknown. array is terminated by 0</summary>
     public ulong* @channel_layouts;
+    /// <summary>maximum value for lowres supported by the decoder</summary>
+    public byte @max_lowres;
     /// <summary>AVClass for the private context</summary>
     public AVClass* @priv_class;
     /// <summary>array of recognized profiles, or NULL if unknown, array is terminated by {FF_PROFILE_UNKNOWN}</summary>
     public AVProfile* @profiles;
     /// <summary>Group name of the codec implementation. This is a short symbolic name of the wrapper backing this codec. A wrapper uses some kind of external implementation for the codec, such as an external library, or a codec implementation provided by the OS or the hardware. If this field is NULL, this is a builtin, libavcodec native codec. If non-NULL, this will be the suffix in AVCodec.name in most cases (usually AVCodec.name will be of the form &quot;&lt;codec_name&gt;_&lt;wrapper_name&gt;&quot;).</summary>
     public byte* @wrapper_name;
-    /// <summary>Array of supported channel layouts, terminated with a zeroed layout.</summary>
-    public AVChannelLayout* @ch_layouts;
+    /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavcodec and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
+    public int @priv_data_size;
+    public AVCodec* @next;
+    /// <summary>@{</summary>
+    public AVCodec_update_thread_context_func @update_thread_context;
+    /// <summary>Private codec-specific defaults.</summary>
+    public AVCodecDefault* @defaults;
+    /// <summary>Initialize codec static data, called from avcodec_register().</summary>
+    public AVCodec_init_static_data_func @init_static_data;
+    public AVCodec_init_func @init;
+    public AVCodec_encode_sub_func @encode_sub;
+    /// <summary>Encode data to an AVPacket.</summary>
+    public AVCodec_encode2_func @encode2;
+    public AVCodec_decode_func @decode;
+    public AVCodec_close_func @close;
+    /// <summary>Encode API with decoupled packet/frame dataflow. The API is the same as the avcodec_ prefixed APIs (avcodec_send_frame() etc.), except that: - never called if the codec is closed or the wrong type, - if AV_CODEC_CAP_DELAY is not set, drain frames are never sent, - only one drain frame is ever passed down,</summary>
+    public AVCodec_send_frame_func @send_frame;
+    public AVCodec_receive_packet_func @receive_packet;
+    /// <summary>Decode API with decoupled packet/frame dataflow. This function is called to get one output frame. It should call ff_decode_get_packet() to obtain input data.</summary>
+    public AVCodec_receive_frame_func @receive_frame;
+    /// <summary>Flush buffers. Will be called when seeking</summary>
+    public AVCodec_flush_func @flush;
+    /// <summary>Internal codec capabilities. See FF_CODEC_CAP_* in internal.h</summary>
+    public int @caps_internal;
+    /// <summary>Decoding only, a comma-separated list of bitstream filters to apply to packets before decoding.</summary>
+    public byte* @bsfs;
+    /// <summary>Array of pointers to hardware configurations supported by the codec, or NULL if no hardware supported. The array is terminated by a NULL pointer.</summary>
+    public AVCodecHWConfigInternal** @hw_configs;
+    /// <summary>List of supported codec_tags, terminated by FF_CODEC_TAGS_END.</summary>
+    public uint* @codec_tags;
 }
 
 /// <summary>main external API structure. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. You can use AVOptions (av_opt* / av_set/get*()) to access these fields from user applications. The name string for AVOptions options matches the associated command line parameter name and can be found in libavcodec/options_table.h The AVOption/command line parameter names differ in some cases from the C structure field names for historic reasons or brevity. sizeof(AVCodecContext) must not be used outside libav*.</summary>
@@ -258,16 +269,20 @@ public unsafe partial struct AVCodecContext
     public AVPixelFormat @pix_fmt;
     /// <summary>If non NULL, &apos;draw_horiz_band&apos; is called by the libavcodec decoder to draw a horizontal band. It improves cache usage. Not all codecs can do that. You must check the codec capabilities beforehand. When multithreading is used, it may be called from multiple threads at the same time; threads might draw different parts of the same AVFrame, or multiple AVFrames, and there is no guarantee that slices will be drawn in order. The function is also used by hardware acceleration APIs. It is called at least once during frame decoding to pass the data needed for hardware render. In that mode instead of pixel data, AVFrame points to a structure specific to the acceleration API. The application reads the structure and can change some fields to indicate progress or mark state. - encoding: unused - decoding: Set by user.</summary>
     public AVCodecContext_draw_horiz_band_func @draw_horiz_band;
-    /// <summary>Callback to negotiate the pixel format. Decoding only, may be set by the caller before avcodec_open2().</summary>
+    /// <summary>callback to negotiate the pixelFormat</summary>
     public AVCodecContext_get_format_func @get_format;
     /// <summary>maximum number of B-frames between non-B-frames Note: The output will be delayed by max_b_frames+1 relative to the input. - encoding: Set by user. - decoding: unused</summary>
     public int @max_b_frames;
     /// <summary>qscale factor between IP and B-frames If &gt; 0 then the last P-frame quantizer will be used (q= lastp_q*factor+offset). If &lt; 0 then normal ratecontrol will be done (q= -normal_q*factor+offset). - encoding: Set by user. - decoding: unused</summary>
     public float @b_quant_factor;
+    [Obsolete("use encoder private options instead")]
+    public int @b_frame_strategy;
     /// <summary>qscale offset between IP and B-frames - encoding: Set by user. - decoding: unused</summary>
     public float @b_quant_offset;
     /// <summary>Size of the frame reordering buffer in the decoder. For MPEG-2 it is 1 IPB or 0 low delay IP. - encoding: Set by libavcodec. - decoding: Set by libavcodec.</summary>
     public int @has_b_frames;
+    [Obsolete("use encoder private options instead")]
+    public int @mpeg_quant;
     /// <summary>qscale factor between P- and I-frames If &gt; 0 then the last P-frame quantizer will be used (q = lastp_q * factor + offset). If &lt; 0 then normal ratecontrol will be done (q= -normal_q*factor+offset). - encoding: Set by user. - decoding: unused</summary>
     public float @i_quant_factor;
     /// <summary>qscale offset between P and I-frames - encoding: Set by user. - decoding: unused</summary>
@@ -284,6 +299,8 @@ public unsafe partial struct AVCodecContext
     public float @dark_masking;
     /// <summary>slice count - encoding: Set by libavcodec. - decoding: Set by user (or 0).</summary>
     public int @slice_count;
+    [Obsolete("use encoder private options instead")]
+    public int @prediction_method;
     /// <summary>slice offsets in the frame in bytes - encoding: Set/allocated by libavcodec. - decoding: Set/allocated by user (or NULL).</summary>
     public int* @slice_offset;
     /// <summary>sample aspect ratio (0 if unknown) That is the width of a pixel divided by the height of the pixel. Numerator and denominator must be relatively prime and smaller than 256 for some video standards. - encoding: Set by user. - decoding: Set by libavcodec.</summary>
@@ -300,6 +317,8 @@ public unsafe partial struct AVCodecContext
     public int @dia_size;
     /// <summary>amount of previous MV predictors (2a+1 x 2a+1 square) - encoding: Set by user. - decoding: unused</summary>
     public int @last_predictor_count;
+    [Obsolete("use encoder private options instead")]
+    public int @pre_me;
     /// <summary>motion estimation prepass comparison function - encoding: Set by user. - decoding: unused</summary>
     public int @me_pre_cmp;
     /// <summary>ME prepass diamond size &amp; shape - encoding: Set by user. - decoding: unused</summary>
@@ -316,6 +335,10 @@ public unsafe partial struct AVCodecContext
     public ushort* @intra_matrix;
     /// <summary>custom inter quantization matrix Must be allocated with the av_malloc() family of functions, and will be freed in avcodec_free_context(). - encoding: Set/allocated by user, freed by libavcodec. Can be NULL. - decoding: Set/allocated/freed by libavcodec.</summary>
     public ushort* @inter_matrix;
+    [Obsolete("use encoder private options instead")]
+    public int @scenechange_threshold;
+    [Obsolete("use encoder private options instead")]
+    public int @noise_reduction;
     /// <summary>precision of the intra DC coefficient - 8 - encoding: Set by user. - decoding: Set by libavcodec</summary>
     public int @intra_dc_precision;
     /// <summary>Number of macroblock rows at the top which are skipped. - encoding: unused - decoding: Set by user.</summary>
@@ -326,14 +349,22 @@ public unsafe partial struct AVCodecContext
     public int @mb_lmin;
     /// <summary>maximum MB Lagrange multiplier - encoding: Set by user. - decoding: unused</summary>
     public int @mb_lmax;
+    [Obsolete("use encoder private options instead")]
+    public int @me_penalty_compensation;
     /// <summary>- encoding: Set by user. - decoding: unused</summary>
     public int @bidir_refine;
+    [Obsolete("use encoder private options instead")]
+    public int @brd_scale;
     /// <summary>minimum GOP size - encoding: Set by user. - decoding: unused</summary>
     public int @keyint_min;
     /// <summary>number of reference frames - encoding: Set by user. - decoding: Set by lavc.</summary>
     public int @refs;
+    [Obsolete("use encoder private options instead")]
+    public int @chromaoffset;
     /// <summary>Note: Value depends upon the compare function used for fullpel ME. - encoding: Set by user. - decoding: unused</summary>
     public int @mv0_threshold;
+    [Obsolete("use encoder private options instead")]
+    public int @b_sensitivity;
     /// <summary>Chromaticity coordinates of the source primaries. - encoding: Set by user - decoding: Set by libavcodec</summary>
     public AVColorPrimaries @color_primaries;
     /// <summary>Color Transfer Characteristic. - encoding: Set by user - decoding: Set by libavcodec</summary>
@@ -351,7 +382,6 @@ public unsafe partial struct AVCodecContext
     /// <summary>samples per second</summary>
     public int @sample_rate;
     /// <summary>number of audio channels</summary>
-    [Obsolete("use ch_layout.nb_channels")]
     public int @channels;
     /// <summary>sample format</summary>
     public AVSampleFormat @sample_fmt;
@@ -364,10 +394,8 @@ public unsafe partial struct AVCodecContext
     /// <summary>Audio cutoff bandwidth (0 means &quot;automatic&quot;) - encoding: Set by user. - decoding: unused</summary>
     public int @cutoff;
     /// <summary>Audio channel layout. - encoding: set by user. - decoding: set by user, may be overwritten by libavcodec.</summary>
-    [Obsolete("use ch_layout")]
     public ulong @channel_layout;
     /// <summary>Request decoder to use this channel layout if it can (0 for default) - encoding: unused - decoding: Set by user.</summary>
-    [Obsolete("use \"downmix\" codec private option")]
     public ulong @request_channel_layout;
     /// <summary>Type of service that the audio stream conveys. - encoding: Set by user. - decoding: Set by libavcodec.</summary>
     public AVAudioServiceType @audio_service_type;
@@ -375,6 +403,8 @@ public unsafe partial struct AVCodecContext
     public AVSampleFormat @request_sample_fmt;
     /// <summary>This callback is called at the beginning of each frame to get data buffer(s) for it. There may be one contiguous buffer for all the data or there may be a buffer per each data plane or anything in between. What this means is, you may set however many entries in buf[] you feel necessary. Each buffer must be reference-counted using the AVBuffer API (see description of buf[] below).</summary>
     public AVCodecContext_get_buffer2_func @get_buffer2;
+    /// <summary>If non-zero, the decoded audio and video frames returned from avcodec_decode_video2() and avcodec_decode_audio4() are reference-counted and are valid indefinitely. The caller must free them with av_frame_unref() when they are not needed anymore. Otherwise, the decoded frames must not be freed by the caller and are only valid until the next decode call.</summary>
+    public int @refcounted_frames;
     /// <summary>amount of qscale change between easy &amp; hard scenes (0.0-1.0)</summary>
     public float @qcompress;
     /// <summary>amount of qscale smoothing over time (0.0-1.0)</summary>
@@ -400,8 +430,40 @@ public unsafe partial struct AVCodecContext
     public float @rc_min_vbv_overflow_use;
     /// <summary>Number of bits which should be loaded into the rc buffer before decoding starts. - encoding: Set by user. - decoding: unused</summary>
     public int @rc_initial_buffer_occupancy;
+    [Obsolete("use encoder private options instead")]
+    public int @coder_type;
+    [Obsolete("use encoder private options instead")]
+    public int @context_model;
+    [Obsolete("use encoder private options instead")]
+    public int @frame_skip_threshold;
+    [Obsolete("use encoder private options instead")]
+    public int @frame_skip_factor;
+    [Obsolete("use encoder private options instead")]
+    public int @frame_skip_exp;
+    [Obsolete("use encoder private options instead")]
+    public int @frame_skip_cmp;
     /// <summary>trellis RD quantization - encoding: Set by user. - decoding: unused</summary>
     public int @trellis;
+    [Obsolete("use encoder private options instead")]
+    public int @min_prediction_order;
+    [Obsolete("use encoder private options instead")]
+    public int @max_prediction_order;
+    [Obsolete("use encoder private options instead")]
+    public long @timecode_frame_start;
+    [Obsolete("unused")]
+    public AVCodecContext_rtp_callback_func @rtp_callback;
+    [Obsolete("use encoder private options instead")]
+    public int @rtp_payload_size;
+    public int @mv_bits;
+    public int @header_bits;
+    public int @i_tex_bits;
+    public int @p_tex_bits;
+    public int @i_count;
+    public int @p_count;
+    public int @skip_count;
+    public int @misc_bits;
+    [Obsolete("this field is unused")]
+    public int @frame_bits;
     /// <summary>pass1 encoding statistics output buffer - encoding: Set by libavcodec. - decoding: unused</summary>
     public byte* @stats_out;
     /// <summary>pass2 encoding statistics input buffer Concatenated stuff from stats_out of pass1 should be placed here. - encoding: Allocated/set/freed by user. - decoding: unused</summary>
@@ -414,13 +476,13 @@ public unsafe partial struct AVCodecContext
     public int @error_concealment;
     /// <summary>debug - encoding: Set by user. - decoding: Set by user.</summary>
     public int @debug;
-    /// <summary>Error recognition; may misdetect some more or less valid parts as errors. - encoding: Set by user. - decoding: Set by user.</summary>
+    /// <summary>Error recognition; may misdetect some more or less valid parts as errors. - encoding: unused - decoding: Set by user.</summary>
     public int @err_recognition;
     /// <summary>opaque 64-bit number (generally a PTS) that will be reordered and output in AVFrame.reordered_opaque - encoding: Set by libavcodec to the reordered_opaque of the input frame corresponding to the last returned packet. Only supported by encoders with the AV_CODEC_CAP_ENCODER_REORDERED_OPAQUE capability. - decoding: Set by user.</summary>
     public long @reordered_opaque;
     /// <summary>Hardware accelerator in use - encoding: unused. - decoding: Set by libavcodec</summary>
     public AVHWAccel* @hwaccel;
-    /// <summary>Hardware accelerator context. For some hardware accelerators, a global context needs to be provided by the user. In that case, this holds display-dependent data FFmpeg cannot instantiate itself. Please refer to the FFmpeg HW accelerator documentation to know how to fill this. - encoding: unused - decoding: Set by user</summary>
+    /// <summary>Hardware accelerator context. For some hardware accelerators, a global context needs to be provided by the user. In that case, this holds display-dependent data FFmpeg cannot instantiate itself. Please refer to the FFmpeg HW accelerator documentation to know how to fill this is. e.g. for VA API, this is a struct vaapi_context. - encoding: unused - decoding: Set by user</summary>
     public void* @hwaccel_context;
     /// <summary>error - encoding: Set by libavcodec if flags &amp; AV_CODEC_FLAG_PSNR. - decoding: unused</summary>
     public ulong_array8 @error;
@@ -434,6 +496,9 @@ public unsafe partial struct AVCodecContext
     public int @bits_per_raw_sample;
     /// <summary>low resolution decoding, 1-&gt; 1/2 size, 2-&gt;1/4 size - encoding: unused - decoding: Set by user.</summary>
     public int @lowres;
+    /// <summary>the picture in the bitstream - encoding: Set by libavcodec. - decoding: unused</summary>
+    [Obsolete("use the quality factor packet side data instead")]
+    public AVFrame* @coded_frame;
     /// <summary>thread count is used to decide how many independent tasks should be passed to execute() - encoding: Set by user. - decoding: Set by user.</summary>
     public int @thread_count;
     /// <summary>Which multithreading methods to use. Use of FF_THREAD_FRAME will increase decoding delay by one frame per thread, so clients which cannot provide future frames should not use it.</summary>
@@ -441,11 +506,10 @@ public unsafe partial struct AVCodecContext
     /// <summary>Which multithreading methods are in use by the codec. - encoding: Set by libavcodec. - decoding: Set by libavcodec.</summary>
     public int @active_thread_type;
     /// <summary>Set by the client if its custom get_buffer() callback can be called synchronously from another thread, which allows faster multithreaded decoding. draw_horiz_band() will be called from other threads regardless of this setting. Ignored if the default get_buffer() is used. - encoding: Set by user. - decoding: Set by user.</summary>
-    [Obsolete("the custom get_buffer2() callback should always be thread-safe. Thread-unsafe get_buffer2() implementations will be invalid starting with LIBAVCODEC_VERSION_MAJOR=60; in other words, libavcodec will behave as if this field was always set to 1. Callers that want to be forward compatible with future libavcodec versions should wrap access to this field in #if LIBAVCODEC_VERSION_MAJOR < 60")]
     public int @thread_safe_callbacks;
     /// <summary>The codec may call this to execute several independent things. It will return only after finishing all tasks. The user may replace this with some multithreaded implementation, the default implementation will execute the parts serially.</summary>
     public AVCodecContext_execute_func @execute;
-    /// <summary>The codec may call this to execute several independent things. It will return only after finishing all tasks. The user may replace this with some multithreaded implementation, the default implementation will execute the parts serially.</summary>
+    /// <summary>The codec may call this to execute several independent things. It will return only after finishing all tasks. The user may replace this with some multithreaded implementation, the default implementation will execute the parts serially. Also see avcodec_thread_init and e.g. the --enable-pthread configure option.</summary>
     public AVCodecContext_execute2_func @execute2;
     /// <summary>noise vs. sse weight for the nsse comparison function - encoding: Set by user. - decoding: unused</summary>
     public int @nsse_weight;
@@ -462,6 +526,12 @@ public unsafe partial struct AVCodecContext
     /// <summary>Header containing style information for text subtitles. For SUBTITLE_ASS subtitle type, it should contain the whole ASS [Script Info] and [V4+ Styles] section, plus the [Events] line and the Format line following. It shouldn&apos;t include any Dialogue line. - encoding: Set/allocated/freed by user (before avcodec_open2()) - decoding: Set/allocated/freed by libavcodec (by avcodec_open2())</summary>
     public byte* @subtitle_header;
     public int @subtitle_header_size;
+    /// <summary>VBV delay coded in the last frame (in periods of a 27 MHz clock). Used for compliant TS muxing. - encoding: Set by libavcodec. - decoding: unused.</summary>
+    [Obsolete("this value is now exported as a part of AV_PKT_DATA_CPB_PROPERTIES packet side data")]
+    public ulong @vbv_delay;
+    /// <summary>Encoding only and set by default. Allow encoders to output packets that do not contain any encoded data, only side data.</summary>
+    [Obsolete("this field disables the default behaviour and it is kept only for compatibility.")]
+    public int @side_data_only_packets;
     /// <summary>Audio only. The number of &quot;priming&quot; samples (padding) inserted by the encoder at the beginning of the audio. I.e. this number of leading decoded samples must be discarded by the caller to get the original audio without leading padding.</summary>
     public int @initial_padding;
     /// <summary>- decoding: For codecs that store a framerate value in the compressed bitstream, the decoder may export it here. { 0, 1} when unknown. - encoding: May be used to signal the framerate of CFR content to an encoder.</summary>
@@ -488,7 +558,7 @@ public unsafe partial struct AVCodecContext
     public int @skip_alpha;
     /// <summary>Number of samples to skip after a discontinuity - decoding: unused - encoding: set by libavcodec</summary>
     public int @seek_preroll;
-    [Obsolete("unused")]
+    /// <summary>debug motion vectors - encoding: Set by user. - decoding: Set by user.</summary>
     public int @debug_mv;
     /// <summary>custom intra quantization matrix - encoding: Set by user, can be NULL. - decoding: unused.</summary>
     public ushort* @chroma_intra_matrix;
@@ -503,7 +573,7 @@ public unsafe partial struct AVCodecContext
     public int @nb_coded_side_data;
     /// <summary>A reference to the AVHWFramesContext describing the input (for encoding) or output (decoding) frames. The reference is set by the caller and afterwards owned (and freed) by libavcodec - it should never be read by the caller after being set.</summary>
     public AVBufferRef* @hw_frames_ctx;
-    [Obsolete("unused")]
+    /// <summary>Control the form of AVSubtitle.rects[N]-&gt;ass - decoding: set by user - encoding: unused</summary>
     public int @sub_text_format;
     /// <summary>Audio only. The amount of padding (in samples) appended by the encoder to the end of the audio. I.e. this number of decoded samples must be discarded by the caller from the end of the stream to get the original audio without any trailing padding.</summary>
     public int @trailing_padding;
@@ -522,10 +592,6 @@ public unsafe partial struct AVCodecContext
     public long @max_samples;
     /// <summary>Bit set of AV_CODEC_EXPORT_DATA_* flags, which affects the kind of metadata exported in frame, packet, or coded stream side data by decoders and encoders.</summary>
     public int @export_side_data;
-    /// <summary>This callback is called at the beginning of each packet to get a data buffer for it.</summary>
-    public AVCodecContext_get_encode_buffer_func @get_encode_buffer;
-    /// <summary>Audio channel layout. - encoding: must be set by the caller, to one of AVCodec.ch_layouts. - decoding: may be set by the caller if known e.g. from the container. The decoder can then override during decoding as needed.</summary>
-    public AVChannelLayout @ch_layout;
 }
 
 /// <summary>This struct describes the properties of a single codec described by an AVCodecID.</summary>
@@ -595,10 +661,8 @@ public unsafe partial struct AVCodecParameters
     /// <summary>Video only. Number of delayed frames.</summary>
     public int @video_delay;
     /// <summary>Audio only. The channel layout bitmask. May be 0 if the channel layout is unknown or unspecified, otherwise the number of bits set must be equal to the channels field.</summary>
-    [Obsolete("use ch_layout")]
     public ulong @channel_layout;
     /// <summary>Audio only. The number of audio channels.</summary>
-    [Obsolete("use ch_layout.nb_channels")]
     public int @channels;
     /// <summary>Audio only. The number of audio samples per second.</summary>
     public int @sample_rate;
@@ -612,18 +676,17 @@ public unsafe partial struct AVCodecParameters
     public int @trailing_padding;
     /// <summary>Audio only. Number of samples to skip after a discontinuity.</summary>
     public int @seek_preroll;
-    /// <summary>Audio only. The channel layout and number of channels.</summary>
-    public AVChannelLayout @ch_layout;
 }
 
 public unsafe partial struct AVCodecParser
 {
-    public int_array7 @codec_ids;
+    public int_array5 @codec_ids;
     public int @priv_data_size;
     public AVCodecParser_parser_init_func @parser_init;
     public AVCodecParser_parser_parse_func @parser_parse;
     public AVCodecParser_parser_close_func @parser_close;
     public AVCodecParser_split_func @split;
+    public AVCodecParser* @next;
 }
 
 public unsafe partial struct AVCodecParserContext
@@ -651,6 +714,8 @@ public unsafe partial struct AVCodecParserContext
     public long_array4 @cur_frame_end;
     /// <summary>Set by parser to 1 for key frames and 0 for non-key frames. It is initialized to -1, so if the parser doesn&apos;t set this flag, old-style fallback using AV_PICTURE_TYPE_I picture type as key frames will be used.</summary>
     public int @key_frame;
+    [Obsolete("unused")]
+    public long @convergence_duration;
     /// <summary>Synchronization point for start of timestamp generation.</summary>
     public int @dts_sync_point;
     /// <summary>Offset of the current timestamp against last timestamp sync point in units of AVCodecContext.time_base.</summary>
@@ -692,6 +757,12 @@ public unsafe partial struct AVComponentDescriptor
     public int @shift;
     /// <summary>Number of bits in the component.</summary>
     public int @depth;
+    /// <summary>deprecated, use step instead</summary>
+    public int @step_minus1;
+    /// <summary>deprecated, use depth instead</summary>
+    public int @depth_minus1;
+    /// <summary>deprecated, use offset instead</summary>
+    public int @offset_plus1;
 }
 
 /// <summary>Content light level needed by to transmit HDR over HDMI (CTA-861.3).</summary>
@@ -706,14 +777,11 @@ public unsafe partial struct AVContentLightMetadata
 /// <summary>This structure describes the bitrate properties of an encoded bitstream. It roughly corresponds to a subset the VBV parameters for MPEG-2 or HRD parameters for H.264/HEVC.</summary>
 public unsafe partial struct AVCPBProperties
 {
-    /// <summary>Maximum bitrate of the stream, in bits per second. Zero if unknown or unspecified.</summary>
-    public long @max_bitrate;
-    /// <summary>Minimum bitrate of the stream, in bits per second. Zero if unknown or unspecified.</summary>
-    public long @min_bitrate;
-    /// <summary>Average bitrate of the stream, in bits per second. Zero if unknown or unspecified.</summary>
-    public long @avg_bitrate;
+    public int @max_bitrate;
+    public int @min_bitrate;
+    public int @avg_bitrate;
     /// <summary>The size of the buffer to which the ratecontrol is applied, in bits. Zero if unknown or unspecified.</summary>
-    public long @buffer_size;
+    public int @buffer_size;
     /// <summary>The delay between the time the packet this structure is associated with is received and the time when it should be decoded, in periods of a 27MHz clock.</summary>
     public ulong @vbv_delay;
 }
@@ -774,8 +842,6 @@ public unsafe partial struct AVD3D11VAFramesContext
     public uint @BindFlags;
     /// <summary>D3D11_TEXTURE2D_DESC.MiscFlags used for texture creation. This field is ignored/invalid if a user-allocated texture is provided.</summary>
     public uint @MiscFlags;
-    /// <summary>In case if texture structure member above is not NULL contains the same texture pointer for all elements and different indexes into the array texture. In case if texture structure member above is NULL, all elements contains pointers to separate non-array textures and 0 indexes. This field is ignored/invalid if a user-allocated texture is provided.</summary>
-    public AVD3D11FrameDescriptor* @texture_infos;
 }
 
 /// <summary>Structure describes device capabilities.</summary>
@@ -803,10 +869,6 @@ public unsafe partial struct AVDeviceInfo
     public byte* @device_name;
     /// <summary>human friendly name</summary>
     public byte* @device_description;
-    /// <summary>array indicating what media types(s), if any, a device can provide. If null, cannot provide any</summary>
-    public AVMediaType* @media_types;
-    /// <summary>length of media_types array, 0 if device cannot provide any media types</summary>
-    public int @nb_media_types;
 }
 
 /// <summary>List of devices.</summary>
@@ -887,6 +949,16 @@ public unsafe partial struct AVDynamicHDRPlus
     public AVRational_array25x25 @mastering_display_actual_peak_luminance;
 }
 
+public unsafe partial struct AVFifoBuffer
+{
+    public byte* @buffer;
+    public byte* @rptr;
+    public byte* @wptr;
+    public byte* @end;
+    public uint @rndx;
+    public uint @wndx;
+}
+
 /// <summary>Filter definition. This defines the pads a filter contains, and all the callback functions used to interact with the filter.</summary>
 public unsafe partial struct AVFilter
 {
@@ -894,20 +966,14 @@ public unsafe partial struct AVFilter
     public byte* @name;
     /// <summary>A description of the filter. May be NULL.</summary>
     public byte* @description;
-    /// <summary>List of static inputs.</summary>
+    /// <summary>List of inputs, terminated by a zeroed element.</summary>
     public AVFilterPad* @inputs;
-    /// <summary>List of static outputs.</summary>
+    /// <summary>List of outputs, terminated by a zeroed element.</summary>
     public AVFilterPad* @outputs;
     /// <summary>A class for the private data, used to declare filter private AVOptions. This field is NULL for filters that do not declare any options.</summary>
     public AVClass* @priv_class;
     /// <summary>A combination of AVFILTER_FLAG_*</summary>
     public int @flags;
-    /// <summary>The number of entries in the list of inputs.</summary>
-    public byte @nb_inputs;
-    /// <summary>The number of entries in the list of outputs.</summary>
-    public byte @nb_outputs;
-    /// <summary>This field determines the state of the formats union. It is an enum FilterFormatsState value.</summary>
-    public byte @formats_state;
     /// <summary>Filter pre-initialization function</summary>
     public AVFilter_preinit_func @preinit;
     /// <summary>Filter initialization function.</summary>
@@ -916,36 +982,20 @@ public unsafe partial struct AVFilter
     public AVFilter_init_dict_func @init_dict;
     /// <summary>Filter uninitialization function.</summary>
     public AVFilter_uninit_func @uninit;
-    public AVFilter_formats @formats;
+    /// <summary>Query formats supported by the filter on its inputs and outputs.</summary>
+    public AVFilter_query_formats_func @query_formats;
     /// <summary>size of private data to allocate for the filter</summary>
     public int @priv_size;
     /// <summary>Additional flags for avfilter internal use only.</summary>
     public int @flags_internal;
+    /// <summary>Used by the filter registration system. Must not be touched by any other code.</summary>
+    public AVFilter* @next;
     /// <summary>Make the filter instance process a command.</summary>
     public AVFilter_process_command_func @process_command;
+    /// <summary>Filter initialization function, alternative to the init() callback. Args contains the user-supplied parameters, opaque is used for providing binary data.</summary>
+    public AVFilter_init_opaque_func @init_opaque;
     /// <summary>Filter activation function.</summary>
     public AVFilter_activate_func @activate;
-}
-
-/// <summary>The state of the following union is determined by formats_state. See the documentation of enum FilterFormatsState in internal.h.</summary>
-[StructLayout(LayoutKind.Explicit)]
-public unsafe partial struct AVFilter_formats
-{
-    /// <summary>Query formats supported by the filter on its inputs and outputs.</summary>
-    [FieldOffset(0)]
-    public _query_func_func @query_func;
-    /// <summary>A pointer to an array of admissible pixel formats delimited by AV_PIX_FMT_NONE. The generic code will use this list to indicate that this filter supports each of these pixel formats, provided that all inputs and outputs use the same pixel format.</summary>
-    [FieldOffset(0)]
-    public AVPixelFormat* @pixels_list;
-    /// <summary>Analogous to pixels, but delimited by AV_SAMPLE_FMT_NONE and restricted to filters that only have AVMEDIA_TYPE_AUDIO inputs and outputs.</summary>
-    [FieldOffset(0)]
-    public AVSampleFormat* @samples_list;
-    /// <summary>Equivalent to { pix_fmt, AV_PIX_FMT_NONE } as pixels_list.</summary>
-    [FieldOffset(0)]
-    public AVPixelFormat @pix_fmt;
-    /// <summary>Equivalent to { sample_fmt, AV_SAMPLE_FMT_NONE } as samples_list.</summary>
-    [FieldOffset(0)]
-    public AVSampleFormat @sample_fmt;
 }
 
 /// <summary>An instance of a filter</summary>
@@ -996,17 +1046,6 @@ public unsafe partial struct AVFilterContext
     public int @extra_hw_frames;
 }
 
-/// <summary>Lists of formats / etc. supported by an end of a link.</summary>
-public unsafe partial struct AVFilterFormatsConfig
-{
-    /// <summary>List of supported formats (pixel or sample).</summary>
-    public AVFilterFormats* @formats;
-    /// <summary>Lists of supported sample rates, only for audio.</summary>
-    public AVFilterFormats* @samplerates;
-    /// <summary>Lists of supported channel layouts, only for audio.</summary>
-    public AVFilterChannelLayouts* @channel_layouts;
-}
-
 public unsafe partial struct AVFilterGraph
 {
     public AVClass* @av_class;
@@ -1014,6 +1053,8 @@ public unsafe partial struct AVFilterGraph
     public uint @nb_filters;
     /// <summary>sws options to use for the auto-inserted scale filters</summary>
     public byte* @scale_sws_opts;
+    /// <summary>libavresample options to use for the auto-inserted resample filters</summary>
+    public byte* @resample_lavr_opts;
     /// <summary>Type of multithreading allowed for filters in this graph. A combination of AVFILTER_THREAD_* flags.</summary>
     public int @thread_type;
     /// <summary>Maximum number of threads used by filters in this graph. May be set by the caller before adding any filters to the filtergraph. Zero (the default) means that the number of threads is determined automatically.</summary>
@@ -1065,7 +1106,6 @@ public unsafe partial struct AVFilterLink
     /// <summary>agreed upon sample aspect ratio</summary>
     public AVRational @sample_aspect_ratio;
     /// <summary>channel layout of current buffer (see libavutil/channel_layout.h)</summary>
-    [Obsolete("use ch_layout")]
     public ulong @channel_layout;
     /// <summary>samples per second</summary>
     public int @sample_rate;
@@ -1073,12 +1113,16 @@ public unsafe partial struct AVFilterLink
     public int @format;
     /// <summary>Define the time base used by the PTS of the frames/samples which will pass through this link. During the configuration stage, each filter is supposed to change only the output timebase, while the timebase of the input link is assumed to be an unchangeable property.</summary>
     public AVRational @time_base;
-    /// <summary>channel layout of current buffer (see libavutil/channel_layout.h)</summary>
-    public AVChannelLayout @ch_layout;
-    /// <summary>Lists of supported formats / etc. supported by the input filter.</summary>
-    public AVFilterFormatsConfig @incfg;
-    /// <summary>Lists of supported formats / etc. supported by the output filter.</summary>
-    public AVFilterFormatsConfig @outcfg;
+    /// <summary>*************************************************************** All fields below this line are not part of the public API. They may not be used outside of libavfilter and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
+    public AVFilterFormats* @in_formats;
+    public AVFilterFormats* @out_formats;
+    /// <summary>Lists of channel layouts and sample rates used for automatic negotiation.</summary>
+    public AVFilterFormats* @in_samplerates;
+    public AVFilterFormats* @out_samplerates;
+    public AVFilterChannelLayouts* @in_channel_layouts;
+    public AVFilterChannelLayouts* @out_channel_layouts;
+    /// <summary>Audio only, the destination filter sets this to a non-zero value to request that buffers with the given number of samples should be sent to it. AVFilterPad.needs_fifo must also be set on the corresponding input pad. Last buffer before EOF will be padded with silence.</summary>
+    public int @request_samples;
     public AVFilterLink_init_state @init_state;
     /// <summary>Graph the filter belongs to.</summary>
     public AVFilterGraph* @graph;
@@ -1090,18 +1134,22 @@ public unsafe partial struct AVFilterLink
     public int @age_index;
     /// <summary>Frame rate of the stream on the link, or 1/0 if unknown or variable; if left to 0/0, will be automatically copied from the first input of the source filter if it exists.</summary>
     public AVRational @frame_rate;
-    /// <summary>Minimum number of samples to filter at once. If filter_frame() is called with fewer samples, it will accumulate them in fifo. This field and the related ones must not be changed after filtering has started. If 0, all related fields are ignored.</summary>
+    /// <summary>Buffer partially filled with samples to achieve a fixed/minimum size.</summary>
+    public AVFrame* @partial_buf;
+    /// <summary>Size of the partial buffer to allocate. Must be between min_samples and max_samples.</summary>
+    public int @partial_buf_size;
+    /// <summary>Minimum number of samples to filter at once. If filter_frame() is called with fewer samples, it will accumulate them in partial_buf. This field and the related ones must not be changed after filtering has started. If 0, all related fields are ignored.</summary>
     public int @min_samples;
     /// <summary>Maximum number of samples to filter at once. If filter_frame() is called with more samples, it will split them.</summary>
     public int @max_samples;
+    /// <summary>Number of channels.</summary>
+    public int @channels;
+    /// <summary>Link processing flags.</summary>
+    public uint @flags;
     /// <summary>Number of past frames sent through the link.</summary>
     public long @frame_count_in;
     /// <summary>Number of past frames sent through the link.</summary>
     public long @frame_count_out;
-    /// <summary>Number of past samples sent through the link.</summary>
-    public long @sample_count_in;
-    /// <summary>Number of past samples sent through the link.</summary>
-    public long @sample_count_out;
     /// <summary>A pointer to a FFFramePool struct.</summary>
     public void* @frame_pool;
     /// <summary>True if a frame is currently wanted on the output of this filter. Set when ff_request_frame() is called by the output, cleared when a frame is filtered.</summary>
@@ -1131,6 +1179,9 @@ public unsafe partial struct AVFormatContext
     public uint @nb_streams;
     /// <summary>A list of all streams in the file. New streams are created with avformat_new_stream().</summary>
     public AVStream** @streams;
+    /// <summary>input or output filename</summary>
+    [Obsolete("Use url instead.")]
+    public byte_array1024 @filename;
     /// <summary>input or output URL. Unlike the old filename field, this field has no length restriction.</summary>
     public byte* @url;
     /// <summary>Position of the first frame of the component, in AV_TIME_BASE fractional seconds. NEVER set this value directly: It is deduced from the AVStream values.</summary>
@@ -1143,7 +1194,7 @@ public unsafe partial struct AVFormatContext
     public int @max_delay;
     /// <summary>Flags modifying the (de)muxer behaviour. A combination of AVFMT_FLAG_*. Set by the user before avformat_open_input() / avformat_write_header().</summary>
     public int @flags;
-    /// <summary>Maximum number of bytes read from input in order to determine stream properties. Used when reading the global header and in avformat_find_stream_info().</summary>
+    /// <summary>Maximum size of the data read from input for determining the input container format. Demuxing only, set by the caller before avformat_open_input().</summary>
     public long @probesize;
     /// <summary>Maximum duration (in AV_TIME_BASE units) of the data read from input in avformat_find_stream_info(). Demuxing only, set by the caller before avformat_find_stream_info(). Can be set to 0 to let avformat choose using a heuristic.</summary>
     public long @max_analyze_duration;
@@ -1180,11 +1231,11 @@ public unsafe partial struct AVFormatContext
     public long @max_interleave_delta;
     /// <summary>Allow non-standard and experimental extension</summary>
     public int @strict_std_compliance;
-    /// <summary>Flags indicating events happening on the file, a combination of AVFMT_EVENT_FLAG_*.</summary>
+    /// <summary>Flags for the user to detect events happening on the file. Flags must be cleared by the user once the event has been handled. A combination of AVFMT_EVENT_FLAG_*.</summary>
     public int @event_flags;
     /// <summary>Maximum number of packets to read while waiting for the first timestamp. Decoding only.</summary>
     public int @max_ts_probe;
-    /// <summary>Avoid negative timestamps during muxing. Any value of the AVFMT_AVOID_NEG_TS_* constants. Note, this works better when using av_interleaved_write_frame(). - muxing: Set by user - demuxing: unused</summary>
+    /// <summary>Avoid negative timestamps during muxing. Any value of the AVFMT_AVOID_NEG_TS_* constants. Note, this only works when using av_interleaved_write_frame. (interleave_packet_per_dts is in use) - muxing: Set by user - demuxing: unused</summary>
     public int @avoid_negative_ts;
     /// <summary>Transport stream id. This will be moved into demuxer private options. Thus no API/ABI compatibility</summary>
     public int @ts_id;
@@ -1210,12 +1261,14 @@ public unsafe partial struct AVFormatContext
     public int @flush_packets;
     /// <summary>format probing score. The maximal score is AVPROBE_SCORE_MAX, its set when the demuxer probes the format. - encoding: unused - decoding: set by avformat, read by user</summary>
     public int @probe_score;
-    /// <summary>Maximum number of bytes read from input in order to identify the AVInputFormat &quot;input format&quot;. Only used when the format is not set explicitly by the caller.</summary>
+    /// <summary>number of bytes to read maximally to identify format. - encoding: unused - decoding: set by user</summary>
     public int @format_probesize;
     /// <summary>&apos;,&apos; separated list of allowed decoders. If NULL then all are allowed - encoding: unused - decoding: set by user</summary>
     public byte* @codec_whitelist;
     /// <summary>&apos;,&apos; separated list of allowed demuxers. If NULL then all are allowed - encoding: unused - decoding: set by user</summary>
     public byte* @format_whitelist;
+    /// <summary>An opaque field for libavformat internal usage. Must not be accessed in any way by callers.</summary>
+    public AVFormatInternal* @internal;
     /// <summary>IO repositioned flag. This is set by avformat when the underlaying IO context read pointer is repositioned, for example when doing byte based seeking. Demuxers can use the flag to detect such changes.</summary>
     public int @io_repositioned;
     /// <summary>Forced video codec. This allows forcing a specific decoder, even when there are multiple with the same codec_id. Demuxing: Set by user</summary>
@@ -1238,6 +1291,9 @@ public unsafe partial struct AVFormatContext
     public byte* @dump_separator;
     /// <summary>Forced Data codec_id. Demuxing: Set by user.</summary>
     public AVCodecID @data_codec_id;
+    /// <summary>Called to open further IO contexts when needed for demuxing.</summary>
+    [Obsolete("Use io_open and io_close.")]
+    public AVFormatContext_open_cb_func @open_cb;
     /// <summary>&apos;,&apos; separated list of allowed protocols. - encoding: unused - decoding: set by user</summary>
     public byte* @protocol_whitelist;
     /// <summary>A callback for opening new IO streams.</summary>
@@ -1252,16 +1308,14 @@ public unsafe partial struct AVFormatContext
     public int @skip_estimate_duration_from_pts;
     /// <summary>Maximum number of packets that can be probed - encoding: unused - decoding: set by user</summary>
     public int @max_probe_packets;
-    /// <summary>A callback for closing the streams opened with AVFormatContext.io_open().</summary>
-    public AVFormatContext_io_close2_func @io_close2;
 }
 
 /// <summary>This structure describes decoded (raw) audio or video data.</summary>
 public unsafe partial struct AVFrame
 {
-    /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte. For video, it could even point to the end of the image data.</summary>
+    /// <summary>pointer to the picture/channel planes. This might be different from the first allocated byte</summary>
     public byte_ptrArray8 @data;
-    /// <summary>For video, a positive or negative value, which is typically indicating the size in bytes of each picture line, but it can also be: - the negative byte size of lines for vertical flipping (with data[n] pointing to the end of the data - a positive or negative multiple of the byte size as for accessing even and odd fields of a frame (possibly flipped)</summary>
+    /// <summary>For video, size in bytes of each picture line. For audio, size in bytes of each plane.</summary>
     public int_array8 @linesize;
     /// <summary>pointers to the data planes/channels.</summary>
     public byte** @extended_data;
@@ -1281,10 +1335,11 @@ public unsafe partial struct AVFrame
     public AVRational @sample_aspect_ratio;
     /// <summary>Presentation timestamp in time_base units (time when frame should be shown to user).</summary>
     public long @pts;
+    /// <summary>PTS copied from the AVPacket that was decoded to produce this frame.</summary>
+    [Obsolete("use the pts field instead")]
+    public long @pkt_pts;
     /// <summary>DTS copied from the AVPacket that triggered returning this frame. (if frame threading isn&apos;t used) This is also the Presentation time of this AVFrame calculated from only AVPacket.dts values without pts values.</summary>
     public long @pkt_dts;
-    /// <summary>Time base for the timestamps in this frame. In the future, this field may be set on frames output by decoders or filters, but its value will be by default ignored on input to encoders or filters.</summary>
-    public AVRational @time_base;
     /// <summary>picture number in bitstream order</summary>
     public int @coded_picture_number;
     /// <summary>picture number in display order</summary>
@@ -1293,6 +1348,8 @@ public unsafe partial struct AVFrame
     public int @quality;
     /// <summary>for some private data of the user</summary>
     public void* @opaque;
+    [Obsolete("unused")]
+    public ulong_array8 @error;
     /// <summary>When decoding, this signals how much the picture must be delayed. extra_delay = repeat_pict / (2*fps)</summary>
     public int @repeat_pict;
     /// <summary>The content of the picture is interlaced.</summary>
@@ -1306,9 +1363,8 @@ public unsafe partial struct AVFrame
     /// <summary>Sample rate of the audio data.</summary>
     public int @sample_rate;
     /// <summary>Channel layout of the audio data.</summary>
-    [Obsolete("use ch_layout instead")]
     public ulong @channel_layout;
-    /// <summary>AVBuffer references backing the data for this frame. All the pointers in data and extended_data must point inside one of the buffers in buf or extended_buf. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j &lt; i.</summary>
+    /// <summary>AVBuffer references backing the data for this frame. If all elements of this array are NULL, then this frame is not reference counted. This array must be filled contiguously -- if buf[i] is non-NULL then buf[j] must also be non-NULL for all j &lt; i.</summary>
     public AVBufferRef_ptrArray8 @buf;
     /// <summary>For planar audio which requires more than AV_NUM_DATA_POINTERS AVBufferRef pointers, this array will hold all the references which cannot fit into AVFrame.buf.</summary>
     public AVBufferRef** @extended_buf;
@@ -1336,10 +1392,15 @@ public unsafe partial struct AVFrame
     /// <summary>decode error flags of the frame, set to a combination of FF_DECODE_ERROR_xxx flags if the decoder produced a frame, but there were errors during the decoding. - encoding: unused - decoding: set by libavcodec, read by user.</summary>
     public int @decode_error_flags;
     /// <summary>number of audio channels, only used for audio. - encoding: unused - decoding: Read by user.</summary>
-    [Obsolete("use ch_layout instead")]
     public int @channels;
     /// <summary>size of the corresponding packet containing the compressed frame. It is set to a negative value if unknown. - encoding: unused - decoding: set by libavcodec, read by user.</summary>
     public int @pkt_size;
+    /// <summary>QP table</summary>
+    public sbyte* @qscale_table;
+    /// <summary>QP store stride</summary>
+    public int @qstride;
+    public int @qscale_type;
+    public AVBufferRef* @qp_table_buf;
     /// <summary>For hwaccel-format frames, this should be a reference to the AVHWFramesContext describing the frame.</summary>
     public AVBufferRef* @hw_frames_ctx;
     /// <summary>AVBufferRef for free use by the API user. FFmpeg will never check the contents of the buffer ref. FFmpeg calls av_buffer_unref() on it when the frame is unreferenced. av_frame_copy_props() calls create a new reference with av_buffer_ref() for the target frame&apos;s opaque_ref field.</summary>
@@ -1351,8 +1412,6 @@ public unsafe partial struct AVFrame
     public ulong @crop_right;
     /// <summary>AVBufferRef for internal use by a single libav* library. Must not be used to transfer data between libraries. Has to be NULL when ownership of the frame leaves the respective library.</summary>
     public AVBufferRef* @private_ref;
-    /// <summary>Channel layout of the audio data.</summary>
-    public AVChannelLayout @ch_layout;
 }
 
 /// <summary>Structure to hold side data for an AVFrame.</summary>
@@ -1360,7 +1419,7 @@ public unsafe partial struct AVFrameSideData
 {
     public AVFrameSideDataType @type;
     public byte* @data;
-    public ulong @size;
+    public int @size;
     public AVDictionary* @metadata;
     public AVBufferRef* @buf;
 }
@@ -1449,6 +1508,8 @@ public unsafe partial struct AVHWAccel
     public AVHWAccel_end_frame_func @end_frame;
     /// <summary>Size of per-frame hardware accelerator private data.</summary>
     public int @frame_priv_data_size;
+    /// <summary>Called for every Macroblock in a slice.</summary>
+    public AVHWAccel_decode_mb_func @decode_mb;
     /// <summary>Initialize the hwaccel private data.</summary>
     public AVHWAccel_init_func @init;
     /// <summary>Uninitialize the hwaccel private data.</summary>
@@ -1552,11 +1613,11 @@ public unsafe partial struct AVInputFormat
     /// <summary>Comma-separated list of mime types. It is used check for matching mime types while probing.</summary>
     public byte* @mime_type;
     /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavformat and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
+    public AVInputFormat* @next;
+    /// <summary>Raw demuxers store their codec ID here.</summary>
     public int @raw_codec_id;
     /// <summary>Size of private data so that it can be allocated in the wrapper.</summary>
     public int @priv_data_size;
-    /// <summary>Internal flags. See FF_FMT_FLAG_* in internal.h.</summary>
-    public int @flags_internal;
     /// <summary>Tell if a given file has a chance of being parsed as this format. The buffer provided is guaranteed to be AVPROBE_PADDING_SIZE bytes big so you do not have to check for that unless you need more.</summary>
     public AVInputFormat_read_probe_func @read_probe;
     /// <summary>Read the format header and initialize the AVFormatContext structure. Return 0 if OK. &apos;avformat_new_stream&apos; should be called to create new streams.</summary>
@@ -1577,9 +1638,13 @@ public unsafe partial struct AVInputFormat
     public AVInputFormat_read_seek2_func @read_seek2;
     /// <summary>Returns device list with it properties.</summary>
     public AVInputFormat_get_device_list_func @get_device_list;
+    /// <summary>Initialize device capabilities submodule.</summary>
+    public AVInputFormat_create_device_capabilities_func @create_device_capabilities;
+    /// <summary>Free device capabilities submodule.</summary>
+    public AVInputFormat_free_device_capabilities_func @free_device_capabilities;
 }
 
-/// <summary>Bytestream IO Context. New public fields can be added with minor version bumps. Removal, reordering and changes to existing public fields require a major version bump. sizeof(AVIOContext) must not be used outside libav*.</summary>
+/// <summary>Bytestream IO Context. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. sizeof(AVIOContext) must not be used outside libav*.</summary>
 public unsafe partial struct AVIOContext
 {
     /// <summary>A class for private options.</summary>
@@ -1601,24 +1666,34 @@ public unsafe partial struct AVIOContext
     public long @pos;
     /// <summary>true if was unable to read due to error or eof</summary>
     public int @eof_reached;
-    /// <summary>contains the error code or 0 if no error happened</summary>
-    public int @error;
     /// <summary>true if open for writing</summary>
     public int @write_flag;
     public int @max_packet_size;
-    /// <summary>Try to buffer at least this amount of data before flushing it.</summary>
-    public int @min_packet_size;
     public ulong @checksum;
     public byte* @checksum_ptr;
     public AVIOContext_update_checksum_func @update_checksum;
+    /// <summary>contains the error code or 0 if no error happened</summary>
+    public int @error;
     /// <summary>Pause or resume playback for network streaming protocols - e.g. MMS.</summary>
     public AVIOContext_read_pause_func @read_pause;
     /// <summary>Seek to a given timestamp in stream with the specified stream_index. Needed for some network streaming protocols which don&apos;t support seeking to byte position.</summary>
     public AVIOContext_read_seek_func @read_seek;
     /// <summary>A combination of AVIO_SEEKABLE_ flags or 0 when the stream is not seekable.</summary>
     public int @seekable;
+    /// <summary>max filesize, used to limit allocations This field is internal to libavformat and access from outside is not allowed.</summary>
+    public long @maxsize;
     /// <summary>avio_read and avio_write should if possible be satisfied directly instead of going through a buffer, and avio_seek will always call the underlying seek function directly.</summary>
     public int @direct;
+    /// <summary>Bytes read statistic This field is internal to libavformat and access from outside is not allowed.</summary>
+    public long @bytes_read;
+    /// <summary>seek statistic This field is internal to libavformat and access from outside is not allowed.</summary>
+    public int @seek_count;
+    /// <summary>writeout statistic This field is internal to libavformat and access from outside is not allowed.</summary>
+    public int @writeout_count;
+    /// <summary>Original buffer size used internally after probing and ensure seekback to reset the buffer size This field is internal to libavformat and access from outside is not allowed.</summary>
+    public int @orig_buffer_size;
+    /// <summary>Threshold to favor readahead over seek. This is current internal only, do not use from outside.</summary>
+    public int @short_seek_threshold;
     /// <summary>&apos;,&apos; separated list of allowed protocols.</summary>
     public byte* @protocol_whitelist;
     /// <summary>&apos;,&apos; separated list of disallowed protocols.</summary>
@@ -1627,14 +1702,16 @@ public unsafe partial struct AVIOContext
     public AVIOContext_write_data_type_func @write_data_type;
     /// <summary>If set, don&apos;t call write_data_type separately for AVIO_DATA_MARKER_BOUNDARY_POINT, but ignore them and treat them as AVIO_DATA_MARKER_UNKNOWN (to avoid needlessly small chunks of data returned from the callback).</summary>
     public int @ignore_boundary_point;
-    [Obsolete("field utilized privately by libavformat. For a public statistic of how many bytes were written out, see AVIOContext::bytes_written.")]
+    /// <summary>Internal, not meant to be used from outside of AVIOContext.</summary>
+    public AVIODataMarkerType @current_type;
+    public long @last_time;
+    /// <summary>A callback that is used instead of short_seek_threshold. This is current internal only, do not use from outside.</summary>
+    public AVIOContext_short_seek_get_func @short_seek_get;
     public long @written;
     /// <summary>Maximum reached position before a backward seek in the write buffer, used keeping track of already written data for a later flush.</summary>
     public byte* @buf_ptr_max;
-    /// <summary>Read-only statistic of bytes read for this AVIOContext.</summary>
-    public long @bytes_read;
-    /// <summary>Read-only statistic of bytes written for this AVIOContext.</summary>
-    public long @bytes_written;
+    /// <summary>Try to buffer at least this amount of data before flushing it</summary>
+    public int @min_packet_size;
 }
 
 public unsafe partial struct AVIODirContext
@@ -1772,10 +1849,9 @@ public unsafe partial struct AVOutputFormat
     public AVCodecTag** @codec_tag;
     /// <summary>AVClass for the private context</summary>
     public AVClass* @priv_class;
-    /// <summary>*************************************************************** No fields below this line are part of the public API. They may not be used outside of libavformat and can be changed and removed at will. New public fields should be added right above. ****************************************************************</summary>
+    public AVOutputFormat* @next;
+    /// <summary>size of private data so that it can be allocated in the wrapper</summary>
     public int @priv_data_size;
-    /// <summary>Internal flags. See FF_FMT_FLAG_* in internal.h.</summary>
-    public int @flags_internal;
     public AVOutputFormat_write_header_func @write_header;
     /// <summary>Write a packet. If AVFMT_ALLOW_FLUSH is set in flags, pkt can be NULL in order to flush data buffered in the muxer. When flushing, return 0 if there still is more data to flush, or 1 if everything was flushed and there is no more buffered data.</summary>
     public AVOutputFormat_write_packet_func @write_packet;
@@ -1791,13 +1867,17 @@ public unsafe partial struct AVOutputFormat
     public AVOutputFormat_write_uncoded_frame_func @write_uncoded_frame;
     /// <summary>Returns device list with it properties.</summary>
     public AVOutputFormat_get_device_list_func @get_device_list;
+    /// <summary>Initialize device capabilities submodule.</summary>
+    public AVOutputFormat_create_device_capabilities_func @create_device_capabilities;
+    /// <summary>Free device capabilities submodule.</summary>
+    public AVOutputFormat_free_device_capabilities_func @free_device_capabilities;
     /// <summary>default data codec</summary>
     public AVCodecID @data_codec;
     /// <summary>Initialize format. May allocate data here, and set any AVFormatContext or AVStream parameters that need to be set before packets are sent. This method must not write output.</summary>
     public AVOutputFormat_init_func @init;
     /// <summary>Deinitialize format. If present, this is called whenever the muxer is being destroyed, regardless of whether or not the header has been written.</summary>
     public AVOutputFormat_deinit_func @deinit;
-    /// <summary>Set up any necessary bitstream filtering and extract any extra data needed for the global header.</summary>
+    /// <summary>Set up any necessary bitstream filtering and extract any extra data needed for the global header. Return 0 if more packets from this stream must be checked; 1 if not.</summary>
     public AVOutputFormat_check_bitstream_func @check_bitstream;
 }
 
@@ -1822,12 +1902,8 @@ public unsafe partial struct AVPacket
     public long @duration;
     /// <summary>byte position in stream, -1 if unknown</summary>
     public long @pos;
-    /// <summary>for some private data of the user</summary>
-    public void* @opaque;
-    /// <summary>AVBufferRef for free use by the API user. FFmpeg will never check the contents of the buffer ref. FFmpeg calls av_buffer_unref() on it when the packet is unreferenced. av_packet_copy_props() calls create a new reference with av_buffer_ref() for the target packet&apos;s opaque_ref field.</summary>
-    public AVBufferRef* @opaque_ref;
-    /// <summary>Time base of the packet&apos;s timestamps. In the future, this field may be set on packets output by encoders or demuxers, but its value will be by default ignored on input to decoders or muxers.</summary>
-    public AVRational @time_base;
+    [Obsolete("Same as the duration field, but as int64_t. This was required for Matroska subtitles, whose duration values could overflow when the duration field was still an int.")]
+    public long @convergence_duration;
 }
 
 public unsafe partial struct AVPacketList
@@ -1839,7 +1915,7 @@ public unsafe partial struct AVPacketList
 public unsafe partial struct AVPacketSideData
 {
     public byte* @data;
-    public ulong @size;
+    public int @size;
     public AVPacketSideDataType @type;
 }
 
@@ -1853,6 +1929,16 @@ public unsafe partial struct AVPanScan
     public int @height;
     /// <summary>position of the top left corner in 1/16 pel for up to 3 fields/frames - encoding: Set by user. - decoding: Set by libavcodec.</summary>
     public short_array3x2 @position;
+}
+
+/// <summary>Picture data structure.</summary>
+[Obsolete("use AVFrame or imgutils functions instead")]
+public unsafe partial struct AVPicture
+{
+    /// <summary>pointers to the image data planes</summary>
+    public byte_ptrArray8 @data;
+    /// <summary>number of bytes per line</summary>
+    public int_array8 @linesize;
 }
 
 /// <summary>Descriptor that unambiguously describes how the bits of a pixel are stored in the up to 4 data planes of an image. It also stores the subsampling factors and number of components.</summary>
@@ -1954,6 +2040,8 @@ public unsafe partial struct AVStream
     public int @index;
     /// <summary>Format-specific stream ID. decoding: set by libavformat encoding: set by the user, replaced by libavformat if left unset</summary>
     public int @id;
+    [Obsolete("use the codecpar struct instead")]
+    public AVCodecContext* @codec;
     public void* @priv_data;
     /// <summary>This is the fundamental unit of time (in seconds) in terms of which frame timestamps are represented.</summary>
     public AVRational @time_base;
@@ -1963,7 +2051,7 @@ public unsafe partial struct AVStream
     public long @duration;
     /// <summary>number of frames in this stream if known or 0</summary>
     public long @nb_frames;
-    /// <summary>Stream disposition - a combination of AV_DISPOSITION_* flags. - demuxing: set by libavformat when creating the stream or in avformat_find_stream_info(). - muxing: may be set by the caller before avformat_write_header().</summary>
+    /// <summary>AV_DISPOSITION_* bit field</summary>
     public int @disposition;
     /// <summary>Selects which packets can be discarded at will and do not need to be demuxed.</summary>
     public AVDiscard @discard;
@@ -1978,14 +2066,101 @@ public unsafe partial struct AVStream
     public AVPacketSideData* @side_data;
     /// <summary>The number of elements in the AVStream.side_data array.</summary>
     public int @nb_side_data;
-    /// <summary>Flags indicating events happening on the stream, a combination of AVSTREAM_EVENT_FLAG_*.</summary>
+    /// <summary>Flags for the user to detect events happening on the stream. Flags must be cleared by the user once the event has been handled. A combination of AVSTREAM_EVENT_FLAG_*.</summary>
     public int @event_flags;
     /// <summary>Real base framerate of the stream. This is the lowest framerate with which all timestamps can be represented accurately (it is the least common multiple of all framerates in the stream). Note, this value is just a guess! For example, if the time base is 1/90000 and all frames have either approximately 3600 or 1800 timer ticks, then r_frame_rate will be 50/1.</summary>
     public AVRational @r_frame_rate;
+    /// <summary>String containing pairs of key and values describing recommended encoder configuration. Pairs are separated by &apos;,&apos;. Keys are separated from values by &apos;=&apos;.</summary>
+    [Obsolete("unused")]
+    public byte* @recommended_encoder_configuration;
     /// <summary>Codec parameters associated with this stream. Allocated and freed by libavformat in avformat_new_stream() and avformat_free_context() respectively.</summary>
     public AVCodecParameters* @codecpar;
-    /// <summary>Number of bits in timestamps. Used for wrapping control.</summary>
+    public AVStream_info* @info;
+    /// <summary>number of bits in pts (used for wrapping control)</summary>
     public int @pts_wrap_bits;
+    /// <summary>Timestamp corresponding to the last dts sync point.</summary>
+    public long @first_dts;
+    public long @cur_dts;
+    public long @last_IP_pts;
+    public int @last_IP_duration;
+    /// <summary>Number of packets to buffer for codec probing</summary>
+    public int @probe_packets;
+    /// <summary>Number of frames that have been demuxed during avformat_find_stream_info()</summary>
+    public int @codec_info_nb_frames;
+    public AVStreamParseType @need_parsing;
+    public AVCodecParserContext* @parser;
+    /// <summary>last packet in packet_buffer for this stream when muxing.</summary>
+    public AVPacketList* @last_in_packet_buffer;
+    public AVProbeData @probe_data;
+    public long_array17 @pts_buffer;
+    /// <summary>Only used if the format does not support seeking natively.</summary>
+    public AVIndexEntry* @index_entries;
+    public int @nb_index_entries;
+    public uint @index_entries_allocated_size;
+    /// <summary>Stream Identifier This is the MPEG-TS stream identifier +1 0 means unknown</summary>
+    public int @stream_identifier;
+    /// <summary>Details of the MPEG-TS program which created this stream.</summary>
+    public int @program_num;
+    public int @pmt_version;
+    public int @pmt_stream_idx;
+    public long @interleaver_chunk_size;
+    public long @interleaver_chunk_duration;
+    /// <summary>stream probing state -1 -&gt; probing finished 0 -&gt; no probing requested rest -&gt; perform probing with request_probe being the minimum score to accept.</summary>
+    public int @request_probe;
+    /// <summary>Indicates that everything up to the next keyframe should be discarded.</summary>
+    public int @skip_to_keyframe;
+    /// <summary>Number of samples to skip at the start of the frame decoded from the next packet.</summary>
+    public int @skip_samples;
+    /// <summary>If not 0, the number of samples that should be skipped from the start of the stream (the samples are removed from packets with pts==0, which also assumes negative timestamps do not happen). Intended for use with formats such as mp3 with ad-hoc gapless audio support.</summary>
+    public long @start_skip_samples;
+    /// <summary>If not 0, the first audio sample that should be discarded from the stream. This is broken by design (needs global sample count), but can&apos;t be avoided for broken by design formats such as mp3 with ad-hoc gapless audio support.</summary>
+    public long @first_discard_sample;
+    /// <summary>The sample after last sample that is intended to be discarded after first_discard_sample. Works on frame boundaries only. Used to prevent early EOF if the gapless info is broken (considered concatenated mp3s).</summary>
+    public long @last_discard_sample;
+    /// <summary>Number of internally decoded frames, used internally in libavformat, do not access its lifetime differs from info which is why it is not in that structure.</summary>
+    public int @nb_decoded_frames;
+    /// <summary>Timestamp offset added to timestamps before muxing</summary>
+    public long @mux_ts_offset;
+    /// <summary>Internal data to check for wrapping of the time stamp</summary>
+    public long @pts_wrap_reference;
+    /// <summary>Options for behavior, when a wrap is detected.</summary>
+    public int @pts_wrap_behavior;
+    /// <summary>Internal data to prevent doing update_initial_durations() twice</summary>
+    public int @update_initial_durations_done;
+    /// <summary>Internal data to generate dts from pts</summary>
+    public long_array17 @pts_reorder_error;
+    public byte_array17 @pts_reorder_error_count;
+    /// <summary>Internal data to analyze DTS and detect faulty mpeg streams</summary>
+    public long @last_dts_for_order_check;
+    public byte @dts_ordered;
+    public byte @dts_misordered;
+    /// <summary>Internal data to inject global side data</summary>
+    public int @inject_global_side_data;
+    /// <summary>display aspect ratio (0 if unknown) - encoding: unused - decoding: Set by libavformat to calculate sample_aspect_ratio internally</summary>
+    public AVRational @display_aspect_ratio;
+    /// <summary>An opaque field for libavformat internal usage. Must not be accessed in any way by callers.</summary>
+    public AVStreamInternal* @internal;
+}
+
+/// <summary>Stream information used internally by avformat_find_stream_info()</summary>
+public unsafe partial struct AVStream_info
+{
+    public long @last_dts;
+    public long @duration_gcd;
+    public int @duration_count;
+    public long @rfps_duration_sum;
+    public double2x399* @duration_error;
+    public long @codec_info_duration;
+    public long @codec_info_duration_fields;
+    public int @frame_delay_evidence;
+    /// <summary>0 -&gt; decoder has not been searched for yet. &gt;0 -&gt; decoder found &lt;0 -&gt; decoder with codec_id == -found_decoder has not been found</summary>
+    public int @found_decoder;
+    public long @last_duration;
+    /// <summary>Those are used for average framerate estimation.</summary>
+    public long @fps_first_dts;
+    public int @fps_first_dts_idx;
+    public long @fps_last_dts;
+    public int @fps_last_dts_idx;
 }
 
 public unsafe partial struct AVSubtitle
@@ -2011,6 +2186,8 @@ public unsafe partial struct AVSubtitleRect
     public int @h;
     /// <summary>number of colors in pict, undefined when pict is not set</summary>
     public int @nb_colors;
+    [Obsolete("unused")]
+    public AVPicture @pict;
     /// <summary>data+linesize for the bitmap of this subtitle. Can be set for text/ass as well once they are rendered.</summary>
     public byte_ptrArray4 @data;
     public int_array4 @linesize;
@@ -2489,6 +2666,12 @@ public unsafe partial struct AVBPrint
 {
 }
 
+/// <summary>@{</summary>
+/// <remarks>This struct is incomplete.</remarks>
+public unsafe partial struct AVBSFInternal
+{
+}
+
 /// <summary>Structure for chain/list of bitstream filters. Empty list can be allocated by av_bsf_list_alloc().</summary>
 /// <remarks>This struct is incomplete.</remarks>
 public unsafe partial struct AVBSFList
@@ -2504,6 +2687,16 @@ public unsafe partial struct AVBuffer
 /// <summary>The buffer pool. This structure is opaque and not meant to be accessed directly. It is allocated with av_buffer_pool_init() and freed with av_buffer_pool_uninit().</summary>
 /// <remarks>This struct is incomplete.</remarks>
 public unsafe partial struct AVBufferPool
+{
+}
+
+/// <remarks>This struct is incomplete.</remarks>
+public unsafe partial struct AVCodecDefault
+{
+}
+
+/// <remarks>This struct is incomplete.</remarks>
+public unsafe partial struct AVCodecHWConfigInternal
 {
 }
 
@@ -2554,6 +2747,11 @@ public unsafe partial struct AVFilterPad
 }
 
 /// <remarks>This struct is incomplete.</remarks>
+public unsafe partial struct AVFormatInternal
+{
+}
+
+/// <remarks>This struct is incomplete.</remarks>
 public unsafe partial struct AVHWDeviceInternal
 {
 }
@@ -2563,9 +2761,19 @@ public unsafe partial struct AVHWFramesInternal
 {
 }
 
+/// <remarks>This struct is incomplete.</remarks>
+public unsafe partial struct AVStreamInternal
+{
+}
+
 /// <summary>Low-complexity tree container</summary>
 /// <remarks>This struct is incomplete.</remarks>
 public unsafe partial struct AVTreeNode
+{
+}
+
+/// <remarks>This struct is incomplete.</remarks>
+public unsafe partial struct MpegEncContext
 {
 }
 

@@ -27,7 +27,8 @@
 #ifndef AVUTIL_AUDIO_FIFO_H
 #define AVUTIL_AUDIO_FIFO_H
 
-#include "attributes.h"
+#include "avutil.h"
+#include "fifo.h"
 #include "samplefmt.h"
 
 /**

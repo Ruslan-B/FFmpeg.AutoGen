@@ -110,19 +110,10 @@ typedef struct AVBufferSrcParameters {
      */
     int sample_rate;
 
-#if FF_API_OLD_CHANNEL_LAYOUT
     /**
      * Audio only, the audio channel layout
-     * @deprecated use ch_layout
      */
-    attribute_deprecated
     uint64_t channel_layout;
-#endif
-
-    /**
-     * Audio only, the audio channel layout
-     */
-    AVChannelLayout ch_layout;
 } AVBufferSrcParameters;
 
 /**

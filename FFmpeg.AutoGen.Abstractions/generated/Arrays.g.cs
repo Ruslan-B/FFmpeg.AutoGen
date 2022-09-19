@@ -24,6 +24,28 @@ public unsafe struct AVRational2 : IFixedArray<AVRational>
     public static implicit operator AVRational[](AVRational2 @struct) => @struct.ToArray();
 }
 
+public unsafe struct double2x399 : IFixedArray<double399>
+{
+    public static readonly int ArrayLength = 2;
+    public int Length => 2;
+    double399 _0; double399 _1;
+    
+    public double399 this[uint i]
+    {
+        get { if (i >= 2) throw new ArgumentOutOfRangeException(); fixed (double399* p0 = &_0) { return *(p0 + i); } }
+        set { if (i >= 2) throw new ArgumentOutOfRangeException(); fixed (double399* p0 = &_0) { *(p0 + i) = value;  } }
+    }
+    public double399[] ToArray()
+    {
+        fixed (double399* p0 = &_0) { var a = new double399[2]; for (uint i = 0; i < 2; i++) a[i] = *(p0 + i); return a; }
+    }
+    public void UpdateFrom(double399[] array)
+    {
+        fixed (double399* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= 2) return; } }
+    }
+    public static implicit operator double399[](double2x399 @struct) => @struct.ToArray();
+}
+
 public unsafe struct short2 : IFixedArray<short>
 {
     public static readonly int ArrayLength = 2;
@@ -288,33 +310,11 @@ public unsafe struct long4 : IFixedArray<long>
     public static implicit operator long[](long4 @struct) => @struct.ToArray();
 }
 
-public unsafe struct ulong4 : IFixedArray<ulong>
+public unsafe struct int5 : IFixedArray<int>
 {
-    public static readonly int ArrayLength = 4;
-    public int Length => 4;
-    fixed ulong _[4];
-    
-    public ulong this[uint i]
-    {
-        get => _[i];
-        set => _[i] = value;
-    }
-    public ulong[] ToArray()
-    {
-        var a = new ulong[4]; for (uint i = 0; i < 4; i++) a[i] = _[i]; return a;
-    }
-    public void UpdateFrom(ulong[] array)
-    {
-        uint i = 0; foreach(var value in array) { _[i++] = value; if (i >= 4) return; }
-    }
-    public static implicit operator ulong[](ulong4 @struct) => @struct.ToArray();
-}
-
-public unsafe struct int7 : IFixedArray<int>
-{
-    public static readonly int ArrayLength = 7;
-    public int Length => 7;
-    fixed int _[7];
+    public static readonly int ArrayLength = 5;
+    public int Length => 5;
+    fixed int _[5];
     
     public int this[uint i]
     {
@@ -323,13 +323,13 @@ public unsafe struct int7 : IFixedArray<int>
     }
     public int[] ToArray()
     {
-        var a = new int[7]; for (uint i = 0; i < 7; i++) a[i] = _[i]; return a;
+        var a = new int[5]; for (uint i = 0; i < 5; i++) a[i] = _[i]; return a;
     }
     public void UpdateFrom(int[] array)
     {
-        uint i = 0; foreach(var value in array) { _[i++] = value; if (i >= 7) return; }
+        uint i = 0; foreach(var value in array) { _[i++] = value; if (i >= 5) return; }
     }
-    public static implicit operator int[](int7 @struct) => @struct.ToArray();
+    public static implicit operator int[](int5 @struct) => @struct.ToArray();
 }
 
 public unsafe struct AVBufferRef_ptr8 : IFixedArray
@@ -486,11 +486,11 @@ public unsafe struct AVRational15 : IFixedArray<AVRational>
     public static implicit operator AVRational[](AVRational15 @struct) => @struct.ToArray();
 }
 
-public unsafe struct byte16 : IFixedArray<byte>
+public unsafe struct byte17 : IFixedArray<byte>
 {
-    public static readonly int ArrayLength = 16;
-    public int Length => 16;
-    fixed byte _[16];
+    public static readonly int ArrayLength = 17;
+    public int Length => 17;
+    fixed byte _[17];
     
     public byte this[uint i]
     {
@@ -499,13 +499,35 @@ public unsafe struct byte16 : IFixedArray<byte>
     }
     public byte[] ToArray()
     {
-        var a = new byte[16]; for (uint i = 0; i < 16; i++) a[i] = _[i]; return a;
+        var a = new byte[17]; for (uint i = 0; i < 17; i++) a[i] = _[i]; return a;
     }
     public void UpdateFrom(byte[] array)
     {
-        uint i = 0; foreach(var value in array) { _[i++] = value; if (i >= 16) return; }
+        uint i = 0; foreach(var value in array) { _[i++] = value; if (i >= 17) return; }
     }
-    public static implicit operator byte[](byte16 @struct) => @struct.ToArray();
+    public static implicit operator byte[](byte17 @struct) => @struct.ToArray();
+}
+
+public unsafe struct long17 : IFixedArray<long>
+{
+    public static readonly int ArrayLength = 17;
+    public int Length => 17;
+    fixed long _[17];
+    
+    public long this[uint i]
+    {
+        get => _[i];
+        set => _[i] = value;
+    }
+    public long[] ToArray()
+    {
+        var a = new long[17]; for (uint i = 0; i < 17; i++) a[i] = _[i]; return a;
+    }
+    public void UpdateFrom(long[] array)
+    {
+        uint i = 0; foreach(var value in array) { _[i++] = value; if (i >= 17) return; }
+    }
+    public static implicit operator long[](long17 @struct) => @struct.ToArray();
 }
 
 public unsafe struct AVRational25 : IFixedArray<AVRational>
@@ -550,6 +572,50 @@ public unsafe struct AVRational25x25 : IFixedArray<AVRational25>
         fixed (AVRational25* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= 25) return; } }
     }
     public static implicit operator AVRational25[](AVRational25x25 @struct) => @struct.ToArray();
+}
+
+public unsafe struct double399 : IFixedArray<double>
+{
+    public static readonly int ArrayLength = 399;
+    public int Length => 399;
+    fixed double _[399];
+    
+    public double this[uint i]
+    {
+        get => _[i];
+        set => _[i] = value;
+    }
+    public double[] ToArray()
+    {
+        var a = new double[399]; for (uint i = 0; i < 399; i++) a[i] = _[i]; return a;
+    }
+    public void UpdateFrom(double[] array)
+    {
+        uint i = 0; foreach(var value in array) { _[i++] = value; if (i >= 399) return; }
+    }
+    public static implicit operator double[](double399 @struct) => @struct.ToArray();
+}
+
+public unsafe struct byte1024 : IFixedArray<byte>
+{
+    public static readonly int ArrayLength = 1024;
+    public int Length => 1024;
+    fixed byte _[1024];
+    
+    public byte this[uint i]
+    {
+        get => _[i];
+        set => _[i] = value;
+    }
+    public byte[] ToArray()
+    {
+        var a = new byte[1024]; for (uint i = 0; i < 1024; i++) a[i] = _[i]; return a;
+    }
+    public void UpdateFrom(byte[] array)
+    {
+        uint i = 0; foreach(var value in array) { _[i++] = value; if (i >= 1024) return; }
+    }
+    public static implicit operator byte[](byte1024 @struct) => @struct.ToArray();
 }
 
 public unsafe struct byte61440 : IFixedArray<byte>

@@ -27,7 +27,6 @@
 #ifndef AVUTIL_ADLER32_H
 #define AVUTIL_ADLER32_H
 
-#include <stddef.h>
 #include <stdint.h>
 #include "attributes.h"
 
@@ -38,8 +37,6 @@
  *
  * @{
  */
-
-typedef uint32_t AVAdler;
 
 /**
  * Calculate the Adler32 checksum of a buffer.
@@ -53,8 +50,8 @@ typedef uint32_t AVAdler;
  * @param len   size of input buffer
  * @return      updated checksum
  */
-AVAdler av_adler32_update(AVAdler adler, const uint8_t *buf,
-                          size_t len) av_pure;
+unsigned long av_adler32_update(unsigned long adler, const uint8_t *buf,
+                                unsigned int len) av_pure;
 
 /**
  * @}
