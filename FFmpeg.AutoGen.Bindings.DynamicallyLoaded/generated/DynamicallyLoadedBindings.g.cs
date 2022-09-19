@@ -1531,7 +1531,7 @@ public static unsafe partial class DynamicallyLoadedBindings
             return vectors.av_image_check_size2(@w, @h, @max_pixels, @pix_fmt, @log_offset, @log_ctx);
         };
         
-        vectors.av_image_copy = (ref byte_ptr4 @dst_data, ref int4 @dst_linesizes, byte_ptr4 @src_data, int4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height) =>
+        vectors.av_image_copy = (ref byte_ptr4 @dst_data, ref int4 @dst_linesizes, in byte_ptr4 @src_data, in int4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height) =>
         {
             vectors.av_image_copy = FunctionResolver.GetFunctionDelegate<vectors.av_image_copy_delegate>("avutil", "av_image_copy", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
             vectors.av_image_copy(ref @dst_data, ref @dst_linesizes, @src_data, @src_linesizes, @pix_fmt, @width, @height);
@@ -1549,13 +1549,13 @@ public static unsafe partial class DynamicallyLoadedBindings
             vectors.av_image_copy_plane_uc_from(@dst, @dst_linesize, @src, @src_linesize, @bytewidth, @height);
         };
         
-        vectors.av_image_copy_to_buffer = (byte* @dst, int @dst_size, byte_ptr4 @src_data, int4 @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align) =>
+        vectors.av_image_copy_to_buffer = (byte* @dst, int @dst_size, in byte_ptr4 @src_data, in int4 @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align) =>
         {
             vectors.av_image_copy_to_buffer = FunctionResolver.GetFunctionDelegate<vectors.av_image_copy_to_buffer_delegate>("avutil", "av_image_copy_to_buffer", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
             return vectors.av_image_copy_to_buffer(@dst, @dst_size, @src_data, @src_linesize, @pix_fmt, @width, @height, @align);
         };
         
-        vectors.av_image_copy_uc_from = (ref byte_ptr4 @dst_data, long4 @dst_linesizes, byte_ptr4 @src_data, long4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height) =>
+        vectors.av_image_copy_uc_from = (ref byte_ptr4 @dst_data, in long4 @dst_linesizes, in byte_ptr4 @src_data, in long4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height) =>
         {
             vectors.av_image_copy_uc_from = FunctionResolver.GetFunctionDelegate<vectors.av_image_copy_uc_from_delegate>("avutil", "av_image_copy_uc_from", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
             vectors.av_image_copy_uc_from(ref @dst_data, @dst_linesizes, @src_data, @src_linesizes, @pix_fmt, @width, @height);
@@ -1567,7 +1567,7 @@ public static unsafe partial class DynamicallyLoadedBindings
             return vectors.av_image_fill_arrays(ref @dst_data, ref @dst_linesize, @src, @pix_fmt, @width, @height, @align);
         };
         
-        vectors.av_image_fill_black = (ref byte_ptr4 @dst_data, long4 @dst_linesize, AVPixelFormat @pix_fmt, AVColorRange @range, int @width, int @height) =>
+        vectors.av_image_fill_black = (ref byte_ptr4 @dst_data, in long4 @dst_linesize, AVPixelFormat @pix_fmt, AVColorRange @range, int @width, int @height) =>
         {
             vectors.av_image_fill_black = FunctionResolver.GetFunctionDelegate<vectors.av_image_fill_black_delegate>("avutil", "av_image_fill_black", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
             return vectors.av_image_fill_black(ref @dst_data, @dst_linesize, @pix_fmt, @range, @width, @height);
@@ -1585,13 +1585,13 @@ public static unsafe partial class DynamicallyLoadedBindings
             vectors.av_image_fill_max_pixsteps(ref @max_pixsteps, ref @max_pixstep_comps, @pixdesc);
         };
         
-        vectors.av_image_fill_plane_sizes = (ref ulong4 @size, AVPixelFormat @pix_fmt, int @height, long4 @linesizes) =>
+        vectors.av_image_fill_plane_sizes = (ref ulong4 @size, AVPixelFormat @pix_fmt, int @height, in long4 @linesizes) =>
         {
             vectors.av_image_fill_plane_sizes = FunctionResolver.GetFunctionDelegate<vectors.av_image_fill_plane_sizes_delegate>("avutil", "av_image_fill_plane_sizes", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
             return vectors.av_image_fill_plane_sizes(ref @size, @pix_fmt, @height, @linesizes);
         };
         
-        vectors.av_image_fill_pointers = (ref byte_ptr4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int4 @linesizes) =>
+        vectors.av_image_fill_pointers = (ref byte_ptr4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, in int4 @linesizes) =>
         {
             vectors.av_image_fill_pointers = FunctionResolver.GetFunctionDelegate<vectors.av_image_fill_pointers_delegate>("avutil", "av_image_fill_pointers", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
             return vectors.av_image_fill_pointers(ref @data, @pix_fmt, @height, @ptr, @linesizes);
@@ -2371,13 +2371,13 @@ public static unsafe partial class DynamicallyLoadedBindings
             return vectors.av_read_frame(@s, @pkt);
         };
         
-        vectors.av_read_image_line = (ushort* @dst, byte_ptr4 @data, int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component) =>
+        vectors.av_read_image_line = (ushort* @dst, in byte_ptr4 @data, in int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component) =>
         {
             vectors.av_read_image_line = FunctionResolver.GetFunctionDelegate<vectors.av_read_image_line_delegate>("avutil", "av_read_image_line", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
             vectors.av_read_image_line(@dst, @data, @linesize, @desc, @x, @y, @c, @w, @read_pal_component);
         };
         
-        vectors.av_read_image_line2 = (void* @dst, byte_ptr4 @data, int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component, int @dst_element_size) =>
+        vectors.av_read_image_line2 = (void* @dst, in byte_ptr4 @data, in int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component, int @dst_element_size) =>
         {
             vectors.av_read_image_line2 = FunctionResolver.GetFunctionDelegate<vectors.av_read_image_line2_delegate>("avutil", "av_read_image_line2", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
             vectors.av_read_image_line2(@dst, @data, @linesize, @desc, @x, @y, @c, @w, @read_pal_component, @dst_element_size);
@@ -2731,13 +2731,13 @@ public static unsafe partial class DynamicallyLoadedBindings
             return vectors.av_write_frame(@s, @pkt);
         };
         
-        vectors.av_write_image_line = (ushort* @src, ref byte_ptr4 @data, int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w) =>
+        vectors.av_write_image_line = (ushort* @src, ref byte_ptr4 @data, in int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w) =>
         {
             vectors.av_write_image_line = FunctionResolver.GetFunctionDelegate<vectors.av_write_image_line_delegate>("avutil", "av_write_image_line", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
             vectors.av_write_image_line(@src, ref @data, @linesize, @desc, @x, @y, @c, @w);
         };
         
-        vectors.av_write_image_line2 = (void* @src, ref byte_ptr4 @data, int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @src_element_size) =>
+        vectors.av_write_image_line2 = (void* @src, ref byte_ptr4 @data, in int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @src_element_size) =>
         {
             vectors.av_write_image_line2 = FunctionResolver.GetFunctionDelegate<vectors.av_write_image_line2_delegate>("avutil", "av_write_image_line2", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
             vectors.av_write_image_line2(@src, ref @data, @linesize, @desc, @x, @y, @c, @w, @src_element_size);
@@ -3907,7 +3907,7 @@ public static unsafe partial class DynamicallyLoadedBindings
             return vectors.pp_get_mode_by_name_and_quality(@name, @quality);
         };
         
-        vectors.pp_postprocess = (byte_ptr3 @src, int3 @srcStride, ref byte_ptr3 @dst, int3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type) =>
+        vectors.pp_postprocess = (in byte_ptr3 @src, in int3 @srcStride, ref byte_ptr3 @dst, in int3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type) =>
         {
             vectors.pp_postprocess = FunctionResolver.GetFunctionDelegate<vectors.pp_postprocess_delegate>("postproc", "pp_postprocess", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
             vectors.pp_postprocess(@src, @srcStride, ref @dst, @dstStride, @horizontalSize, @verticalSize, @QP_store, @QP_stride, @mode, @ppContext, @pict_type);
@@ -4219,7 +4219,7 @@ public static unsafe partial class DynamicallyLoadedBindings
             return vectors.sws_send_slice(@c, @slice_start, @slice_height);
         };
         
-        vectors.sws_setColorspaceDetails = (SwsContext* @c, int4 @inv_table, int @srcRange, int4 @table, int @dstRange, int @brightness, int @contrast, int @saturation) =>
+        vectors.sws_setColorspaceDetails = (SwsContext* @c, in int4 @inv_table, int @srcRange, in int4 @table, int @dstRange, int @brightness, int @contrast, int @saturation) =>
         {
             vectors.sws_setColorspaceDetails = FunctionResolver.GetFunctionDelegate<vectors.sws_setColorspaceDetails_delegate>("swscale", "sws_setColorspaceDetails", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
             return vectors.sws_setColorspaceDetails(@c, @inv_table, @srcRange, @table, @dstRange, @brightness, @contrast, @saturation);

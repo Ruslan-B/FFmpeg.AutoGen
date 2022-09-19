@@ -16,6 +16,7 @@ internal static class ParametersHelper
         {
             var sb = new StringBuilder();
             if (withAttributes && parameter.Type.Attributes.Length > 0) sb.Append($"{string.Join("", parameter.Type.Attributes)} ");
+            if (parameter.IsConstant) sb.Append("in ");
             if (parameter.ByReference) sb.Append("ref ");
             sb.Append($"{GetTypeName(parameter.Type, useLegacy)} @{parameter.Name}");
             return sb.ToString();

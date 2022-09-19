@@ -1274,7 +1274,7 @@ public static unsafe partial class vectors
     public static av_image_check_size2_delegate av_image_check_size2;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void av_image_copy_delegate(ref byte_ptr4 @dst_data, ref int4 @dst_linesizes, byte_ptr4 @src_data, int4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
+    public delegate void av_image_copy_delegate(ref byte_ptr4 @dst_data, ref int4 @dst_linesizes, in byte_ptr4 @src_data, in int4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
     public static av_image_copy_delegate av_image_copy;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -1286,11 +1286,11 @@ public static unsafe partial class vectors
     public static av_image_copy_plane_uc_from_delegate av_image_copy_plane_uc_from;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate int av_image_copy_to_buffer_delegate(byte* @dst, int @dst_size, byte_ptr4 @src_data, int4 @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
+    public delegate int av_image_copy_to_buffer_delegate(byte* @dst, int @dst_size, in byte_ptr4 @src_data, in int4 @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
     public static av_image_copy_to_buffer_delegate av_image_copy_to_buffer;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void av_image_copy_uc_from_delegate(ref byte_ptr4 @dst_data, long4 @dst_linesizes, byte_ptr4 @src_data, long4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
+    public delegate void av_image_copy_uc_from_delegate(ref byte_ptr4 @dst_data, in long4 @dst_linesizes, in byte_ptr4 @src_data, in long4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
     public static av_image_copy_uc_from_delegate av_image_copy_uc_from;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -1298,7 +1298,7 @@ public static unsafe partial class vectors
     public static av_image_fill_arrays_delegate av_image_fill_arrays;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate int av_image_fill_black_delegate(ref byte_ptr4 @dst_data, long4 @dst_linesize, AVPixelFormat @pix_fmt, AVColorRange @range, int @width, int @height);
+    public delegate int av_image_fill_black_delegate(ref byte_ptr4 @dst_data, in long4 @dst_linesize, AVPixelFormat @pix_fmt, AVColorRange @range, int @width, int @height);
     public static av_image_fill_black_delegate av_image_fill_black;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -1310,11 +1310,11 @@ public static unsafe partial class vectors
     public static av_image_fill_max_pixsteps_delegate av_image_fill_max_pixsteps;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate int av_image_fill_plane_sizes_delegate(ref ulong4 @size, AVPixelFormat @pix_fmt, int @height, long4 @linesizes);
+    public delegate int av_image_fill_plane_sizes_delegate(ref ulong4 @size, AVPixelFormat @pix_fmt, int @height, in long4 @linesizes);
     public static av_image_fill_plane_sizes_delegate av_image_fill_plane_sizes;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate int av_image_fill_pointers_delegate(ref byte_ptr4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int4 @linesizes);
+    public delegate int av_image_fill_pointers_delegate(ref byte_ptr4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, in int4 @linesizes);
     public static av_image_fill_pointers_delegate av_image_fill_pointers;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -2165,11 +2165,11 @@ public static unsafe partial class vectors
     public static av_read_frame_delegate av_read_frame;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void av_read_image_line_delegate(ushort* @dst, byte_ptr4 @data, int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component);
+    public delegate void av_read_image_line_delegate(ushort* @dst, in byte_ptr4 @data, in int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component);
     public static av_read_image_line_delegate av_read_image_line;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void av_read_image_line2_delegate(void* @dst, byte_ptr4 @data, int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component, int @dst_element_size);
+    public delegate void av_read_image_line2_delegate(void* @dst, in byte_ptr4 @data, in int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component, int @dst_element_size);
     public static av_read_image_line2_delegate av_read_image_line2;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -2460,11 +2460,11 @@ public static unsafe partial class vectors
     public static av_write_frame_delegate av_write_frame;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void av_write_image_line_delegate(ushort* @src, ref byte_ptr4 @data, int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w);
+    public delegate void av_write_image_line_delegate(ushort* @src, ref byte_ptr4 @data, in int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w);
     public static av_write_image_line_delegate av_write_image_line;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void av_write_image_line2_delegate(void* @src, ref byte_ptr4 @data, int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @src_element_size);
+    public delegate void av_write_image_line2_delegate(void* @src, ref byte_ptr4 @data, in int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @src_element_size);
     public static av_write_image_line2_delegate av_write_image_line2;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -3495,7 +3495,7 @@ public static unsafe partial class vectors
     public static pp_get_mode_by_name_and_quality_delegate pp_get_mode_by_name_and_quality;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void pp_postprocess_delegate(byte_ptr3 @src, int3 @srcStride, ref byte_ptr3 @dst, int3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
+    public delegate void pp_postprocess_delegate(in byte_ptr3 @src, in int3 @srcStride, ref byte_ptr3 @dst, in int3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
     public static pp_postprocess_delegate pp_postprocess;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -3705,7 +3705,7 @@ public static unsafe partial class vectors
     public static sws_send_slice_delegate sws_send_slice;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate int sws_setColorspaceDetails_delegate(SwsContext* @c, int4 @inv_table, int @srcRange, int4 @table, int @dstRange, int @brightness, int @contrast, int @saturation);
+    public delegate int sws_setColorspaceDetails_delegate(SwsContext* @c, in int4 @inv_table, int @srcRange, in int4 @table, int @dstRange, int @brightness, int @contrast, int @saturation);
     public static sws_setColorspaceDetails_delegate sws_setColorspaceDetails;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

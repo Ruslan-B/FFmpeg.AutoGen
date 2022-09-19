@@ -1755,7 +1755,7 @@ public static unsafe partial class DynamicallyLinkedBindings
     /// <param name="dst_linesizes">linesizes for the image in dst_data</param>
     /// <param name="src_linesizes">linesizes for the image in src_data</param>
     [DllImport("avutil-57", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void av_image_copy(ref byte_ptr4 @dst_data, ref int4 @dst_linesizes, byte_ptr4 @src_data, int4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
+    public static extern void av_image_copy(ref byte_ptr4 @dst_data, ref int4 @dst_linesizes, in byte_ptr4 @src_data, in int4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
     
     /// <summary>Copy image plane from src to dst. That is, copy &quot;height&quot; number of lines of &quot;bytewidth&quot; bytes each. The first byte of each successive line is separated by *_linesize bytes.</summary>
     /// <param name="dst_linesize">linesize for the image plane in dst</param>
@@ -1778,11 +1778,11 @@ public static unsafe partial class DynamicallyLinkedBindings
     /// <param name="align">the assumed linesize alignment for dst</param>
     /// <returns>the number of bytes written to dst, or a negative value (error code) on error</returns>
     [DllImport("avutil-57", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int av_image_copy_to_buffer(byte* @dst, int @dst_size, byte_ptr4 @src_data, int4 @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
+    public static extern int av_image_copy_to_buffer(byte* @dst, int @dst_size, in byte_ptr4 @src_data, in int4 @src_linesize, AVPixelFormat @pix_fmt, int @width, int @height, int @align);
     
     /// <summary>Copy image data located in uncacheable (e.g. GPU mapped) memory. Where available, this function will use special functionality for reading from such memory, which may result in greatly improved performance compared to plain av_image_copy().</summary>
     [DllImport("avutil-57", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void av_image_copy_uc_from(ref byte_ptr4 @dst_data, long4 @dst_linesizes, byte_ptr4 @src_data, long4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
+    public static extern void av_image_copy_uc_from(ref byte_ptr4 @dst_data, in long4 @dst_linesizes, in byte_ptr4 @src_data, in long4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
     
     /// <summary>Setup the data pointers and linesizes based on the specified image parameters and the provided array.</summary>
     /// <param name="dst_data">data pointers to be filled in</param>
@@ -1805,7 +1805,7 @@ public static unsafe partial class DynamicallyLinkedBindings
     /// <param name="height">the height of the image in pixels</param>
     /// <returns>0 if the image data was cleared, a negative AVERROR code otherwise</returns>
     [DllImport("avutil-57", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int av_image_fill_black(ref byte_ptr4 @dst_data, long4 @dst_linesize, AVPixelFormat @pix_fmt, AVColorRange @range, int @width, int @height);
+    public static extern int av_image_fill_black(ref byte_ptr4 @dst_data, in long4 @dst_linesize, AVPixelFormat @pix_fmt, AVColorRange @range, int @width, int @height);
     
     /// <summary>Fill plane linesizes for an image with pixel format pix_fmt and width width.</summary>
     /// <param name="linesizes">array to be filled with the linesize for each plane</param>
@@ -1824,7 +1824,7 @@ public static unsafe partial class DynamicallyLinkedBindings
     /// <param name="linesizes">the array containing the linesize for each plane, should be filled by av_image_fill_linesizes()</param>
     /// <returns>&gt;= 0 in case of success, a negative error code otherwise</returns>
     [DllImport("avutil-57", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int av_image_fill_plane_sizes(ref ulong4 @size, AVPixelFormat @pix_fmt, int @height, long4 @linesizes);
+    public static extern int av_image_fill_plane_sizes(ref ulong4 @size, AVPixelFormat @pix_fmt, int @height, in long4 @linesizes);
     
     /// <summary>Fill plane data pointers for an image with pixel format pix_fmt and height height.</summary>
     /// <param name="data">pointers array to be filled with the pointer for each image plane</param>
@@ -1832,7 +1832,7 @@ public static unsafe partial class DynamicallyLinkedBindings
     /// <param name="linesizes">the array containing the linesize for each plane, should be filled by av_image_fill_linesizes()</param>
     /// <returns>the size in bytes required for the image buffer, a negative error code in case of failure</returns>
     [DllImport("avutil-57", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int av_image_fill_pointers(ref byte_ptr4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, int4 @linesizes);
+    public static extern int av_image_fill_pointers(ref byte_ptr4 @data, AVPixelFormat @pix_fmt, int @height, byte* @ptr, in int4 @linesizes);
     
     /// <summary>Return the size in bytes of the amount of data required to store an image with the given parameters.</summary>
     /// <param name="pix_fmt">the pixel format of the image</param>
@@ -2904,7 +2904,7 @@ public static unsafe partial class DynamicallyLinkedBindings
     public static extern int av_read_frame(AVFormatContext* @s, AVPacket* @pkt);
     
     [DllImport("avutil-57", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void av_read_image_line(ushort* @dst, byte_ptr4 @data, int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component);
+    public static extern void av_read_image_line(ushort* @dst, in byte_ptr4 @data, in int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component);
     
     /// <summary>Read a line from an image, and write the values of the pixel format component c to dst.</summary>
     /// <param name="data">the array containing the pointers to the planes of the image</param>
@@ -2916,7 +2916,7 @@ public static unsafe partial class DynamicallyLinkedBindings
     /// <param name="read_pal_component">if not zero and the format is a paletted format writes the values corresponding to the palette component c in data[1] to dst, rather than the palette indexes in data[0]. The behavior is undefined if the format is not paletted.</param>
     /// <param name="dst_element_size">size of elements in dst array (2 or 4 byte)</param>
     [DllImport("avutil-57", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void av_read_image_line2(void* @dst, byte_ptr4 @data, int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component, int @dst_element_size);
+    public static extern void av_read_image_line2(void* @dst, in byte_ptr4 @data, in int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @read_pal_component, int @dst_element_size);
     
     /// <summary>Pause a network-based stream (e.g. RTSP stream).</summary>
     [DllImport("avformat-59", CallingConvention = CallingConvention.Cdecl)]
@@ -3391,7 +3391,7 @@ public static unsafe partial class DynamicallyLinkedBindings
     public static extern int av_write_frame(AVFormatContext* @s, AVPacket* @pkt);
     
     [DllImport("avutil-57", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void av_write_image_line(ushort* @src, ref byte_ptr4 @data, int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w);
+    public static extern void av_write_image_line(ushort* @src, ref byte_ptr4 @data, in int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w);
     
     /// <summary>Write the values from src to the pixel format component c of an image line.</summary>
     /// <param name="src">array containing the values to write</param>
@@ -3403,7 +3403,7 @@ public static unsafe partial class DynamicallyLinkedBindings
     /// <param name="w">the width of the line to write, that is the number of values to write to the image line</param>
     /// <param name="src_element_size">size of elements in src array (2 or 4 byte)</param>
     [DllImport("avutil-57", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void av_write_image_line2(void* @src, ref byte_ptr4 @data, int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @src_element_size);
+    public static extern void av_write_image_line2(void* @src, ref byte_ptr4 @data, in int4 @linesize, AVPixFmtDescriptor* @desc, int @x, int @y, int @c, int @w, int @src_element_size);
     
     /// <summary>Write the stream trailer to an output media file and free the file private data.</summary>
     /// <param name="s">media file handle</param>
@@ -4706,7 +4706,7 @@ public static unsafe partial class DynamicallyLinkedBindings
     string @name, int @quality);
     
     [DllImport("postproc-56", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void pp_postprocess(byte_ptr3 @src, int3 @srcStride, ref byte_ptr3 @dst, int3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
+    public static extern void pp_postprocess(in byte_ptr3 @src, in int3 @srcStride, ref byte_ptr3 @dst, in int3 @dstStride, int @horizontalSize, int @verticalSize, sbyte* @QP_store, int @QP_stride, void* @mode, void* @ppContext, int @pict_type);
     
     /// <summary>Allocate SwrContext.</summary>
     /// <returns>NULL on error, allocated context otherwise</returns>
@@ -5047,7 +5047,7 @@ public static unsafe partial class DynamicallyLinkedBindings
     /// <param name="saturation">16.16 fixed point saturation correction #if LIBSWSCALE_VERSION_MAJOR &gt; 6</param>
     /// <returns>negative error code on error, non negative otherwise #else</returns>
     [DllImport("swscale-6", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int sws_setColorspaceDetails(SwsContext* @c, int4 @inv_table, int @srcRange, int4 @table, int @dstRange, int @brightness, int @contrast, int @saturation);
+    public static extern int sws_setColorspaceDetails(SwsContext* @c, in int4 @inv_table, int @srcRange, in int4 @table, int @dstRange, int @brightness, int @contrast, int @saturation);
     
     /// <summary>Return the libswscale build-time configuration.</summary>
     [DllImport("swscale-6", CallingConvention = CallingConvention.Cdecl)]

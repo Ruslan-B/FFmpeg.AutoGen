@@ -10,7 +10,7 @@ namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Processing;
 
 internal class FunctionProcessor
 {
-    private const string ReturnMarshalAsUTF8Marshaler = "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]";
+    private const string ReturnMarshalAsConstCharPtr = "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]";
 
     private const string MarshalAsUTF8Macros =
         "    \r\n" +
@@ -37,7 +37,7 @@ internal class FunctionProcessor
             void PopulateCommon(FunctionDefinitionBase inline)
             {
                 inline.Name = functionName;
-                inline.ReturnType = GetReturnTypeName(function.ReturnType.Type, functionName);
+                inline.ReturnType = GetReturnType(function.ReturnType.Type, functionName);
                 inline.Content = function.Comment?.BriefText;
                 inline.ReturnComment = GetReturnComment(function);
                 inline.Parameters = function.Parameters.Select((x, i) => GetParameter(function, x, i)).ToArray();
@@ -78,7 +78,7 @@ internal class FunctionProcessor
         {
             Name = $"{name}_func",
             FunctionName = name,
-            ReturnType = GetReturnTypeName(functionType.ReturnType.Type, name),
+            ReturnType = GetReturnType(functionType.ReturnType.Type, name),
             Parameters = functionType.Parameters.Select(GetParameter).ToArray()
         };
         _context.AddDefinition(@delegate);
@@ -94,7 +94,7 @@ internal class FunctionProcessor
         {
             Name = name,
             Type = parameterType,
-            IsConstant = parameter.IsConst,
+            IsConstant = ParameterIsConstantFixedArray(parameter),
             IsIndirect = parameter.IsIndirect,
             ByReference = !parameter.IsConst && (parameterType.ByReference || parameterType is FixedArrayDefinition)
         };
@@ -109,37 +109,10 @@ internal class FunctionProcessor
             Name = name,
             Type = parameterType,
             Content = GetParamComment(function, parameter.Name),
-            IsConstant = parameter.IsConst,
+            IsConstant = ParameterIsConstantFixedArray(parameter),
             IsIndirect = parameter.IsIndirect,
             ByReference = !parameter.IsConst && (parameterType.ByReference || parameterType is FixedArrayDefinition)
         };
-    }
-
-    private TypeDefinition GetReturnTypeName(Type type, string name)
-    {
-        if (type is PointerType pointerType &&
-            pointerType.QualifiedPointee.Qualifiers.IsConst &&
-            pointerType.Pointee is BuiltinType builtinType)
-        {
-            return builtinType.Type switch
-            {
-                PrimitiveType.Char => new TypeDefinition
-                {
-                    Name = "string",
-                    Attributes = new[] { ReturnMarshalAsUTF8Marshaler }
-                },
-                PrimitiveType.Void => new TypeDefinition
-                {
-                    Name = "void*"
-                },
-                _ => new TypeDefinition
-                {
-                    Name = TypeHelper.GetTypeName(type)
-                }
-            };
-        }
-
-        return GetParameterType(type, name);
     }
 
     private TypeDefinition GetParameterType(Type type, string name)
@@ -166,6 +139,38 @@ internal class FunctionProcessor
             };
         }
 
+        return GetNoneBuiltinParameterType(type, name);
+    }
+
+    private TypeDefinition GetReturnType(Type type, string name)
+    {
+        if (type is PointerType pointerType &&
+            pointerType.QualifiedPointee.Qualifiers.IsConst &&
+            pointerType.Pointee is BuiltinType builtinType)
+        {
+            return builtinType.Type switch
+            {
+                PrimitiveType.Char => new TypeDefinition
+                {
+                    Name = "string",
+                    Attributes = new[] { ReturnMarshalAsConstCharPtr }
+                },
+                PrimitiveType.Void => new TypeDefinition
+                {
+                    Name = "void*"
+                },
+                _ => new TypeDefinition
+                {
+                    Name = TypeHelper.GetTypeName(type)
+                }
+            };
+        }
+
+        return GetNoneBuiltinParameterType(type, name);
+    }
+
+    private TypeDefinition GetNoneBuiltinParameterType(Type type, string name)
+    {
         // edge case when type is array of pointers to none builtin type (type[]* -> type**)
         if (type is ArrayType arrayType &&
             arrayType.SizeType == ArrayType.ArraySize.Incomplete &&
@@ -192,6 +197,8 @@ internal class FunctionProcessor
             .FirstOrDefault(x => x.CommandKind == CommentCommandKind.Return);
         return GetCommentString(comment);
     }
+
+    private static bool ParameterIsConstantFixedArray(Parameter parameter) => parameter.IsConst && parameter.Type is ArrayType { SizeType: ArrayType.ArraySize.Constant };
 
     private static string GetCommentString(BlockCommandComment comment)
     {
