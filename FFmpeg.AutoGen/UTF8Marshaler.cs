@@ -4,22 +4,16 @@ using System.Text;
 
 namespace FFmpeg.AutoGen;
 
-#if NETSTANDARD2_1_OR_GREATER
-#else 
 public class UTF8Marshaler : ICustomMarshaler
 {
-    private static readonly UTF8Marshaler Instance = new();
-
     public virtual object MarshalNativeToManaged(IntPtr pNativeData) => FromNative(Encoding.UTF8, pNativeData);
 
     public virtual IntPtr MarshalManagedToNative(object managedObj)
     {
         if (managedObj == null)
             return IntPtr.Zero;
-
-        var str = managedObj as string;
-
-        if (str == null)
+        
+        if (managedObj is not string str)
             throw new MarshalDirectiveException($"{GetType().Name} must be used on a string.");
 
         return FromManaged(Encoding.UTF8, str);
@@ -27,7 +21,7 @@ public class UTF8Marshaler : ICustomMarshaler
 
     public virtual void CleanUpNativeData(IntPtr pNativeData)
     {
-        //Free anything allocated by MarshalManagedtoNative
+        //Free anything allocated by MarshalManagedToNative
         //This is called after the native function call completes
 
         if (pNativeData != IntPtr.Zero)
@@ -40,13 +34,8 @@ public class UTF8Marshaler : ICustomMarshaler
         //This is called after the native function call completes
     }
 
-    public int GetNativeDataSize() =>
-        // Not a value type
-        -1;
-
-    public static ICustomMarshaler GetInstance(string cookie) => Instance;
-
-
+    public int GetNativeDataSize() => -1; // Not a value type
+    
     public static unsafe string FromNative(Encoding encoding, IntPtr pNativeData) => FromNative(encoding, (byte*)pNativeData);
 
     public static unsafe string FromNative(Encoding encoding, byte* pNativeData)
@@ -87,4 +76,3 @@ public class UTF8Marshaler : ICustomMarshaler
         return new IntPtr(buffer);
     }
 }
-#endif

@@ -5,4 +5,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Update="Microsoft.Net.Compilers.Toolset" Version="4.2.0" />
+  </ItemGroup>
+
 </Project>
