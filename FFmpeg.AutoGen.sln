@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen", "FFmpeg.Au
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Example", "FFmpeg.AutoGen.Example\FFmpeg.AutoGen.Example.csproj", "{5BD870D6-27B4-4208-ACBF-496F2809326A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CF48D45D-979F-4574-9E33-A3AC1CB542B5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Solution Items", "0. Solution Items", "{CF48D45D-979F-4574-9E33-A3AC1CB542B5}"
 	ProjectSection(SolutionItems) = preProject
 		.travis.yml = .travis.yml
 		Directory.Build.props = Directory.Build.props
@@ -34,13 +34,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Bindings.Dyn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Bindings.DynamicallyLoaded", "FFmpeg.AutoGen.Bindings.DynamicallyLoaded\FFmpeg.AutoGen.Bindings.DynamicallyLoaded.csproj", "{028113A5-39CE-40A2-9118-56E99F30B4F8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generation", "Generation", "{E9CC1A7F-ADD1-486B-BEB3-B6E388B35731}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Generation", "1. Generation", "{E9CC1A7F-ADD1-486B-BEB3-B6E388B35731}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{660FBA30-C9C0-44A6-B4C5-1C5030ED271D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Examples", "4. Examples", "{660FBA30-C9C0-44A6-B4C5-1C5030ED271D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Legacy", "Legacy", "{0771FEE5-9700-4F09-99C4-EC36FD5AFEA9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Legacy", "3. Legacy", "{0771FEE5-9700-4F09-99C4-EC36FD5AFEA9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Abstractions", "Abstractions", "{1B9CC2D2-096F-4D35-8940-DA6344450430}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Abstractions", "2. Abstractions", "{1B9CC2D2-096F-4D35-8940-DA6344450430}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
