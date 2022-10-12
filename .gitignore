@@ -105,9 +105,5 @@ UpgradeLog*.XML
 
 *.stackdump
 
-# JetBrains Rider
-.idea/
-*.sln.iml
-
 # Local 
 /FFmpeg.AutoGen.Example/frame.*.jpg
