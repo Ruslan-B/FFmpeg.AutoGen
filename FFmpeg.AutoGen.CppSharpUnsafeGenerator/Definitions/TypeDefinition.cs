@@ -1,8 +1,11 @@
+using System;
+
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
-internal class TypeDefinition : IDefinition
+internal record TypeDefinition : IDefinition
 {
-    public string[] Attributes { get; init; } = { };
+    public string[] Attributes { get; init; } = Array.Empty<string>();
     public bool ByReference { get; init; }
     public string Name { get; init; }
+    public string LegacyName { get; init; }
 }

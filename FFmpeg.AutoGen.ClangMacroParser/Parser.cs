@@ -11,7 +11,7 @@ namespace FFmpeg.AutoGen.ClangMacroParser
     {
         public static IExpression Parse(string expression)
         {
-            var tokens = Tokenizer.Tokenize(expression).ToArray();
+            Token[] tokens = Tokenizer.Tokenize(expression).ToArray();
 
             var i = 0;
             bool CanRead() => i < tokens.Length;

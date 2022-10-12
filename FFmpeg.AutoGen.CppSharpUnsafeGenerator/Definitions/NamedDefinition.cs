@@ -1,6 +1,6 @@
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
-internal class NamedDefinition : ICanGenerateXmlDoc, IObsoletionAware
+internal record NamedDefinition : ICanGenerateXmlDoc, IObsoletionAware
 {
     public string Name { get; init; }
     public string TypeName { get; init; }

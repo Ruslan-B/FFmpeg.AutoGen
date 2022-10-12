@@ -2,8 +2,8 @@ using System.Diagnostics;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator;
 
-[DebuggerDisplay("{Name}, {LibraryName}")]
-internal class FunctionExport
+[DebuggerDisplay("{Name}, {LibraryName}-{LibraryVersion}")]
+internal record FunctionExport
 {
     public string Name { get; init; }
     public string LibraryName { get; init; }

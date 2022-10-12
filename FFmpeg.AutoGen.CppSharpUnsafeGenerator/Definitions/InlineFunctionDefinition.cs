@@ -1,7 +1,7 @@
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
-internal class InlineFunctionDefinition : FunctionDefinitionBase
+internal record InlineFunctionDefinition : FunctionDefinitionBase
 {
-    public string Body { get; set; }
-    public string OriginalBodyHash { get; set; }
+    public string Body { get; init; }
+    public string OriginalBodyHash { get; init; }
 }

@@ -15,11 +15,11 @@ public class CliOptions
         HelpText = "The namespace that will contain the generated symbols.")]
     public string Namespace { get; set; }
 
-    [Option('c',
-        "class",
+    [Option('t',
+        "type",
         Default = "ffmpeg",
-        HelpText = "The name of the class that contains the FFmpeg unmanaged method calls.")]
-    public string ClassName { get; set; }
+        HelpText = "The name of the type that contains the FFmpeg unmanaged method calls.")]
+    public string TypeName { get; set; }
 
     /// <summary>
     ///     See http://ybeernet.blogspot.ro/2011/03/techniques-of-calling-unmanaged-code.html.
@@ -49,11 +49,11 @@ public class CliOptions
         HelpText = "The path to the directory that contains the FFmpeg binaries.")]
     public string FFmpegBinDir { get; set; }
 
-    [Option('o',
+    [Option('s',
         "output",
         Required = false,
-        HelpText = "The path to the directory where to output the generated files.")]
-    public string OutputDir { get; set; }
+        HelpText = "The path to the solution directory.")]
+    public string SolutionDir { get; set; }
 
     [Option('v',
         HelpText = "Print details during execution.")]
@@ -61,7 +61,7 @@ public class CliOptions
 
     public static CliOptions ParseArgumentsStrict(string[] args)
     {
-        var result = Parser.Default.ParseArguments<CliOptions>(args);
+        var result = CommandLine.Parser.Default.ParseArguments<CliOptions>(args);
         var options = result.MapResult(x => x, x => new CliOptions());
         options.Normalize();
         return options;
@@ -70,15 +70,13 @@ public class CliOptions
     private void Normalize()
     {
         // Support for the original path setup
-        var solutionDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../");
+        if (string.IsNullOrWhiteSpace(SolutionDir)) SolutionDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../"));
 
         if (string.IsNullOrWhiteSpace(FFmpegDir) &&
             string.IsNullOrWhiteSpace(FFmpegIncludesDir) &&
             string.IsNullOrWhiteSpace(FFmpegBinDir))
-            FFmpegDir = Path.Combine(solutionDir, "FFmpeg");
-
-        if (string.IsNullOrWhiteSpace(OutputDir)) OutputDir = Path.Combine(solutionDir, "FFmpeg.AutoGen/");
-
+            FFmpegDir = Path.Combine(SolutionDir, "FFmpeg");
+        
         // If the FFmpegDir option is specified, it will take precedence
         if (!string.IsNullOrWhiteSpace(FFmpegDir))
         {
@@ -116,16 +114,5 @@ public class CliOptions
                               "the FFmpeg headers does not exist.");
             Environment.Exit(1);
         }
-
-        if (!Directory.Exists(OutputDir))
-        {
-            Console.WriteLine("The output directory does not exist.");
-            Environment.Exit(1);
-        }
-
-        // Resolve paths
-        FFmpegIncludesDir = Path.GetFullPath(FFmpegIncludesDir);
-        FFmpegBinDir = Path.GetFullPath(FFmpegBinDir);
-        OutputDir = Path.GetFullPath(OutputDir);
     }
 }

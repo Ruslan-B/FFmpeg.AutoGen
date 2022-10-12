@@ -1,6 +1,6 @@
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
-internal class StructureField : ICanGenerateXmlDoc, IObsoletionAware
+internal record StructureField : ICanGenerateXmlDoc, IObsoletionAware
 {
     public string Name { get; init; }
     public TypeDefinition FieldType { get; init; }

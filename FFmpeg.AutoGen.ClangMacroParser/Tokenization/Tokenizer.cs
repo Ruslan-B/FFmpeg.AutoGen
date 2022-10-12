@@ -31,7 +31,7 @@ namespace FFmpeg.AutoGen.ClangMacroParser.Tokenization
             bool IsIdentifierStart(char x) => x == '_' || IsAz(x);
             bool IsId(char x) => IsIdentifierStart(x) || Digits.Contains(x) || x == '.';
 
-            var characters = expression.ToCharArray();
+            char[] characters = expression.ToCharArray();
             var i = 0;
 
             bool CanRead() => i < characters.Length;
