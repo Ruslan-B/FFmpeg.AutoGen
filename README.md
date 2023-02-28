@@ -49,17 +49,17 @@ Steps to generate:
 - All files with extension ```*.g.cs```  in ```FFmpeg.AutoGen``` project will be regenerated.
 
 ## Packaging ffmpeg *.dlls in a nuget package for automatic extraction
-You may package the ffmpeg .dlls required to run you code in a Nuget package that you create. When a user installs your Nuget package, the ffmpeg .dlls will be automatically extracted into the directory of the binary / assembly, without the user having to paste it manually. This opens up the door for a small footprint, custom build ffmpeg library. Because the ffmpeg .dlls are not managed C# code, the packaging required manual editing of Visual Studio's `.csproj` file, after enabling your library to be build as a Nuget package. AFAIK Nuget pack on other OSs also honors these settings.
+You may package the ffmpeg .dlls required to run your code in a NuGet package. When a user installs your NuGet package, the ffmpeg .dlls will be automatically extracted into the directory of the binary / assembly, without the user having to paste them manually. This opens up the door for a small footprint, project specific ffmpeg library, e.g. without uneccesary baggege like 10s of MBs of Networking code. Because the ffmpeg .dlls are not managed C# code, the packaging requires manual editing of Visual Studio's `.csproj` file, after enabling your library to be build as a NuGet package. AFAIK `nuget pack` on other OSs also honors these settings.
 ### .csproj settings
-Since Visual Studio 2017, the generation of a `.nuspec` file is *not* required anymore. Put the .dlls in a subfolder (here `ffmpeg\`) in your project. In the `<ItemGroup>` tag create a `<None>` or `<Content>` tag. Specify the files to be included via the `Include` property. (Everything is case-sensitive, so `include` is invalid) set `Pack` to `true` and `PackagePath` to the target path in the nuget package. `lib\$(TargetFramework)` would place it at the same place as the binary (unless `TargetFramework` is undefined). Most crucially, specify `PackageCopyToOutput` as `true`, which performs the extraction and copying upon build.
+Since Visual Studio 2017, the generation of a `.nuspec` file is *not* required anymore. Put the .dlls in a subfolder (here `ffmpeg\`) in your project. In the `<ItemGroup>` tag create a `<None>` or `<Content>` tag. Specify the files to be included via the `Include` property. (Everything is case-sensitive, so `include` is invalid.) Set `Pack` to `true` and `PackagePath` to the target path in the nuget package. `lib\$(TargetFramework)` would place it at the same place as the binary (unless `TargetFramework` is undefined). You may verify that everything is correctly packaged in the resulting `*.nupkg` file with [NuGetPackageExplorer](https://github.com/NuGetPackageExplorer/NuGetPackageExplorer). Most crucially, specify `PackageCopyToOutput` as `true`, which performs the extraction and copying upon build.
 ```xml
 <ItemGroup>
   <PackageReference Include="FFmpeg.AutoGen.Bindings.DynamicallyLoaded" Version="5.1.1.1" />
   <None Include="ffmpeg\*.dll" Pack="true" PackagePath="lib\$(TargetFramework)" PackageCopyToOutput="true" />
 </ItemGroup>
 ```
-### Extraction not performed upon enabling PackageCopyToOutput in a Nuget package Update
-Visual Studio 2022 has a bug, where extraction/copying is not performed, after enabling this packaging behaviour and pushing it as a Nuget package update, where it wasn't enabled previously. To remedy right click your project, that consumes this Nuget package, click `clean` and after that `rebuild`. Now the consuming App should extract the .dlls going forward.
+### Extraction not performed upon enabling PackageCopyToOutput in a NuGet package Update
+Visual Studio 2022 has a bug, where extraction/copying is not performed, after enabling this packaging behaviour and pushing it as a NuGet package update, when it wasn't enabled previously. To remedy this, right click your project, that consumes this NuGet package, click `clean` and after that `rebuild`. Now the consuming App should extract the .dlls going forward.
 
 ## Special Thanks
 <a href="https://jetbrains.com">
