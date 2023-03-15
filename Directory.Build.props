@@ -1,11 +1,11 @@
 <Project>
   <PropertyGroup>
     <PackageId>$(AssemblyName)</PackageId>
-    <Version>5.1.2.0</Version>
+    <Version>5.1.2</Version>
     <Authors>Ruslan Balanukhin</Authors>
     <Company>Rationale One</Company>
     <Product>FFmpeg.AutoGen</Product>
-    <Copyright>Copyright © Ruslan Balanukhin 2022 All rights reserved.</Copyright>
+    <Copyright>Copyright © Ruslan Balanukhin 2023 All rights reserved.</Copyright>
     <PackageProjectUrl>https://github.com/Ruslan-B/FFmpeg.AutoGen</PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
     <AssemblyVersion>$(Version)</AssemblyVersion>
