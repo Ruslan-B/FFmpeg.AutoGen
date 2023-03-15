@@ -74,7 +74,6 @@ public abstract class FunctionResolverBase : IFunctionResolver
 
             var version = DynamicallyLoadedBindings.LibraryVersionMap[libraryName];
             var nativeLibraryName = GetNativeLibraryName(libraryName, version);
-
             var libraryPath = Path.Combine(DynamicallyLoadedBindings.LibrariesPath, nativeLibraryName);
             ptr = LoadNativeLibrary(libraryPath);
 
