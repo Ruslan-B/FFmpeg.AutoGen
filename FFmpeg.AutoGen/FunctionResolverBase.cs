@@ -71,9 +71,10 @@ public abstract class FunctionResolverBase : IFunctionResolver
                 .ForEach(n => GetOrLoadLibrary(n, false));
 
             var version = ffmpeg.LibraryVersionMap[libraryName];
-            var nativeLibraryName = GetNativeLibraryName(Path.Combine(ffmpeg.RootPath, libraryName), version);
+            var nativeLibraryName = GetNativeLibraryName(libraryName, version);
+            var libraryPath = Path.Combine(ffmpeg.RootPath, nativeLibraryName);
 
-            ptr = LoadNativeLibrary(nativeLibraryName);
+            ptr = LoadNativeLibrary(libraryPath);
 
             if (ptr != IntPtr.Zero) _loadedLibraries.Add(libraryName, ptr);
             else if (throwOnError)
