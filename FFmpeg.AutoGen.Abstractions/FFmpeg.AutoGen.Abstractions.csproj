@@ -2,7 +2,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;netstandard2.0;net45</TargetFrameworks>
-    <Description>FFmpeg auto generated unsafe bindings for C#/.NET and Mono. Abstractions todo</Description>
+    <Description>
+      FFmpeg auto generated unsafe bindings for C#/.NET and Mono. An abstraction API has been created specifically for use in .NET MAUI scenarios.
+      This API can be utilized in conjunction with either the FFmpeg.AutoGen.Bindings.DynamicallyLinked, FFmpeg.AutoGen.Bindings.DynamicallyLoaded or FFmpeg.AutoGen.Bindings.StaticallyLinked package.
+    </Description>
     <GeneratePackageOnBuild Condition=" $(Configuration) == 'Release' ">true</GeneratePackageOnBuild>
   </PropertyGroup>
 

@@ -2,7 +2,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;netstandard2.0;net45</TargetFrameworks>
-    <Description>FFmpeg auto generated unsafe bindings for C#/.NET and Mono. Dynamicly loaded implementation.</Description>
+    <Description>
+      FFmpeg auto generated unsafe bindings for C#/.NET and Mono. 
+      The Dynamic Loading implementation relies on lazy import function resolution, and it allows for the specification of the location of native binaries via DynamicallyLoadedBindings.LibrariesPath.
+    </Description>
     <GeneratePackageOnBuild Condition=" $(Configuration) == 'Release' ">true</GeneratePackageOnBuild>
   </PropertyGroup>
 
