@@ -2,7 +2,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;netstandard2.0;net45</TargetFrameworks>
-    <Description>FFmpeg auto generated unsafe bindings for C#/.NET and Mono. Dynamicly Linked implementation</Description>
+    <Description>
+      FFmpeg auto generated unsafe bindings for C#/.NET and Mono. 
+      The Dynamicly Linked implementation is based on DllImport attribute.
+    </Description>
     <GeneratePackageOnBuild Condition=" $(Configuration) == 'Release' ">true</GeneratePackageOnBuild>
   </PropertyGroup>
 
