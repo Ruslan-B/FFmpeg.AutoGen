@@ -42,11 +42,20 @@ Normally you need to set static ```ffmpeg.RootPath = ``` with full path to FFmpe
 The bindings generator uses [CppSharp](https://github.com/mono/CppSharp).
 
 Prerequisites:
- - Visual Studio 2019 with C# and C++ desktop development workloads and Windows SDK for desktop.
+ - As of time of writing, FFmpeg 5.1 [is supported](https://github.com/Ruslan-B/FFmpeg.AutoGen/pull/211), whilst FFmpeg 6.0 [is not](https://github.com/Ruslan-B/FFmpeg.AutoGen/issues/241). Versions older or inbetween may or may not be supported. Check and contribute to the table below to keep track of the version used.
+ - Visual Studio 2022 with C# and C++ desktop development workloads and Windows SDK for desktop. Older Visual Studio versions are not supported in the master branch and require minor modification of the project file to do so.
 
 Steps to generate:
+- Set the [`Active Solution plattform`](https://learn.microsoft.com/en-us/visualstudio/ide/how-to-configure-projects-to-target-multiple-platforms?view=vs-2022) to a specific plattform and *not* AnyCPU. Eg. x64 or x86
+  - Just for clarification: Only `FFmpeg.AutoGen.CppSharpUnsafeGenerator` *needs* to run in a specific architecutre. The bindings may be used in your project as as `AnyCPU` or another architecture. However, the bindings won't be valid, even if paired with a .dll of the correct plattform. Bindings need to be regenerated per plattform and included per-plattform with program logic to switch between them.
 - Run ```FFmpeg.AutoGen.CppSharpUnsafeGenerator;```
 - All files with extension ```*.g.cs```  in ```FFmpeg.AutoGen``` project will be regenerated.
+
+### Confirmed and tested FFmpeg versions and configure options
+As build via the `https://git.ffmpeg.org/ffmpeg.git` repo and the relevant [FFmpeg build docs](https://trac.ffmpeg.org/wiki/CompilationGuide)
+| Commit or Tag | Plattform | Configure Settings | Comments |
+| ------------- | --------- | ------------------ | -------- |
+| n5.1          | x86_64    | <details><summary>Configure Flags used</summary>`./configure --disable-nvenc --enable-shared --disable-nvdec --enable-gpl --enable-stripping --disable-vulkan --disable-sdl2 --disable-securetransport --disable-swresample --disable-swscale --disable-avfilter --disable-network --disable-doc --disable-programs --disable-d3d11va --disable-cuda-llvm --disable-dxva2 --disable-schannel --disable-mediafoundation --disable-postproc --disable-avdevice --disable-encoders --disable-hwaccels --disable-muxers --disable-parsers --disable-bsfs --disable-indevs --disable-outdevs --disable-devices --disable-filters --disable-decoders --enable-decoder=h264 --disable-protocols --enable-protocol=file --disable-demuxers --enable-demuxer=mov --enable-demuxer=h264 --enable-demuxer=m4v`</details> | Minimal build and config flags to software decode a soundless H.264 file and nothing else |
 
 ## Special Thanks
 <a href="https://jetbrains.com">
