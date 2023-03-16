@@ -6,13 +6,15 @@ namespace FFmpeg.AutoGen;
 
 public class UTF8Marshaler : ICustomMarshaler
 {
+    private static readonly UTF8Marshaler Instance = new();
+
     public virtual object MarshalNativeToManaged(IntPtr pNativeData) => FromNative(Encoding.UTF8, pNativeData);
 
     public virtual IntPtr MarshalManagedToNative(object managedObj)
     {
         if (managedObj == null)
             return IntPtr.Zero;
-        
+
         if (managedObj is not string str)
             throw new MarshalDirectiveException($"{GetType().Name} must be used on a string.");
 
@@ -35,7 +37,9 @@ public class UTF8Marshaler : ICustomMarshaler
     }
 
     public int GetNativeDataSize() => -1; // Not a value type
-    
+
+    public static ICustomMarshaler GetInstance(string cookie) => Instance;
+
     public static unsafe string FromNative(Encoding encoding, IntPtr pNativeData) => FromNative(encoding, (byte*)pNativeData);
 
     public static unsafe string FromNative(Encoding encoding, byte* pNativeData)
