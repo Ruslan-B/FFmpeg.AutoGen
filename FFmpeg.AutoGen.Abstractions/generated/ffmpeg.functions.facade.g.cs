@@ -5,10 +5,6 @@ namespace FFmpeg.AutoGen.Abstractions;
 
 public static unsafe partial class ffmpeg
 {
-    /// <summary>Create an AVABufferSinkParams structure.</summary>
-    [Obsolete()]
-    public static AVABufferSinkParams* av_abuffersink_params_alloc() => vectors.av_abuffersink_params_alloc();
-    
     /// <summary>Add an index entry into a sorted list. Update the entry if the list already contains it.</summary>
     /// <param name="timestamp">timestamp in the time base of the given stream</param>
     public static int av_add_index_entry(AVStream* @st, long @pos, long @timestamp, int @size, int @distance, int @flags) => vectors.av_add_index_entry(@st, @pos, @timestamp, @size, @distance, @flags);
@@ -127,6 +123,7 @@ public static unsafe partial class ffmpeg
     public static int av_bsf_get_null_filter(AVBSFContext** @bsf) => vectors.av_bsf_get_null_filter(@bsf);
     
     /// <summary>Prepare the filter for use, after all the parameters and options have been set.</summary>
+    /// <param name="ctx">a AVBSFContext previously allocated with av_bsf_alloc()</param>
     public static int av_bsf_init(AVBSFContext* @ctx) => vectors.av_bsf_init(@ctx);
     
     /// <summary>Iterate over all registered bitstream filters.</summary>
@@ -168,11 +165,13 @@ public static unsafe partial class ffmpeg
     public static int av_bsf_list_parse_str(string @str, AVBSFContext** @bsf) => vectors.av_bsf_list_parse_str(@str, @bsf);
     
     /// <summary>Retrieve a filtered packet.</summary>
+    /// <param name="ctx">an initialized AVBSFContext</param>
     /// <param name="pkt">this struct will be filled with the contents of the filtered packet. It is owned by the caller and must be freed using av_packet_unref() when it is no longer needed. This parameter should be &quot;clean&quot; (i.e. freshly allocated with av_packet_alloc() or unreffed with av_packet_unref()) when this function is called. If this function returns successfully, the contents of pkt will be completely overwritten by the returned data. On failure, pkt is not touched.</param>
     /// <returns>- 0 on success. - AVERROR(EAGAIN) if more packets need to be sent to the filter (using av_bsf_send_packet()) to get more output. - AVERROR_EOF if there will be no further output from the filter. - Another negative AVERROR value if an error occurs.</returns>
     public static int av_bsf_receive_packet(AVBSFContext* @ctx, AVPacket* @pkt) => vectors.av_bsf_receive_packet(@ctx, @pkt);
     
     /// <summary>Submit a packet for filtering.</summary>
+    /// <param name="ctx">an initialized AVBSFContext</param>
     /// <param name="pkt">the packet to filter. The bitstream filter will take ownership of the packet and reset the contents of pkt. pkt is not touched if an error occurs. If pkt is empty (i.e. NULL, or pkt-&gt;data is NULL and pkt-&gt;side_data_elems zero), it signals the end of the stream (i.e. no more non-empty packets will be sent; sending more empty packets does nothing) and will cause the filter to output any packets it may have buffered internally.</param>
     /// <returns>- 0 on success. - AVERROR(EAGAIN) if packets need to be retrieved from the filter (using av_bsf_receive_packet()) before new input can be consumed. - Another negative AVERROR value if an error occurs.</returns>
     public static int av_bsf_send_packet(AVBSFContext* @ctx, AVPacket* @pkt) => vectors.av_bsf_send_packet(@ctx, @pkt);
@@ -303,10 +302,6 @@ public static unsafe partial class ffmpeg
     
     public static int av_buffersink_get_w(AVFilterContext* @ctx) => vectors.av_buffersink_get_w(@ctx);
     
-    /// <summary>Create an AVBufferSinkParams structure.</summary>
-    [Obsolete()]
-    public static AVBufferSinkParams* av_buffersink_params_alloc() => vectors.av_buffersink_params_alloc();
-    
     /// <summary>Set the frame size for an audio buffer sink.</summary>
     public static void av_buffersink_set_frame_size(AVFilterContext* @ctx, uint @frame_size) => vectors.av_buffersink_set_frame_size(@ctx, @frame_size);
     
@@ -353,6 +348,7 @@ public static unsafe partial class ffmpeg
     /// <summary>Get a human readable string describing a given channel.</summary>
     /// <param name="buf">pre-allocated buffer where to put the generated string</param>
     /// <param name="buf_size">size in bytes of the buffer.</param>
+    /// <param name="channel">the AVChannel whose description to get</param>
     /// <returns>amount of bytes needed to hold the output string, or a negative AVERROR on failure. If the returned value is bigger than buf_size, then the string was truncated.</returns>
     public static int av_channel_description(byte* @buf, ulong @buf_size, AVChannel @channel) => vectors.av_channel_description(@buf, @buf_size, @channel);
     
@@ -365,11 +361,13 @@ public static unsafe partial class ffmpeg
     
     /// <summary>Get the channel with the given index in a channel layout.</summary>
     /// <param name="channel_layout">input channel layout</param>
+    /// <param name="idx">index of the channel</param>
     /// <returns>channel with the index idx in channel_layout on success or AV_CHAN_NONE on failure (if idx is not valid or the channel order is unspecified)</returns>
     public static AVChannel av_channel_layout_channel_from_index(AVChannelLayout* @channel_layout, uint @idx) => vectors.av_channel_layout_channel_from_index(@channel_layout, @idx);
     
     /// <summary>Get a channel described by the given string.</summary>
     /// <param name="channel_layout">input channel layout</param>
+    /// <param name="name">string describing the channel to obtain</param>
     /// <returns>a channel described by the given string in channel_layout on success or AV_CHAN_NONE on failure (if the string is not valid or the channel order is unspecified)</returns>
     public static AVChannel av_channel_layout_channel_from_string(AVChannelLayout* @channel_layout, string @name) => vectors.av_channel_layout_channel_from_string(@channel_layout, @name);
     
@@ -391,6 +389,7 @@ public static unsafe partial class ffmpeg
     public static int av_channel_layout_copy(AVChannelLayout* @dst, AVChannelLayout* @src) => vectors.av_channel_layout_copy(@dst, @src);
     
     /// <summary>Get the default channel layout for a given number of channels.</summary>
+    /// <param name="ch_layout">the layout structure to be initialized</param>
     /// <param name="nb_channels">number of channels</param>
     public static void av_channel_layout_default(AVChannelLayout* @ch_layout, int @nb_channels) => vectors.av_channel_layout_default(@ch_layout, @nb_channels);
     
@@ -423,11 +422,13 @@ public static unsafe partial class ffmpeg
     
     /// <summary>Get the index of a given channel in a channel layout. In case multiple channels are found, only the first match will be returned.</summary>
     /// <param name="channel_layout">input channel layout</param>
+    /// <param name="channel">the channel whose index to obtain</param>
     /// <returns>index of channel in channel_layout on success or a negative number if channel is not present in channel_layout.</returns>
     public static int av_channel_layout_index_from_channel(AVChannelLayout* @channel_layout, AVChannel @channel) => vectors.av_channel_layout_index_from_channel(@channel_layout, @channel);
     
     /// <summary>Get the index in a channel layout of a channel described by the given string. In case multiple channels are found, only the first match will be returned.</summary>
     /// <param name="channel_layout">input channel layout</param>
+    /// <param name="name">string describing the channel whose index to obtain</param>
     /// <returns>a channel index described by the given string, or a negative AVERROR value.</returns>
     public static int av_channel_layout_index_from_string(AVChannelLayout* @channel_layout, string @name) => vectors.av_channel_layout_index_from_string(@channel_layout, @name);
     
@@ -449,11 +450,17 @@ public static unsafe partial class ffmpeg
     /// <summary>Get a human readable string in an abbreviated form describing a given channel. This is the inverse function of av_channel_from_string().</summary>
     /// <param name="buf">pre-allocated buffer where to put the generated string</param>
     /// <param name="buf_size">size in bytes of the buffer.</param>
+    /// <param name="channel">the AVChannel whose name to get</param>
     /// <returns>amount of bytes needed to hold the output string, or a negative AVERROR on failure. If the returned value is bigger than buf_size, then the string was truncated.</returns>
     public static int av_channel_name(byte* @buf, ulong @buf_size, AVChannel @channel) => vectors.av_channel_name(@buf, @buf_size, @channel);
     
     /// <summary>bprint variant of av_channel_name().</summary>
     public static void av_channel_name_bprint(AVBPrint* @bp, AVChannel @channel_id) => vectors.av_channel_name_bprint(@bp, @channel_id);
+    
+    /// <summary>Converts AVChromaLocation to swscale x/y chroma position.</summary>
+    /// <param name="xpos">horizontal chroma sample position</param>
+    /// <param name="ypos">vertical   chroma sample position</param>
+    public static int av_chroma_location_enum_to_pos(int* @xpos, int* @ypos, AVChromaLocation @pos) => vectors.av_chroma_location_enum_to_pos(@xpos, @ypos, @pos);
     
     /// <summary>Returns the AVChromaLocation value for name or an AVError if not found.</summary>
     /// <returns>the AVChromaLocation value for name or an AVError if not found.</returns>
@@ -462,6 +469,11 @@ public static unsafe partial class ffmpeg
     /// <summary>Returns the name for provided chroma location or NULL if unknown.</summary>
     /// <returns>the name for provided chroma location or NULL if unknown.</returns>
     public static string av_chroma_location_name(AVChromaLocation @location) => vectors.av_chroma_location_name(@location);
+    
+    /// <summary>Converts swscale x/y chroma position to AVChromaLocation.</summary>
+    /// <param name="xpos">horizontal chroma sample position</param>
+    /// <param name="ypos">vertical   chroma sample position</param>
+    public static AVChromaLocation av_chroma_location_pos_to_enum(int @xpos, int @ypos) => vectors.av_chroma_location_pos_to_enum(@xpos, @ypos);
     
     /// <summary>Get the AVCodecID for the given codec tag tag. If no codec id is found returns AV_CODEC_ID_NONE.</summary>
     /// <param name="tags">list of supported codec_id-codec_tag pairs, as stored in AVInputFormat.codec_tag and AVOutputFormat.codec_tag</param>
@@ -526,6 +538,8 @@ public static unsafe partial class ffmpeg
     public static string av_color_transfer_name(AVColorTransferCharacteristic @transfer) => vectors.av_color_transfer_name(@transfer);
     
     /// <summary>Compare the remainders of two integer operands divided by a common divisor.</summary>
+    /// <param name="a">Operand</param>
+    /// <param name="b">Operand</param>
     /// <param name="mod">Divisor; must be a power of 2</param>
     /// <returns>- a negative value if `a % mod &lt; b % mod` - a positive value if `a % mod &gt; b % mod` - zero             if `a % mod == b % mod`</returns>
     public static long av_compare_mod(ulong @a, ulong @b, ulong @mod) => vectors.av_compare_mod(@a, @b, @mod);
@@ -581,9 +595,9 @@ public static unsafe partial class ffmpeg
     public static AVInputFormat* av_demuxer_iterate(void** @opaque) => vectors.av_demuxer_iterate(@opaque);
     
     /// <summary>Copy entries from one AVDictionary struct into another.</summary>
-    /// <param name="dst">pointer to a pointer to a AVDictionary struct. If *dst is NULL, this function will allocate a struct for you and put it in *dst</param>
-    /// <param name="src">pointer to source AVDictionary struct</param>
-    /// <param name="flags">flags to use when setting entries in *dst</param>
+    /// <param name="dst">Pointer to a pointer to a AVDictionary struct to copy into. If *dst is NULL, this function will allocate a struct for you and put it in *dst</param>
+    /// <param name="src">Pointer to the source AVDictionary struct to copy items from.</param>
+    /// <param name="flags">Flags to use when setting entries in *dst</param>
     /// <returns>0 on success, negative AVERROR code on failure. If dst was allocated by this function, callers should free the associated memory.</returns>
     public static int av_dict_copy(AVDictionary** @dst, AVDictionary* @src, int @flags) => vectors.av_dict_copy(@dst, @src, @flags);
     
@@ -596,35 +610,40 @@ public static unsafe partial class ffmpeg
     public static void av_dict_free(AVDictionary** @m) => vectors.av_dict_free(@m);
     
     /// <summary>Get a dictionary entry with matching key.</summary>
-    /// <param name="key">matching key</param>
+    /// <param name="key">Matching key</param>
     /// <param name="prev">Set to the previous matching element to find the next. If set to NULL the first matching element is returned.</param>
-    /// <param name="flags">a collection of AV_DICT_* flags controlling how the entry is retrieved</param>
-    /// <returns>found entry or NULL in case no matching entry was found in the dictionary</returns>
+    /// <param name="flags">A collection of AV_DICT_* flags controlling how the entry is retrieved</param>
+    /// <returns>Found entry or NULL in case no matching entry was found in the dictionary</returns>
     public static AVDictionaryEntry* av_dict_get(AVDictionary* @m, string @key, AVDictionaryEntry* @prev, int @flags) => vectors.av_dict_get(@m, @key, @prev, @flags);
     
     /// <summary>Get dictionary entries as a string.</summary>
-    /// <param name="m">dictionary</param>
+    /// <param name="m">The dictionary</param>
     /// <param name="buffer">Pointer to buffer that will be allocated with string containg entries. Buffer must be freed by the caller when is no longer needed.</param>
-    /// <param name="key_val_sep">character used to separate key from value</param>
-    /// <param name="pairs_sep">character used to separate two pairs from each other</param>
+    /// <param name="key_val_sep">Character used to separate key from value</param>
+    /// <param name="pairs_sep">Character used to separate two pairs from each other</param>
     /// <returns>&gt;= 0 on success, negative on error</returns>
     public static int av_dict_get_string(AVDictionary* @m, byte** @buffer, byte @key_val_sep, byte @pairs_sep) => vectors.av_dict_get_string(@m, @buffer, @key_val_sep, @pairs_sep);
     
+    /// <summary>Iterate over a dictionary</summary>
+    /// <param name="m">The dictionary to iterate over</param>
+    /// <param name="prev">Pointer to the previous AVDictionaryEntry, NULL initially</param>
+    public static AVDictionaryEntry* av_dict_iterate(AVDictionary* @m, AVDictionaryEntry* @prev) => vectors.av_dict_iterate(@m, @prev);
+    
     /// <summary>Parse the key/value pairs list and add the parsed entries to a dictionary.</summary>
-    /// <param name="key_val_sep">a 0-terminated list of characters used to separate key from value</param>
-    /// <param name="pairs_sep">a 0-terminated list of characters used to separate two pairs from each other</param>
-    /// <param name="flags">flags to use when adding to dictionary. AV_DICT_DONT_STRDUP_KEY and AV_DICT_DONT_STRDUP_VAL are ignored since the key/value tokens will always be duplicated.</param>
+    /// <param name="key_val_sep">A 0-terminated list of characters used to separate key from value</param>
+    /// <param name="pairs_sep">A 0-terminated list of characters used to separate two pairs from each other</param>
+    /// <param name="flags">Flags to use when adding to the dictionary. ::AV_DICT_DONT_STRDUP_KEY and ::AV_DICT_DONT_STRDUP_VAL are ignored since the key/value tokens will always be duplicated.</param>
     /// <returns>0 on success, negative AVERROR code on failure</returns>
     public static int av_dict_parse_string(AVDictionary** @pm, string @str, string @key_val_sep, string @pairs_sep, int @flags) => vectors.av_dict_parse_string(@pm, @str, @key_val_sep, @pairs_sep, @flags);
     
     /// <summary>Set the given entry in *pm, overwriting an existing entry.</summary>
-    /// <param name="pm">pointer to a pointer to a dictionary struct. If *pm is NULL a dictionary struct is allocated and put in *pm.</param>
-    /// <param name="key">entry key to add to *pm (will either be av_strduped or added as a new key depending on flags)</param>
-    /// <param name="value">entry value to add to *pm (will be av_strduped or added as a new key depending on flags). Passing a NULL value will cause an existing entry to be deleted.</param>
+    /// <param name="pm">Pointer to a pointer to a dictionary struct. If *pm is NULL a dictionary struct is allocated and put in *pm.</param>
+    /// <param name="key">Entry key to add to *pm (will either be av_strduped or added as a new key depending on flags)</param>
+    /// <param name="value">Entry value to add to *pm (will be av_strduped or added as a new key depending on flags). Passing a NULL value will cause an existing entry to be deleted.</param>
     /// <returns>&gt;= 0 on success otherwise an error code &lt; 0</returns>
     public static int av_dict_set(AVDictionary** @pm, string @key, string @value, int @flags) => vectors.av_dict_set(@pm, @key, @value, @flags);
     
-    /// <summary>Convenience wrapper for av_dict_set that converts the value to a string and stores it.</summary>
+    /// <summary>Convenience wrapper for av_dict_set() that converts the value to a string and stores it.</summary>
     public static int av_dict_set_int(AVDictionary** @pm, string @key, long @value, int @flags) => vectors.av_dict_set_int(@pm, @key, @value, @flags);
     
     /// <summary>Returns The AV_DISPOSITION_* flag corresponding to disp or a negative error code if disp does not correspond to a known stream disposition.</summary>
@@ -702,12 +721,16 @@ public static unsafe partial class ffmpeg
     public static void* av_fast_realloc(void* @ptr, uint* @size, ulong @min_size) => vectors.av_fast_realloc(@ptr, @size, @min_size);
     
     /// <summary>Read the file with name filename, and put its content in a newly allocated buffer or map it with mmap() when available. In case of success set *bufptr to the read or mmapped buffer, and *size to the size in bytes of the buffer in *bufptr. Unlike mmap this function succeeds with zero sized files, in this case *bufptr will be set to NULL and *size will be set to 0. The returned buffer must be released with av_file_unmap().</summary>
+    /// <param name="filename">path to the file</param>
+    /// <param name="bufptr">pointee is set to the mapped or allocated buffer</param>
+    /// <param name="size">pointee is set to the size in bytes of the buffer</param>
     /// <param name="log_offset">loglevel offset used for logging</param>
     /// <param name="log_ctx">context used for logging</param>
     /// <returns>a non negative number in case of success, a negative value corresponding to an AVERROR error code in case of failure</returns>
     public static int av_file_map(string @filename, byte** @bufptr, ulong* @size, int @log_offset, void* @log_ctx) => vectors.av_file_map(@filename, @bufptr, @size, @log_offset, @log_ctx);
     
     /// <summary>Unmap or free the buffer bufptr created by av_file_map().</summary>
+    /// <param name="bufptr">the buffer previously created with av_file_map()</param>
     /// <param name="size">size in bytes of bufptr, must be the same as returned by av_file_map()</param>
     public static void av_file_unmap(byte* @bufptr, ulong @size) => vectors.av_file_unmap(@bufptr, @size);
     
@@ -807,6 +830,7 @@ public static unsafe partial class ffmpeg
     public static int av_frame_get_buffer(AVFrame* @frame, int @align) => vectors.av_frame_get_buffer(@frame, @align);
     
     /// <summary>Get the buffer reference a given data plane is stored in.</summary>
+    /// <param name="frame">the frame to get the plane&apos;s buffer from</param>
     /// <param name="plane">index of the data plane of interest in frame-&gt;extended_data.</param>
     /// <returns>the buffer reference that contains the plane or NULL if the input frame is not valid.</returns>
     public static AVBufferRef* av_frame_get_plane_buffer(AVFrame* @frame, int @plane) => vectors.av_frame_get_plane_buffer(@frame, @plane);
@@ -863,6 +887,8 @@ public static unsafe partial class ffmpeg
     public static void av_freep(void* @ptr) => vectors.av_freep(@ptr);
     
     /// <summary>Compute the greatest common divisor of two integer operands.</summary>
+    /// <param name="a">Operand</param>
+    /// <param name="b">Operand</param>
     /// <returns>GCD of a and b up to sign; if a &gt;= 0 and b &gt;= 0, return value is &gt;= 0; if a == 0 and b == 0, returns 0.</returns>
     public static long av_gcd(long @a, long @b) => vectors.av_gcd(@a, @b);
     
@@ -905,6 +931,7 @@ public static unsafe partial class ffmpeg
     public static ulong av_get_channel_layout(string @name) => vectors.av_get_channel_layout(@name);
     
     /// <summary>Get the index of a channel in channel_layout.</summary>
+    /// <param name="channel_layout">channel layout bitset</param>
     /// <param name="channel">a channel layout describing exactly one channel which must be present in channel_layout.</param>
     /// <returns>index of channel in channel_layout on success, a negative AVERROR on error.</returns>
     [Obsolete("use av_channel_layout_index_from_channel()")]
@@ -917,6 +944,8 @@ public static unsafe partial class ffmpeg
     /// <summary>Return a description of a channel layout. If nb_channels is &lt;= 0, it is guessed from the channel_layout.</summary>
     /// <param name="buf">put here the string containing the channel layout</param>
     /// <param name="buf_size">size in bytes of the buffer</param>
+    /// <param name="nb_channels">number of channels</param>
+    /// <param name="channel_layout">channel layout bitset</param>
     [Obsolete("use av_channel_layout_describe()")]
     public static void av_get_channel_layout_string(byte* @buf, int @buf_size, int @nb_channels, ulong @channel_layout) => vectors.av_get_channel_layout_string(@buf, @buf_size, @nb_channels, @channel_layout);
     
@@ -924,11 +953,6 @@ public static unsafe partial class ffmpeg
     /// <returns>channel name on success, NULL on error.</returns>
     [Obsolete("use av_channel_name()")]
     public static string av_get_channel_name(ulong @channel) => vectors.av_get_channel_name(@channel);
-    
-    /// <summary>Get the name of a colorspace.</summary>
-    /// <returns>a static string identifying the colorspace; can be NULL.</returns>
-    [Obsolete("use av_color_space_name()")]
-    public static string av_get_colorspace_name(AVColorSpace @val) => vectors.av_get_colorspace_name(@val);
     
     /// <summary>Return the flags which specify extensions supported by the CPU. The returned value is affected by av_force_cpu_flags() if that was used before. So av_get_cpu_flags() can easily be used in an application to detect the enabled cpu flags.</summary>
     public static int av_get_cpu_flags() => vectors.av_get_cpu_flags();
@@ -969,7 +993,6 @@ public static unsafe partial class ffmpeg
     /// <param name="stream">stream in the media file</param>
     /// <param name="dts">DTS of the last packet output for the stream, in stream time_base units</param>
     /// <param name="wall">absolute time when that packet whas output, in microsecond</param>
-    /// <returns>0 if OK, AVERROR(ENOSYS) if the format does not support it Note: some formats or devices may not allow to measure dts and wall atomically.</returns>
     public static int av_get_output_timestamp(AVFormatContext* @s, int @stream, long* @dts, long* @wall) => vectors.av_get_output_timestamp(@s, @stream, @dts, @wall);
     
     /// <summary>Get the packed alternative form of the given sample format.</summary>
@@ -1157,6 +1180,7 @@ public static unsafe partial class ffmpeg
     public static void* av_hwdevice_hwconfig_alloc(AVBufferRef* @device_ctx) => vectors.av_hwdevice_hwconfig_alloc(@device_ctx);
     
     /// <summary>Iterate over supported device types.</summary>
+    /// <param name="prev">AV_HWDEVICE_TYPE_NONE initially, then the previous type returned by this function in subsequent iterations.</param>
     /// <returns>The next usable device type from enum AVHWDeviceType, or AV_HWDEVICE_TYPE_NONE if there are no more.</returns>
     public static AVHWDeviceType av_hwdevice_iterate_types(AVHWDeviceType @prev) => vectors.av_hwdevice_iterate_types(@prev);
     
@@ -1171,6 +1195,7 @@ public static unsafe partial class ffmpeg
     
     /// <summary>Create and initialise an AVHWFramesContext as a mapping of another existing AVHWFramesContext on a different device.</summary>
     /// <param name="derived_frame_ctx">On success, a reference to the newly created AVHWFramesContext.</param>
+    /// <param name="format">The AVPixelFormat for the derived context.</param>
     /// <param name="derived_device_ctx">A reference to the device to create the new AVHWFramesContext on.</param>
     /// <param name="source_frame_ctx">A reference to an existing AVHWFramesContext which will be mapped to the derived context.</param>
     /// <param name="flags">Some combination of AV_HWFRAME_MAP_* flags, defining the mapping parameters to apply to frames which are allocated in the derived device.</param>
@@ -1212,6 +1237,11 @@ public static unsafe partial class ffmpeg
     public static int av_hwframe_transfer_get_formats(AVBufferRef* @hwframe_ctx, AVHWFrameTransferDirection @dir, AVPixelFormat** @formats, int @flags) => vectors.av_hwframe_transfer_get_formats(@hwframe_ctx, @dir, @formats, @flags);
     
     /// <summary>Allocate an image with size w and h and pixel format pix_fmt, and fill pointers and linesizes accordingly. The allocated image buffer has to be freed by using av_freep(&amp;pointers[0]).</summary>
+    /// <param name="pointers">array to be filled with the pointer for each image plane</param>
+    /// <param name="linesizes">the array filled with the linesize for each plane</param>
+    /// <param name="w">width of the image in pixels</param>
+    /// <param name="h">height of the image in pixels</param>
+    /// <param name="pix_fmt">the AVPixelFormat of the image</param>
     /// <param name="align">the value to use for buffer size alignment</param>
     /// <returns>the size in bytes required for the image buffer, a negative error code in case of failure</returns>
     public static int av_image_alloc(ref byte_ptr4 @pointers, ref int4 @linesizes, int @w, int @h, AVPixelFormat @pix_fmt, int @align) => vectors.av_image_alloc(ref @pointers, ref @linesizes, @w, @h, @pix_fmt, @align);
@@ -1242,13 +1272,21 @@ public static unsafe partial class ffmpeg
     public static int av_image_check_size2(uint @w, uint @h, long @max_pixels, AVPixelFormat @pix_fmt, int @log_offset, void* @log_ctx) => vectors.av_image_check_size2(@w, @h, @max_pixels, @pix_fmt, @log_offset, @log_ctx);
     
     /// <summary>Copy image in src_data to dst_data.</summary>
+    /// <param name="dst_data">destination image data buffer to copy to</param>
     /// <param name="dst_linesizes">linesizes for the image in dst_data</param>
+    /// <param name="src_data">source image data buffer to copy from</param>
     /// <param name="src_linesizes">linesizes for the image in src_data</param>
+    /// <param name="pix_fmt">the AVPixelFormat of the image</param>
+    /// <param name="width">width of the image in pixels</param>
+    /// <param name="height">height of the image in pixels</param>
     public static void av_image_copy(ref byte_ptr4 @dst_data, ref int4 @dst_linesizes, in byte_ptr4 @src_data, in int4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height) => vectors.av_image_copy(ref @dst_data, ref @dst_linesizes, @src_data, @src_linesizes, @pix_fmt, @width, @height);
     
     /// <summary>Copy image plane from src to dst. That is, copy &quot;height&quot; number of lines of &quot;bytewidth&quot; bytes each. The first byte of each successive line is separated by *_linesize bytes.</summary>
+    /// <param name="dst">destination plane to copy to</param>
     /// <param name="dst_linesize">linesize for the image plane in dst</param>
+    /// <param name="src">source plane to copy from</param>
     /// <param name="src_linesize">linesize for the image plane in src</param>
+    /// <param name="height">height (number of lines) of the plane</param>
     public static void av_image_copy_plane(byte* @dst, int @dst_linesize, byte* @src, int @src_linesize, int @bytewidth, int @height) => vectors.av_image_copy_plane(@dst, @dst_linesize, @src, @src_linesize, @bytewidth, @height);
     
     /// <summary>Copy image data located in uncacheable (e.g. GPU mapped) memory. Where available, this function will use special functionality for reading from such memory, which may result in greatly improved performance compared to plain av_image_copy_plane().</summary>
@@ -1292,22 +1330,29 @@ public static unsafe partial class ffmpeg
     
     /// <summary>Fill plane linesizes for an image with pixel format pix_fmt and width width.</summary>
     /// <param name="linesizes">array to be filled with the linesize for each plane</param>
+    /// <param name="pix_fmt">the AVPixelFormat of the image</param>
+    /// <param name="width">width of the image in pixels</param>
     /// <returns>&gt;= 0 in case of success, a negative error code otherwise</returns>
     public static int av_image_fill_linesizes(ref int4 @linesizes, AVPixelFormat @pix_fmt, int @width) => vectors.av_image_fill_linesizes(ref @linesizes, @pix_fmt, @width);
     
     /// <summary>Compute the max pixel step for each plane of an image with a format described by pixdesc.</summary>
     /// <param name="max_pixsteps">an array which is filled with the max pixel step for each plane. Since a plane may contain different pixel components, the computed max_pixsteps[plane] is relative to the component in the plane with the max pixel step.</param>
     /// <param name="max_pixstep_comps">an array which is filled with the component for each plane which has the max pixel step. May be NULL.</param>
+    /// <param name="pixdesc">the AVPixFmtDescriptor for the image, describing its format</param>
     public static void av_image_fill_max_pixsteps(ref int4 @max_pixsteps, ref int4 @max_pixstep_comps, AVPixFmtDescriptor* @pixdesc) => vectors.av_image_fill_max_pixsteps(ref @max_pixsteps, ref @max_pixstep_comps, @pixdesc);
     
     /// <summary>Fill plane sizes for an image with pixel format pix_fmt and height height.</summary>
     /// <param name="size">the array to be filled with the size of each image plane</param>
+    /// <param name="pix_fmt">the AVPixelFormat of the image</param>
+    /// <param name="height">height of the image in pixels</param>
     /// <param name="linesizes">the array containing the linesize for each plane, should be filled by av_image_fill_linesizes()</param>
     /// <returns>&gt;= 0 in case of success, a negative error code otherwise</returns>
     public static int av_image_fill_plane_sizes(ref ulong4 @size, AVPixelFormat @pix_fmt, int @height, in long4 @linesizes) => vectors.av_image_fill_plane_sizes(ref @size, @pix_fmt, @height, @linesizes);
     
     /// <summary>Fill plane data pointers for an image with pixel format pix_fmt and height height.</summary>
     /// <param name="data">pointers array to be filled with the pointer for each image plane</param>
+    /// <param name="pix_fmt">the AVPixelFormat of the image</param>
+    /// <param name="height">height of the image in pixels</param>
     /// <param name="ptr">the pointer to a buffer which will contain the image</param>
     /// <param name="linesizes">the array containing the linesize for each plane, should be filled by av_image_fill_linesizes()</param>
     /// <returns>the size in bytes required for the image buffer, a negative error code in case of failure</returns>
@@ -1430,9 +1475,6 @@ public static unsafe partial class ffmpeg
     /// <returns>Pointer to the allocated block, or `NULL` if it cannot be allocated</returns>
     public static void* av_mallocz(ulong @size) => vectors.av_mallocz(@size);
     
-    [Obsolete("use av_calloc()")]
-    public static void* av_mallocz_array(ulong @nmemb, ulong @size) => vectors.av_mallocz_array(@nmemb, @size);
-    
     /// <summary>Allocate an AVMasteringDisplayMetadata structure and set its fields to default values. The resulting struct can be freed using av_freep().</summary>
     /// <returns>An AVMasteringDisplayMetadata filled with default values or NULL on failure.</returns>
     public static AVMasteringDisplayMetadata* av_mastering_display_metadata_alloc() => vectors.av_mastering_display_metadata_alloc();
@@ -1476,6 +1518,8 @@ public static unsafe partial class ffmpeg
     
     /// <summary>Find which of the two rationals is closer to another rational.</summary>
     /// <param name="q">Rational to be compared against</param>
+    /// <param name="q1">Rational to be tested</param>
+    /// <param name="q2">Rational to be tested</param>
     /// <returns>One of the following values: - 1 if `q1` is nearer to `q` than `q2` - -1 if `q2` is nearer to `q` than `q1` - 0 if they have the same distance</returns>
     public static int av_nearer_q(AVRational @q, AVRational @q1, AVRational @q2) => vectors.av_nearer_q(@q, @q1, @q2);
     
@@ -2011,6 +2055,7 @@ public static unsafe partial class ffmpeg
     /// <param name="linesize">aligned size for audio buffer(s), may be NULL</param>
     /// <param name="nb_channels">number of audio channels</param>
     /// <param name="nb_samples">number of samples per channel</param>
+    /// <param name="sample_fmt">the sample format</param>
     /// <param name="align">buffer size alignment (0 = default, 1 = no alignment)</param>
     /// <returns>&gt;=0 on success or a negative error code on failure</returns>
     public static int av_samples_alloc(byte** @audio_data, int* @linesize, int @nb_channels, int @nb_samples, AVSampleFormat @sample_fmt, int @align) => vectors.av_samples_alloc(@audio_data, @linesize, @nb_channels, @nb_samples, @sample_fmt, @align);
@@ -2085,6 +2130,8 @@ public static unsafe partial class ffmpeg
     public static void av_shrink_packet(AVPacket* @pkt, int @size) => vectors.av_shrink_packet(@pkt, @size);
     
     /// <summary>Multiply two `size_t` values checking for overflow.</summary>
+    /// <param name="a">Operand of multiplication</param>
+    /// <param name="b">Operand of multiplication</param>
     /// <param name="r">Pointer to the result of the operation</param>
     /// <returns>0 on success, AVERROR(EINVAL) on overflow</returns>
     public static int av_size_mult(ulong @a, ulong @b, ulong* @r) => vectors.av_size_mult(@a, @b, @r);
@@ -2110,6 +2157,7 @@ public static unsafe partial class ffmpeg
     public static AVRational av_stream_get_codec_timebase(AVStream* @st) => vectors.av_stream_get_codec_timebase(@st);
     
     /// <summary>Returns the pts of the last muxed packet + its duration</summary>
+    [Obsolete()]
     public static long av_stream_get_end_pts(AVStream* @st) => vectors.av_stream_get_end_pts(@st);
     
     public static AVCodecParserContext* av_stream_get_parser(AVStream* @s) => vectors.av_stream_get_parser(@s);
@@ -2339,6 +2387,7 @@ public static unsafe partial class ffmpeg
     /// <summary>Converts swscale x/y chroma position to AVChromaLocation.</summary>
     /// <param name="xpos">horizontal chroma sample position</param>
     /// <param name="ypos">vertical   chroma sample position</param>
+    [Obsolete("Use av_chroma_location_pos_to_enum() instead.")]
     public static AVChromaLocation avcodec_chroma_pos_to_enum(int @xpos, int @ypos) => vectors.avcodec_chroma_pos_to_enum(@xpos, @ypos);
     
     /// <summary>Close a given AVCodecContext and free all the data associated with it (but not the AVCodecContext itself).</summary>
@@ -2385,6 +2434,7 @@ public static unsafe partial class ffmpeg
     /// <summary>Converts AVChromaLocation to swscale x/y chroma position.</summary>
     /// <param name="xpos">horizontal chroma sample position</param>
     /// <param name="ypos">vertical   chroma sample position</param>
+    [Obsolete("Use av_chroma_location_enum_to_pos() instead.")]
     public static int avcodec_enum_to_chroma_pos(int* @xpos, int* @ypos, AVChromaLocation @pos) => vectors.avcodec_enum_to_chroma_pos(@xpos, @ypos, @pos);
     
     /// <summary>Fill AVFrame audio data and linesize pointers.</summary>
@@ -2433,9 +2483,6 @@ public static unsafe partial class ffmpeg
     
     /// <summary>Get the AVClass for AVCodecContext. It can be used in combination with AV_OPT_SEARCH_FAKE_OBJ for examining options.</summary>
     public static AVClass* avcodec_get_class() => vectors.avcodec_get_class();
-    
-    [Obsolete("This function should not be used.")]
-    public static AVClass* avcodec_get_frame_class() => vectors.avcodec_get_frame_class();
     
     /// <summary>Retrieve supported hardware configurations for a codec.</summary>
     public static AVCodecHWConfig* avcodec_get_hw_config(AVCodec* @codec, int @index) => vectors.avcodec_get_hw_config(@codec, @index);
@@ -2499,28 +2546,24 @@ public static unsafe partial class ffmpeg
     /// <returns>A name for the profile if found, NULL otherwise.</returns>
     public static string avcodec_profile_name(AVCodecID @codec_id, int @profile) => vectors.avcodec_profile_name(@codec_id, @profile);
     
-    /// <summary>Return decoded output data from a decoder.</summary>
+    /// <summary>Return decoded output data from a decoder or encoder (when the AV_CODEC_FLAG_RECON_FRAME flag is used).</summary>
     /// <param name="avctx">codec context</param>
-    /// <param name="frame">This will be set to a reference-counted video or audio frame (depending on the decoder type) allocated by the decoder. Note that the function will always call av_frame_unref(frame) before doing anything else.</param>
-    /// <returns>0:                 success, a frame was returned AVERROR(EAGAIN):   output is not available in this state - user must try to send new input AVERROR_EOF:       the decoder has been fully flushed, and there will be no more output frames AVERROR(EINVAL):   codec not opened, or it is an encoder AVERROR_INPUT_CHANGED:   current decoded frame has changed parameters with respect to first decoded frame. Applicable when flag AV_CODEC_FLAG_DROPCHANGED is set. other negative values: legitimate decoding errors</returns>
+    /// <param name="frame">This will be set to a reference-counted video or audio frame (depending on the decoder type) allocated by the codec. Note that the function will always call av_frame_unref(frame) before doing anything else.</param>
     public static int avcodec_receive_frame(AVCodecContext* @avctx, AVFrame* @frame) => vectors.avcodec_receive_frame(@avctx, @frame);
     
     /// <summary>Read encoded data from the encoder.</summary>
     /// <param name="avctx">codec context</param>
     /// <param name="avpkt">This will be set to a reference-counted packet allocated by the encoder. Note that the function will always call av_packet_unref(avpkt) before doing anything else.</param>
-    /// <returns>0 on success, otherwise negative error code: AVERROR(EAGAIN):   output is not available in the current state - user must try to send input AVERROR_EOF:       the encoder has been fully flushed, and there will be no more output packets AVERROR(EINVAL):   codec not opened, or it is a decoder other errors: legitimate encoding errors</returns>
     public static int avcodec_receive_packet(AVCodecContext* @avctx, AVPacket* @avpkt) => vectors.avcodec_receive_packet(@avctx, @avpkt);
     
     /// <summary>Supply a raw video or audio frame to the encoder. Use avcodec_receive_packet() to retrieve buffered output packets.</summary>
     /// <param name="avctx">codec context</param>
     /// <param name="frame">AVFrame containing the raw audio or video frame to be encoded. Ownership of the frame remains with the caller, and the encoder will not write to the frame. The encoder may create a reference to the frame data (or copy it if the frame is not reference-counted). It can be NULL, in which case it is considered a flush packet.  This signals the end of the stream. If the encoder still has packets buffered, it will return them after this call. Once flushing mode has been entered, additional flush packets are ignored, and sending frames will return AVERROR_EOF.</param>
-    /// <returns>0 on success, otherwise negative error code: AVERROR(EAGAIN):   input is not accepted in the current state - user must read output with avcodec_receive_packet() (once all output is read, the packet should be resent, and the call will not fail with EAGAIN). AVERROR_EOF:       the encoder has been flushed, and no new frames can be sent to it AVERROR(EINVAL):   codec not opened, it is a decoder, or requires flush AVERROR(ENOMEM):   failed to add packet to internal queue, or similar other errors: legitimate encoding errors</returns>
     public static int avcodec_send_frame(AVCodecContext* @avctx, AVFrame* @frame) => vectors.avcodec_send_frame(@avctx, @frame);
     
     /// <summary>Supply raw packet data as input to a decoder.</summary>
     /// <param name="avctx">codec context</param>
     /// <param name="avpkt">The input AVPacket. Usually, this will be a single video frame, or several complete audio frames. Ownership of the packet remains with the caller, and the decoder will not write to the packet. The decoder may create a reference to the packet data (or copy it if the packet is not reference-counted). Unlike with older APIs, the packet is always fully consumed, and if it contains multiple frames (e.g. some audio codecs), will require you to call avcodec_receive_frame() multiple times afterwards before you can send a new packet. It can be NULL (or an AVPacket with data set to NULL and size set to 0); in this case, it is considered a flush packet, which signals the end of the stream. Sending the first flush packet will return success. Subsequent ones are unnecessary and will return AVERROR_EOF. If the decoder still has frames buffered, it will return them after sending a flush packet.</param>
-    /// <returns>0 on success, otherwise negative error code: AVERROR(EAGAIN):   input is not accepted in the current state - user must read output with avcodec_receive_frame() (once all output is read, the packet should be resent, and the call will not fail with EAGAIN). AVERROR_EOF:       the decoder has been flushed, and no new packets can be sent to it (also returned if more than 1 flush packet is sent) AVERROR(EINVAL):   codec not opened, it is an encoder, or requires flush AVERROR(ENOMEM):   failed to add packet to internal queue, or similar other errors: legitimate decoding errors</returns>
     public static int avcodec_send_packet(AVCodecContext* @avctx, AVPacket* @avpkt) => vectors.avcodec_send_packet(@avctx, @avpkt);
     
     /// <summary>@}</summary>
@@ -2537,20 +2580,6 @@ public static unsafe partial class ffmpeg
     /// <returns>&gt;= 0 on success, negative on error. AVERROR(ENOSYS) when device doesn&apos;t implement handler of the message.</returns>
     public static int avdevice_app_to_dev_control_message(AVFormatContext* @s, AVAppToDevMessageType @type, void* @data, ulong @data_size) => vectors.avdevice_app_to_dev_control_message(@s, @type, @data, @data_size);
     
-    /// <summary>Initialize capabilities probing API based on AVOption API.</summary>
-    /// <param name="caps">Device capabilities data. Pointer to a NULL pointer must be passed.</param>
-    /// <param name="s">Context of the device.</param>
-    /// <param name="device_options">An AVDictionary filled with device-private options. On return this parameter will be destroyed and replaced with a dict containing options that were not found. May be NULL. The same options must be passed later to avformat_write_header() for output devices or avformat_open_input() for input devices, or at any other place that affects device-private options.</param>
-    /// <returns>&gt;= 0 on success, negative otherwise.</returns>
-    [Obsolete()]
-    public static int avdevice_capabilities_create(AVDeviceCapabilitiesQuery** @caps, AVFormatContext* @s, AVDictionary** @device_options) => vectors.avdevice_capabilities_create(@caps, @s, @device_options);
-    
-    /// <summary>Free resources created by avdevice_capabilities_create()</summary>
-    /// <param name="caps">Device capabilities data to be freed.</param>
-    /// <param name="s">Context of the device.</param>
-    [Obsolete()]
-    public static void avdevice_capabilities_free(AVDeviceCapabilitiesQuery** @caps, AVFormatContext* @s) => vectors.avdevice_capabilities_free(@caps, @s);
-    
     /// <summary>Return the libavdevice build-time configuration.</summary>
     public static string avdevice_configuration() => vectors.avdevice_configuration();
     
@@ -2563,6 +2592,7 @@ public static unsafe partial class ffmpeg
     public static int avdevice_dev_to_app_control_message(AVFormatContext* @s, AVDevToAppMessageType @type, void* @data, ulong @data_size) => vectors.avdevice_dev_to_app_control_message(@s, @type, @data, @data_size);
     
     /// <summary>Convenient function to free result of avdevice_list_devices().</summary>
+    /// <param name="device_list">device list to be freed.</param>
     public static void avdevice_free_list_devices(AVDeviceInfoList** @device_list) => vectors.avdevice_free_list_devices(@device_list);
     
     /// <summary>Return the libavdevice license.</summary>
@@ -2688,6 +2718,46 @@ public static unsafe partial class ffmpeg
     /// <returns>the return value of ff_request_frame(), or AVERROR_EOF if all links returned AVERROR_EOF</returns>
     public static int avfilter_graph_request_oldest(AVFilterGraph* @graph) => vectors.avfilter_graph_request_oldest(@graph);
     
+    /// <summary>Apply all filter/link descriptions from a graph segment to the associated filtergraph.</summary>
+    /// <param name="seg">the filtergraph segment to process</param>
+    /// <param name="flags">reserved for future use, caller must set to 0 for now</param>
+    /// <param name="inputs">passed to avfilter_graph_segment_link()</param>
+    /// <param name="outputs">passed to avfilter_graph_segment_link()</param>
+    public static int avfilter_graph_segment_apply(AVFilterGraphSegment* @seg, int @flags, AVFilterInOut** @inputs, AVFilterInOut** @outputs) => vectors.avfilter_graph_segment_apply(@seg, @flags, @inputs, @outputs);
+    
+    /// <summary>Apply parsed options to filter instances in a graph segment.</summary>
+    /// <param name="seg">the filtergraph segment to process</param>
+    /// <param name="flags">reserved for future use, caller must set to 0 for now</param>
+    public static int avfilter_graph_segment_apply_opts(AVFilterGraphSegment* @seg, int @flags) => vectors.avfilter_graph_segment_apply_opts(@seg, @flags);
+    
+    /// <summary>Create filters specified in a graph segment.</summary>
+    /// <param name="seg">the filtergraph segment to process</param>
+    /// <param name="flags">reserved for future use, caller must set to 0 for now</param>
+    public static int avfilter_graph_segment_create_filters(AVFilterGraphSegment* @seg, int @flags) => vectors.avfilter_graph_segment_create_filters(@seg, @flags);
+    
+    /// <summary>Free the provided AVFilterGraphSegment and everything associated with it.</summary>
+    /// <param name="seg">double pointer to the AVFilterGraphSegment to be freed. NULL will be written to this pointer on exit from this function.</param>
+    public static void avfilter_graph_segment_free(AVFilterGraphSegment** @seg) => vectors.avfilter_graph_segment_free(@seg);
+    
+    /// <summary>Initialize all filter instances in a graph segment.</summary>
+    /// <param name="seg">the filtergraph segment to process</param>
+    /// <param name="flags">reserved for future use, caller must set to 0 for now</param>
+    public static int avfilter_graph_segment_init(AVFilterGraphSegment* @seg, int @flags) => vectors.avfilter_graph_segment_init(@seg, @flags);
+    
+    /// <summary>Link filters in a graph segment.</summary>
+    /// <param name="seg">the filtergraph segment to process</param>
+    /// <param name="flags">reserved for future use, caller must set to 0 for now</param>
+    /// <param name="inputs">a linked list of all free (unlinked) inputs of the filters in this graph segment will be returned here. It is to be freed by the caller using avfilter_inout_free().</param>
+    /// <param name="outputs">a linked list of all free (unlinked) outputs of the filters in this graph segment will be returned here. It is to be freed by the caller using avfilter_inout_free().</param>
+    public static int avfilter_graph_segment_link(AVFilterGraphSegment* @seg, int @flags, AVFilterInOut** @inputs, AVFilterInOut** @outputs) => vectors.avfilter_graph_segment_link(@seg, @flags, @inputs, @outputs);
+    
+    /// <summary>Parse a textual filtergraph description into an intermediate form.</summary>
+    /// <param name="graph">Filter graph the parsed segment is associated with. Will only be used for logging and similar auxiliary purposes. The graph will not be actually modified by this function - the parsing results are instead stored in seg for further processing.</param>
+    /// <param name="graph_str">a string describing the filtergraph segment</param>
+    /// <param name="flags">reserved for future use, caller must set to 0 for now</param>
+    /// <param name="seg">A pointer to the newly-created AVFilterGraphSegment is written here on success. The graph segment is owned by the caller and must be freed with avfilter_graph_segment_free() before graph itself is freed.</param>
+    public static int avfilter_graph_segment_parse(AVFilterGraph* @graph, string @graph_str, int @flags, AVFilterGraphSegment** @seg) => vectors.avfilter_graph_segment_parse(@graph, @graph_str, @flags, @seg);
+    
     /// <summary>Send a command to one or more filter instances.</summary>
     /// <param name="graph">the filter graph</param>
     /// <param name="target">the filter(s) to which the command should be sent &quot;all&quot; sends to all filters otherwise it can be a filter or filter instance name which will send the command to all matching filters.</param>
@@ -2741,10 +2811,6 @@ public static unsafe partial class ffmpeg
     /// <summary>Free the link in *link, and set its pointer to NULL.</summary>
     public static void avfilter_link_free(AVFilterLink** @link) => vectors.avfilter_link_free(@link);
     
-    /// <summary>Get the number of elements in an AVFilter&apos;s inputs or outputs array.</summary>
-    [Obsolete("Use avfilter_filter_pad_count() instead.")]
-    public static int avfilter_pad_count(AVFilterPad* @pads) => vectors.avfilter_pad_count(@pads);
-    
     /// <summary>Get the name of an AVFilterPad.</summary>
     /// <param name="pads">an array of AVFilterPads</param>
     /// <param name="pad_idx">index of the pad in the array; it is the caller&apos;s responsibility to ensure the index is valid</param>
@@ -2767,6 +2833,7 @@ public static unsafe partial class ffmpeg
     public static AVFormatContext* avformat_alloc_context() => vectors.avformat_alloc_context();
     
     /// <summary>Allocate an AVFormatContext for an output format. avformat_free_context() can be used to free the context and everything allocated by the framework within it.</summary>
+    /// <param name="ctx">pointee is set to the created format context, or to NULL in case of failure</param>
     /// <param name="oformat">format to use for allocating the context, if NULL format_name and filename are used instead</param>
     /// <param name="format_name">the name of output format to use for allocating the context, if NULL filename is used instead</param>
     /// <param name="filename">the name of the filename to use for allocating the context, may be NULL</param>
@@ -2826,14 +2893,14 @@ public static unsafe partial class ffmpeg
     
     /// <summary>Get the AVIndexEntry corresponding to the given timestamp.</summary>
     /// <param name="st">Stream containing the requested AVIndexEntry.</param>
+    /// <param name="wanted_timestamp">Timestamp to retrieve the index entry for.</param>
     /// <param name="flags">If AVSEEK_FLAG_BACKWARD then the returned entry will correspond to the timestamp which is &lt; = the requested one, if backward is 0, then it will be &gt;= if AVSEEK_FLAG_ANY seek to any frame, only keyframes otherwise.</param>
     /// <returns>A pointer to the requested AVIndexEntry if it exists, NULL otherwise.</returns>
     public static AVIndexEntry* avformat_index_get_entry_from_timestamp(AVStream* @st, long @wanted_timestamp, int @flags) => vectors.avformat_index_get_entry_from_timestamp(@st, @wanted_timestamp, @flags);
     
-    /// <summary>Allocate the stream private data and initialize the codec, but do not write the header. May optionally be used before avformat_write_header to initialize stream parameters before actually writing the header. If using this function, do not pass the same options to avformat_write_header.</summary>
-    /// <param name="s">Media file handle, must be allocated with avformat_alloc_context(). Its oformat field must be set to the desired output format; Its pb field must be set to an already opened AVIOContext.</param>
-    /// <param name="options">An AVDictionary filled with AVFormatContext and muxer-private options. On return this parameter will be destroyed and replaced with a dict containing options that were not found. May be NULL.</param>
-    /// <returns>AVSTREAM_INIT_IN_WRITE_HEADER on success if the codec requires avformat_write_header to fully initialize, AVSTREAM_INIT_IN_INIT_OUTPUT  on success if the codec has been fully initialized, negative AVERROR on failure.</returns>
+    /// <summary>Allocate the stream private data and initialize the codec, but do not write the header. May optionally be used before avformat_write_header() to initialize stream parameters before actually writing the header. If using this function, do not pass the same options to avformat_write_header().</summary>
+    /// <param name="s">Media file handle, must be allocated with avformat_alloc_context(). Its &quot;oformat&quot; field must be set to the desired output format; Its &quot;pb&quot; field must be set to an already opened ::AVIOContext.</param>
+    /// <param name="options">An ::AVDictionary filled with AVFormatContext and muxer-private options. On return this parameter will be destroyed and replaced with a dict containing options that were not found. May be NULL.</param>
     public static int avformat_init_output(AVFormatContext* @s, AVDictionary** @options) => vectors.avformat_init_output(@s, @options);
     
     /// <summary>Return the libavformat license.</summary>
@@ -2893,9 +2960,8 @@ public static unsafe partial class ffmpeg
     public static uint avformat_version() => vectors.avformat_version();
     
     /// <summary>Allocate the stream private data and write the stream header to an output media file.</summary>
-    /// <param name="s">Media file handle, must be allocated with avformat_alloc_context(). Its oformat field must be set to the desired output format; Its pb field must be set to an already opened AVIOContext.</param>
-    /// <param name="options">An AVDictionary filled with AVFormatContext and muxer-private options. On return this parameter will be destroyed and replaced with a dict containing options that were not found. May be NULL.</param>
-    /// <returns>AVSTREAM_INIT_IN_WRITE_HEADER on success if the codec had not already been fully initialized in avformat_init, AVSTREAM_INIT_IN_INIT_OUTPUT  on success if the codec had already been fully initialized in avformat_init, negative AVERROR on failure.</returns>
+    /// <param name="s">Media file handle, must be allocated with avformat_alloc_context(). Its &quot;oformat&quot; field must be set to the desired output format; Its &quot;pb&quot; field must be set to an already opened ::AVIOContext.</param>
+    /// <param name="options">An ::AVDictionary filled with AVFormatContext and muxer-private options. On return this parameter will be destroyed and replaced with a dict containing options that were not found. May be NULL.</param>
     public static int avformat_write_header(AVFormatContext* @s, AVDictionary** @options) => vectors.avformat_write_header(@s, @options);
     
     /// <summary>Accept and allocate a client context on a server context.</summary>
@@ -3125,6 +3191,7 @@ public static unsafe partial class ffmpeg
     public static void avio_write(AVIOContext* @s, byte* @buf, int @size) => vectors.avio_write(@s, @buf, @size);
     
     /// <summary>Mark the written bytestream as a specific type.</summary>
+    /// <param name="s">the AVIOContext</param>
     /// <param name="time">the stream time the current bytestream pos corresponds to (in AV_TIME_BASE units), or AV_NOPTS_VALUE if unknown or not applicable</param>
     /// <param name="type">the kind of data written starting at the current pos</param>
     public static void avio_write_marker(AVIOContext* @s, long @time, AVIODataMarkerType @type) => vectors.avio_write_marker(@s, @time, @type);
@@ -3228,6 +3295,8 @@ public static unsafe partial class ffmpeg
     
     /// <summary>Configure or reconfigure the SwrContext using the information provided by the AVFrames.</summary>
     /// <param name="swr">audio resample context</param>
+    /// <param name="out">output AVFrame</param>
+    /// <param name="in">input AVFrame</param>
     /// <returns>0 on success, AVERROR on failure.</returns>
     public static int swr_config_frame(SwrContext* @swr, AVFrame* @out, AVFrame* @in) => vectors.swr_config_frame(@swr, @out, @in);
     
@@ -3287,6 +3356,8 @@ public static unsafe partial class ffmpeg
     public static int swr_is_initialized(SwrContext* @s) => vectors.swr_is_initialized(@s);
     
     /// <summary>Convert the next timestamp from input to output timestamps are in 1/(in_sample_rate * out_sample_rate) units.</summary>
+    /// <param name="s">initialized Swr context</param>
+    /// <param name="pts">timestamp for the next input sample, INT64_MIN if unknown</param>
     /// <returns>the output timestamp for the next output sample</returns>
     public static long swr_next_pts(SwrContext* @s, long @pts) => vectors.swr_next_pts(@s, @pts);
     
@@ -3340,9 +3411,11 @@ public static unsafe partial class ffmpeg
     public static void sws_convertPalette8ToPacked32(byte* @src, byte* @dst, int @num_pixels, byte* @palette) => vectors.sws_convertPalette8ToPacked32(@src, @dst, @num_pixels, @palette);
     
     /// <summary>Finish the scaling process for a pair of source/destination frames previously submitted with sws_frame_start(). Must be called after all sws_send_slice() and sws_receive_slice() calls are done, before any new sws_frame_start() calls.</summary>
+    /// <param name="c">The scaling context</param>
     public static void sws_frame_end(SwsContext* @c) => vectors.sws_frame_end(@c);
     
     /// <summary>Initialize the scaling process for a given pair of source/destination frames. Must be called before any calls to sws_send_slice() and sws_receive_slice().</summary>
+    /// <param name="c">The scaling context</param>
     /// <param name="dst">The destination frame.</param>
     /// <param name="src">The source frame. The data buffers must be allocated, but the frame data does not have to be ready at this point. Data availability is then signalled by sws_send_slice().</param>
     /// <returns>0 on success, a negative AVERROR code on failure</returns>
@@ -3365,8 +3438,8 @@ public static unsafe partial class ffmpeg
     /// <param name="colorspace">One of the SWS_CS_* macros. If invalid, SWS_CS_DEFAULT is used.</param>
     public static int* sws_getCoefficients(int @colorspace) => vectors.sws_getCoefficients(@colorspace);
     
-    /// <summary>#if LIBSWSCALE_VERSION_MAJOR &gt; 6</summary>
-    /// <returns>negative error code on error, non negative otherwise #else</returns>
+    /// <summary>Returns A negative error code on error, non negative otherwise. If `LIBSWSCALE_VERSION_MAJOR &lt; 7`, returns -1 if not supported.</summary>
+    /// <returns>A negative error code on error, non negative otherwise. If `LIBSWSCALE_VERSION_MAJOR &lt; 7`, returns -1 if not supported.</returns>
     public static int sws_getColorspaceDetails(SwsContext* @c, int** @inv_table, int* @srcRange, int** @table, int* @dstRange, int* @brightness, int* @contrast, int* @saturation) => vectors.sws_getColorspaceDetails(@c, @inv_table, @srcRange, @table, @dstRange, @brightness, @contrast, @saturation);
     
     /// <summary>Allocate and return an SwsContext. You need it to perform scaling/conversion operations using sws_scale().</summary>
@@ -3405,12 +3478,14 @@ public static unsafe partial class ffmpeg
     public static void sws_normalizeVec(SwsVector* @a, double @height) => vectors.sws_normalizeVec(@a, @height);
     
     /// <summary>Request a horizontal slice of the output data to be written into the frame previously provided to sws_frame_start().</summary>
+    /// <param name="c">The scaling context</param>
     /// <param name="slice_start">first row of the slice; must be a multiple of sws_receive_slice_alignment()</param>
     /// <param name="slice_height">number of rows in the slice; must be a multiple of sws_receive_slice_alignment(), except for the last slice (i.e. when slice_start+slice_height is equal to output frame height)</param>
     /// <returns>a non-negative number if the data was successfully written into the output AVERROR(EAGAIN) if more input data needs to be provided before the output can be produced another negative AVERROR code on other kinds of scaling failure</returns>
     public static int sws_receive_slice(SwsContext* @c, uint @slice_start, uint @slice_height) => vectors.sws_receive_slice(@c, @slice_start, @slice_height);
     
-    /// <summary>Returns alignment required for output slices requested with sws_receive_slice(). Slice offsets and sizes passed to sws_receive_slice() must be multiples of the value returned from this function.</summary>
+    /// <summary>Get the alignment required for slices</summary>
+    /// <param name="c">The scaling context</param>
     /// <returns>alignment required for output slices requested with sws_receive_slice(). Slice offsets and sizes passed to sws_receive_slice() must be multiples of the value returned from this function.</returns>
     public static uint sws_receive_slice_alignment(SwsContext* @c) => vectors.sws_receive_slice_alignment(@c);
     
@@ -3426,6 +3501,7 @@ public static unsafe partial class ffmpeg
     public static int sws_scale(SwsContext* @c, byte*[] @srcSlice, int[] @srcStride, int @srcSliceY, int @srcSliceH, byte*[] @dst, int[] @dstStride) => vectors.sws_scale(@c, @srcSlice, @srcStride, @srcSliceY, @srcSliceH, @dst, @dstStride);
     
     /// <summary>Scale source data from src and write the output to dst.</summary>
+    /// <param name="c">The scaling context</param>
     /// <param name="dst">The destination frame. See documentation for sws_frame_start() for more details.</param>
     /// <param name="src">The source frame.</param>
     /// <returns>0 on success, a negative AVERROR code on failure</returns>
@@ -3435,20 +3511,22 @@ public static unsafe partial class ffmpeg
     public static void sws_scaleVec(SwsVector* @a, double @scalar) => vectors.sws_scaleVec(@a, @scalar);
     
     /// <summary>Indicate that a horizontal slice of input data is available in the source frame previously provided to sws_frame_start(). The slices may be provided in any order, but may not overlap. For vertically subsampled pixel formats, the slices must be aligned according to subsampling.</summary>
+    /// <param name="c">The scaling context</param>
     /// <param name="slice_start">first row of the slice</param>
     /// <param name="slice_height">number of rows in the slice</param>
     /// <returns>a non-negative number on success, a negative AVERROR code on failure.</returns>
     public static int sws_send_slice(SwsContext* @c, uint @slice_start, uint @slice_height) => vectors.sws_send_slice(@c, @slice_start, @slice_height);
     
-    /// <summary>Returns negative error code on error, non negative otherwise #else Returns -1 if not supported #endif</summary>
+    /// <summary>Returns A negative error code on error, non negative otherwise. If `LIBSWSCALE_VERSION_MAJOR &lt; 7`, returns -1 if not supported.</summary>
+    /// <param name="c">the scaling context</param>
     /// <param name="inv_table">the yuv2rgb coefficients describing the input yuv space, normally ff_yuv2rgb_coeffs[x]</param>
     /// <param name="srcRange">flag indicating the while-black range of the input (1=jpeg / 0=mpeg)</param>
     /// <param name="table">the yuv2rgb coefficients describing the output yuv space, normally ff_yuv2rgb_coeffs[x]</param>
     /// <param name="dstRange">flag indicating the while-black range of the output (1=jpeg / 0=mpeg)</param>
     /// <param name="brightness">16.16 fixed point brightness correction</param>
     /// <param name="contrast">16.16 fixed point contrast correction</param>
-    /// <param name="saturation">16.16 fixed point saturation correction #if LIBSWSCALE_VERSION_MAJOR &gt; 6</param>
-    /// <returns>negative error code on error, non negative otherwise #else</returns>
+    /// <param name="saturation">16.16 fixed point saturation correction</param>
+    /// <returns>A negative error code on error, non negative otherwise. If `LIBSWSCALE_VERSION_MAJOR &lt; 7`, returns -1 if not supported.</returns>
     public static int sws_setColorspaceDetails(SwsContext* @c, in int4 @inv_table, int @srcRange, in int4 @table, int @dstRange, int @brightness, int @contrast, int @saturation) => vectors.sws_setColorspaceDetails(@c, @inv_table, @srcRange, @table, @dstRange, @brightness, @contrast, @saturation);
     
     /// <summary>Return the libswscale build-time configuration.</summary>

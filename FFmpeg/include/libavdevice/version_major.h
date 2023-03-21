@@ -25,13 +25,12 @@
  * Libavdevice version macros
  */
 
-#define LIBAVDEVICE_VERSION_MAJOR  59
+#define LIBAVDEVICE_VERSION_MAJOR  60
 
 /**
  * FF_API_* defines may be placed below to indicate public API that will be
  * dropped at a future version bump. The defines themselves are not part of
  * the public API and may change, break or disappear at any time.
  */
-#define FF_API_DEVICE_CAPABILITIES (LIBAVDEVICE_VERSION_MAJOR < 60)
 
 #endif /* AVDEVICE_VERSION_MAJOR_H */
