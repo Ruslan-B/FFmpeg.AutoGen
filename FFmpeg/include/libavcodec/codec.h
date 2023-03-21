@@ -50,12 +50,6 @@
  * avcodec_default_get_buffer2 or avcodec_default_get_encode_buffer.
  */
 #define AV_CODEC_CAP_DR1                 (1 <<  1)
-#if FF_API_FLAG_TRUNCATED
-/**
- * @deprecated Use parsers to always send proper frames.
- */
-#define AV_CODEC_CAP_TRUNCATED           (1 <<  3)
-#endif
 /**
  * Encoder or decoder requires flushing with NULL input at the end in order to
  * give the complete and correct output.
@@ -125,9 +119,6 @@
  * multithreading-capable external libraries.
  */
 #define AV_CODEC_CAP_OTHER_THREADS       (1 << 15)
-#if FF_API_AUTO_THREADS
-#define AV_CODEC_CAP_AUTO_THREADS        AV_CODEC_CAP_OTHER_THREADS
-#endif
 /**
  * Audio encoder supports receiving a different number of samples in each call.
  */
@@ -142,17 +133,6 @@
  * choice for probing.
  */
 #define AV_CODEC_CAP_AVOID_PROBING       (1 << 17)
-
-#if FF_API_UNUSED_CODEC_CAPS
-/**
- * Deprecated and unused. Use AVCodecDescriptor.props instead
- */
-#define AV_CODEC_CAP_INTRA_ONLY       0x40000000
-/**
- * Deprecated and unused. Use AVCodecDescriptor.props instead
- */
-#define AV_CODEC_CAP_LOSSLESS         0x80000000
-#endif
 
 /**
  * Codec is backed by a hardware implementation. Typically used to
@@ -169,9 +149,9 @@
 #define AV_CODEC_CAP_HYBRID              (1 << 19)
 
 /**
- * This codec takes the reordered_opaque field from input AVFrames
- * and returns it in the corresponding field in AVCodecContext after
- * encoding.
+ * This encoder can reorder user opaque values from input AVFrames and return
+ * them with corresponding output packets.
+ * @see AV_CODEC_FLAG_COPY_OPAQUE
  */
 #define AV_CODEC_CAP_ENCODER_REORDERED_OPAQUE (1 << 20)
 
@@ -181,6 +161,14 @@
  * remain pending.
  */
 #define AV_CODEC_CAP_ENCODER_FLUSH   (1 << 21)
+
+/**
+ * The encoder is able to output reconstructed frame data, i.e. raw frames that
+ * would be produced by decoding the encoded bitstream.
+ *
+ * Reconstructed frame output is enabled by the AV_CODEC_FLAG_RECON_FRAME flag.
+ */
+#define AV_CODEC_CAP_ENCODER_RECON_FRAME (1 << 22)
 
 /**
  * AVProfile.

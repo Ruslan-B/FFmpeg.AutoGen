@@ -55,7 +55,7 @@ public enum AVAudioServiceType : int
     @AV_AUDIO_SERVICE_TYPE_NB = 9,
 }
 
-/// <summary>@{</summary>
+/// <summary>Audio channel layout utility functions</summary>
 public enum AVChannel : int
 {
     @AV_CHAN_NONE = -1,
@@ -429,6 +429,10 @@ public enum AVCodecID : int
     @AV_CODEC_ID_JPEGXL = 259,
     @AV_CODEC_ID_QOI = 260,
     @AV_CODEC_ID_PHM = 261,
+    @AV_CODEC_ID_RADIANCE_HDR = 262,
+    @AV_CODEC_ID_WBMP = 263,
+    @AV_CODEC_ID_MEDIA100 = 264,
+    @AV_CODEC_ID_VQC = 265,
     /// <summary>A dummy id pointing at the start of audio codecs</summary>
     @AV_CODEC_ID_FIRST_AUDIO = 65536,
     @AV_CODEC_ID_PCM_S16LE = 65536,
@@ -519,6 +523,7 @@ public enum AVCodecID : int
     @AV_CODEC_ID_ADPCM_IMA_CUNNING = 69680,
     @AV_CODEC_ID_ADPCM_IMA_MOFLEX = 69681,
     @AV_CODEC_ID_ADPCM_IMA_ACORN = 69682,
+    @AV_CODEC_ID_ADPCM_XMD = 69683,
     @AV_CODEC_ID_AMR_NB = 73728,
     @AV_CODEC_ID_AMR_WB = 73729,
     @AV_CODEC_ID_RA_144 = 77824,
@@ -530,6 +535,8 @@ public enum AVCodecID : int
     @AV_CODEC_ID_SDX2_DPCM = 81924,
     @AV_CODEC_ID_GREMLIN_DPCM = 81925,
     @AV_CODEC_ID_DERF_DPCM = 81926,
+    @AV_CODEC_ID_WADY_DPCM = 81927,
+    @AV_CODEC_ID_CBD2_DPCM = 81928,
     @AV_CODEC_ID_MP2 = 86016,
     /// <summary>preferred ID for decoding MPEG audio layer 1, 2 or 3</summary>
     @AV_CODEC_ID_MP3 = 86017,
@@ -629,6 +636,12 @@ public enum AVCodecID : int
     @AV_CODEC_ID_FASTAUDIO = 86110,
     @AV_CODEC_ID_MSNSIREN = 86111,
     @AV_CODEC_ID_DFPWM = 86112,
+    @AV_CODEC_ID_BONK = 86113,
+    @AV_CODEC_ID_MISC4 = 86114,
+    @AV_CODEC_ID_APAC = 86115,
+    @AV_CODEC_ID_FTR = 86116,
+    @AV_CODEC_ID_WAVARC = 86117,
+    @AV_CODEC_ID_RKA = 86118,
     /// <summary>A dummy ID pointing at the start of subtitle codecs.</summary>
     @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
     @AV_CODEC_ID_DVD_SUBTITLE = 94208,
@@ -682,6 +695,10 @@ public enum AVCodecID : int
     @AV_CODEC_ID_FFMETADATA = 135168,
     /// <summary>Passthrough codec, AVFrames wrapped in AVPacket</summary>
     @AV_CODEC_ID_WRAPPED_AVFRAME = 135169,
+    /// <summary>Dummy null video codec, useful mainly for development and debugging. Null encoder/decoder discard all input and never return any output.</summary>
+    @AV_CODEC_ID_VNULL = 135170,
+    /// <summary>Dummy null audio codec, useful mainly for development and debugging. Null encoder/decoder discard all input and never return any output.</summary>
+    @AV_CODEC_ID_ANULL = 135171,
 }
 
 /// <summary>Chromaticity coordinates of the source primaries. These values match the ones defined by ISO/IEC 23091-2_2019 subclause 8.1 and ITU-T H.273.</summary>
@@ -866,13 +883,18 @@ public enum AVDurationEstimationMethod : int
     @AVFMT_DURATION_FROM_BITRATE = 2,
 }
 
+/// <summary>@{</summary>
 public enum AVFieldOrder : int
 {
     @AV_FIELD_UNKNOWN = 0,
     @AV_FIELD_PROGRESSIVE = 1,
+    /// <summary>Top coded_first, top displayed first</summary>
     @AV_FIELD_TT = 2,
+    /// <summary>Bottom coded first, bottom displayed first</summary>
     @AV_FIELD_BB = 3,
+    /// <summary>Top coded first, bottom displayed first</summary>
     @AV_FIELD_TB = 4,
+    /// <summary>Bottom coded first, top displayed first</summary>
     @AV_FIELD_BT = 5,
 }
 
@@ -942,6 +964,8 @@ public enum AVFrameSideDataType : int
     @AV_FRAME_DATA_DOVI_METADATA = 24,
     /// <summary>HDR Vivid dynamic metadata associated with a video frame. The payload is an AVDynamicHDRVivid type and contains information for color volume transform - CUVA 005.1-2021.</summary>
     @AV_FRAME_DATA_DYNAMIC_HDR_VIVID = 25,
+    /// <summary>Ambient viewing environment metadata, as defined by H.274.</summary>
+    @AV_FRAME_DATA_AMBIENT_VIEWING_ENVIRONMENT = 26,
 }
 
 /// <summary>Option for overlapping elliptical pixel selectors in an image.</summary>
@@ -1137,9 +1161,13 @@ public enum AVPacketSideDataType : int
 /// <summary>@{</summary>
 public enum AVPictureStructure : int
 {
+    /// <summary>unknown</summary>
     @AV_PICTURE_STRUCTURE_UNKNOWN = 0,
+    /// <summary>coded as top field</summary>
     @AV_PICTURE_STRUCTURE_TOP_FIELD = 1,
+    /// <summary>coded as bottom field</summary>
     @AV_PICTURE_STRUCTURE_BOTTOM_FIELD = 2,
+    /// <summary>coded as frame</summary>
     @AV_PICTURE_STRUCTURE_FRAME = 3,
 }
 
@@ -1585,8 +1613,40 @@ public enum AVPixelFormat : int
     @AV_PIX_FMT_P416BE = 204,
     /// <summary>interleaved chroma YUV 4:4:4, 48bpp, little-endian</summary>
     @AV_PIX_FMT_P416LE = 205,
+    /// <summary>packed VUYA 4:4:4, 32bpp, VUYAVUYA...</summary>
+    @AV_PIX_FMT_VUYA = 206,
+    /// <summary>IEEE-754 half precision packed RGBA 16:16:16:16, 64bpp, RGBARGBA..., big-endian</summary>
+    @AV_PIX_FMT_RGBAF16BE = 207,
+    /// <summary>IEEE-754 half precision packed RGBA 16:16:16:16, 64bpp, RGBARGBA..., little-endian</summary>
+    @AV_PIX_FMT_RGBAF16LE = 208,
+    /// <summary>packed VUYX 4:4:4, 32bpp, Variant of VUYA where alpha channel is left undefined</summary>
+    @AV_PIX_FMT_VUYX = 209,
+    /// <summary>like NV12, with 12bpp per component, data in the high bits, zeros in the low bits, little-endian</summary>
+    @AV_PIX_FMT_P012LE = 210,
+    /// <summary>like NV12, with 12bpp per component, data in the high bits, zeros in the low bits, big-endian</summary>
+    @AV_PIX_FMT_P012BE = 211,
+    /// <summary>packed YUV 4:2:2 like YUYV422, 24bpp, data in the high bits, zeros in the low bits, big-endian</summary>
+    @AV_PIX_FMT_Y212BE = 212,
+    /// <summary>packed YUV 4:2:2 like YUYV422, 24bpp, data in the high bits, zeros in the low bits, little-endian</summary>
+    @AV_PIX_FMT_Y212LE = 213,
+    /// <summary>packed XVYU 4:4:4, 32bpp, (msb)2X 10V 10Y 10U(lsb), big-endian, variant of Y410 where alpha channel is left undefined</summary>
+    @AV_PIX_FMT_XV30BE = 214,
+    /// <summary>packed XVYU 4:4:4, 32bpp, (msb)2X 10V 10Y 10U(lsb), little-endian, variant of Y410 where alpha channel is left undefined</summary>
+    @AV_PIX_FMT_XV30LE = 215,
+    /// <summary>packed XVYU 4:4:4, 48bpp, data in the high bits, zeros in the low bits, big-endian, variant of Y412 where alpha channel is left undefined</summary>
+    @AV_PIX_FMT_XV36BE = 216,
+    /// <summary>packed XVYU 4:4:4, 48bpp, data in the high bits, zeros in the low bits, little-endian, variant of Y412 where alpha channel is left undefined</summary>
+    @AV_PIX_FMT_XV36LE = 217,
+    /// <summary>IEEE-754 single precision packed RGB 32:32:32, 96bpp, RGBRGB..., big-endian</summary>
+    @AV_PIX_FMT_RGBF32BE = 218,
+    /// <summary>IEEE-754 single precision packed RGB 32:32:32, 96bpp, RGBRGB..., little-endian</summary>
+    @AV_PIX_FMT_RGBF32LE = 219,
+    /// <summary>IEEE-754 single precision packed RGBA 32:32:32:32, 128bpp, RGBARGBA..., big-endian</summary>
+    @AV_PIX_FMT_RGBAF32BE = 220,
+    /// <summary>IEEE-754 single precision packed RGBA 32:32:32:32, 128bpp, RGBARGBA..., little-endian</summary>
+    @AV_PIX_FMT_RGBAF32LE = 221,
     /// <summary>number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions</summary>
-    @AV_PIX_FMT_NB = 206,
+    @AV_PIX_FMT_NB = 222,
 }
 
 /// <summary>Rounding methods.</summary>

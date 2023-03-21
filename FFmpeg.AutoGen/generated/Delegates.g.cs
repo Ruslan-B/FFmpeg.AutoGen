@@ -256,14 +256,6 @@ public unsafe struct AVFilter_activate_func
 }
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVFilter_init_dict (AVFilterContext* @ctx, AVDictionary** @options);
-public unsafe struct AVFilter_init_dict_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVFilter_init_dict_func(AVFilter_init_dict func) => new AVFilter_init_dict_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate int AVFilter_init (AVFilterContext* @ctx);
 public unsafe struct AVFilter_init_func
 {
@@ -599,102 +591,6 @@ public unsafe struct AVIOInterruptCB_callback_func
 {
     public IntPtr Pointer;
     public static implicit operator AVIOInterruptCB_callback_func(AVIOInterruptCB_callback func) => new AVIOInterruptCB_callback_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVOutputFormat_check_bitstream (AVFormatContext* @s, AVStream* @st, AVPacket* @pkt);
-public unsafe struct AVOutputFormat_check_bitstream_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVOutputFormat_check_bitstream_func(AVOutputFormat_check_bitstream func) => new AVOutputFormat_check_bitstream_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVOutputFormat_control_message (AVFormatContext* @s, int @type, void* @data, ulong @data_size);
-public unsafe struct AVOutputFormat_control_message_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVOutputFormat_control_message_func(AVOutputFormat_control_message func) => new AVOutputFormat_control_message_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate void AVOutputFormat_deinit (AVFormatContext* @p0);
-public unsafe struct AVOutputFormat_deinit_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVOutputFormat_deinit_func(AVOutputFormat_deinit func) => new AVOutputFormat_deinit_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVOutputFormat_get_device_list (AVFormatContext* @s, AVDeviceInfoList* @device_list);
-public unsafe struct AVOutputFormat_get_device_list_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVOutputFormat_get_device_list_func(AVOutputFormat_get_device_list func) => new AVOutputFormat_get_device_list_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate void AVOutputFormat_get_output_timestamp (AVFormatContext* @s, int @stream, long* @dts, long* @wall);
-public unsafe struct AVOutputFormat_get_output_timestamp_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVOutputFormat_get_output_timestamp_func(AVOutputFormat_get_output_timestamp func) => new AVOutputFormat_get_output_timestamp_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVOutputFormat_init (AVFormatContext* @p0);
-public unsafe struct AVOutputFormat_init_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVOutputFormat_init_func(AVOutputFormat_init func) => new AVOutputFormat_init_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVOutputFormat_interleave_packet (AVFormatContext* @s, AVPacket* @pkt, int @flush, int @has_packet);
-public unsafe struct AVOutputFormat_interleave_packet_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVOutputFormat_interleave_packet_func(AVOutputFormat_interleave_packet func) => new AVOutputFormat_interleave_packet_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVOutputFormat_query_codec (AVCodecID @id, int @std_compliance);
-public unsafe struct AVOutputFormat_query_codec_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVOutputFormat_query_codec_func(AVOutputFormat_query_codec func) => new AVOutputFormat_query_codec_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVOutputFormat_write_header (AVFormatContext* @p0);
-public unsafe struct AVOutputFormat_write_header_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVOutputFormat_write_header_func(AVOutputFormat_write_header func) => new AVOutputFormat_write_header_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVOutputFormat_write_packet (AVFormatContext* @p0, AVPacket* @pkt);
-public unsafe struct AVOutputFormat_write_packet_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVOutputFormat_write_packet_func(AVOutputFormat_write_packet func) => new AVOutputFormat_write_packet_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVOutputFormat_write_trailer (AVFormatContext* @p0);
-public unsafe struct AVOutputFormat_write_trailer_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVOutputFormat_write_trailer_func(AVOutputFormat_write_trailer func) => new AVOutputFormat_write_trailer_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVOutputFormat_write_uncoded_frame (AVFormatContext* @p0, int @stream_index, AVFrame** @frame, uint @flags);
-public unsafe struct AVOutputFormat_write_uncoded_frame_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVOutputFormat_write_uncoded_frame_func(AVOutputFormat_write_uncoded_frame func) => new AVOutputFormat_write_uncoded_frame_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
 }
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

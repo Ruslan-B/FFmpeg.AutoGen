@@ -27,16 +27,12 @@
  * Libavfilter version macros
  */
 
-#define LIBAVFILTER_VERSION_MAJOR   8
+#define LIBAVFILTER_VERSION_MAJOR   9
 
 /**
  * FF_API_* defines may be placed below to indicate public API that will be
  * dropped at a future version bump. The defines themselves are not part of
  * the public API and may change, break or disappear at any time.
  */
-
-#define FF_API_SWS_PARAM_OPTION             (LIBAVFILTER_VERSION_MAJOR < 9)
-#define FF_API_BUFFERSINK_ALLOC             (LIBAVFILTER_VERSION_MAJOR < 9)
-#define FF_API_PAD_COUNT                    (LIBAVFILTER_VERSION_MAJOR < 9)
 
 #endif /* AVFILTER_VERSION_MAJOR_H */

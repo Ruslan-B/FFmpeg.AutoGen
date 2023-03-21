@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;netstandard2.0;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
     <Description>
       FFmpeg auto generated unsafe bindings for C#/.NET and Mono.
       The Statically Linked implementation is intended for iOS usage, where FFmpeg is linked into the application binary in a static manner.

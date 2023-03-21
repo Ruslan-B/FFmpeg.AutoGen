@@ -1,12 +1,9 @@
-# Important Please do support Ukraine!
-
-[GitHub response to the war in Ukraine](https://github.blog/2022-03-02-our-response-to-the-war-in-ukraine/)<br/>
-GitHub as a company is also donating $100,000 to [Razom](https://razomforukraine.org/) and matching an additional $200,000 of donations from employees to help support relief efforts in the region.
-
+# Important
 **The FFmpeg API is vast and complex and this project exposes it with minimum modifications - support is very limited.
 Please consider to ask *how to* questions on [stackoverflow.com](https://stackoverflow.com/search?tab=newest&q=ffmpeg%20autogen) or in special repository on [github.com](https://github.com/Ruslan-B/FFmpeg.AutoGen.Questions/issues). 
 The community may be able to offer some assistance but you will largely be on your own.
 As another option you can search for a solution in C(lang) as with some effort you can convert it to C#.**
+Here repository with C# converted examples: https://github.com/stjeong/ffmpeg_autogen_cs
 
 ## FFmpeg.AutoGen 
 [![main](https://github.com/Ruslan-B/FFmpeg.AutoGen/actions/workflows/main.yml/badge.svg)](https://github.com/Ruslan-B/FFmpeg.AutoGen/actions/workflows/main.yml)
