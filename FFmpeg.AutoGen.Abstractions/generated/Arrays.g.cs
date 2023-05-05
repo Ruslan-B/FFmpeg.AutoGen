@@ -442,6 +442,28 @@ public unsafe struct ulong8 : IFixedArray<ulong>
     public static implicit operator ulong[](ulong8 @struct) => @struct.ToArray();
 }
 
+public unsafe struct int9 : IFixedArray<int>
+{
+    public static readonly int ArrayLength = 9;
+    public int Length => 9;
+    fixed int _[9];
+    
+    public int this[uint i]
+    {
+        get => _[i];
+        set => _[i] = value;
+    }
+    public int[] ToArray()
+    {
+        var a = new int[9]; for (uint i = 0; i < 9; i++) a[i] = _[i]; return a;
+    }
+    public void UpdateFrom(int[] array)
+    {
+        uint i = 0; foreach(var value in array) { _[i++] = value; if (i >= 9) return; }
+    }
+    public static implicit operator int[](int9 @struct) => @struct.ToArray();
+}
+
 public unsafe struct AVHDRPlusPercentile15 : IFixedArray<AVHDRPlusPercentile>
 {
     public static readonly int ArrayLength = 15;

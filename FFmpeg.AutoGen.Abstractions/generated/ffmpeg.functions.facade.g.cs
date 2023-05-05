@@ -627,6 +627,22 @@ public static unsafe partial class ffmpeg
     /// <summary>Convenience wrapper for av_dict_set that converts the value to a string and stores it.</summary>
     public static int av_dict_set_int(AVDictionary** @pm, string @key, long @value, int @flags) => vectors.av_dict_set_int(@pm, @key, @value, @flags);
     
+    /// <summary>Flip the input matrix horizontally and/or vertically.</summary>
+    /// <param name="matrix">an allocated transformation matrix</param>
+    /// <param name="hflip">whether the matrix should be flipped horizontally</param>
+    /// <param name="vflip">whether the matrix should be flipped vertically</param>
+    public static void av_display_matrix_flip(ref int9 @matrix, int @hflip, int @vflip) => vectors.av_display_matrix_flip(ref @matrix, @hflip, @vflip);
+    
+    /// <summary>Extract the rotation component of the transformation matrix.</summary>
+    /// <param name="matrix">the transformation matrix</param>
+    /// <returns>the angle (in degrees) by which the transformation rotates the frame counterclockwise. The angle will be in range [-180.0, 180.0], or NaN if the matrix is singular.</returns>
+    public static double av_display_rotation_get(in int9 @matrix) => vectors.av_display_rotation_get(@matrix);
+    
+    /// <summary>Initialize a transformation matrix describing a pure clockwise rotation by the specified angle (in degrees).</summary>
+    /// <param name="matrix">an allocated transformation matrix (will be fully overwritten by this function)</param>
+    /// <param name="angle">rotation angle in degrees.</param>
+    public static void av_display_rotation_set(ref int9 @matrix, double @angle) => vectors.av_display_rotation_set(ref @matrix, @angle);
+    
     /// <summary>Returns The AV_DISPOSITION_* flag corresponding to disp or a negative error code if disp does not correspond to a known stream disposition.</summary>
     /// <returns>The AV_DISPOSITION_* flag corresponding to disp or a negative error code if disp does not correspond to a known stream disposition.</returns>
     public static int av_disposition_from_string(string @disp) => vectors.av_disposition_from_string(@disp);
