@@ -89,6 +89,7 @@ internal class Program
         yield return p.Parse("libavutil/audio_fifo.h");
         yield return p.Parse("libavutil/channel_layout.h");
         yield return p.Parse("libavutil/cpu.h");
+        yield return p.Parse("libavutil/display.h");
         yield return p.Parse("libavutil/file.h");
         yield return p.Parse("libavutil/frame.h");
         yield return p.Parse("libavutil/opt.h");
