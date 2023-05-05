@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <PackageId>$(AssemblyName)</PackageId>
-    <Version>5.1.2.1</Version>
+    <Version>5.1.2.3</Version>
     <Authors>Ruslan Balanukhin</Authors>
     <Company>Rationale One</Company>
     <Product>FFmpeg.AutoGen</Product>
