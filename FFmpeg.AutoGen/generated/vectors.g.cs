@@ -662,6 +662,18 @@ public static unsafe partial class vectors
     public static av_dict_set_int_delegate av_dict_set_int;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_display_matrix_flip_delegate(ref int_array9 @matrix, int @hflip, int @vflip);
+    public static av_display_matrix_flip_delegate av_display_matrix_flip;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate double av_display_rotation_get_delegate(in int_array9 @matrix);
+    public static av_display_rotation_get_delegate av_display_rotation_get;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_display_rotation_set_delegate(ref int_array9 @matrix, double @angle);
+    public static av_display_rotation_set_delegate av_display_rotation_set;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_disposition_from_string_delegate(    
     #if NETSTANDARD2_1_OR_GREATER
     [MarshalAs(UnmanagedType.LPUTF8Str)]
