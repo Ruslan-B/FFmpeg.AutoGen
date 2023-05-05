@@ -816,6 +816,24 @@ public static unsafe partial class DynamicallyLoadedBindings
             return vectors.av_dict_set_int(@pm, @key, @value, @flags);
         };
         
+        vectors.av_display_matrix_flip = (ref int_array9 @matrix, int @hflip, int @vflip) =>
+        {
+            vectors.av_display_matrix_flip = FunctionResolver.GetFunctionDelegate<vectors.av_display_matrix_flip_delegate>("avutil", "av_display_matrix_flip", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            vectors.av_display_matrix_flip(ref @matrix, @hflip, @vflip);
+        };
+        
+        vectors.av_display_rotation_get = (in int_array9 @matrix) =>
+        {
+            vectors.av_display_rotation_get = FunctionResolver.GetFunctionDelegate<vectors.av_display_rotation_get_delegate>("avutil", "av_display_rotation_get", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_display_rotation_get(@matrix);
+        };
+        
+        vectors.av_display_rotation_set = (ref int_array9 @matrix, double @angle) =>
+        {
+            vectors.av_display_rotation_set = FunctionResolver.GetFunctionDelegate<vectors.av_display_rotation_set_delegate>("avutil", "av_display_rotation_set", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            vectors.av_display_rotation_set(ref @matrix, @angle);
+        };
+        
         vectors.av_disposition_from_string = (string @disp) =>
         {
             vectors.av_disposition_from_string = FunctionResolver.GetFunctionDelegate<vectors.av_disposition_from_string_delegate>("avformat", "av_disposition_from_string", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
