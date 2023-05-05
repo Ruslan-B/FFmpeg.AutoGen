@@ -901,6 +901,25 @@ public static unsafe partial class StaticallyLinkedBindings
     #endif
     string @key, long @value, int @flags);
     
+    /// <summary>Flip the input matrix horizontally and/or vertically.</summary>
+    /// <param name="matrix">a transformation matrix</param>
+    /// <param name="hflip">whether the matrix should be flipped horizontally</param>
+    /// <param name="vflip">whether the matrix should be flipped vertically</param>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void av_display_matrix_flip(ref int9 @matrix, int @hflip, int @vflip);
+    
+    /// <summary>Extract the rotation component of the transformation matrix.</summary>
+    /// <param name="matrix">the transformation matrix</param>
+    /// <returns>the angle (in degrees) by which the transformation rotates the frame counterclockwise. The angle will be in range [-180.0, 180.0], or NaN if the matrix is singular.</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern double av_display_rotation_get(in int9 @matrix);
+    
+    /// <summary>Initialize a transformation matrix describing a pure clockwise rotation by the specified angle (in degrees).</summary>
+    /// <param name="matrix">a transformation matrix (will be fully overwritten by this function)</param>
+    /// <param name="angle">rotation angle in degrees.</param>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void av_display_rotation_set(ref int9 @matrix, double @angle);
+    
     /// <summary>Returns The AV_DISPOSITION_* flag corresponding to disp or a negative error code if disp does not correspond to a known stream disposition.</summary>
     /// <returns>The AV_DISPOSITION_* flag corresponding to disp or a negative error code if disp does not correspond to a known stream disposition.</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
@@ -5284,6 +5303,9 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_dict_parse_string = av_dict_parse_string;
         vectors.av_dict_set = av_dict_set;
         vectors.av_dict_set_int = av_dict_set_int;
+        vectors.av_display_matrix_flip = av_display_matrix_flip;
+        vectors.av_display_rotation_get = av_display_rotation_get;
+        vectors.av_display_rotation_set = av_display_rotation_set;
         vectors.av_disposition_from_string = av_disposition_from_string;
         vectors.av_disposition_to_string = av_disposition_to_string;
         vectors.av_div_q = av_div_q;
