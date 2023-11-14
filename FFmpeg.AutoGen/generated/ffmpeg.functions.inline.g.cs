@@ -185,6 +185,13 @@ public static unsafe partial class ffmpeg
     }
     // original body hash: uBvsHd8EeFnxDvSdDE1+k5Um29kCuf0aEJhAvDy0wZk=
     
+    /// <summary>Wrapper around av_image_copy() to workaround the limitation that the conversion from uint8_t * const * to const uint8_t * const * is not performed automatically in C.</summary>
+    public static void av_image_copy2(ref byte_ptrArray4 @dst_data, in int_array4 @dst_linesizes, ref byte_ptrArray4 @src_data, in int_array4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height)
+{
+    av_image_copy(dst_data, dst_linesizes, (const uint8_t *const *)src_data, src_linesizes, pix_fmt, width, height);
+}
+    // original body hash: RdaM2zKuF7t0cNJItdh1SZPg9WiOfPpTwty5cHDiZ2A=
+    
     /// <summary>Reinterpret a 64-bit integer as a double.</summary>
     public static double av_int2double(ulong @i)
     {

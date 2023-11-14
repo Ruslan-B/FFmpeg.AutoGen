@@ -433,6 +433,10 @@ public enum AVCodecID : int
     @AV_CODEC_ID_WBMP = 263,
     @AV_CODEC_ID_MEDIA100 = 264,
     @AV_CODEC_ID_VQC = 265,
+    @AV_CODEC_ID_PDV = 266,
+    @AV_CODEC_ID_EVC = 267,
+    @AV_CODEC_ID_RTV1 = 268,
+    @AV_CODEC_ID_VMIX = 269,
     /// <summary>A dummy id pointing at the start of audio codecs</summary>
     @AV_CODEC_ID_FIRST_AUDIO = 65536,
     @AV_CODEC_ID_PCM_S16LE = 65536,
@@ -642,6 +646,8 @@ public enum AVCodecID : int
     @AV_CODEC_ID_FTR = 86116,
     @AV_CODEC_ID_WAVARC = 86117,
     @AV_CODEC_ID_RKA = 86118,
+    @AV_CODEC_ID_AC4 = 86119,
+    @AV_CODEC_ID_OSQ = 86120,
     /// <summary>A dummy ID pointing at the start of subtitle codecs.</summary>
     @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
     @AV_CODEC_ID_DVD_SUBTITLE = 94208,
@@ -685,6 +691,7 @@ public enum AVCodecID : int
     @AV_CODEC_ID_DVD_NAV = 98312,
     @AV_CODEC_ID_TIMED_ID3 = 98313,
     @AV_CODEC_ID_BIN_DATA = 98314,
+    @AV_CODEC_ID_SMPTE_2038 = 98315,
     /// <summary>codec_id is not known (like AV_CODEC_ID_NONE) but lavf should attempt to identify it</summary>
     @AV_CODEC_ID_PROBE = 102400,
     /// <summary>_FAKE_ codec to indicate a raw MPEG-2 TS stream (only used by libavformat)</summary>
@@ -883,7 +890,6 @@ public enum AVDurationEstimationMethod : int
     @AVFMT_DURATION_FROM_BITRATE = 2,
 }
 
-/// <summary>@{</summary>
 public enum AVFieldOrder : int
 {
     @AV_FIELD_UNKNOWN = 0,
@@ -966,6 +972,8 @@ public enum AVFrameSideDataType : int
     @AV_FRAME_DATA_DYNAMIC_HDR_VIVID = 25,
     /// <summary>Ambient viewing environment metadata, as defined by H.274.</summary>
     @AV_FRAME_DATA_AMBIENT_VIEWING_ENVIRONMENT = 26,
+    /// <summary>Provide encoder-specific hinting information about changed/unchanged portions of a frame. It can be used to pass information about which macroblocks can be skipped because they didn&apos;t change from the corresponding ones in the previous frame. This could be useful for applications which know this information in advance to speed up encoding.</summary>
+    @AV_FRAME_DATA_VIDEO_HINT = 27,
 }
 
 /// <summary>Option for overlapping elliptical pixel selectors in an image.</summary>
@@ -1087,7 +1095,7 @@ public enum AVOptionType : int
     @AV_OPT_TYPE_CHLAYOUT = 19,
 }
 
-/// <summary>Types and functions for working with AVPacket. @{</summary>
+/// <summary>Types and functions for working with AVPacketSideData. @{</summary>
 public enum AVPacketSideDataType : int
 {
     /// <summary>An AV_PKT_DATA_PALETTE side data packet contains exactly AVPALETTE_SIZE bytes worth of palette. This side data signals that a new palette is present.</summary>
@@ -1645,8 +1653,20 @@ public enum AVPixelFormat : int
     @AV_PIX_FMT_RGBAF32BE = 220,
     /// <summary>IEEE-754 single precision packed RGBA 32:32:32:32, 128bpp, RGBARGBA..., little-endian</summary>
     @AV_PIX_FMT_RGBAF32LE = 221,
+    /// <summary>interleaved chroma YUV 4:2:2, 24bpp, data in the high bits, big-endian</summary>
+    @AV_PIX_FMT_P212BE = 222,
+    /// <summary>interleaved chroma YUV 4:2:2, 24bpp, data in the high bits, little-endian</summary>
+    @AV_PIX_FMT_P212LE = 223,
+    /// <summary>interleaved chroma YUV 4:4:4, 36bpp, data in the high bits, big-endian</summary>
+    @AV_PIX_FMT_P412BE = 224,
+    /// <summary>interleaved chroma YUV 4:4:4, 36bpp, data in the high bits, little-endian</summary>
+    @AV_PIX_FMT_P412LE = 225,
+    /// <summary>planar GBR 4:4:4:4 56bpp, big-endian</summary>
+    @AV_PIX_FMT_GBRAP14BE = 226,
+    /// <summary>planar GBR 4:4:4:4 56bpp, little-endian</summary>
+    @AV_PIX_FMT_GBRAP14LE = 227,
     /// <summary>number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions</summary>
-    @AV_PIX_FMT_NB = 222,
+    @AV_PIX_FMT_NB = 228,
 }
 
 /// <summary>Rounding methods.</summary>
