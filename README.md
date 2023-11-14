@@ -19,7 +19,7 @@ For the more sophisticated operations please refer to offical [ffmpeg Documentat
 Nuget packages version uses [semantic versioning](https://semver.org/) and in sync with MAJOR and MINOR version of FFmpeg as PATCH incremets does not changing API.
 
 - on Windows:  
-Native ffmpeg libraries are pre bundled in this repository, please note the are GPL(!) libraries. 
+Native ffmpeg libraries are pre bundled in this repository, please note the are **GPL**(!) libraries. 
 The x64 libraries source from [CODEX FFMPEG](https://www.gyan.dev/ffmpeg/builds/).
 Please check to example project it shows how specify path to libraries.  
 
