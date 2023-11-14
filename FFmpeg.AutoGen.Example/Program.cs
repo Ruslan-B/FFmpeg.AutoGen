@@ -4,9 +4,11 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using FFmpeg.AutoGen.Abstractions;
 using FFmpeg.AutoGen.Bindings.DynamicallyLoaded;
+using SkiaSharp;
 
 namespace FFmpeg.AutoGen.Example;
 
@@ -111,7 +113,7 @@ internal class Program
             ? vsd.PixelFormat
             : GetHWPixelFormat(HWDevice);
         var destinationSize = sourceSize;
-        var destinationPixelFormat = AVPixelFormat.AV_PIX_FMT_BGR24;
+        var destinationPixelFormat = AVPixelFormat.@AV_PIX_FMT_BGRA;
         using var vfc = new VideoFrameConverter(sourceSize, sourcePixelFormat, destinationSize, destinationPixelFormat);
 
         var frameNumber = 0;
@@ -119,13 +121,7 @@ internal class Program
         while (vsd.TryDecodeNextFrame(out var frame))
         {
             var convertedFrame = vfc.Convert(frame);
-
-            using (var bitmap = new Bitmap(convertedFrame.width,
-                       convertedFrame.height,
-                       convertedFrame.linesize[0],
-                       PixelFormat.Format24bppRgb,
-                       (IntPtr)convertedFrame.data[0]))
-                bitmap.Save($"frames/frame.{frameNumber:D8}.jpg", ImageFormat.Jpeg);
+            WriteFrame(convertedFrame, frameNumber);
 
             Console.WriteLine($"frame: {frameNumber}");
             frameNumber++;
@@ -154,12 +150,12 @@ internal class Program
     private static unsafe void EncodeImagesToH264()
     {
         var frameFiles = Directory.GetFiles("./frames", "frame.*.jpg").OrderBy(x => x).ToArray();
-        var fistFrameImage = Image.FromFile(frameFiles.First());
+        using var fistFrameImage = ReadFrame(frameFiles.First());
 
         var outputFileName = "frames/out.h264";
         var fps = 25;
-        var sourceSize = fistFrameImage.Size;
-        var sourcePixelFormat = AVPixelFormat.AV_PIX_FMT_BGR24;
+        var sourceSize = new Size(fistFrameImage.Width, fistFrameImage.Height);
+        var sourcePixelFormat = AVPixelFormat.@AV_PIX_FMT_BGRA;
         var destinationSize = sourceSize;
         var destinationPixelFormat = AVPixelFormat.AV_PIX_FMT_YUV420P;
         using var vfc = new VideoFrameConverter(sourceSize, sourcePixelFormat, destinationSize, destinationPixelFormat);
@@ -172,12 +168,8 @@ internal class Program
 
         foreach (var frameFile in frameFiles)
         {
-            byte[] bitmapData;
-
-            using (var frameImage = Image.FromFile(frameFile))
-            using (var frameBitmap = frameImage is Bitmap bitmap ? bitmap : new Bitmap(frameImage))
-                bitmapData = GetBitmapData(frameBitmap);
-
+            using var bitmap = ReadFrame(frameFile);
+            var bitmapData = bitmap.Bytes;
             fixed (byte* pBitmapData = bitmapData)
             {
                 var data = new byte_ptr8 { [0] = pBitmapData };
@@ -200,22 +192,18 @@ internal class Program
         vse.Drain();
     }
 
-    private static byte[] GetBitmapData(Bitmap frameBitmap)
+    private static unsafe void WriteFrame(AVFrame convertedFrame, int frameNumber)
     {
-        var bitmapData = frameBitmap.LockBits(new Rectangle(Point.Empty, frameBitmap.Size),
-            ImageLockMode.ReadOnly,
-            PixelFormat.Format24bppRgb);
+        var imageInfo = new SKImageInfo(convertedFrame.width, convertedFrame.height, SKColorType.Bgra8888, SKAlphaType.Opaque);
+        using var bitmap = new SKBitmap();
+        bitmap.InstallPixels(imageInfo, (IntPtr)convertedFrame.data[0]);
+        using var stream = File.Create($"frames/frame.{frameNumber:D8}.jpg");
+        bitmap.Encode(stream, SKEncodedImageFormat.Jpeg, 90);
+    }
 
-        try
-        {
-            var length = bitmapData.Stride * bitmapData.Height;
-            var data = new byte[length];
-            Marshal.Copy(bitmapData.Scan0, data, 0, length);
-            return data;
-        }
-        finally
-        {
-            frameBitmap.UnlockBits(bitmapData);
-        }
+    private static unsafe SKBitmap ReadFrame(string frameFile)
+    {
+        using var codec = SKCodec.Create(frameFile);
+        return SKBitmap.Decode(codec);
     }
 }
