@@ -204,7 +204,7 @@ internal class FunctionProcessor
     {
         return comment == null
             ? null
-            : string.Join(" ", comment.ParagraphComment.Content.OfType<TextComment>().Select(x => x.Text.Trim()));
+            : string.Join(" ", comment.ParagraphComment.Content.OfType<TextComment>().Select(x => x.Text.Trim()).Where(x => !string.IsNullOrWhiteSpace(x)));
     }
 
     private static string GetSha256(string text)

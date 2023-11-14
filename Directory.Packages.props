@@ -6,7 +6,7 @@
   <ItemGroup>
     <PackageVersion Include="CommandLineParser" Version="2.9.1" />
     <PackageVersion Include="coverlet.collector" Version="6.0.0" />
-    <PackageVersion Include="CppSharp" Version="1.1.5.3168" />
+    <PackageVersion Include="CppSharp" Version="1.0.1" />
     <PackageVersion Include="Microsoft.Net.Compilers.Toolset" Version="4.7.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
