@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <!--<CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>-->
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="CommandLineParser" Version="2.9.1" />
