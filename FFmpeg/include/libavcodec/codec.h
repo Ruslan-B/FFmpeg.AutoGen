@@ -80,6 +80,7 @@
  */
 #define AV_CODEC_CAP_SMALL_LAST_FRAME    (1 <<  6)
 
+#if FF_API_SUBFRAMES
 /**
  * Codec can output multiple frames per AVPacket
  * Normally demuxers return one frame at a time, demuxers which do not do
@@ -92,6 +93,8 @@
  * as a last resort.
  */
 #define AV_CODEC_CAP_SUBFRAMES           (1 <<  8)
+#endif
+
 /**
  * Codec is experimental and is thus avoided in favor of non experimental
  * encoders
@@ -214,7 +217,7 @@ typedef struct AVCodec {
     const uint64_t *channel_layouts;         ///< array of support channel layouts, or NULL if unknown. array is terminated by 0
 #endif
     const AVClass *priv_class;              ///< AVClass for the private context
-    const AVProfile *profiles;              ///< array of recognized profiles, or NULL if unknown, array is terminated by {FF_PROFILE_UNKNOWN}
+    const AVProfile *profiles;              ///< array of recognized profiles, or NULL if unknown, array is terminated by {AV_PROFILE_UNKNOWN}
 
     /**
      * Group name of the codec implementation.

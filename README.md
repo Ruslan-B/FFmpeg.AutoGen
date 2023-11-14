@@ -39,7 +39,7 @@ Normally you need to set static ```ffmpeg.RootPath = ``` with full path to FFmpe
 The bindings generator uses [CppSharp](https://github.com/mono/CppSharp).
 
 Prerequisites:
- - Visual Studio 2019 with C# and C++ desktop development workloads and Windows SDK for desktop.
+ - Visual Studio 2022 with C# and C++ desktop development workloads and Windows SDK for desktop.
 
 Steps to generate:
 - Run ```FFmpeg.AutoGen.CppSharpUnsafeGenerator;```
