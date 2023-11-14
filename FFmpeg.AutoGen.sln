@@ -9,8 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.Example", "F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Solution Items", "0. Solution Items", "{CF48D45D-979F-4574-9E33-A3AC1CB542B5}"
 	ProjectSection(SolutionItems) = preProject
-		.travis.yml = .travis.yml
 		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
 		README.md = README.md
 	EndProjectSection
 EndProject
