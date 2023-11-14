@@ -111,6 +111,10 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_audio_fifo_write(AVAudioFifo* @af, void** @data, int @nb_samples);
     
+    /// <summary>0th order modified bessel function of the first kind.</summary>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern double av_bessel_i0(double @x);
+    
     /// <summary>Append a description of a channel layout to a bprint buffer.</summary>
     [Obsolete("use av_channel_layout_describe()")]
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
@@ -970,6 +974,20 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern AVDynamicHDRPlus* av_dynamic_hdr_plus_create_side_data(AVFrame* @frame);
     
+    /// <summary>Parse the user data registered ITU-T T.35 to AVbuffer (AVDynamicHDRPlus). The T.35 buffer must begin with the application mode, skipping the country code, terminal provider codes, and application identifier.</summary>
+    /// <param name="s">A pointer containing the decoded AVDynamicHDRPlus structure.</param>
+    /// <param name="data">The byte array containing the raw ITU-T T.35 data.</param>
+    /// <param name="size">Size of the data array in bytes.</param>
+    /// <returns>&gt;= 0 on success. Otherwise, returns the appropriate AVERROR.</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_dynamic_hdr_plus_from_t35(AVDynamicHDRPlus* @s, byte* @data, ulong @size);
+    
+    /// <summary>Serialize dynamic HDR10+ metadata to a user data registered ITU-T T.35 buffer, excluding the first 48 bytes of the header, and beginning with the application mode.</summary>
+    /// <param name="s">A pointer containing the decoded AVDynamicHDRPlus structure.</param>
+    /// <returns>&gt;= 0 on success. Otherwise, returns the appropriate AVERROR.</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_dynamic_hdr_plus_to_t35(AVDynamicHDRPlus* @s, byte** @data, ulong* @size);
+    
     /// <summary>Add the pointer to an element to a dynamic array.</summary>
     /// <param name="tab_ptr">Pointer to the array to grow</param>
     /// <param name="nb_ptr">Pointer to the number of elements in the array</param>
@@ -1232,6 +1250,11 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <summary>Remove and free all side data instances of the given type.</summary>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern void av_frame_remove_side_data(AVFrame* @frame, AVFrameSideDataType @type);
+    
+    /// <summary>Ensure the destination frame refers to the same data described by the source frame, either by creating a new reference for each AVBufferRef from src if they differ from those in dst, by allocating new buffers and copying data if src is not reference counted, or by unrefencing it if src is empty.</summary>
+    /// <returns>0 on success, a negative AVERROR on error. On error, dst is unreferenced.</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_frame_replace(AVFrame* @dst, AVFrame* @src);
     
     /// <summary>Returns a string identifying the side data type</summary>
     /// <returns>a string identifying the side data type</returns>
@@ -1510,7 +1533,7 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <param name="index">index in an internal list, starting at 0</param>
     /// <param name="layout">channel layout mask</param>
     /// <param name="name">name of the layout</param>
-    /// <returns>0  if the layout exists,  &lt; 0 if index is beyond the limits</returns>
+    /// <returns>0  if the layout exists, &lt; 0 if index is beyond the limits</returns>
     [Obsolete("use av_channel_layout_standard()")]
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_get_standard_channel_layout(uint @index, ulong* @layout, byte** @name);
@@ -1808,7 +1831,7 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <param name="width">width of the image in pixels</param>
     /// <param name="height">height of the image in pixels</param>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void av_image_copy(ref byte_ptr4 @dst_data, ref int4 @dst_linesizes, in byte_ptr4 @src_data, in int4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
+    public static extern void av_image_copy(ref byte_ptr4 @dst_data, in int4 @dst_linesizes, in byte_ptr4 @src_data, in int4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
     
     /// <summary>Copy image plane from src to dst. That is, copy &quot;height&quot; number of lines of &quot;bytewidth&quot; bytes each. The first byte of each successive line is separated by *_linesize bytes.</summary>
     /// <param name="dst">destination plane to copy to</param>
@@ -1943,7 +1966,7 @@ public static unsafe partial class StaticallyLinkedBindings
     
     /// <summary>Write a packet to an output media file ensuring correct interleaving.</summary>
     /// <param name="s">media file handle</param>
-    /// <param name="pkt">The packet containing the data to be written.  If the packet is reference-counted, this function will take ownership of this reference and unreference it later when it sees fit. If the packet is not reference-counted, libavformat will make a copy. The returned packet will be blank (as if returned from av_packet_alloc()), even on error.  This parameter can be NULL (at any time, not just at the end), to flush the interleaving queues.  Packet&apos;s &quot;stream_index&quot; field must be set to the index of the corresponding stream in &quot;s-&gt;streams&quot;.  The timestamps ( &quot;pts&quot;, &quot;dts&quot;) must be set to correct values in the stream&apos;s timebase (unless the output format is flagged with the AVFMT_NOTIMESTAMPS flag, then they can be set to AV_NOPTS_VALUE). The dts for subsequent packets in one stream must be strictly increasing (unless the output format is flagged with the AVFMT_TS_NONSTRICT, then they merely have to be nondecreasing).  &quot;duration&quot; should also be set if known.</param>
+    /// <param name="pkt">The packet containing the data to be written. If the packet is reference-counted, this function will take ownership of this reference and unreference it later when it sees fit. If the packet is not reference-counted, libavformat will make a copy. The returned packet will be blank (as if returned from av_packet_alloc()), even on error. This parameter can be NULL (at any time, not just at the end), to flush the interleaving queues. Packet&apos;s &quot;stream_index&quot; field must be set to the index of the corresponding stream in &quot;s-&gt;streams&quot;. The timestamps ( &quot;pts&quot;, &quot;dts&quot;) must be set to correct values in the stream&apos;s timebase (unless the output format is flagged with the AVFMT_NOTIMESTAMPS flag, then they can be set to AV_NOPTS_VALUE). The dts for subsequent packets in one stream must be strictly increasing (unless the output format is flagged with the AVFMT_TS_NONSTRICT, then they merely have to be nondecreasing). &quot;duration&quot; should also be set if known.</param>
     /// <returns>0 on success, a negative AVERROR on error.</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_interleaved_write_frame(AVFormatContext* @s, AVPacket* @pkt);
@@ -2430,7 +2453,7 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <summary>Check if given option is set to its default value.</summary>
     /// <param name="obj">AVClass object to check option on</param>
     /// <param name="o">option to be checked</param>
-    /// <returns>&gt;0 when option is set to its default, 0 when option is not set its default,  &lt; 0 on error</returns>
+    /// <returns>&gt;0 when option is set to its default, 0 when option is not set its default, &lt; 0 on error</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_opt_is_set_to_default(void* @obj, AVOption* @o);
     
@@ -2438,7 +2461,7 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <param name="obj">AVClass object to check option on</param>
     /// <param name="name">option name</param>
     /// <param name="search_flags">combination of AV_OPT_SEARCH_*</param>
-    /// <returns>&gt;0 when option is set to its default, 0 when option is not set its default,  &lt; 0 on error</returns>
+    /// <returns>&gt;0 when option is set to its default, 0 when option is not set its default, &lt; 0 on error</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_opt_is_set_to_default_by_name(void* @obj,     
     #if NETSTANDARD2_1_OR_GREATER
@@ -2798,9 +2821,49 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_packet_shrink_side_data(AVPacket* @pkt, AVPacketSideDataType @type, ulong @size);
     
+    /// <summary>Wrap existing data as packet side data.</summary>
+    /// <param name="sd">pointer to an array of side data to which the side data should be added. *sd may be NULL, in which case the array will be initialized</param>
+    /// <param name="nb_sd">pointer to an integer containing the number of entries in the array. The integer value will be increased by 1 on success.</param>
+    /// <param name="type">side data type</param>
+    /// <param name="data">a data array. It must be allocated with the av_malloc() family of functions. The ownership of the data is transferred to the side data array on success</param>
+    /// <param name="size">size of the data array</param>
+    /// <param name="flags">currently unused. Must be zero</param>
+    /// <returns>pointer to freshly allocated side data on success, or NULL otherwise On failure, the side data array is unchanged and the data remains owned by the caller.</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern AVPacketSideData* av_packet_side_data_add(AVPacketSideData** @sd, int* @nb_sd, AVPacketSideDataType @type, void* @data, ulong @size, int @flags);
+    
+    /// <summary>Convenience function to free all the side data stored in an array, and the array itself.</summary>
+    /// <param name="sd">pointer to array of side data to free. Will be set to NULL upon return.</param>
+    /// <param name="nb_sd">pointer to an integer containing the number of entries in the array. Will be set to 0 upon return.</param>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void av_packet_side_data_free(AVPacketSideData** @sd, int* @nb_sd);
+    
+    /// <summary>Get side information from a side data array.</summary>
+    /// <param name="sd">the array from which the side data should be fetched</param>
+    /// <param name="nb_sd">value containing the number of entries in the array.</param>
+    /// <param name="type">desired side information type</param>
+    /// <returns>pointer to side data if present or NULL otherwise</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern AVPacketSideData* av_packet_side_data_get(AVPacketSideData* @sd, int @nb_sd, AVPacketSideDataType @type);
+    
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
     public static extern string av_packet_side_data_name(AVPacketSideDataType @type);
+    
+    /// <summary>Allocate a new packet side data.</summary>
+    /// <param name="type">side data type</param>
+    /// <param name="size">desired side data size</param>
+    /// <param name="flags">currently unused. Must be zero</param>
+    /// <returns>pointer to freshly allocated side data on success, or NULL otherwise.</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern AVPacketSideData* av_packet_side_data_new(AVPacketSideData** @psd, int* @pnb_sd, AVPacketSideDataType @type, ulong @size, int @flags);
+    
+    /// <summary>Remove side data of the given type from a side data array.</summary>
+    /// <param name="sd">the array from which the side data should be removed</param>
+    /// <param name="nb_sd">pointer to an integer containing the number of entries in the array. Will be reduced by the amount of entries removed upon return</param>
+    /// <param name="type">side information type</param>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void av_packet_side_data_remove(AVPacketSideData* @sd, int* @nb_sd, AVPacketSideDataType @type);
     
     /// <summary>Unpack a dictionary from side_data.</summary>
     /// <param name="data">data from side_data</param>
@@ -3197,6 +3260,7 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <param name="data">the side data array. It must be allocated with the av_malloc() family of functions. The ownership of the data is transferred to st.</param>
     /// <param name="size">side information size</param>
     /// <returns>zero on success, a negative AVERROR code on failure. On failure, the stream is unchanged and the data remains owned by the caller.</returns>
+    [Obsolete("use av_packet_side_data_add() with the stream's  \"codecpar side data\"")]
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_stream_add_side_data(AVStream* @st, AVPacketSideDataType @type, byte* @data, ulong @size);
     
@@ -3222,6 +3286,7 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <param name="type">desired side information type</param>
     /// <param name="size">If supplied, *size will be set to the size of the side data or to zero if the desired side data is not present.</param>
     /// <returns>pointer to data if present or NULL otherwise</returns>
+    [Obsolete("use av_packet_side_data_get() with the stream's  \"codecpar side data\"")]
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern byte* av_stream_get_side_data(AVStream* @stream, AVPacketSideDataType @type, ulong* @size);
     
@@ -3230,6 +3295,7 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <param name="type">desired side information type</param>
     /// <param name="size">side information size</param>
     /// <returns>pointer to fresh allocated data or NULL otherwise</returns>
+    [Obsolete("use av_packet_side_data_new() with the stream's  \"codecpar side data\"")]
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern byte* av_stream_new_side_data(AVStream* @stream, AVPacketSideDataType @type, ulong @size);
     
@@ -3450,7 +3516,7 @@ public static unsafe partial class StaticallyLinkedBindings
     
     /// <summary>Write a packet to an output media file.</summary>
     /// <param name="s">media file handle</param>
-    /// <param name="pkt">The packet containing the data to be written. Note that unlike av_interleaved_write_frame(), this function does not take ownership of the packet passed to it (though some muxers may make an internal reference to the input packet).  This parameter can be NULL (at any time, not just at the end), in order to immediately flush data buffered within the muxer, for muxers that buffer up data internally before writing it to the output.  Packet&apos;s &quot;stream_index&quot; field must be set to the index of the corresponding stream in &quot;s-&gt;streams&quot;.  The timestamps ( &quot;pts&quot;, &quot;dts&quot;) must be set to correct values in the stream&apos;s timebase (unless the output format is flagged with the AVFMT_NOTIMESTAMPS flag, then they can be set to AV_NOPTS_VALUE). The dts for subsequent packets passed to this function must be strictly increasing when compared in their respective timebases (unless the output format is flagged with the AVFMT_TS_NONSTRICT, then they merely have to be nondecreasing). &quot;duration&quot;) should also be set if known.</param>
+    /// <param name="pkt">The packet containing the data to be written. Note that unlike av_interleaved_write_frame(), this function does not take ownership of the packet passed to it (though some muxers may make an internal reference to the input packet). This parameter can be NULL (at any time, not just at the end), in order to immediately flush data buffered within the muxer, for muxers that buffer up data internally before writing it to the output. Packet&apos;s &quot;stream_index&quot; field must be set to the index of the corresponding stream in &quot;s-&gt;streams&quot;. The timestamps ( &quot;pts&quot;, &quot;dts&quot;) must be set to correct values in the stream&apos;s timebase (unless the output format is flagged with the AVFMT_NOTIMESTAMPS flag, then they can be set to AV_NOPTS_VALUE). The dts for subsequent packets passed to this function must be strictly increasing when compared in their respective timebases (unless the output format is flagged with the AVFMT_TS_NONSTRICT, then they merely have to be nondecreasing). &quot;duration&quot;) should also be set if known.</param>
     /// <returns>&lt; 0 on error, = 0 if OK, 1 if flushed and there is no more data to flush</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_write_frame(AVFormatContext* @s, AVPacket* @pkt);
@@ -3481,7 +3547,7 @@ public static unsafe partial class StaticallyLinkedBindings
     public static extern int av_write_uncoded_frame(AVFormatContext* @s, int @stream_index, AVFrame* @frame);
     
     /// <summary>Test whether a muxer supports uncoded frame.</summary>
-    /// <returns>&gt;=0 if an uncoded frame can be written to that muxer and stream,  &lt; 0 if not</returns>
+    /// <returns>&gt;=0 if an uncoded frame can be written to that muxer and stream, &lt; 0 if not</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_write_uncoded_frame_query(AVFormatContext* @s, int @stream_index);
     
@@ -3688,7 +3754,7 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <summary>Initialize the AVCodecContext to use the given AVCodec. Prior to using this function the context has to be allocated with avcodec_alloc_context3().</summary>
     /// <param name="avctx">The context to initialize.</param>
     /// <param name="codec">The codec to open this context for. If a non-NULL codec has been previously passed to avcodec_alloc_context3() or for this context, then this parameter MUST be either NULL or equal to the previously passed codec.</param>
-    /// <param name="options">A dictionary filled with AVCodecContext and codec-private options. On return this object will be filled with options that were not found.</param>
+    /// <param name="options">A dictionary filled with AVCodecContext and codec-private options, which are set on top of the options already set in avctx, can be NULL. On return this object will be filled with options that were not found in the avctx codec context.</param>
     /// <returns>zero on success, a negative value on error</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int avcodec_open2(AVCodecContext* @avctx, AVCodec* @codec, AVDictionary** @options);
@@ -4499,7 +4565,7 @@ public static unsafe partial class StaticallyLinkedBindings
     
     /// <summary>Perform one step of the protocol handshake to accept a new client. This function must be called on a client returned by avio_accept() before using it as a read/write context. It is separate from avio_accept() because it may block. A step of the handshake is defined by places where the application may decide to change the proceedings. For example, on a protocol with a request header and a reply header, each one can constitute a step because the application may use the parameters from the request to change parameters in the reply; or each individual chunk of the request can constitute a step. If the handshake is already finished, avio_handshake() does nothing and returns 0 immediately.</summary>
     /// <param name="c">the client context to perform the handshake on</param>
-    /// <returns>0   on a complete and successful handshake &gt; 0 if the handshake progressed, but is not complete  &lt; 0 for an AVERROR code</returns>
+    /// <returns>0   on a complete and successful handshake &gt; 0 if the handshake progressed, but is not complete &lt; 0 for an AVERROR code</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int avio_handshake(AVIOContext* @c);
     
@@ -5184,6 +5250,7 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_audio_fifo_size = av_audio_fifo_size;
         vectors.av_audio_fifo_space = av_audio_fifo_space;
         vectors.av_audio_fifo_write = av_audio_fifo_write;
+        vectors.av_bessel_i0 = av_bessel_i0;
         vectors.av_bprint_channel_layout = av_bprint_channel_layout;
         vectors.av_bsf_alloc = av_bsf_alloc;
         vectors.av_bsf_flush = av_bsf_flush;
@@ -5312,6 +5379,8 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_dump_format = av_dump_format;
         vectors.av_dynamic_hdr_plus_alloc = av_dynamic_hdr_plus_alloc;
         vectors.av_dynamic_hdr_plus_create_side_data = av_dynamic_hdr_plus_create_side_data;
+        vectors.av_dynamic_hdr_plus_from_t35 = av_dynamic_hdr_plus_from_t35;
+        vectors.av_dynamic_hdr_plus_to_t35 = av_dynamic_hdr_plus_to_t35;
         vectors.av_dynarray_add = av_dynarray_add;
         vectors.av_dynarray_add_nofree = av_dynarray_add_nofree;
         vectors.av_dynarray2_add = av_dynarray2_add;
@@ -5351,6 +5420,7 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_frame_new_side_data_from_buf = av_frame_new_side_data_from_buf;
         vectors.av_frame_ref = av_frame_ref;
         vectors.av_frame_remove_side_data = av_frame_remove_side_data;
+        vectors.av_frame_replace = av_frame_replace;
         vectors.av_frame_side_data_name = av_frame_side_data_name;
         vectors.av_frame_unref = av_frame_unref;
         vectors.av_free = av_free;
@@ -5540,7 +5610,12 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_packet_ref = av_packet_ref;
         vectors.av_packet_rescale_ts = av_packet_rescale_ts;
         vectors.av_packet_shrink_side_data = av_packet_shrink_side_data;
+        vectors.av_packet_side_data_add = av_packet_side_data_add;
+        vectors.av_packet_side_data_free = av_packet_side_data_free;
+        vectors.av_packet_side_data_get = av_packet_side_data_get;
         vectors.av_packet_side_data_name = av_packet_side_data_name;
+        vectors.av_packet_side_data_new = av_packet_side_data_new;
+        vectors.av_packet_side_data_remove = av_packet_side_data_remove;
         vectors.av_packet_unpack_dictionary = av_packet_unpack_dictionary;
         vectors.av_packet_unref = av_packet_unref;
         vectors.av_parse_cpu_caps = av_parse_cpu_caps;
