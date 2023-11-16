@@ -7,7 +7,6 @@ Here repository with C# converted examples: https://github.com/stjeong/ffmpeg_au
 
 ## FFmpeg.AutoGen 
 [![main](https://github.com/Ruslan-B/FFmpeg.AutoGen/actions/workflows/main.yml/badge.svg)](https://github.com/Ruslan-B/FFmpeg.AutoGen/actions/workflows/main.yml)
-[![travis](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.svg)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
 [![nuget](https://img.shields.io/nuget/v/FFmpeg.AutoGen.svg)](https://www.nuget.org/packages/FFmpeg.AutoGen/)
 
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.
