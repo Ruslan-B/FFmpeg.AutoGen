@@ -1,22 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <PlatformTarget>x64</PlatformTarget>
+    <NoWarn>8002</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="CppSharp" Version="1.0.1" />
+    <PackageReference Include="CommandLineParser" />
+    <PackageReference Include="CppSharp" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FFmpeg.AutoGen.ClangMacroParser\FFmpeg.AutoGen.ClangMacroParser.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="Microsoft.Net.Compilers.Toolset" Version="4.2.0" />
   </ItemGroup>
 
 </Project>

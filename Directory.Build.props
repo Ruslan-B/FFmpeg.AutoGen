@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <PackageId>$(AssemblyName)</PackageId>
-    <Version>6.0.0.2</Version>
+    <Version>6.1.0</Version>
     <Authors>Ruslan Balanukhin</Authors>
     <Company>Rationale One</Company>
     <Product>FFmpeg.AutoGen</Product>
@@ -16,7 +16,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <!--<PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>-->
     <PublicSign>true</PublicSign>
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
@@ -30,9 +29,5 @@
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LICENSE.txt" Link="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="3.*" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.*" PrivateAssets="all" />
-  </ItemGroup>
+  
 </Project>

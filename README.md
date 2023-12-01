@@ -7,7 +7,6 @@ Here repository with C# converted examples: https://github.com/stjeong/ffmpeg_au
 
 ## FFmpeg.AutoGen 
 [![main](https://github.com/Ruslan-B/FFmpeg.AutoGen/actions/workflows/main.yml/badge.svg)](https://github.com/Ruslan-B/FFmpeg.AutoGen/actions/workflows/main.yml)
-[![travis](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen.svg)](https://travis-ci.org/Ruslan-B/FFmpeg.AutoGen)
 [![nuget](https://img.shields.io/nuget/v/FFmpeg.AutoGen.svg)](https://www.nuget.org/packages/FFmpeg.AutoGen/)
 
 FFmpeg auto generated unsafe bindings for C#/.NET and Mono.
@@ -19,7 +18,7 @@ For the more sophisticated operations please refer to offical [ffmpeg Documentat
 Nuget packages version uses [semantic versioning](https://semver.org/) and in sync with MAJOR and MINOR version of FFmpeg as PATCH incremets does not changing API.
 
 - on Windows:  
-Native ffmpeg libraries are pre bundled in this repository, please note the are GPL(!) libraries. 
+Native ffmpeg libraries are pre bundled in this repository, please note the are **GPL**(!) libraries. 
 The x64 libraries source from [CODEX FFMPEG](https://www.gyan.dev/ffmpeg/builds/).
 Please check to example project it shows how specify path to libraries.  
 
@@ -39,7 +38,7 @@ Normally you need to set static ```ffmpeg.RootPath = ``` with full path to FFmpe
 The bindings generator uses [CppSharp](https://github.com/mono/CppSharp).
 
 Prerequisites:
- - Visual Studio 2019 with C# and C++ desktop development workloads and Windows SDK for desktop.
+ - Visual Studio 2022 with C# and C++ desktop development workloads and Windows SDK for desktop.
 
 Steps to generate:
 - Run ```FFmpeg.AutoGen.CppSharpUnsafeGenerator;```

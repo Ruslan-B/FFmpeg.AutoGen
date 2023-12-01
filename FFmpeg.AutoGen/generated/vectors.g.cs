@@ -66,6 +66,10 @@ public static unsafe partial class vectors
     public static av_audio_fifo_write_delegate av_audio_fifo_write;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate double av_bessel_i0_delegate(double @x);
+    public static av_bessel_i0_delegate av_bessel_i0;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_bprint_channel_layout_delegate(AVBPrint* @bp, int @nb_channels, ulong @channel_layout);
     public static av_bprint_channel_layout_delegate av_bprint_channel_layout;
     
@@ -711,6 +715,14 @@ public static unsafe partial class vectors
     public static av_dynamic_hdr_plus_create_side_data_delegate av_dynamic_hdr_plus_create_side_data;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_dynamic_hdr_plus_from_t35_delegate(AVDynamicHDRPlus* @s, byte* @data, ulong @size);
+    public static av_dynamic_hdr_plus_from_t35_delegate av_dynamic_hdr_plus_from_t35;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_dynamic_hdr_plus_to_t35_delegate(AVDynamicHDRPlus* @s, byte** @data, ulong* @size);
+    public static av_dynamic_hdr_plus_to_t35_delegate av_dynamic_hdr_plus_to_t35;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_dynarray_add_delegate(void* @tab_ptr, int* @nb_ptr, void* @elem);
     public static av_dynarray_add_delegate av_dynarray_add;
     
@@ -895,6 +907,10 @@ public static unsafe partial class vectors
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_frame_remove_side_data_delegate(AVFrame* @frame, AVFrameSideDataType @type);
     public static av_frame_remove_side_data_delegate av_frame_remove_side_data;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_frame_replace_delegate(AVFrame* @dst, AVFrame* @src);
+    public static av_frame_replace_delegate av_frame_replace;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
@@ -1285,7 +1301,7 @@ public static unsafe partial class vectors
     public static av_image_check_size2_delegate av_image_check_size2;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void av_image_copy_delegate(ref byte_ptrArray4 @dst_data, ref int_array4 @dst_linesizes, in byte_ptrArray4 @src_data, in int_array4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
+    public delegate void av_image_copy_delegate(ref byte_ptrArray4 @dst_data, in int_array4 @dst_linesizes, in byte_ptrArray4 @src_data, in int_array4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height);
     public static av_image_copy_delegate av_image_copy;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -2057,9 +2073,29 @@ public static unsafe partial class vectors
     public static av_packet_shrink_side_data_delegate av_packet_shrink_side_data;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVPacketSideData* av_packet_side_data_add_delegate(AVPacketSideData** @sd, int* @nb_sd, AVPacketSideDataType @type, void* @data, ulong @size, int @flags);
+    public static av_packet_side_data_add_delegate av_packet_side_data_add;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_packet_side_data_free_delegate(AVPacketSideData** @sd, int* @nb_sd);
+    public static av_packet_side_data_free_delegate av_packet_side_data_free;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVPacketSideData* av_packet_side_data_get_delegate(AVPacketSideData* @sd, int @nb_sd, AVPacketSideDataType @type);
+    public static av_packet_side_data_get_delegate av_packet_side_data_get;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
     public delegate string av_packet_side_data_name_delegate(AVPacketSideDataType @type);
     public static av_packet_side_data_name_delegate av_packet_side_data_name;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVPacketSideData* av_packet_side_data_new_delegate(AVPacketSideData** @psd, int* @pnb_sd, AVPacketSideDataType @type, ulong @size, int @flags);
+    public static av_packet_side_data_new_delegate av_packet_side_data_new;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_packet_side_data_remove_delegate(AVPacketSideData* @sd, int* @nb_sd, AVPacketSideDataType @type);
+    public static av_packet_side_data_remove_delegate av_packet_side_data_remove;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_packet_unpack_dictionary_delegate(byte* @data, ulong @size, AVDictionary** @dict);
