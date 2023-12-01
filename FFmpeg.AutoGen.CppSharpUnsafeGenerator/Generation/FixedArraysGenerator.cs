@@ -65,11 +65,11 @@ internal sealed class FixedArraysGenerator : GeneratorBase<FixedArrayDefinition>
 
         WriteLine($"public {elementType}[] ToArray()");
         using (BeginBlock())
-            WriteLine($"var a = new {elementType}[{length}]; for (uint i = 0; i < {length}; i++) a[i] = _[i]; return a;");
+            WriteLine(PrimitiveFixedArraysGeneratorHelper.GetBlockOfToArray(elementType, length));
 
         WriteLine($"public void UpdateFrom({elementType}[] array)");
         using (BeginBlock())
-            WriteLine($"uint i = 0; foreach(var value in array) {{ _[i++] = value; if (i >= {length}) return; }}");
+            WriteLine(PrimitiveFixedArraysGeneratorHelper.GetBlockOfUpdateFrom(elementType, length));
     }
 
     private void WriteComplexFixedArray(string elementType, int length)
