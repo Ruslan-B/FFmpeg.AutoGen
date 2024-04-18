@@ -184,7 +184,7 @@ public static unsafe partial class ffmpeg
         return (uint)@f;
     }
     // original body hash: uBvsHd8EeFnxDvSdDE1+k5Um29kCuf0aEJhAvDy0wZk=
-
+    
     /// <summary>Wrapper around av_frame_side_data_get_c() to workaround the limitation that for any type T the conversion from T * const * to const T * const * is not performed automatically in C.</summary>
     public static AVFrameSideData* av_frame_side_data_get(AVFrameSideData** @sd, int @nb_sd, AVFrameSideDataType @type)
     {
