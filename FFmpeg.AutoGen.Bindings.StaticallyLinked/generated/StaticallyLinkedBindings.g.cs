@@ -115,11 +115,6 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern double av_bessel_i0(double @x);
     
-    /// <summary>Append a description of a channel layout to a bprint buffer.</summary>
-    [Obsolete("use av_channel_layout_describe()")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void av_bprint_channel_layout(AVBPrint* @bp, int @nb_channels, ulong @channel_layout);
-    
     /// <summary>Allocate a context for a given bitstream filter. The caller must fill in the context parameters as described in the documentation and then call av_bsf_init() before sending any data to the filter.</summary>
     /// <param name="filter">the filter for which to allocate an instance.</param>
     /// <param name="ctx">a pointer into which the pointer to the newly-allocated context will be written. It must be freed with av_bsf_free() after the filtering is done.</param>
@@ -332,12 +327,14 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_buffersink_get_ch_layout(AVFilterContext* @ctx, AVChannelLayout* @ch_layout);
     
-    [Obsolete()]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern ulong av_buffersink_get_channel_layout(AVFilterContext* @ctx);
-    
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_buffersink_get_channels(AVFilterContext* @ctx);
+    
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern AVColorRange av_buffersink_get_color_range(AVFilterContext* @ctx);
+    
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern AVColorSpace av_buffersink_get_colorspace(AVFilterContext* @ctx);
     
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_buffersink_get_format(AVFilterContext* @ctx);
@@ -504,6 +501,13 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_channel_layout_copy(AVChannelLayout* @dst, AVChannelLayout* @src);
     
+    /// <summary>Initialize a custom channel layout with the specified number of channels. The channel map will be allocated and the designation of all channels will be set to AV_CHAN_UNKNOWN.</summary>
+    /// <param name="channel_layout">the layout structure to be initialized</param>
+    /// <param name="nb_channels">the number of channels</param>
+    /// <returns>0 on success AVERROR(EINVAL) if the number of channels &lt; = 0 AVERROR(ENOMEM) if the channel map could not be allocated</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_channel_layout_custom_init(AVChannelLayout* @channel_layout, int @nb_channels);
+    
     /// <summary>Get the default channel layout for a given number of channels.</summary>
     /// <param name="ch_layout">the layout structure to be initialized</param>
     /// <param name="nb_channels">number of channels</param>
@@ -523,11 +527,6 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_channel_layout_describe_bprint(AVChannelLayout* @channel_layout, AVBPrint* @bp);
     
-    /// <summary>Get the channel with the given index in channel_layout.</summary>
-    [Obsolete("use av_channel_layout_channel_from_index()")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern ulong av_channel_layout_extract_channel(ulong @channel_layout, int @index);
-    
     /// <summary>Initialize a native channel layout from a bitmask indicating which channels are present.</summary>
     /// <param name="channel_layout">the layout structure to be initialized</param>
     /// <param name="mask">bitmask describing the channel layout</param>
@@ -535,10 +534,10 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_channel_layout_from_mask(AVChannelLayout* @channel_layout, ulong @mask);
     
-    /// <summary>Initialize a channel layout from a given string description. The input string can be represented by: - the formal channel layout name (returned by av_channel_layout_describe()) - single or multiple channel names (returned by av_channel_name(), eg. &quot;FL&quot;, or concatenated with &quot;+&quot;, each optionally containing a custom name after a &quot;&quot;, eg. &quot;FL+FR+LFE&quot;) - a decimal or hexadecimal value of a native channel layout (eg. &quot;4&quot; or &quot;0x4&quot;) - the number of channels with default layout (eg. &quot;4c&quot;) - the number of unordered channels (eg. &quot;4C&quot; or &quot;4 channels&quot;) - the ambisonic order followed by optional non-diegetic channels (eg. &quot;ambisonic 2+stereo&quot;)</summary>
-    /// <param name="channel_layout">input channel layout</param>
+    /// <summary>Initialize a channel layout from a given string description. The input string can be represented by: - the formal channel layout name (returned by av_channel_layout_describe()) - single or multiple channel names (returned by av_channel_name(), eg. &quot;FL&quot;, or concatenated with &quot;+&quot;, each optionally containing a custom name after a &quot;&quot;, eg. &quot;FL+FR+LFE&quot;) - a decimal or hexadecimal value of a native channel layout (eg. &quot;4&quot; or &quot;0x4&quot;) - the number of channels with default layout (eg. &quot;4c&quot;) - the number of unordered channels (eg. &quot;4C&quot; or &quot;4 channels&quot;) - the ambisonic order followed by optional non-diegetic channels (eg. &quot;ambisonic 2+stereo&quot;) On error, the channel layout will remain uninitialized, but not necessarily untouched.</summary>
+    /// <param name="channel_layout">uninitialized channel layout for the result</param>
     /// <param name="str">string describing the channel layout</param>
-    /// <returns>0 channel layout was detected, AVERROR_INVALIDATATA otherwise</returns>
+    /// <returns>0 on success parsing the channel layout AVERROR(EINVAL) if an invalid channel layout string was provided AVERROR(ENOMEM) if there was not enough memory</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_channel_layout_from_string(AVChannelLayout* @channel_layout,     
     #if NETSTANDARD2_1_OR_GREATER
@@ -567,6 +566,14 @@ public static unsafe partial class StaticallyLinkedBindings
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @name);
+    
+    /// <summary>Change the AVChannelOrder of a channel layout.</summary>
+    /// <param name="channel_layout">channel layout which will be changed</param>
+    /// <param name="order">the desired channel layout order</param>
+    /// <param name="flags">a combination of AV_CHANNEL_LAYOUT_RETYPE_FLAG_* constants</param>
+    /// <returns>0 if the conversion was successful and lossless or if the channel layout was already in the desired order &gt;0 if the conversion was successful but lossy AVERROR(ENOSYS) if the conversion was not possible (or would be lossy and AV_CHANNEL_LAYOUT_RETYPE_FLAG_LOSSLESS was specified) AVERROR(EINVAL), AVERROR(ENOMEM) on error</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_channel_layout_retype(AVChannelLayout* @channel_layout, AVChannelOrder @order, int @flags);
     
     /// <summary>Iterate over all standard channel layouts.</summary>
     /// <param name="opaque">a pointer where libavutil will store the iteration state. Must point to NULL to start the iteration.</param>
@@ -984,6 +991,8 @@ public static unsafe partial class StaticallyLinkedBindings
     
     /// <summary>Serialize dynamic HDR10+ metadata to a user data registered ITU-T T.35 buffer, excluding the first 48 bytes of the header, and beginning with the application mode.</summary>
     /// <param name="s">A pointer containing the decoded AVDynamicHDRPlus structure.</param>
+    /// <param name="data">A pointer to pointer to a byte buffer to be filled with the serialized metadata. If *data is NULL, a buffer be will be allocated and a pointer to it stored in its place. The caller assumes ownership of the buffer. May be NULL, in which case the function will only store the required buffer size in *size.</param>
+    /// <param name="size">A pointer to a size to be set to the returned buffer&apos;s size. If *data is not NULL, *size must contain the size of the input buffer. May be NULL only if *data is NULL.</param>
     /// <returns>&gt;= 0 on success. Otherwise, returns the appropriate AVERROR.</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_dynamic_hdr_plus_to_t35(AVDynamicHDRPlus* @s, byte** @data, ulong* @size);
@@ -1127,25 +1136,9 @@ public static unsafe partial class StaticallyLinkedBindings
     
     /// <summary>Returns the method used to set ctx-&gt;duration.</summary>
     /// <returns>AVFMT_DURATION_FROM_PTS, AVFMT_DURATION_FROM_STREAM, or AVFMT_DURATION_FROM_BITRATE.</returns>
+    [Obsolete("duration_estimation_method is public and can be read directly.")]
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern AVDurationEstimationMethod av_fmt_ctx_get_duration_estimation_method(AVFormatContext* @ctx);
-    
-    /// <summary>Open a file using a UTF-8 filename. The API of this function matches POSIX fopen(), errors are returned through errno.</summary>
-    [Obsolete("Avoid using it, as on Windows, the FILE* allocated by this function may be allocated with a different CRT than the caller who uses the FILE*. No replacement provided in public API.")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern _iobuf* av_fopen_utf8(    
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @path,     
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @mode);
     
     /// <summary>Disables cpu detection and forces the specified flags. -1 is a special case that disables forcing of specific flags.</summary>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
@@ -1256,11 +1249,44 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_frame_replace(AVFrame* @dst, AVFrame* @src);
     
+    /// <summary>Add a new side data entry to an array based on existing side data, taking a reference towards the contained AVBufferRef.</summary>
+    /// <param name="sd">pointer to array of side data to which to add another entry, or to NULL in order to start a new array.</param>
+    /// <param name="nb_sd">pointer to an integer containing the number of entries in the array.</param>
+    /// <param name="src">side data to be cloned, with a new reference utilized for the buffer.</param>
+    /// <param name="flags">Some combination of AV_FRAME_SIDE_DATA_FLAG_* flags, or 0.</param>
+    /// <returns>negative error code on failure, &gt;=0 on success. In case of AV_FRAME_SIDE_DATA_FLAG_UNIQUE being set, entries of matching AVFrameSideDataType will be removed before the addition is attempted.</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_frame_side_data_clone(AVFrameSideData*** @sd, int* @nb_sd, AVFrameSideData* @src, uint @flags);
+    
+    /// <summary>Free all side data entries and their contents, then zeroes out the values which the pointers are pointing to.</summary>
+    /// <param name="sd">pointer to array of side data to free. Will be set to NULL upon return.</param>
+    /// <param name="nb_sd">pointer to an integer containing the number of entries in the array. Will be set to 0 upon return.</param>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void av_frame_side_data_free(AVFrameSideData*** @sd, int* @nb_sd);
+    
+    /// <summary>Get a side data entry of a specific type from an array.</summary>
+    /// <param name="sd">array of side data.</param>
+    /// <param name="nb_sd">integer containing the number of entries in the array.</param>
+    /// <param name="type">type of side data to be queried</param>
+    /// <returns>a pointer to the side data of a given type on success, NULL if there is no side data with such type in this set.</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern AVFrameSideData* av_frame_side_data_get_c(AVFrameSideData** @sd, int @nb_sd, AVFrameSideDataType @type);
+    
     /// <summary>Returns a string identifying the side data type</summary>
     /// <returns>a string identifying the side data type</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
     public static extern string av_frame_side_data_name(AVFrameSideDataType @type);
+    
+    /// <summary>Add new side data entry to an array.</summary>
+    /// <param name="sd">pointer to array of side data to which to add another entry, or to NULL in order to start a new array.</param>
+    /// <param name="nb_sd">pointer to an integer containing the number of entries in the array.</param>
+    /// <param name="type">type of the added side data</param>
+    /// <param name="size">size of the side data</param>
+    /// <param name="flags">Some combination of AV_FRAME_SIDE_DATA_FLAG_* flags, or 0.</param>
+    /// <returns>newly added side data on success, NULL on error. In case of AV_FRAME_SIDE_DATA_FLAG_UNIQUE being set, entries of matching AVFrameSideDataType will be removed before the addition is attempted.</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern AVFrameSideData* av_frame_side_data_new(AVFrameSideData*** @sd, int* @nb_sd, AVFrameSideDataType @type, ulong @size, uint @flags);
     
     /// <summary>Unreference all the buffers referenced by frame and reset the frame fields.</summary>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
@@ -1318,83 +1344,15 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_get_bytes_per_sample(AVSampleFormat @sample_fmt);
     
-    /// <summary>Get the description of a given channel.</summary>
-    /// <param name="channel">a channel layout with a single channel</param>
-    /// <returns>channel description on success, NULL on error</returns>
-    [Obsolete("use av_channel_description()")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
-    public static extern string av_get_channel_description(ulong @channel);
-    
-    /// <summary>Return a channel layout id that matches name, or 0 if no match is found.</summary>
-    [Obsolete("use av_channel_layout_from_string()")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern ulong av_get_channel_layout(    
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name);
-    
-    /// <summary>Get the index of a channel in channel_layout.</summary>
-    /// <param name="channel_layout">channel layout bitset</param>
-    /// <param name="channel">a channel layout describing exactly one channel which must be present in channel_layout.</param>
-    /// <returns>index of channel in channel_layout on success, a negative AVERROR on error.</returns>
-    [Obsolete("use av_channel_layout_index_from_channel()")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int av_get_channel_layout_channel_index(ulong @channel_layout, ulong @channel);
-    
-    /// <summary>Return the number of channels in the channel layout.</summary>
-    [Obsolete("use AVChannelLayout.nb_channels")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int av_get_channel_layout_nb_channels(ulong @channel_layout);
-    
-    /// <summary>Return a description of a channel layout. If nb_channels is &lt;= 0, it is guessed from the channel_layout.</summary>
-    /// <param name="buf">put here the string containing the channel layout</param>
-    /// <param name="buf_size">size in bytes of the buffer</param>
-    /// <param name="nb_channels">number of channels</param>
-    /// <param name="channel_layout">channel layout bitset</param>
-    [Obsolete("use av_channel_layout_describe()")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void av_get_channel_layout_string(byte* @buf, int @buf_size, int @nb_channels, ulong @channel_layout);
-    
-    /// <summary>Get the name of a given channel.</summary>
-    /// <returns>channel name on success, NULL on error.</returns>
-    [Obsolete("use av_channel_name()")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
-    public static extern string av_get_channel_name(ulong @channel);
-    
     /// <summary>Return the flags which specify extensions supported by the CPU. The returned value is affected by av_force_cpu_flags() if that was used before. So av_get_cpu_flags() can easily be used in an application to detect the enabled cpu flags.</summary>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_get_cpu_flags();
-    
-    /// <summary>Return default channel layout for a given number of channels.</summary>
-    [Obsolete("use av_channel_layout_default()")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern long av_get_default_channel_layout(int @nb_channels);
     
     /// <summary>Return codec bits per sample. Only return non-zero if the bits per sample is exactly correct, not an approximation.</summary>
     /// <param name="codec_id">the codec</param>
     /// <returns>Number of bits per sample or zero if unknown for the given codec.</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_get_exact_bits_per_sample(AVCodecID @codec_id);
-    
-    /// <summary>Return a channel layout and the number of channels based on the specified name.</summary>
-    /// <param name="name">channel layout specification string</param>
-    /// <param name="channel_layout">parsed channel layout (0 if unknown)</param>
-    /// <param name="nb_channels">number of channels</param>
-    /// <returns>0 on success, AVERROR(EINVAL) if the parsing fails.</returns>
-    [Obsolete("use av_channel_layout_from_string()")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int av_get_extended_channel_layout(    
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, ulong* @channel_layout, int* @nb_channels);
     
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_get_frame_filename(byte* @buf, int @buf_size,     
@@ -1528,15 +1486,6 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <returns>the pointer to the filled buffer or NULL if sample_fmt is unknown or in case of other errors</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern byte* av_get_sample_fmt_string(byte* @buf, int @buf_size, AVSampleFormat @sample_fmt);
-    
-    /// <summary>Get the value and name of a standard channel layout.</summary>
-    /// <param name="index">index in an internal list, starting at 0</param>
-    /// <param name="layout">channel layout mask</param>
-    /// <param name="name">name of the layout</param>
-    /// <returns>0  if the layout exists, &lt; 0 if index is beyond the limits</returns>
-    [Obsolete("use av_channel_layout_standard()")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int av_get_standard_channel_layout(uint @index, ulong* @layout, byte** @name);
     
     /// <summary>Return the fractional representation of the internal time base.</summary>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
@@ -1885,6 +1834,18 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <returns>0 if the image data was cleared, a negative AVERROR code otherwise</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_image_fill_black(ref byte_ptr4 @dst_data, in long4 @dst_linesize, AVPixelFormat @pix_fmt, AVColorRange @range, int @width, int @height);
+    
+    /// <summary>Overwrite the image data with a color. This is suitable for filling a sub-rectangle of an image, meaning the padding between the right most pixel and the left most pixel on the next line will not be overwritten. For some formats, the image size might be rounded up due to inherent alignment.</summary>
+    /// <param name="dst_data">data pointers to destination image</param>
+    /// <param name="dst_linesize">linesizes for the destination image</param>
+    /// <param name="pix_fmt">the pixel format of the image</param>
+    /// <param name="color">the color components to be used for the fill</param>
+    /// <param name="width">the width of the image in pixels</param>
+    /// <param name="height">the height of the image in pixels</param>
+    /// <param name="flags">currently unused</param>
+    /// <returns>0 if the image data was filled, a negative AVERROR code otherwise</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_image_fill_color(ref byte_ptr4 @dst_data, in long4 @dst_linesize, AVPixelFormat @pix_fmt, in uint4 @color, int @width, int @height, int @flags);
     
     /// <summary>Fill plane linesizes for an image with pixel format pix_fmt and width width.</summary>
     /// <param name="linesizes">array to be filled with the linesize for each plane</param>
@@ -2335,16 +2296,6 @@ public static unsafe partial class StaticallyLinkedBindings
     #endif
     string @name, int @search_flags, byte** @out_val);
     
-    [Obsolete()]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int av_opt_get_channel_layout(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, int @search_flags, long* @ch_layout);
-    
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_opt_get_chlayout(void* @obj,     
     #if NETSTANDARD2_1_OR_GREATER
@@ -2478,7 +2429,7 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern AVOption* av_opt_next(void* @obj, AVOption* @prev);
     
-    /// <summary>@}</summary>
+    /// <summary>Gets a pointer to the requested field in a struct. This function allows accessing a struct even when its fields are moved or renamed since the application making the access has been compiled,</summary>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern void* av_opt_ptr(AVClass* @avclass, void* @obj,     
     #if NETSTANDARD2_1_OR_GREATER
@@ -2552,16 +2503,6 @@ public static unsafe partial class StaticallyLinkedBindings
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @name, byte* @val, int @size, int @search_flags);
-    
-    [Obsolete()]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int av_opt_set_channel_layout(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @name, long @ch_layout, int @search_flags);
     
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int av_opt_set_chlayout(void* @obj,     
@@ -3273,11 +3214,6 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern AVRational av_stream_get_codec_timebase(AVStream* @st);
     
-    /// <summary>Returns the pts of the last muxed packet + its duration</summary>
-    [Obsolete()]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern long av_stream_get_end_pts(AVStream* @st);
-    
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern AVCodecParserContext* av_stream_get_parser(AVStream* @s);
     
@@ -3289,6 +3225,10 @@ public static unsafe partial class StaticallyLinkedBindings
     [Obsolete("use av_packet_side_data_get() with the stream's  \"codecpar side data\"")]
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern byte* av_stream_get_side_data(AVStream* @stream, AVPacketSideDataType @type, ulong* @size);
+    
+    /// <summary>Get the AVClass for AVStreamGroup. It can be used in combination with AV_OPT_SEARCH_FAKE_OBJ for examining options.</summary>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern AVClass* av_stream_group_get_class();
     
     /// <summary>Allocate new information from stream.</summary>
     /// <param name="stream">stream</param>
@@ -3326,18 +3266,6 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <returns>b-c</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern AVRational av_sub_q(AVRational @b, AVRational @c);
-    
-    /// <summary>Wrapper to work around the lack of mkstemp() on mingw. Also, tries to create file in /tmp first, if possible. *prefix can be a character constant; *filename will be allocated internally.</summary>
-    /// <returns>file descriptor of opened file (or negative value corresponding to an AVERROR code on error) and opened file name in **filename.</returns>
-    [Obsolete("as fd numbers cannot be passed saftely between libs on some platforms")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int av_tempfile(    
-    #if NETSTANDARD2_1_OR_GREATER
-    [MarshalAs(UnmanagedType.LPUTF8Str)]
-    #else
-    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
-    #endif
-    string @prefix, byte** @filename, int @log_offset, void* @log_ctx);
     
     /// <summary>Adjust frame number for NTSC drop frame time code.</summary>
     /// <param name="framenum">frame number to adjust</param>
@@ -3572,14 +3500,8 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern AVCodecContext* avcodec_alloc_context3(AVCodec* @codec);
     
-    /// <summary>Converts swscale x/y chroma position to AVChromaLocation.</summary>
-    /// <param name="xpos">horizontal chroma sample position</param>
-    /// <param name="ypos">vertical   chroma sample position</param>
-    [Obsolete("Use av_chroma_location_pos_to_enum() instead.")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern AVChromaLocation avcodec_chroma_pos_to_enum(int @xpos, int @ypos);
-    
     /// <summary>Close a given AVCodecContext and free all the data associated with it (but not the AVCodecContext itself).</summary>
+    [Obsolete("Do not use this function. Use avcodec_free_context() to destroy a codec context (either open or closed). Opening and closing a codec context multiple times is not supported anymore -- use multiple codec contexts instead.")]
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int avcodec_close(AVCodecContext* @avctx);
     
@@ -3638,13 +3560,6 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <summary>@{</summary>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int avcodec_encode_subtitle(AVCodecContext* @avctx, byte* @buf, int @buf_size, AVSubtitle* @sub);
-    
-    /// <summary>Converts AVChromaLocation to swscale x/y chroma position.</summary>
-    /// <param name="xpos">horizontal chroma sample position</param>
-    /// <param name="ypos">vertical   chroma sample position</param>
-    [Obsolete("Use av_chroma_location_enum_to_pos() instead.")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int avcodec_enum_to_chroma_pos(int* @xpos, int* @ypos, AVChromaLocation @pos);
     
     /// <summary>Fill AVFrame audio data and linesize pointers.</summary>
     /// <param name="frame">the AVFrame frame-&gt;nb_samples must be set prior to calling the function. This function fills in frame-&gt;data, frame-&gt;extended_data, frame-&gt;linesize[0].</param>
@@ -3898,9 +3813,7 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern uint avdevice_version();
     
-    /// <summary>Negotiate the media format, dimensions, etc of all inputs to a filter.</summary>
-    /// <param name="filter">the filter to negotiate the properties for its inputs</param>
-    /// <returns>zero on successful negotiation</returns>
+    [Obsolete("this function should never be called by users")]
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int avfilter_config_links(AVFilterContext* @filter);
     
@@ -4224,7 +4137,7 @@ public static unsafe partial class StaticallyLinkedBindings
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int avfilter_link(AVFilterContext* @src, uint @srcpad, AVFilterContext* @dst, uint @dstpad);
     
-    /// <summary>Free the link in *link, and set its pointer to NULL.</summary>
+    [Obsolete("this function should never be called by users")]
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern void avfilter_link_free(AVFilterLink** @link);
     
@@ -4433,6 +4346,24 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <returns>&gt;=0 on success, error code otherwise</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int avformat_seek_file(AVFormatContext* @s, int @stream_index, long @min_ts, long @ts, long @max_ts, int @flags);
+    
+    /// <summary>Add an already allocated stream to a stream group.</summary>
+    /// <param name="stg">stream group belonging to a media file.</param>
+    /// <param name="st">stream in the media file to add to the group.</param>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int avformat_stream_group_add_stream(AVStreamGroup* @stg, AVStream* @st);
+    
+    /// <summary>Add a new empty stream group to a media file.</summary>
+    /// <param name="s">media file handle</param>
+    /// <returns>newly created group or NULL on error.</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    public static extern AVStreamGroup* avformat_stream_group_create(AVFormatContext* @s, AVStreamGroupParamsType @type, AVDictionary** @options);
+    
+    /// <summary>Returns a string identifying the stream group type, or NULL if unknown</summary>
+    /// <returns>a string identifying the stream group type, or NULL if unknown</returns>
+    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+    [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+    public static extern string avformat_stream_group_name(AVStreamGroupParamsType @type);
     
     /// <summary>Transfer internal timing information from one stream to another.</summary>
     /// <param name="ofmt">target output format for ost</param>
@@ -4873,21 +4804,6 @@ public static unsafe partial class StaticallyLinkedBindings
     public static extern SwrContext* swr_alloc();
     
     /// <summary>Allocate SwrContext if needed and set/reset common parameters.</summary>
-    /// <param name="s">existing Swr context if available, or NULL if not</param>
-    /// <param name="out_ch_layout">output channel layout (AV_CH_LAYOUT_*)</param>
-    /// <param name="out_sample_fmt">output sample format (AV_SAMPLE_FMT_*).</param>
-    /// <param name="out_sample_rate">output sample rate (frequency in Hz)</param>
-    /// <param name="in_ch_layout">input channel layout (AV_CH_LAYOUT_*)</param>
-    /// <param name="in_sample_fmt">input sample format (AV_SAMPLE_FMT_*).</param>
-    /// <param name="in_sample_rate">input sample rate (frequency in Hz)</param>
-    /// <param name="log_offset">logging level offset</param>
-    /// <param name="log_ctx">parent logging context, can be NULL</param>
-    /// <returns>NULL on error, allocated context otherwise</returns>
-    [Obsolete("use ")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern SwrContext* swr_alloc_set_opts(SwrContext* @s, long @out_ch_layout, AVSampleFormat @out_sample_fmt, int @out_sample_rate, long @in_ch_layout, AVSampleFormat @in_sample_fmt, int @in_sample_rate, int @log_offset, void* @log_ctx);
-    
-    /// <summary>Allocate SwrContext if needed and set/reset common parameters.</summary>
     /// <param name="ps">Pointer to an existing Swr context if available, or to NULL if not. On success, *ps will be set to the allocated context.</param>
     /// <param name="out_ch_layout">output channel layout (e.g. AV_CHANNEL_LAYOUT_*)</param>
     /// <param name="out_sample_fmt">output sample format (AV_SAMPLE_FMT_*).</param>
@@ -4900,22 +4816,6 @@ public static unsafe partial class StaticallyLinkedBindings
     /// <returns>0 on success, a negative AVERROR code on error. On error, the Swr context is freed and *ps set to NULL.</returns>
     [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
     public static extern int swr_alloc_set_opts2(SwrContext** @ps, AVChannelLayout* @out_ch_layout, AVSampleFormat @out_sample_fmt, int @out_sample_rate, AVChannelLayout* @in_ch_layout, AVSampleFormat @in_sample_fmt, int @in_sample_rate, int @log_offset, void* @log_ctx);
-    
-    /// <summary>Generate a channel mixing matrix.</summary>
-    /// <param name="in_layout">input channel layout</param>
-    /// <param name="out_layout">output channel layout</param>
-    /// <param name="center_mix_level">mix level for the center channel</param>
-    /// <param name="surround_mix_level">mix level for the surround channel(s)</param>
-    /// <param name="lfe_mix_level">mix level for the low-frequency effects channel</param>
-    /// <param name="rematrix_maxval">if 1.0, coefficients will be normalized to prevent overflow. if INT_MAX, coefficients will not be normalized.</param>
-    /// <param name="matrix">mixing coefficients; matrix[i + stride * o] is the weight of input channel i in output channel o.</param>
-    /// <param name="stride">distance between adjacent input channels in the matrix array</param>
-    /// <param name="matrix_encoding">matrixed stereo downmix mode (e.g. dplii)</param>
-    /// <param name="log_ctx">parent logging context, can be NULL</param>
-    /// <returns>0 on success, negative AVERROR code on failure</returns>
-    [Obsolete("use ")]
-    [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-    public static extern int swr_build_matrix(ulong @in_layout, ulong @out_layout, double @center_mix_level, double @surround_mix_level, double @lfe_mix_level, double @rematrix_maxval, double @rematrix_volume, double* @matrix, int @stride, AVMatrixEncoding @matrix_encoding, void* @log_ctx);
     
     /// <summary>Generate a channel mixing matrix.</summary>
     /// <param name="in_layout">input channel layout</param>
@@ -5251,7 +5151,6 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_audio_fifo_space = av_audio_fifo_space;
         vectors.av_audio_fifo_write = av_audio_fifo_write;
         vectors.av_bessel_i0 = av_bessel_i0;
-        vectors.av_bprint_channel_layout = av_bprint_channel_layout;
         vectors.av_bsf_alloc = av_bsf_alloc;
         vectors.av_bsf_flush = av_bsf_flush;
         vectors.av_bsf_free = av_bsf_free;
@@ -5286,8 +5185,9 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_buffer_replace = av_buffer_replace;
         vectors.av_buffer_unref = av_buffer_unref;
         vectors.av_buffersink_get_ch_layout = av_buffersink_get_ch_layout;
-        vectors.av_buffersink_get_channel_layout = av_buffersink_get_channel_layout;
         vectors.av_buffersink_get_channels = av_buffersink_get_channels;
+        vectors.av_buffersink_get_color_range = av_buffersink_get_color_range;
+        vectors.av_buffersink_get_colorspace = av_buffersink_get_colorspace;
         vectors.av_buffersink_get_format = av_buffersink_get_format;
         vectors.av_buffersink_get_frame = av_buffersink_get_frame;
         vectors.av_buffersink_get_frame_flags = av_buffersink_get_frame_flags;
@@ -5317,14 +5217,15 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_channel_layout_check = av_channel_layout_check;
         vectors.av_channel_layout_compare = av_channel_layout_compare;
         vectors.av_channel_layout_copy = av_channel_layout_copy;
+        vectors.av_channel_layout_custom_init = av_channel_layout_custom_init;
         vectors.av_channel_layout_default = av_channel_layout_default;
         vectors.av_channel_layout_describe = av_channel_layout_describe;
         vectors.av_channel_layout_describe_bprint = av_channel_layout_describe_bprint;
-        vectors.av_channel_layout_extract_channel = av_channel_layout_extract_channel;
         vectors.av_channel_layout_from_mask = av_channel_layout_from_mask;
         vectors.av_channel_layout_from_string = av_channel_layout_from_string;
         vectors.av_channel_layout_index_from_channel = av_channel_layout_index_from_channel;
         vectors.av_channel_layout_index_from_string = av_channel_layout_index_from_string;
+        vectors.av_channel_layout_retype = av_channel_layout_retype;
         vectors.av_channel_layout_standard = av_channel_layout_standard;
         vectors.av_channel_layout_subset = av_channel_layout_subset;
         vectors.av_channel_layout_uninit = av_channel_layout_uninit;
@@ -5400,7 +5301,6 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_find_nearest_q_idx = av_find_nearest_q_idx;
         vectors.av_find_program_from_stream = av_find_program_from_stream;
         vectors.av_fmt_ctx_get_duration_estimation_method = av_fmt_ctx_get_duration_estimation_method;
-        vectors.av_fopen_utf8 = av_fopen_utf8;
         vectors.av_force_cpu_flags = av_force_cpu_flags;
         vectors.av_format_inject_global_side_data = av_format_inject_global_side_data;
         vectors.av_fourcc_make_string = av_fourcc_make_string;
@@ -5421,7 +5321,11 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_frame_ref = av_frame_ref;
         vectors.av_frame_remove_side_data = av_frame_remove_side_data;
         vectors.av_frame_replace = av_frame_replace;
+        vectors.av_frame_side_data_clone = av_frame_side_data_clone;
+        vectors.av_frame_side_data_free = av_frame_side_data_free;
+        vectors.av_frame_side_data_get_c = av_frame_side_data_get_c;
         vectors.av_frame_side_data_name = av_frame_side_data_name;
+        vectors.av_frame_side_data_new = av_frame_side_data_new;
         vectors.av_frame_unref = av_frame_unref;
         vectors.av_free = av_free;
         vectors.av_freep = av_freep;
@@ -5433,16 +5337,8 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_get_bits_per_pixel = av_get_bits_per_pixel;
         vectors.av_get_bits_per_sample = av_get_bits_per_sample;
         vectors.av_get_bytes_per_sample = av_get_bytes_per_sample;
-        vectors.av_get_channel_description = av_get_channel_description;
-        vectors.av_get_channel_layout = av_get_channel_layout;
-        vectors.av_get_channel_layout_channel_index = av_get_channel_layout_channel_index;
-        vectors.av_get_channel_layout_nb_channels = av_get_channel_layout_nb_channels;
-        vectors.av_get_channel_layout_string = av_get_channel_layout_string;
-        vectors.av_get_channel_name = av_get_channel_name;
         vectors.av_get_cpu_flags = av_get_cpu_flags;
-        vectors.av_get_default_channel_layout = av_get_default_channel_layout;
         vectors.av_get_exact_bits_per_sample = av_get_exact_bits_per_sample;
-        vectors.av_get_extended_channel_layout = av_get_extended_channel_layout;
         vectors.av_get_frame_filename = av_get_frame_filename;
         vectors.av_get_frame_filename2 = av_get_frame_filename2;
         vectors.av_get_media_type_string = av_get_media_type_string;
@@ -5461,7 +5357,6 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_get_sample_fmt = av_get_sample_fmt;
         vectors.av_get_sample_fmt_name = av_get_sample_fmt_name;
         vectors.av_get_sample_fmt_string = av_get_sample_fmt_string;
-        vectors.av_get_standard_channel_layout = av_get_standard_channel_layout;
         vectors.av_get_time_base_q = av_get_time_base_q;
         vectors.av_gettime = av_gettime;
         vectors.av_gettime_relative = av_gettime_relative;
@@ -5502,6 +5397,7 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_image_copy_uc_from = av_image_copy_uc_from;
         vectors.av_image_fill_arrays = av_image_fill_arrays;
         vectors.av_image_fill_black = av_image_fill_black;
+        vectors.av_image_fill_color = av_image_fill_color;
         vectors.av_image_fill_linesizes = av_image_fill_linesizes;
         vectors.av_image_fill_max_pixsteps = av_image_fill_max_pixsteps;
         vectors.av_image_fill_plane_sizes = av_image_fill_plane_sizes;
@@ -5556,7 +5452,6 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_opt_free = av_opt_free;
         vectors.av_opt_freep_ranges = av_opt_freep_ranges;
         vectors.av_opt_get = av_opt_get;
-        vectors.av_opt_get_channel_layout = av_opt_get_channel_layout;
         vectors.av_opt_get_chlayout = av_opt_get_chlayout;
         vectors.av_opt_get_dict_val = av_opt_get_dict_val;
         vectors.av_opt_get_double = av_opt_get_double;
@@ -5576,7 +5471,6 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_opt_serialize = av_opt_serialize;
         vectors.av_opt_set = av_opt_set;
         vectors.av_opt_set_bin = av_opt_set_bin;
-        vectors.av_opt_set_channel_layout = av_opt_set_channel_layout;
         vectors.av_opt_set_chlayout = av_opt_set_chlayout;
         vectors.av_opt_set_defaults = av_opt_set_defaults;
         vectors.av_opt_set_defaults2 = av_opt_set_defaults2;
@@ -5670,14 +5564,13 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.av_stream_add_side_data = av_stream_add_side_data;
         vectors.av_stream_get_class = av_stream_get_class;
         vectors.av_stream_get_codec_timebase = av_stream_get_codec_timebase;
-        vectors.av_stream_get_end_pts = av_stream_get_end_pts;
         vectors.av_stream_get_parser = av_stream_get_parser;
         vectors.av_stream_get_side_data = av_stream_get_side_data;
+        vectors.av_stream_group_get_class = av_stream_group_get_class;
         vectors.av_stream_new_side_data = av_stream_new_side_data;
         vectors.av_strerror = av_strerror;
         vectors.av_strndup = av_strndup;
         vectors.av_sub_q = av_sub_q;
-        vectors.av_tempfile = av_tempfile;
         vectors.av_timecode_adjust_ntsc_framenum2 = av_timecode_adjust_ntsc_framenum2;
         vectors.av_timecode_check_frame_rate = av_timecode_check_frame_rate;
         vectors.av_timecode_get_smpte = av_timecode_get_smpte;
@@ -5708,7 +5601,6 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.avcodec_align_dimensions = avcodec_align_dimensions;
         vectors.avcodec_align_dimensions2 = avcodec_align_dimensions2;
         vectors.avcodec_alloc_context3 = avcodec_alloc_context3;
-        vectors.avcodec_chroma_pos_to_enum = avcodec_chroma_pos_to_enum;
         vectors.avcodec_close = avcodec_close;
         vectors.avcodec_configuration = avcodec_configuration;
         vectors.avcodec_decode_subtitle2 = avcodec_decode_subtitle2;
@@ -5721,7 +5613,6 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.avcodec_descriptor_get_by_name = avcodec_descriptor_get_by_name;
         vectors.avcodec_descriptor_next = avcodec_descriptor_next;
         vectors.avcodec_encode_subtitle = avcodec_encode_subtitle;
-        vectors.avcodec_enum_to_chroma_pos = avcodec_enum_to_chroma_pos;
         vectors.avcodec_fill_audio_frame = avcodec_fill_audio_frame;
         vectors.avcodec_find_best_pix_fmt_of_list = avcodec_find_best_pix_fmt_of_list;
         vectors.avcodec_find_decoder = avcodec_find_decoder;
@@ -5826,6 +5717,9 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.avformat_query_codec = avformat_query_codec;
         vectors.avformat_queue_attached_pictures = avformat_queue_attached_pictures;
         vectors.avformat_seek_file = avformat_seek_file;
+        vectors.avformat_stream_group_add_stream = avformat_stream_group_add_stream;
+        vectors.avformat_stream_group_create = avformat_stream_group_create;
+        vectors.avformat_stream_group_name = avformat_stream_group_name;
         vectors.avformat_transfer_internal_stream_timing_info = avformat_transfer_internal_stream_timing_info;
         vectors.avformat_version = avformat_version;
         vectors.avformat_write_header = avformat_write_header;
@@ -5900,9 +5794,7 @@ public static unsafe partial class StaticallyLinkedBindings
         vectors.pp_get_mode_by_name_and_quality = pp_get_mode_by_name_and_quality;
         vectors.pp_postprocess = pp_postprocess;
         vectors.swr_alloc = swr_alloc;
-        vectors.swr_alloc_set_opts = swr_alloc_set_opts;
         vectors.swr_alloc_set_opts2 = swr_alloc_set_opts2;
-        vectors.swr_build_matrix = swr_build_matrix;
         vectors.swr_build_matrix2 = swr_build_matrix2;
         vectors.swr_close = swr_close;
         vectors.swr_config_frame = swr_config_frame;

@@ -100,7 +100,7 @@ internal class Program
     {
         // decode all frames from url, please not it might local resorce, e.g. string url = "../../sample_mpeg4.mp4";
         
-        var url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"; // be advised this file holds 1440 frames
+        var url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"; // be advised this file holds 1440 frames
         using var vsd = new VideoStreamDecoder(url, HWDevice);
 
         Console.WriteLine($"codec name: {vsd.CodecName}");
@@ -125,6 +125,7 @@ internal class Program
 
             Console.WriteLine($"frame: {frameNumber}");
             frameNumber++;
+            if (frameNumber > 1000) break;
         }
     }
 

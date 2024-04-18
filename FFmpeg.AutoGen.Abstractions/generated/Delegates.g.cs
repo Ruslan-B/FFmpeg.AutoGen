@@ -316,14 +316,6 @@ public unsafe struct AVFormatContext_control_message_cb_func
 }
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate void AVFormatContext_io_close (AVFormatContext* @s, AVIOContext* @pb);
-public unsafe struct AVFormatContext_io_close_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVFormatContext_io_close_func(AVFormatContext_io_close func) => new AVFormatContext_io_close_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate int AVFormatContext_io_close2 (AVFormatContext* @s, AVIOContext* @pb);
 public unsafe struct AVFormatContext_io_close2_func
 {
@@ -359,86 +351,6 @@ public unsafe struct AVHWFramesContext_free_func
 {
     public IntPtr Pointer;
     public static implicit operator AVHWFramesContext_free_func(AVHWFramesContext_free func) => new AVHWFramesContext_free_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVInputFormat_get_device_list (AVFormatContext* @s, AVDeviceInfoList* @device_list);
-public unsafe struct AVInputFormat_get_device_list_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVInputFormat_get_device_list_func(AVInputFormat_get_device_list func) => new AVInputFormat_get_device_list_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVInputFormat_read_close (AVFormatContext* @p0);
-public unsafe struct AVInputFormat_read_close_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVInputFormat_read_close_func(AVInputFormat_read_close func) => new AVInputFormat_read_close_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVInputFormat_read_header (AVFormatContext* @p0);
-public unsafe struct AVInputFormat_read_header_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVInputFormat_read_header_func(AVInputFormat_read_header func) => new AVInputFormat_read_header_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVInputFormat_read_packet (AVFormatContext* @p0, AVPacket* @pkt);
-public unsafe struct AVInputFormat_read_packet_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVInputFormat_read_packet_func(AVInputFormat_read_packet func) => new AVInputFormat_read_packet_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVInputFormat_read_pause (AVFormatContext* @p0);
-public unsafe struct AVInputFormat_read_pause_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVInputFormat_read_pause_func(AVInputFormat_read_pause func) => new AVInputFormat_read_pause_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVInputFormat_read_play (AVFormatContext* @p0);
-public unsafe struct AVInputFormat_read_play_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVInputFormat_read_play_func(AVInputFormat_read_play func) => new AVInputFormat_read_play_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVInputFormat_read_probe (AVProbeData* @p0);
-public unsafe struct AVInputFormat_read_probe_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVInputFormat_read_probe_func(AVInputFormat_read_probe func) => new AVInputFormat_read_probe_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVInputFormat_read_seek (AVFormatContext* @p0, int @stream_index, long @timestamp, int @flags);
-public unsafe struct AVInputFormat_read_seek_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVInputFormat_read_seek_func(AVInputFormat_read_seek func) => new AVInputFormat_read_seek_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVInputFormat_read_seek2 (AVFormatContext* @s, int @stream_index, long @min_ts, long @ts, long @max_ts, int @flags);
-public unsafe struct AVInputFormat_read_seek2_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVInputFormat_read_seek2_func(AVInputFormat_read_seek2 func) => new AVInputFormat_read_seek2_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate long AVInputFormat_read_timestamp (AVFormatContext* @s, int @stream_index, long* @pos, long @pos_limit);
-public unsafe struct AVInputFormat_read_timestamp_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVInputFormat_read_timestamp_func(AVInputFormat_read_timestamp func) => new AVInputFormat_read_timestamp_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
 }
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

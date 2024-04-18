@@ -330,7 +330,6 @@
 
 struct AVFormatContext;
 struct AVFrame;
-struct AVDeviceInfoList;
 
 /**
  * @defgroup metadata_api Public Metadata API
@@ -584,103 +583,6 @@ typedef struct AVInputFormat {
      * @see av_probe_input_format2
      */
     const char *mime_type;
-
-    /*****************************************************************
-     * No fields below this line are part of the public API. They
-     * may not be used outside of libavformat and can be changed and
-     * removed at will.
-     * New public fields should be added right above.
-     *****************************************************************
-     */
-    /**
-     * Raw demuxers store their codec ID here.
-     */
-    int raw_codec_id;
-
-    /**
-     * Size of private data so that it can be allocated in the wrapper.
-     */
-    int priv_data_size;
-
-    /**
-     * Internal flags. See FF_FMT_FLAG_* in internal.h.
-     */
-    int flags_internal;
-
-    /**
-     * Tell if a given file has a chance of being parsed as this format.
-     * The buffer provided is guaranteed to be AVPROBE_PADDING_SIZE bytes
-     * big so you do not have to check for that unless you need more.
-     */
-    int (*read_probe)(const AVProbeData *);
-
-    /**
-     * Read the format header and initialize the AVFormatContext
-     * structure. Return 0 if OK. 'avformat_new_stream' should be
-     * called to create new streams.
-     */
-    int (*read_header)(struct AVFormatContext *);
-
-    /**
-     * Read one packet and put it in 'pkt'. pts and flags are also
-     * set. 'avformat_new_stream' can be called only if the flag
-     * AVFMTCTX_NOHEADER is used and only in the calling thread (not in a
-     * background thread).
-     * @return 0 on success, < 0 on error.
-     *         Upon returning an error, pkt must be unreferenced by the caller.
-     */
-    int (*read_packet)(struct AVFormatContext *, AVPacket *pkt);
-
-    /**
-     * Close the stream. The AVFormatContext and AVStreams are not
-     * freed by this function
-     */
-    int (*read_close)(struct AVFormatContext *);
-
-    /**
-     * Seek to a given timestamp relative to the frames in
-     * stream component stream_index.
-     * @param stream_index Must not be -1.
-     * @param flags Selects which direction should be preferred if no exact
-     *              match is available.
-     * @return >= 0 on success (but not necessarily the new offset)
-     */
-    int (*read_seek)(struct AVFormatContext *,
-                     int stream_index, int64_t timestamp, int flags);
-
-    /**
-     * Get the next timestamp in stream[stream_index].time_base units.
-     * @return the timestamp or AV_NOPTS_VALUE if an error occurred
-     */
-    int64_t (*read_timestamp)(struct AVFormatContext *s, int stream_index,
-                              int64_t *pos, int64_t pos_limit);
-
-    /**
-     * Start/resume playing - only meaningful if using a network-based format
-     * (RTSP).
-     */
-    int (*read_play)(struct AVFormatContext *);
-
-    /**
-     * Pause playing - only meaningful if using a network-based format
-     * (RTSP).
-     */
-    int (*read_pause)(struct AVFormatContext *);
-
-    /**
-     * Seek to timestamp ts.
-     * Seeking will be done so that the point from which all active streams
-     * can be presented successfully will be closest to ts and within min/max_ts.
-     * Active streams are all streams that have AVStream.discard < AVDISCARD_ALL.
-     */
-    int (*read_seek2)(struct AVFormatContext *s, int stream_index, int64_t min_ts, int64_t ts, int64_t max_ts, int flags);
-
-    /**
-     * Returns device list with it properties.
-     * @see avdevice_list_devices() for more details.
-     */
-    int (*get_device_list)(struct AVFormatContext *s, struct AVDeviceInfoList *device_list);
-
 } AVInputFormat;
 /**
  * @}
@@ -802,9 +704,9 @@ typedef struct AVIndexEntry {
  */
 #define AV_DISPOSITION_METADATA             (1 << 18)
 /**
- * The audio stream is intended to be mixed with another stream before
- * presentation.
- * Corresponds to mix_type=0 in mpegts.
+ * The stream is intended to be mixed with another stream before presentation.
+ * Used for example to signal the stream contains an image part of a HEIF grid,
+ * or for mix_type=0 in mpegts.
  */
 #define AV_DISPOSITION_DEPENDENT            (1 << 19)
 /**
@@ -1018,17 +920,255 @@ typedef struct AVStream {
     int pts_wrap_bits;
 } AVStream;
 
-struct AVCodecParserContext *av_stream_get_parser(const AVStream *s);
-
-#if FF_API_GET_END_PTS
 /**
- * Returns the pts of the last muxed packet + its duration
+ * AVStreamGroupTileGrid holds information on how to combine several
+ * independent images on a single canvas for presentation.
  *
- * the retuned value is undefined when used with a demuxer.
+ * The output should be a @ref AVStreamGroupTileGrid.background "background"
+ * colored @ref AVStreamGroupTileGrid.coded_width "coded_width" x
+ * @ref AVStreamGroupTileGrid.coded_height "coded_height" canvas where a
+ * @ref AVStreamGroupTileGrid.nb_tiles "nb_tiles" amount of tiles are placed in
+ * the order they appear in the @ref AVStreamGroupTileGrid.offsets "offsets"
+ * array, at the exact offset described for them. In particular, if two or more
+ * tiles overlap, the image with higher index in the
+ * @ref AVStreamGroupTileGrid.offsets "offsets" array takes priority.
+ * Note that a single image may be used multiple times, i.e. multiple entries
+ * in @ref AVStreamGroupTileGrid.offsets "offsets" may have the same value of
+ * idx.
+ *
+ * The following is an example of a simple grid with 3 rows and 4 columns:
+ *
+ * +---+---+---+---+
+ * | 0 | 1 | 2 | 3 |
+ * +---+---+---+---+
+ * | 4 | 5 | 6 | 7 |
+ * +---+---+---+---+
+ * | 8 | 9 |10 |11 |
+ * +---+---+---+---+
+ *
+ * Assuming all tiles have a dimension of 512x512, the
+ * @ref AVStreamGroupTileGrid.offsets "offset" of the topleft pixel of
+ * the first @ref AVStreamGroup.streams "stream" in the group is "0,0", the
+ * @ref AVStreamGroupTileGrid.offsets "offset" of the topleft pixel of
+ * the second @ref AVStreamGroup.streams "stream" in the group is "512,0", the
+ * @ref AVStreamGroupTileGrid.offsets "offset" of the topleft pixel of
+ * the fifth @ref AVStreamGroup.streams "stream" in the group is "0,512", the
+ * @ref AVStreamGroupTileGrid.offsets "offset", of the topleft pixel of
+ * the sixth @ref AVStreamGroup.streams "stream" in the group is "512,512",
+ * etc.
+ *
+ * The following is an example of a canvas with overlaping tiles:
+ *
+ * +-----------+
+ * |   %%%%%   |
+ * |***%%3%%@@@|
+ * |**0%%%%%2@@|
+ * |***##1@@@@@|
+ * |   #####   |
+ * +-----------+
+ *
+ * Assuming a canvas with size 1024x1024 and all tiles with a dimension of
+ * 512x512, a possible @ref AVStreamGroupTileGrid.offsets "offset" for the
+ * topleft pixel of the first @ref AVStreamGroup.streams "stream" in the group
+ * would be 0x256, the @ref AVStreamGroupTileGrid.offsets "offset" for the
+ * topleft pixel of the second @ref AVStreamGroup.streams "stream" in the group
+ * would be 256x512, the @ref AVStreamGroupTileGrid.offsets "offset" for the
+ * topleft pixel of the third @ref AVStreamGroup.streams "stream" in the group
+ * would be 512x256, and the @ref AVStreamGroupTileGrid.offsets "offset" for
+ * the topleft pixel of the fourth @ref AVStreamGroup.streams "stream" in the
+ * group would be 256x0.
+ *
+ * sizeof(AVStreamGroupTileGrid) is not a part of the ABI and may only be
+ * allocated by avformat_stream_group_create().
  */
-attribute_deprecated
-int64_t    av_stream_get_end_pts(const AVStream *st);
-#endif
+typedef struct AVStreamGroupTileGrid {
+    const AVClass *av_class;
+
+    /**
+     * Amount of tiles in the grid.
+     *
+     * Must be > 0.
+     */
+    unsigned int nb_tiles;
+
+    /**
+     * Width of the canvas.
+     *
+     * Must be > 0.
+     */
+    int coded_width;
+    /**
+     * Width of the canvas.
+     *
+     * Must be > 0.
+     */
+    int coded_height;
+
+    /**
+     * An @ref nb_tiles sized array of offsets in pixels from the topleft edge
+     * of the canvas, indicating where each stream should be placed.
+     * It must be allocated with the av_malloc() family of functions.
+     *
+     * - demuxing: set by libavformat, must not be modified by the caller.
+     * - muxing: set by the caller before avformat_write_header().
+     *
+     * Freed by libavformat in avformat_free_context().
+     */
+    struct {
+        /**
+         * Index of the stream in the group this tile references.
+         *
+         * Must be < @ref AVStreamGroup.nb_streams "nb_streams".
+         */
+        unsigned int idx;
+        /**
+         * Offset in pixels from the left edge of the canvas where the tile
+         * should be placed.
+         */
+        int horizontal;
+        /**
+         * Offset in pixels from the top edge of the canvas where the tile
+         * should be placed.
+         */
+        int vertical;
+    } *offsets;
+
+    /**
+     * The pixel value per channel in RGBA format used if no pixel of any tile
+     * is located at a particular pixel location.
+     *
+     * @see av_image_fill_color().
+     * @see av_parse_color().
+     */
+    uint8_t background[4];
+
+    /**
+     * Offset in pixels from the left edge of the canvas where the actual image
+     * meant for presentation starts.
+     *
+     * This field must be >= 0 and < @ref coded_width.
+     */
+    int horizontal_offset;
+    /**
+     * Offset in pixels from the top edge of the canvas where the actual image
+     * meant for presentation starts.
+     *
+     * This field must be >= 0 and < @ref coded_height.
+     */
+    int vertical_offset;
+
+    /**
+     * Width of the final image for presentation.
+     *
+     * Must be > 0 and <= (@ref coded_width - @ref horizontal_offset).
+     * When it's not equal to (@ref coded_width - @ref horizontal_offset), the
+     * result of (@ref coded_width - width - @ref horizontal_offset) is the
+     * amount amount of pixels to be cropped from the right edge of the
+     * final image before presentation.
+     */
+    int width;
+    /**
+     * Height of the final image for presentation.
+     *
+     * Must be > 0 and <= (@ref coded_height - @ref vertical_offset).
+     * When it's not equal to (@ref coded_height - @ref vertical_offset), the
+     * result of (@ref coded_height - height - @ref vertical_offset) is the
+     * amount amount of pixels to be cropped from the bottom edge of the
+     * final image before presentation.
+     */
+    int height;
+} AVStreamGroupTileGrid;
+
+enum AVStreamGroupParamsType {
+    AV_STREAM_GROUP_PARAMS_NONE,
+    AV_STREAM_GROUP_PARAMS_IAMF_AUDIO_ELEMENT,
+    AV_STREAM_GROUP_PARAMS_IAMF_MIX_PRESENTATION,
+    AV_STREAM_GROUP_PARAMS_TILE_GRID,
+};
+
+struct AVIAMFAudioElement;
+struct AVIAMFMixPresentation;
+
+typedef struct AVStreamGroup {
+    /**
+     * A class for @ref avoptions. Set by avformat_stream_group_create().
+     */
+    const AVClass *av_class;
+
+    void *priv_data;
+
+    /**
+     * Group index in AVFormatContext.
+     */
+    unsigned int index;
+
+    /**
+     * Group type-specific group ID.
+     *
+     * decoding: set by libavformat
+     * encoding: may set by the user
+     */
+    int64_t id;
+
+    /**
+     * Group type
+     *
+     * decoding: set by libavformat on group creation
+     * encoding: set by avformat_stream_group_create()
+     */
+    enum AVStreamGroupParamsType type;
+
+    /**
+     * Group type-specific parameters
+     */
+    union {
+        struct AVIAMFAudioElement *iamf_audio_element;
+        struct AVIAMFMixPresentation *iamf_mix_presentation;
+        struct AVStreamGroupTileGrid *tile_grid;
+    } params;
+
+    /**
+     * Metadata that applies to the whole group.
+     *
+     * - demuxing: set by libavformat on group creation
+     * - muxing: may be set by the caller before avformat_write_header()
+     *
+     * Freed by libavformat in avformat_free_context().
+     */
+    AVDictionary *metadata;
+
+    /**
+     * Number of elements in AVStreamGroup.streams.
+     *
+     * Set by avformat_stream_group_add_stream() must not be modified by any other code.
+     */
+    unsigned int nb_streams;
+
+    /**
+     * A list of streams in the group. New entries are created with
+     * avformat_stream_group_add_stream().
+     *
+     * - demuxing: entries are created by libavformat on group creation.
+     *             If AVFMTCTX_NOHEADER is set in ctx_flags, then new entries may also
+     *             appear in av_read_frame().
+     * - muxing: entries are created by the user before avformat_write_header().
+     *
+     * Freed by libavformat in avformat_free_context().
+     */
+    AVStream **streams;
+
+    /**
+     * Stream group disposition - a combination of AV_DISPOSITION_* flags.
+     * This field currently applies to all defined AVStreamGroupParamsType.
+     *
+     * - demuxing: set by libavformat when creating the group or in
+     *             avformat_find_stream_info().
+     * - muxing: may be set by the caller before avformat_write_header().
+     */
+    int disposition;
+} AVStreamGroup;
+
+struct AVCodecParserContext *av_stream_get_parser(const AVStream *s);
 
 #define AV_PROGRAM_RUNNING 1
 
@@ -1185,6 +1325,39 @@ typedef struct AVFormatContext {
     AVStream **streams;
 
     /**
+     * Number of elements in AVFormatContext.stream_groups.
+     *
+     * Set by avformat_stream_group_create(), must not be modified by any other code.
+     */
+    unsigned int nb_stream_groups;
+    /**
+     * A list of all stream groups in the file. New groups are created with
+     * avformat_stream_group_create(), and filled with avformat_stream_group_add_stream().
+     *
+     * - demuxing: groups may be created by libavformat in avformat_open_input().
+     *             If AVFMTCTX_NOHEADER is set in ctx_flags, then new groups may also
+     *             appear in av_read_frame().
+     * - muxing: groups may be created by the user before avformat_write_header().
+     *
+     * Freed by libavformat in avformat_free_context().
+     */
+    AVStreamGroup **stream_groups;
+
+    /**
+     * Number of chapters in AVChapter array.
+     * When muxing, chapters are normally written in the file header,
+     * so nb_chapters should normally be initialized before write_header
+     * is called. Some muxers (e.g. mov and mkv) can also write chapters
+     * in the trailer.  To write chapters in the trailer, nb_chapters
+     * must be zero when write_header is called and non-zero when
+     * write_trailer is called.
+     * - muxing: set by user
+     * - demuxing: set by libavformat
+     */
+    unsigned int nb_chapters;
+    AVChapter **chapters;
+
+    /**
      * input or output URL. Unlike the old filename field, this field has no
      * length restriction.
      *
@@ -1303,36 +1476,10 @@ typedef struct AVFormatContext {
     enum AVCodecID subtitle_codec_id;
 
     /**
-     * Maximum amount of memory in bytes to use for the index of each stream.
-     * If the index exceeds this size, entries will be discarded as
-     * needed to maintain a smaller size. This can lead to slower or less
-     * accurate seeking (depends on demuxer).
-     * Demuxers for which a full in-memory index is mandatory will ignore
-     * this.
-     * - muxing: unused
-     * - demuxing: set by user
+     * Forced Data codec_id.
+     * Demuxing: Set by user.
      */
-    unsigned int max_index_size;
-
-    /**
-     * Maximum amount of memory in bytes to use for buffering frames
-     * obtained from realtime capture devices.
-     */
-    unsigned int max_picture_buffer;
-
-    /**
-     * Number of chapters in AVChapter array.
-     * When muxing, chapters are normally written in the file header,
-     * so nb_chapters should normally be initialized before write_header
-     * is called. Some muxers (e.g. mov and mkv) can also write chapters
-     * in the trailer.  To write chapters in the trailer, nb_chapters
-     * must be zero when write_header is called and non-zero when
-     * write_trailer is called.
-     * - muxing: set by user
-     * - demuxing: set by libavformat
-     */
-    unsigned int nb_chapters;
-    AVChapter **chapters;
+    enum AVCodecID data_codec_id;
 
     /**
      * Metadata that applies to the whole file.
@@ -1389,6 +1536,31 @@ typedef struct AVFormatContext {
 #define FF_FDEBUG_TS        0x0001
 
     /**
+     * The maximum number of streams.
+     * - encoding: unused
+     * - decoding: set by user
+     */
+    int max_streams;
+
+    /**
+     * Maximum amount of memory in bytes to use for the index of each stream.
+     * If the index exceeds this size, entries will be discarded as
+     * needed to maintain a smaller size. This can lead to slower or less
+     * accurate seeking (depends on demuxer).
+     * Demuxers for which a full in-memory index is mandatory will ignore
+     * this.
+     * - muxing: unused
+     * - demuxing: set by user
+     */
+    unsigned int max_index_size;
+
+    /**
+     * Maximum amount of memory in bytes to use for buffering frames
+     * obtained from realtime capture devices.
+     */
+    unsigned int max_picture_buffer;
+
+    /**
      * Maximum buffering duration for interleaving.
      *
      * To ensure all the streams are interleaved correctly,
@@ -1405,6 +1577,35 @@ typedef struct AVFormatContext {
      * Muxing only, set by the caller before avformat_write_header().
      */
     int64_t max_interleave_delta;
+
+    /**
+     * Maximum number of packets to read while waiting for the first timestamp.
+     * Decoding only.
+     */
+    int max_ts_probe;
+
+    /**
+     * Max chunk time in microseconds.
+     * Note, not all formats support this and unpredictable things may happen if it is used when not supported.
+     * - encoding: Set by user
+     * - decoding: unused
+     */
+    int max_chunk_duration;
+
+    /**
+     * Max chunk size in bytes
+     * Note, not all formats support this and unpredictable things may happen if it is used when not supported.
+     * - encoding: Set by user
+     * - decoding: unused
+     */
+    int max_chunk_size;
+
+    /**
+     * Maximum number of packets that can be probed
+     * - encoding: unused
+     * - decoding: set by user
+     */
+    int max_probe_packets;
 
     /**
      * Allow non-standard and experimental extension
@@ -1432,11 +1633,6 @@ typedef struct AVFormatContext {
  */
 #define AVFMT_EVENT_FLAG_METADATA_UPDATED 0x0001
 
-    /**
-     * Maximum number of packets to read while waiting for the first timestamp.
-     * Decoding only.
-     */
-    int max_ts_probe;
 
     /**
      * Avoid negative timestamps during muxing.
@@ -1452,12 +1648,6 @@ typedef struct AVFormatContext {
 #define AVFMT_AVOID_NEG_TS_MAKE_ZERO         2 ///< Shift timestamps so that they start at 0
 
     /**
-     * Transport stream id.
-     * This will be moved into demuxer private options. Thus no API/ABI compatibility
-     */
-    int ts_id;
-
-    /**
      * Audio preload in microseconds.
      * Note, not all formats support this and unpredictable things may happen if it is used when not supported.
      * - encoding: Set by user
@@ -1466,28 +1656,19 @@ typedef struct AVFormatContext {
     int audio_preload;
 
     /**
-     * Max chunk time in microseconds.
-     * Note, not all formats support this and unpredictable things may happen if it is used when not supported.
-     * - encoding: Set by user
-     * - decoding: unused
-     */
-    int max_chunk_duration;
-
-    /**
-     * Max chunk size in bytes
-     * Note, not all formats support this and unpredictable things may happen if it is used when not supported.
-     * - encoding: Set by user
-     * - decoding: unused
-     */
-    int max_chunk_size;
-
-    /**
      * forces the use of wallclock timestamps as pts/dts of packets
      * This has undefined results in the presence of B frames.
      * - encoding: unused
      * - decoding: Set by user
      */
     int use_wallclock_as_timestamps;
+
+    /**
+     * Skip duration calcuation in estimate_timings_from_pts.
+     * - encoding: unused
+     * - decoding: set by user
+     */
+    int skip_estimate_duration_from_pts;
 
     /**
      * avio flags, used to force AVIO_FLAG_DIRECT.
@@ -1569,6 +1750,20 @@ typedef struct AVFormatContext {
     char *format_whitelist;
 
     /**
+     * ',' separated list of allowed protocols.
+     * - encoding: unused
+     * - decoding: set by user
+     */
+    char *protocol_whitelist;
+
+    /**
+     * ',' separated list of disallowed protocols.
+     * - encoding: unused
+     * - decoding: set by user
+     */
+    char *protocol_blacklist;
+
+    /**
      * IO repositioned flag.
      * This is set by avformat when the underlaying IO context read pointer
      * is repositioned, for example when doing byte based seeking.
@@ -1611,7 +1806,7 @@ typedef struct AVFormatContext {
     /**
      * Number of bytes to be written as padding in a metadata header.
      * Demuxing: Unused.
-     * Muxing: Set by user via av_format_set_metadata_header_padding.
+     * Muxing: Set by user.
      */
     int metadata_header_padding;
 
@@ -1641,19 +1836,6 @@ typedef struct AVFormatContext {
     uint8_t *dump_separator;
 
     /**
-     * Forced Data codec_id.
-     * Demuxing: Set by user.
-     */
-    enum AVCodecID data_codec_id;
-
-    /**
-     * ',' separated list of allowed protocols.
-     * - encoding: unused
-     * - decoding: set by user
-     */
-    char *protocol_whitelist;
-
-    /**
      * A callback for opening new IO streams.
      *
      * Whenever a muxer or a demuxer needs to open an IO stream (typically from
@@ -1675,44 +1857,6 @@ typedef struct AVFormatContext {
      */
     int (*io_open)(struct AVFormatContext *s, AVIOContext **pb, const char *url,
                    int flags, AVDictionary **options);
-
-#if FF_API_AVFORMAT_IO_CLOSE
-    /**
-     * A callback for closing the streams opened with AVFormatContext.io_open().
-     *
-     * @deprecated use io_close2
-     */
-    attribute_deprecated
-    void (*io_close)(struct AVFormatContext *s, AVIOContext *pb);
-#endif
-
-    /**
-     * ',' separated list of disallowed protocols.
-     * - encoding: unused
-     * - decoding: set by user
-     */
-    char *protocol_blacklist;
-
-    /**
-     * The maximum number of streams.
-     * - encoding: unused
-     * - decoding: set by user
-     */
-    int max_streams;
-
-    /**
-     * Skip duration calcuation in estimate_timings_from_pts.
-     * - encoding: unused
-     * - decoding: set by user
-     */
-    int skip_estimate_duration_from_pts;
-
-    /**
-     * Maximum number of packets that can be probed
-     * - encoding: unused
-     * - decoding: set by user
-     */
-    int max_probe_packets;
 
     /**
      * A callback for closing the streams opened with AVFormatContext.io_open().
@@ -1740,12 +1884,16 @@ typedef struct AVFormatContext {
  */
 void av_format_inject_global_side_data(AVFormatContext *s);
 
+#if FF_API_GET_DUR_ESTIMATE_METHOD
 /**
  * Returns the method used to set ctx->duration.
  *
  * @return AVFMT_DURATION_FROM_PTS, AVFMT_DURATION_FROM_STREAM, or AVFMT_DURATION_FROM_BITRATE.
+ * @deprecated duration_estimation_method is public and can be read directly.
  */
+attribute_deprecated
 enum AVDurationEstimationMethod av_fmt_ctx_get_duration_estimation_method(const AVFormatContext* ctx);
+#endif
 
 /**
  * @defgroup lavf_core Core functions
@@ -1845,6 +1993,42 @@ const AVClass *avformat_get_class(void);
 const AVClass *av_stream_get_class(void);
 
 /**
+ * Get the AVClass for AVStreamGroup. It can be used in combination with
+ * AV_OPT_SEARCH_FAKE_OBJ for examining options.
+ *
+ * @see av_opt_find().
+ */
+const AVClass *av_stream_group_get_class(void);
+
+/**
+ * @return a string identifying the stream group type, or NULL if unknown
+ */
+const char *avformat_stream_group_name(enum AVStreamGroupParamsType type);
+
+/**
+ * Add a new empty stream group to a media file.
+ *
+ * When demuxing, it may be called by the demuxer in read_header(). If the
+ * flag AVFMTCTX_NOHEADER is set in s.ctx_flags, then it may also
+ * be called in read_packet().
+ *
+ * When muxing, may be called by the user before avformat_write_header().
+ *
+ * User is required to call avformat_free_context() to clean up the allocation
+ * by avformat_stream_group_create().
+ *
+ * New streams can be added to the group with avformat_stream_group_add_stream().
+ *
+ * @param s media file handle
+ *
+ * @return newly created group or NULL on error.
+ * @see avformat_new_stream, avformat_stream_group_add_stream.
+ */
+AVStreamGroup *avformat_stream_group_create(AVFormatContext *s,
+                                            enum AVStreamGroupParamsType type,
+                                            AVDictionary **options);
+
+/**
  * Add a new stream to a media file.
  *
  * When demuxing, it is called by the demuxer in read_header(). If the
@@ -1862,6 +2046,31 @@ const AVClass *av_stream_get_class(void);
  * @return newly created stream or NULL on error.
  */
 AVStream *avformat_new_stream(AVFormatContext *s, const struct AVCodec *c);
+
+/**
+ * Add an already allocated stream to a stream group.
+ *
+ * When demuxing, it may be called by the demuxer in read_header(). If the
+ * flag AVFMTCTX_NOHEADER is set in s.ctx_flags, then it may also
+ * be called in read_packet().
+ *
+ * When muxing, may be called by the user before avformat_write_header() after
+ * having allocated a new group with avformat_stream_group_create() and stream with
+ * avformat_new_stream().
+ *
+ * User is required to call avformat_free_context() to clean up the allocation
+ * by avformat_stream_group_add_stream().
+ *
+ * @param stg stream group belonging to a media file.
+ * @param st  stream in the media file to add to the group.
+ *
+ * @retval 0                 success
+ * @retval AVERROR(EEXIST)   the stream was already in the group
+ * @retval "another negative error code" legitimate errors
+ *
+ * @see avformat_new_stream, avformat_stream_group_create.
+ */
+int avformat_stream_group_add_stream(AVStreamGroup *stg, AVStream *st);
 
 #if FF_API_AVSTREAM_SIDE_DATA
 /**
