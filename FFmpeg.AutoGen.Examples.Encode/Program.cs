@@ -187,16 +187,16 @@ namespace FFmpeg.AutoGen.Examples.Encode
         /* select layout with the highest channel count */
         static ulong select_channel_layout(AVCodec* codec)
         {
-            ulong* p;
+            var p;
             ulong best_ch_layout = 0;
             int best_nb_channels = 0;
 
-            if (codec->channel_layouts == null)
+            if (codec->@ch_layouts == null)
                 return ffmpeg.AV_CH_LAYOUT_STEREO;
 
-            p = codec->channel_layouts;
+            p = codec->@ch_layouts;
             while (*p != 0) {
-                int nb_channels = ffmpeg.av_get_channel_layout_nb_channels(*p);
+                int nb_channels = ffmpeg.av_buffersink_get_channels(*p);
 
                 if (nb_channels > best_nb_channels) {
                     best_ch_layout    = *p;
