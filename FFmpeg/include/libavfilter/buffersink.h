@@ -55,6 +55,8 @@
  * The format can be constrained by setting options, using av_opt_set() and
  * related functions with the AV_OPT_SEARCH_CHILDREN flag.
  *  - pix_fmts (int list),
+ *  - color_spaces (int list),
+ *  - color_ranges (int list),
  *  - sample_fmts (int list),
  *  - sample_rates (int list),
  *  - ch_layouts (string),
@@ -117,12 +119,10 @@ AVRational       av_buffersink_get_frame_rate          (const AVFilterContext *c
 int              av_buffersink_get_w                   (const AVFilterContext *ctx);
 int              av_buffersink_get_h                   (const AVFilterContext *ctx);
 AVRational       av_buffersink_get_sample_aspect_ratio (const AVFilterContext *ctx);
+enum AVColorSpace av_buffersink_get_colorspace         (const AVFilterContext *ctx);
+enum AVColorRange av_buffersink_get_color_range        (const AVFilterContext *ctx);
 
 int              av_buffersink_get_channels            (const AVFilterContext *ctx);
-#if FF_API_OLD_CHANNEL_LAYOUT
-attribute_deprecated
-uint64_t         av_buffersink_get_channel_layout      (const AVFilterContext *ctx);
-#endif
 int              av_buffersink_get_ch_layout           (const AVFilterContext *ctx,
                                                         AVChannelLayout *ch_layout);
 int              av_buffersink_get_sample_rate         (const AVFilterContext *ctx);
