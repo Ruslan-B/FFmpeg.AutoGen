@@ -12,6 +12,7 @@ internal sealed record ProcessingContext
     public Dictionary<string, string> WellKnownEnumItems { get; init; } = new();
     public Dictionary<string, FunctionExport> FunctionExportMap { get; init; } = new();
     public List<IDefinition> Definitions { get; init; } = new();
+    public bool NoCustomStringMarshal { get; init; } = false;
 
     public void AddDefinition(IDefinition definition)
     {
