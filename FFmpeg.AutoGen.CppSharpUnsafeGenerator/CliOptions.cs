@@ -59,6 +59,10 @@ public class CliOptions
         HelpText = "Print details during execution.")]
     public bool Verbose { get; set; }
 
+    [Option("fileHeader",
+        HelpText = "Optional string to use as header for generated files.")]
+    public string FileHeader { get; set; }
+
     public static CliOptions ParseArgumentsStrict(string[] args)
     {
         var result = CommandLine.Parser.Default.ParseArguments<CliOptions>(args);

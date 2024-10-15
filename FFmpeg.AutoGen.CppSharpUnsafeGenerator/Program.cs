@@ -66,7 +66,8 @@ internal class Program
                 .ToDictionary(x => x.LibraryName, x => x.LibraryVersion),
             Definitions = processingContext.Definitions.ToArray(),
             ExistingInlineFunctionMap = inlineFunctions.ToDictionary(f => f.Name),
-            SolutionDir = options.SolutionDir
+            SolutionDir = options.SolutionDir,
+            FileHeader = options.FileHeader,
         };
 
         GenerateLegacyFFmpegAutoGen(generationContext);
