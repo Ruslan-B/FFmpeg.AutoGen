@@ -359,6 +359,11 @@ public static unsafe partial class ffmpeg
     /// <returns>the channel with the given name AV_CHAN_NONE when name does not identify a known channel</returns>
     public static AVChannel av_channel_from_string(string @name) => vectors.av_channel_from_string(@name);
     
+    /// <summary>Return the order if the layout is n-th order standard-order ambisonic. The presence of optional extra non-diegetic channels at the end is not taken into account.</summary>
+    /// <param name="channel_layout">input channel layout</param>
+    /// <returns>the order of the layout, a negative error code otherwise.</returns>
+    public static int av_channel_layout_ambisonic_order(AVChannelLayout* @channel_layout) => vectors.av_channel_layout_ambisonic_order(@channel_layout);
+    
     /// <summary>Get the channel with the given index in a channel layout.</summary>
     /// <param name="channel_layout">input channel layout</param>
     /// <param name="idx">index of the channel</param>
@@ -911,13 +916,26 @@ public static unsafe partial class ffmpeg
     /// <returns>0 on success, a negative AVERROR on error. On error, dst is unreferenced.</returns>
     public static int av_frame_replace(AVFrame* @dst, AVFrame* @src) => vectors.av_frame_replace(@dst, @src);
     
+    /// <summary>Add a new side data entry to an array from an existing AVBufferRef.</summary>
+    /// <param name="sd">pointer to array of side data to which to add another entry, or to NULL in order to start a new array.</param>
+    /// <param name="nb_sd">pointer to an integer containing the number of entries in the array.</param>
+    /// <param name="type">type of the added side data</param>
+    /// <param name="buf">Pointer to AVBufferRef to add to the array. On success, the function takes ownership of the AVBufferRef and *buf is set to NULL, unless AV_FRAME_SIDE_DATA_FLAG_NEW_REF is set in which case the ownership will remain with the caller.</param>
+    /// <param name="flags">Some combination of AV_FRAME_SIDE_DATA_FLAG_* flags, or 0.</param>
+    /// <returns>newly added side data on success, NULL on error.</returns>
+    public static AVFrameSideData* av_frame_side_data_add(AVFrameSideData*** @sd, int* @nb_sd, AVFrameSideDataType @type, AVBufferRef** @buf, uint @flags) => vectors.av_frame_side_data_add(@sd, @nb_sd, @type, @buf, @flags);
+    
     /// <summary>Add a new side data entry to an array based on existing side data, taking a reference towards the contained AVBufferRef.</summary>
     /// <param name="sd">pointer to array of side data to which to add another entry, or to NULL in order to start a new array.</param>
     /// <param name="nb_sd">pointer to an integer containing the number of entries in the array.</param>
     /// <param name="src">side data to be cloned, with a new reference utilized for the buffer.</param>
     /// <param name="flags">Some combination of AV_FRAME_SIDE_DATA_FLAG_* flags, or 0.</param>
-    /// <returns>negative error code on failure, &gt;=0 on success. In case of AV_FRAME_SIDE_DATA_FLAG_UNIQUE being set, entries of matching AVFrameSideDataType will be removed before the addition is attempted.</returns>
+    /// <returns>negative error code on failure, &gt;=0 on success.</returns>
     public static int av_frame_side_data_clone(AVFrameSideData*** @sd, int* @nb_sd, AVFrameSideData* @src, uint @flags) => vectors.av_frame_side_data_clone(@sd, @nb_sd, @src, @flags);
+    
+    /// <summary>Returns side data descriptor corresponding to a given side data type, NULL when not available.</summary>
+    /// <returns>side data descriptor corresponding to a given side data type, NULL when not available.</returns>
+    public static AVSideDataDescriptor* av_frame_side_data_desc(AVFrameSideDataType @type) => vectors.av_frame_side_data_desc(@type);
     
     /// <summary>Free all side data entries and their contents, then zeroes out the values which the pointers are pointing to.</summary>
     /// <param name="sd">pointer to array of side data to free. Will be set to NULL upon return.</param>
@@ -941,8 +959,11 @@ public static unsafe partial class ffmpeg
     /// <param name="type">type of the added side data</param>
     /// <param name="size">size of the side data</param>
     /// <param name="flags">Some combination of AV_FRAME_SIDE_DATA_FLAG_* flags, or 0.</param>
-    /// <returns>newly added side data on success, NULL on error. In case of AV_FRAME_SIDE_DATA_FLAG_UNIQUE being set, entries of matching AVFrameSideDataType will be removed before the addition is attempted.</returns>
+    /// <returns>newly added side data on success, NULL on error.</returns>
     public static AVFrameSideData* av_frame_side_data_new(AVFrameSideData*** @sd, int* @nb_sd, AVFrameSideDataType @type, ulong @size, uint @flags) => vectors.av_frame_side_data_new(@sd, @nb_sd, @type, @size, @flags);
+    
+    /// <summary>Remove and free all side data instances of the given type from an array.</summary>
+    public static void av_frame_side_data_remove(AVFrameSideData*** @sd, int* @nb_sd, AVFrameSideDataType @type) => vectors.av_frame_side_data_remove(@sd, @nb_sd, @type);
     
     /// <summary>Unreference all the buffers referenced by frame and reset the frame fields.</summary>
     public static void av_frame_unref(AVFrame* @frame) => vectors.av_frame_unref(@frame);
@@ -1505,6 +1526,10 @@ public static unsafe partial class ffmpeg
     /// <returns>An AVMasteringDisplayMetadata filled with default values or NULL on failure.</returns>
     public static AVMasteringDisplayMetadata* av_mastering_display_metadata_alloc() => vectors.av_mastering_display_metadata_alloc();
     
+    /// <summary>Allocate an AVMasteringDisplayMetadata structure and set its fields to default values. The resulting struct can be freed using av_freep().</summary>
+    /// <returns>An AVMasteringDisplayMetadata filled with default values or NULL on failure.</returns>
+    public static AVMasteringDisplayMetadata* av_mastering_display_metadata_alloc_size(ulong* @size) => vectors.av_mastering_display_metadata_alloc_size(@size);
+    
     /// <summary>Allocate a complete AVMasteringDisplayMetadata and add it to the frame.</summary>
     /// <param name="frame">The frame which side data is added to.</param>
     /// <returns>The AVMasteringDisplayMetadata structure to be filled by caller.</returns>
@@ -1590,6 +1615,8 @@ public static unsafe partial class ffmpeg
     
     public static int av_opt_eval_q(void* @obj, AVOption* @o, string @val, AVRational* @q_out) => vectors.av_opt_eval_q(@obj, @o, @val, @q_out);
     
+    public static int av_opt_eval_uint(void* @obj, AVOption* @o, string @val, uint* @uint_out) => vectors.av_opt_eval_uint(@obj, @o, @val, @uint_out);
+    
     /// <summary>Look for an option in an object. Consider only options which have all the specified flags set.</summary>
     /// <param name="obj">A pointer to a struct whose first element is a pointer to an AVClass. Alternatively a double pointer to an AVClass, if AV_OPT_SEARCH_FAKE_OBJ search flag is set.</param>
     /// <param name="name">The name of the option to look for.</param>
@@ -1629,6 +1656,17 @@ public static unsafe partial class ffmpeg
     /// <returns>&gt;=0 on success, a negative error code otherwise</returns>
     public static int av_opt_get(void* @obj, string @name, int @search_flags, byte** @out_val) => vectors.av_opt_get(@obj, @name, @search_flags, @out_val);
     
+    /// <summary>For an array-type option, retrieve the values of one or more array elements.</summary>
+    /// <param name="start_elem">index of the first array element to retrieve</param>
+    /// <param name="nb_elems">number of array elements to retrieve; start_elem+nb_elems must not be larger than array size as returned by av_opt_get_array_size()</param>
+    /// <param name="out_type">Option type corresponding to the desired output.</param>
+    /// <param name="out_val">Array with nb_elems members into which the output will be written. The array type must match the underlying C type as documented for out_type, and be zeroed on entry to this function.</param>
+    public static int av_opt_get_array(void* @obj, string @name, int @search_flags, uint @start_elem, uint @nb_elems, AVOptionType @out_type, void* @out_val) => vectors.av_opt_get_array(@obj, @name, @search_flags, @start_elem, @nb_elems, @out_type, @out_val);
+    
+    /// <summary>For an array-type option, get the number of elements in the array.</summary>
+    public static int av_opt_get_array_size(void* @obj, string @name, int @search_flags, uint* @out_val) => vectors.av_opt_get_array_size(@obj, @name, @search_flags, @out_val);
+    
+    /// <param name="layout">The returned layout is a copy of the actual value and must be freed with av_channel_layout_uninit() by the caller</param>
     public static int av_opt_get_chlayout(void* @obj, string @name, int @search_flags, AVChannelLayout* @layout) => vectors.av_opt_get_chlayout(@obj, @name, @search_flags, @layout);
     
     /// <param name="out_val">The returned dictionary is a copy of the actual value and must be freed with av_dict_free() by the caller</param>
@@ -1707,6 +1745,13 @@ public static unsafe partial class ffmpeg
     /// <param name="search_flags">flags passed to av_opt_find2. I.e. if AV_OPT_SEARCH_CHILDREN is passed here, then the option may be set on a child of obj.</param>
     /// <returns>0 if the value has been set, or an AVERROR code in case of error: AVERROR_OPTION_NOT_FOUND if no matching option exists AVERROR(ERANGE) if the value is out of range AVERROR(EINVAL) if the value is not valid</returns>
     public static int av_opt_set(void* @obj, string @name, string @val, int @search_flags) => vectors.av_opt_set(@obj, @name, @val, @search_flags);
+    
+    /// <summary>Add, replace, or remove elements for an array option. Which of these operations is performed depends on the values of val and search_flags.</summary>
+    /// <param name="start_elem">Index of the first array element to modify; must not be larger than array size as returned by av_opt_get_array_size().</param>
+    /// <param name="nb_elems">number of array elements to modify; when val is NULL, start_elem+nb_elems must not be larger than array size as returned by av_opt_get_array_size()</param>
+    /// <param name="val_type">Option type corresponding to the type of val, ignored when val is NULL.</param>
+    /// <param name="val">Array with nb_elems elements or NULL.</param>
+    public static int av_opt_set_array(void* @obj, string @name, int @search_flags, uint @start_elem, uint @nb_elems, AVOptionType @val_type, void* @val) => vectors.av_opt_set_array(@obj, @name, @search_flags, @start_elem, @nb_elems, @val_type, @val);
     
     public static int av_opt_set_bin(void* @obj, string @name, byte* @val, int @size, int @search_flags) => vectors.av_opt_set_bin(@obj, @name, @val, @size, @search_flags);
     
@@ -2208,8 +2253,7 @@ public static unsafe partial class ffmpeg
     /// <summary>Get the AVClass for AVStream. It can be used in combination with AV_OPT_SEARCH_FAKE_OBJ for examining options.</summary>
     public static AVClass* av_stream_get_class() => vectors.av_stream_get_class();
     
-    /// <summary>Get the internal codec timebase from a stream.</summary>
-    /// <param name="st">input stream to extract the timebase from</param>
+    [Obsolete("do not call this function")]
     public static AVRational av_stream_get_codec_timebase(AVStream* @st) => vectors.av_stream_get_codec_timebase(@st);
     
     public static AVCodecParserContext* av_stream_get_parser(AVStream* @s) => vectors.av_stream_get_parser(@s);
@@ -2542,6 +2586,15 @@ public static unsafe partial class ffmpeg
     
     /// <summary>Get the AVClass for AVSubtitleRect. It can be used in combination with AV_OPT_SEARCH_FAKE_OBJ for examining options.</summary>
     public static AVClass* avcodec_get_subtitle_rect_class() => vectors.avcodec_get_subtitle_rect_class();
+    
+    /// <summary>Retrieve a list of all supported values for a given configuration type.</summary>
+    /// <param name="avctx">An optional context to use. Values such as `strict_std_compliance` may affect the result. If NULL, default values are used.</param>
+    /// <param name="codec">The codec to query, or NULL to use avctx-&gt;codec.</param>
+    /// <param name="config">The configuration to query.</param>
+    /// <param name="flags">Currently unused; should be set to zero.</param>
+    /// <param name="out_configs">On success, set to a list of configurations, terminated by a config-specific terminator, or NULL if all possible values are supported.</param>
+    /// <param name="out_num_configs">On success, set to the number of elements in out_configs, excluding the terminator. Optional.</param>
+    public static int avcodec_get_supported_config(AVCodecContext* @avctx, AVCodec* @codec, AVCodecConfig @config, uint @flags, void** @out_configs, int* @out_num_configs) => vectors.avcodec_get_supported_config(@avctx, @codec, @config, @flags, @out_configs, @out_num_configs);
     
     /// <summary>Get the type of the given codec.</summary>
     public static AVMediaType avcodec_get_type(AVCodecID @codec_id) => vectors.avcodec_get_type(@codec_id);
@@ -3002,11 +3055,7 @@ public static unsafe partial class ffmpeg
     /// <returns>a string identifying the stream group type, or NULL if unknown</returns>
     public static string avformat_stream_group_name(AVStreamGroupParamsType @type) => vectors.avformat_stream_group_name(@type);
     
-    /// <summary>Transfer internal timing information from one stream to another.</summary>
-    /// <param name="ofmt">target output format for ost</param>
-    /// <param name="ost">output stream which needs timings copy and adjustments</param>
-    /// <param name="ist">reference input stream to copy timings from</param>
-    /// <param name="copy_tb">define from where the stream codec timebase needs to be imported</param>
+    [Obsolete("do not call this function")]
     public static int avformat_transfer_internal_stream_timing_info(AVOutputFormat* @ofmt, AVStream* @ost, AVStream* @ist, AVTimebaseSource @copy_tb) => vectors.avformat_transfer_internal_stream_timing_info(@ofmt, @ost, @ist, @copy_tb);
     
     /// <summary>Return the LIBAVFORMAT_VERSION_INT constant.</summary>

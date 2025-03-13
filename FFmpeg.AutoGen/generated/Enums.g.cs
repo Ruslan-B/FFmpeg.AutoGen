@@ -101,6 +101,14 @@ public enum AVChannel : int
     @AV_CHAN_BOTTOM_FRONT_LEFT = 39,
     /// <summary>See above.</summary>
     @AV_CHAN_BOTTOM_FRONT_RIGHT = 40,
+    /// <summary>+90 degrees, Lss, SiL</summary>
+    @AV_CHAN_SIDE_SURROUND_LEFT = 41,
+    /// <summary>-90 degrees, Rss, SiR</summary>
+    @AV_CHAN_SIDE_SURROUND_RIGHT = 42,
+    /// <summary>+110 degrees, Lvs, TpLS</summary>
+    @AV_CHAN_TOP_SURROUND_LEFT = 43,
+    /// <summary>-110 degrees, Rvs, TpRS</summary>
+    @AV_CHAN_TOP_SURROUND_RIGHT = 44,
     /// <summary>Channel is empty can be safely skipped.</summary>
     @AV_CHAN_UNUSED = 512,
     /// <summary>Channel contains data, but its position is unknown.</summary>
@@ -163,6 +171,24 @@ public enum AVClassCategory : int
     @AV_CLASS_CATEGORY_DEVICE_INPUT = 45,
     /// <summary>not part of ABI/API</summary>
     @AV_CLASS_CATEGORY_NB = 46,
+}
+
+public enum AVCodecConfig : int
+{
+    /// <summary>AVPixelFormat, terminated by AV_PIX_FMT_NONE</summary>
+    @AV_CODEC_CONFIG_PIX_FORMAT = 0,
+    /// <summary>AVRational, terminated by {0, 0}</summary>
+    @AV_CODEC_CONFIG_FRAME_RATE = 1,
+    /// <summary>int, terminated by 0</summary>
+    @AV_CODEC_CONFIG_SAMPLE_RATE = 2,
+    /// <summary>AVSampleFormat, terminated by AV_SAMPLE_FMT_NONE</summary>
+    @AV_CODEC_CONFIG_SAMPLE_FORMAT = 3,
+    /// <summary>AVChannelLayout, terminated by {0}</summary>
+    @AV_CODEC_CONFIG_CHANNEL_LAYOUT = 4,
+    /// <summary>AVColorRange, terminated by AVCOL_RANGE_UNSPECIFIED</summary>
+    @AV_CODEC_CONFIG_COLOR_RANGE = 5,
+    /// <summary>AVColorSpace, terminated by AVCOL_SPC_UNSPECIFIED</summary>
+    @AV_CODEC_CONFIG_COLOR_SPACE = 6,
 }
 
 /// <summary>Identify the syntax and semantics of the bitstream. The principle is roughly: Two decoders with the same ID can decode the same streams. Two encoders with the same ID can encode compatible streams. There may be slight deviations from the principle due to implementation details.</summary>
@@ -651,6 +677,7 @@ public enum AVCodecID : int
     @AV_CODEC_ID_AC4 = 86119,
     @AV_CODEC_ID_OSQ = 86120,
     @AV_CODEC_ID_QOA = 86121,
+    @AV_CODEC_ID_LC3 = 86122,
     /// <summary>A dummy ID pointing at the start of subtitle codecs.</summary>
     @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
     @AV_CODEC_ID_DVD_SUBTITLE = 94208,
@@ -695,6 +722,7 @@ public enum AVCodecID : int
     @AV_CODEC_ID_TIMED_ID3 = 98313,
     @AV_CODEC_ID_BIN_DATA = 98314,
     @AV_CODEC_ID_SMPTE_2038 = 98315,
+    @AV_CODEC_ID_LCEVC = 98316,
     /// <summary>codec_id is not known (like AV_CODEC_ID_NONE) but lavf should attempt to identify it</summary>
     @AV_CODEC_ID_PROBE = 102400,
     /// <summary>_FAKE_ codec to indicate a raw MPEG-2 TS stream (only used by libavformat)</summary>
@@ -790,8 +818,14 @@ public enum AVColorSpace : int
     @AVCOL_SPC_CHROMA_DERIVED_CL = 13,
     /// <summary>ITU-R BT.2100-0, ICtCp</summary>
     @AVCOL_SPC_ICTCP = 14,
+    /// <summary>SMPTE ST 2128, IPT-C2</summary>
+    @AVCOL_SPC_IPT_C2 = 15,
+    /// <summary>YCgCo-R, even addition of bits</summary>
+    @AVCOL_SPC_YCGCO_RE = 16,
+    /// <summary>YCgCo-R, odd addition of bits</summary>
+    @AVCOL_SPC_YCGCO_RO = 17,
     /// <summary>Not part of ABI</summary>
-    @AVCOL_SPC_NB = 15,
+    @AVCOL_SPC_NB = 18,
 }
 
 /// <summary>Color Transfer Characteristic. These values match the ones defined by ISO/IEC 23091-2_2019 subclause 8.2.</summary>
@@ -966,6 +1000,10 @@ public enum AVFrameSideDataType : int
     @AV_FRAME_DATA_AMBIENT_VIEWING_ENVIRONMENT = 26,
     /// <summary>Provide encoder-specific hinting information about changed/unchanged portions of a frame. It can be used to pass information about which macroblocks can be skipped because they didn&apos;t change from the corresponding ones in the previous frame. This could be useful for applications which know this information in advance to speed up encoding.</summary>
     @AV_FRAME_DATA_VIDEO_HINT = 27,
+    /// <summary>Raw LCEVC payload data, as a uint8_t array, with NAL emulation bytes intact.</summary>
+    @AV_FRAME_DATA_LCEVC = 28,
+    /// <summary>This side data must be associated with a video frame. The presence of this side data indicates that the video stream is composed of multiple views (e.g. stereoscopic 3D content, cf. H.264 Annex H or H.265 Annex G). The data is an int storing the view ID.</summary>
+    @AV_FRAME_DATA_VIEW_ID = 29,
 }
 
 /// <summary>Option for overlapping elliptical pixel selectors in an image.</summary>
@@ -1060,31 +1098,49 @@ public enum AVMediaType : int
     @AVMEDIA_TYPE_NB = 5,
 }
 
-/// <summary>@{ AVOptions provide a generic system to declare options on arbitrary structs (&quot;objects&quot;). An option can have a help text, a type and a range of possible values. Options may then be enumerated, read and written to.</summary>
+/// <summary>An option type determines: - for native access, the underlying C type of the field that an AVOption refers to; - for foreign access, the semantics of accessing the option through this API, e.g. which av_opt_get_*() and av_opt_set_*() functions can be called, or what format will av_opt_get()/av_opt_set() expect/produce.</summary>
 public enum AVOptionType : int
 {
+    /// <summary>Underlying C type is unsigned int.</summary>
     @AV_OPT_TYPE_FLAGS = 1,
+    /// <summary>Underlying C type is int.</summary>
     @AV_OPT_TYPE_INT = 2,
+    /// <summary>Underlying C type is int64_t.</summary>
     @AV_OPT_TYPE_INT64 = 3,
+    /// <summary>Underlying C type is double.</summary>
     @AV_OPT_TYPE_DOUBLE = 4,
+    /// <summary>Underlying C type is float.</summary>
     @AV_OPT_TYPE_FLOAT = 5,
+    /// <summary>Underlying C type is a uint8_t* that is either NULL or points to a C string allocated with the av_malloc() family of functions.</summary>
     @AV_OPT_TYPE_STRING = 6,
+    /// <summary>Underlying C type is AVRational.</summary>
     @AV_OPT_TYPE_RATIONAL = 7,
-    /// <summary>offset must point to a pointer immediately followed by an int for the length</summary>
+    /// <summary>Underlying C type is a uint8_t* that is either NULL or points to an array allocated with the av_malloc() family of functions. The pointer is immediately followed by an int containing the array length in bytes.</summary>
     @AV_OPT_TYPE_BINARY = 8,
+    /// <summary>Underlying C type is AVDictionary*.</summary>
     @AV_OPT_TYPE_DICT = 9,
+    /// <summary>Underlying C type is uint64_t.</summary>
     @AV_OPT_TYPE_UINT64 = 10,
+    /// <summary>Special option type for declaring named constants. Does not correspond to an actual field in the object, offset must be 0.</summary>
     @AV_OPT_TYPE_CONST = 11,
-    /// <summary>offset must point to two consecutive integers</summary>
+    /// <summary>Underlying C type is two consecutive integers.</summary>
     @AV_OPT_TYPE_IMAGE_SIZE = 12,
+    /// <summary>Underlying C type is enum AVPixelFormat.</summary>
     @AV_OPT_TYPE_PIXEL_FMT = 13,
+    /// <summary>Underlying C type is enum AVSampleFormat.</summary>
     @AV_OPT_TYPE_SAMPLE_FMT = 14,
-    /// <summary>offset must point to AVRational</summary>
+    /// <summary>Underlying C type is AVRational.</summary>
     @AV_OPT_TYPE_VIDEO_RATE = 15,
+    /// <summary>Underlying C type is int64_t.</summary>
     @AV_OPT_TYPE_DURATION = 16,
+    /// <summary>Underlying C type is uint8_t[4].</summary>
     @AV_OPT_TYPE_COLOR = 17,
+    /// <summary>Underlying C type is int.</summary>
     @AV_OPT_TYPE_BOOL = 18,
+    /// <summary>Underlying C type is AVChannelLayout.</summary>
     @AV_OPT_TYPE_CHLAYOUT = 19,
+    /// <summary>Underlying C type is unsigned int.</summary>
+    @AV_OPT_TYPE_UINT = 20,
     /// <summary>May be combined with another regular option type to declare an array option.</summary>
     @AV_OPT_TYPE_FLAG_ARRAY = 65536,
 }
@@ -1164,8 +1220,12 @@ public enum AVPacketSideDataType : int
     @AV_PKT_DATA_IAMF_RECON_GAIN_INFO_PARAM = 34,
     /// <summary>Ambient viewing environment metadata, as defined by H.274. This metadata should be associated with a video stream and contains data in the form of the AVAmbientViewingEnvironment struct.</summary>
     @AV_PKT_DATA_AMBIENT_VIEWING_ENVIRONMENT = 35,
+    /// <summary>The number of pixels to discard from the top/bottom/left/right border of the decoded frame to obtain the sub-rectangle intended for presentation.</summary>
+    @AV_PKT_DATA_FRAME_CROPPING = 36,
+    /// <summary>Raw LCEVC payload data, as a uint8_t array, with NAL emulation bytes intact.</summary>
+    @AV_PKT_DATA_LCEVC = 37,
     /// <summary>The number of side data types. This is not part of the public API/ABI in the sense that it may change when new side data types are added. This must stay the last enum value. If its value becomes huge, some code using it needs to be updated as it assumes it to be smaller than other limits.</summary>
-    @AV_PKT_DATA_NB = 36,
+    @AV_PKT_DATA_NB = 38,
 }
 
 /// <summary>@{</summary>
@@ -1726,12 +1786,21 @@ public enum AVSideDataParamChangeFlags : int
     @AV_SIDE_DATA_PARAM_CHANGE_DIMENSIONS = 8,
 }
 
+public enum AVSideDataProps : int
+{
+    /// <summary>The side data type can be used in stream-global structures. Side data types without this property are only meaningful on per-frame basis.</summary>
+    @AV_SIDE_DATA_PROP_GLOBAL = 1,
+    /// <summary>Multiple instances of this side data type can be meaningfully present in a single side data array.</summary>
+    @AV_SIDE_DATA_PROP_MULTI = 2,
+}
+
 public enum AVStreamGroupParamsType : int
 {
     @AV_STREAM_GROUP_PARAMS_NONE = 0,
     @AV_STREAM_GROUP_PARAMS_IAMF_AUDIO_ELEMENT = 1,
     @AV_STREAM_GROUP_PARAMS_IAMF_MIX_PRESENTATION = 2,
     @AV_STREAM_GROUP_PARAMS_TILE_GRID = 3,
+    @AV_STREAM_GROUP_PARAMS_LCEVC = 4,
 }
 
 /// <summary>@}</summary>

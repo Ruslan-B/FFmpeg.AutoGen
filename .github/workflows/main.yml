@@ -13,6 +13,9 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
       - name: Install FFmpeg - linux
         if: matrix.os == 'ubuntu-latest'
         run: |
@@ -23,7 +26,7 @@ jobs:
       - name: Test
         run: |
           dotnet test -c Release
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         if: matrix.os == 'windows-latest'
         with:
           path: FFmpeg.AutoGen/bin/Release/*.nupkg

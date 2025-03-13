@@ -12,6 +12,14 @@ public unsafe struct _query_func_func
 }
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+public unsafe delegate int _query_func2 (AVFilterContext* @p0, AVFilterFormatsConfig** @cfg_in, AVFilterFormatsConfig** @cfg_out);
+public unsafe struct _query_func2_func
+{
+    public IntPtr Pointer;
+    public static implicit operator _query_func2_func(_query_func2 func) => new _query_func2_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+}
+
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate void av_buffer_create_free (void* @opaque, byte* @data);
 public unsafe struct av_buffer_create_free_func
 {
