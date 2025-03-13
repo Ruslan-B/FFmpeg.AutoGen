@@ -58,13 +58,13 @@ public static unsafe partial class ffmpeg
     /// <param name="p">bit position to clip at</param>
     /// <returns>clipped value</returns>
     public static int av_clip_intp2_c(int @a, int @p)
-    {
-        if ((((uint)a + (1 << p)) & ~((2 << p) - 1)) != 0)
-            return (a >> 31) ^ ((1 << p) - 1);
-        else
-            return a;
-    }
-    // original body hash: /qM73AkEE6w4/NOhpvKw1SVRZPxbN61+Yqc3i9L/2bM=
+{
+    if ((((uint)a + (1U << p)) & ~((2U << p) - 1)) != 0)
+        return (a >> 31) ^ ((1 << p) - 1);
+    else
+        return a;
+}
+    // original body hash: H4R9TdJsLPxie0kMNORwLhiEFWSn5cG8vNmgEcRcwaE=
     
     /// <summary>Clip a signed integer value into the 0-65535 range.</summary>
     /// <param name="a">value to clip</param>
@@ -95,13 +95,13 @@ public static unsafe partial class ffmpeg
     /// <param name="p">bit position to clip at</param>
     /// <returns>clipped value</returns>
     public static uint av_clip_uintp2_c(int @a, int @p)
-    {
-        if ((a & ~((1 << p) - 1)) != 0)
-            return (uint)((~a) >> 31 & ((1 << p) - 1));
-        else
-            return (uint)a;
-    }
-    // original body hash: 01v+7HjG6Id/YAdTCeWBkPwvakfGiCosPM6u5MXI8pU=
+{
+    if ((a & ~((1U << p) - 1)) != 0)
+        return (uint)(~a) >> 31 & ((1U << p) - 1);
+    else
+        return (uint)a;
+}
+    // original body hash: e+b5mkBcLXfL9tlPoRVY9A8fy1jLPsqovjAobPBirRs=
     
     /// <summary>Clip a signed 64bit integer value into the amin-amax range.</summary>
     /// <param name="a">value to clip</param>
@@ -145,13 +145,13 @@ public static unsafe partial class ffmpeg
     /// <param name="a">value to clip</param>
     /// <returns>clipped value</returns>
     public static int av_clipl_int32_c(long @a)
-    {
-        if ((((ulong)a + 2147483648UL) & ~(4294967295UL)) != 0)
-            return (int)((a >> 63) ^ 2147483647);
-        else
-            return (int)a;
-    }
-    // original body hash: 00dWv9FNYsEeRh1lPjYlSw3TQiOlthet3Kyi6z91Hbo=
+{
+    if ((((ulong)a + (2147483648UL)) & ~(4294967295UL)) != 0)
+        return (int)((a >> 63) ^ 2147483647);
+    else
+        return (int)a;
+}
+    // original body hash: hVbFRW9NmALaR5Wqm8W2hfXu9xV8Kg7CEndQKK0wY4I=
     
     /// <summary>Compare two rationals.</summary>
     /// <param name="a">First rational</param>
@@ -243,15 +243,12 @@ public static unsafe partial class ffmpeg
     }
     // original body hash: IAPYNNcg3GX0PGxINeLQhb41dH921lPVKcnqxCk7ERA=
     
-    /// <summary>Clear high bits from an unsigned integer starting with specific bit position</summary>
-    /// <param name="a">value to clip</param>
-    /// <param name="p">bit position to clip at</param>
-    /// <returns>clipped value</returns>
+    [Obsolete()]
     public static uint av_mod_uintp2_c(uint @a, uint @p)
-    {
-        return a & (uint)((1 << (int)p) - 1);
-    }
-    // original body hash: ncn4Okxr9Nas1g/qCfpRHKtywuNmJuf3UED+o3wjadc=
+{
+    return av_zero_extend_c(a, p);
+}
+    // original body hash: MfDd5KRKGNiwvccdrrbME05wNKCRzGTF1T24OggAyp0=
     
     public static int av_parity_c(uint @v)
     {
@@ -370,6 +367,16 @@ public static unsafe partial class ffmpeg
         return (void*)(p != null ? p : x);
     }
     // original body hash: zOY924eIk3VeTSNb9XcE2Yw8aZ4/jlzQSfP06k5n0nU=
+    
+    /// <summary>Clear high bits from an unsigned integer starting with specific bit position</summary>
+    /// <param name="a">value to clip</param>
+    /// <param name="p">bit position to clip at. Must be between 0 and 31.</param>
+    /// <returns>clipped value</returns>
+    public static uint av_zero_extend_c(uint @a, uint @p)
+    {
+        return a & ((1U << (int)p) - 1);
+    }
+    // original body hash: ncn4Okxr9Nas1g/qCfpRHKtywuNmJuf3UED+o3wjadc=
     
     /// <summary>ftell() equivalent for AVIOContext.</summary>
     /// <returns>position or AVERROR.</returns>

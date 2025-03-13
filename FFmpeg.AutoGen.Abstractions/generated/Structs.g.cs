@@ -165,13 +165,13 @@ public unsafe partial struct AVCodec
     public int @capabilities;
     /// <summary>maximum value for lowres supported by the decoder</summary>
     public byte @max_lowres;
-    /// <summary>array of supported framerates, or NULL if any, array is terminated by {0,0}</summary>
+    [Obsolete("use avcodec_get_supported_config()")]
     public AVRational* @supported_framerates;
-    /// <summary>array of supported pixel formats, or NULL if unknown, array is terminated by -1</summary>
+    [Obsolete("use avcodec_get_supported_config()")]
     public AVPixelFormat* @pix_fmts;
-    /// <summary>array of supported audio samplerates, or NULL if unknown, array is terminated by 0</summary>
+    [Obsolete("use avcodec_get_supported_config()")]
     public int* @supported_samplerates;
-    /// <summary>array of supported sample formats, or NULL if unknown, array is terminated by -1</summary>
+    [Obsolete("use avcodec_get_supported_config()")]
     public AVSampleFormat* @sample_fmts;
     /// <summary>AVClass for the private context</summary>
     public AVClass* @priv_class;
@@ -180,6 +180,7 @@ public unsafe partial struct AVCodec
     /// <summary>Group name of the codec implementation. This is a short symbolic name of the wrapper backing this codec. A wrapper uses some kind of external implementation for the codec, such as an external library, or a codec implementation provided by the OS or the hardware. If this field is NULL, this is a builtin, libavcodec native codec. If non-NULL, this will be the suffix in AVCodec.name in most cases (usually AVCodec.name will be of the form &quot;&lt;codec_name&gt;_&lt;wrapper_name&gt;&quot;).</summary>
     public byte* @wrapper_name;
     /// <summary>Array of supported channel layouts, terminated with a zeroed layout.</summary>
+    [Obsolete("use avcodec_get_supported_config()")]
     public AVChannelLayout* @ch_layouts;
 }
 
@@ -870,6 +871,9 @@ public unsafe partial struct AVFilter_formats
     /// <summary>Query formats supported by the filter on its inputs and outputs.</summary>
     [FieldOffset(0)]
     public _query_func_func @query_func;
+    /// <summary>Same as query_func(), except this function writes the results into provided arrays.</summary>
+    [FieldOffset(0)]
+    public _query_func2_func @query_func2;
     /// <summary>A pointer to an array of admissible pixel formats delimited by AV_PIX_FMT_NONE. The generic code will use this list to indicate that this filter supports each of these pixel formats, provided that all inputs and outputs use the same pixel format.</summary>
     [FieldOffset(0)]
     public AVPixelFormat* @pixels_list;
@@ -1031,30 +1035,6 @@ public unsafe partial struct AVFilterLink
     public AVFilterFormatsConfig @incfg;
     /// <summary>Lists of supported formats / etc. supported by the output filter.</summary>
     public AVFilterFormatsConfig @outcfg;
-    /// <summary>Graph the filter belongs to.</summary>
-    public AVFilterGraph* @graph;
-    /// <summary>Current timestamp of the link, as defined by the most recent frame(s), in link time_base units.</summary>
-    public long @current_pts;
-    /// <summary>Current timestamp of the link, as defined by the most recent frame(s), in AV_TIME_BASE units.</summary>
-    public long @current_pts_us;
-    /// <summary>Frame rate of the stream on the link, or 1/0 if unknown or variable; if left to 0/0, will be automatically copied from the first input of the source filter if it exists.</summary>
-    public AVRational @frame_rate;
-    /// <summary>Minimum number of samples to filter at once. If filter_frame() is called with fewer samples, it will accumulate them in fifo. This field and the related ones must not be changed after filtering has started. If 0, all related fields are ignored.</summary>
-    public int @min_samples;
-    /// <summary>Maximum number of samples to filter at once. If filter_frame() is called with more samples, it will split them.</summary>
-    public int @max_samples;
-    /// <summary>Number of past frames sent through the link.</summary>
-    public long @frame_count_in;
-    /// <summary>Number of past frames sent through the link.</summary>
-    public long @frame_count_out;
-    /// <summary>Number of past samples sent through the link.</summary>
-    public long @sample_count_in;
-    /// <summary>Number of past samples sent through the link.</summary>
-    public long @sample_count_out;
-    /// <summary>True if a frame is currently wanted on the output of this filter. Set when ff_request_frame() is called by the output, cleared when a frame is filtered.</summary>
-    public int @frame_wanted_out;
-    /// <summary>For hwaccel pixel formats, this should be a reference to the AVHWFramesContext describing the frames.</summary>
-    public AVBufferRef* @hw_frames_ctx;
 }
 
 /// <summary>Parameters of a filter&apos;s input or output pad.</summary>
@@ -1223,6 +1203,8 @@ public unsafe partial struct AVFormatContext
     public AVFormatContext_io_open_func @io_open;
     /// <summary>A callback for closing the streams opened with AVFormatContext.io_open().</summary>
     public AVFormatContext_io_close2_func @io_close2;
+    /// <summary>Maximum number of bytes read from input in order to determine stream durations when using estimate_timings_from_pts in avformat_find_stream_info(). Demuxing only, set by the caller before avformat_find_stream_info(). Can be set to 0 to let avformat choose using a heuristic.</summary>
+    public long @duration_probesize;
 }
 
 /// <summary>This structure describes decoded (raw) audio or video data.</summary>
@@ -1841,6 +1823,15 @@ public unsafe partial struct AVRegionOfInterest
     public AVRational @qoffset;
 }
 
+/// <summary>This struct describes the properties of a side data type. Its instance corresponding to a given type can be obtained from av_frame_side_data_desc().</summary>
+public unsafe partial struct AVSideDataDescriptor
+{
+    /// <summary>Human-readable side data description.</summary>
+    public byte* @name;
+    /// <summary>Side data property flags, a combination of AVSideDataProps values.</summary>
+    public uint @props;
+}
+
 /// <summary>Stream structure. New fields can be added to the end with minor version bumps. Removal, reordering and changes to existing fields require a major version bump. sizeof(AVStream) must not be used outside libav*.</summary>
 public unsafe partial struct AVStream
 {
@@ -1918,6 +1909,20 @@ public unsafe partial struct AVStreamGroup_params
     public AVIAMFMixPresentation* @iamf_mix_presentation;
     [FieldOffset(0)]
     public AVStreamGroupTileGrid* @tile_grid;
+    [FieldOffset(0)]
+    public AVStreamGroupLCEVC* @lcevc;
+}
+
+/// <summary>AVStreamGroupLCEVC is meant to define the relation between video streams and a data stream containing LCEVC enhancement layer NALUs.</summary>
+public unsafe partial struct AVStreamGroupLCEVC
+{
+    public AVClass* @av_class;
+    /// <summary>Index of the LCEVC data stream in AVStreamGroup.</summary>
+    public uint @lcevc_index;
+    /// <summary>Width of the final stream for presentation.</summary>
+    public int @width;
+    /// <summary>Height of the final image for presentation.</summary>
+    public int @height;
 }
 
 /// <summary>AVStreamGroupTileGrid holds information on how to combine several independent images on a single canvas for presentation.</summary>
