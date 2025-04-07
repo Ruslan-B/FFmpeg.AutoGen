@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <PackageId>$(AssemblyName)</PackageId>
-    <Version>7.1.1</Version>
+    <Version>7.1.1.0</Version>
     <Authors>Ruslan Balanukhin</Authors>
     <Company>Rationale One</Company>
     <Product>FFmpeg.AutoGen</Product>
@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LICENSE.txt" Link="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
+    <None Include="$(MSBuildThisFileDirectory)README.md" Link="README.md" Pack="true" PackagePath="README.md" />
   </ItemGroup>
   
 </Project>
