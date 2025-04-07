@@ -12,6 +12,7 @@
     <FileVersion>$(Version)</FileVersion>
     <PackageTags>ffmpeg</PackageTags>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
