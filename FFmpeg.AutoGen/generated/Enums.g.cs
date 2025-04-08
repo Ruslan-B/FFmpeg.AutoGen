@@ -55,6 +55,17 @@ public enum AVAudioServiceType : int
     @AV_AUDIO_SERVICE_TYPE_NB = 9,
 }
 
+/// <summary>@{</summary>
+public enum AVBuffersrcFlag : int
+{
+    /// <summary>Do not check for format changes.</summary>
+    @AV_BUFFERSRC_FLAG_NO_CHECK_FORMAT = 1,
+    /// <summary>Immediately push the frame to the output.</summary>
+    @AV_BUFFERSRC_FLAG_PUSH = 4,
+    /// <summary>Keep a reference to the frame. If the frame if reference-counted, create a new reference; otherwise copy the frame data.</summary>
+    @AV_BUFFERSRC_FLAG_KEEP_REF = 8,
+}
+
 /// <summary>Audio channel layout utility functions</summary>
 public enum AVChannel : int
 {
@@ -189,6 +200,18 @@ public enum AVCodecConfig : int
     @AV_CODEC_CONFIG_COLOR_RANGE = 5,
     /// <summary>AVColorSpace, terminated by AVCOL_SPC_UNSPECIFIED</summary>
     @AV_CODEC_CONFIG_COLOR_SPACE = 6,
+}
+
+public enum AVCodecHwConfigMethod : int
+{
+    /// <summary>The codec supports this format via the hw_device_ctx interface.</summary>
+    @AV_CODEC_HW_CONFIG_METHOD_HW_DEVICE_CTX = 1,
+    /// <summary>The codec supports this format via the hw_frames_ctx interface.</summary>
+    @AV_CODEC_HW_CONFIG_METHOD_HW_FRAMES_CTX = 2,
+    /// <summary>The codec supports this format by some internal method.</summary>
+    @AV_CODEC_HW_CONFIG_METHOD_INTERNAL = 4,
+    /// <summary>The codec supports this format by some ad-hoc method.</summary>
+    @AV_CODEC_HW_CONFIG_METHOD_AD_HOC = 8,
 }
 
 /// <summary>Identify the syntax and semantics of the bitstream. The principle is roughly: Two decoders with the same ID can decode the same streams. Two encoders with the same ID can encode compatible streams. There may be slight deviations from the principle due to implementation details.</summary>
@@ -941,6 +964,21 @@ public enum AVFieldOrder : int
     @AV_FIELD_BT = 5,
 }
 
+public enum AVFilterAutoConvert : int
+{
+    /// <summary>all automatic conversions enabled</summary>
+    @AVFILTER_AUTO_CONVERT_ALL = 0,
+    /// <summary>all automatic conversions disabled</summary>
+    @AVFILTER_AUTO_CONVERT_NONE = -1,
+}
+
+/// <summary>Flags for frame cropping.</summary>
+public enum AVFrameCrop : int
+{
+    /// <summary>Apply the maximum possible cropping, even if it requires setting the AVFrame.data[] entries to unaligned pointers. Passing unaligned data to FFmpeg API is generally not allowed, and causes undefined behavior (such as crashes). You can pass unaligned data only to FFmpeg APIs that are explicitly documented to accept it. Use this flag only if you absolutely know what you are doing.</summary>
+    @AV_FRAME_CROP_UNALIGNED = 1,
+}
+
 /// <summary>@{ AVFrame is an abstraction for reference-counted raw multimedia data.</summary>
 public enum AVFrameSideDataType : int
 {
@@ -1030,6 +1068,19 @@ public enum AVHWDeviceType : int
     @AV_HWDEVICE_TYPE_D3D12VA = 12,
 }
 
+/// <summary>Flags to apply to frame mappings.</summary>
+public enum AVHwframeMap : int
+{
+    /// <summary>The mapping must be readable.</summary>
+    @AV_HWFRAME_MAP_READ = 1,
+    /// <summary>The mapping must be writeable.</summary>
+    @AV_HWFRAME_MAP_WRITE = 2,
+    /// <summary>The mapped frame will be overwritten completely in subsequent operations, so the current frame data need not be loaded. Any values which are not overwritten are unspecified.</summary>
+    @AV_HWFRAME_MAP_OVERWRITE = 4,
+    /// <summary>The mapping must be direct. That is, there must not be any copying in the map or unmap steps. Note that performance of direct mappings may be much lower than normal memory.</summary>
+    @AV_HWFRAME_MAP_DIRECT = 8,
+}
+
 public enum AVHWFrameTransferDirection : int
 {
     /// <summary>Transfer the data from the queried hw frame.</summary>
@@ -1096,6 +1147,12 @@ public enum AVMediaType : int
     /// <summary>Opaque data information usually sparse</summary>
     @AVMEDIA_TYPE_ATTACHMENT = 4,
     @AVMEDIA_TYPE_NB = 5,
+}
+
+public enum AVOptFlagImplicit : int
+{
+    /// <summary>Accept to parse a value without a key; the key will then be returned as NULL.</summary>
+    @AV_OPT_FLAG_IMPLICIT_KEY = 1,
 }
 
 /// <summary>An option type determines: - for native access, the underlying C type of the field that an AVOption refers to; - for foreign access, the semantics of accessing the option through this API, e.g. which av_opt_get_*() and av_opt_set_*() functions can be called, or what format will av_opt_get()/av_opt_set() expect/produce.</summary>
