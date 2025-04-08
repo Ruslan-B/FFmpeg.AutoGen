@@ -20,7 +20,22 @@ internal class EnumerationProcessor
 
             var enumerationName = enumeration.Name;
             if (string.IsNullOrEmpty(enumerationName))
-                continue;
+            {
+                var items = enumeration.Items;
+                if (items.Count == 0)
+                    continue;
+
+                var firstItem = enumeration.Items[0];
+                int idx = firstItem.Name.LastIndexOf('_');
+                if (enumeration.Items.Count == 1 && idx != -1)
+                {
+                    enumerationName = firstItem.Name.Substring(0, idx).ToCamelCase();
+                }
+                else
+                {
+                    enumerationName = enumeration.Items.Select(x => x.Name).FindCommonPrefix().ToCamelCase();
+                }
+            }
 
             MakeDefinition(enumeration, enumerationName);
         }
