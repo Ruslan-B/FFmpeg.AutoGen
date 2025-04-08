@@ -63,6 +63,11 @@ public class CliOptions
         HelpText = "Optional string to use as header for generated files.")]
     public string FileHeader { get; set; }
 
+    [Option("noCustomStringMarshal",
+        Default = false,
+        HelpText = "Don't use custom string marshallers; all strings are marshalled as UnmanagedType.LPUTF8Str regardless of .NET target framework.")]
+    public bool NoCustomStringMarshal { get; set; }
+
     public static CliOptions ParseArgumentsStrict(string[] args)
     {
         var result = CommandLine.Parser.Default.ParseArguments<CliOptions>(args);

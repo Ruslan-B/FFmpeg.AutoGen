@@ -48,7 +48,8 @@ internal class Program
             FunctionExportMap = functionExports
                 .GroupBy(x => x.Name)
                 .Select(x => x.First()) // Eliminate duplicated names
-                .ToDictionary(x => x.Name)
+                .ToDictionary(x => x.Name),
+            NoCustomStringMarshal = options.NoCustomStringMarshal,
         };
         var processor = new ASTProcessor(processingContext);
         astContexts.ForEach(processor.Process);
