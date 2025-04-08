@@ -12,6 +12,8 @@ internal class FunctionProcessor
 {
     private const string ReturnMarshalAsConstCharPtr = "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]";
 
+    private const string ReturnMarshalAsLPUTF8Str = "[return: MarshalAs(UnmanagedType.LPUTF8Str)]";
+
     private const string MarshalAsUTF8Macros =
         "    \r\n" +
         "    #if NETSTANDARD2_1_OR_GREATER\r\n" +
@@ -20,6 +22,8 @@ internal class FunctionProcessor
         "    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]\r\n" +
         "    #endif\r\n" +
         "   ";
+
+    private const string MarshalAsLPUTF8Str = "[MarshalAs(UnmanagedType.LPUTF8Str)]";
 
 
     private readonly ProcessingContext _context;
@@ -126,7 +130,7 @@ internal class FunctionProcessor
                 PrimitiveType.Char => new TypeDefinition
                 {
                     Name = "string",
-                    Attributes = new[] { MarshalAsUTF8Macros }
+                    Attributes = new[] { _context.NoCustomStringMarshal ? MarshalAsLPUTF8Str : MarshalAsUTF8Macros }
                 },
                 PrimitiveType.Void => new TypeDefinition
                 {
@@ -153,7 +157,7 @@ internal class FunctionProcessor
                 PrimitiveType.Char => new TypeDefinition
                 {
                     Name = "string",
-                    Attributes = new[] { ReturnMarshalAsConstCharPtr }
+                    Attributes = new[] { _context.NoCustomStringMarshal ? ReturnMarshalAsLPUTF8Str : ReturnMarshalAsConstCharPtr }
                 },
                 PrimitiveType.Void => new TypeDefinition
                 {
