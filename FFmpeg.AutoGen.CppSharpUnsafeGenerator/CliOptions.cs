@@ -59,6 +59,10 @@ public class CliOptions
         HelpText = "Print details during execution.")]
     public bool Verbose { get; set; }
 
+    [Option("fileHeader",
+        HelpText = "Optional string to use as header for generated files.")]
+    public string FileHeader { get; set; }
+
     [Option("noCustomStringMarshal",
         Default = false,
         HelpText = "Don't use custom string marshallers; all strings are marshalled as UnmanagedType.LPUTF8Str regardless of .NET target framework.")]

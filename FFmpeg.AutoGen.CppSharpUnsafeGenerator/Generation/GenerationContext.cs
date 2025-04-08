@@ -15,4 +15,5 @@ internal sealed record GenerationContext
     public Dictionary<string, InlineFunctionDefinition> ExistingInlineFunctionMap { get; init; } = new();
     public string SolutionDir { get; init; } = string.Empty;
     public string OutputDir { get; init; } = string.Empty;
+    public string FileHeader { get; init; } = string.Empty;
 }
