@@ -35,7 +35,7 @@ internal class MacroPostProcessor
         {
             var expression = CleanUp(macro.Expression);
 
-            // Detect function-like macro definitions with ## (token concatenation)
+            // Detect function-like macro definitions with ## or struct init body
             var funcMatch = FunctionMacroRegex.Match(expression);
             if (funcMatch.Success && expression.Contains("##"))
             {
@@ -74,6 +74,12 @@ internal class MacroPostProcessor
 
         macro.TypeName = typeOrAlias.ToString();
         macro.Content = $"{macro.Name} = {CleanUp(macro.Expression)}";
+
+        // Wrap bare InitializerList with inferred type into CompoundLiteral for proper serialization
+        if (expression is InitializerListExpression initList && !typeOrAlias.IsType
+            && _context.Definitions.Any(d => d.Name == typeOrAlias.Alias))
+            expression = new CompoundLiteralExpression(typeOrAlias.Alias, initList);
+
         macro.Expression = Serialize(expression);
         macro.IsConst = IsConst(expression);
         macro.IsValid = typeOrAlias.IsType
@@ -93,7 +99,7 @@ internal class MacroPostProcessor
         return expression switch
         {
             CompoundLiteralExpression e => new TypeOrAlias(e.TypeName),
-            InitializerListExpression => null, // Bare initializer list without type — can't deduce
+            InitializerListExpression e => DeduceStructType(e),
             BinaryExpression e => DeduceType(e),
             UnaryExpression e => DeduceType(e.Operand),
             CastExpression e => GetTypeAlias(e.TargetType),
@@ -102,6 +108,27 @@ internal class MacroPostProcessor
             ConstantExpression e => e.Value.GetType(),
             _ => throw new NotSupportedException()
         };
+    }
+
+    /// <summary>
+    /// Tries to infer struct type from designated initializer field names.
+    /// Matches field names against known struct definitions.
+    /// </summary>
+    private TypeOrAlias DeduceStructType(InitializerListExpression e)
+    {
+        // Extract top-level field names (e.g. "u.mask" → "u", "order" → "order")
+        var fieldNames = e.Fields
+            .Where(f => f.Name != null)
+            .Select(f => f.Name.Split('.')[0])
+            .ToHashSet();
+        if (fieldNames.Count == 0) return null;
+
+        var match = _context.Definitions
+            .OfType<StructureDefinition>()
+            .FirstOrDefault(s => s.Fields != null &&
+                fieldNames.All(fn => s.Fields.Any(sf => sf.Name == fn)));
+
+        return match != null ? new TypeOrAlias(match.Name) : null;
     }
 
     private TypeOrAlias DeduceCallType(CallExpression e)
@@ -202,12 +229,17 @@ internal class MacroPostProcessor
         // Substitute parameters in the body and evaluate ## concatenation
         var body = macroDef.Body;
 
-        // First substitute parameters (both with ## and standalone)
+        // First substitute parameters with word-boundary matching
         foreach (var (param, arg) in paramMap)
-            body = body.Replace(param, arg);
+            body = Regex.Replace(body, $@"\b{Regex.Escape(param)}\b", arg);
 
         // Then evaluate ## (token concatenation = string join)
         body = body.Replace("##", "");
+
+        // Convert C-style designated init comments to actual designators:
+        // { /* .order */ value } → { .order = value }
+        body = Regex.Replace(body, @"/\*\s*(\.\w+)\s*\*/", "$1 =");
+
         body = body.Replace("  ", " ").Trim();
 
         // Try to parse the result as a single identifier/expression
