@@ -76,7 +76,9 @@ internal class MacroPostProcessor
         macro.Content = $"{macro.Name} = {CleanUp(macro.Expression)}";
         macro.Expression = Serialize(expression);
         macro.IsConst = IsConst(expression);
-        macro.IsValid = typeOrAlias.IsType || _context.TypeAliases.ContainsKey(typeOrAlias.Alias);
+        macro.IsValid = typeOrAlias.IsType
+            || _context.TypeAliases.ContainsKey(typeOrAlias.Alias)
+            || (expression is CompoundLiteralExpression && _context.Definitions.Any(d => d.Name == typeOrAlias.Alias));
     }
 
     private static string CleanUp(string expression)
@@ -90,6 +92,8 @@ internal class MacroPostProcessor
     {
         return expression switch
         {
+            CompoundLiteralExpression e => new TypeOrAlias(e.TypeName),
+            InitializerListExpression => null, // Bare initializer list without type — can't deduce
             BinaryExpression e => DeduceType(e),
             UnaryExpression e => DeduceType(e.Operand),
             CastExpression e => GetTypeAlias(e.TargetType),
@@ -148,6 +152,11 @@ internal class MacroPostProcessor
             case UnaryExpression e: return new UnaryExpression(e.OperationType, Rewrite(e.Operand));
             case CastExpression e: return new CastExpression(e.TargetType, Rewrite(e.Operand));
             case CallExpression e: return RewriteCall(e);
+            case CompoundLiteralExpression e: return new CompoundLiteralExpression(e.TypeName,
+                new InitializerListExpression(e.Initializer.Fields.Select(f =>
+                    new InitializerField { Name = f.Name, Value = Rewrite(f.Value) })));
+            case InitializerListExpression e: return new InitializerListExpression(
+                e.Fields.Select(f => new InitializerField { Name = f.Name, Value = Rewrite(f.Value) }));
             case VariableExpression e: return Rewrite(e);
             case ConstantExpression e: return e;
             default: return expression;
@@ -229,6 +238,8 @@ internal class MacroPostProcessor
     {
         return expression switch
         {
+            CompoundLiteralExpression e => SerializeCompoundLiteral(e),
+            InitializerListExpression e => SerializeInitializerList(e),
             BinaryExpression e =>
                 $"{Serialize(e.Left)} {e.OperationType.ToOperationTypeString()} {Serialize(e.Right)}",
             UnaryExpression e => $"{e.OperationType.ToOperationTypeString()}{Serialize(e.Operand)}",
@@ -238,6 +249,40 @@ internal class MacroPostProcessor
             ConstantExpression e => Serialize(e.Value),
             _ => throw new NotSupportedException()
         };
+    }
+
+    private string SerializeCompoundLiteral(CompoundLiteralExpression e)
+    {
+        var typeName = GetTypeAlias(e.TypeName);
+        var fields = e.Initializer.Fields;
+
+        // For positional initializers, resolve field names from struct definition
+        if (fields.Count > 0 && fields[0].Name == null)
+        {
+            var structDef = _context.Definitions
+                .OfType<Definitions.StructureDefinition>()
+                .FirstOrDefault(s => s.Name == e.TypeName.ToString());
+            if (structDef?.Fields != null)
+            {
+                for (var idx = 0; idx < fields.Count && idx < structDef.Fields.Length; idx++)
+                    fields[idx].Name = structDef.Fields[idx].Name;
+            }
+        }
+
+        var serialized = fields
+            .Where(f => f.Name != null || !(f.Value is ConstantExpression c && c.Value is int v && v == 0))
+            .Select(f => f.Name != null
+                ? $"{f.Name} = {Serialize(f.Value)}"
+                : Serialize(f.Value));
+        return $"new {typeName} {{ {string.Join(", ", serialized)} }}";
+    }
+
+    private string SerializeInitializerList(InitializerListExpression e)
+    {
+        var fields = e.Fields.Select(f => f.Name != null
+            ? $"{f.Name} = {Serialize(f.Value)}"
+            : Serialize(f.Value));
+        return $"{{ {string.Join(", ", fields)} }}";
     }
 
     internal TypeOrAlias GetWellKnownMacroType(string macroName)
@@ -270,6 +315,8 @@ internal class MacroPostProcessor
     {
         return expression switch
         {
+            CompoundLiteralExpression _ => false,
+            InitializerListExpression _ => false,
             BinaryExpression e => IsConst(e.Left) && IsConst(e.Right),
             UnaryExpression e => IsConst(e.Operand),
             CastExpression e => IsConst(e.Operand),

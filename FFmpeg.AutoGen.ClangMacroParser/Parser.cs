@@ -80,15 +80,65 @@ namespace FFmpeg.AutoGen.ClangMacroParser
                 return new UnaryExpression(operationType, Expression());
             }
 
+            IExpression InitializerList()
+            {
+                Read(); // skip {
+                var fields = new List<InitializerField>();
+
+                while (CanRead() && !Current().IsPunctuator("}"))
+                {
+                    string fieldName = null;
+
+                    // Check for designated initializer: .field = value
+                    // After tokenizer, ".field" is a single Identifier token starting with "."
+                    if (Current().IsIdentifier() && Current().Value.StartsWith(".") &&
+                        i + 1 < tokens.Length && tokens[i + 1].IsOperator() && tokens[i + 1].Value == "=")
+                    {
+                        fieldName = Current().Value.Substring(1); // remove leading "."
+                        Read(); // skip .field
+                        Read(); // skip =
+                    }
+
+                    fields.Add(new InitializerField { Name = fieldName, Value = Expression() });
+
+                    if (CanRead() && Current().IsPunctuator(",")) Read();
+                }
+
+                if (CanRead() && Current().IsPunctuator("}")) Read(); // skip }
+
+                return new InitializerListExpression(fields);
+            }
+
             IExpression Atomic()
             {
+                if (Current().IsPunctuator("{")) return InitializerList();
                 if (Current().IsPunctuator("(")) return InParentheses(Expression);
                 if (Current().IsConstant() || Current().IsString()) return Constant();
-                if (Current().IsIdentifier()) return Variable();
+                if (Current().IsIdentifier())
+                {
+                    // NULL → null constant
+                    if (Current().Value == "NULL") { Read(); return new ConstantExpression(0); }
+                    return Variable();
+                }
                 throw new NotSupportedException();
             }
 
-            bool IsCast() => IsSequenceOf(x => x.IsPunctuator("("), x => x.IsKeyword() || x.IsIdentifier(), x => x.IsPunctuator(")"));
+            bool IsTypeInParentheses() => IsSequenceOf(
+                x => x.IsPunctuator("("),
+                x => x.IsKeyword() || x.IsIdentifier(),
+                x => x.IsPunctuator(")"));
+
+            bool IsCast() => IsTypeInParentheses();
+
+            bool IsCompoundLiteral() => IsTypeInParentheses()
+                && i + 3 < tokens.Length && tokens[i + 3].IsPunctuator("{");
+
+            IExpression CompoundLiteral()
+            {
+                var typeName = InParentheses(() => Read().Value);
+                var init = (InitializerListExpression)InitializerList();
+                return new CompoundLiteralExpression(typeName, init);
+            }
 
             IExpression Cast() => new CastExpression(InParentheses(() => Read().Value), NoneAtomic());
 
@@ -98,6 +148,7 @@ namespace FFmpeg.AutoGen.ClangMacroParser
                 {
                     if (IsSequenceOf(x => x.IsIdentifier(), x => x.IsPunctuator("("))) return Call();
                     if (Current().IsOperator()) return Unary();
+                    if (IsCompoundLiteral()) return CompoundLiteral();
                     if (IsCast()) return Cast();
                     return Atomic();
                 }
@@ -105,11 +156,14 @@ namespace FFmpeg.AutoGen.ClangMacroParser
                 throw new NotSupportedException();
             }
 
+            bool IsKnownBinaryOperator() =>
+                CanRead() && Current().IsOperator() && Current().Value.TryToOperationType(out _);
+
             IExpression MaybeBinary(IExpression left, int precedence = int.MaxValue)
             {
                 while (true)
                 {
-                    if (CanRead() && Current().IsOperator())
+                    if (IsKnownBinaryOperator())
                     {
                         var operationType = Current().Value.ToOperationType();
                         var currentPrecedence = operationType.GetPrecedence();

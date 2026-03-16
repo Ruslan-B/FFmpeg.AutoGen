@@ -140,5 +140,70 @@ namespace FFmpeg.AutoGen.ClangMacroParser.Test
                     CastExpression<VariableExpression>(args[1], y => Assert.AreEqual("RGB0", y.Name));
                 });
         }
+
+        [TestMethod]
+        public void CompoundLiteral()
+        {
+            var e = Parser.Parse("(AVRational){1, 1000000}");
+            CastExpression<CompoundLiteralExpression>(e,
+                x =>
+                {
+                    Assert.AreEqual("AVRational", x.TypeName);
+                    Assert.AreEqual(2, x.Initializer.Fields.Count);
+                    Assert.IsNull(x.Initializer.Fields[0].Name);
+                    CastExpression<ConstantExpression>(x.Initializer.Fields[0].Value, y => Assert.AreEqual(1, y.Value));
+                    CastExpression<ConstantExpression>(x.Initializer.Fields[1].Value, y => Assert.AreEqual(1000000, y.Value));
+                });
+        }
+
+        [TestMethod]
+        public void InitializerList()
+        {
+            var e = Parser.Parse("{ 0, 2, { 3 }, 0 }");
+            CastExpression<InitializerListExpression>(e,
+                x =>
+                {
+                    Assert.AreEqual(4, x.Fields.Count);
+                    CastExpression<ConstantExpression>(x.Fields[0].Value, y => Assert.AreEqual(0, y.Value));
+                    CastExpression<ConstantExpression>(x.Fields[1].Value, y => Assert.AreEqual(2, y.Value));
+                    CastExpression<InitializerListExpression>(x.Fields[2].Value, y => Assert.AreEqual(1, y.Fields.Count));
+                    CastExpression<ConstantExpression>(x.Fields[3].Value, y => Assert.AreEqual(0, y.Value));
+                });
+        }
+
+        [TestMethod]
+        public void CCommentSkipping()
+        {
+            var e = Parser.Parse("{ /* .order */ 0, /* .nb */ 2 }");
+            CastExpression<InitializerListExpression>(e,
+                x =>
+                {
+                    Assert.AreEqual(2, x.Fields.Count);
+                    CastExpression<ConstantExpression>(x.Fields[0].Value, y => Assert.AreEqual(0, y.Value));
+                    CastExpression<ConstantExpression>(x.Fields[1].Value, y => Assert.AreEqual(2, y.Value));
+                });
+        }
+
+        [TestMethod]
+        public void NullHandling()
+        {
+            var e = Parser.Parse("NULL");
+            CastExpression<ConstantExpression>(e, x => Assert.AreEqual(0, x.Value));
+        }
+
+        [TestMethod]
+        public void DesignatedInitializer()
+        {
+            var e = Parser.Parse("{ .order = 0, .nb_channels = 2 }");
+            CastExpression<InitializerListExpression>(e,
+                x =>
+                {
+                    Assert.AreEqual(2, x.Fields.Count);
+                    Assert.AreEqual("order", x.Fields[0].Name);
+                    Assert.AreEqual("nb_channels", x.Fields[1].Name);
+                    CastExpression<ConstantExpression>(x.Fields[0].Value, y => Assert.AreEqual(0, y.Value));
+                    CastExpression<ConstantExpression>(x.Fields[1].Value, y => Assert.AreEqual(2, y.Value));
+                });
+        }
     }
 }

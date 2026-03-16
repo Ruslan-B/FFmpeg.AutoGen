@@ -110,6 +110,14 @@ namespace FFmpeg.AutoGen.ClangMacroParser.Tokenization
                 var c = Current();
 
                 if (Separators.Contains(c)) Skip(Separators.Contains);
+                else if (c == '/' && i + 1 < characters.Length && characters[i + 1] == '*')
+                {
+                    // Skip C-style comments /* ... */
+                    Read(); Read(); // skip /*
+                    while (CanRead() && !(Current() == '*' && i + 1 < characters.Length && characters[i + 1] == '/'))
+                        Read();
+                    if (CanRead()) { Read(); Read(); } // skip */
+                }
                 else if (IsNumberStart(c))
                 {
                     var num = Number();

@@ -1192,11 +1192,12 @@ public static unsafe partial class ffmpeg
     public const int AV_SUBTITLE_FLAG_FORCED = 0x1;
     /// <summary>AV_TIME_BASE = 1000000</summary>
     public const int AV_TIME_BASE = 0xf4240;
-    // public static AV_TIME_BASE_Q = (AVRational){1, AV_TIME_BASE};
+    /// <summary>AV_TIME_BASE_Q = (AVRational){1, AV_TIME_BASE}</summary>
+    public static readonly AVRational AV_TIME_BASE_Q = new AVRational { num = 0x1, den = AV_TIME_BASE };
     /// <summary>AV_TIMECODE_STR_SIZE = 0x17</summary>
     public const int AV_TIMECODE_STR_SIZE = 0x17;
     // public static AV_TOSTRING = (s) #s;
-    // public static av_uninit = (x) x=x;
+    // public static av_uninit = (x)(x);
     // public static av_unused = __attribute__((unused));
     // public static av_used = __attribute__((used));
     // public static AV_VERSION = a;
