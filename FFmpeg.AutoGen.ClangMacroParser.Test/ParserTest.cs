@@ -205,5 +205,28 @@ namespace FFmpeg.AutoGen.ClangMacroParser.Test
                     CastExpression<ConstantExpression>(x.Fields[1].Value, y => Assert.AreEqual(2, y.Value));
                 });
         }
+
+        [TestMethod]
+        public void NestedDesignatedInitializer()
+        {
+            var e = Parser.Parse("{ .order = AV_CHANNEL_ORDER_NATIVE, .nb_channels = 1, .u.mask = { AV_CH_LAYOUT_MONO }, .opaque = NULL }");
+            CastExpression<InitializerListExpression>(e,
+                x =>
+                {
+                    Assert.AreEqual(4, x.Fields.Count);
+                    Assert.AreEqual("order", x.Fields[0].Name);
+                    Assert.AreEqual("nb_channels", x.Fields[1].Name);
+                    Assert.AreEqual("u.mask", x.Fields[2].Name);
+                    Assert.AreEqual("opaque", x.Fields[3].Name);
+                    CastExpression<VariableExpression>(x.Fields[0].Value, y => Assert.AreEqual("AV_CHANNEL_ORDER_NATIVE", y.Name));
+                    CastExpression<ConstantExpression>(x.Fields[1].Value, y => Assert.AreEqual(1, y.Value));
+                    CastExpression<InitializerListExpression>(x.Fields[2].Value, y =>
+                    {
+                        Assert.AreEqual(1, y.Fields.Count);
+                        CastExpression<VariableExpression>(y.Fields[0].Value, z => Assert.AreEqual("AV_CH_LAYOUT_MONO", z.Name));
+                    });
+                    CastExpression<ConstantExpression>(x.Fields[3].Value, y => Assert.AreEqual(0, y.Value));
+                });
+        }
     }
 }

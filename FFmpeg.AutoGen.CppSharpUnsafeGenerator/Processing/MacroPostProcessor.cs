@@ -37,7 +37,7 @@ internal class MacroPostProcessor
 
             // Detect function-like macro definitions with ## or struct init body
             var funcMatch = FunctionMacroRegex.Match(expression);
-            if (funcMatch.Success && expression.Contains("##"))
+            if (funcMatch.Success && (expression.Contains("##") || expression.Contains("{")))
             {
                 var parameters = funcMatch.Groups[1].Value.Split(',').Select(p => p.Trim()).ToArray();
                 var body = funcMatch.Groups[2].Value.Trim();
@@ -238,7 +238,7 @@ internal class MacroPostProcessor
 
         // Convert C-style designated init comments to actual designators:
         // { /* .order */ value } → { .order = value }
-        body = Regex.Replace(body, @"/\*\s*(\.\w+)\s*\*/", "$1 =");
+        body = Regex.Replace(body, @"/\*\s*(\.[\w.]+)\s*\*/", "$1 =");
 
         body = body.Replace("  ", " ").Trim();
 
@@ -288,25 +288,56 @@ internal class MacroPostProcessor
         var typeName = GetTypeAlias(e.TypeName);
         var fields = e.Initializer.Fields;
 
+        var structDef = _context.Definitions
+            .OfType<Definitions.StructureDefinition>()
+            .FirstOrDefault(s => s.Name == e.TypeName.ToString());
+
         // For positional initializers, resolve field names from struct definition
-        if (fields.Count > 0 && fields[0].Name == null)
+        if (fields.Count > 0 && fields[0].Name == null && structDef?.Fields != null)
         {
-            var structDef = _context.Definitions
-                .OfType<Definitions.StructureDefinition>()
-                .FirstOrDefault(s => s.Name == e.TypeName.ToString());
-            if (structDef?.Fields != null)
-            {
-                for (var idx = 0; idx < fields.Count && idx < structDef.Fields.Length; idx++)
-                    fields[idx].Name = structDef.Fields[idx].Name;
-            }
+            for (var idx = 0; idx < fields.Count && idx < structDef.Fields.Length; idx++)
+                fields[idx].Name = structDef.Fields[idx].Name;
         }
 
         var serialized = fields
-            .Where(f => f.Name != null || !(f.Value is ConstantExpression c && c.Value is int v && v == 0))
+            // Skip nested fields (u.mask) — C# doesn't support nested object initializer access
+            .Where(f => f.Name == null || !f.Name.Contains('.'))
+            // Skip zero-initialized fields (default value)
+            .Where(f => !(f.Value is ConstantExpression c && c.Value is int v && v == 0))
             .Select(f => f.Name != null
-                ? $"{f.Name} = {Serialize(f.Value)}"
+                ? $"{f.Name} = {SerializeFieldValue(f.Name, f.Value, structDef)}"
                 : Serialize(f.Value));
         return $"new {typeName} {{ {string.Join(", ", serialized)} }}";
+    }
+
+    private string SerializeFieldValue(string fieldName, IExpression value, Definitions.StructureDefinition structDef)
+    {
+        // Unwrap single-element initializer list: { x } → x
+        if (value is InitializerListExpression initList && initList.Fields.Count == 1)
+            value = initList.Fields[0].Value;
+
+        // Cast value to enum type if struct field is an enum
+        if (structDef?.Fields != null)
+        {
+            var field = structDef.Fields.FirstOrDefault(f => f.Name == fieldName);
+            if (field != null)
+            {
+                var enumDef = _context.Definitions
+                    .OfType<Definitions.EnumerationDefinition>()
+                    .FirstOrDefault(d => d.Name == field.FieldType.Name);
+                if (enumDef != null)
+                {
+                    // Try to find matching enum member by value
+                    var serializedValue = Serialize(value);
+                    var enumItem = enumDef.Items.FirstOrDefault(i => i.Value == serializedValue);
+                    if (enumItem != null)
+                        return $"{enumDef.Name}.{enumItem.Name}";
+                    return $"({enumDef.Name})({serializedValue})";
+                }
+            }
+        }
+
+        return Serialize(value);
     }
 
     private string SerializeInitializerList(InitializerListExpression e)

@@ -87,7 +87,7 @@ namespace FFmpeg.AutoGen.ClangMacroParser
 
                 while (CanRead() && !Current().IsPunctuator("}"))
                 {
-                    string fieldName = null;
+                    string? fieldName = null;
 
                     // Check for designated initializer: .field = value
                     // After tokenizer, ".field" is a single Identifier token starting with "."

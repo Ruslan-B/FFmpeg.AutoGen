@@ -20,7 +20,7 @@ namespace FFmpeg.AutoGen.ClangMacroParser.Expressions
         /// <summary>
         /// Field name for designated initializers (.field = value). Null for positional.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The value expression.
