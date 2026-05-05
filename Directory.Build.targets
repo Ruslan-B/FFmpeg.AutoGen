@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- The package intentionally includes a manually-run PowerShell helper script. -->
+    <NoWarn>$(NoWarn);NU5111</NoWarn>
+  </PropertyGroup>
+</Project>
