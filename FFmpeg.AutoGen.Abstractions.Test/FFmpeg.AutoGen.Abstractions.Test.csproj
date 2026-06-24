@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--
+      Multi-targeted on purpose: net9.0 resolves the netstandard2.1 build of
+      FFmpeg.AutoGen.Abstractions (Marshal.PtrToStringUTF8 path) while net48
+      resolves the netstandard2.0 build (manual UTF-8 decode path). This way the
+      ConstCharPtrMarshaler tests exercise both compile-time branches.
+
+      net48 is only added on Windows: the .NET Framework test host cannot run on
+      Linux/macOS, so on non-Windows hosts we build and run net9.0 only (which
+      still covers the netstandard2.1 branch). The netstandard2.0 branch is
+      validated on Windows.
+    -->
+    <TargetFrameworks>net9.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">net9.0;net48</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="MSTest.TestAdapter" />
+    <PackageReference Include="MSTest.TestFramework" />
+    <PackageReference Include="coverlet.collector">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FFmpeg.AutoGen.Abstractions\FFmpeg.AutoGen.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
