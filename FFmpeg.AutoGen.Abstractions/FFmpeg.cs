@@ -5,29 +5,22 @@ namespace FFmpeg.AutoGen.Abstractions;
 
 public static partial class ffmpeg
 {
-    public static readonly int EAGAIN;
+    /// <summary>EAGAIN is 35 on Darwin and 11 everywhere else, so it cannot be a constant.</summary>
+    public static readonly int EAGAIN = IsDarwin ? 35 : 11;
 
-    public static readonly int ENOMEM = 12;
+    public const int ENOMEM = 12;
 
-    public static readonly int EINVAL = 22;
+    public const int EINVAL = 22;
 
-    public static readonly int EPIPE = 32;
-    
-    static ffmpeg()
-    {
+    public const int EPIPE = 32;
+
+    private static bool IsDarwin =>
 #if NET
-        // EAGAIN is 35 on Darwin (macOS, iOS, tvOS, watchOS) and 11 elsewhere.
-        EAGAIN = OperatingSystem.IsMacOS() || OperatingSystem.IsIOS() ||
-                 OperatingSystem.IsTvOS() || OperatingSystem.IsWatchOS()
-            ? 35
-            : 11;
-#elif NETSTANDARD2_0_OR_GREATER
-        EAGAIN = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? 35 : 11;
+        OperatingSystem.IsMacOS() || OperatingSystem.IsIOS() ||
+        OperatingSystem.IsTvOS() || OperatingSystem.IsWatchOS();
 #else
-        EAGAIN = Environment.OSVersion.Platform == PlatformID.MacOSX ? 35 : 11;
+        RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 #endif
-
-    }
 
     public static ulong UINT64_C<T>(T a)
         => Convert.ToUInt64(a);
