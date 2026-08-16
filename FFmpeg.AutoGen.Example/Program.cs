@@ -17,6 +17,17 @@ internal class Program
     // 854x480 H.264, 52 s, ~4 MB. Might also be a local resource, e.g. "../../sample_mpeg4.mp4".
     private const string SampleVideoUrl = "https://media.w3.org/2010/05/sintel/trailer.mp4";
 
+    private const string OutputDirectory = "frames";
+
+    // The search pattern and FramePath must keep matching each other.
+    private const string FrameSearchPattern = "frame.*.jpg";
+
+    private static readonly string H264Path = Path.Combine(OutputDirectory, "out.h264");
+    private static readonly string Mp4Path = Path.Combine(OutputDirectory, "out.mp4");
+
+    private static string FramePath(int frameNumber)
+        => Path.Combine(OutputDirectory, $"frame.{frameNumber:D8}.jpg");
+
     private static void Main(string[] args)
     {
         Console.WriteLine("Current directory: " + Environment.CurrentDirectory);
@@ -31,7 +42,7 @@ internal class Program
         SetupLogging();
         ConfigureHWDecoder(out var deviceType);
 
-        Directory.CreateDirectory("frames");
+        Directory.CreateDirectory(OutputDirectory);
         
         Console.WriteLine("Decoding...");
         DecodeAllFramesToImages(deviceType);
@@ -45,12 +56,12 @@ internal class Program
 
     private static void MuxH264ToMp4()
     {
-        using var muxer = new Mp4Muxer("frames/out.h264", "frames/out.mp4", 25);
+        using var muxer = new Mp4Muxer(H264Path, Mp4Path, 25);
 
         Console.WriteLine($"output is seekable: {muxer.IsSeekable}");
 
         var packetCount = muxer.Mux();
-        Console.WriteLine($"muxed {packetCount} packets into frames/out.mp4");
+        Console.WriteLine($"muxed {packetCount} packets into {Mp4Path}");
     }
 
     private static void ConfigureHWDecoder(out AVHWDeviceType HWtype)
@@ -163,10 +174,10 @@ internal class Program
 
     private static unsafe void EncodeImagesToH264()
     {
-        var frameFiles = Directory.GetFiles("./frames", "frame.*.jpg").OrderBy(x => x).ToArray();
+        var frameFiles = Directory.GetFiles(OutputDirectory, FrameSearchPattern).OrderBy(x => x).ToArray();
         using var fistFrameImage = ReadFrame(frameFiles.First());
 
-        var outputFileName = "frames/out.h264";
+        var outputFileName = H264Path;
         var fps = 25;
         var sourceSize = new Size(fistFrameImage.Width, fistFrameImage.Height);
         var sourcePixelFormat = AVPixelFormat.@AV_PIX_FMT_BGRA;
@@ -211,7 +222,7 @@ internal class Program
         var imageInfo = new SKImageInfo(convertedFrame.width, convertedFrame.height, SKColorType.Bgra8888, SKAlphaType.Opaque);
         using var bitmap = new SKBitmap();
         bitmap.InstallPixels(imageInfo, (IntPtr)convertedFrame.data[0]);
-        using var stream = File.Create($"frames/frame.{frameNumber:D8}.jpg");
+        using var stream = File.Create(FramePath(frameNumber));
         bitmap.Encode(stream, SKEncodedImageFormat.Jpeg, 90);
     }
 
