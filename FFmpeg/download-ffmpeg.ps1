@@ -7,18 +7,18 @@
     and extracts headers to FFmpeg/include/ and DLLs to FFmpeg/bin/x64/.
 
 .PARAMETER Version
-    FFmpeg release tag on GyanD/codexffmpeg (default: 8.1).
+    FFmpeg release tag on GyanD/codexffmpeg (default: 9.0.1).
 
 .PARAMETER Force
     Overwrite existing headers and DLLs.
 
 .EXAMPLE
     .\download-ffmpeg.ps1
-    .\download-ffmpeg.ps1 -Version 8.1 -Force
+    .\download-ffmpeg.ps1 -Version 9.0.1 -Force
 #>
 
 param(
-    [string]$Version = "8.1",
+    [string]$Version = "9.0.1",
     [switch]$Force
 )
 

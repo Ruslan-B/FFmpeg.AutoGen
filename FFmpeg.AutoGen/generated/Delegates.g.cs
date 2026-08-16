@@ -192,38 +192,6 @@ public unsafe struct AVCodecContext_get_format_func
 }
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate void AVCodecParser_parser_close (AVCodecParserContext* @s);
-public unsafe struct AVCodecParser_parser_close_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVCodecParser_parser_close_func(AVCodecParser_parser_close func) => new AVCodecParser_parser_close_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVCodecParser_parser_init (AVCodecParserContext* @s);
-public unsafe struct AVCodecParser_parser_init_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVCodecParser_parser_init_func(AVCodecParser_parser_init func) => new AVCodecParser_parser_init_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVCodecParser_parser_parse (AVCodecParserContext* @s, AVCodecContext* @avctx, byte** @poutbuf, int* @poutbuf_size, byte* @buf, int @buf_size);
-public unsafe struct AVCodecParser_parser_parse_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVCodecParser_parser_parse_func(AVCodecParser_parser_parse func) => new AVCodecParser_parser_parse_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int AVCodecParser_split (AVCodecContext* @avctx, byte* @buf, int @buf_size);
-public unsafe struct AVCodecParser_split_func
-{
-    public IntPtr Pointer;
-    public static implicit operator AVCodecParser_split_func(AVCodecParser_split func) => new AVCodecParser_split_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
-}
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate void AVD3D11VADeviceContext_lock (void* @lock_ctx);
 public unsafe struct AVD3D11VADeviceContext_lock_func
 {

@@ -14,6 +14,9 @@ namespace FFmpeg.AutoGen.Example;
 
 internal class Program
 {
+    // 854x480 H.264, 52 s, ~4 MB. Might also be a local resource, e.g. "../../sample_mpeg4.mp4".
+    private const string SampleVideoUrl = "https://media.w3.org/2010/05/sintel/trailer.mp4";
+
     private static void Main(string[] args)
     {
         Console.WriteLine("Current directory: " + Environment.CurrentDirectory);
@@ -98,10 +101,7 @@ internal class Program
 
     private static unsafe void DecodeAllFramesToImages(AVHWDeviceType HWDevice)
     {
-        // decode all frames from url, please not it might local resorce, e.g. string url = "../../sample_mpeg4.mp4";
-        
-        var url = "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_1MB.mp4"; // ~1 MB, 10 s, 1080p H.264
-        using var vsd = new VideoStreamDecoder(url, HWDevice);
+        using var vsd = new VideoStreamDecoder(SampleVideoUrl, HWDevice);
 
         Console.WriteLine($"codec name: {vsd.CodecName}");
 
