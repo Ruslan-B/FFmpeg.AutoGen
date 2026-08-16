@@ -81,8 +81,9 @@ internal class StructureProcessor
                 continue;
             }
 
-            // Anonymous struct/union members carry no name in C; C# has no equivalent,
-            // so they are exposed as a regular nested field under a synthesized name.
+            // Anonymous struct/union members carry no name in C; C# has no equivalent, so they
+            // are exposed as a regular nested field named union0, union1, struct0 and so on,
+            // numbered per declaring struct in declaration order.
             var fieldName = string.IsNullOrEmpty(field.Name)
                 ? $"{(IsUnion(field.Type) ? "union" : "struct")}{anonymousFieldCount++}"
                 : field.Name;

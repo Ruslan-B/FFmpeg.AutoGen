@@ -30,7 +30,7 @@ FFmpeg auto generated unsafe bindings for C#/.NET and Mono.
 
 The basic example of the library usage: video decoding, conversion and frame extraction to jpeg is included in ```FFmpeg.AutoGen.Example``` project.  
 For the more sophisticated operations please refer to offical [ffmpeg Documentation](https://www.ffmpeg.org/documentation.html) expecially API section of it.
-Nuget packages version uses [semantic versioning](https://semver.org/) and is in sync with the FFmpeg release the bindings are generated from, e.g. package `9.0.1` targets FFmpeg 9.0.1.
+NuGet packages version uses [semantic versioning](https://semver.org/) and is in sync with the FFmpeg release the bindings are generated from, e.g. package `9.0.1` targets FFmpeg 9.0.1.
 
 - on Windows:
 The x64 libraries source from [CODEX FFMPEG](https://www.gyan.dev/ffmpeg/builds/).
