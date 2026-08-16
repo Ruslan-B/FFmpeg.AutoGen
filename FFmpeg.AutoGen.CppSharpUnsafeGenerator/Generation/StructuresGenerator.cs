@@ -22,6 +22,15 @@ internal sealed class StructuresGenerator : GeneratorBase<StructureDefinition>
         yield return "System.Runtime.InteropServices";
     }
 
+    protected override void WriteConditionalUsings()
+    {
+        WriteLineWithoutIntent("#if NET6_0_OR_GREATER");
+        WriteLineWithoutIntent("using CLong = System.Runtime.InteropServices.CLong;");
+        WriteLineWithoutIntent("using CULong = System.Runtime.InteropServices.CULong;");
+        WriteLineWithoutIntent("#endif");
+        WriteLine();
+    }
+
     protected override IEnumerable<StructureDefinition> Query(IEnumerable<StructureDefinition> arrays)
         => arrays.OrderBy(s => s.IsComplete ? 0 : 1).ThenBy(s => s.Name);
 

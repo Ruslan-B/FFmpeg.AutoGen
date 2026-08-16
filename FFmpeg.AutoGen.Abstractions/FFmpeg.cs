@@ -16,7 +16,11 @@ public static partial class ffmpeg
     static ffmpeg()
     {
 #if NET
-
+        // EAGAIN is 35 on Darwin (macOS, iOS, tvOS, watchOS) and 11 elsewhere.
+        EAGAIN = OperatingSystem.IsMacOS() || OperatingSystem.IsIOS() ||
+                 OperatingSystem.IsTvOS() || OperatingSystem.IsWatchOS()
+            ? 35
+            : 11;
 #elif NETSTANDARD2_0_OR_GREATER
         EAGAIN = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? 35 : 11;
 #else
