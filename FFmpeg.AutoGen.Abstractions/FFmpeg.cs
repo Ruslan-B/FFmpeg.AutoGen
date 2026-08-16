@@ -8,11 +8,13 @@ public static partial class ffmpeg
     /// <summary>EAGAIN is 35 on Darwin and 11 everywhere else, so it cannot be a constant.</summary>
     public static readonly int EAGAIN = IsDarwin ? 35 : 11;
 
-    public const int ENOMEM = 12;
+    // Deliberately not const: these are part of the public surface, and a literal would be
+    // baked into every consumer, so an assembly-only upgrade would throw MissingFieldException.
+    public static readonly int ENOMEM = 12;
 
-    public const int EINVAL = 22;
+    public static readonly int EINVAL = 22;
 
-    public const int EPIPE = 32;
+    public static readonly int EPIPE = 32;
 
     private static bool IsDarwin =>
 #if NET

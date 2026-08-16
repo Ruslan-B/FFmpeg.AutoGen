@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -18,6 +18,10 @@ internal class Program
     private const string SampleVideoUrl = "https://media.w3.org/2010/05/sintel/trailer.mp4";
 
     private const string OutputDirectory = "frames";
+
+    // Both halves of the encode pipeline must agree on this: the encoder's time base is
+    // 1/FramesPerSecond, and the muxer rescales packet indices at the same rate.
+    private const int FramesPerSecond = 25;
 
     // The search pattern and FramePath must keep matching each other.
     private const string FrameSearchPattern = "frame.*.jpg";
@@ -56,7 +60,7 @@ internal class Program
 
     private static void MuxH264ToMp4()
     {
-        using var muxer = new Mp4Muxer(H264Path, Mp4Path, 25);
+        using var muxer = new Mp4Muxer(H264Path, Mp4Path, FramesPerSecond);
 
         Console.WriteLine($"output is seekable: {muxer.IsSeekable}");
 
@@ -178,7 +182,7 @@ internal class Program
         using var fistFrameImage = ReadFrame(frameFiles.First());
 
         var outputFileName = H264Path;
-        var fps = 25;
+        var fps = FramesPerSecond;
         var sourceSize = new Size(fistFrameImage.Width, fistFrameImage.Height);
         var sourcePixelFormat = AVPixelFormat.@AV_PIX_FMT_BGRA;
         var destinationSize = sourceSize;
@@ -206,7 +210,7 @@ internal class Program
                     height = sourceSize.Height
                 };
                 var convertedFrame = vfc.Convert(frame);
-                convertedFrame.pts = frameNumber * fps;
+                convertedFrame.pts = frameNumber;
                 vse.Encode(convertedFrame);
             }
 

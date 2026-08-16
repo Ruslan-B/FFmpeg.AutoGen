@@ -9,8 +9,10 @@ namespace FFmpeg.AutoGen.Example;
 ///     avformat_write_header, av_interleaved_write_frame and av_write_trailer.
 /// </summary>
 /// <remarks>
-///     Raw H.264 carries no timestamps, so presentation times are generated from the frame
-///     index at a fixed rate and rescaled into whatever time base the muxer settles on.
+///     Raw H.264 carries no timestamps at all - the demuxer reports AV_NOPTS_VALUE for every
+///     packet - so presentation times are numbered from the packet index at a fixed rate and
+///     rescaled into whatever time base the muxer settles on. That is only correct while
+///     decode order matches presentation order, which is why the encoder disables B-frames.
 /// </remarks>
 public sealed unsafe class Mp4Muxer : IDisposable
 {
@@ -23,31 +25,42 @@ public sealed unsafe class Mp4Muxer : IDisposable
     {
         _fps = fps;
 
-        AVFormatContext* pInputContext = null;
-        ffmpeg.avformat_open_input(&pInputContext, inputPath, null, null).ThrowExceptionIfError();
-        _pInputContext = pInputContext;
-        ffmpeg.avformat_find_stream_info(_pInputContext, null).ThrowExceptionIfError();
+        try
+        {
+            AVFormatContext* pInputContext = null;
+            ffmpeg.avformat_open_input(&pInputContext, inputPath, null, null).ThrowExceptionIfError();
+            _pInputContext = pInputContext;
+            ffmpeg.avformat_find_stream_info(_pInputContext, null).ThrowExceptionIfError();
 
-        AVFormatContext* pOutputContext = null;
-        ffmpeg.avformat_alloc_output_context2(&pOutputContext, null, null, outputPath).ThrowExceptionIfError();
-        _pOutputContext = pOutputContext;
+            if (_pInputContext->nb_streams == 0)
+                throw new InvalidOperationException($"No streams found in {inputPath}.");
 
-        var pInputStream = _pInputContext->streams[0];
-        var pOutputStream = ffmpeg.avformat_new_stream(_pOutputContext, null);
-        if (pOutputStream == null) throw new InvalidOperationException("Could not allocate the output stream.");
+            AVFormatContext* pOutputContext = null;
+            ffmpeg.avformat_alloc_output_context2(&pOutputContext, null, null, outputPath).ThrowExceptionIfError();
+            _pOutputContext = pOutputContext;
 
-        ffmpeg.avcodec_parameters_copy(pOutputStream->codecpar, pInputStream->codecpar).ThrowExceptionIfError();
-        pOutputStream->codecpar->codec_tag = 0;
-        pOutputStream->time_base = new AVRational { num = 1, den = fps };
-        _streamIndex = pOutputStream->index;
+            var pInputStream = _pInputContext->streams[0];
+            var pOutputStream = ffmpeg.avformat_new_stream(_pOutputContext, null);
+            if (pOutputStream == null) throw new InvalidOperationException("Could not allocate the output stream.");
 
-        AVIOContext* pIoContext = null;
-        ffmpeg.avio_open2(&pIoContext, outputPath, ffmpeg.AVIO_FLAG_WRITE, null, null).ThrowExceptionIfError();
-        _pOutputContext->pb = pIoContext;
+            ffmpeg.avcodec_parameters_copy(pOutputStream->codecpar, pInputStream->codecpar).ThrowExceptionIfError();
+            pOutputStream->codecpar->codec_tag = 0;
+            pOutputStream->time_base = new AVRational { num = 1, den = fps };
+            _streamIndex = pOutputStream->index;
 
-        // The mov muxer rewinds at trailer time to patch the sizes in moov and mdat, so it
-        // needs a seekable sink. A non-seekable one would have to be muxed as fragmented mp4.
-        IsSeekable = (_pOutputContext->pb->seekable & ffmpeg.AVIO_SEEKABLE_NORMAL) != 0;
+            AVIOContext* pIoContext = null;
+            ffmpeg.avio_open2(&pIoContext, outputPath, ffmpeg.AVIO_FLAG_WRITE, null, null).ThrowExceptionIfError();
+            _pOutputContext->pb = pIoContext;
+
+            // The mov muxer rewinds at trailer time to patch the sizes in moov and mdat, so a
+            // regular file lets it finalise the container in place.
+            IsSeekable = (_pOutputContext->pb->seekable & ffmpeg.AVIO_SEEKABLE_NORMAL) != 0;
+        }
+        catch
+        {
+            Dispose();
+            throw;
+        }
     }
 
     /// <summary>Whether the muxer can rewind the output to finalise the container in place.</summary>
@@ -87,11 +100,15 @@ public sealed unsafe class Mp4Muxer : IDisposable
         var targetTimeBase = _pOutputContext->streams[_streamIndex]->time_base;
 
         var pPacket = ffmpeg.av_packet_alloc();
+        if (pPacket == null) throw new InvalidOperationException("Could not allocate the packet.");
+
         var packetNumber = 0;
 
         try
         {
-            while (ffmpeg.av_read_frame(_pInputContext, pPacket) >= 0)
+            int error;
+
+            while ((error = ffmpeg.av_read_frame(_pInputContext, pPacket)) >= 0)
             {
                 try
                 {
@@ -101,6 +118,7 @@ public sealed unsafe class Mp4Muxer : IDisposable
                     ffmpeg.av_packet_rescale_ts(pPacket, sourceTimeBase, targetTimeBase);
                     pPacket->pos = -1;
 
+                    // Takes ownership of the packet and leaves it blank on return.
                     ffmpeg.av_interleaved_write_frame(_pOutputContext, pPacket).ThrowExceptionIfError();
                     packetNumber++;
                 }
@@ -109,6 +127,9 @@ public sealed unsafe class Mp4Muxer : IDisposable
                     ffmpeg.av_packet_unref(pPacket);
                 }
             }
+
+            // Anything other than a clean end of input would silently truncate the output.
+            if (error != ffmpeg.AVERROR_EOF) error.ThrowExceptionIfError();
         }
         finally
         {

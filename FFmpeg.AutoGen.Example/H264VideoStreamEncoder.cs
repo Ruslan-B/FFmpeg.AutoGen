@@ -31,6 +31,12 @@ public sealed unsafe class H264VideoStreamEncoder : IDisposable
         _pCodecContext->height = frameSize.Height;
         _pCodecContext->time_base = new AVRational { num = 1, den = fps };
         _pCodecContext->pix_fmt = AVPixelFormat.AV_PIX_FMT_YUV420P;
+
+        // The elementary stream carries no timestamps, so whoever wraps it into a container
+        // can only number the packets as they come. B-frames would make decode order differ
+        // from presentation order, and that difference would be lost.
+        _pCodecContext->max_b_frames = 0;
+
         ffmpeg.av_opt_set(_pCodecContext->priv_data, "preset", "veryslow", 0);
 
         ffmpeg.avcodec_open2(_pCodecContext, _pCodec, null).ThrowExceptionIfError();
