@@ -1,6 +1,11 @@
 using System;
 using System.Runtime.InteropServices;
 
+#if NET6_0_OR_GREATER
+using CLong = System.Runtime.InteropServices.CLong;
+using CULong = System.Runtime.InteropServices.CULong;
+#endif
+
 namespace FFmpeg.AutoGen;
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -37,7 +42,7 @@ public unsafe struct av_buffer_pool_init2_pool_free_func
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate void av_log_set_callback_callback (void* @p0, int @p1,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -115,7 +120,7 @@ public unsafe struct AVClass_item_name_func
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate int AVClass_query_ranges (AVOptionRanges** @p0, void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -233,7 +238,7 @@ public unsafe struct AVFormatContext_io_close2_func
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate int AVFormatContext_io_open (AVFormatContext* @s, AVIOContext** @pb,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -318,7 +323,7 @@ public unsafe struct AVIOContext_seek_func
 }
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate ulong AVIOContext_update_checksum (ulong @checksum, byte* @buf, uint @size);
+public unsafe delegate CULong AVIOContext_update_checksum (CULong @checksum, byte* @buf, uint @size);
 public unsafe struct AVIOContext_update_checksum_func
 {
     public IntPtr Pointer;

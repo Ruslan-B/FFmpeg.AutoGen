@@ -1,11 +1,16 @@
 using System;
 using System.Runtime.InteropServices;
 
+#if NET6_0_OR_GREATER
+using CLong = System.Runtime.InteropServices.CLong;
+using CULong = System.Runtime.InteropServices.CULong;
+#endif
+
 namespace FFmpeg.AutoGen;
 
 public unsafe partial struct _GUID
 {
-    public ulong @Data1;
+    public CULong @Data1;
     public ushort @Data2;
     public ushort @Data3;
     public byte_array8 @Data4;
@@ -782,7 +787,7 @@ public unsafe partial struct AVDXVA2DeviceContext
 public unsafe partial struct AVDXVA2FramesContext
 {
     /// <summary>The surface type (e.g. DXVA2_VideoProcessorRenderTarget or DXVA2_VideoDecoderRenderTarget). Must be set by the caller.</summary>
-    public ulong @surface_type;
+    public CULong @surface_type;
     /// <summary>The surface pool. When an external pool is not provided by the caller, this will be managed (allocated and filled on init, freed on uninit) by libavutil.</summary>
     public IDirect3DSurface9** @surfaces;
     public int @nb_surfaces;
@@ -1469,7 +1474,7 @@ public unsafe partial struct AVIOContext
     public int @max_packet_size;
     /// <summary>Try to buffer at least this amount of data before flushing it.</summary>
     public int @min_packet_size;
-    public ulong @checksum;
+    public CULong @checksum;
     public byte* @checksum_ptr;
     public AVIOContext_update_checksum_func @update_checksum;
     /// <summary>Pause or resume playback for network streaming protocols - e.g. MMS.</summary>

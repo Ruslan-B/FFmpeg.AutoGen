@@ -19,7 +19,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVAlphaMode av_alpha_mode_from_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -98,7 +98,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVBitStreamFilter* av_bsf_get_by_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -132,7 +132,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_bsf_list_append2_delegate(AVBSFList* @lst,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -150,7 +150,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_bsf_list_parse_str_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -356,7 +356,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVChannel av_channel_from_string_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -374,7 +374,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVChannel av_channel_layout_channel_from_string_delegate(AVChannelLayout* @channel_layout,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -416,7 +416,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_channel_layout_from_string_delegate(AVChannelLayout* @channel_layout,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -430,7 +430,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_channel_layout_index_from_string_delegate(AVChannelLayout* @channel_layout,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -468,7 +468,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_chroma_location_from_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -511,7 +511,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_color_primaries_from_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -526,7 +526,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_color_range_from_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -541,7 +541,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_color_space_from_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -556,7 +556,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_color_transfer_from_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -640,7 +640,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVDictionaryEntry* av_dict_get_delegate(AVDictionary* @m,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -658,19 +658,19 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_dict_parse_string_delegate(AVDictionary** @pm,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @str,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @key_val_sep,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -680,13 +680,13 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_dict_set_delegate(AVDictionary** @pm,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @key,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -696,7 +696,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_dict_set_int_delegate(AVDictionary** @pm,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -718,7 +718,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_disposition_from_string_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -737,7 +737,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_dump_format_delegate(AVFormatContext* @ic, int @index,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -811,7 +811,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_file_map_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -825,7 +825,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_filename_number_test_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -851,7 +851,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVInputFormat* av_find_input_format_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1034,7 +1034,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_get_frame_filename_delegate(byte* @buf, int @buf_size,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1044,7 +1044,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_get_frame_filename2_delegate(byte* @buf, int @buf_size,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1083,7 +1083,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVPixelFormat av_get_pix_fmt_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1115,7 +1115,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVSampleFormat av_get_sample_fmt_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1154,19 +1154,19 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVCodecID av_guess_codec_delegate(AVOutputFormat* @fmt,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @short_name,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @filename,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1176,19 +1176,19 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVOutputFormat* av_guess_format_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @short_name,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @filename,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1218,7 +1218,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_hwdevice_ctx_create_delegate(AVBufferRef** @device_ctx, AVHWDeviceType @type,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1240,7 +1240,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVHWDeviceType av_hwdevice_find_type_by_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1395,7 +1395,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_log_delegate(void* @avcl, int @level,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1405,7 +1405,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_log_default_callback_delegate(void* @avcl, int @level,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1415,7 +1415,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_log_format_line_delegate(void* @ptr, int @level,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1425,7 +1425,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_log_format_line2_delegate(void* @ptr, int @level,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1443,7 +1443,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_log_once_delegate(void* @avcl, int @initial_level, int @subsequent_level, int* @state,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1497,13 +1497,13 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_match_ext_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @filename,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1561,7 +1561,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_eval_double_delegate(void* @obj, AVOption* @o,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1571,7 +1571,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_eval_flags_delegate(void* @obj, AVOption* @o,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1581,7 +1581,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_eval_float_delegate(void* @obj, AVOption* @o,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1591,7 +1591,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_eval_int_delegate(void* @obj, AVOption* @o,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1601,7 +1601,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_eval_int64_delegate(void* @obj, AVOption* @o,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1611,7 +1611,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_eval_q_delegate(void* @obj, AVOption* @o,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1621,7 +1621,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_eval_uint_delegate(void* @obj, AVOption* @o,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1631,13 +1631,13 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVOption* av_opt_find_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @name,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1647,13 +1647,13 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVOption* av_opt_find2_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @name,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1663,13 +1663,13 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_flag_is_set_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @field_name,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1687,7 +1687,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1697,7 +1697,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_array_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1707,7 +1707,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_array_size_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1717,7 +1717,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_chlayout_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1727,7 +1727,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_dict_val_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1737,7 +1737,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_double_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1747,7 +1747,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_image_size_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1757,7 +1757,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_int_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1767,13 +1767,13 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_key_value_delegate(byte** @ropts,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @key_val_sep,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1783,7 +1783,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_pixel_fmt_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1793,7 +1793,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_q_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1803,7 +1803,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_sample_fmt_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1813,7 +1813,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_get_video_rate_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1827,7 +1827,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_is_set_to_default_by_name_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1841,7 +1841,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_query_ranges_delegate(AVOptionRanges** @p0, void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1851,7 +1851,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_query_ranges_default_delegate(AVOptionRanges** @p0, void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1865,13 +1865,13 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @name,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1881,7 +1881,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_array_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1891,7 +1891,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_bin_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1901,7 +1901,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_chlayout_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1923,7 +1923,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_dict_val_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1937,7 +1937,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_double_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1947,19 +1947,19 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_from_string_delegate(void* @ctx,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @opts, byte** @shorthand,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @key_val_sep,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1969,7 +1969,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_image_size_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1979,7 +1979,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_int_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1989,7 +1989,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_pixel_fmt_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -1999,7 +1999,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_q_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2009,7 +2009,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_sample_fmt_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2019,7 +2019,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_opt_set_video_rate_delegate(void* @obj,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2146,7 +2146,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_parse_cpu_caps_delegate(uint* @flags,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2204,7 +2204,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_probe_input_buffer_delegate(AVIOContext* @pb, AVInputFormat** @fmt,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2214,7 +2214,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_probe_input_buffer2_delegate(AVIOContext* @pb, AVInputFormat** @fmt,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2352,19 +2352,19 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_set_options_string_delegate(void* @ctx,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @opts,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @key_val_sep,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2382,7 +2382,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate byte* av_strdup_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2408,7 +2408,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate byte* av_strndup_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2446,7 +2446,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_timecode_init_from_string_delegate(AVTimecode* @tc, AVRational @rate,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2492,7 +2492,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_url_split_delegate(byte* @proto, int @proto_size, byte* @authorization, int @authorization_size, byte* @hostname, int @hostname_size, int* @port_ptr, byte* @path, int @path_size,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2511,7 +2511,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_vlog_delegate(void* @avcl, int @level,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2594,7 +2594,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVCodecDescriptor* avcodec_descriptor_get_by_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2624,7 +2624,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVCodec* avcodec_find_decoder_by_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2638,7 +2638,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVCodec* avcodec_find_encoder_by_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2781,7 +2781,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avdevice_list_input_sources_delegate(AVInputFormat* @device,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2791,7 +2791,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avdevice_list_output_sinks_delegate(AVOutputFormat* @device,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2822,7 +2822,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVFilter* avfilter_get_by_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2840,7 +2840,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVFilterContext* avfilter_graph_alloc_filter_delegate(AVFilterGraph* @graph, AVFilter* @filter,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2854,13 +2854,13 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avfilter_graph_create_filter_delegate(AVFilterContext** @filt_ctx, AVFilter* @filt,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @name,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2870,7 +2870,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate byte* avfilter_graph_dump_delegate(AVFilterGraph* @graph,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2884,7 +2884,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVFilterContext* avfilter_graph_get_filter_delegate(AVFilterGraph* @graph,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2894,7 +2894,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avfilter_graph_parse_delegate(AVFilterGraph* @graph,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2904,7 +2904,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avfilter_graph_parse_ptr_delegate(AVFilterGraph* @graph,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2914,7 +2914,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avfilter_graph_parse2_delegate(AVFilterGraph* @graph,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2924,19 +2924,19 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avfilter_graph_queue_command_delegate(AVFilterGraph* @graph,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @target,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @cmd,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2974,7 +2974,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avfilter_graph_segment_parse_delegate(AVFilterGraph* @graph,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -2984,19 +2984,19 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avfilter_graph_send_command_delegate(AVFilterGraph* @graph,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @target,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @cmd,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3014,7 +3014,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avfilter_init_str_delegate(AVFilterContext* @ctx,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3058,13 +3058,13 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avfilter_process_command_delegate(AVFilterContext* @filter,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @cmd,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3082,13 +3082,13 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avformat_alloc_output_context2_delegate(AVFormatContext** @ctx, AVOutputFormat* @oformat,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
     #endif
     string @format_name,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3160,7 +3160,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avformat_match_stream_specifier_delegate(AVFormatContext* @s, AVStream* @st,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3182,7 +3182,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avformat_open_input_delegate(AVFormatContext** @ps,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3241,7 +3241,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avio_check_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3281,7 +3281,7 @@ public static unsafe partial class vectors
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
     public delegate string avio_find_protocol_name_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3319,7 +3319,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avio_open_delegate(AVIOContext** @s,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3329,7 +3329,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avio_open_dir_delegate(AVIODirContext** @s,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3343,7 +3343,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avio_open2_delegate(AVIOContext** @s,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3361,7 +3361,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avio_printf_delegate(AVIOContext* @s,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3371,7 +3371,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVClass* avio_protocol_get_class_delegate(    
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3381,7 +3381,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avio_put_str_delegate(AVIOContext* @s,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3391,7 +3391,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avio_put_str16be_delegate(AVIOContext* @s,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3401,7 +3401,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avio_put_str16le_delegate(AVIOContext* @s,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
@@ -3479,7 +3479,7 @@ public static unsafe partial class vectors
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int avio_vprintf_delegate(AVIOContext* @s,     
-    #if NETSTANDARD2_1_OR_GREATER
+    #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
     #else
     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]

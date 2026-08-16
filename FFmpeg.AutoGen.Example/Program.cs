@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -17,6 +17,21 @@ internal class Program
     // 854x480 H.264, 52 s, ~4 MB. Might also be a local resource, e.g. "../../sample_mpeg4.mp4".
     private const string SampleVideoUrl = "https://media.w3.org/2010/05/sintel/trailer.mp4";
 
+    private const string OutputDirectory = "frames";
+
+    // Both halves of the encode pipeline must agree on this: the encoder's time base is
+    // 1/FramesPerSecond, and the muxer rescales packet indices at the same rate.
+    private const int FramesPerSecond = 25;
+
+    // The search pattern and FramePath must keep matching each other.
+    private const string FrameSearchPattern = "frame.*.jpg";
+
+    private static readonly string H264Path = Path.Combine(OutputDirectory, "out.h264");
+    private static readonly string Mp4Path = Path.Combine(OutputDirectory, "out.mp4");
+
+    private static string FramePath(int frameNumber)
+        => Path.Combine(OutputDirectory, $"frame.{frameNumber:D8}.jpg");
+
     private static void Main(string[] args)
     {
         Console.WriteLine("Current directory: " + Environment.CurrentDirectory);
@@ -31,13 +46,26 @@ internal class Program
         SetupLogging();
         ConfigureHWDecoder(out var deviceType);
 
-        Directory.CreateDirectory("frames");
+        Directory.CreateDirectory(OutputDirectory);
         
         Console.WriteLine("Decoding...");
         DecodeAllFramesToImages(deviceType);
 
         Console.WriteLine("Encoding...");
         EncodeImagesToH264();
+
+        Console.WriteLine("Muxing...");
+        MuxH264ToMp4();
+    }
+
+    private static void MuxH264ToMp4()
+    {
+        using var muxer = new Mp4Muxer(H264Path, Mp4Path, FramesPerSecond);
+
+        Console.WriteLine($"output is seekable: {muxer.IsSeekable}");
+
+        var packetCount = muxer.Mux();
+        Console.WriteLine($"muxed {packetCount} packets into {Mp4Path}");
     }
 
     private static void ConfigureHWDecoder(out AVHWDeviceType HWtype)
@@ -150,11 +178,11 @@ internal class Program
 
     private static unsafe void EncodeImagesToH264()
     {
-        var frameFiles = Directory.GetFiles("./frames", "frame.*.jpg").OrderBy(x => x).ToArray();
+        var frameFiles = Directory.GetFiles(OutputDirectory, FrameSearchPattern).OrderBy(x => x).ToArray();
         using var fistFrameImage = ReadFrame(frameFiles.First());
 
-        var outputFileName = "frames/out.h264";
-        var fps = 25;
+        var outputFileName = H264Path;
+        var fps = FramesPerSecond;
         var sourceSize = new Size(fistFrameImage.Width, fistFrameImage.Height);
         var sourcePixelFormat = AVPixelFormat.@AV_PIX_FMT_BGRA;
         var destinationSize = sourceSize;
@@ -182,7 +210,7 @@ internal class Program
                     height = sourceSize.Height
                 };
                 var convertedFrame = vfc.Convert(frame);
-                convertedFrame.pts = frameNumber * fps;
+                convertedFrame.pts = frameNumber;
                 vse.Encode(convertedFrame);
             }
 
@@ -198,7 +226,7 @@ internal class Program
         var imageInfo = new SKImageInfo(convertedFrame.width, convertedFrame.height, SKColorType.Bgra8888, SKAlphaType.Opaque);
         using var bitmap = new SKBitmap();
         bitmap.InstallPixels(imageInfo, (IntPtr)convertedFrame.data[0]);
-        using var stream = File.Create($"frames/frame.{frameNumber:D8}.jpg");
+        using var stream = File.Create(FramePath(frameNumber));
         bitmap.Encode(stream, SKEncodedImageFormat.Jpeg, 90);
     }
 
