@@ -6,11 +6,12 @@ namespace FFmpeg.AutoGen.Abstractions;
 
 /// <summary>
 /// Platform-specific C 'long' type.
-/// On netstandard2.0/2.1, assumes 8 bytes (same as previous behavior).
-/// C 'long' is 4 bytes on Windows — this is a known issue on older frameworks.
-/// For correct cross-platform struct layout, upgrade to .NET 6+.
+/// Always 8 bytes here, which is correct on Linux and macOS x64 but wrong on Windows,
+/// where C 'long' is 4 bytes. A netstandard assembly has one fixed layout and cannot
+/// differ per platform, so this preserves the historical behaviour rather than fixing it.
+/// Target net8.0 or newer to get the runtime's own CLong, which is sized per platform.
 /// </summary>
-[Obsolete("CLong has incorrect size on Windows. Upgrade to .NET 6+ for correct cross-platform behavior.")]
+[Obsolete("CLong is 8 bytes here, which is wrong on Windows and shifts every field after it. Target net8.0 or newer for a correct struct layout.")]
 [StructLayout(LayoutKind.Sequential)]
 public struct CLong
 {
@@ -24,11 +25,12 @@ public struct CLong
 
 /// <summary>
 /// Platform-specific C 'unsigned long' type.
-/// On netstandard2.0/2.1, assumes 8 bytes (same as previous behavior).
-/// C 'unsigned long' is 4 bytes on Windows — this is a known issue on older frameworks.
-/// For correct cross-platform struct layout, upgrade to .NET 6+.
+/// Always 8 bytes here, which is correct on Linux and macOS x64 but wrong on Windows,
+/// where C 'unsigned long' is 4 bytes. A netstandard assembly has one fixed layout and
+/// cannot differ per platform, so this preserves the historical behaviour rather than
+/// fixing it. Target net8.0 or newer to get the runtime's own CULong, sized per platform.
 /// </summary>
-[Obsolete("CULong has incorrect size on Windows. Upgrade to .NET 6+ for correct cross-platform behavior.")]
+[Obsolete("CULong is 8 bytes here, which is wrong on Windows and shifts every field after it. Target net8.0 or newer for a correct struct layout.")]
 [StructLayout(LayoutKind.Sequential)]
 public struct CULong
 {
