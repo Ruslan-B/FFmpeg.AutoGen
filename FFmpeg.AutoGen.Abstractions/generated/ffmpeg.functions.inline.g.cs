@@ -243,13 +243,6 @@ public static unsafe partial class ffmpeg
     }
     // original body hash: IAPYNNcg3GX0PGxINeLQhb41dH921lPVKcnqxCk7ERA=
     
-    [Obsolete()]
-    public static uint av_mod_uintp2_c(uint @a, uint @p)
-{
-    return av_zero_extend_c(a, p);
-}
-    // original body hash: MfDd5KRKGNiwvccdrrbME05wNKCRzGTF1T24OggAyp0=
-    
     public static int av_parity_c(uint @v)
     {
         return av_popcount_c(v) & 1;
