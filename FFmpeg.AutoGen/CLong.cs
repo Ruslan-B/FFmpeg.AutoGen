@@ -9,9 +9,11 @@ namespace FFmpeg.AutoGen;
 /// Always 8 bytes here, which is correct on Linux and macOS x64 but wrong on Windows,
 /// where C 'long' is 4 bytes. A netstandard assembly has one fixed layout and cannot
 /// differ per platform, so this preserves the historical behaviour rather than fixing it.
-/// Target net8.0 or newer to get the runtime's own CLong, which is sized per platform.
+/// The runtime supplies its own per-platform CLong from net6.0 onward, which is why this
+/// shim is excluded there. net8.0 is the lowest modern target this package ships,
+/// so that is the one to move to.
 /// </summary>
-[Obsolete("CLong is 8 bytes here, which is wrong on Windows and shifts every field after it. Target net8.0 or newer for a correct struct layout.")]
+[Obsolete("CLong is 8 bytes here, which is wrong on Windows and shifts every field after it. Target net8.0 or newer - the lowest modern asset this package ships - for a correct struct layout.")]
 [StructLayout(LayoutKind.Sequential)]
 public struct CLong
 {
@@ -28,9 +30,11 @@ public struct CLong
 /// Always 8 bytes here, which is correct on Linux and macOS x64 but wrong on Windows,
 /// where C 'unsigned long' is 4 bytes. A netstandard assembly has one fixed layout and
 /// cannot differ per platform, so this preserves the historical behaviour rather than
-/// fixing it. Target net8.0 or newer to get the runtime's own CULong, sized per platform.
+/// fixing it. The runtime supplies its own per-platform CULong from net6.0 onward, which is
+/// why this shim is excluded there. net8.0 is the lowest modern target this package ships,
+/// so that is the one to move to.
 /// </summary>
-[Obsolete("CULong is 8 bytes here, which is wrong on Windows and shifts every field after it. Target net8.0 or newer for a correct struct layout.")]
+[Obsolete("CULong is 8 bytes here, which is wrong on Windows and shifts every field after it. Target net8.0 or newer - the lowest modern asset this package ships - for a correct struct layout.")]
 [StructLayout(LayoutKind.Sequential)]
 public struct CULong
 {
