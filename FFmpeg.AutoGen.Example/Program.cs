@@ -38,6 +38,19 @@ internal class Program
 
         Console.WriteLine("Encoding...");
         EncodeImagesToH264();
+
+        Console.WriteLine("Muxing...");
+        MuxH264ToMp4();
+    }
+
+    private static void MuxH264ToMp4()
+    {
+        using var muxer = new Mp4Muxer("frames/out.h264", "frames/out.mp4", 25);
+
+        Console.WriteLine($"output is seekable: {muxer.IsSeekable}");
+
+        var packetCount = muxer.Mux();
+        Console.WriteLine($"muxed {packetCount} packets into frames/out.mp4");
     }
 
     private static void ConfigureHWDecoder(out AVHWDeviceType HWtype)
