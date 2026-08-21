@@ -37,6 +37,10 @@ public static unsafe partial class ffmpeg
     /// <returns>&gt;0 (read size) if OK, AVERROR_xxx otherwise, previous data will not be lost even if an error occurs.</returns>
     public static int av_append_packet(AVIOContext* @s, AVPacket* @pkt, int @size) => vectors.av_append_packet(@s, @pkt, @size);
     
+    /// <summary>Assert that floating point operations can be executed.</summary>
+    [Obsolete("without replacement")]
+    public static void av_assert0_fpu() => vectors.av_assert0_fpu();
+    
     /// <summary>Allocate an AVAudioFifo.</summary>
     /// <param name="sample_fmt">sample format</param>
     /// <param name="channels">number of channels</param>
@@ -781,6 +785,132 @@ public static unsafe partial class ffmpeg
     /// <returns>Pointer to the data of the element to copy in the newly allocated space</returns>
     public static void* av_dynarray2_add(void** @tab_ptr, int* @nb_ptr, ulong @elem_size, byte* @elem_data) => vectors.av_dynarray2_add(@tab_ptr, @nb_ptr, @elem_size, @elem_data);
     
+    /// <summary>Allocates and initializes side data that holds a copy of the given encryption info. The resulting pointer should be either freed using av_free or given to av_packet_add_side_data().</summary>
+    /// <returns>The new side-data pointer, or NULL.</returns>
+    public static byte* av_encryption_info_add_side_data(AVEncryptionInfo* @info, ulong* @side_data_size) => vectors.av_encryption_info_add_side_data(@info, @side_data_size);
+    
+    /// <summary>Allocates an AVEncryptionInfo structure and sub-pointers to hold the given number of subsamples. This will allocate pointers for the key ID, IV, and subsample entries, set the size members, and zero-initialize the rest.</summary>
+    /// <param name="subsample_count">The number of subsamples.</param>
+    /// <param name="key_id_size">The number of bytes in the key ID, should be 16.</param>
+    /// <param name="iv_size">The number of bytes in the IV, should be 16.</param>
+    /// <returns>The new AVEncryptionInfo structure, or NULL on error.</returns>
+    public static AVEncryptionInfo* av_encryption_info_alloc(uint @subsample_count, uint @key_id_size, uint @iv_size) => vectors.av_encryption_info_alloc(@subsample_count, @key_id_size, @iv_size);
+    
+    /// <summary>Allocates an AVEncryptionInfo structure with a copy of the given data.</summary>
+    /// <returns>The new AVEncryptionInfo structure, or NULL on error.</returns>
+    public static AVEncryptionInfo* av_encryption_info_clone(AVEncryptionInfo* @info) => vectors.av_encryption_info_clone(@info);
+    
+    /// <summary>Frees the given encryption info object. This MUST NOT be used to free the side-data data pointer, that should use normal side-data methods.</summary>
+    public static void av_encryption_info_free(AVEncryptionInfo* @info) => vectors.av_encryption_info_free(@info);
+    
+    /// <summary>Creates a copy of the AVEncryptionInfo that is contained in the given side data. The resulting object should be passed to av_encryption_info_free() when done.</summary>
+    /// <returns>The new AVEncryptionInfo structure, or NULL on error.</returns>
+    public static AVEncryptionInfo* av_encryption_info_get_side_data(byte* @side_data, ulong @side_data_size) => vectors.av_encryption_info_get_side_data(@side_data, @side_data_size);
+    
+    /// <summary>Allocates and initializes side data that holds a copy of the given encryption init info. The resulting pointer should be either freed using av_free or given to av_packet_add_side_data().</summary>
+    /// <returns>The new side-data pointer, or NULL.</returns>
+    public static byte* av_encryption_init_info_add_side_data(AVEncryptionInitInfo* @info, ulong* @side_data_size) => vectors.av_encryption_init_info_add_side_data(@info, @side_data_size);
+    
+    /// <summary>Allocates an AVEncryptionInitInfo structure and sub-pointers to hold the given sizes. This will allocate pointers and set all the fields.</summary>
+    /// <returns>The new AVEncryptionInitInfo structure, or NULL on error.</returns>
+    public static AVEncryptionInitInfo* av_encryption_init_info_alloc(uint @system_id_size, uint @num_key_ids, uint @key_id_size, uint @data_size) => vectors.av_encryption_init_info_alloc(@system_id_size, @num_key_ids, @key_id_size, @data_size);
+    
+    /// <summary>Frees the given encryption init info object. This MUST NOT be used to free the side-data data pointer, that should use normal side-data methods.</summary>
+    public static void av_encryption_init_info_free(AVEncryptionInitInfo* @info) => vectors.av_encryption_init_info_free(@info);
+    
+    /// <summary>Creates a copy of the AVEncryptionInitInfo that is contained in the given side data. The resulting object should be passed to av_encryption_init_info_free() when done.</summary>
+    /// <returns>The new AVEncryptionInitInfo structure, or NULL on error.</returns>
+    public static AVEncryptionInitInfo* av_encryption_init_info_get_side_data(byte* @side_data, ulong @side_data_size) => vectors.av_encryption_init_info_get_side_data(@side_data, @side_data_size);
+    
+    /// <summary>Allocates a duplicate of the provided EXIF metadata struct. The caller owns the duplicate and must free it with av_exif_free. Returns NULL if the duplication process failed.</summary>
+    public static AVExifMetadata* av_exif_clone_ifd(AVExifMetadata* @ifd) => vectors.av_exif_clone_ifd(@ifd);
+    
+    /// <summary>Frees all resources associated with the given EXIF metadata struct. Does not free the pointer passed itself, in case it is stack-allocated. The pointer passed to this function must be freed by the caller, if it is heap-allocated. Passing NULL is permitted.</summary>
+    public static void av_exif_free(AVExifMetadata* @ifd) => vectors.av_exif_free(@ifd);
+    
+    /// <summary>Get an entry with the tagged ID from the EXIF metadata struct. A pointer to the entry will be written into *value.</summary>
+    public static int av_exif_get_entry(void* @logctx, AVExifMetadata* @ifd, ushort @id, int @flags, AVExifEntry** @value) => vectors.av_exif_get_entry(@logctx, @ifd, @id, @flags, @value);
+    
+    /// <summary>Retrieves the tag ID associated with the provided tag string name. If the tag name is unknown, a negative number is returned. Otherwise it always fits inside a uint16_t integer.</summary>
+    public static int av_exif_get_tag_id(string @name) => vectors.av_exif_get_tag_id(@name);
+    
+    /// <summary>Retrieves the tag name associated with the provided tag ID. If the tag ID is unknown, NULL is returned.</summary>
+    public static string av_exif_get_tag_name(ushort @id) => vectors.av_exif_get_tag_name(@id);
+    
+    /// <summary>Recursively reads all tags from the IFD and stores them in the provided metadata dictionary.</summary>
+    public static int av_exif_ifd_to_dict(void* @logctx, AVExifMetadata* @ifd, AVDictionary** @metadata) => vectors.av_exif_ifd_to_dict(@logctx, @ifd, @metadata);
+    
+    /// <summary>Convert a display matrix used by AV_FRAME_DATA_DISPLAYMATRIX into an orientation constant used by EXIF&apos;s orientation tag.</summary>
+    public static int av_exif_matrix_to_orientation(int* @matrix) => vectors.av_exif_matrix_to_orientation(@matrix);
+    
+    /// <summary>Convert an orientation constant used by EXIF&apos;s orientation tag into a display matrix used by AV_FRAME_DATA_DISPLAYMATRIX.</summary>
+    public static int av_exif_orientation_to_matrix(int* @matrix, int @orientation) => vectors.av_exif_orientation_to_matrix(@matrix, @orientation);
+    
+    /// <summary>Decodes the EXIF data provided in the buffer and writes it into the struct *ifd. If this function succeeds, the IFD is owned by the caller and must be cleared after use by calling av_exif_free(); If this function fails and returns a negative value, it will call av_exif_free(ifd) before returning.</summary>
+    public static int av_exif_parse_buffer(void* @logctx, byte* @data, ulong @size, AVExifMetadata* @ifd, AVExifHeaderMode @header_mode) => vectors.av_exif_parse_buffer(@logctx, @data, @size, @ifd, @header_mode);
+    
+    /// <summary>Remove an entry from the provided EXIF metadata struct.</summary>
+    public static int av_exif_remove_entry(void* @logctx, AVExifMetadata* @ifd, ushort @id, int @flags) => vectors.av_exif_remove_entry(@logctx, @ifd, @id, @flags);
+    
+    /// <summary>Add an entry to the provided EXIF metadata struct. If one already exists with the provided ID, it will set the existing one to have the other information provided. Otherwise, it will allocate a new entry.</summary>
+    public static int av_exif_set_entry(void* @logctx, AVExifMetadata* @ifd, ushort @id, AVTiffDataType @type, uint @count, byte* @ifd_lead, uint @ifd_offset, void* @value) => vectors.av_exif_set_entry(@logctx, @ifd, @id, @type, @count, @ifd_lead, @ifd_offset, @value);
+    
+    /// <summary>Allocates a buffer using av_malloc of an appropriate size and writes the EXIF data represented by ifd into that buffer.</summary>
+    public static int av_exif_write(void* @logctx, AVExifMetadata* @ifd, AVBufferRef** @buffer, AVExifHeaderMode @header_mode) => vectors.av_exif_write(@logctx, @ifd, @buffer, @header_mode);
+    
+    /// <summary>Track the presence of user provided functions and their number of occurrences in a parsed expression.</summary>
+    /// <param name="e">the AVExpr to track user provided functions in</param>
+    /// <param name="counter">a zero-initialized array where the count of each function will be stored if you passed 5 functions with 2 arguments to av_expr_parse() then for arg=2 this will use up to 5 entries.</param>
+    /// <param name="size">size of array</param>
+    /// <param name="arg">number of arguments the counted functions have</param>
+    /// <returns>0 on success, a negative value indicates that no expression or array was passed or size was zero</returns>
+    public static int av_expr_count_func(AVExpr* @e, uint* @counter, int @size, int @arg) => vectors.av_expr_count_func(@e, @counter, @size, @arg);
+    
+    /// <summary>Track the presence of variables and their number of occurrences in a parsed expression</summary>
+    /// <param name="e">the AVExpr to track variables in</param>
+    /// <param name="counter">a zero-initialized array where the count of each variable will be stored</param>
+    /// <param name="size">size of array</param>
+    /// <returns>0 on success, a negative value indicates that no expression or array was passed or size was zero</returns>
+    public static int av_expr_count_vars(AVExpr* @e, uint* @counter, int @size) => vectors.av_expr_count_vars(@e, @counter, @size);
+    
+    /// <summary>Evaluate a previously parsed expression.</summary>
+    /// <param name="e">the AVExpr to evaluate</param>
+    /// <param name="const_values">a zero terminated array of values for the identifiers from av_expr_parse() const_names</param>
+    /// <param name="opaque">a pointer which will be passed to all functions from funcs1 and funcs2</param>
+    /// <returns>the value of the expression</returns>
+    public static double av_expr_eval(AVExpr* @e, double* @const_values, void* @opaque) => vectors.av_expr_eval(@e, @const_values, @opaque);
+    
+    /// <summary>Free a parsed expression previously created with av_expr_parse().</summary>
+    public static void av_expr_free(AVExpr* @e) => vectors.av_expr_free(@e);
+    
+    /// <summary>Parse an expression.</summary>
+    /// <param name="expr">a pointer where is put an AVExpr containing the parsed value in case of successful parsing, or NULL otherwise. The pointed to AVExpr must be freed with av_expr_free() by the user when it is not needed anymore.</param>
+    /// <param name="s">expression as a zero terminated string, for example &quot;1+2^3+5*5+sin(2/3)&quot;</param>
+    /// <param name="const_names">NULL terminated array of zero terminated strings of constant identifiers, for example {&quot;PI&quot;, &quot;E&quot;, 0}</param>
+    /// <param name="func1_names">NULL terminated array of zero terminated strings of funcs1 identifiers</param>
+    /// <param name="funcs1">NULL terminated array of function pointers for functions which take 1 argument</param>
+    /// <param name="func2_names">NULL terminated array of zero terminated strings of funcs2 identifiers</param>
+    /// <param name="funcs2">NULL terminated array of function pointers for functions which take 2 arguments</param>
+    /// <param name="log_offset">log level offset, can be used to silence error messages</param>
+    /// <param name="log_ctx">parent logging context</param>
+    /// <returns>&gt;= 0 in case of success, a negative value corresponding to an AVERROR code otherwise</returns>
+    public static int av_expr_parse(AVExpr** @expr, string @s, byte** @const_names, byte** @func1_names, av_expr_parse_funcs1_func* @funcs1, byte** @func2_names, av_expr_parse_funcs2_func* @funcs2, int @log_offset, void* @log_ctx) => vectors.av_expr_parse(@expr, @s, @const_names, @func1_names, @funcs1, @func2_names, @funcs2, @log_offset, @log_ctx);
+    
+    /// <summary>Parse and evaluate an expression. Note, this is significantly slower than av_expr_eval().</summary>
+    /// <param name="res">a pointer to a double where is put the result value of the expression, or NAN in case of error</param>
+    /// <param name="s">expression as a zero terminated string, for example &quot;1+2^3+5*5+sin(2/3)&quot;</param>
+    /// <param name="const_names">NULL terminated array of zero terminated strings of constant identifiers, for example {&quot;PI&quot;, &quot;E&quot;, 0}</param>
+    /// <param name="const_values">a zero terminated array of values for the identifiers from const_names</param>
+    /// <param name="func1_names">NULL terminated array of zero terminated strings of funcs1 identifiers</param>
+    /// <param name="funcs1">NULL terminated array of function pointers for functions which take 1 argument</param>
+    /// <param name="func2_names">NULL terminated array of zero terminated strings of funcs2 identifiers</param>
+    /// <param name="funcs2">NULL terminated array of function pointers for functions which take 2 arguments</param>
+    /// <param name="opaque">a pointer which will be passed to all functions from funcs1 and funcs2</param>
+    /// <param name="log_offset">log level offset, can be used to silence error messages</param>
+    /// <param name="log_ctx">parent logging context</param>
+    /// <returns>&gt;= 0 in case of success, a negative value corresponding to an AVERROR code otherwise</returns>
+    public static int av_expr_parse_and_eval(double* @res, string @s, byte** @const_names, double* @const_values, byte** @func1_names, av_expr_parse_and_eval_funcs1_func* @funcs1, byte** @func2_names, av_expr_parse_and_eval_funcs2_func* @funcs2, void* @opaque, int @log_offset, void* @log_ctx) => vectors.av_expr_parse_and_eval(@res, @s, @const_names, @const_values, @func1_names, @funcs1, @func2_names, @funcs2, @opaque, @log_offset, @log_ctx);
+    
     /// <summary>Allocate a buffer, reusing the given one if large enough.</summary>
     /// <param name="ptr">Pointer to pointer to an already allocated buffer. `*ptr` will be overwritten with pointer to new buffer on success or `NULL` on failure</param>
     /// <param name="size">Pointer to the size of buffer `*ptr`. `*size` is updated to the new allocated size, in particular 0 in case of failure.</param>
@@ -847,6 +977,9 @@ public static unsafe partial class ffmpeg
     public static int av_find_best_stream(AVFormatContext* @ic, AVMediaType @type, int @wanted_stream_nb, int @related_stream, AVCodec** @decoder_ret, int @flags) => vectors.av_find_best_stream(@ic, @type, @wanted_stream_nb, @related_stream, @decoder_ret, @flags);
     
     public static int av_find_default_stream_index(AVFormatContext* @s) => vectors.av_find_default_stream_index(@s);
+    
+    /// <summary>Attempt to find a specific tag in a URL.</summary>
+    public static int av_find_info_tag(byte* @arg, int @arg_size, string @tag1, string @info) => vectors.av_find_info_tag(@arg, @arg_size, @tag1, @info);
     
     /// <summary>Find AVInputFormat based on the short name of the input format.</summary>
     public static AVInputFormat* av_find_input_format(string @short_name) => vectors.av_find_input_format(@short_name);
@@ -1065,6 +1198,12 @@ public static unsafe partial class ffmpeg
     /// <param name="flags">AV_FRAME_FILENAME_FLAGS_*</param>
     /// <returns>0 if OK, -1 on format error</returns>
     public static int av_get_frame_filename2(byte* @buf, int @buf_size, string @path, int @number, int @flags) => vectors.av_get_frame_filename2(@buf, @buf_size, @path, @number, @flags);
+    
+    /// <summary>Get the name of a color from the internal table of hard-coded named colors.</summary>
+    /// <param name="color_idx">index of the requested color, starting from 0</param>
+    /// <param name="rgb">if not NULL, will point to a 3-elements array with the color value in RGB</param>
+    /// <returns>the color name string or NULL if color_idx is not in the array</returns>
+    public static string av_get_known_color_name(int @color_idx, byte** @rgb) => vectors.av_get_known_color_name(@color_idx, @rgb);
     
     /// <summary>Return a string describing the media_type enum, NULL if media_type is unknown.</summary>
     public static string av_get_media_type_string(AVMediaType @media_type) => vectors.av_get_media_type_string(@media_type);
@@ -1308,6 +1447,45 @@ public static unsafe partial class ffmpeg
     /// <param name="flags">currently unused, should be set to zero</param>
     /// <returns>0 on success, a negative AVERROR code on failure.</returns>
     public static int av_hwframe_transfer_get_formats(AVBufferRef* @hwframe_ctx, AVHWFrameTransferDirection @dir, AVPixelFormat** @formats, int @flags) => vectors.av_hwframe_transfer_get_formats(@hwframe_ctx, @dir, @formats, @flags);
+    
+    /// <summary>Allocate a layer and add it to a given AVIAMFAudioElement. It is freed by av_iamf_audio_element_free() alongside the rest of the parent AVIAMFAudioElement.</summary>
+    /// <returns>a pointer to the allocated layer.</returns>
+    public static AVIAMFLayer* av_iamf_audio_element_add_layer(AVIAMFAudioElement* @audio_element) => vectors.av_iamf_audio_element_add_layer(@audio_element);
+    
+    /// <summary>Allocates a AVIAMFAudioElement, and initializes its fields with default values. No layers are allocated. Must be freed with av_iamf_audio_element_free().</summary>
+    public static AVIAMFAudioElement* av_iamf_audio_element_alloc() => vectors.av_iamf_audio_element_alloc();
+    
+    /// <summary>Free an AVIAMFAudioElement and all its contents.</summary>
+    /// <param name="audio_element">pointer to pointer to an allocated AVIAMFAudioElement. upon return, *audio_element will be set to NULL.</param>
+    public static void av_iamf_audio_element_free(AVIAMFAudioElement** @audio_element) => vectors.av_iamf_audio_element_free(@audio_element);
+    
+    public static AVClass* av_iamf_audio_element_get_class() => vectors.av_iamf_audio_element_get_class();
+    
+    /// <summary>Allocate a submix and add it to a given AVIAMFMixPresentation. It is freed by av_iamf_mix_presentation_free() alongside the rest of the parent AVIAMFMixPresentation.</summary>
+    /// <returns>a pointer to the allocated submix.</returns>
+    public static AVIAMFSubmix* av_iamf_mix_presentation_add_submix(AVIAMFMixPresentation* @mix_presentation) => vectors.av_iamf_mix_presentation_add_submix(@mix_presentation);
+    
+    /// <summary>Allocates a AVIAMFMixPresentation, and initializes its fields with default values. No submixes are allocated. Must be freed with av_iamf_mix_presentation_free().</summary>
+    public static AVIAMFMixPresentation* av_iamf_mix_presentation_alloc() => vectors.av_iamf_mix_presentation_alloc();
+    
+    /// <summary>Free an AVIAMFMixPresentation and all its contents.</summary>
+    /// <param name="mix_presentation">pointer to pointer to an allocated AVIAMFMixPresentation. upon return, *mix_presentation will be set to NULL.</param>
+    public static void av_iamf_mix_presentation_free(AVIAMFMixPresentation** @mix_presentation) => vectors.av_iamf_mix_presentation_free(@mix_presentation);
+    
+    public static AVClass* av_iamf_mix_presentation_get_class() => vectors.av_iamf_mix_presentation_get_class();
+    
+    /// <summary>Allocates memory for AVIAMFParamDefinition, plus an array of {</summary>
+    public static AVIAMFParamDefinition* av_iamf_param_definition_alloc(AVIAMFParamDefinitionType @type, uint @nb_subblocks, ulong* @size) => vectors.av_iamf_param_definition_alloc(@type, @nb_subblocks, @size);
+    
+    public static AVClass* av_iamf_param_definition_get_class() => vectors.av_iamf_param_definition_get_class();
+    
+    /// <summary>Allocate a submix element and add it to a given AVIAMFSubmix. It is freed by av_iamf_mix_presentation_free() alongside the rest of the parent AVIAMFSubmix.</summary>
+    /// <returns>a pointer to the allocated submix.</returns>
+    public static AVIAMFSubmixElement* av_iamf_submix_add_element(AVIAMFSubmix* @submix) => vectors.av_iamf_submix_add_element(@submix);
+    
+    /// <summary>Allocate a submix layout and add it to a given AVIAMFSubmix. It is freed by av_iamf_mix_presentation_free() alongside the rest of the parent AVIAMFSubmix.</summary>
+    /// <returns>a pointer to the allocated submix.</returns>
+    public static AVIAMFSubmixLayout* av_iamf_submix_add_layout(AVIAMFSubmix* @submix) => vectors.av_iamf_submix_add_layout(@submix);
     
     /// <summary>Allocate an image with size w and h and pixel format pix_fmt, and fill pointers and linesizes accordingly. The allocated image buffer has to be freed by using av_freep(&amp;pointers[0]).</summary>
     /// <param name="pointers">array to be filled with the pointer for each image plane</param>
@@ -1998,9 +2176,46 @@ public static unsafe partial class ffmpeg
     /// <param name="pkt">The packet to be unreferenced.</param>
     public static void av_packet_unref(AVPacket* @pkt) => vectors.av_packet_unref(@pkt);
     
+    /// <summary>Put the RGBA values that correspond to color_string in rgba_color.</summary>
+    /// <param name="rgba_color">4-elements array of uint8_t values, where the respective red, green, blue and alpha component values are written.</param>
+    /// <param name="color_string">a string specifying a color. It can be the name of a color (case insensitive match) or a [0x|#]RRGGBB[AA] sequence, possibly followed by &quot; &quot; and a string representing the alpha component. The alpha component may be a string composed by &quot;0x&quot; followed by an hexadecimal number or a decimal number between 0.0 and 1.0, which represents the opacity value (0x00/0.0 means completely transparent, 0xff/1.0 completely opaque). If the alpha component is not specified then 0xff is assumed. The string &quot;random&quot; will result in a random color.</param>
+    /// <param name="slen">length of the initial part of color_string containing the color. It can be set to -1 if color_string is a null terminated string containing nothing else than the color.</param>
+    /// <param name="log_ctx">a pointer to an arbitrary struct of which the first field is a pointer to an AVClass struct (used for av_log()). Can be NULL.</param>
+    /// <returns>&gt;= 0 in case of success, a negative value in case of failure (for example if color_string cannot be parsed).</returns>
+    public static int av_parse_color(byte* @rgba_color, string @color_string, int @slen, void* @log_ctx) => vectors.av_parse_color(@rgba_color, @color_string, @slen, @log_ctx);
+    
     /// <summary>Parse CPU caps from a string and update the given AV_CPU_* flags based on that.</summary>
     /// <returns>negative on error.</returns>
     public static int av_parse_cpu_caps(uint* @flags, string @s) => vectors.av_parse_cpu_caps(@flags, @s);
+    
+    /// <summary>Parse str and store the parsed ratio in q.</summary>
+    /// <param name="q">pointer to the AVRational which will contain the ratio</param>
+    /// <param name="str">the string to parse: it has to be a string in the format num:den, a float number or an expression</param>
+    /// <param name="max">the maximum allowed numerator and denominator</param>
+    /// <param name="log_offset">log level offset which is applied to the log level of log_ctx</param>
+    /// <param name="log_ctx">parent logging context</param>
+    /// <returns>&gt;= 0 on success, a negative error code otherwise</returns>
+    public static int av_parse_ratio(AVRational* @q, string @str, int @max, int @log_offset, void* @log_ctx) => vectors.av_parse_ratio(@q, @str, @max, @log_offset, @log_ctx);
+    
+    /// <summary>Parse timestr and return in *time a corresponding number of microseconds.</summary>
+    /// <param name="timeval">puts here the number of microseconds corresponding to the string in timestr. If the string represents a duration, it is the number of microseconds contained in the time interval.  If the string is a date, is the number of microseconds since 1st of January, 1970 up to the time of the parsed date.  If timestr cannot be successfully parsed, set *time to INT64_MIN.</param>
+    /// <param name="timestr">a string representing a date or a duration. - If a date the syntax is:</param>
+    /// <param name="duration">flag which tells how to interpret timestr, if not zero timestr is interpreted as a duration, otherwise as a date</param>
+    /// <returns>&gt;= 0 in case of success, a negative value corresponding to an AVERROR code otherwise</returns>
+    public static int av_parse_time(long* @timeval, string @timestr, int @duration) => vectors.av_parse_time(@timeval, @timestr, @duration);
+    
+    /// <summary>Parse str and store the detected values in *rate.</summary>
+    /// <param name="rate">pointer to the AVRational which will contain the detected frame rate</param>
+    /// <param name="str">the string to parse: it has to be a string in the format rate_num / rate_den, a float number or a valid video rate abbreviation</param>
+    /// <returns>&gt;= 0 on success, a negative error code otherwise</returns>
+    public static int av_parse_video_rate(AVRational* @rate, string @str) => vectors.av_parse_video_rate(@rate, @str);
+    
+    /// <summary>Parse str and put in width_ptr and height_ptr the detected values.</summary>
+    /// <param name="width_ptr">pointer to the variable which will contain the detected width value</param>
+    /// <param name="height_ptr">pointer to the variable which will contain the detected height value</param>
+    /// <param name="str">the string to parse: it has to be a string in the format width x height or a valid video size abbreviation.</param>
+    /// <returns>&gt;= 0 on success, a negative error code otherwise</returns>
+    public static int av_parse_video_size(int* @width_ptr, int* @height_ptr, string @str) => vectors.av_parse_video_size(@width_ptr, @height_ptr, @str);
     
     public static void av_parser_close(AVCodecParserContext* @s) => vectors.av_parser_close(@s);
     
@@ -2293,6 +2508,10 @@ public static unsafe partial class ffmpeg
     /// <returns>0 on success, AVERROR(EINVAL) on overflow</returns>
     public static int av_size_mult(ulong @a, ulong @b, ulong* @r) => vectors.av_size_mult(@a, @b, @r);
     
+    /// <summary>Simplified version of strptime</summary>
+    /// <returns>a pointer to the first character not processed in this function call. In case the input string contains more characters than required by the format string the return value points right after the last consumed input character. In case the whole input string is consumed the return value points to the null byte at the end of the string. On failure NULL is returned.</returns>
+    public static byte* av_small_strptime(string @p, string @fmt, tm* @dt) => vectors.av_small_strptime(@p, @fmt, @dt);
+    
     /// <summary>Duplicate a string.</summary>
     /// <param name="s">String to be duplicated</param>
     /// <returns>Pointer to a newly-allocated string containing a copy of `s` or `NULL` if the string cannot be allocated</returns>
@@ -2318,6 +2537,11 @@ public static unsafe partial class ffmpeg
     /// <param name="len">Maximum length of the resulting string (not counting the terminating byte)</param>
     /// <returns>Pointer to a newly-allocated string containing a substring of `s` or `NULL` if the string cannot be allocated</returns>
     public static byte* av_strndup(string @s, ulong @len) => vectors.av_strndup(@s, @len);
+    
+    /// <summary>Parse the string in numstr and return its value as a double. If the string is empty, contains only whitespaces, or does not contain an initial substring that has the expected syntax for a floating-point number, no conversion is performed. In this case, returns a value of zero and the value returned in tail is the value of numstr.</summary>
+    /// <param name="numstr">a string representing a number, may contain one of the International System number postfixes, for example &apos;K&apos;, &apos;M&apos;, &apos;G&apos;. If &apos;i&apos; is appended after the postfix, powers of 2 are used instead of powers of 10. The &apos;B&apos; postfix multiplies the value by 8, and can be appended after another postfix or used alone. This allows using for example &apos;KB&apos;, &apos;MiB&apos;, &apos;G&apos; and &apos;B&apos; as postfix.</param>
+    /// <param name="tail">if non-NULL puts here the pointer to the char next after the last parsed character</param>
+    public static double av_strtod(string @numstr, byte** @tail) => vectors.av_strtod(@numstr, @tail);
     
     /// <summary>Subtract one rational from another.</summary>
     /// <param name="b">First rational</param>
@@ -2409,6 +2633,9 @@ public static unsafe partial class ffmpeg
     /// <returns>the buf parameter</returns>
     public static byte* av_timecode_make_string(AVTimecode* @tc, byte* @buf, int @framenum) => vectors.av_timecode_make_string(@tc, @buf, @framenum);
     
+    /// <summary>Convert the decomposed UTC time in tm to a time_t value.</summary>
+    public static long av_timegm(tm* @tm) => vectors.av_timegm(@tm);
+    
     public static void av_tree_destroy(AVTreeNode* @t) => vectors.av_tree_destroy(@t);
     
     /// <summary>Apply enu(opaque, &amp;elem) to all the elements in the tree in a given range.</summary>
@@ -2432,6 +2659,20 @@ public static unsafe partial class ffmpeg
     
     /// <summary>Allocate an AVTreeNode.</summary>
     public static AVTreeNode* av_tree_node_alloc() => vectors.av_tree_node_alloc();
+    
+    /// <summary>Initialize a transform context with the given configuration (i)MDCTs with an odd length are currently not supported.</summary>
+    /// <param name="ctx">the context to allocate, will be NULL on error</param>
+    /// <param name="tx">pointer to the transform function pointer to set</param>
+    /// <param name="type">type the type of transform</param>
+    /// <param name="inv">whether to do an inverse or a forward transform</param>
+    /// <param name="len">the size of the transform in samples</param>
+    /// <param name="scale">pointer to the value to scale the output if supported by type</param>
+    /// <param name="flags">a bitmask of AVTXFlags or 0</param>
+    /// <returns>0 on success, negative error code on failure</returns>
+    public static int av_tx_init(AVTXContext** @ctx, av_tx_init_tx_func* @tx, AVTXType @type, int @inv, int @len, void* @scale, ulong @flags) => vectors.av_tx_init(@ctx, @tx, @type, @inv, @len, @scale, @flags);
+    
+    /// <summary>Frees a context and sets *ctx to NULL, does nothing when *ctx == NULL.</summary>
+    public static void av_tx_uninit(AVTXContext** @ctx) => vectors.av_tx_uninit(@ctx);
     
     /// <summary>Split a URL string into components.</summary>
     /// <param name="proto">the buffer for the protocol</param>

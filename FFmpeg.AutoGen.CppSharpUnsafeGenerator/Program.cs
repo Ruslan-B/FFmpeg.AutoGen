@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -54,6 +54,9 @@ internal class Program
         var processor = new ASTProcessor(processingContext);
         astContexts.ForEach(processor.Process);
 
+        HeaderCoverage.Report(options.FFmpegIncludesDir,
+            astContexts.SelectMany(x => x.TranslationUnits).Where(x => !x.IsSystemHeader).Select(x => x.FilePath));
+
         // generate files
         var inlineFunctions = ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.SolutionDir, "FFmpeg.AutoGen/generated/FFmpeg.functions.inline.g.cs"));
         var generationContext = new GenerationContext
@@ -104,6 +107,12 @@ internal class Program
         yield return p.Parse("libavutil/hwcontext_d3d11va.h");
         yield return p.Parse("libavutil/hdr_dynamic_metadata.h");
         yield return p.Parse("libavutil/mastering_display_metadata.h");
+        yield return p.Parse("libavutil/encryption_info.h");
+        yield return p.Parse("libavutil/eval.h");
+        yield return p.Parse("libavutil/hwcontext_drm.h");
+        yield return p.Parse("libavutil/iamf.h");
+        yield return p.Parse("libavutil/parseutils.h");
+        yield return p.Parse("libavutil/tx.h");
 
         // libswresample
         yield return p.Parse("libswresample/swresample.h");
@@ -114,6 +123,7 @@ internal class Program
         // libavcodec
         yield return p.Parse("libavcodec/avcodec.h");
         yield return p.Parse("libavcodec/bsf.h");
+        yield return p.Parse("libavcodec/exif.h");
         yield return p.Parse("libavcodec/dxva2.h");
         yield return p.Parse("libavcodec/d3d11va.h");
 

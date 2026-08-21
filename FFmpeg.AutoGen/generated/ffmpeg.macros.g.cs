@@ -8,6 +8,11 @@ public static unsafe partial class ffmpeg
     // public static av_alias = __attribute__((may_alias));
     // public static av_alloc_size = (...);
     // public static av_always_inline = __attribute__((always_inline)) inline;
+    // public static av_assert0 = (cond) do {                                           if (!(cond)) {                                                      av_log(NULL, AV_LOG_PANIC, "Assertion %s failed at %s:%d\n",    AV_STRINGIFY(cond), __FILE__, __LINE__);                 abort();                                                        }                                                                   } while (0);
+    // public static av_assert1 = (cond)((void)(0x0));
+    // public static av_assert2 = (cond)((void)(0x0));
+    // public static av_assert2_fpu = () ((void)0);
+    // public static av_assume = (cond)(av_assert0(cond));
     /// <summary>AV_BUFFER_FLAG_READONLY = (1 &lt;&lt; 0)</summary>
     public const int AV_BUFFER_FLAG_READONLY = 0x1 << 0x0;
     /// <summary>AV_BUFFERSINK_FLAG_NO_REQUEST = 0x2</summary>
@@ -566,6 +571,8 @@ public static unsafe partial class ffmpeg
     // public static av_err2str = (errnum) av_make_error_string((char[AV_ERROR_MAX_STRING_SIZE]){0}, AV_ERROR_MAX_STRING_SIZE, errnum);
     /// <summary>AV_ERROR_MAX_STRING_SIZE = 64</summary>
     public const int AV_ERROR_MAX_STRING_SIZE = 0x40;
+    /// <summary>AV_EXIF_FLAG_RECURSIVE = 0x1 &lt;&lt; 0x0</summary>
+    public const int AV_EXIF_FLAG_RECURSIVE = 0x1 << 0x0;
     // public static av_extern_inline = inline;
     // public static av_fallthrough = __attribute__((fallthrough));
     /// <summary>AV_FDEBUG_ID3V2 = 0x0002</summary>
@@ -624,6 +631,8 @@ public static unsafe partial class ffmpeg
     public const int AV_HWACCEL_FLAG_IGNORE_LEVEL = 0x1 << 0x0;
     /// <summary>AV_HWACCEL_FLAG_UNSAFE_OUTPUT = 0x1 &lt;&lt; 0x3</summary>
     public const int AV_HWACCEL_FLAG_UNSAFE_OUTPUT = 0x1 << 0x3;
+    /// <summary>AV_IAMF_LAYER_FLAG_RECON_GAIN = 0x1 &lt;&lt; 0x0</summary>
+    public const int AV_IAMF_LAYER_FLAG_RECON_GAIN = 0x1 << 0x0;
     /// <summary>AV_INPUT_BUFFER_PADDING_SIZE = 64</summary>
     public const int AV_INPUT_BUFFER_PADDING_SIZE = 0x40;
     // public static AV_IS_INPUT_DEVICE = (category)((category)(==41) || (category)(==43) || (category)(==45));
@@ -709,6 +718,7 @@ public static unsafe partial class ffmpeg
     /// <summary>AV_OPT_SERIALIZE_SKIP_DEFAULTS = 0x00000001</summary>
     public const int AV_OPT_SERIALIZE_SKIP_DEFAULTS = 0x1;
     // public static av_parity = av_parity_c;
+    // public static av_parse_ratio_quiet = rate;
     /// <summary>AV_PARSER_PTS_NB = 0x4</summary>
     public const int AV_PARSER_PTS_NB = 0x4;
     /// <summary>AV_PIX_FMT_0BGR32 = AV_PIX_FMT_NE(0BGR, RGB0)</summary>
@@ -1220,6 +1230,7 @@ public static unsafe partial class ffmpeg
     public const int AV_TIMECODE_STR_SIZE = 0x17;
     // public static AV_TOSTRING = (s) #s;
     // public static av_uninit = (x) x=x;
+    // public static av_unreachable = (msg)                                             do {                                                                    av_log(NULL, AV_LOG_PANIC,                                          "Reached supposedly unreachable code at %s:%d: %s\n",        __FILE__, __LINE__, msg);                                    abort();                                                            } while (0);
     // public static av_unused = __attribute__((unused));
     // public static av_used = __attribute__((used));
     // public static AV_VERSION = a;
