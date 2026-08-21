@@ -24,7 +24,10 @@ This project is transitioning to a semi-managed model. The maintainer welcomes c
    ```
 
 2. **Make your changes**
-   - Follow existing code style
+   - Follow existing code style. In the generator that includes naming regex groups
+     (`(?<name>...)`) and reading them by name rather than by index
+   - If you touched the generator, regenerate and commit the `*.g.cs` files with it
+     (see [Regenerating Bindings](#regenerating-bindings))
    - Add tests if applicable
    - Update documentation if needed
 
@@ -75,7 +78,33 @@ dotnet test -c Release
 
 ### Regenerating Bindings
 
-Run the `FFmpeg.AutoGen.CppSharpUnsafeGenerator` project to regenerate all `*.g.cs` files.
+Run the `FFmpeg.AutoGen.CppSharpUnsafeGenerator` project to regenerate all `*.g.cs` files:
+
+```bash
+dotnet run -c Release --project FFmpeg.AutoGen.CppSharpUnsafeGenerator -- --input FFmpeg --namespace FFmpeg.AutoGen
+```
+
+The generated files are committed on purpose. It means the repository can be built and used
+without running the generator at all, and it makes a generator change reviewable as a
+before-and-after diff of its own output, which is how generator bugs are usually spotted.
+
+Because of that, a pull request that touches the generator must also carry the regenerated
+files, and the two must agree. After regenerating, check that the only differences are the
+ones you intended:
+
+```bash
+git diff --stat -- '*.g.cs'
+```
+
+And on a branch where you have already committed the regenerated output, this must come back
+empty:
+
+```bash
+git diff --exit-code -- '*.g.cs'
+```
+
+A non-empty diff there means the committed `*.g.cs` files do not match the generator in the
+same pull request.
 
 ## Code of Conduct
 
