@@ -37,6 +37,10 @@ public static unsafe partial class vectors
     public static av_append_packet_delegate av_append_packet;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_assert0_fpu_delegate();
+    public static av_assert0_fpu_delegate av_assert0_fpu;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVAudioFifo* av_audio_fifo_alloc_delegate(AVSampleFormat @sample_fmt, int @channels, int @nb_samples);
     public static av_audio_fifo_alloc_delegate av_audio_fifo_alloc;
     
@@ -790,6 +794,133 @@ public static unsafe partial class vectors
     public static av_dynarray2_add_delegate av_dynarray2_add;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate byte* av_encryption_info_add_side_data_delegate(AVEncryptionInfo* @info, ulong* @side_data_size);
+    public static av_encryption_info_add_side_data_delegate av_encryption_info_add_side_data;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVEncryptionInfo* av_encryption_info_alloc_delegate(uint @subsample_count, uint @key_id_size, uint @iv_size);
+    public static av_encryption_info_alloc_delegate av_encryption_info_alloc;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVEncryptionInfo* av_encryption_info_clone_delegate(AVEncryptionInfo* @info);
+    public static av_encryption_info_clone_delegate av_encryption_info_clone;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_encryption_info_free_delegate(AVEncryptionInfo* @info);
+    public static av_encryption_info_free_delegate av_encryption_info_free;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVEncryptionInfo* av_encryption_info_get_side_data_delegate(byte* @side_data, ulong @side_data_size);
+    public static av_encryption_info_get_side_data_delegate av_encryption_info_get_side_data;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate byte* av_encryption_init_info_add_side_data_delegate(AVEncryptionInitInfo* @info, ulong* @side_data_size);
+    public static av_encryption_init_info_add_side_data_delegate av_encryption_init_info_add_side_data;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVEncryptionInitInfo* av_encryption_init_info_alloc_delegate(uint @system_id_size, uint @num_key_ids, uint @key_id_size, uint @data_size);
+    public static av_encryption_init_info_alloc_delegate av_encryption_init_info_alloc;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_encryption_init_info_free_delegate(AVEncryptionInitInfo* @info);
+    public static av_encryption_init_info_free_delegate av_encryption_init_info_free;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVEncryptionInitInfo* av_encryption_init_info_get_side_data_delegate(byte* @side_data, ulong @side_data_size);
+    public static av_encryption_init_info_get_side_data_delegate av_encryption_init_info_get_side_data;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVExifMetadata* av_exif_clone_ifd_delegate(AVExifMetadata* @ifd);
+    public static av_exif_clone_ifd_delegate av_exif_clone_ifd;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_exif_free_delegate(AVExifMetadata* @ifd);
+    public static av_exif_free_delegate av_exif_free;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_exif_get_entry_delegate(void* @logctx, AVExifMetadata* @ifd, ushort @id, int @flags, AVExifEntry** @value);
+    public static av_exif_get_entry_delegate av_exif_get_entry;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_exif_get_tag_id_delegate(    
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @name);
+    public static av_exif_get_tag_id_delegate av_exif_get_tag_id;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+    public delegate string av_exif_get_tag_name_delegate(ushort @id);
+    public static av_exif_get_tag_name_delegate av_exif_get_tag_name;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_exif_ifd_to_dict_delegate(void* @logctx, AVExifMetadata* @ifd, AVDictionary** @metadata);
+    public static av_exif_ifd_to_dict_delegate av_exif_ifd_to_dict;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_exif_matrix_to_orientation_delegate(int* @matrix);
+    public static av_exif_matrix_to_orientation_delegate av_exif_matrix_to_orientation;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_exif_orientation_to_matrix_delegate(int* @matrix, int @orientation);
+    public static av_exif_orientation_to_matrix_delegate av_exif_orientation_to_matrix;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_exif_parse_buffer_delegate(void* @logctx, byte* @data, ulong @size, AVExifMetadata* @ifd, AVExifHeaderMode @header_mode);
+    public static av_exif_parse_buffer_delegate av_exif_parse_buffer;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_exif_remove_entry_delegate(void* @logctx, AVExifMetadata* @ifd, ushort @id, int @flags);
+    public static av_exif_remove_entry_delegate av_exif_remove_entry;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_exif_set_entry_delegate(void* @logctx, AVExifMetadata* @ifd, ushort @id, AVTiffDataType @type, uint @count, byte* @ifd_lead, uint @ifd_offset, void* @value);
+    public static av_exif_set_entry_delegate av_exif_set_entry;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_exif_write_delegate(void* @logctx, AVExifMetadata* @ifd, AVBufferRef** @buffer, AVExifHeaderMode @header_mode);
+    public static av_exif_write_delegate av_exif_write;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_expr_count_func_delegate(AVExpr* @e, uint* @counter, int @size, int @arg);
+    public static av_expr_count_func_delegate av_expr_count_func;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_expr_count_vars_delegate(AVExpr* @e, uint* @counter, int @size);
+    public static av_expr_count_vars_delegate av_expr_count_vars;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate double av_expr_eval_delegate(AVExpr* @e, double* @const_values, void* @opaque);
+    public static av_expr_eval_delegate av_expr_eval;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_expr_free_delegate(AVExpr* @e);
+    public static av_expr_free_delegate av_expr_free;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_expr_parse_delegate(AVExpr** @expr,     
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @s, byte** @const_names, byte** @func1_names, av_expr_parse_funcs1_func* @funcs1, byte** @func2_names, av_expr_parse_funcs2_func* @funcs2, int @log_offset, void* @log_ctx);
+    public static av_expr_parse_delegate av_expr_parse;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_expr_parse_and_eval_delegate(double* @res,     
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @s, byte** @const_names, double* @const_values, byte** @func1_names, av_expr_parse_and_eval_funcs1_func* @funcs1, byte** @func2_names, av_expr_parse_and_eval_funcs2_func* @funcs2, void* @opaque, int @log_offset, void* @log_ctx);
+    public static av_expr_parse_and_eval_delegate av_expr_parse_and_eval;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_fast_malloc_delegate(void* @ptr, uint* @size, ulong @min_size);
     public static av_fast_malloc_delegate av_fast_malloc;
     
@@ -848,6 +979,22 @@ public static unsafe partial class vectors
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_find_default_stream_index_delegate(AVFormatContext* @s);
     public static av_find_default_stream_index_delegate av_find_default_stream_index;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_find_info_tag_delegate(byte* @arg, int @arg_size,     
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @tag1,     
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @info);
+    public static av_find_info_tag_delegate av_find_info_tag;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVInputFormat* av_find_input_format_delegate(    
@@ -1051,6 +1198,11 @@ public static unsafe partial class vectors
     #endif
     string @path, int @number, int @flags);
     public static av_get_frame_filename2_delegate av_get_frame_filename2;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
+    public delegate string av_get_known_color_name_delegate(int @color_idx, byte** @rgb);
+    public static av_get_known_color_name_delegate av_get_known_color_name;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]
@@ -1296,6 +1448,54 @@ public static unsafe partial class vectors
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_hwframe_transfer_get_formats_delegate(AVBufferRef* @hwframe_ctx, AVHWFrameTransferDirection @dir, AVPixelFormat** @formats, int @flags);
     public static av_hwframe_transfer_get_formats_delegate av_hwframe_transfer_get_formats;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVIAMFLayer* av_iamf_audio_element_add_layer_delegate(AVIAMFAudioElement* @audio_element);
+    public static av_iamf_audio_element_add_layer_delegate av_iamf_audio_element_add_layer;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVIAMFAudioElement* av_iamf_audio_element_alloc_delegate();
+    public static av_iamf_audio_element_alloc_delegate av_iamf_audio_element_alloc;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_iamf_audio_element_free_delegate(AVIAMFAudioElement** @audio_element);
+    public static av_iamf_audio_element_free_delegate av_iamf_audio_element_free;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVClass* av_iamf_audio_element_get_class_delegate();
+    public static av_iamf_audio_element_get_class_delegate av_iamf_audio_element_get_class;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVIAMFSubmix* av_iamf_mix_presentation_add_submix_delegate(AVIAMFMixPresentation* @mix_presentation);
+    public static av_iamf_mix_presentation_add_submix_delegate av_iamf_mix_presentation_add_submix;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVIAMFMixPresentation* av_iamf_mix_presentation_alloc_delegate();
+    public static av_iamf_mix_presentation_alloc_delegate av_iamf_mix_presentation_alloc;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_iamf_mix_presentation_free_delegate(AVIAMFMixPresentation** @mix_presentation);
+    public static av_iamf_mix_presentation_free_delegate av_iamf_mix_presentation_free;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVClass* av_iamf_mix_presentation_get_class_delegate();
+    public static av_iamf_mix_presentation_get_class_delegate av_iamf_mix_presentation_get_class;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVIAMFParamDefinition* av_iamf_param_definition_alloc_delegate(AVIAMFParamDefinitionType @type, uint @nb_subblocks, ulong* @size);
+    public static av_iamf_param_definition_alloc_delegate av_iamf_param_definition_alloc;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVClass* av_iamf_param_definition_get_class_delegate();
+    public static av_iamf_param_definition_get_class_delegate av_iamf_param_definition_get_class;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVIAMFSubmixElement* av_iamf_submix_add_element_delegate(AVIAMFSubmix* @submix);
+    public static av_iamf_submix_add_element_delegate av_iamf_submix_add_element;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVIAMFSubmixLayout* av_iamf_submix_add_layout_delegate(AVIAMFSubmix* @submix);
+    public static av_iamf_submix_add_layout_delegate av_iamf_submix_add_layout;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_image_alloc_delegate(ref byte_ptr4 @pointers, ref int4 @linesizes, int @w, int @h, AVPixelFormat @pix_fmt, int @align);
@@ -2145,6 +2345,16 @@ public static unsafe partial class vectors
     public static av_packet_unref_delegate av_packet_unref;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_parse_color_delegate(byte* @rgba_color,     
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @color_string, int @slen, void* @log_ctx);
+    public static av_parse_color_delegate av_parse_color;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_parse_cpu_caps_delegate(uint* @flags,     
     #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
@@ -2153,6 +2363,46 @@ public static unsafe partial class vectors
     #endif
     string @s);
     public static av_parse_cpu_caps_delegate av_parse_cpu_caps;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_parse_ratio_delegate(AVRational* @q,     
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @str, int @max, int @log_offset, void* @log_ctx);
+    public static av_parse_ratio_delegate av_parse_ratio;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_parse_time_delegate(long* @timeval,     
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @timestr, int @duration);
+    public static av_parse_time_delegate av_parse_time;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_parse_video_rate_delegate(AVRational* @rate,     
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @str);
+    public static av_parse_video_rate_delegate av_parse_video_rate;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_parse_video_size_delegate(int* @width_ptr, int* @height_ptr,     
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @str);
+    public static av_parse_video_size_delegate av_parse_video_size;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_parser_close_delegate(AVCodecParserContext* @s);
@@ -2381,6 +2631,22 @@ public static unsafe partial class vectors
     public static av_size_mult_delegate av_size_mult;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate byte* av_small_strptime_delegate(    
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @p,     
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @fmt, tm* @dt);
+    public static av_small_strptime_delegate av_small_strptime;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate byte* av_strdup_delegate(    
     #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
@@ -2415,6 +2681,16 @@ public static unsafe partial class vectors
     #endif
     string @s, ulong @len);
     public static av_strndup_delegate av_strndup;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate double av_strtod_delegate(    
+    #if NETSTANDARD2_1_OR_GREATER || NET
+    [MarshalAs(UnmanagedType.LPUTF8Str)]
+    #else
+    [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))]
+    #endif
+    string @numstr, byte** @tail);
+    public static av_strtod_delegate av_strtod;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVRational av_sub_q_delegate(AVRational @b, AVRational @c);
@@ -2471,6 +2747,10 @@ public static unsafe partial class vectors
     public static av_timecode_make_string_delegate av_timecode_make_string;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate long av_timegm_delegate(tm* @tm);
+    public static av_timegm_delegate av_timegm;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_tree_destroy_delegate(AVTreeNode* @t);
     public static av_tree_destroy_delegate av_tree_destroy;
     
@@ -2489,6 +2769,14 @@ public static unsafe partial class vectors
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate AVTreeNode* av_tree_node_alloc_delegate();
     public static av_tree_node_alloc_delegate av_tree_node_alloc;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_tx_init_delegate(AVTXContext** @ctx, av_tx_init_tx_func* @tx, AVTXType @type, int @inv, int @len, void* @scale, ulong @flags);
+    public static av_tx_init_delegate av_tx_init;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_tx_uninit_delegate(AVTXContext** @ctx);
+    public static av_tx_uninit_delegate av_tx_uninit;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void av_url_split_delegate(byte* @proto, int @proto_size, byte* @authorization, int @authorization_size, byte* @hostname, int @hostname_size, int* @port_ptr, byte* @path, int @path_size,     

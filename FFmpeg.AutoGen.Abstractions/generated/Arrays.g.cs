@@ -200,6 +200,72 @@ public unsafe struct AVComponentDescriptor4 : IFixedArray<AVComponentDescriptor>
     public static implicit operator AVComponentDescriptor[](AVComponentDescriptor4 @struct) => @struct.ToArray();
 }
 
+public unsafe struct AVDRMLayerDescriptor4 : IFixedArray<AVDRMLayerDescriptor>
+{
+    public static readonly int ArrayLength = 4;
+    public int Length => 4;
+    AVDRMLayerDescriptor _0; AVDRMLayerDescriptor _1; AVDRMLayerDescriptor _2; AVDRMLayerDescriptor _3;
+    
+    public AVDRMLayerDescriptor this[uint i]
+    {
+        get { if (i >= 4) throw new ArgumentOutOfRangeException(); fixed (AVDRMLayerDescriptor* p0 = &_0) { return *(p0 + i); } }
+        set { if (i >= 4) throw new ArgumentOutOfRangeException(); fixed (AVDRMLayerDescriptor* p0 = &_0) { *(p0 + i) = value;  } }
+    }
+    public AVDRMLayerDescriptor[] ToArray()
+    {
+        fixed (AVDRMLayerDescriptor* p0 = &_0) { var a = new AVDRMLayerDescriptor[4]; for (uint i = 0; i < 4; i++) a[i] = *(p0 + i); return a; }
+    }
+    public void UpdateFrom(AVDRMLayerDescriptor[] array)
+    {
+        fixed (AVDRMLayerDescriptor* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= 4) return; } }
+    }
+    public static implicit operator AVDRMLayerDescriptor[](AVDRMLayerDescriptor4 @struct) => @struct.ToArray();
+}
+
+public unsafe struct AVDRMObjectDescriptor4 : IFixedArray<AVDRMObjectDescriptor>
+{
+    public static readonly int ArrayLength = 4;
+    public int Length => 4;
+    AVDRMObjectDescriptor _0; AVDRMObjectDescriptor _1; AVDRMObjectDescriptor _2; AVDRMObjectDescriptor _3;
+    
+    public AVDRMObjectDescriptor this[uint i]
+    {
+        get { if (i >= 4) throw new ArgumentOutOfRangeException(); fixed (AVDRMObjectDescriptor* p0 = &_0) { return *(p0 + i); } }
+        set { if (i >= 4) throw new ArgumentOutOfRangeException(); fixed (AVDRMObjectDescriptor* p0 = &_0) { *(p0 + i) = value;  } }
+    }
+    public AVDRMObjectDescriptor[] ToArray()
+    {
+        fixed (AVDRMObjectDescriptor* p0 = &_0) { var a = new AVDRMObjectDescriptor[4]; for (uint i = 0; i < 4; i++) a[i] = *(p0 + i); return a; }
+    }
+    public void UpdateFrom(AVDRMObjectDescriptor[] array)
+    {
+        fixed (AVDRMObjectDescriptor* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= 4) return; } }
+    }
+    public static implicit operator AVDRMObjectDescriptor[](AVDRMObjectDescriptor4 @struct) => @struct.ToArray();
+}
+
+public unsafe struct AVDRMPlaneDescriptor4 : IFixedArray<AVDRMPlaneDescriptor>
+{
+    public static readonly int ArrayLength = 4;
+    public int Length => 4;
+    AVDRMPlaneDescriptor _0; AVDRMPlaneDescriptor _1; AVDRMPlaneDescriptor _2; AVDRMPlaneDescriptor _3;
+    
+    public AVDRMPlaneDescriptor this[uint i]
+    {
+        get { if (i >= 4) throw new ArgumentOutOfRangeException(); fixed (AVDRMPlaneDescriptor* p0 = &_0) { return *(p0 + i); } }
+        set { if (i >= 4) throw new ArgumentOutOfRangeException(); fixed (AVDRMPlaneDescriptor* p0 = &_0) { *(p0 + i) = value;  } }
+    }
+    public AVDRMPlaneDescriptor[] ToArray()
+    {
+        fixed (AVDRMPlaneDescriptor* p0 = &_0) { var a = new AVDRMPlaneDescriptor[4]; for (uint i = 0; i < 4; i++) a[i] = *(p0 + i); return a; }
+    }
+    public void UpdateFrom(AVDRMPlaneDescriptor[] array)
+    {
+        fixed (AVDRMPlaneDescriptor* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= 4) return; } }
+    }
+    public static implicit operator AVDRMPlaneDescriptor[](AVDRMPlaneDescriptor4 @struct) => @struct.ToArray();
+}
+
 public unsafe struct byte_ptr4 : IFixedArray
 {
     public static readonly int ArrayLength = 4;
@@ -442,6 +508,28 @@ public unsafe struct byte6 : IFixedArray<byte>
     public static implicit operator byte[](byte6 @struct) => @struct.ToArray();
 }
 
+public unsafe struct byte6x12 : IFixedArray<byte12>
+{
+    public static readonly int ArrayLength = 6;
+    public int Length => 6;
+    byte12 _0; byte12 _1; byte12 _2; byte12 _3; byte12 _4; byte12 _5;
+    
+    public byte12 this[uint i]
+    {
+        get { if (i >= 6) throw new ArgumentOutOfRangeException(); fixed (byte12* p0 = &_0) { return *(p0 + i); } }
+        set { if (i >= 6) throw new ArgumentOutOfRangeException(); fixed (byte12* p0 = &_0) { *(p0 + i) = value;  } }
+    }
+    public byte12[] ToArray()
+    {
+        fixed (byte12* p0 = &_0) { var a = new byte12[6]; for (uint i = 0; i < 6; i++) a[i] = *(p0 + i); return a; }
+    }
+    public void UpdateFrom(byte12[] array)
+    {
+        fixed (byte12* p0 = &_0) { uint i = 0; foreach(var value in array) { *(p0 + i++) = value; if (i >= 6) return; } }
+    }
+    public static implicit operator byte12[](byte6x12 @struct) => @struct.ToArray();
+}
+
 public unsafe struct ushort6 : IFixedArray<ushort>
 {
     public static readonly int ArrayLength = 6;
@@ -638,6 +726,28 @@ public unsafe struct int9 : IFixedArray<int>
         uint i = 0; foreach(var value in array) { _[i++] = value; if (i >= 9) return; }
     }
     public static implicit operator int[](int9 @struct) => @struct.ToArray();
+}
+
+public unsafe struct byte12 : IFixedArray<byte>
+{
+    public static readonly int ArrayLength = 12;
+    public int Length => 12;
+    fixed byte _[12];
+    
+    public byte this[uint i]
+    {
+        get => _[i];
+        set => _[i] = value;
+    }
+    public byte[] ToArray()
+    {
+        var a = new byte[12]; for (uint i = 0; i < 12; i++) a[i] = _[i]; return a;
+    }
+    public void UpdateFrom(byte[] array)
+    {
+        uint i = 0; foreach(var value in array) { _[i++] = value; if (i >= 12) return; }
+    }
+    public static implicit operator byte[](byte12 @struct) => @struct.ToArray();
 }
 
 public unsafe struct AVHDRPlusPercentile15 : IFixedArray<AVHDRPlusPercentile>

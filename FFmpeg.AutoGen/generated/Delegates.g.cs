@@ -41,6 +41,38 @@ public unsafe struct av_buffer_pool_init2_pool_free_func
 }
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+public unsafe delegate double av_expr_parse_and_eval_funcs1 (void* @p0, double @p1);
+public unsafe struct av_expr_parse_and_eval_funcs1_func
+{
+    public IntPtr Pointer;
+    public static implicit operator av_expr_parse_and_eval_funcs1_func(av_expr_parse_and_eval_funcs1 func) => new av_expr_parse_and_eval_funcs1_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+}
+
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+public unsafe delegate double av_expr_parse_and_eval_funcs2 (void* @p0, double @p1, double @p2);
+public unsafe struct av_expr_parse_and_eval_funcs2_func
+{
+    public IntPtr Pointer;
+    public static implicit operator av_expr_parse_and_eval_funcs2_func(av_expr_parse_and_eval_funcs2 func) => new av_expr_parse_and_eval_funcs2_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+}
+
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+public unsafe delegate double av_expr_parse_funcs1 (void* @p0, double @p1);
+public unsafe struct av_expr_parse_funcs1_func
+{
+    public IntPtr Pointer;
+    public static implicit operator av_expr_parse_funcs1_func(av_expr_parse_funcs1 func) => new av_expr_parse_funcs1_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+}
+
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+public unsafe delegate double av_expr_parse_funcs2 (void* @p0, double @p1, double @p2);
+public unsafe struct av_expr_parse_funcs2_func
+{
+    public IntPtr Pointer;
+    public static implicit operator av_expr_parse_funcs2_func(av_expr_parse_funcs2 func) => new av_expr_parse_funcs2_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+}
+
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate void av_log_set_callback_callback (void* @p0, int @p1,     
     #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
@@ -84,6 +116,14 @@ public unsafe struct av_tree_insert_cmp_func
 {
     public IntPtr Pointer;
     public static implicit operator av_tree_insert_cmp_func(av_tree_insert_cmp func) => new av_tree_insert_cmp_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+}
+
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+public unsafe delegate void av_tx_init_tx (AVTXContext* @s, void* @out, void* @in, long @stride);
+public unsafe struct av_tx_init_tx_func
+{
+    public IntPtr Pointer;
+    public static implicit operator av_tx_init_tx_func(av_tx_init_tx func) => new av_tx_init_tx_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
 }
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
