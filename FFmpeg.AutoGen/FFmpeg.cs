@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace FFmpeg.AutoGen;
 
@@ -25,8 +25,11 @@ public static partial class ffmpeg
 
 
     /// <summary>
-    ///     Gets or sets the root path for loading libraries.
-    ///     Work out of box with companion ffmpeg distribution package like FFmpeg.AutoGen.Redist.windows.x64
+    ///     Gets or sets the directory the native FFmpeg libraries are loaded from. Defaults to the
+    ///     application's base directory. This project neither builds nor distributes the binaries,
+    ///     so they can come from anywhere - a native NuGet package, a system install, or a folder
+    ///     the application ships. What has to match is the ABI the bindings were generated against,
+    ///     since the libraries are resolved by versioned name.
     /// </summary>
     /// <value>The root path.</value>
     public static string RootPath { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
