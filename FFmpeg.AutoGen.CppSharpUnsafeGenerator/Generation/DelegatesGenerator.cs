@@ -22,6 +22,15 @@ internal sealed class DelegatesGenerator : GeneratorBase<DelegateDefinition>
         yield return "System.Runtime.InteropServices";
     }
 
+    protected override void WriteConditionalUsings()
+    {
+        WriteLineWithoutIntent("#if NET6_0_OR_GREATER");
+        WriteLineWithoutIntent("using CLong = System.Runtime.InteropServices.CLong;");
+        WriteLineWithoutIntent("using CULong = System.Runtime.InteropServices.CULong;");
+        WriteLineWithoutIntent("#endif");
+        WriteLine();
+    }
+
     protected override void GenerateDefinition(DelegateDefinition @delegate)
     {
         @delegate.Parameters.ToList().ForEach(x => this.WriteParam(x, x.Name));

@@ -1,5 +1,3 @@
-using System;
-
 namespace FFmpeg.AutoGen;
 
 public enum AVActiveFormatDescription : int
@@ -419,126 +417,124 @@ public enum AVCodecID : int
     @AV_CODEC_ID_BMV_VIDEO = 153,
     @AV_CODEC_ID_VBLE = 154,
     @AV_CODEC_ID_DXTORY = 155,
-    @AV_CODEC_ID_V410 = 156,
-    @AV_CODEC_ID_XWD = 157,
-    @AV_CODEC_ID_CDXL = 158,
-    @AV_CODEC_ID_XBM = 159,
-    @AV_CODEC_ID_ZEROCODEC = 160,
-    @AV_CODEC_ID_MSS1 = 161,
-    @AV_CODEC_ID_MSA1 = 162,
-    @AV_CODEC_ID_TSCC2 = 163,
-    @AV_CODEC_ID_MTS2 = 164,
-    @AV_CODEC_ID_CLLC = 165,
-    @AV_CODEC_ID_MSS2 = 166,
-    @AV_CODEC_ID_VP9 = 167,
-    @AV_CODEC_ID_AIC = 168,
-    @AV_CODEC_ID_ESCAPE130 = 169,
-    @AV_CODEC_ID_G2M = 170,
-    @AV_CODEC_ID_WEBP = 171,
-    @AV_CODEC_ID_HNM4_VIDEO = 172,
-    @AV_CODEC_ID_HEVC = 173,
-    @AV_CODEC_ID_FIC = 174,
-    @AV_CODEC_ID_ALIAS_PIX = 175,
-    @AV_CODEC_ID_BRENDER_PIX = 176,
-    @AV_CODEC_ID_PAF_VIDEO = 177,
-    @AV_CODEC_ID_EXR = 178,
-    @AV_CODEC_ID_VP7 = 179,
-    @AV_CODEC_ID_SANM = 180,
-    @AV_CODEC_ID_SGIRLE = 181,
-    @AV_CODEC_ID_MVC1 = 182,
-    @AV_CODEC_ID_MVC2 = 183,
-    @AV_CODEC_ID_HQX = 184,
-    @AV_CODEC_ID_TDSC = 185,
-    @AV_CODEC_ID_HQ_HQA = 186,
-    @AV_CODEC_ID_HAP = 187,
-    @AV_CODEC_ID_DDS = 188,
-    @AV_CODEC_ID_DXV = 189,
-    @AV_CODEC_ID_SCREENPRESSO = 190,
-    @AV_CODEC_ID_RSCC = 191,
-    @AV_CODEC_ID_AVS2 = 192,
-    @AV_CODEC_ID_PGX = 193,
-    @AV_CODEC_ID_AVS3 = 194,
-    @AV_CODEC_ID_MSP2 = 195,
-    @AV_CODEC_ID_VVC = 196,
-    @AV_CODEC_ID_Y41P = 197,
-    @AV_CODEC_ID_AVRP = 198,
-    @AV_CODEC_ID_012V = 199,
-    @AV_CODEC_ID_AVUI = 200,
-    @AV_CODEC_ID_TARGA_Y216 = 201,
-    @AV_CODEC_ID_V308 = 202,
-    @AV_CODEC_ID_V408 = 203,
-    @AV_CODEC_ID_YUV4 = 204,
-    @AV_CODEC_ID_AVRN = 205,
-    @AV_CODEC_ID_CPIA = 206,
-    @AV_CODEC_ID_XFACE = 207,
-    @AV_CODEC_ID_SNOW = 208,
-    @AV_CODEC_ID_SMVJPEG = 209,
-    @AV_CODEC_ID_APNG = 210,
-    @AV_CODEC_ID_DAALA = 211,
-    @AV_CODEC_ID_CFHD = 212,
-    @AV_CODEC_ID_TRUEMOTION2RT = 213,
-    @AV_CODEC_ID_M101 = 214,
-    @AV_CODEC_ID_MAGICYUV = 215,
-    @AV_CODEC_ID_SHEERVIDEO = 216,
-    @AV_CODEC_ID_YLC = 217,
-    @AV_CODEC_ID_PSD = 218,
-    @AV_CODEC_ID_PIXLET = 219,
-    @AV_CODEC_ID_SPEEDHQ = 220,
-    @AV_CODEC_ID_FMVC = 221,
-    @AV_CODEC_ID_SCPR = 222,
-    @AV_CODEC_ID_CLEARVIDEO = 223,
-    @AV_CODEC_ID_XPM = 224,
-    @AV_CODEC_ID_AV1 = 225,
-    @AV_CODEC_ID_BITPACKED = 226,
-    @AV_CODEC_ID_MSCC = 227,
-    @AV_CODEC_ID_SRGC = 228,
-    @AV_CODEC_ID_SVG = 229,
-    @AV_CODEC_ID_GDV = 230,
-    @AV_CODEC_ID_FITS = 231,
-    @AV_CODEC_ID_IMM4 = 232,
-    @AV_CODEC_ID_PROSUMER = 233,
-    @AV_CODEC_ID_MWSC = 234,
-    @AV_CODEC_ID_WCMV = 235,
-    @AV_CODEC_ID_RASC = 236,
-    @AV_CODEC_ID_HYMT = 237,
-    @AV_CODEC_ID_ARBC = 238,
-    @AV_CODEC_ID_AGM = 239,
-    @AV_CODEC_ID_LSCR = 240,
-    @AV_CODEC_ID_VP4 = 241,
-    @AV_CODEC_ID_IMM5 = 242,
-    @AV_CODEC_ID_MVDV = 243,
-    @AV_CODEC_ID_MVHA = 244,
-    @AV_CODEC_ID_CDTOONS = 245,
-    @AV_CODEC_ID_MV30 = 246,
-    @AV_CODEC_ID_NOTCHLC = 247,
-    @AV_CODEC_ID_PFM = 248,
-    @AV_CODEC_ID_MOBICLIP = 249,
-    @AV_CODEC_ID_PHOTOCD = 250,
-    @AV_CODEC_ID_IPU = 251,
-    @AV_CODEC_ID_ARGO = 252,
-    @AV_CODEC_ID_CRI = 253,
-    @AV_CODEC_ID_SIMBIOSIS_IMX = 254,
-    @AV_CODEC_ID_SGA_VIDEO = 255,
-    @AV_CODEC_ID_GEM = 256,
-    @AV_CODEC_ID_VBN = 257,
-    @AV_CODEC_ID_JPEGXL = 258,
-    @AV_CODEC_ID_QOI = 259,
-    @AV_CODEC_ID_PHM = 260,
-    @AV_CODEC_ID_RADIANCE_HDR = 261,
-    @AV_CODEC_ID_WBMP = 262,
-    @AV_CODEC_ID_MEDIA100 = 263,
-    @AV_CODEC_ID_VQC = 264,
-    @AV_CODEC_ID_PDV = 265,
-    @AV_CODEC_ID_EVC = 266,
-    @AV_CODEC_ID_RTV1 = 267,
-    @AV_CODEC_ID_VMIX = 268,
-    @AV_CODEC_ID_LEAD = 269,
-    @AV_CODEC_ID_DNXUC = 270,
-    @AV_CODEC_ID_RV60 = 271,
-    @AV_CODEC_ID_JPEGXL_ANIM = 272,
-    @AV_CODEC_ID_APV = 273,
-    @AV_CODEC_ID_PRORES_RAW = 274,
-    @AV_CODEC_ID_JPEGXS = 275,
+    @AV_CODEC_ID_XWD = 156,
+    @AV_CODEC_ID_CDXL = 157,
+    @AV_CODEC_ID_XBM = 158,
+    @AV_CODEC_ID_ZEROCODEC = 159,
+    @AV_CODEC_ID_MSS1 = 160,
+    @AV_CODEC_ID_MSA1 = 161,
+    @AV_CODEC_ID_TSCC2 = 162,
+    @AV_CODEC_ID_MTS2 = 163,
+    @AV_CODEC_ID_CLLC = 164,
+    @AV_CODEC_ID_MSS2 = 165,
+    @AV_CODEC_ID_VP9 = 166,
+    @AV_CODEC_ID_AIC = 167,
+    @AV_CODEC_ID_ESCAPE130 = 168,
+    @AV_CODEC_ID_G2M = 169,
+    @AV_CODEC_ID_WEBP = 170,
+    @AV_CODEC_ID_HNM4_VIDEO = 171,
+    @AV_CODEC_ID_HEVC = 172,
+    @AV_CODEC_ID_FIC = 173,
+    @AV_CODEC_ID_ALIAS_PIX = 174,
+    @AV_CODEC_ID_BRENDER_PIX = 175,
+    @AV_CODEC_ID_PAF_VIDEO = 176,
+    @AV_CODEC_ID_EXR = 177,
+    @AV_CODEC_ID_VP7 = 178,
+    @AV_CODEC_ID_SANM = 179,
+    @AV_CODEC_ID_SGIRLE = 180,
+    @AV_CODEC_ID_MVC1 = 181,
+    @AV_CODEC_ID_MVC2 = 182,
+    @AV_CODEC_ID_HQX = 183,
+    @AV_CODEC_ID_TDSC = 184,
+    @AV_CODEC_ID_HQ_HQA = 185,
+    @AV_CODEC_ID_HAP = 186,
+    @AV_CODEC_ID_DDS = 187,
+    @AV_CODEC_ID_DXV = 188,
+    @AV_CODEC_ID_SCREENPRESSO = 189,
+    @AV_CODEC_ID_RSCC = 190,
+    @AV_CODEC_ID_AVS2 = 191,
+    @AV_CODEC_ID_PGX = 192,
+    @AV_CODEC_ID_AVS3 = 193,
+    @AV_CODEC_ID_MSP2 = 194,
+    @AV_CODEC_ID_VVC = 195,
+    @AV_CODEC_ID_Y41P = 196,
+    @AV_CODEC_ID_AVRP = 197,
+    @AV_CODEC_ID_012V = 198,
+    @AV_CODEC_ID_AVUI = 199,
+    @AV_CODEC_ID_TARGA_Y216 = 200,
+    @AV_CODEC_ID_YUV4 = 201,
+    @AV_CODEC_ID_AVRN = 202,
+    @AV_CODEC_ID_CPIA = 203,
+    @AV_CODEC_ID_XFACE = 204,
+    @AV_CODEC_ID_SNOW = 205,
+    @AV_CODEC_ID_SMVJPEG = 206,
+    @AV_CODEC_ID_APNG = 207,
+    @AV_CODEC_ID_DAALA = 208,
+    @AV_CODEC_ID_CFHD = 209,
+    @AV_CODEC_ID_TRUEMOTION2RT = 210,
+    @AV_CODEC_ID_M101 = 211,
+    @AV_CODEC_ID_MAGICYUV = 212,
+    @AV_CODEC_ID_SHEERVIDEO = 213,
+    @AV_CODEC_ID_YLC = 214,
+    @AV_CODEC_ID_PSD = 215,
+    @AV_CODEC_ID_PIXLET = 216,
+    @AV_CODEC_ID_SPEEDHQ = 217,
+    @AV_CODEC_ID_FMVC = 218,
+    @AV_CODEC_ID_SCPR = 219,
+    @AV_CODEC_ID_CLEARVIDEO = 220,
+    @AV_CODEC_ID_XPM = 221,
+    @AV_CODEC_ID_AV1 = 222,
+    @AV_CODEC_ID_BITPACKED = 223,
+    @AV_CODEC_ID_MSCC = 224,
+    @AV_CODEC_ID_SRGC = 225,
+    @AV_CODEC_ID_SVG = 226,
+    @AV_CODEC_ID_GDV = 227,
+    @AV_CODEC_ID_FITS = 228,
+    @AV_CODEC_ID_IMM4 = 229,
+    @AV_CODEC_ID_PROSUMER = 230,
+    @AV_CODEC_ID_MWSC = 231,
+    @AV_CODEC_ID_WCMV = 232,
+    @AV_CODEC_ID_RASC = 233,
+    @AV_CODEC_ID_HYMT = 234,
+    @AV_CODEC_ID_ARBC = 235,
+    @AV_CODEC_ID_AGM = 236,
+    @AV_CODEC_ID_LSCR = 237,
+    @AV_CODEC_ID_VP4 = 238,
+    @AV_CODEC_ID_IMM5 = 239,
+    @AV_CODEC_ID_MVDV = 240,
+    @AV_CODEC_ID_MVHA = 241,
+    @AV_CODEC_ID_CDTOONS = 242,
+    @AV_CODEC_ID_MV30 = 243,
+    @AV_CODEC_ID_NOTCHLC = 244,
+    @AV_CODEC_ID_PFM = 245,
+    @AV_CODEC_ID_MOBICLIP = 246,
+    @AV_CODEC_ID_PHOTOCD = 247,
+    @AV_CODEC_ID_IPU = 248,
+    @AV_CODEC_ID_ARGO = 249,
+    @AV_CODEC_ID_CRI = 250,
+    @AV_CODEC_ID_SIMBIOSIS_IMX = 251,
+    @AV_CODEC_ID_SGA_VIDEO = 252,
+    @AV_CODEC_ID_GEM = 253,
+    @AV_CODEC_ID_VBN = 254,
+    @AV_CODEC_ID_JPEGXL = 255,
+    @AV_CODEC_ID_QOI = 256,
+    @AV_CODEC_ID_PHM = 257,
+    @AV_CODEC_ID_RADIANCE_HDR = 258,
+    @AV_CODEC_ID_WBMP = 259,
+    @AV_CODEC_ID_MEDIA100 = 260,
+    @AV_CODEC_ID_VQC = 261,
+    @AV_CODEC_ID_PDV = 262,
+    @AV_CODEC_ID_EVC = 263,
+    @AV_CODEC_ID_RTV1 = 264,
+    @AV_CODEC_ID_VMIX = 265,
+    @AV_CODEC_ID_LEAD = 266,
+    @AV_CODEC_ID_DNXUC = 267,
+    @AV_CODEC_ID_RV60 = 268,
+    @AV_CODEC_ID_JPEGXL_ANIM = 269,
+    @AV_CODEC_ID_APV = 270,
+    @AV_CODEC_ID_PRORES_RAW = 271,
+    @AV_CODEC_ID_JPEGXS = 272,
+    @AV_CODEC_ID_WEBP_ANIM = 273,
     /// <summary>A dummy id pointing at the start of audio codecs</summary>
     @AV_CODEC_ID_FIRST_AUDIO = 65536,
     @AV_CODEC_ID_PCM_S16LE = 65536,
@@ -764,6 +760,7 @@ public enum AVCodecID : int
     @AV_CODEC_ID_LC3 = 86122,
     @AV_CODEC_ID_G728 = 86123,
     @AV_CODEC_ID_AHX = 86124,
+    @AV_CODEC_ID_APPLE_APAC = 86125,
     /// <summary>A dummy ID pointing at the start of subtitle codecs.</summary>
     @AV_CODEC_ID_FIRST_SUBTITLE = 94208,
     @AV_CODEC_ID_DVD_SUBTITLE = 94208,
@@ -1053,11 +1050,10 @@ public enum AVFormatCommandID : int
 }
 
 /// <summary>Flags for frame cropping.</summary>
-[Flags]
 public enum AvFrameCrop : int
 {
     /// <summary>Apply the maximum possible cropping, even if it requires setting the AVFrame.data[] entries to unaligned pointers. Passing unaligned data to FFmpeg API is generally not allowed, and causes undefined behavior (such as crashes). You can pass unaligned data only to FFmpeg APIs that are explicitly documented to accept it. Use this flag only if you absolutely know what you are doing.</summary>
-    @AV_FRAME_CROP_UNALIGNED = 1 << 0,
+    @AV_FRAME_CROP_UNALIGNED = 1,
 }
 
 /// <summary>@{ AVFrame is an abstraction for reference-counted raw multimedia data.</summary>
@@ -1125,8 +1121,18 @@ public enum AVFrameSideDataType : int
     @AV_FRAME_DATA_VIEW_ID = 29,
     /// <summary>This side data contains information about the reference display width(s) and reference viewing distance(s) as well as information about the corresponding reference stereo pair(s), i.e., the pair(s) of views to be displayed for the viewer&apos;s left and right eyes on the reference display at the reference viewing distance. The payload is the AV3DReferenceDisplaysInfo struct defined in libavutil/tdrdi.h.</summary>
     @AV_FRAME_DATA_3D_REFERENCE_DISPLAYS = 30,
-    /// <summary>Extensible image file format metadata. The payload is a buffer containing EXIF metadata, starting with either 49 49 2a 00, or 4d 4d 00 2a.</summary>
+    /// <summary>Exchangeable image file format metadata. The payload is a buffer containing EXIF metadata, starting with either 49 49 2a 00, or 4d 4d 00 2a. These four bytes signify the endianness, and occur as the first part of the TIFF header.</summary>
     @AV_FRAME_DATA_EXIF = 31,
+    /// <summary>HDR dynamic metadata associated with a video frame. The payload is an AVDynamicHDRSmpte2094App5 type and contains information for color volume transform as specified in the SMPTE 2094-50 standard.</summary>
+    @AV_FRAME_DATA_DYNAMIC_HDR_SMPTE_2094_APP5 = 32,
+    /// <summary>IAMF Mix Gain Parameter Data associated with the audio frame. This metadata is in the form of the AVIAMFParamDefinition struct and contains information defined in sections 3.6.1 and 3.8.1 of the Immersive Audio Model and Formats standard.</summary>
+    @AV_FRAME_DATA_IAMF_MIX_GAIN_PARAM = 33,
+    /// <summary>IAMF Demixing Info Parameter Data associated with the audio frame. This metadata is in the form of the AVIAMFParamDefinition struct and contains information defined in sections 3.6.1 and 3.8.2 of the Immersive Audio Model and Formats standard.</summary>
+    @AV_FRAME_DATA_IAMF_DEMIXING_INFO_PARAM = 34,
+    /// <summary>IAMF Recon Gain Info Parameter Data associated with the audio frame. This metadata is in the form of the AVIAMFParamDefinition struct and contains information defined in sections 3.6.1 and 3.8.3 of the Immersive Audio Model and Formats standard.</summary>
+    @AV_FRAME_DATA_IAMF_RECON_GAIN_INFO_PARAM = 35,
+    /// <summary>Color information from a RAW camera codecs, needed to correctly process the video data. The payload is an AVRawColorParams struct defined in libavutil/raw_color_params.h.</summary>
+    @AV_FRAME_DATA_RAW_COLOR_PARAMS = 36,
 }
 
 /// <summary>Option for overlapping elliptical pixel selectors in an image.</summary>
@@ -1156,17 +1162,16 @@ public enum AVHWDeviceType : int
 }
 
 /// <summary>Flags to apply to frame mappings.</summary>
-[Flags]
 public enum AvHwframeMap : int
 {
     /// <summary>The mapping must be readable.</summary>
-    @AV_HWFRAME_MAP_READ = 1 << 0,
+    @AV_HWFRAME_MAP_READ = 1,
     /// <summary>The mapping must be writeable.</summary>
-    @AV_HWFRAME_MAP_WRITE = 1 << 1,
+    @AV_HWFRAME_MAP_WRITE = 2,
     /// <summary>The mapped frame will be overwritten completely in subsequent operations, so the current frame data need not be loaded. Any values which are not overwritten are unspecified.</summary>
-    @AV_HWFRAME_MAP_OVERWRITE = 1 << 2,
+    @AV_HWFRAME_MAP_OVERWRITE = 4,
     /// <summary>The mapping must be direct. That is, there must not be any copying in the map or unmap steps. Note that performance of direct mappings may be much lower than normal memory.</summary>
-    @AV_HWFRAME_MAP_DIRECT = 1 << 3,
+    @AV_HWFRAME_MAP_DIRECT = 8,
 }
 
 public enum AVHWFrameTransferDirection : int
@@ -1375,8 +1380,12 @@ public enum AVPacketSideDataType : int
     @AV_PKT_DATA_RTCP_SR = 39,
     /// <summary>Extensible image file format metadata. The payload is a buffer containing EXIF metadata, starting with either 49 49 2a 00, or 4d 4d 00 2a.</summary>
     @AV_PKT_DATA_EXIF = 40,
+    /// <summary>HDR dynamic metadata associated with a video frame. The payload is an AVDynamicHDRSmpte2094App5 type and contains information for color volume transform as specified in the SMPTE 2094-50 standard.</summary>
+    @AV_PKT_DATA_DYNAMIC_HDR_SMPTE_2094_APP5 = 41,
+    /// <summary>Dolby Vision enhancement-layer HEVC decoder configuration. Parsed from the hvcE box in ISOM-based containers or the corresponding BlockAdditionMapping in Matroska. The data is a raw HEVCDecoderConfigurationRecord as defined in ISO 14496-15.</summary>
+    @AV_PKT_DATA_HEVC_CONF = 42,
     /// <summary>The number of side data types. This is not part of the public API/ABI in the sense that it may change when new side data types are added. This must stay the last enum value. If its value becomes huge, some code using it needs to be updated as it assumes it to be smaller than other limits.</summary>
-    @AV_PKT_DATA_NB = 41,
+    @AV_PKT_DATA_NB = 43,
 }
 
 /// <summary>@{</summary>
@@ -2035,6 +2044,8 @@ public enum AVStreamGroupParamsType : int
     @AV_STREAM_GROUP_PARAMS_IAMF_MIX_PRESENTATION = 2,
     @AV_STREAM_GROUP_PARAMS_TILE_GRID = 3,
     @AV_STREAM_GROUP_PARAMS_LCEVC = 4,
+    @AV_STREAM_GROUP_PARAMS_TREF = 5,
+    @AV_STREAM_GROUP_PARAMS_DOLBY_VISION = 6,
 }
 
 /// <summary>@}</summary>
@@ -2065,23 +2076,14 @@ public enum AVSubtitleType : int
     @SUBTITLE_ASS = 3,
 }
 
-public enum AVTimebaseSource : int
-{
-    @AVFMT_TBCF_AUTO = -1,
-    @AVFMT_TBCF_DECODER = 0,
-    @AVFMT_TBCF_DEMUXER = 1,
-    @AVFMT_TBCF_R_FRAMERATE = 2,
-}
-
-[Flags]
 public enum AVTimecodeFlag : int
 {
     /// <summary>timecode is drop frame</summary>
-    @AV_TIMECODE_FLAG_DROPFRAME = 1 << 0,
+    @AV_TIMECODE_FLAG_DROPFRAME = 1,
     /// <summary>timecode wraps after 24 hours</summary>
-    @AV_TIMECODE_FLAG_24HOURSMAX = 1 << 1,
+    @AV_TIMECODE_FLAG_24HOURSMAX = 2,
     /// <summary>negative time values are allowed</summary>
-    @AV_TIMECODE_FLAG_ALLOWNEGATIVE = 1 << 2,
+    @AV_TIMECODE_FLAG_ALLOWNEGATIVE = 4,
 }
 
 /// <summary>Dithering algorithms</summary>
@@ -2135,6 +2137,27 @@ public enum SwsAlphaBlend : int
     @SWS_ALPHA_BLEND_MAX_ENUM = 2147483647,
 }
 
+public enum SwsBackend : int
+{
+    /// <summary>Legacy bespoke format-specific code</summary>
+    @SWS_BACKEND_LEGACY = 1,
+    @SWS_BACKEND_STABLE = 1,
+    /// <summary>Template-based C reference implementation</summary>
+    @SWS_BACKEND_C = 2,
+    /// <summary>Fast path using libc memcpy() / memset()</summary>
+    @SWS_BACKEND_MEMCPY = 4,
+    /// <summary>Chained x86 SIMD kernels</summary>
+    @SWS_BACKEND_X86 = 8,
+    /// <summary>Chained AArch64 NEON kernels</summary>
+    @SWS_BACKEND_AARCH64 = 16,
+    /// <summary>Vulkan SPIR-V backend</summary>
+    @SWS_BACKEND_SPIRV = 32,
+    @SWS_BACKEND_UNSTABLE = 62,
+    @SWS_BACKEND_ALL = 63,
+    /// <summary>force size to 32 bits, not a valid backend</summary>
+    @SWS_BACKEND_MAX_ENUM = 2147483647,
+}
+
 /// <summary>**************************** Flags and quality settings * ****************************</summary>
 public enum SwsDither : int
 {
@@ -2148,49 +2171,48 @@ public enum SwsDither : int
     @SWS_DITHER_MAX_ENUM = 2147483647,
 }
 
-[Flags]
 public enum SwsFlags : int
 {
-    /// <summary>fast bilinear filtering</summary>
-    @SWS_FAST_BILINEAR = 1 << 0,
-    /// <summary>bilinear filtering</summary>
-    @SWS_BILINEAR = 1 << 1,
-    /// <summary>2-tap cubic B-spline</summary>
-    @SWS_BICUBIC = 1 << 2,
-    /// <summary>experimental</summary>
-    @SWS_X = 1 << 3,
-    /// <summary>nearest neighbor</summary>
-    @SWS_POINT = 1 << 4,
-    /// <summary>area averaging</summary>
-    @SWS_AREA = 1 << 5,
-    /// <summary>bicubic luma, bilinear chroma</summary>
-    @SWS_BICUBLIN = 1 << 6,
-    /// <summary>gaussian approximation</summary>
-    @SWS_GAUSS = 1 << 7,
-    /// <summary>unwindowed sinc</summary>
-    @SWS_SINC = 1 << 8,
-    /// <summary>3-tap sinc/sinc</summary>
-    @SWS_LANCZOS = 1 << 9,
-    /// <summary>cubic Keys spline</summary>
-    @SWS_SPLINE = 1 << 10,
     /// <summary>Return an error on underspecified conversions. Without this flag, unspecified fields are defaulted to sensible values.</summary>
-    @SWS_STRICT = 1 << 11,
+    @SWS_STRICT = 2048,
     /// <summary>Emit verbose log of scaling parameters.</summary>
-    @SWS_PRINT_INFO = 1 << 12,
+    @SWS_PRINT_INFO = 4096,
     /// <summary>Perform full chroma upsampling when upscaling to RGB.</summary>
-    @SWS_FULL_CHR_H_INT = 1 << 13,
+    @SWS_FULL_CHR_H_INT = 8192,
     /// <summary>Perform full chroma interpolation when downscaling RGB sources.</summary>
-    @SWS_FULL_CHR_H_INP = 1 << 14,
+    @SWS_FULL_CHR_H_INP = 16384,
     /// <summary>Force bit-exact output. This will prevent the use of platform-specific optimizations that may lead to slight difference in rounding, in favor of always maintaining exact bit output compatibility with the reference C code.</summary>
-    @SWS_ACCURATE_RND = 1 << 18,
+    @SWS_ACCURATE_RND = 262144,
     /// <summary>Force bit-exact output. This will prevent the use of platform-specific optimizations that may lead to slight difference in rounding, in favor of always maintaining exact bit output compatibility with the reference C code.</summary>
-    @SWS_BITEXACT = 1 << 19,
-    /// <summary>Allow using experimental new code paths. This may be faster, slower, or produce different output, with semantics subject to change at any point in time. For testing and debugging purposes only.</summary>
-    @SWS_UNSTABLE = 1 << 20,
+    @SWS_BITEXACT = 524288,
+    /// <summary>Allow/prefer using experimental new code paths. This may be faster, slower, or produce different output, with semantics subject to change at any point in time. For testing and debugging purposes only.</summary>
+    @SWS_UNSTABLE = 1048576,
     /// <summary>This flag has no effect</summary>
-    @SWS_DIRECT_BGR = 1 << 15,
+    @SWS_DIRECT_BGR = 32768,
     /// <summary>Set `SwsContext.dither` instead</summary>
-    @SWS_ERROR_DIFFUSION = 1 << 23,
+    @SWS_ERROR_DIFFUSION = 8388608,
+    /// <summary>fast bilinear filtering</summary>
+    @SWS_FAST_BILINEAR = 1,
+    /// <summary>bilinear filtering</summary>
+    @SWS_BILINEAR = 2,
+    /// <summary>2-tap cubic B-spline</summary>
+    @SWS_BICUBIC = 4,
+    /// <summary>experimental</summary>
+    @SWS_X = 8,
+    /// <summary>nearest neighbor</summary>
+    @SWS_POINT = 16,
+    /// <summary>area averaging</summary>
+    @SWS_AREA = 32,
+    /// <summary>bicubic luma, bilinear chroma</summary>
+    @SWS_BICUBLIN = 64,
+    /// <summary>gaussian approximation</summary>
+    @SWS_GAUSS = 128,
+    /// <summary>unwindowed sinc</summary>
+    @SWS_SINC = 256,
+    /// <summary>3-tap sinc/sinc</summary>
+    @SWS_LANCZOS = 512,
+    /// <summary>unwindowed natural cubic spline</summary>
+    @SWS_SPLINE = 1024,
 }
 
 public enum SwsIntent : int
@@ -2205,5 +2227,30 @@ public enum SwsIntent : int
     @SWS_INTENT_ABSOLUTE_COLORIMETRIC = 3,
     /// <summary>not part of the ABI</summary>
     @SWS_INTENT_NB = 4,
+}
+
+public enum SwsScaler : int
+{
+    @SWS_SCALE_AUTO = 0,
+    /// <summary>bilinear filtering</summary>
+    @SWS_SCALE_BILINEAR = 1,
+    /// <summary>2-tap cubic BC-spline</summary>
+    @SWS_SCALE_BICUBIC = 2,
+    /// <summary>nearest neighbor (point sampling)</summary>
+    @SWS_SCALE_POINT = 3,
+    /// <summary>area averaging</summary>
+    @SWS_SCALE_AREA = 4,
+    /// <summary>2-tap gaussian approximation</summary>
+    @SWS_SCALE_GAUSSIAN = 5,
+    /// <summary>unwindowed sinc</summary>
+    @SWS_SCALE_SINC = 6,
+    /// <summary>3-tap sinc/sinc</summary>
+    @SWS_SCALE_LANCZOS = 7,
+    /// <summary>unwindowned natural cubic spline</summary>
+    @SWS_SCALE_SPLINE = 8,
+    /// <summary>not part of the ABI</summary>
+    @SWS_SCALE_NB = 9,
+    /// <summary>force size to 32 bits, not a valid filter type</summary>
+    @SWS_SCALE_MAX_ENUM = 2147483647,
 }
 

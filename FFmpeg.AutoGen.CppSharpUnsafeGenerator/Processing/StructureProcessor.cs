@@ -60,6 +60,7 @@ internal class StructureProcessor
         var bitFieldComments = new List<string>();
         long bitCounter = 0;
         var fields = new List<StructureField>();
+        var anonymousFieldCount = 0;
 
         foreach (var field in @class.Fields)
         {
@@ -80,10 +81,17 @@ internal class StructureProcessor
                 continue;
             }
 
-            var typeName = $"{field.Class.Name}_{field.Name}";
+            // Anonymous struct/union members carry no name in C; C# has no equivalent, so they
+            // are exposed as a regular nested field named union0, union1, struct0 and so on,
+            // numbered per declaring struct in declaration order.
+            var fieldName = string.IsNullOrEmpty(field.Name)
+                ? $"{(IsUnion(field.Type) ? "union" : "struct")}{anonymousFieldCount++}"
+                : field.Name;
+
+            var typeName = $"{field.Class.Name}_{fieldName}";
             fields.Add(new StructureField
             {
-                Name = field.Name,
+                Name = fieldName,
                 FieldType = GetTypeDefinition(field.Type, typeName),
                 Content = field.Comment?.BriefText,
                 Obsoletion = ObsoletionHelper.CreateObsoletion(field)
@@ -109,6 +117,8 @@ internal class StructureProcessor
             }
         };
     }
+
+    private static bool IsUnion(Type type) => type.TryGetClass(out var @class) && @class.IsUnion;
 
     private static StructureField GetBitField(IEnumerable<string> names, long bitCounter, List<string> comments)
     {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,7 +37,6 @@ public abstract class FunctionResolverBase : IFunctionResolver
                 return default;
             }
 
-#if NETSTANDARD2_0_OR_GREATER
             try
             {
                 return Marshal.GetDelegateForFunctionPointer<T>(ptr);
@@ -48,9 +47,6 @@ public abstract class FunctionResolverBase : IFunctionResolver
                     throw;
                 return default;
             }
-#else
-        return (T)(object)Marshal.GetDelegateForFunctionPointer(ptr, typeof(T));
-#endif
         }
     }
 

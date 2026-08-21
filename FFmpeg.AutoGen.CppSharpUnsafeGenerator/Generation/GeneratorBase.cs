@@ -50,6 +50,8 @@ internal abstract class GeneratorBase : IDisposable
 
     public virtual IEnumerable<string> Usings() => Array.Empty<string>();
 
+    protected virtual void WriteConditionalUsings() { }
+
     public virtual void Generate()
     {
         if (!string.IsNullOrEmpty(Context.FileHeader))
@@ -61,6 +63,8 @@ internal abstract class GeneratorBase : IDisposable
         var usings = Usings().ToList();
         usings.ForEach(ns => WriteLine($"using {ns};"));
         if (usings.Count > 0) WriteLine();
+
+        WriteConditionalUsings();
 
         WriteLine($"namespace {Context.Namespace};");
         WriteLine();
