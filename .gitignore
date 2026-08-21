@@ -119,3 +119,6 @@ FFmpeg/bin/
 # Claude
 .claude/
 CLAUDE.md
+
+# C# Dev Kit language service cache
+*.lscache
