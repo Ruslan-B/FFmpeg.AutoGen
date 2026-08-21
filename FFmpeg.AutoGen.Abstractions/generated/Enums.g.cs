@@ -225,7 +225,7 @@ public enum AVClassCategory : int
 public enum AVClassStateFlags : int
 {
     /// <summary>Object initialization has finished and it is now in the &apos;runtime&apos; stage. This affects e.g. what options can be set on the object (only AV_OPT_FLAG_RUNTIME_PARAM options can be set on initialized objects).</summary>
-    @AV_CLASS_STATE_INITIALIZED = 1,
+    @AV_CLASS_STATE_INITIALIZED = 1 << 0,
 }
 
 public enum AVCodecConfig : int
@@ -248,6 +248,7 @@ public enum AVCodecConfig : int
     @AV_CODEC_CONFIG_ALPHA_MODE = 7,
 }
 
+[Flags]
 public enum AvCodecHwConfigMethod : int
 {
     /// <summary>The codec supports this format via the hw_device_ctx interface.</summary>
@@ -1053,7 +1054,6 @@ public enum AVFormatCommandID : int
 }
 
 /// <summary>Flags for frame cropping.</summary>
-[Flags]
 public enum AvFrameCrop : int
 {
     /// <summary>Apply the maximum possible cropping, even if it requires setting the AVFrame.data[] entries to unaligned pointers. Passing unaligned data to FFmpeg API is generally not allowed, and causes undefined behavior (such as crashes). You can pass unaligned data only to FFmpeg APIs that are explicitly documented to accept it. Use this flag only if you absolutely know what you are doing.</summary>
@@ -1297,7 +1297,7 @@ public enum AVOptionType : int
     /// <summary>Underlying C type is unsigned int.</summary>
     @AV_OPT_TYPE_UINT = 20,
     /// <summary>May be combined with another regular option type to declare an array option.</summary>
-    @AV_OPT_TYPE_FLAG_ARRAY = 65536,
+    @AV_OPT_TYPE_FLAG_ARRAY = 1 << 16,
 }
 
 /// <summary>Types and functions for working with AVPacketSideData. @{</summary>
@@ -2022,24 +2022,26 @@ public enum AVSampleFormat : int
     @AV_SAMPLE_FMT_NB = 12,
 }
 
+[Flags]
 public enum AVSideDataParamChangeFlags : int
 {
     @AV_SIDE_DATA_PARAM_CHANGE_SAMPLE_RATE = 4,
     @AV_SIDE_DATA_PARAM_CHANGE_DIMENSIONS = 8,
 }
 
+[Flags]
 public enum AVSideDataProps : int
 {
     /// <summary>The side data type can be used in stream-global structures. Side data types without this property are only meaningful on per-frame basis.</summary>
-    @AV_SIDE_DATA_PROP_GLOBAL = 1,
+    @AV_SIDE_DATA_PROP_GLOBAL = 1 << 0,
     /// <summary>Multiple instances of this side data type can be meaningfully present in a single side data array.</summary>
-    @AV_SIDE_DATA_PROP_MULTI = 2,
+    @AV_SIDE_DATA_PROP_MULTI = 1 << 1,
     /// <summary>Side data depends on the video dimensions. Side data with this property loses its meaning when rescaling or cropping the image, unless either recomputed or adjusted to the new resolution.</summary>
-    @AV_SIDE_DATA_PROP_SIZE_DEPENDENT = 4,
+    @AV_SIDE_DATA_PROP_SIZE_DEPENDENT = 1 << 2,
     /// <summary>Side data depends on the video color space. Side data with this property loses its meaning when changing the video color encoding, e.g. by adapting to a different set of primaries or transfer characteristics.</summary>
-    @AV_SIDE_DATA_PROP_COLOR_DEPENDENT = 8,
+    @AV_SIDE_DATA_PROP_COLOR_DEPENDENT = 1 << 3,
     /// <summary>Side data depends on the channel layout. Side data with this property loses its meaning when downmixing or upmixing, unless either recomputed or adjusted to the new layout.</summary>
-    @AV_SIDE_DATA_PROP_CHANNEL_DEPENDENT = 16,
+    @AV_SIDE_DATA_PROP_CHANNEL_DEPENDENT = 1 << 4,
 }
 
 public enum AVStreamGroupParamsType : int
@@ -2143,21 +2145,22 @@ public enum SwsAlphaBlend : int
     @SWS_ALPHA_BLEND_MAX_ENUM = 2147483647,
 }
 
+[Flags]
 public enum SwsBackend : int
 {
     /// <summary>Legacy bespoke format-specific code</summary>
-    @SWS_BACKEND_LEGACY = 1,
+    @SWS_BACKEND_LEGACY = 1 << 0,
     @SWS_BACKEND_STABLE = 1,
     /// <summary>Template-based C reference implementation</summary>
-    @SWS_BACKEND_C = 2,
+    @SWS_BACKEND_C = 1 << 1,
     /// <summary>Fast path using libc memcpy() / memset()</summary>
-    @SWS_BACKEND_MEMCPY = 4,
+    @SWS_BACKEND_MEMCPY = 1 << 2,
     /// <summary>Chained x86 SIMD kernels</summary>
-    @SWS_BACKEND_X86 = 8,
+    @SWS_BACKEND_X86 = 1 << 3,
     /// <summary>Chained AArch64 NEON kernels</summary>
-    @SWS_BACKEND_AARCH64 = 16,
+    @SWS_BACKEND_AARCH64 = 1 << 4,
     /// <summary>Vulkan SPIR-V backend</summary>
-    @SWS_BACKEND_SPIRV = 32,
+    @SWS_BACKEND_SPIRV = 1 << 5,
     @SWS_BACKEND_UNSTABLE = 62,
     @SWS_BACKEND_ALL = 63,
     /// <summary>force size to 32 bits, not a valid backend</summary>
