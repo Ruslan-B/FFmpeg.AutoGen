@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -53,6 +53,9 @@ internal class Program
         };
         var processor = new ASTProcessor(processingContext);
         astContexts.ForEach(processor.Process);
+
+        HeaderCoverage.Report(options.FFmpegIncludesDir,
+            astContexts.SelectMany(x => x.TranslationUnits).Where(x => !x.IsSystemHeader).Select(x => x.FilePath));
 
         // generate files
         var inlineFunctions = ExistingInlineFunctionsHelper.LoadInlineFunctions(Path.Combine(options.SolutionDir, "FFmpeg.AutoGen/generated/FFmpeg.functions.inline.g.cs"));
