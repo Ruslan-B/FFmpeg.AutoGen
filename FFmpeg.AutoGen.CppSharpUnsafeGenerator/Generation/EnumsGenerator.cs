@@ -1,4 +1,6 @@
-﻿using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
+﻿using System.Collections.Generic;
+using System.Linq;
+using FFmpeg.AutoGen.CppSharpUnsafeGenerator.Definitions;
 
 namespace FFmpeg.AutoGen.CppSharpUnsafeGenerator.Generation;
 
@@ -14,17 +16,26 @@ internal sealed class EnumsGenerator : GeneratorBase<EnumerationDefinition>
         g.Generate();
     }
 
+    public override IEnumerable<string> Usings()
+    {
+        if (Context.Definitions.OfType<EnumerationDefinition>().Any(x => x.IsFlags))
+            yield return "System";
+    }
+
     protected override void GenerateDefinition(EnumerationDefinition @enum)
     {
         this.WriteSummary(@enum);
         this.WriteObsoletion(@enum);
+
+        if (@enum.IsFlags) WriteLine("[Flags]");
+
         WriteLine($"public enum {@enum.Name} : {@enum.TypeName}");
 
         using (BeginBlock())
             foreach (var item in @enum.Items)
             {
                 this.WriteSummary(item);
-                WriteLine($"@{item.Name} = {item.Value},");
+                WriteLine($"@{item.Name} = {item.Literal},");
             }
 
         WriteLine();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using FFmpeg.AutoGen.Abstractions;
@@ -13,6 +13,11 @@ public sealed unsafe class VideoFrameConverter : IDisposable
     private readonly int4 _dstLinesize;
     private readonly SwsContext* _pConvertContext;
 
+    // The low bits of SwsFlags pick the scaler and only one of them may be active; the rest are
+    // flags that combine with it. SwsFlags is a [Flags] enum, so the combination is written out
+    // rather than added up by hand, and sws_getContext takes it as an int.
+    private const SwsFlags ScalingOptions = SwsFlags.SWS_FAST_BILINEAR | SwsFlags.SWS_ACCURATE_RND;
+
     public VideoFrameConverter(Size sourceSize, AVPixelFormat sourcePixelFormat,
         Size destinationSize, AVPixelFormat destinationPixelFormat)
     {
@@ -24,7 +29,7 @@ public sealed unsafe class VideoFrameConverter : IDisposable
             destinationSize.Width,
             destinationSize.Height,
             destinationPixelFormat,
-            (int)SwsFlags.SWS_FAST_BILINEAR,
+            (int)ScalingOptions,
             null,
             null,
             null);
