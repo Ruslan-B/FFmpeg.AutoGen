@@ -111,6 +111,7 @@ UpgradeLog*.XML
 
 # FFmpeg binaries (download via FFmpeg/download-ffmpeg.ps1)
 FFmpeg/bin/
+FFmpeg/sample.*
 
 # JetBrains Rider
 .idea/

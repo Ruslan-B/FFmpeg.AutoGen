@@ -35,9 +35,9 @@ internal class MacroPostProcessor
         {
             var expression = CleanUp(macro.Expression);
 
-            // Detect function-like macro definitions with ## (token concatenation)
+            // Detect function-like macro definitions with ## or struct init body
             var funcMatch = FunctionMacroRegex.Match(expression);
-            if (funcMatch.Success && expression.Contains("##"))
+            if (funcMatch.Success && (expression.Contains("##") || expression.Contains("{")))
             {
                 var parameters = funcMatch.Groups[1].Value.Split(',').Select(p => p.Trim()).ToArray();
                 var body = funcMatch.Groups[2].Value.Trim();
@@ -74,9 +74,17 @@ internal class MacroPostProcessor
 
         macro.TypeName = typeOrAlias.ToString();
         macro.Content = $"{macro.Name} = {CleanUp(macro.Expression)}";
+
+        // Wrap bare InitializerList with inferred type into CompoundLiteral for proper serialization
+        if (expression is InitializerListExpression initList && !typeOrAlias.IsType
+            && _context.Definitions.Any(d => d.Name == typeOrAlias.Alias))
+            expression = new CompoundLiteralExpression(typeOrAlias.Alias, initList);
+
         macro.Expression = Serialize(expression);
         macro.IsConst = IsConst(expression);
-        macro.IsValid = typeOrAlias.IsType || _context.TypeAliases.ContainsKey(typeOrAlias.Alias);
+        macro.IsValid = typeOrAlias.IsType
+            || _context.TypeAliases.ContainsKey(typeOrAlias.Alias)
+            || (expression is CompoundLiteralExpression && _context.Definitions.Any(d => d.Name == typeOrAlias.Alias));
     }
 
     private static string CleanUp(string expression)
@@ -90,6 +98,8 @@ internal class MacroPostProcessor
     {
         return expression switch
         {
+            CompoundLiteralExpression e => new TypeOrAlias(e.TypeName),
+            InitializerListExpression e => DeduceStructType(e),
             BinaryExpression e => DeduceType(e),
             UnaryExpression e => DeduceType(e.Operand),
             CastExpression e => GetTypeAlias(e.TargetType),
@@ -98,6 +108,27 @@ internal class MacroPostProcessor
             ConstantExpression e => e.Value.GetType(),
             _ => throw new NotSupportedException()
         };
+    }
+
+    /// <summary>
+    /// Tries to infer struct type from designated initializer field names.
+    /// Matches field names against known struct definitions.
+    /// </summary>
+    private TypeOrAlias DeduceStructType(InitializerListExpression e)
+    {
+        // Extract top-level field names (e.g. "u.mask" → "u", "order" → "order")
+        var fieldNames = e.Fields
+            .Where(f => f.Name != null)
+            .Select(f => f.Name.Split('.')[0])
+            .ToHashSet();
+        if (fieldNames.Count == 0) return null;
+
+        var match = _context.Definitions
+            .OfType<StructureDefinition>()
+            .FirstOrDefault(s => s.Fields != null &&
+                fieldNames.All(fn => s.Fields.Any(sf => sf.Name == fn)));
+
+        return match != null ? new TypeOrAlias(match.Name) : null;
     }
 
     private TypeOrAlias DeduceCallType(CallExpression e)
@@ -148,6 +179,11 @@ internal class MacroPostProcessor
             case UnaryExpression e: return new UnaryExpression(e.OperationType, Rewrite(e.Operand));
             case CastExpression e: return new CastExpression(e.TargetType, Rewrite(e.Operand));
             case CallExpression e: return RewriteCall(e);
+            case CompoundLiteralExpression e: return new CompoundLiteralExpression(e.TypeName,
+                new InitializerListExpression(e.Initializer.Fields.Select(f =>
+                    new InitializerField { Name = f.Name, Value = Rewrite(f.Value) })));
+            case InitializerListExpression e: return new InitializerListExpression(
+                e.Fields.Select(f => new InitializerField { Name = f.Name, Value = Rewrite(f.Value) }));
             case VariableExpression e: return Rewrite(e);
             case ConstantExpression e: return e;
             default: return expression;
@@ -193,12 +229,17 @@ internal class MacroPostProcessor
         // Substitute parameters in the body and evaluate ## concatenation
         var body = macroDef.Body;
 
-        // First substitute parameters (both with ## and standalone)
+        // First substitute parameters with word-boundary matching
         foreach (var (param, arg) in paramMap)
-            body = body.Replace(param, arg);
+            body = Regex.Replace(body, $@"\b{Regex.Escape(param)}\b", arg);
 
         // Then evaluate ## (token concatenation = string join)
         body = body.Replace("##", "");
+
+        // Convert C-style designated init comments to actual designators:
+        // { /* .order */ value } → { .order = value }
+        body = Regex.Replace(body, @"/\*\s*(\.[\w.]+)\s*\*/", "$1 =");
+
         body = body.Replace("  ", " ").Trim();
 
         // Try to parse the result as a single identifier/expression
@@ -229,6 +270,8 @@ internal class MacroPostProcessor
     {
         return expression switch
         {
+            CompoundLiteralExpression e => SerializeCompoundLiteral(e),
+            InitializerListExpression e => SerializeInitializerList(e),
             BinaryExpression e =>
                 $"{Serialize(e.Left)} {e.OperationType.ToOperationTypeString()} {Serialize(e.Right)}",
             UnaryExpression e => $"{e.OperationType.ToOperationTypeString()}{Serialize(e.Operand)}",
@@ -238,6 +281,71 @@ internal class MacroPostProcessor
             ConstantExpression e => Serialize(e.Value),
             _ => throw new NotSupportedException()
         };
+    }
+
+    private string SerializeCompoundLiteral(CompoundLiteralExpression e)
+    {
+        var typeName = GetTypeAlias(e.TypeName);
+        var fields = e.Initializer.Fields;
+
+        var structDef = _context.Definitions
+            .OfType<Definitions.StructureDefinition>()
+            .FirstOrDefault(s => s.Name == e.TypeName.ToString());
+
+        // For positional initializers, resolve field names from struct definition
+        if (fields.Count > 0 && fields[0].Name == null && structDef?.Fields != null)
+        {
+            for (var idx = 0; idx < fields.Count && idx < structDef.Fields.Length; idx++)
+                fields[idx].Name = structDef.Fields[idx].Name;
+        }
+
+        var serialized = fields
+            // Skip nested fields (u.mask) — C# doesn't support nested object initializer access
+            .Where(f => f.Name == null || !f.Name.Contains('.'))
+            // Skip zero-initialized fields (default value)
+            .Where(f => !(f.Value is ConstantExpression c && c.Value is int v && v == 0))
+            .Select(f => f.Name != null
+                ? $"{f.Name} = {SerializeFieldValue(f.Name, f.Value, structDef)}"
+                : Serialize(f.Value));
+        return $"new {typeName} {{ {string.Join(", ", serialized)} }}";
+    }
+
+    private string SerializeFieldValue(string fieldName, IExpression value, Definitions.StructureDefinition structDef)
+    {
+        // Unwrap single-element initializer list: { x } → x
+        if (value is InitializerListExpression initList && initList.Fields.Count == 1)
+            value = initList.Fields[0].Value;
+
+        // Cast value to enum type if struct field is an enum
+        if (structDef?.Fields != null)
+        {
+            var field = structDef.Fields.FirstOrDefault(f => f.Name == fieldName);
+            if (field != null)
+            {
+                var enumDef = _context.Definitions
+                    .OfType<Definitions.EnumerationDefinition>()
+                    .FirstOrDefault(d => d.Name == field.FieldType.Name);
+                if (enumDef != null)
+                {
+                    // Try to find matching enum member by value
+                    var serializedValue = Serialize(value);
+                    var enumItem = enumDef.Items.FirstOrDefault(i => i.Value == serializedValue);
+                    if (enumItem != null)
+                        return $"{enumDef.Name}.{enumItem.Name}";
+                    return $"({enumDef.Name})({serializedValue})";
+                }
+            }
+        }
+
+        return Serialize(value);
+    }
+
+    private string SerializeInitializerList(InitializerListExpression e)
+    {
+        var fields = e.Fields.Select(f => f.Name != null
+            ? $"{f.Name} = {Serialize(f.Value)}"
+            : Serialize(f.Value));
+        return $"{{ {string.Join(", ", fields)} }}";
     }
 
     internal TypeOrAlias GetWellKnownMacroType(string macroName)
@@ -270,6 +378,8 @@ internal class MacroPostProcessor
     {
         return expression switch
         {
+            CompoundLiteralExpression _ => false,
+            InitializerListExpression _ => false,
             BinaryExpression e => IsConst(e.Left) && IsConst(e.Right),
             UnaryExpression e => IsConst(e.Operand),
             CastExpression e => IsConst(e.Operand),

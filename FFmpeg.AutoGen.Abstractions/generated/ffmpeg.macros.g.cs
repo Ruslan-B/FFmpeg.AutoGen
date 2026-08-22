@@ -171,53 +171,93 @@ public static unsafe partial class ffmpeg
     public static readonly ulong AV_CH_WIDE_LEFT = 0x1UL << 31;
     /// <summary>AV_CH_WIDE_RIGHT = (1ULL &lt;&lt; AV_CHAN_WIDE_RIGHT           )</summary>
     public static readonly ulong AV_CH_WIDE_RIGHT = 0x1UL << 32;
-    // public static AV_CHANNEL_LAYOUT_2_1 = AV_CHANNEL_LAYOUT_MASK(0x3, AV_CH_LAYOUT_2_1);
-    // public static AV_CHANNEL_LAYOUT_2_2 = AV_CHANNEL_LAYOUT_MASK(0x4, AV_CH_LAYOUT_2_2);
-    // public static AV_CHANNEL_LAYOUT_22POINT2 = AV_CHANNEL_LAYOUT_MASK(0x18, AV_CH_LAYOUT_22POINT2);
-    // public static AV_CHANNEL_LAYOUT_2POINT1 = AV_CHANNEL_LAYOUT_MASK(0x3, AV_CH_LAYOUT_2POINT1);
-    // public static AV_CHANNEL_LAYOUT_3POINT1 = AV_CHANNEL_LAYOUT_MASK(0x4, AV_CH_LAYOUT_3POINT1);
-    // public static AV_CHANNEL_LAYOUT_3POINT1POINT2 = AV_CHANNEL_LAYOUT_MASK(0x6, AV_CH_LAYOUT_3POINT1POINT2);
-    // public static AV_CHANNEL_LAYOUT_4POINT0 = AV_CHANNEL_LAYOUT_MASK(0x4, AV_CH_LAYOUT_4POINT0);
-    // public static AV_CHANNEL_LAYOUT_4POINT1 = AV_CHANNEL_LAYOUT_MASK(0x5, AV_CH_LAYOUT_4POINT1);
-    // public static AV_CHANNEL_LAYOUT_5POINT0 = AV_CHANNEL_LAYOUT_MASK(0x5, AV_CH_LAYOUT_5POINT0);
-    // public static AV_CHANNEL_LAYOUT_5POINT0_BACK = AV_CHANNEL_LAYOUT_MASK(0x5, AV_CH_LAYOUT_5POINT0_BACK);
-    // public static AV_CHANNEL_LAYOUT_5POINT1 = AV_CHANNEL_LAYOUT_MASK(0x6, AV_CH_LAYOUT_5POINT1);
-    // public static AV_CHANNEL_LAYOUT_5POINT1_BACK = AV_CHANNEL_LAYOUT_MASK(0x6, AV_CH_LAYOUT_5POINT1_BACK);
-    // public static AV_CHANNEL_LAYOUT_5POINT1POINT2 = AV_CHANNEL_LAYOUT_MASK(0x8, AV_CH_LAYOUT_5POINT1POINT2);
-    // public static AV_CHANNEL_LAYOUT_5POINT1POINT2_BACK = AV_CHANNEL_LAYOUT_MASK(0x8, AV_CH_LAYOUT_5POINT1POINT2_BACK);
-    // public static AV_CHANNEL_LAYOUT_5POINT1POINT4_BACK = AV_CHANNEL_LAYOUT_MASK(0xa, AV_CH_LAYOUT_5POINT1POINT4_BACK);
-    // public static AV_CHANNEL_LAYOUT_6POINT0 = AV_CHANNEL_LAYOUT_MASK(0x6, AV_CH_LAYOUT_6POINT0);
-    // public static AV_CHANNEL_LAYOUT_6POINT0_FRONT = AV_CHANNEL_LAYOUT_MASK(0x6, AV_CH_LAYOUT_6POINT0_FRONT);
-    // public static AV_CHANNEL_LAYOUT_6POINT1 = AV_CHANNEL_LAYOUT_MASK(0x7, AV_CH_LAYOUT_6POINT1);
-    // public static AV_CHANNEL_LAYOUT_6POINT1_BACK = AV_CHANNEL_LAYOUT_MASK(0x7, AV_CH_LAYOUT_6POINT1_BACK);
-    // public static AV_CHANNEL_LAYOUT_6POINT1_FRONT = AV_CHANNEL_LAYOUT_MASK(0x7, AV_CH_LAYOUT_6POINT1_FRONT);
-    // public static AV_CHANNEL_LAYOUT_7POINT0 = AV_CHANNEL_LAYOUT_MASK(0x7, AV_CH_LAYOUT_7POINT0);
-    // public static AV_CHANNEL_LAYOUT_7POINT0_FRONT = AV_CHANNEL_LAYOUT_MASK(0x7, AV_CH_LAYOUT_7POINT0_FRONT);
-    // public static AV_CHANNEL_LAYOUT_7POINT1 = AV_CHANNEL_LAYOUT_MASK(0x8, AV_CH_LAYOUT_7POINT1);
+    /// <summary>AV_CHANNEL_LAYOUT_2_1 = AV_CHANNEL_LAYOUT_MASK(3,  AV_CH_LAYOUT_2_1)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_2_1 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x3 };
+    /// <summary>AV_CHANNEL_LAYOUT_2_2 = AV_CHANNEL_LAYOUT_MASK(4,  AV_CH_LAYOUT_2_2)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_2_2 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x4 };
+    /// <summary>AV_CHANNEL_LAYOUT_22POINT2 = AV_CHANNEL_LAYOUT_MASK(24, AV_CH_LAYOUT_22POINT2)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_22POINT2 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x18 };
+    /// <summary>AV_CHANNEL_LAYOUT_2POINT1 = AV_CHANNEL_LAYOUT_MASK(3,  AV_CH_LAYOUT_2POINT1)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_2POINT1 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x3 };
+    /// <summary>AV_CHANNEL_LAYOUT_3POINT1 = AV_CHANNEL_LAYOUT_MASK(4,  AV_CH_LAYOUT_3POINT1)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_3POINT1 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x4 };
+    /// <summary>AV_CHANNEL_LAYOUT_3POINT1POINT2 = AV_CHANNEL_LAYOUT_MASK(6,  AV_CH_LAYOUT_3POINT1POINT2)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_3POINT1POINT2 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x6 };
+    /// <summary>AV_CHANNEL_LAYOUT_4POINT0 = AV_CHANNEL_LAYOUT_MASK(4,  AV_CH_LAYOUT_4POINT0)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_4POINT0 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x4 };
+    /// <summary>AV_CHANNEL_LAYOUT_4POINT1 = AV_CHANNEL_LAYOUT_MASK(5,  AV_CH_LAYOUT_4POINT1)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_4POINT1 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x5 };
+    /// <summary>AV_CHANNEL_LAYOUT_5POINT0 = AV_CHANNEL_LAYOUT_MASK(5,  AV_CH_LAYOUT_5POINT0)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_5POINT0 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x5 };
+    /// <summary>AV_CHANNEL_LAYOUT_5POINT0_BACK = AV_CHANNEL_LAYOUT_MASK(5,  AV_CH_LAYOUT_5POINT0_BACK)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_5POINT0_BACK = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x5 };
+    /// <summary>AV_CHANNEL_LAYOUT_5POINT1 = AV_CHANNEL_LAYOUT_MASK(6,  AV_CH_LAYOUT_5POINT1)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_5POINT1 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x6 };
+    /// <summary>AV_CHANNEL_LAYOUT_5POINT1_BACK = AV_CHANNEL_LAYOUT_MASK(6,  AV_CH_LAYOUT_5POINT1_BACK)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_5POINT1_BACK = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x6 };
+    /// <summary>AV_CHANNEL_LAYOUT_5POINT1POINT2 = AV_CHANNEL_LAYOUT_MASK(8,  AV_CH_LAYOUT_5POINT1POINT2)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_5POINT1POINT2 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x8 };
+    /// <summary>AV_CHANNEL_LAYOUT_5POINT1POINT2_BACK = AV_CHANNEL_LAYOUT_MASK(8, AV_CH_LAYOUT_5POINT1POINT2_BACK)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_5POINT1POINT2_BACK = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x8 };
+    /// <summary>AV_CHANNEL_LAYOUT_5POINT1POINT4_BACK = AV_CHANNEL_LAYOUT_MASK(10, AV_CH_LAYOUT_5POINT1POINT4_BACK)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_5POINT1POINT4_BACK = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0xa };
+    /// <summary>AV_CHANNEL_LAYOUT_6POINT0 = AV_CHANNEL_LAYOUT_MASK(6,  AV_CH_LAYOUT_6POINT0)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_6POINT0 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x6 };
+    /// <summary>AV_CHANNEL_LAYOUT_6POINT0_FRONT = AV_CHANNEL_LAYOUT_MASK(6,  AV_CH_LAYOUT_6POINT0_FRONT)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_6POINT0_FRONT = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x6 };
+    /// <summary>AV_CHANNEL_LAYOUT_6POINT1 = AV_CHANNEL_LAYOUT_MASK(7,  AV_CH_LAYOUT_6POINT1)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_6POINT1 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x7 };
+    /// <summary>AV_CHANNEL_LAYOUT_6POINT1_BACK = AV_CHANNEL_LAYOUT_MASK(7,  AV_CH_LAYOUT_6POINT1_BACK)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_6POINT1_BACK = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x7 };
+    /// <summary>AV_CHANNEL_LAYOUT_6POINT1_FRONT = AV_CHANNEL_LAYOUT_MASK(7,  AV_CH_LAYOUT_6POINT1_FRONT)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_6POINT1_FRONT = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x7 };
+    /// <summary>AV_CHANNEL_LAYOUT_7POINT0 = AV_CHANNEL_LAYOUT_MASK(7,  AV_CH_LAYOUT_7POINT0)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_7POINT0 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x7 };
+    /// <summary>AV_CHANNEL_LAYOUT_7POINT0_FRONT = AV_CHANNEL_LAYOUT_MASK(7,  AV_CH_LAYOUT_7POINT0_FRONT)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_7POINT0_FRONT = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x7 };
+    /// <summary>AV_CHANNEL_LAYOUT_7POINT1 = AV_CHANNEL_LAYOUT_MASK(8,  AV_CH_LAYOUT_7POINT1)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_7POINT1 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x8 };
     // public static AV_CHANNEL_LAYOUT_7POINT1_TOP_BACK = AV_CHANNEL_LAYOUT_5POINT1POINT2_BACK;
-    // public static AV_CHANNEL_LAYOUT_7POINT1_WIDE = AV_CHANNEL_LAYOUT_MASK(0x8, AV_CH_LAYOUT_7POINT1_WIDE);
-    // public static AV_CHANNEL_LAYOUT_7POINT1_WIDE_BACK = AV_CHANNEL_LAYOUT_MASK(0x8, AV_CH_LAYOUT_7POINT1_WIDE_BACK);
-    // public static AV_CHANNEL_LAYOUT_7POINT1POINT2 = AV_CHANNEL_LAYOUT_MASK(0xa, AV_CH_LAYOUT_7POINT1POINT2);
-    // public static AV_CHANNEL_LAYOUT_7POINT1POINT4_BACK = AV_CHANNEL_LAYOUT_MASK(0xc, AV_CH_LAYOUT_7POINT1POINT4_BACK);
-    // public static AV_CHANNEL_LAYOUT_7POINT2POINT3 = AV_CHANNEL_LAYOUT_MASK(0xc, AV_CH_LAYOUT_7POINT2POINT3);
-    // public static AV_CHANNEL_LAYOUT_9POINT1POINT4_BACK = AV_CHANNEL_LAYOUT_MASK(0xe, AV_CH_LAYOUT_9POINT1POINT4_BACK);
-    // public static AV_CHANNEL_LAYOUT_9POINT1POINT6 = AV_CHANNEL_LAYOUT_MASK(0x10, AV_CH_LAYOUT_9POINT1POINT6);
+    /// <summary>AV_CHANNEL_LAYOUT_7POINT1_WIDE = AV_CHANNEL_LAYOUT_MASK(8,  AV_CH_LAYOUT_7POINT1_WIDE)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_7POINT1_WIDE = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x8 };
+    /// <summary>AV_CHANNEL_LAYOUT_7POINT1_WIDE_BACK = AV_CHANNEL_LAYOUT_MASK(8,  AV_CH_LAYOUT_7POINT1_WIDE_BACK)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_7POINT1_WIDE_BACK = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x8 };
+    /// <summary>AV_CHANNEL_LAYOUT_7POINT1POINT2 = AV_CHANNEL_LAYOUT_MASK(10, AV_CH_LAYOUT_7POINT1POINT2)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_7POINT1POINT2 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0xa };
+    /// <summary>AV_CHANNEL_LAYOUT_7POINT1POINT4_BACK = AV_CHANNEL_LAYOUT_MASK(12, AV_CH_LAYOUT_7POINT1POINT4_BACK)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_7POINT1POINT4_BACK = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0xc };
+    /// <summary>AV_CHANNEL_LAYOUT_7POINT2POINT3 = AV_CHANNEL_LAYOUT_MASK(12, AV_CH_LAYOUT_7POINT2POINT3)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_7POINT2POINT3 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0xc };
+    /// <summary>AV_CHANNEL_LAYOUT_9POINT1POINT4_BACK = AV_CHANNEL_LAYOUT_MASK(14, AV_CH_LAYOUT_9POINT1POINT4_BACK)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_9POINT1POINT4_BACK = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0xe };
+    /// <summary>AV_CHANNEL_LAYOUT_9POINT1POINT6 = AV_CHANNEL_LAYOUT_MASK(16, AV_CH_LAYOUT_9POINT1POINT6)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_9POINT1POINT6 = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x10 };
     // public static AV_CHANNEL_LAYOUT_AMBISONIC_FIRST_ORDER = { /* .order */ AV_CHANNEL_ORDER_AMBISONIC, /* .nb_channels */ 4, /* .u.mask */ { 0 }, /* .opaque */ NULL };
-    // public static AV_CHANNEL_LAYOUT_BINAURAL = AV_CHANNEL_LAYOUT_MASK(0x2, AV_CH_LAYOUT_BINAURAL);
-    // public static AV_CHANNEL_LAYOUT_CUBE = AV_CHANNEL_LAYOUT_MASK(0x8, AV_CH_LAYOUT_CUBE);
-    // public static AV_CHANNEL_LAYOUT_HEXADECAGONAL = AV_CHANNEL_LAYOUT_MASK(0x10, AV_CH_LAYOUT_HEXADECAGONAL);
-    // public static AV_CHANNEL_LAYOUT_HEXAGONAL = AV_CHANNEL_LAYOUT_MASK(0x6, AV_CH_LAYOUT_HEXAGONAL);
+    /// <summary>AV_CHANNEL_LAYOUT_BINAURAL = AV_CHANNEL_LAYOUT_MASK(2,  AV_CH_LAYOUT_BINAURAL)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_BINAURAL = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x2 };
+    /// <summary>AV_CHANNEL_LAYOUT_CUBE = AV_CHANNEL_LAYOUT_MASK(8,  AV_CH_LAYOUT_CUBE)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_CUBE = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x8 };
+    /// <summary>AV_CHANNEL_LAYOUT_HEXADECAGONAL = AV_CHANNEL_LAYOUT_MASK(16, AV_CH_LAYOUT_HEXADECAGONAL)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_HEXADECAGONAL = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x10 };
+    /// <summary>AV_CHANNEL_LAYOUT_HEXAGONAL = AV_CHANNEL_LAYOUT_MASK(6,  AV_CH_LAYOUT_HEXAGONAL)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_HEXAGONAL = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x6 };
     // public static AV_CHANNEL_LAYOUT_MASK = nb;
-    // public static AV_CHANNEL_LAYOUT_MONO = AV_CHANNEL_LAYOUT_MASK(0x1, AV_CH_LAYOUT_MONO);
-    // public static AV_CHANNEL_LAYOUT_OCTAGONAL = AV_CHANNEL_LAYOUT_MASK(0x8, AV_CH_LAYOUT_OCTAGONAL);
-    // public static AV_CHANNEL_LAYOUT_QUAD = AV_CHANNEL_LAYOUT_MASK(0x4, AV_CH_LAYOUT_QUAD);
+    /// <summary>AV_CHANNEL_LAYOUT_MONO = AV_CHANNEL_LAYOUT_MASK(1,  AV_CH_LAYOUT_MONO)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_MONO = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x1 };
+    /// <summary>AV_CHANNEL_LAYOUT_OCTAGONAL = AV_CHANNEL_LAYOUT_MASK(8,  AV_CH_LAYOUT_OCTAGONAL)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_OCTAGONAL = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x8 };
+    /// <summary>AV_CHANNEL_LAYOUT_QUAD = AV_CHANNEL_LAYOUT_MASK(4,  AV_CH_LAYOUT_QUAD)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_QUAD = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x4 };
     /// <summary>AV_CHANNEL_LAYOUT_RETYPE_FLAG_CANONICAL = (1 &lt;&lt; 1)</summary>
     public const int AV_CHANNEL_LAYOUT_RETYPE_FLAG_CANONICAL = 0x1 << 0x1;
     /// <summary>AV_CHANNEL_LAYOUT_RETYPE_FLAG_LOSSLESS = (1 &lt;&lt; 0)</summary>
     public const int AV_CHANNEL_LAYOUT_RETYPE_FLAG_LOSSLESS = 0x1 << 0x0;
-    // public static AV_CHANNEL_LAYOUT_STEREO = AV_CHANNEL_LAYOUT_MASK(0x2, AV_CH_LAYOUT_STEREO);
-    // public static AV_CHANNEL_LAYOUT_STEREO_DOWNMIX = AV_CHANNEL_LAYOUT_MASK(0x2, AV_CH_LAYOUT_STEREO_DOWNMIX);
-    // public static AV_CHANNEL_LAYOUT_SURROUND = AV_CHANNEL_LAYOUT_MASK(0x3, AV_CH_LAYOUT_SURROUND);
+    /// <summary>AV_CHANNEL_LAYOUT_STEREO = AV_CHANNEL_LAYOUT_MASK(2,  AV_CH_LAYOUT_STEREO)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_STEREO = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x2 };
+    /// <summary>AV_CHANNEL_LAYOUT_STEREO_DOWNMIX = AV_CHANNEL_LAYOUT_MASK(2,  AV_CH_LAYOUT_STEREO_DOWNMIX)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_STEREO_DOWNMIX = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x2 };
+    /// <summary>AV_CHANNEL_LAYOUT_SURROUND = AV_CHANNEL_LAYOUT_MASK(3,  AV_CH_LAYOUT_SURROUND)</summary>
+    public static readonly AVChannelLayout AV_CHANNEL_LAYOUT_SURROUND = new AVChannelLayout { order = AVChannelOrder.AV_CHANNEL_ORDER_NATIVE, nb_channels = 0x3 };
     // public static av_clip = av_clip_c;
     // public static av_clip_int16 = av_clip_int16_c;
     // public static av_clip_int8 = av_clip_int8_c;
@@ -1215,11 +1255,12 @@ public static unsafe partial class ffmpeg
     public const int AV_SUBTITLE_FLAG_FORCED = 0x1;
     /// <summary>AV_TIME_BASE = 1000000</summary>
     public const int AV_TIME_BASE = 0xf4240;
-    // public static AV_TIME_BASE_Q = (AVRational){1, AV_TIME_BASE};
+    /// <summary>AV_TIME_BASE_Q = (AVRational){1, AV_TIME_BASE}</summary>
+    public static readonly AVRational AV_TIME_BASE_Q = new AVRational { num = 0x1, den = AV_TIME_BASE };
     /// <summary>AV_TIMECODE_STR_SIZE = 0x17</summary>
     public const int AV_TIMECODE_STR_SIZE = 0x17;
     // public static AV_TOSTRING = (s) #s;
-    // public static av_uninit = (x) x=x;
+    // public static av_uninit = (x)(x);
     // public static av_unused = __attribute__((unused));
     // public static av_used = __attribute__((used));
     // public static AV_VERSION = a;

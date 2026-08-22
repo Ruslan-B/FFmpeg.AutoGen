@@ -32,33 +32,38 @@ namespace FFmpeg.AutoGen.ClangMacroParser.Expressions
 
         public static int GetPrecedence(this OperationType operationType) => OperationPrecedence[operationType];
 
-        public static OperationType ToOperationType(this string value)
+        public static bool TryToOperationType(this string value, out OperationType result)
         {
             switch (value)
             {
-                case "+": return OperationType.Add;
-                case "/": return OperationType.Divide;
-                case "%": return OperationType.Modulo;
-                case "*": return OperationType.Multiply;
-                case "^": return OperationType.Power;
-                case "-": return OperationType.Subtract;
-                case "&": return OperationType.And;
-                case "|": return OperationType.Or;
-                case "~": return OperationType.ExclusiveOr;
-                case "<<": return OperationType.LeftShift;
-                case ">>": return OperationType.RightShift;
-                case "&&": return OperationType.AndAlso;
-                case "||": return OperationType.OrElse;
-                case "==": return OperationType.Equal;
-                case "!=": return OperationType.NotEqual;
-                case ">=": return OperationType.GreaterThanOrEqual;
-                case ">": return OperationType.GreaterThan;
-                case "<": return OperationType.LessThan;
-                case "<=": return OperationType.LessThanOrEqual;
-                case "##": return OperationType.TokenConcat;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(value));
+                case "+": result = OperationType.Add; return true;
+                case "/": result = OperationType.Divide; return true;
+                case "%": result = OperationType.Modulo; return true;
+                case "*": result = OperationType.Multiply; return true;
+                case "^": result = OperationType.Power; return true;
+                case "-": result = OperationType.Subtract; return true;
+                case "&": result = OperationType.And; return true;
+                case "|": result = OperationType.Or; return true;
+                case "~": result = OperationType.ExclusiveOr; return true;
+                case "<<": result = OperationType.LeftShift; return true;
+                case ">>": result = OperationType.RightShift; return true;
+                case "&&": result = OperationType.AndAlso; return true;
+                case "||": result = OperationType.OrElse; return true;
+                case "==": result = OperationType.Equal; return true;
+                case "!=": result = OperationType.NotEqual; return true;
+                case ">=": result = OperationType.GreaterThanOrEqual; return true;
+                case ">": result = OperationType.GreaterThan; return true;
+                case "<": result = OperationType.LessThan; return true;
+                case "<=": result = OperationType.LessThanOrEqual; return true;
+                case "##": result = OperationType.TokenConcat; return true;
+                default: result = default; return false;
             }
+        }
+
+        public static OperationType ToOperationType(this string value)
+        {
+            if (TryToOperationType(value, out var result)) return result;
+            throw new ArgumentOutOfRangeException(nameof(value));
         }
 
         public static string ToOperationTypeString(this OperationType operationType)
