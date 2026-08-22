@@ -941,6 +941,66 @@ public static unsafe partial class vectors
     public static av_fast_realloc_delegate av_fast_realloc;
     
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate AVFifo* av_fifo_alloc2_delegate(ulong @elems, ulong @elem_size, uint @flags);
+    public static av_fifo_alloc2_delegate av_fifo_alloc2;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_fifo_auto_grow_limit_delegate(AVFifo* @f, ulong @max_elems);
+    public static av_fifo_auto_grow_limit_delegate av_fifo_auto_grow_limit;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate ulong av_fifo_can_read_delegate(AVFifo* @f);
+    public static av_fifo_can_read_delegate av_fifo_can_read;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate ulong av_fifo_can_write_delegate(AVFifo* @f);
+    public static av_fifo_can_write_delegate av_fifo_can_write;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_fifo_drain2_delegate(AVFifo* @f, ulong @size);
+    public static av_fifo_drain2_delegate av_fifo_drain2;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate ulong av_fifo_elem_size_delegate(AVFifo* @f);
+    public static av_fifo_elem_size_delegate av_fifo_elem_size;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_fifo_freep2_delegate(AVFifo** @f);
+    public static av_fifo_freep2_delegate av_fifo_freep2;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_fifo_grow2_delegate(AVFifo* @f, ulong @inc);
+    public static av_fifo_grow2_delegate av_fifo_grow2;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_fifo_peek_delegate(AVFifo* @f, void* @buf, ulong @nb_elems, ulong @offset);
+    public static av_fifo_peek_delegate av_fifo_peek;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_fifo_peek_to_cb_delegate(AVFifo* @f, av_fifo_peek_to_cb_write_cb_func @write_cb, void* @opaque, ulong* @nb_elems, ulong @offset);
+    public static av_fifo_peek_to_cb_delegate av_fifo_peek_to_cb;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_fifo_read_delegate(AVFifo* @f, void* @buf, ulong @nb_elems);
+    public static av_fifo_read_delegate av_fifo_read;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_fifo_read_to_cb_delegate(AVFifo* @f, av_fifo_read_to_cb_write_cb_func @write_cb, void* @opaque, ulong* @nb_elems);
+    public static av_fifo_read_to_cb_delegate av_fifo_read_to_cb;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void av_fifo_reset2_delegate(AVFifo* @f);
+    public static av_fifo_reset2_delegate av_fifo_reset2;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_fifo_write_delegate(AVFifo* @f, void* @buf, ulong @nb_elems);
+    public static av_fifo_write_delegate av_fifo_write;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int av_fifo_write_from_cb_delegate(AVFifo* @f, av_fifo_write_from_cb_read_cb_func @read_cb, void* @opaque, ulong* @nb_elems);
+    public static av_fifo_write_from_cb_delegate av_fifo_write_from_cb;
+    
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate int av_file_map_delegate(    
     #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]

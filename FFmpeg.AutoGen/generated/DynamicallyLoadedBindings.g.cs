@@ -1176,6 +1176,96 @@ public static unsafe partial class DynamicallyLoadedBindings
             return vectors.av_fast_realloc(@ptr, @size, @min_size);
         };
         
+        vectors.av_fifo_alloc2 = (ulong @elems, ulong @elem_size, uint @flags) =>
+        {
+            vectors.av_fifo_alloc2 = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_alloc2_delegate>("avutil", "av_fifo_alloc2", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_fifo_alloc2(@elems, @elem_size, @flags);
+        };
+        
+        vectors.av_fifo_auto_grow_limit = (AVFifo* @f, ulong @max_elems) =>
+        {
+            vectors.av_fifo_auto_grow_limit = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_auto_grow_limit_delegate>("avutil", "av_fifo_auto_grow_limit", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            vectors.av_fifo_auto_grow_limit(@f, @max_elems);
+        };
+        
+        vectors.av_fifo_can_read = (AVFifo* @f) =>
+        {
+            vectors.av_fifo_can_read = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_can_read_delegate>("avutil", "av_fifo_can_read", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_fifo_can_read(@f);
+        };
+        
+        vectors.av_fifo_can_write = (AVFifo* @f) =>
+        {
+            vectors.av_fifo_can_write = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_can_write_delegate>("avutil", "av_fifo_can_write", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_fifo_can_write(@f);
+        };
+        
+        vectors.av_fifo_drain2 = (AVFifo* @f, ulong @size) =>
+        {
+            vectors.av_fifo_drain2 = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_drain2_delegate>("avutil", "av_fifo_drain2", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            vectors.av_fifo_drain2(@f, @size);
+        };
+        
+        vectors.av_fifo_elem_size = (AVFifo* @f) =>
+        {
+            vectors.av_fifo_elem_size = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_elem_size_delegate>("avutil", "av_fifo_elem_size", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_fifo_elem_size(@f);
+        };
+        
+        vectors.av_fifo_freep2 = (AVFifo** @f) =>
+        {
+            vectors.av_fifo_freep2 = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_freep2_delegate>("avutil", "av_fifo_freep2", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            vectors.av_fifo_freep2(@f);
+        };
+        
+        vectors.av_fifo_grow2 = (AVFifo* @f, ulong @inc) =>
+        {
+            vectors.av_fifo_grow2 = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_grow2_delegate>("avutil", "av_fifo_grow2", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_fifo_grow2(@f, @inc);
+        };
+        
+        vectors.av_fifo_peek = (AVFifo* @f, void* @buf, ulong @nb_elems, ulong @offset) =>
+        {
+            vectors.av_fifo_peek = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_peek_delegate>("avutil", "av_fifo_peek", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_fifo_peek(@f, @buf, @nb_elems, @offset);
+        };
+        
+        vectors.av_fifo_peek_to_cb = (AVFifo* @f, av_fifo_peek_to_cb_write_cb_func @write_cb, void* @opaque, ulong* @nb_elems, ulong @offset) =>
+        {
+            vectors.av_fifo_peek_to_cb = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_peek_to_cb_delegate>("avutil", "av_fifo_peek_to_cb", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_fifo_peek_to_cb(@f, @write_cb, @opaque, @nb_elems, @offset);
+        };
+        
+        vectors.av_fifo_read = (AVFifo* @f, void* @buf, ulong @nb_elems) =>
+        {
+            vectors.av_fifo_read = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_read_delegate>("avutil", "av_fifo_read", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_fifo_read(@f, @buf, @nb_elems);
+        };
+        
+        vectors.av_fifo_read_to_cb = (AVFifo* @f, av_fifo_read_to_cb_write_cb_func @write_cb, void* @opaque, ulong* @nb_elems) =>
+        {
+            vectors.av_fifo_read_to_cb = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_read_to_cb_delegate>("avutil", "av_fifo_read_to_cb", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_fifo_read_to_cb(@f, @write_cb, @opaque, @nb_elems);
+        };
+        
+        vectors.av_fifo_reset2 = (AVFifo* @f) =>
+        {
+            vectors.av_fifo_reset2 = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_reset2_delegate>("avutil", "av_fifo_reset2", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            vectors.av_fifo_reset2(@f);
+        };
+        
+        vectors.av_fifo_write = (AVFifo* @f, void* @buf, ulong @nb_elems) =>
+        {
+            vectors.av_fifo_write = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_write_delegate>("avutil", "av_fifo_write", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_fifo_write(@f, @buf, @nb_elems);
+        };
+        
+        vectors.av_fifo_write_from_cb = (AVFifo* @f, av_fifo_write_from_cb_read_cb_func @read_cb, void* @opaque, ulong* @nb_elems) =>
+        {
+            vectors.av_fifo_write_from_cb = FunctionResolver.GetFunctionDelegate<vectors.av_fifo_write_from_cb_delegate>("avutil", "av_fifo_write_from_cb", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };
+            return vectors.av_fifo_write_from_cb(@f, @read_cb, @opaque, @nb_elems);
+        };
+        
         vectors.av_file_map = (string @filename, byte** @bufptr, ulong* @size, int @log_offset, void* @log_ctx) =>
         {
             vectors.av_file_map = FunctionResolver.GetFunctionDelegate<vectors.av_file_map_delegate>("avutil", "av_file_map", ThrowErrorIfFunctionNotFound) ?? delegate { throw new NotSupportedException(); };

@@ -111,6 +111,9 @@ internal class StructureProcessor
             ArrayType { SizeType: ArrayType.ArraySize.Constant } arrayType => GetFieldTypeForFixedArray(arrayType),
             TagType tagType => GetFieldTypeForNestedDeclaration(tagType.Declaration, name),
             PointerType pointerType => GetTypeDefinition(pointerType, name),
+            // A function type in parameter position decays to a pointer to function in C, so it
+            // binds the same way one written as a pointer does. AVFifoCB is declared like this.
+            FunctionType functionType => FunctionProcessor.GetDelegateType(functionType, name),
             _ => new TypeDefinition
             {
                 Name = TypeHelper.GetTypeName(type)

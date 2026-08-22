@@ -109,6 +109,7 @@ internal class Program
         yield return p.Parse("libavutil/mastering_display_metadata.h");
         yield return p.Parse("libavutil/encryption_info.h");
         yield return p.Parse("libavutil/eval.h");
+        yield return p.Parse("libavutil/fifo.h");
         yield return p.Parse("libavutil/hwcontext_drm.h");
         yield return p.Parse("libavutil/iamf.h");
         yield return p.Parse("libavutil/parseutils.h");

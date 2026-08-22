@@ -936,6 +936,91 @@ public static unsafe partial class ffmpeg
     /// <returns>`ptr` if the buffer is large enough, a pointer to newly reallocated buffer if the buffer was not large enough, or `NULL` in case of error</returns>
     public static void* av_fast_realloc(void* @ptr, uint* @size, ulong @min_size) => vectors.av_fast_realloc(@ptr, @size, @min_size);
     
+    /// <summary>Allocate and initialize an AVFifo with a given element size.</summary>
+    /// <param name="elems">initial number of elements that can be stored in the FIFO</param>
+    /// <param name="elem_size">Size in bytes of a single element. Further operations on the returned FIFO will implicitly use this element size.</param>
+    /// <param name="flags">a combination of AV_FIFO_FLAG_*</param>
+    /// <returns>newly-allocated AVFifo on success, a negative error code on failure</returns>
+    public static AVFifo* av_fifo_alloc2(ulong @elems, ulong @elem_size, uint @flags) => vectors.av_fifo_alloc2(@elems, @elem_size, @flags);
+    
+    /// <summary>Set the maximum size (in elements) to which the FIFO can be resized automatically. Has no effect unless AV_FIFO_FLAG_AUTO_GROW is used.</summary>
+    public static void av_fifo_auto_grow_limit(AVFifo* @f, ulong @max_elems) => vectors.av_fifo_auto_grow_limit(@f, @max_elems);
+    
+    /// <summary>Returns number of elements available for reading from the given FIFO.</summary>
+    /// <returns>number of elements available for reading from the given FIFO.</returns>
+    public static ulong av_fifo_can_read(AVFifo* @f) => vectors.av_fifo_can_read(@f);
+    
+    /// <summary>Returns Number of elements that can be written into the given FIFO without growing it.</summary>
+    /// <returns>Number of elements that can be written into the given FIFO without growing it.</returns>
+    public static ulong av_fifo_can_write(AVFifo* @f) => vectors.av_fifo_can_write(@f);
+    
+    /// <summary>Discard the specified amount of data from an AVFifo.</summary>
+    /// <param name="size">number of elements to discard, MUST NOT be larger than av_fifo_can_read(f)</param>
+    public static void av_fifo_drain2(AVFifo* @f, ulong @size) => vectors.av_fifo_drain2(@f, @size);
+    
+    /// <summary>Returns Element size for FIFO operations. This element size is set at FIFO allocation and remains constant during its lifetime</summary>
+    /// <returns>Element size for FIFO operations. This element size is set at FIFO allocation and remains constant during its lifetime</returns>
+    public static ulong av_fifo_elem_size(AVFifo* @f) => vectors.av_fifo_elem_size(@f);
+    
+    /// <summary>Free an AVFifo and reset pointer to NULL.</summary>
+    /// <param name="f">Pointer to an AVFifo to free. *f == NULL is allowed.</param>
+    public static void av_fifo_freep2(AVFifo** @f) => vectors.av_fifo_freep2(@f);
+    
+    /// <summary>Enlarge an AVFifo.</summary>
+    /// <param name="f">AVFifo to resize</param>
+    /// <param name="inc">number of elements to allocate for, in addition to the current allocated size</param>
+    /// <returns>a non-negative number on success, a negative error code on failure</returns>
+    public static int av_fifo_grow2(AVFifo* @f, ulong @inc) => vectors.av_fifo_grow2(@f, @inc);
+    
+    /// <summary>Read data from a FIFO without modifying FIFO state.</summary>
+    /// <param name="f">the FIFO buffer</param>
+    /// <param name="buf">Buffer to store the data. nb_elems * av_fifo_elem_size(f) bytes will be written into buf.</param>
+    /// <param name="nb_elems">number of elements to read from FIFO</param>
+    /// <param name="offset">number of initial elements to skip.</param>
+    /// <returns>a non-negative number on success, a negative error code on failure</returns>
+    public static int av_fifo_peek(AVFifo* @f, void* @buf, ulong @nb_elems, ulong @offset) => vectors.av_fifo_peek(@f, @buf, @nb_elems, @offset);
+    
+    /// <summary>Feed data from a FIFO into a user-provided callback.</summary>
+    /// <param name="f">the FIFO buffer</param>
+    /// <param name="write_cb">Callback the data will be supplied to. May be called multiple times.</param>
+    /// <param name="opaque">opaque user data to be provided to write_cb</param>
+    /// <param name="nb_elems">Should point to the maximum number of elements that can be read. Will be updated to contain the total number of elements actually sent to the callback.</param>
+    /// <param name="offset">number of initial elements to skip; offset + *nb_elems must not be larger than av_fifo_can_read(f).</param>
+    /// <returns>a non-negative number on success, a negative error code on failure</returns>
+    public static int av_fifo_peek_to_cb(AVFifo* @f, av_fifo_peek_to_cb_write_cb_func @write_cb, void* @opaque, ulong* @nb_elems, ulong @offset) => vectors.av_fifo_peek_to_cb(@f, @write_cb, @opaque, @nb_elems, @offset);
+    
+    /// <summary>Read data from a FIFO.</summary>
+    /// <param name="f">the FIFO buffer</param>
+    /// <param name="buf">Buffer to store the data. nb_elems * av_fifo_elem_size(f) bytes will be written into buf on success.</param>
+    /// <param name="nb_elems">number of elements to read from FIFO</param>
+    /// <returns>a non-negative number on success, a negative error code on failure</returns>
+    public static int av_fifo_read(AVFifo* @f, void* @buf, ulong @nb_elems) => vectors.av_fifo_read(@f, @buf, @nb_elems);
+    
+    /// <summary>Feed data from a FIFO into a user-provided callback.</summary>
+    /// <param name="f">the FIFO buffer</param>
+    /// <param name="write_cb">Callback the data will be supplied to. May be called multiple times.</param>
+    /// <param name="opaque">opaque user data to be provided to write_cb</param>
+    /// <param name="nb_elems">Should point to the maximum number of elements that can be read. Will be updated to contain the total number of elements actually sent to the callback.</param>
+    /// <returns>non-negative number on success, a negative error code on failure</returns>
+    public static int av_fifo_read_to_cb(AVFifo* @f, av_fifo_read_to_cb_write_cb_func @write_cb, void* @opaque, ulong* @nb_elems) => vectors.av_fifo_read_to_cb(@f, @write_cb, @opaque, @nb_elems);
+    
+    public static void av_fifo_reset2(AVFifo* @f) => vectors.av_fifo_reset2(@f);
+    
+    /// <summary>Write data into a FIFO.</summary>
+    /// <param name="f">the FIFO buffer</param>
+    /// <param name="buf">Data to be written. nb_elems * av_fifo_elem_size(f) bytes will be read from buf on success.</param>
+    /// <param name="nb_elems">number of elements to write into FIFO</param>
+    /// <returns>a non-negative number on success, a negative error code on failure</returns>
+    public static int av_fifo_write(AVFifo* @f, void* @buf, ulong @nb_elems) => vectors.av_fifo_write(@f, @buf, @nb_elems);
+    
+    /// <summary>Write data from a user-provided callback into a FIFO.</summary>
+    /// <param name="f">the FIFO buffer</param>
+    /// <param name="read_cb">Callback supplying the data to the FIFO. May be called multiple times.</param>
+    /// <param name="opaque">opaque user data to be provided to read_cb</param>
+    /// <param name="nb_elems">Should point to the maximum number of elements that can be written. Will be updated to contain the number of elements actually written.</param>
+    /// <returns>non-negative number on success, a negative error code on failure</returns>
+    public static int av_fifo_write_from_cb(AVFifo* @f, av_fifo_write_from_cb_read_cb_func @read_cb, void* @opaque, ulong* @nb_elems) => vectors.av_fifo_write_from_cb(@f, @read_cb, @opaque, @nb_elems);
+    
     /// <summary>Read the file with name filename, and put its content in a newly allocated buffer or map it with mmap() when available. In case of success set *bufptr to the read or mmapped buffer, and *size to the size in bytes of the buffer in *bufptr. Unlike mmap this function succeeds with zero sized files, in this case *bufptr will be set to NULL and *size will be set to 0. The returned buffer must be released with av_file_unmap().</summary>
     /// <param name="filename">path to the file</param>
     /// <param name="bufptr">pointee is set to the mapped or allocated buffer</param>

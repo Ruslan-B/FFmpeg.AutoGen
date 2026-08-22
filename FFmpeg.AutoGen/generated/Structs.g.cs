@@ -2913,6 +2913,12 @@ public unsafe partial struct AVExpr
 {
 }
 
+/// <summary>@{ A generic FIFO API</summary>
+/// <remarks>This struct is incomplete.</remarks>
+public unsafe partial struct AVFifo
+{
+}
+
 /// <remarks>This struct is incomplete.</remarks>
 public unsafe partial struct AVFilterChannelLayouts
 {

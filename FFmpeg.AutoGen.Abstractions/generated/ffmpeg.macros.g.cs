@@ -579,6 +579,8 @@ public static unsafe partial class ffmpeg
     public const int AV_FDEBUG_ID3V2 = 0x2;
     /// <summary>AV_FDEBUG_TS = 0x0001</summary>
     public const int AV_FDEBUG_TS = 0x1;
+    /// <summary>AV_FIFO_FLAG_AUTO_GROW = 0x1 &lt;&lt; 0x0</summary>
+    public const int AV_FIFO_FLAG_AUTO_GROW = 0x1 << 0x0;
     // public static av_flatten = __attribute__((flatten));
     /// <summary>AV_FOURCC_MAX_STRING_SIZE = 32</summary>
     public const int AV_FOURCC_MAX_STRING_SIZE = 0x20;

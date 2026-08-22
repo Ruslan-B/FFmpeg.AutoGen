@@ -1290,6 +1290,106 @@ public static unsafe partial class DynamicallyLinkedBindings
     [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
     public static extern void* av_fast_realloc(void* @ptr, uint* @size, ulong @min_size);
     
+    /// <summary>Allocate and initialize an AVFifo with a given element size.</summary>
+    /// <param name="elems">initial number of elements that can be stored in the FIFO</param>
+    /// <param name="elem_size">Size in bytes of a single element. Further operations on the returned FIFO will implicitly use this element size.</param>
+    /// <param name="flags">a combination of AV_FIFO_FLAG_*</param>
+    /// <returns>newly-allocated AVFifo on success, a negative error code on failure</returns>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern AVFifo* av_fifo_alloc2(ulong @elems, ulong @elem_size, uint @flags);
+    
+    /// <summary>Set the maximum size (in elements) to which the FIFO can be resized automatically. Has no effect unless AV_FIFO_FLAG_AUTO_GROW is used.</summary>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void av_fifo_auto_grow_limit(AVFifo* @f, ulong @max_elems);
+    
+    /// <summary>Returns number of elements available for reading from the given FIFO.</summary>
+    /// <returns>number of elements available for reading from the given FIFO.</returns>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern ulong av_fifo_can_read(AVFifo* @f);
+    
+    /// <summary>Returns Number of elements that can be written into the given FIFO without growing it.</summary>
+    /// <returns>Number of elements that can be written into the given FIFO without growing it.</returns>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern ulong av_fifo_can_write(AVFifo* @f);
+    
+    /// <summary>Discard the specified amount of data from an AVFifo.</summary>
+    /// <param name="size">number of elements to discard, MUST NOT be larger than av_fifo_can_read(f)</param>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void av_fifo_drain2(AVFifo* @f, ulong @size);
+    
+    /// <summary>Returns Element size for FIFO operations. This element size is set at FIFO allocation and remains constant during its lifetime</summary>
+    /// <returns>Element size for FIFO operations. This element size is set at FIFO allocation and remains constant during its lifetime</returns>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern ulong av_fifo_elem_size(AVFifo* @f);
+    
+    /// <summary>Free an AVFifo and reset pointer to NULL.</summary>
+    /// <param name="f">Pointer to an AVFifo to free. *f == NULL is allowed.</param>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void av_fifo_freep2(AVFifo** @f);
+    
+    /// <summary>Enlarge an AVFifo.</summary>
+    /// <param name="f">AVFifo to resize</param>
+    /// <param name="inc">number of elements to allocate for, in addition to the current allocated size</param>
+    /// <returns>a non-negative number on success, a negative error code on failure</returns>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_fifo_grow2(AVFifo* @f, ulong @inc);
+    
+    /// <summary>Read data from a FIFO without modifying FIFO state.</summary>
+    /// <param name="f">the FIFO buffer</param>
+    /// <param name="buf">Buffer to store the data. nb_elems * av_fifo_elem_size(f) bytes will be written into buf.</param>
+    /// <param name="nb_elems">number of elements to read from FIFO</param>
+    /// <param name="offset">number of initial elements to skip.</param>
+    /// <returns>a non-negative number on success, a negative error code on failure</returns>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_fifo_peek(AVFifo* @f, void* @buf, ulong @nb_elems, ulong @offset);
+    
+    /// <summary>Feed data from a FIFO into a user-provided callback.</summary>
+    /// <param name="f">the FIFO buffer</param>
+    /// <param name="write_cb">Callback the data will be supplied to. May be called multiple times.</param>
+    /// <param name="opaque">opaque user data to be provided to write_cb</param>
+    /// <param name="nb_elems">Should point to the maximum number of elements that can be read. Will be updated to contain the total number of elements actually sent to the callback.</param>
+    /// <param name="offset">number of initial elements to skip; offset + *nb_elems must not be larger than av_fifo_can_read(f).</param>
+    /// <returns>a non-negative number on success, a negative error code on failure</returns>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_fifo_peek_to_cb(AVFifo* @f, av_fifo_peek_to_cb_write_cb_func @write_cb, void* @opaque, ulong* @nb_elems, ulong @offset);
+    
+    /// <summary>Read data from a FIFO.</summary>
+    /// <param name="f">the FIFO buffer</param>
+    /// <param name="buf">Buffer to store the data. nb_elems * av_fifo_elem_size(f) bytes will be written into buf on success.</param>
+    /// <param name="nb_elems">number of elements to read from FIFO</param>
+    /// <returns>a non-negative number on success, a negative error code on failure</returns>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_fifo_read(AVFifo* @f, void* @buf, ulong @nb_elems);
+    
+    /// <summary>Feed data from a FIFO into a user-provided callback.</summary>
+    /// <param name="f">the FIFO buffer</param>
+    /// <param name="write_cb">Callback the data will be supplied to. May be called multiple times.</param>
+    /// <param name="opaque">opaque user data to be provided to write_cb</param>
+    /// <param name="nb_elems">Should point to the maximum number of elements that can be read. Will be updated to contain the total number of elements actually sent to the callback.</param>
+    /// <returns>non-negative number on success, a negative error code on failure</returns>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_fifo_read_to_cb(AVFifo* @f, av_fifo_read_to_cb_write_cb_func @write_cb, void* @opaque, ulong* @nb_elems);
+    
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void av_fifo_reset2(AVFifo* @f);
+    
+    /// <summary>Write data into a FIFO.</summary>
+    /// <param name="f">the FIFO buffer</param>
+    /// <param name="buf">Data to be written. nb_elems * av_fifo_elem_size(f) bytes will be read from buf on success.</param>
+    /// <param name="nb_elems">number of elements to write into FIFO</param>
+    /// <returns>a non-negative number on success, a negative error code on failure</returns>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_fifo_write(AVFifo* @f, void* @buf, ulong @nb_elems);
+    
+    /// <summary>Write data from a user-provided callback into a FIFO.</summary>
+    /// <param name="f">the FIFO buffer</param>
+    /// <param name="read_cb">Callback supplying the data to the FIFO. May be called multiple times.</param>
+    /// <param name="opaque">opaque user data to be provided to read_cb</param>
+    /// <param name="nb_elems">Should point to the maximum number of elements that can be written. Will be updated to contain the number of elements actually written.</param>
+    /// <returns>non-negative number on success, a negative error code on failure</returns>
+    [DllImport("avutil-61", CallingConvention = CallingConvention.Cdecl)]
+    public static extern int av_fifo_write_from_cb(AVFifo* @f, av_fifo_write_from_cb_read_cb_func @read_cb, void* @opaque, ulong* @nb_elems);
+    
     /// <summary>Read the file with name filename, and put its content in a newly allocated buffer or map it with mmap() when available. In case of success set *bufptr to the read or mmapped buffer, and *size to the size in bytes of the buffer in *bufptr. Unlike mmap this function succeeds with zero sized files, in this case *bufptr will be set to NULL and *size will be set to 0. The returned buffer must be released with av_file_unmap().</summary>
     /// <param name="filename">path to the file</param>
     /// <param name="bufptr">pointee is set to the mapped or allocated buffer</param>
@@ -5846,6 +5946,21 @@ public static unsafe partial class DynamicallyLinkedBindings
         vectors.av_fast_padded_malloc = av_fast_padded_malloc;
         vectors.av_fast_padded_mallocz = av_fast_padded_mallocz;
         vectors.av_fast_realloc = av_fast_realloc;
+        vectors.av_fifo_alloc2 = av_fifo_alloc2;
+        vectors.av_fifo_auto_grow_limit = av_fifo_auto_grow_limit;
+        vectors.av_fifo_can_read = av_fifo_can_read;
+        vectors.av_fifo_can_write = av_fifo_can_write;
+        vectors.av_fifo_drain2 = av_fifo_drain2;
+        vectors.av_fifo_elem_size = av_fifo_elem_size;
+        vectors.av_fifo_freep2 = av_fifo_freep2;
+        vectors.av_fifo_grow2 = av_fifo_grow2;
+        vectors.av_fifo_peek = av_fifo_peek;
+        vectors.av_fifo_peek_to_cb = av_fifo_peek_to_cb;
+        vectors.av_fifo_read = av_fifo_read;
+        vectors.av_fifo_read_to_cb = av_fifo_read_to_cb;
+        vectors.av_fifo_reset2 = av_fifo_reset2;
+        vectors.av_fifo_write = av_fifo_write;
+        vectors.av_fifo_write_from_cb = av_fifo_write_from_cb;
         vectors.av_file_map = av_file_map;
         vectors.av_file_unmap = av_file_unmap;
         vectors.av_filename_number_test = av_filename_number_test;

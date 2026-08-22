@@ -73,6 +73,30 @@ public unsafe struct av_expr_parse_funcs2_func
 }
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+public unsafe delegate int av_fifo_peek_to_cb_write_cb (void* @opaque, void* @buf, ulong* @nb_elems);
+public unsafe struct av_fifo_peek_to_cb_write_cb_func
+{
+    public IntPtr Pointer;
+    public static implicit operator av_fifo_peek_to_cb_write_cb_func(av_fifo_peek_to_cb_write_cb func) => new av_fifo_peek_to_cb_write_cb_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+}
+
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+public unsafe delegate int av_fifo_read_to_cb_write_cb (void* @opaque, void* @buf, ulong* @nb_elems);
+public unsafe struct av_fifo_read_to_cb_write_cb_func
+{
+    public IntPtr Pointer;
+    public static implicit operator av_fifo_read_to_cb_write_cb_func(av_fifo_read_to_cb_write_cb func) => new av_fifo_read_to_cb_write_cb_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+}
+
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+public unsafe delegate int av_fifo_write_from_cb_read_cb (void* @opaque, void* @buf, ulong* @nb_elems);
+public unsafe struct av_fifo_write_from_cb_read_cb_func
+{
+    public IntPtr Pointer;
+    public static implicit operator av_fifo_write_from_cb_read_cb_func(av_fifo_write_from_cb_read_cb func) => new av_fifo_write_from_cb_read_cb_func { Pointer = func == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(func) };
+}
+
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate void av_log_set_callback_callback (void* @p0, int @p1,     
     #if NETSTANDARD2_1_OR_GREATER || NET
     [MarshalAs(UnmanagedType.LPUTF8Str)]
