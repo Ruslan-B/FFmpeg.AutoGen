@@ -12,8 +12,6 @@ internal class FunctionProcessor
 {
     private const string ReturnMarshalAsConstCharPtr = "[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ConstCharPtrMarshaler))]";
 
-    private const string ReturnMarshalAsLPUTF8Str = "[return: MarshalAs(UnmanagedType.LPUTF8Str)]";
-
     private const string MarshalAsUTF8Macros =
         "    \r\n" +
         "    #if NETSTANDARD2_1_OR_GREATER || NET\r\n" +
@@ -169,10 +167,17 @@ internal class FunctionProcessor
         {
             return builtinType.Type switch
             {
+                // For const char* return values we must always use ConstCharPtrMarshaler and never
+                // [return: MarshalAs(UnmanagedType.LPUTF8Str)]. LPUTF8Str on a return value makes the
+                // CLR call CoTaskMemFree on the pointer after copying the string, but FFmpeg returns
+                // pointers to static/borrowed memory (e.g. av_version_info, avcodec_get_name,
+                // av_get_pix_fmt_name, AVClass names). Freeing that memory corrupts the native heap
+                // and leads to AccessViolationException. The NoCustomStringMarshal option only makes
+                // sense for parameters, where the CLR owns the marshalled buffer.
                 PrimitiveType.Char => new TypeDefinition
                 {
                     Name = "string",
-                    Attributes = new[] { _context.NoCustomStringMarshal ? ReturnMarshalAsLPUTF8Str : ReturnMarshalAsConstCharPtr }
+                    Attributes = new[] { ReturnMarshalAsConstCharPtr }
                 },
                 PrimitiveType.Void => new TypeDefinition
                 {
