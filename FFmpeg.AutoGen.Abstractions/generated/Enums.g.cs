@@ -1009,6 +1009,13 @@ public enum AVDiscard : int
     @AVDISCARD_ALL = 48,
 }
 
+/// <summary>API-specific header for AV_HWDEVICE_TYPE_DRM.</summary>
+public enum AvDrmMax : int
+{
+    /// <summary>The maximum number of layers/planes in a DRM frame.</summary>
+    @AV_DRM_MAX_PLANES = 4,
+}
+
 /// <summary>The duration of a video can be estimated through various ways, and this enum can be used to know how the duration was estimated.</summary>
 public enum AVDurationEstimationMethod : int
 {
@@ -1018,6 +1025,20 @@ public enum AVDurationEstimationMethod : int
     @AVFMT_DURATION_FROM_STREAM = 1,
     /// <summary>Duration estimated from bitrate (less accurate)</summary>
     @AVFMT_DURATION_FROM_BITRATE = 2,
+}
+
+public enum AVExifHeaderMode : int
+{
+    /// <summary>The TIFF header starts with 0x49492a00, or 0x4d4d002a. This one is used internally by FFmpeg.</summary>
+    @AV_EXIF_TIFF_HEADER = 0,
+    /// <summary>skip the TIFF header, assume little endian</summary>
+    @AV_EXIF_ASSUME_LE = 1,
+    /// <summary>skip the TIFF header, assume big endian</summary>
+    @AV_EXIF_ASSUME_BE = 2,
+    /// <summary>The first four bytes point to the actual start, then it&apos;s AV_EXIF_TIFF_HEADER</summary>
+    @AV_EXIF_T_OFF = 3,
+    /// <summary>The first six bytes contain &quot;Exif\0\0&quot;, then it&apos;s AV_EXIF_TIFF_HEADER</summary>
+    @AV_EXIF_EXIF00 = 4,
 }
 
 public enum AVFieldOrder : int
@@ -1180,6 +1201,54 @@ public enum AVHWFrameTransferDirection : int
     @AV_HWFRAME_TRANSFER_DIRECTION_FROM = 0,
     /// <summary>Transfer the data to the queried hw frame.</summary>
     @AV_HWFRAME_TRANSFER_DIRECTION_TO = 1,
+}
+
+/// <summary>@} @{</summary>
+public enum AVIAMFAmbisonicsMode : int
+{
+    @AV_IAMF_AMBISONICS_MODE_MONO = 0,
+    @AV_IAMF_AMBISONICS_MODE_PROJECTION = 1,
+}
+
+/// <summary>Immersive Audio Model and Formats related functions and defines</summary>
+public enum AVIAMFAnimationType : int
+{
+    @AV_IAMF_ANIMATION_TYPE_STEP = 0,
+    @AV_IAMF_ANIMATION_TYPE_LINEAR = 1,
+    @AV_IAMF_ANIMATION_TYPE_BEZIER = 2,
+}
+
+public enum AVIAMFAudioElementType : int
+{
+    @AV_IAMF_AUDIO_ELEMENT_TYPE_CHANNEL = 0,
+    @AV_IAMF_AUDIO_ELEMENT_TYPE_SCENE = 1,
+}
+
+/// <summary>@} @{</summary>
+public enum AVIAMFHeadphonesMode : int
+{
+    /// <summary>The referenced Audio Element shall be rendered to stereo loudspeakers.</summary>
+    @AV_IAMF_HEADPHONES_MODE_STEREO = 0,
+    /// <summary>The referenced Audio Element shall be rendered with a binaural renderer.</summary>
+    @AV_IAMF_HEADPHONES_MODE_BINAURAL = 1,
+}
+
+public enum AVIAMFParamDefinitionType : int
+{
+    /// <summary>Subblocks are of struct type AVIAMFMixGain</summary>
+    @AV_IAMF_PARAMETER_DEFINITION_MIX_GAIN = 0,
+    /// <summary>Subblocks are of struct type AVIAMFDemixingInfo</summary>
+    @AV_IAMF_PARAMETER_DEFINITION_DEMIXING = 1,
+    /// <summary>Subblocks are of struct type AVIAMFReconGain</summary>
+    @AV_IAMF_PARAMETER_DEFINITION_RECON_GAIN = 2,
+}
+
+public enum AVIAMFSubmixLayoutType : int
+{
+    /// <summary>The layout follows the loudspeaker sound system convention of ITU-2051-3. AVIAMFSubmixLayout.sound_system must be set.</summary>
+    @AV_IAMF_SUBMIX_LAYOUT_TYPE_LOUDSPEAKERS = 2,
+    /// <summary>The layout is binaural.</summary>
+    @AV_IAMF_SUBMIX_LAYOUT_TYPE_BINAURAL = 3,
 }
 
 /// <summary>Different data types that can be returned via the AVIO write_data_type callback.</summary>
@@ -2076,6 +2145,24 @@ public enum AVSubtitleType : int
     @SUBTITLE_ASS = 3,
 }
 
+/// <summary>Data type identifiers for TIFF tags</summary>
+public enum AVTiffDataType : int
+{
+    @AV_TIFF_BYTE = 1,
+    @AV_TIFF_STRING = 2,
+    @AV_TIFF_SHORT = 3,
+    @AV_TIFF_LONG = 4,
+    @AV_TIFF_RATIONAL = 5,
+    @AV_TIFF_SBYTE = 6,
+    @AV_TIFF_UNDEFINED = 7,
+    @AV_TIFF_SSHORT = 8,
+    @AV_TIFF_SLONG = 9,
+    @AV_TIFF_SRATIONAL = 10,
+    @AV_TIFF_FLOAT = 11,
+    @AV_TIFF_DOUBLE = 12,
+    @AV_TIFF_IFD = 13,
+}
+
 public enum AVTimecodeFlag : int
 {
     /// <summary>timecode is drop frame</summary>
@@ -2084,6 +2171,63 @@ public enum AVTimecodeFlag : int
     @AV_TIMECODE_FLAG_24HOURSMAX = 2,
     /// <summary>negative time values are allowed</summary>
     @AV_TIMECODE_FLAG_ALLOWNEGATIVE = 4,
+}
+
+/// <summary>Flags for av_tx_init()</summary>
+public enum AVTXFlags : int
+{
+    /// <summary>Allows for in-place transformations, where input == output. May be unsupported or slower for some transform types.</summary>
+    @AV_TX_INPLACE = 1,
+    /// <summary>Relaxes alignment requirement for the in and out arrays of av_tx_fn(). May be slower with certain transform types.</summary>
+    @AV_TX_UNALIGNED = 2,
+    /// <summary>Performs a full inverse MDCT rather than leaving out samples that can be derived through symmetry. Requires an output array of &apos;len&apos; floats, rather than the usual &apos;len/2&apos; floats. Ignored for all transforms but inverse MDCTs.</summary>
+    @AV_TX_FULL_IMDCT = 4,
+    /// <summary>Perform a real to half-complex RDFT. Only the real, or imaginary coefficients will be output, depending on the flag used. Only available for forward RDFTs. Output array must have enough space to hold N complex values (regular size for a real to complex transform).</summary>
+    @AV_TX_REAL_TO_REAL = 8,
+    /// <summary>Perform a real to half-complex RDFT. Only the real, or imaginary coefficients will be output, depending on the flag used. Only available for forward RDFTs. Output array must have enough space to hold N complex values (regular size for a real to complex transform).</summary>
+    @AV_TX_REAL_TO_IMAGINARY = 16,
+}
+
+public enum AVTXType : int
+{
+    /// <summary>Standard complex to complex FFT with sample data type of AVComplexFloat, AVComplexDouble or AVComplexInt32, for each respective variant.</summary>
+    @AV_TX_FLOAT_FFT = 0,
+    /// <summary>Standard complex to complex FFT with sample data type of AVComplexFloat, AVComplexDouble or AVComplexInt32, for each respective variant.</summary>
+    @AV_TX_DOUBLE_FFT = 2,
+    /// <summary>Standard complex to complex FFT with sample data type of AVComplexFloat, AVComplexDouble or AVComplexInt32, for each respective variant.</summary>
+    @AV_TX_INT32_FFT = 4,
+    /// <summary>Standard MDCT with a sample data type of float, double or int32_t, respectively. For the float and int32 variants, the scale type is &apos;float&apos;, while for the double variant, it&apos;s &apos;double&apos;. If scale is NULL, 1.0 will be used as a default.</summary>
+    @AV_TX_FLOAT_MDCT = 1,
+    /// <summary>Standard MDCT with a sample data type of float, double or int32_t, respectively. For the float and int32 variants, the scale type is &apos;float&apos;, while for the double variant, it&apos;s &apos;double&apos;. If scale is NULL, 1.0 will be used as a default.</summary>
+    @AV_TX_DOUBLE_MDCT = 3,
+    /// <summary>Standard MDCT with a sample data type of float, double or int32_t, respectively. For the float and int32 variants, the scale type is &apos;float&apos;, while for the double variant, it&apos;s &apos;double&apos;. If scale is NULL, 1.0 will be used as a default.</summary>
+    @AV_TX_INT32_MDCT = 5,
+    /// <summary>Real to complex and complex to real DFTs. For the float and int32 variants, the scale type is &apos;float&apos;, while for the double variant, it&apos;s a &apos;double&apos;. If scale is NULL, 1.0 will be used as a default.</summary>
+    @AV_TX_FLOAT_RDFT = 6,
+    /// <summary>Real to complex and complex to real DFTs. For the float and int32 variants, the scale type is &apos;float&apos;, while for the double variant, it&apos;s a &apos;double&apos;. If scale is NULL, 1.0 will be used as a default.</summary>
+    @AV_TX_DOUBLE_RDFT = 7,
+    /// <summary>Real to complex and complex to real DFTs. For the float and int32 variants, the scale type is &apos;float&apos;, while for the double variant, it&apos;s a &apos;double&apos;. If scale is NULL, 1.0 will be used as a default.</summary>
+    @AV_TX_INT32_RDFT = 8,
+    /// <summary>Real to real (DCT) transforms.</summary>
+    @AV_TX_FLOAT_DCT = 9,
+    /// <summary>Real to real (DCT) transforms.</summary>
+    @AV_TX_DOUBLE_DCT = 10,
+    /// <summary>Real to real (DCT) transforms.</summary>
+    @AV_TX_INT32_DCT = 11,
+    /// <summary>Discrete Cosine Transform I</summary>
+    @AV_TX_FLOAT_DCT_I = 12,
+    /// <summary>Discrete Cosine Transform I</summary>
+    @AV_TX_DOUBLE_DCT_I = 13,
+    /// <summary>Discrete Cosine Transform I</summary>
+    @AV_TX_INT32_DCT_I = 14,
+    /// <summary>Discrete Sine Transform I</summary>
+    @AV_TX_FLOAT_DST_I = 15,
+    /// <summary>Discrete Sine Transform I</summary>
+    @AV_TX_DOUBLE_DST_I = 16,
+    /// <summary>Discrete Sine Transform I</summary>
+    @AV_TX_INT32_DST_I = 17,
+    /// <summary>Discrete Sine Transform I</summary>
+    @AV_TX_NB = 18,
 }
 
 /// <summary>Dithering algorithms</summary>

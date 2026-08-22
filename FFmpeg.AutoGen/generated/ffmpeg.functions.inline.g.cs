@@ -192,6 +192,16 @@ public static unsafe partial class ffmpeg
     }
     // original body hash: nxiyu/BnkvF9Z/fWwpii6qfquOeLA/wdeiuxyQQxS4E=
     
+    /// <summary>Get the subblock at the specified {</summary>
+    public static void* av_iamf_param_definition_get_subblock(AVIAMFParamDefinition* @par, uint @idx)
+    {
+        // The C body asserts with av_assert0 and calls abort(); throwing carries the same
+        // meaning to a managed caller.
+        if (idx >= par->nb_subblocks) throw new IndexOutOfRangeException(nameof(idx));
+        return (byte*)par + par->subblocks_offset + idx * par->subblock_size;
+    }
+    // original body hash: px1Hq8gB6XEAsEXGs8XH6gMabrGX4d2QIZ9NUwafgjk=
+    
     /// <summary>Wrapper around av_image_copy() to workaround the limitation that the conversion from uint8_t * const * to const uint8_t * const * is not performed automatically in C.</summary>
     public static void av_image_copy2(ref byte_ptrArray4 @dst_data, in int_array4 @dst_linesizes, ref byte_ptrArray4 @src_data, in int_array4 @src_linesizes, AVPixelFormat @pix_fmt, int @width, int @height)
     {

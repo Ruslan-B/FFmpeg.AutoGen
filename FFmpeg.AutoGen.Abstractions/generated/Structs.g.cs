@@ -632,6 +632,24 @@ public unsafe partial struct AVCodecParserContext
     public int @format;
 }
 
+public unsafe partial struct AVComplexDouble
+{
+    public double @re;
+    public double @im;
+}
+
+public unsafe partial struct AVComplexFloat
+{
+    public float @re;
+    public float @im;
+}
+
+public unsafe partial struct AVComplexInt32
+{
+    public int @re;
+    public int @im;
+}
+
 public unsafe partial struct AVComponentDescriptor
 {
     /// <summary>Which of the 4 planes contains the component.</summary>
@@ -777,6 +795,59 @@ public unsafe partial struct AVDictionaryEntry
     public byte* @value;
 }
 
+/// <summary>DRM device.</summary>
+public unsafe partial struct AVDRMDeviceContext
+{
+    /// <summary>File descriptor of DRM device.</summary>
+    public int @fd;
+}
+
+/// <summary>DRM frame descriptor.</summary>
+public unsafe partial struct AVDRMFrameDescriptor
+{
+    /// <summary>Number of DRM objects making up this frame.</summary>
+    public int @nb_objects;
+    /// <summary>Array of objects making up the frame.</summary>
+    public AVDRMObjectDescriptor4 @objects;
+    /// <summary>Number of layers in the frame.</summary>
+    public int @nb_layers;
+    /// <summary>Array of layers in the frame.</summary>
+    public AVDRMLayerDescriptor4 @layers;
+}
+
+/// <summary>DRM layer descriptor.</summary>
+public unsafe partial struct AVDRMLayerDescriptor
+{
+    /// <summary>Format of the layer (DRM_FORMAT_*).</summary>
+    public uint @format;
+    /// <summary>Number of planes in the layer.</summary>
+    public int @nb_planes;
+    /// <summary>Array of planes in this layer.</summary>
+    public AVDRMPlaneDescriptor4 @planes;
+}
+
+/// <summary>DRM object descriptor.</summary>
+public unsafe partial struct AVDRMObjectDescriptor
+{
+    /// <summary>DRM PRIME fd for the object.</summary>
+    public int @fd;
+    /// <summary>Total size of the object.</summary>
+    public ulong @size;
+    /// <summary>Format modifier applied to the object (DRM_FORMAT_MOD_*).</summary>
+    public ulong @format_modifier;
+}
+
+/// <summary>DRM plane descriptor.</summary>
+public unsafe partial struct AVDRMPlaneDescriptor
+{
+    /// <summary>Index of the object containing this plane in the objects array of the enclosing frame descriptor.</summary>
+    public int @object_index;
+    /// <summary>Offset within that object of this plane.</summary>
+    public long @offset;
+    /// <summary>Pitch (linesize) of this plane.</summary>
+    public long @pitch;
+}
+
 /// <summary>This struct is allocated as AVHWDeviceContext.hwctx</summary>
 public unsafe partial struct AVDXVA2DeviceContext
 {
@@ -855,6 +926,85 @@ public unsafe partial struct AVDynamicHDRSmpte2094App5
     public ushort4x32 @gain_curve_control_points_x;
     public ushort4x32 @gain_curve_control_points_y;
     public ushort4x32 @gain_curve_control_points_theta;
+}
+
+/// <summary>This describes encryption info for a packet. This contains frame-specific info for how to decrypt the packet before passing it to the decoder.</summary>
+public unsafe partial struct AVEncryptionInfo
+{
+    /// <summary>The fourcc encryption scheme, in big-endian byte order.</summary>
+    public uint @scheme;
+    /// <summary>Only used for pattern encryption. This is the number of 16-byte blocks that are encrypted.</summary>
+    public uint @crypt_byte_block;
+    /// <summary>Only used for pattern encryption. This is the number of 16-byte blocks that are clear.</summary>
+    public uint @skip_byte_block;
+    /// <summary>The ID of the key used to encrypt the packet. This should always be 16 bytes long, but may be changed in the future.</summary>
+    public byte* @key_id;
+    public uint @key_id_size;
+    /// <summary>The initialization vector. This may have been zero-filled to be the correct block size. This should always be 16 bytes long, but may be changed in the future.</summary>
+    public byte* @iv;
+    public uint @iv_size;
+    /// <summary>An array of subsample encryption info specifying how parts of the sample are encrypted. If there are no subsamples, then the whole sample is encrypted.</summary>
+    public AVSubsampleEncryptionInfo* @subsamples;
+    public uint @subsample_count;
+}
+
+/// <summary>This describes info used to initialize an encryption key system.</summary>
+public unsafe partial struct AVEncryptionInitInfo
+{
+    /// <summary>A unique identifier for the key system this is for, can be NULL if it is not known. This should always be 16 bytes, but may change in the future.</summary>
+    public byte* @system_id;
+    public uint @system_id_size;
+    /// <summary>An array of key IDs this initialization data is for. All IDs are the same length. Can be NULL if there are no known key IDs.</summary>
+    public byte** @key_ids;
+    /// <summary>The number of key IDs.</summary>
+    public uint @num_key_ids;
+    /// <summary>The number of bytes in each key ID. This should always be 16, but may change in the future.</summary>
+    public uint @key_id_size;
+    /// <summary>Key-system specific initialization data. This data is copied directly from the file and the format depends on the specific key system. This can be NULL if there is no initialization data; in that case, there will be at least one key ID.</summary>
+    public byte* @data;
+    public uint @data_size;
+    /// <summary>An optional pointer to the next initialization info in the list.</summary>
+    public AVEncryptionInitInfo* @next;
+}
+
+public unsafe partial struct AVExifEntry
+{
+    public ushort @id;
+    public AVTiffDataType @type;
+    public uint @count;
+    public uint @ifd_offset;
+    public byte* @ifd_lead;
+    public AVExifEntry_value @value;
+}
+
+[StructLayout(LayoutKind.Explicit)]
+public unsafe partial struct AVExifEntry_value
+{
+    [FieldOffset(0)]
+    public void* @ptr;
+    [FieldOffset(0)]
+    public long* @sint;
+    [FieldOffset(0)]
+    public ulong* @uint;
+    [FieldOffset(0)]
+    public double* @dbl;
+    [FieldOffset(0)]
+    public byte* @str;
+    [FieldOffset(0)]
+    public byte* @ubytes;
+    [FieldOffset(0)]
+    public sbyte* @sbytes;
+    [FieldOffset(0)]
+    public AVRational* @rat;
+    [FieldOffset(0)]
+    public AVExifMetadata @ifd;
+}
+
+public unsafe partial struct AVExifMetadata
+{
+    public AVExifEntry* @entries;
+    public uint @count;
+    public uint @size;
 }
 
 /// <summary>Filter definition. This defines the pads a filter contains, and all the callback functions used to interact with the filter.</summary>
@@ -1414,6 +1564,167 @@ public unsafe partial struct AVHWFramesContext
     public int @width;
     /// <summary>The allocated dimensions of the frames in this pool.</summary>
     public int @height;
+}
+
+/// <summary>Information on how to combine one or more audio streams, as defined in section 3.6 of IAMF.</summary>
+public unsafe partial struct AVIAMFAudioElement
+{
+    public AVClass* @av_class;
+    public AVIAMFLayer** @layers;
+    /// <summary>Number of layers, or channel groups, in the Audio Element. There may be 6 layers at most, and for audio_element_type AV_IAMF_AUDIO_ELEMENT_TYPE_SCENE, there may be exactly 1.</summary>
+    public uint @nb_layers;
+    /// <summary>Demixing information used to reconstruct a scalable channel audio representation. The AVIAMFParamDefinition.type &quot;type&quot; must be AV_IAMF_PARAMETER_DEFINITION_DEMIXING.</summary>
+    public AVIAMFParamDefinition* @demixing_info;
+    /// <summary>Recon gain information used to reconstruct a scalable channel audio representation. The AVIAMFParamDefinition.type &quot;type&quot; must be AV_IAMF_PARAMETER_DEFINITION_RECON_GAIN.</summary>
+    public AVIAMFParamDefinition* @recon_gain_info;
+    /// <summary>Audio element type as defined in section 3.6 of IAMF.</summary>
+    public AVIAMFAudioElementType @audio_element_type;
+    /// <summary>Default weight value as defined in section 3.6 of IAMF.</summary>
+    public uint @default_w;
+}
+
+/// <summary>Demixing Info Parameter Data as defined in section 3.8.2 of IAMF.</summary>
+public unsafe partial struct AVIAMFDemixingInfo
+{
+    public AVClass* @av_class;
+    /// <summary>Duration for the given subblock, in units of 1 / AVIAMFParamDefinition.parameter_rate &quot;parameter_rate&quot;. It must not be 0.</summary>
+    public uint @subblock_duration;
+    /// <summary>Pre-defined combination of demixing parameters.</summary>
+    public uint @dmixp_mode;
+}
+
+/// <summary>A layer defining a Channel Layout in the Audio Element.</summary>
+public unsafe partial struct AVIAMFLayer
+{
+    public AVClass* @av_class;
+    public AVChannelLayout @ch_layout;
+    /// <summary>A bitmask which may contain a combination of AV_IAMF_LAYER_FLAG_* flags.</summary>
+    public uint @flags;
+    /// <summary>Output gain channel flags as defined in section 3.6.2 of IAMF.</summary>
+    public uint @output_gain_flags;
+    /// <summary>Output gain as defined in section 3.6.2 of IAMF.</summary>
+    public AVRational @output_gain;
+    /// <summary>Ambisonics mode as defined in section 3.6.3 of IAMF.</summary>
+    public AVIAMFAmbisonicsMode @ambisonics_mode;
+    /// <summary>Demixing matrix as defined in section 3.6.3 of IAMF.</summary>
+    public AVRational* @demixing_matrix;
+    /// <summary>The length of the Demixing matrix array. Must be ch_layout.nb_channels multiplied by the sum of the amount of streams in the group plus the amount of streams in the group that are stereo.</summary>
+    public uint @nb_demixing_matrix;
+}
+
+/// <summary>Mix Gain Parameter Data as defined in section 3.8.1 of IAMF.</summary>
+public unsafe partial struct AVIAMFMixGain
+{
+    public AVClass* @av_class;
+    /// <summary>Duration for the given subblock, in units of 1 / AVIAMFParamDefinition.parameter_rate &quot;parameter_rate&quot;. It must not be 0.</summary>
+    public uint @subblock_duration;
+    /// <summary>The type of animation applied to the parameter values.</summary>
+    public AVIAMFAnimationType @animation_type;
+    /// <summary>Parameter value that is applied at the start of the subblock. Applies to all defined Animation Types.</summary>
+    public AVRational @start_point_value;
+    /// <summary>Parameter value that is applied at the end of the subblock. Applies only to AV_IAMF_ANIMATION_TYPE_LINEAR and AV_IAMF_ANIMATION_TYPE_BEZIER Animation Types.</summary>
+    public AVRational @end_point_value;
+    /// <summary>Parameter value of the middle control point of a quadratic Bezier curve, i.e., its y-axis value. Applies only to AV_IAMF_ANIMATION_TYPE_BEZIER Animation Type.</summary>
+    public AVRational @control_point_value;
+    /// <summary>Parameter value of the time of the middle control point of a quadratic Bezier curve, i.e., its x-axis value. Applies only to AV_IAMF_ANIMATION_TYPE_BEZIER Animation Type.</summary>
+    public AVRational @control_point_relative_time;
+}
+
+/// <summary>Information on how to render and mix one or more AVIAMFAudioElement to generate the final audio output, as defined in section 3.7 of IAMF.</summary>
+public unsafe partial struct AVIAMFMixPresentation
+{
+    public AVClass* @av_class;
+    /// <summary>Array of submixes.</summary>
+    public AVIAMFSubmix** @submixes;
+    /// <summary>Number of submixes in the presentation.</summary>
+    public uint @nb_submixes;
+    /// <summary>A dictionary of strings describing the mix in different languages. Must have the same amount of entries as every AVIAMFSubmixElement.annotations &quot;Submix element annotations&quot;, stored in the same order, and with the same key strings.</summary>
+    public AVDictionary* @annotations;
+}
+
+/// <summary>Parameters as defined in section 3.6.1 of IAMF.</summary>
+public unsafe partial struct AVIAMFParamDefinition
+{
+    public AVClass* @av_class;
+    /// <summary>Offset in bytes from the start of this struct, at which the subblocks array is located.</summary>
+    public ulong @subblocks_offset;
+    /// <summary>Size in bytes of each element in the subblocks array.</summary>
+    public ulong @subblock_size;
+    /// <summary>Number of subblocks in the array.</summary>
+    public uint @nb_subblocks;
+    /// <summary>Parameters type. Determines the type of the subblock elements.</summary>
+    public AVIAMFParamDefinitionType @type;
+    /// <summary>Identifier for the parameter substream.</summary>
+    public uint @parameter_id;
+    /// <summary>Sample rate for the parameter substream. It must not be 0.</summary>
+    public uint @parameter_rate;
+    /// <summary>The accumulated duration of all blocks in this parameter definition, in units of 1 / parameter_rate.</summary>
+    public uint @duration;
+    /// <summary>The duration of every subblock in the case where all subblocks, with the optional exception of the last subblock, have equal durations.</summary>
+    public uint @constant_subblock_duration;
+}
+
+/// <summary>Recon Gain Info Parameter Data as defined in section 3.8.3 of IAMF.</summary>
+public unsafe partial struct AVIAMFReconGain
+{
+    public AVClass* @av_class;
+    /// <summary>Duration for the given subblock, in units of 1 / AVIAMFParamDefinition.parameter_rate &quot;parameter_rate&quot;. It must not be 0.</summary>
+    public uint @subblock_duration;
+    /// <summary>Array of gain values to be applied to each channel for each layer defined in the Audio Element referencing the parent Parameter Definition. Values for layers where the AV_IAMF_LAYER_FLAG_RECON_GAIN flag is not set are undefined.</summary>
+    public byte6x12 @recon_gain;
+}
+
+/// <summary>Submix layout as defined in section 3.7 of IAMF.</summary>
+public unsafe partial struct AVIAMFSubmix
+{
+    public AVClass* @av_class;
+    /// <summary>Array of submix elements.</summary>
+    public AVIAMFSubmixElement** @elements;
+    /// <summary>Number of elements in the submix.</summary>
+    public uint @nb_elements;
+    /// <summary>Array of submix layouts.</summary>
+    public AVIAMFSubmixLayout** @layouts;
+    /// <summary>Number of layouts in the submix.</summary>
+    public uint @nb_layouts;
+    /// <summary>Information required for post-processing the mixed audio signal to generate the audio signal for playback. The AVIAMFParamDefinition.type &quot;type&quot; must be AV_IAMF_PARAMETER_DEFINITION_MIX_GAIN.</summary>
+    public AVIAMFParamDefinition* @output_mix_config;
+    /// <summary>Default mix gain value to apply when there are no AVIAMFParamDefinition with output_mix_config &quot;output_mix_config&apos;s&quot; AVIAMFParamDefinition.parameter_id &quot;parameter_id&quot; available for a given audio frame.</summary>
+    public AVRational @default_mix_gain;
+}
+
+/// <summary>Submix element as defined in section 3.7 of IAMF.</summary>
+public unsafe partial struct AVIAMFSubmixElement
+{
+    public AVClass* @av_class;
+    /// <summary>The id of the Audio Element this submix element references.</summary>
+    public uint @audio_element_id;
+    /// <summary>Information required required for applying any processing to the referenced and rendered Audio Element before being summed with other processed Audio Elements. The AVIAMFParamDefinition.type &quot;type&quot; must be AV_IAMF_PARAMETER_DEFINITION_MIX_GAIN.</summary>
+    public AVIAMFParamDefinition* @element_mix_config;
+    /// <summary>Default mix gain value to apply when there are no AVIAMFParamDefinition with element_mix_config &quot;element_mix_config&apos;s&quot; AVIAMFParamDefinition.parameter_id &quot;parameter_id&quot; available for a given audio frame.</summary>
+    public AVRational @default_mix_gain;
+    /// <summary>A value that indicates whether the referenced channel-based Audio Element shall be rendered to stereo loudspeakers or spatialized with a binaural renderer when played back on headphones. If the Audio Element is not of AVIAMFAudioElement.audio_element_type &quot;type&quot; AV_IAMF_AUDIO_ELEMENT_TYPE_CHANNEL, then this field is undefined.</summary>
+    public AVIAMFHeadphonesMode @headphones_rendering_mode;
+    /// <summary>A dictionary of strings describing the submix in different languages. Must have the same amount of entries as AVIAMFMixPresentation.annotations &quot;the mix&apos;s annotations&quot;, stored in the same order, and with the same key strings.</summary>
+    public AVDictionary* @annotations;
+}
+
+/// <summary>Submix layout as defined in section 3.7.6 of IAMF.</summary>
+public unsafe partial struct AVIAMFSubmixLayout
+{
+    public AVClass* @av_class;
+    public AVIAMFSubmixLayoutType @layout_type;
+    /// <summary>Channel layout matching one of Sound Systems A to J of ITU-2051-3, plus 7.1.2ch, 3.1.2ch, and binaural. If layout_type is not AV_IAMF_SUBMIX_LAYOUT_TYPE_LOUDSPEAKERS or AV_IAMF_SUBMIX_LAYOUT_TYPE_BINAURAL, this field is undefined.</summary>
+    public AVChannelLayout @sound_system;
+    /// <summary>The program integrated loudness information, as defined in ITU-1770-4.</summary>
+    public AVRational @integrated_loudness;
+    /// <summary>The digital (sampled) peak value of the audio signal, as defined in ITU-1770-4.</summary>
+    public AVRational @digital_peak;
+    /// <summary>The true peak of the audio signal, as defined in ITU-1770-4.</summary>
+    public AVRational @true_peak;
+    /// <summary>The Dialogue loudness information, as defined in ITU-1770-4.</summary>
+    public AVRational @dialogue_anchored_loudness;
+    /// <summary>The Album loudness information, as defined in ITU-1770-4.</summary>
+    public AVRational @album_anchored_loudness;
 }
 
 public unsafe partial struct AVIndexEntry
@@ -1984,6 +2295,14 @@ public unsafe partial struct AVStreamGroupTREF
     public uint @metadata_index;
 }
 
+public unsafe partial struct AVSubsampleEncryptionInfo
+{
+    /// <summary>The number of bytes that are clear.</summary>
+    public uint @bytes_of_clear_data;
+    /// <summary>The number of bytes that are protected. If using pattern encryption, the pattern applies to only the protected bytes; if not using pattern encryption, all these bytes are encrypted.</summary>
+    public uint @bytes_of_protected_data;
+}
+
 public unsafe partial struct AVSubtitle
 {
     public ushort @format;
@@ -2525,6 +2844,19 @@ public unsafe partial struct SwsVector
     public int @length;
 }
 
+public unsafe partial struct tm
+{
+    public int @tm_sec;
+    public int @tm_min;
+    public int @tm_hour;
+    public int @tm_mday;
+    public int @tm_mon;
+    public int @tm_year;
+    public int @tm_wday;
+    public int @tm_yday;
+    public int @tm_isdst;
+}
+
 /// <summary>Context for an Audio FIFO Buffer.</summary>
 /// <remarks>This struct is incomplete.</remarks>
 public unsafe partial struct AVAudioFifo
@@ -2577,6 +2909,17 @@ public unsafe partial struct AVDictionary
 }
 
 /// <remarks>This struct is incomplete.</remarks>
+public unsafe partial struct AVExpr
+{
+}
+
+/// <summary>@{ A generic FIFO API</summary>
+/// <remarks>This struct is incomplete.</remarks>
+public unsafe partial struct AVFifo
+{
+}
+
+/// <remarks>This struct is incomplete.</remarks>
 public unsafe partial struct AVFilterChannelLayouts
 {
 }
@@ -2592,16 +2935,6 @@ public unsafe partial struct AVFilterPad
 }
 
 /// <remarks>This struct is incomplete.</remarks>
-public unsafe partial struct AVIAMFAudioElement
-{
-}
-
-/// <remarks>This struct is incomplete.</remarks>
-public unsafe partial struct AVIAMFMixPresentation
-{
-}
-
-/// <remarks>This struct is incomplete.</remarks>
 public unsafe partial struct AVIODirContext
 {
 }
@@ -2609,6 +2942,11 @@ public unsafe partial struct AVIODirContext
 /// <summary>Low-complexity tree container</summary>
 /// <remarks>This struct is incomplete.</remarks>
 public unsafe partial struct AVTreeNode
+{
+}
+
+/// <remarks>This struct is incomplete.</remarks>
+public unsafe partial struct AVTXContext
 {
 }
 
